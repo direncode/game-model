@@ -15,6 +15,8 @@ interface PitchViewProps {
   selectedPlayerId?: string | null;
   onPlayerClick?: (playerId: string | null) => void;
   className?: string;
+  ballPosition?: { x: number; y: number };
+  ballPossession?: 'home' | 'away';
 }
 
 // Standard formation positions for both teams
@@ -113,6 +115,8 @@ export function PitchView({
   selectedPlayerId,
   onPlayerClick,
   className,
+  ballPosition,
+  ballPossession,
 }: PitchViewProps) {
   // Calculate home player positions on the pitch
   const homePlayerPositions = useMemo(() => {
@@ -388,6 +392,36 @@ export function PitchView({
           )}
         </div>
       ))}
+
+      {/* Ball */}
+      {ballPosition && (
+        <div
+          className="absolute transform -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-150 ease-out"
+          style={{
+            left: `${ballPosition.x}%`,
+            top: `${ballPosition.y}%`,
+          }}
+        >
+          <div
+            className={cn(
+              'w-4 h-4 md:w-5 md:h-5 rounded-full shadow-lg border-2',
+              'bg-white border-slate-200',
+              ballPossession === 'home' && 'ring-2 ring-sky-400 ring-opacity-50',
+              ballPossession === 'away' && 'ring-2 ring-red-400 ring-opacity-50'
+            )}
+          >
+            {/* Ball pattern */}
+            <svg viewBox="0 0 20 20" className="w-full h-full">
+              <circle cx="10" cy="10" r="9" fill="white" stroke="#e2e8f0" strokeWidth="1" />
+              <circle cx="10" cy="10" r="3" fill="#334155" />
+              <circle cx="5" cy="5" r="2" fill="#334155" />
+              <circle cx="15" cy="5" r="2" fill="#334155" />
+              <circle cx="5" cy="15" r="2" fill="#334155" />
+              <circle cx="15" cy="15" r="2" fill="#334155" />
+            </svg>
+          </div>
+        </div>
+      )}
 
       {/* Player count indicator */}
       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-black/60 text-white text-xs rounded-full">

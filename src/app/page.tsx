@@ -550,6 +550,8 @@ export default function Home() {
                       formation={activeGameModel?.formation.shape}
                       selectedPlayerId={selectedPlayerId}
                       onPlayerClick={handlePlayerSelect}
+                      ballPosition={matchState?.ballPosition}
+                      ballPossession={matchState?.ballPossession}
                     />
                   </CardContent>
                 </Card>

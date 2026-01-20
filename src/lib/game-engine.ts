@@ -34,6 +34,7 @@ export interface MatchState {
   events: MatchEvent[];
   currentPhase: 'buildUp' | 'progression' | 'finalThird' | 'pressing' | 'defensiveBlock' | 'transition';
   ballPosition: { x: number; y: number; zone: string };
+  ballPossession: 'home' | 'away';
   momentum: 'home' | 'away' | 'neutral';
   intensity: number;
 }
@@ -94,6 +95,48 @@ export interface MatchStats {
   saves: { home: number; away: number };
   xG: { home: number; away: number };
 }
+
+// ==================== Pitch Dimensions (in meters) ====================
+const PITCH = {
+  length: 105,
+  width: 68,
+  center: { x: 52.5, y: 34 },
+  homeGoal: { x: 0, y: 34 },
+  awayGoal: { x: 105, y: 34 },
+  penaltyAreaWidth: 40.32,
+  penaltyAreaDepth: 16.5,
+};
+
+// ==================== Formation Positions (percentage-based 0-100) ====================
+// 4-3-3 Formation for Home (attacking right)
+const HOME_FORMATION_433: Record<number, { baseX: number; baseY: number; role: string }> = {
+  0: { baseX: 5, baseY: 50, role: 'GK' },
+  1: { baseX: 20, baseY: 85, role: 'RB' },
+  2: { baseX: 18, baseY: 65, role: 'CB' },
+  3: { baseX: 18, baseY: 35, role: 'CB' },
+  4: { baseX: 20, baseY: 15, role: 'LB' },
+  5: { baseX: 35, baseY: 50, role: 'CDM' },
+  6: { baseX: 42, baseY: 70, role: 'CM' },
+  7: { baseX: 42, baseY: 30, role: 'CM' },
+  8: { baseX: 48, baseY: 85, role: 'RW' },
+  9: { baseX: 50, baseY: 50, role: 'ST' },
+  10: { baseX: 48, baseY: 15, role: 'LW' },
+};
+
+// 4-2-3-1 Formation for Away (attacking left, positions mirrored)
+const AWAY_FORMATION_4231: Record<number, { baseX: number; baseY: number; role: string }> = {
+  0: { baseX: 95, baseY: 50, role: 'GK' },
+  1: { baseX: 80, baseY: 15, role: 'RB' },
+  2: { baseX: 82, baseY: 35, role: 'CB' },
+  3: { baseX: 82, baseY: 65, role: 'CB' },
+  4: { baseX: 80, baseY: 85, role: 'LB' },
+  5: { baseX: 68, baseY: 40, role: 'CDM' },
+  6: { baseX: 68, baseY: 60, role: 'CDM' },
+  7: { baseX: 58, baseY: 15, role: 'RW' },
+  8: { baseX: 55, baseY: 50, role: 'CAM' },
+  9: { baseX: 58, baseY: 85, role: 'LW' },
+  10: { baseX: 52, baseY: 50, role: 'ST' },
+};
 
 // ==================== Manchester Derby Configuration ====================
 
@@ -171,15 +214,19 @@ export class GameEngine {
   private config: MatchConfig;
   private state: MatchState;
   private stats: MatchStats;
-  private playerMetrics: Map<string, TrackingMetrics>;
+  private playerPositions: Map<string, { x: number; y: number; targetX: number; targetY: number; speed: number }>;
   private eventListeners: ((event: MatchEvent) => void)[];
+  private ballTargetX: number = 52.5;
+  private ballTargetY: number = 34;
+  private lastBallUpdate: number = 0;
 
   constructor(config: MatchConfig) {
     this.config = config;
     this.state = this.initializeState();
     this.stats = this.initializeStats();
-    this.playerMetrics = new Map();
+    this.playerPositions = new Map();
     this.eventListeners = [];
+    this.initializePlayerPositions();
   }
 
   private initializeState(): MatchState {
@@ -191,7 +238,8 @@ export class GameEngine {
       possession: { home: 50, away: 50 },
       events: [],
       currentPhase: 'buildUp',
-      ballPosition: { x: 0, y: 0, zone: 'center' },
+      ballPosition: { x: 52.5, y: 34, zone: 'center' },
+      ballPossession: 'home',
       momentum: 'neutral',
       intensity: 0.5,
     };
@@ -215,6 +263,34 @@ export class GameEngine {
     };
   }
 
+  private initializePlayerPositions(): void {
+    // Initialize home team positions
+    for (let i = 0; i < 11; i++) {
+      const pos = HOME_FORMATION_433[i];
+      const playerId = `home-${i}`;
+      this.playerPositions.set(playerId, {
+        x: pos.baseX,
+        y: pos.baseY,
+        targetX: pos.baseX,
+        targetY: pos.baseY,
+        speed: 0,
+      });
+    }
+
+    // Initialize away team positions
+    for (let i = 0; i < 11; i++) {
+      const pos = AWAY_FORMATION_4231[i];
+      const playerId = `away-${i}`;
+      this.playerPositions.set(playerId, {
+        x: pos.baseX,
+        y: pos.baseY,
+        targetX: pos.baseX,
+        targetY: pos.baseY,
+        speed: 0,
+      });
+    }
+  }
+
   public onEvent(listener: (event: MatchEvent) => void): void {
     this.eventListeners.push(listener);
   }
@@ -234,6 +310,10 @@ export class GameEngine {
 
   public getConfig(): MatchConfig {
     return this.config;
+  }
+
+  public getBallPosition(): { x: number; y: number } {
+    return { x: this.state.ballPosition.x, y: this.state.ballPosition.y };
   }
 
   // Advance match by specified seconds
@@ -261,6 +341,12 @@ export class GameEngine {
     if (this.state.phase === 'first_half' || this.state.phase === 'second_half') {
       const generatedEvents = this.simulateMatchEvents();
       events.push(...generatedEvents);
+
+      // Update ball position smoothly
+      this.updateBallPosition(seconds);
+
+      // Update player positions based on ball
+      this.updatePlayerPositions(seconds);
     }
 
     // Update possession dynamically
@@ -273,6 +359,204 @@ export class GameEngine {
     events.forEach((event) => this.emitEvent(event));
 
     return events;
+  }
+
+  private updateBallPosition(seconds: number): void {
+    const ball = this.state.ballPosition;
+    const speed = 0.15; // Ball movement speed factor
+
+    // Move ball towards target
+    const dx = this.ballTargetX - ball.x;
+    const dy = this.ballTargetY - ball.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > 1) {
+      ball.x += (dx / distance) * speed * seconds * 60;
+      ball.y += (dy / distance) * speed * seconds * 60;
+    } else {
+      // Set new target when ball reaches destination
+      this.lastBallUpdate += seconds;
+      if (this.lastBallUpdate > 0.5 + Math.random() * 1.5) {
+        this.lastBallUpdate = 0;
+        this.setNewBallTarget();
+      }
+    }
+
+    // Constrain ball to pitch
+    ball.x = Math.max(2, Math.min(98, ball.x));
+    ball.y = Math.max(5, Math.min(95, ball.y));
+
+    // Update zone
+    if (ball.x < 33) {
+      ball.zone = this.state.ballPossession === 'home' ? 'defensive_third' : 'attacking_third';
+    } else if (ball.x > 67) {
+      ball.zone = this.state.ballPossession === 'home' ? 'attacking_third' : 'defensive_third';
+    } else {
+      ball.zone = 'middle_third';
+    }
+  }
+
+  private setNewBallTarget(): void {
+    // Determine target based on possession and game phase
+    const possTeam = this.state.ballPossession;
+    const phase = this.state.currentPhase;
+
+    let baseX: number;
+    let baseY: number;
+
+    if (possTeam === 'home') {
+      // Home team attacks right
+      switch (phase) {
+        case 'buildUp':
+          baseX = 20 + Math.random() * 25;
+          baseY = 20 + Math.random() * 60;
+          break;
+        case 'progression':
+          baseX = 40 + Math.random() * 25;
+          baseY = 15 + Math.random() * 70;
+          break;
+        case 'finalThird':
+          baseX = 70 + Math.random() * 20;
+          baseY = 20 + Math.random() * 60;
+          break;
+        default:
+          baseX = 30 + Math.random() * 40;
+          baseY = 20 + Math.random() * 60;
+      }
+    } else {
+      // Away team attacks left
+      switch (phase) {
+        case 'buildUp':
+          baseX = 80 - Math.random() * 25;
+          baseY = 20 + Math.random() * 60;
+          break;
+        case 'progression':
+          baseX = 60 - Math.random() * 25;
+          baseY = 15 + Math.random() * 70;
+          break;
+        case 'finalThird':
+          baseX = 30 - Math.random() * 20;
+          baseY = 20 + Math.random() * 60;
+          break;
+        default:
+          baseX = 30 + Math.random() * 40;
+          baseY = 20 + Math.random() * 60;
+      }
+    }
+
+    this.ballTargetX = baseX;
+    this.ballTargetY = baseY;
+
+    // Random possession change (less frequent)
+    if (Math.random() < 0.08) {
+      this.state.ballPossession = this.state.ballPossession === 'home' ? 'away' : 'home';
+    }
+  }
+
+  private updatePlayerPositions(seconds: number): void {
+    const ball = this.state.ballPosition;
+    const possTeam = this.state.ballPossession;
+
+    // Update home team positions
+    for (let i = 0; i < 11; i++) {
+      const pos = HOME_FORMATION_433[i];
+      const playerId = `home-${i}`;
+      const current = this.playerPositions.get(playerId);
+      if (!current) continue;
+
+      // Calculate offset based on ball position and possession
+      const isAttacking = possTeam === 'home';
+      const attackOffset = isAttacking ? 8 : -5;
+      const ballInfluence = 0.15; // How much players follow the ball
+
+      // Base position with tactical adjustment
+      let targetX = pos.baseX + attackOffset;
+      let targetY = pos.baseY;
+
+      // Follow ball slightly (except GK)
+      if (i > 0) {
+        targetX += (ball.x - 50) * ballInfluence;
+        targetY += (ball.y - 50) * ballInfluence * 0.5;
+      }
+
+      // Add small random movement for realism
+      targetX += (Math.random() - 0.5) * 3;
+      targetY += (Math.random() - 0.5) * 3;
+
+      // Constrain to valid zones based on role
+      const constraints = this.getPositionConstraints(pos.role, true);
+      targetX = Math.max(constraints.minX, Math.min(constraints.maxX, targetX));
+      targetY = Math.max(constraints.minY, Math.min(constraints.maxY, targetY));
+
+      // Smooth movement towards target
+      const moveSpeed = 0.08;
+      current.x += (targetX - current.x) * moveSpeed;
+      current.y += (targetY - current.y) * moveSpeed;
+      current.speed = Math.abs(targetX - current.x) * 10 + Math.abs(targetY - current.y) * 5;
+
+      current.targetX = targetX;
+      current.targetY = targetY;
+    }
+
+    // Update away team positions
+    for (let i = 0; i < 11; i++) {
+      const pos = AWAY_FORMATION_4231[i];
+      const playerId = `away-${i}`;
+      const current = this.playerPositions.get(playerId);
+      if (!current) continue;
+
+      // Calculate offset based on ball position and possession
+      const isAttacking = possTeam === 'away';
+      const attackOffset = isAttacking ? -8 : 5;
+      const ballInfluence = 0.15;
+
+      // Base position with tactical adjustment
+      let targetX = pos.baseX + attackOffset;
+      let targetY = pos.baseY;
+
+      // Follow ball slightly (except GK)
+      if (i > 0) {
+        targetX += (ball.x - 50) * ballInfluence;
+        targetY += (ball.y - 50) * ballInfluence * 0.5;
+      }
+
+      // Add small random movement
+      targetX += (Math.random() - 0.5) * 3;
+      targetY += (Math.random() - 0.5) * 3;
+
+      // Constrain to valid zones based on role
+      const constraints = this.getPositionConstraints(pos.role, false);
+      targetX = Math.max(constraints.minX, Math.min(constraints.maxX, targetX));
+      targetY = Math.max(constraints.minY, Math.min(constraints.maxY, targetY));
+
+      // Smooth movement towards target
+      const moveSpeed = 0.08;
+      current.x += (targetX - current.x) * moveSpeed;
+      current.y += (targetY - current.y) * moveSpeed;
+      current.speed = Math.abs(targetX - current.x) * 10 + Math.abs(targetY - current.y) * 5;
+
+      current.targetX = targetX;
+      current.targetY = targetY;
+    }
+  }
+
+  private getPositionConstraints(role: string, isHome: boolean): { minX: number; maxX: number; minY: number; maxY: number } {
+    // Constraints keep players in realistic zones
+    const constraints: Record<string, { minX: number; maxX: number; minY: number; maxY: number }> = {
+      GK: isHome ? { minX: 2, maxX: 12, minY: 35, maxY: 65 } : { minX: 88, maxX: 98, minY: 35, maxY: 65 },
+      CB: isHome ? { minX: 10, maxX: 40, minY: 20, maxY: 80 } : { minX: 60, maxX: 90, minY: 20, maxY: 80 },
+      RB: isHome ? { minX: 12, maxX: 55, minY: 60, maxY: 95 } : { minX: 45, maxX: 88, minY: 5, maxY: 40 },
+      LB: isHome ? { minX: 12, maxX: 55, minY: 5, maxY: 40 } : { minX: 45, maxX: 88, minY: 60, maxY: 95 },
+      CDM: isHome ? { minX: 25, maxX: 55, minY: 25, maxY: 75 } : { minX: 45, maxX: 75, minY: 25, maxY: 75 },
+      CM: isHome ? { minX: 30, maxX: 65, minY: 15, maxY: 85 } : { minX: 35, maxX: 70, minY: 15, maxY: 85 },
+      CAM: isHome ? { minX: 35, maxX: 70, minY: 25, maxY: 75 } : { minX: 30, maxX: 65, minY: 25, maxY: 75 },
+      RW: isHome ? { minX: 35, maxX: 75, minY: 60, maxY: 95 } : { minX: 25, maxX: 65, minY: 5, maxY: 40 },
+      LW: isHome ? { minX: 35, maxX: 75, minY: 5, maxY: 40 } : { minX: 25, maxX: 65, minY: 60, maxY: 95 },
+      ST: isHome ? { minX: 40, maxX: 80, minY: 25, maxY: 75 } : { minX: 20, maxX: 60, minY: 25, maxY: 75 },
+      CF: isHome ? { minX: 40, maxX: 80, minY: 25, maxY: 75 } : { minX: 20, maxX: 60, minY: 25, maxY: 75 },
+    };
+
+    return constraints[role] || { minX: 5, maxX: 95, minY: 5, maxY: 95 };
   }
 
   private createEvent(
@@ -345,9 +629,7 @@ export class GameEngine {
   }
 
   private determinePossessingTeam(): 'home' | 'away' {
-    // City typically dominate possession
-    const homePossessionChance = 0.58;
-    return Math.random() < homePossessionChance ? 'home' : 'away';
+    return this.state.ballPossession;
   }
 
   private generateEvent(type: EventType, team: 'home' | 'away'): MatchEvent | null {
@@ -420,6 +702,8 @@ export class GameEngine {
         const fouler = players[Math.floor(Math.random() * 10) + 1];
         const fouled = opposingPlayers[Math.floor(Math.random() * 10) + 1];
         this.stats.fouls[team]++;
+        // Possession changes after foul
+        this.state.ballPossession = team === 'home' ? 'away' : 'home';
         return this.createEvent(type, team, fouler, `Foul by ${fouler} on ${fouled}.`);
       }
 
@@ -439,12 +723,17 @@ export class GameEngine {
       case 'offside': {
         const offside = players[Math.floor(Math.random() * 3) + 8];
         this.stats.offsides[team]++;
+        this.state.ballPossession = team === 'home' ? 'away' : 'home';
         return this.createEvent(type, team, offside, `Offside called against ${offside}.`);
       }
 
       case 'tackle': {
         const tackler = players[Math.floor(Math.random() * 6) + 1];
         this.stats.tackles[team]++;
+        // Possession might change on tackle
+        if (Math.random() < 0.6) {
+          this.state.ballPossession = team;
+        }
         return this.createEvent(type, team, tackler, `Strong tackle by ${tackler}.`);
       }
 
@@ -499,29 +788,26 @@ export class GameEngine {
   }
 
   private updateGamePhase(): void {
-    const phases: MatchState['currentPhase'][] = [
-      'buildUp',
-      'progression',
-      'finalThird',
-      'pressing',
-      'defensiveBlock',
-      'transition',
-    ];
+    // Weighted phase selection based on ball position
+    const ballX = this.state.ballPosition.x;
+    const possTeam = this.state.ballPossession;
 
-    // Weighted phase selection based on game state
-    const random = Math.random();
-    if (random < 0.25) {
-      this.state.currentPhase = 'buildUp';
-    } else if (random < 0.45) {
-      this.state.currentPhase = 'progression';
-    } else if (random < 0.6) {
-      this.state.currentPhase = 'finalThird';
-    } else if (random < 0.75) {
-      this.state.currentPhase = 'pressing';
-    } else if (random < 0.9) {
-      this.state.currentPhase = 'defensiveBlock';
+    if (possTeam === 'home') {
+      if (ballX < 30) {
+        this.state.currentPhase = 'buildUp';
+      } else if (ballX < 60) {
+        this.state.currentPhase = 'progression';
+      } else {
+        this.state.currentPhase = 'finalThird';
+      }
     } else {
-      this.state.currentPhase = 'transition';
+      if (ballX > 70) {
+        this.state.currentPhase = 'buildUp';
+      } else if (ballX > 40) {
+        this.state.currentPhase = 'progression';
+      } else {
+        this.state.currentPhase = 'finalThird';
+      }
     }
 
     // Update momentum based on recent events
@@ -544,11 +830,23 @@ export class GameEngine {
     const intensity = this.state.intensity;
     const isAttacking = (isHome && this.state.momentum === 'home') || (!isHome && this.state.momentum === 'away');
 
+    // Find player index based on matching characteristics
+    const playerIndex = isHome
+      ? this.config.homeTeam.startingXI.findIndex(p => p.includes(player.name.split(' ').pop() || ''))
+      : this.config.awayTeam.startingXI.findIndex(p => p.includes(player.name.split(' ').pop() || ''));
+
+    const posIndex = Math.max(0, playerIndex);
+    const playerId = isHome ? `home-${posIndex}` : `away-${posIndex}`;
+    const pos = this.playerPositions.get(playerId);
+
     const baseDistance = minute * 110;
     const positionMultiplier = this.getPositionMultiplier(player.position);
     const intensityMultiplier = 0.8 + intensity * 0.4;
 
     const variation = (Math.random() - 0.5) * 20;
+
+    // Calculate current speed based on movement
+    const currentSpeed = pos ? Math.min(pos.speed * 3 + Math.random() * 5, player.physicalProfile.maxSpeed * 0.9) : 8 + Math.random() * 5;
 
     return {
       totalDistance: (baseDistance + variation * minute) * positionMultiplier * intensityMultiplier,
@@ -558,7 +856,7 @@ export class GameEngine {
       walkingDistance: baseDistance * 0.2,
       joggingDistance: baseDistance * 0.4,
       runningDistance: baseDistance * 0.3,
-      currentSpeed: Math.random() * 15 + (Math.random() > 0.92 ? 15 : 0),
+      currentSpeed,
       averageSpeed: 7 + Math.random() * 2,
       maxSpeed: player.physicalProfile.maxSpeed * (0.9 + Math.random() * 0.1),
       speedZones: {
@@ -587,10 +885,15 @@ export class GameEngine {
       playerLoadPerMinute: 5 + Math.random() * 2,
       metabolicPower: 10 + Math.random() * 5,
       highMetabolicLoadDistance: baseDistance * 0.11,
-      position: {
-        x: this.calculatePlayerX(player.position, isHome, isAttacking),
-        y: this.calculatePlayerY(player.position),
-        zone: this.getPlayerZone(player.position, isAttacking),
+      position: pos ? {
+        x: pos.x,
+        y: pos.y,
+        zone: this.getPlayerZone(pos.x, isHome),
+        heatmap: { cells: [], resolution: { x: 21, y: 14 } },
+      } : {
+        x: 50,
+        y: 50,
+        zone: 'middle_third',
         heatmap: { cells: [], resolution: { x: 21, y: 14 } },
       },
     };
@@ -615,70 +918,32 @@ export class GameEngine {
     return multipliers[position] || 1.0;
   }
 
-  private calculatePlayerX(position: string, isHome: boolean, isAttacking: boolean): number {
-    const baseX: Record<string, number> = {
-      GK: -40,
-      CB: -25,
-      LB: -15,
-      RB: -15,
-      CDM: -5,
-      CM: 5,
-      CAM: 15,
-      LM: 10,
-      RM: 10,
-      LW: 25,
-      RW: 25,
-      CF: 30,
-      ST: 35,
-    };
-
-    let x = baseX[position] || 0;
-    if (isAttacking) x += 10;
-    if (!isHome) x = -x;
-
-    return x + (Math.random() - 0.5) * 10;
-  }
-
-  private calculatePlayerY(position: string): number {
-    const baseY: Record<string, number> = {
-      GK: 0,
-      CB: 0,
-      LB: -20,
-      RB: 20,
-      CDM: 0,
-      CM: 0,
-      CAM: 0,
-      LM: -25,
-      RM: 25,
-      LW: -25,
-      RW: 25,
-      CF: 0,
-      ST: 0,
-    };
-
-    return (baseY[position] || 0) + (Math.random() - 0.5) * 8;
-  }
-
-  private getPlayerZone(position: string, isAttacking: boolean): 'defensive_third' | 'middle_third' | 'attacking_third' {
-    if (['GK', 'CB'].includes(position)) {
-      return isAttacking ? 'middle_third' : 'defensive_third';
-    }
-    if (['LB', 'RB', 'CDM', 'CM'].includes(position)) {
+  private getPlayerZone(x: number, isHome: boolean): 'defensive_third' | 'middle_third' | 'attacking_third' {
+    if (isHome) {
+      if (x < 33) return 'defensive_third';
+      if (x > 67) return 'attacking_third';
+      return 'middle_third';
+    } else {
+      if (x > 67) return 'defensive_third';
+      if (x < 33) return 'attacking_third';
       return 'middle_third';
     }
-    return isAttacking ? 'attacking_third' : 'middle_third';
   }
 
   // Start the match
   public kickoff(): void {
     this.state.phase = 'first_half';
     this.state.minute = 0;
+    this.state.ballPosition = { x: 50, y: 50, zone: 'center' };
+    this.state.ballPossession = 'home';
   }
 
   // Resume from half time
   public startSecondHalf(): void {
     this.state.phase = 'second_half';
     this.state.minute = 45;
+    this.state.ballPosition = { x: 50, y: 50, zone: 'center' };
+    this.state.ballPossession = 'away';
   }
 }
 
