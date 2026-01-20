@@ -540,11 +540,12 @@ export default function Home() {
                 {/* Pitch View */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Team Formation</CardTitle>
+                    <CardTitle>Manchester Derby - Live Formation (22 Players)</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <PitchView
                       players={players}
+                      awayPlayers={awayPlayers}
                       liveData={liveData}
                       formation={activeGameModel?.formation.shape}
                       selectedPlayerId={selectedPlayerId}

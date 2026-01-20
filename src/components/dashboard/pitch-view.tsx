@@ -6,74 +6,166 @@ import type { Player, TrackingMetrics, FormationPosition } from '@/types';
 
 interface PitchViewProps {
   players: Player[];
+  awayPlayers?: Player[];
   liveData?: Map<string, TrackingMetrics>;
+  awayLiveData?: Map<string, TrackingMetrics>;
   formation?: { positions: FormationPosition[] };
+  awayFormation?: { positions: FormationPosition[] };
   showHeatmap?: boolean;
   selectedPlayerId?: string | null;
-  onPlayerClick?: (playerId: string) => void;
+  onPlayerClick?: (playerId: string | null) => void;
   className?: string;
+}
+
+// Standard formation positions for both teams
+const HOME_POSITIONS: Record<string, { x: number; y: number }> = {
+  GK: { x: 5, y: 50 },
+  CB: { x: 18, y: 50 },
+  'CB-L': { x: 18, y: 35 },
+  'CB-R': { x: 18, y: 65 },
+  LB: { x: 20, y: 12 },
+  RB: { x: 20, y: 88 },
+  CDM: { x: 32, y: 50 },
+  'CDM-L': { x: 32, y: 40 },
+  'CDM-R': { x: 32, y: 60 },
+  CM: { x: 40, y: 50 },
+  'CM-L': { x: 40, y: 35 },
+  'CM-R': { x: 40, y: 65 },
+  LM: { x: 40, y: 15 },
+  RM: { x: 40, y: 85 },
+  CAM: { x: 48, y: 50 },
+  LW: { x: 45, y: 15 },
+  RW: { x: 45, y: 85 },
+  CF: { x: 48, y: 50 },
+  ST: { x: 48, y: 50 },
+  'ST-L': { x: 48, y: 40 },
+  'ST-R': { x: 48, y: 60 },
+  LWB: { x: 28, y: 8 },
+  RWB: { x: 28, y: 92 },
+};
+
+// Away team positions (mirrored)
+const AWAY_POSITIONS: Record<string, { x: number; y: number }> = {
+  GK: { x: 95, y: 50 },
+  CB: { x: 82, y: 50 },
+  'CB-L': { x: 82, y: 35 },
+  'CB-R': { x: 82, y: 65 },
+  LB: { x: 80, y: 12 },
+  RB: { x: 80, y: 88 },
+  CDM: { x: 68, y: 50 },
+  'CDM-L': { x: 68, y: 40 },
+  'CDM-R': { x: 68, y: 60 },
+  CM: { x: 60, y: 50 },
+  'CM-L': { x: 60, y: 35 },
+  'CM-R': { x: 60, y: 65 },
+  LM: { x: 60, y: 15 },
+  RM: { x: 60, y: 85 },
+  CAM: { x: 52, y: 50 },
+  LW: { x: 55, y: 15 },
+  RW: { x: 55, y: 85 },
+  CF: { x: 52, y: 50 },
+  ST: { x: 52, y: 50 },
+  'ST-L': { x: 52, y: 40 },
+  'ST-R': { x: 52, y: 60 },
+  LWB: { x: 72, y: 8 },
+  RWB: { x: 72, y: 92 },
+};
+
+// 4-3-3 formation assignment for starting XI
+function getFormationPosition(index: number, isHome: boolean): { x: number; y: number } {
+  const positions = isHome ? [
+    { x: 5, y: 50 },   // GK
+    { x: 20, y: 88 },  // RB
+    { x: 18, y: 65 },  // CB-R
+    { x: 18, y: 35 },  // CB-L
+    { x: 20, y: 12 },  // LB
+    { x: 35, y: 50 },  // CDM
+    { x: 40, y: 70 },  // CM-R
+    { x: 40, y: 30 },  // CM-L
+    { x: 45, y: 85 },  // RW
+    { x: 48, y: 50 },  // ST
+    { x: 45, y: 15 },  // LW
+  ] : [
+    { x: 95, y: 50 },  // GK
+    { x: 80, y: 12 },  // RB (mirrored)
+    { x: 82, y: 35 },  // CB-L (mirrored)
+    { x: 82, y: 65 },  // CB-R (mirrored)
+    { x: 80, y: 88 },  // LB (mirrored)
+    { x: 65, y: 50 },  // CDM
+    { x: 60, y: 30 },  // CM-L (mirrored)
+    { x: 60, y: 70 },  // CM-R (mirrored)
+    { x: 55, y: 15 },  // RW (mirrored)
+    { x: 52, y: 50 },  // ST
+    { x: 55, y: 85 },  // LW (mirrored)
+  ];
+
+  return positions[index] || { x: 50, y: 50 };
 }
 
 export function PitchView({
   players,
+  awayPlayers = [],
   liveData,
+  awayLiveData,
   formation,
+  awayFormation,
   showHeatmap = false,
   selectedPlayerId,
   onPlayerClick,
   className,
 }: PitchViewProps) {
-  // Calculate player positions on the pitch
-  const playerPositions = useMemo(() => {
-    return players.map((player) => {
+  // Calculate home player positions on the pitch
+  const homePlayerPositions = useMemo(() => {
+    // Only show first 11 players (starting XI)
+    const startingXI = players.slice(0, 11);
+
+    return startingXI.map((player, index) => {
       const metrics = liveData?.get(player.id);
 
-      // Use live position if available, otherwise use formation position
+      // Use live position if available
       if (metrics?.position) {
         return {
           player,
-          x: 50 + (metrics.position.x / 52.5) * 45, // Convert to percentage
-          y: 50 + (metrics.position.y / 34) * 45,
+          x: (metrics.position.x / 105) * 100,
+          y: (metrics.position.y / 68) * 100,
           metrics,
+          isHome: true,
         };
       }
 
-      // Use formation position
-      const formationPos = formation?.positions.find(
-        (p) => p.role === player.position
-      );
-      if (formationPos) {
-        return {
-          player,
-          x: formationPos.baseX,
-          y: formationPos.baseY,
-          metrics: undefined,
-        };
-      }
-
-      // Default positions based on player position
-      const defaultPositions: Record<string, { x: number; y: number }> = {
-        GK: { x: 8, y: 50 },
-        CB: { x: 20, y: 50 },
-        LB: { x: 22, y: 15 },
-        RB: { x: 22, y: 85 },
-        CDM: { x: 35, y: 50 },
-        CM: { x: 45, y: 50 },
-        LM: { x: 45, y: 20 },
-        RM: { x: 45, y: 80 },
-        CAM: { x: 55, y: 50 },
-        LW: { x: 70, y: 15 },
-        RW: { x: 70, y: 85 },
-        CF: { x: 80, y: 50 },
-        ST: { x: 85, y: 50 },
-        LWB: { x: 30, y: 10 },
-        RWB: { x: 30, y: 90 },
-      };
-
-      const pos = defaultPositions[player.position] || { x: 50, y: 50 };
-      return { player, ...pos, metrics: undefined };
+      // Use formation position based on index
+      const pos = getFormationPosition(index, true);
+      return { player, ...pos, metrics: undefined, isHome: true };
     });
   }, [players, liveData, formation]);
+
+  // Calculate away player positions on the pitch
+  const awayPlayerPositions = useMemo(() => {
+    // Only show first 11 players (starting XI)
+    const startingXI = awayPlayers.slice(0, 11);
+
+    return startingXI.map((player, index) => {
+      const metrics = awayLiveData?.get(player.id);
+
+      // Use live position if available
+      if (metrics?.position) {
+        return {
+          player,
+          x: 100 - (metrics.position.x / 105) * 100, // Mirror for away team
+          y: (metrics.position.y / 68) * 100,
+          metrics,
+          isHome: false,
+        };
+      }
+
+      // Use formation position based on index
+      const pos = getFormationPosition(index, false);
+      return { player, ...pos, metrics: undefined, isHome: false };
+    });
+  }, [awayPlayers, awayLiveData, awayFormation]);
+
+  // Combine all players
+  const allPlayerPositions = [...homePlayerPositions, ...awayPlayerPositions];
 
   return (
     <div className={cn('relative w-full aspect-[105/68] bg-green-600 rounded-lg overflow-hidden', className)}>
@@ -83,6 +175,15 @@ export function PitchView({
         className="absolute inset-0 w-full h-full"
         preserveAspectRatio="xMidYMid meet"
       >
+        {/* Grass pattern */}
+        <defs>
+          <pattern id="grassPattern" patternUnits="userSpaceOnUse" width="10.5" height="68">
+            <rect x="0" y="0" width="5.25" height="68" fill="#4ade80" />
+            <rect x="5.25" y="0" width="5.25" height="68" fill="#22c55e" />
+          </pattern>
+        </defs>
+        <rect width="105" height="68" fill="url(#grassPattern)" />
+
         {/* Field outline */}
         <rect
           x="0.5"
@@ -90,8 +191,8 @@ export function PitchView({
           width="104"
           height="67"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Center line */}
@@ -100,8 +201,8 @@ export function PitchView({
           y1="0.5"
           x2="52.5"
           y2="67.5"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Center circle */}
@@ -110,12 +211,12 @@ export function PitchView({
           cy="34"
           r="9.15"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Center spot */}
-        <circle cx="52.5" cy="34" r="0.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="52.5" cy="34" r="0.6" fill="rgba(255,255,255,0.9)" />
 
         {/* Left penalty area */}
         <rect
@@ -124,8 +225,8 @@ export function PitchView({
           width="16.5"
           height="40.32"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Left goal area */}
@@ -135,12 +236,20 @@ export function PitchView({
           width="5.5"
           height="18.32"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Left penalty spot */}
-        <circle cx="11" cy="34" r="0.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="11" cy="34" r="0.4" fill="rgba(255,255,255,0.9)" />
+
+        {/* Left penalty arc */}
+        <path
+          d="M 16.5 27.5 A 9.15 9.15 0 0 1 16.5 40.5"
+          fill="none"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
+        />
 
         {/* Right penalty area */}
         <rect
@@ -149,8 +258,8 @@ export function PitchView({
           width="16.5"
           height="40.32"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Right goal area */}
@@ -160,12 +269,26 @@ export function PitchView({
           width="5.5"
           height="18.32"
           fill="none"
-          stroke="rgba(255,255,255,0.6)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
         />
 
         {/* Right penalty spot */}
-        <circle cx="94" cy="34" r="0.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="94" cy="34" r="0.4" fill="rgba(255,255,255,0.9)" />
+
+        {/* Right penalty arc */}
+        <path
+          d="M 88.5 27.5 A 9.15 9.15 0 0 0 88.5 40.5"
+          fill="none"
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth="0.4"
+        />
+
+        {/* Corner arcs */}
+        <path d="M 0.5 1.5 A 1 1 0 0 0 1.5 0.5" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="0.4" />
+        <path d="M 103.5 0.5 A 1 1 0 0 0 104.5 1.5" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="0.4" />
+        <path d="M 104.5 66.5 A 1 1 0 0 0 103.5 67.5" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="0.4" />
+        <path d="M 1.5 67.5 A 1 1 0 0 0 0.5 66.5" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="0.4" />
 
         {/* Goals */}
         <rect
@@ -174,8 +297,8 @@ export function PitchView({
           width="2.5"
           height="7.32"
           fill="none"
-          stroke="rgba(255,255,255,0.8)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.9)"
+          strokeWidth="0.5"
         />
         <rect
           x="104.5"
@@ -183,8 +306,8 @@ export function PitchView({
           width="2.5"
           height="7.32"
           fill="none"
-          stroke="rgba(255,255,255,0.8)"
-          strokeWidth="0.3"
+          stroke="rgba(255,255,255,0.9)"
+          strokeWidth="0.5"
         />
       </svg>
 
@@ -195,13 +318,21 @@ export function PitchView({
         </div>
       )}
 
+      {/* Team Labels */}
+      <div className="absolute top-2 left-4 px-2 py-1 bg-sky-600 text-white text-xs font-bold rounded shadow">
+        MCI
+      </div>
+      <div className="absolute top-2 right-4 px-2 py-1 bg-red-600 text-white text-xs font-bold rounded shadow">
+        MUN
+      </div>
+
       {/* Players */}
-      {playerPositions.map(({ player, x, y, metrics }) => (
+      {allPlayerPositions.map(({ player, x, y, metrics, isHome }) => (
         <div
           key={player.id}
           className={cn(
             'absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300',
-            selectedPlayerId === player.id && 'z-10'
+            selectedPlayerId === player.id && 'z-20'
           )}
           style={{
             left: `${x}%`,
@@ -212,10 +343,13 @@ export function PitchView({
           {/* Player marker */}
           <div
             className={cn(
-              'relative w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg',
+              'relative w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-white text-[10px] md:text-xs font-bold shadow-lg border-2',
               selectedPlayerId === player.id
-                ? 'bg-yellow-500 ring-2 ring-yellow-300'
-                : 'bg-blue-600',
+                ? 'ring-2 ring-yellow-300 ring-offset-1 scale-110'
+                : '',
+              isHome
+                ? 'bg-sky-500 border-sky-300'
+                : 'bg-red-600 border-red-400',
               metrics && metrics.currentSpeed > 20 && 'animate-pulse'
             )}
           >
@@ -223,19 +357,25 @@ export function PitchView({
           </div>
 
           {/* Player name tooltip */}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 px-2 py-0.5 bg-black/80 text-white text-xs rounded whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity">
-            {player.name}
+          <div className={cn(
+            'absolute left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 text-white text-[10px] rounded whitespace-nowrap transition-opacity z-30',
+            selectedPlayerId === player.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
+            isHome ? 'bg-sky-700/90' : 'bg-red-700/90'
+          )}
+          style={{ top: '100%' }}
+          >
+            <div className="font-semibold">{player.name.split(' ').pop()}</div>
             {metrics && (
-              <span className="ml-1 text-gray-300">
+              <div className="text-gray-200">
                 {metrics.currentSpeed.toFixed(1)} km/h
-              </span>
+              </div>
             )}
           </div>
 
           {/* Speed indicator */}
           {metrics && metrics.currentSpeed > 15 && (
             <div
-              className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+              className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-white"
               style={{
                 backgroundColor:
                   metrics.currentSpeed > 25
@@ -249,10 +389,9 @@ export function PitchView({
         </div>
       ))}
 
-      {/* Pitch thirds overlay */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-0 top-0 w-1/3 h-full border-r border-white/20" />
-        <div className="absolute right-0 top-0 w-1/3 h-full border-l border-white/20" />
+      {/* Player count indicator */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-black/60 text-white text-xs rounded-full">
+        {homePlayerPositions.length} vs {awayPlayerPositions.length}
       </div>
     </div>
   );
