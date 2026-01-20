@@ -11,9 +11,16 @@ import { CoherenceGauge, CoherenceBar } from '@/components/dashboard/coherence-g
 import { LiveMatchPanel } from '@/components/dashboard/live-match-panel';
 import { GameModelEditor } from '@/components/game-model/game-model-editor';
 import { AIInput } from '@/components/tactical/ai-input';
+import { InstructionLogPanel } from '@/components/tactical/instruction-log-panel';
 import { createDigitalTwin } from '@/lib/digital-twin';
 import { calculateCoherence } from '@/lib/coherence-analysis';
-import type { Player, GameModel, TrackingMetrics, LivePlayerData } from '@/types';
+import { getPLSquadData } from '@/lib/premier-league-api';
+import {
+  getInstructionLogManager,
+  generateInterpretation,
+  type InstructionLogEntry,
+} from '@/lib/instruction-log';
+import type { Player, GameModel, TrackingMetrics, LivePlayerData, ManagerInput } from '@/types';
 import {
   LayoutDashboard,
   Users,
@@ -24,7 +31,16 @@ import {
   Plus,
   Play,
   Activity,
+  History,
+  FileText,
 } from 'lucide-react';
+
+// Available PL teams for team selector
+const plTeams = [
+  { tla: 'MCI', name: 'Manchester City', shortName: 'Man City' },
+  { tla: 'ARS', name: 'Arsenal FC', shortName: 'Arsenal' },
+  { tla: 'LIV', name: 'Liverpool FC', shortName: 'Liverpool' },
+];
 
 // Sample data for demonstration
 const samplePlayers: Player[] = [
@@ -64,24 +80,57 @@ export default function Home() {
     deviations,
     selectedPlayerId,
     setSelectedPlayer,
+    selectedTeam,
+    setSelectedTeam,
+    instructionLogs,
+    addInstructionLog,
   } = useGameStore();
 
   const [activeTab, setActiveTab] = useState('dashboard');
   const [matchMinute, setMatchMinute] = useState(0);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [logManager] = useState(() => getInstructionLogManager());
 
-  // Initialize with sample data
-  useEffect(() => {
-    if (players.length === 0) {
-      setPlayers(samplePlayers);
-
+  // Load PL squad data based on selected team
+  const loadTeamSquad = useCallback((teamTla: string) => {
+    const squadPlayers = getPLSquadData(teamTla);
+    if (squadPlayers.length > 0) {
+      setPlayers(squadPlayers);
       // Create digital twins for each player
-      samplePlayers.forEach((player) => {
+      squadPlayers.forEach((player) => {
         const twin = createDigitalTwin(player, []);
         setTwin(player.id, twin);
       });
     }
-  }, [players.length, setPlayers, setTwin]);
+  }, [setPlayers, setTwin]);
+
+  // Initialize with PL data or sample data
+  useEffect(() => {
+    if (players.length === 0) {
+      // Try to load PL squad first
+      const squadPlayers = getPLSquadData(selectedTeam);
+      if (squadPlayers.length > 0) {
+        setPlayers(squadPlayers);
+        squadPlayers.forEach((player) => {
+          const twin = createDigitalTwin(player, []);
+          setTwin(player.id, twin);
+        });
+      } else {
+        // Fallback to sample data
+        setPlayers(samplePlayers);
+        samplePlayers.forEach((player) => {
+          const twin = createDigitalTwin(player, []);
+          setTwin(player.id, twin);
+        });
+      }
+    }
+  }, [players.length, setPlayers, setTwin, selectedTeam]);
+
+  // Handle team change
+  const handleTeamChange = useCallback((teamTla: string) => {
+    setSelectedTeam(teamTla);
+    loadTeamSquad(teamTla);
+  }, [setSelectedTeam, loadTeamSquad]);
 
   // Simulation loop for live match
   useEffect(() => {
@@ -228,6 +277,63 @@ export default function Home() {
     [gameModels, createGameModel, setActiveGameModel]
   );
 
+  // Handle AI instruction processing with logging
+  const handleInstructionsProcessed = useCallback(
+    (input: ManagerInput) => {
+      // Generate interpretation
+      const interpretation = generateInterpretation(input, {
+        gameModel: activeGameModel || undefined,
+        matchMinute: isLive ? matchMinute : undefined,
+      });
+
+      // Create log entry
+      const logEntry = logManager.createEntry(input, interpretation);
+
+      // Add match context if live
+      if (isLive && matchData) {
+        logManager.setMatchContext(logEntry.id, {
+          matchId: matchData.matchId,
+          minute: Math.floor(matchMinute),
+          score: matchData.score,
+          phase: matchData.phase,
+          possession: matchData.teamMetrics.possession,
+          momentum: 'neutral',
+          recentEvents: [],
+        });
+      }
+
+      // Add to store
+      addInstructionLog(logEntry);
+
+      console.log('Instruction logged:', logEntry.id, logEntry.interpretation.summary);
+    },
+    [activeGameModel, isLive, matchMinute, matchData, logManager, addInstructionLog]
+  );
+
+  // Handle instructions applied
+  const handleInstructionsApplied = useCallback(
+    (instructions: ManagerInput['processedInstructions']) => {
+      console.log('Instructions applied:', instructions.length);
+
+      // Update the most recent log entry with application status
+      if (instructionLogs.length > 0) {
+        const latestLog = instructionLogs[0];
+        useGameStore.getState().updateInstructionLog(latestLog.id, {
+          applicationStatus: 'applied',
+          appliedTo: instructions.map((inst) => ({
+            type: inst.category === 'player_specific' ? 'player_instruction' : 'game_model',
+            target: inst.affectedPlayers[0] || 'team',
+            field: inst.category,
+            previousValue: null,
+            newValue: inst.instruction,
+            timestamp: new Date(),
+          })),
+        });
+      }
+    },
+    [instructionLogs]
+  );
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
@@ -239,12 +345,28 @@ export default function Home() {
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Football Analytics</h1>
+                <h1 className="text-xl font-bold text-gray-900">Premier League Analytics</h1>
                 <p className="text-xs text-gray-500">GPS/Wearable + Tactical Intelligence</p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Team Selector */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Team:</span>
+                <select
+                  value={selectedTeam}
+                  onChange={(e) => handleTeamChange(e.target.value)}
+                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {plTeams.map((team) => (
+                    <option key={team.tla} value={team.tla}>
+                      {team.shortName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {isLive && (
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-red-100 text-red-700 rounded-full">
                   <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
@@ -282,6 +404,10 @@ export default function Home() {
             <TabsTrigger value="ai">
               <Brain className="w-4 h-4 mr-2" />
               AI Assistant
+            </TabsTrigger>
+            <TabsTrigger value="history">
+              <FileText className="w-4 h-4 mr-2" />
+              Instructions
             </TabsTrigger>
           </TabsList>
 
@@ -500,50 +626,233 @@ export default function Home() {
               <AIInput
                 players={players}
                 currentGameModel={activeGameModel || undefined}
-                onInstructionsProcessed={(input) => {
-                  console.log('Processed:', input);
-                }}
-                onInstructionsApplied={(instructions) => {
-                  console.log('Applied:', instructions);
-                }}
+                onInstructionsProcessed={handleInstructionsProcessed}
+                onInstructionsApplied={handleInstructionsApplied}
               />
-              <Card>
-                <CardHeader>
-                  <CardTitle>Current Game Model Summary</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {activeGameModel ? (
-                    <div className="space-y-4">
-                      <div>
-                        <span className="text-sm text-gray-500">Formation</span>
-                        <p className="font-medium">{activeGameModel.formation.name}</p>
+              <div className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Current Game Model Summary</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {activeGameModel ? (
+                      <div className="space-y-4">
+                        <div>
+                          <span className="text-sm text-gray-500">Formation</span>
+                          <p className="font-medium">{activeGameModel.formation.name}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">Defensive Line</span>
+                          <p className="font-medium">{activeGameModel.formation.depth.defensiveLineHeight}m</p>
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">In Possession Principles</span>
+                          <ul className="list-disc list-inside text-sm">
+                            {activeGameModel.principles.inPossession.map((p) => (
+                              <li key={p.id}>{p.name}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">Defensive Principles</span>
+                          <ul className="list-disc list-inside text-sm">
+                            {activeGameModel.principles.outOfPossession.map((p) => (
+                              <li key={p.id}>{p.name} ({p.pressureType})</li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-sm text-gray-500">Defensive Line</span>
-                        <p className="font-medium">{activeGameModel.formation.depth.defensiveLineHeight}m</p>
+                    ) : (
+                      <p className="text-gray-500">No game model selected. Create one to get started.</p>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Recent Instructions Preview */}
+                {instructionLogs.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Recent Instructions</span>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setActiveTab('history')}
+                        >
+                          View All
+                        </Button>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {instructionLogs.slice(0, 3).map((log) => (
+                          <div
+                            key={log.id}
+                            className="p-2 bg-gray-50 rounded-lg text-sm"
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium truncate">
+                                {log.interpretation.summary}
+                              </span>
+                              <span
+                                className={`px-1.5 py-0.5 text-xs rounded-full ${
+                                  log.applicationStatus === 'applied'
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-yellow-100 text-yellow-700'
+                                }`}
+                              >
+                                {log.applicationStatus}
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {new Date(log.timestamp).toLocaleTimeString()} -{' '}
+                              {log.processedInstructions.length} instruction(s)
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                      <div>
-                        <span className="text-sm text-gray-500">In Possession Principles</span>
-                        <ul className="list-disc list-inside text-sm">
-                          {activeGameModel.principles.inPossession.map((p) => (
-                            <li key={p.id}>{p.name}</li>
-                          ))}
-                        </ul>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Instruction History Tab */}
+          <TabsContent value="history">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <InstructionLogPanel
+                  logs={instructionLogs}
+                  onSelectLog={(log) => {
+                    console.log('Selected log:', log.id);
+                  }}
+                />
+              </div>
+              <div className="space-y-6">
+                {/* Stats Summary */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Instruction Statistics</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Total Instructions</span>
+                        <span className="font-medium">{instructionLogs.length}</span>
                       </div>
-                      <div>
-                        <span className="text-sm text-gray-500">Defensive Principles</span>
-                        <ul className="list-disc list-inside text-sm">
-                          {activeGameModel.principles.outOfPossession.map((p) => (
-                            <li key={p.id}>{p.name} ({p.pressureType})</li>
-                          ))}
-                        </ul>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Applied</span>
+                        <span className="font-medium text-green-600">
+                          {instructionLogs.filter((l) => l.applicationStatus === 'applied').length}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Pending</span>
+                        <span className="font-medium text-yellow-600">
+                          {instructionLogs.filter((l) => l.applicationStatus === 'pending').length}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Avg Confidence</span>
+                        <span className="font-medium">
+                          {instructionLogs.length > 0
+                            ? (
+                                (instructionLogs.reduce((sum, l) => sum + l.confidence, 0) /
+                                  instructionLogs.length) *
+                                100
+                              ).toFixed(1)
+                            : 0}
+                          %
+                        </span>
                       </div>
                     </div>
-                  ) : (
-                    <p className="text-gray-500">No game model selected. Create one to get started.</p>
-                  )}
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+
+                {/* Category Breakdown */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>By Category</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {(() => {
+                        const categories = new Map<string, number>();
+                        instructionLogs.forEach((log) => {
+                          log.processedInstructions.forEach((inst) => {
+                            categories.set(
+                              inst.category,
+                              (categories.get(inst.category) || 0) + 1
+                            );
+                          });
+                        });
+                        return Array.from(categories.entries()).map(([cat, count]) => (
+                          <div
+                            key={cat}
+                            className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                          >
+                            <span className="text-sm capitalize">
+                              {cat.replace('_', ' ')}
+                            </span>
+                            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs">
+                              {count}
+                            </span>
+                          </div>
+                        ));
+                      })()}
+                      {instructionLogs.length === 0 && (
+                        <p className="text-sm text-gray-500 text-center py-4">
+                          No instructions yet
+                        </p>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Quick Actions */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Quick Actions</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={() => setActiveTab('ai')}
+                    >
+                      <Brain className="w-4 h-4 mr-2" />
+                      New Instruction
+                    </Button>
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={() => {
+                        if (instructionLogs.length > 0) {
+                          const exportData = JSON.stringify(
+                            instructionLogs,
+                            null,
+                            2
+                          );
+                          const blob = new Blob([exportData], {
+                            type: 'application/json',
+                          });
+                          const url = URL.createObjectURL(blob);
+                          const a = document.createElement('a');
+                          a.href = url;
+                          a.download = `instruction-logs-${new Date().toISOString().split('T')[0]}.json`;
+                          a.click();
+                          URL.revokeObjectURL(url);
+                        }
+                      }}
+                      disabled={instructionLogs.length === 0}
+                    >
+                      <History className="w-4 h-4 mr-2" />
+                      Export Logs
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </TabsContent>
         </Tabs>

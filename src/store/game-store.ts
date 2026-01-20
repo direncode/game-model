@@ -17,6 +17,9 @@ import {
   TacticalDeviation,
   PlayerAlert,
 } from '@/types';
+import type { PLTeam } from '@/lib/premier-league-api';
+import type { PlayerHistory } from '@/lib/player-history';
+import type { InstructionLogEntry } from '@/lib/instruction-log';
 
 // ==================== Store Types ====================
 
@@ -87,13 +90,33 @@ interface AIInputState {
 
 interface UIState {
   selectedPlayerId: string | null;
-  selectedTab: 'dashboard' | 'game-model' | 'players' | 'live' | 'ai-input';
+  selectedTab: 'dashboard' | 'game-model' | 'players' | 'live' | 'ai-input' | 'history';
   sidebarOpen: boolean;
   viewMode: 'overview' | 'detailed' | 'analysis';
   setSelectedPlayer: (id: string | null) => void;
   setSelectedTab: (tab: UIState['selectedTab']) => void;
   toggleSidebar: () => void;
   setViewMode: (mode: UIState['viewMode']) => void;
+}
+
+interface PremierLeagueState {
+  selectedTeam: string;
+  plTeams: PLTeam[];
+  setSelectedTeam: (team: string) => void;
+  setPLTeams: (teams: PLTeam[]) => void;
+}
+
+interface InstructionLogState {
+  instructionLogs: InstructionLogEntry[];
+  addInstructionLog: (log: InstructionLogEntry) => void;
+  updateInstructionLog: (logId: string, updates: Partial<InstructionLogEntry>) => void;
+  clearInstructionLogs: () => void;
+}
+
+interface PlayerHistoryState {
+  playerHistories: Map<string, PlayerHistory>;
+  setPlayerHistory: (playerId: string, history: PlayerHistory) => void;
+  getPlayerHistory: (playerId: string) => PlayerHistory | undefined;
 }
 
 // ==================== Combined Store ====================
@@ -105,7 +128,10 @@ type GameStore = PlayersState &
   WearableDataState &
   LiveMatchState &
   AIInputState &
-  UIState;
+  UIState &
+  PremierLeagueState &
+  InstructionLogState &
+  PlayerHistoryState;
 
 // Helper to convert Map to/from serializable format
 const mapToObject = <K extends string, V>(map: Map<K, V>): Record<K, V> => {
@@ -374,6 +400,42 @@ export const useGameStore = create<GameStore>()(
         toggleSidebar: () =>
           set((state) => ({ sidebarOpen: !state.sidebarOpen })),
         setViewMode: (mode) => set({ viewMode: mode }),
+
+        // ==================== Premier League State ====================
+        selectedTeam: 'MCI',
+        plTeams: [],
+
+        setSelectedTeam: (team) => set({ selectedTeam: team }),
+        setPLTeams: (teams) => set({ plTeams: teams }),
+
+        // ==================== Instruction Log State ====================
+        instructionLogs: [],
+
+        addInstructionLog: (log) =>
+          set((state) => ({
+            instructionLogs: [log, ...state.instructionLogs].slice(0, 100), // Keep last 100
+          })),
+
+        updateInstructionLog: (logId, updates) =>
+          set((state) => ({
+            instructionLogs: state.instructionLogs.map((log) =>
+              log.id === logId ? { ...log, ...updates } : log
+            ),
+          })),
+
+        clearInstructionLogs: () => set({ instructionLogs: [] }),
+
+        // ==================== Player History State ====================
+        playerHistories: new Map(),
+
+        setPlayerHistory: (playerId, history) =>
+          set((state) => {
+            const newHistories = new Map(state.playerHistories);
+            newHistories.set(playerId, history);
+            return { playerHistories: newHistories };
+          }),
+
+        getPlayerHistory: (playerId) => get().playerHistories.get(playerId),
       }),
       {
         name: 'game-model-storage',
