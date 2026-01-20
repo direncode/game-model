@@ -282,7 +282,8 @@ class LiveDataService {
 
   // Generate live tracking data for a player
   public generatePlayerTracking(player: Player, minute: number): LiveTrackingData {
-    const baseMetrics = this.gameEngine?.generatePlayerMetrics(player, true);
+    // Use player index 0 as fallback - position will be approximated
+    const baseMetrics = this.gameEngine?.generatePlayerMetrics(player, true, 0);
 
     if (!baseMetrics) {
       throw new Error('Game engine not initialized');
