@@ -126,12 +126,12 @@ export function PitchView({
     return startingXI.map((player, index) => {
       const metrics = liveData?.get(player.id);
 
-      // Use live position if available
+      // Use live position if available (already in percentage 0-100)
       if (metrics?.position) {
         return {
           player,
-          x: (metrics.position.x / 105) * 100,
-          y: (metrics.position.y / 68) * 100,
+          x: metrics.position.x,
+          y: metrics.position.y,
           metrics,
           isHome: true,
         };
@@ -151,12 +151,12 @@ export function PitchView({
     return startingXI.map((player, index) => {
       const metrics = awayLiveData?.get(player.id);
 
-      // Use live position if available
+      // Use live position if available (already in percentage 0-100)
       if (metrics?.position) {
         return {
           player,
-          x: 100 - (metrics.position.x / 105) * 100, // Mirror for away team
-          y: (metrics.position.y / 68) * 100,
+          x: metrics.position.x,
+          y: metrics.position.y,
           metrics,
           isHome: false,
         };

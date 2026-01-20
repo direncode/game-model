@@ -115,6 +115,7 @@ export default function Home() {
   const [matchStats, setMatchStats] = useState<MatchStats | null>(null);
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
   const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
+  const [awayLiveData, setAwayLiveData] = useState<Map<string, TrackingMetrics>>(new Map());
 
   // Live Data Hooks - Real-time API polling
   const {
@@ -185,10 +186,18 @@ export default function Home() {
         });
 
         // Generate player tracking metrics using game engine
-        players.forEach((player) => {
-          const metrics = engine.generatePlayerMetrics(player, true);
+        players.forEach((player, index) => {
+          const metrics = engine.generatePlayerMetrics(player, true, index);
           updateLiveData(player.id, metrics);
         });
+
+        // Generate away team tracking metrics
+        const newAwayData = new Map<string, TrackingMetrics>();
+        awayPlayers.forEach((player, index) => {
+          const metrics = engine.generatePlayerMetrics(player, false, index);
+          newAwayData.set(player.id, metrics);
+        });
+        setAwayLiveData(newAwayData);
 
         // Calculate coherence periodically
         if (activeGameModel && Math.floor(state.minute) % 5 === 0) {
@@ -547,6 +556,7 @@ export default function Home() {
                       players={players}
                       awayPlayers={awayPlayers}
                       liveData={liveData}
+                      awayLiveData={awayLiveData}
                       formation={activeGameModel?.formation.shape}
                       selectedPlayerId={selectedPlayerId}
                       onPlayerClick={handlePlayerSelect}

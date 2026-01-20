@@ -825,17 +825,12 @@ export class GameEngine {
   }
 
   // Generate player tracking metrics for the current state
-  public generatePlayerMetrics(player: Player, isHome: boolean): TrackingMetrics {
+  public generatePlayerMetrics(player: Player, isHome: boolean, playerIndex: number = 0): TrackingMetrics {
     const minute = this.state.minute;
     const intensity = this.state.intensity;
-    const isAttacking = (isHome && this.state.momentum === 'home') || (!isHome && this.state.momentum === 'away');
 
-    // Find player index based on matching characteristics
-    const playerIndex = isHome
-      ? this.config.homeTeam.startingXI.findIndex(p => p.includes(player.name.split(' ').pop() || ''))
-      : this.config.awayTeam.startingXI.findIndex(p => p.includes(player.name.split(' ').pop() || ''));
-
-    const posIndex = Math.max(0, playerIndex);
+    // Use the provided index directly (0-10 for starting XI)
+    const posIndex = Math.min(playerIndex, 10);
     const playerId = isHome ? `home-${posIndex}` : `away-${posIndex}`;
     const pos = this.playerPositions.get(playerId);
 
