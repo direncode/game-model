@@ -28,6 +28,16 @@ import {
   getInstructionLogManager,
   generateInterpretation,
 } from '@/lib/instruction-log';
+import {
+  useLiveMatch,
+  usePlayerTracking,
+  usePlayerStats,
+  useMatchStats,
+  useMatchEvents,
+  usePlayers,
+  type PlayerTrackingResponse,
+  type MatchStatsResponse,
+} from '@/hooks/use-live-data';
 import type { Player, GameModel, TrackingMetrics, LivePlayerData, ManagerInput } from '@/types';
 import {
   LayoutDashboard,
@@ -45,6 +55,12 @@ import {
   FileText,
   Clock,
   AlertTriangle,
+  TrendingUp,
+  Heart,
+  Gauge,
+  Timer,
+  ChevronRight,
+  X,
 } from 'lucide-react';
 
 // Match configuration
@@ -91,6 +107,7 @@ export default function Home() {
   const [isSimulating, setIsSimulating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [logManager] = useState(() => getInstructionLogManager());
+  const [showPlayerDetail, setShowPlayerDetail] = useState(false);
 
   // Game Engine State
   const gameEngineRef = useRef<GameEngine | null>(null);
@@ -98,6 +115,21 @@ export default function Home() {
   const [matchStats, setMatchStats] = useState<MatchStats | null>(null);
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
   const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
+
+  // Live Data Hooks - Real-time API polling
+  const {
+    data: liveMatchData,
+    isConnected: isApiConnected,
+    startMatch: startApiMatch,
+    stopMatch: stopApiMatch,
+    pauseMatch: pauseApiMatch,
+    resumeMatch: resumeApiMatch,
+  } = useLiveMatch(500);
+
+  const { data: apiMatchStats } = useMatchStats(2000);
+  const { data: apiMatchEvents } = useMatchEvents({ limit: 20 });
+  const { data: playerTrackingData } = usePlayerTracking(selectedPlayerId, 1000);
+  const { data: playerStatsData } = usePlayerStats(selectedPlayerId);
 
   // Initialize squads for Manchester Derby
   useEffect(() => {
@@ -197,7 +229,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [isLive, isSimulating, isPaused, players, activeGameModel, updateLiveData, updateMatch, updateCoherence, matchData, twins, liveData, endMatch]);
 
-  const handleStartMatch = useCallback(() => {
+  const handleStartMatch = useCallback(async () => {
     if (!activeGameModel) {
       // Create a default game model if none exists
       const defaultModel: GameModel = {
@@ -246,6 +278,9 @@ export default function Home() {
     setMatchState(gameEngineRef.current.getState());
     setMatchStats(gameEngineRef.current.getStats());
 
+    // Start API match as well
+    await startApiMatch();
+
     startMatch({
       matchId: `derby-${Date.now()}`,
       gameApproach: {
@@ -278,19 +313,33 @@ export default function Home() {
     });
     setIsSimulating(true);
     setIsPaused(false);
-  }, [activeGameModel, createGameModel, setActiveGameModel, startMatch]);
+  }, [activeGameModel, createGameModel, setActiveGameModel, startMatch, startApiMatch]);
 
-  const handlePauseMatch = useCallback(() => {
+  const handlePauseMatch = useCallback(async () => {
+    if (isPaused) {
+      await resumeApiMatch();
+    } else {
+      await pauseApiMatch();
+    }
     setIsPaused((prev) => !prev);
-  }, []);
+  }, [isPaused, pauseApiMatch, resumeApiMatch]);
 
-  const handleEndMatch = useCallback(() => {
+  const handleEndMatch = useCallback(async () => {
+    await stopApiMatch();
     setIsSimulating(false);
     setIsPaused(false);
     endMatch();
     setMatchState(null);
     setMatchStats(null);
-  }, [endMatch]);
+  }, [endMatch, stopApiMatch]);
+
+  // Handle player selection with detail view
+  const handlePlayerSelect = useCallback((playerId: string | null) => {
+    setSelectedPlayer(playerId);
+    if (playerId) {
+      setShowPlayerDetail(true);
+    }
+  }, [setSelectedPlayer]);
 
   const handleSaveGameModel = useCallback(
     (model: GameModel) => {
@@ -499,7 +548,7 @@ export default function Home() {
                       liveData={liveData}
                       formation={activeGameModel?.formation.shape}
                       selectedPlayerId={selectedPlayerId}
-                      onPlayerClick={setSelectedPlayer}
+                      onPlayerClick={handlePlayerSelect}
                     />
                   </CardContent>
                 </Card>
@@ -650,6 +699,153 @@ export default function Home() {
                   />
                 )}
 
+                {/* API Live Tracking Stats */}
+                {selectedPlayerId && playerTrackingData && (
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center justify-between text-base">
+                        <span className="flex items-center gap-2">
+                          <Gauge className="w-4 h-4 text-blue-500" />
+                          Live GPS Tracking
+                        </span>
+                        <span className="text-xs font-normal text-slate-400">
+                          {playerTrackingData.minutesPlayed.toFixed(0)}&apos;
+                        </span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      {/* Current Metrics */}
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="p-2 bg-slate-50 rounded">
+                          <div className="text-slate-500">Speed</div>
+                          <div className="font-semibold text-slate-900">
+                            {playerTrackingData.current.speed.toFixed(1)} km/h
+                          </div>
+                        </div>
+                        <div className="p-2 bg-slate-50 rounded">
+                          <div className="text-slate-500">Heart Rate</div>
+                          <div className="font-semibold text-slate-900 flex items-center gap-1">
+                            <Heart className="w-3 h-3 text-red-500" />
+                            {playerTrackingData.current.heartRate} bpm
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Totals */}
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Total Distance</span>
+                          <span className="font-medium">{(playerTrackingData.totals.distance / 1000).toFixed(2)} km</span>
+                        </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">High Speed Distance</span>
+                          <span className="font-medium">{playerTrackingData.totals.highSpeedDistance.toFixed(0)} m</span>
+                        </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Sprint Distance</span>
+                          <span className="font-medium">{playerTrackingData.totals.sprintDistance.toFixed(0)} m</span>
+                        </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Player Load</span>
+                          <span className="font-medium">{playerTrackingData.totals.playerLoad.toFixed(1)} AU</span>
+                        </div>
+                      </div>
+
+                      {/* Physical Load Status */}
+                      <div className="pt-2 border-t border-slate-100">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-medium text-slate-700">Physical Status</span>
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${
+                            playerTrackingData.physicalLoad.injuryRisk === 'low'
+                              ? 'bg-green-100 text-green-700'
+                              : playerTrackingData.physicalLoad.injuryRisk === 'moderate'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-red-100 text-red-700'
+                          }`}>
+                            {playerTrackingData.physicalLoad.injuryRisk} risk
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 text-xs text-center">
+                          <div>
+                            <div className="text-slate-400">ACWR</div>
+                            <div className="font-semibold">{playerTrackingData.physicalLoad.acuteChronicRatio.toFixed(2)}</div>
+                          </div>
+                          <div>
+                            <div className="text-slate-400">Fatigue</div>
+                            <div className="font-semibold">{(playerTrackingData.physicalLoad.fatigueIndex * 100).toFixed(0)}%</div>
+                          </div>
+                          <div>
+                            <div className="text-slate-400">Recovery</div>
+                            <div className="font-semibold capitalize">{playerTrackingData.physicalLoad.recoveryStatus}</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Substitution Recommendation */}
+                      {playerTrackingData.derived.optimalSubstitutionMinute > 0 && (
+                        <div className="p-2 bg-amber-50 rounded border border-amber-200">
+                          <div className="text-xs text-amber-700 flex items-center gap-1">
+                            <Timer className="w-3 h-3" />
+                            Optimal sub: {playerTrackingData.derived.optimalSubstitutionMinute}&apos;
+                          </div>
+                          <div className="text-xs text-amber-600 mt-1">
+                            {playerTrackingData.derived.fatigueProjection.recommendation}
+                          </div>
+                        </div>
+                      )}
+
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full text-xs"
+                        onClick={() => setShowPlayerDetail(true)}
+                      >
+                        View Full Stats
+                        <ChevronRight className="w-3 h-3 ml-1" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* API Team Tracking Comparison */}
+                {apiMatchStats && isLive && (
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center gap-2 text-base">
+                        <TrendingUp className="w-4 h-4 text-green-500" />
+                        Team Tracking
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <TrackingStatRow
+                        label="Distance (km)"
+                        home={(apiMatchStats.tracking.home.totalDistance / 1000).toFixed(1)}
+                        away={(apiMatchStats.tracking.away.totalDistance / 1000).toFixed(1)}
+                      />
+                      <TrackingStatRow
+                        label="Sprints"
+                        home={apiMatchStats.tracking.home.totalSprints}
+                        away={apiMatchStats.tracking.away.totalSprints}
+                      />
+                      <TrackingStatRow
+                        label="Max Speed"
+                        home={`${apiMatchStats.tracking.home.maxSpeedReached} km/h`}
+                        away={`${apiMatchStats.tracking.away.maxSpeedReached} km/h`}
+                      />
+                      <TrackingStatRow
+                        label="Intensity"
+                        home={apiMatchStats.tracking.home.intensity.toFixed(1)}
+                        away={apiMatchStats.tracking.away.intensity.toFixed(1)}
+                      />
+                      <TrackingStatRow
+                        label="Avg HR"
+                        home={`${apiMatchStats.tracking.home.avgHeartRate} bpm`}
+                        away={`${apiMatchStats.tracking.away.avgHeartRate} bpm`}
+                      />
+                    </CardContent>
+                  </Card>
+                )}
+
                 {/* Recent Alerts */}
                 {alerts.length > 0 && (
                   <Card>
@@ -694,7 +890,7 @@ export default function Home() {
                   onStartMatch={handleStartMatch}
                   onEndMatch={handleEndMatch}
                   selectedPlayerId={selectedPlayerId}
-                  onPlayerSelect={setSelectedPlayer}
+                  onPlayerSelect={handlePlayerSelect}
                 />
               </div>
               <div>
@@ -704,7 +900,7 @@ export default function Home() {
                   twins={twins}
                   coherenceScores={coherenceReport?.byPlayer}
                   selectedPlayerId={selectedPlayerId}
-                  onPlayerSelect={setSelectedPlayer}
+                  onPlayerSelect={handlePlayerSelect}
                 />
               </div>
             </div>
@@ -728,7 +924,7 @@ export default function Home() {
                   metrics={liveData.get(player.id)}
                   twin={twins.get(player.id)}
                   coherenceScore={coherenceReport?.byPlayer.get(player.id)}
-                  onClick={() => setSelectedPlayer(player.id)}
+                  onClick={() => handlePlayerSelect(player.id)}
                 />
               ))}
             </div>
@@ -971,6 +1167,16 @@ export default function Home() {
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* Player Detail Modal */}
+      {showPlayerDetail && selectedPlayerId && (
+        <PlayerDetailModal
+          player={players.find((p) => p.id === selectedPlayerId)}
+          trackingData={playerTrackingData}
+          statsData={playerStatsData}
+          onClose={() => setShowPlayerDetail(false)}
+        />
+      )}
     </div>
   );
 }
@@ -1015,5 +1221,354 @@ function StatRow({ label, home, away }: StatRowProps) {
       <span className="text-slate-500 flex-1 text-center">{label}</span>
       <span className="text-red-600 font-medium w-16 text-left">{away}</span>
     </div>
+  );
+}
+
+// Tracking Stat Row Component
+function TrackingStatRow({ label, home, away }: StatRowProps) {
+  return (
+    <div className="flex items-center justify-between text-xs">
+      <span className="text-sky-600 font-medium w-20 text-right">{home}</span>
+      <span className="text-slate-500 flex-1 text-center">{label}</span>
+      <span className="text-red-600 font-medium w-20 text-left">{away}</span>
+    </div>
+  );
+}
+
+// Player Detail Modal Component
+interface PlayerDetailModalProps {
+  player: Player | undefined;
+  trackingData: PlayerTrackingResponse | null;
+  statsData: { player: unknown; advancedStats: unknown; liveTracking: unknown } | null;
+  onClose: () => void;
+}
+
+function PlayerDetailModal({ player, trackingData, statsData, onClose }: PlayerDetailModalProps) {
+  if (!player) return null;
+
+  const advancedStats = statsData?.advancedStats as {
+    distancePerMinute: number;
+    highIntensityPercentage: number;
+    sprintFrequency: number;
+    avgSprintDistance: number;
+    accelerationLoad: number;
+    metabolicPowerAvg: number;
+    workRatePerMinute: number;
+    recoveryRate: number;
+    fatigueResistance: number;
+    matchComparison: {
+      vsPositionAvg: { distance: number; sprints: number; intensity: number };
+      vsTeamAvg: { distance: number; sprints: number; intensity: number };
+    };
+  } | undefined;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">{player.name}</h2>
+            <p className="text-sm text-slate-500">
+              #{player.number} - {player.position}
+            </p>
+          </div>
+          <Button variant="outline" size="sm" onClick={onClose}>
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+
+        <div className="p-6 space-y-6">
+          {/* Current Status */}
+          {trackingData && (
+            <div className="grid grid-cols-4 gap-4">
+              <div className="p-4 bg-slate-50 rounded-lg text-center">
+                <Gauge className="w-6 h-6 mx-auto text-blue-500 mb-1" />
+                <div className="text-2xl font-bold text-slate-900">
+                  {trackingData.current.speed.toFixed(1)}
+                </div>
+                <div className="text-xs text-slate-500">km/h</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-lg text-center">
+                <Heart className="w-6 h-6 mx-auto text-red-500 mb-1" />
+                <div className="text-2xl font-bold text-slate-900">
+                  {trackingData.current.heartRate}
+                </div>
+                <div className="text-xs text-slate-500">bpm</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-lg text-center">
+                <Activity className="w-6 h-6 mx-auto text-green-500 mb-1" />
+                <div className="text-2xl font-bold text-slate-900">
+                  {trackingData.current.metabolicPower.toFixed(1)}
+                </div>
+                <div className="text-xs text-slate-500">W/kg</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-lg text-center">
+                <TrendingUp className="w-6 h-6 mx-auto text-purple-500 mb-1" />
+                <div className="text-2xl font-bold text-slate-900">
+                  {trackingData.current.bodyLoad.toFixed(1)}
+                </div>
+                <div className="text-xs text-slate-500">Load</div>
+              </div>
+            </div>
+          )}
+
+          {/* Cumulative Metrics */}
+          {trackingData && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Match Totals</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <MetricCard
+                  label="Total Distance"
+                  value={`${(trackingData.totals.distance / 1000).toFixed(2)} km`}
+                  subValue={`${trackingData.derived.distancePerMinute.toFixed(0)} m/min`}
+                />
+                <MetricCard
+                  label="High Speed Distance"
+                  value={`${trackingData.totals.highSpeedDistance.toFixed(0)} m`}
+                  subValue={`${trackingData.derived.highIntensityPercentage.toFixed(1)}% of total`}
+                />
+                <MetricCard
+                  label="Sprint Distance"
+                  value={`${trackingData.totals.sprintDistance.toFixed(0)} m`}
+                />
+                <MetricCard
+                  label="Accelerations"
+                  value={trackingData.totals.accelerations.toString()}
+                />
+                <MetricCard
+                  label="Decelerations"
+                  value={trackingData.totals.decelerations.toString()}
+                />
+                <MetricCard
+                  label="Player Load"
+                  value={`${trackingData.totals.playerLoad.toFixed(1)} AU`}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Speed Zones */}
+          {trackingData && trackingData.speedZones && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Speed Zone Distribution</h3>
+              <div className="space-y-2">
+                {Object.entries(trackingData.speedZones).map(([zone, data]) => (
+                  <div key={zone} className="flex items-center gap-3">
+                    <span className="text-xs text-slate-500 w-24">{zone}</span>
+                    <div className="flex-1 h-4 bg-slate-100 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full ${
+                          zone.includes('Sprint') ? 'bg-red-500' :
+                          zone.includes('High') ? 'bg-orange-500' :
+                          zone.includes('Medium') ? 'bg-yellow-500' :
+                          'bg-green-500'
+                        }`}
+                        style={{ width: `${data.percentage}%` }}
+                      />
+                    </div>
+                    <span className="text-xs font-medium w-16 text-right">
+                      {data.percentage.toFixed(1)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Physical Load Assessment */}
+          {trackingData && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Physical Load Assessment</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 rounded-lg border border-slate-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-slate-600">Acute:Chronic Workload</span>
+                    <span className={`text-sm font-bold ${
+                      trackingData.physicalLoad.acuteChronicRatio < 0.8 ? 'text-blue-600' :
+                      trackingData.physicalLoad.acuteChronicRatio <= 1.3 ? 'text-green-600' :
+                      trackingData.physicalLoad.acuteChronicRatio <= 1.5 ? 'text-yellow-600' :
+                      'text-red-600'
+                    }`}>
+                      {trackingData.physicalLoad.acuteChronicRatio.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${
+                        trackingData.physicalLoad.acuteChronicRatio < 0.8 ? 'bg-blue-500' :
+                        trackingData.physicalLoad.acuteChronicRatio <= 1.3 ? 'bg-green-500' :
+                        trackingData.physicalLoad.acuteChronicRatio <= 1.5 ? 'bg-yellow-500' :
+                        'bg-red-500'
+                      }`}
+                      style={{ width: `${Math.min(trackingData.physicalLoad.acuteChronicRatio / 2 * 100, 100)}%` }}
+                    />
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">Optimal: 0.8 - 1.3</div>
+                </div>
+
+                <div className="p-4 rounded-lg border border-slate-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-slate-600">Fatigue Index</span>
+                    <span className="text-sm font-bold text-slate-900">
+                      {(trackingData.physicalLoad.fatigueIndex * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${
+                        trackingData.physicalLoad.fatigueIndex < 0.3 ? 'bg-green-500' :
+                        trackingData.physicalLoad.fatigueIndex < 0.5 ? 'bg-yellow-500' :
+                        trackingData.physicalLoad.fatigueIndex < 0.7 ? 'bg-orange-500' :
+                        'bg-red-500'
+                      }`}
+                      style={{ width: `${trackingData.physicalLoad.fatigueIndex * 100}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+                <div className={`p-3 rounded-lg ${
+                  trackingData.physicalLoad.injuryRisk === 'low' ? 'bg-green-50' :
+                  trackingData.physicalLoad.injuryRisk === 'moderate' ? 'bg-yellow-50' :
+                  'bg-red-50'
+                }`}>
+                  <div className="text-xs text-slate-500">Injury Risk</div>
+                  <div className={`font-bold capitalize ${
+                    trackingData.physicalLoad.injuryRisk === 'low' ? 'text-green-700' :
+                    trackingData.physicalLoad.injuryRisk === 'moderate' ? 'text-yellow-700' :
+                    'text-red-700'
+                  }`}>
+                    {trackingData.physicalLoad.injuryRisk}
+                  </div>
+                </div>
+                <div className="p-3 rounded-lg bg-slate-50">
+                  <div className="text-xs text-slate-500">Recovery Status</div>
+                  <div className="font-bold text-slate-700 capitalize">
+                    {trackingData.physicalLoad.recoveryStatus}
+                  </div>
+                </div>
+                <div className="p-3 rounded-lg bg-blue-50">
+                  <div className="text-xs text-slate-500">Optimal Sub</div>
+                  <div className="font-bold text-blue-700">
+                    {trackingData.derived.optimalSubstitutionMinute}&apos;
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Performance Benchmarks */}
+          {trackingData && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Performance Benchmarks</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Max Speed Reached</span>
+                    <span className="font-medium">{trackingData.benchmarks.maxSpeed.toFixed(1)} km/h</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Max Capability</span>
+                    <span className="font-medium">{trackingData.benchmarks.maxSpeedCapability.toFixed(1)} km/h</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Utilization</span>
+                    <span className="font-medium">{(trackingData.benchmarks.maxSpeedUtilization * 100).toFixed(0)}%</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Max Acceleration</span>
+                    <span className="font-medium">{trackingData.benchmarks.maxAcceleration.toFixed(1)} m/s2</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Max Deceleration</span>
+                    <span className="font-medium">{trackingData.benchmarks.maxDeceleration.toFixed(1)} m/s2</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Work Rate</span>
+                    <span className="font-medium">{trackingData.derived.workRate.toFixed(1)} kJ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Advanced Stats Comparison */}
+          {advancedStats && advancedStats.matchComparison && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Performance Comparison</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200">
+                      <th className="text-left py-2 text-slate-500 font-normal">Metric</th>
+                      <th className="text-center py-2 text-slate-500 font-normal">vs Position Avg</th>
+                      <th className="text-center py-2 text-slate-500 font-normal">vs Team Avg</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-2">Distance</td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsPositionAvg.distance} />
+                      </td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsTeamAvg.distance} />
+                      </td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-2">Sprints</td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsPositionAvg.sprints} />
+                      </td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsTeamAvg.sprints} />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Intensity</td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsPositionAvg.intensity} />
+                      </td>
+                      <td className="text-center">
+                        <ComparisonBadge value={advancedStats.matchComparison.vsTeamAvg.intensity} />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Metric Card Component
+function MetricCard({ label, value, subValue }: { label: string; value: string; subValue?: string }) {
+  return (
+    <div className="p-3 bg-slate-50 rounded-lg">
+      <div className="text-xs text-slate-500">{label}</div>
+      <div className="text-lg font-bold text-slate-900">{value}</div>
+      {subValue && <div className="text-xs text-slate-400">{subValue}</div>}
+    </div>
+  );
+}
+
+// Comparison Badge Component
+function ComparisonBadge({ value }: { value: number }) {
+  const percentage = ((value - 1) * 100).toFixed(0);
+  const isPositive = value >= 1;
+
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+      isPositive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+    }`}>
+      {isPositive ? '+' : ''}{percentage}%
+    </span>
   );
 }
