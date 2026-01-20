@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useGameStore } from '@/store/game-store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,9 +16,17 @@ import { createDigitalTwin } from '@/lib/digital-twin';
 import { calculateCoherence } from '@/lib/coherence-analysis';
 import { getPLSquadData } from '@/lib/premier-league-api';
 import {
+  GameEngine,
+  createManchesterDerby,
+  formatMatchTime,
+  getMatchPhaseDisplay,
+  type MatchEvent,
+  type MatchState,
+  type MatchStats,
+} from '@/lib/game-engine';
+import {
   getInstructionLogManager,
   generateInterpretation,
-  type InstructionLogEntry,
 } from '@/lib/instruction-log';
 import type { Player, GameModel, TrackingMetrics, LivePlayerData, ManagerInput } from '@/types';
 import {
@@ -30,32 +38,25 @@ import {
   Settings,
   Plus,
   Play,
+  Pause,
+  Square,
   Activity,
   History,
   FileText,
+  Clock,
+  AlertTriangle,
 } from 'lucide-react';
 
-// Available PL teams for team selector
-const plTeams = [
-  { tla: 'MCI', name: 'Manchester City', shortName: 'Man City' },
-  { tla: 'ARS', name: 'Arsenal FC', shortName: 'Arsenal' },
-  { tla: 'LIV', name: 'Liverpool FC', shortName: 'Liverpool' },
-];
-
-// Sample data for demonstration
-const samplePlayers: Player[] = [
-  { id: 'p1', name: 'Martinez', number: 1, position: 'GK', preferredFoot: 'right', physicalProfile: { maxSpeed: 28, accelerationPeak: 3.5, sprintCapacity: 200, highIntensityThreshold: 19, aerobicThreshold: 150, anaerobicThreshold: 175 }, currentStatus: 'available' },
-  { id: 'p2', name: 'Walker', number: 2, position: 'RB', preferredFoot: 'right', physicalProfile: { maxSpeed: 34, accelerationPeak: 4.2, sprintCapacity: 400, highIntensityThreshold: 20, aerobicThreshold: 155, anaerobicThreshold: 180 }, currentStatus: 'available' },
-  { id: 'p3', name: 'Dias', number: 3, position: 'CB', preferredFoot: 'right', physicalProfile: { maxSpeed: 30, accelerationPeak: 3.8, sprintCapacity: 300, highIntensityThreshold: 19, aerobicThreshold: 150, anaerobicThreshold: 175 }, currentStatus: 'available' },
-  { id: 'p4', name: 'Stones', number: 5, position: 'CB', preferredFoot: 'right', physicalProfile: { maxSpeed: 31, accelerationPeak: 3.9, sprintCapacity: 320, highIntensityThreshold: 19, aerobicThreshold: 152, anaerobicThreshold: 177 }, currentStatus: 'available' },
-  { id: 'p5', name: 'Gvardiol', number: 24, position: 'LB', preferredFoot: 'left', physicalProfile: { maxSpeed: 32, accelerationPeak: 4.0, sprintCapacity: 380, highIntensityThreshold: 20, aerobicThreshold: 155, anaerobicThreshold: 180 }, currentStatus: 'available' },
-  { id: 'p6', name: 'Rodri', number: 16, position: 'CDM', preferredFoot: 'right', physicalProfile: { maxSpeed: 29, accelerationPeak: 3.6, sprintCapacity: 280, highIntensityThreshold: 18, aerobicThreshold: 148, anaerobicThreshold: 173 }, currentStatus: 'available' },
-  { id: 'p7', name: 'De Bruyne', number: 17, position: 'CM', preferredFoot: 'right', physicalProfile: { maxSpeed: 31, accelerationPeak: 4.0, sprintCapacity: 350, highIntensityThreshold: 19, aerobicThreshold: 152, anaerobicThreshold: 177 }, currentStatus: 'available' },
-  { id: 'p8', name: 'Silva', number: 20, position: 'CM', preferredFoot: 'right', physicalProfile: { maxSpeed: 29, accelerationPeak: 3.7, sprintCapacity: 300, highIntensityThreshold: 18, aerobicThreshold: 150, anaerobicThreshold: 175 }, currentStatus: 'available' },
-  { id: 'p9', name: 'Foden', number: 47, position: 'LW', preferredFoot: 'left', physicalProfile: { maxSpeed: 33, accelerationPeak: 4.3, sprintCapacity: 420, highIntensityThreshold: 21, aerobicThreshold: 158, anaerobicThreshold: 183 }, currentStatus: 'available' },
-  { id: 'p10', name: 'Haaland', number: 9, position: 'ST', preferredFoot: 'left', physicalProfile: { maxSpeed: 35, accelerationPeak: 4.5, sprintCapacity: 450, highIntensityThreshold: 22, aerobicThreshold: 160, anaerobicThreshold: 185 }, currentStatus: 'available' },
-  { id: 'p11', name: 'Doku', number: 11, position: 'RW', preferredFoot: 'right', physicalProfile: { maxSpeed: 34, accelerationPeak: 4.4, sprintCapacity: 440, highIntensityThreshold: 21, aerobicThreshold: 158, anaerobicThreshold: 183 }, currentStatus: 'available' },
-];
+// Match configuration
+const MATCH_CONFIG = {
+  season: '2025/26',
+  competition: 'Premier League',
+  matchday: 16,
+  homeTeam: 'Manchester City',
+  awayTeam: 'Manchester United',
+  venue: 'Etihad Stadium',
+  referee: 'Michael Oliver',
+};
 
 export default function Home() {
   const {
@@ -87,107 +88,114 @@ export default function Home() {
   } = useGameStore();
 
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [matchMinute, setMatchMinute] = useState(0);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [logManager] = useState(() => getInstructionLogManager());
 
-  // Load PL squad data based on selected team
-  const loadTeamSquad = useCallback((teamTla: string) => {
-    const squadPlayers = getPLSquadData(teamTla);
-    if (squadPlayers.length > 0) {
-      setPlayers(squadPlayers);
-      // Create digital twins for each player
-      squadPlayers.forEach((player) => {
+  // Game Engine State
+  const gameEngineRef = useRef<GameEngine | null>(null);
+  const [matchState, setMatchState] = useState<MatchState | null>(null);
+  const [matchStats, setMatchStats] = useState<MatchStats | null>(null);
+  const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
+  const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
+
+  // Initialize squads for Manchester Derby
+  useEffect(() => {
+    // Load Manchester City squad (home team)
+    const citySquad = getPLSquadData('MCI');
+    if (citySquad.length > 0) {
+      setPlayers(citySquad);
+      setSelectedTeam('MCI');
+      citySquad.forEach((player) => {
         const twin = createDigitalTwin(player, []);
         setTwin(player.id, twin);
       });
     }
-  }, [setPlayers, setTwin]);
 
-  // Initialize with PL data or sample data
-  useEffect(() => {
-    if (players.length === 0) {
-      // Try to load PL squad first
-      const squadPlayers = getPLSquadData(selectedTeam);
-      if (squadPlayers.length > 0) {
-        setPlayers(squadPlayers);
-        squadPlayers.forEach((player) => {
-          const twin = createDigitalTwin(player, []);
-          setTwin(player.id, twin);
-        });
-      } else {
-        // Fallback to sample data
-        setPlayers(samplePlayers);
-        samplePlayers.forEach((player) => {
-          const twin = createDigitalTwin(player, []);
-          setTwin(player.id, twin);
-        });
-      }
+    // Load Manchester United squad (away team)
+    const unitedSquad = getPLSquadData('MUN');
+    if (unitedSquad.length > 0) {
+      setAwayPlayers(unitedSquad);
     }
-  }, [players.length, setPlayers, setTwin, selectedTeam]);
 
-  // Handle team change
-  const handleTeamChange = useCallback((teamTla: string) => {
-    setSelectedTeam(teamTla);
-    loadTeamSquad(teamTla);
-  }, [setSelectedTeam, loadTeamSquad]);
+    // Initialize game engine
+    if (!gameEngineRef.current) {
+      gameEngineRef.current = createManchesterDerby();
+    }
+  }, [setPlayers, setTwin, setSelectedTeam]);
 
-  // Simulation loop for live match
+  // Game Engine Simulation Loop
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    if (isLive && isSimulating) {
+    if (isLive && isSimulating && !isPaused && gameEngineRef.current) {
       interval = setInterval(() => {
-        setMatchMinute((prev) => {
-          const newMinute = prev + 0.1;
-          updateMatch({ currentMinute: Math.floor(newMinute) });
+        const engine = gameEngineRef.current;
+        if (!engine) return;
 
-          // Simulate live data for each player
+        // Advance the game by 1 second
+        const events = engine.tick(1);
+        const state = engine.getState();
+        const stats = engine.getStats();
+
+        setMatchState(state);
+        setMatchStats(stats);
+
+        // Add new events to the list
+        if (events.length > 0) {
+          setMatchEvents((prev) => [...events, ...prev].slice(0, 100));
+        }
+
+        // Update match data in store
+        updateMatch({
+          currentMinute: Math.floor(state.minute),
+          score: { home: state.homeScore, away: state.awayScore },
+        });
+
+        // Generate player tracking metrics using game engine
+        players.forEach((player) => {
+          const metrics = engine.generatePlayerMetrics(player, true);
+          updateLiveData(player.id, metrics);
+        });
+
+        // Calculate coherence periodically
+        if (activeGameModel && Math.floor(state.minute) % 5 === 0) {
+          const playerDataMap = new Map<string, LivePlayerData>();
           players.forEach((player) => {
-            const simulatedMetrics = generateSimulatedMetrics(player, newMinute);
-            updateLiveData(player.id, simulatedMetrics);
+            const metrics = liveData.get(player.id);
+            if (metrics) {
+              playerDataMap.set(player.id, {
+                playerId: player.id,
+                currentMetrics: metrics,
+                cumulativeMetrics: metrics,
+                coherenceScore: 75 + Math.random() * 25,
+                deviations: [],
+                alerts: [],
+              });
+            }
           });
 
-          // Calculate coherence
-          if (activeGameModel && newMinute % 1 < 0.1) {
-            const playerDataMap = new Map<string, LivePlayerData>();
-            players.forEach((player) => {
-              const metrics = liveData.get(player.id);
-              if (metrics) {
-                playerDataMap.set(player.id, {
-                  playerId: player.id,
-                  currentMetrics: metrics,
-                  cumulativeMetrics: metrics,
-                  coherenceScore: 75 + Math.random() * 25,
-                  deviations: [],
-                  alerts: [],
-                });
-              }
-            });
+          const report = calculateCoherence(
+            activeGameModel,
+            matchData?.gameApproach || null,
+            playerDataMap,
+            twins,
+            Math.floor(state.minute),
+            state.currentPhase
+          );
+          updateCoherence(report);
+        }
 
-            const report = calculateCoherence(
-              activeGameModel,
-              matchData?.gameApproach || null,
-              playerDataMap,
-              twins,
-              Math.floor(newMinute),
-              'buildUp'
-            );
-            updateCoherence(report);
-          }
-
-          if (newMinute >= 90) {
-            setIsSimulating(false);
-            endMatch();
-          }
-
-          return newMinute;
-        });
-      }, 100); // Speed up simulation (100ms = 0.1 match minute)
+        // End match at 90+ minutes
+        if (state.phase === 'full_time') {
+          setIsSimulating(false);
+          endMatch();
+        }
+      }, 100);
     }
 
     return () => clearInterval(interval);
-  }, [isLive, isSimulating, players, activeGameModel, updateLiveData, updateMatch, updateCoherence, matchData, twins, liveData, endMatch]);
+  }, [isLive, isSimulating, isPaused, players, activeGameModel, updateLiveData, updateMatch, updateCoherence, matchData, twins, liveData, endMatch]);
 
   const handleStartMatch = useCallback(() => {
     if (!activeGameModel) {
@@ -231,36 +239,57 @@ export default function Home() {
       setActiveGameModel('default-model');
     }
 
+    // Initialize game engine for Manchester Derby
+    gameEngineRef.current = createManchesterDerby();
+    gameEngineRef.current.kickoff();
+    setMatchEvents([]);
+    setMatchState(gameEngineRef.current.getState());
+    setMatchStats(gameEngineRef.current.getStats());
+
     startMatch({
-      matchId: `match-${Date.now()}`,
+      matchId: `derby-${Date.now()}`,
       gameApproach: {
         id: `approach-${Date.now()}`,
-        matchId: `match-${Date.now()}`,
+        matchId: `derby-${Date.now()}`,
         baseGameModel: activeGameModel?.id || 'default-model',
         opponent: {
-          teamName: 'Opposition',
-          formation: '4-4-2',
-          strengths: [],
-          weaknesses: [],
-          keyPlayers: [],
-          patterns: [],
+          teamName: 'Manchester United',
+          formation: '4-2-3-1',
+          strengths: ['Counter-attack pace', 'Set pieces'],
+          weaknesses: ['High defensive line vulnerable'],
+          keyPlayers: [
+            { name: 'Bruno Fernandes', threats: ['Playmaking', 'Set pieces', 'Long range shooting'] },
+            { name: 'Marcus Rashford', threats: ['Pace', 'Direct running', 'Finishing'] },
+            { name: 'Kobbie Mainoo', threats: ['Ball progression', 'Press resistance'] },
+          ],
+          patterns: ['Quick transitions', 'Wide overloads'],
         },
         adjustments: [],
         playerSpecificInstructions: new Map(),
-        priorityFocus: [],
-        keyBattles: [],
+        priorityFocus: ['Control possession', 'Press high', 'Exploit wide areas'],
+        keyBattles: [
+          { description: 'Aerial duels in the box', ourPlayer: 'Erling Haaland', theirPlayer: 'Matthijs de Ligt', strategy: 'Target with crosses and set pieces', successMetrics: ['Headers won', 'Goals from headers'] },
+          { description: 'Midfield control', ourPlayer: 'Kevin De Bruyne', theirPlayer: 'Kobbie Mainoo', strategy: 'Dominate possession in central areas', successMetrics: ['Pass completion', 'Chances created'] },
+          { description: 'Wide pace battle', ourPlayer: 'Kyle Walker', theirPlayer: 'Marcus Rashford', strategy: 'Prevent isolation, double up when needed', successMetrics: ['Tackles won', 'Dribbles prevented'] },
+        ],
         createdAt: new Date(),
         validatedBy: [],
       },
     });
-    setMatchMinute(0);
     setIsSimulating(true);
+    setIsPaused(false);
   }, [activeGameModel, createGameModel, setActiveGameModel, startMatch]);
+
+  const handlePauseMatch = useCallback(() => {
+    setIsPaused((prev) => !prev);
+  }, []);
 
   const handleEndMatch = useCallback(() => {
     setIsSimulating(false);
+    setIsPaused(false);
     endMatch();
-    setMatchMinute(0);
+    setMatchState(null);
+    setMatchStats(null);
   }, [endMatch]);
 
   const handleSaveGameModel = useCallback(
@@ -283,7 +312,7 @@ export default function Home() {
       // Generate interpretation
       const interpretation = generateInterpretation(input, {
         gameModel: activeGameModel || undefined,
-        matchMinute: isLive ? matchMinute : undefined,
+        matchMinute: isLive && matchState ? Math.floor(matchState.minute) : undefined,
       });
 
       // Create log entry
@@ -293,7 +322,7 @@ export default function Home() {
       if (isLive && matchData) {
         logManager.setMatchContext(logEntry.id, {
           matchId: matchData.matchId,
-          minute: Math.floor(matchMinute),
+          minute: matchState ? Math.floor(matchState.minute) : 0,
           score: matchData.score,
           phase: matchData.phase,
           possession: matchData.teamMetrics.possession,
@@ -307,7 +336,7 @@ export default function Home() {
 
       console.log('Instruction logged:', logEntry.id, logEntry.interpretation.summary);
     },
-    [activeGameModel, isLive, matchMinute, matchData, logManager, addInstructionLog]
+    [activeGameModel, isLive, matchState, matchData, logManager, addInstructionLog]
   );
 
   // Handle instructions applied
@@ -335,44 +364,61 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center">
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Premier League Analytics</h1>
-                <p className="text-xs text-gray-500">GPS/Wearable + Tactical Intelligence</p>
+                <h1 className="text-xl font-bold text-slate-900">Premier League 2025/26</h1>
+                <p className="text-xs text-slate-500">Performance Analytics Platform</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              {/* Team Selector */}
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Team:</span>
-                <select
-                  value={selectedTeam}
-                  onChange={(e) => handleTeamChange(e.target.value)}
-                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {plTeams.map((team) => (
-                    <option key={team.tla} value={team.tla}>
-                      {team.shortName}
-                    </option>
-                  ))}
-                </select>
+            {/* Match Info */}
+            <div className="flex items-center gap-6">
+              {/* Match Badge */}
+              <div className="flex items-center gap-3 px-4 py-2 bg-slate-100 rounded-lg">
+                <div className="text-right">
+                  <div className="text-sm font-semibold text-sky-600">MCI</div>
+                  <div className="text-xs text-slate-500">Home</div>
+                </div>
+                <div className="text-center px-3">
+                  {matchState ? (
+                    <div className="text-lg font-bold text-slate-900">
+                      {matchState.homeScore} - {matchState.awayScore}
+                    </div>
+                  ) : (
+                    <div className="text-lg font-bold text-slate-400">vs</div>
+                  )}
+                </div>
+                <div className="text-left">
+                  <div className="text-sm font-semibold text-red-600">MUN</div>
+                  <div className="text-xs text-slate-500">Away</div>
+                </div>
               </div>
 
-              {isLive && (
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-red-100 text-red-700 rounded-full">
+              {/* Match Status */}
+              {isLive && matchState && (
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-700 rounded-lg border border-red-200">
                   <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-medium">LIVE - {Math.floor(matchMinute)}&apos;</span>
+                  <span className="text-sm font-medium">
+                    {getMatchPhaseDisplay(matchState.phase)} {Math.floor(matchState.minute)}&apos;
+                  </span>
                 </div>
               )}
+
+              {!isLive && (
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-sm">Matchday {MATCH_CONFIG.matchday}</span>
+                </div>
+              )}
+
               <Button variant="outline" size="sm">
                 <Settings className="w-4 h-4" />
               </Button>
@@ -487,44 +533,112 @@ export default function Home() {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                {/* Quick Actions */}
+                {/* Match Controls */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Quick Actions</CardTitle>
+                    <CardTitle>Match Control</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2">
-                    <Button
-                      className="w-full"
-                      onClick={isLive ? handleEndMatch : handleStartMatch}
-                      variant={isLive ? 'danger' : 'primary'}
-                    >
-                      {isLive ? (
-                        <>Stop Match</>
-                      ) : (
-                        <>
-                          <Play className="w-4 h-4 mr-2" />
-                          Start Live Session
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      className="w-full"
-                      variant="outline"
-                      onClick={() => setActiveTab('game-model')}
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Create Game Model
-                    </Button>
+                  <CardContent className="space-y-3">
+                    <div className="text-center pb-2 border-b border-slate-200">
+                      <div className="text-xs text-slate-500 mb-1">{MATCH_CONFIG.competition}</div>
+                      <div className="text-sm font-medium text-slate-700">
+                        {MATCH_CONFIG.homeTeam} vs {MATCH_CONFIG.awayTeam}
+                      </div>
+                      <div className="text-xs text-slate-400">{MATCH_CONFIG.venue}</div>
+                    </div>
+
+                    {!isLive ? (
+                      <Button
+                        className="w-full"
+                        onClick={handleStartMatch}
+                        variant="primary"
+                      >
+                        <Play className="w-4 h-4 mr-2" />
+                        Start Match Simulation
+                      </Button>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          onClick={handlePauseMatch}
+                          variant="outline"
+                        >
+                          {isPaused ? (
+                            <><Play className="w-4 h-4 mr-1" /> Resume</>
+                          ) : (
+                            <><Pause className="w-4 h-4 mr-1" /> Pause</>
+                          )}
+                        </Button>
+                        <Button
+                          onClick={handleEndMatch}
+                          variant="danger"
+                        >
+                          <Square className="w-4 h-4 mr-1" /> End
+                        </Button>
+                      </div>
+                    )}
+
                     <Button
                       className="w-full"
                       variant="outline"
                       onClick={() => setActiveTab('ai')}
                     >
                       <Brain className="w-4 h-4 mr-2" />
-                      AI Instructions
+                      Tactical Instructions
                     </Button>
                   </CardContent>
                 </Card>
+
+                {/* Match Stats */}
+                {matchStats && isLive && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Match Statistics</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <StatRow label="Possession" home={`${matchStats.possession.home}%`} away={`${matchStats.possession.away}%`} />
+                      <StatRow label="Shots" home={matchStats.shots.home} away={matchStats.shots.away} />
+                      <StatRow label="On Target" home={matchStats.shotsOnTarget.home} away={matchStats.shotsOnTarget.away} />
+                      <StatRow label="Corners" home={matchStats.corners.home} away={matchStats.corners.away} />
+                      <StatRow label="Fouls" home={matchStats.fouls.home} away={matchStats.fouls.away} />
+                      <StatRow label="xG" home={matchStats.xG.home.toFixed(2)} away={matchStats.xG.away.toFixed(2)} />
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Match Events */}
+                {matchEvents.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Match Events</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {matchEvents.slice(0, 15).map((event) => (
+                          <div
+                            key={event.id}
+                            className={`text-xs p-2 rounded ${
+                              event.type === 'goal'
+                                ? 'bg-green-50 border border-green-200'
+                                : event.type === 'yellow_card'
+                                ? 'bg-yellow-50 border border-yellow-200'
+                                : event.type === 'red_card'
+                                ? 'bg-red-50 border border-red-200'
+                                : 'bg-slate-50'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono text-slate-500">{event.minute}&apos;</span>
+                              <span className={`font-medium ${event.team === 'home' ? 'text-sky-700' : 'text-red-700'}`}>
+                                {event.team === 'home' ? 'MCI' : 'MUN'}
+                              </span>
+                            </div>
+                            <div className="text-slate-600 mt-0.5">{event.description}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* Selected Player */}
                 {selectedPlayerId && (
@@ -576,7 +690,7 @@ export default function Home() {
                   alerts={alerts}
                   deviations={deviations}
                   isLive={isLive}
-                  matchMinute={matchMinute}
+                  matchMinute={matchState ? matchState.minute : 0}
                   onStartMatch={handleStartMatch}
                   onEndMatch={handleEndMatch}
                   selectedPlayerId={selectedPlayerId}
@@ -887,53 +1001,19 @@ function QuickStatCard({ title, value, icon, truncate, highlight }: QuickStatCar
   );
 }
 
-// Simulation helper
-function generateSimulatedMetrics(player: Player, minute: number): TrackingMetrics {
-  const baseDistance = minute * 110; // ~100m per minute average
-  const variation = Math.random() * 20 - 10;
+// Stat Row Component for Match Statistics
+interface StatRowProps {
+  label: string;
+  home: string | number;
+  away: string | number;
+}
 
-  return {
-    totalDistance: baseDistance + variation * minute,
-    distancePerMinute: 100 + variation,
-    highSpeedRunningDistance: baseDistance * 0.08 + Math.random() * 50,
-    sprintDistance: baseDistance * 0.03 + Math.random() * 20,
-    walkingDistance: baseDistance * 0.2,
-    joggingDistance: baseDistance * 0.4,
-    runningDistance: baseDistance * 0.3,
-    currentSpeed: Math.random() * 15 + (Math.random() > 0.9 ? 15 : 0),
-    averageSpeed: 7 + Math.random() * 2,
-    maxSpeed: player.physicalProfile.maxSpeed * (0.9 + Math.random() * 0.1),
-    speedZones: {
-      zone1: minute * 15,
-      zone2: minute * 20,
-      zone3: minute * 15,
-      zone4: minute * 8,
-      zone5: minute * 3,
-      zone6: minute * 1,
-    },
-    accelerations: {
-      low: Math.floor(minute * 0.5),
-      medium: Math.floor(minute * 0.3),
-      high: Math.floor(minute * 0.15),
-      total: Math.floor(minute * 0.95),
-    },
-    decelerations: {
-      low: Math.floor(minute * 0.5),
-      medium: Math.floor(minute * 0.3),
-      high: Math.floor(minute * 0.15),
-      total: Math.floor(minute * 0.95),
-    },
-    maxAcceleration: 3 + Math.random(),
-    maxDeceleration: -(3 + Math.random()),
-    playerLoad: minute * 5 + Math.random() * 20,
-    playerLoadPerMinute: 5 + Math.random() * 2,
-    metabolicPower: 10 + Math.random() * 5,
-    highMetabolicLoadDistance: baseDistance * 0.11,
-    position: {
-      x: (Math.random() - 0.5) * 80,
-      y: (Math.random() - 0.5) * 50,
-      zone: ['defensive_third', 'middle_third', 'attacking_third'][Math.floor(Math.random() * 3)] as 'defensive_third' | 'middle_third' | 'attacking_third',
-      heatmap: { cells: [], resolution: { x: 21, y: 14 } },
-    },
-  };
+function StatRow({ label, home, away }: StatRowProps) {
+  return (
+    <div className="flex items-center justify-between text-sm">
+      <span className="text-sky-600 font-medium w-16 text-right">{home}</span>
+      <span className="text-slate-500 flex-1 text-center">{label}</span>
+      <span className="text-red-600 font-medium w-16 text-left">{away}</span>
+    </div>
+  );
 }
