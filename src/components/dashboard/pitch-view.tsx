@@ -344,17 +344,17 @@ export function PitchView({
           }}
           onClick={() => onPlayerClick?.(player.id)}
         >
-          {/* Player marker */}
+          {/* Player marker - smaller size */}
           <div
             className={cn(
-              'relative w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-white text-[10px] md:text-xs font-bold shadow-lg border-2',
+              'relative w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-white text-[8px] md:text-[9px] font-bold shadow-md border',
               selectedPlayerId === player.id
-                ? 'ring-2 ring-yellow-300 ring-offset-1 scale-110'
+                ? 'ring-2 ring-yellow-300 ring-offset-1 scale-125'
                 : '',
               isHome
                 ? 'bg-sky-500 border-sky-300'
                 : 'bg-red-600 border-red-400',
-              metrics && metrics.currentSpeed > 20 && 'animate-pulse'
+              metrics && metrics.currentSpeed > 18 && 'animate-pulse'
             )}
           >
             {player.number}
@@ -376,15 +376,15 @@ export function PitchView({
             )}
           </div>
 
-          {/* Speed indicator */}
-          {metrics && metrics.currentSpeed > 15 && (
+          {/* Speed indicator - smaller */}
+          {metrics && metrics.currentSpeed > 14 && (
             <div
-              className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-white"
+              className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full border border-white"
               style={{
                 backgroundColor:
-                  metrics.currentSpeed > 25
+                  metrics.currentSpeed > 22
                     ? '#ef4444'
-                    : metrics.currentSpeed > 20
+                    : metrics.currentSpeed > 17
                     ? '#f59e0b'
                     : '#22c55e',
               }}
@@ -393,10 +393,10 @@ export function PitchView({
         </div>
       ))}
 
-      {/* Ball */}
+      {/* Ball - smaller with smooth movement */}
       {ballPosition && (
         <div
-          className="absolute transform -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-150 ease-out"
+          className="absolute transform -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-100 ease-linear"
           style={{
             left: `${ballPosition.x}%`,
             top: `${ballPosition.y}%`,
@@ -404,20 +404,20 @@ export function PitchView({
         >
           <div
             className={cn(
-              'w-4 h-4 md:w-5 md:h-5 rounded-full shadow-lg border-2',
-              'bg-white border-slate-200',
-              ballPossession === 'home' && 'ring-2 ring-sky-400 ring-opacity-50',
-              ballPossession === 'away' && 'ring-2 ring-red-400 ring-opacity-50'
+              'w-3 h-3 md:w-3.5 md:h-3.5 rounded-full shadow-md border',
+              'bg-white border-slate-300',
+              ballPossession === 'home' && 'ring-1 ring-sky-400 ring-opacity-60',
+              ballPossession === 'away' && 'ring-1 ring-red-400 ring-opacity-60'
             )}
           >
-            {/* Ball pattern */}
+            {/* Simple ball pattern */}
             <svg viewBox="0 0 20 20" className="w-full h-full">
-              <circle cx="10" cy="10" r="9" fill="white" stroke="#e2e8f0" strokeWidth="1" />
-              <circle cx="10" cy="10" r="3" fill="#334155" />
-              <circle cx="5" cy="5" r="2" fill="#334155" />
-              <circle cx="15" cy="5" r="2" fill="#334155" />
-              <circle cx="5" cy="15" r="2" fill="#334155" />
-              <circle cx="15" cy="15" r="2" fill="#334155" />
+              <circle cx="10" cy="10" r="9" fill="white" stroke="#cbd5e1" strokeWidth="1.5" />
+              <circle cx="10" cy="10" r="2.5" fill="#475569" />
+              <circle cx="5" cy="6" r="1.5" fill="#475569" />
+              <circle cx="15" cy="6" r="1.5" fill="#475569" />
+              <circle cx="5" cy="14" r="1.5" fill="#475569" />
+              <circle cx="15" cy="14" r="1.5" fill="#475569" />
             </svg>
           </div>
         </div>

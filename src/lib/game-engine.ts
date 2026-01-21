@@ -122,10 +122,15 @@ export class GameEngine {
   private ballCarrierTeam: 'home' | 'away' = 'home';
   private ballCarrierIndex: number = 9; // Starts with striker
 
+  // Ball position (separate from carrier for smooth movement)
+  private ballX: number = 50;
+  private ballY: number = 50;
+
   // Tactical state
   private passCount: number = 0;
   private lastPassTime: number = 0;
   private possessionTime: { home: number; away: number } = { home: 0, away: 0 };
+  private movementPhase: number = 0; // For cyclical movement
 
   constructor(config: MatchConfig) {
     this.config = config;
@@ -265,42 +270,49 @@ export class GameEngine {
   // ==================== CITY TIKI-TAKA ====================
 
   private updateCityTikiTaka(events: MatchEvent[]): void {
-    const carrier = this.homePositions[this.ballCarrierIndex];
-
     // Tiki-Taka: Quick short passes, constant movement
     this.lastPassTime += 1;
+    this.movementPhase += 0.05; // Cyclical movement phase
 
     // Pass every 1-3 seconds (quick circulation)
-    if (this.lastPassTime > 10 + Math.random() * 20) {
+    if (this.lastPassTime > 12 + Math.random() * 18) {
       this.cityPass(events);
       this.lastPassTime = 0;
     }
+
+    const ballX = this.ballX;
+    const ballY = this.ballY;
 
     // All players constantly move to create passing lanes
     for (let i = 0; i < 11; i++) {
       const pos = this.homePositions[i];
       const base = CITY_BASE[i];
 
+      // Cyclical movement offset (each player has different phase)
+      const phase = this.movementPhase + i * 0.5;
+      const cycleX = Math.sin(phase) * 4;
+      const cycleY = Math.cos(phase * 0.7) * 5;
+
       if (i === 0) {
         // Ederson sweeper keeper - comes out to receive back passes
-        pos.targetX = this.ballCarrierIndex <= 4 ? 15 : base.x;
-        pos.targetY = base.y + (Math.random() - 0.5) * 10;
+        pos.targetX = this.ballCarrierIndex <= 4 ? 14 + cycleX * 0.3 : base.x;
+        pos.targetY = base.y + cycleY * 0.5;
       } else if (pos.hasBall) {
-        // Ball carrier moves forward slightly
-        pos.targetX = Math.min(75, pos.x + 2);
-        pos.targetY = base.y + (Math.random() - 0.5) * 15;
+        // Ball carrier moves forward with the ball
+        pos.targetX = Math.min(72, pos.x + 1);
+        pos.targetY = pos.y + cycleY * 0.3;
       } else {
         // Off-ball movement - create triangles, find space
-        const offsetX = (this.state.ballPosition.x > 50) ? 10 : 0; // Push up when attacking
-        const offsetY = (Math.random() - 0.5) * 20; // Lateral movement
+        const pushUp = (ballX > 40) ? 8 : 0; // Push up when in attacking half
+        const pullTowardsBall = (ballY - base.y) * 0.12; // Slight pull towards ball laterally
 
-        pos.targetX = Math.max(10, Math.min(75, base.x + offsetX + Math.random() * 8));
-        pos.targetY = Math.max(8, Math.min(92, base.y + offsetY));
+        pos.targetX = Math.max(12, Math.min(72, base.x + pushUp + cycleX));
+        pos.targetY = Math.max(10, Math.min(90, base.y + pullTowardsBall + cycleY));
       }
 
-      // Smooth movement
-      pos.x += (pos.targetX - pos.x) * 0.08;
-      pos.y += (pos.targetY - pos.y) * 0.08;
+      // Smooth movement - slightly faster for more visible motion
+      pos.x += (pos.targetX - pos.x) * 0.06;
+      pos.y += (pos.targetY - pos.y) * 0.06;
     }
   }
 
@@ -366,45 +378,58 @@ export class GameEngine {
 
   private updateCityPressing(): void {
     // City press high when out of possession (gegenpressing)
-    const ballX = this.state.ballPosition.x;
-    const ballY = this.state.ballPosition.y;
+    const ballX = this.ballX;
+    const ballY = this.ballY;
+    this.movementPhase += 0.03;
 
     for (let i = 0; i < 11; i++) {
       const pos = this.homePositions[i];
       const base = CITY_BASE[i];
 
+      // Small jitter for realistic movement
+      const jitterX = Math.sin(this.movementPhase + i) * 2;
+      const jitterY = Math.cos(this.movementPhase * 0.8 + i) * 2;
+
+      // Distance to ball affects pressing intensity
+      const distToBall = Math.sqrt(Math.pow(pos.x - ballX, 2) + Math.pow(pos.y - ballY, 2));
+      const pressIntensity = Math.max(0, 1 - distToBall / 50); // Closer = more pressing
+
       if (i === 0) {
-        // GK stays back
-        pos.targetX = base.x;
-        pos.targetY = base.y;
+        // GK adjusts position based on ball
+        pos.targetX = Math.max(6, Math.min(15, base.x + (ballX - 50) * 0.05));
+        pos.targetY = base.y + (ballY - 50) * 0.15 + jitterY * 0.3;
       } else if (i >= 8) {
-        // Forwards press the ball
-        pos.targetX = Math.max(35, ballX - 10);
-        pos.targetY = ballY + (i === 8 ? 10 : i === 10 ? -10 : 0);
+        // Forwards press the ball aggressively
+        pos.targetX = Math.max(30, ballX - 8 - (1 - pressIntensity) * 15) + jitterX;
+        pos.targetY = ballY + (i === 8 ? 12 : i === 10 ? -12 : 0) + jitterY;
       } else if (i >= 5) {
-        // Midfield compact
-        pos.targetX = Math.max(25, ballX - 20);
-        pos.targetY = base.y + (ballY - 50) * 0.3;
+        // Midfield compact and reactive
+        pos.targetX = Math.max(22, ballX - 18) + jitterX;
+        pos.targetY = base.y + (ballY - 50) * 0.4 + jitterY;
       } else {
-        // Defense holds line
-        pos.targetX = Math.min(35, ballX - 25);
-        pos.targetY = base.y + (ballY - 50) * 0.2;
+        // Defense holds line but shifts with ball
+        pos.targetX = Math.min(32, ballX - 22) + jitterX * 0.5;
+        pos.targetY = base.y + (ballY - 50) * 0.25 + jitterY * 0.5;
       }
 
-      pos.x += (pos.targetX - pos.x) * 0.06;
-      pos.y += (pos.targetY - pos.y) * 0.06;
+      // Faster movement when pressing
+      const speed = 0.07 + pressIntensity * 0.04;
+      pos.x += (pos.targetX - pos.x) * speed;
+      pos.y += (pos.targetY - pos.y) * speed;
     }
   }
 
   // ==================== UNITED COUNTER-ATTACK ====================
 
   private updateUnitedCounter(events: MatchEvent[]): void {
-    const carrier = this.awayPositions[this.ballCarrierIndex];
-
     this.lastPassTime += 1;
+    this.movementPhase += 0.04;
+
+    const ballX = this.ballX;
+    const isCounter = ballX < 55; // Ball in City's half = counter opportunity
 
     // Counter-attack: Quick direct passes forward
-    if (this.lastPassTime > 15 + Math.random() * 25) {
+    if (this.lastPassTime > 18 + Math.random() * 22) {
       this.unitedPass(events);
       this.lastPassTime = 0;
     }
@@ -413,32 +438,41 @@ export class GameEngine {
       const pos = this.awayPositions[i];
       const base = UNITED_BASE[i];
 
+      // Movement variation
+      const phase = this.movementPhase + i * 0.6;
+      const moveX = Math.sin(phase) * 3;
+      const moveY = Math.cos(phase * 0.8) * 4;
+
       if (i === 0) {
-        // Onana stays deep
-        pos.targetX = base.x;
-        pos.targetY = base.y;
+        // Onana stays deep but adjusts
+        pos.targetX = base.x + moveX * 0.2;
+        pos.targetY = base.y + (this.ballY - 50) * 0.1 + moveY * 0.3;
       } else if (pos.hasBall) {
-        // Counter! Drive forward
-        pos.targetX = Math.max(20, pos.x - 3);
-        pos.targetY = base.y;
+        // Ball carrier drives forward
+        pos.targetX = Math.max(18, pos.x - 2);
+        pos.targetY = pos.y + moveY * 0.2;
       } else if (i === 7 || i === 9 || i === 10) {
-        // Wingers and striker sprint forward on counter
-        const isCounter = this.awayPositions[this.ballCarrierIndex].x < 60;
+        // Wingers and striker - sprint on counter, stay wide otherwise
         if (isCounter) {
-          pos.targetX = Math.max(15, base.x - 20); // Sprint forward
-          pos.targetY = base.y + (Math.random() - 0.5) * 15;
+          pos.targetX = Math.max(15, base.x - 25 + moveX); // Sprint forward
+          pos.targetY = base.y + moveY;
         } else {
-          pos.targetX = base.x;
-          pos.targetY = base.y;
+          pos.targetX = base.x + moveX;
+          pos.targetY = base.y + moveY;
         }
+      } else if (i === 8) {
+        // Fernandes links play
+        pos.targetX = isCounter ? Math.max(30, ballX + 5) : base.x + moveX;
+        pos.targetY = this.ballY * 0.3 + base.y * 0.7 + moveY;
       } else {
-        // Midfield and defense transition
-        pos.targetX = base.x + (this.state.ballPosition.x < 50 ? -8 : 5);
-        pos.targetY = base.y + (Math.random() - 0.5) * 10;
+        // Midfield and defense support
+        const support = isCounter ? -10 : 0;
+        pos.targetX = base.x + support + moveX;
+        pos.targetY = base.y + moveY;
       }
 
       // United move faster on counter
-      const speed = (i >= 7 && this.awayPositions[this.ballCarrierIndex].x < 60) ? 0.12 : 0.07;
+      const speed = (isCounter && i >= 7) ? 0.10 : 0.06;
       pos.x += (pos.targetX - pos.x) * speed;
       pos.y += (pos.targetY - pos.y) * speed;
     }
@@ -506,38 +540,51 @@ export class GameEngine {
   }
 
   private updateUnitedDefending(): void {
-    // United defend deep in a compact block
-    const ballX = this.state.ballPosition.x;
-    const ballY = this.state.ballPosition.y;
+    // United defend deep in a compact block with reactive pressing
+    const ballX = this.ballX;
+    const ballY = this.ballY;
+    this.movementPhase += 0.03;
 
     for (let i = 0; i < 11; i++) {
       const pos = this.awayPositions[i];
       const base = UNITED_BASE[i];
 
+      // Subtle movement
+      const phase = this.movementPhase + i * 0.5;
+      const jitterX = Math.sin(phase) * 1.5;
+      const jitterY = Math.cos(phase * 0.7) * 2;
+
+      // React to ball position
+      const ballPressure = (ballX > 60) ? 0.3 : 0.1; // Press harder in own half
+
       if (i === 0) {
-        // GK
-        pos.targetX = base.x;
-        pos.targetY = ballY * 0.3 + 35;
+        // GK positions based on ball
+        pos.targetX = base.x + jitterX * 0.2;
+        pos.targetY = ballY * 0.25 + 37.5 + jitterY * 0.3;
       } else if (i <= 4) {
-        // Defensive line - drop deep
-        pos.targetX = Math.max(72, Math.min(88, ballX + 20));
-        pos.targetY = base.y + (ballY - 50) * 0.25;
+        // Defensive line - drops deep, shifts with ball
+        pos.targetX = Math.max(70, Math.min(86, ballX + 18)) + jitterX * 0.5;
+        pos.targetY = base.y + (ballY - 50) * 0.3 + jitterY;
       } else if (i <= 6) {
-        // Double pivot - shield defense
-        pos.targetX = Math.max(60, Math.min(78, ballX + 10));
-        pos.targetY = base.y + (ballY - 50) * 0.3;
+        // Double pivot - shield and react
+        pos.targetX = Math.max(58, Math.min(76, ballX + 8)) + jitterX;
+        pos.targetY = base.y + (ballY - 50) * 0.35 + jitterY;
       } else if (i === 8) {
-        // Fernandes tracks back
-        pos.targetX = Math.max(50, ballX + 5);
-        pos.targetY = ballY;
+        // Fernandes tracks ball, ready to counter
+        pos.targetX = Math.max(48, ballX + 3) + jitterX;
+        pos.targetY = ballY * 0.6 + base.y * 0.4 + jitterY;
       } else {
-        // Wingers ready for counter - stay high
-        pos.targetX = Math.max(40, Math.min(60, base.x));
-        pos.targetY = base.y;
+        // Wingers stay wide but drift with ball, ready for counter
+        const driftY = (ballY - 50) * 0.15;
+        pos.targetX = Math.max(42, Math.min(58, base.x - ballPressure * 10)) + jitterX;
+        pos.targetY = base.y + driftY + jitterY;
       }
 
-      pos.x += (pos.targetX - pos.x) * 0.06;
-      pos.y += (pos.targetY - pos.y) * 0.06;
+      // Reactive speed - faster when ball is closer
+      const distToBall = Math.sqrt(Math.pow(pos.x - ballX, 2) + Math.pow(pos.y - ballY, 2));
+      const speed = 0.05 + (1 - Math.min(distToBall / 60, 1)) * 0.03;
+      pos.x += (pos.targetX - pos.x) * speed;
+      pos.y += (pos.targetY - pos.y) * speed;
     }
   }
 
@@ -547,13 +594,27 @@ export class GameEngine {
     const positions = this.ballCarrierTeam === 'home' ? this.homePositions : this.awayPositions;
     const carrier = positions[this.ballCarrierIndex];
 
-    // Ball sticks to carrier
-    this.state.ballPosition.x = carrier.x;
-    this.state.ballPosition.y = carrier.y;
+    // Ball moves slowly towards carrier (not instant)
+    const dx = carrier.x - this.ballX;
+    const dy = carrier.y - this.ballY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist > 0.5) {
+      // Move ball at controlled speed (slower = more realistic)
+      const speed = Math.min(dist * 0.15, 1.5); // Max 1.5 units per tick
+      this.ballX += (dx / dist) * speed;
+      this.ballY += (dy / dist) * speed;
+    } else {
+      this.ballX = carrier.x;
+      this.ballY = carrier.y;
+    }
+
+    this.state.ballPosition.x = this.ballX;
+    this.state.ballPosition.y = this.ballY;
     this.state.ballPossession = this.ballCarrierTeam;
 
     // Update zone
-    const x = carrier.x;
+    const x = this.ballX;
     if (this.ballCarrierTeam === 'home') {
       this.state.ballPosition.zone = x < 33 ? 'defensive' : x > 66 ? 'attacking' : 'middle';
     } else {
