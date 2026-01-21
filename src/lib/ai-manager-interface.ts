@@ -91,10 +91,10 @@ export function processManagerInput(
       ? processedInstructions.reduce((sum, i) => sum + i.confidence, 0) / processedInstructions.length
       : 0;
 
-  // Determine if verification is needed
+  // Determine if verification is needed (lowered thresholds for smoother UX)
   const needsVerification =
-    avgConfidence < 0.8 ||
-    processedInstructions.some(i => i.confidence < 0.7) ||
+    avgConfidence < 0.6 ||
+    processedInstructions.some(i => i.confidence < 0.5) ||
     processedInstructions.length === 0;
 
   return {
@@ -269,32 +269,45 @@ function extractAffectedPhases(text: string): string[] {
 }
 
 function calculateInstructionConfidence(text: string, category: string): number {
-  let confidence = 0.6; // Base confidence
+  let confidence = 0.7; // Higher base confidence
 
-  // Increase confidence for specific keywords
   const textLower = text.toLowerCase();
 
+  // High confidence for direct tactical commands (phrase matches)
   for (const keywords of Object.values(TACTICAL_KEYWORDS)) {
     for (const keyword of keywords) {
       if (textLower.includes(keyword)) {
-        confidence += 0.05;
+        confidence += 0.1;
       }
     }
   }
 
-  // Increase confidence for clear action words
+  // Boost for individual common tactical words
+  const coreTacticalWords = ['press', 'high', 'low', 'deep', 'wide', 'compact', 'direct', 'counter', 'hold', 'push', 'drop', 'tight', 'quick'];
+  for (const word of coreTacticalWords) {
+    if (textLower.includes(word)) {
+      confidence += 0.05;
+    }
+  }
+
+  // Boost for clear action words
   const actionWords = ['must', 'should', 'need', 'want', 'always', 'never', 'when', 'if'];
   for (const word of actionWords) {
     if (textLower.includes(word)) {
-      confidence += 0.03;
+      confidence += 0.02;
     }
+  }
+
+  // Short, clear commands get a boost (likely direct instructions)
+  if (text.split(' ').length <= 4) {
+    confidence += 0.05;
   }
 
   // Decrease confidence for ambiguous language
   const ambiguousWords = ['maybe', 'perhaps', 'sometimes', 'could', 'might'];
   for (const word of ambiguousWords) {
     if (textLower.includes(word)) {
-      confidence -= 0.1;
+      confidence -= 0.15;
     }
   }
 
