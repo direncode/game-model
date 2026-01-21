@@ -14,6 +14,55 @@ interface DefensiveBlock {
   };
 }
 
+// Advanced analytics interfaces
+interface AdvancedAnalytics {
+  xG: { home: number; away: number };
+  passingNetwork?: PassingNetworkData;
+  heatmap?: HeatmapData;
+  pressingTraps?: PressingTrapData[];
+  phaseTransitions?: PhaseData[];
+}
+
+interface PassingNetworkData {
+  nodes: { id: string; x: number; y: number; passes: number; influence: number }[];
+  edges: { from: string; to: string; weight: number; progressive: number }[];
+}
+
+interface HeatmapData {
+  grid: number[][];
+  resolution: { x: number; y: number };
+  hotspots: { x: number; y: number; intensity: number }[];
+}
+
+interface PressingTrapData {
+  zone: { x: number; y: number; width: number; height: number };
+  type: string;
+  successRate: number;
+}
+
+interface PhaseData {
+  from: string;
+  to: string;
+  avgTime: number;
+  successRate: number;
+}
+
+interface PsychologyData {
+  homeMorale: number;
+  awayMorale: number;
+  homeMomentum: number;
+  awayMomentum: number;
+  crowdVolume: number;
+  crowdTension: number;
+}
+
+interface TacticalDecision {
+  type: string;
+  confidence: number;
+  urgency: number;
+  reasoning: string;
+}
+
 interface PitchViewProps {
   players: Player[];
   awayPlayers?: Player[];
@@ -29,6 +78,11 @@ interface PitchViewProps {
   ballPossession?: 'home' | 'away';
   defensiveBlock?: DefensiveBlock;
   pressingIntensity?: number;
+  // Advanced features
+  analytics?: AdvancedAnalytics;
+  psychology?: PsychologyData;
+  tacticalDecisions?: TacticalDecision[];
+  showAdvancedMode?: boolean;
 }
 
 // 4-3-3 formation assignment for starting XI
@@ -108,6 +162,10 @@ export function PitchView({
   ballPossession,
   defensiveBlock,
   pressingIntensity = 0,
+  analytics,
+  psychology,
+  tacticalDecisions = [],
+  showAdvancedMode = false,
 }: PitchViewProps) {
   // Analysis toggles
   const [showCoverShadows, setShowCoverShadows] = useState(true);
@@ -115,6 +173,13 @@ export function PitchView({
   const [showZones, setShowZones] = useState(false);
   const [showAnalysis, setShowAnalysis] = useState(true);
   const [selectedAnalysis, setSelectedAnalysis] = useState<string | null>(null);
+  // Advanced toggles
+  const [showXGMap, setShowXGMap] = useState(false);
+  const [showHeatmapOverlay, setShowHeatmapOverlay] = useState(false);
+  const [showPassingNetwork, setShowPassingNetwork] = useState(false);
+  const [showPsychology, setShowPsychology] = useState(false);
+  const [showAIDecisions, setShowAIDecisions] = useState(true);
+  const [showPressingTraps, setShowPressingTraps] = useState(false);
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
@@ -273,6 +338,131 @@ export function PitchView({
         </svg>
       )}
 
+      {/* xG Map Overlay - Expected Goals zones */}
+      {showXGMap && (
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+          <defs>
+            <radialGradient id="xgGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="rgba(239, 68, 68, 0.6)" />
+              <stop offset="50%" stopColor="rgba(251, 191, 36, 0.3)" />
+              <stop offset="100%" stopColor="rgba(34, 197, 94, 0.1)" />
+            </radialGradient>
+          </defs>
+          {/* High xG zones near goals */}
+          <ellipse cx="5" cy="50" rx="12" ry="20" fill="url(#xgGradient)" opacity="0.5" />
+          <ellipse cx="95" cy="50" rx="12" ry="20" fill="url(#xgGradient)" opacity="0.5" />
+          {/* 6-yard box - highest xG */}
+          <rect x="0" y="36" width="6" height="28" fill="rgba(239, 68, 68, 0.4)" />
+          <rect x="94" y="36" width="6" height="28" fill="rgba(239, 68, 68, 0.4)" />
+          {/* Penalty spot markers */}
+          <circle cx="11" cy="50" r="1.5" fill="rgba(255, 255, 255, 0.3)" />
+          <circle cx="89" cy="50" r="1.5" fill="rgba(255, 255, 255, 0.3)" />
+          {/* xG labels */}
+          <text x="5" y="48" textAnchor="middle" fill="rgba(255,255,255,0.8)" fontSize="2.5" fontWeight="bold">HIGH xG</text>
+          <text x="95" y="48" textAnchor="middle" fill="rgba(255,255,255,0.8)" fontSize="2.5" fontWeight="bold">HIGH xG</text>
+        </svg>
+      )}
+
+      {/* Heatmap Overlay */}
+      {showHeatmapOverlay && analytics?.heatmap && (
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="heatGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(59, 130, 246, 0.5)" />
+              <stop offset="50%" stopColor="rgba(251, 191, 36, 0.5)" />
+              <stop offset="100%" stopColor="rgba(239, 68, 68, 0.7)" />
+            </linearGradient>
+          </defs>
+          {/* Render hotspots */}
+          {analytics.heatmap.hotspots.map((spot, idx) => (
+            <circle
+              key={idx}
+              cx={spot.x}
+              cy={spot.y}
+              r={3 + spot.intensity * 4}
+              fill={`rgba(239, 68, 68, ${0.2 + spot.intensity * 0.4})`}
+            />
+          ))}
+        </svg>
+      )}
+
+      {/* Passing Network Visualization */}
+      {showPassingNetwork && analytics?.passingNetwork && (
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+          {/* Network edges (passes between players) */}
+          {analytics.passingNetwork.edges.map((edge, idx) => {
+            const fromNode = analytics.passingNetwork!.nodes.find(n => n.id === edge.from);
+            const toNode = analytics.passingNetwork!.nodes.find(n => n.id === edge.to);
+            if (!fromNode || !toNode) return null;
+            const strokeWidth = Math.min(0.8, edge.weight / 15);
+            const isProgressive = edge.progressive > edge.weight * 0.3;
+            return (
+              <line
+                key={idx}
+                x1={fromNode.x}
+                y1={fromNode.y}
+                x2={toNode.x}
+                y2={toNode.y}
+                stroke={isProgressive ? 'rgba(34, 197, 94, 0.6)' : 'rgba(56, 189, 248, 0.4)'}
+                strokeWidth={strokeWidth}
+              />
+            );
+          })}
+          {/* Network nodes (players) */}
+          {analytics.passingNetwork.nodes.map((node, idx) => (
+            <g key={idx}>
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r={1.5 + node.influence * 3}
+                fill="rgba(56, 189, 248, 0.3)"
+                stroke="rgba(56, 189, 248, 0.8)"
+                strokeWidth="0.3"
+              />
+              <text
+                x={node.x}
+                y={node.y + 0.5}
+                textAnchor="middle"
+                fill="white"
+                fontSize="1.8"
+                fontWeight="bold"
+              >
+                {node.passes}
+              </text>
+            </g>
+          ))}
+        </svg>
+      )}
+
+      {/* Pressing Traps Visualization */}
+      {showPressingTraps && analytics?.pressingTraps && (
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+          {analytics.pressingTraps.map((trap, idx) => (
+            <g key={idx}>
+              <rect
+                x={trap.zone.x}
+                y={trap.zone.y}
+                width={trap.zone.width}
+                height={trap.zone.height}
+                fill={trap.successRate > 0.6 ? 'rgba(34, 197, 94, 0.2)' : 'rgba(251, 191, 36, 0.2)'}
+                stroke={trap.successRate > 0.6 ? 'rgba(34, 197, 94, 0.6)' : 'rgba(251, 191, 36, 0.6)'}
+                strokeWidth="0.3"
+                strokeDasharray="2,1"
+              />
+              <text
+                x={trap.zone.x + trap.zone.width / 2}
+                y={trap.zone.y + trap.zone.height / 2}
+                textAnchor="middle"
+                fill="rgba(255,255,255,0.7)"
+                fontSize="2"
+              >
+                TRAP {(trap.successRate * 100).toFixed(0)}%
+              </text>
+            </g>
+          ))}
+        </svg>
+      )}
+
       {/* Cover Shadows Visualization */}
       {showCoverShadows && coverShadows.length > 0 && (
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
@@ -369,7 +559,7 @@ export function PitchView({
         </svg>
       )}
 
-      {/* Interactive Buttons */}
+      {/* Interactive Buttons - Basic */}
       <div className="absolute top-2 right-2 flex flex-col gap-1 z-40">
         <button
           onClick={() => setShowCoverShadows(!showCoverShadows)}
@@ -406,6 +596,53 @@ export function PitchView({
           )}
         >
           Stats
+        </button>
+        {/* Advanced buttons */}
+        <div className="h-px bg-white/20 my-0.5" />
+        <button
+          onClick={() => setShowXGMap(!showXGMap)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showXGMap ? 'bg-rose-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          xG Map
+        </button>
+        <button
+          onClick={() => setShowHeatmapOverlay(!showHeatmapOverlay)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showHeatmapOverlay ? 'bg-orange-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Heat
+        </button>
+        <button
+          onClick={() => setShowPassingNetwork(!showPassingNetwork)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showPassingNetwork ? 'bg-cyan-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Network
+        </button>
+        <button
+          onClick={() => setShowPsychology(!showPsychology)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showPsychology ? 'bg-pink-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Psych
+        </button>
+        <button
+          onClick={() => setShowPressingTraps(!showPressingTraps)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showPressingTraps ? 'bg-teal-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Traps
         </button>
       </div>
 
@@ -473,6 +710,145 @@ export function PitchView({
             {analysis.rightOverload > 3 && (
               <div className="text-purple-400 mt-0.5">RIGHT OVERLOAD ({analysis.rightOverload})</div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* xG Display */}
+      {analytics?.xG && (
+        <div className="absolute top-16 left-2 bg-black/80 rounded-lg p-2 text-white z-40">
+          <div className="font-bold text-[10px] text-rose-400 mb-1">EXPECTED GOALS (xG)</div>
+          <div className="flex items-center gap-3">
+            <div className="text-center">
+              <div className="text-sky-400 text-lg font-bold">{analytics.xG.home.toFixed(2)}</div>
+              <div className="text-[8px] text-white/60">MCI</div>
+            </div>
+            <div className="text-white/40">-</div>
+            <div className="text-center">
+              <div className="text-red-400 text-lg font-bold">{analytics.xG.away.toFixed(2)}</div>
+              <div className="text-[8px] text-white/60">MUN</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Psychology Panel */}
+      {showPsychology && psychology && (
+        <div className="absolute top-2 left-24 bg-black/80 rounded-lg p-2 text-[9px] text-white z-40 min-w-[160px]">
+          <div className="font-bold text-[10px] text-pink-400 mb-1 border-b border-white/20 pb-1">PSYCHOLOGY</div>
+
+          {/* Morale Bars */}
+          <div className="space-y-1.5 mb-2">
+            <div>
+              <div className="flex justify-between text-[8px] mb-0.5">
+                <span className="text-sky-400">MCI Morale</span>
+                <span>{psychology.homeMorale.toFixed(0)}%</span>
+              </div>
+              <div className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-sky-600 to-sky-400 rounded-full transition-all"
+                  style={{ width: `${psychology.homeMorale}%` }}
+                />
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-[8px] mb-0.5">
+                <span className="text-red-400">MUN Morale</span>
+                <span>{psychology.awayMorale.toFixed(0)}%</span>
+              </div>
+              <div className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-red-600 to-red-400 rounded-full transition-all"
+                  style={{ width: `${psychology.awayMorale}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Momentum Indicator */}
+          <div className="mb-2">
+            <div className="text-[8px] text-white/60 mb-0.5">MOMENTUM</div>
+            <div className="relative w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+              <div className="absolute inset-0 flex">
+                <div className="flex-1 bg-sky-600/30" />
+                <div className="flex-1 bg-red-600/30" />
+              </div>
+              <div
+                className="absolute top-0 h-full w-2 bg-white rounded-full transition-all"
+                style={{
+                  left: `${50 + (psychology.homeMomentum - psychology.awayMomentum) / 2}%`,
+                  transform: 'translateX(-50%)'
+                }}
+              />
+            </div>
+            <div className="flex justify-between text-[7px] text-white/40 mt-0.5">
+              <span>MCI</span>
+              <span>MUN</span>
+            </div>
+          </div>
+
+          {/* Crowd */}
+          <div className="border-t border-white/20 pt-1">
+            <div className="flex justify-between">
+              <span className="text-white/60">Crowd Volume</span>
+              <span className={cn(
+                'font-medium',
+                psychology.crowdVolume > 80 ? 'text-green-400' :
+                psychology.crowdVolume > 50 ? 'text-amber-400' : 'text-white/60'
+              )}>
+                {psychology.crowdVolume.toFixed(0)}%
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-white/60">Tension</span>
+              <span className={cn(
+                'font-medium',
+                psychology.crowdTension > 70 ? 'text-red-400' :
+                psychology.crowdTension > 40 ? 'text-amber-400' : 'text-green-400'
+              )}>
+                {psychology.crowdTension.toFixed(0)}%
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AI Tactical Decisions Panel */}
+      {showAIDecisions && tacticalDecisions.length > 0 && (
+        <div className="absolute bottom-12 right-2 bg-black/80 rounded-lg p-2 text-[9px] text-white z-40 max-w-[180px]">
+          <div className="font-bold text-[10px] text-cyan-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            AI DECISIONS
+          </div>
+
+          <div className="space-y-1.5">
+            {tacticalDecisions.slice(0, 3).map((decision, idx) => (
+              <div key={idx} className="border-l-2 pl-1.5" style={{
+                borderColor: decision.urgency > 0.7 ? '#ef4444' :
+                            decision.urgency > 0.4 ? '#f59e0b' : '#22c55e'
+              }}>
+                <div className="flex items-center gap-1">
+                  <span className={cn(
+                    'px-1 py-0.5 rounded text-[7px] font-bold uppercase',
+                    decision.urgency > 0.7 ? 'bg-red-500/20 text-red-400' :
+                    decision.urgency > 0.4 ? 'bg-amber-500/20 text-amber-400' :
+                    'bg-green-500/20 text-green-400'
+                  )}>
+                    {decision.type.replace('_', ' ')}
+                  </span>
+                  <span className="text-[7px] text-white/50">
+                    {(decision.confidence * 100).toFixed(0)}%
+                  </span>
+                </div>
+                <div className="text-[8px] text-white/70 mt-0.5 leading-tight">
+                  {decision.reasoning.length > 60
+                    ? decision.reasoning.slice(0, 60) + '...'
+                    : decision.reasoning}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
