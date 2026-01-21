@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import type { Player, TrackingMetrics, FormationPosition } from '@/types';
 
 interface DefensiveBlock {
@@ -248,6 +248,26 @@ export function PitchView({
   showAdvancedMode = false,
   patternRecognition,
 }: PitchViewProps) {
+  // iPad/Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  const [showLeftPanel, setShowLeftPanel] = useState(true);
+  const [showRightPanel, setShowRightPanel] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 1024 || /iPad|iPhone|iPod|Android/i.test(navigator.userAgent);
+      setIsMobile(mobile);
+      // Auto-collapse panels on mobile
+      if (mobile) {
+        setShowLeftPanel(false);
+        setShowRightPanel(false);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Analysis toggles
   const [showCoverShadows, setShowCoverShadows] = useState(true);
   const [showPassingLanes, setShowPassingLanes] = useState(false);
@@ -643,8 +663,37 @@ export function PitchView({
         </svg>
       )}
 
-      {/* Interactive Buttons - Basic */}
-      <div className="absolute top-2 right-2 flex flex-col gap-1 z-40">
+      {/* MOBILE/TABLET: Floating toggle buttons for panels */}
+      {isMobile && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+          <button
+            onClick={() => setShowLeftPanel(!showLeftPanel)}
+            className={cn(
+              'px-4 py-2 text-xs font-bold rounded-full shadow-lg transition-all active:scale-95',
+              showLeftPanel ? 'bg-indigo-600 text-white' : 'bg-black/70 text-white/80'
+            )}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            {showLeftPanel ? '◀ LOGS' : 'LOGS ▶'}
+          </button>
+          <button
+            onClick={() => setShowRightPanel(!showRightPanel)}
+            className={cn(
+              'px-4 py-2 text-xs font-bold rounded-full shadow-lg transition-all active:scale-95',
+              showRightPanel ? 'CHAINS ▶' : 'bg-black/70 text-white/80'
+            )}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            {showRightPanel ? 'CHAINS ◀' : '▶ CHAINS'}
+          </button>
+        </div>
+      )}
+
+      {/* Interactive Buttons - Basic (desktop only or when visible) */}
+      <div className={cn(
+        'absolute top-2 right-2 flex flex-col gap-1 z-40 transition-all',
+        isMobile ? 'hidden' : 'flex'
+      )}>
         <button
           onClick={() => setShowCoverShadows(!showCoverShadows)}
           className={cn(
@@ -777,8 +826,8 @@ export function PitchView({
         </div>
       )}
 
-      {/* Advanced Analysis Panel */}
-      {showAnalysis && (
+      {/* Advanced Analysis Panel (RESPONSIVE) */}
+      {showAnalysis && !isMobile && (
         <div className="absolute bottom-12 left-2 bg-black/80 rounded-lg p-2 text-[9px] text-white z-40 min-w-[140px]">
           <div className="font-bold text-[10px] text-amber-400 mb-1 border-b border-white/20 pb-1">LIVE ANALYSIS</div>
 
@@ -826,8 +875,8 @@ export function PitchView({
         </div>
       )}
 
-      {/* xG Display */}
-      {analytics?.xG && (
+      {/* xG Display (RESPONSIVE) */}
+      {analytics?.xG && !isMobile && (
         <div className="absolute top-16 left-2 bg-black/80 rounded-lg p-2 text-white z-40">
           <div className="font-bold text-[10px] text-rose-400 mb-1">EXPECTED GOALS (xG)</div>
           <div className="flex items-center gap-3">
@@ -844,8 +893,8 @@ export function PitchView({
         </div>
       )}
 
-      {/* Psychology Panel */}
-      {showPsychology && psychology && (
+      {/* Psychology Panel (RESPONSIVE) */}
+      {showPsychology && psychology && !isMobile && (
         <div className="absolute top-2 left-24 bg-black/80 rounded-lg p-2 text-[9px] text-white z-40 min-w-[160px]">
           <div className="font-bold text-[10px] text-pink-400 mb-1 border-b border-white/20 pb-1">PSYCHOLOGY</div>
 
@@ -925,8 +974,8 @@ export function PitchView({
         </div>
       )}
 
-      {/* AI Tactical Decisions Panel */}
-      {showAIDecisions && tacticalDecisions.length > 0 && (
+      {/* AI Tactical Decisions Panel (RESPONSIVE - hide on mobile) */}
+      {showAIDecisions && tacticalDecisions.length > 0 && !isMobile && (
         <div className="absolute bottom-12 right-2 bg-black/80 rounded-lg p-2 text-[9px] text-white z-40 max-w-[180px]">
           <div className="font-bold text-[10px] text-cyan-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
@@ -965,9 +1014,21 @@ export function PitchView({
         </div>
       )}
 
-      {/* Tactical Logs Panel - Fast scrolling with more items */}
-      {showTacticalLogs && patternRecognition && patternRecognition.recentLogs.length > 0 && (
-        <div className="absolute bottom-36 left-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 max-w-[240px] max-h-[200px] overflow-y-auto scrollbar-thin">
+      {/* Tactical Logs Panel - Fast scrolling with more items (RESPONSIVE) */}
+      {showTacticalLogs && patternRecognition && patternRecognition.recentLogs.length > 0 && (!isMobile || showLeftPanel) && (
+        <div
+          className={cn(
+            'absolute bg-black/90 rounded-lg p-2 text-white z-40',
+            isMobile
+              ? 'left-0 top-10 bottom-24 w-[45vw] max-w-[200px] text-[7px]'
+              : 'bottom-36 left-2 max-w-[240px] max-h-[200px] text-[8px]'
+          )}
+          style={{
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'thin',
+          }}
+        >
           <div className="font-bold text-[10px] text-indigo-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1 sticky top-0 bg-black/90 z-10">
             <svg className="w-3 h-3 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
               <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
@@ -1060,9 +1121,16 @@ export function PitchView({
         </div>
       )}
 
-      {/* Tactical Coherence Panel - Positioned underneath logs at bottom */}
-      {showCoherence && patternRecognition?.coherence && (
-        <div className="absolute bottom-2 left-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 min-w-[200px]">
+      {/* Tactical Coherence Panel - Positioned underneath logs at bottom (RESPONSIVE) */}
+      {showCoherence && patternRecognition?.coherence && (!isMobile || showLeftPanel) && (
+        <div
+          className={cn(
+            'absolute bg-black/90 rounded-lg p-2 text-white z-40',
+            isMobile
+              ? 'left-0 bottom-2 w-[45vw] max-w-[200px] text-[7px]'
+              : 'bottom-2 left-2 min-w-[200px] text-[8px]'
+          )}
+        >
           <div className="font-bold text-[10px] text-violet-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
             <svg className="w-3 h-3 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -1168,9 +1236,21 @@ export function PitchView({
         </div>
       )}
 
-      {/* Markov Chains Panel - Recurrent Pattern Sequences */}
-      {showMarkovChains && patternRecognition?.markov && (
-        <div className="absolute bottom-2 right-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 min-w-[220px] max-w-[250px]">
+      {/* Markov Chains Panel - Recurrent Pattern Sequences (RESPONSIVE) */}
+      {showMarkovChains && patternRecognition?.markov && (!isMobile || showRightPanel) && (
+        <div
+          className={cn(
+            'absolute bg-black/90 rounded-lg p-2 text-white z-40',
+            isMobile
+              ? 'right-0 top-10 bottom-2 w-[45vw] max-w-[200px] text-[7px]'
+              : 'bottom-2 right-2 min-w-[220px] max-w-[250px] text-[8px]'
+          )}
+          style={{
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'thin',
+          }}
+        >
           <div className="font-bold text-[10px] text-emerald-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -1400,9 +1480,12 @@ export function PitchView({
         </div>
       )}
 
-      {/* Pressing Intensity Bar */}
+      {/* Pressing Intensity Bar (RESPONSIVE) */}
       {pressingIntensity > 0 && (
-        <div className="absolute bottom-2 right-2 flex items-center gap-2 px-2 py-1 bg-black/70 rounded z-30">
+        <div className={cn(
+          'absolute flex items-center gap-2 px-2 py-1 bg-black/70 rounded z-30',
+          isMobile ? 'bottom-2 left-1/2 -translate-x-1/2' : 'bottom-14 right-2'
+        )}>
           <span className="text-white/70 text-[9px]">PRESS</span>
           <div className="w-16 h-1.5 bg-gray-700 rounded-full overflow-hidden">
             <div
@@ -1424,8 +1507,11 @@ export function PitchView({
         </div>
       )}
 
-      {/* Player Count */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-black/60 text-white text-[9px] rounded z-30">
+      {/* Player Count (RESPONSIVE) */}
+      <div className={cn(
+        'absolute px-2 py-0.5 bg-black/60 text-white text-[9px] rounded z-30',
+        isMobile ? 'top-2 left-2' : 'bottom-2 left-1/2 -translate-x-1/2'
+      )}>
         {homePlayerPositions.length} v {awayPlayerPositions.length}
       </div>
     </div>
