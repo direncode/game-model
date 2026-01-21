@@ -29,6 +29,19 @@ import {
   generateInterpretation,
 } from '@/lib/instruction-log';
 import {
+  TacticsLibrary,
+} from '@/components/dashboard/tactics-library';
+import {
+  TacticControls,
+} from '@/components/dashboard/tactic-controls';
+import {
+  TacticalPreset,
+  Tactic,
+  Formation,
+  TACTICAL_PRESETS,
+  getPresetById,
+} from '@/lib/tactics-library';
+import {
   useLiveMatch,
   usePlayerTracking,
   usePlayerStats,
@@ -61,6 +74,7 @@ import {
   Timer,
   ChevronRight,
   X,
+  SlidersHorizontal,
 } from 'lucide-react';
 
 // Match configuration
@@ -116,6 +130,19 @@ export default function Home() {
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
   const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
   const [awayLiveData, setAwayLiveData] = useState<Map<string, TrackingMetrics>>(new Map());
+
+  // Tactics State
+  const [selectedPreset, setSelectedPreset] = useState<TacticalPreset | null>(
+    () => getPresetById('guardiola_total_football') || null
+  );
+  const [selectedTactics, setSelectedTactics] = useState<string[]>([]);
+  const [selectedFormation, setSelectedFormation] = useState<string>('f433');
+  const [intensityProfile, setIntensityProfile] = useState({
+    pressing: 95,
+    possession: 90,
+    directness: 30,
+    tempo: 70,
+  });
 
   // Live Data Hooks - Real-time API polling
   const {
@@ -364,6 +391,29 @@ export default function Home() {
     [gameModels, createGameModel, setActiveGameModel]
   );
 
+  // Handle preset selection
+  const handlePresetSelect = useCallback((preset: TacticalPreset) => {
+    setSelectedPreset(preset);
+    setSelectedTactics([...preset.attackingTactics, ...preset.defensiveTactics, ...preset.transitionTactics]);
+    setIntensityProfile(preset.intensityProfile);
+    setSelectedFormation(preset.formation === '4-3-3' ? 'f433' : preset.formation === '4-4-2' ? 'f442' : 'f433');
+  }, []);
+
+  // Handle tactic selection
+  const handleTacticSelect = useCallback((tactic: Tactic) => {
+    setSelectedTactics((prev) => {
+      if (prev.includes(tactic.id)) {
+        return prev.filter((t) => t !== tactic.id);
+      }
+      return [...prev, tactic.id];
+    });
+  }, []);
+
+  // Handle formation selection
+  const handleFormationSelect = useCallback((formation: Formation) => {
+    setSelectedFormation(formation.id);
+  }, []);
+
   // Handle AI instruction processing with logging
   const handleInstructionsProcessed = useCallback(
     (input: ManagerInput) => {
@@ -512,6 +562,10 @@ export default function Home() {
             <TabsTrigger value="history">
               <FileText className="w-4 h-4 mr-2" />
               Instructions
+            </TabsTrigger>
+            <TabsTrigger value="tactics">
+              <SlidersHorizontal className="w-4 h-4 mr-2" />
+              Tactics
             </TabsTrigger>
           </TabsList>
 
@@ -1177,6 +1231,247 @@ export default function Home() {
                     </Button>
                   </CardContent>
                 </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Tactics Tab */}
+          <TabsContent value="tactics">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Tactics Library Sidebar */}
+              <div className="lg:col-span-1">
+                <TacticsLibrary
+                  onPresetSelect={handlePresetSelect}
+                  onTacticSelect={handleTacticSelect}
+                  onFormationSelect={handleFormationSelect}
+                  selectedPreset={selectedPreset?.id}
+                  selectedTactics={selectedTactics}
+                  selectedFormation={selectedFormation}
+                />
+              </div>
+
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Active Preset Info */}
+                {selectedPreset && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>{selectedPreset.name}</span>
+                        <span className="text-sm font-normal text-slate-500">{selectedPreset.formation}</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-slate-600 mb-4">{selectedPreset.description}</p>
+
+                      {selectedPreset.manager && (
+                        <div className="text-xs text-slate-500 mb-4">
+                          Inspired by: <span className="font-medium text-slate-700">{selectedPreset.manager}</span>
+                        </div>
+                      )}
+
+                      {/* Attacking Tactics */}
+                      <div className="mb-4">
+                        <h4 className="text-xs font-semibold text-slate-700 mb-2 uppercase tracking-wide">Attacking Tactics</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {selectedPreset.attackingTactics.map((t) => (
+                            <span
+                              key={t}
+                              className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded border border-green-200"
+                            >
+                              {t.replace(/_/g, ' ')}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Defensive Tactics */}
+                      <div className="mb-4">
+                        <h4 className="text-xs font-semibold text-slate-700 mb-2 uppercase tracking-wide">Defensive Tactics</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {selectedPreset.defensiveTactics.map((t) => (
+                            <span
+                              key={t}
+                              className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded border border-red-200"
+                            >
+                              {t.replace(/_/g, ' ')}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Transition Tactics */}
+                      <div>
+                        <h4 className="text-xs font-semibold text-slate-700 mb-2 uppercase tracking-wide">Transition Tactics</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {selectedPreset.transitionTactics.map((t) => (
+                            <span
+                              key={t}
+                              className="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded border border-yellow-200"
+                            >
+                              {t.replace(/_/g, ' ')}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Pitch View with Tactics */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Formation & Defensive Shape</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PitchView
+                      players={players}
+                      awayPlayers={awayPlayers}
+                      liveData={liveData}
+                      awayLiveData={awayLiveData}
+                      formation={activeGameModel?.formation.shape}
+                      selectedPlayerId={selectedPlayerId}
+                      onPlayerClick={handlePlayerSelect}
+                      ballPosition={matchState?.ballPosition}
+                      ballPossession={matchState?.ballPossession}
+                      defensiveBlock={matchState?.defensiveBlock}
+                      pressingIntensity={matchState?.pressingIntensity}
+                    />
+                  </CardContent>
+                </Card>
+
+                {/* All Presets Overview */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Available Tactical Systems</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-3">
+                      {TACTICAL_PRESETS.map((preset) => (
+                        <div
+                          key={preset.id}
+                          onClick={() => handlePresetSelect(preset)}
+                          className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                            selectedPreset?.id === preset.id
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-sm font-medium text-slate-900">{preset.name}</span>
+                            <span className="text-xs text-slate-500">{preset.formation}</span>
+                          </div>
+                          {preset.manager && (
+                            <div className="text-xs text-slate-500">{preset.manager}</div>
+                          )}
+                          <div className="mt-2 flex gap-2">
+                            <div className="text-xs">
+                              <span className="text-slate-400">Press:</span>{' '}
+                              <span className={`font-medium ${preset.intensityProfile.pressing >= 80 ? 'text-red-600' : preset.intensityProfile.pressing >= 50 ? 'text-yellow-600' : 'text-green-600'}`}>
+                                {preset.intensityProfile.pressing}
+                              </span>
+                            </div>
+                            <div className="text-xs">
+                              <span className="text-slate-400">Poss:</span>{' '}
+                              <span className={`font-medium ${preset.intensityProfile.possession >= 80 ? 'text-blue-600' : 'text-slate-600'}`}>
+                                {preset.intensityProfile.possession}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Controls Sidebar */}
+              <div className="lg:col-span-1 space-y-6">
+                <TacticControls
+                  preset={selectedPreset}
+                  intensityProfile={intensityProfile}
+                  onIntensityChange={setIntensityProfile}
+                />
+
+                {/* Live Intensity Display */}
+                {matchState && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-sm">Live Match Intensity</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div>
+                        <div className="flex items-center justify-between text-xs mb-1">
+                          <span className="text-slate-500">Pressing Intensity</span>
+                          <span className="font-medium">{matchState.pressingIntensity?.toFixed(0) || 0}%</span>
+                        </div>
+                        <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 transition-all"
+                            style={{ width: `${matchState.pressingIntensity || 0}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between text-xs mb-1">
+                          <span className="text-slate-500">Match Intensity</span>
+                          <span className="font-medium">{(matchState.intensity * 100).toFixed(0)}%</span>
+                        </div>
+                        <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-blue-500 transition-all"
+                            style={{ width: `${matchState.intensity * 100}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-200">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-500">Defensive Block</span>
+                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                            matchState.defensiveBlock?.type === 'high'
+                              ? 'bg-green-100 text-green-700'
+                              : matchState.defensiveBlock?.type === 'mid'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-red-100 text-red-700'
+                          }`}>
+                            {matchState.defensiveBlock?.type || 'N/A'} block
+                          </span>
+                        </div>
+                        <div className="text-xs text-slate-400 mt-1">
+                          {matchState.defensiveBlock?.team === 'home' ? 'City' : 'Opposition'} defending
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Phase Display */}
+                {matchState && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-sm">Current Phase</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center py-2">
+                        <span className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                          matchState.currentPhase === 'buildUp' ? 'bg-blue-100 text-blue-700' :
+                          matchState.currentPhase === 'progression' ? 'bg-purple-100 text-purple-700' :
+                          matchState.currentPhase === 'finalThird' ? 'bg-green-100 text-green-700' :
+                          matchState.currentPhase === 'pressing' ? 'bg-red-100 text-red-700' :
+                          matchState.currentPhase === 'defensiveBlock' ? 'bg-orange-100 text-orange-700' :
+                          'bg-yellow-100 text-yellow-700'
+                        }`}>
+                          {matchState.currentPhase.replace(/([A-Z])/g, ' $1').trim()}
+                        </span>
+                      </div>
+                      <div className="mt-3 text-xs text-center text-slate-500">
+                        Ball: {matchState.ballPosition?.zone || 'center'} ({matchState.ballPossession === 'home' ? 'City' : 'United'})
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           </TabsContent>
