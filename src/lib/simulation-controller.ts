@@ -660,9 +660,10 @@ export class SimulationController {
       away: this.patternEngine.getActivePatterns('away')
     };
 
-    // Log significant patterns with outcomes
+    // Log patterns MORE FREQUENTLY for faster tactical log updates
+    // Lower threshold to 0.5 confidence for more granular logging
     for (const pattern of detectedPatterns) {
-      if (pattern.confidence > 0.7) {
+      if (pattern.confidence > 0.5) {
         // Determine outcome based on recent events
         const recentEvent = events.find(e => e.team === pattern.team);
         const outcome = {
@@ -681,24 +682,22 @@ export class SimulationController {
       }
     }
 
-    // Update logs and effects
-    this.state.patternRecognition.recentLogs = this.patternEngine.getPatternLogs(undefined, 15);
+    // Update logs and effects - keep more logs for faster scrolling display
+    this.state.patternRecognition.recentLogs = this.patternEngine.getPatternLogs(undefined, 25);
     this.state.patternRecognition.compoundingEffects = this.patternEngine.getCompoundingEffects();
 
-    // Calculate coherence periodically (every 5 minutes)
-    if (Math.floor(this.state.minute) % 5 === 0) {
-      this.state.patternRecognition.coherence = {
-        home: this.patternEngine.calculateCoherence('home', 'positional_play', this.state.minute),
-        away: this.patternEngine.calculateCoherence('away', 'counter_attacking', this.state.minute)
-      };
-    }
+    // DYNAMIC COHERENCE - Update EVERY TICK for real-time display
+    this.state.patternRecognition.coherence = {
+      home: this.patternEngine.calculateCoherence('home', 'positional_play', this.state.minute),
+      away: this.patternEngine.calculateCoherence('away', 'counter_attacking', this.state.minute)
+    };
 
-    // Generate tactical log events for significant patterns
+    // Generate tactical log events more frequently (30% chance)
     if (detectedPatterns.length > 0) {
       const topPattern = detectedPatterns.reduce((best, p) =>
         p.confidence > best.confidence ? p : best, detectedPatterns[0]);
 
-      if (topPattern.confidence > 0.8 && Math.random() < 0.1) { // 10% chance to log
+      if (topPattern.confidence > 0.6 && Math.random() < 0.3) { // 30% chance to log
         events.push(this.createEvent(
           'tactical_change',
           topPattern.team,

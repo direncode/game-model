@@ -238,7 +238,7 @@ export function PitchView({
   const [showAIDecisions, setShowAIDecisions] = useState(true);
   const [showPressingTraps, setShowPressingTraps] = useState(false);
   const [showTacticalLogs, setShowTacticalLogs] = useState(true);
-  const [showCoherence, setShowCoherence] = useState(false);
+  const [showCoherence, setShowCoherence] = useState(true); // Always show coherence by default
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
@@ -931,18 +931,19 @@ export function PitchView({
         </div>
       )}
 
-      {/* Tactical Logs Panel */}
+      {/* Tactical Logs Panel - Fast scrolling with more items */}
       {showTacticalLogs && patternRecognition && patternRecognition.recentLogs.length > 0 && (
-        <div className="absolute bottom-2 left-2 bg-black/85 rounded-lg p-2 text-[8px] text-white z-40 max-w-[220px] max-h-[180px] overflow-y-auto">
-          <div className="font-bold text-[10px] text-indigo-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1 sticky top-0 bg-black/85">
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+        <div className="absolute bottom-36 left-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 max-w-[240px] max-h-[200px] overflow-y-auto scrollbar-thin">
+          <div className="font-bold text-[10px] text-indigo-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1 sticky top-0 bg-black/90 z-10">
+            <svg className="w-3 h-3 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
               <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
             </svg>
             TACTICAL LOGS
+            <span className="ml-auto text-[7px] text-white/50">LIVE</span>
           </div>
 
-          <div className="space-y-1.5">
-            {patternRecognition.recentLogs.slice(-8).reverse().map((log) => (
+          <div className="space-y-1">
+            {patternRecognition.recentLogs.slice(-12).reverse().map((log) => (
               <div
                 key={log.id}
                 className={cn(
@@ -1025,14 +1026,15 @@ export function PitchView({
         </div>
       )}
 
-      {/* Tactical Coherence Panel */}
+      {/* Tactical Coherence Panel - Positioned underneath logs at bottom */}
       {showCoherence && patternRecognition?.coherence && (
-        <div className="absolute top-28 left-2 bg-black/85 rounded-lg p-2 text-[8px] text-white z-40 min-w-[180px]">
+        <div className="absolute bottom-2 left-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 min-w-[200px]">
           <div className="font-bold text-[10px] text-violet-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-3 h-3 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
-            GAME MODEL COHERENCE
+            COHERENCE
+            <span className="ml-auto text-[7px] text-green-400 animate-pulse">DYNAMIC</span>
           </div>
 
           {/* City Coherence */}

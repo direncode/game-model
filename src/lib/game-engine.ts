@@ -295,19 +295,21 @@ export class GameEngine {
 
     // United 4-2-3-1 - Counter-Attack Setup (OPPOSITE of City)
     // Deep defensive block, ready to spring on transition
-    // FIXED: Better player separation - Garnacho and Hojlund have distinct zones
+    // FIXED: Proper player separation - Mount, Garnacho, Rashford, Hojlund all have distinct zones
+    // Squad order: 0-Onana, 1-Dalot, 2-deLigt, 3-Martinez, 4-Shaw, 5-Casemiro, 6-Mainoo,
+    //              7-Fernandes, 8-Mount, 9-Rashford, 10-Garnacho, 11-Amad, 12-Hojlund
     const unitedFormation = [
-      { x: 94, y: 50, role: 'GK', idx: 0 },
-      { x: 85, y: 80, role: 'RB', idx: 1 },   // Wide right
-      { x: 88, y: 58, role: 'CB', idx: 2 },   // Right CB
-      { x: 88, y: 42, role: 'CB', idx: 3 },   // Left CB
-      { x: 85, y: 20, role: 'LB', idx: 4 },   // Wide left
-      { x: 72, y: 58, role: 'CDM', idx: 5 },  // Shield right
-      { x: 72, y: 42, role: 'CDM', idx: 6 },  // Shield left
-      { x: 58, y: 80, role: 'RM', idx: 8 },   // Rashford - wide right threat
-      { x: 52, y: 50, role: 'CAM', idx: 7 },  // Fernandes - central link
-      { x: 58, y: 20, role: 'LM', idx: 9 },   // Garnacho - wide left threat (SEPARATED)
-      { x: 45, y: 50, role: 'ST', idx: 10 },  // Hojlund - central striker (SEPARATED)
+      { x: 94, y: 50, role: 'GK', idx: 0 },    // Onana
+      { x: 85, y: 80, role: 'RB', idx: 1 },    // Dalot - wide right
+      { x: 88, y: 58, role: 'CB', idx: 2 },    // de Ligt - right CB
+      { x: 88, y: 42, role: 'CB', idx: 3 },    // Martinez - left CB
+      { x: 85, y: 20, role: 'LB', idx: 4 },    // Shaw - wide left
+      { x: 72, y: 58, role: 'CDM', idx: 5 },   // Casemiro - shield right
+      { x: 72, y: 42, role: 'CDM', idx: 6 },   // Mainoo - shield left
+      { x: 62, y: 65, role: 'RM', idx: 8 },    // Mount - right halfspace (SEPARATE from Garnacho)
+      { x: 52, y: 50, role: 'CAM', idx: 7 },   // Fernandes - central link
+      { x: 55, y: 15, role: 'LW', idx: 10 },   // Garnacho - wide left winger (SEPARATE)
+      { x: 42, y: 50, role: 'ST', idx: 12 },   // Hojlund - central striker (idx 12!)
     ];
 
     for (let i = 0; i < 11; i++) {
@@ -739,28 +741,36 @@ export class GameEngine {
         pos.targetY = ballY + (pos.baseY - 50) * 0.4;
       } else {
         // FORWARDS SPRINT (pace merchants)
-        // FIXED: Each player has unique movement pattern - no pairing
+        // FIXED: Each player has UNIQUE movement pattern - no pairing
         const sprintTarget = Math.max(15, ballX - 20 * counterThreat);
 
-        // Player-specific counter-attack movement
+        // Player-specific counter-attack movement - CHECK BY NAME FIRST
         const playerName = pos.profile.name;
 
-        if (playerName.includes('Rashford') || pos.role === 'RM') {
-          // Rashford: Hugs the right touchline, exploits space in behind
-          pos.targetX = sprintTarget + Math.sin(phase) * 2;
-          pos.targetY = 88 + Math.sin(phase * 1.3) * 5; // Right flank
-        } else if (playerName.includes('Garnacho') || pos.role === 'LM') {
-          // Garnacho: Hugs the left touchline, cuts inside occasionally
+        if (playerName.includes('Mount')) {
+          // Mount: Right halfspace runner, makes late diagonal runs
+          pos.targetX = Math.max(25, sprintTarget + 8);
+          pos.targetY = 68 + Math.sin(phase * 1.1) * 8; // Right halfspace - DISTINCT from Garnacho
+        } else if (playerName.includes('Garnacho') || pos.role === 'LW') {
+          // Garnacho: Hugs the LEFT touchline, cuts inside occasionally
           pos.targetX = sprintTarget - 3 + Math.sin(phase * 0.8) * 3;
-          pos.targetY = 12 + Math.cos(phase * 1.5) * 5; // Left flank - WIDE SEPARATION
+          pos.targetY = 8 + Math.cos(phase * 1.5) * 4; // LEFT flank - FAR from Mount
+        } else if (playerName.includes('Rashford')) {
+          // Rashford (bench): If subbed on, runs right channel
+          pos.targetX = sprintTarget + Math.sin(phase) * 2;
+          pos.targetY = 85 + Math.sin(phase * 1.3) * 5; // Right touchline
         } else if (playerName.includes('Hojlund') || pos.role === 'ST') {
           // Hojlund: Central striker, stretches defense vertically
           pos.targetX = Math.max(12, sprintTarget - 8);
-          pos.targetY = 50 + Math.sin(phase * 0.6) * 12; // Central but moves laterally
-        } else if (pos.role === 'CAM') {
+          pos.targetY = 50 + Math.sin(phase * 0.6) * 10; // Central movement
+        } else if (pos.role === 'CAM' || playerName.includes('Fernandes')) {
           // Fernandes: Links play, arrives late in box
           pos.targetX = Math.max(28, sprintTarget + 5);
-          pos.targetY = 50 + (ballY - 50) * 0.4 + Math.sin(phase) * 8;
+          pos.targetY = 50 + (ballY - 50) * 0.4 + Math.sin(phase) * 6;
+        } else if (pos.role === 'RM') {
+          // Any other RM: Support right channel
+          pos.targetX = Math.max(30, sprintTarget + 3);
+          pos.targetY = 75 + Math.sin(phase * 0.9) * 5;
         } else {
           pos.targetX = sprintTarget + Math.sin(phase) * 2;
           pos.targetY = pos.baseY;
