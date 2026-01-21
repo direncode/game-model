@@ -4,6 +4,16 @@ import { cn } from '@/lib/utils';
 import { useMemo } from 'react';
 import type { Player, TrackingMetrics, FormationPosition } from '@/types';
 
+interface DefensiveBlock {
+  team: 'home' | 'away';
+  type: 'high' | 'mid' | 'low';
+  lines: {
+    defensive: { x: number; players: { x: number; y: number }[] };
+    midfield: { x: number; players: { x: number; y: number }[] };
+    forward: { x: number; players: { x: number; y: number }[] };
+  };
+}
+
 interface PitchViewProps {
   players: Player[];
   awayPlayers?: Player[];
@@ -17,6 +27,8 @@ interface PitchViewProps {
   className?: string;
   ballPosition?: { x: number; y: number };
   ballPossession?: 'home' | 'away';
+  defensiveBlock?: DefensiveBlock;
+  pressingIntensity?: number;
 }
 
 // Standard formation positions for both teams
@@ -117,6 +129,8 @@ export function PitchView({
   className,
   ballPosition,
   ballPossession,
+  defensiveBlock,
+  pressingIntensity = 0,
 }: PitchViewProps) {
   // Calculate home player positions on the pitch
   const homePlayerPositions = useMemo(() => {
@@ -327,8 +341,117 @@ export function PitchView({
         MCI
       </div>
       <div className="absolute top-2 right-4 px-2 py-1 bg-red-600 text-white text-xs font-bold rounded shadow">
-        MUN
+        OPP
       </div>
+
+      {/* Defensive Block Lines - Visual trails showing formation shape */}
+      {defensiveBlock && defensiveBlock.lines && (
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          {/* Block type indicator */}
+          <defs>
+            <linearGradient id="highBlockGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(34, 197, 94, 0.6)" />
+              <stop offset="100%" stopColor="rgba(34, 197, 94, 0.2)" />
+            </linearGradient>
+            <linearGradient id="midBlockGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(251, 191, 36, 0.6)" />
+              <stop offset="100%" stopColor="rgba(251, 191, 36, 0.2)" />
+            </linearGradient>
+            <linearGradient id="lowBlockGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(239, 68, 68, 0.6)" />
+              <stop offset="100%" stopColor="rgba(239, 68, 68, 0.2)" />
+            </linearGradient>
+          </defs>
+
+          {/* Defensive Line */}
+          {defensiveBlock.lines.defensive.players.length >= 2 && (
+            <>
+              {/* Line connecting defenders */}
+              <polyline
+                points={defensiveBlock.lines.defensive.players.map(p => `${p.x},${p.y}`).join(' ')}
+                fill="none"
+                stroke={defensiveBlock.type === 'high' ? 'rgba(34, 197, 94, 0.7)' :
+                        defensiveBlock.type === 'mid' ? 'rgba(251, 191, 36, 0.7)' :
+                        'rgba(239, 68, 68, 0.7)'}
+                strokeWidth="0.8"
+                strokeDasharray={defensiveBlock.type === 'high' ? '2,1' : ''}
+              />
+              {/* Shaded area behind defensive line */}
+              <polygon
+                points={`${defensiveBlock.lines.defensive.players[0].x},0 ${defensiveBlock.lines.defensive.players.map(p => `${p.x},${p.y}`).join(' ')} ${defensiveBlock.lines.defensive.players[defensiveBlock.lines.defensive.players.length - 1].x},100`}
+                fill={defensiveBlock.type === 'high' ? 'url(#highBlockGrad)' :
+                      defensiveBlock.type === 'mid' ? 'url(#midBlockGrad)' :
+                      'url(#lowBlockGrad)'}
+                opacity="0.15"
+              />
+            </>
+          )}
+
+          {/* Midfield Line */}
+          {defensiveBlock.lines.midfield.players.length >= 2 && (
+            <polyline
+              points={defensiveBlock.lines.midfield.players.map(p => `${p.x},${p.y}`).join(' ')}
+              fill="none"
+              stroke={defensiveBlock.team === 'home' ? 'rgba(56, 189, 248, 0.5)' : 'rgba(248, 113, 113, 0.5)'}
+              strokeWidth="0.6"
+              strokeDasharray="3,2"
+            />
+          )}
+
+          {/* Forward Line (pressing trigger line) */}
+          {defensiveBlock.lines.forward.players.length >= 2 && (
+            <polyline
+              points={defensiveBlock.lines.forward.players.map(p => `${p.x},${p.y}`).join(' ')}
+              fill="none"
+              stroke={defensiveBlock.team === 'home' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(248, 113, 113, 0.4)'}
+              strokeWidth="0.5"
+              strokeDasharray="1,2"
+            />
+          )}
+        </svg>
+      )}
+
+      {/* Pressing Intensity Indicator */}
+      {pressingIntensity > 0 && (
+        <div className="absolute bottom-2 right-2 flex items-center gap-1.5 px-2 py-1 bg-black/60 rounded text-xs">
+          <span className="text-white/70">Press:</span>
+          <div className="w-12 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+            <div
+              className={cn(
+                'h-full rounded-full transition-all duration-300',
+                pressingIntensity > 85 ? 'bg-red-500' :
+                pressingIntensity > 70 ? 'bg-amber-500' :
+                'bg-green-500'
+              )}
+              style={{ width: `${pressingIntensity}%` }}
+            />
+          </div>
+          <span className={cn(
+            'font-bold',
+            pressingIntensity > 85 ? 'text-red-400' :
+            pressingIntensity > 70 ? 'text-amber-400' :
+            'text-green-400'
+          )}>
+            {Math.round(pressingIntensity)}%
+          </span>
+        </div>
+      )}
+
+      {/* Block Type Label */}
+      {defensiveBlock && (
+        <div className={cn(
+          'absolute top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider',
+          defensiveBlock.type === 'high' ? 'bg-green-500/80 text-white' :
+          defensiveBlock.type === 'mid' ? 'bg-amber-500/80 text-white' :
+          'bg-red-500/80 text-white'
+        )}>
+          {defensiveBlock.type} block
+        </div>
+      )}
 
       {/* Players */}
       {allPlayerPositions.map(({ player, x, y, metrics, isHome }) => (

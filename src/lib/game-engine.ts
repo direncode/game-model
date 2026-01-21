@@ -18,6 +18,17 @@ export interface MatchState {
   ballPossession: 'home' | 'away';
   momentum: 'home' | 'away' | 'neutral';
   intensity: number;
+  // Defensive block visualization
+  defensiveBlock: {
+    team: 'home' | 'away';
+    type: 'high' | 'mid' | 'low';
+    lines: {
+      defensive: { x: number; players: { x: number; y: number }[] };
+      midfield: { x: number; players: { x: number; y: number }[] };
+      forward: { x: number; players: { x: number; y: number }[] };
+    };
+  };
+  pressingIntensity: number; // 0-100
 }
 
 export interface MatchEvent {
@@ -162,7 +173,17 @@ export class GameEngine {
       ballPosition: { x: 50, y: 50, zone: 'center' },
       ballPossession: 'home',
       momentum: 'home',
-      intensity: 0.6,
+      intensity: 0.85, // Premier League intensity
+      defensiveBlock: {
+        team: 'away',
+        type: 'low',
+        lines: {
+          defensive: { x: 85, players: [] },
+          midfield: { x: 70, players: [] },
+          forward: { x: 55, players: [] },
+        },
+      },
+      pressingIntensity: 85, // High PL intensity
     };
   }
 
@@ -236,6 +257,7 @@ export class GameEngine {
       }
 
       this.updateBallPosition();
+      this.updateDefensiveBlockLines();
       this.maybeChangePossession(events);
       this.updatePossessionStats();
     }
@@ -504,10 +526,11 @@ export class GameEngine {
     }
   }
 
-  // ==================== GEGENPRESSING ====================
+  // ==================== GEGENPRESSING - PREMIER LEAGUE MAX INTENSITY ====================
 
   private updateCityGegenpressing(): void {
-    // Immediate counter-press on ball loss - 5 second rule
+    // MAXIMUM INTENSITY - Premier League gegenpressing
+    // Immediate counter-press on ball loss - 5 second rule, swarm the ball
     const ballX = this.ballX;
     const ballY = this.ballY;
 
@@ -516,33 +539,33 @@ export class GameEngine {
       const base = CITY_BASE[i];
 
       const phase = this.movementPhase + i * 0.5;
-      const jitterX = Math.sin(phase) * 2;
-      const jitterY = Math.cos(phase * 0.7) * 2.5;
+      const jitterX = Math.sin(phase) * 2.5;
+      const jitterY = Math.cos(phase * 0.7) * 3;
 
-      // Distance affects pressing intensity
+      // Distance affects pressing intensity - MAXIMUM for PL
       const distToBall = Math.sqrt(Math.pow(pos.x - ballX, 2) + Math.pow(pos.y - ballY, 2));
-      const pressIntensity = Math.max(0.2, 1 - distToBall / 45);
+      const pressIntensity = Math.max(0.4, 1 - distToBall / 40); // Higher baseline
 
       if (i === 0) {
-        // Ederson sweeps
-        pos.targetX = Math.max(8, Math.min(22, ballX - 35));
-        pos.targetY = ballY * 0.2 + 40 + jitterY * 0.3;
+        // Ederson sweeps aggressively
+        pos.targetX = Math.max(12, Math.min(28, ballX - 30));
+        pos.targetY = ballY * 0.25 + 37.5 + jitterY * 0.4;
       } else if (i >= 8) {
-        // Forwards press immediately (Gegenpressing)
-        pos.targetX = Math.max(35, ballX - 6 * pressIntensity) + jitterX;
-        pos.targetY = ballY + (i === 8 ? 10 : i === 10 ? -10 : 0) + jitterY;
+        // Forwards HUNT the ball - max press
+        pos.targetX = Math.max(30, ballX - 5 * pressIntensity) + jitterX;
+        pos.targetY = ballY + (i === 8 ? 8 : i === 10 ? -8 : 0) * pressIntensity + jitterY;
       } else if (i >= 5 && i <= 7) {
-        // Midfield swarms
-        pos.targetX = Math.max(28, ballX - 15) + jitterX;
-        pos.targetY = base.y + (ballY - 50) * 0.5 + jitterY;
+        // Midfield swarms aggressively
+        pos.targetX = Math.max(25, ballX - 12) + jitterX;
+        pos.targetY = base.y + (ballY - 50) * 0.6 + jitterY;
       } else {
-        // Defense compact, high line
-        pos.targetX = Math.min(38, ballX - 20) + jitterX * 0.5;
-        pos.targetY = base.y + (ballY - 50) * 0.3 + jitterY * 0.5;
+        // Defense pushes HIGH - aggressive line
+        pos.targetX = Math.min(42, ballX - 15) + jitterX * 0.6;
+        pos.targetY = base.y + (ballY - 50) * 0.35 + jitterY * 0.6;
       }
 
-      // Press speed based on distance
-      const speed = 0.06 + pressIntensity * 0.05;
+      // MAXIMUM press speed for PL intensity
+      const speed = 0.08 + pressIntensity * 0.07;
       pos.x += (pos.targetX - pos.x) * speed;
       pos.y += (pos.targetY - pos.y) * speed;
     }
@@ -663,6 +686,63 @@ export class GameEngine {
     this.state.ballPosition.y = this.ballY;
     this.state.ballPossession = this.ballCarrierTeam;
     this.state.currentPhase = this.playPhase;
+  }
+
+  private updateDefensiveBlockLines(): void {
+    // Determine which team is defending
+    const defendingTeam = this.ballCarrierTeam === 'home' ? 'away' : 'home';
+    const positions = defendingTeam === 'home' ? this.homePositions : this.awayPositions;
+
+    // Calculate defensive lines from player positions
+    const defLine: { x: number; y: number }[] = [];
+    const midLine: { x: number; y: number }[] = [];
+    const fwdLine: { x: number; y: number }[] = [];
+
+    if (defendingTeam === 'away') {
+      // Opposition defending (low/mid block against City)
+      // GK excluded, defenders 1-4, midfielders 5-7, forwards 8-10
+      for (let i = 1; i <= 4; i++) defLine.push({ x: positions[i].x, y: positions[i].y });
+      for (let i = 5; i <= 7; i++) midLine.push({ x: positions[i].x, y: positions[i].y });
+      for (let i = 8; i <= 10; i++) fwdLine.push({ x: positions[i].x, y: positions[i].y });
+
+      // Determine block type based on average defensive line position
+      const avgDefX = defLine.reduce((s, p) => s + p.x, 0) / defLine.length;
+      const blockType = avgDefX > 80 ? 'low' : avgDefX > 65 ? 'mid' : 'high';
+
+      this.state.defensiveBlock = {
+        team: 'away',
+        type: blockType,
+        lines: {
+          defensive: { x: avgDefX, players: defLine.sort((a, b) => a.y - b.y) },
+          midfield: { x: midLine.reduce((s, p) => s + p.x, 0) / midLine.length, players: midLine.sort((a, b) => a.y - b.y) },
+          forward: { x: fwdLine.reduce((s, p) => s + p.x, 0) / fwdLine.length, players: fwdLine.sort((a, b) => a.y - b.y) },
+        },
+      };
+
+      // Pressing intensity based on ball position (higher when ball is closer)
+      this.state.pressingIntensity = Math.min(95, 70 + (100 - this.ballX) * 0.4);
+    } else {
+      // City defending (high press / gegenpressing)
+      for (let i = 1; i <= 4; i++) defLine.push({ x: positions[i].x, y: positions[i].y });
+      for (let i = 5; i <= 7; i++) midLine.push({ x: positions[i].x, y: positions[i].y });
+      for (let i = 8; i <= 10; i++) fwdLine.push({ x: positions[i].x, y: positions[i].y });
+
+      const avgDefX = defLine.reduce((s, p) => s + p.x, 0) / defLine.length;
+      const blockType = avgDefX < 25 ? 'high' : avgDefX < 40 ? 'mid' : 'low';
+
+      this.state.defensiveBlock = {
+        team: 'home',
+        type: blockType,
+        lines: {
+          defensive: { x: avgDefX, players: defLine.sort((a, b) => a.y - b.y) },
+          midfield: { x: midLine.reduce((s, p) => s + p.x, 0) / midLine.length, players: midLine.sort((a, b) => a.y - b.y) },
+          forward: { x: fwdLine.reduce((s, p) => s + p.x, 0) / fwdLine.length, players: fwdLine.sort((a, b) => a.y - b.y) },
+        },
+      };
+
+      // City presses intensely - PL max intensity
+      this.state.pressingIntensity = Math.min(98, 85 + this.ballX * 0.15);
+    }
   }
 
   private maybeChangePossession(events: MatchEvent[]): void {

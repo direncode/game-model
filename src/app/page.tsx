@@ -562,6 +562,8 @@ export default function Home() {
                       onPlayerClick={handlePlayerSelect}
                       ballPosition={matchState?.ballPosition}
                       ballPossession={matchState?.ballPossession}
+                      defensiveBlock={matchState?.defensiveBlock}
+                      pressingIntensity={matchState?.pressingIntensity}
                     />
                   </CardContent>
                 </Card>
