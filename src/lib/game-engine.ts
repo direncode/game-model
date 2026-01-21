@@ -1,5 +1,5 @@
-// Game Engine - Data-Driven Predictive System
-// City plays with player-data-based predictions, Opposition chases aggressively
+// Game Engine - Premier League Level Tactical Intelligence
+// Dynamic counter-tactics: Opposition plays OPPOSITE of City's style
 
 import type { Player, TrackingMetrics } from '@/types';
 import { getPLSquadData } from './premier-league-api';
@@ -28,6 +28,10 @@ export interface MatchState {
     };
   };
   pressingIntensity: number;
+  tacticalMatchup: {
+    home: TacticalStyle;
+    away: TacticalStyle;
+  };
 }
 
 export interface MatchEvent {
@@ -47,7 +51,7 @@ export type EventType =
   | 'goal' | 'shot_on_target' | 'shot_off_target' | 'shot_blocked' | 'save'
   | 'yellow_card' | 'red_card' | 'foul' | 'corner' | 'free_kick' | 'penalty'
   | 'offside' | 'substitution' | 'kickoff' | 'half_time' | 'full_time'
-  | 'pass_completed' | 'tackle' | 'dribble' | 'cross' | 'clearance';
+  | 'pass_completed' | 'tackle' | 'dribble' | 'cross' | 'clearance' | 'counter_attack';
 
 export interface MatchStats {
   possession: { home: number; away: number };
@@ -63,6 +67,7 @@ export interface MatchStats {
   tackles: { home: number; away: number };
   saves: { home: number; away: number };
   xG: { home: number; away: number };
+  counterAttacks: { home: number; away: number };
 }
 
 export interface MatchConfig {
@@ -75,16 +80,71 @@ export interface MatchConfig {
   season: string;
 }
 
-// ==================== Player Data Profile ====================
+// ==================== Tactical Style System ====================
+
+export interface TacticalStyle {
+  name: string;
+  // Attack (0-100)
+  possession: number;      // 100 = Tiki-Taka, 0 = Direct
+  passingLength: number;   // 100 = Long balls, 0 = Short passes
+  tempo: number;           // 100 = Blitz, 0 = Patient
+  width: number;           // 100 = Wide play, 0 = Central
+  creativity: number;      // 100 = Individual, 0 = Systematic
+
+  // Defense (0-100)
+  defensiveLine: number;   // 100 = High line, 0 = Deep block
+  pressingIntensity: number; // 100 = Gegenpress, 0 = Passive
+  compactness: number;     // 100 = Narrow, 0 = Wide cover
+
+  // Transition (0-100)
+  counterSpeed: number;    // 100 = Lightning counter, 0 = Controlled
+  riskTaking: number;      // 100 = Aggressive, 0 = Safe
+}
+
+// Guardiola's Total Football / Positional Play
+const GUARDIOLA_STYLE: TacticalStyle = {
+  name: 'Total Football',
+  possession: 95,
+  passingLength: 15,  // Short passes
+  tempo: 55,          // Controlled but can accelerate
+  width: 70,          // Uses width but half-spaces key
+  creativity: 40,     // Systematic positional play
+  defensiveLine: 85,  // High line
+  pressingIntensity: 92, // Intense gegenpressing
+  compactness: 80,    // Very compact
+  counterSpeed: 30,   // Rarely counters
+  riskTaking: 65,     // Plays out from back
+};
+
+// Generate OPPOSITE tactical style
+function generateCounterStyle(style: TacticalStyle): TacticalStyle {
+  return {
+    name: 'Counter-Tactical',
+    possession: 100 - style.possession,           // Direct, give up possession
+    passingLength: 100 - style.passingLength,     // Long balls vs short
+    tempo: 100 - style.tempo + 20,                // Fast breaks
+    width: 100 - style.width,                     // Opposite width
+    creativity: 100 - style.creativity,           // Individual brilliance
+    defensiveLine: 100 - style.defensiveLine,     // Deep block vs high line
+    pressingIntensity: Math.max(20, 100 - style.pressingIntensity + 30), // Strategic press
+    compactness: 100 - style.compactness + 10,    // Absorb and spring
+    counterSpeed: 100 - style.counterSpeed + 20,  // Lightning counters
+    riskTaking: 100 - style.riskTaking,           // Clinical, safe
+  };
+}
+
+// ==================== Player Profiles ====================
 
 interface PlayerProfile {
   name: string;
   maxSpeed: number;
   acceleration: number;
   sprintCapacity: number;
-  workRate: number; // Derived from thresholds
-  positioningIQ: number; // How well they read the game
-  passingRange: number; // Short/medium/long preference
+  workRate: number;
+  positioningIQ: number;
+  passingRange: number;
+  finishing: number;
+  counterAttackThreat: number;
 }
 
 interface PlayerPos {
@@ -96,7 +156,7 @@ interface PlayerPos {
   targetY: number;
   hasBall: boolean;
   profile: PlayerProfile;
-  fatigue: number; // 0-100, affects speed
+  fatigue: number;
   role: string;
 }
 
@@ -122,8 +182,19 @@ export class GameEngine {
 
   private playPhase: 'buildUp' | 'progression' | 'finalThird' | 'pressing' = 'buildUp';
 
+  // Tactical styles
+  private homeStyle: TacticalStyle;
+  private awayStyle: TacticalStyle;
+
+  // Counter-attack tracking
+  private isCounterActive: boolean = false;
+  private counterStartTime: number = 0;
+  private transitionZone: number = 50;
+
   constructor(config: MatchConfig) {
     this.config = config;
+    this.homeStyle = GUARDIOLA_STYLE;
+    this.awayStyle = generateCounterStyle(GUARDIOLA_STYLE);
     this.state = this.initState();
     this.stats = this.initStats();
     this.initPositions();
@@ -141,17 +212,21 @@ export class GameEngine {
       ballPosition: { x: 50, y: 50, zone: 'center' },
       ballPossession: 'home',
       momentum: 'home',
-      intensity: 0.9,
+      intensity: 0.92,
       defensiveBlock: {
         team: 'away',
-        type: 'high',
+        type: 'low',
         lines: {
-          defensive: { x: 50, players: [] },
-          midfield: { x: 40, players: [] },
-          forward: { x: 30, players: [] },
+          defensive: { x: 82, players: [] },
+          midfield: { x: 65, players: [] },
+          forward: { x: 50, players: [] },
         },
       },
-      pressingIntensity: 90,
+      pressingIntensity: 45,
+      tacticalMatchup: {
+        home: this.homeStyle,
+        away: this.awayStyle,
+      },
     };
   }
 
@@ -166,31 +241,31 @@ export class GameEngine {
       redCards: { home: 0, away: 0 },
       offsides: { home: 0, away: 0 },
       passes: { home: 0, away: 0 },
-      passAccuracy: { home: 92, away: 78 },
+      passAccuracy: { home: 92, away: 72 },
       tackles: { home: 0, away: 0 },
       saves: { home: 0, away: 0 },
       xG: { home: 0, away: 0 },
+      counterAttacks: { home: 0, away: 0 },
     };
   }
 
   private initPositions(): void {
-    // Load City player data for predictive positioning
     const citySquad = getPLSquadData('MCI');
     const unitedSquad = getPLSquadData('MUN');
 
-    // City 4-3-3 starting positions with player profiles
+    // City 4-3-3 - Positional Play setup
     const cityFormation = [
-      { x: 6, y: 50, role: 'GK', idx: 0 },      // Ederson
-      { x: 18, y: 82, role: 'RB', idx: 1 },     // Walker
-      { x: 15, y: 60, role: 'CB', idx: 2 },     // Dias
-      { x: 15, y: 40, role: 'CB', idx: 3 },     // Stones
-      { x: 18, y: 18, role: 'LB', idx: 5 },     // Gvardiol
-      { x: 30, y: 50, role: 'CDM', idx: 6 },    // Rodri (use Kovacic if injured)
-      { x: 42, y: 65, role: 'CM', idx: 8 },     // De Bruyne
-      { x: 42, y: 35, role: 'CM', idx: 9 },     // Silva
-      { x: 55, y: 85, role: 'RW', idx: 12 },    // Doku
-      { x: 58, y: 50, role: 'ST', idx: 14 },    // Haaland
-      { x: 55, y: 15, role: 'LW', idx: 10 },    // Foden
+      { x: 6, y: 50, role: 'GK', idx: 0 },
+      { x: 18, y: 82, role: 'RB', idx: 1 },
+      { x: 15, y: 60, role: 'CB', idx: 2 },
+      { x: 15, y: 40, role: 'CB', idx: 3 },
+      { x: 18, y: 18, role: 'LB', idx: 5 },
+      { x: 30, y: 50, role: 'CDM', idx: 6 },
+      { x: 42, y: 65, role: 'CM', idx: 8 },
+      { x: 42, y: 35, role: 'CM', idx: 9 },
+      { x: 55, y: 85, role: 'RW', idx: 12 },
+      { x: 58, y: 50, role: 'ST', idx: 14 },
+      { x: 55, y: 15, role: 'LW', idx: 10 },
     ];
 
     for (let i = 0; i < 11; i++) {
@@ -203,38 +278,35 @@ export class GameEngine {
         maxSpeed: phys?.maxSpeed || 30,
         acceleration: phys?.accelerationPeak || 3.8,
         sprintCapacity: phys?.sprintCapacity || 300,
-        workRate: ((phys?.highIntensityThreshold || 19) - 17) / 5, // 0-1 scale
+        workRate: ((phys?.highIntensityThreshold || 19) - 17) / 5,
         positioningIQ: this.getPositioningIQ(formation.role, playerData?.name),
         passingRange: this.getPassingRange(formation.role, playerData?.name),
+        finishing: this.getFinishing(formation.role, playerData?.name),
+        counterAttackThreat: 0.3, // City rarely counters
       };
 
       this.homePositions.push({
-        x: formation.x,
-        y: formation.y,
-        baseX: formation.x,
-        baseY: formation.y,
-        targetX: formation.x,
-        targetY: formation.y,
-        hasBall: i === 5,
-        profile,
-        fatigue: 0,
-        role: formation.role,
+        x: formation.x, y: formation.y,
+        baseX: formation.x, baseY: formation.y,
+        targetX: formation.x, targetY: formation.y,
+        hasBall: i === 5, profile, fatigue: 0, role: formation.role,
       });
     }
 
-    // United 4-2-3-1 - They will CHASE aggressively
+    // United 4-2-3-1 - Counter-Attack Setup (OPPOSITE of City)
+    // Deep defensive block, ready to spring on transition
     const unitedFormation = [
       { x: 94, y: 50, role: 'GK', idx: 0 },
-      { x: 78, y: 80, role: 'RB', idx: 1 },
-      { x: 80, y: 60, role: 'CB', idx: 2 },
-      { x: 80, y: 40, role: 'CB', idx: 3 },
-      { x: 78, y: 20, role: 'LB', idx: 4 },
-      { x: 65, y: 55, role: 'CDM', idx: 5 },
-      { x: 65, y: 45, role: 'CDM', idx: 6 },
-      { x: 50, y: 80, role: 'RM', idx: 9 },
-      { x: 45, y: 50, role: 'CAM', idx: 7 },
-      { x: 50, y: 20, role: 'LM', idx: 10 },
-      { x: 40, y: 50, role: 'ST', idx: 11 },
+      { x: 85, y: 78, role: 'RB', idx: 1 },   // Deep
+      { x: 88, y: 58, role: 'CB', idx: 2 },   // Deep
+      { x: 88, y: 42, role: 'CB', idx: 3 },   // Deep
+      { x: 85, y: 22, role: 'LB', idx: 4 },   // Deep
+      { x: 72, y: 55, role: 'CDM', idx: 5 },  // Shield
+      { x: 72, y: 45, role: 'CDM', idx: 6 },  // Shield
+      { x: 60, y: 75, role: 'RM', idx: 8 },   // Wide counter threat
+      { x: 55, y: 50, role: 'CAM', idx: 7 },  // Link play
+      { x: 60, y: 25, role: 'LM', idx: 9 },   // Wide counter threat
+      { x: 48, y: 50, role: 'ST', idx: 10 },  // Target man / outlet
     ];
 
     for (let i = 0; i < 11; i++) {
@@ -242,40 +314,55 @@ export class GameEngine {
       const playerData = unitedSquad[formation.idx] || unitedSquad[i];
       const phys = playerData?.physicalProfile;
 
+      // Counter-attack specialists have higher threat ratings
+      const counterThreat = this.getCounterThreat(formation.role, playerData?.name);
+
       const profile: PlayerProfile = {
         name: playerData?.name || this.config.awayTeam.startingXI[i],
         maxSpeed: phys?.maxSpeed || 31,
         acceleration: phys?.accelerationPeak || 3.9,
-        sprintCapacity: phys?.sprintCapacity || 320,
+        sprintCapacity: phys?.sprintCapacity || 340,
         workRate: ((phys?.highIntensityThreshold || 19.5) - 17) / 5,
-        positioningIQ: 0.7,
-        passingRange: 0.5,
+        positioningIQ: 0.75,
+        passingRange: 0.7, // Prefer longer passes
+        finishing: this.getFinishing(formation.role, playerData?.name),
+        counterAttackThreat: counterThreat,
       };
 
       this.awayPositions.push({
-        x: formation.x,
-        y: formation.y,
-        baseX: formation.x,
-        baseY: formation.y,
-        targetX: formation.x,
-        targetY: formation.y,
-        hasBall: false,
-        profile,
-        fatigue: 0,
-        role: formation.role,
+        x: formation.x, y: formation.y,
+        baseX: formation.x, baseY: formation.y,
+        targetX: formation.x, targetY: formation.y,
+        hasBall: false, profile, fatigue: 0, role: formation.role,
       });
     }
   }
 
+  private getCounterThreat(role: string, name?: string): number {
+    // Players dangerous on the counter
+    const counterSpecialists: Record<string, number> = {
+      'Marcus Rashford': 0.95,  // Pace king
+      'Alejandro Garnacho': 0.90,
+      'Rasmus Hojlund': 0.85,
+      'Bruno Fernandes': 0.80,  // Killer pass
+      'Kobbie Mainoo': 0.70,
+    };
+    if (name && counterSpecialists[name]) return counterSpecialists[name];
+
+    const roleThreat: Record<string, number> = {
+      'ST': 0.85, 'LM': 0.80, 'RM': 0.80, 'CAM': 0.75,
+      'CDM': 0.40, 'CB': 0.20, 'RB': 0.50, 'LB': 0.50, 'GK': 0.1,
+    };
+    return roleThreat[role] || 0.5;
+  }
+
   private getPositioningIQ(role: string, name?: string): number {
-    // Elite positioning intelligence based on player reputation
     const elitePositioners: Record<string, number> = {
       'Rodri': 0.98, 'Bernardo Silva': 0.95, 'Kevin De Bruyne': 0.97,
       'Ruben Dias': 0.92, 'John Stones': 0.88, 'Phil Foden': 0.93,
-      'Kyle Walker': 0.85, 'Erling Haaland': 0.90,
+      'Kyle Walker': 0.85, 'Erling Haaland': 0.90, 'Mateo Kovacic': 0.90,
     };
     if (name && elitePositioners[name]) return elitePositioners[name];
-
     const roleIQ: Record<string, number> = {
       'GK': 0.85, 'CB': 0.82, 'RB': 0.78, 'LB': 0.78,
       'CDM': 0.92, 'CM': 0.88, 'CAM': 0.85, 'RW': 0.80, 'LW': 0.80, 'ST': 0.82,
@@ -284,18 +371,29 @@ export class GameEngine {
   }
 
   private getPassingRange(role: string, name?: string): number {
-    // Passing range preference (0 = short, 1 = long)
     const longPassers: Record<string, number> = {
       'Ederson': 0.85, 'Kevin De Bruyne': 0.75, 'Ruben Dias': 0.6,
-      'John Stones': 0.55, 'Kyle Walker': 0.5,
     };
     if (name && longPassers[name]) return longPassers[name];
-
     const roleRange: Record<string, number> = {
       'GK': 0.7, 'CB': 0.4, 'RB': 0.35, 'LB': 0.35,
       'CDM': 0.3, 'CM': 0.45, 'CAM': 0.5, 'RW': 0.4, 'LW': 0.4, 'ST': 0.35,
     };
     return roleRange[role] || 0.4;
+  }
+
+  private getFinishing(role: string, name?: string): number {
+    const finishers: Record<string, number> = {
+      'Erling Haaland': 0.95, 'Phil Foden': 0.82, 'Kevin De Bruyne': 0.78,
+      'Marcus Rashford': 0.80, 'Rasmus Hojlund': 0.78, 'Bruno Fernandes': 0.75,
+      'Alejandro Garnacho': 0.76,
+    };
+    if (name && finishers[name]) return finishers[name];
+    const roleFinish: Record<string, number> = {
+      'ST': 0.80, 'LW': 0.70, 'RW': 0.70, 'CAM': 0.65, 'CM': 0.50,
+      'CDM': 0.35, 'CB': 0.25, 'RB': 0.30, 'LB': 0.30, 'GK': 0.05,
+    };
+    return roleFinish[role] || 0.4;
   }
 
   // ==================== Main Tick ====================
@@ -309,16 +407,18 @@ export class GameEngine {
 
     if (this.state.phase === 'first_half' || this.state.phase === 'second_half') {
       this.possessionTime[this.ballCarrierTeam] += seconds;
-
-      // Update fatigue
       this.updateFatigue();
 
       if (this.ballCarrierTeam === 'home') {
-        this.updateCityPredictive(events);
-        this.updateUnitedChasing(); // Opposition CHASES
+        this.updateCityPositionalPlay(events);
+        this.updateUnitedDeepBlock(); // OPPOSITE: Deep block, wait to counter
       } else {
-        this.updateUnitedPossession(events);
-        this.updateCityPressing();
+        if (this.isCounterActive) {
+          this.updateUnitedCounter(events); // OPPOSITE: Lightning counter
+        } else {
+          this.updateUnitedPossession(events);
+        }
+        this.updateCityGegenpress();
       }
 
       this.updateBallPosition();
@@ -335,13 +435,14 @@ export class GameEngine {
     const baseFatigue = Math.min(30, min * 0.3);
 
     for (const pos of this.homePositions) {
-      const workRateMod = pos.profile.workRate * 5;
-      pos.fatigue = Math.min(40, baseFatigue + workRateMod + Math.random() * 5);
+      // City tires from constant pressing
+      const pressPenalty = this.homeStyle.pressingIntensity / 20;
+      pos.fatigue = Math.min(45, baseFatigue + pressPenalty + Math.random() * 5);
     }
     for (const pos of this.awayPositions) {
-      // United gets more tired from chasing
-      const chasingPenalty = 8;
-      pos.fatigue = Math.min(50, baseFatigue + chasingPenalty + Math.random() * 5);
+      // United conserves energy in deep block
+      const conserve = this.isCounterActive ? 8 : -3;
+      pos.fatigue = Math.min(35, baseFatigue + conserve + Math.random() * 3);
     }
   }
 
@@ -353,78 +454,73 @@ export class GameEngine {
       this.ballCarrierTeam = 'home';
       this.ballCarrierIndex = 5;
       this.homePositions[5].hasBall = true;
-      events.push(this.createEvent('kickoff', 'home', this.homePositions[5].profile.name, 'Kickoff! City start with possession'));
+      events.push(this.createEvent('kickoff', 'home', this.homePositions[5].profile.name,
+        'Kickoff! City begin their positional play'));
     } else if (min >= 45 && min < 45.5 && this.state.phase === 'first_half') {
       this.state.phase = 'half_time';
-      events.push(this.createEvent('half_time', 'home', '', `Half Time: MCI ${this.state.homeScore} - ${this.state.awayScore} MUN`));
+      events.push(this.createEvent('half_time', 'home', '',
+        `Half Time: MCI ${this.state.homeScore} - ${this.state.awayScore} MUN`));
     } else if (min >= 46 && min < 46.5 && this.state.phase === 'half_time') {
       this.state.phase = 'second_half';
       this.resetBallToCenter('away');
       events.push(this.createEvent('kickoff', 'away', 'United', 'Second half begins'));
     } else if (min >= 90 && this.state.phase === 'second_half') {
       this.state.phase = 'full_time';
-      events.push(this.createEvent('full_time', 'home', '', `Full Time: MCI ${this.state.homeScore} - ${this.state.awayScore} MUN`));
+      events.push(this.createEvent('full_time', 'home', '',
+        `Full Time: MCI ${this.state.homeScore} - ${this.state.awayScore} MUN`));
     }
   }
 
-  // ==================== CITY - PREDICTIVE POSITIONING ====================
+  // ==================== CITY - POSITIONAL PLAY ====================
 
-  private updateCityPredictive(events: MatchEvent[]): void {
+  private updateCityPositionalPlay(events: MatchEvent[]): void {
     this.lastPassTime += 1;
 
-    // Determine play phase
-    if (this.ballX < 35) {
-      this.playPhase = 'buildUp';
-    } else if (this.ballX < 65) {
-      this.playPhase = 'progression';
-    } else {
-      this.playPhase = 'finalThird';
-    }
+    if (this.ballX < 35) this.playPhase = 'buildUp';
+    else if (this.ballX < 65) this.playPhase = 'progression';
+    else this.playPhase = 'finalThird';
 
-    // Passing based on player profiles
     const carrier = this.homePositions[this.ballCarrierIndex];
-    const passThreshold = 12 + (1 - carrier.profile.passingRange) * 8; // Better passers pass faster
+    // Short, patient passing (OPPOSITE of United's directness)
+    const passThreshold = 10 + (1 - this.homeStyle.passingLength / 100) * 12;
 
-    if (this.lastPassTime > passThreshold + Math.random() * 10) {
+    if (this.lastPassTime > passThreshold + Math.random() * 8) {
       this.cityPredictivePass(events);
       this.lastPassTime = 0;
     }
 
-    // Position all players using their predictive profiles
     this.updateCityPositions();
   }
 
   private updateCityPositions(): void {
     const ballX = this.ballX;
     const ballY = this.ballY;
+    const style = this.homeStyle;
 
     for (let i = 0; i < 11; i++) {
       const pos = this.homePositions[i];
       const profile = pos.profile;
 
-      // Movement influenced by positioning IQ
       const phase = this.movementPhase + i * 0.6;
       const iqFactor = profile.positioningIQ;
       const speedMod = (profile.maxSpeed / 35) * (1 - pos.fatigue / 100);
 
-      // Cyclical movement scaled by work rate
-      const cycleAmp = 3 + profile.workRate * 4;
+      // Systematic movement (low creativity = structured)
+      const cycleAmp = 3 + (1 - style.creativity / 100) * 3;
       const cycleX = Math.sin(phase) * cycleAmp * iqFactor;
       const cycleY = Math.cos(phase * 0.7) * cycleAmp * iqFactor;
 
-      // Predictive positioning - anticipate where ball WILL be
-      const predictedBallX = ballX + (this.ballCarrierTeam === 'home' ? 5 : -3);
-      const predictedBallY = ballY;
+      const predictedBallX = ballX + 5;
 
       switch (pos.role) {
         case 'GK':
-          pos.targetX = 8 + (this.playPhase === 'buildUp' ? 8 : 2);
+          pos.targetX = 8 + (this.playPhase === 'buildUp' ? 10 : 3);
           pos.targetY = ballY * 0.15 + 42.5 + cycleY * 0.2;
           break;
 
-        case 'RB': // Walker - inverts based on IQ prediction
+        case 'RB':
+          // Inverted fullback (Guardiola signature)
           if (ballX > 40 && iqFactor > 0.8) {
-            // Predict: invert into midfield
             pos.targetX = Math.min(50, ballX - 8) + cycleX;
             pos.targetY = 58 + cycleY;
           } else {
@@ -434,26 +530,26 @@ export class GameEngine {
           break;
 
         case 'CB':
-          // CBs read play and step up intelligently
-          const cbAdvance = iqFactor * (this.playPhase === 'buildUp' ? 12 : 6);
+          const cbAdvance = iqFactor * (this.playPhase === 'buildUp' ? 14 : 6);
           pos.targetX = pos.baseX + cbAdvance + cycleX * 0.4;
           pos.targetY = pos.baseY + (ballY - 50) * 0.15 * iqFactor + cycleY * 0.4;
           break;
 
-        case 'LB': // Gvardiol - overlaps based on speed
-          const overlapPush = speedMod * 18;
-          pos.targetX = pos.baseX + (this.playPhase === 'finalThird' ? overlapPush : 8) + cycleX;
+        case 'LB':
+          // Overlapping runs
+          const overlapPush = speedMod * 20;
+          pos.targetX = pos.baseX + (this.playPhase === 'finalThird' ? overlapPush : 10) + cycleX;
           pos.targetY = Math.max(8, pos.baseY + cycleY);
           break;
 
-        case 'CDM': // Rodri - elite positioning
-          // Predicts where to be to receive recycled possession
+        case 'CDM':
+          // Rodri: The metronome
           pos.targetX = Math.max(25, predictedBallX - 18) + cycleX * 0.3;
           pos.targetY = 50 + (ballY - 50) * 0.2 * iqFactor + cycleY * 0.3;
           break;
 
         case 'CM':
-          // De Bruyne / Silva - half-space occupation with prediction
+          // Half-space occupation
           const isRightCM = pos.baseY > 50;
           const cmPush = iqFactor * (this.playPhase === 'finalThird' ? 15 : 8);
           pos.targetX = Math.min(72, predictedBallX + cmPush) + cycleX;
@@ -461,30 +557,26 @@ export class GameEngine {
           break;
 
         case 'RW':
-          // Doku - pace-based width stretching
+          // Width stretching
           pos.targetX = Math.min(78, ballX + 15 * speedMod) + cycleX;
           pos.targetY = Math.min(92, 85 + cycleY);
           break;
 
         case 'LW':
-          // Foden - intelligent positioning
           pos.targetX = Math.min(75, ballX + 12 * iqFactor) + cycleX;
           pos.targetY = Math.max(8, 15 + cycleY);
           break;
 
         case 'ST':
-          // Haaland - predicts crosses, stays central
           pos.targetX = Math.max(55, Math.min(82, predictedBallX + 10)) + cycleX * 0.4;
           pos.targetY = 50 + (ballY - 50) * 0.3 + cycleY * 0.5;
           break;
       }
 
-      // Ball carrier
       if (pos.hasBall) {
-        pos.targetX = Math.min(80, pos.x + 0.6 * speedMod);
+        pos.targetX = Math.min(80, pos.x + 0.5 * speedMod);
       }
 
-      // Move with speed based on profile
       const moveSpeed = 0.045 + speedMod * 0.025;
       pos.x += (pos.targetX - pos.x) * moveSpeed;
       pos.y += (pos.targetY - pos.y) * moveSpeed;
@@ -494,6 +586,7 @@ export class GameEngine {
   private cityPredictivePass(events: MatchEvent[]): void {
     const fromIdx = this.ballCarrierIndex;
     const carrier = this.homePositions[fromIdx];
+    const style = this.homeStyle;
 
     const options: { idx: number; weight: number }[] = [];
 
@@ -504,31 +597,29 @@ export class GameEngine {
 
       let weight = 10;
 
-      // Short passes heavily preferred (Guardiola style)
-      if (dist < 15) weight *= 3;
-      else if (dist < 25) weight *= 1.5;
-      else if (dist > 40) weight *= 0.3 * carrier.profile.passingRange;
+      // SHORT PASSES (opposite of United's long balls)
+      if (dist < 15) weight *= 3.5;
+      else if (dist < 25) weight *= 1.8;
+      else if (dist > 40) weight *= 0.2;
 
-      // High positioning IQ players receive more
+      // High IQ receivers
       weight *= 0.5 + target.profile.positioningIQ;
 
-      // Forward progression
-      if (target.x > carrier.x) weight *= 1.4;
+      // Forward progression (but patient)
+      if (target.x > carrier.x) weight *= 1.3;
 
-      // Half-spaces (y: 20-40 or 60-80)
+      // Half-spaces preference
       if ((target.y > 20 && target.y < 40) || (target.y > 60 && target.y < 80)) {
-        weight *= 1.5;
+        weight *= 1.6;
       }
 
-      // Key players bonus
-      if (target.profile.name === 'Kevin De Bruyne') weight *= 1.5;
-      if (target.profile.name === 'Bernardo Silva') weight *= 1.3;
-      if (target.profile.name === 'Rodri' || target.profile.name === 'Mateo Kovacic') weight *= 1.2;
+      // Key players
+      if (target.profile.name === 'Kevin De Bruyne') weight *= 1.6;
+      if (target.profile.name === 'Bernardo Silva') weight *= 1.4;
 
       options.push({ idx: i, weight });
     }
 
-    // Select
     const totalWeight = options.reduce((sum, o) => sum + o.weight, 0);
     let rand = Math.random() * totalWeight;
     let toIdx = options[0].idx;
@@ -538,109 +629,165 @@ export class GameEngine {
       if (rand <= 0) { toIdx = opt.idx; break; }
     }
 
-    // Execute pass
     this.homePositions[fromIdx].hasBall = false;
     this.homePositions[toIdx].hasBall = true;
     this.ballCarrierIndex = toIdx;
     this.stats.passes.home++;
 
-    // Log
-    if (Math.random() < 0.1) {
+    if (Math.random() < 0.08) {
       events.push(this.createEvent('pass_completed', 'home', carrier.profile.name,
         `${carrier.profile.name} → ${this.homePositions[toIdx].profile.name}`));
     }
 
-    // Shot opportunity
-    if (this.homePositions[toIdx].x > 68 && Math.random() < 0.15) {
+    if (this.homePositions[toIdx].x > 68 && Math.random() < 0.16) {
       this.attemptShot('home', toIdx, events);
     }
   }
 
-  // ==================== UNITED - AGGRESSIVE CHASING ====================
+  // ==================== UNITED - DEEP BLOCK (OPPOSITE OF HIGH PRESS) ====================
 
-  private updateUnitedChasing(): void {
+  private updateUnitedDeepBlock(): void {
     const ballX = this.ballX;
     const ballY = this.ballY;
+    const style = this.awayStyle;
 
-    // United LEAVES their half to chase the ball aggressively
+    // OPPOSITE of City's high line: DEEP BLOCK
+    const baseDefLine = 82 + (100 - style.defensiveLine) / 5; // Deep line
+
     for (let i = 0; i < 11; i++) {
       const pos = this.awayPositions[i];
       const profile = pos.profile;
 
-      const phase = this.movementPhase + i * 0.5;
-      const speedMod = (profile.maxSpeed / 32) * (1 - pos.fatigue / 100);
+      const phase = this.movementPhase + i * 0.4;
+      const jitterX = Math.sin(phase) * 1.5;
+      const jitterY = Math.cos(phase * 0.6) * 2;
 
-      const jitterX = Math.sin(phase) * 3;
-      const jitterY = Math.cos(phase * 0.7) * 4;
-
-      // Distance to ball determines chase intensity
-      const distToBall = Math.sqrt(Math.pow(pos.x - ballX, 2) + Math.pow(pos.y - ballY, 2));
-      const chaseIntensity = Math.max(0.5, 1 - distToBall / 50);
+      // COMPACT shape (absorb pressure)
+      const compactPull = style.compactness / 100;
 
       if (i === 0) {
-        // GK stays but sweeps aggressively
-        pos.targetX = Math.max(75, Math.min(92, ballX + 35));
-        pos.targetY = ballY * 0.25 + 37.5 + jitterY * 0.3;
+        // GK stays deep
+        pos.targetX = 93 + jitterX * 0.1;
+        pos.targetY = ballY * 0.2 + 40 + jitterY * 0.2;
       } else if (i <= 4) {
-        // DEFENDERS PUSH UP HIGH - leave their half!
-        // They chase to around halfway or further
-        const defPush = Math.max(35, ballX - 15); // Push to at least 35%
-        pos.targetX = Math.min(70, defPush + chaseIntensity * 10) + jitterX * 0.5;
-        pos.targetY = pos.baseY + (ballY - 50) * 0.4 + jitterY;
+        // DEEP defensive line (OPPOSITE of high line)
+        pos.targetX = Math.max(78, Math.min(88, baseDefLine - (100 - ballX) * 0.05)) + jitterX * 0.3;
+        pos.targetY = pos.baseY + (ballY - 50) * 0.2 * compactPull + jitterY;
       } else if (i <= 7) {
-        // MIDFIELDERS HUNT THE BALL
-        pos.targetX = Math.max(25, ballX - 8 * chaseIntensity) + jitterX;
-        pos.targetY = ballY + (pos.baseY - 50) * 0.3 + jitterY;
+        // Midfield shields, stays compact
+        pos.targetX = Math.max(62, Math.min(75, ballX + 15)) + jitterX * 0.5;
+        pos.targetY = pos.baseY + (ballY - 50) * 0.3 * compactPull + jitterY;
       } else {
-        // FORWARDS PRESS HARD - In City's half!
-        pos.targetX = Math.max(15, ballX - 5) + jitterX;
-        pos.targetY = ballY + (i === 8 ? 12 : i === 10 ? -12 : 0) * chaseIntensity + jitterY;
+        // Forwards drop to help BUT stay ready to spring
+        // This is key: they're lazy defensively but explosive on counter
+        const stayHighForCounter = profile.counterAttackThreat * 8;
+        pos.targetX = Math.max(45 - stayHighForCounter, Math.min(60, ballX + 8)) + jitterX;
+        pos.targetY = pos.baseY + (ballY - 50) * 0.15 + jitterY;
       }
 
-      // Fast chasing movement
-      const moveSpeed = 0.06 + speedMod * 0.04;
+      // Slower defensive movement (conserving energy)
+      const moveSpeed = 0.04;
       pos.x += (pos.targetX - pos.x) * moveSpeed;
       pos.y += (pos.targetY - pos.y) * moveSpeed;
     }
   }
 
-  private updateUnitedPossession(events: MatchEvent[]): void {
+  // ==================== UNITED - LIGHTNING COUNTER (OPPOSITE OF SLOW BUILD-UP) ====================
+
+  private updateUnitedCounter(events: MatchEvent[]): void {
+    const ballX = this.ballX;
+    const ballY = this.ballY;
+    const style = this.awayStyle;
+
+    // Check if counter should end
+    const counterDuration = this.state.minute - this.counterStartTime;
+    if (counterDuration > 0.15 || ballX < 25) { // 9 seconds or in final third
+      this.isCounterActive = false;
+    }
+
     this.lastPassTime += 1;
 
-    if (this.lastPassTime > 20 + Math.random() * 15) {
-      this.unitedPass(events);
+    // FAST, DIRECT passes (OPPOSITE of patient build-up)
+    const passThreshold = 6 + (1 - style.tempo / 100) * 4;
+
+    if (this.lastPassTime > passThreshold) {
+      this.unitedCounterPass(events);
       this.lastPassTime = 0;
     }
 
-    // Basic forward movement
+    // EXPLOSIVE movement
     for (let i = 0; i < 11; i++) {
       const pos = this.awayPositions[i];
-      const phase = this.movementPhase + i * 0.4;
+      const profile = pos.profile;
 
-      // Move forward when in possession
-      pos.targetX = pos.baseX - (pos.hasBall ? 5 : 3) + Math.sin(phase) * 3;
-      pos.targetY = pos.baseY + Math.cos(phase * 0.6) * 4;
+      const phase = this.movementPhase + i * 0.3;
+      const speedMod = (profile.maxSpeed / 32) * (1 - pos.fatigue / 100);
+      const counterThreat = profile.counterAttackThreat;
 
-      pos.x += (pos.targetX - pos.x) * 0.05;
-      pos.y += (pos.targetY - pos.y) * 0.05;
+      if (i === 0) {
+        // GK stays
+        pos.targetX = 92;
+        pos.targetY = 50;
+      } else if (i <= 4) {
+        // Defenders push up but not too far
+        pos.targetX = Math.max(55, ballX + 25) + Math.sin(phase) * 2;
+        pos.targetY = pos.baseY + Math.cos(phase) * 3;
+      } else if (i <= 7) {
+        // Midfield BOMBS forward
+        pos.targetX = Math.max(35, ballX - 5) + Math.sin(phase) * 3;
+        pos.targetY = ballY + (pos.baseY - 50) * 0.4;
+      } else {
+        // FORWARDS SPRINT (pace merchants)
+        // Target: ahead of the ball, stretching City
+        const sprintTarget = Math.max(15, ballX - 20 * counterThreat);
+        pos.targetX = sprintTarget + Math.sin(phase) * 2;
+
+        // Wide runs to exploit space
+        if (pos.role === 'RM') pos.targetY = 85;
+        else if (pos.role === 'LM') pos.targetY = 15;
+        else pos.targetY = ballY + (pos.baseY - 50) * 0.3;
+      }
+
+      // FAST counter movement
+      const moveSpeed = 0.08 + speedMod * counterThreat * 0.06;
+      pos.x += (pos.targetX - pos.x) * moveSpeed;
+      pos.y += (pos.targetY - pos.y) * moveSpeed;
     }
   }
 
-  private unitedPass(events: MatchEvent[]): void {
+  private unitedCounterPass(events: MatchEvent[]): void {
     const fromIdx = this.ballCarrierIndex;
+    const carrier = this.awayPositions[fromIdx];
 
-    const options = [];
+    const options: { idx: number; weight: number }[] = [];
+
     for (let i = 0; i < 11; i++) {
       if (i === fromIdx) continue;
-      let weight = 1;
-      if (this.awayPositions[i].x < this.awayPositions[fromIdx].x) weight *= 2;
-      if (i >= 8) weight *= 1.5;
+      const target = this.awayPositions[i];
+
+      let weight = 10;
+
+      // LONG, DIRECT passes (OPPOSITE of short passing)
+      // Prefer players ahead of the ball
+      if (target.x < carrier.x) weight *= 3;
+
+      // Counter-attack threat rating
+      weight *= 1 + target.profile.counterAttackThreat * 2;
+
+      // Speed matters on counter
+      weight *= target.profile.maxSpeed / 30;
+
+      // Forward players preferred
+      if (target.role === 'ST' || target.role === 'LM' || target.role === 'RM') {
+        weight *= 2.5;
+      }
+
       options.push({ idx: i, weight });
     }
 
     const totalWeight = options.reduce((sum, o) => sum + o.weight, 0);
     let rand = Math.random() * totalWeight;
-    let toIdx = 5;
+    let toIdx = 10; // Default to striker
 
     for (const opt of options) {
       rand -= opt.weight;
@@ -652,15 +799,74 @@ export class GameEngine {
     this.ballCarrierIndex = toIdx;
     this.stats.passes.away++;
 
-    if (this.awayPositions[toIdx].x < 30 && Math.random() < 0.18) {
+    // More likely to shoot on counter
+    if (this.awayPositions[toIdx].x < 30 && Math.random() < 0.28) {
       this.attemptShot('away', toIdx, events);
     }
   }
 
-  private updateCityPressing(): void {
+  private updateUnitedPossession(events: MatchEvent[]): void {
+    this.lastPassTime += 1;
+
+    // Quick, direct passing (not patient)
+    if (this.lastPassTime > 15 + Math.random() * 10) {
+      this.unitedDirectPass(events);
+      this.lastPassTime = 0;
+    }
+
+    // Forward movement
+    for (let i = 0; i < 11; i++) {
+      const pos = this.awayPositions[i];
+      const phase = this.movementPhase + i * 0.4;
+
+      pos.targetX = pos.baseX - (pos.hasBall ? 8 : 4) + Math.sin(phase) * 4;
+      pos.targetY = pos.baseY + Math.cos(phase * 0.6) * 5;
+
+      pos.x += (pos.targetX - pos.x) * 0.05;
+      pos.y += (pos.targetY - pos.y) * 0.05;
+    }
+  }
+
+  private unitedDirectPass(events: MatchEvent[]): void {
+    const fromIdx = this.ballCarrierIndex;
+
+    const options = [];
+    for (let i = 0; i < 11; i++) {
+      if (i === fromIdx) continue;
+      let weight = 1;
+
+      // Direct forward passes
+      if (this.awayPositions[i].x < this.awayPositions[fromIdx].x) weight *= 2.5;
+      if (i >= 8) weight *= 2; // Forward targets
+
+      options.push({ idx: i, weight });
+    }
+
+    const totalWeight = options.reduce((sum, o) => sum + o.weight, 0);
+    let rand = Math.random() * totalWeight;
+    let toIdx = 7;
+
+    for (const opt of options) {
+      rand -= opt.weight;
+      if (rand <= 0) { toIdx = opt.idx; break; }
+    }
+
+    this.awayPositions[fromIdx].hasBall = false;
+    this.awayPositions[toIdx].hasBall = true;
+    this.ballCarrierIndex = toIdx;
+    this.stats.passes.away++;
+
+    if (this.awayPositions[toIdx].x < 30 && Math.random() < 0.2) {
+      this.attemptShot('away', toIdx, events);
+    }
+  }
+
+  private updateCityGegenpress(): void {
     const ballX = this.ballX;
     const ballY = this.ballY;
+    const style = this.homeStyle;
 
+    // HIGH PRESS (opposite of United's deep block)
     for (let i = 0; i < 11; i++) {
       const pos = this.homePositions[i];
       const profile = pos.profile;
@@ -671,23 +877,26 @@ export class GameEngine {
       const jitterY = Math.cos(phase * 0.7) * 2.5;
 
       const distToBall = Math.sqrt(Math.pow(pos.x - ballX, 2) + Math.pow(pos.y - ballY, 2));
-      const pressIntensity = Math.max(0.4, 1 - distToBall / 45);
+      const pressIntensity = Math.max(0.5, 1 - distToBall / 40);
 
       if (i === 0) {
-        pos.targetX = Math.max(12, Math.min(30, ballX - 35));
+        pos.targetX = Math.max(15, Math.min(35, ballX - 40));
         pos.targetY = ballY * 0.2 + 40 + jitterY * 0.3;
       } else if (i >= 8) {
-        pos.targetX = Math.max(28, ballX - 8 * pressIntensity) + jitterX;
-        pos.targetY = ballY + (i === 8 ? 10 : i === 10 ? -10 : 0) + jitterY;
+        // Forwards HUNT
+        pos.targetX = Math.max(25, ballX - 10 * pressIntensity) + jitterX;
+        pos.targetY = ballY + (i === 8 ? 12 : i === 10 ? -12 : 0) + jitterY;
       } else if (i >= 5 && i <= 7) {
-        pos.targetX = Math.max(22, ballX - 15) + jitterX;
+        // Midfield swarms
+        pos.targetX = Math.max(20, ballX - 18) + jitterX;
         pos.targetY = pos.baseY + (ballY - 50) * 0.5 + jitterY;
       } else {
-        pos.targetX = Math.min(40, ballX - 20) + jitterX * 0.5;
-        pos.targetY = pos.baseY + (ballY - 50) * 0.3 + jitterY * 0.5;
+        // Defense pushes HIGH
+        pos.targetX = Math.min(45, ballX - 22) + jitterX * 0.5;
+        pos.targetY = pos.baseY + (ballY - 50) * 0.35 + jitterY * 0.5;
       }
 
-      const moveSpeed = 0.065 + speedMod * 0.045;
+      const moveSpeed = 0.07 + speedMod * style.pressingIntensity / 1500;
       pos.x += (pos.targetX - pos.x) * moveSpeed;
       pos.y += (pos.targetY - pos.y) * moveSpeed;
     }
@@ -703,8 +912,11 @@ export class GameEngine {
     const dy = carrier.y - this.ballY;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
+    // Ball speed varies: faster on counter
+    const speedMult = this.isCounterActive ? 0.25 : 0.15;
+
     if (dist > 0.5) {
-      const speed = Math.min(dist * 0.15, 1.5);
+      const speed = Math.min(dist * speedMult, 2);
       this.ballX += (dx / dist) * speed;
       this.ballY += (dy / dist) * speed;
     } else {
@@ -732,12 +944,12 @@ export class GameEngine {
 
     const avgDefX = defLine.reduce((s, p) => s + p.x, 0) / defLine.length;
 
-    // United is chasing so their block is HIGH
-    let blockType: 'high' | 'mid' | 'low' = 'mid';
+    // United = LOW block, City = HIGH block
+    let blockType: 'high' | 'mid' | 'low';
     if (defendingTeam === 'away') {
-      blockType = avgDefX < 55 ? 'high' : avgDefX < 70 ? 'mid' : 'low';
+      blockType = avgDefX > 80 ? 'low' : avgDefX > 65 ? 'mid' : 'high';
     } else {
-      blockType = avgDefX < 30 ? 'high' : avgDefX < 45 ? 'mid' : 'low';
+      blockType = avgDefX < 35 ? 'high' : avgDefX < 50 ? 'mid' : 'low';
     }
 
     this.state.defensiveBlock = {
@@ -750,11 +962,13 @@ export class GameEngine {
       },
     };
 
-    // Pressing intensity - United chases hard
+    // Pressing intensity based on style
     if (defendingTeam === 'away') {
-      this.state.pressingIntensity = Math.min(98, 85 + (100 - this.ballX) * 0.2);
+      // United: Low pressing (wait and spring)
+      this.state.pressingIntensity = Math.min(50, 20 + (100 - this.ballX) * 0.3);
     } else {
-      this.state.pressingIntensity = Math.min(95, 80 + this.ballX * 0.2);
+      // City: High pressing
+      this.state.pressingIntensity = Math.min(98, 80 + this.ballX * 0.2);
     }
   }
 
@@ -762,15 +976,13 @@ export class GameEngine {
     const positions = this.ballCarrierTeam === 'home' ? this.homePositions : this.awayPositions;
     const carrier = positions[this.ballCarrierIndex];
 
-    // City's superior technique means lower loss rate
-    let loseChance = this.ballCarrierTeam === 'home' ? 0.004 : 0.015;
+    let loseChance = this.ballCarrierTeam === 'home' ? 0.004 : 0.012;
 
-    // Higher risk in final third
-    if (this.ballCarrierTeam === 'home' && carrier.x > 70) loseChance *= 2;
-    if (this.ballCarrierTeam === 'away' && carrier.x < 30) loseChance *= 1.8;
+    // City more likely to lose in final third (United's trap)
+    if (this.ballCarrierTeam === 'home' && carrier.x > 72) loseChance *= 2.2;
 
-    // Fatigue increases errors
-    loseChance *= 1 + carrier.fatigue / 200;
+    // United more risky on counter
+    if (this.isCounterActive) loseChance *= 1.5;
 
     if (Math.random() < loseChance) {
       this.transferPossession(events);
@@ -809,7 +1021,19 @@ export class GameEngine {
     const newCarrier = newPositions[nearestIdx].profile.name;
 
     this.stats.tackles[this.ballCarrierTeam]++;
-    events.push(this.createEvent('tackle', this.ballCarrierTeam, newCarrier, `${newCarrier} wins it from ${oldCarrier}`));
+
+    // TRIGGER COUNTER-ATTACK for United
+    if (this.ballCarrierTeam === 'away' && this.ballX > 40) {
+      this.isCounterActive = true;
+      this.counterStartTime = this.state.minute;
+      this.transitionZone = this.ballX;
+      this.stats.counterAttacks.away++;
+      events.push(this.createEvent('counter_attack', 'away', newCarrier,
+        `COUNTER! ${newCarrier} wins it and United break!`));
+    } else {
+      events.push(this.createEvent('tackle', this.ballCarrierTeam, newCarrier,
+        `${newCarrier} wins it from ${oldCarrier}`));
+    }
   }
 
   private clearBallCarriers(): void {
@@ -825,17 +1049,21 @@ export class GameEngine {
     positions[this.ballCarrierIndex].hasBall = true;
     this.ballX = 50;
     this.ballY = 50;
+    this.isCounterActive = false;
   }
 
   private attemptShot(team: 'home' | 'away', shooterIdx: number, events: MatchEvent[]): void {
-    const shooter = team === 'home'
-      ? this.homePositions[shooterIdx].profile.name
-      : this.awayPositions[shooterIdx].profile.name;
+    const positions = team === 'home' ? this.homePositions : this.awayPositions;
+    const shooter = positions[shooterIdx].profile;
 
     const rand = Math.random();
     this.stats.shots[team]++;
 
-    const goalChance = team === 'home' ? 0.18 : 0.12;
+    // Goal chance based on finishing ability and counter bonus
+    let goalChance = shooter.finishing * 0.22;
+    if (team === 'away' && this.isCounterActive) {
+      goalChance *= 1.4; // Counter-attack bonus
+    }
 
     if (rand < goalChance) {
       if (team === 'home') this.state.homeScore++;
@@ -843,7 +1071,9 @@ export class GameEngine {
 
       this.stats.shotsOnTarget[team]++;
       this.stats.xG[team] += 0.35 + Math.random() * 0.35;
-      events.push(this.createEvent('goal', team, shooter, `GOAL! ${shooter} scores!`));
+
+      const goalType = this.isCounterActive ? 'COUNTER GOAL!' : 'GOAL!';
+      events.push(this.createEvent('goal', team, shooter.name, `${goalType} ${shooter.name} scores!`));
       this.resetBallToCenter(team === 'home' ? 'away' : 'home');
 
     } else if (rand < 0.45) {
@@ -852,23 +1082,27 @@ export class GameEngine {
       this.stats.xG[team] += 0.12 + Math.random() * 0.15;
 
       const keeper = team === 'home' ? 'Onana' : 'Ederson';
-      events.push(this.createEvent('shot_on_target', team, shooter, `${shooter}'s shot saved by ${keeper}`));
+      events.push(this.createEvent('shot_on_target', team, shooter.name,
+        `${shooter.name}'s shot saved by ${keeper}`));
 
       this.clearBallCarriers();
       this.ballCarrierTeam = team === 'home' ? 'away' : 'home';
       this.ballCarrierIndex = 0;
       const pos = this.ballCarrierTeam === 'home' ? this.homePositions : this.awayPositions;
       pos[0].hasBall = true;
+      this.isCounterActive = false;
 
     } else {
       this.stats.xG[team] += 0.04 + Math.random() * 0.08;
-      events.push(this.createEvent('shot_off_target', team, shooter, `${shooter}'s shot goes wide`));
+      events.push(this.createEvent('shot_off_target', team, shooter.name,
+        `${shooter.name}'s shot goes wide`));
 
       this.clearBallCarriers();
       this.ballCarrierTeam = team === 'home' ? 'away' : 'home';
       this.ballCarrierIndex = 0;
       const pos = this.ballCarrierTeam === 'home' ? this.homePositions : this.awayPositions;
       pos[0].hasBall = true;
+      this.isCounterActive = false;
     }
   }
 
@@ -876,7 +1110,10 @@ export class GameEngine {
     const total = this.possessionTime.home + this.possessionTime.away;
     if (total > 0) {
       const homePoss = Math.round((this.possessionTime.home / total) * 100);
-      this.state.possession = { home: Math.max(55, Math.min(75, homePoss)), away: Math.min(45, Math.max(25, 100 - homePoss)) };
+      this.state.possession = {
+        home: Math.max(58, Math.min(78, homePoss)),
+        away: Math.min(42, Math.max(22, 100 - homePoss))
+      };
       this.stats.possession = this.state.possession;
     }
   }
@@ -905,39 +1142,41 @@ export class GameEngine {
   public getState(): MatchState { return { ...this.state }; }
   public getStats(): MatchStats { return { ...this.stats }; }
   public getConfig(): MatchConfig { return this.config; }
+  public getHomeStyle(): TacticalStyle { return this.homeStyle; }
+  public getAwayStyle(): TacticalStyle { return this.awayStyle; }
 
   public generatePlayerMetrics(player: Player, isHome: boolean, playerIndex: number): TrackingMetrics {
     const idx = Math.min(playerIndex, 10);
     const pos = isHome ? this.homePositions[idx] : this.awayPositions[idx];
     const minute = Math.max(1, this.state.minute);
 
-    const baseDistance = minute * 110;
+    const baseDistance = minute * 112;
     const isGK = idx === 0;
-    const mult = isGK ? 0.35 : 1.0;
+    const mult = isGK ? 0.32 : 1.0;
 
     return {
       totalDistance: baseDistance * mult,
-      distancePerMinute: 110 * mult,
-      highSpeedRunningDistance: baseDistance * 0.1 * mult,
-      sprintDistance: baseDistance * 0.04 * mult,
-      walkingDistance: baseDistance * 0.18,
-      joggingDistance: baseDistance * 0.4,
-      runningDistance: baseDistance * 0.32,
-      currentSpeed: pos.hasBall ? 12 + Math.random() * 7 : 4 + Math.random() * 10,
-      averageSpeed: 7.6,
+      distancePerMinute: 112 * mult,
+      highSpeedRunningDistance: baseDistance * 0.11 * mult,
+      sprintDistance: baseDistance * 0.045 * mult,
+      walkingDistance: baseDistance * 0.17,
+      joggingDistance: baseDistance * 0.38,
+      runningDistance: baseDistance * 0.34,
+      currentSpeed: pos.hasBall ? 13 + Math.random() * 8 : 4 + Math.random() * 11,
+      averageSpeed: 7.8,
       maxSpeed: pos.profile.maxSpeed,
       speedZones: {
-        zone1: minute * 12, zone2: minute * 24, zone3: minute * 16,
-        zone4: minute * 9, zone5: minute * 3, zone6: minute * 1.5,
+        zone1: minute * 11, zone2: minute * 25, zone3: minute * 17,
+        zone4: minute * 10, zone5: minute * 4, zone6: minute * 2,
       },
-      accelerations: { low: Math.floor(minute * 0.7), medium: Math.floor(minute * 0.4), high: Math.floor(minute * 0.15), total: Math.floor(minute * 1.25) },
-      decelerations: { low: Math.floor(minute * 0.6), medium: Math.floor(minute * 0.35), high: Math.floor(minute * 0.12), total: Math.floor(minute * 1.07) },
+      accelerations: { low: Math.floor(minute * 0.75), medium: Math.floor(minute * 0.45), high: Math.floor(minute * 0.18), total: Math.floor(minute * 1.38) },
+      decelerations: { low: Math.floor(minute * 0.65), medium: Math.floor(minute * 0.38), high: Math.floor(minute * 0.14), total: Math.floor(minute * 1.17) },
       maxAcceleration: pos.profile.acceleration,
       maxDeceleration: -pos.profile.acceleration * 0.95,
-      playerLoad: minute * 5.6,
-      playerLoadPerMinute: 5.6,
-      metabolicPower: 12.5,
-      highMetabolicLoadDistance: baseDistance * 0.14,
+      playerLoad: minute * 5.8,
+      playerLoadPerMinute: 5.8,
+      metabolicPower: 12.8,
+      highMetabolicLoadDistance: baseDistance * 0.15,
       position: {
         x: pos.x, y: pos.y,
         zone: 'middle_third',
