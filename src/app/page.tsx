@@ -43,7 +43,15 @@ import {
   TrendingUp,
   AlertTriangle,
   Target,
+  MessageSquare,
 } from 'lucide-react';
+import {
+  GameModelManager,
+  createGameModelManager,
+  type ManagerSession,
+  type StaffMember,
+} from '@/lib/game-model-manager';
+import { ManagerConsole } from '@/components/dashboard/manager-console';
 
 // Pattern Recognition Data Types
 interface PatternRecognitionData {
@@ -142,6 +150,11 @@ export default function Home() {
   );
   const [showPresetMenu, setShowPresetMenu] = useState(false);
 
+  // Manager Console State
+  const gameModelManagerRef = useRef<GameModelManager | null>(null);
+  const [managerSession, setManagerSession] = useState<ManagerSession | null>(null);
+  const [showManagerConsole, setShowManagerConsole] = useState(false);
+
   // Initialize squads
   useEffect(() => {
     const citySquad = getPLSquadData('MCI');
@@ -163,6 +176,29 @@ export default function Home() {
     }
     if (!patternEngineRef.current) {
       patternEngineRef.current = new PatternRecognitionEngine();
+    }
+
+    // Initialize Game Model Manager
+    if (!gameModelManagerRef.current && patternEngineRef.current && citySquad.length > 0) {
+      gameModelManagerRef.current = createGameModelManager(
+        patternEngineRef.current,
+        catapultService,
+        citySquad
+      );
+      // Auto-start session
+      const manager: StaffMember = {
+        id: 'manager-1',
+        name: 'Pep Guardiola',
+        role: 'manager',
+        canVerify: true,
+        canModify: true,
+      };
+      const staff: StaffMember[] = [
+        { id: 'coach-1', name: 'Juanma Lillo', role: 'assistant_coach', canVerify: true, canModify: false },
+        { id: 'analyst-1', name: 'Tactical Analyst', role: 'analyst', canVerify: true, canModify: false },
+      ];
+      const session = gameModelManagerRef.current.startSession(manager, staff);
+      setManagerSession(session);
     }
   }, [setPlayers, setTwin]);
 
@@ -584,6 +620,19 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Manager Console Toggle */}
+            <button
+              onClick={() => setShowManagerConsole(!showManagerConsole)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                showManagerConsole
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+              }`}
+            >
+              <MessageSquare className="w-4 h-4" />
+              Manager AI
+            </button>
+
             {!isLive ? (
               <button
                 onClick={handleStartMatch}
@@ -1176,6 +1225,24 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* Manager Console - AI Interface for Tactical Instructions */}
+        {showManagerConsole && gameModelManagerRef.current && (
+          <div className="mt-6">
+            <ManagerConsole
+              manager={gameModelManagerRef.current}
+              session={managerSession}
+              onSessionStart={(mgr, staff) => {
+                if (gameModelManagerRef.current) {
+                  const session = gameModelManagerRef.current.startSession(mgr, staff);
+                  setManagerSession(session);
+                }
+              }}
+              currentMinute={matchState?.minute ? Math.floor(matchState.minute) : 0}
+              isLive={isLive}
+            />
+          </div>
+        )}
       </main>
     </div>
   );
