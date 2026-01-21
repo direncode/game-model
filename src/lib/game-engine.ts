@@ -254,18 +254,19 @@ export class GameEngine {
     const unitedSquad = getPLSquadData('MUN');
 
     // City 4-3-3 - Positional Play setup
+    // FIXED: Wingers at touchlines to avoid overlap with opposing forwards
     const cityFormation = [
-      { x: 6, y: 50, role: 'GK', idx: 0 },
-      { x: 18, y: 82, role: 'RB', idx: 1 },
-      { x: 15, y: 60, role: 'CB', idx: 2 },
-      { x: 15, y: 40, role: 'CB', idx: 3 },
-      { x: 18, y: 18, role: 'LB', idx: 5 },
-      { x: 30, y: 50, role: 'CDM', idx: 6 },
-      { x: 42, y: 65, role: 'CM', idx: 8 },
-      { x: 42, y: 35, role: 'CM', idx: 9 },
-      { x: 55, y: 85, role: 'RW', idx: 12 },
-      { x: 58, y: 50, role: 'ST', idx: 14 },
-      { x: 55, y: 15, role: 'LW', idx: 10 },
+      { x: 6, y: 50, role: 'GK', idx: 0 },     // Ederson
+      { x: 18, y: 85, role: 'RB', idx: 1 },    // Walker - wide right
+      { x: 15, y: 60, role: 'CB', idx: 2 },    // Dias
+      { x: 15, y: 40, role: 'CB', idx: 3 },    // Stones
+      { x: 18, y: 15, role: 'LB', idx: 5 },    // Gvardiol - wide left
+      { x: 30, y: 50, role: 'CDM', idx: 6 },   // Rodri - anchor
+      { x: 40, y: 68, role: 'CM', idx: 8 },    // De Bruyne - right halfspace
+      { x: 40, y: 32, role: 'CM', idx: 9 },    // Silva - left halfspace
+      { x: 48, y: 95, role: 'RW', idx: 12 },   // Doku - TOUCHLINE RIGHT
+      { x: 50, y: 50, role: 'ST', idx: 14 },   // Haaland - central
+      { x: 48, y: 5, role: 'LW', idx: 10 },    // Foden - TOUCHLINE LEFT (far from Garnacho)
     ];
 
     for (let i = 0; i < 11; i++) {
@@ -295,21 +296,21 @@ export class GameEngine {
 
     // United 4-2-3-1 - Counter-Attack Setup (OPPOSITE of City)
     // Deep defensive block, ready to spring on transition
-    // FIXED: Proper player separation - Mount, Garnacho, Rashford, Hojlund all have distinct zones
+    // FIXED: All forwards in DEFENSIVE positions - no overlap with City attackers
     // Squad order: 0-Onana, 1-Dalot, 2-deLigt, 3-Martinez, 4-Shaw, 5-Casemiro, 6-Mainoo,
     //              7-Fernandes, 8-Mount, 9-Rashford, 10-Garnacho, 11-Amad, 12-Hojlund
     const unitedFormation = [
       { x: 94, y: 50, role: 'GK', idx: 0 },    // Onana
-      { x: 85, y: 80, role: 'RB', idx: 1 },    // Dalot - wide right
-      { x: 88, y: 58, role: 'CB', idx: 2 },    // de Ligt - right CB
-      { x: 88, y: 42, role: 'CB', idx: 3 },    // Martinez - left CB
-      { x: 85, y: 20, role: 'LB', idx: 4 },    // Shaw - wide left
-      { x: 72, y: 58, role: 'CDM', idx: 5 },   // Casemiro - shield right
-      { x: 72, y: 42, role: 'CDM', idx: 6 },   // Mainoo - shield left
-      { x: 62, y: 65, role: 'RM', idx: 8 },    // Mount - right halfspace (SEPARATE from Garnacho)
-      { x: 52, y: 50, role: 'CAM', idx: 7 },   // Fernandes - central link
-      { x: 55, y: 15, role: 'LW', idx: 10 },   // Garnacho - wide left winger (SEPARATE)
-      { x: 42, y: 50, role: 'ST', idx: 12 },   // Hojlund - central striker (idx 12!)
+      { x: 82, y: 78, role: 'RB', idx: 1 },    // Dalot - wide right back
+      { x: 86, y: 58, role: 'CB', idx: 2 },    // de Ligt - right CB
+      { x: 86, y: 42, role: 'CB', idx: 3 },    // Martinez - left CB
+      { x: 82, y: 22, role: 'LB', idx: 4 },    // Shaw - wide left back
+      { x: 70, y: 60, role: 'CDM', idx: 5 },   // Casemiro - shield right
+      { x: 70, y: 40, role: 'CDM', idx: 6 },   // Mainoo - shield left
+      { x: 62, y: 72, role: 'RM', idx: 8 },    // Mount - right wing (SEPARATE from strikers)
+      { x: 58, y: 50, role: 'CAM', idx: 7 },   // Fernandes - central link
+      { x: 62, y: 28, role: 'LW', idx: 10 },   // Garnacho - left wing DEFENSIVE (far from Foden at y=5!)
+      { x: 52, y: 50, role: 'ST', idx: 12 },   // Hojlund - lone striker at halfway
     ];
 
     for (let i = 0; i < 11; i++) {
