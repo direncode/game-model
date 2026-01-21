@@ -17,6 +17,15 @@ import {
   TACTICAL_PRESETS,
   getPresetById,
 } from '@/lib/tactics-library';
+import {
+  PatternRecognitionEngine,
+  type TacticalPattern,
+  type PatternLog,
+  type CompoundingEffect,
+  type TacticalCoherence,
+  type RecurrentSequence,
+  type MarkovTransition,
+} from '@/lib/pattern-recognition';
 import type { Player, TrackingMetrics } from '@/types';
 import {
   Play,
@@ -25,6 +34,20 @@ import {
   ChevronDown,
   Zap,
 } from 'lucide-react';
+
+// Pattern Recognition Data Types for PitchView
+interface PatternRecognitionData {
+  activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
+  recentLogs: PatternLog[];
+  compoundingEffects: CompoundingEffect[];
+  coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
+  markov?: {
+    recurrentSequences: RecurrentSequence[];
+    currentChains: { home: string; away: string };
+    topTransitions: { home: MarkovTransition[]; away: MarkovTransition[] };
+    predictedNext: { home: string | null; away: string | null };
+  };
+}
 
 export default function Home() {
   const {
@@ -44,11 +67,26 @@ export default function Home() {
 
   // Game Engine State
   const gameEngineRef = useRef<GameEngine | null>(null);
+  const patternEngineRef = useRef<PatternRecognitionEngine | null>(null);
   const [matchState, setMatchState] = useState<MatchState | null>(null);
   const [matchStats, setMatchStats] = useState<MatchStats | null>(null);
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
   const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
   const [awayLiveData, setAwayLiveData] = useState<Map<string, TrackingMetrics>>(new Map());
+
+  // Pattern Recognition State
+  const [patternRecognitionData, setPatternRecognitionData] = useState<PatternRecognitionData>({
+    activePatterns: { home: [], away: [] },
+    recentLogs: [],
+    compoundingEffects: [],
+    coherence: { home: null, away: null },
+    markov: {
+      recurrentSequences: [],
+      currentChains: { home: 'No chain', away: 'No chain' },
+      topTransitions: { home: [], away: [] },
+      predictedNext: { home: null, away: null }
+    }
+  });
 
   // Tactics State
   const [selectedPreset, setSelectedPreset] = useState<TacticalPreset | null>(
@@ -76,6 +114,9 @@ export default function Home() {
     if (!gameEngineRef.current) {
       gameEngineRef.current = createManchesterDerby();
     }
+    if (!patternEngineRef.current) {
+      patternEngineRef.current = new PatternRecognitionEngine();
+    }
   }, [setPlayers, setTwin]);
 
   // Game Engine Simulation Loop
@@ -85,6 +126,7 @@ export default function Home() {
     if (isLive && isSimulating && !isPaused && gameEngineRef.current) {
       interval = setInterval(() => {
         const engine = gameEngineRef.current;
+        const patternEngine = patternEngineRef.current;
         if (!engine) return;
 
         const events = engine.tick(1);
@@ -115,6 +157,90 @@ export default function Home() {
         });
         setAwayLiveData(newAwayData);
 
+        // Run pattern recognition engine
+        if (patternEngine) {
+          const minute = Math.floor(state.minute);
+          const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
+
+          // Generate player positions with name and role for pattern engine
+          const homePositions = players.slice(0, 11).map((p, i) => {
+            const metrics = liveData.get(p.id);
+            return {
+              x: metrics?.position?.x ?? 50,
+              y: metrics?.position?.y ?? 50,
+              name: p.name,
+              role: roles[i] || 'MF',
+            };
+          });
+          const awayPositions = awayPlayers.slice(0, 11).map((p, i) => {
+            const metrics = newAwayData.get(p.id);
+            return {
+              x: metrics?.position?.x ?? 50,
+              y: metrics?.position?.y ?? 50,
+              name: p.name,
+              role: roles[i] || 'MF',
+            };
+          });
+
+          // Analyze positions to detect patterns for both teams
+          const detectedPatterns = patternEngine.analyzePositions(
+            homePositions,
+            awayPositions,
+            state.ballPosition || { x: 50, y: 50 },
+            state.ballPossession || 'home',
+            minute
+          );
+
+          // Split patterns by team
+          const homePatterns = detectedPatterns.filter(p => p.team === 'home');
+          const awayPatterns = detectedPatterns.filter(p => p.team === 'away');
+
+          // Log high-confidence patterns
+          detectedPatterns.forEach(pattern => {
+            if (pattern.confidence > 0.5) {
+              patternEngine.logPattern(pattern, events[0]?.type || 'pass_completed', {
+                success: Math.random() > 0.4,
+                result: Math.random() > 0.5 ? 'possession_retained' : 'turnover',
+                duration: Math.random() * 5 + 2,
+                endZone: 'middle_third',
+              });
+            }
+          });
+
+          // Calculate coherence for both teams
+          const homeCoherence = patternEngine.calculateCoherence('home', 'total_football', minute);
+          const awayCoherence = patternEngine.calculateCoherence('away', 'counter_attacking', minute);
+
+          // Get Markov chain data for both teams
+          const homeMarkov = patternEngine.getChainSummary('home');
+          const awayMarkov = patternEngine.getChainSummary('away');
+          const homePredicted = patternEngine.getPredictedNextPattern('home');
+          const awayPredicted = patternEngine.getPredictedNextPattern('away');
+
+          // Update pattern recognition state
+          setPatternRecognitionData({
+            activePatterns: { home: homePatterns, away: awayPatterns },
+            recentLogs: patternEngine.getPatternLogs(undefined, 15),
+            compoundingEffects: patternEngine.getCompoundingEffects(),
+            coherence: { home: homeCoherence, away: awayCoherence },
+            markov: {
+              recurrentSequences: patternEngine.getRecurrentSequences(),
+              currentChains: {
+                home: homeMarkov.currentChain,
+                away: awayMarkov.currentChain,
+              },
+              topTransitions: {
+                home: patternEngine.getTopTransitions('home', 3),
+                away: patternEngine.getTopTransitions('away', 3),
+              },
+              predictedNext: {
+                home: homePredicted?.pattern?.replace(/_/g, ' ') || null,
+                away: awayPredicted?.pattern?.replace(/_/g, ' ') || null,
+              },
+            },
+          });
+        }
+
         if (state.phase === 'full_time') {
           setIsSimulating(false);
           endMatch();
@@ -123,14 +249,27 @@ export default function Home() {
     }
 
     return () => clearInterval(interval);
-  }, [isLive, isSimulating, isPaused, players, awayPlayers, updateLiveData, updateMatch, endMatch]);
+  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch]);
 
   const handleStartMatch = useCallback(() => {
     gameEngineRef.current = createManchesterDerby();
     gameEngineRef.current.kickoff();
+    patternEngineRef.current = new PatternRecognitionEngine(); // Reset pattern engine
     setMatchEvents([]);
     setMatchState(gameEngineRef.current.getState());
     setMatchStats(gameEngineRef.current.getStats());
+    setPatternRecognitionData({
+      activePatterns: { home: [], away: [] },
+      recentLogs: [],
+      compoundingEffects: [],
+      coherence: { home: null, away: null },
+      markov: {
+        recurrentSequences: [],
+        currentChains: { home: 'No chain', away: 'No chain' },
+        topTransitions: { home: [], away: [] },
+        predictedNext: { home: null, away: null }
+      }
+    });
 
     startMatch({
       matchId: `match-${Date.now()}`,
@@ -337,6 +476,10 @@ export default function Home() {
                 ballPossession={matchState?.ballPossession}
                 defensiveBlock={matchState?.defensiveBlock}
                 pressingIntensity={matchState?.pressingIntensity}
+                analytics={{
+                  xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 }
+                }}
+                patternRecognition={patternRecognitionData}
               />
             </div>
           </div>
