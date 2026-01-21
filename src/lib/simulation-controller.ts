@@ -9,6 +9,15 @@ import { BallPhysics, PlayerBiomechanics, EnvironmentalConditions, Vector2D, Vec
 import { PsychologyEngine, PlayerPsychology, TeamMorale, CrowdSimulator, PersonalityProfile, TeamChemistry, MatchStakes } from './psychology-system';
 import { AnalyticsEngine, xGResult, PassingNetwork, HeatmapData, PressingTrap, PhaseTransition } from './analytics-engine';
 import { MultiAgentController, BoidSystem, GegenpressingSystem, TacticalGeneticAlgorithm, AgentState, GeneticTraits } from './multi-agent-system';
+import {
+  PatternRecognitionEngine,
+  TacticalPattern,
+  PatternLog,
+  CompoundingEffect,
+  TacticalCoherence,
+  PatternType,
+  patternEngine
+} from './pattern-recognition';
 
 // ============================================================================
 // INTEGRATED SIMULATION STATE
@@ -67,6 +76,14 @@ export interface SimulationState {
     nextPhase: string;
     threatZone: string;
     suggestedAction: string;
+  };
+
+  // Pattern Recognition & Tactical Logs
+  patternRecognition: {
+    activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
+    recentLogs: PatternLog[];
+    compoundingEffects: CompoundingEffect[];
+    coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
   };
 }
 
@@ -144,6 +161,7 @@ export class SimulationController {
   private analyticsEngine: AnalyticsEngine;
   private multiAgentController: MultiAgentController;
   private geneticAlgorithm: TacticalGeneticAlgorithm;
+  private patternEngine: PatternRecognitionEngine;
 
   // State
   private state: SimulationState;
@@ -187,6 +205,9 @@ export class SimulationController {
     // Initialize multi-agent controller
     this.multiAgentController = new MultiAgentController();
     this.geneticAlgorithm = new TacticalGeneticAlgorithm();
+
+    // Initialize pattern recognition engine
+    this.patternEngine = new PatternRecognitionEngine();
 
     // Match stakes
     this.matchStakes = {
@@ -260,6 +281,12 @@ export class SimulationController {
         nextPhase: 'buildup',
         threatZone: 'central',
         suggestedAction: 'maintain_shape'
+      },
+      patternRecognition: {
+        activePatterns: { home: [], away: [] },
+        recentLogs: [],
+        compoundingEffects: [],
+        coherence: { home: null, away: null }
       }
     };
   }
@@ -379,10 +406,13 @@ export class SimulationController {
       // 5. Update analytics (xG, passing networks, heatmaps)
       this.updateAnalytics();
 
-      // 6. Check for game events (shots, tackles, etc.)
+      // 6. Update pattern recognition (tactical logs)
+      this.updatePatternRecognition(newEvents);
+
+      // 7. Check for game events (shots, tackles, etc.)
       this.checkGameEvents(newEvents);
 
-      // 7. Record history for heatmaps
+      // 8. Record history for heatmaps
       this.recordPositionHistory();
     }
 
@@ -594,6 +624,93 @@ export class SimulationController {
     this.state.analytics.pressingTraps = this.analyticsEngine.pressingDetector.detectTraps();
   }
 
+  private updatePatternRecognition(events: SimulationEvent[]): void {
+    // Convert player states to pattern recognition format
+    const homePlayers = this.state.players.home.map(p => ({
+      x: p.position.x,
+      y: p.position.y,
+      name: p.name,
+      role: p.role
+    }));
+
+    const awayPlayers = this.state.players.away.map(p => ({
+      x: p.position.x,
+      y: p.position.y,
+      name: p.name,
+      role: p.role
+    }));
+
+    const ballPos = {
+      x: this.state.ball.position.x,
+      y: this.state.ball.position.y
+    };
+
+    // Detect patterns from current positions
+    const detectedPatterns = this.patternEngine.analyzePositions(
+      homePlayers,
+      awayPlayers,
+      ballPos,
+      this.state.ball.team || 'home',
+      this.state.minute
+    );
+
+    // Update state with active patterns
+    this.state.patternRecognition.activePatterns = {
+      home: this.patternEngine.getActivePatterns('home'),
+      away: this.patternEngine.getActivePatterns('away')
+    };
+
+    // Log significant patterns with outcomes
+    for (const pattern of detectedPatterns) {
+      if (pattern.confidence > 0.7) {
+        // Determine outcome based on recent events
+        const recentEvent = events.find(e => e.team === pattern.team);
+        const outcome = {
+          success: !recentEvent || !['interception', 'shot_off_target'].includes(recentEvent.type),
+          result: (recentEvent?.type === 'goal' ? 'goal' :
+                   recentEvent?.type?.includes('shot') ? 'shot' :
+                   recentEvent?.type === 'key_pass' ? 'chance' :
+                   recentEvent?.type === 'interception' ? 'turnover' :
+                   'possession_retained') as 'goal' | 'shot' | 'chance' | 'turnover' | 'possession_retained' | 'foul_won' | 'nothing',
+          duration: 1,
+          endZone: pattern.zone
+        };
+
+        const xGCreated = recentEvent?.xG || 0;
+        this.patternEngine.logPattern(pattern, recentEvent?.description || 'Pattern detected', outcome, xGCreated, 0);
+      }
+    }
+
+    // Update logs and effects
+    this.state.patternRecognition.recentLogs = this.patternEngine.getPatternLogs(undefined, 15);
+    this.state.patternRecognition.compoundingEffects = this.patternEngine.getCompoundingEffects();
+
+    // Calculate coherence periodically (every 5 minutes)
+    if (Math.floor(this.state.minute) % 5 === 0) {
+      this.state.patternRecognition.coherence = {
+        home: this.patternEngine.calculateCoherence('home', 'positional_play', this.state.minute),
+        away: this.patternEngine.calculateCoherence('away', 'counter_attacking', this.state.minute)
+      };
+    }
+
+    // Generate tactical log events for significant patterns
+    if (detectedPatterns.length > 0) {
+      const topPattern = detectedPatterns.reduce((best, p) =>
+        p.confidence > best.confidence ? p : best, detectedPatterns[0]);
+
+      if (topPattern.confidence > 0.8 && Math.random() < 0.1) { // 10% chance to log
+        events.push(this.createEvent(
+          'tactical_change',
+          topPattern.team,
+          topPattern.players[0] || 'Team',
+          `TACTICAL: ${topPattern.description}`,
+          undefined,
+          ballPos
+        ));
+      }
+    }
+  }
+
   private checkGameEvents(events: SimulationEvent[]): void {
     // Check for shots
     const carrier = this.state.ball.carrier;
@@ -765,6 +882,23 @@ export class SimulationController {
 
   public getTacticalDecisions(): TacticalDecision[] {
     return this.state.recentDecisions;
+  }
+
+  public getPatternRecognition() {
+    return {
+      activePatterns: this.state.patternRecognition.activePatterns,
+      recentLogs: this.state.patternRecognition.recentLogs,
+      compoundingEffects: this.state.patternRecognition.compoundingEffects,
+      coherence: this.state.patternRecognition.coherence
+    };
+  }
+
+  public getPatternSummary(team: 'home' | 'away') {
+    return this.patternEngine.getPatternSummary(team);
+  }
+
+  public getTacticalCoherence(team: 'home' | 'away', gameModel: string): TacticalCoherence {
+    return this.patternEngine.calculateCoherence(team, gameModel, this.state.minute);
   }
 
   public simulateScenario(changes: Partial<TacticalState>): {

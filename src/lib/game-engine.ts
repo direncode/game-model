@@ -295,18 +295,19 @@ export class GameEngine {
 
     // United 4-2-3-1 - Counter-Attack Setup (OPPOSITE of City)
     // Deep defensive block, ready to spring on transition
+    // FIXED: Better player separation - Garnacho and Hojlund have distinct zones
     const unitedFormation = [
       { x: 94, y: 50, role: 'GK', idx: 0 },
-      { x: 85, y: 78, role: 'RB', idx: 1 },   // Deep
-      { x: 88, y: 58, role: 'CB', idx: 2 },   // Deep
-      { x: 88, y: 42, role: 'CB', idx: 3 },   // Deep
-      { x: 85, y: 22, role: 'LB', idx: 4 },   // Deep
-      { x: 72, y: 55, role: 'CDM', idx: 5 },  // Shield
-      { x: 72, y: 45, role: 'CDM', idx: 6 },  // Shield
-      { x: 60, y: 75, role: 'RM', idx: 8 },   // Wide counter threat
-      { x: 55, y: 50, role: 'CAM', idx: 7 },  // Link play
-      { x: 60, y: 25, role: 'LM', idx: 9 },   // Wide counter threat
-      { x: 48, y: 50, role: 'ST', idx: 10 },  // Target man / outlet
+      { x: 85, y: 80, role: 'RB', idx: 1 },   // Wide right
+      { x: 88, y: 58, role: 'CB', idx: 2 },   // Right CB
+      { x: 88, y: 42, role: 'CB', idx: 3 },   // Left CB
+      { x: 85, y: 20, role: 'LB', idx: 4 },   // Wide left
+      { x: 72, y: 58, role: 'CDM', idx: 5 },  // Shield right
+      { x: 72, y: 42, role: 'CDM', idx: 6 },  // Shield left
+      { x: 58, y: 80, role: 'RM', idx: 8 },   // Rashford - wide right threat
+      { x: 52, y: 50, role: 'CAM', idx: 7 },  // Fernandes - central link
+      { x: 58, y: 20, role: 'LM', idx: 9 },   // Garnacho - wide left threat (SEPARATED)
+      { x: 45, y: 50, role: 'ST', idx: 10 },  // Hojlund - central striker (SEPARATED)
     ];
 
     for (let i = 0; i < 11; i++) {
@@ -738,14 +739,32 @@ export class GameEngine {
         pos.targetY = ballY + (pos.baseY - 50) * 0.4;
       } else {
         // FORWARDS SPRINT (pace merchants)
-        // Target: ahead of the ball, stretching City
+        // FIXED: Each player has unique movement pattern - no pairing
         const sprintTarget = Math.max(15, ballX - 20 * counterThreat);
-        pos.targetX = sprintTarget + Math.sin(phase) * 2;
 
-        // Wide runs to exploit space
-        if (pos.role === 'RM') pos.targetY = 85;
-        else if (pos.role === 'LM') pos.targetY = 15;
-        else pos.targetY = ballY + (pos.baseY - 50) * 0.3;
+        // Player-specific counter-attack movement
+        const playerName = pos.profile.name;
+
+        if (playerName.includes('Rashford') || pos.role === 'RM') {
+          // Rashford: Hugs the right touchline, exploits space in behind
+          pos.targetX = sprintTarget + Math.sin(phase) * 2;
+          pos.targetY = 88 + Math.sin(phase * 1.3) * 5; // Right flank
+        } else if (playerName.includes('Garnacho') || pos.role === 'LM') {
+          // Garnacho: Hugs the left touchline, cuts inside occasionally
+          pos.targetX = sprintTarget - 3 + Math.sin(phase * 0.8) * 3;
+          pos.targetY = 12 + Math.cos(phase * 1.5) * 5; // Left flank - WIDE SEPARATION
+        } else if (playerName.includes('Hojlund') || pos.role === 'ST') {
+          // Hojlund: Central striker, stretches defense vertically
+          pos.targetX = Math.max(12, sprintTarget - 8);
+          pos.targetY = 50 + Math.sin(phase * 0.6) * 12; // Central but moves laterally
+        } else if (pos.role === 'CAM') {
+          // Fernandes: Links play, arrives late in box
+          pos.targetX = Math.max(28, sprintTarget + 5);
+          pos.targetY = 50 + (ballY - 50) * 0.4 + Math.sin(phase) * 8;
+        } else {
+          pos.targetX = sprintTarget + Math.sin(phase) * 2;
+          pos.targetY = pos.baseY;
+        }
       }
 
       // FAST counter movement

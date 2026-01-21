@@ -63,6 +63,60 @@ interface TacticalDecision {
   reasoning: string;
 }
 
+// Pattern Recognition Interfaces
+interface TacticalPattern {
+  id: string;
+  type: string;
+  team: 'home' | 'away';
+  confidence: number;
+  frequency: number;
+  lastSeen: number;
+  players: string[];
+  zone: string;
+  description: string;
+  counterPattern?: string;
+  synergies: string[];
+}
+
+interface CompoundingEffect {
+  type: 'synergy' | 'fatigue' | 'psychological' | 'positional' | 'tactical_shift';
+  description: string;
+  magnitude: number;
+  affectedPlayers: string[];
+  duration: number;
+}
+
+interface PatternLog {
+  id: string;
+  timestamp: number;
+  pattern: TacticalPattern;
+  triggerEvent: string;
+  outcome: {
+    success: boolean;
+    result: string;
+    duration: number;
+    endZone: string;
+  };
+  xGCreated: number;
+  xGConceded: number;
+  compoundingEffects: CompoundingEffect[];
+}
+
+interface TacticalCoherence {
+  gameModel: string;
+  coherenceScore: number;
+  deviations: { pattern: string; deviation: number; reason: string }[];
+  suggestions: string[];
+  historicalComparison: { avgCoherence: number; trend: 'improving' | 'declining' | 'stable' };
+}
+
+interface PatternRecognitionData {
+  activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
+  recentLogs: PatternLog[];
+  compoundingEffects: CompoundingEffect[];
+  coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
+}
+
 interface PitchViewProps {
   players: Player[];
   awayPlayers?: Player[];
@@ -83,6 +137,8 @@ interface PitchViewProps {
   psychology?: PsychologyData;
   tacticalDecisions?: TacticalDecision[];
   showAdvancedMode?: boolean;
+  // Pattern Recognition
+  patternRecognition?: PatternRecognitionData;
 }
 
 // 4-3-3 formation assignment for starting XI
@@ -166,6 +222,7 @@ export function PitchView({
   psychology,
   tacticalDecisions = [],
   showAdvancedMode = false,
+  patternRecognition,
 }: PitchViewProps) {
   // Analysis toggles
   const [showCoverShadows, setShowCoverShadows] = useState(true);
@@ -180,6 +237,8 @@ export function PitchView({
   const [showPsychology, setShowPsychology] = useState(false);
   const [showAIDecisions, setShowAIDecisions] = useState(true);
   const [showPressingTraps, setShowPressingTraps] = useState(false);
+  const [showTacticalLogs, setShowTacticalLogs] = useState(true);
+  const [showCoherence, setShowCoherence] = useState(false);
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
@@ -644,6 +703,25 @@ export function PitchView({
         >
           Traps
         </button>
+        <div className="h-px bg-white/20 my-0.5" />
+        <button
+          onClick={() => setShowTacticalLogs(!showTacticalLogs)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showTacticalLogs ? 'bg-indigo-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Logs
+        </button>
+        <button
+          onClick={() => setShowCoherence(!showCoherence)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showCoherence ? 'bg-violet-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Coherence
+        </button>
       </div>
 
       {/* Team Labels */}
@@ -849,6 +927,207 @@ export function PitchView({
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tactical Logs Panel */}
+      {showTacticalLogs && patternRecognition && patternRecognition.recentLogs.length > 0 && (
+        <div className="absolute bottom-2 left-2 bg-black/85 rounded-lg p-2 text-[8px] text-white z-40 max-w-[220px] max-h-[180px] overflow-y-auto">
+          <div className="font-bold text-[10px] text-indigo-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1 sticky top-0 bg-black/85">
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+            </svg>
+            TACTICAL LOGS
+          </div>
+
+          <div className="space-y-1.5">
+            {patternRecognition.recentLogs.slice(-8).reverse().map((log) => (
+              <div
+                key={log.id}
+                className={cn(
+                  'border-l-2 pl-1.5 py-0.5',
+                  log.pattern.team === 'home' ? 'border-sky-400' : 'border-red-400',
+                  log.outcome.success ? 'bg-green-900/20' : 'bg-red-900/20'
+                )}
+              >
+                <div className="flex items-center gap-1 flex-wrap">
+                  <span className={cn(
+                    'px-1 py-0.5 rounded text-[7px] font-bold uppercase',
+                    log.pattern.team === 'home' ? 'bg-sky-500/30 text-sky-300' : 'bg-red-500/30 text-red-300'
+                  )}>
+                    {log.pattern.team === 'home' ? 'MCI' : 'MUN'}
+                  </span>
+                  <span className="text-white/80 font-medium">
+                    {log.pattern.type.replace(/_/g, ' ')}
+                  </span>
+                  <span className={cn(
+                    'px-1 rounded text-[6px]',
+                    log.outcome.success ? 'bg-green-500/30 text-green-300' : 'bg-red-500/30 text-red-300'
+                  )}>
+                    {log.outcome.result}
+                  </span>
+                </div>
+                <div className="text-white/60 text-[7px] mt-0.5 leading-tight">
+                  {log.pattern.description.length > 50
+                    ? log.pattern.description.slice(0, 50) + '...'
+                    : log.pattern.description}
+                </div>
+                <div className="flex gap-2 mt-0.5 text-[6px]">
+                  <span className="text-white/40">{log.timestamp.toFixed(0)}'</span>
+                  <span className="text-amber-400/70">{(log.pattern.confidence * 100).toFixed(0)}%</span>
+                  {log.xGCreated > 0 && (
+                    <span className="text-green-400">+{log.xGCreated.toFixed(2)} xG</span>
+                  )}
+                </div>
+                {/* Compounding Effects */}
+                {log.compoundingEffects.length > 0 && (
+                  <div className="mt-0.5 flex flex-wrap gap-1">
+                    {log.compoundingEffects.slice(0, 2).map((effect, idx) => (
+                      <span
+                        key={idx}
+                        className={cn(
+                          'px-1 rounded text-[6px]',
+                          effect.type === 'synergy' ? 'bg-purple-500/30 text-purple-300' :
+                          effect.type === 'fatigue' ? 'bg-orange-500/30 text-orange-300' :
+                          effect.type === 'psychological' ? 'bg-pink-500/30 text-pink-300' :
+                          'bg-gray-500/30 text-gray-300'
+                        )}
+                      >
+                        {effect.type}: {effect.magnitude > 0 ? '+' : ''}{(effect.magnitude * 100).toFixed(0)}%
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Active Effects Summary */}
+          {patternRecognition.compoundingEffects.length > 0 && (
+            <div className="mt-2 pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-0.5">ACTIVE EFFECTS ({patternRecognition.compoundingEffects.length})</div>
+              <div className="flex flex-wrap gap-1">
+                {patternRecognition.compoundingEffects.slice(0, 4).map((effect, idx) => (
+                  <span
+                    key={idx}
+                    className={cn(
+                      'px-1 rounded text-[6px]',
+                      effect.magnitude > 0 ? 'bg-green-500/30 text-green-300' : 'bg-red-500/30 text-red-300'
+                    )}
+                  >
+                    {effect.type}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Tactical Coherence Panel */}
+      {showCoherence && patternRecognition?.coherence && (
+        <div className="absolute top-28 left-2 bg-black/85 rounded-lg p-2 text-[8px] text-white z-40 min-w-[180px]">
+          <div className="font-bold text-[10px] text-violet-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            GAME MODEL COHERENCE
+          </div>
+
+          {/* City Coherence */}
+          {patternRecognition.coherence.home && (
+            <div className="mb-2">
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sky-400 font-medium">MCI</span>
+                <span className="text-[7px] text-white/60">{patternRecognition.coherence.home.gameModel.replace(/_/g, ' ')}</span>
+              </div>
+              <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden mb-0.5">
+                <div
+                  className={cn(
+                    'h-full rounded-full transition-all',
+                    patternRecognition.coherence.home.coherenceScore > 70 ? 'bg-green-500' :
+                    patternRecognition.coherence.home.coherenceScore > 40 ? 'bg-amber-500' : 'bg-red-500'
+                  )}
+                  style={{ width: `${patternRecognition.coherence.home.coherenceScore}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-[7px]">
+                <span className={cn(
+                  patternRecognition.coherence.home.coherenceScore > 70 ? 'text-green-400' :
+                  patternRecognition.coherence.home.coherenceScore > 40 ? 'text-amber-400' : 'text-red-400'
+                )}>
+                  {patternRecognition.coherence.home.coherenceScore}%
+                </span>
+                <span className={cn(
+                  'text-[6px]',
+                  patternRecognition.coherence.home.historicalComparison.trend === 'improving' ? 'text-green-400' :
+                  patternRecognition.coherence.home.historicalComparison.trend === 'declining' ? 'text-red-400' : 'text-white/50'
+                )}>
+                  {patternRecognition.coherence.home.historicalComparison.trend === 'improving' ? '↑' :
+                   patternRecognition.coherence.home.historicalComparison.trend === 'declining' ? '↓' : '→'}
+                </span>
+              </div>
+              {patternRecognition.coherence.home.suggestions.length > 0 && (
+                <div className="text-[6px] text-white/50 mt-0.5 italic">
+                  {patternRecognition.coherence.home.suggestions[0]}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* United Coherence */}
+          {patternRecognition.coherence.away && (
+            <div className="pt-1 border-t border-white/20">
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-red-400 font-medium">MUN</span>
+                <span className="text-[7px] text-white/60">{patternRecognition.coherence.away.gameModel.replace(/_/g, ' ')}</span>
+              </div>
+              <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden mb-0.5">
+                <div
+                  className={cn(
+                    'h-full rounded-full transition-all',
+                    patternRecognition.coherence.away.coherenceScore > 70 ? 'bg-green-500' :
+                    patternRecognition.coherence.away.coherenceScore > 40 ? 'bg-amber-500' : 'bg-red-500'
+                  )}
+                  style={{ width: `${patternRecognition.coherence.away.coherenceScore}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-[7px]">
+                <span className={cn(
+                  patternRecognition.coherence.away.coherenceScore > 70 ? 'text-green-400' :
+                  patternRecognition.coherence.away.coherenceScore > 40 ? 'text-amber-400' : 'text-red-400'
+                )}>
+                  {patternRecognition.coherence.away.coherenceScore}%
+                </span>
+                <span className={cn(
+                  'text-[6px]',
+                  patternRecognition.coherence.away.historicalComparison.trend === 'improving' ? 'text-green-400' :
+                  patternRecognition.coherence.away.historicalComparison.trend === 'declining' ? 'text-red-400' : 'text-white/50'
+                )}>
+                  {patternRecognition.coherence.away.historicalComparison.trend === 'improving' ? '↑' :
+                   patternRecognition.coherence.away.historicalComparison.trend === 'declining' ? '↓' : '→'}
+                </span>
+              </div>
+              {patternRecognition.coherence.away.suggestions.length > 0 && (
+                <div className="text-[6px] text-white/50 mt-0.5 italic">
+                  {patternRecognition.coherence.away.suggestions[0]}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Active Patterns Summary */}
+          <div className="mt-2 pt-1 border-t border-white/20">
+            <div className="text-[7px] text-white/50 mb-0.5">ACTIVE PATTERNS</div>
+            <div className="flex gap-2">
+              <div className="text-sky-400">
+                MCI: {patternRecognition.activePatterns.home.length}
+              </div>
+              <div className="text-red-400">
+                MUN: {patternRecognition.activePatterns.away.length}
+              </div>
+            </div>
           </div>
         </div>
       )}
