@@ -90,6 +90,38 @@ export interface TacticalCoherence {
 }
 
 // ============================================================================
+// MARKOV CHAIN INTERFACES
+// ============================================================================
+
+export interface MarkovTransition {
+  from: PatternType;
+  to: PatternType;
+  count: number;
+  probability: number;
+  avgTimeBetween: number;  // Minutes between patterns
+  successRate: number;     // When this transition leads to success
+}
+
+export interface RecurrentSequence {
+  id: string;
+  patterns: PatternType[];
+  team: 'home' | 'away';
+  occurrences: number;
+  avgDuration: number;
+  successRate: number;
+  xGGenerated: number;
+  lastSeen: number;
+  description: string;
+}
+
+export interface MarkovChainState {
+  transitionMatrix: Map<string, MarkovTransition>;
+  recurrentSequences: RecurrentSequence[];
+  currentChain: PatternType[];
+  stateHistory: { pattern: PatternType; timestamp: number; team: 'home' | 'away' }[];
+}
+
+// ============================================================================
 // PATTERN RECOGNITION ENGINE
 // ============================================================================
 
@@ -99,11 +131,36 @@ export class PatternRecognitionEngine {
   private activeCompoundingEffects: CompoundingEffect[] = [];
   private gameModelReference: Record<string, PatternType[]>;
 
+  // MARKOV CHAIN STATE
+  private markovState: {
+    home: MarkovChainState;
+    away: MarkovChainState;
+  };
+  private readonly MIN_SEQUENCE_LENGTH = 2;
+  private readonly MAX_SEQUENCE_LENGTH = 5;
+  private readonly SEQUENCE_TIMEOUT = 3; // Minutes - patterns within this time are considered a sequence
+
   private readonly PATTERN_DECAY = 0.95;     // Confidence decay per minute without observation
   private readonly SYNERGY_BOOST = 0.15;     // Boost when synergistic patterns occur together
   private readonly COUNTER_PENALTY = 0.2;    // Penalty when countered
 
   constructor() {
+    // Initialize Markov chain state for both teams
+    this.markovState = {
+      home: {
+        transitionMatrix: new Map(),
+        recurrentSequences: [],
+        currentChain: [],
+        stateHistory: []
+      },
+      away: {
+        transitionMatrix: new Map(),
+        recurrentSequences: [],
+        currentChain: [],
+        stateHistory: []
+      }
+    };
+
     // Define game model pattern expectations
     this.gameModelReference = {
       'positional_play': [
@@ -164,6 +221,11 @@ export class PatternRecognitionEngine {
     // Update pattern registry
     for (const pattern of detectedPatterns) {
       this.updatePatternRegistry(pattern);
+    }
+
+    // MARKOV CHAIN: Track state transitions
+    for (const pattern of detectedPatterns) {
+      this.updateMarkovChain(pattern.team, pattern.type, minute);
     }
 
     // Apply compounding effects
@@ -802,6 +864,190 @@ export class PatternRecognitionEngine {
   }
 
   // ============================================================================
+  // MARKOV CHAIN PATTERN DETECTION
+  // ============================================================================
+
+  private updateMarkovChain(team: 'home' | 'away', patternType: PatternType, minute: number): void {
+    const state = this.markovState[team];
+    const history = state.stateHistory;
+
+    // Add to history
+    history.push({ pattern: patternType, timestamp: minute, team });
+
+    // Keep history bounded
+    if (history.length > 100) {
+      history.shift();
+    }
+
+    // Update current chain (patterns within SEQUENCE_TIMEOUT of each other)
+    const recentHistory = history.filter(h => minute - h.timestamp < this.SEQUENCE_TIMEOUT);
+    state.currentChain = recentHistory.map(h => h.pattern);
+
+    // Update transition matrix if we have a previous pattern
+    if (history.length >= 2) {
+      const prev = history[history.length - 2];
+      const timeBetween = minute - prev.timestamp;
+
+      // Only count as transition if within reasonable time
+      if (timeBetween < this.SEQUENCE_TIMEOUT) {
+        this.recordTransition(team, prev.pattern, patternType, timeBetween);
+      }
+    }
+
+    // Detect recurrent sequences
+    if (state.currentChain.length >= this.MIN_SEQUENCE_LENGTH) {
+      this.detectRecurrentSequence(team, state.currentChain, minute);
+    }
+  }
+
+  private recordTransition(
+    team: 'home' | 'away',
+    from: PatternType,
+    to: PatternType,
+    timeBetween: number
+  ): void {
+    const key = `${team}_${from}_${to}`;
+    const state = this.markovState[team];
+    const existing = state.transitionMatrix.get(key);
+
+    if (existing) {
+      // Update existing transition
+      existing.count++;
+      existing.avgTimeBetween = (existing.avgTimeBetween * (existing.count - 1) + timeBetween) / existing.count;
+    } else {
+      // New transition
+      state.transitionMatrix.set(key, {
+        from,
+        to,
+        count: 1,
+        probability: 0, // Will be calculated
+        avgTimeBetween: timeBetween,
+        successRate: 0.5
+      });
+    }
+
+    // Recalculate probabilities for all transitions from this pattern
+    this.recalculateTransitionProbabilities(team, from);
+  }
+
+  private recalculateTransitionProbabilities(team: 'home' | 'away', from: PatternType): void {
+    const state = this.markovState[team];
+    const transitions = Array.from(state.transitionMatrix.entries())
+      .filter(([key]) => key.startsWith(`${team}_${from}_`))
+      .map(([, trans]) => trans);
+
+    const totalCount = transitions.reduce((sum, t) => sum + t.count, 0);
+
+    for (const trans of transitions) {
+      trans.probability = totalCount > 0 ? trans.count / totalCount : 0;
+    }
+  }
+
+  private detectRecurrentSequence(team: 'home' | 'away', chain: PatternType[], minute: number): void {
+    const state = this.markovState[team];
+
+    // Look for repeating subsequences
+    for (let len = this.MIN_SEQUENCE_LENGTH; len <= Math.min(this.MAX_SEQUENCE_LENGTH, chain.length); len++) {
+      const sequence = chain.slice(-len);
+      const sequenceKey = sequence.join('->');
+
+      // Check if this sequence has occurred before
+      const existingSeq = state.recurrentSequences.find(s =>
+        s.patterns.join('->') === sequenceKey && s.team === team
+      );
+
+      if (existingSeq) {
+        // Update existing sequence
+        existingSeq.occurrences++;
+        existingSeq.lastSeen = minute;
+
+        // Update success rate from recent logs
+        const relevantLogs = this.patternLogs.filter(l =>
+          l.pattern.team === team &&
+          sequence.includes(l.pattern.type) &&
+          l.timestamp > minute - 10
+        );
+        if (relevantLogs.length > 0) {
+          existingSeq.successRate = relevantLogs.filter(l => l.outcome.success).length / relevantLogs.length;
+          existingSeq.xGGenerated = relevantLogs.reduce((sum, l) => sum + l.xGCreated, 0);
+        }
+      } else if (this.hasSequenceOccurredBefore(state.stateHistory, sequence)) {
+        // New recurrent sequence detected
+        state.recurrentSequences.push({
+          id: `seq_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+          patterns: sequence,
+          team,
+          occurrences: 2, // This is the second occurrence
+          avgDuration: this.SEQUENCE_TIMEOUT * len,
+          successRate: 0.5,
+          xGGenerated: 0,
+          lastSeen: minute,
+          description: this.generateSequenceDescription(sequence)
+        });
+      }
+    }
+
+    // Prune old sequences
+    state.recurrentSequences = state.recurrentSequences
+      .filter(s => minute - s.lastSeen < 30) // Keep sequences seen in last 30 min
+      .sort((a, b) => b.occurrences - a.occurrences)
+      .slice(0, 10); // Keep top 10
+  }
+
+  private hasSequenceOccurredBefore(
+    history: { pattern: PatternType; timestamp: number }[],
+    sequence: PatternType[]
+  ): boolean {
+    if (history.length < sequence.length * 2) return false;
+
+    // Look for the sequence in history (excluding the current occurrence at the end)
+    const historyWithoutCurrent = history.slice(0, -sequence.length);
+
+    for (let i = 0; i <= historyWithoutCurrent.length - sequence.length; i++) {
+      let match = true;
+      for (let j = 0; j < sequence.length; j++) {
+        if (historyWithoutCurrent[i + j].pattern !== sequence[j]) {
+          match = false;
+          break;
+        }
+      }
+      if (match) return true;
+    }
+    return false;
+  }
+
+  private generateSequenceDescription(sequence: PatternType[]): string {
+    const names = sequence.map(p => p.replace(/_/g, ' '));
+
+    if (sequence.includes('high_press_trigger') && sequence.includes('counter_attack')) {
+      return `Press-to-counter sequence: ${names.join(' → ')}`;
+    }
+    if (sequence.includes('overload_left') || sequence.includes('overload_right')) {
+      return `Width exploitation chain: ${names.join(' → ')}`;
+    }
+    if (sequence.includes('quick_combination')) {
+      return `Combination play sequence: ${names.join(' → ')}`;
+    }
+    if (sequence.includes('play_from_back')) {
+      return `Build-up progression: ${names.join(' → ')}`;
+    }
+    return `Tactical chain: ${names.join(' → ')}`;
+  }
+
+  // Update success rate when a pattern outcome is logged
+  updateTransitionSuccess(team: 'home' | 'away', pattern: PatternType, success: boolean): void {
+    const state = this.markovState[team];
+
+    // Update all transitions leading TO this pattern
+    for (const [key, trans] of state.transitionMatrix.entries()) {
+      if (trans.to === pattern && key.startsWith(`${team}_`)) {
+        const weight = 0.1; // Learning rate
+        trans.successRate = trans.successRate * (1 - weight) + (success ? 1 : 0) * weight;
+      }
+    }
+  }
+
+  // ============================================================================
   // TACTICAL COHERENCE
   // ============================================================================
 
@@ -949,6 +1195,87 @@ export class PatternRecognitionEngine {
     this.observedPatterns.clear();
     this.patternLogs = [];
     this.activeCompoundingEffects = [];
+    this.markovState = {
+      home: { transitionMatrix: new Map(), recurrentSequences: [], currentChain: [], stateHistory: [] },
+      away: { transitionMatrix: new Map(), recurrentSequences: [], currentChain: [], stateHistory: [] }
+    };
+  }
+
+  // ============================================================================
+  // MARKOV CHAIN PUBLIC API
+  // ============================================================================
+
+  getMarkovState(team: 'home' | 'away'): MarkovChainState {
+    return {
+      transitionMatrix: new Map(this.markovState[team].transitionMatrix),
+      recurrentSequences: [...this.markovState[team].recurrentSequences],
+      currentChain: [...this.markovState[team].currentChain],
+      stateHistory: [...this.markovState[team].stateHistory]
+    };
+  }
+
+  getRecurrentSequences(team?: 'home' | 'away'): RecurrentSequence[] {
+    if (team) {
+      return [...this.markovState[team].recurrentSequences];
+    }
+    return [
+      ...this.markovState.home.recurrentSequences,
+      ...this.markovState.away.recurrentSequences
+    ];
+  }
+
+  getTopTransitions(team: 'home' | 'away', limit: number = 5): MarkovTransition[] {
+    return Array.from(this.markovState[team].transitionMatrix.values())
+      .sort((a, b) => b.probability - a.probability)
+      .slice(0, limit);
+  }
+
+  getPredictedNextPattern(team: 'home' | 'away'): { pattern: PatternType; probability: number } | null {
+    const state = this.markovState[team];
+    if (state.currentChain.length === 0) return null;
+
+    const lastPattern = state.currentChain[state.currentChain.length - 1];
+    const transitions = Array.from(state.transitionMatrix.entries())
+      .filter(([key]) => key.startsWith(`${team}_${lastPattern}_`))
+      .map(([, trans]) => trans)
+      .sort((a, b) => b.probability - a.probability);
+
+    if (transitions.length === 0) return null;
+
+    return {
+      pattern: transitions[0].to,
+      probability: transitions[0].probability
+    };
+  }
+
+  getCurrentChain(team: 'home' | 'away'): PatternType[] {
+    return [...this.markovState[team].currentChain];
+  }
+
+  getChainSummary(team: 'home' | 'away'): {
+    currentChain: string;
+    topSequences: { sequence: string; count: number; successRate: number }[];
+    predictedNext: string | null;
+    chainHealth: 'strong' | 'building' | 'broken';
+  } {
+    const state = this.markovState[team];
+    const predicted = this.getPredictedNextPattern(team);
+
+    const chainHealth = state.currentChain.length >= 3 ? 'strong' :
+                        state.currentChain.length >= 1 ? 'building' : 'broken';
+
+    return {
+      currentChain: state.currentChain.map(p => p.replace(/_/g, ' ')).join(' → ') || 'No active chain',
+      topSequences: state.recurrentSequences
+        .slice(0, 3)
+        .map(s => ({
+          sequence: s.patterns.map(p => p.replace(/_/g, ' ')).join(' → '),
+          count: s.occurrences,
+          successRate: Math.round(s.successRate * 100)
+        })),
+      predictedNext: predicted ? predicted.pattern.replace(/_/g, ' ') : null,
+      chainHealth
+    };
   }
 }
 

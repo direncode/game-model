@@ -16,6 +16,8 @@ import {
   CompoundingEffect,
   TacticalCoherence,
   PatternType,
+  RecurrentSequence,
+  MarkovTransition,
   patternEngine
 } from './pattern-recognition';
 
@@ -84,6 +86,13 @@ export interface SimulationState {
     recentLogs: PatternLog[];
     compoundingEffects: CompoundingEffect[];
     coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
+    // Markov Chain Data
+    markov: {
+      recurrentSequences: RecurrentSequence[];
+      currentChains: { home: string; away: string };
+      topTransitions: { home: MarkovTransition[]; away: MarkovTransition[] };
+      predictedNext: { home: string | null; away: string | null };
+    };
   };
 }
 
@@ -286,7 +295,13 @@ export class SimulationController {
         activePatterns: { home: [], away: [] },
         recentLogs: [],
         compoundingEffects: [],
-        coherence: { home: null, away: null }
+        coherence: { home: null, away: null },
+        markov: {
+          recurrentSequences: [],
+          currentChains: { home: 'No chain', away: 'No chain' },
+          topTransitions: { home: [], away: [] },
+          predictedNext: { home: null, away: null }
+        }
       }
     };
   }
@@ -690,6 +705,28 @@ export class SimulationController {
     this.state.patternRecognition.coherence = {
       home: this.patternEngine.calculateCoherence('home', 'positional_play', this.state.minute),
       away: this.patternEngine.calculateCoherence('away', 'counter_attacking', this.state.minute)
+    };
+
+    // MARKOV CHAIN - Update recurrent sequences and predictions
+    const homeChain = this.patternEngine.getChainSummary('home');
+    const awayChain = this.patternEngine.getChainSummary('away');
+    const homePredicted = this.patternEngine.getPredictedNextPattern('home');
+    const awayPredicted = this.patternEngine.getPredictedNextPattern('away');
+
+    this.state.patternRecognition.markov = {
+      recurrentSequences: this.patternEngine.getRecurrentSequences(),
+      currentChains: {
+        home: homeChain.currentChain,
+        away: awayChain.currentChain
+      },
+      topTransitions: {
+        home: this.patternEngine.getTopTransitions('home', 3),
+        away: this.patternEngine.getTopTransitions('away', 3)
+      },
+      predictedNext: {
+        home: homePredicted ? `${homePredicted.pattern.replace(/_/g, ' ')} (${(homePredicted.probability * 100).toFixed(0)}%)` : null,
+        away: awayPredicted ? `${awayPredicted.pattern.replace(/_/g, ' ')} (${(awayPredicted.probability * 100).toFixed(0)}%)` : null
+      }
     };
 
     // Generate tactical log events more frequently (30% chance)

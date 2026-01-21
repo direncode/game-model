@@ -110,11 +110,35 @@ interface TacticalCoherence {
   historicalComparison: { avgCoherence: number; trend: 'improving' | 'declining' | 'stable' };
 }
 
+interface RecurrentSequence {
+  id: string;
+  patterns: string[];
+  team: 'home' | 'away';
+  occurrences: number;
+  successRate: number;
+  description: string;
+}
+
+interface MarkovTransition {
+  from: string;
+  to: string;
+  probability: number;
+  successRate: number;
+}
+
+interface MarkovData {
+  recurrentSequences: RecurrentSequence[];
+  currentChains: { home: string; away: string };
+  topTransitions: { home: MarkovTransition[]; away: MarkovTransition[] };
+  predictedNext: { home: string | null; away: string | null };
+}
+
 interface PatternRecognitionData {
   activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
   recentLogs: PatternLog[];
   compoundingEffects: CompoundingEffect[];
   coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
+  markov?: MarkovData;
 }
 
 interface PitchViewProps {
@@ -239,6 +263,7 @@ export function PitchView({
   const [showPressingTraps, setShowPressingTraps] = useState(false);
   const [showTacticalLogs, setShowTacticalLogs] = useState(true);
   const [showCoherence, setShowCoherence] = useState(true); // Always show coherence by default
+  const [showMarkovChains, setShowMarkovChains] = useState(true); // Show recurrent patterns
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
@@ -722,6 +747,15 @@ export function PitchView({
         >
           Coherence
         </button>
+        <button
+          onClick={() => setShowMarkovChains(!showMarkovChains)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showMarkovChains ? 'bg-emerald-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Chains
+        </button>
       </div>
 
       {/* Team Labels */}
@@ -1131,6 +1165,120 @@ export function PitchView({
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Markov Chains Panel - Recurrent Pattern Sequences */}
+      {showMarkovChains && patternRecognition?.markov && (
+        <div className="absolute bottom-2 right-2 bg-black/90 rounded-lg p-2 text-[8px] text-white z-40 min-w-[220px] max-w-[250px]">
+          <div className="font-bold text-[10px] text-emerald-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            MARKOV CHAINS
+            <span className="ml-auto text-[7px] text-emerald-400/70">RECURRENT</span>
+          </div>
+
+          {/* Current Chains */}
+          <div className="mb-2">
+            <div className="text-[7px] text-white/50 mb-0.5">ACTIVE CHAINS</div>
+            <div className="space-y-1">
+              <div className="flex items-center gap-1">
+                <span className="px-1 py-0.5 bg-sky-500/30 text-sky-300 text-[6px] font-bold rounded">MCI</span>
+                <span className="text-white/80 text-[7px] truncate">
+                  {patternRecognition.markov.currentChains.home}
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="px-1 py-0.5 bg-red-500/30 text-red-300 text-[6px] font-bold rounded">MUN</span>
+                <span className="text-white/80 text-[7px] truncate">
+                  {patternRecognition.markov.currentChains.away}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Predicted Next */}
+          {(patternRecognition.markov.predictedNext.home || patternRecognition.markov.predictedNext.away) && (
+            <div className="mb-2 pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-0.5">PREDICTED NEXT</div>
+              <div className="space-y-0.5">
+                {patternRecognition.markov.predictedNext.home && (
+                  <div className="flex items-center gap-1">
+                    <span className="text-sky-400 text-[6px]">MCI:</span>
+                    <span className="text-amber-300 text-[7px]">{patternRecognition.markov.predictedNext.home}</span>
+                  </div>
+                )}
+                {patternRecognition.markov.predictedNext.away && (
+                  <div className="flex items-center gap-1">
+                    <span className="text-red-400 text-[6px]">MUN:</span>
+                    <span className="text-amber-300 text-[7px]">{patternRecognition.markov.predictedNext.away}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Recurrent Sequences */}
+          {patternRecognition.markov.recurrentSequences.length > 0 && (
+            <div className="pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-1">RECURRENT SEQUENCES</div>
+              <div className="space-y-1 max-h-[100px] overflow-y-auto">
+                {patternRecognition.markov.recurrentSequences.slice(0, 5).map((seq) => (
+                  <div
+                    key={seq.id}
+                    className={cn(
+                      'border-l-2 pl-1.5 py-0.5',
+                      seq.team === 'home' ? 'border-sky-400' : 'border-red-400'
+                    )}
+                  >
+                    <div className="flex items-center gap-1">
+                      <span className={cn(
+                        'px-1 rounded text-[6px] font-bold',
+                        seq.team === 'home' ? 'bg-sky-500/30 text-sky-300' : 'bg-red-500/30 text-red-300'
+                      )}>
+                        {seq.team === 'home' ? 'MCI' : 'MUN'}
+                      </span>
+                      <span className="text-white/60 text-[6px]">×{seq.occurrences}</span>
+                      <span className={cn(
+                        'text-[6px] ml-auto',
+                        seq.successRate > 0.6 ? 'text-green-400' : seq.successRate > 0.4 ? 'text-amber-400' : 'text-red-400'
+                      )}>
+                        {(seq.successRate * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                    <div className="text-white/70 text-[6px] leading-tight mt-0.5">
+                      {seq.description.length > 40 ? seq.description.slice(0, 40) + '...' : seq.description}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Top Transitions */}
+          {(patternRecognition.markov.topTransitions.home.length > 0 ||
+            patternRecognition.markov.topTransitions.away.length > 0) && (
+            <div className="mt-2 pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-0.5">TOP TRANSITIONS</div>
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  {patternRecognition.markov.topTransitions.home.slice(0, 2).map((t, i) => (
+                    <div key={i} className="text-[6px] text-sky-300/80">
+                      {t.from.replace(/_/g, ' ').slice(0, 8)}→{t.to.replace(/_/g, ' ').slice(0, 8)} ({(t.probability * 100).toFixed(0)}%)
+                    </div>
+                  ))}
+                </div>
+                <div className="flex-1">
+                  {patternRecognition.markov.topTransitions.away.slice(0, 2).map((t, i) => (
+                    <div key={i} className="text-[6px] text-red-300/80">
+                      {t.from.replace(/_/g, ' ').slice(0, 8)}→{t.to.replace(/_/g, ' ').slice(0, 8)} ({(t.probability * 100).toFixed(0)}%)
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
