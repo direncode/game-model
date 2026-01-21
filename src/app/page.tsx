@@ -38,9 +38,14 @@ import {
   Square,
   ChevronDown,
   Zap,
+  Activity,
+  Brain,
+  TrendingUp,
+  AlertTriangle,
+  Target,
 } from 'lucide-react';
 
-// Pattern Recognition Data Types for PitchView
+// Pattern Recognition Data Types
 interface PatternRecognitionData {
   activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
   recentLogs: PatternLog[];
@@ -54,7 +59,18 @@ interface PatternRecognitionData {
   };
 }
 
-// Fatigue/Wearable Data Types for PitchView
+// Coherence Log Entry
+interface CoherenceLogEntry {
+  minute: number;
+  team: 'home' | 'away';
+  score: number;
+  trend: 'improving' | 'declining' | 'stable';
+  reason: string;
+  patternsMatched: number;
+  patternsExpected: number;
+}
+
+// Fatigue/Wearable Data Types
 interface FatigueData {
   home: Map<string, FatigueModel>;
   away: Map<string, FatigueModel>;
@@ -105,7 +121,10 @@ export default function Home() {
     }
   });
 
-  // Fatigue/Wearable Data State (Catapult Integration)
+  // Coherence History Log
+  const [coherenceLogs, setCoherenceLogs] = useState<CoherenceLogEntry[]>([]);
+
+  // Fatigue/Wearable Data State
   const [fatigueData, setFatigueData] = useState<FatigueData>({
     home: new Map(),
     away: new Map(),
@@ -122,7 +141,6 @@ export default function Home() {
     () => getPresetById('guardiola_total_football') || null
   );
   const [showPresetMenu, setShowPresetMenu] = useState(false);
-  const [showEvents, setShowEvents] = useState(false);
 
   // Initialize squads
   useEffect(() => {
@@ -191,7 +209,6 @@ export default function Home() {
           const minute = Math.floor(state.minute);
           const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
 
-          // Generate player positions with name and role for pattern engine
           const homePositions = players.slice(0, 11).map((p, i) => {
             const metrics = liveData.get(p.id);
             return {
@@ -211,7 +228,6 @@ export default function Home() {
             };
           });
 
-          // Analyze positions to detect patterns for both teams
           const detectedPatterns = patternEngine.analyzePositions(
             homePositions,
             awayPositions,
@@ -220,11 +236,9 @@ export default function Home() {
             minute
           );
 
-          // Split patterns by team
           const homePatterns = detectedPatterns.filter(p => p.team === 'home');
           const awayPatterns = detectedPatterns.filter(p => p.team === 'away');
 
-          // Log high-confidence patterns
           detectedPatterns.forEach(pattern => {
             if (pattern.confidence > 0.5) {
               patternEngine.logPattern(pattern, events[0]?.type || 'pass_completed', {
@@ -236,20 +250,58 @@ export default function Home() {
             }
           });
 
-          // Calculate coherence for both teams
-          const homeCoherence = patternEngine.calculateCoherence('home', 'total_football', minute);
-          const awayCoherence = patternEngine.calculateCoherence('away', 'counter_attacking', minute);
+          // Calculate DYNAMIC coherence based on detected patterns vs game model
+          const homeCoherence = calculateDynamicCoherence(
+            'home',
+            'total_football',
+            homePatterns,
+            patternEngine.getChainSummary('home'),
+            minute
+          );
+          const awayCoherence = calculateDynamicCoherence(
+            'away',
+            'counter_attacking',
+            awayPatterns,
+            patternEngine.getChainSummary('away'),
+            minute
+          );
 
-          // Get Markov chain data for both teams
+          // Log coherence changes every 5 minutes
+          if (minute > 0 && minute % 5 === 0) {
+            const lastHomeLog = coherenceLogs.filter(l => l.team === 'home').slice(-1)[0];
+            const lastAwayLog = coherenceLogs.filter(l => l.team === 'away').slice(-1)[0];
+
+            if (!lastHomeLog || lastHomeLog.minute !== minute) {
+              const newHomeLog: CoherenceLogEntry = {
+                minute,
+                team: 'home',
+                score: homeCoherence.coherenceScore,
+                trend: homeCoherence.historicalComparison.trend,
+                reason: homeCoherence.suggestions[0] || 'Playing to model',
+                patternsMatched: homePatterns.filter(p => p.confidence > 0.6).length,
+                patternsExpected: 5,
+              };
+              const newAwayLog: CoherenceLogEntry = {
+                minute,
+                team: 'away',
+                score: awayCoherence.coherenceScore,
+                trend: awayCoherence.historicalComparison.trend,
+                reason: awayCoherence.suggestions[0] || 'Playing to model',
+                patternsMatched: awayPatterns.filter(p => p.confidence > 0.6).length,
+                patternsExpected: 4,
+              };
+              setCoherenceLogs(prev => [...prev, newHomeLog, newAwayLog].slice(-30));
+            }
+          }
+
           const homeMarkov = patternEngine.getChainSummary('home');
           const awayMarkov = patternEngine.getChainSummary('away');
           const homePredicted = patternEngine.getPredictedNextPattern('home');
           const awayPredicted = patternEngine.getPredictedNextPattern('away');
 
-          // Update pattern recognition state
           setPatternRecognitionData({
             activePatterns: { home: homePatterns, away: awayPatterns },
-            recentLogs: patternEngine.getPatternLogs(undefined, 15),
+            recentLogs: patternEngine.getPatternLogs(undefined, 20),
             compoundingEffects: patternEngine.getCompoundingEffects(),
             coherence: { home: homeCoherence, away: awayCoherence },
             markov: {
@@ -259,8 +311,8 @@ export default function Home() {
                 away: awayMarkov.currentChain,
               },
               topTransitions: {
-                home: patternEngine.getTopTransitions('home', 3),
-                away: patternEngine.getTopTransitions('away', 3),
+                home: patternEngine.getTopTransitions('home', 5),
+                away: patternEngine.getTopTransitions('away', 5),
               },
               predictedNext: {
                 home: homePredicted?.pattern?.replace(/_/g, ' ') || null,
@@ -270,41 +322,31 @@ export default function Home() {
           });
         }
 
-        // ========================================
         // CATAPULT GPS/WEARABLE INTEGRATION
-        // Calculate fatigue models for all players
-        // ========================================
         const currentMinute = Math.floor(state.minute);
         const homeFatigueModels = new Map<string, FatigueModel>();
         const awayFatigueModels = new Map<string, FatigueModel>();
         const allInjuryRisks = new Map<string, InjuryRiskModel>();
 
-        // Process home team players
-        players.slice(0, 11).forEach((player, index) => {
+        players.slice(0, 11).forEach((player) => {
           const metrics = liveData.get(player.id);
           if (metrics?.position) {
-            // Feed live position data to Catapult service
             catapultService.feedLivePosition(player.id, {
               timestamp: Date.now(),
               x: metrics.position.x,
               y: metrics.position.y,
-              speed: (metrics.currentSpeed || 0) / 3.6, // Convert km/h to m/s
+              speed: (metrics.currentSpeed || 0) / 3.6,
               acceleration: metrics.maxAcceleration || 0,
               heading: 0,
             });
           }
-
-          // Calculate fatigue model
           const fatigueModel = catapultService.calculateFatigueModel(player.id, currentMinute);
           homeFatigueModels.set(player.id, fatigueModel);
-
-          // Calculate injury risk
           const injuryRisk = catapultService.calculateInjuryRisk(player.id);
           allInjuryRisks.set(player.id, injuryRisk);
         });
 
-        // Process away team players
-        awayPlayers.slice(0, 11).forEach((player, index) => {
+        awayPlayers.slice(0, 11).forEach((player) => {
           const metrics = newAwayData.get(player.id);
           if (metrics?.position) {
             catapultService.feedLivePosition(player.id, {
@@ -316,18 +358,14 @@ export default function Home() {
               heading: 0,
             });
           }
-
           const fatigueModel = catapultService.calculateFatigueModel(player.id, currentMinute);
           awayFatigueModels.set(player.id, fatigueModel);
-
           const injuryRisk = catapultService.calculateInjuryRisk(player.id);
           allInjuryRisks.set(player.id, injuryRisk);
         });
 
-        // Get tactical recommendations based on fatigue
         const recommendations = catapultService.getTacticalRecommendations(currentMinute);
 
-        // Update fatigue data state
         setFatigueData({
           home: homeFatigueModels,
           away: awayFatigueModels,
@@ -343,13 +381,101 @@ export default function Home() {
     }
 
     return () => clearInterval(interval);
-  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch]);
+  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch, coherenceLogs]);
+
+  // Calculate dynamic coherence based on actual pattern data
+  function calculateDynamicCoherence(
+    team: 'home' | 'away',
+    gameModel: string,
+    patterns: TacticalPattern[],
+    markovSummary: {
+      currentChain: string;
+      topSequences: { sequence: string; count: number; successRate: number }[];
+      predictedNext: string | null;
+      chainHealth: 'strong' | 'building' | 'broken';
+    },
+    minute: number
+  ): TacticalCoherence {
+    // Define expected patterns for each game model
+    const expectedPatterns: Record<string, string[]> = {
+      total_football: ['positional_rotation', 'half_space_occupation', 'inverted_fullback', 'false_nine_drop', 'high_press_trigger', 'build_from_back'],
+      counter_attacking: ['deep_block', 'quick_transition', 'direct_ball', 'wing_isolation', 'defensive_compact', 'counter_press_recovery'],
+    };
+
+    const expected = expectedPatterns[gameModel] || [];
+    const detectedTypes = patterns.map(p => p.type);
+
+    // Count how many expected patterns are being executed
+    const matchedPatterns = expected.filter(exp =>
+      detectedTypes.some(det => det.includes(exp.split('_')[0]) || exp.includes(det.split('_')[0]))
+    );
+
+    // Base coherence from pattern matching
+    const patternCoherence = expected.length > 0 ? (matchedPatterns.length / expected.length) * 100 : 50;
+
+    // Markov chain contribution - stronger chains = more coherent play
+    const chainHealthBonus = markovSummary.chainHealth === 'strong' ? 20 :
+                            markovSummary.chainHealth === 'building' ? 10 : 0;
+
+    // Recurrent sequences bonus - more recurring patterns = more coherent
+    const sequenceBonus = Math.min(15, markovSummary.topSequences.filter(s => s.count > 2).length * 5);
+
+    // High confidence patterns bonus
+    const highConfPatterns = patterns.filter(p => p.confidence > 0.7);
+    const confidenceBonus = Math.min(15, highConfPatterns.length * 3);
+
+    // Calculate final score
+    const rawScore = patternCoherence + chainHealthBonus + sequenceBonus + confidenceBonus;
+    const coherenceScore = Math.min(100, Math.max(0, rawScore));
+
+    // Determine trend based on recent pattern activity
+    const trend: 'improving' | 'declining' | 'stable' =
+      highConfPatterns.length > 3 ? 'improving' :
+      highConfPatterns.length < 1 ? 'declining' : 'stable';
+
+    // Generate deviations
+    const deviations = expected
+      .filter(exp => !matchedPatterns.includes(exp))
+      .slice(0, 3)
+      .map(pattern => ({
+        pattern: pattern.replace(/_/g, ' '),
+        deviation: 30 + Math.random() * 40,
+        reason: `${pattern.replace(/_/g, ' ')} not detected in recent play`,
+      }));
+
+    // Generate suggestions
+    const suggestions: string[] = [];
+    if (deviations.length > 2) {
+      suggestions.push(`Increase ${gameModel.replace(/_/g, ' ')} patterns in build-up`);
+    }
+    if (markovSummary.chainHealth === 'broken') {
+      suggestions.push('Build longer passing sequences');
+    }
+    if (highConfPatterns.length < 2) {
+      suggestions.push('Execute clearer tactical patterns');
+    }
+    if (suggestions.length === 0) {
+      suggestions.push('Maintaining game model effectively');
+    }
+
+    return {
+      gameModel,
+      coherenceScore: Math.round(coherenceScore),
+      deviations,
+      suggestions,
+      historicalComparison: {
+        avgCoherence: 65,
+        trend,
+      },
+    };
+  }
 
   const handleStartMatch = useCallback(() => {
     gameEngineRef.current = createManchesterDerby();
     gameEngineRef.current.kickoff();
-    patternEngineRef.current = new PatternRecognitionEngine(); // Reset pattern engine
+    patternEngineRef.current = new PatternRecognitionEngine();
     setMatchEvents([]);
+    setCoherenceLogs([]);
     setMatchState(gameEngineRef.current.getState());
     setMatchStats(gameEngineRef.current.getStats());
     setPatternRecognitionData({
@@ -364,8 +490,6 @@ export default function Home() {
         predictedNext: { home: null, away: null }
       }
     });
-
-    // Reset fatigue data for new match
     setFatigueData({
       home: new Map(),
       away: new Map(),
@@ -402,12 +526,18 @@ export default function Home() {
     setShowPresetMenu(false);
   }, []);
 
+  // Calculate team average fatigue
+  const getTeamFatigue = (fatigueMap: Map<string, FatigueModel>) => {
+    const values = Array.from(fatigueMap.values());
+    if (values.length === 0) return 0;
+    return values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
+  };
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      {/* Minimal Header */}
-      <header className="border-b border-zinc-800">
+    <div className="min-h-screen bg-zinc-950 text-white overflow-y-auto">
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
         <div className="max-w-screen-2xl mx-auto px-4 h-14 flex items-center justify-between">
-          {/* Left: Match Info */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
               <span className="text-sm font-medium text-sky-400">MCI</span>
@@ -425,7 +555,6 @@ export default function Home() {
             )}
           </div>
 
-          {/* Center: Tactical Preset Selector */}
           <div className="relative">
             <button
               onClick={() => setShowPresetMenu(!showPresetMenu)}
@@ -454,7 +583,6 @@ export default function Home() {
             )}
           </div>
 
-          {/* Right: Match Controls */}
           <div className="flex items-center gap-2">
             {!isLive ? (
               <button
@@ -484,92 +612,12 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-screen-2xl mx-auto">
-        <div className="flex">
-          {/* Left Sidebar - Compact Stats */}
-          <aside className="w-48 border-r border-zinc-800 p-4 space-y-4">
-            {/* Intensity */}
-            <div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Intensity</div>
-              <div className="space-y-2">
-                <div>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-zinc-400">Press</span>
-                    <span>{selectedPreset?.intensityProfile.pressing || 0}</span>
-                  </div>
-                  <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-red-500 transition-all"
-                      style={{ width: `${selectedPreset?.intensityProfile.pressing || 0}%` }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-zinc-400">Poss</span>
-                    <span>{selectedPreset?.intensityProfile.possession || 0}</span>
-                  </div>
-                  <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-blue-500 transition-all"
-                      style={{ width: `${selectedPreset?.intensityProfile.possession || 0}%` }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-zinc-400">Tempo</span>
-                    <span>{selectedPreset?.intensityProfile.tempo || 0}</span>
-                  </div>
-                  <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-emerald-500 transition-all"
-                      style={{ width: `${selectedPreset?.intensityProfile.tempo || 0}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Active Tactics */}
-            {selectedPreset && (
-              <div>
-                <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Tactics</div>
-                <div className="space-y-1">
-                  {selectedPreset.attackingTactics.slice(0, 4).map((t) => (
-                    <div key={t} className="text-xs px-2 py-1 bg-emerald-950 text-emerald-400 rounded">
-                      {t.replace(/_/g, ' ')}
-                    </div>
-                  ))}
-                  {selectedPreset.defensiveTactics.slice(0, 2).map((t) => (
-                    <div key={t} className="text-xs px-2 py-1 bg-red-950 text-red-400 rounded">
-                      {t.replace(/_/g, ' ')}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Block Type */}
-            {matchState?.defensiveBlock && (
-              <div>
-                <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Block</div>
-                <div className={`text-sm font-medium px-2 py-1 rounded ${
-                  matchState.defensiveBlock.type === 'high'
-                    ? 'bg-emerald-950 text-emerald-400'
-                    : matchState.defensiveBlock.type === 'mid'
-                    ? 'bg-amber-950 text-amber-400'
-                    : 'bg-red-950 text-red-400'
-                }`}>
-                  {matchState.defensiveBlock.type.toUpperCase()}
-                </div>
-              </div>
-            )}
-          </aside>
-
-          {/* Center - Pitch */}
-          <div className="flex-1 p-4">
+      {/* Main Content - Scrollable */}
+      <main className="max-w-screen-2xl mx-auto px-4 py-6 space-y-6">
+        {/* Top Section: Pitch + Stats */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Pitch - Takes 3 columns on large screens */}
+          <div className="lg:col-span-3">
             <div className="bg-zinc-900 rounded-lg overflow-hidden">
               <PitchView
                 players={players}
@@ -589,124 +637,563 @@ export default function Home() {
                 fatigueData={fatigueData}
               />
             </div>
+
+            {/* Pressing Intensity Bar */}
+            {matchState && (
+              <div className="mt-4 flex items-center gap-4 bg-zinc-900 rounded-lg px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-amber-500" />
+                  <span className="text-sm text-zinc-400">Pressing</span>
+                </div>
+                <div className="flex-1 h-2 bg-zinc-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500 transition-all"
+                    style={{ width: `${matchState.pressingIntensity || 0}%` }}
+                  />
+                </div>
+                <span className="text-sm font-medium w-12 text-right">
+                  {matchState.pressingIntensity?.toFixed(0) || 0}%
+                </span>
+              </div>
+            )}
           </div>
 
-          {/* Right Sidebar - Stats & Events */}
-          <aside className="w-56 border-l border-zinc-800 p-4 space-y-4">
+          {/* Stats Sidebar */}
+          <div className="space-y-4">
             {/* Match Stats */}
             {matchStats && (
-              <div>
-                <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Stats</div>
-                <div className="space-y-2">
+              <div className="bg-zinc-900 rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide mb-3">Match Stats</h3>
+                <div className="space-y-3">
                   <StatBar label="Possession" home={matchStats.possession.home} away={matchStats.possession.away} />
                   <StatBar label="Shots" home={matchStats.shots.home} away={matchStats.shots.away} showRaw />
                   <StatBar label="On Target" home={matchStats.shotsOnTarget.home} away={matchStats.shotsOnTarget.away} showRaw />
-                  <StatBar label="xG" home={parseFloat(matchStats.xG.home.toFixed(1))} away={parseFloat(matchStats.xG.away.toFixed(1))} showRaw />
+                  <StatBar label="xG" home={parseFloat(matchStats.xG.home.toFixed(2))} away={parseFloat(matchStats.xG.away.toFixed(2))} showRaw />
+                  <StatBar label="Passes" home={matchStats.passes.home} away={matchStats.passes.away} showRaw />
                 </div>
               </div>
             )}
 
-            {/* Live Metrics */}
-            {matchState && (
-              <div>
-                <div className="text-xs text-zinc-500 uppercase tracking-wide mb-2">Live</div>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="bg-zinc-900 rounded p-2 text-center">
-                    <div className="text-zinc-500">Phase</div>
-                    <div className="font-medium text-xs mt-1">
-                      {matchState.currentPhase.replace(/([A-Z])/g, ' $1').trim()}
-                    </div>
+            {/* Team Fatigue */}
+            <div className="bg-zinc-900 rounded-lg p-4">
+              <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                <Activity className="w-4 h-4" />
+                Team Fatigue
+              </h3>
+              <div className="space-y-3">
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-sky-400">MCI</span>
+                    <span className="text-zinc-400">{getTeamFatigue(fatigueData.home).toFixed(0)}%</span>
                   </div>
-                  <div className="bg-zinc-900 rounded p-2 text-center">
-                    <div className="text-zinc-500">Intensity</div>
-                    <div className="font-medium mt-1">
-                      {(matchState.intensity * 100).toFixed(0)}%
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Events Toggle */}
-            <div>
-              <button
-                onClick={() => setShowEvents(!showEvents)}
-                className="flex items-center justify-between w-full text-xs text-zinc-500 uppercase tracking-wide mb-2 hover:text-zinc-300 transition-colors"
-              >
-                <span>Events</span>
-                <ChevronDown className={`w-3 h-3 transition-transform ${showEvents ? 'rotate-180' : ''}`} />
-              </button>
-
-              {showEvents && matchEvents.length > 0 && (
-                <div className="space-y-1 max-h-48 overflow-y-auto">
-                  {matchEvents.slice(0, 10).map((event) => (
+                  <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                     <div
-                      key={event.id}
-                      className={`text-xs p-2 rounded ${
-                        event.type === 'goal'
-                          ? 'bg-emerald-950 text-emerald-400'
-                          : event.type === 'yellow_card'
-                          ? 'bg-amber-950 text-amber-400'
-                          : event.type === 'red_card'
-                          ? 'bg-red-950 text-red-400'
-                          : 'bg-zinc-900 text-zinc-400'
+                      className={`h-full transition-all ${
+                        getTeamFatigue(fatigueData.home) > 60 ? 'bg-red-500' :
+                        getTeamFatigue(fatigueData.home) > 40 ? 'bg-amber-500' : 'bg-emerald-500'
+                      }`}
+                      style={{ width: `${getTeamFatigue(fatigueData.home)}%` }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-red-400">MUN</span>
+                    <span className="text-zinc-400">{getTeamFatigue(fatigueData.away).toFixed(0)}%</span>
+                  </div>
+                  <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full transition-all ${
+                        getTeamFatigue(fatigueData.away) > 60 ? 'bg-red-500' :
+                        getTeamFatigue(fatigueData.away) > 40 ? 'bg-amber-500' : 'bg-emerald-500'
+                      }`}
+                      style={{ width: `${getTeamFatigue(fatigueData.away)}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Match Events */}
+            <div className="bg-zinc-900 rounded-lg p-4">
+              <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide mb-3">Events</h3>
+              <div className="space-y-2 max-h-48 overflow-y-auto">
+                {matchEvents.slice(0, 8).map((event) => (
+                  <div
+                    key={event.id}
+                    className={`text-sm p-2 rounded ${
+                      event.type === 'goal' ? 'bg-emerald-950 text-emerald-400' :
+                      event.type === 'yellow_card' ? 'bg-amber-950 text-amber-400' :
+                      event.type === 'red_card' ? 'bg-red-950 text-red-400' :
+                      'bg-zinc-800 text-zinc-400'
+                    }`}
+                  >
+                    <span className="text-zinc-500">{event.minute}&apos;</span>{' '}
+                    <span className={event.team === 'home' ? 'text-sky-400' : 'text-red-400'}>
+                      {event.team === 'home' ? 'MCI' : 'MUN'}
+                    </span>{' '}
+                    {event.type === 'goal' ? '⚽ ' : ''}{event.description?.slice(0, 35)}
+                  </div>
+                ))}
+                {matchEvents.length === 0 && (
+                  <div className="text-zinc-600 text-sm text-center py-4">No events yet</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Analytics Panels - Below Pitch */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {/* Tactical Pattern Logs */}
+          <div className="bg-zinc-900 rounded-lg p-5">
+            <h3 className="text-base font-semibold text-indigo-400 mb-4 flex items-center gap-2">
+              <Brain className="w-5 h-5" />
+              Tactical Pattern Logs
+            </h3>
+            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+              {patternRecognitionData.recentLogs.slice(0, 15).map((log) => (
+                <div
+                  key={log.id}
+                  className={`p-3 rounded-lg border-l-4 ${
+                    log.pattern.team === 'home'
+                      ? 'border-sky-500 bg-sky-950/30'
+                      : 'border-red-500 bg-red-950/30'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-0.5 rounded text-xs font-bold ${
+                        log.pattern.team === 'home' ? 'bg-sky-600 text-white' : 'bg-red-600 text-white'
+                      }`}>
+                        {log.pattern.team === 'home' ? 'MCI' : 'MUN'}
+                      </span>
+                      <span className="text-white font-medium">
+                        {log.pattern.type.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                    <span className="text-zinc-500 text-sm">{log.timestamp.toFixed(0)}&apos;</span>
+                  </div>
+                  <p className="text-zinc-400 text-sm mb-2">{log.pattern.description}</p>
+                  <div className="flex items-center gap-3 text-xs">
+                    <span className={`px-2 py-0.5 rounded ${
+                      log.outcome.success ? 'bg-emerald-900 text-emerald-400' : 'bg-red-900 text-red-400'
+                    }`}>
+                      {log.outcome.result.replace(/_/g, ' ')}
+                    </span>
+                    <span className="text-amber-400">
+                      {(log.pattern.confidence * 100).toFixed(0)}% confidence
+                    </span>
+                    {log.xGCreated > 0 && (
+                      <span className="text-emerald-400">+{log.xGCreated.toFixed(2)} xG</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {patternRecognitionData.recentLogs.length === 0 && (
+                <div className="text-zinc-600 text-center py-8">
+                  Pattern logs will appear once the match starts
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Coherence Analysis */}
+          <div className="bg-zinc-900 rounded-lg p-5">
+            <h3 className="text-base font-semibold text-violet-400 mb-4 flex items-center gap-2">
+              <Target className="w-5 h-5" />
+              Game Model Coherence
+            </h3>
+
+            {/* Current Coherence */}
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              {/* City Coherence */}
+              <div className="bg-zinc-800 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sky-400 font-medium">MCI</span>
+                  <span className="text-xs text-zinc-500">Total Football</span>
+                </div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  {patternRecognitionData.coherence.home?.coherenceScore ?? '--'}%
+                </div>
+                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden mb-2">
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      (patternRecognitionData.coherence.home?.coherenceScore ?? 0) > 70 ? 'bg-emerald-500' :
+                      (patternRecognitionData.coherence.home?.coherenceScore ?? 0) > 40 ? 'bg-amber-500' : 'bg-red-500'
+                    }`}
+                    style={{ width: `${patternRecognitionData.coherence.home?.coherenceScore ?? 0}%` }}
+                  />
+                </div>
+                <div className={`text-xs flex items-center gap-1 ${
+                  patternRecognitionData.coherence.home?.historicalComparison.trend === 'improving' ? 'text-emerald-400' :
+                  patternRecognitionData.coherence.home?.historicalComparison.trend === 'declining' ? 'text-red-400' : 'text-zinc-400'
+                }`}>
+                  {patternRecognitionData.coherence.home?.historicalComparison.trend === 'improving' ? '↑' :
+                   patternRecognitionData.coherence.home?.historicalComparison.trend === 'declining' ? '↓' : '→'}
+                  {patternRecognitionData.coherence.home?.historicalComparison.trend || 'stable'}
+                </div>
+              </div>
+
+              {/* United Coherence */}
+              <div className="bg-zinc-800 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-red-400 font-medium">MUN</span>
+                  <span className="text-xs text-zinc-500">Counter Attack</span>
+                </div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  {patternRecognitionData.coherence.away?.coherenceScore ?? '--'}%
+                </div>
+                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden mb-2">
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      (patternRecognitionData.coherence.away?.coherenceScore ?? 0) > 70 ? 'bg-emerald-500' :
+                      (patternRecognitionData.coherence.away?.coherenceScore ?? 0) > 40 ? 'bg-amber-500' : 'bg-red-500'
+                    }`}
+                    style={{ width: `${patternRecognitionData.coherence.away?.coherenceScore ?? 0}%` }}
+                  />
+                </div>
+                <div className={`text-xs flex items-center gap-1 ${
+                  patternRecognitionData.coherence.away?.historicalComparison.trend === 'improving' ? 'text-emerald-400' :
+                  patternRecognitionData.coherence.away?.historicalComparison.trend === 'declining' ? 'text-red-400' : 'text-zinc-400'
+                }`}>
+                  {patternRecognitionData.coherence.away?.historicalComparison.trend === 'improving' ? '↑' :
+                   patternRecognitionData.coherence.away?.historicalComparison.trend === 'declining' ? '↓' : '→'}
+                  {patternRecognitionData.coherence.away?.historicalComparison.trend || 'stable'}
+                </div>
+              </div>
+            </div>
+
+            {/* Coherence Logs */}
+            <h4 className="text-sm font-medium text-zinc-400 mb-2">Coherence History</h4>
+            <div className="space-y-2 max-h-[200px] overflow-y-auto">
+              {coherenceLogs.slice().reverse().slice(0, 10).map((log, idx) => (
+                <div
+                  key={idx}
+                  className={`p-2 rounded text-sm border-l-2 ${
+                    log.team === 'home' ? 'border-sky-500 bg-zinc-800/50' : 'border-red-500 bg-zinc-800/50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className={log.team === 'home' ? 'text-sky-400' : 'text-red-400'}>
+                        {log.team === 'home' ? 'MCI' : 'MUN'}
+                      </span>
+                      <span className="text-zinc-500">{log.minute}&apos;</span>
+                    </div>
+                    <span className={`font-medium ${
+                      log.score > 70 ? 'text-emerald-400' : log.score > 40 ? 'text-amber-400' : 'text-red-400'
+                    }`}>
+                      {log.score}%
+                    </span>
+                  </div>
+                  <div className="text-zinc-500 text-xs mt-1">{log.reason}</div>
+                </div>
+              ))}
+              {coherenceLogs.length === 0 && (
+                <div className="text-zinc-600 text-sm text-center py-4">
+                  Coherence logs update every 5 minutes
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Markov Chains & Predictions */}
+          <div className="bg-zinc-900 rounded-lg p-5">
+            <h3 className="text-base font-semibold text-emerald-400 mb-4 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5" />
+              Markov Chains & Predictions
+            </h3>
+
+            {/* Current Chains */}
+            <div className="mb-4">
+              <h4 className="text-sm font-medium text-zinc-400 mb-2">Active Pattern Chains</h4>
+              <div className="space-y-2">
+                <div className="bg-zinc-800 rounded p-3">
+                  <span className="text-sky-400 text-sm font-medium">MCI: </span>
+                  <span className="text-white text-sm">
+                    {patternRecognitionData.markov?.currentChains.home || 'No active chain'}
+                  </span>
+                </div>
+                <div className="bg-zinc-800 rounded p-3">
+                  <span className="text-red-400 text-sm font-medium">MUN: </span>
+                  <span className="text-white text-sm">
+                    {patternRecognitionData.markov?.currentChains.away || 'No active chain'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Predicted Next */}
+            {(patternRecognitionData.markov?.predictedNext.home || patternRecognitionData.markov?.predictedNext.away) && (
+              <div className="mb-4">
+                <h4 className="text-sm font-medium text-zinc-400 mb-2">Predicted Next Pattern</h4>
+                <div className="space-y-2">
+                  {patternRecognitionData.markov?.predictedNext.home && (
+                    <div className="bg-amber-950/50 border border-amber-800 rounded p-3">
+                      <span className="text-sky-400 text-sm font-medium">MCI → </span>
+                      <span className="text-amber-400 text-sm font-medium">
+                        {patternRecognitionData.markov.predictedNext.home}
+                      </span>
+                    </div>
+                  )}
+                  {patternRecognitionData.markov?.predictedNext.away && (
+                    <div className="bg-amber-950/50 border border-amber-800 rounded p-3">
+                      <span className="text-red-400 text-sm font-medium">MUN → </span>
+                      <span className="text-amber-400 text-sm font-medium">
+                        {patternRecognitionData.markov.predictedNext.away}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Top Transitions */}
+            <div className="mb-4">
+              <h4 className="text-sm font-medium text-zinc-400 mb-2">Most Likely Transitions</h4>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <div className="text-sky-400 text-xs font-medium mb-1">MCI</div>
+                  <div className="space-y-1">
+                    {patternRecognitionData.markov?.topTransitions.home.slice(0, 3).map((t, i) => (
+                      <div key={i} className="text-xs text-zinc-400 bg-zinc-800 rounded px-2 py-1">
+                        {t.from.replace(/_/g, ' ').slice(0, 10)} → {t.to.replace(/_/g, ' ').slice(0, 10)}
+                        <span className="text-emerald-400 ml-1">({(t.probability * 100).toFixed(0)}%)</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-red-400 text-xs font-medium mb-1">MUN</div>
+                  <div className="space-y-1">
+                    {patternRecognitionData.markov?.topTransitions.away.slice(0, 3).map((t, i) => (
+                      <div key={i} className="text-xs text-zinc-400 bg-zinc-800 rounded px-2 py-1">
+                        {t.from.replace(/_/g, ' ').slice(0, 10)} → {t.to.replace(/_/g, ' ').slice(0, 10)}
+                        <span className="text-emerald-400 ml-1">({(t.probability * 100).toFixed(0)}%)</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recurrent Sequences */}
+            <div>
+              <h4 className="text-sm font-medium text-zinc-400 mb-2">Recurrent Sequences</h4>
+              <div className="space-y-2 max-h-[150px] overflow-y-auto">
+                {patternRecognitionData.markov?.recurrentSequences.slice(0, 5).map((seq) => (
+                  <div
+                    key={seq.id}
+                    className={`p-2 rounded border-l-2 text-sm ${
+                      seq.team === 'home' ? 'border-sky-500 bg-zinc-800/50' : 'border-red-500 bg-zinc-800/50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={seq.team === 'home' ? 'text-sky-400' : 'text-red-400'}>
+                        {seq.team === 'home' ? 'MCI' : 'MUN'}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-zinc-500">×{seq.occurrences}</span>
+                        <span className={`text-xs ${
+                          seq.successRate > 0.6 ? 'text-emerald-400' : seq.successRate > 0.4 ? 'text-amber-400' : 'text-red-400'
+                        }`}>
+                          {(seq.successRate * 100).toFixed(0)}%
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-zinc-400 text-xs mt-1">{seq.description}</div>
+                  </div>
+                ))}
+                {(!patternRecognitionData.markov?.recurrentSequences || patternRecognitionData.markov.recurrentSequences.length === 0) && (
+                  <div className="text-zinc-600 text-sm text-center py-4">
+                    Sequences emerge as patterns repeat
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Fatigue & Substitution Recommendations */}
+          <div className="bg-zinc-900 rounded-lg p-5 xl:col-span-2">
+            <h3 className="text-base font-semibold text-orange-400 mb-4 flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5" />
+              Fatigue Analysis & Tactical Recommendations
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Substitution Targets */}
+              <div>
+                <h4 className="text-sm font-medium text-zinc-400 mb-3">Substitution Targets</h4>
+                <div className="space-y-2">
+                  {fatigueData.recommendations.substitutionTargets.slice(0, 5).map((target, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-3 rounded-lg border-l-4 ${
+                        target.priority === 'urgent' ? 'border-red-500 bg-red-950/30' :
+                        target.priority === 'soon' ? 'border-orange-500 bg-orange-950/30' :
+                        'border-yellow-500 bg-yellow-950/30'
                       }`}
                     >
-                      <span className="text-zinc-500">{event.minute}&apos;</span>{' '}
-                      <span className={event.team === 'home' ? 'text-sky-400' : 'text-red-400'}>
-                        {event.team === 'home' ? 'MCI' : 'MUN'}
-                      </span>{' '}
-                      {event.type === 'goal' ? '⚽' : ''} {event.description?.slice(0, 30)}
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-white font-medium">
+                          {target.playerId.replace(/_/g, ' ')}
+                        </span>
+                        <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${
+                          target.priority === 'urgent' ? 'bg-red-600 text-white' :
+                          target.priority === 'soon' ? 'bg-orange-600 text-white' :
+                          'bg-yellow-600 text-white'
+                        }`}>
+                          {target.priority}
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-sm">{target.reason}</p>
+                    </div>
+                  ))}
+                  {fatigueData.recommendations.substitutionTargets.length === 0 && (
+                    <div className="text-zinc-600 text-sm text-center py-4 bg-zinc-800 rounded-lg">
+                      No substitutions needed yet
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Tactical Suggestions */}
+              <div>
+                <h4 className="text-sm font-medium text-zinc-400 mb-3">Tactical Adjustments</h4>
+                <div className="space-y-3">
+                  {/* Pressing Adjustments */}
+                  {fatigueData.recommendations.pressingAdjustments.length > 0 && (
+                    <div className="bg-zinc-800 rounded-lg p-3">
+                      <div className="text-amber-400 text-sm font-medium mb-2">Pressing</div>
+                      {fatigueData.recommendations.pressingAdjustments.map((adj, idx) => (
+                        <p key={idx} className="text-zinc-400 text-sm">• {adj.recommendation}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Formation Suggestions */}
+                  {fatigueData.recommendations.formationSuggestions.length > 0 && (
+                    <div className="bg-zinc-800 rounded-lg p-3">
+                      <div className="text-cyan-400 text-sm font-medium mb-2">Formation</div>
+                      {fatigueData.recommendations.formationSuggestions.map((sug, idx) => (
+                        <p key={idx} className="text-zinc-400 text-sm">• {sug}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Coherence Suggestions */}
+                  {(patternRecognitionData.coherence.home?.suggestions?.length || 0) > 0 && (
+                    <div className="bg-zinc-800 rounded-lg p-3">
+                      <div className="text-violet-400 text-sm font-medium mb-2">MCI Game Model</div>
+                      {patternRecognitionData.coherence.home?.suggestions.slice(0, 2).map((sug, idx) => (
+                        <p key={idx} className="text-zinc-400 text-sm">• {sug}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {(patternRecognitionData.coherence.away?.suggestions?.length || 0) > 0 && (
+                    <div className="bg-zinc-800 rounded-lg p-3">
+                      <div className="text-violet-400 text-sm font-medium mb-2">MUN Game Model</div>
+                      {patternRecognitionData.coherence.away?.suggestions.slice(0, 2).map((sug, idx) => (
+                        <p key={idx} className="text-zinc-400 text-sm">• {sug}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {fatigueData.recommendations.pressingAdjustments.length === 0 &&
+                   fatigueData.recommendations.formationSuggestions.length === 0 &&
+                   !patternRecognitionData.coherence.home?.suggestions?.length && (
+                    <div className="text-zinc-600 text-sm text-center py-4 bg-zinc-800 rounded-lg">
+                      No tactical adjustments needed
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Active Patterns Summary */}
+          <div className="bg-zinc-900 rounded-lg p-5">
+            <h3 className="text-base font-semibold text-cyan-400 mb-4 flex items-center gap-2">
+              <Activity className="w-5 h-5" />
+              Active Patterns
+            </h3>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-sky-400 text-sm font-medium mb-2">MCI ({patternRecognitionData.activePatterns.home.length})</div>
+                <div className="space-y-1">
+                  {patternRecognitionData.activePatterns.home.slice(0, 6).map((p, idx) => (
+                    <div key={idx} className="flex items-center justify-between bg-zinc-800 rounded px-2 py-1">
+                      <span className="text-zinc-300 text-xs">{p.type.replace(/_/g, ' ')}</span>
+                      <span className={`text-xs ${
+                        p.confidence > 0.7 ? 'text-emerald-400' : p.confidence > 0.5 ? 'text-amber-400' : 'text-zinc-500'
+                      }`}>
+                        {(p.confidence * 100).toFixed(0)}%
+                      </span>
                     </div>
                   ))}
                 </div>
-              )}
-
-              {showEvents && matchEvents.length === 0 && (
-                <div className="text-xs text-zinc-600 text-center py-4">No events yet</div>
-              )}
-            </div>
-          </aside>
-        </div>
-
-        {/* Bottom Bar - Pressing Intensity */}
-        {matchState && (
-          <div className="border-t border-zinc-800 px-4 py-3">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-amber-500" />
-                <span className="text-xs text-zinc-400">Pressing</span>
               </div>
-              <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500 transition-all"
-                  style={{ width: `${matchState.pressingIntensity || 0}%` }}
-                />
+              <div>
+                <div className="text-red-400 text-sm font-medium mb-2">MUN ({patternRecognitionData.activePatterns.away.length})</div>
+                <div className="space-y-1">
+                  {patternRecognitionData.activePatterns.away.slice(0, 6).map((p, idx) => (
+                    <div key={idx} className="flex items-center justify-between bg-zinc-800 rounded px-2 py-1">
+                      <span className="text-zinc-300 text-xs">{p.type.replace(/_/g, ' ')}</span>
+                      <span className={`text-xs ${
+                        p.confidence > 0.7 ? 'text-emerald-400' : p.confidence > 0.5 ? 'text-amber-400' : 'text-zinc-500'
+                      }`}>
+                        {(p.confidence * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <span className="text-xs font-medium w-8 text-right">
-                {matchState.pressingIntensity?.toFixed(0) || 0}%
-              </span>
             </div>
+
+            {/* Compounding Effects */}
+            {patternRecognitionData.compoundingEffects.length > 0 && (
+              <div className="mt-4">
+                <h4 className="text-sm font-medium text-zinc-400 mb-2">Active Effects</h4>
+                <div className="flex flex-wrap gap-2">
+                  {patternRecognitionData.compoundingEffects.slice(0, 6).map((effect, idx) => (
+                    <span
+                      key={idx}
+                      className={`px-2 py-1 rounded text-xs ${
+                        effect.type === 'synergy' ? 'bg-purple-900 text-purple-300' :
+                        effect.type === 'fatigue' ? 'bg-orange-900 text-orange-300' :
+                        effect.type === 'psychological' ? 'bg-pink-900 text-pink-300' :
+                        'bg-zinc-800 text-zinc-300'
+                      }`}
+                    >
+                      {effect.type}: {effect.magnitude > 0 ? '+' : ''}{(effect.magnitude * 100).toFixed(0)}%
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </main>
     </div>
   );
 }
 
-// Minimal stat bar component
+// Stat bar component
 function StatBar({ label, home, away, showRaw = false }: { label: string; home: number; away: number; showRaw?: boolean }) {
   const total = home + away || 1;
   const homePercent = (home / total) * 100;
 
   return (
     <div>
-      <div className="flex justify-between text-xs mb-1">
+      <div className="flex justify-between text-sm mb-1">
         <span className="text-sky-400">{showRaw ? home : `${home}%`}</span>
         <span className="text-zinc-500">{label}</span>
         <span className="text-red-400">{showRaw ? away : `${away}%`}</span>
       </div>
-      <div className="h-1 bg-zinc-800 rounded-full overflow-hidden flex">
+      <div className="h-2 bg-zinc-800 rounded-full overflow-hidden flex">
         <div className="h-full bg-sky-500" style={{ width: `${homePercent}%` }} />
         <div className="h-full bg-red-500" style={{ width: `${100 - homePercent}%` }} />
       </div>
