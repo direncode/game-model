@@ -310,23 +310,23 @@ export function PitchView({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Analysis toggles
-  const [showCoverShadows, setShowCoverShadows] = useState(true);
+  // Analysis toggles - ALL OFF by default for clean match view
+  const [showCoverShadows, setShowCoverShadows] = useState(false);
   const [showPassingLanes, setShowPassingLanes] = useState(false);
   const [showZones, setShowZones] = useState(false);
-  const [showAnalysis, setShowAnalysis] = useState(true);
+  const [showAnalysis, setShowAnalysis] = useState(false);
   const [selectedAnalysis, setSelectedAnalysis] = useState<string | null>(null);
-  // Advanced toggles
+  // Advanced toggles - ALL OFF by default for clean match view
   const [showXGMap, setShowXGMap] = useState(false);
   const [showHeatmapOverlay, setShowHeatmapOverlay] = useState(false);
   const [showPassingNetwork, setShowPassingNetwork] = useState(false);
   const [showPsychology, setShowPsychology] = useState(false);
-  const [showAIDecisions, setShowAIDecisions] = useState(true);
+  const [showAIDecisions, setShowAIDecisions] = useState(false);
   const [showPressingTraps, setShowPressingTraps] = useState(false);
   const [showTacticalLogs, setShowTacticalLogs] = useState(false);
-  const [showCoherence, setShowCoherence] = useState(true); // Always show coherence by default
-  const [showMarkovChains, setShowMarkovChains] = useState(true); // Show recurrent patterns
-  const [showFatigue, setShowFatigue] = useState(true); // Show fatigue-adjusted shadows and panel
+  const [showCoherence, setShowCoherence] = useState(false);
+  const [showMarkovChains, setShowMarkovChains] = useState(false);
+  const [showFatigue, setShowFatigue] = useState(false);
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
