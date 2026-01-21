@@ -141,6 +141,45 @@ interface PatternRecognitionData {
   markov?: MarkovData;
 }
 
+// Fatigue/Wearable Data Interfaces (Catapult Integration)
+interface FatigueModel {
+  playerId: string;
+  currentFatigue: number;
+  muscularFatigue: number;
+  cardiovascularFatigue: number;
+  neuromuscularFatigue: number;
+  predictedFatigueIn5Min: number;
+  predictedFatigueIn15Min: number;
+  optimalSubstitutionMinute: number | null;
+  speedModifier: number;
+  accelerationModifier: number;
+  decisionModifier: number;
+  coverShadowModifier: number;
+}
+
+interface InjuryRiskModel {
+  playerId: string;
+  overallRisk: number;
+  hamstringRisk: number;
+  quadRisk: number;
+  ankleRisk: number;
+  calfRisk: number;
+  groinRisk: number;
+  acuteChronicRatio: number;
+  recommendations: string[];
+}
+
+interface FatigueData {
+  home: Map<string, FatigueModel>;
+  away: Map<string, FatigueModel>;
+  injuryRisks: Map<string, InjuryRiskModel>;
+  recommendations: {
+    substitutionTargets: { playerId: string; priority: 'urgent' | 'soon' | 'optional'; reason: string }[];
+    pressingAdjustments: { recommendation: string; affectedPlayers: string[] }[];
+    formationSuggestions: string[];
+  };
+}
+
 interface PitchViewProps {
   players: Player[];
   awayPlayers?: Player[];
@@ -163,6 +202,8 @@ interface PitchViewProps {
   showAdvancedMode?: boolean;
   // Pattern Recognition
   patternRecognition?: PatternRecognitionData;
+  // Fatigue/Wearable Data (Catapult GPS Integration)
+  fatigueData?: FatigueData;
 }
 
 // 4-3-3 formation assignment for starting XI
@@ -247,6 +288,7 @@ export function PitchView({
   tacticalDecisions = [],
   showAdvancedMode = false,
   patternRecognition,
+  fatigueData,
 }: PitchViewProps) {
   // iPad/Mobile detection
   const [isMobile, setIsMobile] = useState(false);
@@ -284,6 +326,7 @@ export function PitchView({
   const [showTacticalLogs, setShowTacticalLogs] = useState(true);
   const [showCoherence, setShowCoherence] = useState(true); // Always show coherence by default
   const [showMarkovChains, setShowMarkovChains] = useState(true); // Show recurrent patterns
+  const [showFatigue, setShowFatigue] = useState(true); // Show fatigue-adjusted shadows and panel
 
   // Calculate home player positions
   const homePlayerPositions = useMemo(() => {
@@ -311,14 +354,22 @@ export function PitchView({
     });
   }, [awayPlayers, awayLiveData]);
 
-  // Calculate cover shadows for defending team
+  // Calculate cover shadows for defending team (with fatigue adjustments)
   const coverShadows = useMemo(() => {
     if (!showCoverShadows || !ballPosition) return [];
 
     const defenders = ballPossession === 'home' ? awayPlayerPositions : homePlayerPositions;
     const attackers = ballPossession === 'home' ? homePlayerPositions : awayPlayerPositions;
+    const defenderFatigueMap = ballPossession === 'home' ? fatigueData?.away : fatigueData?.home;
 
-    const shadows: { from: { x: number; y: number }; angle: number; strength: number; name: string }[] = [];
+    const shadows: {
+      from: { x: number; y: number };
+      angle: number;
+      strength: number;
+      name: string;
+      fatigueModifier: number;
+      fatigue: number;
+    }[] = [];
 
     defenders.forEach((def) => {
       if (def.index === 0) return; // Skip GK
@@ -341,18 +392,28 @@ export function PitchView({
         { x: nearestAttacker.x, y: nearestAttacker.y }
       );
 
-      if (shadow.strength > 0.2) {
+      // Get fatigue modifier for this defender (from Catapult data)
+      const playerFatigue = defenderFatigueMap?.get(def.player.id);
+      const fatigueModifier = playerFatigue?.coverShadowModifier ?? 1.0;
+      const currentFatigue = playerFatigue?.currentFatigue ?? 0;
+
+      // Apply fatigue modifier to shadow strength
+      const adjustedStrength = shadow.strength * fatigueModifier;
+
+      if (adjustedStrength > 0.15) {
         shadows.push({
           from: { x: def.x, y: def.y },
           angle: shadow.angle,
-          strength: shadow.strength,
+          strength: adjustedStrength,
           name: getSurname(def.player.name),
+          fatigueModifier,
+          fatigue: currentFatigue,
         });
       }
     });
 
     return shadows;
-  }, [showCoverShadows, ballPosition, ballPossession, homePlayerPositions, awayPlayerPositions]);
+  }, [showCoverShadows, ballPosition, ballPossession, homePlayerPositions, awayPlayerPositions, fatigueData]);
 
   // Advanced analysis calculations
   const analysis = useMemo(() => {
@@ -567,7 +628,7 @@ export function PitchView({
         </svg>
       )}
 
-      {/* Cover Shadows Visualization */}
+      {/* Cover Shadows Visualization (Fatigue-Adjusted) */}
       {showCoverShadows && coverShadows.length > 0 && (
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
           <defs>
@@ -577,13 +638,16 @@ export function PitchView({
             </linearGradient>
           </defs>
           {coverShadows.map((shadow, idx) => {
-            const length = 12 + shadow.strength * 8;
+            // Fatigue-adjusted length: fatigued players have shorter shadows
+            const baseLength = 12 + shadow.strength * 8;
+            const length = baseLength * shadow.fatigueModifier;
             const rad = shadow.angle * (Math.PI / 180);
             const endX = shadow.from.x + Math.cos(rad) * length;
             const endY = shadow.from.y + Math.sin(rad) * length;
 
-            // Create cone shape for cover shadow
-            const coneAngle = 15;
+            // Fatigue-adjusted cone angle: fatigued players have narrower cones
+            const baseConeAngle = 15;
+            const coneAngle = baseConeAngle * shadow.fatigueModifier;
             const rad1 = (shadow.angle - coneAngle) * (Math.PI / 180);
             const rad2 = (shadow.angle + coneAngle) * (Math.PI / 180);
             const end1X = shadow.from.x + Math.cos(rad1) * length;
@@ -591,12 +655,27 @@ export function PitchView({
             const end2X = shadow.from.x + Math.cos(rad2) * length;
             const end2Y = shadow.from.y + Math.sin(rad2) * length;
 
+            // Color based on fatigue level: green (fresh) -> yellow -> orange -> red (fatigued)
+            const getFatigueColor = (fatigue: number, opacity: number) => {
+              if (fatigue > 70) return `rgba(239, 68, 68, ${opacity})`; // Red - critical
+              if (fatigue > 50) return `rgba(251, 146, 60, ${opacity})`; // Orange - high
+              if (fatigue > 30) return `rgba(251, 191, 36, ${opacity})`; // Yellow - moderate
+              return `rgba(34, 197, 94, ${opacity})`; // Green - fresh
+            };
+
+            const shadowColor = showFatigue
+              ? getFatigueColor(shadow.fatigue, 0.2)
+              : ballPossession === 'home' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(56, 189, 248, 0.15)';
+            const lineColor = showFatigue
+              ? getFatigueColor(shadow.fatigue, 0.5)
+              : ballPossession === 'home' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(56, 189, 248, 0.4)';
+
             return (
               <g key={idx}>
                 {/* Shadow cone */}
                 <polygon
                   points={`${shadow.from.x},${shadow.from.y} ${end1X},${end1Y} ${end2X},${end2Y}`}
-                  fill={ballPossession === 'home' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(56, 189, 248, 0.15)'}
+                  fill={shadowColor}
                 />
                 {/* Shadow line */}
                 <line
@@ -604,10 +683,23 @@ export function PitchView({
                   y1={shadow.from.y}
                   x2={endX}
                   y2={endY}
-                  stroke={ballPossession === 'home' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(56, 189, 248, 0.4)'}
+                  stroke={lineColor}
                   strokeWidth="0.3"
                   strokeDasharray="1,0.5"
                 />
+                {/* Fatigue indicator at shadow tip (when fatigue mode on) */}
+                {showFatigue && shadow.fatigue > 40 && (
+                  <text
+                    x={endX}
+                    y={endY - 1}
+                    textAnchor="middle"
+                    fill={getFatigueColor(shadow.fatigue, 0.9)}
+                    fontSize="1.8"
+                    fontWeight="bold"
+                  >
+                    {shadow.fatigue.toFixed(0)}%
+                  </text>
+                )}
               </g>
             );
           })}
@@ -804,6 +896,15 @@ export function PitchView({
           )}
         >
           Chains
+        </button>
+        <button
+          onClick={() => setShowFatigue(!showFatigue)}
+          className={cn(
+            'px-2 py-1 text-[9px] font-medium rounded transition-all',
+            showFatigue ? 'bg-orange-600 text-white' : 'bg-black/50 text-white/70 hover:bg-black/70'
+          )}
+        >
+          Fatigue
         </button>
       </div>
 
@@ -1236,6 +1337,149 @@ export function PitchView({
         </div>
       )}
 
+      {/* Fatigue & Tactical Recommendations Panel (Catapult GPS Integration) */}
+      {showFatigue && fatigueData && (!isMobile || showRightPanel) && (
+        <div
+          className={cn(
+            'absolute bg-black/90 rounded-lg p-2 text-white z-40',
+            isMobile
+              ? 'right-0 top-10 w-[45vw] max-w-[200px] text-[7px]'
+              : 'top-2 left-24 min-w-[200px] max-w-[240px] text-[8px]'
+          )}
+          style={{
+            maxHeight: isMobile ? '40vh' : '180px',
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'thin',
+          }}
+        >
+          <div className="font-bold text-[10px] text-orange-400 mb-1 border-b border-white/20 pb-1 flex items-center gap-1">
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 1.62-.49 3.13-1.32 4.39l1.45 1.45C21.32 16.12 22 14.12 22 12c0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.05.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-1.46-1.46C16.79 18.16 14.54 19 12 19z"/>
+            </svg>
+            CATAPULT GPS / FATIGUE
+            <span className="ml-auto text-[7px] text-orange-400/70">LIVE</span>
+          </div>
+
+          {/* Substitution Recommendations */}
+          {fatigueData.recommendations.substitutionTargets.length > 0 && (
+            <div className="mb-2">
+              <div className="text-[7px] text-white/50 mb-0.5 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                SUBSTITUTION TARGETS
+              </div>
+              <div className="space-y-1">
+                {fatigueData.recommendations.substitutionTargets.slice(0, 3).map((target, idx) => (
+                  <div
+                    key={idx}
+                    className={cn(
+                      'border-l-2 pl-1.5 py-0.5',
+                      target.priority === 'urgent' ? 'border-red-500 bg-red-900/30' :
+                      target.priority === 'soon' ? 'border-orange-500 bg-orange-900/20' :
+                      'border-yellow-500 bg-yellow-900/10'
+                    )}
+                  >
+                    <div className="flex items-center gap-1">
+                      <span className={cn(
+                        'px-1 rounded text-[6px] font-bold uppercase',
+                        target.priority === 'urgent' ? 'bg-red-500/50 text-red-200' :
+                        target.priority === 'soon' ? 'bg-orange-500/50 text-orange-200' :
+                        'bg-yellow-500/50 text-yellow-200'
+                      )}>
+                        {target.priority}
+                      </span>
+                      <span className="text-white/80 text-[7px] font-medium truncate">
+                        {target.playerId.replace(/_/g, ' ').slice(0, 15)}
+                      </span>
+                    </div>
+                    <div className="text-white/50 text-[6px] mt-0.5 leading-tight">
+                      {target.reason.length > 50 ? target.reason.slice(0, 50) + '...' : target.reason}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Pressing Adjustments */}
+          {fatigueData.recommendations.pressingAdjustments.length > 0 && (
+            <div className="mb-2 pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-0.5">PRESSING ADJUSTMENTS</div>
+              <div className="space-y-0.5">
+                {fatigueData.recommendations.pressingAdjustments.slice(0, 2).map((adj, idx) => (
+                  <div key={idx} className="text-amber-300/80 text-[7px]">
+                    • {adj.recommendation}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Formation Suggestions */}
+          {fatigueData.recommendations.formationSuggestions.length > 0 && (
+            <div className="pt-1 border-t border-white/20">
+              <div className="text-[7px] text-white/50 mb-0.5">TACTICAL SUGGESTIONS</div>
+              <div className="space-y-0.5">
+                {fatigueData.recommendations.formationSuggestions.slice(0, 2).map((sug, idx) => (
+                  <div key={idx} className="text-cyan-300/80 text-[7px]">
+                    → {sug}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Team Fatigue Summary */}
+          <div className="mt-2 pt-1 border-t border-white/20">
+            <div className="text-[7px] text-white/50 mb-1">TEAM FATIGUE</div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <div className="text-sky-400 text-[7px] mb-0.5">MCI</div>
+                {(() => {
+                  const avgFatigue = Array.from(fatigueData.home.values())
+                    .reduce((sum, f) => sum + f.currentFatigue, 0) / Math.max(1, fatigueData.home.size);
+                  return (
+                    <div className="flex items-center gap-1">
+                      <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={cn(
+                            'h-full rounded-full transition-all',
+                            avgFatigue > 60 ? 'bg-red-500' : avgFatigue > 40 ? 'bg-amber-500' : 'bg-green-500'
+                          )}
+                          style={{ width: `${avgFatigue}%` }}
+                        />
+                      </div>
+                      <span className="text-[7px] text-white/70">{avgFatigue.toFixed(0)}%</span>
+                    </div>
+                  );
+                })()}
+              </div>
+              <div>
+                <div className="text-red-400 text-[7px] mb-0.5">MUN</div>
+                {(() => {
+                  const avgFatigue = Array.from(fatigueData.away.values())
+                    .reduce((sum, f) => sum + f.currentFatigue, 0) / Math.max(1, fatigueData.away.size);
+                  return (
+                    <div className="flex items-center gap-1">
+                      <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={cn(
+                            'h-full rounded-full transition-all',
+                            avgFatigue > 60 ? 'bg-red-500' : avgFatigue > 40 ? 'bg-amber-500' : 'bg-green-500'
+                          )}
+                          style={{ width: `${avgFatigue}%` }}
+                        />
+                      </div>
+                      <span className="text-[7px] text-white/70">{avgFatigue.toFixed(0)}%</span>
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Markov Chains Panel - Recurrent Pattern Sequences (RESPONSIVE) */}
       {showMarkovChains && patternRecognition?.markov && (!isMobile || showRightPanel) && (
         <div
@@ -1363,100 +1607,206 @@ export function PitchView({
       )}
 
       {/* HOME Players */}
-      {homePlayerPositions.map(({ player, x, y, metrics, index }) => (
-        <div
-          key={player.id}
-          className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
-          style={{ left: `${x}%`, top: `${y}%` }}
-          onClick={() => onPlayerClick?.(player.id)}
-        >
-          {/* Player circle */}
-          <div className={cn(
-            'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
-            selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
-            'bg-gradient-to-br from-sky-400 to-sky-600 border-sky-300 text-white'
-          )}>
-            {player.number}
-          </div>
+      {homePlayerPositions.map(({ player, x, y, metrics, index }) => {
+        const playerFatigue = fatigueData?.home.get(player.id);
+        const fatigue = playerFatigue?.currentFatigue ?? 0;
+        const injuryRisk = fatigueData?.injuryRisks.get(player.id);
 
-          {/* Player name - always visible */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
-            <span className="px-1 py-0.5 bg-sky-900/90 text-white text-[8px] font-medium rounded shadow">
-              {getSurname(player.name)}
-            </span>
-          </div>
+        return (
+          <div
+            key={player.id}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
+            style={{ left: `${x}%`, top: `${y}%` }}
+            onClick={() => onPlayerClick?.(player.id)}
+          >
+            {/* Fatigue ring indicator */}
+            {showFatigue && fatigue > 30 && (
+              <div
+                className={cn(
+                  'absolute inset-[-4px] rounded-full border-2 animate-pulse',
+                  fatigue > 70 ? 'border-red-500' :
+                  fatigue > 50 ? 'border-orange-500' :
+                  'border-yellow-500'
+                )}
+              />
+            )}
 
-          {/* Speed indicator */}
-          {metrics && metrics.currentSpeed > 15 && (
+            {/* Player circle */}
             <div className={cn(
-              'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
-              metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
-              metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
-            )} />
-          )}
+              'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
+              selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
+              'bg-gradient-to-br from-sky-400 to-sky-600 border-sky-300 text-white'
+            )}>
+              {player.number}
+            </div>
 
-          {/* Hover stats */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
-            <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
-              <div className="font-bold text-sky-400">{player.name}</div>
-              {metrics && (
-                <>
-                  <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
-                  <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
-                </>
-              )}
+            {/* Player name - always visible */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
+              <span className={cn(
+                'px-1 py-0.5 text-white text-[8px] font-medium rounded shadow',
+                showFatigue && fatigue > 70 ? 'bg-red-900/90' :
+                showFatigue && fatigue > 50 ? 'bg-orange-900/90' :
+                'bg-sky-900/90'
+              )}>
+                {getSurname(player.name)}
+              </span>
+            </div>
+
+            {/* Speed indicator */}
+            {metrics && metrics.currentSpeed > 15 && (
+              <div className={cn(
+                'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
+                metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
+                metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
+              )} />
+            )}
+
+            {/* Fatigue percentage badge (when fatigue mode on and fatigued) */}
+            {showFatigue && fatigue > 40 && (
+              <div className={cn(
+                'absolute -top-2 -left-2 w-4 h-4 rounded-full flex items-center justify-center text-[6px] font-bold border border-white',
+                fatigue > 70 ? 'bg-red-600 text-white' :
+                fatigue > 50 ? 'bg-orange-600 text-white' :
+                'bg-yellow-600 text-white'
+              )}>
+                {fatigue.toFixed(0)}
+              </div>
+            )}
+
+            {/* Hover stats - enhanced with fatigue data */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                <div className="font-bold text-sky-400">{player.name}</div>
+                {metrics && (
+                  <>
+                    <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
+                    <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
+                  </>
+                )}
+                {playerFatigue && (
+                  <div className="mt-1 pt-1 border-t border-white/20">
+                    <div className={cn(
+                      fatigue > 70 ? 'text-red-400' : fatigue > 50 ? 'text-orange-400' : fatigue > 30 ? 'text-yellow-400' : 'text-green-400'
+                    )}>
+                      Fatigue: {fatigue.toFixed(0)}%
+                    </div>
+                    <div className="text-white/60">Shadow: {(playerFatigue.coverShadowModifier * 100).toFixed(0)}%</div>
+                    {playerFatigue.optimalSubstitutionMinute && (
+                      <div className="text-amber-400">Sub at: {playerFatigue.optimalSubstitutionMinute}'</div>
+                    )}
+                  </div>
+                )}
+                {injuryRisk && injuryRisk.overallRisk > 50 && (
+                  <div className="mt-1 text-red-400">
+                    ⚠️ Injury risk: {injuryRisk.overallRisk.toFixed(0)}%
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* AWAY Players */}
-      {awayPlayerPositions.map(({ player, x, y, metrics, index }) => (
-        <div
-          key={player.id}
-          className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
-          style={{ left: `${x}%`, top: `${y}%` }}
-          onClick={() => onPlayerClick?.(player.id)}
-        >
-          {/* Player circle */}
-          <div className={cn(
-            'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
-            selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
-            'bg-gradient-to-br from-red-500 to-red-700 border-red-400 text-white'
-          )}>
-            {player.number}
-          </div>
+      {awayPlayerPositions.map(({ player, x, y, metrics, index }) => {
+        const playerFatigue = fatigueData?.away.get(player.id);
+        const fatigue = playerFatigue?.currentFatigue ?? 0;
+        const injuryRisk = fatigueData?.injuryRisks.get(player.id);
 
-          {/* Player name - always visible */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
-            <span className="px-1 py-0.5 bg-red-900/90 text-white text-[8px] font-medium rounded shadow">
-              {getSurname(player.name)}
-            </span>
-          </div>
+        return (
+          <div
+            key={player.id}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
+            style={{ left: `${x}%`, top: `${y}%` }}
+            onClick={() => onPlayerClick?.(player.id)}
+          >
+            {/* Fatigue ring indicator */}
+            {showFatigue && fatigue > 30 && (
+              <div
+                className={cn(
+                  'absolute inset-[-4px] rounded-full border-2 animate-pulse',
+                  fatigue > 70 ? 'border-red-500' :
+                  fatigue > 50 ? 'border-orange-500' :
+                  'border-yellow-500'
+                )}
+              />
+            )}
 
-          {/* Speed indicator */}
-          {metrics && metrics.currentSpeed > 15 && (
+            {/* Player circle */}
             <div className={cn(
-              'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
-              metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
-              metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
-            )} />
-          )}
+              'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
+              selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
+              'bg-gradient-to-br from-red-500 to-red-700 border-red-400 text-white'
+            )}>
+              {player.number}
+            </div>
 
-          {/* Hover stats */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
-            <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
-              <div className="font-bold text-red-400">{player.name}</div>
-              {metrics && (
-                <>
-                  <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
-                  <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
-                </>
-              )}
+            {/* Player name - always visible */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
+              <span className={cn(
+                'px-1 py-0.5 text-white text-[8px] font-medium rounded shadow',
+                showFatigue && fatigue > 70 ? 'bg-red-950/90 ring-1 ring-red-500' :
+                showFatigue && fatigue > 50 ? 'bg-orange-950/90 ring-1 ring-orange-500' :
+                'bg-red-900/90'
+              )}>
+                {getSurname(player.name)}
+              </span>
+            </div>
+
+            {/* Speed indicator */}
+            {metrics && metrics.currentSpeed > 15 && (
+              <div className={cn(
+                'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
+                metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
+                metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
+              )} />
+            )}
+
+            {/* Fatigue percentage badge (when fatigue mode on and fatigued) */}
+            {showFatigue && fatigue > 40 && (
+              <div className={cn(
+                'absolute -top-2 -left-2 w-4 h-4 rounded-full flex items-center justify-center text-[6px] font-bold border border-white',
+                fatigue > 70 ? 'bg-red-600 text-white' :
+                fatigue > 50 ? 'bg-orange-600 text-white' :
+                'bg-yellow-600 text-white'
+              )}>
+                {fatigue.toFixed(0)}
+              </div>
+            )}
+
+            {/* Hover stats - enhanced with fatigue data */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                <div className="font-bold text-red-400">{player.name}</div>
+                {metrics && (
+                  <>
+                    <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
+                    <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
+                  </>
+                )}
+                {playerFatigue && (
+                  <div className="mt-1 pt-1 border-t border-white/20">
+                    <div className={cn(
+                      fatigue > 70 ? 'text-red-400' : fatigue > 50 ? 'text-orange-400' : fatigue > 30 ? 'text-yellow-400' : 'text-green-400'
+                    )}>
+                      Fatigue: {fatigue.toFixed(0)}%
+                    </div>
+                    <div className="text-white/60">Shadow: {(playerFatigue.coverShadowModifier * 100).toFixed(0)}%</div>
+                    {playerFatigue.optimalSubstitutionMinute && (
+                      <div className="text-amber-400">Sub at: {playerFatigue.optimalSubstitutionMinute}'</div>
+                    )}
+                  </div>
+                )}
+                {injuryRisk && injuryRisk.overallRisk > 50 && (
+                  <div className="mt-1 text-red-400">
+                    ⚠️ Injury risk: {injuryRisk.overallRisk.toFixed(0)}%
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* Ball */}
       {ballPosition && (

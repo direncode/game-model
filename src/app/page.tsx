@@ -26,6 +26,11 @@ import {
   type RecurrentSequence,
   type MarkovTransition,
 } from '@/lib/pattern-recognition';
+import {
+  catapultService,
+  type FatigueModel,
+  type InjuryRiskModel,
+} from '@/lib/catapult-integration';
 import type { Player, TrackingMetrics } from '@/types';
 import {
   Play,
@@ -46,6 +51,18 @@ interface PatternRecognitionData {
     currentChains: { home: string; away: string };
     topTransitions: { home: MarkovTransition[]; away: MarkovTransition[] };
     predictedNext: { home: string | null; away: string | null };
+  };
+}
+
+// Fatigue/Wearable Data Types for PitchView
+interface FatigueData {
+  home: Map<string, FatigueModel>;
+  away: Map<string, FatigueModel>;
+  injuryRisks: Map<string, InjuryRiskModel>;
+  recommendations: {
+    substitutionTargets: { playerId: string; priority: 'urgent' | 'soon' | 'optional'; reason: string }[];
+    pressingAdjustments: { recommendation: string; affectedPlayers: string[] }[];
+    formationSuggestions: string[];
   };
 }
 
@@ -85,6 +102,18 @@ export default function Home() {
       currentChains: { home: 'No chain', away: 'No chain' },
       topTransitions: { home: [], away: [] },
       predictedNext: { home: null, away: null }
+    }
+  });
+
+  // Fatigue/Wearable Data State (Catapult Integration)
+  const [fatigueData, setFatigueData] = useState<FatigueData>({
+    home: new Map(),
+    away: new Map(),
+    injuryRisks: new Map(),
+    recommendations: {
+      substitutionTargets: [],
+      pressingAdjustments: [],
+      formationSuggestions: [],
     }
   });
 
@@ -241,6 +270,71 @@ export default function Home() {
           });
         }
 
+        // ========================================
+        // CATAPULT GPS/WEARABLE INTEGRATION
+        // Calculate fatigue models for all players
+        // ========================================
+        const currentMinute = Math.floor(state.minute);
+        const homeFatigueModels = new Map<string, FatigueModel>();
+        const awayFatigueModels = new Map<string, FatigueModel>();
+        const allInjuryRisks = new Map<string, InjuryRiskModel>();
+
+        // Process home team players
+        players.slice(0, 11).forEach((player, index) => {
+          const metrics = liveData.get(player.id);
+          if (metrics?.position) {
+            // Feed live position data to Catapult service
+            catapultService.feedLivePosition(player.id, {
+              timestamp: Date.now(),
+              x: metrics.position.x,
+              y: metrics.position.y,
+              speed: (metrics.currentSpeed || 0) / 3.6, // Convert km/h to m/s
+              acceleration: metrics.maxAcceleration || 0,
+              heading: 0,
+            });
+          }
+
+          // Calculate fatigue model
+          const fatigueModel = catapultService.calculateFatigueModel(player.id, currentMinute);
+          homeFatigueModels.set(player.id, fatigueModel);
+
+          // Calculate injury risk
+          const injuryRisk = catapultService.calculateInjuryRisk(player.id);
+          allInjuryRisks.set(player.id, injuryRisk);
+        });
+
+        // Process away team players
+        awayPlayers.slice(0, 11).forEach((player, index) => {
+          const metrics = newAwayData.get(player.id);
+          if (metrics?.position) {
+            catapultService.feedLivePosition(player.id, {
+              timestamp: Date.now(),
+              x: metrics.position.x,
+              y: metrics.position.y,
+              speed: (metrics.currentSpeed || 0) / 3.6,
+              acceleration: metrics.maxAcceleration || 0,
+              heading: 0,
+            });
+          }
+
+          const fatigueModel = catapultService.calculateFatigueModel(player.id, currentMinute);
+          awayFatigueModels.set(player.id, fatigueModel);
+
+          const injuryRisk = catapultService.calculateInjuryRisk(player.id);
+          allInjuryRisks.set(player.id, injuryRisk);
+        });
+
+        // Get tactical recommendations based on fatigue
+        const recommendations = catapultService.getTacticalRecommendations(currentMinute);
+
+        // Update fatigue data state
+        setFatigueData({
+          home: homeFatigueModels,
+          away: awayFatigueModels,
+          injuryRisks: allInjuryRisks,
+          recommendations,
+        });
+
         if (state.phase === 'full_time') {
           setIsSimulating(false);
           endMatch();
@@ -268,6 +362,18 @@ export default function Home() {
         currentChains: { home: 'No chain', away: 'No chain' },
         topTransitions: { home: [], away: [] },
         predictedNext: { home: null, away: null }
+      }
+    });
+
+    // Reset fatigue data for new match
+    setFatigueData({
+      home: new Map(),
+      away: new Map(),
+      injuryRisks: new Map(),
+      recommendations: {
+        substitutionTargets: [],
+        pressingAdjustments: [],
+        formationSuggestions: [],
       }
     });
 
@@ -480,6 +586,7 @@ export default function Home() {
                   xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 }
                 }}
                 patternRecognition={patternRecognitionData}
+                fatigueData={fatigueData}
               />
             </div>
           </div>
