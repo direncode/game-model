@@ -323,7 +323,7 @@ export function PitchView({
   const [showPsychology, setShowPsychology] = useState(false);
   const [showAIDecisions, setShowAIDecisions] = useState(true);
   const [showPressingTraps, setShowPressingTraps] = useState(false);
-  const [showTacticalLogs, setShowTacticalLogs] = useState(true);
+  const [showTacticalLogs, setShowTacticalLogs] = useState(false);
   const [showCoherence, setShowCoherence] = useState(true); // Always show coherence by default
   const [showMarkovChains, setShowMarkovChains] = useState(true); // Show recurrent patterns
   const [showFatigue, setShowFatigue] = useState(true); // Show fatigue-adjusted shadows and panel
