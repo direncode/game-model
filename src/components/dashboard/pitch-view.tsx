@@ -755,6 +755,128 @@ export function PitchView({
         </svg>
       )}
 
+      {/* HOME Players */}
+      {homePlayerPositions.map(({ player, x, y, metrics, index }) => {
+        return (
+          <div
+            key={player.id}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
+            style={{ left: `${x}%`, top: `${y}%` }}
+            onClick={() => onPlayerClick?.(player.id)}
+          >
+            {/* Player circle */}
+            <div className={cn(
+              'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
+              selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
+              'bg-gradient-to-br from-sky-400 to-sky-600 border-sky-300 text-white'
+            )}>
+              {player.number}
+            </div>
+
+            {/* Player name */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
+              <span className="px-1 py-0.5 text-white text-[8px] font-medium rounded shadow bg-sky-900/90">
+                {getSurname(player.name)}
+              </span>
+            </div>
+
+            {/* Speed indicator */}
+            {metrics && metrics.currentSpeed > 15 && (
+              <div className={cn(
+                'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
+                metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
+                metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
+              )} />
+            )}
+
+            {/* Hover stats */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                <div className="font-bold text-sky-400">{player.name}</div>
+                {metrics && (
+                  <>
+                    <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
+                    <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* AWAY Players */}
+      {awayPlayerPositions.map(({ player, x, y, metrics, index }) => {
+        return (
+          <div
+            key={player.id}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group"
+            style={{ left: `${x}%`, top: `${y}%` }}
+            onClick={() => onPlayerClick?.(player.id)}
+          >
+            {/* Player circle */}
+            <div className={cn(
+              'w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shadow-lg border-2 transition-transform',
+              selectedPlayerId === player.id ? 'scale-125 ring-2 ring-yellow-400' : 'hover:scale-110',
+              'bg-gradient-to-br from-red-500 to-red-700 border-red-400 text-white'
+            )}>
+              {player.number}
+            </div>
+
+            {/* Player name */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 whitespace-nowrap">
+              <span className="px-1 py-0.5 text-white text-[8px] font-medium rounded shadow bg-red-900/90">
+                {getSurname(player.name)}
+              </span>
+            </div>
+
+            {/* Speed indicator */}
+            {metrics && metrics.currentSpeed > 15 && (
+              <div className={cn(
+                'absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white',
+                metrics.currentSpeed > 22 ? 'bg-red-500 animate-pulse' :
+                metrics.currentSpeed > 18 ? 'bg-amber-500' : 'bg-green-500'
+              )} />
+            )}
+
+            {/* Hover stats */}
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              <div className="bg-black/90 text-white text-[8px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                <div className="font-bold text-red-400">{player.name}</div>
+                {metrics && (
+                  <>
+                    <div>Speed: {metrics.currentSpeed.toFixed(1)} km/h</div>
+                    <div>Distance: {(metrics.totalDistance / 1000).toFixed(2)} km</div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Ball */}
+      {ballPosition && (
+        <div
+          className="absolute transform -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-75"
+          style={{ left: `${ballPosition.x}%`, top: `${ballPosition.y}%` }}
+        >
+          <div className={cn(
+            'w-4 h-4 rounded-full bg-white shadow-lg border-2',
+            ballPossession === 'home' ? 'border-sky-400' : 'border-red-400'
+          )}>
+            <svg viewBox="0 0 20 20" className="w-full h-full">
+              <circle cx="10" cy="10" r="8" fill="white" />
+              <circle cx="10" cy="10" r="2" fill="#1e293b" />
+              <circle cx="5" cy="6" r="1.2" fill="#1e293b" />
+              <circle cx="15" cy="6" r="1.2" fill="#1e293b" />
+              <circle cx="5" cy="14" r="1.2" fill="#1e293b" />
+              <circle cx="15" cy="14" r="1.2" fill="#1e293b" />
+            </svg>
+          </div>
+        </div>
+      )}
+
       {/* Clean pitch view - no overlays, buttons, or panels */}
     </div>
   );
