@@ -558,6 +558,10 @@ export default function Home() {
     return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
   };
 
+  // Get current game model name
+  const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
+  const modelName = activeGameModel?.name || GAME_MODEL_TEMPLATES.find(t => t.id === selectedTemplate)?.name || 'Total Football';
+
   return (
     <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
       {/* Header */}
@@ -593,282 +597,232 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="flex-1 grid grid-cols-12 gap-px bg-white/5 overflow-hidden">
-        {/* Left: Live Match + Digital Twin */}
-        <div className="col-span-8 bg-zinc-950 flex flex-col overflow-hidden">
-          {/* Match Views */}
-          <div className="flex-1 grid grid-cols-2 gap-px bg-white/5 overflow-hidden">
-            {/* Organic Match */}
-            <div className="bg-zinc-950 flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Users className="w-3 h-3 text-white/30" />
-                  <span className="text-[10px] uppercase tracking-wider text-white/40">Live Match</span>
-                </div>
-                {matchStats && (
-                  <span className="text-[10px] text-white/30">{matchStats.possession.home}% poss</span>
-                )}
+      {/* Main Content - Vertical Stack */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top: Pitches Side by Side */}
+        <div className="flex-shrink-0 h-[55%] flex gap-px bg-white/5">
+          {/* Organic Match */}
+          <div className="flex-1 bg-zinc-950 flex flex-col">
+            <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Users className="w-3 h-3 text-emerald-400" />
+                <span className="text-[10px] uppercase tracking-wider text-white/50">Live Match</span>
               </div>
-              <div className="flex-1 p-2">
-                <div className="h-full rounded-lg overflow-hidden">
-                  <PitchView
-                    players={players}
-                    awayPlayers={awayPlayers}
-                    liveData={liveData}
-                    awayLiveData={awayLiveData}
-                    selectedPlayerId={null}
-                    onPlayerClick={() => {}}
-                    ballPosition={matchState?.ballPosition}
-                    ballPossession={matchState?.ballPossession}
-                    defensiveBlock={matchState?.defensiveBlock}
-                    pressingIntensity={matchState?.pressingIntensity}
-                    analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
-                    patternRecognition={patternRecognitionData}
-                    fatigueData={fatigueData}
-                  />
-                </div>
+              <div className="flex items-center gap-3 text-[10px]">
+                {matchStats && <span className="text-white/30">{matchStats.possession.home}%</span>}
+                <span className="text-white/20">|</span>
+                <span className="text-sky-400">City</span>
+                <span className="text-white/30">vs</span>
+                <span className="text-red-400">United</span>
               </div>
             </div>
-
-            {/* Digital Twin */}
-            <div className="bg-zinc-950 flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <GitCompare className="w-3 h-3 text-sky-400/60" />
-                  <span className="text-[10px] uppercase tracking-wider text-white/40">Digital Twin</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                    {overallCoherence}%
-                  </span>
-                  <span className="text-[10px] text-white/30">coherent</span>
-                </div>
-              </div>
-              <div className="flex-1 p-2">
-                <div className="h-full rounded-lg bg-zinc-900/50 relative overflow-hidden">
-                  {/* Mini pitch */}
-                  <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                    {/* Pitch background */}
-                    <rect x="0" y="0" width="100" height="100" fill="#1a2f1a" />
-                    {/* Center line */}
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="#2d4a2d" strokeWidth="0.3" />
-                    {/* Center circle */}
-                    <circle cx="50" cy="50" r="10" fill="none" stroke="#2d4a2d" strokeWidth="0.3" />
-                    {/* Penalty areas */}
-                    <rect x="25" y="0" width="50" height="15" fill="none" stroke="#2d4a2d" strokeWidth="0.3" />
-                    <rect x="25" y="85" width="50" height="15" fill="none" stroke="#2d4a2d" strokeWidth="0.3" />
-
-                    {/* Deviation lines and players */}
-                    {twinPositions.map((pos, idx) => (
-                      <g key={idx}>
-                        {/* Deviation line */}
-                        <line
-                          x1={pos.idealX}
-                          y1={pos.idealY}
-                          x2={pos.actualX}
-                          y2={pos.actualY}
-                          stroke={pos.isCoherent ? '#22c55e' : '#ef4444'}
-                          strokeWidth="0.4"
-                          strokeDasharray={pos.isCoherent ? '0' : '1,1'}
-                          opacity="0.6"
-                        />
-                        {/* Ideal position (ghost) */}
-                        <circle
-                          cx={pos.idealX}
-                          cy={pos.idealY}
-                          r="2.5"
-                          fill="none"
-                          stroke="#38bdf8"
-                          strokeWidth="0.3"
-                          strokeDasharray="1,1"
-                          opacity="0.4"
-                        />
-                        {/* Actual position */}
-                        <circle
-                          cx={pos.actualX}
-                          cy={pos.actualY}
-                          r="2"
-                          fill={pos.isCoherent ? '#22c55e' : '#ef4444'}
-                          opacity="0.9"
-                        />
-                        {/* Player label */}
-                        <text
-                          x={pos.actualX}
-                          y={pos.actualY + 5}
-                          textAnchor="middle"
-                          fontSize="2.5"
-                          fill="white"
-                          opacity="0.6"
-                        >
-                          {pos.role}
-                        </text>
-                      </g>
-                    ))}
-                  </svg>
-
-                  {/* Legend */}
-                  <div className="absolute bottom-2 left-2 flex items-center gap-3 text-[9px]">
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <span className="text-white/40">In position</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-red-500" />
-                      <span className="text-white/40">Drifting</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full border border-dashed border-sky-400" />
-                      <span className="text-white/40">Ideal</span>
-                    </div>
-                  </div>
-                </div>
+            <div className="flex-1 p-1.5">
+              <div className="h-full rounded-lg overflow-hidden">
+                <PitchView
+                  players={players}
+                  awayPlayers={awayPlayers}
+                  liveData={liveData}
+                  awayLiveData={awayLiveData}
+                  selectedPlayerId={null}
+                  onPlayerClick={() => {}}
+                  ballPosition={matchState?.ballPosition}
+                  ballPossession={matchState?.ballPossession}
+                  defensiveBlock={matchState?.defensiveBlock}
+                  pressingIntensity={matchState?.pressingIntensity}
+                  analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
+                  patternRecognition={patternRecognitionData}
+                  fatigueData={fatigueData}
+                />
               </div>
             </div>
           </div>
 
-          {/* Coherence Indicator Bar */}
-          <div className="flex-shrink-0 px-3 py-2 border-t border-white/5 bg-black/30">
-            <div className="flex items-center gap-3">
-              <Target className="w-3 h-3 text-white/30" />
-              <div className="flex-1">
-                <div className="flex items-center justify-between text-[10px] mb-1">
-                  <span className="text-white/40">Twin Coherence</span>
-                  <span className={`font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                    {overallCoherence}%
+          {/* Digital Twin - Full Model Adherence */}
+          <div className="flex-1 bg-zinc-950 flex flex-col">
+            <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <GitCompare className="w-3 h-3 text-sky-400" />
+                <span className="text-[10px] uppercase tracking-wider text-white/50">Digital Twin</span>
+                <span className="text-[10px] px-2 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`text-xs font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                  {overallCoherence}%
+                </span>
+                <span className="text-[10px] text-white/30">match</span>
+              </div>
+            </div>
+            <div className="flex-1 p-1.5">
+              <div className="h-full rounded-lg bg-gradient-to-b from-emerald-950/30 to-emerald-950/10 relative overflow-hidden border border-emerald-500/20">
+                {/* Digital Twin Pitch - Shows ideal game with full adherence */}
+                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                  {/* Pitch */}
+                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
+                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.2" />
+                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
+                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
+                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
+
+                  {/* City players at IDEAL positions (perfect model adherence) */}
+                  {idealPositions.map((pos, idx) => (
+                    <g key={`ideal-${idx}`}>
+                      <circle
+                        cx={pos.x}
+                        cy={pos.y * 0.65}
+                        r="2.2"
+                        fill="#38bdf8"
+                        opacity="0.9"
+                      />
+                      <text
+                        x={pos.x}
+                        y={pos.y * 0.65 + 4.5}
+                        textAnchor="middle"
+                        fontSize="2"
+                        fill="#38bdf8"
+                        opacity="0.7"
+                      >
+                        {pos.role}
+                      </text>
+                    </g>
+                  ))}
+
+                  {/* Away team in counter-formation */}
+                  {[
+                    { x: 95, y: 32.5 }, // GK
+                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 }, // Defense
+                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 }, // Midfield
+                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 }, // Attack
+                  ].map((pos, idx) => (
+                    <circle
+                      key={`away-${idx}`}
+                      cx={pos.x}
+                      cy={pos.y}
+                      r="2"
+                      fill="#ef4444"
+                      opacity="0.7"
+                    />
+                  ))}
+
+                  {/* Ball */}
+                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
+                </svg>
+
+                {/* Model Label */}
+                <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 rounded text-[9px] text-sky-300">
+                  AI Model: {modelName}
+                </div>
+
+                {/* Coherence to model */}
+                <div className="absolute bottom-2 right-2 flex items-center gap-2 px-2 py-1 bg-black/60 rounded">
+                  <span className="text-[9px] text-white/50">Real → Twin:</span>
+                  <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                    {twinPositions.filter(p => p.isCoherent).length}/11
                   </span>
                 </div>
-                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all ${overallCoherence >= 70 ? 'bg-emerald-500' : overallCoherence >= 50 ? 'bg-amber-500' : 'bg-red-500'}`}
-                    style={{ width: `${overallCoherence}%` }}
-                  />
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-[10px]">
-                <span className="text-emerald-400">{twinPositions.filter(p => p.isCoherent).length}</span>
-                <span className="text-white/20">/</span>
-                <span className="text-white/40">11</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right: Instructions + Stats */}
-        <div className="col-span-4 bg-zinc-950 flex flex-col overflow-hidden">
-          {/* Manager AI Input */}
-          <div className="flex-shrink-0 p-3 border-b border-white/5">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Manager AI</span>
-            </div>
-            <div className="flex gap-1 mb-2 overflow-x-auto">
-              {GAME_MODEL_TEMPLATES.slice(0, 3).map(t => (
-                <button
-                  key={t.id}
-                  onClick={() => handleTemplateSelect(t.id)}
-                  className={`flex-shrink-0 px-2 py-1 rounded text-[10px] transition-all ${
-                    selectedTemplate === t.id ? 'bg-sky-500 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
-                  }`}
-                >
-                  {t.name}
-                </button>
-              ))}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <input
-                type="text"
-                value={instructionInput}
-                onChange={(e) => setInstructionInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSendInstruction()}
-                placeholder="Press high..."
-                className="flex-1 bg-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-white/20"
-                disabled={isProcessing}
-              />
-              <button
-                onClick={toggleRecording}
-                className={`w-7 h-7 flex items-center justify-center rounded transition-all ${isRecording ? 'bg-red-500 text-white' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
-              >
-                {isRecording ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
-              </button>
-              <button
-                onClick={handleSendInstruction}
-                disabled={!instructionInput.trim() || isProcessing}
-                className="w-7 h-7 flex items-center justify-center bg-sky-500 text-white rounded disabled:opacity-30"
-              >
-                {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Instruction Log */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="px-3 py-1.5 border-b border-white/5 flex items-center justify-between sticky top-0 bg-zinc-950">
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Instructions</span>
-              <span className="text-[10px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} applied</span>
-            </div>
-            {instructionLog.length === 0 ? (
-              <div className="flex items-center justify-center h-20 text-white/20 text-xs">
-                Instructions appear here
+        {/* Bottom: Controls + Log Panel */}
+        <div className="flex-1 flex gap-px bg-white/5 overflow-hidden">
+          {/* Manager AI + Templates */}
+          <div className="w-72 bg-zinc-950 flex flex-col border-r border-white/5">
+            <div className="px-3 py-2 border-b border-white/5">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] uppercase tracking-wider text-white/40">Manager AI</span>
+                <span className="text-[10px] text-sky-400">{modelName}</span>
               </div>
-            ) : (
-              <div className="divide-y divide-white/5">
-                {instructionLog.map(entry => (
-                  <div key={entry.id} className="px-3 py-2 hover:bg-white/[0.02]">
-                    <div className="flex items-start gap-2">
-                      <div className={`mt-0.5 ${entry.status === 'applied' ? 'text-emerald-400' : entry.status === 'pending' ? 'text-amber-400' : 'text-red-400'}`}>
-                        {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> : entry.status === 'pending' ? <Clock className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-xs text-white/80">{entry.input}</span>
-                          <span className="text-[10px] text-white/30">{entry.minute}&apos;</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                            entry.category === 'pressing' ? 'bg-orange-500/20 text-orange-300' :
-                            entry.category === 'possession' ? 'bg-blue-500/20 text-blue-300' :
-                            entry.category === 'formation' ? 'bg-purple-500/20 text-purple-300' :
-                            'bg-white/10 text-white/40'
-                          }`}>{entry.category}</span>
-                          <span className={`text-[9px] ${entry.confidence >= 0.8 ? 'text-emerald-400' : entry.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
-                            {Math.round(entry.confidence * 100)}%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="flex flex-wrap gap-1 mb-2">
+                {GAME_MODEL_TEMPLATES.map(t => (
+                  <button
+                    key={t.id}
+                    onClick={() => handleTemplateSelect(t.id)}
+                    className={`px-2 py-1 rounded text-[9px] transition-all ${
+                      selectedTemplate === t.id ? 'bg-sky-500 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
+                    }`}
+                  >
+                    {t.name}
+                  </button>
                 ))}
               </div>
-            )}
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  value={instructionInput}
+                  onChange={(e) => setInstructionInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendInstruction()}
+                  placeholder="Press high..."
+                  className="flex-1 bg-white/5 border border-white/10 rounded px-2 py-1.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-white/20"
+                  disabled={isProcessing}
+                />
+                <button
+                  onClick={toggleRecording}
+                  className={`w-7 h-7 flex items-center justify-center rounded ${isRecording ? 'bg-red-500 text-white' : 'bg-white/5 text-white/40'}`}
+                >
+                  {isRecording ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
+                </button>
+                <button
+                  onClick={handleSendInstruction}
+                  disabled={!instructionInput.trim() || isProcessing}
+                  className="w-7 h-7 flex items-center justify-center bg-sky-500 text-white rounded disabled:opacity-30"
+                >
+                  {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
+                </button>
+              </div>
+            </div>
+            {/* Quick Stats */}
+            <div className="px-3 py-2 border-b border-white/5 grid grid-cols-3 gap-2 text-center text-[10px]">
+              <div>
+                <div className="text-white/30">xG</div>
+                <div><span className="text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</span> - <span className="text-red-400">{matchStats?.xG.away.toFixed(1) ?? '0.0'}</span></div>
+              </div>
+              <div>
+                <div className="text-white/30">Shots</div>
+                <div><span className="text-sky-400">{matchStats?.shots.home ?? 0}</span> - <span className="text-red-400">{matchStats?.shots.away ?? 0}</span></div>
+              </div>
+              <div>
+                <div className="text-white/30">Coherence</div>
+                <div className={overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}>{overallCoherence}%</div>
+              </div>
+            </div>
           </div>
 
-          {/* Stats Footer */}
-          <div className="flex-shrink-0 p-3 border-t border-white/5 bg-black/30">
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <div>
-                <div className="text-[10px] text-white/30 mb-0.5">xG</div>
-                <div className="text-xs">
-                  <span className="text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                  <span className="text-white/20 mx-1">-</span>
-                  <span className="text-red-400">{matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+          {/* Instruction Log Panel */}
+          <div className="flex-1 bg-zinc-950 flex flex-col overflow-hidden">
+            <div className="px-4 py-2 border-b border-white/5 flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/40">Instruction Log</span>
+              <span className="text-[10px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} applied</span>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              {instructionLog.length === 0 ? (
+                <div className="flex items-center justify-center h-full text-white/20 text-xs">
+                  Instructions will appear here when you give commands
                 </div>
-              </div>
-              <div>
-                <div className="text-[10px] text-white/30 mb-0.5">Shots</div>
-                <div className="text-xs">
-                  <span className="text-sky-400">{matchStats?.shots.home ?? 0}</span>
-                  <span className="text-white/20 mx-1">-</span>
-                  <span className="text-red-400">{matchStats?.shots.away ?? 0}</span>
+              ) : (
+                <div className="divide-y divide-white/5">
+                  {instructionLog.map(entry => (
+                    <div key={entry.id} className="px-4 py-2 hover:bg-white/[0.02] flex items-center gap-3">
+                      <div className={`${entry.status === 'applied' ? 'text-emerald-400' : entry.status === 'pending' ? 'text-amber-400' : 'text-red-400'}`}>
+                        {entry.status === 'applied' ? <CheckCircle2 className="w-4 h-4" /> : entry.status === 'pending' ? <Clock className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-sm text-white/80">{entry.input}</span>
+                      </div>
+                      <span className={`text-[10px] px-2 py-0.5 rounded ${
+                        entry.category === 'pressing' ? 'bg-orange-500/20 text-orange-300' :
+                        entry.category === 'possession' ? 'bg-blue-500/20 text-blue-300' :
+                        entry.category === 'formation' ? 'bg-purple-500/20 text-purple-300' :
+                        'bg-white/10 text-white/40'
+                      }`}>{entry.category}</span>
+                      <span className={`text-xs ${entry.confidence >= 0.8 ? 'text-emerald-400' : entry.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
+                        {Math.round(entry.confidence * 100)}%
+                      </span>
+                      <span className="text-[10px] text-white/30">{entry.minute}&apos;</span>
+                    </div>
+                  ))}
                 </div>
-              </div>
-              <div>
-                <div className="text-[10px] text-white/30 mb-0.5">Fatigue</div>
-                <div className="text-xs">
-                  <span className={`${getTeamFatigue(fatigueData.home) > 50 ? 'text-amber-400' : 'text-emerald-400'}`}>
-                    {getTeamFatigue(fatigueData.home).toFixed(0)}%
-                  </span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
