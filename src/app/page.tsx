@@ -515,6 +515,48 @@ export default function Home() {
     setIsProcessing(false);
   }, [instructionInput, isProcessing, matchState?.minute]);
 
+  // Handle pressing trigger button clicks
+  const handleTriggerPress = useCallback((triggerId: string, label: string) => {
+    if (!gameModelManagerRef.current || isProcessing) return;
+    const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
+
+    // Map trigger IDs to instructions
+    const triggerInstructions: Record<string, string> = {
+      'high_press': 'Press high immediately',
+      'counter_press': 'Counter press on loss',
+      'press_trap_sideline': 'Trap on the sideline',
+      'press_trap_corner': 'Force to the corner',
+      'mid_block': 'Hold mid block',
+      'low_block': 'Drop into low block',
+      'man_mark': 'Man mark their playmaker',
+      'zonal': 'Switch to zonal marking',
+      'drop_deep': 'Drop deep and compact',
+      'hold_line': 'Hold the defensive line',
+      'step_up': 'Step up and squeeze',
+    };
+
+    const instruction = triggerInstructions[triggerId] || label;
+
+    // Add to log immediately with 'applied' status for quick UX
+    const entry: InstructionLogEntry = {
+      id: `trigger-${Date.now()}`,
+      timestamp: new Date(),
+      minute,
+      input: label,
+      category: 'pressing',
+      confidence: 0.95, // High confidence for direct triggers
+      status: 'applied',
+      affectedPlayers: [],
+      effect: 'Triggered',
+    };
+    setInstructionLog(prev => [entry, ...prev].slice(0, 20));
+
+    // Process through game model manager in background
+    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
+      // Silently handle errors for triggers
+    });
+  }, [isProcessing, matchState?.minute]);
+
   const handleTemplateSelect = useCallback((templateId: string) => {
     if (!gameModelManagerRef.current) return;
     try {
@@ -674,115 +716,133 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Manager AI Controls */}
-          <div className="flex-shrink-0 px-3 py-3 border-b border-white/5">
+          {/* Markov Chain Analysis */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
+                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
+              }`}>
+                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
+              </span>
+            </div>
+            <div className="text-[10px] text-white/50 mb-1.5 truncate">
+              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
+            </div>
+            {patternRecognitionData.markov?.predictedNext?.home && (
+              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
+                <Zap className="w-3 h-3 text-purple-400" />
+                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Pressing Triggers Grid */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Manager AI</span>
-              <span className="text-[10px] text-sky-400 font-medium">{modelName}</span>
+              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
+              <Target className="w-3 h-3 text-orange-400/50" />
             </div>
-            <div className="flex flex-wrap gap-1 mb-2">
-              {GAME_MODEL_TEMPLATES.map(t => (
-                <button
-                  key={t.id}
-                  onClick={() => handleTemplateSelect(t.id)}
-                  className={`px-2 py-1 rounded text-[9px] font-medium transition-all ${
-                    selectedTemplate === t.id ? 'bg-sky-500 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
-                  }`}
-                >
-                  {t.name}
-                </button>
-              ))}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <input
-                type="text"
-                value={instructionInput}
-                onChange={(e) => setInstructionInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSendInstruction()}
-                placeholder="Press high, drop deeper..."
-                className="flex-1 bg-black/30 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-sky-500/50"
-                disabled={isProcessing}
-              />
-              <button
-                onClick={toggleRecording}
-                className={`w-7 h-7 flex items-center justify-center rounded transition-all ${isRecording ? 'bg-red-500 text-white' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
-              >
-                {isRecording ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
-              </button>
-              <button
-                onClick={handleSendInstruction}
-                disabled={!instructionInput.trim() || isProcessing}
-                className="w-7 h-7 flex items-center justify-center bg-sky-500 text-white rounded disabled:opacity-30 hover:bg-sky-400 transition-all"
-              >
-                {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
-              </button>
+            <div className="grid grid-cols-2 gap-1">
+              {[
+                { id: 'high_press', label: 'High Press', icon: '⬆️' },
+                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
+                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
+                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
+                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
+                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
+                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
+                { id: 'zonal', label: 'Zonal', icon: '🔲' },
+              ].map(trigger => {
+                const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
+                return (
+                  <button
+                    key={trigger.id}
+                    onClick={() => handleTriggerPress(trigger.id, trigger.label)}
+                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
+                      isMarkovSuggested
+                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
+                        : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
+                    }`}
+                  >
+                    <span className="mr-1">{trigger.icon}</span>
+                    {trigger.label}
+                    {isMarkovSuggested && (
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Quick Stats Row */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-3 gap-2 text-center">
-            <div className="bg-black/20 rounded p-1.5">
-              <div className="text-[9px] text-white/40">Shots</div>
-              <div className="text-xs font-medium">
-                <span className="text-sky-400">{matchStats?.shots.home ?? 0}</span>
-                <span className="text-white/20 mx-1">-</span>
-                <span className="text-red-400">{matchStats?.shots.away ?? 0}</span>
-              </div>
+          {/* Defensive Shape */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
             </div>
-            <div className="bg-black/20 rounded p-1.5">
-              <div className="text-[9px] text-white/40">On Target</div>
-              <div className="text-xs font-medium">
-                <span className="text-sky-400">{matchStats?.shotsOnTarget.home ?? 0}</span>
-                <span className="text-white/20 mx-1">-</span>
-                <span className="text-red-400">{matchStats?.shotsOnTarget.away ?? 0}</span>
-              </div>
+            <div className="grid grid-cols-3 gap-1">
+              {[
+                { id: 'drop_deep', label: 'Drop' },
+                { id: 'hold_line', label: 'Hold' },
+                { id: 'step_up', label: 'Step Up' },
+              ].map(shape => (
+                <button
+                  key={shape.id}
+                  onClick={() => handleTriggerPress(shape.id, shape.label)}
+                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
+                >
+                  {shape.label}
+                </button>
+              ))}
             </div>
-            <div className="bg-black/20 rounded p-1.5">
-              <div className="text-[9px] text-white/40">Coherence</div>
-              <div className={`text-xs font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+          </div>
+
+          {/* Live Stats */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[8px] text-white/40">xG</div>
+              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[8px] text-white/40">Shots</div>
+              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[8px] text-white/40">Pass%</div>
+              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[8px] text-white/40">Coh</div>
+              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
                 {overallCoherence}%
               </div>
             </div>
           </div>
 
-          {/* Instruction Log - Scrollable */}
+          {/* Trigger Execution Log */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-2 flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Instruction Log</span>
-              <span className="text-[10px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} applied</span>
+            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
+              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
+              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
             </div>
-            <div className="flex-1 overflow-y-auto px-3 pb-2 space-y-1.5">
+            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
               {instructionLog.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-white/30 py-8">
-                  <span className="text-xs mb-1">No instructions yet</span>
-                  <span className="text-[10px] text-white/20">Type commands above</span>
+                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
+                  Click triggers above
                 </div>
               ) : (
                 instructionLog.map(entry => (
-                  <div key={entry.id} className="bg-black/20 rounded p-2 hover:bg-black/30 transition-colors">
-                    <div className="flex items-start gap-2">
-                      <div className={`mt-0.5 ${entry.status === 'applied' ? 'text-emerald-400' : entry.status === 'pending' ? 'text-amber-400' : 'text-red-400'}`}>
-                        {entry.status === 'applied' ? <CheckCircle2 className="w-3.5 h-3.5" /> : entry.status === 'pending' ? <Clock className="w-3.5 h-3.5" /> : <XCircle className="w-3.5 h-3.5" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-white font-medium truncate">{entry.input}</span>
-                          <span className="text-[9px] text-white/30 ml-1">{entry.minute}&apos;</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className={`text-[8px] px-1.5 py-0.5 rounded ${
-                            entry.category === 'pressing' ? 'bg-orange-500/20 text-orange-300' :
-                            entry.category === 'possession' ? 'bg-blue-500/20 text-blue-300' :
-                            entry.category === 'formation' ? 'bg-purple-500/20 text-purple-300' :
-                            entry.category === 'transition' ? 'bg-green-500/20 text-green-300' :
-                            'bg-white/10 text-white/50'
-                          }`}>{entry.category}</span>
-                          <span className={`text-[9px] ${entry.confidence >= 0.8 ? 'text-emerald-400' : entry.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
-                            {Math.round(entry.confidence * 100)}%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
+                    entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
+                    entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
+                    'bg-red-500/10 text-red-300'
+                  }`}>
+                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
+                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
+                     <XCircle className="w-3 h-3" />}
+                    <span className="flex-1 truncate">{entry.input}</span>
+                    <span className="text-white/30">{entry.minute}&apos;</span>
                   </div>
                 ))
               )}
