@@ -597,15 +597,21 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content - Vertical Stack */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top: Pitches Side by Side - Compact */}
-        <div className="flex-shrink-0 h-[35%] flex gap-1 p-2 bg-zinc-950">
-          {/* Organic Match */}
-          <div className="flex-1 bg-zinc-900 rounded-lg overflow-hidden flex flex-col">
-            <div className="flex-shrink-0 px-2 py-1 bg-black/30 flex items-center justify-between">
-              <span className="text-[9px] uppercase tracking-wider text-emerald-400">Live</span>
-              <span className="text-[9px] text-white/40">{matchStats?.possession.home ?? 50}%</span>
+      {/* Main Content - Horizontal Layout */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left: Main Live Match - Takes majority of space */}
+        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
+          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
+                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
+              </div>
+              <div className="flex items-center gap-4 text-xs">
+                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
+                <span className="text-white/20">|</span>
+                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+              </div>
             </div>
             <div className="flex-1 overflow-hidden">
               <PitchView
@@ -625,167 +631,160 @@ export default function Home() {
               />
             </div>
           </div>
-
-          {/* Digital Twin - Full Model Adherence */}
-          <div className="flex-1 bg-zinc-900 rounded-lg overflow-hidden flex flex-col border border-sky-500/20">
-            <div className="flex-shrink-0 px-2 py-1 bg-black/30 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-[9px] uppercase tracking-wider text-sky-400">Twin</span>
-                <span className="text-[8px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
-              </div>
-              <span className={`text-[9px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {twinPositions.filter(p => p.isCoherent).length}/11
-              </span>
-            </div>
-            <div className="flex-1 bg-gradient-to-b from-emerald-950/20 to-zinc-900 relative overflow-hidden">
-              <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.2" />
-                <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
-                <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
-                <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.2" />
-                {idealPositions.map((pos, idx) => (
-                  <g key={`ideal-${idx}`}>
-                    <circle cx={pos.x} cy={pos.y * 0.65} r="2" fill="#38bdf8" opacity="0.9" />
-                    <text x={pos.x} y={pos.y * 0.65 + 4} textAnchor="middle" fontSize="1.8" fill="#38bdf8" opacity="0.6">{pos.role}</text>
-                  </g>
-                ))}
-                {[
-                  { x: 95, y: 32.5 },
-                  { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                  { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                  { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                ].map((pos, idx) => (
-                  <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="1.8" fill="#ef4444" opacity="0.7" />
-                ))}
-                <circle cx="45" cy="32.5" r="1" fill="white" />
-              </svg>
-            </div>
-          </div>
         </div>
 
-        {/* Bottom: Controls + Log Panel - Takes most space */}
-        <div className="flex-1 flex gap-2 p-2 bg-zinc-950 overflow-hidden">
-          {/* Manager AI + Templates */}
-          <div className="w-80 bg-zinc-900 rounded-lg flex flex-col overflow-hidden">
-            <div className="px-4 py-3 border-b border-white/5">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs uppercase tracking-wider text-white/50 font-medium">Manager AI</span>
-                <span className="text-xs text-sky-400 font-medium">{modelName}</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {GAME_MODEL_TEMPLATES.map(t => (
-                  <button
-                    key={t.id}
-                    onClick={() => handleTemplateSelect(t.id)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-medium transition-all ${
-                      selectedTemplate === t.id ? 'bg-sky-500 text-white' : 'bg-white/5 text-white/60 hover:bg-white/10'
-                    }`}
-                  >
-                    {t.name}
-                  </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={instructionInput}
-                  onChange={(e) => setInstructionInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendInstruction()}
-                  placeholder="Press high, drop deeper, play wide..."
-                  className="flex-1 bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-sky-500/50"
-                  disabled={isProcessing}
-                />
-                <button
-                  onClick={toggleRecording}
-                  className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all ${isRecording ? 'bg-red-500 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'}`}
-                >
-                  {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                </button>
-                <button
-                  onClick={handleSendInstruction}
-                  disabled={!instructionInput.trim() || isProcessing}
-                  className="w-9 h-9 flex items-center justify-center bg-sky-500 text-white rounded-lg disabled:opacity-30 hover:bg-sky-400 transition-all"
-                >
-                  {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-            {/* Quick Stats */}
-            <div className="px-4 py-3 grid grid-cols-3 gap-3 text-center">
-              <div className="bg-black/20 rounded-lg p-2">
-                <div className="text-[10px] text-white/40 mb-1">xG</div>
-                <div className="text-sm font-medium">
-                  <span className="text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                  <span className="text-white/20 mx-1">-</span>
-                  <span className="text-red-400">{matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+        {/* Right Sidebar: Twin + Controls + Log */}
+        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
+          {/* Digital Twin Mini View */}
+          <div className="flex-shrink-0 h-44 border-b border-white/5">
+            <div className="h-full flex flex-col">
+              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
+                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
                 </div>
+                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                  {twinPositions.filter(p => p.isCoherent).length}/11 coherent
+                </span>
               </div>
-              <div className="bg-black/20 rounded-lg p-2">
-                <div className="text-[10px] text-white/40 mb-1">Shots</div>
-                <div className="text-sm font-medium">
-                  <span className="text-sky-400">{matchStats?.shots.home ?? 0}</span>
-                  <span className="text-white/20 mx-1">-</span>
-                  <span className="text-red-400">{matchStats?.shots.away ?? 0}</span>
-                </div>
-              </div>
-              <div className="bg-black/20 rounded-lg p-2">
-                <div className="text-[10px] text-white/40 mb-1">Coherence</div>
-                <div className={`text-sm font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                  {overallCoherence}%
-                </div>
+              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
+                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
+                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
+                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
+                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
+                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
+                  {idealPositions.map((pos, idx) => (
+                    <g key={`ideal-${idx}`}>
+                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
+                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
+                    </g>
+                  ))}
+                  {[
+                    { x: 95, y: 32.5 },
+                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
+                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
+                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
+                  ].map((pos, idx) => (
+                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
+                  ))}
+                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
+                </svg>
               </div>
             </div>
           </div>
 
-          {/* Instruction Log Panel */}
-          <div className="flex-1 bg-zinc-900 rounded-lg flex flex-col overflow-hidden">
-            <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
-              <span className="text-xs uppercase tracking-wider text-white/50 font-medium">Instruction Log</span>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} applied</span>
-                <span className="text-xs text-amber-400">{instructionLog.filter(l => l.status === 'pending').length} pending</span>
+          {/* Manager AI Controls */}
+          <div className="flex-shrink-0 px-3 py-3 border-b border-white/5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] uppercase tracking-wider text-white/40">Manager AI</span>
+              <span className="text-[10px] text-sky-400 font-medium">{modelName}</span>
+            </div>
+            <div className="flex flex-wrap gap-1 mb-2">
+              {GAME_MODEL_TEMPLATES.map(t => (
+                <button
+                  key={t.id}
+                  onClick={() => handleTemplateSelect(t.id)}
+                  className={`px-2 py-1 rounded text-[9px] font-medium transition-all ${
+                    selectedTemplate === t.id ? 'bg-sky-500 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
+                  }`}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <input
+                type="text"
+                value={instructionInput}
+                onChange={(e) => setInstructionInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendInstruction()}
+                placeholder="Press high, drop deeper..."
+                className="flex-1 bg-black/30 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-sky-500/50"
+                disabled={isProcessing}
+              />
+              <button
+                onClick={toggleRecording}
+                className={`w-7 h-7 flex items-center justify-center rounded transition-all ${isRecording ? 'bg-red-500 text-white' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
+              >
+                {isRecording ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
+              </button>
+              <button
+                onClick={handleSendInstruction}
+                disabled={!instructionInput.trim() || isProcessing}
+                className="w-7 h-7 flex items-center justify-center bg-sky-500 text-white rounded disabled:opacity-30 hover:bg-sky-400 transition-all"
+              >
+                {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Stats Row */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-3 gap-2 text-center">
+            <div className="bg-black/20 rounded p-1.5">
+              <div className="text-[9px] text-white/40">Shots</div>
+              <div className="text-xs font-medium">
+                <span className="text-sky-400">{matchStats?.shots.home ?? 0}</span>
+                <span className="text-white/20 mx-1">-</span>
+                <span className="text-red-400">{matchStats?.shots.away ?? 0}</span>
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-2">
+            <div className="bg-black/20 rounded p-1.5">
+              <div className="text-[9px] text-white/40">On Target</div>
+              <div className="text-xs font-medium">
+                <span className="text-sky-400">{matchStats?.shotsOnTarget.home ?? 0}</span>
+                <span className="text-white/20 mx-1">-</span>
+                <span className="text-red-400">{matchStats?.shotsOnTarget.away ?? 0}</span>
+              </div>
+            </div>
+            <div className="bg-black/20 rounded p-1.5">
+              <div className="text-[9px] text-white/40">Coherence</div>
+              <div className={`text-xs font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                {overallCoherence}%
+              </div>
+            </div>
+          </div>
+
+          {/* Instruction Log - Scrollable */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="flex-shrink-0 px-3 py-2 flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/40">Instruction Log</span>
+              <span className="text-[10px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} applied</span>
+            </div>
+            <div className="flex-1 overflow-y-auto px-3 pb-2 space-y-1.5">
               {instructionLog.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-white/30">
-                  <span className="text-sm mb-2">No instructions yet</span>
-                  <span className="text-xs text-white/20">Type commands like &quot;Press high&quot; or &quot;Play wide&quot;</span>
+                <div className="flex flex-col items-center justify-center h-full text-white/30 py-8">
+                  <span className="text-xs mb-1">No instructions yet</span>
+                  <span className="text-[10px] text-white/20">Type commands above</span>
                 </div>
               ) : (
-                <div className="space-y-2">
-                  {instructionLog.map(entry => (
-                    <div key={entry.id} className="bg-black/20 rounded-lg p-3 hover:bg-black/30 transition-colors">
-                      <div className="flex items-start gap-3">
-                        <div className={`mt-0.5 ${entry.status === 'applied' ? 'text-emerald-400' : entry.status === 'pending' ? 'text-amber-400' : 'text-red-400'}`}>
-                          {entry.status === 'applied' ? <CheckCircle2 className="w-5 h-5" /> : entry.status === 'pending' ? <Clock className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+                instructionLog.map(entry => (
+                  <div key={entry.id} className="bg-black/20 rounded p-2 hover:bg-black/30 transition-colors">
+                    <div className="flex items-start gap-2">
+                      <div className={`mt-0.5 ${entry.status === 'applied' ? 'text-emerald-400' : entry.status === 'pending' ? 'text-amber-400' : 'text-red-400'}`}>
+                        {entry.status === 'applied' ? <CheckCircle2 className="w-3.5 h-3.5" /> : entry.status === 'pending' ? <Clock className="w-3.5 h-3.5" /> : <XCircle className="w-3.5 h-3.5" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-white font-medium truncate">{entry.input}</span>
+                          <span className="text-[9px] text-white/30 ml-1">{entry.minute}&apos;</span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm text-white font-medium">{entry.input}</span>
-                            <span className="text-xs text-white/30 ml-2">{entry.minute}&apos;</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                              entry.category === 'pressing' ? 'bg-orange-500/20 text-orange-300' :
-                              entry.category === 'possession' ? 'bg-blue-500/20 text-blue-300' :
-                              entry.category === 'formation' ? 'bg-purple-500/20 text-purple-300' :
-                              entry.category === 'transition' ? 'bg-green-500/20 text-green-300' :
-                              'bg-white/10 text-white/50'
-                            }`}>{entry.category}</span>
-                            <span className={`text-xs font-medium ${entry.confidence >= 0.8 ? 'text-emerald-400' : entry.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
-                              {Math.round(entry.confidence * 100)}% conf
-                            </span>
-                            {entry.affectedPlayers.length > 0 && (
-                              <span className="text-xs text-white/30">{entry.affectedPlayers.length} players</span>
-                            )}
-                          </div>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className={`text-[8px] px-1.5 py-0.5 rounded ${
+                            entry.category === 'pressing' ? 'bg-orange-500/20 text-orange-300' :
+                            entry.category === 'possession' ? 'bg-blue-500/20 text-blue-300' :
+                            entry.category === 'formation' ? 'bg-purple-500/20 text-purple-300' :
+                            entry.category === 'transition' ? 'bg-green-500/20 text-green-300' :
+                            'bg-white/10 text-white/50'
+                          }`}>{entry.category}</span>
+                          <span className={`text-[9px] ${entry.confidence >= 0.8 ? 'text-emerald-400' : entry.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
+                            {Math.round(entry.confidence * 100)}%
+                          </span>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))
               )}
             </div>
           </div>
