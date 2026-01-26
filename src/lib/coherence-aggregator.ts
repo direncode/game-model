@@ -18,6 +18,7 @@ import {
   RealtimeAnalyticsBridge,
   RealTimeAnalyticsData,
   PlaceholderAnalyticsProvider,
+  ProviderStatus,
   createAnalyticsBridge,
   createPlaceholderProvider,
 } from './realtime-analytics-bridge';
@@ -212,7 +213,7 @@ export interface CoherenceRecommendation {
 
 export interface SystemHealthReport {
   status: 'healthy' | 'degraded' | 'critical';
-  analyticsStatus: Map<string, 'connected' | 'disconnected' | 'error'>;
+  analyticsStatus: Map<string, ProviderStatus>;
   dataQuality: number;
   latency: number;
   lastUpdate: Date;
