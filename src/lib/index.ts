@@ -1,7 +1,75 @@
-// Football Analytics Platform - Library Exports
-// Central export point for advanced game model, coherence, and analytics systems
+/**
+ * ============================================================================
+ * FOOTBALL ANALYTICS PLATFORM - GAME MODEL COHERENCE SYSTEM
+ * ============================================================================
+ *
+ * This module provides a market-leading coherence scoring system that integrates
+ * game models with real-time analytics to provide comprehensive tactical analysis.
+ *
+ * QUICK START:
+ * ```typescript
+ * import {
+ *   createGameModelCoherenceSystem,
+ *   initializeCoherenceSystem
+ * } from '@/lib';
+ *
+ * // Option 1: Full control
+ * const system = createGameModelCoherenceSystem({ enablePredictiveScoring: true });
+ * await system.initialize(gameModel, digitalTwins);
+ * const result = await system.calculateCoherence(minute, score, playerData);
+ *
+ * // Option 2: Quick start
+ * const system = await initializeCoherenceSystem(gameModel, digitalTwins);
+ * const result = await system.calculateCoherence(minute, score, playerData);
+ * ```
+ *
+ * ============================================================================
+ */
 
-// ==================== Advanced Game Model System ====================
+// ============================================================================
+// PRIMARY EXPORT - GAME MODEL COHERENCE SYSTEM
+// ============================================================================
+
+export {
+  // Main system class
+  GameModelCoherenceSystem,
+
+  // Factory functions
+  createGameModelCoherenceSystem,
+  initializeCoherenceSystem,
+} from './game-model-coherence-system';
+
+export type {
+  // Configuration
+  GameModelCoherenceConfig,
+
+  // Core result types
+  CoherenceResult,
+  DimensionalBreakdown,
+  DimensionInfo,
+  DimensionSummary,
+
+  // Player analysis
+  PlayerAnalysis,
+  PlayerRiskInfo,
+
+  // Temporal & predictive
+  TrendInfo,
+  PredictionInfo,
+  ScenarioInfo,
+  MomentumInfo,
+
+  // Bayesian
+  BayesianInfo,
+
+  // Phase analysis
+  PhaseAnalysis,
+} from './game-model-coherence-system';
+
+// ============================================================================
+// ADVANCED GAME MODEL ENGINE
+// ============================================================================
+
 export {
   AdvancedGameModelEngine,
   createAdvancedGameModelEngine,
@@ -33,7 +101,10 @@ export type {
   ResolvedGameModel,
 } from './advanced-game-model';
 
-// ==================== Real-time Analytics Bridge ====================
+// ============================================================================
+// REAL-TIME ANALYTICS BRIDGE
+// ============================================================================
+
 export {
   RealtimeAnalyticsBridge,
   PlaceholderAnalyticsProvider,
@@ -60,7 +131,10 @@ export type {
   BridgeConfig,
 } from './realtime-analytics-bridge';
 
-// ==================== Composite Scoring Engine ====================
+// ============================================================================
+// COMPOSITE SCORING ENGINE
+// ============================================================================
+
 export {
   CompositeScoringEngine,
   createCompositeScoringEngine,
@@ -88,7 +162,10 @@ export type {
   Anomaly,
 } from './composite-scoring-engine';
 
-// ==================== Coherence Aggregator ====================
+// ============================================================================
+// COHERENCE AGGREGATOR
+// ============================================================================
+
 export {
   CoherenceAggregator,
   createCoherenceAggregator,
