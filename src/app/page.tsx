@@ -46,6 +46,11 @@ import {
   Target,
   GitCompare,
   Users,
+  Activity,
+  TrendingUp,
+  AlertTriangle,
+  Brain,
+  Layers,
 } from 'lucide-react';
 import {
   GameModelManager,
@@ -54,6 +59,13 @@ import {
   type StaffMember,
   GAME_MODEL_TEMPLATES,
 } from '@/lib/game-model-manager';
+import {
+  GameModelCoherenceSystem,
+  createGameModelCoherenceSystem,
+  type CoherenceResult,
+  type GameModelCoherenceConfig,
+} from '@/lib';
+import { CoherenceSystemDashboard, type CoherenceDisplayData } from '@/components/coherence';
 
 // Pattern Recognition Data Types
 interface PatternRecognitionData {
@@ -174,6 +186,11 @@ export default function Home() {
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
 
+  // Coherence System State
+  const coherenceSystemRef = useRef<GameModelCoherenceSystem | null>(null);
+  const [coherenceData, setCoherenceData] = useState<CoherenceDisplayData | null>(null);
+  const [coherenceTab, setCoherenceTab] = useState<'dimensions' | 'players' | 'predictions' | 'alerts'>('dimensions');
+
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
     const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
@@ -266,6 +283,23 @@ export default function Home() {
       ];
       const session = gameModelManagerRef.current.startSession(manager, staff);
       setManagerSession(session);
+    }
+
+    // Initialize Coherence System
+    if (!coherenceSystemRef.current) {
+      const config: GameModelCoherenceConfig = {
+        enablePredictiveScoring: true,
+        enableBayesianInference: true,
+        enableEnsembleScoring: true,
+        enableTemporalAnalysis: true,
+        updateIntervalMs: 1000,
+        alertThresholds: {
+          criticalCoherence: 40,
+          warningCoherence: 60,
+          playerRiskThreshold: 0.7,
+        },
+      };
+      coherenceSystemRef.current = createGameModelCoherenceSystem(config);
     }
   }, [setPlayers, setTwin]);
 
@@ -413,6 +447,51 @@ export default function Home() {
           injuryRisks: allInjuryRisks,
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
+
+        // Calculate Advanced Coherence Scores
+        if (coherenceSystemRef.current) {
+          const playerData = players.slice(0, 11).map((player, index) => {
+            const metrics = liveData.get(player.id);
+            const ideal = idealPositions[index];
+            return {
+              id: player.id,
+              name: player.name,
+              position: player.position,
+              actualPosition: { x: metrics?.position?.x ?? ideal.x, y: metrics?.position?.y ?? ideal.y },
+              idealPosition: { x: ideal.x, y: ideal.y },
+              metrics: {
+                speed: metrics?.currentSpeed ?? 0,
+                distance: metrics?.totalDistance ?? 0,
+                sprints: metrics?.sprintDistance ?? 0,
+                heartRate: metrics?.heartRate?.current ?? 120,
+              },
+            };
+          });
+
+          const coherenceResult = coherenceSystemRef.current.calculateCoherenceSync(
+            currentMinute,
+            { home: state.homeScore, away: state.awayScore },
+            playerData
+          );
+
+          // Convert to display data
+          const displayData: CoherenceDisplayData = {
+            overallScore: coherenceResult.overallScore,
+            confidence: coherenceResult.confidence,
+            trend: coherenceResult.trend,
+            dimensions: coherenceResult.dimensions,
+            playerAnalysis: coherenceResult.playerAnalysis,
+            predictions: coherenceResult.predictions,
+            momentum: coherenceResult.momentum,
+            bayesian: coherenceResult.bayesian,
+            phase: coherenceResult.phase,
+            alerts: coherenceResult.alerts || [],
+            recommendations: coherenceResult.recommendations || [],
+            timestamp: coherenceResult.timestamp,
+          };
+
+          setCoherenceData(displayData);
+        }
 
         if (state.phase === 'full_time') {
           setIsSimulating(false);
@@ -639,11 +718,12 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
-        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
-          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+      {/* Main Content - Split Layout with Equal Pitch Views */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Row: Live Match + Digital Twin (Equal Size) */}
+        <div className="flex-1 flex gap-2 p-2 min-h-0">
+          {/* Left: Live Match */}
+          <div className="flex-1 flex flex-col bg-zinc-900 rounded-xl overflow-hidden">
             <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
@@ -673,179 +753,500 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
 
-        {/* Right Sidebar: Twin + Controls + Log */}
-        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-44 border-b border-white/5">
-            <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
-                </div>
-                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+          {/* Right: Digital Twin (Same Size as Live Match) */}
+          <div className="flex-1 flex flex-col bg-zinc-900 rounded-xl overflow-hidden">
+            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xs uppercase tracking-wider text-sky-400 font-medium">Digital Twin</span>
+                <span className="text-[10px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className={`text-xs font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
                   {twinPositions.filter(p => p.isCoherent).length}/11 coherent
                 </span>
+                <span className={`text-xs px-2 py-0.5 rounded ${
+                  (coherenceData?.overallScore ?? 0) >= 70 ? 'bg-emerald-500/20 text-emerald-400' :
+                  (coherenceData?.overallScore ?? 0) >= 50 ? 'bg-amber-500/20 text-amber-400' :
+                  'bg-red-500/20 text-red-400'
+                }`}>
+                  {coherenceData?.overallScore?.toFixed(0) ?? overallCoherence}% Score
+                </span>
               </div>
-              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
-                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  {idealPositions.map((pos, idx) => (
-                    <g key={`ideal-${idx}`}>
-                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
+            </div>
+            <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
+              <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                {/* Pitch Background */}
+                <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
+                {/* Pitch Lines */}
+                <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.5" />
+                <circle cx="50" cy="32.5" r="10" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                <rect x="0" y="15" width="16" height="35" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                <rect x="84" y="15" width="16" height="35" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                <rect x="0" y="22" width="6" height="21" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                <rect x="94" y="22" width="6" height="21" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                <rect x="0" y="0" width="100" height="65" fill="none" stroke="#1a3a1a" strokeWidth="1" />
+
+                {/* Ideal Positions with connecting lines */}
+                {twinPositions.map((twin, idx) => {
+                  const idealY = idealPositions[idx].y * 0.65;
+                  const actualY = twin.actualY * 0.65;
+                  return (
+                    <g key={`twin-${idx}`}>
+                      {/* Deviation line */}
+                      <line
+                        x1={idealPositions[idx].x}
+                        y1={idealY}
+                        x2={twin.actualX}
+                        y2={actualY}
+                        stroke={twin.isCoherent ? '#22c55e' : '#ef4444'}
+                        strokeWidth="0.5"
+                        strokeDasharray={twin.isCoherent ? '0' : '1,1'}
+                        opacity="0.6"
+                      />
+                      {/* Ideal position (hollow) */}
+                      <circle
+                        cx={idealPositions[idx].x}
+                        cy={idealY}
+                        r="3"
+                        fill="none"
+                        stroke="#38bdf8"
+                        strokeWidth="0.5"
+                        strokeDasharray="2,1"
+                        opacity="0.5"
+                      />
+                      {/* Actual position (filled) */}
+                      <circle
+                        cx={twin.actualX}
+                        cy={actualY}
+                        r="3"
+                        fill={twin.isCoherent ? '#22c55e' : '#ef4444'}
+                        opacity="0.9"
+                      />
+                      {/* Player name */}
+                      <text
+                        x={twin.actualX}
+                        y={actualY + 5}
+                        textAnchor="middle"
+                        fontSize="2.5"
+                        fill="white"
+                        opacity="0.8"
+                      >
+                        {twin.name}
+                      </text>
+                      {/* Role label */}
+                      <text
+                        x={idealPositions[idx].x}
+                        y={idealY - 4}
+                        textAnchor="middle"
+                        fontSize="2"
+                        fill="#38bdf8"
+                        opacity="0.6"
+                      >
+                        {twin.role}
+                      </text>
                     </g>
-                  ))}
-                  {[
-                    { x: 95, y: 32.5 },
-                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                  ].map((pos, idx) => (
-                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
-                  ))}
-                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
-                </svg>
+                  );
+                })}
+
+                {/* Away Team (static reference) */}
+                {[
+                  { x: 95, y: 32.5 },
+                  { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
+                  { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
+                  { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
+                ].map((pos, idx) => (
+                  <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2.5" fill="#ef4444" opacity="0.5" />
+                ))}
+
+                {/* Ball */}
+                <circle cx={matchState?.ballPosition?.x ?? 50} cy={(matchState?.ballPosition?.y ?? 50) * 0.65} r="1.5" fill="white" />
+              </svg>
+
+              {/* Legend Overlay */}
+              <div className="absolute bottom-2 left-2 flex items-center gap-3 text-[8px] text-white/50">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full border border-sky-400 border-dashed" />
+                  <span>Ideal</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span>Coherent</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-red-500" />
+                  <span>Deviated</span>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Markov Chain Analysis */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
-              }`}>
-                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
-              </span>
-            </div>
-            <div className="text-[10px] text-white/50 mb-1.5 truncate">
-              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
-            </div>
-            {patternRecognitionData.markov?.predictedNext?.home && (
-              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
-                <Zap className="w-3 h-3 text-purple-400" />
-                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Pressing Triggers Grid */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <Target className="w-3 h-3 text-orange-400/50" />
-            </div>
-            <div className="grid grid-cols-2 gap-1">
-              {[
-                { id: 'high_press', label: 'High Press', icon: '⬆️' },
-                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
-                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
-                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
-                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
-                { id: 'zonal', label: 'Zonal', icon: '🔲' },
-              ].map(trigger => {
-                const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
-                return (
+        {/* Bottom Section: Coherence System Dashboard */}
+        <div className="flex-shrink-0 h-72 border-t border-white/10 bg-zinc-900/50">
+          <div className="h-full flex overflow-hidden">
+            {/* Coherence Dashboard - Main Content */}
+            <div className="flex-1 flex flex-col">
+              {/* Tab Navigation */}
+              <div className="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 bg-black/30 border-b border-white/5">
+                <span className="text-[10px] uppercase tracking-wider text-violet-400 font-medium mr-3">
+                  <Brain className="w-3 h-3 inline mr-1" />
+                  Coherence Engine
+                </span>
+                {[
+                  { id: 'dimensions', label: 'Dimensions', icon: Layers },
+                  { id: 'players', label: 'Players', icon: Users },
+                  { id: 'predictions', label: 'Predictions', icon: TrendingUp },
+                  { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
+                ].map(tab => (
                   <button
-                    key={trigger.id}
-                    onClick={() => handleTriggerPress(trigger.id, trigger.label)}
-                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
-                      isMarkovSuggested
-                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
-                        : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
+                    key={tab.id}
+                    onClick={() => setCoherenceTab(tab.id as typeof coherenceTab)}
+                    className={`px-2 py-1 rounded text-[10px] font-medium transition-all flex items-center gap-1 ${
+                      coherenceTab === tab.id
+                        ? 'bg-violet-500/20 text-violet-300'
+                        : 'text-white/50 hover:text-white/80 hover:bg-white/5'
                     }`}
                   >
-                    <span className="mr-1">{trigger.icon}</span>
-                    {trigger.label}
-                    {isMarkovSuggested && (
-                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                    <tab.icon className="w-3 h-3" />
+                    {tab.label}
+                    {tab.id === 'alerts' && (coherenceData?.alerts?.length ?? 0) > 0 && (
+                      <span className="ml-1 px-1 py-0.5 bg-red-500 text-white text-[8px] rounded-full">
+                        {coherenceData?.alerts?.length}
+                      </span>
                     )}
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                ))}
 
-          {/* Defensive Shape */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1">
-              {[
-                { id: 'drop_deep', label: 'Drop' },
-                { id: 'hold_line', label: 'Hold' },
-                { id: 'step_up', label: 'Step Up' },
-              ].map(shape => (
-                <button
-                  key={shape.id}
-                  onClick={() => handleTriggerPress(shape.id, shape.label)}
-                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
-                >
-                  {shape.label}
-                </button>
-              ))}
-            </div>
-          </div>
+                {/* Overall Score Display */}
+                <div className="ml-auto flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-white/40">Overall:</span>
+                    <span className={`text-sm font-bold ${
+                      (coherenceData?.overallScore ?? 0) >= 70 ? 'text-emerald-400' :
+                      (coherenceData?.overallScore ?? 0) >= 50 ? 'text-amber-400' :
+                      'text-red-400'
+                    }`}>
+                      {coherenceData?.overallScore?.toFixed(1) ?? '0.0'}%
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-white/40">Confidence:</span>
+                    <span className="text-sm text-sky-400">{((coherenceData?.confidence ?? 0) * 100).toFixed(0)}%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-white/40">Trend:</span>
+                    <span className={`text-sm ${
+                      coherenceData?.trend === 'improving' ? 'text-emerald-400' :
+                      coherenceData?.trend === 'declining' ? 'text-red-400' :
+                      'text-white/60'
+                    }`}>
+                      {coherenceData?.trend === 'improving' ? '↑' : coherenceData?.trend === 'declining' ? '↓' : '→'}
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-          {/* Live Stats */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">xG</div>
-              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Shots</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Pass%</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Coh</div>
-              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {overallCoherence}%
+              {/* Tab Content */}
+              <div className="flex-1 overflow-auto p-3">
+                {coherenceTab === 'dimensions' && (
+                  <div className="grid grid-cols-5 gap-2 h-full">
+                    {coherenceData?.dimensions?.breakdown?.map(dim => (
+                      <div key={dim.name} className="bg-black/30 rounded-lg p-2 flex flex-col">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-medium text-white/80">{dim.name}</span>
+                          <span className={`text-xs font-bold ${
+                            dim.score >= 70 ? 'text-emerald-400' :
+                            dim.score >= 50 ? 'text-amber-400' :
+                            'text-red-400'
+                          }`}>
+                            {dim.score.toFixed(0)}%
+                          </span>
+                        </div>
+                        <div className="flex-1 space-y-1 overflow-auto">
+                          {dim.subComponents?.slice(0, 4).map(sub => (
+                            <div key={sub.name} className="flex items-center gap-1">
+                              <div className="flex-1 h-1 bg-white/10 rounded overflow-hidden">
+                                <div
+                                  className={`h-full transition-all ${
+                                    sub.score >= 70 ? 'bg-emerald-500' :
+                                    sub.score >= 50 ? 'bg-amber-500' :
+                                    'bg-red-500'
+                                  }`}
+                                  style={{ width: `${sub.score}%` }}
+                                />
+                              </div>
+                              <span className="text-[8px] text-white/40 w-8 text-right">{sub.score.toFixed(0)}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="text-[8px] text-white/30 mt-1">w: {(dim.weight * 100).toFixed(0)}%</div>
+                      </div>
+                    )) ?? (
+                      <div className="col-span-5 flex items-center justify-center text-white/30 text-sm">
+                        Start match to see dimensional analysis
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {coherenceTab === 'players' && (
+                  <div className="grid grid-cols-6 gap-2 h-full overflow-auto">
+                    {coherenceData?.playerAnalysis?.map(player => (
+                      <div key={player.playerId} className={`bg-black/30 rounded-lg p-2 border-l-2 ${
+                        player.riskLevel === 'high' ? 'border-red-500' :
+                        player.riskLevel === 'medium' ? 'border-amber-500' :
+                        'border-emerald-500'
+                      }`}>
+                        <div className="text-[10px] font-medium text-white/80 truncate">{player.playerName}</div>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className={`text-lg font-bold ${
+                            player.coherenceScore >= 70 ? 'text-emerald-400' :
+                            player.coherenceScore >= 50 ? 'text-amber-400' :
+                            'text-red-400'
+                          }`}>
+                            {player.coherenceScore.toFixed(0)}
+                          </span>
+                          <span className={`text-[8px] px-1 rounded ${
+                            player.riskLevel === 'high' ? 'bg-red-500/20 text-red-400' :
+                            player.riskLevel === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                            'bg-emerald-500/20 text-emerald-400'
+                          }`}>
+                            {player.riskLevel}
+                          </span>
+                        </div>
+                        <div className="text-[8px] text-white/40 mt-1">
+                          Dev: {player.positionDeviation?.toFixed(1) ?? '0'}m
+                        </div>
+                      </div>
+                    )) ?? (
+                      <div className="col-span-6 flex items-center justify-center text-white/30 text-sm">
+                        Start match to see player analysis
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {coherenceTab === 'predictions' && (
+                  <div className="grid grid-cols-3 gap-3 h-full">
+                    {/* Temporal Predictions */}
+                    <div className="bg-black/30 rounded-lg p-2">
+                      <div className="text-[10px] font-medium text-purple-400 mb-2">Temporal Predictions</div>
+                      <div className="space-y-2">
+                        {coherenceData?.predictions?.shortTerm && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-[9px] text-white/50">5 min</span>
+                            <span className="text-xs font-medium text-white/80">
+                              {coherenceData.predictions.shortTerm.predicted.toFixed(1)}%
+                            </span>
+                            <span className="text-[8px] text-white/40">
+                              ±{((1 - coherenceData.predictions.shortTerm.confidence) * 10).toFixed(1)}
+                            </span>
+                          </div>
+                        )}
+                        {coherenceData?.predictions?.mediumTerm && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-[9px] text-white/50">15 min</span>
+                            <span className="text-xs font-medium text-white/80">
+                              {coherenceData.predictions.mediumTerm.predicted.toFixed(1)}%
+                            </span>
+                            <span className="text-[8px] text-white/40">
+                              ±{((1 - coherenceData.predictions.mediumTerm.confidence) * 10).toFixed(1)}
+                            </span>
+                          </div>
+                        )}
+                        {coherenceData?.predictions?.longTerm && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-[9px] text-white/50">End</span>
+                            <span className="text-xs font-medium text-white/80">
+                              {coherenceData.predictions.longTerm.predicted.toFixed(1)}%
+                            </span>
+                            <span className="text-[8px] text-white/40">
+                              ±{((1 - coherenceData.predictions.longTerm.confidence) * 10).toFixed(1)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Scenarios */}
+                    <div className="bg-black/30 rounded-lg p-2">
+                      <div className="text-[10px] font-medium text-cyan-400 mb-2">Scenario Analysis</div>
+                      <div className="space-y-1.5">
+                        {coherenceData?.predictions?.scenarios?.slice(0, 4).map((scenario, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <span className="text-[9px] text-white/50 flex-1 truncate">{scenario.name}</span>
+                            <span className={`text-[10px] font-medium ${
+                              scenario.impact > 0 ? 'text-emerald-400' : 'text-red-400'
+                            }`}>
+                              {scenario.impact > 0 ? '+' : ''}{scenario.impact.toFixed(0)}%
+                            </span>
+                            <span className="text-[8px] text-white/30">{(scenario.probability * 100).toFixed(0)}%</span>
+                          </div>
+                        )) ?? (
+                          <div className="text-[9px] text-white/30">No scenarios</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bayesian & Momentum */}
+                    <div className="bg-black/30 rounded-lg p-2">
+                      <div className="text-[10px] font-medium text-orange-400 mb-2">Bayesian Analysis</div>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[9px] text-white/50">Prior</span>
+                          <span className="text-xs text-white/70">{coherenceData?.bayesian?.prior?.toFixed(1) ?? '50.0'}%</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[9px] text-white/50">Posterior</span>
+                          <span className="text-xs font-medium text-orange-400">{coherenceData?.bayesian?.posterior?.toFixed(1) ?? '50.0'}%</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[9px] text-white/50">Likelihood</span>
+                          <span className="text-xs text-white/70">{coherenceData?.bayesian?.likelihood?.toFixed(2) ?? '1.00'}</span>
+                        </div>
+                        <div className="border-t border-white/10 pt-2 mt-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[9px] text-white/50">Momentum</span>
+                            <span className={`text-xs font-medium ${
+                              (coherenceData?.momentum?.value ?? 0) > 0 ? 'text-emerald-400' :
+                              (coherenceData?.momentum?.value ?? 0) < 0 ? 'text-red-400' :
+                              'text-white/60'
+                            }`}>
+                              {(coherenceData?.momentum?.value ?? 0) > 0 ? '+' : ''}{coherenceData?.momentum?.value?.toFixed(1) ?? '0.0'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {coherenceTab === 'alerts' && (
+                  <div className="grid grid-cols-2 gap-3 h-full">
+                    {/* Alerts */}
+                    <div className="space-y-2 overflow-auto">
+                      <div className="text-[10px] font-medium text-red-400 mb-2">Active Alerts</div>
+                      {coherenceData?.alerts?.length ? coherenceData.alerts.map((alert, idx) => (
+                        <div key={idx} className={`p-2 rounded-lg border-l-2 ${
+                          alert.severity === 'critical' ? 'bg-red-500/10 border-red-500' :
+                          alert.severity === 'warning' ? 'bg-amber-500/10 border-amber-500' :
+                          'bg-blue-500/10 border-blue-500'
+                        }`}>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-[10px] font-medium ${
+                              alert.severity === 'critical' ? 'text-red-400' :
+                              alert.severity === 'warning' ? 'text-amber-400' :
+                              'text-blue-400'
+                            }`}>
+                              {alert.type}
+                            </span>
+                            <span className="text-[8px] text-white/30">{alert.timestamp}</span>
+                          </div>
+                          <div className="text-[9px] text-white/60 mt-1">{alert.message}</div>
+                        </div>
+                      )) : (
+                        <div className="flex items-center justify-center h-full text-white/30 text-sm">
+                          No active alerts
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Recommendations */}
+                    <div className="space-y-2 overflow-auto">
+                      <div className="text-[10px] font-medium text-emerald-400 mb-2">Recommendations</div>
+                      {coherenceData?.recommendations?.length ? coherenceData.recommendations.map((rec, idx) => (
+                        <div key={idx} className="p-2 rounded-lg bg-emerald-500/10 border-l-2 border-emerald-500">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-medium text-emerald-400">{rec.type}</span>
+                            <span className={`text-[8px] px-1 rounded ${
+                              rec.priority === 'high' ? 'bg-red-500/20 text-red-400' :
+                              rec.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                              'bg-emerald-500/20 text-emerald-400'
+                            }`}>
+                              {rec.priority}
+                            </span>
+                          </div>
+                          <div className="text-[9px] text-white/60 mt-1">{rec.action}</div>
+                          <div className="text-[8px] text-emerald-400/60 mt-1">Impact: +{rec.expectedImpact?.toFixed(0) ?? '?'}%</div>
+                        </div>
+                      )) : (
+                        <div className="flex items-center justify-center h-full text-white/30 text-sm">
+                          No recommendations
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
 
-          {/* Trigger Execution Log */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
-              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
-            </div>
-            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
-              {instructionLog.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
-                  Click triggers above
+            {/* Right Panel: Controls & Execution Log */}
+            <div className="w-72 flex flex-col border-l border-white/5 bg-zinc-900">
+              {/* Pressing Triggers */}
+              <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[10px] uppercase tracking-wider text-orange-400">Triggers</span>
+                  <Target className="w-3 h-3 text-orange-400/50" />
                 </div>
-              ) : (
-                instructionLog.map(entry => (
-                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
-                    entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
-                    entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
-                    'bg-red-500/10 text-red-300'
-                  }`}>
-                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
-                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
-                     <XCircle className="w-3 h-3" />}
-                    <span className="flex-1 truncate">{entry.input}</span>
-                    <span className="text-white/30">{entry.minute}&apos;</span>
+                <div className="grid grid-cols-4 gap-1">
+                  {[
+                    { id: 'high_press', label: 'High', icon: '⬆' },
+                    { id: 'counter_press', label: 'Counter', icon: '↻' },
+                    { id: 'mid_block', label: 'Mid', icon: '▬' },
+                    { id: 'low_block', label: 'Low', icon: '⬇' },
+                  ].map(trigger => (
+                    <button
+                      key={trigger.id}
+                      onClick={() => handleTriggerPress(trigger.id, trigger.label)}
+                      className="px-1 py-1 rounded text-[8px] font-medium bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200 transition-all"
+                    >
+                      {trigger.icon} {trigger.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Markov Prediction */}
+              {patternRecognitionData.markov?.predictedNext?.home && (
+                <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 bg-purple-500/10">
+                  <div className="flex items-center gap-1.5">
+                    <Zap className="w-3 h-3 text-purple-400" />
+                    <span className="text-[9px] text-purple-300 truncate">
+                      Next: {patternRecognitionData.markov.predictedNext.home}
+                    </span>
                   </div>
-                ))
+                </div>
               )}
+
+              {/* Execution Log */}
+              <div className="flex-1 flex flex-col overflow-hidden">
+                <div className="flex-shrink-0 px-3 py-1 bg-black/20 flex items-center justify-between">
+                  <span className="text-[9px] text-white/40">Log</span>
+                  <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length}</span>
+                </div>
+                <div className="flex-1 overflow-y-auto px-2 py-1 space-y-0.5">
+                  {instructionLog.length === 0 ? (
+                    <div className="flex items-center justify-center h-full text-white/20 text-[9px]">
+                      Click triggers
+                    </div>
+                  ) : (
+                    instructionLog.slice(0, 10).map(entry => (
+                      <div key={entry.id} className={`flex items-center gap-1.5 px-1.5 py-0.5 rounded text-[9px] ${
+                        entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
+                        entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
+                        'bg-red-500/10 text-red-300'
+                      }`}>
+                        {entry.status === 'applied' ? <CheckCircle2 className="w-2.5 h-2.5 flex-shrink-0" /> :
+                         entry.status === 'pending' ? <Clock className="w-2.5 h-2.5 flex-shrink-0" /> :
+                         <XCircle className="w-2.5 h-2.5 flex-shrink-0" />}
+                        <span className="flex-1 truncate">{entry.input}</span>
+                        <span className="text-white/30 text-[8px]">{entry.minute}&apos;</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
