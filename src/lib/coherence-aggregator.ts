@@ -27,6 +27,7 @@ import {
   CompositeScoringEngine,
   CompositeScore,
   DimensionalScores,
+  SubComponentScore,
   createCompositeScoringEngine,
 } from './composite-scoring-engine';
 
@@ -996,7 +997,7 @@ export class CoherenceAggregator {
             'Identify players contributing to low score',
             'Consider tactical adjustment or substitution',
           ],
-          affectedPlayers: dim.subComponents.filter(s => s.anomaly).map(s => s.name),
+          affectedPlayers: dim.subComponents.filter((s: SubComponentScore) => s.anomaly).map((s: SubComponentScore) => s.name),
         });
       }
     }
