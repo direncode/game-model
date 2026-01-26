@@ -37,6 +37,7 @@ import {
   CriticalDeviation,
   LivePlayerData,
   TrackingMetrics,
+  TacticalDeviation,
 } from '@/types';
 
 // ==================== Aggregator Types ====================
@@ -819,9 +820,16 @@ export class CoherenceAggregator {
     };
   }
 
-  private buildDeviations(deviations: CoherenceDeviation[]): CoherenceDeviation[] {
-    // Convert from player score deviations
-    return deviations || [];
+  private buildDeviations(deviations: TacticalDeviation[]): CoherenceDeviation[] {
+    if (!deviations) return [];
+
+    return deviations.map(d => ({
+      type: d.type,
+      description: `Expected: ${d.expected}, Actual: ${d.actual}`,
+      severity: d.severity === 'major' ? 'critical' : d.severity,
+      impact: d.severity === 'major' ? 30 : d.severity === 'moderate' ? 20 : 10,
+      suggestedAction: `Review ${d.type} during ${d.context}`,
+    }));
   }
 
   private getPlayerTrend(playerId: string): 'improving' | 'stable' | 'declining' {
