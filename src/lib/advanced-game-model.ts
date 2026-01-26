@@ -647,7 +647,7 @@ class DynamicRuleEngine {
         case 'modify_weight':
           const weightKey = action.target as keyof CoherenceWeightConfig;
           if (weightKey in result.coherenceWeights && typeof action.value === 'number') {
-            (result.coherenceWeights as Record<string, unknown>)[weightKey] = action.value;
+            (result.coherenceWeights as unknown as Record<string, unknown>)[weightKey] = action.value;
           }
           break;
 
