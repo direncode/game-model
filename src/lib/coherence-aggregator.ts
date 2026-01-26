@@ -1198,15 +1198,3 @@ export function createCoherenceAggregator(
 ): CoherenceAggregator {
   return new CoherenceAggregator(config);
 }
-
-// ==================== Type Exports ====================
-
-export type {
-  AggregatedCoherenceResult,
-  PlayerCoherenceResult,
-  TemporalCoherenceData,
-  CoherencePredictions,
-  CoherenceAlert,
-  CoherenceRecommendation,
-  SystemHealthReport,
-};
