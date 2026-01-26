@@ -363,8 +363,8 @@ export class RealtimeAnalyticsBridge {
             if (gpsData) {
               for (const [playerId, data] of gpsData) {
                 const existing = playerMetrics.get(playerId) || this.createEmptyPlayerAnalytics(playerId);
-                existing.physical = data.physical;
-                existing.positional = data.positional;
+                if (data.physical) existing.physical = data.physical;
+                if (data.positional) existing.positional = data.positional;
                 playerMetrics.set(playerId, existing);
               }
             }
@@ -375,7 +375,7 @@ export class RealtimeAnalyticsBridge {
             if (videoData) {
               for (const [playerId, data] of videoData.playerData) {
                 const existing = playerMetrics.get(playerId) || this.createEmptyPlayerAnalytics(playerId);
-                existing.technical = data.technical;
+                if (data.technical) existing.technical = data.technical;
                 playerMetrics.set(playerId, existing);
               }
               tacticalMetrics = videoData.tactical;
@@ -1111,13 +1111,3 @@ export function createPlaceholderProvider(
     customConfig
   );
 }
-
-// ==================== Type Exports for External Use ====================
-
-export type {
-  RealTimeAnalyticsData,
-  PlayerAnalyticsData,
-  TeamAnalyticsData,
-  TacticalAnalyticsData,
-  PredictiveAnalyticsData,
-};

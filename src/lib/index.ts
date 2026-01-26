@@ -1,5 +1,5 @@
 // Football Analytics Platform - Library Exports
-// Central export point for all game model, coherence, and analytics systems
+// Central export point for advanced game model, coherence, and analytics systems
 
 // ==================== Advanced Game Model System ====================
 export {
@@ -111,21 +111,3 @@ export type {
   CoherenceRecommendation,
   SystemHealthReport,
 } from './coherence-aggregator';
-
-// ==================== Existing Systems Re-exports ====================
-export * from './coherence-analysis';
-export * from './game-model-manager';
-export * from './digital-twin';
-export * from './pattern-recognition';
-export * from './game-engine';
-export * from './simulation-controller';
-export * from './analytics-engine';
-export * from './tactical-ai';
-export * from './physics-engine';
-export * from './multi-agent-system';
-export * from './psychology-system';
-export * from './wearable-analytics';
-export * from './instruction-log';
-export * from './player-history';
-export * from './tactics-library';
-export * from './utils';

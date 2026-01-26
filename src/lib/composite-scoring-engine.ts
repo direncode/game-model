@@ -3,15 +3,18 @@
 // Implements Bayesian inference, temporal analysis, and ensemble methods
 
 import {
+  AdvancedGameModel,
+  AdvancedGameModelEngine,
   CoherenceWeightConfig,
   RealtimeContext,
   ResolvedGameModel,
+} from './advanced-game-model';
+import {
   PlayerAnalyticsData,
   TeamAnalyticsData,
   TacticalAnalyticsData,
   RealTimeAnalyticsData,
 } from './realtime-analytics-bridge';
-import { AdvancedGameModel, AdvancedGameModelEngine } from './advanced-game-model';
 import {
   GameModel,
   LivePlayerData,
@@ -1167,7 +1170,7 @@ export class CompositeScoringEngine {
 
     // Find player's contribution in each dimension
     for (const dim of Object.values(dimensions)) {
-      const playerComponent = dim.subComponents.find(sc => sc.name === playerId);
+      const playerComponent = dim.subComponents.find((sc: SubComponentScore) => sc.name === playerId);
       if (playerComponent) {
         score += playerComponent.value * dim.weight;
         weight += dim.weight;
@@ -1735,17 +1738,3 @@ class PredictionEngine {
 export function createCompositeScoringEngine(config?: Partial<ScoringConfig>): CompositeScoringEngine {
   return new CompositeScoringEngine(config);
 }
-
-// ==================== Type Exports ====================
-
-export type {
-  DimensionalScores,
-  DimensionScore,
-  SubComponentScore,
-  ScoreBreakdown,
-  PlayerCompositeScore,
-  TemporalAnalysis,
-  BayesianMetrics,
-  EnsembleResult,
-  ScoringDiagnostics,
-};
