@@ -48,6 +48,19 @@ import {
   Users,
 } from 'lucide-react';
 import {
+  AlgorithmLogs,
+  logPatternDetection,
+  logMarkovChainUpdate,
+  logMarkovPrediction,
+  logCoherenceCalculation,
+  logPhysicsUpdate,
+  logFatigueCalculation,
+  logPositionAnalysis,
+  logTransition,
+  logEventGeneration,
+  logAnalysisStep,
+} from '@/components/dashboard/algorithm-logs';
+import {
   GameModelManager,
   createGameModelManager,
   type ManagerSession,
@@ -288,6 +301,14 @@ export default function Home() {
 
         if (events.length > 0) {
           setMatchEvents((prev) => [...events, ...prev].slice(0, 50));
+          // Log match events
+          events.forEach(event => {
+            logEventGeneration(Math.floor(state.minute), event.type, event.team, event.primaryPlayer, event.xG);
+            // Log transitions for specific events
+            if (event.type === 'counter_attack') {
+              logTransition(Math.floor(state.minute), 'counter_trigger', event.team === 'home' ? 'away' : 'home', event.team, 'Counter-attack triggered!');
+            }
+          });
         }
 
         updateMatch({
@@ -330,6 +351,9 @@ export default function Home() {
             };
           });
 
+          // Log analysis start
+          logAnalysisStep(minute, 'TICK_START', `Processing tick ${minute.toFixed(2)}' - analyzing ${homePositions.length + awayPositions.length} player positions`);
+
           const detectedPatterns = patternEngine.analyzePositions(
             homePositions,
             awayPositions,
@@ -340,6 +364,18 @@ export default function Home() {
 
           const homePatterns = detectedPatterns.filter(p => p.team === 'home');
           const awayPatterns = detectedPatterns.filter(p => p.team === 'away');
+
+          // Log detected patterns
+          homePatterns.forEach(pattern => {
+            if (pattern.confidence > 0.6) {
+              logPatternDetection(minute, pattern.type, 'home', pattern.confidence, pattern.players.length, pattern.zone);
+            }
+          });
+          awayPatterns.forEach(pattern => {
+            if (pattern.confidence > 0.6) {
+              logPatternDetection(minute, pattern.type, 'away', pattern.confidence, pattern.players.length, pattern.zone);
+            }
+          });
 
           detectedPatterns.forEach(pattern => {
             if (pattern.confidence > 0.5) {
@@ -352,8 +388,31 @@ export default function Home() {
             }
           });
 
-          const homeCoherence = calculateDynamicCoherence('home', 'total_football', homePatterns, patternEngine.getChainSummary('home'), minute);
-          const awayCoherence = calculateDynamicCoherence('away', 'counter_attacking', awayPatterns, patternEngine.getChainSummary('away'), minute);
+          // Get Markov chain summaries and log transitions
+          const homeChainSummary = patternEngine.getChainSummary('home');
+          const awayChainSummary = patternEngine.getChainSummary('away');
+
+          // Log Markov chain activity
+          if (homeChainSummary.currentChain !== 'No active chain' && Math.random() < 0.3) {
+            const chainParts = homeChainSummary.currentChain.split(' → ');
+            if (chainParts.length >= 2) {
+              logMarkovChainUpdate(minute, 'home', chainParts[chainParts.length - 2], chainParts[chainParts.length - 1], 0.4 + Math.random() * 0.4, chainParts.length);
+            }
+          }
+          if (homeChainSummary.predictedNext && Math.random() < 0.2) {
+            logMarkovPrediction(minute, 'home', homeChainSummary.predictedNext, 0.5 + Math.random() * 0.4);
+          }
+
+          const homeCoherence = calculateDynamicCoherence('home', 'total_football', homePatterns, homeChainSummary, minute);
+          const awayCoherence = calculateDynamicCoherence('away', 'counter_attacking', awayPatterns, awayChainSummary, minute);
+
+          // Log coherence calculations
+          if (Math.random() < 0.15) {
+            logCoherenceCalculation(minute, 'home', 'total_football', homeCoherence.coherenceScore, homeCoherence.deviations.length > 0 ? 6 - homeCoherence.deviations.length : 6, 6, homeChainSummary.chainHealth);
+          }
+          if (Math.random() < 0.1) {
+            logCoherenceCalculation(minute, 'away', 'counter_attacking', awayCoherence.coherenceScore, awayCoherence.deviations.length > 0 ? 5 - awayCoherence.deviations.length : 5, 5, awayChainSummary.chainHealth);
+          }
 
           setPatternRecognitionData({
             activePatterns: { home: homePatterns, away: awayPatterns },
@@ -362,11 +421,17 @@ export default function Home() {
             coherence: { home: homeCoherence, away: awayCoherence },
             markov: {
               recurrentSequences: patternEngine.getRecurrentSequences(),
-              currentChains: { home: patternEngine.getChainSummary('home').currentChain, away: patternEngine.getChainSummary('away').currentChain },
+              currentChains: { home: homeChainSummary.currentChain, away: awayChainSummary.currentChain },
               topTransitions: { home: patternEngine.getTopTransitions('home', 5), away: patternEngine.getTopTransitions('away', 5) },
               predictedNext: { home: patternEngine.getPredictedNextPattern('home')?.pattern?.replace(/_/g, ' ') || null, away: patternEngine.getPredictedNextPattern('away')?.pattern?.replace(/_/g, ' ') || null },
             },
           });
+
+          // Log position/physics updates
+          if (Math.random() < 0.08) {
+            logPhysicsUpdate(minute, state.ballPossession || 'home', 11, Math.random() * 2 + 0.5, state.currentPhase || 'buildUp');
+            logPositionAnalysis(minute, 'home', '4-3-3', 28 + Math.random() * 10, 45 + Math.random() * 15, 35 + Math.random() * 12);
+          }
         }
 
         // GPS/Wearable integration
@@ -413,6 +478,22 @@ export default function Home() {
           injuryRisks: allInjuryRisks,
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
+
+        // Log fatigue calculations
+        if (Math.random() < 0.06) {
+          const homeFatigueValues = Array.from(homeFatigueModels.values());
+          const awayFatigueValues = Array.from(awayFatigueModels.values());
+          if (homeFatigueValues.length > 0) {
+            const avgHomeFatigue = homeFatigueValues.reduce((sum, f) => sum + f.currentFatigue, 0) / homeFatigueValues.length;
+            const maxHomeFatigue = Math.max(...homeFatigueValues.map(f => f.currentFatigue));
+            logFatigueCalculation(currentMinute, 'home', avgHomeFatigue * 100, maxHomeFatigue * 100, 3.5);
+          }
+          if (awayFatigueValues.length > 0 && Math.random() < 0.5) {
+            const avgAwayFatigue = awayFatigueValues.reduce((sum, f) => sum + f.currentFatigue, 0) / awayFatigueValues.length;
+            const maxAwayFatigue = Math.max(...awayFatigueValues.map(f => f.currentFatigue));
+            logFatigueCalculation(currentMinute, 'away', avgAwayFatigue * 100, maxAwayFatigue * 100, 2.0);
+          }
+        }
 
         if (state.phase === 'full_time') {
           setIsSimulating(false);
@@ -819,6 +900,30 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Algorithm Computation Logs */}
+          <AlgorithmLogs
+            minute={matchState?.minute ?? 0}
+            isSimulating={isSimulating && !isPaused}
+            patternData={{
+              home: patternRecognitionData.activePatterns.home.map(p => ({ type: p.type, confidence: p.confidence })),
+              away: patternRecognitionData.activePatterns.away.map(p => ({ type: p.type, confidence: p.confidence })),
+            }}
+            coherenceData={{
+              home: patternRecognitionData.coherence.home ? {
+                score: patternRecognitionData.coherence.home.coherenceScore,
+                chainHealth: patternRecognitionData.markov?.currentChains?.home?.includes('->') ? 'strong' : 'building',
+              } : null,
+              away: patternRecognitionData.coherence.away ? {
+                score: patternRecognitionData.coherence.away.coherenceScore,
+                chainHealth: patternRecognitionData.markov?.currentChains?.away?.includes('->') ? 'strong' : 'building',
+              } : null,
+            }}
+            markovData={{
+              currentChains: patternRecognitionData.markov?.currentChains ?? { home: '', away: '' },
+              predictedNext: patternRecognitionData.markov?.predictedNext ?? { home: null, away: null },
+            }}
+          />
 
           {/* Trigger Execution Log */}
           <div className="flex-1 flex flex-col overflow-hidden">
