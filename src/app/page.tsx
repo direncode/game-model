@@ -35,20 +35,24 @@ import {
   Play,
   Pause,
   Square,
-  Send,
-  Mic,
-  MicOff,
-  Loader2,
   CheckCircle2,
   XCircle,
   Clock,
   Zap,
   Target,
-  GitCompare,
-  Users,
+  GitBranch,
+  Activity,
+  Brain,
+  Cpu,
+  BarChart3,
+  TrendingUp,
+  ArrowRight,
+  Circle,
+  Layers,
+  ChevronRight,
 } from 'lucide-react';
 import {
-  AlgorithmLogs,
+  algorithmLogger,
   logPatternDetection,
   logMarkovChainUpdate,
   logMarkovPrediction,
@@ -59,6 +63,8 @@ import {
   logTransition,
   logEventGeneration,
   logAnalysisStep,
+  type AlgorithmLogEntry,
+  type LogCategory,
 } from '@/components/dashboard/algorithm-logs';
 import {
   GameModelManager,
@@ -120,6 +126,19 @@ interface TwinPosition {
   isCoherent: boolean;
 }
 
+// Log Category Config
+const CATEGORY_CONFIG: Record<LogCategory, { icon: React.ElementType; color: string; bgColor: string; label: string }> = {
+  pattern_detection: { icon: Target, color: 'text-purple-400', bgColor: 'bg-purple-500/10', label: 'PATTERN' },
+  markov_chain: { icon: GitBranch, color: 'text-cyan-400', bgColor: 'bg-cyan-500/10', label: 'MARKOV' },
+  coherence: { icon: Brain, color: 'text-emerald-400', bgColor: 'bg-emerald-500/10', label: 'COHERENCE' },
+  physics: { icon: Activity, color: 'text-blue-400', bgColor: 'bg-blue-500/10', label: 'PHYSICS' },
+  fatigue: { icon: BarChart3, color: 'text-orange-400', bgColor: 'bg-orange-500/10', label: 'FATIGUE' },
+  position: { icon: Layers, color: 'text-sky-400', bgColor: 'bg-sky-500/10', label: 'POSITION' },
+  event: { icon: Zap, color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', label: 'EVENT' },
+  transition: { icon: ArrowRight, color: 'text-pink-400', bgColor: 'bg-pink-500/10', label: 'TRANSITION' },
+  analysis: { icon: Cpu, color: 'text-white/60', bgColor: 'bg-white/5', label: 'ANALYSIS' },
+};
+
 export default function Home() {
   const {
     players,
@@ -144,6 +163,9 @@ export default function Home() {
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
   const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
   const [awayLiveData, setAwayLiveData] = useState<Map<string, TrackingMetrics>>(new Map());
+
+  // Algorithm Logs State
+  const [algorithmLogs, setAlgorithmLogs] = useState<AlgorithmLogEntry[]>([]);
 
   // Pattern Recognition State
   const [patternRecognitionData, setPatternRecognitionData] = useState<PatternRecognitionData>({
@@ -181,9 +203,6 @@ export default function Home() {
   const [managerSession, setManagerSession] = useState<ManagerSession | null>(null);
 
   // Instruction Integration State
-  const [instructionInput, setInstructionInput] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
 
@@ -237,6 +256,14 @@ export default function Home() {
     const coherentCount = twinPositions.filter(p => p.isCoherent).length;
     return Math.round((coherentCount / twinPositions.length) * 100);
   }, [twinPositions]);
+
+  // Subscribe to algorithm logger
+  useEffect(() => {
+    const unsubscribe = algorithmLogger.subscribe((logs) => {
+      setAlgorithmLogs(logs);
+    });
+    return unsubscribe;
+  }, []);
 
   // Initialize squads
   useEffect(() => {
@@ -301,10 +328,8 @@ export default function Home() {
 
         if (events.length > 0) {
           setMatchEvents((prev) => [...events, ...prev].slice(0, 50));
-          // Log match events
           events.forEach(event => {
             logEventGeneration(Math.floor(state.minute), event.type, event.team, event.primaryPlayer, event.xG);
-            // Log transitions for specific events
             if (event.type === 'counter_attack') {
               logTransition(Math.floor(state.minute), 'counter_trigger', event.team === 'home' ? 'away' : 'home', event.team, 'Counter-attack triggered!');
             }
@@ -351,7 +376,6 @@ export default function Home() {
             };
           });
 
-          // Log analysis start
           logAnalysisStep(minute, 'TICK_START', `Processing tick ${minute.toFixed(2)}' - analyzing ${homePositions.length + awayPositions.length} player positions`);
 
           const detectedPatterns = patternEngine.analyzePositions(
@@ -365,7 +389,6 @@ export default function Home() {
           const homePatterns = detectedPatterns.filter(p => p.team === 'home');
           const awayPatterns = detectedPatterns.filter(p => p.team === 'away');
 
-          // Log detected patterns
           homePatterns.forEach(pattern => {
             if (pattern.confidence > 0.6) {
               logPatternDetection(minute, pattern.type, 'home', pattern.confidence, pattern.players.length, pattern.zone);
@@ -388,11 +411,9 @@ export default function Home() {
             }
           });
 
-          // Get Markov chain summaries and log transitions
           const homeChainSummary = patternEngine.getChainSummary('home');
           const awayChainSummary = patternEngine.getChainSummary('away');
 
-          // Log Markov chain activity
           if (homeChainSummary.currentChain !== 'No active chain' && Math.random() < 0.3) {
             const chainParts = homeChainSummary.currentChain.split(' → ');
             if (chainParts.length >= 2) {
@@ -406,7 +427,6 @@ export default function Home() {
           const homeCoherence = calculateDynamicCoherence('home', 'total_football', homePatterns, homeChainSummary, minute);
           const awayCoherence = calculateDynamicCoherence('away', 'counter_attacking', awayPatterns, awayChainSummary, minute);
 
-          // Log coherence calculations
           if (Math.random() < 0.15) {
             logCoherenceCalculation(minute, 'home', 'total_football', homeCoherence.coherenceScore, homeCoherence.deviations.length > 0 ? 6 - homeCoherence.deviations.length : 6, 6, homeChainSummary.chainHealth);
           }
@@ -427,7 +447,6 @@ export default function Home() {
             },
           });
 
-          // Log position/physics updates
           if (Math.random() < 0.08) {
             logPhysicsUpdate(minute, state.ballPossession || 'home', 11, Math.random() * 2 + 0.5, state.currentPhase || 'buildUp');
             logPositionAnalysis(minute, 'home', '4-3-3', 28 + Math.random() * 10, 45 + Math.random() * 15, 35 + Math.random() * 12);
@@ -479,7 +498,6 @@ export default function Home() {
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
 
-        // Log fatigue calculations
         if (Math.random() < 0.06) {
           const homeFatigueValues = Array.from(homeFatigueModels.values());
           const awayFatigueValues = Array.from(awayFatigueModels.values());
@@ -541,6 +559,7 @@ export default function Home() {
     gameEngineRef.current = createManchesterDerby();
     gameEngineRef.current.kickoff();
     patternEngineRef.current = new PatternRecognitionEngine();
+    algorithmLogger.clear();
     setMatchEvents([]);
     setInstructionLog([]);
     setMatchState(gameEngineRef.current.getState());
@@ -559,49 +578,11 @@ export default function Home() {
     setMatchStats(null);
   }, [endMatch]);
 
-  const handleSendInstruction = useCallback(async () => {
-    if (!instructionInput.trim() || isProcessing || !gameModelManagerRef.current) return;
-    setIsProcessing(true);
-    const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-
-    try {
-      const result = await gameModelManagerRef.current.processManagerInstruction(instructionInput, 'text');
-      const status: 'applied' | 'pending' | 'rejected' = result.applied ? 'applied' : (result.verification ? 'pending' : 'rejected');
-      setInstructionLog(prev => [{
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: result.processed.processedInstructions[0]?.category || 'general',
-        confidence: result.processed.confidence,
-        status,
-        affectedPlayers: result.processed.processedInstructions.flatMap(i => i.affectedPlayers),
-        effect: result.applied ? `Applied` : result.verification ? `Pending (${Math.round(result.processed.confidence * 100)}%)` : 'Not understood',
-      }, ...prev].slice(0, 15));
-      setInstructionInput('');
-    } catch (error) {
-      const errorEntry: InstructionLogEntry = {
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: 'general',
-        confidence: 0,
-        status: 'rejected',
-        affectedPlayers: [],
-        effect: 'Error',
-      };
-      setInstructionLog(prev => [errorEntry, ...prev].slice(0, 15));
-    }
-    setIsProcessing(false);
-  }, [instructionInput, isProcessing, matchState?.minute]);
-
   // Handle pressing trigger button clicks
   const handleTriggerPress = useCallback((triggerId: string, label: string) => {
-    if (!gameModelManagerRef.current || isProcessing) return;
+    if (!gameModelManagerRef.current) return;
     const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
 
-    // Map trigger IDs to instructions
     const triggerInstructions: Record<string, string> = {
       'high_press': 'Press high immediately',
       'counter_press': 'Counter press on loss',
@@ -618,78 +599,45 @@ export default function Home() {
 
     const instruction = triggerInstructions[triggerId] || label;
 
-    // Add to log immediately with 'applied' status for quick UX
     const entry: InstructionLogEntry = {
       id: `trigger-${Date.now()}`,
       timestamp: new Date(),
       minute,
       input: label,
       category: 'pressing',
-      confidence: 0.95, // High confidence for direct triggers
+      confidence: 0.95,
       status: 'applied',
       affectedPlayers: [],
       effect: 'Triggered',
     };
     setInstructionLog(prev => [entry, ...prev].slice(0, 20));
 
-    // Process through game model manager in background
-    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
-      // Silently handle errors for triggers
-    });
-  }, [isProcessing, matchState?.minute]);
-
-  const handleTemplateSelect = useCallback((templateId: string) => {
-    if (!gameModelManagerRef.current) return;
-    try {
-      const gameModel = gameModelManagerRef.current.createGameModelFromTemplate(templateId);
-      const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-      const entry: InstructionLogEntry = {
-        id: `template-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: gameModel.name,
-        category: 'formation',
-        confidence: 1,
-        status: 'applied',
-        affectedPlayers: [],
-        effect: gameModel.formation.name,
-      };
-      setInstructionLog(prev => [entry, ...prev].slice(0, 15));
-      setSelectedTemplate(templateId);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {});
   }, [matchState?.minute]);
-
-  const toggleRecording = useCallback(() => {
-    setIsRecording(!isRecording);
-    if (!isRecording) {
-      const SpeechRecognitionAPI = (window as Window & { SpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void }; webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).SpeechRecognition || (window as Window & { webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).webkitSpeechRecognition;
-      if (SpeechRecognitionAPI) {
-        const recognizer = new SpeechRecognitionAPI();
-        recognizer.continuous = false;
-        recognizer.interimResults = false;
-        recognizer.onresult = (event) => { setInstructionInput(event.results[0][0].transcript); setIsRecording(false); };
-        recognizer.onerror = () => setIsRecording(false);
-        recognizer.start();
-      } else { setIsRecording(false); }
-    }
-  }, [isRecording]);
-
-  const getTeamFatigue = (fatigueMap: Map<string, FatigueModel>) => {
-    const values = Array.from(fatigueMap.values());
-    return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
-  };
 
   // Get current game model name
   const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
   const modelName = activeGameModel?.name || GAME_MODEL_TEMPLATES.find(t => t.id === selectedTemplate)?.name || 'Total Football';
+
+  // Compute log statistics
+  const logStats = useMemo(() => {
+    const byCategory: Record<string, number> = {};
+    algorithmLogs.slice(0, 100).forEach((log) => {
+      byCategory[log.category] = (byCategory[log.category] || 0) + 1;
+    });
+    return byCategory;
+  }, [algorithmLogs]);
 
   return (
     <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
       {/* Header */}
       <header className="flex-shrink-0 h-10 flex items-center justify-between px-4 bg-black/50 border-b border-white/5">
         <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Cpu className="w-4 h-4 text-emerald-400" />
+            <span className="text-sm font-semibold text-emerald-400">Algorithm Visualization</span>
+          </div>
+          <span className="text-white/20">|</span>
           <span className="text-sky-400 text-xs font-medium">MCI</span>
           <span className="text-sm font-semibold tabular-nums">
             {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
@@ -704,8 +652,8 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-2">
           {!isLive ? (
-            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90">
-              <Play className="w-3 h-3" /> Start
+            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500 text-white rounded-full text-xs font-medium hover:bg-emerald-400">
+              <Play className="w-3 h-3" /> Start Simulation
             </button>
           ) : (
             <>
@@ -720,136 +668,85 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
+      {/* Main Content - Algorithm Focused Layout */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
-        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
-          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
-            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
-              </div>
-              <div className="flex items-center gap-4 text-xs">
-                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                <span className="text-white/20">|</span>
-                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
-              </div>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <PitchView
-                players={players}
-                awayPlayers={awayPlayers}
-                liveData={liveData}
-                awayLiveData={awayLiveData}
-                selectedPlayerId={null}
-                onPlayerClick={() => {}}
-                ballPosition={matchState?.ballPosition}
-                ballPossession={matchState?.ballPossession}
-                defensiveBlock={matchState?.defensiveBlock}
-                pressingIntensity={matchState?.pressingIntensity}
-                analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
-                patternRecognition={patternRecognitionData}
-                fatigueData={fatigueData}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Right Sidebar: Twin + Controls + Log */}
-        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-44 border-b border-white/5">
+        {/* Left Sidebar: Small Pitch + Controls */}
+        <div className="w-72 flex flex-col bg-zinc-900 border-r border-white/5 overflow-hidden">
+          {/* Mini Pitch View */}
+          <div className="flex-shrink-0 h-48 border-b border-white/5">
             <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
-                </div>
-                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                  {twinPositions.filter(p => p.isCoherent).length}/11 coherent
-                </span>
+              <div className="flex-shrink-0 px-2 py-1 bg-black/30 flex items-center justify-between">
+                <span className="text-[9px] uppercase tracking-wider text-white/50">Live Match</span>
+                <span className="text-[9px] text-white/30">{matchStats?.possession.home ?? 50}%</span>
               </div>
-              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
-                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  {idealPositions.map((pos, idx) => (
-                    <g key={`ideal-${idx}`}>
-                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
-                    </g>
-                  ))}
-                  {[
-                    { x: 95, y: 32.5 },
-                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                  ].map((pos, idx) => (
-                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
-                  ))}
-                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
-                </svg>
+              <div className="flex-1 overflow-hidden">
+                <PitchView
+                  players={players}
+                  awayPlayers={awayPlayers}
+                  liveData={liveData}
+                  awayLiveData={awayLiveData}
+                  selectedPlayerId={null}
+                  onPlayerClick={() => {}}
+                  ballPosition={matchState?.ballPosition}
+                  ballPossession={matchState?.ballPossession}
+                  defensiveBlock={matchState?.defensiveBlock}
+                  pressingIntensity={matchState?.pressingIntensity}
+                  analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
+                  patternRecognition={patternRecognitionData}
+                  fatigueData={fatigueData}
+                />
               </div>
             </div>
           </div>
 
-          {/* Markov Chain Analysis */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+          {/* Match Stats */}
+          <div className="flex-shrink-0 px-2 py-2 border-b border-white/5 grid grid-cols-4 gap-1 text-center">
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[7px] text-white/40">xG</div>
+              <div className="text-[9px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[7px] text-white/40">Shots</div>
+              <div className="text-[9px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[7px] text-white/40">Pass%</div>
+              <div className="text-[9px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
+            </div>
+            <div className="bg-black/20 rounded p-1">
+              <div className="text-[7px] text-white/40">Coh</div>
+              <div className={`text-[9px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                {overallCoherence}%
+              </div>
+            </div>
+          </div>
+
+          {/* Pressing Triggers */}
+          <div className="flex-shrink-0 px-2 py-2 border-b border-white/5">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
-              }`}>
-                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
-              </span>
-            </div>
-            <div className="text-[10px] text-white/50 mb-1.5 truncate">
-              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
-            </div>
-            {patternRecognitionData.markov?.predictedNext?.home && (
-              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
-                <Zap className="w-3 h-3 text-purple-400" />
-                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Pressing Triggers Grid */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <Target className="w-3 h-3 text-orange-400/50" />
+              <span className="text-[8px] uppercase tracking-wider text-orange-400">Triggers</span>
             </div>
             <div className="grid grid-cols-2 gap-1">
               {[
-                { id: 'high_press', label: 'High Press', icon: '⬆️' },
-                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
-                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
-                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
-                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
-                { id: 'zonal', label: 'Zonal', icon: '🔲' },
+                { id: 'high_press', label: 'High Press' },
+                { id: 'counter_press', label: 'Counter' },
+                { id: 'mid_block', label: 'Mid Block' },
+                { id: 'low_block', label: 'Low Block' },
               ].map(trigger => {
                 const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
                 return (
                   <button
                     key={trigger.id}
                     onClick={() => handleTriggerPress(trigger.id, trigger.label)}
-                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
+                    className={`relative px-1.5 py-1 rounded text-[8px] font-medium transition-all ${
                       isMarkovSuggested
-                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
+                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50'
                         : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
                     }`}
                   >
-                    <span className="mr-1">{trigger.icon}</span>
                     {trigger.label}
                     {isMarkovSuggested && (
-                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                      <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
                     )}
                   </button>
                 );
@@ -857,100 +754,390 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Defensive Shape */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1">
-              {[
-                { id: 'drop_deep', label: 'Drop' },
-                { id: 'hold_line', label: 'Hold' },
-                { id: 'step_up', label: 'Step Up' },
-              ].map(shape => (
-                <button
-                  key={shape.id}
-                  onClick={() => handleTriggerPress(shape.id, shape.label)}
-                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
-                >
-                  {shape.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Live Stats */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">xG</div>
-              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Shots</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Pass%</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Coh</div>
-              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {overallCoherence}%
-              </div>
-            </div>
-          </div>
-
-          {/* Algorithm Computation Logs */}
-          <AlgorithmLogs
-            minute={matchState?.minute ?? 0}
-            isSimulating={isSimulating && !isPaused}
-            patternData={{
-              home: patternRecognitionData.activePatterns.home.map(p => ({ type: p.type, confidence: p.confidence })),
-              away: patternRecognitionData.activePatterns.away.map(p => ({ type: p.type, confidence: p.confidence })),
-            }}
-            coherenceData={{
-              home: patternRecognitionData.coherence.home ? {
-                score: patternRecognitionData.coherence.home.coherenceScore,
-                chainHealth: patternRecognitionData.markov?.currentChains?.home?.includes('->') ? 'strong' : 'building',
-              } : null,
-              away: patternRecognitionData.coherence.away ? {
-                score: patternRecognitionData.coherence.away.coherenceScore,
-                chainHealth: patternRecognitionData.markov?.currentChains?.away?.includes('->') ? 'strong' : 'building',
-              } : null,
-            }}
-            markovData={{
-              currentChains: patternRecognitionData.markov?.currentChains ?? { home: '', away: '' },
-              predictedNext: patternRecognitionData.markov?.predictedNext ?? { home: null, away: null },
-            }}
-          />
-
-          {/* Trigger Execution Log */}
+          {/* Execution Log */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
-              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
+            <div className="flex-shrink-0 px-2 py-1 bg-black/20">
+              <span className="text-[8px] uppercase tracking-wider text-white/40">Execution Log</span>
             </div>
-            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
+            <div className="flex-1 overflow-y-auto px-1.5 py-1 space-y-0.5">
               {instructionLog.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
-                  Click triggers above
+                <div className="flex items-center justify-center h-full text-white/20 text-[9px]">
+                  Click triggers
                 </div>
               ) : (
-                instructionLog.map(entry => (
-                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
+                instructionLog.slice(0, 10).map(entry => (
+                  <div key={entry.id} className={`flex items-center gap-1.5 px-1.5 py-0.5 rounded text-[8px] ${
                     entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
                     entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
                     'bg-red-500/10 text-red-300'
                   }`}>
-                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
-                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
-                     <XCircle className="w-3 h-3" />}
+                    {entry.status === 'applied' ? <CheckCircle2 className="w-2.5 h-2.5" /> :
+                     entry.status === 'pending' ? <Clock className="w-2.5 h-2.5" /> :
+                     <XCircle className="w-2.5 h-2.5" />}
                     <span className="flex-1 truncate">{entry.input}</span>
                     <span className="text-white/30">{entry.minute}&apos;</span>
                   </div>
                 ))
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Main: Algorithm Visualization */}
+        <div className="flex-1 flex flex-col overflow-hidden bg-zinc-950">
+          {/* Algorithm Flow Header */}
+          <div className="flex-shrink-0 px-4 py-2 bg-gradient-to-r from-emerald-900/20 via-cyan-900/20 to-purple-900/20 border-b border-white/5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-semibold text-emerald-400">ALGORITHM FLOWCHART</span>
+                </div>
+                {isSimulating && !isPaused && (
+                  <div className="flex items-center gap-1.5">
+                    <Circle className="w-2 h-2 text-emerald-500 fill-emerald-500 animate-pulse" />
+                    <span className="text-[10px] text-emerald-400">COMPUTING</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-4 text-[10px] text-white/40">
+                <span>{algorithmLogs.length} operations logged</span>
+              </div>
+            </div>
+            {/* Flowchart Steps */}
+            <div className="flex items-center gap-2 mt-2 text-[9px]">
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-purple-500/20 text-purple-300 rounded">
+                <Target className="w-3 h-3" />
+                <span>Pattern Detection</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-white/20" />
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-cyan-500/20 text-cyan-300 rounded">
+                <GitBranch className="w-3 h-3" />
+                <span>Markov Chain</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-white/20" />
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded">
+                <Brain className="w-3 h-3" />
+                <span>Coherence</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-white/20" />
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded">
+                <Activity className="w-3 h-3" />
+                <span>Physics</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-white/20" />
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-yellow-500/20 text-yellow-300 rounded">
+                <Zap className="w-3 h-3" />
+                <span>Events</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Algorithm Display Area */}
+          <div className="flex-1 flex overflow-hidden">
+            {/* Left: Markov Chain & Coherence */}
+            <div className="w-80 flex flex-col border-r border-white/5 overflow-hidden">
+              {/* Markov Chain Panel */}
+              <div className="flex-1 flex flex-col border-b border-white/5 overflow-hidden">
+                <div className="flex-shrink-0 px-3 py-2 bg-cyan-900/20 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <GitBranch className="w-4 h-4 text-cyan-400" />
+                    <span className="text-xs font-semibold text-cyan-400">MARKOV CHAIN STATE</span>
+                  </div>
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded ${
+                    patternRecognitionData.markov?.predictedNext?.home ? 'bg-cyan-500/20 text-cyan-300' : 'bg-white/10 text-white/30'
+                  }`}>
+                    {patternRecognitionData.markov?.predictedNext?.home ? 'PREDICTING' : 'LEARNING'}
+                  </span>
+                </div>
+                <div className="flex-1 overflow-y-auto p-3 space-y-3">
+                  {/* Current Chain */}
+                  <div className="p-2 bg-black/30 rounded border border-cyan-500/20">
+                    <div className="text-[9px] text-white/40 mb-1">CURRENT CHAIN (HOME)</div>
+                    <div className="text-[11px] text-cyan-300 font-mono break-words">
+                      {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
+                    </div>
+                  </div>
+
+                  {/* Predicted Next */}
+                  {patternRecognitionData.markov?.predictedNext?.home && (
+                    <div className="p-2 bg-purple-500/10 rounded border border-purple-500/30">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Zap className="w-3 h-3 text-purple-400" />
+                        <span className="text-[9px] text-purple-300">PREDICTED NEXT PATTERN</span>
+                      </div>
+                      <div className="text-sm font-semibold text-purple-200">
+                        {patternRecognitionData.markov.predictedNext.home}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Top Transitions */}
+                  <div>
+                    <div className="text-[9px] text-white/40 mb-1.5">TOP TRANSITIONS</div>
+                    <div className="space-y-1">
+                      {(patternRecognitionData.markov?.topTransitions?.home || []).slice(0, 5).map((trans, i) => (
+                        <div key={i} className="flex items-center gap-2 p-1.5 bg-black/20 rounded text-[9px]">
+                          <span className="text-cyan-300">{trans.from.replace(/_/g, ' ')}</span>
+                          <ArrowRight className="w-3 h-3 text-white/30" />
+                          <span className="text-cyan-300">{trans.to.replace(/_/g, ' ')}</span>
+                          <span className="ml-auto text-white/40">{(trans.probability * 100).toFixed(0)}%</span>
+                        </div>
+                      ))}
+                      {(!patternRecognitionData.markov?.topTransitions?.home || patternRecognitionData.markov.topTransitions.home.length === 0) && (
+                        <div className="text-[10px] text-white/30 text-center py-4">Collecting transition data...</div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Recurrent Sequences */}
+                  <div>
+                    <div className="text-[9px] text-white/40 mb-1.5">RECURRENT SEQUENCES</div>
+                    <div className="space-y-1">
+                      {(patternRecognitionData.markov?.recurrentSequences || []).slice(0, 3).map((seq, i) => (
+                        <div key={i} className="p-1.5 bg-black/20 rounded">
+                          <div className="text-[9px] text-white/60 font-mono">{seq.description}</div>
+                          <div className="flex items-center gap-2 mt-1 text-[8px]">
+                            <span className="text-cyan-400">{seq.occurrences}x</span>
+                            <span className="text-white/30">|</span>
+                            <span className="text-emerald-400">{(seq.successRate * 100).toFixed(0)}% success</span>
+                          </div>
+                        </div>
+                      ))}
+                      {(!patternRecognitionData.markov?.recurrentSequences || patternRecognitionData.markov.recurrentSequences.length === 0) && (
+                        <div className="text-[10px] text-white/30 text-center py-2">Detecting sequences...</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Coherence Panel */}
+              <div className="h-48 flex flex-col overflow-hidden">
+                <div className="flex-shrink-0 px-3 py-2 bg-emerald-900/20 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Brain className="w-4 h-4 text-emerald-400" />
+                    <span className="text-xs font-semibold text-emerald-400">COHERENCE ANALYSIS</span>
+                  </div>
+                  <span className={`text-sm font-bold ${
+                    (patternRecognitionData.coherence.home?.coherenceScore ?? 0) >= 70 ? 'text-emerald-400' :
+                    (patternRecognitionData.coherence.home?.coherenceScore ?? 0) >= 50 ? 'text-amber-400' : 'text-red-400'
+                  }`}>
+                    {patternRecognitionData.coherence.home?.coherenceScore ?? 0}%
+                  </span>
+                </div>
+                <div className="flex-1 overflow-y-auto p-3">
+                  <div className="grid grid-cols-2 gap-2 mb-2">
+                    <div className="p-2 bg-black/30 rounded">
+                      <div className="text-[8px] text-white/40">Model</div>
+                      <div className="text-[10px] text-emerald-300">{modelName}</div>
+                    </div>
+                    <div className="p-2 bg-black/30 rounded">
+                      <div className="text-[8px] text-white/40">Trend</div>
+                      <div className={`text-[10px] flex items-center gap-1 ${
+                        patternRecognitionData.coherence.home?.historicalComparison.trend === 'improving' ? 'text-emerald-400' :
+                        patternRecognitionData.coherence.home?.historicalComparison.trend === 'declining' ? 'text-red-400' : 'text-white/60'
+                      }`}>
+                        {patternRecognitionData.coherence.home?.historicalComparison.trend === 'improving' && <TrendingUp className="w-3 h-3" />}
+                        {patternRecognitionData.coherence.home?.historicalComparison.trend || 'stable'}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Deviations */}
+                  <div className="text-[8px] text-white/40 mb-1">DEVIATIONS</div>
+                  {patternRecognitionData.coherence.home?.deviations.slice(0, 3).map((dev, i) => (
+                    <div key={i} className="text-[9px] text-amber-300/70 py-0.5">
+                      • {dev.reason}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Algorithm Logs */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              {/* Category Filter Bar */}
+              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 border-b border-white/5 flex items-center gap-1 overflow-x-auto">
+                {(Object.keys(CATEGORY_CONFIG) as LogCategory[]).map((cat) => {
+                  const config = CATEGORY_CONFIG[cat];
+                  const count = logStats[cat] || 0;
+                  const Icon = config.icon;
+                  return (
+                    <div
+                      key={cat}
+                      className={`flex items-center gap-1 px-2 py-0.5 rounded text-[8px] ${config.bgColor}`}
+                    >
+                      <Icon className={`w-2.5 h-2.5 ${config.color}`} />
+                      <span className={config.color}>{config.label}</span>
+                      <span className="text-white/30">({count})</span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Logs Display */}
+              <div className="flex-1 overflow-y-auto font-mono text-[10px]">
+                {algorithmLogs.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full text-white/20">
+                    <Cpu className="w-12 h-12 mb-3 opacity-20" />
+                    <div className="text-sm">Start simulation to see algorithm logs</div>
+                    <div className="text-[10px] mt-1">Real-time computational process visualization</div>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-white/5">
+                    {algorithmLogs.map((log, idx) => {
+                      const catConfig = CATEGORY_CONFIG[log.category];
+                      const Icon = catConfig.icon;
+
+                      return (
+                        <div
+                          key={log.id}
+                          className={`flex items-start gap-2 px-3 py-1.5 hover:bg-white/5 transition-colors ${
+                            idx === 0 ? 'bg-white/[0.02]' : ''
+                          }`}
+                        >
+                          {/* Step Number */}
+                          <div className="flex flex-col items-center w-6 shrink-0">
+                            <span className="text-[8px] text-white/20 tabular-nums">
+                              {String(log.flowStep).padStart(3, '0')}
+                            </span>
+                          </div>
+
+                          {/* Category Icon */}
+                          <div className={`p-1 rounded ${catConfig.bgColor} shrink-0`}>
+                            <Icon className={`w-3 h-3 ${catConfig.color}`} />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className={`font-semibold ${catConfig.color}`}>{log.operation}</span>
+                              <span className="text-white/30">@</span>
+                              <span className="text-white/40 tabular-nums">{log.minute.toFixed(1)}&apos;</span>
+                            </div>
+                            <div className="text-white/50">{log.details}</div>
+
+                            {/* Metrics */}
+                            {log.metrics && (
+                              <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-0.5">
+                                {Object.entries(log.metrics).map(([key, value]) => (
+                                  <span key={key} className="text-white/30">
+                                    <span className="text-white/40">{key}:</span>{' '}
+                                    <span className={catConfig.color}>{value}</span>
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Duration */}
+                          <span className="text-white/20 tabular-nums w-14 text-right shrink-0">
+                            {log.duration ? `${log.duration.toFixed(1)}ms` : '-'}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Flowchart Status Bar */}
+              <div className="flex-shrink-0 px-3 py-1.5 bg-black/40 border-t border-white/5 flex items-center justify-between text-[9px]">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-purple-500/50 border border-purple-500" />
+                    <span className="text-white/40">Pattern</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-cyan-500/50 border border-cyan-500" />
+                    <span className="text-white/40">Markov</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/50 border border-emerald-500" />
+                    <span className="text-white/40">Coherence</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-blue-500/50 border border-blue-500" />
+                    <span className="text-white/40">Physics</span>
+                  </div>
+                </div>
+                <div className="text-white/30">
+                  Flow: Detection → Chain → Coherence → Position → Event
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Active Patterns Panel */}
+        <div className="w-64 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
+          {/* Active Patterns */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="flex-shrink-0 px-3 py-2 bg-purple-900/20 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Target className="w-4 h-4 text-purple-400" />
+                <span className="text-xs font-semibold text-purple-400">ACTIVE PATTERNS</span>
+              </div>
+              <span className="text-[9px] text-purple-300">{patternRecognitionData.activePatterns.home.length} detected</span>
+            </div>
+            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+              {patternRecognitionData.activePatterns.home.length === 0 ? (
+                <div className="text-[10px] text-white/30 text-center py-8">Analyzing patterns...</div>
+              ) : (
+                patternRecognitionData.activePatterns.home.map((pattern, i) => (
+                  <div key={i} className="p-2 bg-black/30 rounded border-l-2 border-purple-500/50">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-purple-300 font-medium">{pattern.type.replace(/_/g, ' ')}</span>
+                      <span className={`text-[9px] ${pattern.confidence >= 0.7 ? 'text-emerald-400' : 'text-white/40'}`}>
+                        {(pattern.confidence * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                    <div className="text-[8px] text-white/40 mt-0.5">{pattern.zone} • {pattern.players.length} players</div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Away Patterns */}
+          <div className="h-40 flex flex-col border-t border-white/5 overflow-hidden">
+            <div className="flex-shrink-0 px-3 py-1.5 bg-red-900/20">
+              <span className="text-[9px] uppercase tracking-wider text-red-400">Away Patterns</span>
+            </div>
+            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+              {patternRecognitionData.activePatterns.away.length === 0 ? (
+                <div className="text-[9px] text-white/30 text-center py-4">Analyzing...</div>
+              ) : (
+                patternRecognitionData.activePatterns.away.slice(0, 4).map((pattern, i) => (
+                  <div key={i} className="p-1.5 bg-black/30 rounded">
+                    <div className="flex items-center justify-between text-[9px]">
+                      <span className="text-red-300">{pattern.type.replace(/_/g, ' ')}</span>
+                      <span className="text-white/40">{(pattern.confidence * 100).toFixed(0)}%</span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Digital Twin Mini */}
+          <div className="h-36 border-t border-white/5">
+            <div className="flex-shrink-0 px-2 py-1 bg-black/30 flex items-center justify-between">
+              <span className="text-[8px] uppercase tracking-wider text-sky-400">Digital Twin</span>
+              <span className={`text-[8px] ${overallCoherence >= 70 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                {twinPositions.filter(p => p.isCoherent).length}/11
+              </span>
+            </div>
+            <div className="h-28 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative">
+              <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
+                <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
+                <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
+                {idealPositions.map((pos, idx) => (
+                  <circle key={idx} cx={pos.x} cy={pos.y * 0.65} r="2" fill="#38bdf8" opacity="0.9" />
+                ))}
+                <circle cx="45" cy="32.5" r="1" fill="white" />
+              </svg>
             </div>
           </div>
         </div>
