@@ -46,7 +46,18 @@ import {
   Target,
   GitCompare,
   Users,
+  Search,
+  AlertTriangle,
+  TrendingUp,
+  UserPlus,
+  Activity,
+  Heart,
+  BarChart3,
+  MessageSquare,
 } from 'lucide-react';
+import { NLPQueryInterface, nlpQueryInterface, type QueryResponse } from '@/lib/nlp-query-interface';
+import { InjuryPredictionEngine, type InjuryRiskScore } from '@/lib/injury-prediction';
+import { RecruitmentAI, type ScoutingReport, type PlayerComparison } from '@/lib/recruitment-ai';
 import {
   GameModelManager,
   createGameModelManager,
@@ -173,6 +184,17 @@ export default function Home() {
   const [isRecording, setIsRecording] = useState(false);
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
+
+  // Analytics Panel State
+  const [activePanel, setActivePanel] = useState<'match' | 'analytics' | 'medical' | 'scouting'>('match');
+  const [nlpQuery, setNlpQuery] = useState('');
+  const [nlpResponse, setNlpResponse] = useState<QueryResponse | null>(null);
+  const [isQueryProcessing, setIsQueryProcessing] = useState(false);
+  const injuryEngineRef = useRef<InjuryPredictionEngine>(new InjuryPredictionEngine());
+  const recruitmentAIRef = useRef<RecruitmentAI | null>(null);
+  const [injuryRisks, setInjuryRisks] = useState<Map<string, InjuryRiskScore>>(new Map());
+  const [scoutingReport, setScoutingReport] = useState<ScoutingReport | null>(null);
+  const [similarPlayers, setSimilarPlayers] = useState<PlayerComparison[]>([]);
 
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
@@ -600,6 +622,59 @@ export default function Home() {
     return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
   };
 
+  // Handle NLP Query
+  const handleNLPQuery = useCallback(async () => {
+    if (!nlpQuery.trim() || isQueryProcessing) return;
+    setIsQueryProcessing(true);
+
+    try {
+      // Register current players for entity recognition
+      nlpQueryInterface.registerPlayers(players);
+
+      const response = nlpQueryInterface.processQuery(nlpQuery, {
+        players: players,
+        events: matchEvents as unknown as import('@/types').MatchEvent[],
+      });
+
+      setNlpResponse(response);
+    } catch {
+      setNlpResponse({
+        success: false,
+        query: nlpQueryInterface.analyzeQuery(nlpQuery),
+        data: { type: 'summary', summary: 'Failed to process query' },
+        naturalLanguageResponse: 'Sorry, I could not process that query. Please try rephrasing.',
+        followUpQuestions: [],
+      });
+    }
+
+    setIsQueryProcessing(false);
+    setNlpQuery('');
+  }, [nlpQuery, isQueryProcessing, players, matchEvents]);
+
+  // Calculate injury risks for all players
+  useEffect(() => {
+    if (players.length > 0) {
+      const risks = new Map<string, InjuryRiskScore>();
+      players.forEach(player => {
+        const metrics = liveData.get(player.id);
+        const risk = injuryEngineRef.current.calculateRiskScore(player, metrics);
+        risks.set(player.id, risk);
+      });
+      setInjuryRisks(risks);
+    }
+  }, [players, liveData]);
+
+  // Get high risk players
+  const highRiskPlayers = useMemo(() => {
+    return Array.from(injuryRisks.entries())
+      .filter(([, risk]) => risk.riskCategory === 'high' || risk.riskCategory === 'critical')
+      .map(([playerId, risk]) => ({
+        player: players.find(p => p.id === playerId),
+        risk,
+      }))
+      .filter(item => item.player);
+  }, [injuryRisks, players]);
+
   // Get current game model name
   const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
   const modelName = activeGameModel?.name || GAME_MODEL_TEMPLATES.find(t => t.id === selectedTemplate)?.name || 'Total Football';
@@ -607,32 +682,67 @@ export default function Home() {
   return (
     <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
       {/* Header */}
-      <header className="flex-shrink-0 h-10 flex items-center justify-between px-4 bg-black/50 border-b border-white/5">
-        <div className="flex items-center gap-4">
-          <span className="text-sky-400 text-xs font-medium">MCI</span>
-          <span className="text-sm font-semibold tabular-nums">
-            {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
-          </span>
-          <span className="text-red-400 text-xs font-medium">MUN</span>
-          {isLive && matchState && (
-            <div className="flex items-center gap-1.5 ml-2">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-xs text-white/40 tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
+      <header className="flex-shrink-0 h-12 flex items-center justify-between px-4 bg-black/50 border-b border-white/5">
+        <div className="flex items-center gap-6">
+          {/* Match Score */}
+          <div className="flex items-center gap-4">
+            <span className="text-sky-400 text-xs font-medium">MCI</span>
+            <span className="text-sm font-semibold tabular-nums">
+              {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
+            </span>
+            <span className="text-red-400 text-xs font-medium">MUN</span>
+            {isLive && matchState && (
+              <div className="flex items-center gap-1.5 ml-2">
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                <span className="text-xs text-white/40 tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
+              </div>
+            )}
+          </div>
+
+          {/* Panel Navigation */}
+          <div className="flex items-center gap-1 bg-white/5 rounded-lg p-0.5">
+            {[
+              { id: 'match' as const, label: 'Match', icon: Activity },
+              { id: 'analytics' as const, label: 'Analytics', icon: BarChart3 },
+              { id: 'medical' as const, label: 'Medical', icon: Heart },
+              { id: 'scouting' as const, label: 'Scouting', icon: UserPlus },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActivePanel(tab.id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  activePanel === tab.id
+                    ? 'bg-white text-black'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <tab.icon className="w-3.5 h-3.5" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {/* Risk Indicator */}
+          {highRiskPlayers.length > 0 && (
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-red-500/20 border border-red-500/30 rounded-lg mr-2">
+              <AlertTriangle className="w-3.5 h-3.5 text-red-400" />
+              <span className="text-xs text-red-300">{highRiskPlayers.length} at risk</span>
             </div>
           )}
-        </div>
-        <div className="flex items-center gap-2">
+
           {!isLive ? (
-            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90">
-              <Play className="w-3 h-3" /> Start
+            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90">
+              <Play className="w-3 h-3" /> Start Match
             </button>
           ) : (
             <>
-              <button onClick={handlePauseMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full">
-                {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
+              <button onClick={handlePauseMatch} className="w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full">
+                {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
               </button>
-              <button onClick={handleEndMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-red-500/80 rounded-full">
-                <Square className="w-2.5 h-2.5" />
+              <button onClick={handleEndMatch} className="w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-red-500/80 rounded-full">
+                <Square className="w-3 h-3" />
               </button>
             </>
           )}
@@ -641,38 +751,375 @@ export default function Home() {
 
       {/* Main Content - Horizontal Layout */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
+        {/* Left: Main Content Area - Changes based on active panel */}
         <div className="flex-1 flex flex-col bg-zinc-950 p-2">
-          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
-            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
+          {activePanel === 'match' && (
+            <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+              <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
+                  <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
+                </div>
+                <div className="flex items-center gap-4 text-xs">
+                  <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
+                  <span className="text-white/20">|</span>
+                  <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-xs">
-                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                <span className="text-white/20">|</span>
-                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+              <div className="flex-1 overflow-hidden">
+                <PitchView
+                  players={players}
+                  awayPlayers={awayPlayers}
+                  liveData={liveData}
+                  awayLiveData={awayLiveData}
+                  selectedPlayerId={null}
+                  onPlayerClick={() => {}}
+                  ballPosition={matchState?.ballPosition}
+                  ballPossession={matchState?.ballPossession}
+                  defensiveBlock={matchState?.defensiveBlock}
+                  pressingIntensity={matchState?.pressingIntensity}
+                  analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
+                  patternRecognition={patternRecognitionData}
+                  fatigueData={fatigueData}
+                />
               </div>
             </div>
-            <div className="flex-1 overflow-hidden">
-              <PitchView
-                players={players}
-                awayPlayers={awayPlayers}
-                liveData={liveData}
-                awayLiveData={awayLiveData}
-                selectedPlayerId={null}
-                onPlayerClick={() => {}}
-                ballPosition={matchState?.ballPosition}
-                ballPossession={matchState?.ballPossession}
-                defensiveBlock={matchState?.defensiveBlock}
-                pressingIntensity={matchState?.pressingIntensity}
-                analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
-                patternRecognition={patternRecognitionData}
-                fatigueData={fatigueData}
-              />
+          )}
+
+          {activePanel === 'analytics' && (
+            <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+              <div className="flex-shrink-0 px-4 py-3 bg-black/40 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <MessageSquare className="w-4 h-4 text-cyan-400" />
+                  <span className="text-sm font-medium text-white">Analytics Query Interface</span>
+                </div>
+              </div>
+
+              {/* NLP Query Input */}
+              <div className="flex-shrink-0 p-4 border-b border-white/5">
+                <div className="flex gap-2">
+                  <div className="flex-1 relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                    <input
+                      type="text"
+                      value={nlpQuery}
+                      onChange={(e) => setNlpQuery(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleNLPQuery()}
+                      placeholder="Ask a question... (e.g., 'What are Haaland's stats this match?')"
+                      className="w-full pl-10 pr-4 py-2.5 bg-black/30 border border-white/10 rounded-lg text-sm text-white placeholder-white/30 focus:outline-none focus:border-cyan-500/50"
+                    />
+                  </div>
+                  <button
+                    onClick={handleNLPQuery}
+                    disabled={isQueryProcessing || !nlpQuery.trim()}
+                    className="px-4 py-2.5 bg-cyan-500 hover:bg-cyan-400 disabled:bg-white/10 disabled:text-white/30 text-black font-medium rounded-lg text-sm transition-all flex items-center gap-2"
+                  >
+                    {isQueryProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    Query
+                  </button>
+                </div>
+
+                {/* Example queries */}
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {[
+                    "Compare pressing intensity",
+                    "Top performers today",
+                    "Show shot map",
+                    "Formation analysis",
+                  ].map((q, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setNlpQuery(q)}
+                      className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-white/60 hover:text-white transition-all"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Query Response */}
+              <div className="flex-1 overflow-y-auto p-4">
+                {nlpResponse ? (
+                  <div className="space-y-4">
+                    {/* Response header */}
+                    <div className={`p-4 rounded-lg ${nlpResponse.success ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-red-500/10 border border-red-500/20'}`}>
+                      <div className="flex items-start gap-3">
+                        {nlpResponse.success ? (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                        )}
+                        <div>
+                          <p className="text-sm text-white">{nlpResponse.naturalLanguageResponse}</p>
+                          <p className="text-xs text-white/40 mt-1">
+                            Intent: {nlpResponse.query.intent} • Confidence: {Math.round(nlpResponse.query.confidence * 100)}%
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Data visualization hint */}
+                    {nlpResponse.visualizationHint && (
+                      <div className="p-4 bg-black/30 rounded-lg border border-white/5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <BarChart3 className="w-4 h-4 text-cyan-400" />
+                          <span className="text-xs uppercase tracking-wider text-white/50">Visualization</span>
+                        </div>
+                        <div className="h-48 flex items-center justify-center bg-zinc-800/50 rounded-lg border border-white/5">
+                          <span className="text-sm text-white/30">
+                            {nlpResponse.visualizationHint.type.replace('_', ' ')} chart
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Result data */}
+                    {nlpResponse.data.metrics && (
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {Object.entries(nlpResponse.data.metrics).slice(0, 8).map(([key, value]) => (
+                          <div key={key} className="p-3 bg-black/30 rounded-lg border border-white/5">
+                            <div className="text-xs text-white/40 mb-1">{key.replace(/_/g, ' ')}</div>
+                            <div className="text-lg font-medium text-white">{typeof value === 'number' ? value.toFixed(1) : value}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Follow-up questions */}
+                    {nlpResponse.followUpQuestions.length > 0 && (
+                      <div className="pt-4 border-t border-white/5">
+                        <span className="text-xs text-white/40 uppercase tracking-wider">Follow-up questions</span>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {nlpResponse.followUpQuestions.map((q, i) => (
+                            <button
+                              key={i}
+                              onClick={() => setNlpQuery(q)}
+                              className="px-3 py-1.5 bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 rounded-lg text-xs text-white/70 hover:text-cyan-300 transition-all"
+                            >
+                              {q}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="h-full flex flex-col items-center justify-center text-white/30">
+                    <Search className="w-12 h-12 mb-4 opacity-50" />
+                    <p className="text-sm">Ask any question about match data, player stats, or tactical analysis</p>
+                    <p className="text-xs mt-2 text-white/20">Uses natural language processing to understand your queries</p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
+          {activePanel === 'medical' && (
+            <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+              <div className="flex-shrink-0 px-4 py-3 bg-black/40 border-b border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Heart className="w-4 h-4 text-red-400" />
+                  <span className="text-sm font-medium text-white">Medical & Injury Risk</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-white/40">Squad Status:</span>
+                  <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded">
+                    {players.length - highRiskPlayers.length} fit
+                  </span>
+                  {highRiskPlayers.length > 0 && (
+                    <span className="px-2 py-0.5 bg-red-500/20 text-red-300 rounded">
+                      {highRiskPlayers.length} at risk
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4">
+                {/* High Risk Alert */}
+                {highRiskPlayers.length > 0 && (
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <div className="flex items-center gap-2 mb-3">
+                      <AlertTriangle className="w-5 h-5 text-red-400" />
+                      <span className="font-medium text-red-300">High Risk Players</span>
+                    </div>
+                    <div className="space-y-2">
+                      {highRiskPlayers.map(({ player, risk }) => player && (
+                        <div key={player.id} className="flex items-center justify-between p-3 bg-black/30 rounded-lg">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center text-xs font-medium text-red-300">
+                              {player.name.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-white">{player.name}</div>
+                              <div className="text-xs text-white/40">{player.position}</div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={`text-sm font-medium ${risk.riskCategory === 'critical' ? 'text-red-400' : 'text-orange-400'}`}>
+                              {Math.round(risk.overallRisk)}% risk
+                            </div>
+                            <div className="text-xs text-white/40">{risk.concerns[0]?.description || 'Elevated workload'}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Squad Overview */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-white mb-3">Squad Workload Overview</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {[
+                      { label: 'Avg ACWR', value: '0.95', status: 'good' },
+                      { label: 'High Load', value: `${Math.floor(players.length * 0.3)}`, status: 'warning' },
+                      { label: 'Recovery', value: `${Math.floor(players.length * 0.2)}`, status: 'good' },
+                      { label: 'Optimal', value: `${Math.floor(players.length * 0.5)}`, status: 'good' },
+                    ].map((stat, i) => (
+                      <div key={i} className="p-4 bg-black/30 rounded-lg border border-white/5">
+                        <div className="text-xs text-white/40 mb-1">{stat.label}</div>
+                        <div className={`text-2xl font-light ${stat.status === 'good' ? 'text-emerald-400' : stat.status === 'warning' ? 'text-amber-400' : 'text-red-400'}`}>
+                          {stat.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Player Risk List */}
+                <div>
+                  <h3 className="text-sm font-medium text-white mb-3">All Players - Injury Risk Assessment</h3>
+                  <div className="space-y-2">
+                    {players.slice(0, 11).map(player => {
+                      const risk = injuryRisks.get(player.id);
+                      const riskColor = risk?.riskCategory === 'low' ? 'emerald' : risk?.riskCategory === 'moderate' ? 'amber' : risk?.riskCategory === 'high' ? 'orange' : 'red';
+                      return (
+                        <div key={player.id} className="flex items-center justify-between p-3 bg-black/20 rounded-lg border border-white/5 hover:border-white/10 transition-all">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-2 h-2 rounded-full bg-${riskColor}-400`} />
+                            <div>
+                              <span className="text-sm text-white">{player.name}</span>
+                              <span className="text-xs text-white/40 ml-2">{player.position}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="text-right">
+                              <div className="text-xs text-white/40">Risk Score</div>
+                              <div className={`text-sm font-medium text-${riskColor}-400`}>
+                                {risk ? Math.round(risk.overallRisk) : 0}%
+                              </div>
+                            </div>
+                            <div className="w-24 h-2 bg-white/10 rounded-full overflow-hidden">
+                              <div
+                                className={`h-full bg-${riskColor}-400 rounded-full transition-all`}
+                                style={{ width: `${risk?.overallRisk || 0}%` }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activePanel === 'scouting' && (
+            <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
+              <div className="flex-shrink-0 px-4 py-3 bg-black/40 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <UserPlus className="w-4 h-4 text-purple-400" />
+                  <span className="text-sm font-medium text-white">Recruitment & Scouting</span>
+                </div>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4">
+                {/* Player Similarity Search */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-white mb-3">Find Similar Players</h3>
+                  <div className="flex gap-2 mb-4">
+                    <select className="flex-1 px-3 py-2 bg-black/30 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-purple-500/50">
+                      <option value="">Select a player to find similar profiles...</option>
+                      {players.slice(0, 11).map(p => (
+                        <option key={p.id} value={p.id}>{p.name} - {p.position}</option>
+                      ))}
+                    </select>
+                    <button className="px-4 py-2 bg-purple-500 hover:bg-purple-400 text-white font-medium rounded-lg text-sm transition-all">
+                      Search
+                    </button>
+                  </div>
+
+                  {/* Sample similar players */}
+                  <div className="space-y-3">
+                    {[
+                      { name: 'Florian Wirtz', age: 21, club: 'Leverkusen', similarity: 89, value: '130M' },
+                      { name: 'Jamal Musiala', age: 21, club: 'Bayern', similarity: 85, value: '120M' },
+                      { name: 'Pedri', age: 21, club: 'Barcelona', similarity: 82, value: '100M' },
+                    ].map((player, i) => (
+                      <div key={i} className="flex items-center justify-between p-4 bg-black/30 rounded-lg border border-white/5 hover:border-purple-500/30 transition-all cursor-pointer">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center text-sm font-medium text-purple-300">
+                            {player.name.split(' ').map(n => n[0]).join('')}
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium text-white">{player.name}</div>
+                            <div className="text-xs text-white/40">{player.club} • Age {player.age}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-6">
+                          <div className="text-right">
+                            <div className="text-xs text-white/40">Similarity</div>
+                            <div className="text-sm font-medium text-purple-400">{player.similarity}%</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-xs text-white/40">Value</div>
+                            <div className="text-sm font-medium text-white">€{player.value}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scouting Reports */}
+                <div>
+                  <h3 className="text-sm font-medium text-white mb-3">Recent Scouting Reports</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                      { player: 'Lamine Yamal', rating: 9.2, fit: 94, recommendation: 'sign' },
+                      { player: 'Nico Williams', rating: 8.8, fit: 88, recommendation: 'monitor' },
+                    ].map((report, i) => (
+                      <div key={i} className="p-4 bg-black/30 rounded-xl border border-white/5">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="text-sm font-medium text-white">{report.player}</div>
+                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                            report.recommendation === 'sign' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'
+                          }`}>
+                            {report.recommendation}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <div className="text-xs text-white/40 mb-1">Overall Rating</div>
+                            <div className="text-2xl font-light text-white">{report.rating}</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-white/40 mb-1">Squad Fit</div>
+                            <div className="text-2xl font-light text-purple-400">{report.fit}%</div>
+                          </div>
+                        </div>
+                        <button className="w-full mt-4 px-3 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs text-white/60 hover:text-white transition-all">
+                          View Full Report
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right Sidebar: Twin + Controls + Log */}

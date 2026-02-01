@@ -379,6 +379,199 @@ function Capabilities() {
   );
 }
 
+// Insights Section
+function Insights() {
+  const insights = [
+    {
+      category: 'Research',
+      title: 'Latent Space Modeling in Football Tactics',
+      description: 'How 256-dimensional representations capture the complexity of team coordination and reveal hidden patterns in formation dynamics.',
+      date: 'Jan 2025',
+      readTime: '8 min read',
+    },
+    {
+      category: 'Case Study',
+      title: 'Manchester City: Pressing Efficiency Analysis',
+      description: 'Deep dive into how PPDA metrics combined with GPS tracking revealed optimization opportunities in high-press scenarios.',
+      date: 'Dec 2024',
+      readTime: '12 min read',
+    },
+    {
+      category: 'Technical',
+      title: 'Injury Prediction with ACWR Models',
+      description: 'Acute:Chronic Workload Ratio calculations that reduced soft tissue injuries by 34% across three Premier League seasons.',
+      date: 'Nov 2024',
+      readTime: '10 min read',
+    },
+    {
+      category: 'Industry',
+      title: 'The Future of Digital Twins in Sport',
+      description: 'How behavioral modeling and real-time simulation are transforming pre-match preparation and in-game decision making.',
+      date: 'Oct 2024',
+      readTime: '6 min read',
+    },
+  ];
+
+  return (
+    <section id="insights" className="relative py-32 bg-black">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+          <div>
+            <span className="text-cyan-400 text-sm uppercase tracking-widest mb-4 block">Insights</span>
+            <h2 className="mb-4">
+              Latest from our
+              <br />
+              research team
+            </h2>
+          </div>
+          <p className="text-gray-400 max-w-md mt-4 md:mt-0">
+            Deep dives into football analytics, tactical modeling, and the science behind performance optimization.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {insights.map((insight, i) => (
+            <article
+              key={i}
+              className="group card-dark rounded-xl p-8 cursor-pointer transition-all duration-300 hover:border-cyan-500/30"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-xs uppercase tracking-wider rounded-full">
+                  {insight.category}
+                </span>
+                <span className="text-gray-500 text-sm">{insight.date}</span>
+                <span className="text-gray-600 text-sm">{insight.readTime}</span>
+              </div>
+              <h3 className="text-xl mb-3 group-hover:text-cyan-400 transition-colors">
+                {insight.title}
+              </h3>
+              <p className="text-gray-400 leading-relaxed">{insight.description}</p>
+              <div className="mt-6 flex items-center gap-2 text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                Read article <ArrowRight className="w-4 h-4" />
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <button className="btn-outline">
+            View all insights
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// About Section
+function About() {
+  const team = [
+    { role: 'CEO & Founder', expertise: 'Sports Science PhD, 15 years elite football' },
+    { role: 'CTO', expertise: 'ML Engineering, Ex-DeepMind' },
+    { role: 'Head of Analytics', expertise: 'Former PL Performance Director' },
+    { role: 'Lead Scientist', expertise: 'Biomechanics, Injury Prevention' },
+  ];
+
+  const milestones = [
+    { year: '2019', event: 'Founded with seed funding' },
+    { year: '2020', event: 'First Premier League partnership' },
+    { year: '2022', event: 'UFE engine breakthrough' },
+    { year: '2024', event: '12 elite clubs worldwide' },
+  ];
+
+  return (
+    <section id="about" className="relative py-32 bg-gradient-to-b from-black via-gray-950 to-black">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Mission */}
+          <div>
+            <span className="text-cyan-400 text-sm uppercase tracking-widest mb-4 block">About Us</span>
+            <h2 className="mb-6">
+              Pioneering the future of
+              <br />
+              football intelligence
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+              TACTICAL.AI was founded on a simple belief: the complexity of modern football
+              demands equally sophisticated analytical tools. We combine cutting-edge machine
+              learning with deep domain expertise to deliver insights that matter.
+            </p>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              Our team brings together world-class researchers, former elite coaches, and
+              engineers who have built AI systems at the highest level. We work directly
+              with performance departments to understand their real challenges and build
+              solutions that integrate seamlessly into their workflows.
+            </p>
+
+            {/* Values */}
+            <div className="grid grid-cols-2 gap-6 mt-12">
+              {[
+                { label: 'Precision', desc: 'Every metric validated against ground truth' },
+                { label: 'Speed', desc: 'Real-time insights when they matter most' },
+                { label: 'Privacy', desc: 'Military-grade data protection' },
+                { label: 'Partnership', desc: 'Your success is our success' },
+              ].map((value, i) => (
+                <div key={i} className="border-l-2 border-cyan-500/50 pl-4">
+                  <div className="text-white font-medium mb-1">{value.label}</div>
+                  <div className="text-gray-500 text-sm">{value.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline & Team */}
+          <div>
+            {/* Timeline */}
+            <div className="card-dark rounded-xl p-8 mb-8">
+              <h3 className="text-lg mb-6">Our Journey</h3>
+              <div className="space-y-6">
+                {milestones.map((m, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="text-cyan-400 font-mono text-sm w-16 flex-shrink-0">{m.year}</div>
+                    <div className="flex-1">
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 float-left mr-4" />
+                      <p className="text-gray-300">{m.event}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Leadership */}
+            <div className="card-dark rounded-xl p-8">
+              <h3 className="text-lg mb-6">Leadership</h3>
+              <div className="space-y-4">
+                {team.map((member, i) => (
+                  <div key={i} className="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                    <div className="text-white">{member.role}</div>
+                    <div className="text-gray-500 text-sm">{member.expertise}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 mt-8">
+              <div className="card-dark rounded-xl p-6 text-center">
+                <div className="text-3xl font-light text-white mb-1">50+</div>
+                <div className="text-gray-500 text-xs uppercase tracking-wider">Team Members</div>
+              </div>
+              <div className="card-dark rounded-xl p-6 text-center">
+                <div className="text-3xl font-light text-white mb-1">4</div>
+                <div className="text-gray-500 text-xs uppercase tracking-wider">Offices</div>
+              </div>
+              <div className="card-dark rounded-xl p-6 text-center">
+                <div className="text-3xl font-light text-white mb-1">12</div>
+                <div className="text-gray-500 text-xs uppercase tracking-wider">Countries</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // CTA Section
 function CTA() {
   return (
@@ -480,6 +673,8 @@ export default function HomePage() {
       <Stats />
       <Platform />
       <Capabilities />
+      <Insights />
+      <About />
       <CTA />
       <Footer />
     </main>
