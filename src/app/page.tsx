@@ -117,9 +117,8 @@ function Navigation() {
 
         <div className="hidden md:flex items-center gap-8">
           <a href="#platform" className="nav-link">Platform</a>
+          <a href="#algorithm" className="nav-link">Algorithm</a>
           <a href="#capabilities" className="nav-link">Capabilities</a>
-          <a href="#insights" className="nav-link">Insights</a>
-          <a href="#about" className="nav-link">About</a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -379,193 +378,117 @@ function Capabilities() {
   );
 }
 
-// Insights Section
-function Insights() {
-  const insights = [
-    {
-      category: 'Research',
-      title: 'Latent Space Modeling in Football Tactics',
-      description: 'How 256-dimensional representations capture the complexity of team coordination and reveal hidden patterns in formation dynamics.',
-      date: 'Jan 2025',
-      readTime: '8 min read',
-    },
-    {
-      category: 'Case Study',
-      title: 'Manchester City: Pressing Efficiency Analysis',
-      description: 'Deep dive into how PPDA metrics combined with GPS tracking revealed optimization opportunities in high-press scenarios.',
-      date: 'Dec 2024',
-      readTime: '12 min read',
-    },
-    {
-      category: 'Technical',
-      title: 'Injury Prediction with ACWR Models',
-      description: 'Acute:Chronic Workload Ratio calculations that reduced soft tissue injuries by 34% across three Premier League seasons.',
-      date: 'Nov 2024',
-      readTime: '10 min read',
-    },
-    {
-      category: 'Industry',
-      title: 'The Future of Digital Twins in Sport',
-      description: 'How behavioral modeling and real-time simulation are transforming pre-match preparation and in-game decision making.',
-      date: 'Oct 2024',
-      readTime: '6 min read',
-    },
-  ];
-
+// Algorithm Section - Core Technology Showcase
+function Algorithm() {
   return (
-    <section id="insights" className="relative py-32 bg-black">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
-          <div>
-            <span className="text-cyan-400 text-sm uppercase tracking-widest mb-4 block">Insights</span>
-            <h2 className="mb-4">
-              Latest from our
-              <br />
-              research team
-            </h2>
-          </div>
-          <p className="text-gray-400 max-w-md mt-4 md:mt-0">
-            Deep dives into football analytics, tactical modeling, and the science behind performance optimization.
+    <section id="algorithm" className="relative py-32 bg-black overflow-hidden">
+      {/* Background grid effect */}
+      <div className="absolute inset-0 hero-grid opacity-30" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="text-cyan-400 text-sm uppercase tracking-widest mb-4 block">Core Algorithm</span>
+          <h2 className="mb-6">
+            Undercurrent Flux Engine
+          </h2>
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            The mathematical foundation powering real-time tactical analysis.
+            256-dimensional latent space modeling meets energy-based coherence scoring.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {insights.map((insight, i) => (
-            <article
-              key={i}
-              className="group card-dark rounded-xl p-8 cursor-pointer transition-all duration-300 hover:border-cyan-500/30"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-xs uppercase tracking-wider rounded-full">
-                  {insight.category}
-                </span>
-                <span className="text-gray-500 text-sm">{insight.date}</span>
-                <span className="text-gray-600 text-sm">{insight.readTime}</span>
+        {/* Energy Function Display */}
+        <div className="card-dark rounded-2xl p-8 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse" />
+            <span className="text-xs uppercase tracking-widest text-cyan-400">Energy Function</span>
+          </div>
+
+          <div className="bg-black/50 rounded-xl p-8 font-mono text-center">
+            <div className="text-2xl md:text-3xl text-white mb-4">
+              E = α·<span className="text-cyan-400">Δtrajectory</span> + β·<span className="text-purple-400">friction</span> + γ·<span className="text-emerald-400">ε_self</span>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 mt-8 text-left">
+              <div className="p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
+                <div className="text-cyan-400 font-semibold mb-2">Trajectory Deviation</div>
+                <div className="text-sm text-gray-400">Measures divergence between predicted and actual player movements in latent space</div>
               </div>
-              <h3 className="text-xl mb-3 group-hover:text-cyan-400 transition-colors">
-                {insight.title}
-              </h3>
-              <p className="text-gray-400 leading-relaxed">{insight.description}</p>
-              <div className="mt-6 flex items-center gap-2 text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                Read article <ArrowRight className="w-4 h-4" />
+              <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+                <div className="text-purple-400 font-semibold mb-2">Undercurrent Friction</div>
+                <div className="text-sm text-gray-400">coherence_dev + fatigue_energy + overpress — tactical resistance forces</div>
               </div>
-            </article>
+              <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                <div className="text-emerald-400 font-semibold mb-2">Self-Prediction Error</div>
+                <div className="text-sm text-gray-400">Digital twin accuracy — how well the model predicts its own state</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Technical Specs Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {[
+            { value: '96', label: 'Input Dimensions', desc: 'GPS, biometrics, tactical' },
+            { value: '256', label: 'Latent Dimensions', desc: 'Compressed representation' },
+            { value: '10Hz', label: 'Sample Rate', desc: 'Real-time processing' },
+            { value: '<50ms', label: 'Inference Time', desc: 'End-to-end latency' },
+          ].map((spec, i) => (
+            <div key={i} className="card-dark rounded-xl p-6 text-center">
+              <div className="text-4xl font-light text-white mb-2">{spec.value}</div>
+              <div className="text-sm text-cyan-400 mb-1">{spec.label}</div>
+              <div className="text-xs text-gray-500">{spec.desc}</div>
+            </div>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <button className="btn-outline">
-            View all insights
-          </button>
+        {/* Feature Vector Breakdown */}
+        <div className="card-dark rounded-2xl p-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <Zap className="w-5 h-5 text-cyan-400" />
+              <span className="text-lg font-medium">96-Dimensional Feature Vector</span>
+            </div>
+            <span className="text-xs text-gray-500 uppercase tracking-wider">Real-time Input</span>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {[
+              { range: '0-6', label: 'Distance', color: 'bg-blue-500' },
+              { range: '7-15', label: 'Speed Zones', color: 'bg-cyan-500' },
+              { range: '16-25', label: 'Acceleration', color: 'bg-teal-500' },
+              { range: '26-34', label: 'Load/Position', color: 'bg-emerald-500' },
+              { range: '35-49', label: 'HR/Twin State', color: 'bg-green-500' },
+              { range: '50-59', label: 'Tactical', color: 'bg-lime-500' },
+              { range: '60-74', label: 'Formation', color: 'bg-yellow-500' },
+              { range: '75-87', label: 'Coherence', color: 'bg-orange-500' },
+              { range: '88-95', label: 'Physical', color: 'bg-red-500' },
+            ].map((segment, i) => (
+              <div key={i} className="p-3 bg-black/30 rounded-lg border border-white/5">
+                <div className={`w-full h-1 ${segment.color} rounded-full mb-2 opacity-60`} />
+                <div className="text-xs text-white/70">{segment.label}</div>
+                <div className="text-[10px] text-gray-500 font-mono">[{segment.range}]</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 p-4 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-emerald-500/10 rounded-lg border border-white/5">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+              <span className="text-sm text-white">Markov Chain Pattern Recognition</span>
+            </div>
+            <p className="text-xs text-gray-400">
+              Sequential tactical patterns are modeled as Markov chains, enabling prediction of opponent movements
+              and automatic detection of recurring sequences with Q-learning optimization for decision-making.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-// About Section
-function About() {
-  const team = [
-    { role: 'CEO & Founder', expertise: 'Sports Science PhD, 15 years elite football' },
-    { role: 'CTO', expertise: 'ML Engineering, Ex-DeepMind' },
-    { role: 'Head of Analytics', expertise: 'Former PL Performance Director' },
-    { role: 'Lead Scientist', expertise: 'Biomechanics, Injury Prevention' },
-  ];
-
-  const milestones = [
-    { year: '2019', event: 'Founded with seed funding' },
-    { year: '2020', event: 'First Premier League partnership' },
-    { year: '2022', event: 'UFE engine breakthrough' },
-    { year: '2024', event: '12 elite clubs worldwide' },
-  ];
-
-  return (
-    <section id="about" className="relative py-32 bg-gradient-to-b from-black via-gray-950 to-black">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Mission */}
-          <div>
-            <span className="text-cyan-400 text-sm uppercase tracking-widest mb-4 block">About Us</span>
-            <h2 className="mb-6">
-              Pioneering the future of
-              <br />
-              football intelligence
-            </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              TACTICAL.AI was founded on a simple belief: the complexity of modern football
-              demands equally sophisticated analytical tools. We combine cutting-edge machine
-              learning with deep domain expertise to deliver insights that matter.
-            </p>
-            <p className="text-gray-400 leading-relaxed mb-8">
-              Our team brings together world-class researchers, former elite coaches, and
-              engineers who have built AI systems at the highest level. We work directly
-              with performance departments to understand their real challenges and build
-              solutions that integrate seamlessly into their workflows.
-            </p>
-
-            {/* Values */}
-            <div className="grid grid-cols-2 gap-6 mt-12">
-              {[
-                { label: 'Precision', desc: 'Every metric validated against ground truth' },
-                { label: 'Speed', desc: 'Real-time insights when they matter most' },
-                { label: 'Privacy', desc: 'Military-grade data protection' },
-                { label: 'Partnership', desc: 'Your success is our success' },
-              ].map((value, i) => (
-                <div key={i} className="border-l-2 border-cyan-500/50 pl-4">
-                  <div className="text-white font-medium mb-1">{value.label}</div>
-                  <div className="text-gray-500 text-sm">{value.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Timeline & Team */}
-          <div>
-            {/* Timeline */}
-            <div className="card-dark rounded-xl p-8 mb-8">
-              <h3 className="text-lg mb-6">Our Journey</h3>
-              <div className="space-y-6">
-                {milestones.map((m, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="text-cyan-400 font-mono text-sm w-16 flex-shrink-0">{m.year}</div>
-                    <div className="flex-1">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 float-left mr-4" />
-                      <p className="text-gray-300">{m.event}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Leadership */}
-            <div className="card-dark rounded-xl p-8">
-              <h3 className="text-lg mb-6">Leadership</h3>
-              <div className="space-y-4">
-                {team.map((member, i) => (
-                  <div key={i} className="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
-                    <div className="text-white">{member.role}</div>
-                    <div className="text-gray-500 text-sm">{member.expertise}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="card-dark rounded-xl p-6 text-center">
-                <div className="text-3xl font-light text-white mb-1">50+</div>
-                <div className="text-gray-500 text-xs uppercase tracking-wider">Team Members</div>
-              </div>
-              <div className="card-dark rounded-xl p-6 text-center">
-                <div className="text-3xl font-light text-white mb-1">4</div>
-                <div className="text-gray-500 text-xs uppercase tracking-wider">Offices</div>
-              </div>
-              <div className="card-dark rounded-xl p-6 text-center">
-                <div className="text-3xl font-light text-white mb-1">12</div>
-                <div className="text-gray-500 text-xs uppercase tracking-wider">Countries</div>
-              </div>
-            </div>
-          </div>
+        {/* Live Demo CTA */}
+        <div className="mt-12 text-center">
+          <Link href="/dashboard" className="btn-primary inline-flex items-center gap-2">
+            <Play className="w-4 h-4" />
+            See Algorithm in Action
+          </Link>
         </div>
       </div>
     </section>
@@ -671,10 +594,9 @@ export default function HomePage() {
       <Navigation />
       <Hero />
       <Stats />
+      <Algorithm />
       <Platform />
       <Capabilities />
-      <Insights />
-      <About />
       <CTA />
       <Footer />
     </main>
