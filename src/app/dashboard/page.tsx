@@ -195,6 +195,24 @@ export default function Home() {
   const [injuryRisks, setInjuryRisks] = useState<Map<string, InjuryRiskScore>>(new Map());
   const [scoutingReport, setScoutingReport] = useState<ScoutingReport | null>(null);
   const [similarPlayers, setSimilarPlayers] = useState<PlayerComparison[]>([]);
+  const [selectedScoutingPlayer, setSelectedScoutingPlayer] = useState<string>('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  // Local type for display-friendly player comparisons
+  interface SimilarPlayerDisplay {
+    name: string;
+    position: string;
+    club: string;
+    age: number;
+    value: string;
+    similarityScore: number;
+    styleMatch: number;
+    physicalMatch: number;
+    technicalMatch: number;
+    mentalMatch: number;
+    keyDifferences: string[];
+  }
+  const [displaySimilarPlayers, setDisplaySimilarPlayers] = useState<SimilarPlayerDisplay[]>([]);
 
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
@@ -537,10 +555,17 @@ export default function Home() {
     setIsProcessing(false);
   }, [instructionInput, isProcessing, matchState?.minute]);
 
+  // Active trigger state for visual feedback
+  const [activeTrigger, setActiveTrigger] = useState<string | null>(null);
+
   // Handle pressing trigger button clicks
   const handleTriggerPress = useCallback((triggerId: string, label: string) => {
-    if (!gameModelManagerRef.current || isProcessing) return;
+    if (isProcessing) return;
     const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
+
+    // Visual feedback - set active trigger
+    setActiveTrigger(triggerId);
+    setTimeout(() => setActiveTrigger(null), 800);
 
     // Map trigger IDs to instructions
     const triggerInstructions: Record<string, string> = {
@@ -573,10 +598,12 @@ export default function Home() {
     };
     setInstructionLog(prev => [entry, ...prev].slice(0, 20));
 
-    // Process through game model manager in background
-    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
-      // Silently handle errors for triggers
-    });
+    // Process through game model manager in background if available
+    if (gameModelManagerRef.current) {
+      gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
+        // Silently handle errors for triggers
+      });
+    }
   }, [isProcessing, matchState?.minute]);
 
   const handleTemplateSelect = useCallback((templateId: string) => {
@@ -674,6 +701,74 @@ export default function Home() {
       }))
       .filter(item => item.player);
   }, [injuryRisks, players]);
+
+  // Handle scouting analysis
+  const handleScoutingAnalysis = useCallback(async () => {
+    if (!selectedScoutingPlayer || isAnalyzing) return;
+    setIsAnalyzing(true);
+
+    const referencePlayer = players.find(p => p.id === selectedScoutingPlayer);
+    if (referencePlayer) {
+      // Generate mock similar players based on the reference player's position
+      const mockPlayers: SimilarPlayerDisplay[] = [
+        {
+          name: 'Florian Wirtz',
+          position: referencePlayer.position,
+          club: 'B. Leverkusen',
+          age: 21,
+          value: '130M',
+          similarityScore: 89,
+          styleMatch: 92,
+          physicalMatch: 85,
+          technicalMatch: 91,
+          mentalMatch: 88,
+          keyDifferences: ['Higher dribbling frequency', 'Prefers left foot'],
+        },
+        {
+          name: 'Jamal Musiala',
+          position: referencePlayer.position,
+          club: 'Bayern Munich',
+          age: 21,
+          value: '120M',
+          similarityScore: 85,
+          styleMatch: 88,
+          physicalMatch: 82,
+          technicalMatch: 89,
+          mentalMatch: 84,
+          keyDifferences: ['More central role', 'Better in tight spaces'],
+        },
+        {
+          name: 'Pedri',
+          position: referencePlayer.position,
+          club: 'Barcelona',
+          age: 21,
+          value: '100M',
+          similarityScore: 82,
+          styleMatch: 85,
+          physicalMatch: 78,
+          technicalMatch: 88,
+          mentalMatch: 86,
+          keyDifferences: ['Better vision', 'Lower top speed'],
+        },
+        {
+          name: 'Jude Bellingham',
+          position: referencePlayer.position,
+          club: 'Real Madrid',
+          age: 20,
+          value: '150M',
+          similarityScore: 78,
+          styleMatch: 80,
+          physicalMatch: 90,
+          technicalMatch: 82,
+          mentalMatch: 85,
+          keyDifferences: ['More box-to-box', 'Aerial presence'],
+        },
+      ];
+      setDisplaySimilarPlayers(mockPlayers);
+    }
+
+    setTimeout(() => setIsAnalyzing(false), 500);
+  }, [selectedScoutingPlayer, isAnalyzing, players]);
 
   // Get current game model name
   const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
@@ -869,33 +964,111 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Response Area */}
-              <div className="flex-1 bg-black border border-white/[0.06] p-6 overflow-y-auto">
-                {nlpResponse ? (
-                  <div className="space-y-6">
-                    <div className={`p-4 border ${nlpResponse.success ? 'border-cyan-500/30 bg-cyan-500/5' : 'border-red-500/30 bg-red-500/5'}`}>
-                      <p className="text-sm text-white/80">{nlpResponse.naturalLanguageResponse}</p>
-                      <p className="text-[10px] text-white/30 mt-2 tracking-wider uppercase">
-                        Intent: {nlpResponse.query.intent} · Confidence: {Math.round(nlpResponse.query.confidence * 100)}%
-                      </p>
+              {/* Response Area - Terminal Style */}
+              <div className="flex-1 bg-black border border-white/[0.06] overflow-hidden flex flex-col">
+                {/* Terminal Header */}
+                <div className="flex-shrink-0 px-4 py-2 border-b border-white/[0.06] flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                      <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                      <div className="w-2 h-2 rounded-full bg-green-500/60" />
                     </div>
-                    {nlpResponse.data.metrics && (
-                      <div className="grid grid-cols-4 gap-px bg-white/[0.06]">
-                        {Object.entries(nlpResponse.data.metrics).slice(0, 8).map(([key, value]) => (
-                          <div key={key} className="bg-black p-4">
-                            <div className="text-[10px] text-white/30 tracking-wider uppercase mb-1">{key.replace(/_/g, ' ')}</div>
-                            <div className="text-xl font-light text-white tabular-nums">{typeof value === 'number' ? value.toFixed(1) : value}</div>
-                          </div>
-                        ))}
+                    <span className="text-[10px] text-white/30 tracking-wider ml-2">QUERY_OUTPUT</span>
+                  </div>
+                  {nlpResponse && (
+                    <div className="flex items-center gap-2">
+                      <div className={`w-1.5 h-1.5 rounded-full ${nlpResponse.success ? 'bg-emerald-400' : 'bg-red-400'}`} />
+                      <span className="text-[10px] text-white/40 tracking-wider uppercase">
+                        {nlpResponse.success ? 'SUCCESS' : 'ERROR'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Terminal Content */}
+                <div className="flex-1 overflow-y-auto p-4 font-mono">
+                  {nlpResponse ? (
+                    <div className="space-y-4">
+                      {/* Command Echo */}
+                      <div className="flex items-start gap-2">
+                        <span className="text-cyan-400 text-xs">{'>'}</span>
+                        <span className="text-white/60 text-xs">{nlpResponse.query.originalQuery || 'query'}</span>
                       </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-white/20">
-                    <Search className="w-8 h-8 mb-3 opacity-50" />
-                    <p className="text-xs tracking-wider uppercase">Enter query to analyze match data</p>
-                  </div>
-                )}
+
+                      {/* Status Line */}
+                      <div className="text-[10px] text-white/30 tracking-wider pl-4 border-l border-white/10">
+                        INTENT: <span className="text-purple-400">{nlpResponse.query.intent}</span>
+                        {' · '}CONFIDENCE: <span className="text-cyan-400">{Math.round(nlpResponse.query.confidence * 100)}%</span>
+                        {' · '}ENTITIES: <span className="text-amber-400">{
+                          Object.values(nlpResponse.query.entities || {}).reduce((sum, arr) => sum + (Array.isArray(arr) ? arr.length : 0), 0)
+                        }</span>
+                      </div>
+
+                      {/* Response Output */}
+                      <div className="p-4 bg-white/[0.02] border-l-2 border-cyan-500/50">
+                        <p className="text-sm text-white/80 leading-relaxed">{nlpResponse.naturalLanguageResponse}</p>
+                      </div>
+
+                      {/* Metrics Grid */}
+                      {nlpResponse.data.metrics && Object.keys(nlpResponse.data.metrics).length > 0 && (
+                        <div className="space-y-2">
+                          <div className="text-[10px] text-white/30 tracking-widest uppercase">// DATA MATRIX</div>
+                          <div className="grid grid-cols-4 gap-[1px] bg-white/[0.04]">
+                            {Object.entries(nlpResponse.data.metrics).slice(0, 8).map(([key, value]) => (
+                              <div key={key} className="bg-black p-3 group hover:bg-cyan-500/5 transition-colors">
+                                <div className="text-[9px] text-white/25 tracking-wider uppercase mb-1 truncate">{key.replace(/_/g, ' ')}</div>
+                                <div className="text-lg font-light text-cyan-400 tabular-nums group-hover:text-cyan-300">
+                                  {typeof value === 'number' ? value.toFixed(1) : String(value)}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Follow-up Suggestions */}
+                      {nlpResponse.followUpQuestions && nlpResponse.followUpQuestions.length > 0 && (
+                        <div className="space-y-2 pt-2">
+                          <div className="text-[10px] text-white/30 tracking-widest uppercase">// SUGGESTED QUERIES</div>
+                          <div className="flex flex-wrap gap-2">
+                            {nlpResponse.followUpQuestions.map((q, i) => (
+                              <button
+                                key={i}
+                                onClick={() => setNlpQuery(q)}
+                                className="px-3 py-1.5 bg-white/[0.02] border border-white/10 text-[10px] text-white/40 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-cyan-500/5 tracking-wider transition-all"
+                              >
+                                {q}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Cursor */}
+                      <div className="flex items-center gap-2 pt-2">
+                        <span className="text-cyan-400 text-xs">{'>'}</span>
+                        <span className="w-2 h-4 bg-cyan-400/70 animate-pulse" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="h-full flex flex-col items-center justify-center">
+                      <div className="text-center space-y-4">
+                        <div className="w-16 h-16 mx-auto border border-white/10 flex items-center justify-center">
+                          <Search className="w-6 h-6 text-white/20" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-xs text-white/40 tracking-wider uppercase">Awaiting Query Input</p>
+                          <p className="text-[10px] text-white/20">Enter natural language query to analyze match data</p>
+                        </div>
+                        <div className="flex items-center justify-center gap-2 pt-2">
+                          <span className="text-cyan-400/50 text-xs">{'>'}</span>
+                          <span className="w-2 h-4 bg-cyan-400/30 animate-pulse" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -967,52 +1140,115 @@ export default function Home() {
                   <span className="text-xs tracking-widest text-white/50 uppercase">Player Similarity Engine</span>
                 </div>
                 <div className="flex gap-3">
-                  <select className="flex-1 px-4 py-3 bg-white/[0.02] border border-white/10 text-sm text-white focus:outline-none focus:border-purple-500/50">
+                  <select
+                    value={selectedScoutingPlayer}
+                    onChange={(e) => setSelectedScoutingPlayer(e.target.value)}
+                    className="flex-1 px-4 py-3 bg-white/[0.02] border border-white/10 text-sm text-white focus:outline-none focus:border-purple-500/50"
+                  >
                     <option value="">Select reference player...</option>
                     {players.slice(0, 11).map(p => (
                       <option key={p.id} value={p.id}>{p.name}</option>
                     ))}
                   </select>
-                  <button className="px-6 py-3 bg-purple-500 hover:bg-purple-400 text-black text-xs tracking-wider uppercase">
-                    Analyze
+                  <button
+                    onClick={handleScoutingAnalysis}
+                    disabled={!selectedScoutingPlayer || isAnalyzing}
+                    className={`px-6 py-3 text-xs tracking-wider uppercase transition-all ${
+                      !selectedScoutingPlayer || isAnalyzing
+                        ? 'bg-white/10 text-white/30 cursor-not-allowed'
+                        : 'bg-purple-500 hover:bg-purple-400 text-black'
+                    }`}
+                  >
+                    {isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Analyze'}
                   </button>
                 </div>
               </div>
 
-              {/* Results */}
-              <div className="flex-1 bg-black border border-white/[0.06] overflow-y-auto">
-                <div className="p-4 border-b border-white/[0.06]">
-                  <span className="text-[10px] tracking-widest text-white/50 uppercase">Similar Profiles</span>
+              {/* Results - Terminal Style */}
+              <div className="flex-1 bg-black border border-white/[0.06] overflow-hidden flex flex-col">
+                {/* Terminal Header */}
+                <div className="flex-shrink-0 px-4 py-2 border-b border-white/[0.06] flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                      <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                      <div className="w-2 h-2 rounded-full bg-green-500/60" />
+                    </div>
+                    <span className="text-[10px] text-white/30 tracking-wider ml-2">SIMILARITY_ENGINE</span>
+                  </div>
+                  {displaySimilarPlayers.length > 0 && (
+                    <span className="text-[10px] text-purple-400 tracking-wider">{displaySimilarPlayers.length} MATCHES</span>
+                  )}
                 </div>
-                <div className="divide-y divide-white/[0.04]">
-                  {[
-                    { name: 'Florian Wirtz', club: 'B. Leverkusen', similarity: 89, value: '130M', age: 21 },
-                    { name: 'Jamal Musiala', club: 'Bayern Munich', similarity: 85, value: '120M', age: 21 },
-                    { name: 'Pedri', club: 'Barcelona', similarity: 82, value: '100M', age: 21 },
-                    { name: 'Jude Bellingham', club: 'Real Madrid', similarity: 78, value: '150M', age: 20 },
-                  ].map((player, i) => (
-                    <div key={i} className="flex items-center justify-between px-4 py-4 hover:bg-white/[0.02] cursor-pointer">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 border border-purple-500/30 bg-purple-500/10 flex items-center justify-center text-xs text-purple-400">
-                          {player.name.split(' ').map(n => n[0]).join('')}
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto">
+                  {displaySimilarPlayers.length > 0 ? (
+                    <div className="divide-y divide-white/[0.04]">
+                      {displaySimilarPlayers.map((player, i) => (
+                        <div key={i} className="p-4 hover:bg-white/[0.02] cursor-pointer group">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 border border-purple-500/30 bg-purple-500/10 flex items-center justify-center text-xs text-purple-400 font-mono">
+                                {player.name.split(' ').map(n => n[0]).join('')}
+                              </div>
+                              <div>
+                                <div className="text-sm text-white/90 group-hover:text-purple-400 transition-colors">{player.name}</div>
+                                <div className="text-[10px] text-white/30 tracking-wider uppercase">{player.club} · {player.age}y · €{player.value}</div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-2xl font-light text-purple-400 tabular-nums">{player.similarityScore}%</div>
+                              <div className="text-[9px] text-white/30 tracking-wider">MATCH</div>
+                            </div>
+                          </div>
+                          {/* Attribute Bars */}
+                          <div className="grid grid-cols-4 gap-3 mt-3">
+                            {[
+                              { label: 'STYLE', value: player.styleMatch },
+                              { label: 'PHYSICAL', value: player.physicalMatch },
+                              { label: 'TECHNICAL', value: player.technicalMatch },
+                              { label: 'MENTAL', value: player.mentalMatch },
+                            ].map((attr, j) => (
+                              <div key={j}>
+                                <div className="text-[8px] text-white/30 tracking-wider mb-1">{attr.label}</div>
+                                <div className="h-1 bg-white/10">
+                                  <div
+                                    className="h-full bg-purple-500/70 transition-all"
+                                    style={{ width: `${attr.value}%` }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          {/* Key Differences */}
+                          {player.keyDifferences.length > 0 && (
+                            <div className="mt-3 pt-3 border-t border-white/[0.04]">
+                              <div className="flex flex-wrap gap-2">
+                                {player.keyDifferences.map((diff, k) => (
+                                  <span key={k} className="px-2 py-0.5 bg-white/[0.03] text-[9px] text-white/40 tracking-wider">
+                                    {diff}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
-                        <div>
-                          <div className="text-sm text-white/90">{player.name}</div>
-                          <div className="text-[10px] text-white/30 tracking-wider uppercase">{player.club} · {player.age}y</div>
-                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="h-full flex flex-col items-center justify-center p-8">
+                      <div className="w-16 h-16 border border-white/10 flex items-center justify-center mb-4">
+                        <GitCompare className="w-6 h-6 text-white/20" />
                       </div>
-                      <div className="flex items-center gap-8">
-                        <div className="text-right">
-                          <div className="text-xs text-white/30 tracking-wider">MATCH</div>
-                          <div className="text-lg font-light text-purple-400 tabular-nums">{player.similarity}%</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs text-white/30 tracking-wider">VALUE</div>
-                          <div className="text-lg font-light text-white/80 tabular-nums">€{player.value}</div>
-                        </div>
+                      <p className="text-xs text-white/40 tracking-wider uppercase mb-1">No Analysis Active</p>
+                      <p className="text-[10px] text-white/20 text-center">Select a reference player and click Analyze to find similar profiles</p>
+                      <div className="flex items-center gap-2 mt-4">
+                        <span className="text-purple-400/50 text-xs">{'>'}</span>
+                        <span className="w-2 h-4 bg-purple-400/30 animate-pulse" />
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
@@ -1072,7 +1308,11 @@ export default function Home() {
                 <button
                   key={trigger.id}
                   onClick={() => handleTriggerPress(trigger.id, trigger.label)}
-                  className="px-3 py-2 border border-white/10 text-[10px] text-white/50 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-cyan-500/5 tracking-wider transition-all"
+                  className={`px-3 py-2 border text-[10px] tracking-wider transition-all ${
+                    activeTrigger === trigger.id
+                      ? 'bg-cyan-500 text-black border-cyan-400 scale-95'
+                      : 'border-white/10 text-white/50 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-cyan-500/5'
+                  }`}
                 >
                   {trigger.label}
                 </button>
