@@ -252,10 +252,11 @@ export class RecruitmentAI {
     }
 
     const sum = stats.reduce((acc, s) => {
-      Object.keys(s).forEach(key => {
-        if (typeof (s as Record<string, unknown>)[key] === 'number') {
+      const sRecord = s as unknown as Record<string, unknown>;
+      Object.keys(sRecord).forEach(key => {
+        if (typeof sRecord[key] === 'number') {
           (acc as Record<string, number>)[key] = ((acc as Record<string, number>)[key] || 0) +
-            ((s as Record<string, number>)[key] || 0);
+            (sRecord[key] as number);
         }
       });
       return acc;
@@ -477,14 +478,20 @@ export class RecruitmentAI {
 
     let score = 50;
 
-    // Check pressing requirements
-    if (this.gameModel.principles.outOfPossession.pressingTriggers.length > 0) {
+    // Check pressing requirements (from defensive principles)
+    const highPressRequired = this.gameModel.principles.outOfPossession.some(
+      p => p.pressureType === 'high' && p.triggers.length > 0
+    );
+    if (highPressRequired) {
       if (player.labels.pressureRate > 15) score += 15;
       if (player.labels.pressureIntensity > 10) score += 10;
     }
 
     // Check possession requirements
-    if (this.gameModel.principles.inPossession.buildUpStyle === 'short_passing') {
+    const shortPassingStyle = this.gameModel.principles.inPossession.some(
+      p => p.name.toLowerCase().includes('short') || p.name.toLowerCase().includes('build')
+    );
+    if (shortPassingStyle) {
       if (player.labels.passVolume > 50) score += 15;
       if (player.labels.passProgression > 20) score += 10;
     }

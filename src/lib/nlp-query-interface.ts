@@ -5,7 +5,16 @@
  * and tactical analysis. Provides intelligent parsing and response generation.
  */
 
-import type { Player, MatchEvent, TacticalZone } from '@/types';
+import type { Player, MatchEvent, PitchZone } from '@/types';
+
+// Local type for tactical zone data
+export interface TacticalZone {
+  id: string;
+  zone: PitchZone;
+  controlPercentage: number;
+  entries: number;
+  exits: number;
+}
 
 // Query Intent Types
 export type QueryIntent =
