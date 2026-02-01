@@ -1,0 +1,701 @@
+// Football Analytics Platform - Database Schema
+// Prisma Schema for PostgreSQL
+// Designed for Premier League data department requirements
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// CORE ENTITIES
+// ============================================
+
+model Club {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  shortName     String   @db.VarChar(5)
+  country       String
+  league        String
+  stadium       String?
+  capacity      Int?
+  founded       Int?
+  logoUrl       String?
+  primaryColor  String?
+  secondaryColor String?
+
+  // Relations
+  players       Player[]
+  homeMatches   Match[]  @relation("HomeTeam")
+  awayMatches   Match[]  @relation("AwayTeam")
+  seasons       ClubSeason[]
+  transfers     Transfer[]
+  staff         Staff[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([league])
+  @@index([country])
+}
+
+model Player {
+  id                String   @id @default(cuid())
+  externalIds       Json?    // { opta: "...", statsbomb: "...", transfermarkt: "..." }
+
+  // Basic Info
+  firstName         String
+  lastName          String
+  displayName       String
+  dateOfBirth       DateTime
+  nationality       String
+  secondNationality String?
+  height            Float?   // cm
+  weight            Float?   // kg
+  preferredFoot     String?  // left, right, both
+
+  // Current Status
+  currentClubId     String?
+  currentClub       Club?    @relation(fields: [currentClubId], references: [id])
+  position          String   // Primary position
+  positions         String[] // All positions played
+  shirtNumber       Int?
+  contractExpiry    DateTime?
+  marketValue       Float?   // millions EUR
+
+  // Physical Profile
+  maxSpeed          Float?   // km/h
+  acceleration      Float?   // m/s²
+  sprintCapacity    Float?   // meters per 90
+
+  // Relations
+  matchEvents       MatchEvent[]
+  trackingData      TrackingData[]
+  injuries          Injury[]
+  transfers         Transfer[]
+  seasonStats       PlayerSeasonStats[]
+  workloadRecords   WorkloadRecord[]
+  scoutingReports   ScoutingReport[]
+  styleVector       PlayerStyleVector?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([firstName, lastName, dateOfBirth])
+  @@index([currentClubId])
+  @@index([position])
+  @@index([nationality])
+}
+
+model Staff {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  role        String   // manager, assistant, coach, analyst, physio, etc.
+  clubId      String?
+  club        Club?    @relation(fields: [clubId], references: [id])
+  nationality String?
+  dateOfBirth DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([clubId])
+  @@index([role])
+}
+
+// ============================================
+// MATCH & COMPETITION DATA
+// ============================================
+
+model Competition {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  shortName String   @db.VarChar(10)
+  country   String
+  type      String   // league, cup, international
+  tier      Int      @default(1)
+
+  seasons   Season[]
+  matches   Match[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Season {
+  id            String   @id @default(cuid())
+  competitionId String
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  year          String   // "2024-25"
+  startDate     DateTime
+  endDate       DateTime
+
+  matches       Match[]
+  clubSeasons   ClubSeason[]
+  playerStats   PlayerSeasonStats[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([competitionId, year])
+}
+
+model ClubSeason {
+  id            String   @id @default(cuid())
+  clubId        String
+  club          Club     @relation(fields: [clubId], references: [id])
+  seasonId      String
+  season        Season   @relation(fields: [seasonId], references: [id])
+
+  // League standings
+  position      Int?
+  played        Int      @default(0)
+  won           Int      @default(0)
+  drawn         Int      @default(0)
+  lost          Int      @default(0)
+  goalsFor      Int      @default(0)
+  goalsAgainst  Int      @default(0)
+  points        Int      @default(0)
+
+  // Advanced metrics
+  xGFor         Float    @default(0)
+  xGAgainst     Float    @default(0)
+  ppda          Float?   // Passes allowed per defensive action
+  oppPpda       Float?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([clubId, seasonId])
+}
+
+model Match {
+  id              String   @id @default(cuid())
+  externalIds     Json?    // { opta: "...", statsbomb: "..." }
+
+  // Basic Info
+  competitionId   String
+  competition     Competition @relation(fields: [competitionId], references: [id])
+  seasonId        String
+  season          Season   @relation(fields: [seasonId], references: [id])
+  matchday        Int?
+
+  // Teams
+  homeTeamId      String
+  homeTeam        Club     @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeamId      String
+  awayTeam        Club     @relation("AwayTeam", fields: [awayTeamId], references: [id])
+
+  // Result
+  homeScore       Int?
+  awayScore       Int?
+  status          String   @default("scheduled") // scheduled, live, finished, postponed
+
+  // Timing
+  kickoff         DateTime
+  venue           String?
+  attendance      Int?
+  referee         String?
+
+  // Advanced Stats
+  homeXG          Float?
+  awayXG          Float?
+  homePossession  Float?
+  awayPossession  Float?
+
+  // Relations
+  events          MatchEvent[]
+  trackingFrames  TrackingData[]
+  lineups         MatchLineup[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([competitionId, seasonId])
+  @@index([homeTeamId])
+  @@index([awayTeamId])
+  @@index([kickoff])
+  @@index([status])
+}
+
+model MatchLineup {
+  id            String   @id @default(cuid())
+  matchId       String
+  match         Match    @relation(fields: [matchId], references: [id])
+  teamId        String
+
+  // Formation
+  formation     String   // "4-3-3", "4-4-2", etc.
+
+  // Player positions (JSON array)
+  startingXI    Json     // [{ playerId, position, shirtNumber }]
+  substitutes   Json     // [{ playerId, position, shirtNumber }]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([matchId, teamId])
+}
+
+// ============================================
+// EVENT DATA (Opta/StatsBomb normalized)
+// ============================================
+
+model MatchEvent {
+  id              String   @id @default(cuid())
+  matchId         String
+  match           Match    @relation(fields: [matchId], references: [id])
+  playerId        String?
+  player          Player?  @relation(fields: [playerId], references: [id])
+
+  // Event Details
+  eventType       String   // pass, shot, tackle, foul, etc.
+  eventSubType    String?  // through_ball, header, etc.
+  minute          Int
+  second          Int?
+  period          String   // first_half, second_half, extra_time, penalties
+
+  // Location
+  startX          Float?   // 0-100 pitch coordinates
+  startY          Float?
+  endX            Float?
+  endY            Float?
+
+  // Outcome
+  outcome         String?  // successful, unsuccessful, goal, saved, etc.
+
+  // Advanced Metrics
+  xG              Float?   // For shots
+  xA              Float?   // For key passes
+
+  // Related Events
+  relatedEventId  String?  // Link to resulting event (e.g., shot from pass)
+
+  // Raw Data
+  rawData         Json?    // Original provider data
+  provider        String   // opta, statsbomb, internal
+
+  createdAt       DateTime @default(now())
+
+  @@index([matchId])
+  @@index([playerId])
+  @@index([eventType])
+  @@index([minute])
+}
+
+// ============================================
+// TRACKING DATA (GPS/Optical)
+// ============================================
+
+model TrackingData {
+  id          String   @id @default(cuid())
+  matchId     String
+  match       Match    @relation(fields: [matchId], references: [id])
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id])
+
+  // Frame Info
+  frameId     Int      // Frame number in match
+  timestamp   Float    // Seconds from kickoff
+  period      String
+
+  // Position
+  x           Float    // Pitch coordinates (0-105m)
+  y           Float    // (0-68m)
+
+  // Movement
+  speed       Float?   // km/h
+  acceleration Float?  // m/s²
+  direction   Float?   // degrees
+
+  // Ball
+  hasBall     Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+
+  @@index([matchId, frameId])
+  @@index([playerId])
+  @@index([matchId, playerId])
+}
+
+// ============================================
+// PLAYER ANALYTICS
+// ============================================
+
+model PlayerSeasonStats {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id])
+  seasonId        String
+  season          Season   @relation(fields: [seasonId], references: [id])
+
+  // Appearances
+  appearances     Int      @default(0)
+  starts          Int      @default(0)
+  minutesPlayed   Int      @default(0)
+
+  // Goals & Assists
+  goals           Int      @default(0)
+  assists         Int      @default(0)
+  xG              Float    @default(0)
+  xA              Float    @default(0)
+  npxG            Float    @default(0) // Non-penalty xG
+
+  // Shooting
+  shots           Int      @default(0)
+  shotsOnTarget   Int      @default(0)
+
+  // Passing
+  passes          Int      @default(0)
+  passesCompleted Int      @default(0)
+  keyPasses       Int      @default(0)
+  progressivePasses Int    @default(0)
+
+  // Defending
+  tackles         Int      @default(0)
+  tacklesWon      Int      @default(0)
+  interceptions   Int      @default(0)
+  clearances      Int      @default(0)
+  blocks          Int      @default(0)
+
+  // Dribbling
+  dribbles        Int      @default(0)
+  dribblesSuccessful Int   @default(0)
+  progressiveCarries Int   @default(0)
+
+  // Physical
+  distanceCovered Float    @default(0) // Total km
+  sprints         Int      @default(0)
+  topSpeed        Float?
+
+  // Discipline
+  yellowCards     Int      @default(0)
+  redCards        Int      @default(0)
+  foulsCommitted  Int      @default(0)
+  foulsSuffered   Int      @default(0)
+
+  // Aerial
+  aerialsWon      Int      @default(0)
+  aerialsLost     Int      @default(0)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([playerId, seasonId])
+  @@index([seasonId])
+}
+
+model PlayerStyleVector {
+  id              String   @id @default(cuid())
+  playerId        String   @unique
+  player          Player   @relation(fields: [playerId], references: [id])
+
+  // 64-dimensional style vector (stored as array)
+  vector          Float[]
+
+  // Key style dimensions (extracted from vector)
+  playmakerIndex  Float?
+  finisherIndex   Float?
+  defenderIndex   Float?
+  pressureIndex   Float?
+  dribbleIndex    Float?
+  aerialIndex     Float?
+
+  // Metadata
+  matchesSampled  Int      @default(0)
+  lastUpdated     DateTime @updatedAt
+
+  createdAt       DateTime @default(now())
+}
+
+// ============================================
+// INJURY & WORKLOAD TRACKING
+// ============================================
+
+model Injury {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id])
+
+  // Injury Details
+  type            String   // muscle, ligament, bone, concussion, illness
+  bodyPart        String   // hamstring, knee, ankle, etc.
+  severity        String   // minor, moderate, severe
+
+  // Dates
+  injuryDate      DateTime
+  expectedReturn  DateTime?
+  actualReturn    DateTime?
+
+  // Context
+  matchId         String?  // Match where injury occurred
+  trainingRelated Boolean  @default(false)
+
+  notes           String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([playerId])
+  @@index([injuryDate])
+  @@index([type])
+}
+
+model WorkloadRecord {
+  id                    String   @id @default(cuid())
+  playerId              String
+  player                Player   @relation(fields: [playerId], references: [id])
+
+  date                  DateTime
+  sessionType           String   // match, training, recovery
+
+  // Load Metrics
+  duration              Int      // minutes
+  distance              Float    // km
+  highSpeedDistance     Float    @default(0) // km above 21 km/h
+  sprintDistance        Float    @default(0) // km above 25 km/h
+  accelerations         Int      @default(0)
+  decelerations         Int      @default(0)
+
+  // Intensity
+  averageHeartRate      Float?
+  maxHeartRate          Float?
+  rpe                   Float?   // Rate of Perceived Exertion (1-10)
+
+  // Calculated
+  trainingLoad          Float?   // Session RPE * duration
+
+  createdAt             DateTime @default(now())
+
+  @@index([playerId, date])
+  @@index([date])
+}
+
+// ============================================
+// TRANSFERS & SCOUTING
+// ============================================
+
+model Transfer {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id])
+
+  fromClubId      String?
+  fromClub        Club?    @relation(fields: [fromClubId], references: [id])
+  toClubId        String?  // null for free agents
+
+  transferDate    DateTime
+  fee             Float?   // millions EUR
+  transferType    String   // permanent, loan, free, youth
+
+  contractLength  Int?     // years
+  wages           Float?   // weekly, thousands EUR
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([playerId])
+  @@index([fromClubId])
+  @@index([toClubId])
+  @@index([transferDate])
+}
+
+model ScoutingReport {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id])
+  scoutName       String
+
+  // Assessment
+  overallRating   Float    // 1-10
+  technicalRating Float?
+  tacticalRating  Float?
+  physicalRating  Float?
+  mentalRating    Float?
+
+  // Fit Assessment
+  styleFit        Float?   // How well they fit our system
+  squadFit        Float?   // Gap they would fill
+
+  // Notes
+  strengths       String[]
+  weaknesses      String[]
+  summary         String?
+  recommendation  String   // sign, monitor, pass
+
+  // Context
+  matchesWatched  Int      @default(1)
+  reportDate      DateTime @default(now())
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([playerId])
+  @@index([recommendation])
+  @@index([reportDate])
+}
+
+// ============================================
+// TACTICAL ANALYSIS
+// ============================================
+
+model TacticalAnalysis {
+  id              String   @id @default(cuid())
+  matchId         String?
+  teamId          String
+
+  analysisType    String   // pre_match, post_match, opponent
+
+  // Formation & Shape
+  formation       String
+  avgDefensiveLineHeight Float?
+  avgWidth        Float?
+  compactness     Float?
+
+  // Pressing
+  ppda            Float?
+  pressureZones   Json?    // Heatmap data
+  pressTriggers   String[]
+
+  // Build-up
+  buildUpStyle    String?  // short, direct, mixed
+  progressionZones Json?
+
+  // Attack
+  attackingStyle  String?
+  chancesCreatedZones Json?
+
+  // Transitions
+  counterFrequency Float?
+  transitionSpeed Float?
+
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([matchId])
+  @@index([teamId])
+  @@index([analysisType])
+}
+
+// ============================================
+// UFE INTEGRATION
+// ============================================
+
+model UFESnapshot {
+  id              String   @id @default(cuid())
+  matchId         String?
+  timestamp       DateTime @default(now())
+
+  // Latent State
+  latentVector    Float[]  // 256-dimensional
+
+  // Feature Input
+  featureVector   Float[]  // 96-dimensional input
+
+  // Energy Components
+  totalEnergy     Float
+  trajectoryDeviation Float?
+  undercurrentFriction Float?
+  selfPredictionError Float?
+
+  // Friction Terms
+  coherenceDev    Float?
+  fatigueEnergy   Float?
+  overpress       Float?
+
+  // Metadata
+  scenario        String?  // tactical_scenario name
+  teamId          String?
+
+  createdAt       DateTime @default(now())
+
+  @@index([matchId])
+  @@index([timestamp])
+  @@index([teamId])
+}
+
+// ============================================
+// USER & ACCESS
+// ============================================
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String
+  role            String   // admin, analyst, scout, coach, viewer
+  department      String?  // first_team, academy, recruitment, medical
+
+  // Auth
+  passwordHash    String?
+  lastLogin       DateTime?
+
+  // Preferences
+  preferences     Json?
+
+  // Activity
+  queries         QueryLog[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([role])
+  @@index([department])
+}
+
+model QueryLog {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+
+  query           String
+  intent          String?
+  entities        Json?
+  responseTime    Int?     // ms
+  successful      Boolean  @default(true)
+
+  createdAt       DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([intent])
+}
+
+// ============================================
+// DATA INGESTION
+// ============================================
+
+model DataIngestion {
+  id              String   @id @default(cuid())
+  provider        String   // opta, statsbomb, internal, gps
+  dataType        String   // events, tracking, stats
+
+  status          String   @default("pending") // pending, processing, completed, failed
+
+  // File Info
+  fileName        String?
+  fileSize        Int?
+  recordCount     Int?
+
+  // Processing
+  startedAt       DateTime?
+  completedAt     DateTime?
+  errorMessage    String?
+
+  // Stats
+  recordsCreated  Int      @default(0)
+  recordsUpdated  Int      @default(0)
+  recordsSkipped  Int      @default(0)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([provider])
+  @@index([status])
+  @@index([createdAt])
+}
