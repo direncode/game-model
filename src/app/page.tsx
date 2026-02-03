@@ -35,25 +35,23 @@ import {
   Play,
   Pause,
   Square,
-  Send,
-  Mic,
-  MicOff,
-  Loader2,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  Zap,
-  Target,
-  GitCompare,
-  Users,
+  ChevronRight,
+  Activity,
   AlertTriangle,
   TrendingUp,
   TrendingDown,
-  Activity,
-  Gauge,
-  ArrowUpRight,
+  Circle,
+  Layers,
+  Target,
+  Crosshair,
   Shield,
-  Footprints,
+  Zap,
+  Radio,
+  BarChart3,
+  Users,
+  Clock,
+  CheckCircle2,
+  XCircle,
 } from 'lucide-react';
 import {
   GameModelManager,
@@ -87,6 +85,32 @@ import {
   type TacticalInterpretation,
   type TeamTacticalSummary,
 } from '@/lib/gps-tactical-bridge';
+
+// ==================== PALANTIR BLUEPRINT COLORS ====================
+const BP = {
+  BLACK: '#111418',
+  DARK_GRAY1: '#1C2127',
+  DARK_GRAY2: '#252A31',
+  DARK_GRAY3: '#2F343C',
+  DARK_GRAY4: '#383E47',
+  DARK_GRAY5: '#404854',
+  GRAY1: '#5F6B7C',
+  GRAY2: '#738091',
+  GRAY3: '#8F99A8',
+  GRAY4: '#ABB3BF',
+  GRAY5: '#C5CBD3',
+  WHITE: '#F6F7F9',
+  BLUE3: '#2D72D2',
+  BLUE4: '#4C90F0',
+  BLUE5: '#8ABBFF',
+  GREEN3: '#238551',
+  GREEN4: '#32A467',
+  GREEN5: '#72CA9B',
+  ORANGE3: '#C87619',
+  ORANGE4: '#EC9A3C',
+  RED3: '#CD4246',
+  RED4: '#E76A6E',
+};
 
 // Pattern Recognition Data Types
 interface PatternRecognitionData {
@@ -272,8 +296,7 @@ export default function Home() {
 
   // Initialize squads and Corberán systems
   useEffect(() => {
-    // Load West Brom squad for Corberán (using Man City data as placeholder)
-    const wbaSquad = getPLSquadData('MCI'); // Would be WBA in real implementation
+    const wbaSquad = getPLSquadData('MCI');
     if (wbaSquad.length > 0) {
       setPlayers(wbaSquad);
       wbaSquad.forEach((player) => {
@@ -282,8 +305,7 @@ export default function Home() {
       });
     }
 
-    // Load opponent (Leeds United in the scenario)
-    const opponentSquad = getPLSquadData('MUN'); // Placeholder for Leeds
+    const opponentSquad = getPLSquadData('MUN');
     if (opponentSquad.length > 0) {
       setAwayPlayers(opponentSquad);
     }
@@ -295,10 +317,8 @@ export default function Home() {
       patternEngineRef.current = new PatternRecognitionEngine();
     }
 
-    // Initialize Corberán-specific systems
     if (!transitionEngineRef.current) {
       transitionEngineRef.current = createTransitionEngine(CARLOS_CORBERAN_PERSONA);
-      // Set double pivot players (positions 5 and 6 in 4-2-3-1)
       if (wbaSquad.length >= 7) {
         transitionEngineRef.current.setDoublePivotPlayers(wbaSquad[5].id, wbaSquad[6].id);
       }
@@ -312,7 +332,6 @@ export default function Home() {
       gpsBridgeRef.current = createGPSTacticalBridge(CARLOS_CORBERAN_PERSONA);
     }
 
-    // Initialize Game Model Manager with Corberán setup
     if (!gameModelManagerRef.current && patternEngineRef.current && wbaSquad.length > 0) {
       gameModelManagerRef.current = createGameModelManager(
         patternEngineRef.current,
@@ -320,7 +339,6 @@ export default function Home() {
         wbaSquad
       );
 
-      // Set up Carlos Corberán as the manager
       const manager: StaffMember = {
         id: 'corberan-1',
         name: 'Carlos Corberán',
@@ -335,10 +353,8 @@ export default function Home() {
       const session = gameModelManagerRef.current.startSession(manager, staff);
       setManagerSession(session);
 
-      // Load Corberán's game model
       try {
         const corberanModel = createCorberanGameModel();
-        // Store in session (simplified - would use proper state management)
       } catch (error) {
         console.error('Failed to create Corberán game model:', error);
       }
@@ -490,9 +506,7 @@ export default function Home() {
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
 
-        // ==================== CORBERÁN SYSTEMS UPDATE ====================
-
-        // Update transition triggers
+        // Corberán Systems Update
         if (transitionEngineRef.current && state.ballPosition) {
           const triggers = transitionEngineRef.current.detectTriggers(
             players.slice(0, 11).map((p, i) => {
@@ -523,7 +537,6 @@ export default function Home() {
             setTransitionTriggers(prev => [...triggers, ...prev].slice(0, 10));
           }
 
-          // Analyze double pivot status
           const pivotStatus = transitionEngineRef.current.analyzeDoublePivot(
             players.slice(0, 11).map((p, i) => {
               const metrics = liveData.get(p.id);
@@ -538,12 +551,10 @@ export default function Home() {
           );
           setDoublePivotStatus(pivotStatus);
 
-          // Update previous state
           setPreviousBallPosition(state.ballPosition);
           setPreviousPossession(state.ballPossession || 'home');
         }
 
-        // Calculate Corberán-specific coherence
         if (coherenceCalcRef.current && state.ballPosition) {
           const homePositions = players.slice(0, 11).map((p, i) => {
             const metrics = liveData.get(p.id);
@@ -580,7 +591,6 @@ export default function Home() {
           }
         }
 
-        // Generate GPS-to-tactical interpretations
         if (gpsBridgeRef.current && state.ballPosition) {
           const interpretations: TacticalInterpretation[] = players.slice(0, 11).map((player, index) => {
             const metrics = liveData.get(player.id);
@@ -675,49 +685,10 @@ export default function Home() {
     setMatchStats(null);
   }, [endMatch]);
 
-  const handleSendInstruction = useCallback(async () => {
-    if (!instructionInput.trim() || isProcessing || !gameModelManagerRef.current) return;
-    setIsProcessing(true);
-    const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-
-    try {
-      const result = await gameModelManagerRef.current.processManagerInstruction(instructionInput, 'text');
-      const status: 'applied' | 'pending' | 'rejected' = result.applied ? 'applied' : (result.verification ? 'pending' : 'rejected');
-      setInstructionLog(prev => [{
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: result.processed.processedInstructions[0]?.category || 'general',
-        confidence: result.processed.confidence,
-        status,
-        affectedPlayers: result.processed.processedInstructions.flatMap(i => i.affectedPlayers),
-        effect: result.applied ? `Applied` : result.verification ? `Pending (${Math.round(result.processed.confidence * 100)}%)` : 'Not understood',
-      }, ...prev].slice(0, 15));
-      setInstructionInput('');
-    } catch (error) {
-      const errorEntry: InstructionLogEntry = {
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: 'general',
-        confidence: 0,
-        status: 'rejected',
-        affectedPlayers: [],
-        effect: 'Error',
-      };
-      setInstructionLog(prev => [errorEntry, ...prev].slice(0, 15));
-    }
-    setIsProcessing(false);
-  }, [instructionInput, isProcessing, matchState?.minute]);
-
-  // Handle pressing trigger button clicks
   const handleTriggerPress = useCallback((triggerId: string, label: string) => {
     if (!gameModelManagerRef.current || isProcessing) return;
     const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
 
-    // Map trigger IDs to instructions
     const triggerInstructions: Record<string, string> = {
       'high_press': 'Press high immediately',
       'counter_press': 'Counter press on loss',
@@ -734,125 +705,312 @@ export default function Home() {
 
     const instruction = triggerInstructions[triggerId] || label;
 
-    // Add to log immediately with 'applied' status for quick UX
     const entry: InstructionLogEntry = {
       id: `trigger-${Date.now()}`,
       timestamp: new Date(),
       minute,
       input: label,
       category: 'pressing',
-      confidence: 0.95, // High confidence for direct triggers
+      confidence: 0.95,
       status: 'applied',
       affectedPlayers: [],
       effect: 'Triggered',
     };
     setInstructionLog(prev => [entry, ...prev].slice(0, 20));
 
-    // Process through game model manager in background
-    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
-      // Silently handle errors for triggers
-    });
+    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {});
   }, [isProcessing, matchState?.minute]);
-
-  const handleTemplateSelect = useCallback((templateId: string) => {
-    if (!gameModelManagerRef.current) return;
-    try {
-      const gameModel = gameModelManagerRef.current.createGameModelFromTemplate(templateId);
-      const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-      const entry: InstructionLogEntry = {
-        id: `template-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: gameModel.name,
-        category: 'formation',
-        confidence: 1,
-        status: 'applied',
-        affectedPlayers: [],
-        effect: gameModel.formation.name,
-      };
-      setInstructionLog(prev => [entry, ...prev].slice(0, 15));
-      setSelectedTemplate(templateId);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }, [matchState?.minute]);
-
-  const toggleRecording = useCallback(() => {
-    setIsRecording(!isRecording);
-    if (!isRecording) {
-      const SpeechRecognitionAPI = (window as Window & { SpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void }; webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).SpeechRecognition || (window as Window & { webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).webkitSpeechRecognition;
-      if (SpeechRecognitionAPI) {
-        const recognizer = new SpeechRecognitionAPI();
-        recognizer.continuous = false;
-        recognizer.interimResults = false;
-        recognizer.onresult = (event) => { setInstructionInput(event.results[0][0].transcript); setIsRecording(false); };
-        recognizer.onerror = () => setIsRecording(false);
-        recognizer.start();
-      } else { setIsRecording(false); }
-    }
-  }, [isRecording]);
 
   const getTeamFatigue = (fatigueMap: Map<string, FatigueModel>) => {
     const values = Array.from(fatigueMap.values());
     return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
   };
 
-  // Get current game model name - default to Corberán System
-  const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
-  const modelName = activeGameModel?.name || 'Corberán System';
+  // Get coherence color based on score
+  const getCoherenceColor = (score: number) => {
+    if (score >= 70) return BP.GREEN4;
+    if (score >= 50) return BP.ORANGE4;
+    return BP.RED4;
+  };
 
   return (
-    <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
-      {/* Header */}
-      <header className="flex-shrink-0 h-10 flex items-center justify-between px-4 bg-black/50 border-b border-white/5">
-        <div className="flex items-center gap-4">
-          <span className="text-sky-400 text-xs font-medium">MCI</span>
-          <span className="text-sm font-semibold tabular-nums">
-            {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
-          </span>
-          <span className="text-red-400 text-xs font-medium">MUN</span>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: BP.BLACK, color: BP.GRAY4 }}>
+      {/* ==================== TOP NAV BAR ==================== */}
+      <header
+        className="h-11 flex items-center justify-between px-4 border-b"
+        style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+      >
+        <div className="flex items-center gap-6">
+          {/* Logo/Brand */}
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center" style={{ color: BP.BLUE4 }}>
+              <Layers className="w-5 h-5" />
+            </div>
+            <span className="text-xs font-semibold tracking-wide" style={{ color: BP.WHITE }}>TACTICAL INTELLIGENCE</span>
+          </div>
+
+          {/* Match Info */}
+          <div className="flex items-center gap-3 pl-6 border-l" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <span className="text-xs font-medium" style={{ color: BP.BLUE4 }}>MCI</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-mono font-bold" style={{ color: BP.WHITE }}>
+                {matchState ? matchState.homeScore : 0}
+              </span>
+              <span className="text-xs" style={{ color: BP.GRAY1 }}>-</span>
+              <span className="text-sm font-mono font-bold" style={{ color: BP.WHITE }}>
+                {matchState ? matchState.awayScore : 0}
+              </span>
+            </div>
+            <span className="text-xs font-medium" style={{ color: BP.RED4 }}>MUN</span>
+          </div>
+
+          {/* Live Indicator */}
           {isLive && matchState && (
-            <div className="flex items-center gap-1.5 ml-2">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-xs text-white/40 tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <Circle className="w-2 h-2 fill-current animate-pulse" style={{ color: BP.GREEN4 }} />
+                <span className="text-xs font-mono" style={{ color: BP.GREEN4 }}>LIVE</span>
+              </div>
+              <span className="text-xs font-mono" style={{ color: BP.GRAY2 }}>{Math.floor(matchState.minute)}&apos;</span>
             </div>
           )}
         </div>
+
+        {/* Right Controls */}
         <div className="flex items-center gap-2">
           {!isLive ? (
-            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90">
-              <Play className="w-3 h-3" /> Start
+            <button
+              onClick={handleStartMatch}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors"
+              style={{
+                background: BP.BLUE3,
+                color: BP.WHITE,
+              }}
+            >
+              <Play className="w-3 h-3" />
+              Initialize
             </button>
           ) : (
             <>
-              <button onClick={handlePauseMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full">
-                {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
+              <button
+                onClick={handlePauseMatch}
+                className="w-8 h-8 flex items-center justify-center transition-colors"
+                style={{ background: BP.DARK_GRAY3, color: BP.GRAY4 }}
+              >
+                {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
               </button>
-              <button onClick={handleEndMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-red-500/80 rounded-full">
-                <Square className="w-2.5 h-2.5" />
+              <button
+                onClick={handleEndMatch}
+                className="w-8 h-8 flex items-center justify-center transition-colors"
+                style={{ background: BP.DARK_GRAY3, color: BP.RED4 }}
+              >
+                <Square className="w-3 h-3" />
               </button>
             </>
           )}
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
+      {/* ==================== MAIN CONTENT ==================== */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
-        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
-          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
-            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
+
+        {/* ==================== LEFT PANEL - METRICS ==================== */}
+        <aside
+          className="w-64 flex flex-col border-r overflow-hidden"
+          style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+        >
+          {/* Coherence Section */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>COHERENCE</span>
+              <span
+                className="text-xs font-mono font-bold"
+                style={{ color: getCoherenceColor(corberanCoherence?.overallScore ?? 0) }}
+              >
+                {corberanCoherence?.overallScore ?? 0}%
+              </span>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="h-1 w-full mb-3" style={{ background: BP.DARK_GRAY3 }}>
+              <div
+                className="h-full transition-all duration-300"
+                style={{
+                  width: `${corberanCoherence?.overallScore ?? 0}%`,
+                  background: getCoherenceColor(corberanCoherence?.overallScore ?? 0)
+                }}
+              />
+            </div>
+
+            {/* Sub-metrics */}
+            <div className="space-y-2">
+              {[
+                { label: 'Pressing', value: corberanCoherence?.pressingCoherence.score ?? 0 },
+                { label: 'Compactness', value: 100 - Math.min(100, (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 25) * 2) },
+                { label: 'Transition', value: corberanCoherence?.transitionCoherence.score ?? 0 },
+              ].map(metric => (
+                <div key={metric.label} className="flex items-center justify-between">
+                  <span className="text-[10px]" style={{ color: BP.GRAY1 }}>{metric.label}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 h-0.5" style={{ background: BP.DARK_GRAY4 }}>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: `${metric.value}%`,
+                          background: getCoherenceColor(metric.value)
+                        }}
+                      />
+                    </div>
+                    <span className="text-[10px] font-mono w-7 text-right" style={{ color: BP.GRAY3 }}>
+                      {Math.round(metric.value)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Double Pivot Status */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>DOUBLE PIVOT</span>
+              <span
+                className="text-[10px] font-mono"
+                style={{ color: doublePivotStatus?.transitionReadiness && doublePivotStatus.transitionReadiness > 60 ? BP.GREEN4 : BP.ORANGE4 }}
+              >
+                {doublePivotStatus?.transitionReadiness ?? 0}% RDY
+              </span>
+            </div>
+
+            {doublePivotStatus && (
+              <div className="grid grid-cols-2 gap-2">
+                {[doublePivotStatus.player1, doublePivotStatus.player2].map((player, idx) => (
+                  <div
+                    key={idx}
+                    className="p-2"
+                    style={{
+                      background: player.isAvailable ? `${BP.GREEN3}15` : BP.DARK_GRAY2,
+                      borderLeft: `2px solid ${player.isAvailable ? BP.GREEN4 : BP.DARK_GRAY4}`
+                    }}
+                  >
+                    <div className="text-[10px] font-medium truncate" style={{ color: BP.GRAY4 }}>
+                      {player.name.split(' ').pop()}
+                    </div>
+                    <div className="text-[9px] font-mono" style={{ color: BP.GRAY1 }}>
+                      {player.distanceFromBall.toFixed(0)}m
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center gap-4 text-xs">
-                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                <span className="text-white/20">|</span>
-                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+            )}
+
+            {doublePivotStatus && doublePivotStatus.spacing !== 'optimal' && (
+              <div className="mt-2 text-[9px] px-2 py-1" style={{ background: `${BP.ORANGE3}20`, color: BP.ORANGE4 }}>
+                {doublePivotStatus.spacing === 'too_close' ? 'SPACING: Split wider' : 'SPACING: Too spread'}
+              </div>
+            )}
+          </div>
+
+          {/* Match Stats */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>MATCH DATA</span>
+            <div className="mt-2 space-y-1.5">
+              {[
+                { label: 'Possession', home: matchStats?.possession.home ?? 50, away: matchStats?.possession.away ?? 50, unit: '%' },
+                { label: 'xG', home: matchStats?.xG.home ?? 0, away: matchStats?.xG.away ?? 0, unit: '', decimal: true },
+                { label: 'Shots', home: matchStats?.shots.home ?? 0, away: matchStats?.shots.away ?? 0, unit: '' },
+              ].map(stat => (
+                <div key={stat.label} className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono" style={{ color: BP.BLUE4 }}>
+                    {stat.decimal ? stat.home.toFixed(1) : stat.home}{stat.unit}
+                  </span>
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>{stat.label}</span>
+                  <span className="text-[10px] font-mono" style={{ color: BP.RED4 }}>
+                    {stat.decimal ? stat.away.toFixed(1) : stat.away}{stat.unit}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Efficiency Metrics */}
+          {teamTacticalSummary && (
+            <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>EFFICIENCY</span>
+              <div className="mt-2">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px]" style={{ color: BP.GRAY1 }}>Running</span>
+                  <span
+                    className="text-[10px] font-mono"
+                    style={{ color: getCoherenceColor(teamTacticalSummary.efficiency.efficiencyRating) }}
+                  >
+                    {teamTacticalSummary.efficiency.efficiencyRating}%
+                  </span>
+                </div>
+                <div className="text-[9px]" style={{ color: BP.GRAY1 }}>
+                  {teamTacticalSummary.efficiency.message}
+                </div>
               </div>
             </div>
-            <div className="flex-1 overflow-hidden">
+          )}
+
+          {/* Markov Prediction */}
+          <div className="p-3 flex-1">
+            <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>PATTERN ANALYSIS</span>
+            <div className="mt-2">
+              <div className="text-[9px] truncate" style={{ color: BP.GRAY1 }}>
+                {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
+              </div>
+              {patternRecognitionData.markov?.predictedNext?.home && (
+                <div
+                  className="mt-2 p-2 flex items-center gap-2"
+                  style={{ background: `${BP.BLUE3}15`, borderLeft: `2px solid ${BP.BLUE4}` }}
+                >
+                  <Zap className="w-3 h-3" style={{ color: BP.BLUE4 }} />
+                  <span className="text-[9px]" style={{ color: BP.BLUE4 }}>
+                    {patternRecognitionData.markov.predictedNext.home}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        </aside>
+
+        {/* ==================== CENTER - PITCH VIEW ==================== */}
+        <main className="flex-1 flex flex-col overflow-hidden" style={{ background: BP.BLACK }}>
+          {/* Alert Banner */}
+          {transitionTriggers.length > 0 && transitionTriggers[0].active && (
+            <div
+              className="flex items-center gap-3 px-4 py-2 border-b"
+              style={{
+                background: transitionTriggers[0].intensity === 'critical' ? `${BP.RED3}20` : `${BP.ORANGE3}20`,
+                borderColor: transitionTriggers[0].intensity === 'critical' ? BP.RED3 : BP.ORANGE3,
+              }}
+            >
+              <AlertTriangle
+                className="w-4 h-4"
+                style={{ color: transitionTriggers[0].intensity === 'critical' ? BP.RED4 : BP.ORANGE4 }}
+              />
+              <div className="flex-1">
+                <span className="text-xs font-medium" style={{ color: BP.WHITE }}>
+                  {transitionTriggers[0].suggestedAction}
+                </span>
+                <span className="text-[10px] ml-2" style={{ color: BP.GRAY2 }}>
+                  {doublePivotStatus ? getCorberanTransitionGuidance(transitionTriggers[0], doublePivotStatus) : ''}
+                </span>
+              </div>
+              <span className="text-xs font-mono" style={{ color: BP.GRAY1 }}>
+                {transitionTriggers[0].deadline}s
+              </span>
+            </div>
+          )}
+
+          {/* Pitch Container */}
+          <div className="flex-1 p-3 overflow-hidden">
+            <div
+              className="h-full overflow-hidden"
+              style={{ background: BP.DARK_GRAY1, border: `1px solid ${BP.DARK_GRAY3}` }}
+            >
               <PitchView
                 players={players}
                 awayPlayers={awayPlayers}
@@ -870,172 +1028,125 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
 
-        {/* Right Sidebar: Corberán Dashboard */}
-        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Coach Header */}
-          <div className="flex-shrink-0 px-3 py-2 bg-gradient-to-r from-[#122F67] to-[#1a3f8a] border-b border-white/10">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold">CC</div>
-                <div>
-                  <div className="text-white text-xs font-semibold">{activePersona.name}</div>
-                  <div className="text-white/50 text-[9px]">{activePersona.club}</div>
-                </div>
+          {/* Bottom Stats Bar */}
+          <div
+            className="h-8 flex items-center justify-between px-4 border-t"
+            style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+          >
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                <BarChart3 className="w-3 h-3" style={{ color: BP.GRAY1 }} />
+                <span className="text-[10px] font-mono" style={{ color: BP.GRAY3 }}>
+                  {matchStats?.possession.home ?? 50}% POSS
+                </span>
               </div>
-              <div className="flex items-center gap-1">
-                <span className={`px-2 py-0.5 rounded text-[9px] font-medium ${
-                  corberanCoherence?.overallScore && corberanCoherence.overallScore >= 70 ? 'bg-emerald-500/30 text-emerald-300' :
-                  corberanCoherence?.overallScore && corberanCoherence.overallScore >= 50 ? 'bg-amber-500/30 text-amber-300' :
-                  'bg-red-500/30 text-red-300'
-                }`}>
-                  {corberanCoherence?.overallScore ?? 0}% Coherent
+              <div className="flex items-center gap-1.5">
+                <Target className="w-3 h-3" style={{ color: BP.GRAY1 }} />
+                <span className="text-[10px] font-mono" style={{ color: BP.GRAY3 }}>
+                  xG {(matchStats?.xG.home ?? 0).toFixed(2)}
                 </span>
               </div>
             </div>
-          </div>
-
-          {/* Transition Triggers Alert */}
-          {transitionTriggers.length > 0 && transitionTriggers[0].active && (
-            <div className={`flex-shrink-0 px-3 py-2 border-b border-white/5 animate-pulse ${
-              transitionTriggers[0].intensity === 'critical' ? 'bg-red-500/20' :
-              transitionTriggers[0].intensity === 'high' ? 'bg-amber-500/20' : 'bg-blue-500/20'
-            }`}>
-              <div className="flex items-center gap-2">
-                <AlertTriangle className={`w-4 h-4 ${
-                  transitionTriggers[0].intensity === 'critical' ? 'text-red-400' : 'text-amber-400'
-                }`} />
-                <div className="flex-1">
-                  <div className="text-white text-[11px] font-semibold">{transitionTriggers[0].suggestedAction}</div>
-                  <div className="text-white/60 text-[9px]">
-                    {doublePivotStatus ? getCorberanTransitionGuidance(transitionTriggers[0], doublePivotStatus) : 'React now'}
-                  </div>
-                </div>
-                <div className="text-white/40 text-[10px]">{transitionTriggers[0].deadline}s</div>
-              </div>
-            </div>
-          )}
-
-          {/* Double Pivot Status */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 bg-black/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Double Pivot</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                doublePivotStatus?.transitionReadiness && doublePivotStatus.transitionReadiness > 70 ? 'bg-emerald-500/20 text-emerald-300' :
-                doublePivotStatus?.transitionReadiness && doublePivotStatus.transitionReadiness > 40 ? 'bg-amber-500/20 text-amber-300' :
-                'bg-red-500/20 text-red-300'
-              }`}>
-                {doublePivotStatus?.transitionReadiness ?? 0}% Ready
+            <div className="flex items-center gap-4">
+              <span className="text-[10px]" style={{ color: BP.GRAY1 }}>
+                {corberanCoherence?.compactnessCoherence.linesBroken === false ? 'LINES CONNECTED' : 'LINES BROKEN'}
+              </span>
+              <span className="text-[10px] font-mono" style={{ color: BP.GRAY2 }}>
+                {corberanCoherence?.compactnessCoherence.verticalCompactness?.toFixed(0) ?? 0}m COMPACT
               </span>
             </div>
-            {doublePivotStatus && (
-              <div className="grid grid-cols-2 gap-2">
-                <div className={`p-1.5 rounded text-[9px] ${doublePivotStatus.player1.isAvailable ? 'bg-emerald-500/10 text-emerald-300' : 'bg-white/5 text-white/40'}`}>
-                  <div className="font-medium">{doublePivotStatus.player1.name.split(' ').pop()}</div>
-                  <div className="text-[8px]">{doublePivotStatus.player1.distanceFromBall.toFixed(0)}m from ball</div>
-                </div>
-                <div className={`p-1.5 rounded text-[9px] ${doublePivotStatus.player2.isAvailable ? 'bg-emerald-500/10 text-emerald-300' : 'bg-white/5 text-white/40'}`}>
-                  <div className="font-medium">{doublePivotStatus.player2.name.split(' ').pop()}</div>
-                  <div className="text-[8px]">{doublePivotStatus.player2.distanceFromBall.toFixed(0)}m from ball</div>
-                </div>
-              </div>
-            )}
-            {doublePivotStatus && doublePivotStatus.spacing !== 'optimal' && (
-              <div className="mt-1.5 text-[9px] text-amber-400">
-                {doublePivotStatus.spacing === 'too_close' ? 'Split wider - offer more angles' : 'Stay connected - too spread'}
-              </div>
-            )}
           </div>
+        </main>
 
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-36 border-b border-white/5">
-            <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Shape</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">4-2-3-1</span>
-                </div>
-                <span className={`text-[10px] font-medium ${
-                  corberanCoherence?.compactnessCoherence.linesBroken === false ? 'text-emerald-400' : 'text-red-400'
-                }`}>
-                  {corberanCoherence?.compactnessCoherence.linesBroken === false ? 'Lines Connected' : 'Lines Broken'}
-                </span>
+        {/* ==================== RIGHT PANEL - CONTROLS ==================== */}
+        <aside
+          className="w-72 flex flex-col border-l overflow-hidden"
+          style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+        >
+          {/* Operator Header */}
+          <div
+            className="p-3 border-b"
+            style={{ borderColor: BP.DARK_GRAY3 }}
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className="w-7 h-7 flex items-center justify-center text-[10px] font-bold"
+                style={{ background: BP.BLUE3, color: BP.WHITE }}
+              >
+                CC
               </div>
-              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
-                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  {idealPositions.map((pos, idx) => (
-                    <g key={`ideal-${idx}`}>
-                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
-                    </g>
-                  ))}
-                  {[
-                    { x: 95, y: 32.5 },
-                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                  ].map((pos, idx) => (
-                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
-                  ))}
-                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
-                </svg>
+              <div>
+                <div className="text-xs font-medium" style={{ color: BP.WHITE }}>{activePersona.name}</div>
+                <div className="text-[10px]" style={{ color: BP.GRAY1 }}>{activePersona.club}</div>
               </div>
             </div>
           </div>
 
-          {/* Markov Chain Analysis */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
-              }`}>
-                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
-              </span>
-            </div>
-            <div className="text-[10px] text-white/50 mb-1.5 truncate">
-              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
-            </div>
-            {patternRecognitionData.markov?.predictedNext?.home && (
-              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
-                <Zap className="w-3 h-3 text-purple-400" />
-                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Corberán Pressing Triggers */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+          {/* Tactical Shape Mini */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <div className="flex items-center gap-1">
-                <span className="text-[8px] text-white/40">5-sec rule</span>
-                <Target className="w-3 h-3 text-orange-400/50" />
-              </div>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>FORMATION</span>
+              <span className="text-[10px] font-mono" style={{ color: BP.BLUE4 }}>4-2-3-1</span>
+            </div>
+            <div
+              className="h-24 relative"
+              style={{ background: '#0a1a0a' }}
+            >
+              <svg viewBox="0 0 100 60" className="w-full h-full">
+                <line x1="50" y1="0" x2="50" y2="60" stroke="#1a3a1a" strokeWidth="0.5" />
+                <circle cx="50" cy="30" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.5" />
+                {idealPositions.map((pos, idx) => (
+                  <circle
+                    key={idx}
+                    cx={pos.x}
+                    cy={pos.y * 0.6}
+                    r="2.5"
+                    fill={BP.BLUE4}
+                    opacity="0.9"
+                  />
+                ))}
+                {[
+                  { x: 95, y: 30 },
+                  { x: 80, y: 8 }, { x: 80, y: 22 }, { x: 80, y: 38 }, { x: 80, y: 52 },
+                  { x: 65, y: 15 }, { x: 65, y: 30 }, { x: 65, y: 45 },
+                  { x: 50, y: 10 }, { x: 45, y: 30 }, { x: 50, y: 50 },
+                ].map((pos, idx) => (
+                  <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill={BP.RED4} opacity="0.7" />
+                ))}
+              </svg>
+            </div>
+          </div>
+
+          {/* Pressing Controls */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>PRESSING</span>
+              <span className="text-[9px]" style={{ color: BP.GRAY1 }}>5-SEC RULE</span>
             </div>
             <div className="grid grid-cols-2 gap-1">
               {CORBERAN_INSTRUCTION_TEMPLATES.filter(t => t.category === 'pressing').slice(0, 6).map(template => {
                 const isUrgent = transitionTriggers.some(t => t.active && t.type === 'pressing_opportunity');
+                const isActive = isUrgent && template.id === 'counter_press';
                 return (
                   <button
                     key={template.id}
                     onClick={() => handleTriggerPress(template.id, template.name)}
-                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
-                      isUrgent && template.id === 'counter_press'
-                        ? 'bg-red-500/30 text-red-200 border border-red-500/50 ring-1 ring-red-400/30 animate-pulse'
-                        : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
-                    }`}
+                    className="relative px-2 py-1.5 text-[10px] text-left transition-all"
+                    style={{
+                      background: isActive ? `${BP.RED3}30` : BP.DARK_GRAY2,
+                      borderLeft: `2px solid ${isActive ? BP.RED4 : 'transparent'}`,
+                      color: isActive ? BP.RED4 : BP.GRAY3,
+                    }}
                   >
-                    <span className="mr-1">{template.icon}</span>
                     {template.name}
                     {template.shortcut && (
-                      <span className="absolute top-0.5 right-1 text-[7px] text-white/30">{template.shortcut}</span>
+                      <span
+                        className="absolute top-0.5 right-1 text-[8px]"
+                        style={{ color: BP.GRAY1 }}
+                      >
+                        {template.shortcut}
+                      </span>
                     )}
                   </button>
                 );
@@ -1043,20 +1154,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Transition Triggers */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+          {/* Transition Controls */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Transitions</span>
-              <ArrowUpRight className="w-3 h-3 text-blue-400/50" />
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>TRANSITIONS</span>
             </div>
             <div className="grid grid-cols-2 gap-1">
               {CORBERAN_INSTRUCTION_TEMPLATES.filter(t => t.category === 'transition').slice(0, 4).map(template => (
                 <button
                   key={template.id}
                   onClick={() => handleTriggerPress(template.id, template.name)}
-                  className="px-2 py-1.5 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all text-left"
+                  className="px-2 py-1.5 text-[10px] text-left transition-all"
+                  style={{ background: BP.DARK_GRAY2, color: BP.GRAY3 }}
                 >
-                  <span className="mr-1">{template.icon}</span>
                   {template.name}
                 </button>
               ))}
@@ -1064,20 +1174,21 @@ export default function Home() {
           </div>
 
           {/* Defensive Shape */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>DEFENSIVE</span>
             </div>
-            <div className="grid grid-cols-3 gap-1">
+            <div className="flex gap-1">
               {[
-                { id: 'drop_deep', label: 'Drop' },
-                { id: 'hold_line', label: 'Hold' },
-                { id: 'step_up', label: 'Step Up' },
+                { id: 'drop_deep', label: 'DROP' },
+                { id: 'hold_line', label: 'HOLD' },
+                { id: 'step_up', label: 'STEP UP' },
               ].map(shape => (
                 <button
                   key={shape.id}
                   onClick={() => handleTriggerPress(shape.id, shape.label)}
-                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
+                  className="flex-1 px-2 py-1.5 text-[10px] transition-all"
+                  style={{ background: BP.DARK_GRAY2, color: BP.GRAY3 }}
                 >
                   {shape.label}
                 </button>
@@ -1085,94 +1196,41 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Corberán Primary Metrics */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="grid grid-cols-5 gap-1 text-center">
-              <div className="bg-black/20 rounded p-1">
-                <div className="text-[7px] text-white/40">Coherence</div>
-                <div className={`text-[11px] font-bold ${
-                  (corberanCoherence?.overallScore ?? 0) >= 70 ? 'text-emerald-400' :
-                  (corberanCoherence?.overallScore ?? 0) >= 50 ? 'text-amber-400' : 'text-red-400'
-                }`}>
-                  {corberanCoherence?.overallScore ?? 0}%
-                </div>
-              </div>
-              <div className="bg-black/20 rounded p-1">
-                <div className="text-[7px] text-white/40">Pressing</div>
-                <div className={`text-[11px] font-bold ${
-                  (corberanCoherence?.pressingCoherence.score ?? 0) >= 70 ? 'text-emerald-400' :
-                  (corberanCoherence?.pressingCoherence.score ?? 0) >= 50 ? 'text-amber-400' : 'text-red-400'
-                }`}>
-                  {corberanCoherence?.pressingCoherence.score ?? 0}%
-                </div>
-              </div>
-              <div className="bg-black/20 rounded p-1">
-                <div className="text-[7px] text-white/40">Compact</div>
-                <div className={`text-[11px] font-bold ${
-                  (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 30) <= 25 ? 'text-emerald-400' :
-                  (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 30) <= 35 ? 'text-amber-400' : 'text-red-400'
-                }`}>
-                  {corberanCoherence?.compactnessCoherence.verticalCompactness?.toFixed(0) ?? 0}m
-                </div>
-              </div>
-              <div className="bg-black/20 rounded p-1">
-                <div className="text-[7px] text-white/40">Trans</div>
-                <div className={`text-[11px] font-bold ${
-                  (corberanCoherence?.transitionCoherence.score ?? 0) >= 70 ? 'text-emerald-400' : 'text-amber-400'
-                }`}>
-                  {corberanCoherence?.transitionCoherence.score ?? 0}%
-                </div>
-              </div>
-              <div className="bg-black/20 rounded p-1">
-                <div className="text-[7px] text-white/40">xG</div>
-                <div className="text-[11px] font-bold text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-              </div>
-            </div>
-
-            {/* GPS-to-Tactical Efficiency */}
-            {teamTacticalSummary && (
-              <div className="mt-2 p-1.5 bg-black/30 rounded">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[8px] text-white/50">Running Efficiency</span>
-                  <span className={`text-[9px] font-medium ${
-                    teamTacticalSummary.efficiency.efficiencyRating >= 70 ? 'text-emerald-400' :
-                    teamTacticalSummary.efficiency.efficiencyRating >= 50 ? 'text-amber-400' : 'text-red-400'
-                  }`}>
-                    {teamTacticalSummary.efficiency.efficiencyRating}%
-                  </span>
-                </div>
-                <div className="text-[8px] text-white/40">{teamTacticalSummary.efficiency.message}</div>
-              </div>
-            )}
-          </div>
-
-          {/* Alerts & Recommendations */}
+          {/* Alerts */}
           {corberanCoherence && corberanCoherence.alerts.length > 0 && (
-            <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-              <div className="text-[9px] uppercase tracking-wider text-red-400 mb-1.5">Alerts</div>
-              <div className="space-y-1">
+            <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.RED4 }}>ALERTS</span>
+              <div className="mt-2 space-y-1">
                 {corberanCoherence.alerts.slice(0, 3).map((alert, idx) => (
-                  <div key={alert.id || idx} className={`p-1.5 rounded text-[9px] ${
-                    alert.severity === 'critical' ? 'bg-red-500/20 text-red-300' :
-                    alert.severity === 'warning' ? 'bg-amber-500/20 text-amber-300' :
-                    'bg-blue-500/20 text-blue-300'
-                  }`}>
-                    <div className="font-medium">{alert.message}</div>
-                    <div className="text-white/50 text-[8px]">{alert.suggestedAction}</div>
+                  <div
+                    key={alert.id || idx}
+                    className="p-2 text-[10px]"
+                    style={{
+                      background: alert.severity === 'critical' ? `${BP.RED3}15` : `${BP.ORANGE3}15`,
+                      borderLeft: `2px solid ${alert.severity === 'critical' ? BP.RED4 : BP.ORANGE4}`,
+                      color: BP.GRAY4,
+                    }}
+                  >
+                    <div>{alert.message}</div>
+                    <div style={{ color: BP.GRAY1 }}>{alert.suggestedAction}</div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Insights (GPS-to-Tactical) */}
+          {/* Insights */}
           {teamTacticalSummary && teamTacticalSummary.insights.length > 0 && (
-            <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-              <div className="text-[9px] uppercase tracking-wider text-cyan-400 mb-1.5">Tactical Insights</div>
-              <div className="space-y-1">
+            <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.BLUE4 }}>INSIGHTS</span>
+              <div className="mt-2 space-y-1">
                 {teamTacticalSummary.insights.slice(0, 3).map((insight, idx) => (
-                  <div key={idx} className="flex items-start gap-1.5 text-[9px] text-white/70">
-                    <Activity className="w-3 h-3 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <div
+                    key={idx}
+                    className="flex items-start gap-2 text-[10px]"
+                    style={{ color: BP.GRAY3 }}
+                  >
+                    <Activity className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: BP.BLUE4 }} />
                     <span>{insight}</span>
                   </div>
                 ))}
@@ -1182,45 +1240,46 @@ export default function Home() {
 
           {/* Execution Log */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
+            <div
+              className="px-3 py-2 flex items-center justify-between"
+              style={{ background: BP.DARK_GRAY2 }}
+            >
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>LOG</span>
               <div className="flex items-center gap-2">
-                <span className={`text-[9px] flex items-center gap-1 ${
-                  corberanCoherence?.trend === 'improving' ? 'text-emerald-400' :
-                  corberanCoherence?.trend === 'declining' ? 'text-red-400' : 'text-white/40'
-                }`}>
-                  {corberanCoherence?.trend === 'improving' && <TrendingUp className="w-3 h-3" />}
-                  {corberanCoherence?.trend === 'declining' && <TrendingDown className="w-3 h-3" />}
-                  {corberanCoherence?.trend || 'stable'}
+                {corberanCoherence?.trend === 'improving' && <TrendingUp className="w-3 h-3" style={{ color: BP.GREEN4 }} />}
+                {corberanCoherence?.trend === 'declining' && <TrendingDown className="w-3 h-3" style={{ color: BP.RED4 }} />}
+                <span className="text-[10px] font-mono" style={{ color: BP.GREEN4 }}>
+                  {instructionLog.filter(l => l.status === 'applied').length}
                 </span>
-                <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
+            <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
               {instructionLog.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-white/20 text-[10px] gap-2">
-                  <Shield className="w-8 h-8 text-white/10" />
-                  <div>Use triggers above to give instructions</div>
-                  <div className="text-[8px] text-white/30">Press &apos;P&apos; for high press, &apos;C&apos; for counter-press</div>
+                <div className="flex flex-col items-center justify-center h-full" style={{ color: BP.GRAY1 }}>
+                  <Radio className="w-6 h-6 mb-2" style={{ color: BP.DARK_GRAY4 }} />
+                  <div className="text-[10px]">Awaiting commands</div>
                 </div>
               ) : (
                 instructionLog.map(entry => (
-                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
-                    entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
-                    entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
-                    'bg-red-500/10 text-red-300'
-                  }`}>
-                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
-                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
-                     <XCircle className="w-3 h-3" />}
-                    <span className="flex-1 truncate">{entry.input}</span>
-                    <span className="text-white/30">{entry.minute}&apos;</span>
+                  <div
+                    key={entry.id}
+                    className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                    style={{
+                      background: entry.status === 'applied' ? `${BP.GREEN3}10` : entry.status === 'pending' ? `${BP.ORANGE3}10` : `${BP.RED3}10`,
+                      borderLeft: `2px solid ${entry.status === 'applied' ? BP.GREEN4 : entry.status === 'pending' ? BP.ORANGE4 : BP.RED4}`,
+                    }}
+                  >
+                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" style={{ color: BP.GREEN4 }} /> :
+                     entry.status === 'pending' ? <Clock className="w-3 h-3" style={{ color: BP.ORANGE4 }} /> :
+                     <XCircle className="w-3 h-3" style={{ color: BP.RED4 }} />}
+                    <span className="flex-1 truncate" style={{ color: BP.GRAY4 }}>{entry.input}</span>
+                    <span className="font-mono" style={{ color: BP.GRAY1 }}>{entry.minute}&apos;</span>
                   </div>
                 ))
               )}
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
