@@ -15,7 +15,7 @@ export interface Player {
 
 export type PlayerPosition =
   | 'GK' | 'CB' | 'LB' | 'RB' | 'LWB' | 'RWB'
-  | 'CDM' | 'CM' | 'CAM' | 'LM' | 'RM'
+  | 'CDM' | 'RDM' | 'LDM' | 'CM' | 'CAM' | 'RAM' | 'LAM' | 'LM' | 'RM'
   | 'LW' | 'RW' | 'CF' | 'ST';
 
 export interface PhysicalProfile {

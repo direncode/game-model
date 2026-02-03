@@ -46,6 +46,14 @@ import {
   Target,
   GitCompare,
   Users,
+  AlertTriangle,
+  TrendingUp,
+  TrendingDown,
+  Activity,
+  Gauge,
+  ArrowUpRight,
+  Shield,
+  Footprints,
 } from 'lucide-react';
 import {
   GameModelManager,
@@ -54,6 +62,31 @@ import {
   type StaffMember,
   GAME_MODEL_TEMPLATES,
 } from '@/lib/game-model-manager';
+import {
+  CARLOS_CORBERAN_PERSONA,
+  CORBERAN_INSTRUCTION_TEMPLATES,
+  createCorberanGameModel,
+  type CoachPersona,
+  type InstructionTemplate,
+} from '@/lib/coach-persona';
+import {
+  TransitionTriggerEngine,
+  createTransitionEngine,
+  type TransitionTrigger,
+  type DoublePivotStatus,
+  getCorberanTransitionGuidance,
+} from '@/lib/transition-triggers';
+import {
+  CorberanCoherenceCalculator,
+  createCorberanCoherenceCalculator,
+  type CorberanCoherenceReport,
+} from '@/lib/corberan-coherence';
+import {
+  GPSTacticalBridge,
+  createGPSTacticalBridge,
+  type TacticalInterpretation,
+  type TeamTacticalSummary,
+} from '@/lib/gps-tactical-bridge';
 
 // Pattern Recognition Data Types
 interface PatternRecognitionData {
@@ -167,12 +200,24 @@ export default function Home() {
   const gameModelManagerRef = useRef<GameModelManager | null>(null);
   const [managerSession, setManagerSession] = useState<ManagerSession | null>(null);
 
+  // Corberán Persona Systems
+  const transitionEngineRef = useRef<TransitionTriggerEngine | null>(null);
+  const coherenceCalcRef = useRef<CorberanCoherenceCalculator | null>(null);
+  const gpsBridgeRef = useRef<GPSTacticalBridge | null>(null);
+  const [activePersona] = useState<CoachPersona>(CARLOS_CORBERAN_PERSONA);
+  const [transitionTriggers, setTransitionTriggers] = useState<TransitionTrigger[]>([]);
+  const [doublePivotStatus, setDoublePivotStatus] = useState<DoublePivotStatus | null>(null);
+  const [corberanCoherence, setCorberanCoherence] = useState<CorberanCoherenceReport | null>(null);
+  const [teamTacticalSummary, setTeamTacticalSummary] = useState<TeamTacticalSummary | null>(null);
+  const [previousPossession, setPreviousPossession] = useState<'home' | 'away'>('home');
+  const [previousBallPosition, setPreviousBallPosition] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
+
   // Instruction Integration State
   const [instructionInput, setInstructionInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
-  const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>('corberan_system');
 
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
@@ -225,20 +270,22 @@ export default function Home() {
     return Math.round((coherentCount / twinPositions.length) * 100);
   }, [twinPositions]);
 
-  // Initialize squads
+  // Initialize squads and Corberán systems
   useEffect(() => {
-    const citySquad = getPLSquadData('MCI');
-    if (citySquad.length > 0) {
-      setPlayers(citySquad);
-      citySquad.forEach((player) => {
+    // Load West Brom squad for Corberán (using Man City data as placeholder)
+    const wbaSquad = getPLSquadData('MCI'); // Would be WBA in real implementation
+    if (wbaSquad.length > 0) {
+      setPlayers(wbaSquad);
+      wbaSquad.forEach((player) => {
         const twin = createDigitalTwin(player, []);
         setTwin(player.id, twin);
       });
     }
 
-    const unitedSquad = getPLSquadData('MUN');
-    if (unitedSquad.length > 0) {
-      setAwayPlayers(unitedSquad);
+    // Load opponent (Leeds United in the scenario)
+    const opponentSquad = getPLSquadData('MUN'); // Placeholder for Leeds
+    if (opponentSquad.length > 0) {
+      setAwayPlayers(opponentSquad);
     }
 
     if (!gameEngineRef.current) {
@@ -248,24 +295,53 @@ export default function Home() {
       patternEngineRef.current = new PatternRecognitionEngine();
     }
 
-    if (!gameModelManagerRef.current && patternEngineRef.current && citySquad.length > 0) {
+    // Initialize Corberán-specific systems
+    if (!transitionEngineRef.current) {
+      transitionEngineRef.current = createTransitionEngine(CARLOS_CORBERAN_PERSONA);
+      // Set double pivot players (positions 5 and 6 in 4-2-3-1)
+      if (wbaSquad.length >= 7) {
+        transitionEngineRef.current.setDoublePivotPlayers(wbaSquad[5].id, wbaSquad[6].id);
+      }
+    }
+
+    if (!coherenceCalcRef.current) {
+      coherenceCalcRef.current = createCorberanCoherenceCalculator();
+    }
+
+    if (!gpsBridgeRef.current) {
+      gpsBridgeRef.current = createGPSTacticalBridge(CARLOS_CORBERAN_PERSONA);
+    }
+
+    // Initialize Game Model Manager with Corberán setup
+    if (!gameModelManagerRef.current && patternEngineRef.current && wbaSquad.length > 0) {
       gameModelManagerRef.current = createGameModelManager(
         patternEngineRef.current,
         catapultService,
-        citySquad
+        wbaSquad
       );
+
+      // Set up Carlos Corberán as the manager
       const manager: StaffMember = {
-        id: 'manager-1',
-        name: 'Pep Guardiola',
+        id: 'corberan-1',
+        name: 'Carlos Corberán',
         role: 'manager',
         canVerify: true,
         canModify: true,
       };
       const staff: StaffMember[] = [
-        { id: 'coach-1', name: 'Juanma Lillo', role: 'assistant_coach', canVerify: true, canModify: false },
+        { id: 'analyst-1', name: 'Technical Analyst', role: 'analyst', canVerify: true, canModify: false },
+        { id: 'fitness-1', name: 'Fitness Coach', role: 'fitness_coach', canVerify: false, canModify: false },
       ];
       const session = gameModelManagerRef.current.startSession(manager, staff);
       setManagerSession(session);
+
+      // Load Corberán's game model
+      try {
+        const corberanModel = createCorberanGameModel();
+        // Store in session (simplified - would use proper state management)
+      } catch (error) {
+        console.error('Failed to create Corberán game model:', error);
+      }
     }
   }, [setPlayers, setTwin]);
 
@@ -414,6 +490,127 @@ export default function Home() {
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
 
+        // ==================== CORBERÁN SYSTEMS UPDATE ====================
+
+        // Update transition triggers
+        if (transitionEngineRef.current && state.ballPosition) {
+          const triggers = transitionEngineRef.current.detectTriggers(
+            players.slice(0, 11).map((p, i) => {
+              const metrics = liveData.get(p.id);
+              return {
+                playerId: p.id,
+                x: metrics?.position?.x ?? 50,
+                y: metrics?.position?.y ?? 50,
+                metrics,
+              };
+            }),
+            awayPlayers.slice(0, 11).map((p, i) => {
+              const metrics = newAwayData.get(p.id);
+              return {
+                playerId: p.id,
+                x: metrics?.position?.x ?? 50,
+                y: metrics?.position?.y ?? 50,
+              };
+            }),
+            state.ballPosition,
+            previousBallPosition,
+            state.ballPossession || 'home',
+            previousPossession,
+            currentMinute
+          );
+
+          if (triggers.length > 0) {
+            setTransitionTriggers(prev => [...triggers, ...prev].slice(0, 10));
+          }
+
+          // Analyze double pivot status
+          const pivotStatus = transitionEngineRef.current.analyzeDoublePivot(
+            players.slice(0, 11).map((p, i) => {
+              const metrics = liveData.get(p.id);
+              return {
+                playerId: p.id,
+                x: metrics?.position?.x ?? 50,
+                y: metrics?.position?.y ?? 50,
+              };
+            }),
+            state.ballPosition,
+            players
+          );
+          setDoublePivotStatus(pivotStatus);
+
+          // Update previous state
+          setPreviousBallPosition(state.ballPosition);
+          setPreviousPossession(state.ballPossession || 'home');
+        }
+
+        // Calculate Corberán-specific coherence
+        if (coherenceCalcRef.current && state.ballPosition) {
+          const homePositions = players.slice(0, 11).map((p, i) => {
+            const metrics = liveData.get(p.id);
+            return {
+              playerId: p.id,
+              x: metrics?.position?.x ?? 50,
+              y: metrics?.position?.y ?? 50,
+              speed: metrics?.currentSpeed ?? 0,
+            };
+          });
+
+          const awayPositions = awayPlayers.slice(0, 11).map((p, i) => {
+            const metrics = newAwayData.get(p.id);
+            return {
+              playerId: p.id,
+              x: metrics?.position?.x ?? 50,
+              y: metrics?.position?.y ?? 50,
+            };
+          });
+
+          const gameModel = gameModelManagerRef.current?.getActiveGameModel();
+          if (gameModel) {
+            const coherenceReport = coherenceCalcRef.current.calculateCoherence(
+              homePositions,
+              awayPositions,
+              liveData,
+              gameModel,
+              players,
+              state.ballPosition,
+              state.ballPossession || 'home',
+              currentMinute
+            );
+            setCorberanCoherence(coherenceReport);
+          }
+        }
+
+        // Generate GPS-to-tactical interpretations
+        if (gpsBridgeRef.current && state.ballPosition) {
+          const interpretations: TacticalInterpretation[] = players.slice(0, 11).map((player, index) => {
+            const metrics = liveData.get(player.id);
+            const idealPos = idealPositions[index];
+            if (metrics) {
+              return gpsBridgeRef.current!.interpretPlayerData(
+                player,
+                metrics,
+                { x: idealPos.x, y: idealPos.y, role: idealPos.role },
+                state.ballPosition!,
+                state.ballPossession || 'home',
+                currentMinute,
+                false
+              );
+            }
+            return null;
+          }).filter(Boolean) as TacticalInterpretation[];
+
+          if (interpretations.length > 0) {
+            const teamSummary = gpsBridgeRef.current.interpretTeamData(
+              interpretations,
+              {
+                verticalCompactness: CARLOS_CORBERAN_PERSONA.tacticalProfile.compactnessTarget.vertical,
+                pressingIntensity: CARLOS_CORBERAN_PERSONA.tacticalProfile.pressingIntensityPreference,
+              }
+            );
+            setTeamTacticalSummary(teamSummary);
+          }
+        }
+
         if (state.phase === 'full_time') {
           setIsSimulating(false);
           endMatch();
@@ -422,7 +619,7 @@ export default function Home() {
     }
 
     return () => clearInterval(interval);
-  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch]);
+  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch, previousPossession, previousBallPosition, idealPositions]);
 
   function calculateDynamicCoherence(
     team: 'home' | 'away',
@@ -600,9 +797,9 @@ export default function Home() {
     return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
   };
 
-  // Get current game model name
+  // Get current game model name - default to Corberán System
   const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
-  const modelName = activeGameModel?.name || GAME_MODEL_TEMPLATES.find(t => t.id === selectedTemplate)?.name || 'Total Football';
+  const modelName = activeGameModel?.name || 'Corberán System';
 
   return (
     <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
@@ -675,18 +872,94 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right Sidebar: Twin + Controls + Log */}
+        {/* Right Sidebar: Corberán Dashboard */}
         <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-44 border-b border-white/5">
-            <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
+          {/* Coach Header */}
+          <div className="flex-shrink-0 px-3 py-2 bg-gradient-to-r from-[#122F67] to-[#1a3f8a] border-b border-white/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold">CC</div>
+                <div>
+                  <div className="text-white text-xs font-semibold">{activePersona.name}</div>
+                  <div className="text-white/50 text-[9px]">{activePersona.club}</div>
                 </div>
-                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                  {twinPositions.filter(p => p.isCoherent).length}/11 coherent
+              </div>
+              <div className="flex items-center gap-1">
+                <span className={`px-2 py-0.5 rounded text-[9px] font-medium ${
+                  corberanCoherence?.overallScore && corberanCoherence.overallScore >= 70 ? 'bg-emerald-500/30 text-emerald-300' :
+                  corberanCoherence?.overallScore && corberanCoherence.overallScore >= 50 ? 'bg-amber-500/30 text-amber-300' :
+                  'bg-red-500/30 text-red-300'
+                }`}>
+                  {corberanCoherence?.overallScore ?? 0}% Coherent
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Transition Triggers Alert */}
+          {transitionTriggers.length > 0 && transitionTriggers[0].active && (
+            <div className={`flex-shrink-0 px-3 py-2 border-b border-white/5 animate-pulse ${
+              transitionTriggers[0].intensity === 'critical' ? 'bg-red-500/20' :
+              transitionTriggers[0].intensity === 'high' ? 'bg-amber-500/20' : 'bg-blue-500/20'
+            }`}>
+              <div className="flex items-center gap-2">
+                <AlertTriangle className={`w-4 h-4 ${
+                  transitionTriggers[0].intensity === 'critical' ? 'text-red-400' : 'text-amber-400'
+                }`} />
+                <div className="flex-1">
+                  <div className="text-white text-[11px] font-semibold">{transitionTriggers[0].suggestedAction}</div>
+                  <div className="text-white/60 text-[9px]">
+                    {doublePivotStatus ? getCorberanTransitionGuidance(transitionTriggers[0], doublePivotStatus) : 'React now'}
+                  </div>
+                </div>
+                <div className="text-white/40 text-[10px]">{transitionTriggers[0].deadline}s</div>
+              </div>
+            </div>
+          )}
+
+          {/* Double Pivot Status */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 bg-black/20">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] uppercase tracking-wider text-purple-400">Double Pivot</span>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
+                doublePivotStatus?.transitionReadiness && doublePivotStatus.transitionReadiness > 70 ? 'bg-emerald-500/20 text-emerald-300' :
+                doublePivotStatus?.transitionReadiness && doublePivotStatus.transitionReadiness > 40 ? 'bg-amber-500/20 text-amber-300' :
+                'bg-red-500/20 text-red-300'
+              }`}>
+                {doublePivotStatus?.transitionReadiness ?? 0}% Ready
+              </span>
+            </div>
+            {doublePivotStatus && (
+              <div className="grid grid-cols-2 gap-2">
+                <div className={`p-1.5 rounded text-[9px] ${doublePivotStatus.player1.isAvailable ? 'bg-emerald-500/10 text-emerald-300' : 'bg-white/5 text-white/40'}`}>
+                  <div className="font-medium">{doublePivotStatus.player1.name.split(' ').pop()}</div>
+                  <div className="text-[8px]">{doublePivotStatus.player1.distanceFromBall.toFixed(0)}m from ball</div>
+                </div>
+                <div className={`p-1.5 rounded text-[9px] ${doublePivotStatus.player2.isAvailable ? 'bg-emerald-500/10 text-emerald-300' : 'bg-white/5 text-white/40'}`}>
+                  <div className="font-medium">{doublePivotStatus.player2.name.split(' ').pop()}</div>
+                  <div className="text-[8px]">{doublePivotStatus.player2.distanceFromBall.toFixed(0)}m from ball</div>
+                </div>
+              </div>
+            )}
+            {doublePivotStatus && doublePivotStatus.spacing !== 'optimal' && (
+              <div className="mt-1.5 text-[9px] text-amber-400">
+                {doublePivotStatus.spacing === 'too_close' ? 'Split wider - offer more angles' : 'Stay connected - too spread'}
+              </div>
+            )}
+          </div>
+
+          {/* Digital Twin Mini View */}
+          <div className="flex-shrink-0 h-36 border-b border-white/5">
+            <div className="h-full flex flex-col">
+              <div className="flex-shrink-0 px-3 py-1 bg-black/30 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Shape</span>
+                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">4-2-3-1</span>
+                </div>
+                <span className={`text-[10px] font-medium ${
+                  corberanCoherence?.compactnessCoherence.linesBroken === false ? 'text-emerald-400' : 'text-red-400'
+                }`}>
+                  {corberanCoherence?.compactnessCoherence.linesBroken === false ? 'Lines Connected' : 'Lines Broken'}
                 </span>
               </div>
               <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
@@ -737,42 +1010,56 @@ export default function Home() {
             )}
           </div>
 
-          {/* Pressing Triggers Grid */}
+          {/* Corberán Pressing Triggers */}
           <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <Target className="w-3 h-3 text-orange-400/50" />
+              <div className="flex items-center gap-1">
+                <span className="text-[8px] text-white/40">5-sec rule</span>
+                <Target className="w-3 h-3 text-orange-400/50" />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-1">
-              {[
-                { id: 'high_press', label: 'High Press', icon: '⬆️' },
-                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
-                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
-                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
-                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
-                { id: 'zonal', label: 'Zonal', icon: '🔲' },
-              ].map(trigger => {
-                const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
+              {CORBERAN_INSTRUCTION_TEMPLATES.filter(t => t.category === 'pressing').slice(0, 6).map(template => {
+                const isUrgent = transitionTriggers.some(t => t.active && t.type === 'pressing_opportunity');
                 return (
                   <button
-                    key={trigger.id}
-                    onClick={() => handleTriggerPress(trigger.id, trigger.label)}
+                    key={template.id}
+                    onClick={() => handleTriggerPress(template.id, template.name)}
                     className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
-                      isMarkovSuggested
-                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
+                      isUrgent && template.id === 'counter_press'
+                        ? 'bg-red-500/30 text-red-200 border border-red-500/50 ring-1 ring-red-400/30 animate-pulse'
                         : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
                     }`}
                   >
-                    <span className="mr-1">{trigger.icon}</span>
-                    {trigger.label}
-                    {isMarkovSuggested && (
-                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                    <span className="mr-1">{template.icon}</span>
+                    {template.name}
+                    {template.shortcut && (
+                      <span className="absolute top-0.5 right-1 text-[7px] text-white/30">{template.shortcut}</span>
                     )}
                   </button>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Transition Triggers */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] uppercase tracking-wider text-blue-400">Transitions</span>
+              <ArrowUpRight className="w-3 h-3 text-blue-400/50" />
+            </div>
+            <div className="grid grid-cols-2 gap-1">
+              {CORBERAN_INSTRUCTION_TEMPLATES.filter(t => t.category === 'transition').slice(0, 4).map(template => (
+                <button
+                  key={template.id}
+                  onClick={() => handleTriggerPress(template.id, template.name)}
+                  className="px-2 py-1.5 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all text-left"
+                >
+                  <span className="mr-1">{template.icon}</span>
+                  {template.name}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -798,38 +1085,123 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Live Stats */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">xG</div>
-              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Shots</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Pass%</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Coh</div>
-              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {overallCoherence}%
+          {/* Corberán Primary Metrics */}
+          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+            <div className="grid grid-cols-5 gap-1 text-center">
+              <div className="bg-black/20 rounded p-1">
+                <div className="text-[7px] text-white/40">Coherence</div>
+                <div className={`text-[11px] font-bold ${
+                  (corberanCoherence?.overallScore ?? 0) >= 70 ? 'text-emerald-400' :
+                  (corberanCoherence?.overallScore ?? 0) >= 50 ? 'text-amber-400' : 'text-red-400'
+                }`}>
+                  {corberanCoherence?.overallScore ?? 0}%
+                </div>
+              </div>
+              <div className="bg-black/20 rounded p-1">
+                <div className="text-[7px] text-white/40">Pressing</div>
+                <div className={`text-[11px] font-bold ${
+                  (corberanCoherence?.pressingCoherence.score ?? 0) >= 70 ? 'text-emerald-400' :
+                  (corberanCoherence?.pressingCoherence.score ?? 0) >= 50 ? 'text-amber-400' : 'text-red-400'
+                }`}>
+                  {corberanCoherence?.pressingCoherence.score ?? 0}%
+                </div>
+              </div>
+              <div className="bg-black/20 rounded p-1">
+                <div className="text-[7px] text-white/40">Compact</div>
+                <div className={`text-[11px] font-bold ${
+                  (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 30) <= 25 ? 'text-emerald-400' :
+                  (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 30) <= 35 ? 'text-amber-400' : 'text-red-400'
+                }`}>
+                  {corberanCoherence?.compactnessCoherence.verticalCompactness?.toFixed(0) ?? 0}m
+                </div>
+              </div>
+              <div className="bg-black/20 rounded p-1">
+                <div className="text-[7px] text-white/40">Trans</div>
+                <div className={`text-[11px] font-bold ${
+                  (corberanCoherence?.transitionCoherence.score ?? 0) >= 70 ? 'text-emerald-400' : 'text-amber-400'
+                }`}>
+                  {corberanCoherence?.transitionCoherence.score ?? 0}%
+                </div>
+              </div>
+              <div className="bg-black/20 rounded p-1">
+                <div className="text-[7px] text-white/40">xG</div>
+                <div className="text-[11px] font-bold text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
               </div>
             </div>
+
+            {/* GPS-to-Tactical Efficiency */}
+            {teamTacticalSummary && (
+              <div className="mt-2 p-1.5 bg-black/30 rounded">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[8px] text-white/50">Running Efficiency</span>
+                  <span className={`text-[9px] font-medium ${
+                    teamTacticalSummary.efficiency.efficiencyRating >= 70 ? 'text-emerald-400' :
+                    teamTacticalSummary.efficiency.efficiencyRating >= 50 ? 'text-amber-400' : 'text-red-400'
+                  }`}>
+                    {teamTacticalSummary.efficiency.efficiencyRating}%
+                  </span>
+                </div>
+                <div className="text-[8px] text-white/40">{teamTacticalSummary.efficiency.message}</div>
+              </div>
+            )}
           </div>
 
-          {/* Trigger Execution Log */}
+          {/* Alerts & Recommendations */}
+          {corberanCoherence && corberanCoherence.alerts.length > 0 && (
+            <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+              <div className="text-[9px] uppercase tracking-wider text-red-400 mb-1.5">Alerts</div>
+              <div className="space-y-1">
+                {corberanCoherence.alerts.slice(0, 3).map((alert, idx) => (
+                  <div key={alert.id || idx} className={`p-1.5 rounded text-[9px] ${
+                    alert.severity === 'critical' ? 'bg-red-500/20 text-red-300' :
+                    alert.severity === 'warning' ? 'bg-amber-500/20 text-amber-300' :
+                    'bg-blue-500/20 text-blue-300'
+                  }`}>
+                    <div className="font-medium">{alert.message}</div>
+                    <div className="text-white/50 text-[8px]">{alert.suggestedAction}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Insights (GPS-to-Tactical) */}
+          {teamTacticalSummary && teamTacticalSummary.insights.length > 0 && (
+            <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
+              <div className="text-[9px] uppercase tracking-wider text-cyan-400 mb-1.5">Tactical Insights</div>
+              <div className="space-y-1">
+                {teamTacticalSummary.insights.slice(0, 3).map((insight, idx) => (
+                  <div key={idx} className="flex items-start gap-1.5 text-[9px] text-white/70">
+                    <Activity className="w-3 h-3 text-cyan-400 flex-shrink-0 mt-0.5" />
+                    <span>{insight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Execution Log */}
           <div className="flex-1 flex flex-col overflow-hidden">
             <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
               <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
-              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
+              <div className="flex items-center gap-2">
+                <span className={`text-[9px] flex items-center gap-1 ${
+                  corberanCoherence?.trend === 'improving' ? 'text-emerald-400' :
+                  corberanCoherence?.trend === 'declining' ? 'text-red-400' : 'text-white/40'
+                }`}>
+                  {corberanCoherence?.trend === 'improving' && <TrendingUp className="w-3 h-3" />}
+                  {corberanCoherence?.trend === 'declining' && <TrendingDown className="w-3 h-3" />}
+                  {corberanCoherence?.trend || 'stable'}
+                </span>
+                <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
+              </div>
             </div>
             <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
               {instructionLog.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
-                  Click triggers above
+                <div className="flex flex-col items-center justify-center h-full text-white/20 text-[10px] gap-2">
+                  <Shield className="w-8 h-8 text-white/10" />
+                  <div>Use triggers above to give instructions</div>
+                  <div className="text-[8px] text-white/30">Press &apos;P&apos; for high press, &apos;C&apos; for counter-press</div>
                 </div>
               ) : (
                 instructionLog.map(entry => (
