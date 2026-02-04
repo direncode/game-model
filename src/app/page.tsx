@@ -204,6 +204,13 @@ export default function Home() {
   const [isSimulating, setIsSimulating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  // ==================== RESIZABLE PANEL STATE ====================
+  const [leftPanelWidth, setLeftPanelWidth] = useState(256); // Default 256px (w-64)
+  const [rightPanelWidth, setRightPanelWidth] = useState(288); // Default 288px (w-72)
+  const [pitchHeight, setPitchHeight] = useState(40); // Default 40% height
+  const [isResizing, setIsResizing] = useState<'left' | 'right' | 'vertical' | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   // Game Engine State
   const gameEngineRef = useRef<GameEngine | null>(null);
   const patternEngineRef = useRef<PatternRecognitionEngine | null>(null);
@@ -281,6 +288,54 @@ export default function Home() {
   const [spaceControl, setSpaceControl] = useState<SpaceControlResult | null>(null);
   const [dataSubstrateStatus, setDataSubstrateStatus] = useState<DataSubstrateStatus | null>(null);
   const [scenarioResults, setScenarioResults] = useState<{ scenarios: number; bestOutcome: string; winProb: number } | null>(null);
+
+  // ==================== RESIZE HANDLERS ====================
+  const handleMouseDown = useCallback((panel: 'left' | 'right' | 'vertical') => {
+    setIsResizing(panel);
+  }, []);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isResizing || !containerRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    if (isResizing === 'left') {
+      const newWidth = Math.max(180, Math.min(400, e.clientX - containerRect.left));
+      setLeftPanelWidth(newWidth);
+    } else if (isResizing === 'right') {
+      const newWidth = Math.max(200, Math.min(450, containerRect.right - e.clientX));
+      setRightPanelWidth(newWidth);
+    } else if (isResizing === 'vertical') {
+      const mainContent = containerRef.current.querySelector('main');
+      if (mainContent) {
+        const mainRect = mainContent.getBoundingClientRect();
+        const relativeY = e.clientY - mainRect.top;
+        const percentage = Math.max(20, Math.min(70, (relativeY / mainRect.height) * 100));
+        setPitchHeight(percentage);
+      }
+    }
+  }, [isResizing]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsResizing(null);
+  }, []);
+
+  // Attach global mouse listeners for resize
+  useEffect(() => {
+    if (isResizing) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = isResizing === 'vertical' ? 'row-resize' : 'col-resize';
+      document.body.style.userSelect = 'none';
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isResizing, handleMouseMove, handleMouseUp]);
 
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
@@ -1037,12 +1092,12 @@ export default function Home() {
       </header>
 
       {/* ==================== MAIN CONTENT ==================== */}
-      <div className="flex-1 flex overflow-hidden">
+      <div ref={containerRef} className="flex-1 flex overflow-hidden">
 
         {/* ==================== LEFT PANEL - METRICS ==================== */}
         <aside
-          className="w-64 flex flex-col border-r overflow-hidden"
-          style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+          className="flex flex-col border-r overflow-hidden flex-shrink-0"
+          style={{ width: leftPanelWidth, background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
         >
           {/* Coherence Section */}
           <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
@@ -1272,6 +1327,13 @@ export default function Home() {
           </div>
         </aside>
 
+        {/* LEFT RESIZE HANDLE */}
+        <div
+          className="w-1 cursor-col-resize hover:bg-blue-500 transition-colors flex-shrink-0"
+          style={{ background: isResizing === 'left' ? BP.BLUE4 : BP.DARK_GRAY3 }}
+          onMouseDown={() => handleMouseDown('left')}
+        />
+
         {/* ==================== CENTER - PITCH + TACTICAL LOG ==================== */}
         <main className="flex-1 flex flex-col overflow-hidden" style={{ background: BP.BLACK }}>
           {/* Alert Banner */}
@@ -1301,8 +1363,8 @@ export default function Home() {
             </div>
           )}
 
-          {/* Compact Pitch Container - 40% height */}
-          <div className="h-[40%] p-2 overflow-hidden">
+          {/* Compact Pitch Container - Resizable height */}
+          <div className="p-2 overflow-hidden" style={{ height: `${pitchHeight}%` }}>
             <div
               className="h-full overflow-hidden"
               style={{ background: BP.DARK_GRAY1, border: `1px solid ${BP.DARK_GRAY3}` }}
@@ -1325,8 +1387,15 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tactical Event Log - 60% height */}
-          <div className="flex-1 flex flex-col border-t overflow-hidden" style={{ borderColor: BP.DARK_GRAY3 }}>
+          {/* VERTICAL RESIZE HANDLE */}
+          <div
+            className="h-1 cursor-row-resize hover:bg-blue-500 transition-colors"
+            style={{ background: isResizing === 'vertical' ? BP.BLUE4 : BP.DARK_GRAY3 }}
+            onMouseDown={() => handleMouseDown('vertical')}
+          />
+
+          {/* Tactical Event Log - Resizable height */}
+          <div className="flex-1 flex flex-col overflow-hidden" style={{ borderColor: BP.DARK_GRAY3 }}>
             <div className="px-3 py-1.5 flex items-center justify-between" style={{ background: BP.DARK_GRAY2 }}>
               <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>TACTICAL LOG</span>
               <div className="flex items-center gap-3">
@@ -1520,10 +1589,17 @@ export default function Home() {
           </div>
         </main>
 
+        {/* RIGHT RESIZE HANDLE */}
+        <div
+          className="w-1 cursor-col-resize hover:bg-blue-500 transition-colors flex-shrink-0"
+          style={{ background: isResizing === 'right' ? BP.BLUE4 : BP.DARK_GRAY3 }}
+          onMouseDown={() => handleMouseDown('right')}
+        />
+
         {/* ==================== RIGHT PANEL - CONTROLS ==================== */}
         <aside
-          className="w-72 flex flex-col border-l overflow-hidden"
-          style={{ background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
+          className="flex flex-col border-l overflow-hidden flex-shrink-0"
+          style={{ width: rightPanelWidth, background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
         >
           {/* Operator Header */}
           <div
