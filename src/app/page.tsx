@@ -85,6 +85,30 @@ import {
   type TacticalInterpretation,
   type TeamTacticalSummary,
 } from '@/lib/gps-tactical-bridge';
+import {
+  FootballBrain,
+  type BrainPrediction,
+  type ScenarioResult,
+} from '@/lib/football-brain';
+import {
+  GraphNeuralPatternEngine,
+  type PatternMatchResult as GNNPatternMatch,
+  type TacticalGraph,
+} from '@/lib/graph-neural-patterns';
+import {
+  CoherenceV3Engine,
+  type CoherenceState,
+  type CoherenceSummary,
+} from '@/lib/coherence-v3';
+import {
+  DataSubstrateEngine,
+  type DataSubstrateStatus,
+} from '@/lib/data-substrate';
+import {
+  AdvancedMetricsEngine,
+  type SpaceControlResult,
+  type InjuryRiskResult,
+} from '@/lib/advanced-metrics';
 
 // ==================== PALANTIR BLUEPRINT COLORS ====================
 const BP = {
@@ -228,6 +252,13 @@ export default function Home() {
   const transitionEngineRef = useRef<TransitionTriggerEngine | null>(null);
   const coherenceCalcRef = useRef<CorberanCoherenceCalculator | null>(null);
   const gpsBridgeRef = useRef<GPSTacticalBridge | null>(null);
+
+  // Tactical Nexus Engine Refs
+  const footballBrainRef = useRef<FootballBrain | null>(null);
+  const gnnEngineRef = useRef<GraphNeuralPatternEngine | null>(null);
+  const coherenceV3Ref = useRef<CoherenceV3Engine | null>(null);
+  const dataSubstrateRef = useRef<DataSubstrateEngine | null>(null);
+  const advancedMetricsRef = useRef<AdvancedMetricsEngine | null>(null);
   const [activePersona] = useState<CoachPersona>(CARLOS_CORBERAN_PERSONA);
   const [transitionTriggers, setTransitionTriggers] = useState<TransitionTrigger[]>([]);
   const [doublePivotStatus, setDoublePivotStatus] = useState<DoublePivotStatus | null>(null);
@@ -242,6 +273,14 @@ export default function Home() {
   const [isRecording, setIsRecording] = useState(false);
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>('corberan_system');
+
+  // Tactical Nexus State
+  const [brainPredictions, setBrainPredictions] = useState<BrainPrediction[]>([]);
+  const [gnnPatterns, setGnnPatterns] = useState<GNNPatternMatch[]>([]);
+  const [coherenceV3State, setCoherenceV3State] = useState<CoherenceSummary | null>(null);
+  const [spaceControl, setSpaceControl] = useState<SpaceControlResult | null>(null);
+  const [dataSubstrateStatus, setDataSubstrateStatus] = useState<DataSubstrateStatus | null>(null);
+  const [scenarioResults, setScenarioResults] = useState<{ scenarios: number; bestOutcome: string; winProb: number } | null>(null);
 
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
@@ -330,6 +369,23 @@ export default function Home() {
 
     if (!gpsBridgeRef.current) {
       gpsBridgeRef.current = createGPSTacticalBridge(CARLOS_CORBERAN_PERSONA);
+    }
+
+    // Initialize Tactical Nexus Engines
+    if (!footballBrainRef.current) {
+      footballBrainRef.current = new FootballBrain();
+    }
+    if (!gnnEngineRef.current) {
+      gnnEngineRef.current = new GraphNeuralPatternEngine();
+    }
+    if (!coherenceV3Ref.current) {
+      coherenceV3Ref.current = new CoherenceV3Engine();
+    }
+    if (!dataSubstrateRef.current) {
+      dataSubstrateRef.current = new DataSubstrateEngine();
+    }
+    if (!advancedMetricsRef.current) {
+      advancedMetricsRef.current = new AdvancedMetricsEngine();
     }
 
     if (!gameModelManagerRef.current && patternEngineRef.current && wbaSquad.length > 0) {
@@ -505,6 +561,175 @@ export default function Home() {
           injuryRisks: allInjuryRisks,
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
+
+        // Tactical Nexus Engine Updates (every 5 ticks for performance)
+        if (currentMinute % 5 === 0 || gnnPatterns.length === 0) {
+          // GNN Pattern Recognition
+          if (gnnEngineRef.current && state.ballPosition) {
+            const playerSnapshots = players.slice(0, 11).map((p, i) => {
+              const metrics = liveData.get(p.id);
+              return {
+                playerId: p.id,
+                position: p.position,
+                x: metrics?.position?.x ?? 50,
+                y: metrics?.position?.y ?? 50,
+                velocity: { vx: (metrics?.currentSpeed ?? 0) / 3.6, vy: 0 },
+                acceleration: { ax: metrics?.maxAcceleration ?? 0, ay: 0 },
+                fatigue: homeFatigueModels.get(p.id)?.currentFatigue ?? 0,
+                sprintCapacity: 100 - (homeFatigueModels.get(p.id)?.currentFatigue ?? 0),
+              };
+            });
+
+            const awaySnapshots = awayPlayers.slice(0, 11).map((p, i) => {
+              const metrics = newAwayData.get(p.id);
+              return {
+                playerId: p.id,
+                position: p.position,
+                x: metrics?.position?.x ?? 50,
+                y: metrics?.position?.y ?? 50,
+                velocity: { vx: (metrics?.currentSpeed ?? 0) / 3.6, vy: 0 },
+                acceleration: { ax: metrics?.maxAcceleration ?? 0, ay: 0 },
+              };
+            });
+
+            const allSnapshots = [...playerSnapshots, ...awaySnapshots];
+            const tacticalGraph = gnnEngineRef.current.createTacticalGraph(
+              'match_001',
+              currentMinute,
+              allSnapshots,
+              state.ballPosition,
+              state.ballPossession || 'home'
+            );
+
+            const detectedGNNPatterns = gnnEngineRef.current.recognizePatterns(tacticalGraph);
+            setGnnPatterns(detectedGNNPatterns);
+
+            // Coherence V3 Analysis
+            if (coherenceV3Ref.current) {
+              coherenceV3Ref.current.analyzeCoherence(tacticalGraph, detectedGNNPatterns, currentMinute);
+              const summary = coherenceV3Ref.current.getCoherenceSummary();
+              setCoherenceV3State(summary);
+            }
+
+            // Space Control
+            if (advancedMetricsRef.current && dataSubstrateRef.current) {
+              const latestFrame = dataSubstrateRef.current.getLatestFrame();
+              if (latestFrame) {
+                const spaceResult = advancedMetricsRef.current.calculateSpaceControl(latestFrame);
+                setSpaceControl(spaceResult);
+              }
+            }
+          }
+
+          // Football Brain Predictions (less frequent)
+          if (footballBrainRef.current && currentMinute % 10 === 0) {
+            const matchContext = {
+              matchId: 'match_001',
+              competition: 'Premier League',
+              homeTeam: {
+                id: 'MCI',
+                name: 'Manchester City',
+                currentForm: [3, 3, 1, 3, 3, 1, 3, 0, 3, 1],
+                fatigueLevel: getTeamFatigue(homeFatigueModels),
+                injuryImpact: 0.1,
+                tacticalFlexibility: 0.85,
+                squadDepth: 0.9,
+                momentumScore: matchStats ? matchStats.possession.home / 100 : 0.5,
+                pressureHandling: 0.8,
+              },
+              awayTeam: {
+                id: 'MUN',
+                name: 'Manchester United',
+                currentForm: [1, 3, 0, 1, 3, 3, 1, 1, 0, 3],
+                fatigueLevel: getTeamFatigue(awayFatigueModels),
+                injuryImpact: 0.15,
+                tacticalFlexibility: 0.7,
+                squadDepth: 0.75,
+                momentumScore: matchStats ? matchStats.possession.away / 100 : 0.5,
+                pressureHandling: 0.65,
+              },
+              venue: {
+                stadiumId: 'etihad',
+                name: 'Etihad Stadium',
+                capacity: 55017,
+                altitude: 75,
+                pitchDimensions: { length: 105, width: 68 },
+                surfaceType: 'hybrid' as const,
+                weatherConditions: {
+                  temperature: 15,
+                  humidity: 65,
+                  windSpeed: 10,
+                  windDirection: 180,
+                  precipitation: 'none' as const,
+                  visibility: 10000,
+                },
+                homeAdvantage: 0.65,
+                atmosphereIntensity: 0.85,
+              },
+              referee: {
+                id: 'ref_001',
+                name: 'Michael Oliver',
+                cardRate: 3.5,
+                penaltyRate: 0.3,
+                advantagePlayTendency: 0.7,
+                homeTeamBias: 0.02,
+                physicalityTolerance: 0.6,
+              },
+              stakes: {
+                homeImportance: 85,
+                awayImportance: 80,
+                titleRace: true,
+                relegationBattle: false,
+                europeanQualification: true,
+                rivalry: 'fierce' as const,
+                mediaAttention: 95,
+              },
+              historicalH2H: {
+                totalMatches: 188,
+                homeWins: 78,
+                awayWins: 59,
+                draws: 51,
+                recentTrend: 'home_dominant' as const,
+                tacticalPatterns: ['high_press', 'possession_dominance'],
+                keyBattles: [
+                  { position: 'midfield', advantage: 'home' as const },
+                  { position: 'flanks', advantage: 'even' as const },
+                ],
+              },
+            };
+
+            footballBrainRef.current.predict(
+              matchContext,
+              ['match_outcome', 'goal_probability', 'momentum_change'],
+              300
+            ).then(predictions => {
+              setBrainPredictions(predictions);
+            }).catch(() => {});
+
+            // Run scenario simulations
+            footballBrainRef.current.runScenarios({
+              baseState: matchContext,
+              modifications: [
+                { type: 'tactical_change', target: 'pressing', value: 'high_press' },
+                { type: 'tactical_change', target: 'transition', value: 'quick_counter' },
+              ],
+              simulationCount: 100,
+              timeHorizon: 15, // 15 minutes ahead
+              focusMetrics: ['win_probability', 'goal_probability', 'possession'],
+            }).then(result => {
+              setScenarioResults({
+                scenarios: result.outcomes.length,
+                bestOutcome: result.modifications.length > 0 ? result.modifications[0].target : 'current',
+                winProb: result.aggregateMetrics.winProbability.home,
+              });
+            }).catch(() => {});
+          }
+
+          // Data Substrate Status
+          if (dataSubstrateRef.current) {
+            setDataSubstrateStatus(dataSubstrateRef.current.getSystemStatus());
+          }
+        }
 
         // Corberán Systems Update
         if (transitionEngineRef.current && state.ballPosition) {
@@ -746,7 +971,7 @@ export default function Home() {
             <div className="w-6 h-6 flex items-center justify-center" style={{ color: BP.BLUE4 }}>
               <Layers className="w-5 h-5" />
             </div>
-            <span className="text-xs font-semibold tracking-wide" style={{ color: BP.WHITE }}>TACTICAL INTELLIGENCE</span>
+            <span className="text-xs font-semibold tracking-wide" style={{ color: BP.WHITE }}>TACTICAL NEXUS</span>
           </div>
 
           {/* Match Info */}
@@ -955,7 +1180,7 @@ export default function Home() {
           )}
 
           {/* Markov Prediction */}
-          <div className="p-3 flex-1">
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
             <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>PATTERN ANALYSIS</span>
             <div className="mt-2">
               <div className="text-[9px] truncate" style={{ color: BP.GRAY1 }}>
@@ -973,6 +1198,77 @@ export default function Home() {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* GNN Pattern Recognition */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>GNN PATTERNS</span>
+              <span className="text-[9px] font-mono" style={{ color: BP.BLUE4 }}>{gnnPatterns.length} ACTIVE</span>
+            </div>
+            {gnnPatterns.slice(0, 2).map((pattern, idx) => (
+              <div
+                key={idx}
+                className="mb-1 p-1.5"
+                style={{ background: BP.DARK_GRAY2, borderLeft: `2px solid ${BP.BLUE4}` }}
+              >
+                <div className="flex justify-between">
+                  <span className="text-[9px]" style={{ color: BP.GRAY4 }}>{pattern.pattern.name}</span>
+                  <span className="text-[9px] font-mono" style={{ color: BP.BLUE4 }}>{(pattern.matchConfidence * 100).toFixed(0)}%</span>
+                </div>
+              </div>
+            ))}
+            {gnnPatterns.length === 0 && (
+              <div className="text-[9px]" style={{ color: BP.GRAY1 }}>Analyzing tactical structure...</div>
+            )}
+          </div>
+
+          {/* Football Brain Predictions */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>BRAIN PREDICTIONS</span>
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: BP.GREEN4 }} />
+            </div>
+            {brainPredictions.slice(0, 2).map((pred, idx) => (
+              <div key={idx} className="flex justify-between mb-1">
+                <span className="text-[9px]" style={{ color: BP.GRAY3 }}>{pred.type.replace(/_/g, ' ')}</span>
+                <span className="text-[9px] font-mono" style={{ color: pred.confidence > 0.6 ? BP.GREEN4 : BP.ORANGE4 }}>
+                  {(pred.confidence * 100).toFixed(0)}%
+                </span>
+              </div>
+            ))}
+            {brainPredictions.length === 0 && (
+              <div className="text-[9px]" style={{ color: BP.GRAY1 }}>Processing neural predictions...</div>
+            )}
+          </div>
+
+          {/* Space Control */}
+          <div className="p-3 flex-1">
+            <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>SPACE CONTROL</span>
+            {spaceControl ? (
+              <div className="mt-2 space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Controlled</span>
+                  <span className="text-[9px] font-mono" style={{ color: BP.BLUE4 }}>
+                    {spaceControl.totalControlledSpace.toFixed(0)}m²
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Final Third</span>
+                  <span className="text-[9px] font-mono" style={{ color: getCoherenceColor(spaceControl.attackingThirdControl * 100) }}>
+                    {(spaceControl.attackingThirdControl * 100).toFixed(0)}%
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Half-Space L/R</span>
+                  <span className="text-[9px] font-mono" style={{ color: BP.GRAY3 }}>
+                    {(spaceControl.halfSpaceControl.left * 100).toFixed(0)}% / {(spaceControl.halfSpaceControl.right * 100).toFixed(0)}%
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-2 text-[9px]" style={{ color: BP.GRAY1 }}>Calculating Voronoi...</div>
+            )}
           </div>
         </aside>
 
@@ -1047,8 +1343,30 @@ export default function Home() {
                   xG {(matchStats?.xG.home ?? 0).toFixed(2)}
                 </span>
               </div>
+              {scenarioResults && (
+                <div className="flex items-center gap-1.5 pl-2 border-l" style={{ borderColor: BP.DARK_GRAY4 }}>
+                  <Layers className="w-3 h-3" style={{ color: BP.BLUE4 }} />
+                  <span className="text-[10px] font-mono" style={{ color: BP.BLUE4 }}>
+                    {scenarioResults.scenarios} SIMS
+                  </span>
+                  <span className="text-[10px] font-mono" style={{ color: BP.GREEN4 }}>
+                    {(scenarioResults.winProb * 100).toFixed(0)}% WIN
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex items-center gap-4">
+              {coherenceV3State && (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>COHERENCE V3</span>
+                  <span
+                    className="text-[10px] font-mono"
+                    style={{ color: coherenceV3State.trajectory === 'improving' ? BP.GREEN4 : coherenceV3State.trajectory === 'declining' ? BP.RED4 : BP.GRAY3 }}
+                  >
+                    {coherenceV3State.trajectory.toUpperCase()}
+                  </span>
+                </div>
+              )}
               <span className="text-[10px]" style={{ color: BP.GRAY1 }}>
                 {corberanCoherence?.compactnessCoherence.linesBroken === false ? 'LINES CONNECTED' : 'LINES BROKEN'}
               </span>
