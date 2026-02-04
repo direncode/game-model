@@ -1272,7 +1272,7 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* ==================== CENTER - PITCH VIEW ==================== */}
+        {/* ==================== CENTER - PITCH + TACTICAL LOG ==================== */}
         <main className="flex-1 flex flex-col overflow-hidden" style={{ background: BP.BLACK }}>
           {/* Alert Banner */}
           {transitionTriggers.length > 0 && transitionTriggers[0].active && (
@@ -1301,8 +1301,8 @@ export default function Home() {
             </div>
           )}
 
-          {/* Pitch Container */}
-          <div className="flex-1 p-3 overflow-hidden">
+          {/* Compact Pitch Container - 40% height */}
+          <div className="h-[40%] p-2 overflow-hidden">
             <div
               className="h-full overflow-hidden"
               style={{ background: BP.DARK_GRAY1, border: `1px solid ${BP.DARK_GRAY3}` }}
@@ -1322,6 +1322,149 @@ export default function Home() {
                 patternRecognition={patternRecognitionData}
                 fatigueData={fatigueData}
               />
+            </div>
+          </div>
+
+          {/* Tactical Event Log - 60% height */}
+          <div className="flex-1 flex flex-col border-t overflow-hidden" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="px-3 py-1.5 flex items-center justify-between" style={{ background: BP.DARK_GRAY2 }}>
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>TACTICAL LOG</span>
+              <div className="flex items-center gap-3">
+                <span className="text-[9px] font-mono" style={{ color: BP.BLUE4 }}>
+                  {patternRecognitionData.activePatterns.home.length} PATTERNS
+                </span>
+                <span className="text-[9px] font-mono" style={{ color: BP.GREEN4 }}>
+                  {transitionTriggers.filter(t => t.active).length} TRIGGERS
+                </span>
+              </div>
+            </div>
+            <div className="flex-1 overflow-y-auto p-2 space-y-1" style={{ background: BP.DARK_GRAY1 }}>
+              {/* Match Events */}
+              {matchEvents.slice(0, 8).map((event, idx) => {
+                const isShot = event.type === 'shot_on_target' || event.type === 'shot_off_target' || event.type === 'shot_blocked';
+                const isGoal = event.type === 'goal';
+                const isFoul = event.type === 'foul' || event.type === 'yellow_card' || event.type === 'red_card';
+                return (
+                  <div
+                    key={event.id || idx}
+                    className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                    style={{
+                      background: isGoal ? `${BP.GREEN3}15` :
+                                isShot ? `${BP.BLUE3}10` :
+                                isFoul ? `${BP.RED3}10` : BP.DARK_GRAY2,
+                      borderLeft: `2px solid ${
+                        isGoal ? BP.GREEN4 :
+                        isShot ? BP.BLUE4 :
+                        isFoul ? BP.RED4 : BP.DARK_GRAY4
+                      }`,
+                    }}
+                  >
+                    <span className="font-mono w-8" style={{ color: BP.GRAY1 }}>{event.minute}&apos;</span>
+                    <span style={{ color: isGoal ? BP.GREEN4 : isShot ? BP.BLUE4 : BP.GRAY4 }}>{event.description}</span>
+                  </div>
+                );
+              })}
+
+              {/* Pattern Recognition Logs */}
+              {patternRecognitionData.recentLogs.slice(0, 5).map((log, idx) => (
+                <div
+                  key={log.id || idx}
+                  className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                  style={{
+                    background: `${BP.BLUE3}08`,
+                    borderLeft: `2px solid ${log.outcome?.success ? BP.GREEN4 : BP.ORANGE4}`,
+                  }}
+                >
+                  <span className="font-mono w-8" style={{ color: BP.GRAY1 }}>{log.timestamp}&apos;</span>
+                  <span style={{ color: BP.BLUE4 }}>[PATTERN]</span>
+                  <span style={{ color: BP.GRAY4 }}>{log.pattern.type.replace(/_/g, ' ')}</span>
+                  <span className="ml-auto font-mono" style={{ color: log.pattern.confidence > 0.7 ? BP.GREEN4 : BP.GRAY2 }}>
+                    {(log.pattern.confidence * 100).toFixed(0)}%
+                  </span>
+                </div>
+              ))}
+
+              {/* Transition Triggers */}
+              {transitionTriggers.slice(0, 5).map((trigger, idx) => (
+                <div
+                  key={trigger.id || idx}
+                  className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                  style={{
+                    background: trigger.active ? `${BP.ORANGE3}15` : BP.DARK_GRAY2,
+                    borderLeft: `2px solid ${trigger.active ? BP.ORANGE4 : BP.DARK_GRAY4}`,
+                  }}
+                >
+                  <span className="font-mono w-8" style={{ color: BP.GRAY1 }}>{trigger.minute}&apos;</span>
+                  <span style={{ color: BP.ORANGE4 }}>[{trigger.type.toUpperCase()}]</span>
+                  <span style={{ color: BP.GRAY4 }}>{trigger.suggestedAction}</span>
+                  {trigger.active && (
+                    <span className="ml-auto font-mono animate-pulse" style={{ color: BP.RED4 }}>
+                      {trigger.deadline}s
+                    </span>
+                  )}
+                </div>
+              ))}
+
+              {/* Coherence Alerts */}
+              {corberanCoherence?.alerts.slice(0, 3).map((alert, idx) => (
+                <div
+                  key={alert.id || idx}
+                  className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                  style={{
+                    background: alert.severity === 'critical' ? `${BP.RED3}15` : `${BP.ORANGE3}10`,
+                    borderLeft: `2px solid ${alert.severity === 'critical' ? BP.RED4 : BP.ORANGE4}`,
+                  }}
+                >
+                  <AlertTriangle className="w-3 h-3" style={{ color: alert.severity === 'critical' ? BP.RED4 : BP.ORANGE4 }} />
+                  <span style={{ color: BP.GRAY4 }}>{alert.message}</span>
+                </div>
+              ))}
+
+              {/* GNN Pattern Matches */}
+              {gnnPatterns.slice(0, 3).map((pattern, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                  style={{
+                    background: `${BP.BLUE3}05`,
+                    borderLeft: `2px solid ${BP.BLUE4}`,
+                  }}
+                >
+                  <Layers className="w-3 h-3" style={{ color: BP.BLUE4 }} />
+                  <span style={{ color: BP.BLUE4 }}>[GNN]</span>
+                  <span style={{ color: BP.GRAY4 }}>{pattern.pattern.name}</span>
+                  <span className="ml-auto font-mono" style={{ color: BP.BLUE4 }}>
+                    {(pattern.matchConfidence * 100).toFixed(0)}%
+                  </span>
+                </div>
+              ))}
+
+              {/* Brain Predictions */}
+              {brainPredictions.slice(0, 2).map((pred, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 px-2 py-1 text-[10px]"
+                  style={{
+                    background: `${BP.GREEN3}05`,
+                    borderLeft: `2px solid ${BP.GREEN4}`,
+                  }}
+                >
+                  <Activity className="w-3 h-3" style={{ color: BP.GREEN4 }} />
+                  <span style={{ color: BP.GREEN4 }}>[BRAIN]</span>
+                  <span style={{ color: BP.GRAY4 }}>{pred.type.replace(/_/g, ' ')}</span>
+                  <span className="ml-auto font-mono" style={{ color: pred.confidence > 0.7 ? BP.GREEN4 : BP.ORANGE4 }}>
+                    {(pred.confidence * 100).toFixed(0)}%
+                  </span>
+                </div>
+              ))}
+
+              {/* Placeholder when no events */}
+              {matchEvents.length === 0 && patternRecognitionData.recentLogs.length === 0 && (
+                <div className="flex flex-col items-center justify-center h-32" style={{ color: BP.GRAY1 }}>
+                  <Radio className="w-6 h-6 mb-2" style={{ color: BP.DARK_GRAY4 }} />
+                  <div className="text-[10px]">Waiting for tactical events...</div>
+                </div>
+              )}
             </div>
           </div>
 
