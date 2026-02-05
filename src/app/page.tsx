@@ -109,6 +109,26 @@ import {
   type SpaceControlResult,
   type InjuryRiskResult,
 } from '@/lib/advanced-metrics';
+import {
+  ResonanceKernelEngine,
+  type ResonanceCoherence,
+  type WaveFunction,
+  type AttractorPoint,
+  type ResonanceState,
+} from '@/lib/resonance-kernel';
+import {
+  AutonomousTwinEngine,
+  createAutonomousTwinEngine,
+  type AutonomousTwin,
+  type TwinIntent,
+  type CatapultLiveData,
+} from '@/lib/autonomous-twin';
+import {
+  catapultDataSubstrate,
+  type CatapultProcessedFrame,
+  type CatapultHistoricalData,
+  SAMPLE_HISTORICAL_DATA,
+} from '@/lib/catapult-data-substrate';
 
 // ==================== PALANTIR BLUEPRINT COLORS ====================
 const BP = {
@@ -289,6 +309,16 @@ export default function Home() {
   const [dataSubstrateStatus, setDataSubstrateStatus] = useState<DataSubstrateStatus | null>(null);
   const [scenarioResults, setScenarioResults] = useState<{ scenarios: number; bestOutcome: string; winProb: number } | null>(null);
 
+  // ==================== RESONANCE KERNEL CORE (PRIMARY SYSTEM) ====================
+  const resonanceKernelRef = useRef<ResonanceKernelEngine | null>(null);
+  const autonomousTwinEngineRef = useRef<AutonomousTwinEngine | null>(null);
+  const [resonanceCoherence, setResonanceCoherence] = useState<ResonanceCoherence | null>(null);
+  const [resonanceState, setResonanceState] = useState<ResonanceState | null>(null);
+  const [twinIntents, setTwinIntents] = useState<Map<string, TwinIntent>>(new Map());
+  const [activeTwins, setActiveTwins] = useState<AutonomousTwin[]>([]);
+  const [catapultFrames, setCatapultFrames] = useState<Map<string, CatapultProcessedFrame>>(new Map());
+  const [catapultHistory, setCatapultHistory] = useState<CatapultHistoricalData[]>(SAMPLE_HISTORICAL_DATA);
+
   // ==================== RESIZE HANDLERS ====================
   const handleMouseDown = useCallback((panel: 'left' | 'right' | 'vertical') => {
     setIsResizing(panel);
@@ -442,6 +472,30 @@ export default function Home() {
     if (!advancedMetricsRef.current) {
       advancedMetricsRef.current = new AdvancedMetricsEngine();
     }
+
+    // ==================== INITIALIZE RESONANCE KERNEL CORE ====================
+    if (!resonanceKernelRef.current) {
+      resonanceKernelRef.current = new ResonanceKernelEngine();
+    }
+    if (!autonomousTwinEngineRef.current && resonanceKernelRef.current) {
+      autonomousTwinEngineRef.current = createAutonomousTwinEngine(resonanceKernelRef.current);
+
+      // Create autonomous twins for all players
+      const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
+      wbaSquad.slice(0, 11).forEach((player, index) => {
+        const ideal = idealPositions[index];
+        autonomousTwinEngineRef.current!.createTwin(
+          player.id,
+          player.name,
+          roles[index],
+          { x: ideal.x, y: ideal.y },
+          { x: ideal.x, y: ideal.y }
+        );
+      });
+    }
+
+    // Connect Catapult Data Substrate
+    catapultDataSubstrate.connect();
 
     if (!gameModelManagerRef.current && patternEngineRef.current && wbaSquad.length > 0) {
       gameModelManagerRef.current = createGameModelManager(
@@ -616,6 +670,85 @@ export default function Home() {
           injuryRisks: allInjuryRisks,
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
+
+        // ==================== RESONANCE KERNEL CORE UPDATE (PRIMARY) ====================
+        if (resonanceKernelRef.current && state.ballPosition) {
+          const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
+
+          // Prepare home player data for resonance kernel
+          const homePlayerData = players.slice(0, 11).map((p, i) => {
+            const metrics = liveData.get(p.id);
+            const fatigue = homeFatigueModels.get(p.id)?.currentFatigue ?? 0;
+            const ideal = idealPositions[i];
+            return {
+              id: p.id,
+              position: { x: metrics?.position?.x ?? 50, y: metrics?.position?.y ?? 50 },
+              velocity: { vx: (metrics?.currentSpeed ?? 0) / 3.6 * (Math.random() > 0.5 ? 1 : -1), vy: (metrics?.currentSpeed ?? 0) / 3.6 * (Math.random() > 0.5 ? 1 : -1) },
+              fatigue,
+              role: roles[i],
+              idealPosition: { x: ideal.x, y: ideal.y },
+            };
+          });
+
+          // Prepare away player data
+          const awayPlayerData = awayPlayers.slice(0, 11).map((p, i) => {
+            const metrics = newAwayData.get(p.id);
+            return {
+              id: p.id,
+              position: { x: metrics?.position?.x ?? 50, y: metrics?.position?.y ?? 50 },
+            };
+          });
+
+          // Update resonance kernel (THE CORE)
+          const coherence = resonanceKernelRef.current.update(
+            homePlayerData,
+            awayPlayerData,
+            state.ballPosition,
+            state.ballPossession || 'home',
+            currentMinute,
+            0.1
+          );
+          setResonanceCoherence(coherence);
+          setResonanceState(resonanceKernelRef.current.getState());
+
+          // Update autonomous twins (self-governing agents)
+          if (autonomousTwinEngineRef.current) {
+            // Feed Catapult data to twins
+            const catapultSampleFrames = catapultDataSubstrate.generateSampleFrames(
+              homePlayerData.map(p => ({ id: p.id, x: p.position.x, y: p.position.y, fatigue: p.fatigue })),
+              currentMinute
+            );
+            setCatapultFrames(catapultSampleFrames);
+
+            // Feed data to each twin
+            for (const [playerId, frame] of catapultSampleFrames) {
+              autonomousTwinEngineRef.current.feedCatapultData(playerId, {
+                timestamp: frame.timestamp,
+                playerLoad: frame.cumulativeLoad,
+                totalDistance: frame.distance,
+                hsr: frame.hsr,
+                sprint: frame.sprint,
+                accelerations: 0,
+                decelerations: 0,
+                maxSpeed: frame.speed,
+                metabolicPower: frame.metabolicPower,
+                heartRate: frame.heartRate,
+                heartRateZone: frame.heartRateZone,
+              });
+            }
+
+            // Autonomous twin decision-making
+            const intents = autonomousTwinEngineRef.current.update(
+              state.ballPosition,
+              state.ballPossession || 'home',
+              awayPlayerData.map(p => ({ id: p.id, x: p.position.x, y: p.position.y })),
+              coherence,
+              0.1
+            );
+            setTwinIntents(intents);
+            setActiveTwins(autonomousTwinEngineRef.current.getAllTwins());
+          }
+        }
 
         // Tactical Nexus Engine Updates (every 5 ticks for performance)
         if (currentMinute % 5 === 0 || gnnPatterns.length === 0) {
@@ -1099,55 +1232,106 @@ export default function Home() {
           className="flex flex-col border-r overflow-hidden flex-shrink-0"
           style={{ width: leftPanelWidth, background: BP.DARK_GRAY1, borderColor: BP.DARK_GRAY3 }}
         >
-          {/* Coherence Section */}
-          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+          {/* ==================== RESONANCE KERNEL CORE (PRIMARY) ==================== */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3, background: `${BP.BLUE3}08` }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.BLUE4 }}>RESONANCE KERNEL</span>
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: BP.BLUE4 }} />
+            </div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>COHERENCE</span>
+              <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Wave Coherence</span>
               <span
-                className="text-xs font-mono font-bold"
-                style={{ color: getCoherenceColor(corberanCoherence?.overallScore ?? 0) }}
+                className="text-lg font-mono font-bold"
+                style={{ color: getCoherenceColor(resonanceCoherence?.overall ?? 0) }}
               >
-                {corberanCoherence?.overallScore ?? 0}%
+                {(resonanceCoherence?.overall ?? 0).toFixed(0)}%
               </span>
             </div>
 
-            {/* Progress Bar */}
-            <div className="h-1 w-full mb-3" style={{ background: BP.DARK_GRAY3 }}>
+            {/* Resonance Progress Bar */}
+            <div className="h-1.5 w-full mb-3 rounded-full overflow-hidden" style={{ background: BP.DARK_GRAY3 }}>
               <div
                 className="h-full transition-all duration-300"
                 style={{
-                  width: `${corberanCoherence?.overallScore ?? 0}%`,
-                  background: getCoherenceColor(corberanCoherence?.overallScore ?? 0)
+                  width: `${resonanceCoherence?.overall ?? 0}%`,
+                  background: `linear-gradient(90deg, ${BP.BLUE4}, ${BP.GREEN4})`
                 }}
               />
             </div>
 
-            {/* Sub-metrics */}
-            <div className="space-y-2">
+            {/* Wave Function Metrics */}
+            <div className="space-y-1.5">
               {[
-                { label: 'Pressing', value: corberanCoherence?.pressingCoherence.score ?? 0 },
-                { label: 'Compactness', value: 100 - Math.min(100, (corberanCoherence?.compactnessCoherence.verticalCompactness ?? 25) * 2) },
-                { label: 'Transition', value: corberanCoherence?.transitionCoherence.score ?? 0 },
+                { label: 'Wave Alignment', value: resonanceCoherence?.waveAlignment ?? 0, color: BP.BLUE4 },
+                { label: 'Field Harmony', value: resonanceCoherence?.fieldHarmony ?? 0, color: BP.GREEN4 },
+                { label: 'Kernel Density', value: resonanceCoherence?.kernelDensity ?? 0, color: BP.ORANGE4 },
+                { label: 'Attractor Eff.', value: resonanceCoherence?.attractorEfficiency ?? 0, color: BP.RED4 },
               ].map(metric => (
                 <div key={metric.label} className="flex items-center justify-between">
-                  <span className="text-[10px]" style={{ color: BP.GRAY1 }}>{metric.label}</span>
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>{metric.label}</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-16 h-0.5" style={{ background: BP.DARK_GRAY4 }}>
-                      <div
-                        className="h-full"
-                        style={{
-                          width: `${metric.value}%`,
-                          background: getCoherenceColor(metric.value)
-                        }}
-                      />
+                    <div className="w-14 h-0.5" style={{ background: BP.DARK_GRAY4 }}>
+                      <div className="h-full" style={{ width: `${metric.value}%`, background: metric.color }} />
                     </div>
-                    <span className="text-[10px] font-mono w-7 text-right" style={{ color: BP.GRAY3 }}>
+                    <span className="text-[9px] font-mono w-6 text-right" style={{ color: metric.color }}>
                       {Math.round(metric.value)}
                     </span>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Energy State */}
+            <div className="mt-2 pt-2 border-t" style={{ borderColor: BP.DARK_GRAY4 }}>
+              <div className="flex items-center justify-between">
+                <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Total Energy</span>
+                <span className="text-[10px] font-mono" style={{ color: BP.BLUE4 }}>
+                  {resonanceState?.energyBalance ? (resonanceState.energyBalance * 100).toFixed(0) : 50}%
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-[9px]" style={{ color: BP.GRAY1 }}>Field Stability</span>
+                <span className="text-[10px] font-mono" style={{ color: resonanceState?.fieldStability && resonanceState.fieldStability > 0.7 ? BP.GREEN4 : BP.ORANGE4 }}>
+                  {resonanceState?.fieldStability ? (resonanceState.fieldStability * 100).toFixed(0) : 100}%
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Line Coherence (from Resonance Kernel) */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GRAY2 }}>LINE RESONANCE</span>
+            <div className="mt-2 space-y-1">
+              {[
+                { label: 'Defense Line', value: resonanceCoherence?.defensiveLine ?? 50 },
+                { label: 'Midfield Block', value: resonanceCoherence?.midfieldBlock ?? 50 },
+                { label: 'Attack Shape', value: resonanceCoherence?.attackingShape ?? 50 },
+              ].map(line => (
+                <div key={line.label} className="flex items-center justify-between">
+                  <span className="text-[9px]" style={{ color: BP.GRAY1 }}>{line.label}</span>
+                  <span className="text-[9px] font-mono" style={{ color: getCoherenceColor(line.value) }}>
+                    {Math.round(line.value)}%
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Decoherence Alerts */}
+            {resonanceCoherence && resonanceCoherence.resonanceBreaks.length > 0 && (
+              <div className="mt-2 pt-2 border-t" style={{ borderColor: BP.DARK_GRAY4 }}>
+                <span className="text-[9px]" style={{ color: BP.RED4 }}>RESONANCE BREAKS</span>
+                {resonanceCoherence.resonanceBreaks.slice(0, 2).map((brk, idx) => (
+                  <div key={idx} className="flex items-center justify-between mt-1">
+                    <span className="text-[8px] truncate" style={{ color: BP.GRAY3 }}>
+                      {players.find(p => p.id === brk.playerId)?.name.split(' ').pop() || brk.playerId}
+                    </span>
+                    <span className="text-[8px] font-mono" style={{ color: BP.RED4 }}>
+                      -{brk.deviation.toFixed(0)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Double Pivot Status */}
@@ -1233,6 +1417,75 @@ export default function Home() {
               </div>
             </div>
           )}
+
+          {/* ==================== AUTONOMOUS TWINS ==================== */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.GREEN4 }}>AUTONOMOUS TWINS</span>
+              <span className="text-[9px] font-mono" style={{ color: BP.GREEN4 }}>{activeTwins.length} ACTIVE</span>
+            </div>
+            <div className="space-y-1 max-h-24 overflow-y-auto">
+              {activeTwins.slice(0, 4).map(twin => (
+                <div
+                  key={twin.playerId}
+                  className="flex items-center justify-between p-1"
+                  style={{ background: twin.consciousness.energyState.inAttractor ? `${BP.GREEN3}15` : BP.DARK_GRAY2 }}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[8px] font-mono w-6" style={{ color: BP.GRAY1 }}>{twin.role}</span>
+                    <span className="text-[9px] truncate" style={{ color: BP.GRAY3, maxWidth: '60px' }}>
+                      {twin.name.split(' ').pop()}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-[8px]" style={{ color: BP.BLUE4 }}>
+                      {twin.consciousness.currentIntent.type.replace(/_/g, ' ').slice(0, 8)}
+                    </span>
+                    <span
+                      className="text-[8px] font-mono"
+                      style={{ color: twin.consciousness.intentConfidence > 0.6 ? BP.GREEN4 : BP.ORANGE4 }}
+                    >
+                      {(twin.consciousness.intentConfidence * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {activeTwins.length === 0 && (
+              <div className="text-[9px]" style={{ color: BP.GRAY1 }}>Initializing autonomous agents...</div>
+            )}
+          </div>
+
+          {/* ==================== CATAPULT DATA SUBSTRATE ==================== */}
+          <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-medium tracking-wider" style={{ color: BP.ORANGE4 }}>CATAPULT DATA</span>
+              <div className="flex items-center gap-1">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: catapultFrames.size > 0 ? BP.GREEN4 : BP.RED4 }} />
+                <span className="text-[8px]" style={{ color: BP.GRAY1 }}>
+                  {catapultFrames.size > 0 ? 'STREAMING' : 'OFFLINE'}
+                </span>
+              </div>
+            </div>
+            {catapultFrames.size > 0 && (
+              <div className="space-y-1">
+                {Array.from(catapultFrames.values()).slice(0, 3).map(frame => (
+                  <div key={frame.playerId} className="flex items-center justify-between text-[8px]">
+                    <span style={{ color: BP.GRAY2 }}>{frame.playerId.slice(0, 6)}</span>
+                    <span style={{ color: BP.BLUE4 }}>{frame.speed.toFixed(1)}m/s</span>
+                    <span style={{ color: BP.GREEN4 }}>{frame.distance.toFixed(0)}m</span>
+                    <span style={{ color: frame.heartRateZone >= 4 ? BP.RED4 : BP.GRAY3 }}>HR{frame.heartRateZone}</span>
+                  </div>
+                ))}
+                <div className="mt-1 pt-1 border-t text-[8px]" style={{ borderColor: BP.DARK_GRAY4 }}>
+                  <div className="flex justify-between">
+                    <span style={{ color: BP.GRAY1 }}>Sample History</span>
+                    <span style={{ color: BP.ORANGE4 }}>{catapultHistory.length} players</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Markov Prediction */}
           <div className="p-3 border-b" style={{ borderColor: BP.DARK_GRAY3 }}>
