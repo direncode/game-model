@@ -18,6 +18,35 @@ import {
 import { FieldConstructor, type FieldMutation, type ConstructionSnapshot } from '@/lib/field-constructor';
 import { EventIngestionPipeline, type AbstractEvent, type EnrichedEvent } from '@/lib/event-ingestion';
 
+// ─── Blueprint palette constants (used in SVG) ─────────────────────────
+const BP = {
+  black: '#111418',
+  bg1: '#1C2127',
+  bg2: '#252A31',
+  bg3: '#2F343C',
+  bg4: '#383E47',
+  bg5: '#404854',
+  text1: '#F6F7F9',
+  text2: '#D3D8DE',
+  text3: '#8F99A8',
+  text4: '#5F6B7C',
+  blue: '#2D72D2',
+  blueL: '#4C90F0',
+  blueM: '#8ABBFF',
+  green: '#238551',
+  greenL: '#32A467',
+  greenM: '#72CA9B',
+  orange: '#C87619',
+  orangeL: '#EC9A3C',
+  orangeM: '#FBB360',
+  red: '#CD4246',
+  redL: '#E76A6E',
+  violet: '#7C3AED',
+  teal: '#0D9488',
+  rose: '#DB2777',
+  cyan: '#06B6D4',
+};
+
 // ─── Formation setup ───────────────────────────────────────────────
 
 interface PlayerSetup {
@@ -38,7 +67,7 @@ const FORMATION: PlayerSetup[] = [
   { id: 'RW',  x: 70, y: 56, state: 'attacking',  load: 75 },
 ];
 
-// ─── Diagram layout coordinates ────────────────────────────────────
+// ─── Diagram layout ────────────────────────────────────────────────
 
 interface Node {
   id: string;
@@ -49,6 +78,7 @@ interface Node {
   h: number;
   color: string;
   sub?: string;
+  group?: string;
 }
 
 interface Edge {
@@ -63,56 +93,56 @@ const H = 1020;
 
 const NODES: Node[] = [
   // Layer 0 — Data Sources
-  { id: 'catapult',    label: 'Catapult GPS/IMU',     x: 80,   y: 40,  w: 180, h: 52, color: '#0ea5e9', sub: 'speed, acc, load, HR' },
-  { id: 'synthetic',   label: 'Synthetic Generator',   x: 80,   y: 120, w: 180, h: 52, color: '#0ea5e9', sub: '11 players × random' },
+  { id: 'catapult',    label: 'Catapult GPS/IMU',     x: 80,   y: 40,  w: 180, h: 52, color: BP.blueL, sub: 'speed, acc, load, HR', group: 'source' },
+  { id: 'synthetic',   label: 'Synthetic Generator',   x: 80,   y: 120, w: 180, h: 52, color: BP.blueL, sub: '11 players × random', group: 'source' },
 
   // Layer 1 — Substrate
-  { id: 'substrate',   label: 'DataSubstrate',         x: 380,  y: 80,  w: 200, h: 60, color: '#8b5cf6', sub: 'ingestFrame() → normalize' },
+  { id: 'substrate',   label: 'DataSubstrate',         x: 380,  y: 80,  w: 200, h: 60, color: BP.violet, sub: 'ingestFrame() → normalize', group: 'substrate' },
 
   // Layer 2 — Kernel core
-  { id: 'kernel',      label: 'ResonanceKernel',       x: 700,  y: 30,  w: 220, h: 50, color: '#f59e0b', sub: 'tick(Δt) — main loop' },
+  { id: 'kernel',      label: 'ResonanceKernel',       x: 700,  y: 30,  w: 220, h: 50, color: BP.orangeL, sub: 'tick(Δt) — main loop', group: 'kernel' },
 
-  // Layer 2 sub-steps (inside kernel)
-  { id: 'attractors',  label: '① Attractor Forces',    x: 520,  y: 150, w: 180, h: 48, color: '#f59e0b', sub: 'F = s·e^(-d/r) · dir' },
-  { id: 'coulomb',     label: '② Coulomb Spacing',     x: 520,  y: 220, w: 180, h: 48, color: '#f59e0b', sub: 'F = k·q₁q₂/d²' },
-  { id: 'fokker',      label: '③ Wave Evolution',      x: 520,  y: 290, w: 180, h: 48, color: '#f59e0b', sub: 'Fokker-Planck diffuse/drift' },
-  { id: 'positions',   label: '④ Update Positions',    x: 520,  y: 360, w: 180, h: 48, color: '#f59e0b', sub: 'v → pos, boundary clamp' },
+  // Kernel sub-steps
+  { id: 'attractors',  label: '① Attractor Forces',    x: 520,  y: 150, w: 180, h: 48, color: BP.orangeL, sub: 'F = s·e^(-d/r) · dir', group: 'kernel' },
+  { id: 'coulomb',     label: '② Coulomb Spacing',     x: 520,  y: 220, w: 180, h: 48, color: BP.orangeL, sub: 'F = k·q₁q₂/d²', group: 'kernel' },
+  { id: 'fokker',      label: '③ Wave Evolution',      x: 520,  y: 290, w: 180, h: 48, color: BP.orangeL, sub: 'Fokker-Planck diffuse/drift', group: 'kernel' },
+  { id: 'positions',   label: '④ Update Positions',    x: 520,  y: 360, w: 180, h: 48, color: BP.orangeL, sub: 'v → pos, boundary clamp', group: 'kernel' },
 
-  // Layer 2 wave details
-  { id: 'waveamp',     label: 'Amplitude',             x: 760,  y: 150, w: 140, h: 40, color: '#fb923c', sub: 'load → energy 0–1' },
-  { id: 'wavephase',   label: 'Phase',                 x: 760,  y: 210, w: 140, h: 40, color: '#fb923c', sub: 'state → radians' },
-  { id: 'wavefreq',    label: 'Frequency',             x: 760,  y: 270, w: 140, h: 40, color: '#fb923c', sub: 'speed → Hz rhythm' },
-  { id: 'wavelength',  label: 'Wavelength',            x: 760,  y: 330, w: 140, h: 40, color: '#fb923c', sub: 'coverage meters' },
+  // Wave details
+  { id: 'waveamp',     label: 'Amplitude',             x: 760,  y: 150, w: 140, h: 40, color: BP.orangeM, sub: 'load → energy 0–1', group: 'wave' },
+  { id: 'wavephase',   label: 'Phase',                 x: 760,  y: 210, w: 140, h: 40, color: BP.orangeM, sub: 'state → radians', group: 'wave' },
+  { id: 'wavefreq',    label: 'Frequency',             x: 760,  y: 270, w: 140, h: 40, color: BP.orangeM, sub: 'speed → Hz rhythm', group: 'wave' },
+  { id: 'wavelength',  label: 'Wavelength',            x: 760,  y: 330, w: 140, h: 40, color: BP.orangeM, sub: 'coverage meters', group: 'wave' },
 
   // Layer 3 — Outputs
-  { id: 'harmony',     label: 'Field Harmony',         x: 1000, y: 40,  w: 170, h: 52, color: '#22c55e', sub: 'cos(Δφ) + entropy' },
-  { id: 'coherence',   label: 'Player Coherence',      x: 1000, y: 115, w: 170, h: 52, color: '#22c55e', sub: '|ψ|² + phase align' },
-  { id: 'entangle',    label: 'Entanglement Map',      x: 1000, y: 190, w: 170, h: 52, color: '#22c55e', sub: 'RBF × cos(Δφ) pairs' },
-  { id: 'drifts',      label: 'Drift Detection',       x: 1000, y: 265, w: 170, h: 52, color: '#ef4444', sub: '3–6s collapse warning' },
-  { id: 'energy',      label: 'Field Energy',          x: 1000, y: 340, w: 170, h: 52, color: '#22c55e', sub: 'KE + wave²' },
+  { id: 'harmony',     label: 'Field Harmony',         x: 1000, y: 40,  w: 170, h: 52, color: BP.greenL, sub: 'cos(Δφ) + entropy', group: 'output' },
+  { id: 'coherence',   label: 'Player Coherence',      x: 1000, y: 115, w: 170, h: 52, color: BP.greenL, sub: '|ψ|² + phase align', group: 'output' },
+  { id: 'entangle',    label: 'Entanglement Map',      x: 1000, y: 190, w: 170, h: 52, color: BP.greenL, sub: 'RBF × cos(Δφ) pairs', group: 'output' },
+  { id: 'drifts',      label: 'Drift Detection',       x: 1000, y: 265, w: 170, h: 52, color: BP.redL, sub: '3–6s collapse warning', group: 'output' },
+  { id: 'energy',      label: 'Field Energy',          x: 1000, y: 340, w: 170, h: 52, color: BP.greenL, sub: 'KE + wave²', group: 'output' },
 
   // Layer 4 — Twins
-  { id: 'twins',       label: 'AutonomousTwin ×11',    x: 380,  y: 460, w: 210, h: 56, color: '#ec4899', sub: 'evaluate → execute intent' },
-  { id: 'awareness',   label: 'Awareness Vector',      x: 120,  y: 460, w: 180, h: 50, color: '#ec4899', sub: 'ball, space, threat, team' },
-  { id: 'intents',     label: 'Intent Scoring',        x: 120,  y: 540, w: 180, h: 50, color: '#ec4899', sub: '6 intents ranked' },
+  { id: 'twins',       label: 'AutonomousTwin ×11',    x: 380,  y: 460, w: 210, h: 56, color: BP.rose, sub: 'evaluate → execute intent', group: 'agent' },
+  { id: 'awareness',   label: 'Awareness Vector',      x: 120,  y: 460, w: 180, h: 50, color: BP.rose, sub: 'ball, space, threat, team', group: 'agent' },
+  { id: 'intents',     label: 'Intent Scoring',        x: 120,  y: 540, w: 180, h: 50, color: BP.rose, sub: '6 intents ranked', group: 'agent' },
 
   // Layer 5 — Insights
-  { id: 'insight',     label: 'Insight Layer',         x: 700,  y: 460, w: 200, h: 56, color: '#a855f7', sub: 'insightFromKernel()' },
+  { id: 'insight',     label: 'Insight Layer',         x: 700,  y: 460, w: 200, h: 56, color: BP.violet, sub: 'insightFromKernel()', group: 'insight' },
 
   // Layer 6 — Monte Carlo
-  { id: 'montecarlo',  label: 'Monte Carlo What-If',   x: 1000, y: 460, w: 190, h: 56, color: '#06b6d4', sub: 'N scenarios × T ticks' },
+  { id: 'montecarlo',  label: 'Monte Carlo What-If',   x: 1000, y: 460, w: 190, h: 56, color: BP.cyan, sub: 'N scenarios × T ticks', group: 'mc' },
 
   // Superposition states
-  { id: 'states',      label: 'Superposition States',  x: 380,  y: 580, w: 530, h: 44, color: '#64748b', sub: 'defending | pressing | building | attacking | transitioning' },
+  { id: 'states',      label: 'Superposition States',  x: 380,  y: 580, w: 530, h: 44, color: BP.bg5, sub: 'defending | pressing | building | attacking | transitioning', group: 'meta' },
 
   // Pre-decision output
-  { id: 'predecision', label: 'PRE-DECISION OUTPUT',   x: 380,  y: 660, w: 530, h: 54, color: '#ef4444', sub: '"Harmony dropping in midfield — shift phase now"' },
+  { id: 'predecision', label: 'PRE-DECISION OUTPUT',   x: 380,  y: 660, w: 530, h: 54, color: BP.redL, sub: '"Harmony dropping in midfield — shift phase now"', group: 'output' },
 
-  // Layer 7 — Event Pipeline (bottom section)
-  { id: 'eventingest', label: 'Event Ingestion',       x: 80,   y: 760, w: 190, h: 52, color: '#14b8a6', sub: '"CB1 passed to CM2"' },
-  { id: 'vectorenrich',label: 'Vector Enrichment',     x: 340,  y: 760, w: 200, h: 52, color: '#14b8a6', sub: 'coords, trajectory, velocity' },
-  { id: 'fieldconst',  label: 'Field Constructor',     x: 620,  y: 760, w: 200, h: 52, color: '#14b8a6', sub: 'organic mutations → kernel' },
-  { id: 'eventlog',    label: 'Mutation Log',          x: 900,  y: 760, w: 170, h: 52, color: '#14b8a6', sub: 'player_move, phase, ball' },
+  // Layer 7 — Event Pipeline
+  { id: 'eventingest', label: 'Event Ingestion',       x: 80,   y: 760, w: 190, h: 52, color: BP.teal, sub: '"CB1 passed to CM2"', group: 'event' },
+  { id: 'vectorenrich',label: 'Vector Enrichment',     x: 340,  y: 760, w: 200, h: 52, color: BP.teal, sub: 'coords, trajectory, velocity', group: 'event' },
+  { id: 'fieldconst',  label: 'Field Constructor',     x: 620,  y: 760, w: 200, h: 52, color: BP.teal, sub: 'organic mutations → kernel', group: 'event' },
+  { id: 'eventlog',    label: 'Mutation Log',          x: 900,  y: 760, w: 170, h: 52, color: BP.teal, sub: 'player_move, phase, ball', group: 'event' },
 ];
 
 const EDGES: Edge[] = [
@@ -167,32 +197,35 @@ function getNodeCenter(n: Node): { cx: number; cy: number } {
 function edgePath(from: Node, to: Node): string {
   const a = getNodeCenter(from);
   const b = getNodeCenter(to);
-
   const dx = b.cx - a.cx;
   const dy = b.cy - a.cy;
   const dist = Math.sqrt(dx * dx + dy * dy);
   if (dist === 0) return '';
-
   const nx = dx / dist;
   const ny = dy / dist;
-
-  // Exit point on from-node border
   const fx = a.cx + nx * (from.w / 2) * Math.min(1, Math.abs(nx) + 0.3);
   const fy = a.cy + ny * (from.h / 2) * Math.min(1, Math.abs(ny) + 0.3);
-
-  // Entry point on to-node border
   const tx = b.cx - nx * (to.w / 2) * Math.min(1, Math.abs(nx) + 0.3);
   const ty = b.cy - ny * (to.h / 2) * Math.min(1, Math.abs(ny) + 0.3);
-
-  // Subtle curve
   const mx = (fx + tx) / 2;
   const my = (fy + ty) / 2;
   const off = Math.min(30, dist * 0.1);
   const cx = mx - ny * off;
   const cy = my + nx * off;
-
   return `M${fx},${fy} Q${cx},${cy} ${tx},${ty}`;
 }
+
+// Group label config
+const GROUP_LABELS: { text: string; x: number; y: number }[] = [
+  { text: 'DATA SOURCES', x: 80, y: 25 },
+  { text: 'SUBSTRATE', x: 380, y: 68 },
+  { text: 'KERNEL PIPELINE', x: 520, y: 140 },
+  { text: 'WAVE FUNCTION', x: 760, y: 140 },
+  { text: 'OUTPUTS', x: 1000, y: 28 },
+  { text: 'AGENT SYSTEM', x: 120, y: 448 },
+  { text: 'INSIGHT LAYER', x: 700, y: 448 },
+  { text: 'EVENT PIPELINE', x: 80, y: 748 },
+];
 
 // ─── Component ─────────────────────────────────────────────────────
 
@@ -248,7 +281,6 @@ export default function BigDuncFlowDiagram() {
     }
     twinsRef.current = twins;
 
-    // Init field constructor + sample event stream
     const fc = new FieldConstructor(kernel);
     fieldConstructorRef.current = fc;
     sampleEventsRef.current = fc.getPipeline().generateSampleEvents(200, 1);
@@ -262,12 +294,10 @@ export default function BigDuncFlowDiagram() {
       const kernel = kernelRef.current;
       if (!kernel) return;
 
-      // Animate edge flow
       const edgeOrder = ['substrate', 'kernel', 'attractors', 'coulomb', 'fokker', 'positions', 'harmony', 'insight', 'predecision'];
       edgeTimerRef.current = (edgeTimerRef.current + 1) % edgeOrder.length;
       setActiveEdge(edgeOrder[edgeTimerRef.current]);
 
-      // ── Process one event from the stream into the field ──
       const fc = fieldConstructorRef.current;
       if (fc && sampleEventsRef.current.length > 0) {
         const idx = eventIndexRef.current % sampleEventsRef.current.length;
@@ -279,7 +309,6 @@ export default function BigDuncFlowDiagram() {
         setConstructionState(fc.getSnapshot());
       }
 
-      // Twin evaluate + execute
       const pre = kernel.tick(1);
       const intents: Record<string, { intent: string; confidence: number }> = {};
       for (const [id, twin] of twinsRef.current) {
@@ -294,7 +323,6 @@ export default function BigDuncFlowDiagram() {
       setTick(out.tick);
       setInsights(insightFromKernel(out));
 
-      // Run Monte Carlo every 10 ticks
       if (out.tick % 10 === 0) {
         setMcResult(kernel.monteCarloWhatIf(10, 5));
       }
@@ -306,7 +334,6 @@ export default function BigDuncFlowDiagram() {
     const kernel = kernelRef.current;
     if (!kernel) return;
 
-    // Process event
     const fc = fieldConstructorRef.current;
     if (fc && sampleEventsRef.current.length > 0) {
       const idx = eventIndexRef.current % sampleEventsRef.current.length;
@@ -348,7 +375,6 @@ export default function BigDuncFlowDiagram() {
     setInsights([]);
     setMcResult(null);
     setTwinIntents({});
-    // Reset field constructor
     const fc = new FieldConstructor(kernel);
     fieldConstructorRef.current = fc;
     sampleEventsRef.current = fc.getPipeline().generateSampleEvents(200, 1);
@@ -358,11 +384,11 @@ export default function BigDuncFlowDiagram() {
     setConstructionState(null);
   }, []);
 
-  // Build node map for edge drawing
+  // Build node map
   const nodeMap = new Map<string, Node>();
   for (const n of NODES) nodeMap.set(n.id, n);
 
-  // Live values for overlay inside nodes
+  // Live values overlay
   const liveValues: Record<string, string> = {};
   if (output) {
     liveValues['harmony'] = `${(output.harmony * 100).toFixed(1)}%`;
@@ -380,7 +406,6 @@ export default function BigDuncFlowDiagram() {
       const avg = cohVals.reduce((s, c) => s + c.coherenceScore, 0) / cohVals.length;
       liveValues['coherence'] = `avg ${(avg * 100).toFixed(0)}%`;
     }
-
     if (insights.length > 0) {
       liveValues['insight'] = insights[0].message.slice(0, 30) + '…';
     }
@@ -390,7 +415,6 @@ export default function BigDuncFlowDiagram() {
       liveValues['predecision'] = insights[0].message.slice(0, 45);
     }
   }
-  // Event pipeline live values
   if (recentEvents.length > 0) {
     const last = recentEvents[recentEvents.length - 1];
     liveValues['eventingest'] = `${last.abstract.type}: ${last.abstract.from}`;
@@ -399,55 +423,85 @@ export default function BigDuncFlowDiagram() {
     liveValues['eventlog'] = `${recentMutations.length} mutations`;
   }
 
+  // Harmony status
+  const harmonyVal = output?.harmony ?? 0;
+  const harmonyColor = harmonyVal > 0.7 ? BP.greenL : harmonyVal > 0.4 ? BP.orangeL : BP.redL;
+  const harmonyLabel = harmonyVal > 0.7 ? 'RESONANT' : harmonyVal > 0.4 ? 'DRIFTING' : 'CRITICAL';
+
   return (
-    <div className="h-screen bg-[#0a0e1a] text-white flex flex-col overflow-hidden">
-      {/* Header */}
-      <header className="flex-shrink-0 h-12 flex items-center justify-between px-6 bg-black/40 border-b border-white/5">
-        <div className="flex items-center gap-3">
-          <span className="text-lg font-bold tracking-tight text-amber-400">BigDunc</span>
-          <span className="text-xs text-white/30">Resonance Kernel — Algorithm Flow</span>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: BP.black, color: BP.text1 }}>
+      {/* ═══ Header ═══════════════════════════════════════════════════ */}
+      <header
+        className="flex-shrink-0 h-11 flex items-center justify-between px-5"
+        style={{ background: BP.bg1, borderBottom: `1px solid ${BP.bg3}` }}
+      >
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full" style={{ background: running ? BP.greenL : BP.bg5 }} />
+            <span className="text-[13px] font-semibold tracking-wide" style={{ color: BP.text1 }}>BigDunc</span>
+          </div>
+          <div className="h-4 w-px" style={{ background: BP.bg3 }} />
+          <span className="text-[11px]" style={{ color: BP.text4 }}>Resonance Kernel — Algorithm Flow</span>
+          {output && (
+            <>
+              <div className="h-4 w-px" style={{ background: BP.bg3 }} />
+              <span className="text-[11px] font-mono tabular-nums" style={{ color: harmonyColor }}>
+                {harmonyLabel} {(harmonyVal * 100).toFixed(0)}%
+              </span>
+            </>
+          )}
         </div>
-        <div className="flex items-center gap-3">
+
+        <div className="flex items-center gap-2">
           <button
             onClick={handleReset}
-            className="px-3 py-1 text-xs rounded bg-white/5 hover:bg-white/10 text-white/60 transition"
+            className="px-3 py-1 text-[11px] rounded transition-colors"
+            style={{ background: BP.bg2, color: BP.text3, border: `1px solid ${BP.bg3}` }}
+            onMouseEnter={e => { e.currentTarget.style.background = BP.bg3; e.currentTarget.style.color = BP.text2; }}
+            onMouseLeave={e => { e.currentTarget.style.background = BP.bg2; e.currentTarget.style.color = BP.text3; }}
           >
             Reset
           </button>
           <button
             onClick={handleStep}
-            className="px-3 py-1 text-xs rounded bg-white/10 hover:bg-white/20 text-white/80 transition"
+            className="px-3 py-1 text-[11px] rounded transition-colors"
+            style={{ background: BP.bg2, color: BP.text2, border: `1px solid ${BP.bg3}` }}
+            onMouseEnter={e => { e.currentTarget.style.background = BP.bg3; }}
+            onMouseLeave={e => { e.currentTarget.style.background = BP.bg2; }}
           >
             Step
           </button>
           <button
             onClick={() => setRunning(r => !r)}
-            className={`px-4 py-1 text-xs rounded font-medium transition ${
-              running
-                ? 'bg-red-500/80 hover:bg-red-500 text-white'
-                : 'bg-emerald-500/80 hover:bg-emerald-500 text-white'
-            }`}
+            className="px-4 py-1 text-[11px] rounded font-medium transition-colors"
+            style={{
+              background: running ? 'rgba(205,66,70,0.15)' : 'rgba(35,133,81,0.15)',
+              color: running ? BP.redL : BP.greenL,
+              border: `1px solid ${running ? 'rgba(205,66,70,0.3)' : 'rgba(35,133,81,0.3)'}`,
+            }}
           >
             {running ? 'Pause' : 'Run'}
           </button>
           <select
             value={speed}
             onChange={e => setSpeed(Number(e.target.value))}
-            className="bg-white/5 text-xs text-white/60 px-2 py-1 rounded border border-white/10"
+            className="text-[11px] px-2 py-1 rounded outline-none"
+            style={{ background: BP.bg2, color: BP.text3, border: `1px solid ${BP.bg3}` }}
           >
             <option value={1000}>1s</option>
             <option value={500}>500ms</option>
             <option value={200}>200ms</option>
             <option value={100}>100ms</option>
           </select>
-          <span className="text-xs text-white/40 tabular-nums ml-2">tick {tick}</span>
+          <span className="text-[11px] font-mono tabular-nums ml-1" style={{ color: BP.text4 }}>t={tick}</span>
         </div>
       </header>
 
-      {/* Main: SVG Diagram + Sidebar */}
+      {/* ═══ Main: Diagram + Sidebar ══════════════════════════════════ */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Diagram */}
-        <div ref={diagramRef} className="flex-1 overflow-auto p-4 relative">
+
+        {/* ─── Diagram Panel ─────────────────────────────────────── */}
+        <div ref={diagramRef} className="flex-1 overflow-auto p-3 relative" style={{ background: BP.black }}>
           <svg
             viewBox={`0 0 ${W} ${H}`}
             className="w-full h-full"
@@ -455,32 +509,29 @@ export default function BigDuncFlowDiagram() {
           >
             <defs>
               <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
+                <polygon points="0 0, 10 3.5, 0 7" fill={BP.bg5} />
               </marker>
               <marker id="arrow-active" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+                <polygon points="0 0, 10 3.5, 0 7" fill={BP.blueL} />
               </marker>
               <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feGaussianBlur stdDeviation="4" result="blur" />
                 <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
               </filter>
             </defs>
 
-            {/* Background grid */}
+            {/* Grid */}
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" strokeWidth="0.3" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke={BP.bg2} strokeWidth="0.3" />
             </pattern>
             <rect width={W} height={H} fill="url(#grid)" />
 
             {/* Section labels */}
-            <text x="80" y="25" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">DATA SOURCES</text>
-            <text x="380" y="68" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">SUBSTRATE</text>
-            <text x="520" y="140" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">KERNEL PIPELINE</text>
-            <text x="760" y="140" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">WAVE FUNCTION</text>
-            <text x="1000" y="28" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">OUTPUTS</text>
-            <text x="120" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">AGENT SYSTEM</text>
-            <text x="700" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">INSIGHT LAYER</text>
-            <text x="80" y="748" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">EVENT PIPELINE — ORGANIC FIELD CONSTRUCTION</text>
+            {GROUP_LABELS.map(g => (
+              <text key={g.text} x={g.x} y={g.y} fill={BP.text4} fontSize="9" fontWeight="600" letterSpacing="0.08em">
+                {g.text}
+              </text>
+            ))}
 
             {/* Edges */}
             {EDGES.map((edge, i) => {
@@ -494,20 +545,21 @@ export default function BigDuncFlowDiagram() {
                   <path
                     d={path}
                     fill="none"
-                    stroke={isActive ? '#f59e0b' : '#334155'}
-                    strokeWidth={isActive ? 1.8 : 1}
+                    stroke={isActive ? BP.blueL : BP.bg3}
+                    strokeWidth={isActive ? 1.5 : 0.8}
                     strokeDasharray={edge.dashed ? '6 4' : undefined}
                     markerEnd={isActive ? 'url(#arrow-active)' : 'url(#arrow)'}
-                    opacity={isActive ? 1 : 0.6}
+                    opacity={isActive ? 1 : 0.5}
+                    style={{ transition: 'all 0.2s ease' }}
                   />
                   {edge.label && (
                     <text
                       x={(getNodeCenter(fromNode).cx + getNodeCenter(toNode).cx) / 2}
                       y={(getNodeCenter(fromNode).cy + getNodeCenter(toNode).cy) / 2 - 6}
-                      fill={isActive ? '#f59e0b' : '#475569'}
+                      fill={isActive ? BP.blueM : BP.text4}
                       fontSize="8"
-                      fontFamily="monospace"
                       textAnchor="middle"
+                      style={{ transition: 'fill 0.2s ease' }}
                     >
                       {edge.label}
                     </text>
@@ -516,7 +568,7 @@ export default function BigDuncFlowDiagram() {
               );
             })}
 
-            {/* Nodes — with hover detection */}
+            {/* Nodes */}
             {NODES.map(node => {
               const live = liveValues[node.id];
               const isActive = activeEdge === node.id;
@@ -524,12 +576,11 @@ export default function BigDuncFlowDiagram() {
               return (
                 <g
                   key={node.id}
-                  style={{ cursor: 'help' }}
-                  onMouseEnter={(e) => {
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => {
                     if (hoverTimer.current) clearTimeout(hoverTimer.current);
                     hoverTimer.current = setTimeout(() => {
                       setHoveredNode(node.id);
-                      // Use the node's center position relative to diagram container
                       if (diagramRef.current) {
                         const svgEl = diagramRef.current.querySelector('svg');
                         if (svgEl) {
@@ -537,90 +588,103 @@ export default function BigDuncFlowDiagram() {
                           const scaleX = svgRect.width / W;
                           const scaleY = svgRect.height / H;
                           setHoverPos({
-                            x: (node.x + node.w) * scaleX + svgRect.left - (diagramRef.current.getBoundingClientRect().left) + 8,
+                            x: (node.x + node.w) * scaleX + svgRect.left - (diagramRef.current.getBoundingClientRect().left) + 12,
                             y: node.y * scaleY + svgRect.top - (diagramRef.current.getBoundingClientRect().top),
                           });
                         }
                       }
-                    }, 150);
+                    }, 120);
                   }}
                   onMouseLeave={() => {
                     if (hoverTimer.current) clearTimeout(hoverTimer.current);
                     hoverTimer.current = setTimeout(() => setHoveredNode(null), 200);
                   }}
                 >
-                  {/* Shadow/glow when active or hovered */}
+                  {/* Glow ring on hover/active */}
                   {(isActive || isHovered) && (
                     <rect
-                      x={node.x - 2} y={node.y - 2}
-                      width={node.w + 4} height={node.h + 4}
-                      rx={8} fill="none"
-                      stroke={node.color} strokeWidth={isHovered ? 2.5 : 2}
-                      opacity={isHovered ? 0.7 : 0.4} filter="url(#glow)"
+                      x={node.x - 3} y={node.y - 3}
+                      width={node.w + 6} height={node.h + 6}
+                      rx={7} fill="none"
+                      stroke={isHovered ? node.color : BP.blueL}
+                      strokeWidth={1.5}
+                      opacity={0.4}
+                      filter="url(#glow)"
                     />
                   )}
+
                   {/* Background */}
                   <rect
                     x={node.x} y={node.y}
                     width={node.w} height={node.h}
-                    rx={6}
-                    fill={isHovered ? '#131c30' : '#0f172a'}
-                    stroke={node.color + (isActive || isHovered ? '' : '60')}
-                    strokeWidth={isHovered ? 2 : isActive ? 1.5 : 1}
+                    rx={4}
+                    fill={isHovered ? BP.bg2 : BP.bg1}
+                    stroke={isHovered ? node.color : `${node.color}40`}
+                    strokeWidth={isHovered ? 1.5 : 0.8}
+                    style={{ transition: 'all 0.15s ease' }}
                   />
-                  {/* Color bar on left */}
+
+                  {/* Left accent bar */}
                   <rect
                     x={node.x} y={node.y}
-                    width={4} height={node.h}
+                    width={3} height={node.h}
                     rx={2}
                     fill={node.color}
+                    opacity={isHovered ? 1 : 0.6}
                   />
+
                   {/* Label */}
                   <text
-                    x={node.x + 14} y={node.y + 16}
-                    fill="#e2e8f0" fontSize="11" fontFamily="monospace" fontWeight="bold"
+                    x={node.x + 12} y={node.y + 16}
+                    fill={isHovered ? BP.text1 : BP.text2}
+                    fontSize="11" fontWeight="600"
+                    style={{ transition: 'fill 0.15s ease' }}
                   >
                     {node.label}
                   </text>
+
                   {/* Sub label */}
                   {node.sub && (
                     <text
-                      x={node.x + 14} y={node.y + 30}
-                      fill="#64748b" fontSize="8.5" fontFamily="monospace"
+                      x={node.x + 12} y={node.y + 30}
+                      fill={BP.text4} fontSize="8.5"
                     >
                       {node.sub}
                     </text>
                   )}
+
                   {/* Live value */}
                   {live && (
                     <text
                       x={node.x + node.w - 8} y={node.y + node.h - 8}
-                      fill={node.color} fontSize="9" fontFamily="monospace" fontWeight="bold"
+                      fill={node.color} fontSize="9" fontWeight="600"
                       textAnchor="end"
+                      style={{ fontFamily: 'monospace' }}
                     >
                       {live}
                     </text>
                   )}
-                  {/* Hover hint indicator */}
-                  <text
-                    x={node.x + node.w - 6} y={node.y + 12}
-                    fill={isHovered ? '#fbbf24' : '#334155'}
-                    fontSize="8" fontFamily="monospace"
-                    textAnchor="end"
-                  >
-                    ?
-                  </text>
+
+                  {/* Hover indicator */}
+                  <circle
+                    cx={node.x + node.w - 8} cy={node.y + 10}
+                    r={3}
+                    fill={isHovered ? node.color : 'none'}
+                    stroke={isHovered ? node.color : BP.bg4}
+                    strokeWidth={0.8}
+                    opacity={isHovered ? 1 : 0.5}
+                  />
                 </g>
               );
             })}
 
-            {/* Title block */}
-            <text x={W / 2} y={H - 30} textAnchor="middle" fill="#334155" fontSize="11" fontFamily="monospace">
+            {/* Footer */}
+            <text x={W / 2} y={H - 24} textAnchor="middle" fill={BP.text4} fontSize="10" letterSpacing="0.04em">
               BigDunc Engine — Quantum-Inspired Pre-Decision Resonance Kernel
             </text>
           </svg>
 
-          {/* ── Floating Hover Panel for diagram nodes ── */}
+          {/* ─── Floating Hover Panel ────────────────────────────── */}
           {hoveredNode && (() => {
             const cohVals = output ? Object.values(output.players) : [];
             const avgCoh = cohVals.length > 0 ? cohVals.reduce((s, c) => s + c.coherenceScore, 0) / cohVals.length : undefined;
@@ -636,51 +700,71 @@ export default function BigDuncFlowDiagram() {
             });
             return (
               <div
-                className="absolute z-[200] pointer-events-auto"
-                style={{ left: hoverPos.x, top: hoverPos.y, maxWidth: 380, minWidth: 320 }}
+                className="absolute z-[200] pointer-events-auto animate-fadeIn"
+                style={{ left: hoverPos.x, top: hoverPos.y, maxWidth: 400, minWidth: 340 }}
                 onMouseEnter={() => { if (hoverTimer.current) clearTimeout(hoverTimer.current); }}
                 onMouseLeave={() => {
                   if (hoverTimer.current) clearTimeout(hoverTimer.current);
                   hoverTimer.current = setTimeout(() => setHoveredNode(null), 200);
                 }}
               >
-                <div className="bg-[#0d1424] border border-white/10 rounded-lg shadow-2xl shadow-black/70 overflow-hidden backdrop-blur-xl">
+                <div
+                  className="rounded-md overflow-hidden"
+                  style={{
+                    background: BP.bg1,
+                    border: `1px solid ${BP.bg3}`,
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.7), 0 0 1px rgba(255,255,255,0.05)',
+                  }}
+                >
                   {/* Header */}
-                  <div className="px-3 py-2 border-b border-white/5 bg-gradient-to-r from-amber-500/10 to-purple-500/10">
-                    <div className="text-[11px] font-bold text-white tracking-wide">{explanation.title}</div>
-                    {explanation.liveValue && (
-                      <div className="text-[10px] text-amber-400 font-mono mt-0.5">Live: {explanation.liveValue}</div>
-                    )}
+                  <div
+                    className="px-4 py-2.5 flex items-start justify-between gap-3"
+                    style={{ borderBottom: `1px solid ${BP.bg3}`, background: BP.bg2 }}
+                  >
+                    <div className="min-w-0">
+                      <div className="text-[12px] font-semibold tracking-wide" style={{ color: BP.text1 }}>{explanation.title}</div>
+                      {explanation.liveValue && (
+                        <div className="text-[11px] font-mono mt-0.5" style={{ color: BP.blueL }}>{explanation.liveValue}</div>
+                      )}
+                    </div>
+                    <div className="w-1.5 h-1.5 rounded-full mt-1.5 opacity-70" style={{ background: BP.blueL }} />
                   </div>
+
                   {/* Sections */}
-                  <div className="max-h-80 overflow-y-auto">
-                    {explanation.sections.map((sec, si) => (
-                      <div key={si} className="border-b border-white/5 last:border-0">
-                        <div className="px-3 py-1.5 bg-white/[0.02]">
+                  <div className="max-h-[360px] overflow-y-auto">
+                    {explanation.sections.map((sec: ComputationSection, si: number) => (
+                      <div key={si} style={{ borderBottom: si < explanation.sections.length - 1 ? `1px solid ${BP.bg2}` : 'none' }}>
+                        <div className="px-4 py-1.5" style={{ background: `${BP.bg2}80` }}>
                           <span className={`text-[10px] font-semibold ${sec.color}`}>{sec.title}</span>
                         </div>
-                        <div className="px-3 pb-2 space-y-1.5">
+                        <div className="px-4 pb-3 space-y-2">
                           {sec.steps.map((step, stIdx) => (
-                            <div key={stIdx} className="ml-2">
+                            <div key={stIdx} className="ml-3">
                               {step.formula && (
-                                <div className="text-[9px] font-mono text-blue-300/80 bg-blue-500/[0.08] px-1.5 py-0.5 rounded mb-0.5 leading-snug break-all">
+                                <div
+                                  className="text-[10px] font-mono px-2.5 py-1 rounded mb-1 leading-relaxed break-all"
+                                  style={{ color: BP.blueM, background: 'rgba(45,114,210,0.07)', border: '1px solid rgba(45,114,210,0.1)' }}
+                                >
                                   {step.formula}
                                 </div>
                               )}
-                              <div className="flex items-start justify-between gap-2">
-                                <span className="text-[9px] text-white/50 leading-snug">{step.label}</span>
+                              <div className="flex items-start justify-between gap-3">
+                                <span className="text-[10px] leading-snug" style={{ color: BP.text3 }}>{step.label}</span>
                                 {step.value && (
-                                  <span className="text-[10px] font-mono text-white/80 tabular-nums flex-shrink-0">{step.value}</span>
+                                  <span className="text-[11px] font-mono tabular-nums flex-shrink-0" style={{ color: BP.text2 }}>{step.value}</span>
                                 )}
                               </div>
                               {step.detail && (
-                                <div className="text-[8px] text-white/30 leading-relaxed mt-0.5">{step.detail}</div>
+                                <div className="text-[9px] leading-relaxed mt-0.5" style={{ color: BP.text4 }}>{step.detail}</div>
                               )}
                             </div>
                           ))}
                           {sec.conceptNote && (
-                            <div className="ml-2 mt-1 p-1.5 bg-purple-500/5 border-l-2 border-purple-400/30 rounded-r">
-                              <div className="text-[8px] text-purple-300/60 leading-relaxed">{sec.conceptNote}</div>
+                            <div
+                              className="ml-3 mt-2 px-3 py-2 rounded"
+                              style={{ background: 'rgba(124,58,237,0.05)', borderLeft: '2px solid rgba(124,58,237,0.25)' }}
+                            >
+                              <div className="text-[9px] leading-relaxed" style={{ color: 'rgba(167,139,250,0.65)' }}>{sec.conceptNote}</div>
                             </div>
                           )}
                         </div>
@@ -693,55 +777,67 @@ export default function BigDuncFlowDiagram() {
           })()}
         </div>
 
-        {/* Right sidebar — live data */}
-        <div className="w-80 flex-shrink-0 bg-[#0c1220] border-l border-white/5 flex flex-col overflow-hidden">
-          {/* Harmony gauge */}
-          <div className="p-4 border-b border-white/5">
+        {/* ─── Right Sidebar ─────────────────────────────────────── */}
+        <div
+          className="w-[320px] flex-shrink-0 flex flex-col overflow-hidden"
+          style={{ background: BP.bg1, borderLeft: `1px solid ${BP.bg3}` }}
+        >
+          {/* Harmony Gauge */}
+          <div className="p-4" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
             <HoverCard
               title="Field Harmony — Team Synchronization"
               anchor="left"
-              width={360}
-              sections={[
-                {
-                  title: 'Harmony Formula',
-                  color: 'text-emerald-400',
-                  steps: [
-                    { label: 'Phase alignment', formula: 'align = Σcos(φᵢ - φⱼ) / C(n,2)', value: output ? `${((output.harmony - 0.3 * (1)) * 100 / 0.7).toFixed(0)}% phase` : '—', detail: '70% of final harmony score' },
-                    { label: 'Energy uniformity', formula: '1 - H/log₂(n)', value: output ? 'computed' : '—', detail: '30% weight — penalizes uneven workload' },
-                    { label: 'Final', formula: '0.7 × align + 0.3 × (1 - entropy)', value: output ? `${(output.harmony * 100).toFixed(1)}%` : '—' },
-                  ],
-                  conceptNote: '>70% = team in resonance (green). 40-70% = drifting (yellow). <40% = collapsing (red). Harmony measures BOTH tactical sync AND energy balance.',
-                },
-              ]}
+              width={380}
+              sections={[{
+                title: 'Harmony Formula',
+                color: 'text-[#32A467]',
+                steps: [
+                  { label: 'Phase alignment', formula: 'align = Σcos(φᵢ - φⱼ) / C(n,2)', detail: '70% of final harmony score' },
+                  { label: 'Energy uniformity', formula: '1 - H/log₂(n)', detail: '30% weight — penalizes uneven workload' },
+                  { label: 'Final', formula: '0.7 × align + 0.3 × (1 - entropy)', value: output ? `${(output.harmony * 100).toFixed(1)}%` : '—' },
+                ],
+                conceptNote: '>70% = team in resonance. 40-70% = drifting. <40% = collapsing. Measures BOTH tactical sync AND energy balance.',
+              }]}
               liveValue={output ? `${(output.harmony * 100).toFixed(1)}%` : undefined}
             >
-              <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 inline-block">Field Harmony</div>
+              <div className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: BP.text4 }}>Field Harmony</div>
             </HoverCard>
-            <div className="h-5 bg-white/5 rounded-full overflow-hidden relative">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{
-                  width: `${(output?.harmony ?? 0) * 100}%`,
-                  background: (output?.harmony ?? 0) > 0.7 ? '#22c55e' : (output?.harmony ?? 0) > 0.4 ? '#eab308' : '#ef4444',
-                }}
-              />
-              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold tabular-nums">
+
+            <div className="mt-2 flex items-center gap-3">
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: BP.bg3 }}>
+                <div
+                  className="h-full rounded-full transition-all duration-300"
+                  style={{ width: `${harmonyVal * 100}%`, background: harmonyColor }}
+                />
+              </div>
+              <span className="text-[12px] font-mono font-semibold tabular-nums" style={{ color: harmonyColor }}>
                 {output ? `${(output.harmony * 100).toFixed(1)}%` : '—'}
               </span>
             </div>
+            <div className="mt-1.5 text-[9px] font-medium tracking-wide" style={{ color: harmonyColor }}>
+              {harmonyLabel}
+            </div>
           </div>
 
-          {/* Stats grid */}
-          <div className="grid grid-cols-2 gap-px bg-white/5 border-b border-white/5">
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
             {[
-              { label: 'Tick', statId: 'tick', value: tick.toString(), color: '#f59e0b' },
-              { label: 'Energy', statId: 'energy', value: output?.fieldEnergy.toFixed(2) ?? '—', color: '#22c55e' },
-              { label: 'Entangled', statId: 'entangled', value: output ? `${output.entanglements.length}` : '—', color: '#a855f7' },
-              { label: 'Drifts', statId: 'drifts', value: output ? `${output.drifts.length}` : '—', color: '#ef4444' },
-            ].map(s => {
+              { label: 'Tick', statId: 'tick', value: tick.toString(), color: BP.orangeL },
+              { label: 'Energy', statId: 'energy', value: output?.fieldEnergy.toFixed(2) ?? '—', color: BP.greenL },
+              { label: 'Entangled', statId: 'entangled', value: output ? `${output.entanglements.length}` : '—', color: BP.violet },
+              { label: 'Drifts', statId: 'drifts', value: output ? `${output.drifts.length}` : '—', color: BP.redL },
+            ].map((s, i) => {
               const statExp = getStatExplanation(s.statId, s.value);
               return (
-                <div key={s.label} className="bg-[#0c1220] p-3">
+                <div
+                  key={s.label}
+                  className="p-3"
+                  style={{
+                    background: BP.bg1,
+                    borderRight: i % 2 === 0 ? `1px solid ${BP.bg3}` : 'none',
+                    borderBottom: i < 2 ? `1px solid ${BP.bg3}` : 'none',
+                  }}
+                >
                   <HoverCard
                     title={statExp.title}
                     sections={statExp.sections}
@@ -749,330 +845,325 @@ export default function BigDuncFlowDiagram() {
                     anchor="left"
                     width={320}
                   >
-                    <div className="text-[9px] uppercase text-white/30">{s.label}</div>
+                    <div className="text-[9px] uppercase tracking-[0.1em]" style={{ color: BP.text4 }}>{s.label}</div>
                   </HoverCard>
-                  <div className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
+                  <div className="text-[15px] font-semibold tabular-nums mt-0.5 font-mono" style={{ color: s.color }}>{s.value}</div>
                 </div>
               );
             })}
           </div>
 
-          {/* Monte Carlo */}
-          {mcResult && (
-            <div className="p-3 border-b border-white/5">
-              <HoverCard
-                title="Monte Carlo What-If — Scenario Simulation"
-                anchor="left"
-                width={350}
-                liveValue={`avg ${(mcResult.avgHarmony * 100).toFixed(0)}%`}
-                sections={[
-                  {
+          {/* Scrollable content area */}
+          <div className="flex-1 overflow-y-auto">
+
+            {/* Monte Carlo */}
+            {mcResult && (
+              <div className="p-3" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
+                <HoverCard
+                  title="Monte Carlo What-If — Scenario Simulation"
+                  anchor="left"
+                  width={360}
+                  liveValue={`avg ${(mcResult.avgHarmony * 100).toFixed(0)}%`}
+                  sections={[{
                     title: 'Monte Carlo Method',
-                    color: 'text-cyan-400',
+                    color: 'text-[#06B6D4]',
                     steps: [
                       { label: 'Scenarios', value: '10', detail: '10 random perturbations of current state' },
-                      { label: 'Lookahead', value: '5 ticks', detail: 'Each scenario runs 5 ticks into the future' },
-                      { label: 'Perturbation', formula: 'pos ± 2m, phase ± 0.15 rad', detail: 'Random nudges to test robustness' },
+                      { label: 'Lookahead', value: '5 ticks' },
                       { label: 'Best case', value: `${(mcResult.bestCase * 100).toFixed(0)}%` },
                       { label: 'Worst case', value: `${(mcResult.worstCase * 100).toFixed(0)}%` },
-                      { label: 'Spread', value: `${((mcResult.bestCase - mcResult.worstCase) * 100).toFixed(0)}%`, detail: 'Wide spread = fragile state. Narrow = robust.' },
+                      { label: 'Spread', value: `${((mcResult.bestCase - mcResult.worstCase) * 100).toFixed(0)}%`, detail: 'Wide = fragile. Narrow = robust.' },
                     ],
-                    conceptNote: 'Monte Carlo answers: "how stable is our shape right now?" A wide best-worst gap means small random perturbations lead to very different outcomes — the team is in a fragile tactical state.',
-                  },
-                ]}
-              >
-                <div className="text-[9px] uppercase tracking-widest text-cyan-400/60 mb-1">Monte Carlo (10x5)</div>
-              </HoverCard>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <div className="text-[8px] text-white/30">worst</div>
-                  <div className="text-xs font-bold text-red-400">{(mcResult.worstCase * 100).toFixed(0)}%</div>
-                </div>
-                <div>
-                  <div className="text-[8px] text-white/30">avg</div>
-                  <div className="text-xs font-bold text-amber-400">{(mcResult.avgHarmony * 100).toFixed(0)}%</div>
-                </div>
-                <div>
-                  <div className="text-[8px] text-white/30">best</div>
-                  <div className="text-xs font-bold text-emerald-400">{(mcResult.bestCase * 100).toFixed(0)}%</div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Top entanglements */}
-          <div className="p-3 border-b border-white/5">
-            <HoverCard
-              title="Entanglement Map — Player Pair Correlations"
-              anchor="left"
-              width={360}
-              liveValue={output ? `${output.entanglements.length} pairs above threshold` : undefined}
-              sections={[
-                {
-                  title: 'How Entanglement Is Computed',
-                  color: 'text-purple-400',
-                  steps: [
-                    { label: 'Spatial RBF', formula: 'RBF(d, σ=20) = e^(-d²/(2×400))', detail: 'Gaussian kernel: 1.0 at same position, ~0.6 at 10m, ~0.1 at 30m' },
-                    { label: 'Phase correlation', formula: '(cos(φA - φB) + 1) / 2', detail: 'Same phase = 1.0, opposite = 0.0' },
-                    { label: 'Combined', formula: 'correlation = spatial × phase', detail: 'Must be close AND in-phase to entangle' },
-                    { label: 'Threshold', value: '> 0.30' },
-                    { label: 'Total pairs checked', value: 'C(11,2) = 55', detail: 'Every possible pair evaluated each tick' },
-                  ],
-                  conceptNote: 'Two "entangled" players move and think as a coordinated unit — like CB partners who shift together. Zero entanglement = fragmented team. 5-8 pairs = well-organized structure.',
-                },
-              ]}
-            >
-              <div className="text-[9px] uppercase tracking-widest text-purple-400/60 mb-2">Entanglements</div>
-            </HoverCard>
-            <div className="space-y-1">
-              {(output?.entanglements ?? []).slice(0, 5).map((e, i) => (
-                <HoverCard
-                  key={i}
-                  title={`Entanglement: ${e.playerA} ↔ ${e.playerB}`}
-                  anchor="left"
-                  width={300}
-                  liveValue={`${(e.correlation * 100).toFixed(1)}% correlation`}
-                  sections={[{
-                    title: 'Pair Breakdown',
-                    color: 'text-purple-400',
-                    steps: [
-                      { label: 'Correlation', value: `${(e.correlation * 100).toFixed(1)}%`, detail: e.correlation > 0.7 ? 'Strong: moving as a unit' : e.correlation > 0.5 ? 'Moderate: loosely coupled' : 'Weak: barely connected' },
-                      { label: 'Meaning', value: e.correlation > 0.7 ? 'Phase-locked pair' : 'Proximity correlation', detail: `These two players are spatially close AND tactically aligned (similar wave phase). They coordinate movements implicitly.` },
-                    ],
+                    conceptNote: '"How stable is our shape?" Wide best-worst gap = fragile state.',
                   }]}
                 >
-                  <div className="flex items-center gap-2 text-[10px]">
-                    <span className="text-white/60 font-mono">{e.playerA}</span>
-                    <span className="text-purple-400">↔</span>
-                    <span className="text-white/60 font-mono">{e.playerB}</span>
-                    <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
-                      <div className="h-full bg-purple-500 rounded-full" style={{ width: `${e.correlation * 100}%` }} />
-                    </div>
-                    <span className="text-purple-400 tabular-nums">{(e.correlation * 100).toFixed(0)}%</span>
-                  </div>
+                  <div className="text-[9px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: BP.cyan }}>Monte Carlo (10×5)</div>
                 </HoverCard>
-              ))}
-              {(!output || output.entanglements.length === 0) && (
-                <div className="text-[10px] text-white/20">No entangled pairs yet</div>
-              )}
-            </div>
-          </div>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  {[
+                    { label: 'worst', val: mcResult.worstCase, color: BP.redL },
+                    { label: 'avg', val: mcResult.avgHarmony, color: BP.orangeL },
+                    { label: 'best', val: mcResult.bestCase, color: BP.greenL },
+                  ].map(m => (
+                    <div key={m.label} className="rounded p-1.5" style={{ background: BP.bg2 }}>
+                      <div className="text-[8px] uppercase tracking-wider" style={{ color: BP.text4 }}>{m.label}</div>
+                      <div className="text-[13px] font-semibold font-mono tabular-nums" style={{ color: m.color }}>
+                        {(m.val * 100).toFixed(0)}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
-          {/* Twin intents */}
-          <div className="p-3 border-b border-white/5">
-            <HoverCard
-              title="Autonomous Twin Intents — Agent Decisions"
-              anchor="left"
-              width={360}
-              sections={[
-                {
+            {/* Entanglements */}
+            <div className="p-3" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
+              <HoverCard
+                title="Entanglement Map — Player Pair Correlations"
+                anchor="left"
+                width={380}
+                liveValue={output ? `${output.entanglements.length} pairs above threshold` : undefined}
+                sections={[{
+                  title: 'How Entanglement Is Computed',
+                  color: 'text-[#A78BFA]',
+                  steps: [
+                    { label: 'Spatial RBF', formula: 'RBF(d, σ=20) = e^(-d²/(2×400))' },
+                    { label: 'Phase correlation', formula: '(cos(φA - φB) + 1) / 2' },
+                    { label: 'Combined', formula: 'correlation = spatial × phase' },
+                    { label: 'Threshold', value: '> 0.30' },
+                  ],
+                  conceptNote: 'Two "entangled" players move as a coordinated unit. 5-8 pairs = well-organized structure.',
+                }]}
+              >
+                <div className="text-[9px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: BP.violet }}>Entanglements</div>
+              </HoverCard>
+              <div className="space-y-1">
+                {(output?.entanglements ?? []).slice(0, 5).map((e, i) => (
+                  <HoverCard
+                    key={i}
+                    title={`${e.playerA} ↔ ${e.playerB}`}
+                    anchor="left"
+                    width={300}
+                    liveValue={`${(e.correlation * 100).toFixed(1)}%`}
+                    sections={[{
+                      title: 'Pair',
+                      color: 'text-[#A78BFA]',
+                      steps: [
+                        { label: 'Correlation', value: `${(e.correlation * 100).toFixed(1)}%` },
+                        { label: 'Meaning', value: e.correlation > 0.7 ? 'Phase-locked' : e.correlation > 0.5 ? 'Loosely coupled' : 'Weak link' },
+                      ],
+                    }]}
+                  >
+                    <div className="flex items-center gap-2 text-[10px] rounded px-2 py-1" style={{ background: BP.bg2 }}>
+                      <span className="font-mono" style={{ color: BP.text3 }}>{e.playerA}</span>
+                      <span style={{ color: BP.violet }}>↔</span>
+                      <span className="font-mono" style={{ color: BP.text3 }}>{e.playerB}</span>
+                      <div className="flex-1 h-[3px] rounded-full overflow-hidden" style={{ background: BP.bg4 }}>
+                        <div className="h-full rounded-full" style={{ width: `${e.correlation * 100}%`, background: BP.violet }} />
+                      </div>
+                      <span className="tabular-nums font-mono" style={{ color: BP.violet }}>{(e.correlation * 100).toFixed(0)}%</span>
+                    </div>
+                  </HoverCard>
+                ))}
+                {(!output || output.entanglements.length === 0) && (
+                  <div className="text-[10px]" style={{ color: BP.text4 }}>No entangled pairs yet</div>
+                )}
+              </div>
+            </div>
+
+            {/* Twin Intents */}
+            <div className="p-3" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
+              <HoverCard
+                title="Autonomous Twin Intents — Agent Decisions"
+                anchor="left"
+                width={380}
+                sections={[{
                   title: 'Intent Scoring System',
-                  color: 'text-pink-400',
+                  color: 'text-[#DB2777]',
                   steps: [
-                    { label: 'hold_position', formula: 'coherence × 0.6 + (1-threat) × 0.4', detail: 'Stay put when coherent and safe' },
-                    { label: 'move_to_space', formula: 'space × 0.7 + (1-threat) × 0.3', detail: 'Exploit open areas' },
-                    { label: 'press_opponent', formula: 'threat × 0.5 + amplitude × 0.3 + ball × 0.2', detail: 'Press when opponent near and energized' },
-                    { label: 'support_ball', formula: 'ball × 0.6 + (1-teammates) × 0.4', detail: 'Move to ball when few helpers nearby' },
-                    { label: 'create_passing_lane', formula: 'space × 0.4 + ball × 0.3 + teammates × 0.3', detail: 'Find receiving position' },
-                    { label: 'recover_shape', formula: '(1-coherence) × 0.7 + (1-phaseAlign) × 0.3', detail: 'Return to position when out of shape' },
+                    { label: 'hold_position', formula: 'coherence × 0.6 + (1-threat) × 0.4' },
+                    { label: 'move_to_space', formula: 'space × 0.7 + (1-threat) × 0.3' },
+                    { label: 'press_opponent', formula: 'threat × 0.5 + amplitude × 0.3 + ball × 0.2' },
+                    { label: 'support_ball', formula: 'ball × 0.6 + (1-teammates) × 0.4' },
+                    { label: 'create_passing_lane', formula: 'space × 0.4 + ball × 0.3 + teammates × 0.3' },
+                    { label: 'recover_shape', formula: '(1-coherence) × 0.7 + (1-phaseAlign) × 0.3' },
                   ],
-                  conceptNote: 'Each twin independently scores all 6 intents and picks the highest. No central controller — team behavior emerges from 11 autonomous decisions. The confidence number shows how dominant the winning intent was.',
-                },
-              ]}
-            >
-              <div className="text-[9px] uppercase tracking-widest text-pink-400/60 mb-2">Twin Intents</div>
-            </HoverCard>
-            <div className="grid grid-cols-2 gap-1">
-              {Object.entries(twinIntents).slice(0, 11).map(([id, t]) => {
-                const intentExplanations: Record<string, string> = {
-                  hold_position: 'Staying in assigned position — coherence is high, no immediate threat.',
-                  move_to_space: 'Seeking open space to receive or stretch the opposition.',
-                  press_opponent: 'Closing down opponent — high threat detected, has energy to press.',
-                  support_ball: 'Moving toward ball to offer passing option.',
-                  create_passing_lane: 'Positioning between teammates and ball to create receiving angle.',
-                  recover_shape: 'Returning to tactical position — coherence was low, out of phase.',
-                };
-                return (
-                  <HoverCard
-                    key={id}
-                    title={`${id} — ${t.intent.replace(/_/g, ' ')}`}
-                    anchor="left"
-                    width={280}
-                    liveValue={`${(t.confidence * 100).toFixed(0)}% confidence`}
-                    sections={[{
-                      title: 'Decision Explanation',
-                      color: 'text-pink-400',
-                      steps: [
-                        { label: 'Chosen intent', value: t.intent.replace(/_/g, ' ') },
-                        { label: 'Confidence', value: `${(t.confidence * 100).toFixed(0)}%`, detail: t.confidence > 0.7 ? 'Strong conviction — clear best action' : t.confidence > 0.4 ? 'Moderate — close to other options' : 'Weak — almost arbitrary choice' },
-                        { label: 'Why', value: intentExplanations[t.intent] || 'Context-dependent decision' },
-                      ],
-                    }]}
-                  >
-                    <div className="flex items-center gap-1 text-[9px] bg-white/3 rounded px-1.5 py-0.5">
-                      <span className="text-white/50 font-mono w-7">{id}</span>
-                      <span className="text-pink-300 truncate flex-1">{t.intent.replace(/_/g, ' ')}</span>
-                      <span className="text-white/30 tabular-nums">{(t.confidence * 100).toFixed(0)}</span>
-                    </div>
-                  </HoverCard>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Event Feed */}
-          <div className="p-3 border-b border-white/5">
-            <HoverCard
-              title="Event Ingestion — Organic Field Construction"
-              anchor="left"
-              width={370}
-              liveValue={constructionState ? `${constructionState.eventCount} events, ${constructionState.fieldState}` : undefined}
-              sections={[
-                {
-                  title: 'How Events Build the Field',
-                  color: 'text-teal-400',
-                  steps: [
-                    { label: 'Abstract event', value: '"CB1 passed to CM2"', detail: 'Raw event with no coordinates — just who did what to whom' },
-                    { label: 'Vector enrichment', formula: 'origin=resolve(actor), dest=resolve(target)+lead, trajectory=bezier(origin,dest)', detail: 'Computes full spatial vectors: coordinates, ball trajectory, velocities, angles' },
-                    { label: 'Field mutation', value: 'kernel.player.pos += lerp(enriched, 0.4)', detail: 'Smoothly interpolates kernel player positions toward event-inferred locations' },
-                    { label: 'Phase cascade', formula: 'if dist(player, trigger) < 25m: P(shift) = 0.6 × (1 - d/25)', detail: 'Events like interceptions cascade phase changes to nearby players' },
-                    { label: 'Organic coverage', value: constructionState ? `${(constructionState.organicCoverage * 100).toFixed(0)}%` : '—', detail: 'What % of players have been positioned by events vs defaults' },
-                  ],
-                  conceptNote: 'The field is not hardcoded — it grows organically from events. Each pass, tackle, shot, and press enriches abstract data with full vector detail, then mutates the kernel. After ~20 events, the field reflects real match dynamics rather than starting formation.',
-                },
-              ]}
-            >
-              <div className="text-[9px] uppercase tracking-widest text-teal-400/60 mb-2">Event Feed</div>
-            </HoverCard>
-            <div className="space-y-0.5 max-h-28 overflow-y-auto">
-              {recentEvents.slice(-8).reverse().map((e, i) => {
-                const ev = e.abstract;
-                const typeColors: Record<string, string> = {
-                  pass: 'text-sky-300', shot: 'text-red-300', tackle: 'text-amber-300',
-                  dribble: 'text-purple-300', press_trigger: 'text-orange-300',
-                  cross: 'text-cyan-300', through_ball: 'text-emerald-300',
-                  interception: 'text-yellow-300', clearance: 'text-slate-300',
-                  recovery_run: 'text-pink-300',
-                };
-                return (
-                  <HoverCard
-                    key={i}
-                    title={`${ev.type.replace(/_/g, ' ')} — Vector Detail`}
-                    anchor="left"
-                    width={340}
-                    liveValue={`${e.distanceCovered.toFixed(1)}m at ${e.ballSpeed.toFixed(0)} m/s`}
-                    sections={[
-                      {
-                        title: 'Spatial Vectors',
-                        color: 'text-teal-400',
+                  conceptNote: 'Each twin independently scores all 6 intents and picks the highest. No central controller — team behavior emerges from 11 autonomous decisions.',
+                }]}
+              >
+                <div className="text-[9px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: BP.rose }}>Twin Intents</div>
+              </HoverCard>
+              <div className="grid grid-cols-2 gap-1">
+                {Object.entries(twinIntents).slice(0, 11).map(([id, t]) => {
+                  const intentExplanations: Record<string, string> = {
+                    hold_position: 'Staying in position — coherence high, safe.',
+                    move_to_space: 'Seeking open space.',
+                    press_opponent: 'Closing down opponent.',
+                    support_ball: 'Moving toward ball to offer option.',
+                    create_passing_lane: 'Positioning for receiving angle.',
+                    recover_shape: 'Returning to tactical position.',
+                  };
+                  return (
+                    <HoverCard
+                      key={id}
+                      title={`${id} — ${t.intent.replace(/_/g, ' ')}`}
+                      anchor="left"
+                      width={280}
+                      liveValue={`${(t.confidence * 100).toFixed(0)}%`}
+                      sections={[{
+                        title: 'Decision',
+                        color: 'text-[#DB2777]',
                         steps: [
-                          { label: 'Origin', value: `(${e.origin.x.toFixed(1)}, ${e.origin.y.toFixed(1)})` },
-                          { label: 'Destination', value: `(${e.destination.x.toFixed(1)}, ${e.destination.y.toFixed(1)})` },
-                          { label: 'Ball velocity', value: `(${e.ballVelocity.x.toFixed(1)}, ${e.ballVelocity.y.toFixed(1)}) m/s` },
-                          { label: 'Distance', value: `${e.distanceCovered.toFixed(1)}m` },
-                          { label: 'Angle', value: `${(e.angle * 180 / Math.PI).toFixed(0)}°` },
-                          { label: 'Progressive dist', value: `${e.progressiveDistance.toFixed(1)}m`, detail: e.progressiveDistance > 0 ? 'Forward progression' : 'Backward/lateral' },
+                          { label: 'Intent', value: t.intent.replace(/_/g, ' ') },
+                          { label: 'Confidence', value: `${(t.confidence * 100).toFixed(0)}%` },
+                          { label: 'Why', value: intentExplanations[t.intent] || 'Context-dependent' },
                         ],
-                      },
-                      {
-                        title: 'Context',
-                        color: 'text-teal-300',
-                        steps: [
-                          { label: 'Passing lane width', value: `${e.passingLaneWidth.toFixed(1)}m`, detail: e.passingLaneWidth > 5 ? 'Wide open' : e.passingLaneWidth > 2 ? 'Narrow' : 'Blocked' },
-                          { label: 'Pressure on actor', value: `${(e.pressureOnActor * 100).toFixed(0)}%` },
-                          { label: 'Space at destination', value: `${(e.spaceAtDestination * 100).toFixed(0)}%` },
-                          { label: 'Actor phase', value: e.actorPhase },
-                          { label: 'Energy delta', value: `+${e.fieldEnergyDelta.toFixed(2)}` },
-                          ...(e.phaseShift ? [{ label: 'Phase cascade', value: e.phaseShift }] : []),
-                        ],
-                      },
-                    ]}
-                  >
-                    <div className="flex items-center gap-1.5 text-[9px]">
-                      <span className="text-white/30 tabular-nums w-8">{ev.minute}'{ev.second !== undefined ? String(ev.second).padStart(2, '0') : ''}</span>
-                      <span className={`font-medium ${typeColors[ev.type] ?? 'text-white/60'}`}>
-                        {ev.type.replace(/_/g, ' ')}
-                      </span>
-                      <span className="text-white/40 truncate">
-                        {ev.from}{ev.to ? ` → ${ev.to}` : ''}
-                      </span>
-                      {ev.success === false && <span className="text-red-400/60 text-[8px]">FAIL</span>}
-                    </div>
-                  </HoverCard>
-                );
-              })}
-              {recentEvents.length === 0 && (
-                <div className="text-[10px] text-white/20">Run to see events flow</div>
-              )}
-            </div>
-          </div>
-
-          {/* Insights */}
-          <div className="flex-1 overflow-auto p-3">
-            <HoverCard
-              title="Insight Layer — Human-Readable Intelligence"
-              anchor="left"
-              width={350}
-              sections={[
-                {
-                  title: 'How Insights Are Generated',
-                  color: 'text-violet-400',
-                  steps: [
-                    { label: 'Harmony check', value: '≥85% info, ≥60% warn, <60% critical', detail: 'Maps global harmony to urgency level' },
-                    { label: 'Drift check', value: 'severity > 0.7 → critical', detail: 'Converts drift predictions to human warnings' },
-                    { label: 'Coherence check', value: '< 0.35 → flag player', detail: '3+ flagged = critical team fragmentation' },
-                    { label: 'Entanglement check', value: '0 pairs = critical', detail: 'No coordinated units detected' },
-                  ],
-                  conceptNote: 'The insight layer translates kernel math into coaching language. "Midfield coherence low — shape at risk" instead of raw numbers. It\'s the bridge between computation and decision-making.',
-                },
-              ]}
-            >
-              <div className="text-[9px] uppercase tracking-widest text-violet-400/60 mb-2">Insights</div>
-            </HoverCard>
-            <div className="space-y-1.5">
-              {insights.map((ins, i) => {
-                const insightTypeExplanation = ins.message.includes('harmony')
-                  ? 'Derived from field harmony computation: phase alignment + energy entropy.'
-                  : ins.message.includes('coherence') || ins.message.includes('tactical connection')
-                  ? 'Derived from per-player coherence: density + phase alignment + positional deviation.'
-                  : ins.message.includes('entangle') || ins.message.includes('phase correlation')
-                  ? 'Derived from entanglement map: RBF spatial kernel × phase cosine similarity.'
-                  : ins.message.includes('zone') || ins.message.includes('collapse')
-                  ? 'Derived from drift detection: harmony trend analysis + zone-level coherence checks.'
-                  : 'Derived from kernel output analysis.';
-
-                return (
-                  <HoverCard
-                    key={i}
-                    title={`${ins.level.toUpperCase()} Insight`}
-                    anchor="left"
-                    width={320}
-                    sections={[{
-                      title: 'Insight Source',
-                      color: ins.level === 'critical' ? 'text-red-400' : ins.level === 'warning' ? 'text-amber-400' : 'text-emerald-400',
-                      steps: [
-                        { label: 'Level', value: ins.level, detail: ins.level === 'critical' ? 'Requires immediate tactical intervention' : ins.level === 'warning' ? 'Monitor closely — may escalate' : 'Informational — positive or neutral' },
-                        { label: 'Tick', value: `${ins.tick}` },
-                        { label: 'Computation source', value: insightTypeExplanation },
-                      ],
-                    }]}
-                  >
-                    <div
-                      className={`text-[10px] px-2 py-1.5 rounded ${
-                        ins.level === 'critical' ? 'bg-red-500/10 text-red-300 border border-red-500/20'
-                        : ins.level === 'warning' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
-                        : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
-                      }`}
+                      }]}
                     >
-                      {ins.message}
-                    </div>
-                  </HoverCard>
-                );
-              })}
-              {insights.length === 0 && (
-                <div className="text-[10px] text-white/20">Run the engine to see insights</div>
-              )}
+                      <div className="flex items-center gap-1 text-[9px] rounded px-1.5 py-1" style={{ background: BP.bg2 }}>
+                        <span className="font-mono w-7" style={{ color: BP.text3 }}>{id}</span>
+                        <span className="truncate flex-1" style={{ color: BP.rose }}>{t.intent.replace(/_/g, ' ')}</span>
+                        <span className="tabular-nums font-mono" style={{ color: BP.text4 }}>{(t.confidence * 100).toFixed(0)}</span>
+                      </div>
+                    </HoverCard>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* Event Feed */}
+            <div className="p-3" style={{ borderBottom: `1px solid ${BP.bg3}` }}>
+              <HoverCard
+                title="Event Ingestion — Organic Field Construction"
+                anchor="left"
+                width={380}
+                liveValue={constructionState ? `${constructionState.eventCount} events, ${constructionState.fieldState}` : undefined}
+                sections={[{
+                  title: 'How Events Build the Field',
+                  color: 'text-[#0D9488]',
+                  steps: [
+                    { label: 'Abstract event', value: '"CB1 passed to CM2"' },
+                    { label: 'Vector enrichment', formula: 'origin=resolve(actor), dest=resolve(target)+lead, trajectory=bezier(origin,dest)' },
+                    { label: 'Field mutation', value: 'kernel.player.pos += lerp(enriched, 0.4)' },
+                    { label: 'Phase cascade', formula: 'P(shift) = 0.6 × (1 - d/25)' },
+                    { label: 'Coverage', value: constructionState ? `${(constructionState.organicCoverage * 100).toFixed(0)}%` : '—' },
+                  ],
+                  conceptNote: 'The field grows organically from events. Each pass, tackle, shot enriches abstract data with full vectors, then mutates the kernel.',
+                }]}
+              >
+                <div className="text-[9px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: BP.teal }}>Event Feed</div>
+              </HoverCard>
+              <div className="space-y-0.5 max-h-28 overflow-y-auto">
+                {recentEvents.slice(-8).reverse().map((e, i) => {
+                  const ev = e.abstract;
+                  const typeColors: Record<string, string> = {
+                    pass: BP.blueL, shot: BP.redL, tackle: BP.orangeL,
+                    dribble: BP.violet, press_trigger: BP.orangeL,
+                    cross: BP.cyan, through_ball: BP.greenL,
+                    interception: BP.orangeM, clearance: BP.text3,
+                    recovery_run: BP.rose,
+                  };
+                  return (
+                    <HoverCard
+                      key={i}
+                      title={`${ev.type.replace(/_/g, ' ')} — Vector Detail`}
+                      anchor="left"
+                      width={340}
+                      liveValue={`${e.distanceCovered.toFixed(1)}m at ${e.ballSpeed.toFixed(0)} m/s`}
+                      sections={[
+                        {
+                          title: 'Spatial Vectors',
+                          color: 'text-[#0D9488]',
+                          steps: [
+                            { label: 'Origin', value: `(${e.origin.x.toFixed(1)}, ${e.origin.y.toFixed(1)})` },
+                            { label: 'Destination', value: `(${e.destination.x.toFixed(1)}, ${e.destination.y.toFixed(1)})` },
+                            { label: 'Ball velocity', value: `(${e.ballVelocity.x.toFixed(1)}, ${e.ballVelocity.y.toFixed(1)}) m/s` },
+                            { label: 'Distance', value: `${e.distanceCovered.toFixed(1)}m` },
+                            { label: 'Angle', value: `${(e.angle * 180 / Math.PI).toFixed(0)}°` },
+                            { label: 'Progressive dist', value: `${e.progressiveDistance.toFixed(1)}m` },
+                          ],
+                        },
+                        {
+                          title: 'Context',
+                          color: 'text-[#5EEAD4]',
+                          steps: [
+                            { label: 'Passing lane', value: `${e.passingLaneWidth.toFixed(1)}m` },
+                            { label: 'Pressure', value: `${(e.pressureOnActor * 100).toFixed(0)}%` },
+                            { label: 'Space at dest', value: `${(e.spaceAtDestination * 100).toFixed(0)}%` },
+                            { label: 'Phase', value: e.actorPhase },
+                            ...(e.phaseShift ? [{ label: 'Cascade', value: e.phaseShift }] : []),
+                          ],
+                        },
+                      ]}
+                    >
+                      <div className="flex items-center gap-1.5 text-[9px] rounded px-1.5 py-0.5" style={{ background: BP.bg2 }}>
+                        <span className="tabular-nums w-8 font-mono" style={{ color: BP.text4 }}>
+                          {ev.minute}&apos;{ev.second !== undefined ? String(ev.second).padStart(2, '0') : ''}
+                        </span>
+                        <span className="font-medium" style={{ color: typeColors[ev.type] ?? BP.text3 }}>
+                          {ev.type.replace(/_/g, ' ')}
+                        </span>
+                        <span className="truncate" style={{ color: BP.text4 }}>
+                          {ev.from}{ev.to ? ` → ${ev.to}` : ''}
+                        </span>
+                        {ev.success === false && <span className="text-[8px]" style={{ color: BP.redL }}>FAIL</span>}
+                      </div>
+                    </HoverCard>
+                  );
+                })}
+                {recentEvents.length === 0 && (
+                  <div className="text-[10px]" style={{ color: BP.text4 }}>Run to see events flow</div>
+                )}
+              </div>
+            </div>
+
+            {/* Insights */}
+            <div className="p-3">
+              <HoverCard
+                title="Insight Layer — Human-Readable Intelligence"
+                anchor="left"
+                width={360}
+                sections={[{
+                  title: 'How Insights Are Generated',
+                  color: 'text-[#A78BFA]',
+                  steps: [
+                    { label: 'Harmony check', value: '≥85% info, ≥60% warn, <60% critical' },
+                    { label: 'Drift check', value: 'severity > 0.7 → critical' },
+                    { label: 'Coherence check', value: '< 0.35 → flag player' },
+                    { label: 'Entanglement check', value: '0 pairs = critical' },
+                  ],
+                  conceptNote: 'Translates kernel math into coaching language. The bridge between computation and decision-making.',
+                }]}
+              >
+                <div className="text-[9px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: BP.violet }}>Insights</div>
+              </HoverCard>
+              <div className="space-y-1.5">
+                {insights.map((ins, i) => {
+                  const insightSource = ins.message.includes('harmony')
+                    ? 'From field harmony computation.'
+                    : ins.message.includes('coherence') || ins.message.includes('tactical connection')
+                    ? 'From per-player coherence.'
+                    : ins.message.includes('entangle') || ins.message.includes('phase correlation')
+                    ? 'From entanglement map.'
+                    : ins.message.includes('zone') || ins.message.includes('collapse')
+                    ? 'From drift detection.'
+                    : 'From kernel output.';
+
+                  const insColor = ins.level === 'critical' ? BP.redL : ins.level === 'warning' ? BP.orangeL : BP.greenL;
+                  const insBg = ins.level === 'critical' ? 'rgba(205,66,70,0.08)' : ins.level === 'warning' ? 'rgba(200,118,25,0.08)' : 'rgba(35,133,81,0.08)';
+                  const insBorder = ins.level === 'critical' ? 'rgba(205,66,70,0.2)' : ins.level === 'warning' ? 'rgba(200,118,25,0.2)' : 'rgba(35,133,81,0.2)';
+
+                  return (
+                    <HoverCard
+                      key={i}
+                      title={`${ins.level.toUpperCase()} Insight`}
+                      anchor="left"
+                      width={320}
+                      sections={[{
+                        title: 'Source',
+                        color: ins.level === 'critical' ? 'text-[#E76A6E]' : ins.level === 'warning' ? 'text-[#EC9A3C]' : 'text-[#32A467]',
+                        steps: [
+                          { label: 'Level', value: ins.level },
+                          { label: 'Tick', value: `${ins.tick}` },
+                          { label: 'Source', value: insightSource },
+                        ],
+                      }]}
+                    >
+                      <div
+                        className="text-[10px] px-2.5 py-1.5 rounded"
+                        style={{ background: insBg, color: insColor, border: `1px solid ${insBorder}` }}
+                      >
+                        {ins.message}
+                      </div>
+                    </HoverCard>
+                  );
+                })}
+                {insights.length === 0 && (
+                  <div className="text-[10px]" style={{ color: BP.text4 }}>Run the engine to see insights</div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

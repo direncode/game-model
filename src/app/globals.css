@@ -1,8 +1,58 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════
+   Palantir Blueprint–Inspired Theme System
+   Colors sourced from Blueprint's design tokens
+   ═══════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core dark backgrounds (Blueprint DARK_GRAY scale) */
+  --bp-black: #111418;
+  --bp-bg-primary: #1C2127;
+  --bp-bg-secondary: #252A31;
+  --bp-bg-tertiary: #2F343C;
+  --bp-bg-hover: #383E47;
+  --bp-bg-active: #404854;
+
+  /* Text scale */
+  --bp-text-primary: #F6F7F9;
+  --bp-text-secondary: #D3D8DE;
+  --bp-text-muted: #8F99A8;
+  --bp-text-disabled: #5F6B7C;
+
+  /* Borders */
+  --bp-border-subtle: rgba(255, 255, 255, 0.06);
+  --bp-border-default: #2F343C;
+  --bp-border-strong: #383E47;
+
+  /* Accent — Blue */
+  --bp-blue: #2D72D2;
+  --bp-blue-light: #4C90F0;
+  --bp-blue-muted: #8ABBFF;
+
+  /* Status */
+  --bp-green: #238551;
+  --bp-green-light: #32A467;
+  --bp-green-muted: #72CA9B;
+  --bp-orange: #C87619;
+  --bp-orange-light: #EC9A3C;
+  --bp-red: #CD4246;
+  --bp-red-light: #E76A6E;
+
+  /* Extended accents */
+  --bp-violet: #7C3AED;
+  --bp-teal: #0D9488;
+  --bp-rose: #DB2777;
+  --bp-cyan: #06B6D4;
+
+  /* Shadows */
+  --bp-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --bp-shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  --bp-shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+  --bp-shadow-glow: 0 0 20px rgba(45,114,210,0.15);
+
+  --background: #111418;
+  --foreground: #F6F7F9;
 }
 
 @theme inline {
@@ -12,15 +62,61 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ───────────────────────────────────────────────────── */
+body {
+  background: var(--bp-black);
+  color: var(--bp-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Scrollbar (Palantir-style subtle) ──────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bp-bg-hover);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bp-bg-active);
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(45, 114, 210, 0.3);
+  color: var(--bp-text-primary);
+}
+
+/* ── Utility animations ─────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45, 114, 210, 0); }
+  50% { box-shadow: 0 0 12px 2px rgba(45, 114, 210, 0.15); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+.animate-slideIn {
+  animation: slideIn 0.2s ease-out;
+}
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
 }
