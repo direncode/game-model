@@ -612,6 +612,113 @@ export function getNodeExplanation(
         conceptNote: 'The entire BigDunc engine exists for this single purpose: to give coaches a 3-6 second warning before tactical breakdowns occur. Not analysis, not statistics — PREDICTION. The resonance model detects when the team\'s "wave function" is about to decohere, and surfaces that as a plain-language directive.',
       }],
     }),
+    // ═══════════════════════════════════════════════════════════════
+    // EVENT PIPELINE — ORGANIC FIELD CONSTRUCTION
+    // ═══════════════════════════════════════════════════════════════
+    eventingest: () => ({
+      title: 'Event Ingestion — Abstract to Structured',
+      sections: [
+        {
+          title: 'What It Does',
+          color: 'text-teal-400',
+          steps: [
+            { label: 'Input', value: 'AbstractEvent', detail: '{ type: "pass", from: "CB1", to: "CM2", minute: 23, success: true }' },
+            { label: 'No coordinates', value: 'Just semantics', detail: 'Abstract events carry only WHO did WHAT — no spatial data at all' },
+            { label: 'Event types', value: '20+ types', detail: 'pass, shot, tackle, dribble, cross, through_ball, press_trigger, interception, clearance, recovery_run, corner, free_kick, goal_kick, aerial_duel, foul, goal, save, offside, substitution, positional_shift' },
+          ],
+          conceptNote: 'This is the entry point: a commentator or data provider says "CB1 passed to CM2 in the 23rd minute." No x,y coordinates, no velocities, no trajectories. The ingestion layer accepts this raw semantic data and passes it to the vector enrichment stage.',
+        },
+        {
+          title: 'Sample Event Stream',
+          color: 'text-teal-300',
+          steps: [
+            { label: '1', value: 'CB1 → CM2 (pass)', detail: 'Short pass from center-back to central midfielder' },
+            { label: '2', value: 'CM2 → LW (through_ball)', detail: 'Progressive through ball to left winger' },
+            { label: '3', value: 'LW dribble', detail: 'Left winger takes on defender' },
+            { label: '4', value: 'LW → ST (cross)', detail: 'Cross from left flank into the box' },
+            { label: '5', value: 'ST shot', detail: 'Striker shoots on goal' },
+          ],
+          conceptNote: 'Each event in the stream enriches the field state incrementally. After 20+ events, the field has moved organically from its initial formation to reflect real match dynamics.',
+        },
+      ],
+    }),
+
+    vectorenrich: () => ({
+      title: 'Vector Enrichment — Spatial Resolution',
+      sections: [
+        {
+          title: 'Position Resolution',
+          color: 'text-teal-400',
+          steps: [
+            { label: 'Step 1: Kernel sync', value: 'Current positions', detail: 'First tries kernel-synced GPS positions from live player state' },
+            { label: 'Step 2: Role fallback', value: 'Tactical template', detail: 'If no kernel data, uses role-based positions (e.g., CB1 → (18, 28))' },
+            { label: 'Step 3: Destination', formula: 'dest = target_pos + lead_offset + zone_noise', detail: 'Target position with lead pass offset (through balls add 5-8m forward)' },
+            { label: 'Zone mapping', value: '24 zones → Vec2', detail: 'Zone names like "left_half_space" map to pitch coordinates (52.5, 22)' },
+          ],
+          conceptNote: '"CB1 passed to CM2" has no coordinates. The enrichment layer resolves this: CB1 is at (18, 28) from kernel state, CM2 is at (42, 34), so the pass goes from (18, 28) to (42, 34). If it\'s a through ball, add a lead offset so the destination is slightly ahead of CM2.',
+        },
+        {
+          title: 'Vector Computation',
+          color: 'text-teal-300',
+          steps: [
+            { label: 'Ball trajectory', formula: 'B(t) = (1-t)²P₀ + 2(1-t)tC + t²P₂ (Bézier curve)', detail: 'Quadratic Bézier with perpendicular offset for curve. Crosses curve 15%, through balls 8%, short passes 3%.' },
+            { label: 'Ball speed', formula: 'v = base_speed[type] + clamp(distance/15, 0, 8)', detail: 'pass=12 m/s, shot=28 m/s, cross=18 m/s, through_ball=16 m/s. Longer distance adds up to 8 m/s.' },
+            { label: 'Ball velocity vector', formula: 'v⃗ = normalize(dest - origin) × speed', detail: 'Direction × magnitude gives full 2D velocity' },
+            { label: 'Passing lane width', formula: 'width = 10 - dist/8 - fwd_penalty×3', detail: 'Wider for short passes. Forward passes have narrower lanes (more risky).' },
+            { label: 'Pressure on actor', formula: 'P = 0.3 + center_bonus + midfield_bonus + noise', detail: 'Higher in central congested areas, lower on flanks' },
+            { label: 'Progressive distance', formula: 'Δx = dest.x - origin.x', detail: 'Positive = toward opponent goal. Negative = backward.' },
+          ],
+        },
+      ],
+    }),
+
+    fieldconst: () => ({
+      title: 'Field Constructor — Organic Kernel Mutation',
+      liveValue: liveOutput?.tick !== undefined ? `tick ${liveOutput.tick}` : undefined,
+      sections: [
+        {
+          title: 'Mutation Pipeline',
+          color: 'text-teal-400',
+          steps: [
+            { label: '1. Actor position', formula: 'pos += (enriched_pos - pos) × 0.4', detail: 'Lerp 40% toward event-inferred position. Smooth, not teleporting.' },
+            { label: '2. Actor velocity', formula: 'v += normalize(dest - pos) × 0.8', detail: 'Inject velocity in direction of the event\'s destination' },
+            { label: '3. Actor phase', value: 'Event → phase map', detail: 'shot/dribble → attacking, tackle → defending, press_trigger → pressing' },
+            { label: '4. Target position', formula: 'pos += (enriched_target - pos) × 0.35', detail: 'Receiver moves toward reception point (35% lerp)' },
+            { label: '5. Ball attractor', value: 'Move to destination', detail: 'Ball attractor follows the ball to new position' },
+            { label: '6. Phase cascade', formula: 'for nearby(25m): P(shift) = 0.6 × (1 - d/25)', detail: 'Interceptions and press triggers cascade phase changes to nearby teammates' },
+            { label: '7. Energy injection', value: 'Amplitude boost', detail: 'High-energy events boost nearby players\' wave amplitudes' },
+          ],
+          conceptNote: 'The key insight: no player position is hardcoded. Every position emerges from events. After 20+ events, every player has been moved by passes, tackles, dribbles, and runs. The field is ORGANIC — it\'s shaped by what happened, not by what was prescribed.',
+        },
+        {
+          title: 'Organic Coverage',
+          color: 'text-teal-300',
+          steps: [
+            { label: 'Coverage metric', formula: 'coverage = event_driven_players / 11', detail: 'Tracks how many players have been positioned by events vs. formation defaults' },
+            { label: 'States', value: 'initializing → stable → organic', detail: '<10 events = initializing, 10-20 = stable, 20+ with >50% coverage = organic' },
+            { label: 'Volatile', value: '>5 mutations/5 ticks', detail: 'High mutation rate signals rapid tactical changes (counter-attack, pressing trigger)' },
+          ],
+        },
+      ],
+    }),
+
+    eventlog: () => ({
+      title: 'Mutation Log — Field Change Audit Trail',
+      sections: [{
+        title: 'Mutation Types',
+        color: 'text-teal-400',
+        steps: [
+          { label: 'player_move', value: 'Position change', detail: '(18.0, 28.0) → (22.5, 30.1) — actor or target moved by event' },
+          { label: 'player_phase', value: 'Phase transition', detail: 'defending → transitioning — event triggered a tactical state change' },
+          { label: 'player_load', value: 'Load adjustment', detail: '50 → 55 — physical load increased from event effort' },
+          { label: 'ball_move', value: 'Ball attractor moved', detail: 'Ball position updated to event destination' },
+          { label: 'attractor_mutate', value: 'Create/remove attractor', detail: 'Press triggers create temporary tactical attractors' },
+          { label: 'energy_inject', value: 'Field energy boost', detail: 'High-energy events (shots, tackles) boost nearby amplitude' },
+          { label: 'phase_cascade', value: 'Nearby players shift', detail: 'Cascading phase change from trigger event to nearby teammates' },
+        ],
+        conceptNote: 'Every field mutation is logged with before/after state and the causing event. This creates a complete audit trail: you can trace exactly why player X is at position Y — because of a chain of passes, tackles, and movements. Full transparency into how the field was constructed.',
+      }],
+    }),
   };
 
   const builder = explanations[nodeId];

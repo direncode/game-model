@@ -15,6 +15,8 @@ import {
   getStatExplanation,
   type ComputationSection,
 } from '@/components/computation-hover';
+import { FieldConstructor, type FieldMutation, type ConstructionSnapshot } from '@/lib/field-constructor';
+import { EventIngestionPipeline, type AbstractEvent, type EnrichedEvent } from '@/lib/event-ingestion';
 
 // ─── Formation setup ───────────────────────────────────────────────
 
@@ -57,7 +59,7 @@ interface Edge {
 }
 
 const W = 1400;
-const H = 920;
+const H = 1020;
 
 const NODES: Node[] = [
   // Layer 0 — Data Sources
@@ -105,6 +107,12 @@ const NODES: Node[] = [
 
   // Pre-decision output
   { id: 'predecision', label: 'PRE-DECISION OUTPUT',   x: 380,  y: 660, w: 530, h: 54, color: '#ef4444', sub: '"Harmony dropping in midfield — shift phase now"' },
+
+  // Layer 7 — Event Pipeline (bottom section)
+  { id: 'eventingest', label: 'Event Ingestion',       x: 80,   y: 760, w: 190, h: 52, color: '#14b8a6', sub: '"CB1 passed to CM2"' },
+  { id: 'vectorenrich',label: 'Vector Enrichment',     x: 340,  y: 760, w: 200, h: 52, color: '#14b8a6', sub: 'coords, trajectory, velocity' },
+  { id: 'fieldconst',  label: 'Field Constructor',     x: 620,  y: 760, w: 200, h: 52, color: '#14b8a6', sub: 'organic mutations → kernel' },
+  { id: 'eventlog',    label: 'Mutation Log',          x: 900,  y: 760, w: 170, h: 52, color: '#14b8a6', sub: 'player_move, phase, ball' },
 ];
 
 const EDGES: Edge[] = [
@@ -141,6 +149,13 @@ const EDGES: Edge[] = [
   { from: 'harmony',   to: 'montecarlo',  dashed: true },
   { from: 'states',    to: 'twins',       dashed: true },
   { from: 'states',    to: 'predecision', dashed: true },
+
+  // Event pipeline edges
+  { from: 'eventingest',  to: 'vectorenrich', label: 'abstract events' },
+  { from: 'vectorenrich', to: 'fieldconst',   label: 'enriched vectors' },
+  { from: 'fieldconst',   to: 'kernel',       label: 'mutations', dashed: true },
+  { from: 'fieldconst',   to: 'eventlog',     label: 'log' },
+  { from: 'substrate',    to: 'vectorenrich', label: 'player state', dashed: true },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────
@@ -197,6 +212,12 @@ export default function BigDuncFlowDiagram() {
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const hoverTimer = useRef<NodeJS.Timeout | null>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
+  const fieldConstructorRef = useRef<FieldConstructor | null>(null);
+  const [recentEvents, setRecentEvents] = useState<EnrichedEvent[]>([]);
+  const [recentMutations, setRecentMutations] = useState<FieldMutation[]>([]);
+  const [constructionState, setConstructionState] = useState<ConstructionSnapshot | null>(null);
+  const sampleEventsRef = useRef<AbstractEvent[]>([]);
+  const eventIndexRef = useRef(0);
 
   // Init engine
   useEffect(() => {
@@ -226,6 +247,12 @@ export default function BigDuncFlowDiagram() {
       }
     }
     twinsRef.current = twins;
+
+    // Init field constructor + sample event stream
+    const fc = new FieldConstructor(kernel);
+    fieldConstructorRef.current = fc;
+    sampleEventsRef.current = fc.getPipeline().generateSampleEvents(200, 1);
+    eventIndexRef.current = 0;
   }, []);
 
   // Simulation loop
@@ -239,6 +266,18 @@ export default function BigDuncFlowDiagram() {
       const edgeOrder = ['substrate', 'kernel', 'attractors', 'coulomb', 'fokker', 'positions', 'harmony', 'insight', 'predecision'];
       edgeTimerRef.current = (edgeTimerRef.current + 1) % edgeOrder.length;
       setActiveEdge(edgeOrder[edgeTimerRef.current]);
+
+      // ── Process one event from the stream into the field ──
+      const fc = fieldConstructorRef.current;
+      if (fc && sampleEventsRef.current.length > 0) {
+        const idx = eventIndexRef.current % sampleEventsRef.current.length;
+        const event = sampleEventsRef.current[idx];
+        eventIndexRef.current = idx + 1;
+        const { enriched, mutations } = fc.processEvent(event);
+        setRecentEvents(prev => [...prev.slice(-14), enriched]);
+        setRecentMutations(prev => [...prev.slice(-14), ...mutations]);
+        setConstructionState(fc.getSnapshot());
+      }
 
       // Twin evaluate + execute
       const pre = kernel.tick(1);
@@ -266,6 +305,19 @@ export default function BigDuncFlowDiagram() {
   const handleStep = useCallback(() => {
     const kernel = kernelRef.current;
     if (!kernel) return;
+
+    // Process event
+    const fc = fieldConstructorRef.current;
+    if (fc && sampleEventsRef.current.length > 0) {
+      const idx = eventIndexRef.current % sampleEventsRef.current.length;
+      const event = sampleEventsRef.current[idx];
+      eventIndexRef.current = idx + 1;
+      const { enriched, mutations } = fc.processEvent(event);
+      setRecentEvents(prev => [...prev.slice(-14), enriched]);
+      setRecentMutations(prev => [...prev.slice(-14), ...mutations]);
+      setConstructionState(fc.getSnapshot());
+    }
+
     const pre = kernel.tick(1);
     const intents: Record<string, { intent: string; confidence: number }> = {};
     for (const [id, twin] of twinsRef.current) {
@@ -296,6 +348,14 @@ export default function BigDuncFlowDiagram() {
     setInsights([]);
     setMcResult(null);
     setTwinIntents({});
+    // Reset field constructor
+    const fc = new FieldConstructor(kernel);
+    fieldConstructorRef.current = fc;
+    sampleEventsRef.current = fc.getPipeline().generateSampleEvents(200, 1);
+    eventIndexRef.current = 0;
+    setRecentEvents([]);
+    setRecentMutations([]);
+    setConstructionState(null);
   }, []);
 
   // Build node map for edge drawing
@@ -329,6 +389,14 @@ export default function BigDuncFlowDiagram() {
     } else if (insights.length > 0) {
       liveValues['predecision'] = insights[0].message.slice(0, 45);
     }
+  }
+  // Event pipeline live values
+  if (recentEvents.length > 0) {
+    const last = recentEvents[recentEvents.length - 1];
+    liveValues['eventingest'] = `${last.abstract.type}: ${last.abstract.from}`;
+    liveValues['vectorenrich'] = `(${last.origin.x.toFixed(0)},${last.origin.y.toFixed(0)})→(${last.destination.x.toFixed(0)},${last.destination.y.toFixed(0)})`;
+    liveValues['fieldconst'] = constructionState ? `${constructionState.fieldState} ${(constructionState.organicCoverage * 100).toFixed(0)}%` : '—';
+    liveValues['eventlog'] = `${recentMutations.length} mutations`;
   }
 
   return (
@@ -412,6 +480,7 @@ export default function BigDuncFlowDiagram() {
             <text x="1000" y="28" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">OUTPUTS</text>
             <text x="120" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">AGENT SYSTEM</text>
             <text x="700" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">INSIGHT LAYER</text>
+            <text x="80" y="748" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">EVENT PIPELINE — ORGANIC FIELD CONSTRUCTION</text>
 
             {/* Edges */}
             {EDGES.map((edge, i) => {
@@ -848,6 +917,93 @@ export default function BigDuncFlowDiagram() {
                   </HoverCard>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Event Feed */}
+          <div className="p-3 border-b border-white/5">
+            <HoverCard
+              title="Event Ingestion — Organic Field Construction"
+              anchor="left"
+              width={370}
+              liveValue={constructionState ? `${constructionState.eventCount} events, ${constructionState.fieldState}` : undefined}
+              sections={[
+                {
+                  title: 'How Events Build the Field',
+                  color: 'text-teal-400',
+                  steps: [
+                    { label: 'Abstract event', value: '"CB1 passed to CM2"', detail: 'Raw event with no coordinates — just who did what to whom' },
+                    { label: 'Vector enrichment', formula: 'origin=resolve(actor), dest=resolve(target)+lead, trajectory=bezier(origin,dest)', detail: 'Computes full spatial vectors: coordinates, ball trajectory, velocities, angles' },
+                    { label: 'Field mutation', value: 'kernel.player.pos += lerp(enriched, 0.4)', detail: 'Smoothly interpolates kernel player positions toward event-inferred locations' },
+                    { label: 'Phase cascade', formula: 'if dist(player, trigger) < 25m: P(shift) = 0.6 × (1 - d/25)', detail: 'Events like interceptions cascade phase changes to nearby players' },
+                    { label: 'Organic coverage', value: constructionState ? `${(constructionState.organicCoverage * 100).toFixed(0)}%` : '—', detail: 'What % of players have been positioned by events vs defaults' },
+                  ],
+                  conceptNote: 'The field is not hardcoded — it grows organically from events. Each pass, tackle, shot, and press enriches abstract data with full vector detail, then mutates the kernel. After ~20 events, the field reflects real match dynamics rather than starting formation.',
+                },
+              ]}
+            >
+              <div className="text-[9px] uppercase tracking-widest text-teal-400/60 mb-2">Event Feed</div>
+            </HoverCard>
+            <div className="space-y-0.5 max-h-28 overflow-y-auto">
+              {recentEvents.slice(-8).reverse().map((e, i) => {
+                const ev = e.abstract;
+                const typeColors: Record<string, string> = {
+                  pass: 'text-sky-300', shot: 'text-red-300', tackle: 'text-amber-300',
+                  dribble: 'text-purple-300', press_trigger: 'text-orange-300',
+                  cross: 'text-cyan-300', through_ball: 'text-emerald-300',
+                  interception: 'text-yellow-300', clearance: 'text-slate-300',
+                  recovery_run: 'text-pink-300',
+                };
+                return (
+                  <HoverCard
+                    key={i}
+                    title={`${ev.type.replace(/_/g, ' ')} — Vector Detail`}
+                    anchor="left"
+                    width={340}
+                    liveValue={`${e.distanceCovered.toFixed(1)}m at ${e.ballSpeed.toFixed(0)} m/s`}
+                    sections={[
+                      {
+                        title: 'Spatial Vectors',
+                        color: 'text-teal-400',
+                        steps: [
+                          { label: 'Origin', value: `(${e.origin.x.toFixed(1)}, ${e.origin.y.toFixed(1)})` },
+                          { label: 'Destination', value: `(${e.destination.x.toFixed(1)}, ${e.destination.y.toFixed(1)})` },
+                          { label: 'Ball velocity', value: `(${e.ballVelocity.x.toFixed(1)}, ${e.ballVelocity.y.toFixed(1)}) m/s` },
+                          { label: 'Distance', value: `${e.distanceCovered.toFixed(1)}m` },
+                          { label: 'Angle', value: `${(e.angle * 180 / Math.PI).toFixed(0)}°` },
+                          { label: 'Progressive dist', value: `${e.progressiveDistance.toFixed(1)}m`, detail: e.progressiveDistance > 0 ? 'Forward progression' : 'Backward/lateral' },
+                        ],
+                      },
+                      {
+                        title: 'Context',
+                        color: 'text-teal-300',
+                        steps: [
+                          { label: 'Passing lane width', value: `${e.passingLaneWidth.toFixed(1)}m`, detail: e.passingLaneWidth > 5 ? 'Wide open' : e.passingLaneWidth > 2 ? 'Narrow' : 'Blocked' },
+                          { label: 'Pressure on actor', value: `${(e.pressureOnActor * 100).toFixed(0)}%` },
+                          { label: 'Space at destination', value: `${(e.spaceAtDestination * 100).toFixed(0)}%` },
+                          { label: 'Actor phase', value: e.actorPhase },
+                          { label: 'Energy delta', value: `+${e.fieldEnergyDelta.toFixed(2)}` },
+                          ...(e.phaseShift ? [{ label: 'Phase cascade', value: e.phaseShift }] : []),
+                        ],
+                      },
+                    ]}
+                  >
+                    <div className="flex items-center gap-1.5 text-[9px]">
+                      <span className="text-white/30 tabular-nums w-8">{ev.minute}'{ev.second !== undefined ? String(ev.second).padStart(2, '0') : ''}</span>
+                      <span className={`font-medium ${typeColors[ev.type] ?? 'text-white/60'}`}>
+                        {ev.type.replace(/_/g, ' ')}
+                      </span>
+                      <span className="text-white/40 truncate">
+                        {ev.from}{ev.to ? ` → ${ev.to}` : ''}
+                      </span>
+                      {ev.success === false && <span className="text-red-400/60 text-[8px]">FAIL</span>}
+                    </div>
+                  </HoverCard>
+                );
+              })}
+              {recentEvents.length === 0 && (
+                <div className="text-[10px] text-white/20">Run to see events flow</div>
+              )}
             </div>
           </div>
 
