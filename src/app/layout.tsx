@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Football Analytics - GPS/Wearable + Tactical Intelligence",
-  description: "Advanced football analytics system integrating GPS/wearable tracking data with tactical game models. Create digital twins, define game approaches, and monitor live coherence between player data and managerial instructions.",
+  title: "BigDunc — Resonance Kernel Algorithm Flow",
+  description: "Quantum-inspired pre-decision engine for football team dynamics. Visualizes the resonance kernel algorithm pipeline in real-time.",
 };
 
 export default function RootLayout({

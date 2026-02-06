@@ -1,850 +1,619 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { useGameStore } from '@/store/game-store';
-import { PitchView } from '@/components/dashboard/pitch-view';
-import { createDigitalTwin } from '@/lib/digital-twin';
-import { getPLSquadData } from '@/lib/premier-league-api';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import {
-  GameEngine,
-  createManchesterDerby,
-  type MatchEvent,
-  type MatchState,
-  type MatchStats,
-} from '@/lib/game-engine';
-import {
-  TacticalPreset,
-  getPresetById,
-} from '@/lib/tactics-library';
-import {
-  PatternRecognitionEngine,
-  type TacticalPattern,
-  type PatternLog,
-  type CompoundingEffect,
-  type TacticalCoherence,
-  type RecurrentSequence,
-  type MarkovTransition,
-} from '@/lib/pattern-recognition';
-import {
-  catapultService,
-  type FatigueModel,
-  type InjuryRiskModel,
-} from '@/lib/catapult-integration';
-import type { Player, TrackingMetrics } from '@/types';
-import {
-  Play,
-  Pause,
-  Square,
-  Send,
-  Mic,
-  MicOff,
-  Loader2,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  Zap,
-  Target,
-  GitCompare,
-  Users,
-} from 'lucide-react';
-import {
-  GameModelManager,
-  createGameModelManager,
-  type ManagerSession,
-  type StaffMember,
-  GAME_MODEL_TEMPLATES,
-} from '@/lib/game-model-manager';
+  ResonanceKernel,
+  type KernelOutput,
+  type PlayerPhase,
+} from '@/lib/resonance-kernel';
+import { AutonomousTwin } from '@/lib/autonomous-twin';
+import { DataSubstrate } from '@/lib/catapult-data-substrate';
+import { insightFromKernel, type Insight } from '@/lib/resonance-insight';
 
-// Pattern Recognition Data Types
-interface PatternRecognitionData {
-  activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
-  recentLogs: PatternLog[];
-  compoundingEffects: CompoundingEffect[];
-  coherence: { home: TacticalCoherence | null; away: TacticalCoherence | null };
-  markov?: {
-    recurrentSequences: RecurrentSequence[];
-    currentChains: { home: string; away: string };
-    topTransitions: { home: MarkovTransition[]; away: MarkovTransition[] };
-    predictedNext: { home: string | null; away: string | null };
-  };
+// ─── Formation setup ───────────────────────────────────────────────
+
+interface PlayerSetup {
+  id: string; x: number; y: number; state: PlayerPhase; load: number;
 }
 
-// Fatigue/Wearable Data Types
-interface FatigueData {
-  home: Map<string, FatigueModel>;
-  away: Map<string, FatigueModel>;
-  injuryRisks: Map<string, InjuryRiskModel>;
-  recommendations: {
-    substitutionTargets: { playerId: string; priority: 'urgent' | 'soon' | 'optional'; reason: string }[];
-    pressingAdjustments: { recommendation: string; affectedPlayers: string[] }[];
-    formationSuggestions: string[];
-  };
-}
+const FORMATION: PlayerSetup[] = [
+  { id: 'GK',  x: 5,  y: 34, state: 'defending',  load: 30 },
+  { id: 'LB',  x: 20, y: 10, state: 'defending',  load: 55 },
+  { id: 'CB1', x: 18, y: 28, state: 'defending',  load: 50 },
+  { id: 'CB2', x: 18, y: 40, state: 'defending',  load: 50 },
+  { id: 'RB',  x: 20, y: 58, state: 'defending',  load: 55 },
+  { id: 'CM1', x: 40, y: 22, state: 'building',   load: 65 },
+  { id: 'CM2', x: 42, y: 34, state: 'building',   load: 70 },
+  { id: 'CM3', x: 40, y: 46, state: 'building',   load: 65 },
+  { id: 'LW',  x: 70, y: 12, state: 'attacking',  load: 75 },
+  { id: 'ST',  x: 78, y: 34, state: 'attacking',  load: 80 },
+  { id: 'RW',  x: 70, y: 56, state: 'attacking',  load: 75 },
+];
 
-// Instruction Log Entry
-interface InstructionLogEntry {
+// ─── Diagram layout coordinates ────────────────────────────────────
+
+interface Node {
   id: string;
-  timestamp: Date;
-  minute: number;
-  input: string;
-  category: string;
-  confidence: number;
-  status: 'applied' | 'pending' | 'rejected';
-  affectedPlayers: string[];
-  effect?: string;
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  color: string;
+  sub?: string;
 }
 
-// Digital Twin Position
-interface TwinPosition {
-  playerId: string;
-  name: string;
-  role: string;
-  idealX: number;
-  idealY: number;
-  actualX: number;
-  actualY: number;
-  deviation: number;
-  isCoherent: boolean;
+interface Edge {
+  from: string;
+  to: string;
+  label?: string;
+  dashed?: boolean;
 }
 
-export default function Home() {
-  const {
-    players,
-    setPlayers,
-    setTwin,
-    liveData,
-    updateLiveData,
-    isLive,
-    startMatch,
-    updateMatch,
-    endMatch,
-  } = useGameStore();
+const W = 1400;
+const H = 920;
 
-  const [isSimulating, setIsSimulating] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+const NODES: Node[] = [
+  // Layer 0 — Data Sources
+  { id: 'catapult',    label: 'Catapult GPS/IMU',     x: 80,   y: 40,  w: 180, h: 52, color: '#0ea5e9', sub: 'speed, acc, load, HR' },
+  { id: 'synthetic',   label: 'Synthetic Generator',   x: 80,   y: 120, w: 180, h: 52, color: '#0ea5e9', sub: '11 players × random' },
 
-  // Game Engine State
-  const gameEngineRef = useRef<GameEngine | null>(null);
-  const patternEngineRef = useRef<PatternRecognitionEngine | null>(null);
-  const [matchState, setMatchState] = useState<MatchState | null>(null);
-  const [matchStats, setMatchStats] = useState<MatchStats | null>(null);
-  const [matchEvents, setMatchEvents] = useState<MatchEvent[]>([]);
-  const [awayPlayers, setAwayPlayers] = useState<Player[]>([]);
-  const [awayLiveData, setAwayLiveData] = useState<Map<string, TrackingMetrics>>(new Map());
+  // Layer 1 — Substrate
+  { id: 'substrate',   label: 'DataSubstrate',         x: 380,  y: 80,  w: 200, h: 60, color: '#8b5cf6', sub: 'ingestFrame() → normalize' },
 
-  // Pattern Recognition State
-  const [patternRecognitionData, setPatternRecognitionData] = useState<PatternRecognitionData>({
-    activePatterns: { home: [], away: [] },
-    recentLogs: [],
-    compoundingEffects: [],
-    coherence: { home: null, away: null },
-    markov: {
-      recurrentSequences: [],
-      currentChains: { home: 'No chain', away: 'No chain' },
-      topTransitions: { home: [], away: [] },
-      predictedNext: { home: null, away: null }
+  // Layer 2 — Kernel core
+  { id: 'kernel',      label: 'ResonanceKernel',       x: 700,  y: 30,  w: 220, h: 50, color: '#f59e0b', sub: 'tick(Δt) — main loop' },
+
+  // Layer 2 sub-steps (inside kernel)
+  { id: 'attractors',  label: '① Attractor Forces',    x: 520,  y: 150, w: 180, h: 48, color: '#f59e0b', sub: 'F = s·e^(-d/r) · dir' },
+  { id: 'coulomb',     label: '② Coulomb Spacing',     x: 520,  y: 220, w: 180, h: 48, color: '#f59e0b', sub: 'F = k·q₁q₂/d²' },
+  { id: 'fokker',      label: '③ Wave Evolution',      x: 520,  y: 290, w: 180, h: 48, color: '#f59e0b', sub: 'Fokker-Planck diffuse/drift' },
+  { id: 'positions',   label: '④ Update Positions',    x: 520,  y: 360, w: 180, h: 48, color: '#f59e0b', sub: 'v → pos, boundary clamp' },
+
+  // Layer 2 wave details
+  { id: 'waveamp',     label: 'Amplitude',             x: 760,  y: 150, w: 140, h: 40, color: '#fb923c', sub: 'load → energy 0–1' },
+  { id: 'wavephase',   label: 'Phase',                 x: 760,  y: 210, w: 140, h: 40, color: '#fb923c', sub: 'state → radians' },
+  { id: 'wavefreq',    label: 'Frequency',             x: 760,  y: 270, w: 140, h: 40, color: '#fb923c', sub: 'speed → Hz rhythm' },
+  { id: 'wavelength',  label: 'Wavelength',            x: 760,  y: 330, w: 140, h: 40, color: '#fb923c', sub: 'coverage meters' },
+
+  // Layer 3 — Outputs
+  { id: 'harmony',     label: 'Field Harmony',         x: 1000, y: 40,  w: 170, h: 52, color: '#22c55e', sub: 'cos(Δφ) + entropy' },
+  { id: 'coherence',   label: 'Player Coherence',      x: 1000, y: 115, w: 170, h: 52, color: '#22c55e', sub: '|ψ|² + phase align' },
+  { id: 'entangle',    label: 'Entanglement Map',      x: 1000, y: 190, w: 170, h: 52, color: '#22c55e', sub: 'RBF × cos(Δφ) pairs' },
+  { id: 'drifts',      label: 'Drift Detection',       x: 1000, y: 265, w: 170, h: 52, color: '#ef4444', sub: '3–6s collapse warning' },
+  { id: 'energy',      label: 'Field Energy',          x: 1000, y: 340, w: 170, h: 52, color: '#22c55e', sub: 'KE + wave²' },
+
+  // Layer 4 — Twins
+  { id: 'twins',       label: 'AutonomousTwin ×11',    x: 380,  y: 460, w: 210, h: 56, color: '#ec4899', sub: 'evaluate → execute intent' },
+  { id: 'awareness',   label: 'Awareness Vector',      x: 120,  y: 460, w: 180, h: 50, color: '#ec4899', sub: 'ball, space, threat, team' },
+  { id: 'intents',     label: 'Intent Scoring',        x: 120,  y: 540, w: 180, h: 50, color: '#ec4899', sub: '6 intents ranked' },
+
+  // Layer 5 — Insights
+  { id: 'insight',     label: 'Insight Layer',         x: 700,  y: 460, w: 200, h: 56, color: '#a855f7', sub: 'insightFromKernel()' },
+
+  // Layer 6 — Monte Carlo
+  { id: 'montecarlo',  label: 'Monte Carlo What-If',   x: 1000, y: 460, w: 190, h: 56, color: '#06b6d4', sub: 'N scenarios × T ticks' },
+
+  // Superposition states
+  { id: 'states',      label: 'Superposition States',  x: 380,  y: 580, w: 530, h: 44, color: '#64748b', sub: 'defending | pressing | building | attacking | transitioning' },
+
+  // Pre-decision output
+  { id: 'predecision', label: 'PRE-DECISION OUTPUT',   x: 380,  y: 660, w: 530, h: 54, color: '#ef4444', sub: '"Harmony dropping in midfield — shift phase now"' },
+];
+
+const EDGES: Edge[] = [
+  { from: 'catapult',  to: 'substrate', label: 'raw frames' },
+  { from: 'synthetic', to: 'substrate', label: 'sample data' },
+  { from: 'substrate', to: 'kernel',    label: 'normalized {id,x,y,v,load,state}' },
+
+  { from: 'kernel',    to: 'attractors' },
+  { from: 'attractors',to: 'coulomb' },
+  { from: 'coulomb',   to: 'fokker' },
+  { from: 'fokker',    to: 'positions' },
+
+  { from: 'fokker',    to: 'waveamp' },
+  { from: 'fokker',    to: 'wavephase' },
+  { from: 'fokker',    to: 'wavefreq' },
+  { from: 'fokker',    to: 'wavelength' },
+
+  { from: 'positions', to: 'harmony',   label: 'output' },
+  { from: 'positions', to: 'coherence' },
+  { from: 'positions', to: 'entangle' },
+  { from: 'positions', to: 'drifts' },
+  { from: 'positions', to: 'energy' },
+
+  { from: 'harmony',   to: 'insight',   label: 'KernelOutput' },
+  { from: 'drifts',    to: 'insight' },
+  { from: 'coherence', to: 'twins',     label: 'kernelState', dashed: true },
+  { from: 'twins',     to: 'kernel',    label: 'mutate v/φ', dashed: true },
+  { from: 'awareness', to: 'twins' },
+  { from: 'intents',   to: 'twins' },
+  { from: 'substrate', to: 'awareness', label: 'sensor data', dashed: true },
+
+  { from: 'insight',   to: 'predecision', label: 'actionable insights' },
+  { from: 'montecarlo',to: 'predecision', label: 'avg/worst/best' },
+  { from: 'harmony',   to: 'montecarlo',  dashed: true },
+  { from: 'states',    to: 'twins',       dashed: true },
+  { from: 'states',    to: 'predecision', dashed: true },
+];
+
+// ─── Helpers ───────────────────────────────────────────────────────
+
+function getNodeCenter(n: Node): { cx: number; cy: number } {
+  return { cx: n.x + n.w / 2, cy: n.y + n.h / 2 };
+}
+
+function edgePath(from: Node, to: Node): string {
+  const a = getNodeCenter(from);
+  const b = getNodeCenter(to);
+
+  const dx = b.cx - a.cx;
+  const dy = b.cy - a.cy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist === 0) return '';
+
+  const nx = dx / dist;
+  const ny = dy / dist;
+
+  // Exit point on from-node border
+  const fx = a.cx + nx * (from.w / 2) * Math.min(1, Math.abs(nx) + 0.3);
+  const fy = a.cy + ny * (from.h / 2) * Math.min(1, Math.abs(ny) + 0.3);
+
+  // Entry point on to-node border
+  const tx = b.cx - nx * (to.w / 2) * Math.min(1, Math.abs(nx) + 0.3);
+  const ty = b.cy - ny * (to.h / 2) * Math.min(1, Math.abs(ny) + 0.3);
+
+  // Subtle curve
+  const mx = (fx + tx) / 2;
+  const my = (fy + ty) / 2;
+  const off = Math.min(30, dist * 0.1);
+  const cx = mx - ny * off;
+  const cy = my + nx * off;
+
+  return `M${fx},${fy} Q${cx},${cy} ${tx},${ty}`;
+}
+
+// ─── Component ─────────────────────────────────────────────────────
+
+export default function BigDuncFlowDiagram() {
+  const kernelRef = useRef<ResonanceKernel | null>(null);
+  const twinsRef = useRef<Map<string, AutonomousTwin>>(new Map());
+  const [output, setOutput] = useState<KernelOutput | null>(null);
+  const [insights, setInsights] = useState<Insight[]>([]);
+  const [tick, setTick] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [speed, setSpeed] = useState(500);
+  const [mcResult, setMcResult] = useState<{ avgHarmony: number; worstCase: number; bestCase: number } | null>(null);
+  const [twinIntents, setTwinIntents] = useState<Record<string, { intent: string; confidence: number }>>({});
+  const [activeEdge, setActiveEdge] = useState<string | null>(null);
+  const edgeTimerRef = useRef(0);
+
+  // Init engine
+  useEffect(() => {
+    const kernel = new ResonanceKernel();
+    for (const p of FORMATION) kernel.addPlayer(p.id, p.x, p.y, p.state, p.load);
+    kernel.addAttractor('ball', 52, 34, 15, 0.8);
+    kernel.addAttractor('tactical', 35, 34, 25, 0.6);
+    kernel.addAttractor('defensive', 18, 34, 20, 0.5);
+    kernel.addAttractor('offensive', 75, 34, 18, 0.4);
+    kernel.addAttractor('space', 60, 15, 12, 0.3);
+    kernelRef.current = kernel;
+
+    const twins = new Map<string, AutonomousTwin>();
+    for (const p of FORMATION) twins.set(p.id, new AutonomousTwin(p.id));
+
+    const substrate = new DataSubstrate();
+    const frame = substrate.getSampleFrame();
+    for (const np of frame.players) {
+      const twin = twins.get(np.id);
+      if (twin) {
+        twin.updateAwareness({
+          ballDist: Math.sqrt((np.x - 52) ** 2 + (np.y - 34) ** 2),
+          nearestOpponentDist: 5 + Math.random() * 15,
+          nearestTeammateDist: 3 + Math.random() * 10,
+          openSpaceRadius: 4 + Math.random() * 10,
+        });
+      }
     }
-  });
-
-  // Fatigue/Wearable Data State
-  const [fatigueData, setFatigueData] = useState<FatigueData>({
-    home: new Map(),
-    away: new Map(),
-    injuryRisks: new Map(),
-    recommendations: {
-      substitutionTargets: [],
-      pressingAdjustments: [],
-      formationSuggestions: [],
-    }
-  });
-
-  // Tactics State
-  const [selectedPreset, setSelectedPreset] = useState<TacticalPreset | null>(
-    () => getPresetById('guardiola_total_football') || null
-  );
-
-  // Manager Console State
-  const gameModelManagerRef = useRef<GameModelManager | null>(null);
-  const [managerSession, setManagerSession] = useState<ManagerSession | null>(null);
-
-  // Instruction Integration State
-  const [instructionInput, setInstructionInput] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
-  const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
-  const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
-
-  // Digital Twin ideal positions (4-3-3)
-  const idealPositions = useMemo(() => {
-    const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
-    const positions = [
-      { x: 50, y: 5 },   // GK
-      { x: 85, y: 25 },  // RB
-      { x: 65, y: 20 },  // CB
-      { x: 35, y: 20 },  // CB
-      { x: 15, y: 25 },  // LB
-      { x: 50, y: 35 },  // CDM
-      { x: 70, y: 45 },  // CM
-      { x: 30, y: 45 },  // CM
-      { x: 85, y: 70 },  // RW
-      { x: 50, y: 80 },  // ST
-      { x: 15, y: 70 },  // LW
-    ];
-    return positions.map((p, i) => ({ ...p, role: roles[i] }));
+    twinsRef.current = twins;
   }, []);
 
-  // Calculate twin positions with deviations
-  const twinPositions = useMemo((): TwinPosition[] => {
-    return players.slice(0, 11).map((player, index) => {
-      const metrics = liveData.get(player.id);
-      const ideal = idealPositions[index];
-      const actualX = metrics?.position?.x ?? ideal.x;
-      const actualY = metrics?.position?.y ?? ideal.y;
-      const dx = actualX - ideal.x;
-      const dy = actualY - ideal.y;
-      const deviation = Math.sqrt(dx * dx + dy * dy);
-
-      return {
-        playerId: player.id,
-        name: player.name.split(' ').pop() || player.name,
-        role: ideal.role,
-        idealX: ideal.x,
-        idealY: ideal.y,
-        actualX,
-        actualY,
-        deviation,
-        isCoherent: deviation < 15,
-      };
-    });
-  }, [players, liveData, idealPositions]);
-
-  // Calculate overall coherence
-  const overallCoherence = useMemo(() => {
-    if (twinPositions.length === 0) return 0;
-    const coherentCount = twinPositions.filter(p => p.isCoherent).length;
-    return Math.round((coherentCount / twinPositions.length) * 100);
-  }, [twinPositions]);
-
-  // Initialize squads
+  // Simulation loop
   useEffect(() => {
-    const citySquad = getPLSquadData('MCI');
-    if (citySquad.length > 0) {
-      setPlayers(citySquad);
-      citySquad.forEach((player) => {
-        const twin = createDigitalTwin(player, []);
-        setTwin(player.id, twin);
-      });
+    if (!running) return;
+    const iv = setInterval(() => {
+      const kernel = kernelRef.current;
+      if (!kernel) return;
+
+      // Animate edge flow
+      const edgeOrder = ['substrate', 'kernel', 'attractors', 'coulomb', 'fokker', 'positions', 'harmony', 'insight', 'predecision'];
+      edgeTimerRef.current = (edgeTimerRef.current + 1) % edgeOrder.length;
+      setActiveEdge(edgeOrder[edgeTimerRef.current]);
+
+      // Twin evaluate + execute
+      const pre = kernel.tick(1);
+      const intents: Record<string, { intent: string; confidence: number }> = {};
+      for (const [id, twin] of twinsRef.current) {
+        const r = twin.evaluateIntent(pre, kernel);
+        twin.executeIntent(kernel);
+        intents[id] = { intent: r.intent, confidence: r.confidence };
+      }
+      setTwinIntents(intents);
+
+      const out = kernel.tick(1);
+      setOutput(out);
+      setTick(out.tick);
+      setInsights(insightFromKernel(out));
+
+      // Run Monte Carlo every 10 ticks
+      if (out.tick % 10 === 0) {
+        setMcResult(kernel.monteCarloWhatIf(10, 5));
+      }
+    }, speed);
+    return () => clearInterval(iv);
+  }, [running, speed]);
+
+  const handleStep = useCallback(() => {
+    const kernel = kernelRef.current;
+    if (!kernel) return;
+    const pre = kernel.tick(1);
+    const intents: Record<string, { intent: string; confidence: number }> = {};
+    for (const [id, twin] of twinsRef.current) {
+      const r = twin.evaluateIntent(pre, kernel);
+      twin.executeIntent(kernel);
+      intents[id] = { intent: r.intent, confidence: r.confidence };
+    }
+    setTwinIntents(intents);
+    const out = kernel.tick(1);
+    setOutput(out);
+    setTick(out.tick);
+    setInsights(insightFromKernel(out));
+    if (out.tick % 10 === 0) setMcResult(kernel.monteCarloWhatIf(10, 5));
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setRunning(false);
+    const kernel = new ResonanceKernel();
+    for (const p of FORMATION) kernel.addPlayer(p.id, p.x, p.y, p.state, p.load);
+    kernel.addAttractor('ball', 52, 34, 15, 0.8);
+    kernel.addAttractor('tactical', 35, 34, 25, 0.6);
+    kernel.addAttractor('defensive', 18, 34, 20, 0.5);
+    kernel.addAttractor('offensive', 75, 34, 18, 0.4);
+    kernel.addAttractor('space', 60, 15, 12, 0.3);
+    kernelRef.current = kernel;
+    setOutput(null);
+    setTick(0);
+    setInsights([]);
+    setMcResult(null);
+    setTwinIntents({});
+  }, []);
+
+  // Build node map for edge drawing
+  const nodeMap = new Map<string, Node>();
+  for (const n of NODES) nodeMap.set(n.id, n);
+
+  // Live values for overlay inside nodes
+  const liveValues: Record<string, string> = {};
+  if (output) {
+    liveValues['harmony'] = `${(output.harmony * 100).toFixed(1)}%`;
+    liveValues['energy'] = output.fieldEnergy.toFixed(2);
+    liveValues['entangle'] = `${output.entanglements.length} pairs`;
+    liveValues['drifts'] = output.drifts.length > 0 ? `${output.drifts.length} active` : 'none';
+    liveValues['montecarlo'] = mcResult ? `avg ${(mcResult.avgHarmony * 100).toFixed(0)}%` : '—';
+    liveValues['twins'] = Object.values(twinIntents).length > 0
+      ? Object.entries(twinIntents).slice(0, 3).map(([id, t]) => `${id}:${t.intent.slice(0, 6)}`).join(' ')
+      : '—';
+    liveValues['kernel'] = `tick ${output.tick}`;
+
+    const cohVals = Object.values(output.players);
+    if (cohVals.length > 0) {
+      const avg = cohVals.reduce((s, c) => s + c.coherenceScore, 0) / cohVals.length;
+      liveValues['coherence'] = `avg ${(avg * 100).toFixed(0)}%`;
     }
 
-    const unitedSquad = getPLSquadData('MUN');
-    if (unitedSquad.length > 0) {
-      setAwayPlayers(unitedSquad);
+    if (insights.length > 0) {
+      liveValues['insight'] = insights[0].message.slice(0, 30) + '…';
     }
-
-    if (!gameEngineRef.current) {
-      gameEngineRef.current = createManchesterDerby();
+    if (output.drifts.length > 0) {
+      liveValues['predecision'] = output.drifts[0].description.slice(0, 45);
+    } else if (insights.length > 0) {
+      liveValues['predecision'] = insights[0].message.slice(0, 45);
     }
-    if (!patternEngineRef.current) {
-      patternEngineRef.current = new PatternRecognitionEngine();
-    }
-
-    if (!gameModelManagerRef.current && patternEngineRef.current && citySquad.length > 0) {
-      gameModelManagerRef.current = createGameModelManager(
-        patternEngineRef.current,
-        catapultService,
-        citySquad
-      );
-      const manager: StaffMember = {
-        id: 'manager-1',
-        name: 'Pep Guardiola',
-        role: 'manager',
-        canVerify: true,
-        canModify: true,
-      };
-      const staff: StaffMember[] = [
-        { id: 'coach-1', name: 'Juanma Lillo', role: 'assistant_coach', canVerify: true, canModify: false },
-      ];
-      const session = gameModelManagerRef.current.startSession(manager, staff);
-      setManagerSession(session);
-    }
-  }, [setPlayers, setTwin]);
-
-  // Game Engine Simulation Loop
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (isLive && isSimulating && !isPaused && gameEngineRef.current) {
-      interval = setInterval(() => {
-        const engine = gameEngineRef.current;
-        const patternEngine = patternEngineRef.current;
-        if (!engine) return;
-
-        const events = engine.tick(1);
-        const state = engine.getState();
-        const stats = engine.getStats();
-
-        setMatchState(state);
-        setMatchStats(stats);
-
-        if (events.length > 0) {
-          setMatchEvents((prev) => [...events, ...prev].slice(0, 50));
-        }
-
-        updateMatch({
-          currentMinute: Math.floor(state.minute),
-          score: { home: state.homeScore, away: state.awayScore },
-        });
-
-        players.forEach((player, index) => {
-          const metrics = engine.generatePlayerMetrics(player, true, index);
-          updateLiveData(player.id, metrics);
-        });
-
-        const newAwayData = new Map<string, TrackingMetrics>();
-        awayPlayers.forEach((player, index) => {
-          const metrics = engine.generatePlayerMetrics(player, false, index);
-          newAwayData.set(player.id, metrics);
-        });
-        setAwayLiveData(newAwayData);
-
-        if (patternEngine) {
-          const minute = Math.floor(state.minute);
-          const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
-
-          const homePositions = players.slice(0, 11).map((p, i) => {
-            const metrics = liveData.get(p.id);
-            return {
-              x: metrics?.position?.x ?? 50,
-              y: metrics?.position?.y ?? 50,
-              name: p.name,
-              role: roles[i] || 'MF',
-            };
-          });
-          const awayPositions = awayPlayers.slice(0, 11).map((p, i) => {
-            const metrics = newAwayData.get(p.id);
-            return {
-              x: metrics?.position?.x ?? 50,
-              y: metrics?.position?.y ?? 50,
-              name: p.name,
-              role: roles[i] || 'MF',
-            };
-          });
-
-          const detectedPatterns = patternEngine.analyzePositions(
-            homePositions,
-            awayPositions,
-            state.ballPosition || { x: 50, y: 50 },
-            state.ballPossession || 'home',
-            minute
-          );
-
-          const homePatterns = detectedPatterns.filter(p => p.team === 'home');
-          const awayPatterns = detectedPatterns.filter(p => p.team === 'away');
-
-          detectedPatterns.forEach(pattern => {
-            if (pattern.confidence > 0.5) {
-              patternEngine.logPattern(pattern, events[0]?.type || 'pass_completed', {
-                success: Math.random() > 0.4,
-                result: Math.random() > 0.5 ? 'possession_retained' : 'turnover',
-                duration: Math.random() * 5 + 2,
-                endZone: 'middle_third',
-              });
-            }
-          });
-
-          const homeCoherence = calculateDynamicCoherence('home', 'total_football', homePatterns, patternEngine.getChainSummary('home'), minute);
-          const awayCoherence = calculateDynamicCoherence('away', 'counter_attacking', awayPatterns, patternEngine.getChainSummary('away'), minute);
-
-          setPatternRecognitionData({
-            activePatterns: { home: homePatterns, away: awayPatterns },
-            recentLogs: patternEngine.getPatternLogs(undefined, 20),
-            compoundingEffects: patternEngine.getCompoundingEffects(),
-            coherence: { home: homeCoherence, away: awayCoherence },
-            markov: {
-              recurrentSequences: patternEngine.getRecurrentSequences(),
-              currentChains: { home: patternEngine.getChainSummary('home').currentChain, away: patternEngine.getChainSummary('away').currentChain },
-              topTransitions: { home: patternEngine.getTopTransitions('home', 5), away: patternEngine.getTopTransitions('away', 5) },
-              predictedNext: { home: patternEngine.getPredictedNextPattern('home')?.pattern?.replace(/_/g, ' ') || null, away: patternEngine.getPredictedNextPattern('away')?.pattern?.replace(/_/g, ' ') || null },
-            },
-          });
-        }
-
-        // GPS/Wearable integration
-        const currentMinute = Math.floor(state.minute);
-        const homeFatigueModels = new Map<string, FatigueModel>();
-        const awayFatigueModels = new Map<string, FatigueModel>();
-        const allInjuryRisks = new Map<string, InjuryRiskModel>();
-
-        players.slice(0, 11).forEach((player) => {
-          const metrics = liveData.get(player.id);
-          if (metrics?.position) {
-            catapultService.feedLivePosition(player.id, {
-              timestamp: Date.now(),
-              x: metrics.position.x,
-              y: metrics.position.y,
-              speed: (metrics.currentSpeed || 0) / 3.6,
-              acceleration: metrics.maxAcceleration || 0,
-              heading: 0,
-            });
-          }
-          homeFatigueModels.set(player.id, catapultService.calculateFatigueModel(player.id, currentMinute));
-          allInjuryRisks.set(player.id, catapultService.calculateInjuryRisk(player.id));
-        });
-
-        awayPlayers.slice(0, 11).forEach((player) => {
-          const metrics = newAwayData.get(player.id);
-          if (metrics?.position) {
-            catapultService.feedLivePosition(player.id, {
-              timestamp: Date.now(),
-              x: metrics.position.x,
-              y: metrics.position.y,
-              speed: (metrics.currentSpeed || 0) / 3.6,
-              acceleration: metrics.maxAcceleration || 0,
-              heading: 0,
-            });
-          }
-          awayFatigueModels.set(player.id, catapultService.calculateFatigueModel(player.id, currentMinute));
-          allInjuryRisks.set(player.id, catapultService.calculateInjuryRisk(player.id));
-        });
-
-        setFatigueData({
-          home: homeFatigueModels,
-          away: awayFatigueModels,
-          injuryRisks: allInjuryRisks,
-          recommendations: catapultService.getTacticalRecommendations(currentMinute),
-        });
-
-        if (state.phase === 'full_time') {
-          setIsSimulating(false);
-          endMatch();
-        }
-      }, 100);
-    }
-
-    return () => clearInterval(interval);
-  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch]);
-
-  function calculateDynamicCoherence(
-    team: 'home' | 'away',
-    gameModel: string,
-    patterns: TacticalPattern[],
-    markovSummary: { currentChain: string; topSequences: { sequence: string; count: number; successRate: number }[]; predictedNext: string | null; chainHealth: 'strong' | 'building' | 'broken' },
-    minute: number
-  ): TacticalCoherence {
-    const expectedPatterns: Record<string, string[]> = {
-      total_football: ['positional_rotation', 'half_space_occupation', 'inverted_fullback', 'false_nine_drop', 'high_press_trigger', 'build_from_back'],
-      counter_attacking: ['deep_block', 'quick_transition', 'direct_ball', 'wing_isolation', 'defensive_compact', 'counter_press_recovery'],
-    };
-
-    const expected = expectedPatterns[gameModel] || [];
-    const detectedTypes = patterns.map(p => p.type);
-    const matchedPatterns = expected.filter(exp => detectedTypes.some(det => det.includes(exp.split('_')[0]) || exp.includes(det.split('_')[0])));
-    const patternCoherence = expected.length > 0 ? (matchedPatterns.length / expected.length) * 100 : 50;
-    const chainHealthBonus = markovSummary.chainHealth === 'strong' ? 20 : markovSummary.chainHealth === 'building' ? 10 : 0;
-    const sequenceBonus = Math.min(15, markovSummary.topSequences.filter(s => s.count > 2).length * 5);
-    const highConfPatterns = patterns.filter(p => p.confidence > 0.7);
-    const confidenceBonus = Math.min(15, highConfPatterns.length * 3);
-    const coherenceScore = Math.min(100, Math.max(0, patternCoherence + chainHealthBonus + sequenceBonus + confidenceBonus));
-    const trend: 'improving' | 'declining' | 'stable' = highConfPatterns.length > 3 ? 'improving' : highConfPatterns.length < 1 ? 'declining' : 'stable';
-
-    return {
-      gameModel,
-      coherenceScore: Math.round(coherenceScore),
-      deviations: expected.filter(exp => !matchedPatterns.includes(exp)).slice(0, 3).map(pattern => ({ pattern: pattern.replace(/_/g, ' '), deviation: 30 + Math.random() * 40, reason: `${pattern.replace(/_/g, ' ')} not detected` })),
-      suggestions: [],
-      historicalComparison: { avgCoherence: 65, trend },
-    };
   }
 
-  const handleStartMatch = useCallback(() => {
-    gameEngineRef.current = createManchesterDerby();
-    gameEngineRef.current.kickoff();
-    patternEngineRef.current = new PatternRecognitionEngine();
-    setMatchEvents([]);
-    setInstructionLog([]);
-    setMatchState(gameEngineRef.current.getState());
-    setMatchStats(gameEngineRef.current.getStats());
-    startMatch({ matchId: `match-${Date.now()}`, gameApproach: undefined });
-    setIsSimulating(true);
-    setIsPaused(false);
-  }, [startMatch]);
-
-  const handlePauseMatch = useCallback(() => setIsPaused(prev => !prev), []);
-  const handleEndMatch = useCallback(() => {
-    setIsSimulating(false);
-    setIsPaused(false);
-    endMatch();
-    setMatchState(null);
-    setMatchStats(null);
-  }, [endMatch]);
-
-  const handleSendInstruction = useCallback(async () => {
-    if (!instructionInput.trim() || isProcessing || !gameModelManagerRef.current) return;
-    setIsProcessing(true);
-    const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-
-    try {
-      const result = await gameModelManagerRef.current.processManagerInstruction(instructionInput, 'text');
-      const status: 'applied' | 'pending' | 'rejected' = result.applied ? 'applied' : (result.verification ? 'pending' : 'rejected');
-      setInstructionLog(prev => [{
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: result.processed.processedInstructions[0]?.category || 'general',
-        confidence: result.processed.confidence,
-        status,
-        affectedPlayers: result.processed.processedInstructions.flatMap(i => i.affectedPlayers),
-        effect: result.applied ? `Applied` : result.verification ? `Pending (${Math.round(result.processed.confidence * 100)}%)` : 'Not understood',
-      }, ...prev].slice(0, 15));
-      setInstructionInput('');
-    } catch (error) {
-      const errorEntry: InstructionLogEntry = {
-        id: `inst-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: instructionInput,
-        category: 'general',
-        confidence: 0,
-        status: 'rejected',
-        affectedPlayers: [],
-        effect: 'Error',
-      };
-      setInstructionLog(prev => [errorEntry, ...prev].slice(0, 15));
-    }
-    setIsProcessing(false);
-  }, [instructionInput, isProcessing, matchState?.minute]);
-
-  // Handle pressing trigger button clicks
-  const handleTriggerPress = useCallback((triggerId: string, label: string) => {
-    if (!gameModelManagerRef.current || isProcessing) return;
-    const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-
-    // Map trigger IDs to instructions
-    const triggerInstructions: Record<string, string> = {
-      'high_press': 'Press high immediately',
-      'counter_press': 'Counter press on loss',
-      'press_trap_sideline': 'Trap on the sideline',
-      'press_trap_corner': 'Force to the corner',
-      'mid_block': 'Hold mid block',
-      'low_block': 'Drop into low block',
-      'man_mark': 'Man mark their playmaker',
-      'zonal': 'Switch to zonal marking',
-      'drop_deep': 'Drop deep and compact',
-      'hold_line': 'Hold the defensive line',
-      'step_up': 'Step up and squeeze',
-    };
-
-    const instruction = triggerInstructions[triggerId] || label;
-
-    // Add to log immediately with 'applied' status for quick UX
-    const entry: InstructionLogEntry = {
-      id: `trigger-${Date.now()}`,
-      timestamp: new Date(),
-      minute,
-      input: label,
-      category: 'pressing',
-      confidence: 0.95, // High confidence for direct triggers
-      status: 'applied',
-      affectedPlayers: [],
-      effect: 'Triggered',
-    };
-    setInstructionLog(prev => [entry, ...prev].slice(0, 20));
-
-    // Process through game model manager in background
-    gameModelManagerRef.current.processManagerInstruction(instruction, 'text').catch(() => {
-      // Silently handle errors for triggers
-    });
-  }, [isProcessing, matchState?.minute]);
-
-  const handleTemplateSelect = useCallback((templateId: string) => {
-    if (!gameModelManagerRef.current) return;
-    try {
-      const gameModel = gameModelManagerRef.current.createGameModelFromTemplate(templateId);
-      const minute = matchState?.minute ? Math.floor(matchState.minute) : 0;
-      const entry: InstructionLogEntry = {
-        id: `template-${Date.now()}`,
-        timestamp: new Date(),
-        minute,
-        input: gameModel.name,
-        category: 'formation',
-        confidence: 1,
-        status: 'applied',
-        affectedPlayers: [],
-        effect: gameModel.formation.name,
-      };
-      setInstructionLog(prev => [entry, ...prev].slice(0, 15));
-      setSelectedTemplate(templateId);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }, [matchState?.minute]);
-
-  const toggleRecording = useCallback(() => {
-    setIsRecording(!isRecording);
-    if (!isRecording) {
-      const SpeechRecognitionAPI = (window as Window & { SpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void }; webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).SpeechRecognition || (window as Window & { webkitSpeechRecognition?: new () => { continuous: boolean; interimResults: boolean; onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void; onerror: () => void; start: () => void } }).webkitSpeechRecognition;
-      if (SpeechRecognitionAPI) {
-        const recognizer = new SpeechRecognitionAPI();
-        recognizer.continuous = false;
-        recognizer.interimResults = false;
-        recognizer.onresult = (event) => { setInstructionInput(event.results[0][0].transcript); setIsRecording(false); };
-        recognizer.onerror = () => setIsRecording(false);
-        recognizer.start();
-      } else { setIsRecording(false); }
-    }
-  }, [isRecording]);
-
-  const getTeamFatigue = (fatigueMap: Map<string, FatigueModel>) => {
-    const values = Array.from(fatigueMap.values());
-    return values.length === 0 ? 0 : values.reduce((sum, f) => sum + f.currentFatigue, 0) / values.length;
-  };
-
-  // Get current game model name
-  const activeGameModel = gameModelManagerRef.current?.getActiveGameModel();
-  const modelName = activeGameModel?.name || GAME_MODEL_TEMPLATES.find(t => t.id === selectedTemplate)?.name || 'Total Football';
-
   return (
-    <div className="h-screen bg-zinc-950 text-white overflow-hidden flex flex-col">
+    <div className="h-screen bg-[#0a0e1a] text-white flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="flex-shrink-0 h-10 flex items-center justify-between px-4 bg-black/50 border-b border-white/5">
-        <div className="flex items-center gap-4">
-          <span className="text-sky-400 text-xs font-medium">MCI</span>
-          <span className="text-sm font-semibold tabular-nums">
-            {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
-          </span>
-          <span className="text-red-400 text-xs font-medium">MUN</span>
-          {isLive && matchState && (
-            <div className="flex items-center gap-1.5 ml-2">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-xs text-white/40 tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
-            </div>
-          )}
+      <header className="flex-shrink-0 h-12 flex items-center justify-between px-6 bg-black/40 border-b border-white/5">
+        <div className="flex items-center gap-3">
+          <span className="text-lg font-bold tracking-tight text-amber-400">BigDunc</span>
+          <span className="text-xs text-white/30">Resonance Kernel — Algorithm Flow</span>
         </div>
-        <div className="flex items-center gap-2">
-          {!isLive ? (
-            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-3 py-1 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90">
-              <Play className="w-3 h-3" /> Start
-            </button>
-          ) : (
-            <>
-              <button onClick={handlePauseMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full">
-                {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
-              </button>
-              <button onClick={handleEndMatch} className="w-7 h-7 flex items-center justify-center bg-white/10 hover:bg-red-500/80 rounded-full">
-                <Square className="w-2.5 h-2.5" />
-              </button>
-            </>
-          )}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleReset}
+            className="px-3 py-1 text-xs rounded bg-white/5 hover:bg-white/10 text-white/60 transition"
+          >
+            Reset
+          </button>
+          <button
+            onClick={handleStep}
+            className="px-3 py-1 text-xs rounded bg-white/10 hover:bg-white/20 text-white/80 transition"
+          >
+            Step
+          </button>
+          <button
+            onClick={() => setRunning(r => !r)}
+            className={`px-4 py-1 text-xs rounded font-medium transition ${
+              running
+                ? 'bg-red-500/80 hover:bg-red-500 text-white'
+                : 'bg-emerald-500/80 hover:bg-emerald-500 text-white'
+            }`}
+          >
+            {running ? 'Pause' : 'Run'}
+          </button>
+          <select
+            value={speed}
+            onChange={e => setSpeed(Number(e.target.value))}
+            className="bg-white/5 text-xs text-white/60 px-2 py-1 rounded border border-white/10"
+          >
+            <option value={1000}>1s</option>
+            <option value={500}>500ms</option>
+            <option value={200}>200ms</option>
+            <option value={100}>100ms</option>
+          </select>
+          <span className="text-xs text-white/40 tabular-nums ml-2">tick {tick}</span>
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
+      {/* Main: SVG Diagram + Sidebar */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
-        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
-          <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
-            <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
-              </div>
-              <div className="flex items-center gap-4 text-xs">
-                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                <span className="text-white/20">|</span>
-                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
-              </div>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <PitchView
-                players={players}
-                awayPlayers={awayPlayers}
-                liveData={liveData}
-                awayLiveData={awayLiveData}
-                selectedPlayerId={null}
-                onPlayerClick={() => {}}
-                ballPosition={matchState?.ballPosition}
-                ballPossession={matchState?.ballPossession}
-                defensiveBlock={matchState?.defensiveBlock}
-                pressingIntensity={matchState?.pressingIntensity}
-                analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
-                patternRecognition={patternRecognitionData}
-                fatigueData={fatigueData}
-              />
-            </div>
-          </div>
+        {/* Diagram */}
+        <div className="flex-1 overflow-auto p-4">
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            className="w-full h-full"
+            style={{ minWidth: 900, minHeight: 600 }}
+          >
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
+              </marker>
+              <marker id="arrow-active" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+              </marker>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+
+            {/* Background grid */}
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" strokeWidth="0.3" />
+            </pattern>
+            <rect width={W} height={H} fill="url(#grid)" />
+
+            {/* Section labels */}
+            <text x="80" y="25" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">DATA SOURCES</text>
+            <text x="380" y="68" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">SUBSTRATE</text>
+            <text x="520" y="140" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">KERNEL PIPELINE</text>
+            <text x="760" y="140" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">WAVE FUNCTION</text>
+            <text x="1000" y="28" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">OUTPUTS</text>
+            <text x="120" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">AGENT SYSTEM</text>
+            <text x="700" y="448" fill="#475569" fontSize="10" fontFamily="monospace" fontWeight="bold">INSIGHT LAYER</text>
+
+            {/* Edges */}
+            {EDGES.map((edge, i) => {
+              const fromNode = nodeMap.get(edge.from);
+              const toNode = nodeMap.get(edge.to);
+              if (!fromNode || !toNode) return null;
+              const path = edgePath(fromNode, toNode);
+              const isActive = activeEdge === edge.from || activeEdge === edge.to;
+              return (
+                <g key={i}>
+                  <path
+                    d={path}
+                    fill="none"
+                    stroke={isActive ? '#f59e0b' : '#334155'}
+                    strokeWidth={isActive ? 1.8 : 1}
+                    strokeDasharray={edge.dashed ? '6 4' : undefined}
+                    markerEnd={isActive ? 'url(#arrow-active)' : 'url(#arrow)'}
+                    opacity={isActive ? 1 : 0.6}
+                  />
+                  {edge.label && (
+                    <text
+                      x={(getNodeCenter(fromNode).cx + getNodeCenter(toNode).cx) / 2}
+                      y={(getNodeCenter(fromNode).cy + getNodeCenter(toNode).cy) / 2 - 6}
+                      fill={isActive ? '#f59e0b' : '#475569'}
+                      fontSize="8"
+                      fontFamily="monospace"
+                      textAnchor="middle"
+                    >
+                      {edge.label}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Nodes */}
+            {NODES.map(node => {
+              const live = liveValues[node.id];
+              const isActive = activeEdge === node.id;
+              return (
+                <g key={node.id}>
+                  {/* Shadow/glow when active */}
+                  {isActive && (
+                    <rect
+                      x={node.x - 2} y={node.y - 2}
+                      width={node.w + 4} height={node.h + 4}
+                      rx={8} fill="none"
+                      stroke={node.color} strokeWidth={2}
+                      opacity={0.4} filter="url(#glow)"
+                    />
+                  )}
+                  {/* Background */}
+                  <rect
+                    x={node.x} y={node.y}
+                    width={node.w} height={node.h}
+                    rx={6}
+                    fill="#0f172a"
+                    stroke={node.color + (isActive ? '' : '60')}
+                    strokeWidth={isActive ? 1.5 : 1}
+                  />
+                  {/* Color bar on left */}
+                  <rect
+                    x={node.x} y={node.y}
+                    width={4} height={node.h}
+                    rx={2}
+                    fill={node.color}
+                  />
+                  {/* Label */}
+                  <text
+                    x={node.x + 14} y={node.y + 16}
+                    fill="#e2e8f0" fontSize="11" fontFamily="monospace" fontWeight="bold"
+                  >
+                    {node.label}
+                  </text>
+                  {/* Sub label */}
+                  {node.sub && (
+                    <text
+                      x={node.x + 14} y={node.y + 30}
+                      fill="#64748b" fontSize="8.5" fontFamily="monospace"
+                    >
+                      {node.sub}
+                    </text>
+                  )}
+                  {/* Live value */}
+                  {live && (
+                    <text
+                      x={node.x + node.w - 8} y={node.y + node.h - 8}
+                      fill={node.color} fontSize="9" fontFamily="monospace" fontWeight="bold"
+                      textAnchor="end"
+                    >
+                      {live}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Title block */}
+            <text x={W / 2} y={H - 30} textAnchor="middle" fill="#334155" fontSize="11" fontFamily="monospace">
+              BigDunc Engine — Quantum-Inspired Pre-Decision Resonance Kernel
+            </text>
+          </svg>
         </div>
 
-        {/* Right Sidebar: Twin + Controls + Log */}
-        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-44 border-b border-white/5">
-            <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
-                </div>
-                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                  {twinPositions.filter(p => p.isCoherent).length}/11 coherent
-                </span>
-              </div>
-              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
-                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  {idealPositions.map((pos, idx) => (
-                    <g key={`ideal-${idx}`}>
-                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
-                    </g>
-                  ))}
-                  {[
-                    { x: 95, y: 32.5 },
-                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                  ].map((pos, idx) => (
-                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
-                  ))}
-                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Markov Chain Analysis */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
-              }`}>
-                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
+        {/* Right sidebar — live data */}
+        <div className="w-80 flex-shrink-0 bg-[#0c1220] border-l border-white/5 flex flex-col overflow-hidden">
+          {/* Harmony gauge */}
+          <div className="p-4 border-b border-white/5">
+            <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2">Field Harmony</div>
+            <div className="h-5 bg-white/5 rounded-full overflow-hidden relative">
+              <div
+                className="h-full rounded-full transition-all duration-300"
+                style={{
+                  width: `${(output?.harmony ?? 0) * 100}%`,
+                  background: (output?.harmony ?? 0) > 0.7 ? '#22c55e' : (output?.harmony ?? 0) > 0.4 ? '#eab308' : '#ef4444',
+                }}
+              />
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold tabular-nums">
+                {output ? `${(output.harmony * 100).toFixed(1)}%` : '—'}
               </span>
             </div>
-            <div className="text-[10px] text-white/50 mb-1.5 truncate">
-              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
-            </div>
-            {patternRecognitionData.markov?.predictedNext?.home && (
-              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
-                <Zap className="w-3 h-3 text-purple-400" />
-                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
+          </div>
+
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 gap-px bg-white/5 border-b border-white/5">
+            {[
+              { label: 'Tick', value: tick.toString(), color: '#f59e0b' },
+              { label: 'Energy', value: output?.fieldEnergy.toFixed(2) ?? '—', color: '#22c55e' },
+              { label: 'Entangled', value: output ? `${output.entanglements.length}` : '—', color: '#a855f7' },
+              { label: 'Drifts', value: output ? `${output.drifts.length}` : '—', color: '#ef4444' },
+            ].map(s => (
+              <div key={s.label} className="bg-[#0c1220] p-3">
+                <div className="text-[9px] uppercase text-white/30">{s.label}</div>
+                <div className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
               </div>
-            )}
+            ))}
           </div>
 
-          {/* Pressing Triggers Grid */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <Target className="w-3 h-3 text-orange-400/50" />
+          {/* Monte Carlo */}
+          {mcResult && (
+            <div className="p-3 border-b border-white/5">
+              <div className="text-[9px] uppercase tracking-widest text-cyan-400/60 mb-1">Monte Carlo (10×5)</div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div>
+                  <div className="text-[8px] text-white/30">worst</div>
+                  <div className="text-xs font-bold text-red-400">{(mcResult.worstCase * 100).toFixed(0)}%</div>
+                </div>
+                <div>
+                  <div className="text-[8px] text-white/30">avg</div>
+                  <div className="text-xs font-bold text-amber-400">{(mcResult.avgHarmony * 100).toFixed(0)}%</div>
+                </div>
+                <div>
+                  <div className="text-[8px] text-white/30">best</div>
+                  <div className="text-xs font-bold text-emerald-400">{(mcResult.bestCase * 100).toFixed(0)}%</div>
+                </div>
+              </div>
             </div>
+          )}
+
+          {/* Top entanglements */}
+          <div className="p-3 border-b border-white/5">
+            <div className="text-[9px] uppercase tracking-widest text-purple-400/60 mb-2">Entanglements</div>
+            <div className="space-y-1">
+              {(output?.entanglements ?? []).slice(0, 5).map((e, i) => (
+                <div key={i} className="flex items-center gap-2 text-[10px]">
+                  <span className="text-white/60 font-mono">{e.playerA}</span>
+                  <span className="text-purple-400">↔</span>
+                  <span className="text-white/60 font-mono">{e.playerB}</span>
+                  <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-purple-500 rounded-full" style={{ width: `${e.correlation * 100}%` }} />
+                  </div>
+                  <span className="text-purple-400 tabular-nums">{(e.correlation * 100).toFixed(0)}%</span>
+                </div>
+              ))}
+              {(!output || output.entanglements.length === 0) && (
+                <div className="text-[10px] text-white/20">No entangled pairs yet</div>
+              )}
+            </div>
+          </div>
+
+          {/* Twin intents */}
+          <div className="p-3 border-b border-white/5">
+            <div className="text-[9px] uppercase tracking-widest text-pink-400/60 mb-2">Twin Intents</div>
             <div className="grid grid-cols-2 gap-1">
-              {[
-                { id: 'high_press', label: 'High Press', icon: '⬆️' },
-                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
-                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
-                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
-                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
-                { id: 'zonal', label: 'Zonal', icon: '🔲' },
-              ].map(trigger => {
-                const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
-                return (
-                  <button
-                    key={trigger.id}
-                    onClick={() => handleTriggerPress(trigger.id, trigger.label)}
-                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
-                      isMarkovSuggested
-                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
-                        : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
-                    }`}
-                  >
-                    <span className="mr-1">{trigger.icon}</span>
-                    {trigger.label}
-                    {isMarkovSuggested && (
-                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Defensive Shape */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1">
-              {[
-                { id: 'drop_deep', label: 'Drop' },
-                { id: 'hold_line', label: 'Hold' },
-                { id: 'step_up', label: 'Step Up' },
-              ].map(shape => (
-                <button
-                  key={shape.id}
-                  onClick={() => handleTriggerPress(shape.id, shape.label)}
-                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
-                >
-                  {shape.label}
-                </button>
+              {Object.entries(twinIntents).slice(0, 11).map(([id, t]) => (
+                <div key={id} className="flex items-center gap-1 text-[9px] bg-white/3 rounded px-1.5 py-0.5">
+                  <span className="text-white/50 font-mono w-7">{id}</span>
+                  <span className="text-pink-300 truncate flex-1">{t.intent.replace(/_/g, ' ')}</span>
+                  <span className="text-white/30 tabular-nums">{(t.confidence * 100).toFixed(0)}</span>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Live Stats */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">xG</div>
-              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Shots</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Pass%</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Coh</div>
-              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {overallCoherence}%
-              </div>
-            </div>
-          </div>
-
-          {/* Trigger Execution Log */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
-              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
-            </div>
-            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
-              {instructionLog.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
-                  Click triggers above
+          {/* Insights */}
+          <div className="flex-1 overflow-auto p-3">
+            <div className="text-[9px] uppercase tracking-widest text-violet-400/60 mb-2">Insights</div>
+            <div className="space-y-1.5">
+              {insights.map((ins, i) => (
+                <div
+                  key={i}
+                  className={`text-[10px] px-2 py-1.5 rounded ${
+                    ins.level === 'critical' ? 'bg-red-500/10 text-red-300 border border-red-500/20'
+                    : ins.level === 'warning' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
+                    : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
+                  }`}
+                >
+                  {ins.message}
                 </div>
-              ) : (
-                instructionLog.map(entry => (
-                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
-                    entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
-                    entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
-                    'bg-red-500/10 text-red-300'
-                  }`}>
-                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
-                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
-                     <XCircle className="w-3 h-3" />}
-                    <span className="flex-1 truncate">{entry.input}</span>
-                    <span className="text-white/30">{entry.minute}&apos;</span>
-                  </div>
-                ))
+              ))}
+              {insights.length === 0 && (
+                <div className="text-[10px] text-white/20">Run the engine to see insights</div>
               )}
             </div>
           </div>
