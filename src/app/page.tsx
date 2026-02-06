@@ -9,6 +9,12 @@ import {
 import { AutonomousTwin } from '@/lib/autonomous-twin';
 import { DataSubstrate } from '@/lib/catapult-data-substrate';
 import { insightFromKernel, type Insight } from '@/lib/resonance-insight';
+import {
+  HoverCard,
+  getNodeExplanation,
+  getStatExplanation,
+  type ComputationSection,
+} from '@/components/computation-hover';
 
 // ─── Formation setup ───────────────────────────────────────────────
 
@@ -187,6 +193,10 @@ export default function BigDuncFlowDiagram() {
   const [twinIntents, setTwinIntents] = useState<Record<string, { intent: string; confidence: number }>>({});
   const [activeEdge, setActiveEdge] = useState<string | null>(null);
   const edgeTimerRef = useRef(0);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoverPos, setHoverPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const hoverTimer = useRef<NodeJS.Timeout | null>(null);
+  const diagramRef = useRef<HTMLDivElement>(null);
 
   // Init engine
   useEffect(() => {
@@ -369,7 +379,7 @@ export default function BigDuncFlowDiagram() {
       {/* Main: SVG Diagram + Sidebar */}
       <div className="flex-1 flex overflow-hidden">
         {/* Diagram */}
-        <div className="flex-1 overflow-auto p-4">
+        <div ref={diagramRef} className="flex-1 overflow-auto p-4 relative">
           <svg
             viewBox={`0 0 ${W} ${H}`}
             className="w-full h-full"
@@ -437,20 +447,47 @@ export default function BigDuncFlowDiagram() {
               );
             })}
 
-            {/* Nodes */}
+            {/* Nodes — with hover detection */}
             {NODES.map(node => {
               const live = liveValues[node.id];
               const isActive = activeEdge === node.id;
+              const isHovered = hoveredNode === node.id;
               return (
-                <g key={node.id}>
-                  {/* Shadow/glow when active */}
-                  {isActive && (
+                <g
+                  key={node.id}
+                  style={{ cursor: 'help' }}
+                  onMouseEnter={(e) => {
+                    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+                    hoverTimer.current = setTimeout(() => {
+                      setHoveredNode(node.id);
+                      // Use the node's center position relative to diagram container
+                      if (diagramRef.current) {
+                        const svgEl = diagramRef.current.querySelector('svg');
+                        if (svgEl) {
+                          const svgRect = svgEl.getBoundingClientRect();
+                          const scaleX = svgRect.width / W;
+                          const scaleY = svgRect.height / H;
+                          setHoverPos({
+                            x: (node.x + node.w) * scaleX + svgRect.left - (diagramRef.current.getBoundingClientRect().left) + 8,
+                            y: node.y * scaleY + svgRect.top - (diagramRef.current.getBoundingClientRect().top),
+                          });
+                        }
+                      }
+                    }, 150);
+                  }}
+                  onMouseLeave={() => {
+                    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+                    hoverTimer.current = setTimeout(() => setHoveredNode(null), 200);
+                  }}
+                >
+                  {/* Shadow/glow when active or hovered */}
+                  {(isActive || isHovered) && (
                     <rect
                       x={node.x - 2} y={node.y - 2}
                       width={node.w + 4} height={node.h + 4}
                       rx={8} fill="none"
-                      stroke={node.color} strokeWidth={2}
-                      opacity={0.4} filter="url(#glow)"
+                      stroke={node.color} strokeWidth={isHovered ? 2.5 : 2}
+                      opacity={isHovered ? 0.7 : 0.4} filter="url(#glow)"
                     />
                   )}
                   {/* Background */}
@@ -458,9 +495,9 @@ export default function BigDuncFlowDiagram() {
                     x={node.x} y={node.y}
                     width={node.w} height={node.h}
                     rx={6}
-                    fill="#0f172a"
-                    stroke={node.color + (isActive ? '' : '60')}
-                    strokeWidth={isActive ? 1.5 : 1}
+                    fill={isHovered ? '#131c30' : '#0f172a'}
+                    stroke={node.color + (isActive || isHovered ? '' : '60')}
+                    strokeWidth={isHovered ? 2 : isActive ? 1.5 : 1}
                   />
                   {/* Color bar on left */}
                   <rect
@@ -495,6 +532,15 @@ export default function BigDuncFlowDiagram() {
                       {live}
                     </text>
                   )}
+                  {/* Hover hint indicator */}
+                  <text
+                    x={node.x + node.w - 6} y={node.y + 12}
+                    fill={isHovered ? '#fbbf24' : '#334155'}
+                    fontSize="8" fontFamily="monospace"
+                    textAnchor="end"
+                  >
+                    ?
+                  </text>
                 </g>
               );
             })}
@@ -504,13 +550,104 @@ export default function BigDuncFlowDiagram() {
               BigDunc Engine — Quantum-Inspired Pre-Decision Resonance Kernel
             </text>
           </svg>
+
+          {/* ── Floating Hover Panel for diagram nodes ── */}
+          {hoveredNode && (() => {
+            const cohVals = output ? Object.values(output.players) : [];
+            const avgCoh = cohVals.length > 0 ? cohVals.reduce((s, c) => s + c.coherenceScore, 0) / cohVals.length : undefined;
+            const explanation = getNodeExplanation(hoveredNode, {
+              harmony: output?.harmony,
+              fieldEnergy: output?.fieldEnergy,
+              entanglementCount: output?.entanglements.length,
+              driftCount: output?.drifts.length,
+              tick: output?.tick,
+              avgCoherence: avgCoh,
+              mcResult: mcResult,
+              twinIntents,
+            });
+            return (
+              <div
+                className="absolute z-[200] pointer-events-auto"
+                style={{ left: hoverPos.x, top: hoverPos.y, maxWidth: 380, minWidth: 320 }}
+                onMouseEnter={() => { if (hoverTimer.current) clearTimeout(hoverTimer.current); }}
+                onMouseLeave={() => {
+                  if (hoverTimer.current) clearTimeout(hoverTimer.current);
+                  hoverTimer.current = setTimeout(() => setHoveredNode(null), 200);
+                }}
+              >
+                <div className="bg-[#0d1424] border border-white/10 rounded-lg shadow-2xl shadow-black/70 overflow-hidden backdrop-blur-xl">
+                  {/* Header */}
+                  <div className="px-3 py-2 border-b border-white/5 bg-gradient-to-r from-amber-500/10 to-purple-500/10">
+                    <div className="text-[11px] font-bold text-white tracking-wide">{explanation.title}</div>
+                    {explanation.liveValue && (
+                      <div className="text-[10px] text-amber-400 font-mono mt-0.5">Live: {explanation.liveValue}</div>
+                    )}
+                  </div>
+                  {/* Sections */}
+                  <div className="max-h-80 overflow-y-auto">
+                    {explanation.sections.map((sec, si) => (
+                      <div key={si} className="border-b border-white/5 last:border-0">
+                        <div className="px-3 py-1.5 bg-white/[0.02]">
+                          <span className={`text-[10px] font-semibold ${sec.color}`}>{sec.title}</span>
+                        </div>
+                        <div className="px-3 pb-2 space-y-1.5">
+                          {sec.steps.map((step, stIdx) => (
+                            <div key={stIdx} className="ml-2">
+                              {step.formula && (
+                                <div className="text-[9px] font-mono text-blue-300/80 bg-blue-500/[0.08] px-1.5 py-0.5 rounded mb-0.5 leading-snug break-all">
+                                  {step.formula}
+                                </div>
+                              )}
+                              <div className="flex items-start justify-between gap-2">
+                                <span className="text-[9px] text-white/50 leading-snug">{step.label}</span>
+                                {step.value && (
+                                  <span className="text-[10px] font-mono text-white/80 tabular-nums flex-shrink-0">{step.value}</span>
+                                )}
+                              </div>
+                              {step.detail && (
+                                <div className="text-[8px] text-white/30 leading-relaxed mt-0.5">{step.detail}</div>
+                              )}
+                            </div>
+                          ))}
+                          {sec.conceptNote && (
+                            <div className="ml-2 mt-1 p-1.5 bg-purple-500/5 border-l-2 border-purple-400/30 rounded-r">
+                              <div className="text-[8px] text-purple-300/60 leading-relaxed">{sec.conceptNote}</div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Right sidebar — live data */}
         <div className="w-80 flex-shrink-0 bg-[#0c1220] border-l border-white/5 flex flex-col overflow-hidden">
           {/* Harmony gauge */}
           <div className="p-4 border-b border-white/5">
-            <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2">Field Harmony</div>
+            <HoverCard
+              title="Field Harmony — Team Synchronization"
+              anchor="left"
+              width={360}
+              sections={[
+                {
+                  title: 'Harmony Formula',
+                  color: 'text-emerald-400',
+                  steps: [
+                    { label: 'Phase alignment', formula: 'align = Σcos(φᵢ - φⱼ) / C(n,2)', value: output ? `${((output.harmony - 0.3 * (1)) * 100 / 0.7).toFixed(0)}% phase` : '—', detail: '70% of final harmony score' },
+                    { label: 'Energy uniformity', formula: '1 - H/log₂(n)', value: output ? 'computed' : '—', detail: '30% weight — penalizes uneven workload' },
+                    { label: 'Final', formula: '0.7 × align + 0.3 × (1 - entropy)', value: output ? `${(output.harmony * 100).toFixed(1)}%` : '—' },
+                  ],
+                  conceptNote: '>70% = team in resonance (green). 40-70% = drifting (yellow). <40% = collapsing (red). Harmony measures BOTH tactical sync AND energy balance.',
+                },
+              ]}
+              liveValue={output ? `${(output.harmony * 100).toFixed(1)}%` : undefined}
+            >
+              <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 inline-block">Field Harmony</div>
+            </HoverCard>
             <div className="h-5 bg-white/5 rounded-full overflow-hidden relative">
               <div
                 className="h-full rounded-full transition-all duration-300"
@@ -528,22 +665,55 @@ export default function BigDuncFlowDiagram() {
           {/* Stats grid */}
           <div className="grid grid-cols-2 gap-px bg-white/5 border-b border-white/5">
             {[
-              { label: 'Tick', value: tick.toString(), color: '#f59e0b' },
-              { label: 'Energy', value: output?.fieldEnergy.toFixed(2) ?? '—', color: '#22c55e' },
-              { label: 'Entangled', value: output ? `${output.entanglements.length}` : '—', color: '#a855f7' },
-              { label: 'Drifts', value: output ? `${output.drifts.length}` : '—', color: '#ef4444' },
-            ].map(s => (
-              <div key={s.label} className="bg-[#0c1220] p-3">
-                <div className="text-[9px] uppercase text-white/30">{s.label}</div>
-                <div className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
-              </div>
-            ))}
+              { label: 'Tick', statId: 'tick', value: tick.toString(), color: '#f59e0b' },
+              { label: 'Energy', statId: 'energy', value: output?.fieldEnergy.toFixed(2) ?? '—', color: '#22c55e' },
+              { label: 'Entangled', statId: 'entangled', value: output ? `${output.entanglements.length}` : '—', color: '#a855f7' },
+              { label: 'Drifts', statId: 'drifts', value: output ? `${output.drifts.length}` : '—', color: '#ef4444' },
+            ].map(s => {
+              const statExp = getStatExplanation(s.statId, s.value);
+              return (
+                <div key={s.label} className="bg-[#0c1220] p-3">
+                  <HoverCard
+                    title={statExp.title}
+                    sections={statExp.sections}
+                    liveValue={statExp.liveValue}
+                    anchor="left"
+                    width={320}
+                  >
+                    <div className="text-[9px] uppercase text-white/30">{s.label}</div>
+                  </HoverCard>
+                  <div className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{s.value}</div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Monte Carlo */}
           {mcResult && (
             <div className="p-3 border-b border-white/5">
-              <div className="text-[9px] uppercase tracking-widest text-cyan-400/60 mb-1">Monte Carlo (10×5)</div>
+              <HoverCard
+                title="Monte Carlo What-If — Scenario Simulation"
+                anchor="left"
+                width={350}
+                liveValue={`avg ${(mcResult.avgHarmony * 100).toFixed(0)}%`}
+                sections={[
+                  {
+                    title: 'Monte Carlo Method',
+                    color: 'text-cyan-400',
+                    steps: [
+                      { label: 'Scenarios', value: '10', detail: '10 random perturbations of current state' },
+                      { label: 'Lookahead', value: '5 ticks', detail: 'Each scenario runs 5 ticks into the future' },
+                      { label: 'Perturbation', formula: 'pos ± 2m, phase ± 0.15 rad', detail: 'Random nudges to test robustness' },
+                      { label: 'Best case', value: `${(mcResult.bestCase * 100).toFixed(0)}%` },
+                      { label: 'Worst case', value: `${(mcResult.worstCase * 100).toFixed(0)}%` },
+                      { label: 'Spread', value: `${((mcResult.bestCase - mcResult.worstCase) * 100).toFixed(0)}%`, detail: 'Wide spread = fragile state. Narrow = robust.' },
+                    ],
+                    conceptNote: 'Monte Carlo answers: "how stable is our shape right now?" A wide best-worst gap means small random perturbations lead to very different outcomes — the team is in a fragile tactical state.',
+                  },
+                ]}
+              >
+                <div className="text-[9px] uppercase tracking-widest text-cyan-400/60 mb-1">Monte Carlo (10x5)</div>
+              </HoverCard>
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div>
                   <div className="text-[8px] text-white/30">worst</div>
@@ -563,18 +733,55 @@ export default function BigDuncFlowDiagram() {
 
           {/* Top entanglements */}
           <div className="p-3 border-b border-white/5">
-            <div className="text-[9px] uppercase tracking-widest text-purple-400/60 mb-2">Entanglements</div>
+            <HoverCard
+              title="Entanglement Map — Player Pair Correlations"
+              anchor="left"
+              width={360}
+              liveValue={output ? `${output.entanglements.length} pairs above threshold` : undefined}
+              sections={[
+                {
+                  title: 'How Entanglement Is Computed',
+                  color: 'text-purple-400',
+                  steps: [
+                    { label: 'Spatial RBF', formula: 'RBF(d, σ=20) = e^(-d²/(2×400))', detail: 'Gaussian kernel: 1.0 at same position, ~0.6 at 10m, ~0.1 at 30m' },
+                    { label: 'Phase correlation', formula: '(cos(φA - φB) + 1) / 2', detail: 'Same phase = 1.0, opposite = 0.0' },
+                    { label: 'Combined', formula: 'correlation = spatial × phase', detail: 'Must be close AND in-phase to entangle' },
+                    { label: 'Threshold', value: '> 0.30' },
+                    { label: 'Total pairs checked', value: 'C(11,2) = 55', detail: 'Every possible pair evaluated each tick' },
+                  ],
+                  conceptNote: 'Two "entangled" players move and think as a coordinated unit — like CB partners who shift together. Zero entanglement = fragmented team. 5-8 pairs = well-organized structure.',
+                },
+              ]}
+            >
+              <div className="text-[9px] uppercase tracking-widest text-purple-400/60 mb-2">Entanglements</div>
+            </HoverCard>
             <div className="space-y-1">
               {(output?.entanglements ?? []).slice(0, 5).map((e, i) => (
-                <div key={i} className="flex items-center gap-2 text-[10px]">
-                  <span className="text-white/60 font-mono">{e.playerA}</span>
-                  <span className="text-purple-400">↔</span>
-                  <span className="text-white/60 font-mono">{e.playerB}</span>
-                  <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-purple-500 rounded-full" style={{ width: `${e.correlation * 100}%` }} />
+                <HoverCard
+                  key={i}
+                  title={`Entanglement: ${e.playerA} ↔ ${e.playerB}`}
+                  anchor="left"
+                  width={300}
+                  liveValue={`${(e.correlation * 100).toFixed(1)}% correlation`}
+                  sections={[{
+                    title: 'Pair Breakdown',
+                    color: 'text-purple-400',
+                    steps: [
+                      { label: 'Correlation', value: `${(e.correlation * 100).toFixed(1)}%`, detail: e.correlation > 0.7 ? 'Strong: moving as a unit' : e.correlation > 0.5 ? 'Moderate: loosely coupled' : 'Weak: barely connected' },
+                      { label: 'Meaning', value: e.correlation > 0.7 ? 'Phase-locked pair' : 'Proximity correlation', detail: `These two players are spatially close AND tactically aligned (similar wave phase). They coordinate movements implicitly.` },
+                    ],
+                  }]}
+                >
+                  <div className="flex items-center gap-2 text-[10px]">
+                    <span className="text-white/60 font-mono">{e.playerA}</span>
+                    <span className="text-purple-400">↔</span>
+                    <span className="text-white/60 font-mono">{e.playerB}</span>
+                    <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-purple-500 rounded-full" style={{ width: `${e.correlation * 100}%` }} />
+                    </div>
+                    <span className="text-purple-400 tabular-nums">{(e.correlation * 100).toFixed(0)}%</span>
                   </div>
-                  <span className="text-purple-400 tabular-nums">{(e.correlation * 100).toFixed(0)}%</span>
-                </div>
+                </HoverCard>
               ))}
               {(!output || output.entanglements.length === 0) && (
                 <div className="text-[10px] text-white/20">No entangled pairs yet</div>
@@ -584,34 +791,128 @@ export default function BigDuncFlowDiagram() {
 
           {/* Twin intents */}
           <div className="p-3 border-b border-white/5">
-            <div className="text-[9px] uppercase tracking-widest text-pink-400/60 mb-2">Twin Intents</div>
+            <HoverCard
+              title="Autonomous Twin Intents — Agent Decisions"
+              anchor="left"
+              width={360}
+              sections={[
+                {
+                  title: 'Intent Scoring System',
+                  color: 'text-pink-400',
+                  steps: [
+                    { label: 'hold_position', formula: 'coherence × 0.6 + (1-threat) × 0.4', detail: 'Stay put when coherent and safe' },
+                    { label: 'move_to_space', formula: 'space × 0.7 + (1-threat) × 0.3', detail: 'Exploit open areas' },
+                    { label: 'press_opponent', formula: 'threat × 0.5 + amplitude × 0.3 + ball × 0.2', detail: 'Press when opponent near and energized' },
+                    { label: 'support_ball', formula: 'ball × 0.6 + (1-teammates) × 0.4', detail: 'Move to ball when few helpers nearby' },
+                    { label: 'create_passing_lane', formula: 'space × 0.4 + ball × 0.3 + teammates × 0.3', detail: 'Find receiving position' },
+                    { label: 'recover_shape', formula: '(1-coherence) × 0.7 + (1-phaseAlign) × 0.3', detail: 'Return to position when out of shape' },
+                  ],
+                  conceptNote: 'Each twin independently scores all 6 intents and picks the highest. No central controller — team behavior emerges from 11 autonomous decisions. The confidence number shows how dominant the winning intent was.',
+                },
+              ]}
+            >
+              <div className="text-[9px] uppercase tracking-widest text-pink-400/60 mb-2">Twin Intents</div>
+            </HoverCard>
             <div className="grid grid-cols-2 gap-1">
-              {Object.entries(twinIntents).slice(0, 11).map(([id, t]) => (
-                <div key={id} className="flex items-center gap-1 text-[9px] bg-white/3 rounded px-1.5 py-0.5">
-                  <span className="text-white/50 font-mono w-7">{id}</span>
-                  <span className="text-pink-300 truncate flex-1">{t.intent.replace(/_/g, ' ')}</span>
-                  <span className="text-white/30 tabular-nums">{(t.confidence * 100).toFixed(0)}</span>
-                </div>
-              ))}
+              {Object.entries(twinIntents).slice(0, 11).map(([id, t]) => {
+                const intentExplanations: Record<string, string> = {
+                  hold_position: 'Staying in assigned position — coherence is high, no immediate threat.',
+                  move_to_space: 'Seeking open space to receive or stretch the opposition.',
+                  press_opponent: 'Closing down opponent — high threat detected, has energy to press.',
+                  support_ball: 'Moving toward ball to offer passing option.',
+                  create_passing_lane: 'Positioning between teammates and ball to create receiving angle.',
+                  recover_shape: 'Returning to tactical position — coherence was low, out of phase.',
+                };
+                return (
+                  <HoverCard
+                    key={id}
+                    title={`${id} — ${t.intent.replace(/_/g, ' ')}`}
+                    anchor="left"
+                    width={280}
+                    liveValue={`${(t.confidence * 100).toFixed(0)}% confidence`}
+                    sections={[{
+                      title: 'Decision Explanation',
+                      color: 'text-pink-400',
+                      steps: [
+                        { label: 'Chosen intent', value: t.intent.replace(/_/g, ' ') },
+                        { label: 'Confidence', value: `${(t.confidence * 100).toFixed(0)}%`, detail: t.confidence > 0.7 ? 'Strong conviction — clear best action' : t.confidence > 0.4 ? 'Moderate — close to other options' : 'Weak — almost arbitrary choice' },
+                        { label: 'Why', value: intentExplanations[t.intent] || 'Context-dependent decision' },
+                      ],
+                    }]}
+                  >
+                    <div className="flex items-center gap-1 text-[9px] bg-white/3 rounded px-1.5 py-0.5">
+                      <span className="text-white/50 font-mono w-7">{id}</span>
+                      <span className="text-pink-300 truncate flex-1">{t.intent.replace(/_/g, ' ')}</span>
+                      <span className="text-white/30 tabular-nums">{(t.confidence * 100).toFixed(0)}</span>
+                    </div>
+                  </HoverCard>
+                );
+              })}
             </div>
           </div>
 
           {/* Insights */}
           <div className="flex-1 overflow-auto p-3">
-            <div className="text-[9px] uppercase tracking-widest text-violet-400/60 mb-2">Insights</div>
+            <HoverCard
+              title="Insight Layer — Human-Readable Intelligence"
+              anchor="left"
+              width={350}
+              sections={[
+                {
+                  title: 'How Insights Are Generated',
+                  color: 'text-violet-400',
+                  steps: [
+                    { label: 'Harmony check', value: '≥85% info, ≥60% warn, <60% critical', detail: 'Maps global harmony to urgency level' },
+                    { label: 'Drift check', value: 'severity > 0.7 → critical', detail: 'Converts drift predictions to human warnings' },
+                    { label: 'Coherence check', value: '< 0.35 → flag player', detail: '3+ flagged = critical team fragmentation' },
+                    { label: 'Entanglement check', value: '0 pairs = critical', detail: 'No coordinated units detected' },
+                  ],
+                  conceptNote: 'The insight layer translates kernel math into coaching language. "Midfield coherence low — shape at risk" instead of raw numbers. It\'s the bridge between computation and decision-making.',
+                },
+              ]}
+            >
+              <div className="text-[9px] uppercase tracking-widest text-violet-400/60 mb-2">Insights</div>
+            </HoverCard>
             <div className="space-y-1.5">
-              {insights.map((ins, i) => (
-                <div
-                  key={i}
-                  className={`text-[10px] px-2 py-1.5 rounded ${
-                    ins.level === 'critical' ? 'bg-red-500/10 text-red-300 border border-red-500/20'
-                    : ins.level === 'warning' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
-                    : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
-                  }`}
-                >
-                  {ins.message}
-                </div>
-              ))}
+              {insights.map((ins, i) => {
+                const insightTypeExplanation = ins.message.includes('harmony')
+                  ? 'Derived from field harmony computation: phase alignment + energy entropy.'
+                  : ins.message.includes('coherence') || ins.message.includes('tactical connection')
+                  ? 'Derived from per-player coherence: density + phase alignment + positional deviation.'
+                  : ins.message.includes('entangle') || ins.message.includes('phase correlation')
+                  ? 'Derived from entanglement map: RBF spatial kernel × phase cosine similarity.'
+                  : ins.message.includes('zone') || ins.message.includes('collapse')
+                  ? 'Derived from drift detection: harmony trend analysis + zone-level coherence checks.'
+                  : 'Derived from kernel output analysis.';
+
+                return (
+                  <HoverCard
+                    key={i}
+                    title={`${ins.level.toUpperCase()} Insight`}
+                    anchor="left"
+                    width={320}
+                    sections={[{
+                      title: 'Insight Source',
+                      color: ins.level === 'critical' ? 'text-red-400' : ins.level === 'warning' ? 'text-amber-400' : 'text-emerald-400',
+                      steps: [
+                        { label: 'Level', value: ins.level, detail: ins.level === 'critical' ? 'Requires immediate tactical intervention' : ins.level === 'warning' ? 'Monitor closely — may escalate' : 'Informational — positive or neutral' },
+                        { label: 'Tick', value: `${ins.tick}` },
+                        { label: 'Computation source', value: insightTypeExplanation },
+                      ],
+                    }]}
+                  >
+                    <div
+                      className={`text-[10px] px-2 py-1.5 rounded ${
+                        ins.level === 'critical' ? 'bg-red-500/10 text-red-300 border border-red-500/20'
+                        : ins.level === 'warning' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
+                        : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
+                      }`}
+                    >
+                      {ins.message}
+                    </div>
+                  </HoverCard>
+                );
+              })}
               {insights.length === 0 && (
                 <div className="text-[10px] text-white/20">Run the engine to see insights</div>
               )}
