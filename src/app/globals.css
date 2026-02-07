@@ -1,8 +1,62 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   BIGDUNC — PALANTIR-GRADE DESIGN SYSTEM
+   Blueprint dark palette + enterprise typography + immersive animations
+   ============================================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Blueprint Dark Palette */
+  --black: #111418;
+  --dark-gray-1: #1C2127;
+  --dark-gray-2: #252A31;
+  --dark-gray-3: #2F343C;
+  --dark-gray-4: #383E47;
+  --dark-gray-5: #404854;
+  --gray-1: #5F6B7C;
+  --gray-2: #738091;
+  --gray-3: #8F99A8;
+  --gray-4: #ABB3BF;
+  --gray-5: #C5CBD3;
+  --light-gray-5: #F6F7F9;
+  --white: #FFFFFF;
+
+  /* Blueprint Intent Colors */
+  --blue-1: #184A90;
+  --blue-2: #215DB0;
+  --blue-3: #2D72D2;
+  --blue-4: #4C90F0;
+  --blue-5: #8ABBFF;
+  --green-1: #165A36;
+  --green-2: #1C6E42;
+  --green-3: #238551;
+  --green-4: #32A467;
+  --green-5: #72CA9B;
+  --orange-1: #77450D;
+  --orange-2: #935610;
+  --orange-3: #C87619;
+  --orange-4: #EC9A3C;
+  --orange-5: #FBB360;
+  --red-1: #8E292C;
+  --red-2: #AC2F33;
+  --red-3: #CD4246;
+  --red-4: #E76A6E;
+  --red-5: #FA999C;
+  --cerulean-3: #147EB3;
+  --indigo-3: #7961DB;
+  --turquoise-3: #00A396;
+
+  /* Semantic */
+  --background: var(--dark-gray-1);
+  --foreground: var(--light-gray-5);
+  --surface: var(--dark-gray-2);
+  --surface-elevated: var(--dark-gray-3);
+  --border: var(--dark-gray-3);
+  --border-muted: var(--dark-gray-4);
+  --text-primary: var(--light-gray-5);
+  --text-secondary: var(--gray-3);
+  --text-muted: var(--gray-1);
+  --accent: var(--blue-3);
 }
 
 @theme inline {
@@ -12,15 +66,339 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================================
+   BASE
+   ============================================================================ */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--blue-3);
+  color: white;
+}
+
+/* ============================================================================
+   TYPOGRAPHY SCALE — Palantir Enterprise
+   ============================================================================ */
+
+.text-display {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.text-heading-1 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-heading-2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.text-heading-3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.text-body-large {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--gray-3);
+}
+
+.text-body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--gray-3);
+}
+
+.text-caption {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--gray-1);
+}
+
+.text-overline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-1);
+}
+
+/* ============================================================================
+   ANIMATIONS — Palantir HUD Feel
+   ============================================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(45, 114, 210, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(45, 114, 210, 0.15);
+  }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes data-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out both;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-data-pulse {
+  animation: data-pulse 2s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* ============================================================================
+   COMPONENTS — Palantir Enterprise
+   ============================================================================ */
+
+.card-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-surface:hover {
+  border-color: var(--dark-gray-5);
+  background: var(--surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.card-interactive {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-interactive:hover {
+  border-color: var(--blue-3);
+  box-shadow: 0 0 0 1px var(--blue-3), 0 8px 32px rgba(45, 114, 210, 0.08);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--blue-3);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--blue-2);
+  box-shadow: 0 4px 16px rgba(45, 114, 210, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--light-gray-5);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--dark-gray-4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--dark-gray-3);
+  border-color: var(--gray-1);
+}
+
+/* ============================================================================
+   SECTION LAYOUTS
+   ============================================================================ */
+
+.section-full {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Grid pattern background — Palantir HUD */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(47, 52, 60, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 52, 60, 0.3) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Subtle radial glow behind sections */
+.glow-accent {
+  position: relative;
+}
+
+.glow-accent::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(45, 114, 210, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   METRIC COUNTERS
+   ============================================================================ */
+
+.metric-value {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--blue-4), var(--cerulean-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metric-label {
+  font-size: 0.8125rem;
+  color: var(--gray-2);
+  margin-top: 0.5rem;
+}
+
+/* ============================================================================
+   SCROLLBAR — Minimal dark
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-gray-1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-gray-4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-1);
 }
