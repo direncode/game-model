@@ -410,65 +410,13 @@ export interface Adaptation {
   duration: 'temporary' | 'permanent';
 }
 
-// ==================== Game Approach (Match-Specific) ====================
-
-export interface GameApproach {
-  id: string;
-  matchId: string;
-  baseGameModel: string; // GameModel ID
-  opponent: OpponentAnalysis;
-  adjustments: TacticalAdjustment[];
-  playerSpecificInstructions: Map<string, string[]>;
-  priorityFocus: string[];
-  keyBattles: KeyBattle[];
-  createdAt: Date;
-  validatedBy: string[];
-}
-
-export interface OpponentAnalysis {
-  teamName: string;
-  formation: string;
-  strengths: string[];
-  weaknesses: string[];
-  keyPlayers: { name: string; threats: string[] }[];
-  patterns: string[];
-}
-
-export interface TacticalAdjustment {
-  id: string;
-  area: 'formation' | 'pressing' | 'possession' | 'transitions' | 'setPlays';
-  description: string;
-  reason: string;
-  affectedPlayers: string[];
-}
-
-export interface KeyBattle {
-  description: string;
-  ourPlayer: string;
-  theirPlayer: string;
-  strategy: string;
-  successMetrics: string[];
-}
-
-// ==================== Live Match & Coherence ====================
-
-export interface LiveMatchData {
-  matchId: string;
-  gameApproach: GameApproach;
-  currentMinute: number;
-  phase: 'pre_match' | 'first_half' | 'half_time' | 'second_half' | 'full_time';
-  score: { home: number; away: number };
-  playerData: Map<string, LivePlayerData>;
-  teamMetrics: TeamMetrics;
-  coherenceReport: CoherenceReport;
-  events: MatchEvent[];
-}
+// ==================== Coherence & Analysis ====================
 
 export interface LivePlayerData {
   playerId: string;
   currentMetrics: TrackingMetrics;
   cumulativeMetrics: TrackingMetrics;
-  coherenceScore: number; // 0-100
+  coherenceScore: number;
   deviations: TacticalDeviation[];
   alerts: PlayerAlert[];
 }
@@ -483,7 +431,7 @@ export interface TeamMetrics {
 }
 
 export interface CoherenceReport {
-  overallScore: number; // 0-100
+  overallScore: number;
   byPhase: Map<string, number>;
   byPlayer: Map<string, number>;
   byPrinciple: Map<string, number>;
@@ -514,53 +462,6 @@ export interface PlayerAlert {
   severity: 'low' | 'medium' | 'high';
   message: string;
   timestamp: Date;
-}
-
-export interface MatchEvent {
-  id: string;
-  minute: number;
-  type: 'goal' | 'card' | 'substitution' | 'injury' | 'tactical_change';
-  description: string;
-  playersInvolved: string[];
-  impact?: string;
-}
-
-// ==================== AI Manager Interface ====================
-
-export interface ManagerInput {
-  id: string;
-  timestamp: Date;
-  inputType: 'text' | 'voice' | 'tactical_board';
-  rawInput: string;
-  processedInstructions: ProcessedInstruction[];
-  confidence: number;
-  needsVerification: boolean;
-}
-
-export interface ProcessedInstruction {
-  category: 'formation' | 'pressing' | 'possession' | 'transition' | 'player_specific' | 'general';
-  instruction: string;
-  affectedPlayers: string[];
-  affectedPhases: string[];
-  priority: number;
-  confidence: number;
-}
-
-export interface VerificationRequest {
-  id: string;
-  originalInput: ManagerInput;
-  interpretations: ProcessedInstruction[];
-  questions: ClarificationQuestion[];
-  status: 'pending' | 'verified' | 'modified' | 'rejected';
-  verifiedBy?: string;
-  verifiedAt?: Date;
-  modifications?: string;
-}
-
-export interface ClarificationQuestion {
-  question: string;
-  options?: string[];
-  context: string;
 }
 
 // ==================== Session & Analytics ====================

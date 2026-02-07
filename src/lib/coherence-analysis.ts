@@ -3,7 +3,6 @@
 
 import {
   GameModel,
-  GameApproach,
   TrackingMetrics,
   DigitalTwin,
   CoherenceReport,
@@ -21,7 +20,7 @@ import {
 
 export function calculateCoherence(
   gameModel: GameModel,
-  gameApproach: GameApproach | null,
+  gameApproach: unknown,
   playerData: Map<string, LivePlayerData>,
   digitalTwins: Map<string, DigitalTwin>,
   matchMinute: number,

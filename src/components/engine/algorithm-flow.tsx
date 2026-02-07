@@ -38,16 +38,16 @@ interface FlowEdge {
 const NODES: FlowNode[] = [
   {
     id: 'input',
-    label: 'Match Input',
-    description: 'Live GPS data, player positions, ball tracking',
+    label: 'Data Ingestors',
+    description: 'GPS feeds, player metrics, wearable analytics',
     icon: <Activity className="w-5 h-5" />,
     color: BP.cyan,
     phase: 'Data Ingestion',
     details: [
       'Catapult GPS feed (10Hz)',
-      'Ball position tracking',
-      'Player velocity vectors',
-      'Heart rate streaming',
+      'Premier League player data',
+      'Wearable analytics stream',
+      'Football Data API integration',
     ],
   },
   {
@@ -125,15 +125,15 @@ const NODES: FlowNode[] = [
   {
     id: 'ai',
     label: 'Tactical AI',
-    description: 'Process manager instructions via NLP',
+    description: 'Q-Learning RL agent for tactical decisions',
     icon: <Brain className="w-5 h-5" />,
     color: '#E879F9',
     phase: 'Decision',
     details: [
-      'Natural language parsing',
-      'Instruction classification',
-      'Confidence scoring',
-      'Verification pipeline',
+      'Q-Learning state-action pairs',
+      'Epsilon-greedy exploration',
+      'Formation change scoring',
+      'Pressing intensity optimization',
     ],
   },
   {
@@ -161,7 +161,7 @@ const EDGES: FlowEdge[] = [
   { from: 'coherence', to: 'twin', label: 'coherence score' },
   { from: 'fatigue', to: 'twin', label: 'fatigue state' },
   { from: 'twin', to: 'output', label: 'deviations' },
-  { from: 'ai', to: 'coherence', label: 'instructions' },
+  { from: 'ai', to: 'coherence', label: 'decisions' },
   { from: 'fatigue', to: 'output', label: 'physical alerts' },
   { from: 'coherence', to: 'output', label: 'tactical alerts' },
 ];
