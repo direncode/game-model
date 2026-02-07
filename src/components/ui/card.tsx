@@ -12,7 +12,7 @@ export function Card({ children, className, onClick }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-xl border border-gray-200 bg-white shadow-sm',
+        'rounded-xl border border-[#2F343C] bg-[#1C2127] shadow-sm',
         onClick && 'cursor-pointer hover:shadow-md transition-shadow',
         className
       )}
@@ -25,7 +25,7 @@ export function Card({ children, className, onClick }: CardProps) {
 
 export function CardHeader({ children, className, onClick }: { children: React.ReactNode; className?: string; onClick?: () => void }) {
   return (
-    <div className={cn('px-6 py-4 border-b border-gray-100', className)} onClick={onClick}>
+    <div className={cn('px-6 py-4 border-b border-[#2F343C]', className)} onClick={onClick}>
       {children}
     </div>
   );
@@ -33,7 +33,7 @@ export function CardHeader({ children, className, onClick }: { children: React.R
 
 export function CardTitle({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <h3 className={cn('text-lg font-semibold text-gray-900', className)}>
+    <h3 className={cn('text-lg font-semibold text-[#F6F7F9]', className)}>
       {children}
     </h3>
   );
@@ -49,7 +49,7 @@ export function CardContent({ children, className }: { children: React.ReactNode
 
 export function CardFooter({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('px-6 py-4 border-t border-gray-100 bg-gray-50 rounded-b-xl', className)}>
+    <div className={cn('px-6 py-4 border-t border-[#2F343C] bg-[#252A31] rounded-b-xl', className)}>
       {children}
     </div>
   );

@@ -51,7 +51,7 @@ export function TabsList({ children, className }: TabsListProps) {
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 p-1 bg-gray-100 rounded-lg',
+        'inline-flex items-center gap-1 p-1 bg-[#252A31] rounded-lg',
         className
       )}
     >
@@ -75,8 +75,8 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       className={cn(
         'px-4 py-2 text-sm font-medium rounded-md transition-colors',
         isActive
-          ? 'bg-white text-gray-900 shadow-sm'
-          : 'text-gray-600 hover:text-gray-900',
+          ? 'bg-[#2F343C] text-[#F6F7F9] shadow-sm'
+          : 'text-[#8F99A8] hover:text-[#F6F7F9]',
         className
       )}
       onClick={() => setActiveTab(value)}
@@ -97,5 +97,5 @@ export function TabsContent({ value, children, className }: TabsContentProps) {
 
   if (activeTab !== value) return null;
 
-  return <div className={cn('mt-4', className)}>{children}</div>;
+  return <div className={cn('mt-0', className)}>{children}</div>;
 }

@@ -18,32 +18,28 @@ export function CoherenceGauge({
   showLabel = true,
   className,
 }: CoherenceGaugeProps) {
-  const { color, bgColor, textColor } = useMemo(() => {
+  const { color, textColor } = useMemo(() => {
     if (score >= 80) {
       return {
         color: '#22c55e',
-        bgColor: 'bg-green-100',
-        textColor: 'text-green-600',
+        textColor: 'text-green-400',
       };
     }
     if (score >= 60) {
       return {
         color: '#eab308',
-        bgColor: 'bg-yellow-100',
-        textColor: 'text-yellow-600',
+        textColor: 'text-yellow-400',
       };
     }
     if (score >= 40) {
       return {
         color: '#f97316',
-        bgColor: 'bg-orange-100',
-        textColor: 'text-orange-600',
+        textColor: 'text-orange-400',
       };
     }
     return {
       color: '#ef4444',
-      bgColor: 'bg-red-100',
-      textColor: 'text-red-600',
+      textColor: 'text-red-400',
     };
   }, [score]);
 
@@ -72,7 +68,7 @@ export function CoherenceGauge({
               width - stroke / 2
             } ${width / 2}`}
             fill="none"
-            stroke="#e5e7eb"
+            stroke="#2F343C"
             strokeWidth={stroke}
             strokeLinecap="round"
           />
@@ -102,7 +98,7 @@ export function CoherenceGauge({
       </div>
 
       {showLabel && (
-        <span className="mt-1 text-sm font-medium text-gray-600">{label}</span>
+        <span className="mt-1 text-sm font-medium text-[#8F99A8]">{label}</span>
       )}
     </div>
   );
@@ -125,10 +121,10 @@ export function CoherenceBar({ score, label, className }: CoherenceBarProps) {
   return (
     <div className={cn('w-full', className)}>
       <div className="flex justify-between items-center mb-1">
-        <span className="text-sm font-medium text-gray-700">{label}</span>
-        <span className="text-sm font-bold text-gray-900">{Math.round(score)}%</span>
+        <span className="text-sm font-medium text-[#8F99A8]">{label}</span>
+        <span className="text-sm font-bold text-[#F6F7F9]">{Math.round(score)}%</span>
       </div>
-      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="h-2 bg-[#2F343C] rounded-full overflow-hidden">
         <div
           className={cn('h-full rounded-full transition-all duration-500', color)}
           style={{ width: `${score}%` }}
@@ -149,7 +145,7 @@ export function CoherenceGrid({ data, title, className }: CoherenceGridProps) {
 
   return (
     <div className={cn('w-full', className)}>
-      <h4 className="text-sm font-semibold text-gray-900 mb-3">{title}</h4>
+      <h4 className="text-sm font-semibold text-[#F6F7F9] mb-3">{title}</h4>
       <div className="grid grid-cols-2 gap-2">
         {entries.map(([key, value]) => (
           <CoherenceBar key={key} label={key} score={value} />
