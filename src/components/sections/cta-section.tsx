@@ -36,6 +36,12 @@ export function CTASection() {
 
           <div className="flex items-center gap-6 mt-12">
             <a
+              href="/demo"
+              className="text-[13px] text-[#F6F7F9] border border-[#2D72D2] bg-[#2D72D2]/10 px-6 py-2.5 hover:bg-[#2D72D2]/20 transition-colors"
+            >
+              Run live demo
+            </a>
+            <a
               href="#"
               className="text-[13px] text-[#F6F7F9] border border-[#2F343C] px-6 py-2.5 hover:border-[#5F6B7C] transition-colors"
             >

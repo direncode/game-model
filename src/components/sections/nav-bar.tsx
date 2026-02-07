@@ -42,12 +42,20 @@ export function NavBar() {
           ))}
         </div>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-block text-[13px] text-[#F6F7F9] border border-[#2F343C] px-5 py-2 hover:border-[#5F6B7C] transition-colors"
-        >
-          Request Demo
-        </a>
+        <div className="hidden md:flex items-center gap-4">
+          <a
+            href="/demo"
+            className="text-[13px] text-[#2D72D2] hover:text-[#4A90E2] transition-colors"
+          >
+            Live Demo
+          </a>
+          <a
+            href="#contact"
+            className="text-[13px] text-[#F6F7F9] border border-[#2F343C] px-5 py-2 hover:border-[#5F6B7C] transition-colors"
+          >
+            Request Demo
+          </a>
+        </div>
 
         <button
           className="md:hidden text-[#8F99A8] text-[13px]"
@@ -69,6 +77,9 @@ export function NavBar() {
               {l.label}
             </a>
           ))}
+          <a href="/demo" className="block text-[13px] text-[#2D72D2] hover:text-[#4A90E2] mt-2">
+            Live Demo
+          </a>
           <a href="#contact" className="block text-[13px] text-[#F6F7F9] border border-[#2F343C] px-5 py-2 text-center mt-4">
             Request Demo
           </a>
