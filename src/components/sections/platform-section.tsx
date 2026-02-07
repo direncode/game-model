@@ -1,113 +1,58 @@
-'use client';
-
-import { Database, Brain, BarChart3, ArrowRight, Zap, Shield } from 'lucide-react';
-
-const PIPELINE_STEPS = [
-  {
-    phase: 'Ingest',
-    title: 'Data Ingestors',
-    description: 'Real-time streams from GPS, wearables, and performance APIs flow through normalized pipelines.',
-    icon: <Database className="w-5 h-5" />,
-    color: '#2D72D2',
-    items: ['Catapult GPS/IMU (10Hz + 100Hz)', 'Premier League squad data', 'Football Data API (FBref, Understat)', 'Wearable analytics stream'],
-  },
-  {
-    phase: 'Analyze',
-    title: 'Algorithm Modules',
-    description: 'Six specialized engines process data through pattern recognition, AI, and multi-agent systems.',
-    icon: <Brain className="w-5 h-5" />,
-    color: '#7961DB',
-    items: ['Tactical AI (Q-Learning)', 'Pattern Recognition (Markov chains)', 'Multi-Agent System (Boids + Genetics)', 'Analytics Engine (xG + Passing Networks)'],
-  },
-  {
-    phase: 'Decide',
-    title: 'Intelligence Output',
-    description: 'Actionable insights, coherence scores, and tactical recommendations delivered in real-time.',
-    icon: <BarChart3 className="w-5 h-5" />,
-    color: '#238551',
-    items: ['Coherence scoring (0-100)', 'Formation recommendations', 'Substitution intelligence', 'Pressing and tempo optimization'],
-  },
-];
-
 export function PlatformSection() {
   return (
-    <section id="platform" className="section-full section-alt">
-      <div className="section-container">
-        {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="text-overline mb-3 text-[#2D72D2]">Platform</div>
-          <h2 className="text-heading-1 text-[#F6F7F9] mb-4">
-            Data in. Decisions out.
-          </h2>
-          <p className="text-body-large">
-            A three-stage pipeline that transforms raw sensor data into tactical
-            intelligence your coaching staff can act on immediately.
-          </p>
-        </div>
+    <section id="platform" className="py-32 border-t border-[#2F343C]/40">
+      <div className="max-w-[1200px] mx-auto px-8">
+        <p className="text-[13px] text-[#5F6B7C] tracking-[0.15em] uppercase mb-6">
+          Platform
+        </p>
 
-        {/* Pipeline */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {PIPELINE_STEPS.map((step, i) => (
-            <div key={step.phase} className="relative">
-              {/* Connector arrow (between cards on desktop) */}
-              {i < PIPELINE_STEPS.length - 1 && (
-                <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight className="w-6 h-6 text-[#404854]" />
-                </div>
-              )}
+        <h2
+          className="text-[#F6F7F9] font-semibold leading-[1.08] tracking-tight max-w-[700px]"
+          style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', letterSpacing: '-0.025em' }}
+        >
+          Data in. Decisions out.
+        </h2>
 
-              <div className="card-surface p-6 h-full">
-                {/* Phase badge */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center"
-                    style={{ background: `${step.color}18` }}
-                  >
-                    <div style={{ color: step.color }}>{step.icon}</div>
-                  </div>
-                  <div>
-                    <div className="text-overline" style={{ color: step.color }}>
-                      {step.phase}
-                    </div>
-                    <h3 className="text-heading-3 text-[#F6F7F9]">{step.title}</h3>
-                  </div>
-                </div>
+        <p className="text-[#8F99A8] text-base leading-relaxed max-w-[600px] mt-6">
+          BigDunc operates as a three-stage pipeline. Raw sensor data flows through
+          ingestor modules, is processed by algorithm engines, and surfaces as
+          actionable intelligence your coaching staff can use immediately.
+        </p>
 
-                <p className="text-body mb-5">{step.description}</p>
-
-                <div className="space-y-2">
-                  {step.items.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-2 text-sm text-[#ABB3BF]"
-                    >
-                      <Zap className="w-3 h-3 flex-shrink-0" style={{ color: step.color }} />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {/* Three stages */}
+        <div className="grid md:grid-cols-3 gap-px mt-20 bg-[#2F343C]/40">
+          {[
+            {
+              num: '01',
+              title: 'Ingest',
+              body: 'Four ingestor modules connect to GPS hardware, wearable devices, and performance APIs. Catapult Vector at 10Hz GPS and 100Hz IMU. Premier League squad data. Football-Data.org, API-Football, Understat, and FBref integration. Wearable analytics with speed zone classification and heart rate analysis.',
+            },
+            {
+              num: '02',
+              title: 'Analyze',
+              body: 'Six purpose-built algorithm modules process ingested data. Q-Learning tactical AI with Monte Carlo simulation. Markov chain pattern recognition across 40+ tactical patterns. Boid-based multi-agent positioning with genetic algorithm evolution. Graph-theory passing networks with eigenvector centrality. Coherence scoring. Digital twin modeling.',
+            },
+            {
+              num: '03',
+              title: 'Decide',
+              body: 'Actionable output surfaces in real-time. Formation change recommendations with expected impact on possession and xG. Pressing intensity optimization. Substitution timing based on fatigue trajectories and tactical need. Critical deviation alerts with auto-generated recommendations.',
+            },
+          ].map((stage) => (
+            <div key={stage.num} className="bg-[#111418] p-10">
+              <span className="text-[13px] text-[#5F6B7C] font-mono">{stage.num}</span>
+              <h3 className="text-[#F6F7F9] text-xl font-semibold mt-3 mb-4">{stage.title}</h3>
+              <p className="text-[#8F99A8] text-sm leading-relaxed">{stage.body}</p>
             </div>
           ))}
         </div>
 
-        {/* Platform banner */}
-        <div className="mt-12 rounded-xl border border-[#2F343C] bg-gradient-to-r from-[#252A31] to-[#1C2127] p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <Shield className="w-8 h-8 text-[#2D72D2]" />
-            <div>
-              <h3 className="text-heading-3 text-[#F6F7F9]">
-                Built for any club. Any league. Any level.
-              </h3>
-              <p className="text-body mt-1">
-                Plug in your data sources. The platform does the rest.
-              </p>
-            </div>
-          </div>
-          <a href="#contact" className="btn-primary flex-shrink-0">
-            Get Started
-            <ArrowRight className="w-4 h-4" />
-          </a>
+        {/* Bottom statement */}
+        <div className="mt-20 border-t border-[#2F343C]/40 pt-10">
+          <p className="text-[#8F99A8] text-base leading-relaxed max-w-[600px]">
+            There is no charge for getting your data into the platform or for getting it out.
+            BigDunc works with your existing Catapult, STATSports, or GPS hardware. No data
+            science team required. Premier League to grassroots — it scales to any level.
+          </p>
         </div>
       </div>
     </section>

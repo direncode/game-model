@@ -1,7 +1,6 @@
 import { NavBar } from '@/components/sections/nav-bar';
 import { HeroSection } from '@/components/sections/hero-section';
 import { PlatformSection } from '@/components/sections/platform-section';
-import { MetricsSection } from '@/components/sections/metrics-section';
 import { AlgorithmSection } from '@/components/sections/algorithm-section';
 import { IngestorSection } from '@/components/sections/ingestor-section';
 import { ArchitectureSection } from '@/components/sections/architecture-section';
@@ -14,27 +13,21 @@ export default function Home() {
       <main>
         <HeroSection />
         <PlatformSection />
-        <MetricsSection />
         <AlgorithmSection />
         <IngestorSection />
         <ArchitectureSection />
         <CTASection />
       </main>
-      <footer className="border-t border-[#2F343C] py-8">
-        <div className="section-container flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-[#2D72D2]/20 flex items-center justify-center">
-              <span className="text-[10px] font-bold text-[#2D72D2]">BD</span>
-            </div>
-            <span className="text-xs text-[#5F6B7C]">
-              BigDunc Engine — Algorithmic Football Intelligence
-            </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="#platform" className="text-xs text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Platform</a>
-            <a href="#algorithms" className="text-xs text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Algorithms</a>
-            <a href="#ingestors" className="text-xs text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Ingestors</a>
-            <a href="#architecture" className="text-xs text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Architecture</a>
+      <footer className="border-t border-[#2F343C]/40 py-10">
+        <div className="max-w-[1200px] mx-auto px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <span className="text-[13px] text-[#5F6B7C]">
+            BigDunc
+          </span>
+          <div className="flex items-center gap-8">
+            <a href="#platform" className="text-[13px] text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Platform</a>
+            <a href="#algorithms" className="text-[13px] text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Algorithms</a>
+            <a href="#ingestors" className="text-[13px] text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Ingestors</a>
+            <a href="#architecture" className="text-[13px] text-[#5F6B7C] hover:text-[#8F99A8] transition-colors">Architecture</a>
           </div>
         </div>
       </footer>
