@@ -2,7 +2,12 @@
 
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useGameStore } from '@/store/game-store';
-import { PitchView } from '@/components/dashboard/pitch-view';
+import {
+  KernelWaveViz,
+  BlankPitch,
+  type KernelData,
+  type KernelLogEntry,
+} from '@/components/dashboard/kernel-wave-viz';
 import { createDigitalTwin } from '@/lib/digital-twin';
 import { getPLSquadData } from '@/lib/premier-league-api';
 import {
@@ -35,17 +40,6 @@ import {
   Play,
   Pause,
   Square,
-  Send,
-  Mic,
-  MicOff,
-  Loader2,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  Zap,
-  Target,
-  GitCompare,
-  Users,
 } from 'lucide-react';
 import {
   GameModelManager,
@@ -174,6 +168,16 @@ export default function Home() {
   const [instructionLog, setInstructionLog] = useState<InstructionLogEntry[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>('total_football');
 
+  // Kernel wave function state
+  const [kernelLogs, setKernelLogs] = useState<Record<string, KernelLogEntry[]>>({
+    defense: [],
+    midfield: [],
+    forward: [],
+  });
+  const prevKernelMeans = useRef<Record<string, number>>({});
+  const prevKernelStdDevs = useRef<Record<string, number>>({});
+  const lastKernelLogMinute = useRef<Record<string, number>>({});
+
   // Digital Twin ideal positions (4-3-3)
   const idealPositions = useMemo(() => {
     const roles = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CM', 'RW', 'ST', 'LW'];
@@ -224,6 +228,147 @@ export default function Home() {
     const coherentCount = twinPositions.filter(p => p.isCoherent).length;
     return Math.round((coherentCount / twinPositions.length) * 100);
   }, [twinPositions]);
+
+  // Compute kernel data from player positions
+  const kernels: KernelData[] = useMemo(() => {
+    const getPlayerY = (player: Player, fallbackIdx: number) => {
+      const metrics = liveData.get(player.id);
+      return metrics?.position?.y ?? idealPositions[fallbackIdx]?.y ?? 50;
+    };
+
+    const homePlayers = players.slice(0, 11);
+
+    // Defense: indices 1–4 (RB, CB, CB, LB)
+    const defensePositions =
+      homePlayers.length >= 5
+        ? [1, 2, 3, 4].map((i) => getPlayerY(homePlayers[i], i))
+        : [20, 20, 25, 25];
+
+    // Midfield: indices 5–7 (CDM, CM, CM)
+    const midfieldPositions =
+      homePlayers.length >= 8
+        ? [5, 6, 7].map((i) => getPlayerY(homePlayers[i], i))
+        : [35, 45, 45];
+
+    // Forward: indices 8–10 (RW, ST, LW)
+    const forwardPositions =
+      homePlayers.length >= 11
+        ? [8, 9, 10].map((i) => getPlayerY(homePlayers[i], i))
+        : [70, 80, 70];
+
+    return [
+      {
+        id: 'defense',
+        name: 'Defensive Line',
+        color: '#3b82f6',
+        positions: defensePositions,
+        logs: kernelLogs.defense || [],
+      },
+      {
+        id: 'midfield',
+        name: 'Midfield Line',
+        color: '#22c55e',
+        positions: midfieldPositions,
+        logs: kernelLogs.midfield || [],
+      },
+      {
+        id: 'forward',
+        name: 'Forward Line',
+        color: '#f97316',
+        positions: forwardPositions,
+        logs: kernelLogs.forward || [],
+      },
+    ];
+  }, [players, liveData, idealPositions, kernelLogs]);
+
+  // Generate kernel logs when positions change significantly
+  const updateKernelLogs = useCallback(
+    (minute: number) => {
+      const newLogs: Record<string, KernelLogEntry[]> = {};
+
+      kernels.forEach((kernel) => {
+        const { id, positions } = kernel;
+        if (positions.length === 0) return;
+
+        const mean = positions.reduce((a, b) => a + b, 0) / positions.length;
+        const stdDev = Math.sqrt(
+          positions.reduce((s, p) => s + (p - mean) ** 2, 0) / positions.length,
+        );
+
+        const prevMean = prevKernelMeans.current[id] ?? mean;
+        const prevStdDev = prevKernelStdDevs.current[id] ?? stdDev;
+        const lastLogMin = lastKernelLogMinute.current[id] ?? -2;
+
+        // Only generate logs every 2+ game minutes
+        if (minute - lastLogMin < 2) {
+          prevKernelMeans.current[id] = mean;
+          prevKernelStdDevs.current[id] = stdDev;
+          return;
+        }
+
+        const entries: KernelLogEntry[] = [];
+
+        if (Math.abs(mean - prevMean) > 4) {
+          entries.push({
+            id: `${id}-${Date.now()}`,
+            minute,
+            message:
+              mean > prevMean
+                ? `Pushed up to ${mean.toFixed(0)}m`
+                : `Dropped back to ${mean.toFixed(0)}m`,
+            type: 'shift',
+          });
+        }
+
+        if (stdDev - prevStdDev > 2.5) {
+          entries.push({
+            id: `${id}-exp-${Date.now()}`,
+            minute,
+            message: `Line stretching (\u03c3=${stdDev.toFixed(1)})`,
+            type: 'expand',
+          });
+        } else if (prevStdDev - stdDev > 2.5) {
+          entries.push({
+            id: `${id}-comp-${Date.now()}`,
+            minute,
+            message: `Line compacting (\u03c3=${stdDev.toFixed(1)})`,
+            type: 'compress',
+          });
+        }
+
+        // Check for line breaks
+        positions.forEach((pos, i) => {
+          if (Math.abs(pos - mean) > 18) {
+            entries.push({
+              id: `${id}-brk-${i}-${Date.now()}`,
+              minute,
+              message: `Player breaking line at ${pos.toFixed(0)}m`,
+              type: 'break',
+            });
+          }
+        });
+
+        if (entries.length > 0) {
+          newLogs[id] = entries;
+          lastKernelLogMinute.current[id] = minute;
+        }
+
+        prevKernelMeans.current[id] = mean;
+        prevKernelStdDevs.current[id] = stdDev;
+      });
+
+      if (Object.keys(newLogs).length > 0) {
+        setKernelLogs((prev) => {
+          const updated = { ...prev };
+          Object.entries(newLogs).forEach(([kid, entries]) => {
+            updated[kid] = [...entries, ...(prev[kid] || [])].slice(0, 20);
+          });
+          return updated;
+        });
+      }
+    },
+    [kernels],
+  );
 
   // Initialize squads
   useEffect(() => {
@@ -414,6 +559,9 @@ export default function Home() {
           recommendations: catapultService.getTacticalRecommendations(currentMinute),
         });
 
+        // Update kernel wave function logs
+        updateKernelLogs(currentMinute);
+
         if (state.phase === 'full_time') {
           setIsSimulating(false);
           endMatch();
@@ -422,7 +570,7 @@ export default function Home() {
     }
 
     return () => clearInterval(interval);
-  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch]);
+  }, [isLive, isSimulating, isPaused, players, awayPlayers, liveData, updateLiveData, updateMatch, endMatch, updateKernelLogs]);
 
   function calculateDynamicCoherence(
     team: 'home' | 'away',
@@ -639,215 +787,31 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
+      {/* Main Content - Pitch + Kernel Wave Functions */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left: Main Live Match - Takes majority of space */}
-        <div className="flex-1 flex flex-col bg-zinc-950 p-2">
+        {/* Left: Blank Pitch with kernel zone overlays */}
+        <div className="w-[38%] flex flex-col p-2">
           <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col">
             <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
+              <span className="text-xs uppercase tracking-wider text-white/40 font-medium">Pitch</span>
               <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-                <span className="text-xs text-white/40">{matchStats?.possession.home ?? 50}% possession</span>
-              </div>
-              <div className="flex items-center gap-4 text-xs">
-                <span className="text-sky-400">xG {matchStats?.xG.home.toFixed(1) ?? '0.0'}</span>
-                <span className="text-white/20">|</span>
-                <span className="text-red-400">xG {matchStats?.xG.away.toFixed(1) ?? '0.0'}</span>
+                {kernels.map((k) => (
+                  <div key={k.id} className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: k.color }} />
+                    <span className="text-[9px] text-white/40">{k.name.split(' ')[0]}</span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="flex-1 overflow-hidden">
-              <PitchView
-                players={players}
-                awayPlayers={awayPlayers}
-                liveData={liveData}
-                awayLiveData={awayLiveData}
-                selectedPlayerId={null}
-                onPlayerClick={() => {}}
-                ballPosition={matchState?.ballPosition}
-                ballPossession={matchState?.ballPossession}
-                defensiveBlock={matchState?.defensiveBlock}
-                pressingIntensity={matchState?.pressingIntensity}
-                analytics={{ xG: matchStats ? { home: matchStats.xG.home, away: matchStats.xG.away } : { home: 0, away: 0 } }}
-                patternRecognition={patternRecognitionData}
-                fatigueData={fatigueData}
-              />
+            <div className="flex-1 overflow-hidden flex items-center justify-center bg-zinc-950/50 p-2">
+              <BlankPitch kernels={kernels} />
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar: Twin + Controls + Log */}
-        <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
-          {/* Digital Twin Mini View */}
-          <div className="flex-shrink-0 h-44 border-b border-white/5">
-            <div className="h-full flex flex-col">
-              <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                  <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
-                </div>
-                <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                  {twinPositions.filter(p => p.isCoherent).length}/11 coherent
-                </span>
-              </div>
-              <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
-                <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                  <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                  {idealPositions.map((pos, idx) => (
-                    <g key={`ideal-${idx}`}>
-                      <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                      <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
-                    </g>
-                  ))}
-                  {[
-                    { x: 95, y: 32.5 },
-                    { x: 80, y: 10 }, { x: 80, y: 25 }, { x: 80, y: 40 }, { x: 80, y: 55 },
-                    { x: 65, y: 20 }, { x: 65, y: 32.5 }, { x: 65, y: 45 },
-                    { x: 50, y: 15 }, { x: 45, y: 32.5 }, { x: 50, y: 50 },
-                  ].map((pos, idx) => (
-                    <circle key={`away-${idx}`} cx={pos.x} cy={pos.y} r="2" fill="#ef4444" opacity="0.7" />
-                  ))}
-                  <circle cx="45" cy="32.5" r="1.2" fill="white" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Markov Chain Analysis */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-purple-400">Markov Chain</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                patternRecognitionData.markov?.predictedNext?.home ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-white/30'
-              }`}>
-                {patternRecognitionData.markov?.predictedNext?.home ? 'Predicting' : 'Learning'}
-              </span>
-            </div>
-            <div className="text-[10px] text-white/50 mb-1.5 truncate">
-              {patternRecognitionData.markov?.currentChains?.home || 'Building chain...'}
-            </div>
-            {patternRecognitionData.markov?.predictedNext?.home && (
-              <div className="flex items-center gap-1.5 p-1.5 bg-purple-500/10 border border-purple-500/30 rounded">
-                <Zap className="w-3 h-3 text-purple-400" />
-                <span className="text-[10px] text-purple-300">Predicted: {patternRecognitionData.markov.predictedNext.home}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Pressing Triggers Grid */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-orange-400">Pressing Triggers</span>
-              <Target className="w-3 h-3 text-orange-400/50" />
-            </div>
-            <div className="grid grid-cols-2 gap-1">
-              {[
-                { id: 'high_press', label: 'High Press', icon: '⬆️' },
-                { id: 'counter_press', label: 'Counter Press', icon: '🔄' },
-                { id: 'press_trap_sideline', label: 'Sideline Trap', icon: '◀️' },
-                { id: 'press_trap_corner', label: 'Corner Trap', icon: '📐' },
-                { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-                { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-                { id: 'man_mark', label: 'Man Mark', icon: '👤' },
-                { id: 'zonal', label: 'Zonal', icon: '🔲' },
-              ].map(trigger => {
-                const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
-                return (
-                  <button
-                    key={trigger.id}
-                    onClick={() => handleTriggerPress(trigger.id, trigger.label)}
-                    className={`relative px-2 py-1.5 rounded text-[9px] font-medium transition-all text-left ${
-                      isMarkovSuggested
-                        ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50 ring-1 ring-purple-400/30'
-                        : 'bg-white/5 text-white/60 hover:bg-orange-500/20 hover:text-orange-200'
-                    }`}
-                  >
-                    <span className="mr-1">{trigger.icon}</span>
-                    {trigger.label}
-                    {isMarkovSuggested && (
-                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Defensive Shape */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-wider text-blue-400">Defensive Shape</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1">
-              {[
-                { id: 'drop_deep', label: 'Drop' },
-                { id: 'hold_line', label: 'Hold' },
-                { id: 'step_up', label: 'Step Up' },
-              ].map(shape => (
-                <button
-                  key={shape.id}
-                  onClick={() => handleTriggerPress(shape.id, shape.label)}
-                  className="px-2 py-1 rounded text-[9px] font-medium bg-white/5 text-white/60 hover:bg-blue-500/20 hover:text-blue-200 transition-all"
-                >
-                  {shape.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Live Stats */}
-          <div className="flex-shrink-0 px-3 py-2 border-b border-white/5 grid grid-cols-4 gap-1.5 text-center">
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">xG</div>
-              <div className="text-[10px] font-medium text-sky-400">{matchStats?.xG.home.toFixed(1) ?? '0.0'}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Shots</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.shots.home ?? 0}</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Pass%</div>
-              <div className="text-[10px] font-medium text-white/70">{matchStats?.passAccuracy?.home ?? 85}%</div>
-            </div>
-            <div className="bg-black/20 rounded p-1">
-              <div className="text-[8px] text-white/40">Coh</div>
-              <div className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                {overallCoherence}%
-              </div>
-            </div>
-          </div>
-
-          {/* Trigger Execution Log */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-shrink-0 px-3 py-1.5 flex items-center justify-between bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/40">Execution Log</span>
-              <span className="text-[9px] text-emerald-400">{instructionLog.filter(l => l.status === 'applied').length} executed</span>
-            </div>
-            <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
-              {instructionLog.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
-                  Click triggers above
-                </div>
-              ) : (
-                instructionLog.map(entry => (
-                  <div key={entry.id} className={`flex items-center gap-2 px-2 py-1 rounded text-[10px] ${
-                    entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
-                    entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
-                    'bg-red-500/10 text-red-300'
-                  }`}>
-                    {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
-                     entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
-                     <XCircle className="w-3 h-3" />}
-                    <span className="flex-1 truncate">{entry.input}</span>
-                    <span className="text-white/30">{entry.minute}&apos;</span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+        {/* Right: Kernel Wave Functions + Composite + Logs */}
+        <div className="flex-1 flex flex-col overflow-hidden border-l border-white/5">
+          <KernelWaveViz kernels={kernels} />
         </div>
       </div>
     </div>
