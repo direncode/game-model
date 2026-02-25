@@ -599,3 +599,43 @@ export interface MetricComparison {
   deviation: number; // percentage
   significance: 'normal' | 'notable' | 'concerning';
 }
+
+// ==================== Multi-Screen Types ====================
+
+export type ActiveScreen = 'backend' | 'analytics' | 'manager';
+
+export interface StaffComment {
+  id: string;
+  author: string;
+  category: 'line_order' | 'tag_internal' | 'natural' | 'comment';
+  content: string;
+  timestamp: Date;
+  minute: number;
+}
+
+export interface AlgorithmStatus {
+  id: string;
+  name: string;
+  module: string;
+  status: 'active' | 'idle' | 'error' | 'warming_up';
+  metrics: Record<string, number | string>;
+  lastUpdate: Date;
+  tickRate?: number;
+}
+
+export interface DataSourceStatus {
+  id: string;
+  name: string;
+  connected: boolean;
+  lastUpdate: Date;
+  dataRate: number;
+  errors: number;
+}
+
+export interface PipelineLogEntry {
+  id: string;
+  timestamp: Date;
+  module: string;
+  level: 'info' | 'warn' | 'error' | 'debug';
+  message: string;
+}

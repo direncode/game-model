@@ -16,6 +16,9 @@ import {
   TrainingSession,
   TacticalDeviation,
   PlayerAlert,
+  ActiveScreen,
+  StaffComment,
+  PipelineLogEntry,
 } from '@/types';
 import type { PLTeam } from '@/lib/premier-league-api';
 import type { PlayerHistory } from '@/lib/player-history';
@@ -91,12 +94,27 @@ interface AIInputState {
 interface UIState {
   selectedPlayerId: string | null;
   selectedTab: 'dashboard' | 'game-model' | 'players' | 'live' | 'ai-input' | 'history';
+  activeScreen: ActiveScreen;
   sidebarOpen: boolean;
   viewMode: 'overview' | 'detailed' | 'analysis';
   setSelectedPlayer: (id: string | null) => void;
   setSelectedTab: (tab: UIState['selectedTab']) => void;
+  setActiveScreen: (screen: ActiveScreen) => void;
   toggleSidebar: () => void;
   setViewMode: (mode: UIState['viewMode']) => void;
+}
+
+interface StaffCommentsState {
+  staffComments: StaffComment[];
+  addStaffComment: (comment: StaffComment) => void;
+  removeStaffComment: (id: string) => void;
+  clearStaffComments: () => void;
+}
+
+interface PipelineLogsState {
+  pipelineLogs: PipelineLogEntry[];
+  addPipelineLog: (log: PipelineLogEntry) => void;
+  clearPipelineLogs: () => void;
 }
 
 interface PremierLeagueState {
@@ -131,7 +149,9 @@ type GameStore = PlayersState &
   UIState &
   PremierLeagueState &
   InstructionLogState &
-  PlayerHistoryState;
+  PlayerHistoryState &
+  StaffCommentsState &
+  PipelineLogsState;
 
 // Helper to convert Map to/from serializable format
 const mapToObject = <K extends string, V>(map: Map<K, V>): Record<K, V> => {
@@ -392,11 +412,13 @@ export const useGameStore = create<GameStore>()(
         // ==================== UI State ====================
         selectedPlayerId: null,
         selectedTab: 'dashboard',
+        activeScreen: 'manager',
         sidebarOpen: true,
         viewMode: 'overview',
 
         setSelectedPlayer: (id) => set({ selectedPlayerId: id }),
         setSelectedTab: (tab) => set({ selectedTab: tab }),
+        setActiveScreen: (screen) => set({ activeScreen: screen }),
         toggleSidebar: () =>
           set((state) => ({ sidebarOpen: !state.sidebarOpen })),
         setViewMode: (mode) => set({ viewMode: mode }),
@@ -436,6 +458,31 @@ export const useGameStore = create<GameStore>()(
           }),
 
         getPlayerHistory: (playerId) => get().playerHistories.get(playerId),
+
+        // ==================== Staff Comments ====================
+        staffComments: [],
+
+        addStaffComment: (comment) =>
+          set((state) => ({
+            staffComments: [comment, ...state.staffComments].slice(0, 50),
+          })),
+
+        removeStaffComment: (id) =>
+          set((state) => ({
+            staffComments: state.staffComments.filter((c) => c.id !== id),
+          })),
+
+        clearStaffComments: () => set({ staffComments: [] }),
+
+        // ==================== Pipeline Logs ====================
+        pipelineLogs: [],
+
+        addPipelineLog: (log) =>
+          set((state) => ({
+            pipelineLogs: [log, ...state.pipelineLogs].slice(0, 200),
+          })),
+
+        clearPipelineLogs: () => set({ pipelineLogs: [] }),
       }),
       {
         name: 'game-model-storage',
