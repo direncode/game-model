@@ -85,12 +85,12 @@ function StatBar({ label, value, max, color }: { label: string; value: number; m
     red: 'bg-[#E04E5E]', blue: 'bg-[#3B82F6]', indigo: 'bg-[#4F46E5]',
   };
   return (
-    <div className="space-y-1">
+    <div className="space-y-0.5">
       <div className="flex items-center justify-between">
-        <span className="text-[10px] text-[#8E8CA0] font-medium">{label}</span>
-        <span className="text-[10px] text-[#1a1a2e] font-bold font-mono">{typeof value === 'number' ? (value % 1 === 0 ? value : value.toFixed(1)) : value}</span>
+        <span className="text-[9px] text-[#8E8CA0] font-medium">{label}</span>
+        <span className="text-[9px] text-[#1a1a2e] font-bold font-mono">{typeof value === 'number' ? (value % 1 === 0 ? value : value.toFixed(1)) : value}</span>
       </div>
-      <div className="h-1.5 bg-[#e8e4f0] rounded-full overflow-hidden">
+      <div className="h-1 bg-[#e8e4f0] rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all ${colorClass[color] || 'bg-[#6B46C1]'}`} style={{ width: `${pct}%` }} />
       </div>
     </div>
@@ -163,15 +163,15 @@ export function TechnicalAnalyticsScreen({
   return (
     <div className="flex-1 flex overflow-hidden">
       {/* Left Column */}
-      <div className="flex-1 flex flex-col overflow-hidden p-4 gap-4">
+      <div className="flex-1 flex flex-col overflow-hidden p-2 gap-2">
         {/* Catapult Player Stats */}
         <div className="flex-shrink-0 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
-          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Wifi className="w-4 h-4 text-[#3B82F6]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#3B82F6] font-bold">Catapult — Player Stats</span>
+          <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Wifi className="w-3.5 h-3.5 text-[#3B82F6]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#3B82F6] font-bold">Catapult — Player Stats</span>
           </div>
-          <div className="p-3">
-            <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1">
+          <div className="p-2">
+            <div className="flex gap-1 mb-2 overflow-x-auto pb-0.5">
               {players.slice(0, 11).map((player) => {
                 const fatigue = fatigueData.home.get(player.id);
                 const isSelected = (selectedPlayer?.id || players[0]?.id) === player.id;
@@ -179,7 +179,7 @@ export function TechnicalAnalyticsScreen({
                   <button
                     key={player.id}
                     onClick={() => setSelectedPlayerId(player.id)}
-                    className={`flex-shrink-0 px-3 py-1.5 rounded-full text-[10px] font-semibold transition-all ${
+                    className={`flex-shrink-0 px-2 py-1 rounded-full text-[9px] font-semibold transition-all ${
                       isSelected
                         ? 'bg-[#6B46C1] text-white shadow-md shadow-purple-200'
                         : 'bg-[#faf9fe] text-[#8E8CA0] hover:bg-[#f3eefc] border border-[#e8e4f0]'
@@ -188,7 +188,7 @@ export function TechnicalAnalyticsScreen({
                     <span className={isSelected ? 'text-white/60' : 'text-[#b8b4c8]'}>#{player.number} </span>
                     {player.name.split(' ').pop()}
                     {fatigue && fatigue.currentFatigue > 60 && (
-                      <span className="ml-1 text-[#E04E5E]">!</span>
+                      <span className="ml-0.5 text-[#E04E5E]">!</span>
                     )}
                   </button>
                 );
@@ -196,10 +196,10 @@ export function TechnicalAnalyticsScreen({
             </div>
 
             {selectedPlayer && (
-              <div className="grid grid-cols-2 gap-x-6 gap-y-2 px-2">
-                <div className="col-span-2 flex items-center gap-2 mb-1">
-                  <span className="text-[13px] text-[#1a1a2e] font-bold">{selectedPlayer.name}</span>
-                  <span className="text-[10px] text-[#8E8CA0] bg-[#f3eefc] px-2 py-0.5 rounded-full font-medium">#{selectedPlayer.number} · {selectedPlayer.position}</span>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 px-1">
+                <div className="col-span-2 flex items-center gap-2 mb-0.5">
+                  <span className="text-[12px] text-[#1a1a2e] font-bold">{selectedPlayer.name}</span>
+                  <span className="text-[9px] text-[#8E8CA0] bg-[#f3eefc] px-1.5 py-0.5 rounded-full font-medium">#{selectedPlayer.number} · {selectedPlayer.position}</span>
                 </div>
                 <StatBar label="Distance (m)" value={selectedPlayerMetrics?.totalDistance ?? 0} max={12000} color="blue" />
                 <StatBar label="Max Speed (km/h)" value={selectedPlayerMetrics?.maxSpeed ?? 0} max={36} color="green" />
@@ -214,28 +214,28 @@ export function TechnicalAnalyticsScreen({
 
         {/* Match Overview Full Stats */}
         <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
-          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-[#E5863A]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#E5863A] font-bold">Match Overview — Full Stats</span>
+          <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+            <BarChart3 className="w-3.5 h-3.5 text-[#E5863A]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#E5863A] font-bold">Match Overview — Full Stats</span>
           </div>
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-3">
             {matchStats ? (
-              <div className="space-y-4">
-                <div className="flex items-center justify-center gap-10 py-3">
+              <div className="space-y-3">
+                <div className="flex items-center justify-center gap-8 py-2">
                   <div className="text-center">
-                    <div className="text-[#6B46C1] text-[11px] font-bold mb-1">MCI (Home)</div>
-                    <div className="text-[28px] font-black text-[#1a1a2e]">{matchStats.xG?.home?.toFixed(1) ?? '0.0'}</div>
-                    <div className="text-[10px] text-[#8E8CA0] font-medium">xG</div>
+                    <div className="text-[#6B46C1] text-[10px] font-bold mb-0.5">MCI (Home)</div>
+                    <div className="text-[24px] font-black text-[#1a1a2e]">{matchStats.xG?.home?.toFixed(1) ?? '0.0'}</div>
+                    <div className="text-[9px] text-[#8E8CA0] font-medium">xG</div>
                   </div>
-                  <div className="text-[10px] text-[#b8b4c8] font-bold">vs</div>
+                  <div className="text-[9px] text-[#b8b4c8] font-bold">vs</div>
                   <div className="text-center">
-                    <div className="text-[#E04E5E] text-[11px] font-bold mb-1">MUN (Away)</div>
-                    <div className="text-[28px] font-black text-[#1a1a2e]">{matchStats.xG?.away?.toFixed(1) ?? '0.0'}</div>
-                    <div className="text-[10px] text-[#8E8CA0] font-medium">xG</div>
+                    <div className="text-[#E04E5E] text-[10px] font-bold mb-0.5">MUN (Away)</div>
+                    <div className="text-[24px] font-black text-[#1a1a2e]">{matchStats.xG?.away?.toFixed(1) ?? '0.0'}</div>
+                    <div className="text-[9px] text-[#8E8CA0] font-medium">xG</div>
                   </div>
                 </div>
 
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   {[
                     { label: 'Possession', home: `${matchStats.possession?.home ?? 50}%`, away: `${matchStats.possession?.away ?? 50}%`, homeVal: matchStats.possession?.home ?? 50, awayVal: matchStats.possession?.away ?? 50 },
                     { label: 'Shots', home: matchStats.shots?.home ?? 0, away: matchStats.shots?.away ?? 0, homeVal: matchStats.shots?.home ?? 0, awayVal: matchStats.shots?.away ?? 0 },
@@ -247,27 +247,27 @@ export function TechnicalAnalyticsScreen({
                     const total = (Number(stat.homeVal) || 0) + (Number(stat.awayVal) || 0);
                     const homePct = total > 0 ? (Number(stat.homeVal) / total) * 100 : 50;
                     return (
-                      <div key={stat.label} className="flex items-center gap-3">
-                        <span className="text-[11px] text-[#6B46C1] w-8 text-right font-bold font-mono">{stat.home}</span>
-                        <div className="flex-1 h-2 bg-[#e8e4f0] rounded-full overflow-hidden flex">
+                      <div key={stat.label} className="flex items-center gap-2">
+                        <span className="text-[10px] text-[#6B46C1] w-7 text-right font-bold font-mono">{stat.home}</span>
+                        <div className="flex-1 h-1.5 bg-[#e8e4f0] rounded-full overflow-hidden flex">
                           <div className="h-full bg-[#6B46C1] rounded-l-full transition-all" style={{ width: `${homePct}%` }} />
                           <div className="h-full bg-[#E04E5E]/70 rounded-r-full flex-1" />
                         </div>
-                        <span className="text-[11px] text-[#E04E5E] w-8 font-bold font-mono">{stat.away}</span>
-                        <span className="text-[10px] text-[#8E8CA0] w-24 text-center font-medium">{stat.label}</span>
+                        <span className="text-[10px] text-[#E04E5E] w-7 font-bold font-mono">{stat.away}</span>
+                        <span className="text-[9px] text-[#8E8CA0] w-20 text-center font-medium">{stat.label}</span>
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="pt-3 border-t border-[#e8e4f0]">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Team Coherence</span>
-                    <span className={`text-[13px] font-bold ${overallCoherence >= 70 ? 'text-[#2D9F6F]' : overallCoherence >= 50 ? 'text-[#E5863A]' : 'text-[#E04E5E]'}`}>
+                <div className="pt-2 border-t border-[#e8e4f0]">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Team Coherence</span>
+                    <span className={`text-[12px] font-bold ${overallCoherence >= 70 ? 'text-[#2D9F6F]' : overallCoherence >= 50 ? 'text-[#E5863A]' : 'text-[#E04E5E]'}`}>
                       {overallCoherence}%
                     </span>
                   </div>
-                  <div className="h-2.5 bg-[#e8e4f0] rounded-full overflow-hidden">
+                  <div className="h-2 bg-[#e8e4f0] rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all ${overallCoherence >= 70 ? 'bg-[#2D9F6F]' : overallCoherence >= 50 ? 'bg-[#E5863A]' : 'bg-[#E04E5E]'}`}
                       style={{ width: `${overallCoherence}%` }}
@@ -276,7 +276,7 @@ export function TechnicalAnalyticsScreen({
                 </div>
               </div>
             ) : (
-              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[11px] font-medium">
+              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[10px] font-medium">
                 Start match to see statistics
               </div>
             )}
@@ -285,44 +285,44 @@ export function TechnicalAnalyticsScreen({
       </div>
 
       {/* Right Column */}
-      <div className="w-[420px] flex flex-col overflow-hidden gap-4 p-4 pl-0">
+      <div className="w-[360px] flex flex-col overflow-hidden gap-2 p-2 pl-0">
         {/* Algorithm Status */}
         <div className="flex-shrink-0 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
-          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-[#6B46C1]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#6B46C1] font-bold">Algorithm Status</span>
+          <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Cpu className="w-3.5 h-3.5 text-[#6B46C1]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#6B46C1] font-bold">Algorithm Status</span>
           </div>
-          <div className="p-3 grid grid-cols-2 gap-2">
+          <div className="p-2 grid grid-cols-2 gap-1.5">
             {ALGO_LIST.map((algo, idx) => (
-              <div key={algo.id} className="flex items-center gap-2 px-3 py-2 bg-[#faf9fe] rounded-xl border border-[#e8e4f0]">
-                <span className="text-[10px] text-[#b8b4c8] font-mono font-bold">{idx + 1}</span>
+              <div key={algo.id} className="flex items-center gap-1.5 px-2 py-1.5 bg-[#faf9fe] rounded-lg border border-[#e8e4f0]">
+                <span className="text-[9px] text-[#b8b4c8] font-mono font-bold">{idx + 1}</span>
                 <span className={algoColorMap[algo.color]}>{algo.icon}</span>
-                <span className="text-[10px] text-[#1a1a2e] flex-1 truncate font-medium">{algo.name}</span>
-                <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
+                <span className="text-[9px] text-[#1a1a2e] flex-1 truncate font-medium">{algo.name}</span>
+                <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
               </div>
             ))}
           </div>
         </div>
 
         {/* Technical Alert Logs */}
-        <div className="h-40 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
-          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
-            <AlertTriangle className="w-3.5 h-3.5 text-[#E5863A]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#E5863A] font-bold">Technical Alert Logs</span>
-            <span className="text-[10px] text-[#8E8CA0] ml-auto font-medium">{alerts.length} alerts</span>
+        <div className="h-32 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
+          <div className="px-3 py-1.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <AlertTriangle className="w-3 h-3 text-[#E5863A]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#E5863A] font-bold">Technical Alert Logs</span>
+            <span className="text-[9px] text-[#8E8CA0] ml-auto font-medium">{alerts.length} alerts</span>
           </div>
-          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
+          <div className="flex-1 overflow-y-auto px-2 py-1.5 space-y-0.5">
             {alerts.length === 0 ? (
-              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[11px]">No alerts</div>
+              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[10px]">No alerts</div>
             ) : (
               alerts.slice(0, 20).map((alert, i) => (
-                <div key={i} className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-[10px] font-medium ${
+                <div key={i} className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-[9px] font-medium ${
                   alert.severity === 'high' ? 'bg-[#FDE8EB] text-[#E04E5E]' :
                   alert.severity === 'medium' ? 'bg-[#FEF3E8] text-[#E5863A]' :
                   'bg-[#faf9fe] text-[#8E8CA0]'
                 }`}>
-                  {alert.severity === 'high' ? <AlertTriangle className="w-3 h-3 flex-shrink-0" /> :
-                   <Activity className="w-3 h-3 flex-shrink-0" />}
+                  {alert.severity === 'high' ? <AlertTriangle className="w-2.5 h-2.5 flex-shrink-0" /> :
+                   <Activity className="w-2.5 h-2.5 flex-shrink-0" />}
                   <span className="flex-1 truncate">{alert.message}</span>
                   <span className="text-[#b8b4c8] flex-shrink-0">{alert.timestamp.toLocaleTimeString('en-GB', { hour12: false, hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
@@ -333,9 +333,9 @@ export function TechnicalAnalyticsScreen({
 
         {/* AI Alert Prompting */}
         <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
-          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Zap className="w-3.5 h-3.5 text-[#6B46C1]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#6B46C1] font-bold">AI Alert Prompting</span>
+          <div className="px-3 py-1.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Zap className="w-3 h-3 text-[#6B46C1]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#6B46C1] font-bold">AI Alert Prompting</span>
           </div>
           <div className="flex-1 min-h-0">
             <GrokAIEmbed context="analytics" matchMinute={matchMinute} compact />
@@ -344,27 +344,27 @@ export function TechnicalAnalyticsScreen({
 
         {/* Exported Algorithm Selection */}
         <div className="flex-shrink-0 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
-          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center justify-between">
+          <div className="px-3 py-1.5 border-b border-[#e8e4f0] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Download className="w-3.5 h-3.5 text-[#4F46E5]" />
-              <span className="text-[11px] uppercase tracking-wider text-[#4F46E5] font-bold">Algorithm Selection</span>
+              <Download className="w-3 h-3 text-[#4F46E5]" />
+              <span className="text-[10px] uppercase tracking-wider text-[#4F46E5] font-bold">Algorithm Selection</span>
             </div>
-            <span className="text-[10px] text-[#8E8CA0] font-medium">{enabledAlgorithms.size}/6 active</span>
+            <span className="text-[9px] text-[#8E8CA0] font-medium">{enabledAlgorithms.size}/6 active</span>
           </div>
-          <div className="p-3 grid grid-cols-3 gap-2">
+          <div className="p-2 grid grid-cols-3 gap-1.5">
             {ALGO_LIST.map((algo) => {
               const enabled = enabledAlgorithms.has(algo.id);
               return (
                 <button
                   key={algo.id}
                   onClick={() => toggleAlgorithm(algo.id)}
-                  className={`flex flex-col items-center gap-1.5 px-2 py-2 rounded-xl border transition-all ${
+                  className={`flex flex-col items-center gap-1 px-1.5 py-1.5 rounded-lg border transition-all ${
                     enabled ? algoBorderMap[algo.color] : 'border-[#e8e4f0] bg-[#faf9fe] opacity-40'
                   }`}
                 >
                   <span className={algoColorMap[algo.color]}>{algo.icon}</span>
-                  <span className="text-[8px] text-[#1a1a2e] text-center leading-tight font-semibold">{algo.name}</span>
-                  {enabled ? <ToggleRight className="w-4 h-4 text-[#2D9F6F]" /> : <ToggleLeft className="w-4 h-4 text-[#b8b4c8]" />}
+                  <span className="text-[7px] text-[#1a1a2e] text-center leading-tight font-semibold">{algo.name}</span>
+                  {enabled ? <ToggleRight className="w-3.5 h-3.5 text-[#2D9F6F]" /> : <ToggleLeft className="w-3.5 h-3.5 text-[#b8b4c8]" />}
                 </button>
               );
             })}

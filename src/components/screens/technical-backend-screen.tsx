@@ -178,24 +178,24 @@ export function TechnicalBackendScreen({
   return (
     <div className="flex-1 flex overflow-hidden">
       {/* Left Column */}
-      <div className="flex-1 flex flex-col overflow-hidden p-4 gap-4">
+      <div className="flex-1 flex flex-col overflow-hidden p-2 gap-2">
         {/* Top Row */}
-        <div className="flex gap-4 flex-shrink-0">
+        <div className="flex gap-2 flex-shrink-0">
           {/* Data Source Status */}
           <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-              <Database className="w-4 h-4 text-[#2D9F6F]" />
-              <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Data Source Status</span>
+            <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Database className="w-3.5 h-3.5 text-[#2D9F6F]" />
+              <span className="text-[10px] uppercase tracking-wider text-[#2D9F6F] font-bold">Data Source Status</span>
             </div>
-            <div className="p-3 space-y-1.5">
+            <div className="p-2 space-y-1">
               {DATA_SOURCES.map(source => {
                 const connected = isLive;
                 return (
-                  <div key={source.id} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-[#faf9fe]">
+                  <div key={source.id} className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-[#faf9fe]">
                     <span className="text-[#8E8CA0]">{source.icon}</span>
-                    <span className="flex-1 text-[11px] text-[#1a1a2e] font-medium">{source.name}</span>
-                    <span className={`w-2 h-2 rounded-full ${connected ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
-                    <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${connected ? 'bg-[#E6F7EF] text-[#2D9F6F]' : 'bg-[#f3eefc] text-[#8E8CA0]'}`}>
+                    <span className="flex-1 text-[10px] text-[#1a1a2e] font-medium">{source.name}</span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${connected ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
+                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold ${connected ? 'bg-[#E6F7EF] text-[#2D9F6F]' : 'bg-[#f3eefc] text-[#8E8CA0]'}`}>
                       {connected ? 'LIVE' : 'IDLE'}
                     </span>
                   </div>
@@ -206,11 +206,11 @@ export function TechnicalBackendScreen({
 
           {/* Algorithm Reformation */}
           <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-[#6B46C1]" />
-              <span className="text-[11px] uppercase tracking-wider text-[#6B46C1] font-bold">Algorithm Reformation</span>
+            <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Cpu className="w-3.5 h-3.5 text-[#6B46C1]" />
+              <span className="text-[10px] uppercase tracking-wider text-[#6B46C1] font-bold">Algorithm Reformation</span>
             </div>
-            <div className="p-3 space-y-1.5">
+            <div className="p-2 space-y-1">
               {ALGORITHMS.map((algo, idx) => {
                 const status = algorithmStatuses[algo.id as keyof typeof algorithmStatuses];
                 const isSelected = selectedAlgorithm === algo.id;
@@ -218,14 +218,14 @@ export function TechnicalBackendScreen({
                   <button
                     key={algo.id}
                     onClick={() => setSelectedAlgorithm(algo.id)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-left transition-all ${
                       isSelected ? 'bg-[#f3eefc] border border-[#6B46C1]/20 shadow-sm' : 'bg-[#faf9fe] hover:bg-[#f3eefc]'
                     }`}
                   >
-                    <span className="text-[11px] text-[#b8b4c8] w-5 font-mono font-bold">{idx + 1}.</span>
+                    <span className="text-[10px] text-[#b8b4c8] w-4 font-mono font-bold">{idx + 1}.</span>
                     <span className={algoColorClass(algo.color)}>{algo.icon}</span>
-                    <span className="flex-1 text-[11px] text-[#1a1a2e] font-semibold">{algo.name}</span>
-                    <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${statusBadge(status.status)}`}>
+                    <span className="flex-1 text-[10px] text-[#1a1a2e] font-semibold">{algo.name}</span>
+                    <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${statusBadge(status.status)}`}>
                       {status.status.replace('_', ' ').toUpperCase()}
                     </span>
                   </button>
@@ -237,46 +237,46 @@ export function TechnicalBackendScreen({
 
         {/* Detail Algorithm Operation */}
         <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
-          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Settings className="w-4 h-4 text-[#3B82F6]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#3B82F6] font-bold">
+          <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Settings className="w-3.5 h-3.5 text-[#3B82F6]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#3B82F6] font-bold">
               Detail Algorithm Operation — {ALGORITHMS.find(a => a.id === selectedAlgorithm)?.name}
             </span>
           </div>
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-3">
             {(() => {
               const algo = ALGORITHMS.find(a => a.id === selectedAlgorithm);
               const status = algorithmStatuses[selectedAlgorithm as keyof typeof algorithmStatuses];
               if (!algo || !status) return null;
 
               return (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
                     <span className={algoColorClass(algo.color)}>{algo.icon}</span>
                     <div>
-                      <div className="text-[13px] text-[#1a1a2e] font-bold">{algo.name}</div>
-                      <div className="text-[10px] text-[#8E8CA0] font-mono">{algo.module}</div>
+                      <div className="text-[12px] text-[#1a1a2e] font-bold">{algo.name}</div>
+                      <div className="text-[9px] text-[#8E8CA0] font-mono">{algo.module}</div>
                     </div>
-                    <span className={`ml-auto text-[9px] px-3 py-1 rounded-full font-bold ${statusBadge(status.status)}`}>
+                    <span className={`ml-auto text-[8px] px-2 py-0.5 rounded-full font-bold ${statusBadge(status.status)}`}>
                       {status.status.replace('_', ' ').toUpperCase()}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#8E8CA0]">{algo.description}</p>
+                  <p className="text-[10px] text-[#8E8CA0]">{algo.description}</p>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-2">
                     {Object.entries(status.metrics).map(([key, value]) => (
-                      <div key={key} className="bg-[#faf9fe] rounded-xl p-3 border border-[#e8e4f0]">
-                        <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">{key}</div>
-                        <div className="text-[14px] text-[#1a1a2e] font-bold mt-1">{value}</div>
+                      <div key={key} className="bg-[#faf9fe] rounded-lg p-2 border border-[#e8e4f0]">
+                        <div className="text-[8px] text-[#8E8CA0] uppercase tracking-wider font-semibold">{key}</div>
+                        <div className="text-[13px] text-[#1a1a2e] font-bold mt-0.5">{value}</div>
                       </div>
                     ))}
                   </div>
 
                   {selectedAlgorithm === 'pattern_recognition' && patternRecognitionData.markov && (
-                    <div className="space-y-2">
-                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Markov Transitions (Home)</div>
+                    <div className="space-y-1.5">
+                      <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Markov Transitions (Home)</div>
                       {patternRecognitionData.markov.topTransitions.home.slice(0, 4).map((t, i) => (
-                        <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#f3eefc] rounded-xl text-[10px]">
+                        <div key={i} className="flex items-center gap-2 px-2 py-1.5 bg-[#f3eefc] rounded-lg text-[9px]">
                           <span className="text-[#6B46C1] font-medium">{t.from.replace(/_/g, ' ')}</span>
                           <span className="text-[#b8b4c8]">\u2192</span>
                           <span className="text-[#6B46C1] font-medium">{t.to.replace(/_/g, ' ')}</span>
@@ -287,10 +287,10 @@ export function TechnicalBackendScreen({
                   )}
 
                   {selectedAlgorithm === 'catapult_integration' && fatigueData.recommendations.substitutionTargets.length > 0 && (
-                    <div className="space-y-2">
-                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Substitution Targets</div>
+                    <div className="space-y-1.5">
+                      <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Substitution Targets</div>
                       {fatigueData.recommendations.substitutionTargets.map((t, i) => (
-                        <div key={i} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-[10px] font-medium ${
+                        <div key={i} className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-[9px] font-medium ${
                           t.priority === 'urgent' ? 'bg-[#FDE8EB] text-[#E04E5E]' :
                           t.priority === 'soon' ? 'bg-[#FEF3E8] text-[#E5863A]' :
                           'bg-[#faf9fe] text-[#8E8CA0]'
@@ -303,11 +303,11 @@ export function TechnicalBackendScreen({
                   )}
 
                   {selectedAlgorithm === 'coherence_analysis' && patternRecognitionData.coherence.home && (
-                    <div className="space-y-2">
-                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Deviations</div>
+                    <div className="space-y-1.5">
+                      <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Deviations</div>
                       {patternRecognitionData.coherence.home.deviations.map((d, i) => (
-                        <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#FDE8EB] rounded-xl text-[10px] text-[#E04E5E] font-medium">
-                          <AlertTriangle className="w-3.5 h-3.5" />
+                        <div key={i} className="flex items-center gap-2 px-2 py-1.5 bg-[#FDE8EB] rounded-lg text-[9px] text-[#E04E5E] font-medium">
+                          <AlertTriangle className="w-3 h-3" />
                           <span className="flex-1">{d.pattern} — {d.reason}</span>
                           <span className="text-[#8E8CA0]">{Math.round(d.deviation)}%</span>
                         </div>
@@ -322,28 +322,28 @@ export function TechnicalBackendScreen({
       </div>
 
       {/* Right Column */}
-      <div className="w-[420px] flex flex-col overflow-hidden gap-4 p-4 pl-0">
+      <div className="w-[360px] flex flex-col overflow-hidden gap-2 p-2 pl-0">
         {/* Live Debugging + AI Embed */}
         <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
-          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Terminal className="w-4 h-4 text-[#2D9F6F]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Live Debugging</span>
-            {isLive && <span className="w-2 h-2 bg-[#2D9F6F] rounded-full animate-pulse" />}
+          <div className="px-3 py-2 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Terminal className="w-3.5 h-3.5 text-[#2D9F6F]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#2D9F6F] font-bold">Live Debugging</span>
+            {isLive && <span className="w-1.5 h-1.5 bg-[#2D9F6F] rounded-full animate-pulse" />}
           </div>
-          <div className="flex-1 overflow-y-auto px-3 py-2 font-mono min-h-0 bg-[#faf9fe]">
+          <div className="flex-1 overflow-y-auto px-2 py-1.5 font-mono min-h-0 bg-[#faf9fe]">
             {pipelineLogs.length === 0 ? (
-              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[11px]">
+              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[10px]">
                 {isLive ? 'Waiting for pipeline events...' : 'Start match to see debug output'}
               </div>
             ) : (
               pipelineLogs.slice(0, 30).map((log) => (
-                <div key={log.id} className={`text-[10px] py-0.5 flex gap-2 ${
+                <div key={log.id} className={`text-[9px] py-0.5 flex gap-1.5 ${
                   log.level === 'error' ? 'text-[#E04E5E]' :
                   log.level === 'warn' ? 'text-[#E5863A]' :
                   'text-[#8E8CA0]'
                 }`}>
                   <span className="text-[#b8b4c8] flex-shrink-0">{log.timestamp.toLocaleTimeString('en-GB', { hour12: false })}</span>
-                  <span className={`flex-shrink-0 w-16 font-semibold ${
+                  <span className={`flex-shrink-0 w-14 font-semibold ${
                     log.level === 'error' ? 'text-[#E04E5E]' :
                     log.level === 'warn' ? 'text-[#E5863A]' :
                     'text-[#6B46C1]'
@@ -353,24 +353,24 @@ export function TechnicalBackendScreen({
               ))
             )}
           </div>
-          <div className="flex-shrink-0 border-t border-[#e8e4f0] h-[220px]">
+          <div className="flex-shrink-0 border-t border-[#e8e4f0] h-[180px]">
             <GrokAIEmbed context="backend" matchMinute={matchMinute} compact />
           </div>
         </div>
 
         {/* Pipeline Logs */}
-        <div className="h-40 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
-          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Activity className="w-3.5 h-3.5 text-[#E5863A]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#E5863A] font-bold">Pipeline Logs</span>
-            <span className="text-[10px] text-[#8E8CA0] ml-auto font-medium">{pipelineLogs.length} entries</span>
+        <div className="h-32 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
+          <div className="px-3 py-1.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Activity className="w-3 h-3 text-[#E5863A]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#E5863A] font-bold">Pipeline Logs</span>
+            <span className="text-[9px] text-[#8E8CA0] ml-auto font-medium">{pipelineLogs.length} entries</span>
           </div>
-          <div className="flex-1 overflow-y-auto px-3 py-2">
+          <div className="flex-1 overflow-y-auto px-2 py-1.5">
             {pipelineLogs.filter(l => l.level !== 'debug').slice(0, 20).map((log) => (
-              <div key={log.id} className="text-[10px] py-0.5 flex items-start gap-2">
-                {log.level === 'error' ? <AlertTriangle className="w-3 h-3 text-[#E04E5E] flex-shrink-0 mt-0.5" /> :
-                 log.level === 'warn' ? <AlertTriangle className="w-3 h-3 text-[#E5863A] flex-shrink-0 mt-0.5" /> :
-                 <CheckCircle2 className="w-3 h-3 text-[#2D9F6F] flex-shrink-0 mt-0.5" />}
+              <div key={log.id} className="text-[9px] py-0.5 flex items-start gap-1.5">
+                {log.level === 'error' ? <AlertTriangle className="w-2.5 h-2.5 text-[#E04E5E] flex-shrink-0 mt-0.5" /> :
+                 log.level === 'warn' ? <AlertTriangle className="w-2.5 h-2.5 text-[#E5863A] flex-shrink-0 mt-0.5" /> :
+                 <CheckCircle2 className="w-2.5 h-2.5 text-[#2D9F6F] flex-shrink-0 mt-0.5" />}
                 <span className="text-[#1a1a2e]/70 truncate">{log.message}</span>
               </div>
             ))}
@@ -378,21 +378,21 @@ export function TechnicalBackendScreen({
         </div>
 
         {/* Model Customization */}
-        <div className="h-36 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
-          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
-            <Sliders className="w-3.5 h-3.5 text-[#4F46E5]" />
-            <span className="text-[11px] uppercase tracking-wider text-[#4F46E5] font-bold">Model Customization</span>
+        <div className="h-28 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
+          <div className="px-3 py-1.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Sliders className="w-3 h-3 text-[#4F46E5]" />
+            <span className="text-[10px] uppercase tracking-wider text-[#4F46E5] font-bold">Model Customization</span>
           </div>
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
+          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-2">
             {[
               { label: 'Confidence Threshold', value: 0.65, min: 0.3, max: 1.0 },
               { label: 'Coherence Sensitivity', value: 15, min: 5, max: 30 },
               { label: 'Pattern Min Confidence', value: 0.5, min: 0.2, max: 0.9 },
             ].map((param) => (
-              <div key={param.label} className="space-y-1">
+              <div key={param.label} className="space-y-0.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-[#8E8CA0] font-medium">{param.label}</span>
-                  <span className="text-[10px] text-[#1a1a2e] font-bold font-mono">{param.value}</span>
+                  <span className="text-[9px] text-[#8E8CA0] font-medium">{param.label}</span>
+                  <span className="text-[9px] text-[#1a1a2e] font-bold font-mono">{param.value}</span>
                 </div>
                 <input
                   type="range"

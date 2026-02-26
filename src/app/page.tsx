@@ -646,31 +646,31 @@ export default function Home() {
   return (
     <div className="h-screen bg-[#faf9fe] text-[#1a1a2e] overflow-hidden flex flex-col">
       {/* Header with Screen Navigation — 23andMe style */}
-      <header className="flex-shrink-0 h-14 flex items-center justify-between px-6 bg-white border-b border-[#e8e4f0] shadow-sm">
+      <header className="flex-shrink-0 h-11 flex items-center justify-between px-4 bg-white border-b border-[#e8e4f0] shadow-sm">
         {/* Left: Score */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3 bg-[#f3eefc] rounded-full px-4 py-1.5">
-            <span className="text-[#6B46C1] text-xs font-semibold">MCI</span>
-            <span className="text-sm font-bold tabular-nums text-[#1a1a2e]">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 bg-[#f3eefc] rounded-full px-3 py-1">
+            <span className="text-[#6B46C1] text-[10px] font-semibold">MCI</span>
+            <span className="text-xs font-bold tabular-nums text-[#1a1a2e]">
               {matchState ? `${matchState.homeScore} – ${matchState.awayScore}` : '0–0'}
             </span>
-            <span className="text-[#E04E5E] text-xs font-semibold">MUN</span>
+            <span className="text-[#E04E5E] text-[10px] font-semibold">MUN</span>
           </div>
           {isLive && matchState && (
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 bg-[#2D9F6F] rounded-full animate-pulse" />
-              <span className="text-xs text-[#8E8CA0] font-medium tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
+            <div className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-[#2D9F6F] rounded-full animate-pulse" />
+              <span className="text-[10px] text-[#8E8CA0] font-medium tabular-nums">{Math.floor(matchState.minute)}&apos;</span>
             </div>
           )}
         </div>
 
         {/* Center: Screen Navigation */}
-        <div className="flex items-center gap-1 bg-[#f3eefc] rounded-full p-1">
+        <div className="flex items-center gap-0.5 bg-[#f3eefc] rounded-full p-0.5">
           {SCREENS.map(screen => (
             <button
               key={screen.id}
               onClick={() => setActiveScreen(screen.id)}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
+              className={`flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-semibold transition-all ${
                 activeScreen === screen.id
                   ? 'bg-[#6B46C1] text-white shadow-md shadow-purple-200'
                   : 'text-[#8E8CA0] hover:text-[#6B46C1] hover:bg-white/60'
@@ -683,18 +683,18 @@ export default function Home() {
         </div>
 
         {/* Right: Match Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {!isLive ? (
-            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-5 py-2 bg-[#6B46C1] text-white rounded-full text-xs font-semibold hover:bg-[#5a38a8] shadow-md shadow-purple-200 transition-all">
-              <Play className="w-3.5 h-3.5" /> Start Match
+            <button onClick={handleStartMatch} className="flex items-center gap-1.5 px-4 py-1.5 bg-[#6B46C1] text-white rounded-full text-[10px] font-semibold hover:bg-[#5a38a8] shadow-md shadow-purple-200 transition-all">
+              <Play className="w-3 h-3" /> Start Match
             </button>
           ) : (
             <>
-              <button onClick={handlePauseMatch} className="w-8 h-8 flex items-center justify-center bg-[#f3eefc] hover:bg-[#e9e0f7] text-[#6B46C1] rounded-full transition-all">
-                {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+              <button onClick={handlePauseMatch} className="w-7 h-7 flex items-center justify-center bg-[#f3eefc] hover:bg-[#e9e0f7] text-[#6B46C1] rounded-full transition-all">
+                {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
               </button>
-              <button onClick={handleEndMatch} className="w-8 h-8 flex items-center justify-center bg-[#FDE8EB] hover:bg-[#E04E5E] hover:text-white text-[#E04E5E] rounded-full transition-all">
-                <Square className="w-3 h-3" />
+              <button onClick={handleEndMatch} className="w-7 h-7 flex items-center justify-center bg-[#FDE8EB] hover:bg-[#E04E5E] hover:text-white text-[#E04E5E] rounded-full transition-all">
+                <Square className="w-2.5 h-2.5" />
               </button>
             </>
           )}
