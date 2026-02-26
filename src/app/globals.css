@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9fe;
+  --foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-border: #e8e4f0;
+  --primary: #6B46C1;
+  --primary-light: #E9E0F7;
+  --primary-soft: #f3eefc;
+  --accent-green: #2D9F6F;
+  --accent-green-light: #E6F7EF;
+  --accent-orange: #E5863A;
+  --accent-orange-light: #FEF3E8;
+  --accent-red: #E04E5E;
+  --accent-red-light: #FDE8EB;
+  --accent-blue: #3B82F6;
+  --accent-blue-light: #EBF2FF;
+  --muted: #8E8CA0;
+  --border: #E8E4F0;
 }
 
 @theme inline {
@@ -12,15 +27,47 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d0e0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8b4c8;
+}
+
+/* Range input styling for 23andMe look */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #e8e4f0;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #6B46C1;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(107, 70, 193, 0.3);
 }

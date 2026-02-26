@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   XCircle,
   Clock,
-  Zap,
   Target,
   Users,
   AlertTriangle,
@@ -35,8 +34,6 @@ import type {
 } from '@/lib/pattern-recognition';
 import type { FatigueModel, InjuryRiskModel } from '@/lib/catapult-integration';
 import type { GameModelTemplate } from '@/lib/game-model-manager';
-
-// ==================== Props ====================
 
 interface PatternRecognitionData {
   activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
@@ -87,23 +84,18 @@ interface TwinPosition {
 }
 
 export interface ManagerScreenProps {
-  // Match state
   isLive: boolean;
   matchState: MatchState | null;
   matchStats: MatchStats | null;
-  // Players
   players: Player[];
   awayPlayers: Player[];
   liveData: Map<string, TrackingMetrics>;
   awayLiveData: Map<string, TrackingMetrics>;
-  // Pattern & Fatigue
   patternRecognitionData: PatternRecognitionData;
   fatigueData: FatigueData;
-  // Digital Twin
   twinPositions: TwinPosition[];
   overallCoherence: number;
   idealPositions: { x: number; y: number; role: string }[];
-  // Instructions
   instructionLog: InstructionLogEntry[];
   instructionInput: string;
   isProcessing: boolean;
@@ -111,16 +103,12 @@ export interface ManagerScreenProps {
   onInstructionInputChange: (value: string) => void;
   onSendInstruction: () => void;
   onToggleRecording: () => void;
-  // Triggers
   onTriggerPress: (triggerId: string, label: string) => void;
-  // Template
   selectedTemplate: string | null;
   onTemplateSelect: (templateId: string) => void;
   templates: GameModelTemplate[];
   modelName: string;
 }
-
-// ==================== Sub-components ====================
 
 const COMMENT_CATEGORIES = [
   { id: 'line_order' as const, label: 'Line Order', icon: <FileText className="w-3 h-3" /> },
@@ -128,8 +116,6 @@ const COMMENT_CATEGORIES = [
   { id: 'natural' as const, label: 'Natural', icon: <MessageSquare className="w-3 h-3" /> },
   { id: 'comment' as const, label: 'Comment', icon: <MessageSquare className="w-3 h-3" /> },
 ];
-
-// ==================== Component ====================
 
 export function ManagerScreen({
   isLive,
@@ -177,7 +163,6 @@ export function ManagerScreen({
     setCommentInput('');
   }, [commentInput, commentCategory, matchMinute, addStaffComment]);
 
-  // Alert sources: fatigue + pattern deviations
   const keyAlerts = [
     ...fatigueData.recommendations.substitutionTargets.map(t => ({
       type: 'fatigue' as const,
@@ -199,41 +184,41 @@ export function ManagerScreen({
   return (
     <div className="flex-1 flex overflow-hidden">
       {/* Left: Game Model + Live Pitch */}
-      <div className="flex-1 flex flex-col overflow-hidden p-2 gap-2">
+      <div className="flex-1 flex flex-col overflow-hidden p-4 gap-4">
         {/* Top: Game Model Preset + Base/Specific Model */}
-        <div className="flex-shrink-0 flex gap-2">
+        <div className="flex-shrink-0 flex gap-4">
           {/* Game Model Preset */}
-          <div className="w-64 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden">
-            <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-              <Shield className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-[10px] uppercase tracking-wider text-emerald-400 font-medium">Game Model Preset</span>
+          <div className="w-64 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Shield className="w-4 h-4 text-[#2D9F6F]" />
+              <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Game Model Preset</span>
             </div>
-            <div className="p-2 space-y-2">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-sky-500/20 rounded-full flex items-center justify-center">
-                  <Users className="w-3 h-3 text-sky-400" />
+            <div className="p-3 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-[#f3eefc] rounded-full flex items-center justify-center">
+                  <Users className="w-4 h-4 text-[#6B46C1]" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-white/90 font-medium">Pep Guardiola</div>
-                  <div className="text-[9px] text-white/40">Manager</div>
+                  <div className="text-[12px] text-[#1a1a2e] font-bold">Pep Guardiola</div>
+                  <div className="text-[10px] text-[#8E8CA0] font-medium">Manager</div>
                 </div>
               </div>
               <div className="relative">
                 <button
                   onClick={() => setShowTemplateSelector(!showTemplateSelector)}
-                  className="w-full flex items-center justify-between px-2 py-1.5 bg-black/30 rounded border border-white/10 text-[10px] text-white/80"
+                  className="w-full flex items-center justify-between px-3 py-2 bg-[#faf9fe] rounded-xl border border-[#e8e4f0] text-[11px] text-[#1a1a2e] font-semibold hover:border-[#6B46C1]/30 transition-all"
                 >
                   <span>{modelName}</span>
-                  <ChevronDown className="w-3 h-3 text-white/40" />
+                  <ChevronDown className="w-3.5 h-3.5 text-[#8E8CA0]" />
                 </button>
                 {showTemplateSelector && (
-                  <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-zinc-800 border border-white/10 rounded overflow-hidden shadow-xl">
+                  <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white border border-[#e8e4f0] rounded-xl overflow-hidden shadow-xl">
                     {templates.map(t => (
                       <button
                         key={t.id}
                         onClick={() => { onTemplateSelect(t.id); setShowTemplateSelector(false); }}
-                        className={`w-full text-left px-2 py-1.5 text-[10px] hover:bg-white/10 transition-all ${
-                          selectedTemplate === t.id ? 'bg-emerald-500/20 text-emerald-300' : 'text-white/70'
+                        className={`w-full text-left px-3 py-2 text-[11px] hover:bg-[#f3eefc] transition-all font-medium ${
+                          selectedTemplate === t.id ? 'bg-[#E6F7EF] text-[#2D9F6F]' : 'text-[#1a1a2e]'
                         }`}
                       >
                         {t.name}
@@ -246,51 +231,51 @@ export function ManagerScreen({
           </div>
 
           {/* Base Model */}
-          <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden">
-            <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-              <Swords className="w-3.5 h-3.5 text-sky-400" />
-              <span className="text-[10px] uppercase tracking-wider text-sky-400 font-medium">Base Model</span>
+          <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Swords className="w-4 h-4 text-[#3B82F6]" />
+              <span className="text-[11px] uppercase tracking-wider text-[#3B82F6] font-bold">Base Model</span>
             </div>
-            <div className="p-2">
-              <div className="grid grid-cols-2 gap-1">
+            <div className="p-3">
+              <div className="grid grid-cols-2 gap-2">
                 {(templates.find(t => t.id === selectedTemplate)?.principles || []).slice(0, 4).map((p, i) => (
-                  <div key={i} className="text-[9px] text-white/50 px-1.5 py-1 bg-black/20 rounded truncate">
+                  <div key={i} className="text-[10px] text-[#1a1a2e] px-3 py-1.5 bg-[#faf9fe] rounded-xl border border-[#e8e4f0] truncate font-medium">
                     {p}
                   </div>
                 ))}
               </div>
-              <div className="mt-1.5 text-[9px] text-white/30">
-                Formation: {templates.find(t => t.id === selectedTemplate)?.baseFormation || '4-3-3'}
+              <div className="mt-2 text-[10px] text-[#8E8CA0] font-medium">
+                Formation: <span className="text-[#6B46C1] font-bold">{templates.find(t => t.id === selectedTemplate)?.baseFormation || '4-3-3'}</span>
               </div>
             </div>
           </div>
 
           {/* Game Specific Model */}
-          <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden">
-            <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-              <Target className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-[10px] uppercase tracking-wider text-amber-400 font-medium">Game Specific</span>
+          <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Target className="w-4 h-4 text-[#E5863A]" />
+              <span className="text-[11px] uppercase tracking-wider text-[#E5863A] font-bold">Game Specific</span>
             </div>
-            <div className="p-2 space-y-1">
-              <div className="text-[9px] text-white/50 px-1.5 py-1 bg-black/20 rounded">vs Manchester United — Counter-attacking style</div>
-              <div className="text-[9px] text-white/50 px-1.5 py-1 bg-black/20 rounded">Key battle: Midfield pressing zones</div>
-              <div className="text-[9px] text-white/50 px-1.5 py-1 bg-black/20 rounded">Focus: Width exploitation, half-spaces</div>
-              <div className="text-[9px] text-white/30 mt-1">Phase: {matchState?.phase?.replace('_', ' ') || 'pre-match'}</div>
+            <div className="p-3 space-y-1.5">
+              <div className="text-[10px] text-[#1a1a2e] px-3 py-1.5 bg-[#faf9fe] rounded-xl border border-[#e8e4f0] font-medium">vs Manchester United — Counter-attacking style</div>
+              <div className="text-[10px] text-[#1a1a2e] px-3 py-1.5 bg-[#faf9fe] rounded-xl border border-[#e8e4f0] font-medium">Key battle: Midfield pressing zones</div>
+              <div className="text-[10px] text-[#1a1a2e] px-3 py-1.5 bg-[#faf9fe] rounded-xl border border-[#e8e4f0] font-medium">Focus: Width exploitation, half-spaces</div>
+              <div className="text-[10px] text-[#8E8CA0] mt-1 font-medium">Phase: <span className="text-[#6B46C1] font-bold">{matchState?.phase?.replace('_', ' ') || 'pre-match'}</span></div>
             </div>
           </div>
         </div>
 
-        {/* Live Game with Players (Pitch View) */}
-        <div className="flex-1 bg-zinc-900 rounded-xl overflow-hidden flex flex-col min-h-0">
-          <div className="flex-shrink-0 px-4 py-2 bg-black/40 flex items-center justify-between">
+        {/* Live Game with Players */}
+        <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
+          <div className="flex-shrink-0 px-4 py-3 border-b border-[#e8e4f0] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-xs uppercase tracking-wider text-emerald-400 font-medium">Live Match</span>
-              <span className="text-xs text-white/40">{matchStats?.possession?.home ?? 50}% possession</span>
+              <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Live Match</span>
+              <span className="text-[11px] text-[#8E8CA0] font-medium">{matchStats?.possession?.home ?? 50}% possession</span>
             </div>
-            <div className="flex items-center gap-4 text-xs">
-              <span className="text-sky-400">xG {matchStats?.xG?.home?.toFixed(1) ?? '0.0'}</span>
-              <span className="text-white/20">|</span>
-              <span className="text-red-400">xG {matchStats?.xG?.away?.toFixed(1) ?? '0.0'}</span>
+            <div className="flex items-center gap-4 text-[11px]">
+              <span className="text-[#6B46C1] font-bold">xG {matchStats?.xG?.home?.toFixed(1) ?? '0.0'}</span>
+              <span className="text-[#b8b4c8]">|</span>
+              <span className="text-[#E04E5E] font-bold">xG {matchStats?.xG?.away?.toFixed(1) ?? '0.0'}</span>
             </div>
           </div>
           <div className="flex-1 overflow-hidden">
@@ -313,31 +298,31 @@ export function ManagerScreen({
         </div>
       </div>
 
-      {/* Right: Twin + AI Embed + Controls + Alerts + Comments */}
-      <div className="w-96 flex flex-col bg-zinc-900 border-l border-white/5 overflow-hidden">
+      {/* Right sidebar */}
+      <div className="w-96 flex flex-col bg-white border-l border-[#e8e4f0] overflow-hidden">
         {/* Coherence Score + Digital Twin */}
-        <div className="flex-shrink-0 h-40 border-b border-white/5">
+        <div className="flex-shrink-0 h-40 border-b border-[#e8e4f0]">
           <div className="h-full flex flex-col">
-            <div className="flex-shrink-0 px-3 py-1.5 bg-black/30 flex items-center justify-between">
+            <div className="flex-shrink-0 px-4 py-2 bg-[#faf9fe] border-b border-[#e8e4f0] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-wider text-sky-400">Digital Twin</span>
-                <span className="text-[9px] px-1.5 py-0.5 bg-sky-500/20 text-sky-300 rounded">{modelName}</span>
+                <span className="text-[11px] uppercase tracking-wider text-[#3B82F6] font-bold">Digital Twin</span>
+                <span className="text-[9px] px-2 py-0.5 bg-[#EBF2FF] text-[#3B82F6] rounded-full font-bold">{modelName}</span>
               </div>
-              <span className={`text-[10px] font-medium ${overallCoherence >= 70 ? 'text-emerald-400' : overallCoherence >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+              <span className={`text-[11px] font-bold ${overallCoherence >= 70 ? 'text-[#2D9F6F]' : overallCoherence >= 50 ? 'text-[#E5863A]' : 'text-[#E04E5E]'}`}>
                 {twinPositions.filter(p => p.isCoherent).length}/11 coherent · {overallCoherence}%
               </span>
             </div>
-            <div className="flex-1 bg-gradient-to-b from-emerald-950/30 to-zinc-900 relative overflow-hidden">
+            <div className="flex-1 bg-gradient-to-b from-[#e6f7ef]/30 to-white relative overflow-hidden">
               <svg viewBox="0 0 100 65" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                <rect x="0" y="0" width="100" height="65" fill="#0d1f0d" />
-                <line x1="50" y1="0" x2="50" y2="65" stroke="#1a3a1a" strokeWidth="0.3" />
-                <circle cx="50" cy="32.5" r="8" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                <rect x="0" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
-                <rect x="88" y="20" width="12" height="25" fill="none" stroke="#1a3a1a" strokeWidth="0.3" />
+                <rect x="0" y="0" width="100" height="65" fill="#1a5c2e" />
+                <line x1="50" y1="0" x2="50" y2="65" stroke="#2a7a40" strokeWidth="0.3" />
+                <circle cx="50" cy="32.5" r="8" fill="none" stroke="#2a7a40" strokeWidth="0.3" />
+                <rect x="0" y="20" width="12" height="25" fill="none" stroke="#2a7a40" strokeWidth="0.3" />
+                <rect x="88" y="20" width="12" height="25" fill="none" stroke="#2a7a40" strokeWidth="0.3" />
                 {idealPositions.map((pos, idx) => (
                   <g key={`ideal-${idx}`}>
-                    <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#38bdf8" opacity="0.9" />
-                    <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#38bdf8" opacity="0.7">{pos.role}</text>
+                    <circle cx={pos.x} cy={pos.y * 0.65} r="2.5" fill="#6B46C1" opacity="0.9" />
+                    <text x={pos.x} y={pos.y * 0.65 + 5} textAnchor="middle" fontSize="2.2" fill="#fff" opacity="0.8">{pos.role}</text>
                   </g>
                 ))}
                 <circle cx="45" cy="32.5" r="1.2" fill="white" />
@@ -346,104 +331,100 @@ export function ManagerScreen({
           </div>
         </div>
 
-        {/* AI Instruction Embed (Grok) */}
-        <div className="flex-shrink-0 h-[200px] border-b border-white/5">
+        {/* AI Instruction Embed */}
+        <div className="flex-shrink-0 h-[200px] border-b border-[#e8e4f0]">
           <GrokAIEmbed context="manager" matchMinute={matchMinute} compact />
         </div>
 
-        {/* Input Section: Quick Triggers + Instruction Input */}
-        <div className="flex-shrink-0 border-b border-white/5">
-          {/* Stages / Phase indicator */}
-          <div className="px-3 py-1.5 bg-black/20 flex items-center gap-2">
-            <span className="text-[9px] text-white/40 uppercase tracking-wider">Stage:</span>
-            <span className="text-[9px] text-emerald-400 font-medium">{matchState?.phase?.replace('_', ' ') || 'Pre-match'}</span>
-            <span className="text-[9px] text-white/20 ml-auto">{matchMinute}&apos;</span>
+        {/* Input Section */}
+        <div className="flex-shrink-0 border-b border-[#e8e4f0]">
+          <div className="px-4 py-2 bg-[#faf9fe] flex items-center gap-2 border-b border-[#e8e4f0]">
+            <span className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Stage:</span>
+            <span className="text-[10px] text-[#2D9F6F] font-bold">{matchState?.phase?.replace('_', ' ') || 'Pre-match'}</span>
+            <span className="text-[10px] text-[#b8b4c8] ml-auto font-medium">{matchMinute}&apos;</span>
           </div>
 
-          {/* Arrow: Quick triggers */}
-          <div className="px-3 py-1.5 grid grid-cols-4 gap-1">
+          <div className="px-3 py-2 grid grid-cols-4 gap-1.5">
             {[
-              { id: 'high_press', label: 'High Press', icon: '⬆️' },
-              { id: 'counter_press', label: 'Counter', icon: '🔄' },
-              { id: 'mid_block', label: 'Mid Block', icon: '🛡️' },
-              { id: 'low_block', label: 'Low Block', icon: '⬇️' },
-              { id: 'hold_line', label: 'Hold Line', icon: '📏' },
-              { id: 'step_up', label: 'Step Up', icon: '⬆️' },
-              { id: 'drop_deep', label: 'Drop Deep', icon: '⬇️' },
-              { id: 'man_mark', label: 'Man Mark', icon: '👤' },
+              { id: 'high_press', label: 'High Press', icon: '\u2B06\uFE0F' },
+              { id: 'counter_press', label: 'Counter', icon: '\uD83D\uDD04' },
+              { id: 'mid_block', label: 'Mid Block', icon: '\uD83D\uDEE1\uFE0F' },
+              { id: 'low_block', label: 'Low Block', icon: '\u2B07\uFE0F' },
+              { id: 'hold_line', label: 'Hold Line', icon: '\uD83D\uDCCF' },
+              { id: 'step_up', label: 'Step Up', icon: '\u2B06\uFE0F' },
+              { id: 'drop_deep', label: 'Drop Deep', icon: '\u2B07\uFE0F' },
+              { id: 'man_mark', label: 'Man Mark', icon: '\uD83D\uDC64' },
             ].map(trigger => {
               const isMarkovSuggested = patternRecognitionData.markov?.predictedNext?.home?.toLowerCase().includes(trigger.id.replace('_', ' '));
               return (
                 <button
                   key={trigger.id}
                   onClick={() => onTriggerPress(trigger.id, trigger.label)}
-                  className={`relative px-1.5 py-1 rounded text-[8px] font-medium transition-all ${
+                  className={`relative px-2 py-1.5 rounded-xl text-[9px] font-semibold transition-all ${
                     isMarkovSuggested
-                      ? 'bg-purple-500/30 text-purple-200 border border-purple-500/50'
-                      : 'bg-white/5 text-white/50 hover:bg-orange-500/20 hover:text-orange-200'
+                      ? 'bg-[#f3eefc] text-[#6B46C1] border border-[#6B46C1]/30 shadow-sm'
+                      : 'bg-[#faf9fe] text-[#8E8CA0] border border-[#e8e4f0] hover:bg-[#f3eefc] hover:text-[#6B46C1]'
                   }`}
                 >
                   <span className="mr-0.5">{trigger.icon}</span>{trigger.label}
-                  {isMarkovSuggested && <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />}
+                  {isMarkovSuggested && <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-[#6B46C1] rounded-full animate-pulse" />}
                 </button>
               );
             })}
           </div>
 
-          {/* Text instruction input */}
-          <div className="px-3 py-1.5 flex items-center gap-1.5">
+          <div className="px-3 py-2 flex items-center gap-2">
             <input
               type="text"
               value={instructionInput}
               onChange={(e) => onInstructionInputChange(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && onSendInstruction()}
               placeholder="Type instruction..."
-              className="flex-1 bg-white/5 border border-white/10 rounded px-2.5 py-1.5 text-[10px] text-white placeholder-white/30 outline-none focus:border-emerald-500/50"
+              className="flex-1 bg-[#faf9fe] border border-[#e8e4f0] rounded-full px-4 py-2 text-[11px] text-[#1a1a2e] placeholder-[#b8b4c8] outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-[#6B46C1]/10 transition-all"
             />
-            <button onClick={onToggleRecording} className={`w-7 h-7 flex items-center justify-center rounded-full ${isRecording ? 'bg-red-500/80' : 'bg-white/10 hover:bg-white/20'}`}>
-              {isRecording ? <MicOff className="w-3 h-3" /> : <Mic className="w-3 h-3" />}
+            <button onClick={onToggleRecording} className={`w-8 h-8 flex items-center justify-center rounded-full transition-all ${isRecording ? 'bg-[#E04E5E] text-white' : 'bg-[#faf9fe] text-[#8E8CA0] border border-[#e8e4f0] hover:bg-[#f3eefc]'}`}>
+              {isRecording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
             </button>
-            <button onClick={onSendInstruction} disabled={isProcessing || !instructionInput.trim()} className="w-7 h-7 flex items-center justify-center bg-emerald-600/80 hover:bg-emerald-500 disabled:opacity-30 rounded-full">
-              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
+            <button onClick={onSendInstruction} disabled={isProcessing || !instructionInput.trim()} className="w-8 h-8 flex items-center justify-center bg-[#6B46C1] hover:bg-[#5a38a8] disabled:opacity-30 rounded-full shadow-sm shadow-purple-200 transition-all">
+              {isProcessing ? <Loader2 className="w-3.5 h-3.5 text-white animate-spin" /> : <Send className="w-3.5 h-3.5 text-white" />}
             </button>
           </div>
 
-          {/* Output: Execution Log */}
-          <div className="max-h-24 overflow-y-auto px-2 py-1 space-y-0.5">
+          <div className="max-h-24 overflow-y-auto px-3 py-1 space-y-1">
             {instructionLog.slice(0, 6).map(entry => (
-              <div key={entry.id} className={`flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] ${
-                entry.status === 'applied' ? 'bg-emerald-500/10 text-emerald-300' :
-                entry.status === 'pending' ? 'bg-amber-500/10 text-amber-300' :
-                'bg-red-500/10 text-red-300'
+              <div key={entry.id} className={`flex items-center gap-2 px-3 py-1 rounded-xl text-[10px] font-medium ${
+                entry.status === 'applied' ? 'bg-[#E6F7EF] text-[#2D9F6F]' :
+                entry.status === 'pending' ? 'bg-[#FEF3E8] text-[#E5863A]' :
+                'bg-[#FDE8EB] text-[#E04E5E]'
               }`}>
-                {entry.status === 'applied' ? <CheckCircle2 className="w-2.5 h-2.5" /> :
-                 entry.status === 'pending' ? <Clock className="w-2.5 h-2.5" /> :
-                 <XCircle className="w-2.5 h-2.5" />}
+                {entry.status === 'applied' ? <CheckCircle2 className="w-3 h-3" /> :
+                 entry.status === 'pending' ? <Clock className="w-3 h-3" /> :
+                 <XCircle className="w-3 h-3" />}
                 <span className="flex-1 truncate">{entry.input}</span>
-                <span className="text-white/30">{entry.minute}&apos;</span>
+                <span className="text-[#b8b4c8]">{entry.minute}&apos;</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Key Alerts */}
-        <div className="flex-shrink-0 max-h-28 overflow-y-auto border-b border-white/5">
-          <div className="px-3 py-1.5 bg-black/20 flex items-center gap-2">
-            <AlertTriangle className="w-3 h-3 text-orange-400" />
-            <span className="text-[9px] text-orange-400 uppercase tracking-wider font-medium">Key Alerts</span>
-            <span className="text-[9px] text-white/30 ml-auto">{keyAlerts.length}</span>
+        <div className="flex-shrink-0 max-h-28 overflow-y-auto border-b border-[#e8e4f0]">
+          <div className="px-4 py-2 bg-[#faf9fe] flex items-center gap-2 border-b border-[#e8e4f0]">
+            <AlertTriangle className="w-3.5 h-3.5 text-[#E5863A]" />
+            <span className="text-[10px] text-[#E5863A] uppercase tracking-wider font-bold">Key Alerts</span>
+            <span className="text-[10px] text-[#8E8CA0] ml-auto font-medium">{keyAlerts.length}</span>
           </div>
-          <div className="px-2 py-1 space-y-0.5">
+          <div className="px-3 py-1.5 space-y-1">
             {keyAlerts.length === 0 ? (
-              <div className="text-[9px] text-white/20 text-center py-2">No alerts</div>
+              <div className="text-[10px] text-[#b8b4c8] text-center py-2 font-medium">No alerts</div>
             ) : (
               keyAlerts.slice(0, 5).map((alert, i) => (
-                <div key={i} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${
-                  alert.severity === 'high' ? 'bg-red-500/10 text-red-300' :
-                  alert.severity === 'medium' ? 'bg-amber-500/10 text-amber-300' :
-                  'bg-white/5 text-white/40'
+                <div key={i} className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-[10px] font-medium ${
+                  alert.severity === 'high' ? 'bg-[#FDE8EB] text-[#E04E5E]' :
+                  alert.severity === 'medium' ? 'bg-[#FEF3E8] text-[#E5863A]' :
+                  'bg-[#faf9fe] text-[#8E8CA0]'
                 }`}>
-                  <AlertTriangle className="w-2.5 h-2.5 flex-shrink-0" />
+                  <AlertTriangle className="w-3 h-3 flex-shrink-0" />
                   <span className="flex-1 truncate">{alert.message}</span>
                 </div>
               ))
@@ -451,21 +432,21 @@ export function ManagerScreen({
           </div>
         </div>
 
-        {/* Alert Controls (5 custom) */}
-        <div className="flex-shrink-0 px-3 py-1.5 border-b border-white/5 flex gap-1">
+        {/* Alert Controls */}
+        <div className="flex-shrink-0 px-3 py-2 border-b border-[#e8e4f0] flex gap-1.5">
           {[
-            { id: 'press_high', label: 'Press', icon: '⬆️' },
-            { id: 'sit_deep', label: 'Sit Deep', icon: '⬇️' },
-            { id: 'width', label: 'Width', icon: '↔️' },
-            { id: 'tempo_up', label: 'Tempo+', icon: '⚡' },
-            { id: 'custom', label: 'Custom', icon: '⚙️' },
+            { id: 'press_high', label: 'Press', icon: '\u2B06\uFE0F' },
+            { id: 'sit_deep', label: 'Sit Deep', icon: '\u2B07\uFE0F' },
+            { id: 'width', label: 'Width', icon: '\u2194\uFE0F' },
+            { id: 'tempo_up', label: 'Tempo+', icon: '\u26A1' },
+            { id: 'custom', label: 'Custom', icon: '\u2699\uFE0F' },
           ].map(ctrl => (
             <button
               key={ctrl.id}
               onClick={() => onTriggerPress(ctrl.id, ctrl.label)}
-              className="flex-1 px-1 py-1.5 bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-200 rounded text-[8px] text-white/50 font-medium transition-all text-center"
+              className="flex-1 px-1 py-2 bg-[#faf9fe] hover:bg-[#f3eefc] hover:text-[#6B46C1] border border-[#e8e4f0] rounded-xl text-[9px] text-[#8E8CA0] font-semibold transition-all text-center"
             >
-              <span className="block">{ctrl.icon}</span>
+              <span className="block text-sm">{ctrl.icon}</span>
               {ctrl.label}
             </button>
           ))}
@@ -473,21 +454,20 @@ export function ManagerScreen({
 
         {/* Technical Staff Comments */}
         <div className="flex-1 flex flex-col overflow-hidden min-h-0">
-          <div className="flex-shrink-0 px-3 py-1.5 bg-black/20 flex items-center gap-2">
-            <MessageSquare className="w-3 h-3 text-cyan-400" />
-            <span className="text-[9px] text-cyan-400 uppercase tracking-wider font-medium">Staff Comments</span>
+          <div className="flex-shrink-0 px-4 py-2 bg-[#faf9fe] flex items-center gap-2 border-b border-[#e8e4f0]">
+            <MessageSquare className="w-3.5 h-3.5 text-[#4F46E5]" />
+            <span className="text-[10px] text-[#4F46E5] uppercase tracking-wider font-bold">Staff Comments</span>
           </div>
 
-          {/* Category selector */}
-          <div className="flex-shrink-0 px-2 py-1 flex gap-1">
+          <div className="flex-shrink-0 px-3 py-1.5 flex gap-1 border-b border-[#e8e4f0]">
             {COMMENT_CATEGORIES.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setCommentCategory(cat.id)}
-                className={`flex items-center gap-1 px-2 py-1 rounded text-[8px] font-medium transition-all ${
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-semibold transition-all ${
                   commentCategory === cat.id
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                    : 'bg-white/5 text-white/40 hover:bg-white/10'
+                    ? 'bg-[#6B46C1] text-white shadow-sm shadow-purple-200'
+                    : 'bg-[#faf9fe] text-[#8E8CA0] border border-[#e8e4f0] hover:bg-[#f3eefc]'
                 }`}
               >
                 {cat.icon}
@@ -496,40 +476,38 @@ export function ManagerScreen({
             ))}
           </div>
 
-          {/* Comment input */}
-          <div className="flex-shrink-0 px-2 py-1 flex items-center gap-1.5">
+          <div className="flex-shrink-0 px-3 py-2 flex items-center gap-2 border-b border-[#e8e4f0]">
             <input
               type="text"
               value={commentInput}
               onChange={(e) => setCommentInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddComment()}
               placeholder="Add comment..."
-              className="flex-1 bg-white/5 border border-white/10 rounded px-2 py-1 text-[10px] text-white placeholder-white/30 outline-none focus:border-cyan-500/50"
+              className="flex-1 bg-[#faf9fe] border border-[#e8e4f0] rounded-full px-3 py-1.5 text-[11px] text-[#1a1a2e] placeholder-[#b8b4c8] outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-[#6B46C1]/10 transition-all"
             />
-            <button onClick={handleAddComment} disabled={!commentInput.trim()} className="w-6 h-6 flex items-center justify-center bg-cyan-600/80 hover:bg-cyan-500 disabled:opacity-30 rounded">
-              <Send className="w-2.5 h-2.5" />
+            <button onClick={handleAddComment} disabled={!commentInput.trim()} className="w-7 h-7 flex items-center justify-center bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-30 rounded-full shadow-sm transition-all">
+              <Send className="w-3 h-3 text-white" />
             </button>
           </div>
 
-          {/* Comments list */}
-          <div className="flex-1 overflow-y-auto px-2 py-1 space-y-1">
+          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1.5">
             {staffComments.length === 0 ? (
-              <div className="text-[9px] text-white/20 text-center py-4">No comments yet</div>
+              <div className="text-[10px] text-[#b8b4c8] text-center py-4 font-medium">No comments yet</div>
             ) : (
               staffComments.map(comment => {
                 const catColor: Record<string, string> = {
-                  line_order: 'bg-blue-500/10 text-blue-300 border-blue-500/20',
-                  tag_internal: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-                  natural: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
-                  comment: 'bg-white/5 text-white/50 border-white/10',
+                  line_order: 'bg-[#EBF2FF] text-[#3B82F6] border-[#3B82F6]/20',
+                  tag_internal: 'bg-[#FEF3E8] text-[#E5863A] border-[#E5863A]/20',
+                  natural: 'bg-[#E6F7EF] text-[#2D9F6F] border-[#2D9F6F]/20',
+                  comment: 'bg-[#faf9fe] text-[#1a1a2e] border-[#e8e4f0]',
                 };
                 return (
-                  <div key={comment.id} className={`px-2 py-1.5 rounded border ${catColor[comment.category] || catColor.comment}`}>
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[8px] font-medium uppercase">{comment.category.replace('_', ' ')}</span>
-                      <span className="text-[8px] text-white/20">{comment.minute}&apos; · {comment.author}</span>
+                  <div key={comment.id} className={`px-3 py-2 rounded-xl border ${catColor[comment.category] || catColor.comment}`}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[8px] font-bold uppercase tracking-wider">{comment.category.replace('_', ' ')}</span>
+                      <span className="text-[8px] text-[#b8b4c8] font-medium">{comment.minute}&apos; · {comment.author}</span>
                     </div>
-                    <div className="text-[9px]">{comment.content}</div>
+                    <div className="text-[10px] font-medium">{comment.content}</div>
                   </div>
                 );
               })

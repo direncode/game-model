@@ -6,11 +6,8 @@ import {
   Database,
   Cpu,
   Wifi,
-  WifiOff,
   AlertTriangle,
   CheckCircle2,
-  ChevronDown,
-  ChevronRight,
   Settings,
   Terminal,
   Sliders,
@@ -32,8 +29,6 @@ import type {
 } from '@/lib/pattern-recognition';
 import type { FatigueModel, InjuryRiskModel } from '@/lib/catapult-integration';
 import type { PipelineLogEntry } from '@/types';
-
-// ==================== Props ====================
 
 interface PatternRecognitionData {
   activePatterns: { home: TacticalPattern[]; away: TacticalPattern[] };
@@ -85,8 +80,6 @@ export interface TechnicalBackendScreenProps {
   onTickRateChange?: (rate: number) => void;
 }
 
-// ==================== Algorithm Definitions ====================
-
 interface AlgorithmDef {
   id: string;
   name: string;
@@ -97,24 +90,22 @@ interface AlgorithmDef {
 }
 
 const ALGORITHMS: AlgorithmDef[] = [
-  { id: 'game_engine', name: 'Game Engine', module: 'game-engine.ts', icon: <Cpu className="w-3.5 h-3.5" />, color: 'emerald', description: 'Match simulation, ball physics, event generation' },
-  { id: 'pattern_recognition', name: 'Pattern Recognition', module: 'pattern-recognition.ts', icon: <Brain className="w-3.5 h-3.5" />, color: 'purple', description: 'Tactical pattern detection, Markov chains, compounding effects' },
-  { id: 'catapult_integration', name: 'Catapult GPS', module: 'catapult-integration.ts', icon: <Wifi className="w-3.5 h-3.5" />, color: 'sky', description: 'GPS tracking, fatigue modeling, injury risk prediction' },
-  { id: 'analytics_engine', name: 'Analytics Engine', module: 'analytics-engine.ts', icon: <BarChart3 className="w-3.5 h-3.5" />, color: 'amber', description: 'xG calculation, passing networks, pressing traps, heatmaps' },
-  { id: 'coherence_analysis', name: 'Coherence Analysis', module: 'coherence-analysis.ts', icon: <Gauge className="w-3.5 h-3.5" />, color: 'rose', description: 'Game model coherence scoring, deviation tracking, alerts' },
-  { id: 'tactical_ai', name: 'Tactical AI', module: 'ai-manager-interface.ts', icon: <Target className="w-3.5 h-3.5" />, color: 'blue', description: 'NLP instruction processing, verification, game model updates' },
+  { id: 'game_engine', name: 'Game Engine', module: 'game-engine.ts', icon: <Cpu className="w-4 h-4" />, color: 'emerald', description: 'Match simulation, ball physics, event generation' },
+  { id: 'pattern_recognition', name: 'Pattern Recognition', module: 'pattern-recognition.ts', icon: <Brain className="w-4 h-4" />, color: 'purple', description: 'Tactical pattern detection, Markov chains, compounding effects' },
+  { id: 'catapult_integration', name: 'Catapult GPS', module: 'catapult-integration.ts', icon: <Wifi className="w-4 h-4" />, color: 'blue', description: 'GPS tracking, fatigue modeling, injury risk prediction' },
+  { id: 'analytics_engine', name: 'Analytics Engine', module: 'analytics-engine.ts', icon: <BarChart3 className="w-4 h-4" />, color: 'orange', description: 'xG calculation, passing networks, pressing traps, heatmaps' },
+  { id: 'coherence_analysis', name: 'Coherence Analysis', module: 'coherence-analysis.ts', icon: <Gauge className="w-4 h-4" />, color: 'red', description: 'Game model coherence scoring, deviation tracking, alerts' },
+  { id: 'tactical_ai', name: 'Tactical AI', module: 'ai-manager-interface.ts', icon: <Target className="w-4 h-4" />, color: 'indigo', description: 'NLP instruction processing, verification, game model updates' },
 ];
 
 const DATA_SOURCES = [
-  { id: 'gps', name: 'GPS / Catapult', icon: <Wifi className="w-3 h-3" /> },
-  { id: 'match_events', name: 'Match Events', icon: <Activity className="w-3 h-3" /> },
-  { id: 'player_tracking', name: 'Player Tracking', icon: <Database className="w-3 h-3" /> },
-  { id: 'pattern_engine', name: 'Pattern Engine', icon: <Brain className="w-3 h-3" /> },
-  { id: 'coherence', name: 'Coherence Analysis', icon: <Gauge className="w-3 h-3" /> },
-  { id: 'ai_interface', name: 'AI Interface', icon: <Zap className="w-3 h-3" /> },
+  { id: 'gps', name: 'GPS / Catapult', icon: <Wifi className="w-3.5 h-3.5" /> },
+  { id: 'match_events', name: 'Match Events', icon: <Activity className="w-3.5 h-3.5" /> },
+  { id: 'player_tracking', name: 'Player Tracking', icon: <Database className="w-3.5 h-3.5" /> },
+  { id: 'pattern_engine', name: 'Pattern Engine', icon: <Brain className="w-3.5 h-3.5" /> },
+  { id: 'coherence', name: 'Coherence Analysis', icon: <Gauge className="w-3.5 h-3.5" /> },
+  { id: 'ai_interface', name: 'AI Interface', icon: <Zap className="w-3.5 h-3.5" /> },
 ];
-
-// ==================== Component ====================
 
 export function TechnicalBackendScreen({
   isLive,
@@ -129,9 +120,7 @@ export function TechnicalBackendScreen({
   eventsCount,
 }: TechnicalBackendScreenProps) {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>('game_engine');
-  const [expandedAlgorithm, setExpandedAlgorithm] = useState<string | null>('game_engine');
 
-  // Derive algorithm statuses from real data
   const algorithmStatuses = useMemo(() => {
     const homePatterns = patternRecognitionData.activePatterns.home;
     const coherence = patternRecognitionData.coherence.home;
@@ -144,99 +133,69 @@ export function TechnicalBackendScreen({
     return {
       game_engine: {
         status: isLive ? 'active' as const : 'idle' as const,
-        metrics: {
-          'Tick Rate': `${tickRate}Hz`,
-          'Match Phase': matchPhase.replace('_', ' '),
-          'Events': eventsCount.toString(),
-          'Ball Updates': isLive ? '100%' : '0%',
-        },
+        metrics: { 'Tick Rate': `${tickRate}Hz`, 'Match Phase': matchPhase.replace('_', ' '), 'Events': eventsCount.toString(), 'Ball Updates': isLive ? '100%' : '0%' },
       },
       pattern_recognition: {
         status: (isLive && homePatterns.length > 0 ? 'active' : isLive ? 'warming_up' : 'idle') as 'active' | 'idle' | 'warming_up',
-        metrics: {
-          'Patterns Detected': homePatterns.length.toString(),
-          'Chain Health': patternRecognitionData.markov?.currentChains?.home ? 'Building' : 'No chain',
-          'Sequences': (patternRecognitionData.markov?.recurrentSequences?.length || 0).toString(),
-          'Logs': patternRecognitionData.recentLogs.length.toString(),
-        },
+        metrics: { 'Patterns': homePatterns.length.toString(), 'Chain': patternRecognitionData.markov?.currentChains?.home ? 'Building' : 'No chain', 'Sequences': (patternRecognitionData.markov?.recurrentSequences?.length || 0).toString(), 'Logs': patternRecognitionData.recentLogs.length.toString() },
       },
       catapult_integration: {
         status: (homeFatigueCount > 0 ? 'active' : isLive ? 'warming_up' : 'idle') as 'active' | 'idle' | 'warming_up',
-        metrics: {
-          'Players Tracked': `${homeFatigueCount + fatigueData.away.size}`,
-          'Fatigue Models': homeFatigueCount.toString(),
-          'Injury Risks': fatigueData.injuryRisks.size.toString(),
-          'Sub Targets': fatigueData.recommendations.substitutionTargets.length.toString(),
-        },
+        metrics: { 'Tracked': `${homeFatigueCount + fatigueData.away.size}`, 'Fatigue': homeFatigueCount.toString(), 'Injury Risk': fatigueData.injuryRisks.size.toString(), 'Sub Targets': fatigueData.recommendations.substitutionTargets.length.toString() },
       },
       analytics_engine: {
         status: (matchStats ? 'active' : isLive ? 'warming_up' : 'idle') as 'active' | 'idle' | 'warming_up',
-        metrics: {
-          'Home xG': matchStats?.xG.home.toFixed(2) ?? '0.00',
-          'Away xG': matchStats?.xG.away.toFixed(2) ?? '0.00',
-          'Shots': `${matchStats?.shots.home ?? 0}/${matchStats?.shots.away ?? 0}`,
-          'Pass Acc': `${matchStats?.passAccuracy?.home ?? 0}%`,
-        },
+        metrics: { 'Home xG': matchStats?.xG.home.toFixed(2) ?? '0.00', 'Away xG': matchStats?.xG.away.toFixed(2) ?? '0.00', 'Shots': `${matchStats?.shots.home ?? 0}/${matchStats?.shots.away ?? 0}`, 'Pass Acc': `${matchStats?.passAccuracy?.home ?? 0}%` },
       },
       coherence_analysis: {
         status: (coherence ? 'active' : isLive ? 'warming_up' : 'idle') as 'active' | 'idle' | 'warming_up',
-        metrics: {
-          'Score': coherence ? `${coherence.coherenceScore}%` : 'N/A',
-          'Deviations': (coherence?.deviations?.length ?? 0).toString(),
-          'Trend': coherence?.historicalComparison?.trend ?? 'N/A',
-          'Game Model': coherence?.gameModel?.replace(/_/g, ' ') ?? 'None',
-        },
+        metrics: { 'Score': coherence ? `${coherence.coherenceScore}%` : 'N/A', 'Deviations': (coherence?.deviations?.length ?? 0).toString(), 'Trend': coherence?.historicalComparison?.trend ?? 'N/A', 'Model': coherence?.gameModel?.replace(/_/g, ' ') ?? 'None' },
       },
       tactical_ai: {
         status: (instructionsProcessed > 0 ? 'active' : 'idle') as 'active' | 'idle',
-        metrics: {
-          'Processed': instructionsProcessed.toString(),
-          'Applied': instructionLog.filter(l => l.status === 'applied').length.toString(),
-          'Rejected': instructionLog.filter(l => l.status === 'rejected').length.toString(),
-          'Avg Conf': avgConfidence > 0 ? `${Math.round(avgConfidence * 100)}%` : 'N/A',
-        },
+        metrics: { 'Processed': instructionsProcessed.toString(), 'Applied': instructionLog.filter(l => l.status === 'applied').length.toString(), 'Rejected': instructionLog.filter(l => l.status === 'rejected').length.toString(), 'Avg Conf': avgConfidence > 0 ? `${Math.round(avgConfidence * 100)}%` : 'N/A' },
       },
     };
   }, [isLive, matchStats, patternRecognitionData, fatigueData, instructionLog, tickRate, matchPhase, eventsCount]);
 
-  const statusColor = (s: string) => {
+  const statusBadge = (s: string) => {
     switch (s) {
-      case 'active': return 'text-emerald-400 bg-emerald-500/20';
-      case 'warming_up': return 'text-amber-400 bg-amber-500/20';
-      case 'error': return 'text-red-400 bg-red-500/20';
-      default: return 'text-white/40 bg-white/10';
+      case 'active': return 'text-[#2D9F6F] bg-[#E6F7EF]';
+      case 'warming_up': return 'text-[#E5863A] bg-[#FEF3E8]';
+      case 'error': return 'text-[#E04E5E] bg-[#FDE8EB]';
+      default: return 'text-[#8E8CA0] bg-[#f3eefc]';
     }
   };
 
   const algoColorClass = (color: string) => {
     const map: Record<string, string> = {
-      emerald: 'text-emerald-400', purple: 'text-purple-400', sky: 'text-sky-400',
-      amber: 'text-amber-400', rose: 'text-rose-400', blue: 'text-blue-400',
+      emerald: 'text-[#2D9F6F]', purple: 'text-[#6B46C1]', blue: 'text-[#3B82F6]',
+      orange: 'text-[#E5863A]', red: 'text-[#E04E5E]', indigo: 'text-[#4F46E5]',
     };
-    return map[color] || 'text-white/60';
+    return map[color] || 'text-[#8E8CA0]';
   };
 
   return (
     <div className="flex-1 flex overflow-hidden">
-      {/* Left Column: Data Sources + Algorithms + Detail View */}
-      <div className="flex-1 flex flex-col overflow-hidden p-2 gap-2">
-        {/* Top Row: Data Source Status + Algorithm Reformation */}
-        <div className="flex gap-2 flex-shrink-0">
+      {/* Left Column */}
+      <div className="flex-1 flex flex-col overflow-hidden p-4 gap-4">
+        {/* Top Row */}
+        <div className="flex gap-4 flex-shrink-0">
           {/* Data Source Status */}
-          <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden">
-            <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-              <Database className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-[10px] uppercase tracking-wider text-emerald-400 font-medium">Data Source Status</span>
+          <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Database className="w-4 h-4 text-[#2D9F6F]" />
+              <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Data Source Status</span>
             </div>
-            <div className="p-2 space-y-1">
+            <div className="p-3 space-y-1.5">
               {DATA_SOURCES.map(source => {
                 const connected = isLive;
                 return (
-                  <div key={source.id} className="flex items-center gap-2 px-2 py-1.5 rounded bg-black/20">
-                    <span className="text-white/50">{source.icon}</span>
-                    <span className="flex-1 text-[10px] text-white/70">{source.name}</span>
-                    <span className={`w-1.5 h-1.5 rounded-full ${connected ? 'bg-emerald-500' : 'bg-white/20'}`} />
-                    <span className={`text-[9px] px-1.5 py-0.5 rounded ${connected ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-white/30'}`}>
+                  <div key={source.id} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-[#faf9fe]">
+                    <span className="text-[#8E8CA0]">{source.icon}</span>
+                    <span className="flex-1 text-[11px] text-[#1a1a2e] font-medium">{source.name}</span>
+                    <span className={`w-2 h-2 rounded-full ${connected ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
+                    <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${connected ? 'bg-[#E6F7EF] text-[#2D9F6F]' : 'bg-[#f3eefc] text-[#8E8CA0]'}`}>
                       {connected ? 'LIVE' : 'IDLE'}
                     </span>
                   </div>
@@ -245,31 +204,28 @@ export function TechnicalBackendScreen({
             </div>
           </div>
 
-          {/* Algorithm Reformation (1-6) */}
-          <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden">
-            <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-              <Cpu className="w-3.5 h-3.5 text-purple-400" />
-              <span className="text-[10px] uppercase tracking-wider text-purple-400 font-medium">Algorithm Reformation</span>
+          {/* Algorithm Reformation */}
+          <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-[#6B46C1]" />
+              <span className="text-[11px] uppercase tracking-wider text-[#6B46C1] font-bold">Algorithm Reformation</span>
             </div>
-            <div className="p-2 space-y-1">
+            <div className="p-3 space-y-1.5">
               {ALGORITHMS.map((algo, idx) => {
                 const status = algorithmStatuses[algo.id as keyof typeof algorithmStatuses];
                 const isSelected = selectedAlgorithm === algo.id;
                 return (
                   <button
                     key={algo.id}
-                    onClick={() => {
-                      setSelectedAlgorithm(algo.id);
-                      setExpandedAlgorithm(algo.id);
-                    }}
-                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left transition-all ${
-                      isSelected ? 'bg-white/10 border border-white/10' : 'bg-black/20 hover:bg-white/5'
+                    onClick={() => setSelectedAlgorithm(algo.id)}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+                      isSelected ? 'bg-[#f3eefc] border border-[#6B46C1]/20 shadow-sm' : 'bg-[#faf9fe] hover:bg-[#f3eefc]'
                     }`}
                   >
-                    <span className="text-[10px] text-white/30 w-4 font-mono">{idx + 1}.</span>
+                    <span className="text-[11px] text-[#b8b4c8] w-5 font-mono font-bold">{idx + 1}.</span>
                     <span className={algoColorClass(algo.color)}>{algo.icon}</span>
-                    <span className="flex-1 text-[10px] text-white/80 font-medium">{algo.name}</span>
-                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-medium ${statusColor(status.status)}`}>
+                    <span className="flex-1 text-[11px] text-[#1a1a2e] font-semibold">{algo.name}</span>
+                    <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${statusBadge(status.status)}`}>
                       {status.status.replace('_', ' ').toUpperCase()}
                     </span>
                   </button>
@@ -279,55 +235,52 @@ export function TechnicalBackendScreen({
           </div>
         </div>
 
-        {/* Detail Algorithm Operation Modification (Expanded View) */}
-        <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden flex flex-col min-h-0">
-          <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-            <Settings className="w-3.5 h-3.5 text-sky-400" />
-            <span className="text-[10px] uppercase tracking-wider text-sky-400 font-medium">
+        {/* Detail Algorithm Operation */}
+        <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
+          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Settings className="w-4 h-4 text-[#3B82F6]" />
+            <span className="text-[11px] uppercase tracking-wider text-[#3B82F6] font-bold">
               Detail Algorithm Operation — {ALGORITHMS.find(a => a.id === selectedAlgorithm)?.name}
             </span>
           </div>
-          <div className="flex-1 overflow-y-auto p-3">
+          <div className="flex-1 overflow-y-auto p-4">
             {(() => {
               const algo = ALGORITHMS.find(a => a.id === selectedAlgorithm);
               const status = algorithmStatuses[selectedAlgorithm as keyof typeof algorithmStatuses];
               if (!algo || !status) return null;
 
               return (
-                <div className="space-y-3">
-                  {/* Module Info */}
+                <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className={`${algoColorClass(algo.color)}`}>{algo.icon}</span>
+                    <span className={algoColorClass(algo.color)}>{algo.icon}</span>
                     <div>
-                      <div className="text-[11px] text-white/90 font-medium">{algo.name}</div>
-                      <div className="text-[9px] text-white/40 font-mono">{algo.module}</div>
+                      <div className="text-[13px] text-[#1a1a2e] font-bold">{algo.name}</div>
+                      <div className="text-[10px] text-[#8E8CA0] font-mono">{algo.module}</div>
                     </div>
-                    <span className={`ml-auto text-[9px] px-2 py-0.5 rounded font-medium ${statusColor(status.status)}`}>
+                    <span className={`ml-auto text-[9px] px-3 py-1 rounded-full font-bold ${statusBadge(status.status)}`}>
                       {status.status.replace('_', ' ').toUpperCase()}
                     </span>
                   </div>
-                  <p className="text-[10px] text-white/50">{algo.description}</p>
+                  <p className="text-[11px] text-[#8E8CA0]">{algo.description}</p>
 
-                  {/* Live Metrics Grid */}
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-3">
                     {Object.entries(status.metrics).map(([key, value]) => (
-                      <div key={key} className="bg-black/30 rounded p-2 border border-white/5">
-                        <div className="text-[8px] text-white/40 uppercase tracking-wider">{key}</div>
-                        <div className="text-[12px] text-white/90 font-medium mt-0.5">{value}</div>
+                      <div key={key} className="bg-[#faf9fe] rounded-xl p-3 border border-[#e8e4f0]">
+                        <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold">{key}</div>
+                        <div className="text-[14px] text-[#1a1a2e] font-bold mt-1">{value}</div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Algorithm-specific expanded data */}
                   {selectedAlgorithm === 'pattern_recognition' && patternRecognitionData.markov && (
                     <div className="space-y-2">
-                      <div className="text-[9px] text-white/40 uppercase tracking-wider">Markov Transitions (Home)</div>
+                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Markov Transitions (Home)</div>
                       {patternRecognitionData.markov.topTransitions.home.slice(0, 4).map((t, i) => (
-                        <div key={i} className="flex items-center gap-2 px-2 py-1 bg-purple-500/10 rounded text-[9px]">
-                          <span className="text-purple-300">{t.from.replace(/_/g, ' ')}</span>
-                          <span className="text-white/30">→</span>
-                          <span className="text-purple-300">{t.to.replace(/_/g, ' ')}</span>
-                          <span className="ml-auto text-white/40">{Math.round(t.probability * 100)}%</span>
+                        <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#f3eefc] rounded-xl text-[10px]">
+                          <span className="text-[#6B46C1] font-medium">{t.from.replace(/_/g, ' ')}</span>
+                          <span className="text-[#b8b4c8]">\u2192</span>
+                          <span className="text-[#6B46C1] font-medium">{t.to.replace(/_/g, ' ')}</span>
+                          <span className="ml-auto text-[#8E8CA0] font-mono">{Math.round(t.probability * 100)}%</span>
                         </div>
                       ))}
                     </div>
@@ -335,14 +288,14 @@ export function TechnicalBackendScreen({
 
                   {selectedAlgorithm === 'catapult_integration' && fatigueData.recommendations.substitutionTargets.length > 0 && (
                     <div className="space-y-2">
-                      <div className="text-[9px] text-white/40 uppercase tracking-wider">Substitution Targets</div>
+                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Substitution Targets</div>
                       {fatigueData.recommendations.substitutionTargets.map((t, i) => (
-                        <div key={i} className={`flex items-center gap-2 px-2 py-1 rounded text-[9px] ${
-                          t.priority === 'urgent' ? 'bg-red-500/10 text-red-300' :
-                          t.priority === 'soon' ? 'bg-amber-500/10 text-amber-300' :
-                          'bg-white/5 text-white/50'
+                        <div key={i} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-[10px] font-medium ${
+                          t.priority === 'urgent' ? 'bg-[#FDE8EB] text-[#E04E5E]' :
+                          t.priority === 'soon' ? 'bg-[#FEF3E8] text-[#E5863A]' :
+                          'bg-[#faf9fe] text-[#8E8CA0]'
                         }`}>
-                          <span className="font-medium uppercase">{t.priority}</span>
+                          <span className="uppercase font-bold">{t.priority}</span>
                           <span className="flex-1">{t.reason}</span>
                         </div>
                       ))}
@@ -351,12 +304,12 @@ export function TechnicalBackendScreen({
 
                   {selectedAlgorithm === 'coherence_analysis' && patternRecognitionData.coherence.home && (
                     <div className="space-y-2">
-                      <div className="text-[9px] text-white/40 uppercase tracking-wider">Deviations</div>
+                      <div className="text-[10px] text-[#8E8CA0] uppercase tracking-wider font-semibold">Deviations</div>
                       {patternRecognitionData.coherence.home.deviations.map((d, i) => (
-                        <div key={i} className="flex items-center gap-2 px-2 py-1 bg-rose-500/10 rounded text-[9px] text-rose-300">
-                          <AlertTriangle className="w-3 h-3" />
+                        <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#FDE8EB] rounded-xl text-[10px] text-[#E04E5E] font-medium">
+                          <AlertTriangle className="w-3.5 h-3.5" />
                           <span className="flex-1">{d.pattern} — {d.reason}</span>
-                          <span className="text-white/30">{Math.round(d.deviation)}%</span>
+                          <span className="text-[#8E8CA0]">{Math.round(d.deviation)}%</span>
                         </div>
                       ))}
                     </div>
@@ -368,81 +321,78 @@ export function TechnicalBackendScreen({
         </div>
       </div>
 
-      {/* Right Column: Live Debugging + Pipeline Logs + Model Customization */}
-      <div className="w-[420px] flex flex-col overflow-hidden gap-2 p-2 pl-0">
+      {/* Right Column */}
+      <div className="w-[420px] flex flex-col overflow-hidden gap-4 p-4 pl-0">
         {/* Live Debugging + AI Embed */}
-        <div className="flex-1 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden flex flex-col min-h-0">
-          <div className="px-3 py-2 bg-black/40 border-b border-white/5 flex items-center gap-2">
-            <Terminal className="w-3.5 h-3.5 text-green-400" />
-            <span className="text-[10px] uppercase tracking-wider text-green-400 font-medium">Live Debugging</span>
-            {isLive && <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />}
+        <div className="flex-1 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col min-h-0">
+          <div className="px-4 py-3 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-[#2D9F6F]" />
+            <span className="text-[11px] uppercase tracking-wider text-[#2D9F6F] font-bold">Live Debugging</span>
+            {isLive && <span className="w-2 h-2 bg-[#2D9F6F] rounded-full animate-pulse" />}
           </div>
-          {/* Debug Log Stream */}
-          <div className="flex-1 overflow-y-auto px-2 py-1 font-mono min-h-0">
+          <div className="flex-1 overflow-y-auto px-3 py-2 font-mono min-h-0 bg-[#faf9fe]">
             {pipelineLogs.length === 0 ? (
-              <div className="flex items-center justify-center h-full text-white/20 text-[10px]">
+              <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[11px]">
                 {isLive ? 'Waiting for pipeline events...' : 'Start match to see debug output'}
               </div>
             ) : (
               pipelineLogs.slice(0, 30).map((log) => (
-                <div key={log.id} className={`text-[9px] py-0.5 flex gap-2 ${
-                  log.level === 'error' ? 'text-red-400' :
-                  log.level === 'warn' ? 'text-amber-400' :
-                  log.level === 'debug' ? 'text-white/30' :
-                  'text-white/50'
+                <div key={log.id} className={`text-[10px] py-0.5 flex gap-2 ${
+                  log.level === 'error' ? 'text-[#E04E5E]' :
+                  log.level === 'warn' ? 'text-[#E5863A]' :
+                  'text-[#8E8CA0]'
                 }`}>
-                  <span className="text-white/20 flex-shrink-0">{log.timestamp.toLocaleTimeString('en-GB', { hour12: false })}</span>
-                  <span className={`flex-shrink-0 w-16 ${
-                    log.level === 'error' ? 'text-red-500' :
-                    log.level === 'warn' ? 'text-amber-500' :
-                    'text-white/30'
+                  <span className="text-[#b8b4c8] flex-shrink-0">{log.timestamp.toLocaleTimeString('en-GB', { hour12: false })}</span>
+                  <span className={`flex-shrink-0 w-16 font-semibold ${
+                    log.level === 'error' ? 'text-[#E04E5E]' :
+                    log.level === 'warn' ? 'text-[#E5863A]' :
+                    'text-[#6B46C1]'
                   }`}>[{log.module}]</span>
                   <span className="flex-1 truncate">{log.message}</span>
                 </div>
               ))
             )}
           </div>
-          {/* AI Embed */}
-          <div className="flex-shrink-0 border-t border-white/5 h-[220px]">
+          <div className="flex-shrink-0 border-t border-[#e8e4f0] h-[220px]">
             <GrokAIEmbed context="backend" matchMinute={matchMinute} compact />
           </div>
         </div>
 
-        {/* Pipeline Logs (Formatted) */}
-        <div className="h-40 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden flex flex-col">
-          <div className="px-3 py-1.5 bg-black/40 border-b border-white/5 flex items-center gap-2">
-            <Activity className="w-3 h-3 text-orange-400" />
-            <span className="text-[10px] uppercase tracking-wider text-orange-400 font-medium">Pipeline Logs</span>
-            <span className="text-[9px] text-white/30 ml-auto">{pipelineLogs.length} entries</span>
+        {/* Pipeline Logs */}
+        <div className="h-40 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
+          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Activity className="w-3.5 h-3.5 text-[#E5863A]" />
+            <span className="text-[11px] uppercase tracking-wider text-[#E5863A] font-bold">Pipeline Logs</span>
+            <span className="text-[10px] text-[#8E8CA0] ml-auto font-medium">{pipelineLogs.length} entries</span>
           </div>
-          <div className="flex-1 overflow-y-auto px-2 py-1 font-mono">
+          <div className="flex-1 overflow-y-auto px-3 py-2">
             {pipelineLogs.filter(l => l.level !== 'debug').slice(0, 20).map((log) => (
-              <div key={log.id} className="text-[9px] py-0.5 flex items-start gap-1.5">
-                {log.level === 'error' ? <AlertTriangle className="w-2.5 h-2.5 text-red-400 flex-shrink-0 mt-0.5" /> :
-                 log.level === 'warn' ? <AlertTriangle className="w-2.5 h-2.5 text-amber-400 flex-shrink-0 mt-0.5" /> :
-                 <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400/50 flex-shrink-0 mt-0.5" />}
-                <span className="text-white/50 truncate">{log.message}</span>
+              <div key={log.id} className="text-[10px] py-0.5 flex items-start gap-2">
+                {log.level === 'error' ? <AlertTriangle className="w-3 h-3 text-[#E04E5E] flex-shrink-0 mt-0.5" /> :
+                 log.level === 'warn' ? <AlertTriangle className="w-3 h-3 text-[#E5863A] flex-shrink-0 mt-0.5" /> :
+                 <CheckCircle2 className="w-3 h-3 text-[#2D9F6F] flex-shrink-0 mt-0.5" />}
+                <span className="text-[#1a1a2e]/70 truncate">{log.message}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Model Customization */}
-        <div className="h-36 bg-zinc-900 rounded-xl border border-white/5 overflow-hidden flex flex-col">
-          <div className="px-3 py-1.5 bg-black/40 border-b border-white/5 flex items-center gap-2">
-            <Sliders className="w-3 h-3 text-cyan-400" />
-            <span className="text-[10px] uppercase tracking-wider text-cyan-400 font-medium">Model Customization</span>
+        <div className="h-36 bg-white rounded-2xl border border-[#e8e4f0] overflow-hidden shadow-sm flex flex-col">
+          <div className="px-4 py-2.5 border-b border-[#e8e4f0] flex items-center gap-2">
+            <Sliders className="w-3.5 h-3.5 text-[#4F46E5]" />
+            <span className="text-[11px] uppercase tracking-wider text-[#4F46E5] font-bold">Model Customization</span>
           </div>
-          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-2">
+          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {[
               { label: 'Confidence Threshold', value: 0.65, min: 0.3, max: 1.0 },
               { label: 'Coherence Sensitivity', value: 15, min: 5, max: 30 },
               { label: 'Pattern Min Confidence', value: 0.5, min: 0.2, max: 0.9 },
             ].map((param) => (
-              <div key={param.label} className="space-y-0.5">
+              <div key={param.label} className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] text-white/50">{param.label}</span>
-                  <span className="text-[9px] text-white/80 font-mono">{param.value}</span>
+                  <span className="text-[10px] text-[#8E8CA0] font-medium">{param.label}</span>
+                  <span className="text-[10px] text-[#1a1a2e] font-bold font-mono">{param.value}</span>
                 </div>
                 <input
                   type="range"
@@ -450,7 +400,7 @@ export function TechnicalBackendScreen({
                   max={param.max}
                   step={0.05}
                   defaultValue={param.value}
-                  className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full"
                 />
               </div>
             ))}
