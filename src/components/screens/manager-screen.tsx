@@ -83,6 +83,26 @@ interface TwinPosition {
   isCoherent: boolean;
 }
 
+interface PLStanding {
+  position: number;
+  team: { id: number; name: string; shortName: string; crest: string };
+  playedGames: number;
+  won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+}
+
+interface PLMatchForm {
+  id: number;
+  homeTeam: { id: number; name: string };
+  awayTeam: { id: number; name: string };
+  score: { fullTime: { home: number | null; away: number | null } };
+}
+
 export interface ManagerScreenProps {
   isLive: boolean;
   matchState: MatchState | null;
@@ -108,6 +128,9 @@ export interface ManagerScreenProps {
   onTemplateSelect: (templateId: string) => void;
   templates: GameModelTemplate[];
   modelName: string;
+  standings?: PLStanding[];
+  homeForm?: PLMatchForm[];
+  awayForm?: PLMatchForm[];
 }
 
 const COMMENT_CATEGORIES = [
@@ -142,6 +165,9 @@ export function ManagerScreen({
   onTemplateSelect,
   templates,
   modelName,
+  standings,
+  homeForm,
+  awayForm,
 }: ManagerScreenProps) {
   const { staffComments, addStaffComment } = useGameStore();
   const [commentInput, setCommentInput] = useState('');
@@ -257,10 +283,46 @@ export function ManagerScreen({
               <span className="text-[10px] uppercase tracking-wider text-[#E5863A] font-bold">Game Specific</span>
             </div>
             <div className="p-2 space-y-1">
-              <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium">vs Manchester United — Counter-attacking style</div>
-              <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium">Key battle: Midfield pressing zones</div>
-              <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium">Focus: Width exploitation, half-spaces</div>
-              <div className="text-[9px] text-[#8E8CA0] mt-0.5 font-medium">Phase: <span className="text-[#6B46C1] font-bold">{matchState?.phase?.replace('_', ' ') || 'pre-match'}</span></div>
+              {(() => {
+                const mciStanding = standings?.find(s => s.team.id === 65);
+                const munStanding = standings?.find(s => s.team.id === 66);
+                const getFormDots = (matches: PLMatchForm[] | undefined, teamId: number) => {
+                  if (!matches?.length) return null;
+                  return matches.slice(0, 5).map((m, i) => {
+                    const isHome = m.homeTeam.id === teamId;
+                    const h = m.score?.fullTime?.home ?? 0;
+                    const a = m.score?.fullTime?.away ?? 0;
+                    const result = isHome ? (h > a ? 'W' : h < a ? 'L' : 'D') : (a > h ? 'W' : a < h ? 'L' : 'D');
+                    const color = result === 'W' ? 'bg-[#2D9F6F]' : result === 'D' ? 'bg-[#E5863A]' : 'bg-[#E04E5E]';
+                    return <span key={i} className={`w-2 h-2 rounded-full ${color}`} title={result} />;
+                  });
+                };
+                return (
+                  <>
+                    <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium flex items-center justify-between">
+                      <span>vs Manchester United — Counter-attacking style</span>
+                      {munStanding && <span className="text-[#8E8CA0]">#{munStanding.position} · {munStanding.points}pts</span>}
+                    </div>
+                    {(homeForm?.length || awayForm?.length) ? (
+                      <div className="flex gap-2 px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0]">
+                        <div className="flex items-center gap-1">
+                          <span className="text-[8px] text-[#6B46C1] font-bold">MCI</span>
+                          <div className="flex gap-0.5">{getFormDots(homeForm, 65)}</div>
+                          {mciStanding && <span className="text-[8px] text-[#8E8CA0] ml-1">#{mciStanding.position}</span>}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-[8px] text-[#E04E5E] font-bold">MUN</span>
+                          <div className="flex gap-0.5">{getFormDots(awayForm, 66)}</div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium">Key battle: Midfield pressing zones</div>
+                    )}
+                    <div className="text-[9px] text-[#1a1a2e] px-2 py-1 bg-[#faf9fe] rounded-lg border border-[#e8e4f0] font-medium">Focus: Width exploitation, half-spaces</div>
+                    <div className="text-[9px] text-[#8E8CA0] mt-0.5 font-medium">Phase: <span className="text-[#6B46C1] font-bold">{matchState?.phase?.replace('_', ' ') || 'pre-match'}</span></div>
+                  </>
+                );
+              })()}
             </div>
           </div>
         </div>

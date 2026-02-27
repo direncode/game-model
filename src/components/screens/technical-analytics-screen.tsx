@@ -65,6 +65,27 @@ interface InstructionLogEntry {
   effect?: string;
 }
 
+interface PLStanding {
+  position: number;
+  team: { id: number; name: string; shortName: string; crest: string };
+  playedGames: number;
+  won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+}
+
+interface TopScorer {
+  player: { id: number; name: string; nationality: string };
+  team: { id: number; name: string; shortName: string; crest: string };
+  goals: number;
+  assists: number | null;
+  penalties: number | null;
+}
+
 export interface TechnicalAnalyticsScreenProps {
   isLive: boolean;
   matchMinute: number;
@@ -76,6 +97,8 @@ export interface TechnicalAnalyticsScreenProps {
   instructionLog: InstructionLogEntry[];
   overallCoherence: number;
   alerts: { type: string; severity: string; message: string; timestamp: Date }[];
+  standings?: PLStanding[];
+  scorers?: TopScorer[];
 }
 
 function StatBar({ label, value, max, color }: { label: string; value: number; max: number; color: string }) {
@@ -108,6 +131,8 @@ export function TechnicalAnalyticsScreen({
   instructionLog,
   overallCoherence,
   alerts,
+  standings,
+  scorers,
 }: TechnicalAnalyticsScreenProps) {
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [enabledAlgorithms, setEnabledAlgorithms] = useState<Set<string>>(
@@ -274,6 +299,52 @@ export function TechnicalAnalyticsScreen({
                     />
                   </div>
                 </div>
+
+                {/* League Context — from real API */}
+                {standings && standings.length > 0 && (() => {
+                  const mci = standings.find(s => s.team.id === 65);
+                  const mun = standings.find(s => s.team.id === 66);
+                  if (!mci && !mun) return null;
+                  return (
+                    <div className="pt-2 border-t border-[#e8e4f0]">
+                      <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold mb-1.5">League Context</div>
+                      <div className="space-y-1">
+                        {mci && (
+                          <div className="flex items-center gap-2 px-2 py-1.5 bg-[#f3eefc] rounded-lg text-[9px]">
+                            <span className="text-[#6B46C1] font-bold">MCI</span>
+                            <span className="text-[#1a1a2e] font-medium">#{mci.position} · {mci.points}pts</span>
+                            <span className="text-[#8E8CA0] ml-auto">{mci.won}W {mci.draw}D {mci.lost}L · GD {mci.goalDifference > 0 ? '+' : ''}{mci.goalDifference}</span>
+                          </div>
+                        )}
+                        {mun && (
+                          <div className="flex items-center gap-2 px-2 py-1.5 bg-[#FDE8EB]/50 rounded-lg text-[9px]">
+                            <span className="text-[#E04E5E] font-bold">MUN</span>
+                            <span className="text-[#1a1a2e] font-medium">#{mun.position} · {mun.points}pts</span>
+                            <span className="text-[#8E8CA0] ml-auto">{mun.won}W {mun.draw}D {mun.lost}L · GD {mun.goalDifference > 0 ? '+' : ''}{mun.goalDifference}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Top Scorers — from real API */}
+                {scorers && scorers.length > 0 && (
+                  <div className="pt-2 border-t border-[#e8e4f0]">
+                    <div className="text-[9px] text-[#8E8CA0] uppercase tracking-wider font-semibold mb-1.5">PL Top Scorers</div>
+                    <div className="space-y-0.5">
+                      {scorers.slice(0, 5).map((s, i) => (
+                        <div key={s.player.id} className="flex items-center gap-2 px-2 py-1 bg-[#faf9fe] rounded-lg text-[9px]">
+                          <span className="text-[#b8b4c8] font-mono w-3 text-right font-bold">{i + 1}</span>
+                          <span className="text-[#1a1a2e] font-medium flex-1 truncate">{s.player.name}</span>
+                          <span className="text-[#8E8CA0] text-[8px]">{s.team.shortName}</span>
+                          <span className="text-[#6B46C1] font-bold">{s.goals}G</span>
+                          {s.assists != null && <span className="text-[#8E8CA0]">{s.assists}A</span>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center justify-center h-full text-[#b8b4c8] text-[10px] font-medium">

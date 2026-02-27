@@ -10,8 +10,8 @@ import type {
 
 // ==================== API Configuration ====================
 
-const FOOTBALL_DATA_API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_API_KEY || '';
-const API_FOOTBALL_KEY = process.env.NEXT_PUBLIC_API_FOOTBALL_KEY || '';
+const FOOTBALL_DATA_API_KEY = process.env.FOOTBALL_DATA_API_KEY || '';
+const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY || '';
 
 const FOOTBALL_DATA_BASE_URL = 'https://api.football-data.org/v4';
 const API_FOOTBALL_BASE_URL = 'https://v3.football.api-sports.io';
@@ -338,7 +338,7 @@ export function convertPLPlayerToPlayer(plPlayer: PLPlayer, teamName: string): P
   };
 }
 
-function mapPLPosition(position: string): PlayerPosition {
+export function mapPLPosition(position: string): PlayerPosition {
   const positionMap: Record<string, PlayerPosition> = {
     'Goalkeeper': 'GK',
     'Defence': 'CB',

@@ -81,6 +81,8 @@ export interface MatchStats {
 export interface MatchConfig {
   homeTeam: { name: string; shortName: string; formation: string; startingXI: string[]; manager: string };
   awayTeam: { name: string; shortName: string; formation: string; startingXI: string[]; manager: string };
+  homeSquad?: Player[];
+  awaySquad?: Player[];
   competition: string;
   matchday: number;
   venue: string;
@@ -267,8 +269,8 @@ export class GameEngine {
   }
 
   private initPositions(): void {
-    const citySquad = getPLSquadData('MCI');
-    const unitedSquad = getPLSquadData('MUN');
+    const citySquad = this.config.homeSquad || getPLSquadData('MCI');
+    const unitedSquad = this.config.awaySquad || getPLSquadData('MUN');
 
     // City 4-3-3 - Positional Play setup
     // FIXED: Wingers at touchlines to avoid overlap with opposing forwards

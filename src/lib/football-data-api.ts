@@ -711,6 +711,61 @@ export class FootballDataService {
 }
 
 // ============================================================================
+// PROFILE BRIDGING: API squad → simulation PhysicalProfile
+// ============================================================================
+
+/** Look up a player name in REAL_PLAYER_DATA (fuzzy match by last name) */
+export function findRealPlayerData(name: string): Partial<RealPlayerStats> | null {
+  if (REAL_PLAYER_DATA[name]) return REAL_PLAYER_DATA[name];
+  const lastName = name.split(' ').pop()?.toLowerCase();
+  if (!lastName || lastName.length < 3) return null;
+  for (const [key] of Object.entries(REAL_PLAYER_DATA)) {
+    const keyLast = key.split(' ').pop()?.toLowerCase();
+    if (keyLast && (keyLast === lastName || key.toLowerCase().includes(lastName))) {
+      return REAL_PLAYER_DATA[key];
+    }
+  }
+  return null;
+}
+
+/** Build a PhysicalProfile from REAL_PLAYER_DATA stats */
+export function buildPhysicalProfileFromReal(stats: Partial<RealPlayerStats>): {
+  maxSpeed: number; accelerationPeak: number; sprintCapacity: number;
+  highIntensityThreshold: number; aerobicThreshold: number; anaerobicThreshold: number;
+} {
+  const phys = stats.physical;
+  return {
+    maxSpeed: phys?.topSpeed ?? 32,
+    accelerationPeak: phys?.acceleration ?? 4.0,
+    sprintCapacity: (phys?.sprintsPerGame ?? 20) * 15,
+    highIntensityThreshold: 19 + (phys?.highIntensityRuns ?? 45) / 100,
+    aerobicThreshold: 145 + (phys?.aerobicCapacity ?? 58) / 5,
+    anaerobicThreshold: 170 + (phys?.aerobicCapacity ?? 58) / 5,
+  };
+}
+
+/** Generate a default PhysicalProfile based on position string */
+export function defaultPhysicalProfileForPosition(position: string): {
+  maxSpeed: number; accelerationPeak: number; sprintCapacity: number;
+  highIntensityThreshold: number; aerobicThreshold: number; anaerobicThreshold: number;
+} {
+  const profiles: Record<string, { maxSpeed: number; accelerationPeak: number; sprintCapacity: number; highIntensityThreshold: number; aerobicThreshold: number; anaerobicThreshold: number }> = {
+    GK: { maxSpeed: 26, accelerationPeak: 3.2, sprintCapacity: 180, highIntensityThreshold: 18, aerobicThreshold: 145, anaerobicThreshold: 170 },
+    CB: { maxSpeed: 31, accelerationPeak: 3.9, sprintCapacity: 320, highIntensityThreshold: 19, aerobicThreshold: 152, anaerobicThreshold: 177 },
+    LB: { maxSpeed: 32.5, accelerationPeak: 4.1, sprintCapacity: 390, highIntensityThreshold: 20, aerobicThreshold: 155, anaerobicThreshold: 180 },
+    RB: { maxSpeed: 33, accelerationPeak: 4.2, sprintCapacity: 400, highIntensityThreshold: 20.5, aerobicThreshold: 156, anaerobicThreshold: 181 },
+    CDM: { maxSpeed: 30, accelerationPeak: 3.7, sprintCapacity: 300, highIntensityThreshold: 19, aerobicThreshold: 150, anaerobicThreshold: 175 },
+    CM: { maxSpeed: 31, accelerationPeak: 3.9, sprintCapacity: 340, highIntensityThreshold: 19.5, aerobicThreshold: 153, anaerobicThreshold: 178 },
+    CAM: { maxSpeed: 31, accelerationPeak: 4.0, sprintCapacity: 350, highIntensityThreshold: 19.5, aerobicThreshold: 153, anaerobicThreshold: 178 },
+    LW: { maxSpeed: 34, accelerationPeak: 4.4, sprintCapacity: 440, highIntensityThreshold: 21.5, aerobicThreshold: 159, anaerobicThreshold: 184 },
+    RW: { maxSpeed: 34, accelerationPeak: 4.4, sprintCapacity: 440, highIntensityThreshold: 21.5, aerobicThreshold: 159, anaerobicThreshold: 184 },
+    ST: { maxSpeed: 34, accelerationPeak: 4.4, sprintCapacity: 450, highIntensityThreshold: 21.5, aerobicThreshold: 159, anaerobicThreshold: 184 },
+    CF: { maxSpeed: 33, accelerationPeak: 4.3, sprintCapacity: 420, highIntensityThreshold: 21, aerobicThreshold: 158, anaerobicThreshold: 183 },
+  };
+  return profiles[position] || profiles.CM;
+}
+
+// ============================================================================
 // SINGLETON EXPORT
 // ============================================================================
 

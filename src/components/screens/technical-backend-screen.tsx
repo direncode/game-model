@@ -16,6 +16,7 @@ import {
   Brain,
   Gauge,
   Target,
+  Globe,
 } from 'lucide-react';
 import { GrokAIEmbed } from './grok-ai-embed';
 import type { MatchStats } from '@/lib/game-engine';
@@ -78,6 +79,7 @@ export interface TechnicalBackendScreenProps {
   matchPhase: string;
   eventsCount: number;
   onTickRateChange?: (rate: number) => void;
+  apiStatus?: { standings: boolean; teams: boolean; matches: boolean; scorers: boolean };
 }
 
 interface AlgorithmDef {
@@ -118,6 +120,7 @@ export function TechnicalBackendScreen({
   tickRate,
   matchPhase,
   eventsCount,
+  apiStatus,
 }: TechnicalBackendScreenProps) {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>('game_engine');
 
@@ -201,6 +204,21 @@ export function TechnicalBackendScreen({
                   </div>
                 );
               })}
+              {/* Football-Data.org API — real world data source */}
+              {(() => {
+                const apiConnected = apiStatus && Object.values(apiStatus).some(Boolean);
+                const endpointsUp = apiStatus ? Object.values(apiStatus).filter(Boolean).length : 0;
+                return (
+                  <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-[#faf9fe]">
+                    <span className="text-[#8E8CA0]"><Globe className="w-3.5 h-3.5" /></span>
+                    <span className="flex-1 text-[10px] text-[#1a1a2e] font-medium">Football-Data.org</span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${apiConnected ? 'bg-[#2D9F6F]' : 'bg-[#d4d0e0]'}`} />
+                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold ${apiConnected ? 'bg-[#E6F7EF] text-[#2D9F6F]' : 'bg-[#f3eefc] text-[#8E8CA0]'}`}>
+                      {apiConnected ? `API ${endpointsUp}/4` : 'OFFLINE'}
+                    </span>
+                  </div>
+                );
+              })()}
             </div>
           </div>
 

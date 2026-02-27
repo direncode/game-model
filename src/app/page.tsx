@@ -3,7 +3,10 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useGameStore } from '@/store/game-store';
 import { createDigitalTwin } from '@/lib/digital-twin';
-import { getPLSquadData } from '@/lib/premier-league-api';
+import { getPLSquadData, mapPLPosition } from '@/lib/premier-league-api';
+import { useFootballData, computeFormString } from '@/lib/use-football-data';
+import type { PLTeam, PLPlayer } from '@/lib/premier-league-api';
+import { findRealPlayerData, buildPhysicalProfileFromReal, defaultPhysicalProfileForPosition } from '@/lib/football-data-api';
 import {
   GameEngine,
   createManchesterDerby,
@@ -132,6 +135,9 @@ export default function Home() {
   const [isSimulating, setIsSimulating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Real-world API data
+  const footballData = useFootballData();
+
   // Game Engine State
   const gameEngineRef = useRef<GameEngine | null>(null);
   const patternEngineRef = useRef<PatternRecognitionEngine | null>(null);
@@ -237,9 +243,60 @@ export default function Home() {
     return Math.round((coherentCount / twinPositions.length) * 100);
   }, [twinPositions]);
 
-  // Initialize squads
+  // Transform API squad into app Player[] type
+  const transformAPISquad = useCallback((apiTeam: PLTeam, teamTla: string): Player[] => {
+    const squad = apiTeam.squad || [];
+    // Take first 15 players who have a position
+    const validPlayers = squad.filter((p: PLPlayer) => p.position).slice(0, 15);
+    if (validPlayers.length < 11) return []; // Not enough data, use fallback
+
+    return validPlayers.map((apiPlayer: PLPlayer) => {
+      const position = mapPLPosition(apiPlayer.position);
+      const realData = findRealPlayerData(apiPlayer.name);
+      const physicalProfile = realData
+        ? buildPhysicalProfileFromReal(realData)
+        : defaultPhysicalProfileForPosition(position);
+
+      // Try to find the hardcoded player for preferred foot
+      const hardcodedSquad = getPLSquadData(teamTla);
+      const hardcodedMatch = hardcodedSquad.find(p => p.name === apiPlayer.name);
+
+      return {
+        id: `pl-${apiPlayer.id}`,
+        name: apiPlayer.name,
+        number: apiPlayer.shirtNumber ?? 0,
+        position,
+        preferredFoot: hardcodedMatch?.preferredFoot || 'right' as const,
+        physicalProfile,
+        currentStatus: 'available' as const,
+      };
+    });
+  }, []);
+
+  // Initialize squads — use API data when available, fallback to hardcoded
+  const squadsInitialized = useRef(false);
   useEffect(() => {
-    const citySquad = getPLSquadData('MCI');
+    if (footballData.isLoading || squadsInitialized.current) return;
+    squadsInitialized.current = true;
+
+    let citySquad: Player[];
+    let unitedSquad: Player[];
+
+    // Try API data first
+    if (footballData.homeTeam?.squad?.length) {
+      const apiCity = transformAPISquad(footballData.homeTeam, 'MCI');
+      citySquad = apiCity.length >= 11 ? apiCity : getPLSquadData('MCI');
+    } else {
+      citySquad = getPLSquadData('MCI');
+    }
+
+    if (footballData.awayTeam?.squad?.length) {
+      const apiUnited = transformAPISquad(footballData.awayTeam, 'MUN');
+      unitedSquad = apiUnited.length >= 11 ? apiUnited : getPLSquadData('MUN');
+    } else {
+      unitedSquad = getPLSquadData('MUN');
+    }
+
     if (citySquad.length > 0) {
       setPlayers(citySquad);
       citySquad.forEach((player) => {
@@ -248,7 +305,6 @@ export default function Home() {
       });
     }
 
-    const unitedSquad = getPLSquadData('MUN');
     if (unitedSquad.length > 0) {
       setAwayPlayers(unitedSquad);
     }
@@ -279,7 +335,7 @@ export default function Home() {
       const session = gameModelManagerRef.current.startSession(manager, staff);
       setManagerSession(session);
     }
-  }, [setPlayers, setTwin]);
+  }, [footballData.isLoading, footballData.homeTeam, footballData.awayTeam, setPlayers, setTwin, transformAPISquad]);
 
   // Game Engine Simulation Loop (drives ALL screens)
   useEffect(() => {
@@ -714,6 +770,7 @@ export default function Home() {
           tickRate={10}
           matchPhase={matchState?.phase || 'pre_match'}
           eventsCount={matchEvents.length}
+          apiStatus={footballData.apiStatus}
         />
       )}
 
@@ -729,6 +786,8 @@ export default function Home() {
           instructionLog={instructionLog}
           overallCoherence={overallCoherence}
           alerts={alerts}
+          standings={footballData.standings}
+          scorers={footballData.scorers}
         />
       )}
 
@@ -758,6 +817,9 @@ export default function Home() {
           onTemplateSelect={handleTemplateSelect}
           templates={GAME_MODEL_TEMPLATES}
           modelName={modelName}
+          standings={footballData.standings}
+          homeForm={footballData.homeForm}
+          awayForm={footballData.awayForm}
         />
       )}
     </div>
