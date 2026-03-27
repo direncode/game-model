@@ -94,14 +94,14 @@ function ConnectionLine({ start, end, strength }: ConnectionLineProps) {
     return new THREE.BufferGeometry().setFromPoints(points);
   }, [points]);
 
+  const lineRef = useRef<THREE.Line>(null);
+
   return (
-    <line geometry={geometry}>
-      <lineBasicMaterial
-        color="#374151"
-        transparent
-        opacity={0.3 + strength * 0.5}
-      />
-    </line>
+    <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({
+      color: "#374151",
+      transparent: true,
+      opacity: 0.3 + strength * 0.5,
+    }))} ref={lineRef} />
   );
 }
 
