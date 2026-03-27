@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true,
+      "cwd": "frontend"
+    },
+    {
+      "name": "backend",
+      "runtimeExecutable": "uvicorn",
+      "runtimeArgs": ["app.main:app", "--host", "0.0.0.0", "--reload"],
+      "port": 8000,
+      "autoPort": true,
+      "cwd": "backend"
+    },
+    {
+      "name": "celery-worker",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "celery", "-A", "app.celery_app", "worker", "-l", "info", "-Q", "crystallization,interpretation,reports"],
+      "port": 5555,
+      "autoPort": true,
+      "cwd": "backend"
+    }
+  ]
+}

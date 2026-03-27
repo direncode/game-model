@@ -1,0 +1,3 @@
+[submodule "tcd-jepa"]
+	path = tcd-jepa
+	url = https://github.com/direncode/tcd-jepa.git

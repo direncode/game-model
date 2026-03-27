@@ -1,0 +1,436 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --grid-color-bright: rgba(255, 255, 255, 0.08);
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-li-black text-li-white font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Instrument Serif rendering */
+  .font-display, .font-serif {
+    font-feature-settings: "liga" 1, "kern" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(0, 212, 255, 0.2);
+    color: #ffffff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+  }
+}
+
+@layer components {
+  /* ═══════════════════════════════════════════
+     TYPOGRAPHY SYSTEM
+     ═══════════════════════════════════════════ */
+
+  /* Display heading — Instrument Serif */
+  .heading-display {
+    @apply font-display text-hero text-white;
+  }
+
+  /* Section heading — Instrument Serif */
+  .heading-section {
+    @apply font-display text-section text-white;
+  }
+
+  /* Editorial italic — for emphasis within headings */
+  .heading-italic {
+    @apply font-display italic;
+    font-style: italic;
+  }
+
+  /* Caption — uppercase label */
+  .caption {
+    @apply text-xs font-medium uppercase tracking-[0.15em] text-li-gray-400;
+  }
+
+  /* Overline — Palantir-style category label */
+  .overline {
+    @apply text-xs font-mono font-medium uppercase tracking-[0.2em] text-li-cyan;
+  }
+
+  /* Body text variants */
+  .body-large {
+    @apply text-xl font-normal leading-relaxed;
+  }
+
+  .body-text {
+    @apply text-base font-normal leading-relaxed text-li-gray-400;
+  }
+
+  /* Data display — monospace formatting (btut.ai) */
+  .data-label {
+    @apply font-mono text-data-sm uppercase tracking-[0.1em] text-li-gray-500;
+  }
+
+  .data-value {
+    @apply font-mono text-data-lg font-medium text-white;
+  }
+
+  /* Mathematical notation */
+  .math-notation {
+    @apply font-serif italic text-li-warm;
+  }
+
+  /* Strikethrough decoration (trumprx.gov style) */
+  .text-strike {
+    @apply relative inline-block;
+  }
+  .text-strike::after {
+    content: "";
+    @apply absolute left-0 right-0 top-1/2 -translate-y-1/2;
+    height: 4px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  /* ═══════════════════════════════════════════
+     BUTTON SYSTEM (Palantir CTA hierarchy)
+     ═══════════════════════════════════════════ */
+
+  /* Primary — solid white, high authority */
+  .btn-primary {
+    @apply bg-white text-black px-8 py-4 text-sm font-medium tracking-[0.02em]
+           transition-all duration-300 hover:bg-li-gray-200 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-white/30;
+  }
+
+  /* Secondary — outline, medium emphasis */
+  .btn-secondary {
+    @apply bg-transparent border border-li-gray-700 text-white px-8 py-4
+           text-sm font-medium tracking-[0.02em] transition-all duration-300
+           hover:border-white hover:bg-white/5;
+  }
+
+  /* Tertiary — Palantir arrow-indicator shortcut links */
+  .btn-tertiary {
+    @apply inline-flex items-center gap-2 text-sm text-li-gray-400
+           transition-all duration-300 hover:text-white hover:gap-3;
+  }
+  .btn-tertiary::after {
+    content: "\21B3";
+    @apply text-li-cyan transition-all duration-300;
+  }
+
+  /* Ghost — text-only */
+  .btn-ghost {
+    @apply bg-transparent border-none text-li-gray-400 px-0 py-2
+           text-sm font-medium transition-all duration-300 hover:text-white;
+  }
+
+  /* Accent — cyan-tinted */
+  .btn-accent {
+    @apply bg-li-cyan/10 border border-li-cyan/20 text-li-cyan px-6 py-3
+           text-sm font-medium transition-all duration-300
+           hover:bg-li-cyan/20 hover:-translate-y-0.5;
+  }
+
+  /* Warm — gold CTA for serif contexts */
+  .btn-warm {
+    @apply bg-li-warm text-black px-8 py-4 text-sm font-medium
+           transition-all duration-300 hover:bg-li-warm/80 hover:-translate-y-0.5;
+  }
+
+  /* Legacy li-btn classes for backward compatibility */
+  .li-input {
+    @apply w-full px-4 py-2.5 bg-li-black-light border border-li-gray-900 rounded-lg
+           text-white placeholder:text-li-gray-600
+           focus:outline-none focus:ring-2 focus:ring-li-cyan focus:border-transparent
+           transition-all duration-200 font-sans;
+  }
+
+  .li-btn-primary {
+    @apply px-6 py-2.5 bg-li-cyan hover:bg-li-cyan/80 text-black
+           font-medium rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-2 focus:ring-offset-black
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .li-btn-secondary {
+    @apply px-6 py-2.5 bg-li-black-light hover:bg-li-black-elevated text-white
+           border border-li-gray-900 font-medium rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-li-gray-700 focus:ring-offset-2 focus:ring-offset-black
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .li-btn-danger {
+    @apply px-6 py-2.5 bg-li-red hover:bg-li-red/80 text-white
+           font-medium rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-li-red focus:ring-offset-2 focus:ring-offset-black
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .li-btn-ghost {
+    @apply px-4 py-2 text-li-gray-400 hover:text-white hover:bg-li-black-elevated
+           rounded-lg transition-all duration-200;
+  }
+
+  /* ═══════════════════════════════════════════
+     CARD SYSTEM
+     ═══════════════════════════════════════════ */
+
+  /* Base card */
+  .card {
+    @apply bg-li-black-light border border-li-gray-900 p-8 transition-all duration-[400ms];
+  }
+  .card:hover {
+    @apply border-li-gray-700 bg-li-black-elevated;
+  }
+
+  /* Highlight card */
+  .card-highlight {
+    @apply bg-li-black-light border border-li-gray-800 p-10 relative overflow-hidden;
+  }
+  .card-highlight::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-px;
+    background: linear-gradient(90deg, transparent, #525252, transparent);
+  }
+
+  /* Numbered methodology card (btut.ai 01-06 pattern) */
+  .card-numbered {
+    @apply bg-li-black border border-li-gray-900 p-10 md:p-12
+           transition-all duration-500 relative;
+  }
+  .card-numbered:hover {
+    @apply bg-li-black-light border-li-gray-800;
+  }
+  .card-numbered .card-number {
+    @apply font-mono text-sm font-medium text-li-cyan mb-6 block;
+  }
+  .card-numbered .card-title {
+    @apply font-display text-xl md:text-2xl text-white mb-4 tracking-tight;
+    line-height: 1.15;
+  }
+  .card-numbered .card-desc {
+    @apply text-sm text-li-gray-400 leading-relaxed;
+  }
+
+  /* Metric card (btut.ai live convergence widget) */
+  .card-metric {
+    @apply bg-li-depth-2 border border-li-border-accent p-6
+           transition-all duration-300 relative overflow-hidden;
+  }
+  .card-metric::before {
+    content: "";
+    @apply absolute top-0 left-0 right-0 h-px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  }
+  .card-metric .metric-value {
+    @apply font-mono text-2xl font-medium text-white;
+  }
+  .card-metric .metric-label {
+    @apply font-mono text-xs uppercase tracking-[0.15em] text-li-gray-500 mt-1;
+  }
+  .card-metric .metric-status {
+    @apply inline-flex items-center gap-1.5 mt-3;
+  }
+  .card-metric .metric-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-li-cyan animate-pulse;
+  }
+
+  /* Legacy li-card */
+  .li-card {
+    @apply bg-li-black-light border border-li-gray-900 rounded-xl p-6
+           hover:border-li-gray-700 transition-all duration-200;
+  }
+
+  .li-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-mono;
+  }
+
+  .li-stat-card {
+    @apply li-card flex flex-col gap-2;
+  }
+
+  /* ═══════════════════════════════════════════
+     NAVIGATION (Palantir patterns)
+     ═══════════════════════════════════════════ */
+
+  /* Platform nav link with underline reveal */
+  .nav-link {
+    @apply text-sm text-li-gray-400 hover:text-white transition-colors duration-300
+           relative py-1;
+  }
+  .nav-link::after {
+    content: "";
+    @apply absolute bottom-0 left-0 right-0 h-px bg-white scale-x-0
+           transition-transform duration-300 origin-left;
+  }
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  /* Platform shortcut with kbd hint */
+  .nav-shortcut {
+    @apply inline-flex items-center gap-3 text-sm text-li-gray-400
+           hover:text-white transition-colors duration-300;
+  }
+  .nav-shortcut kbd {
+    @apply px-1.5 py-0.5 border border-li-gray-700 rounded text-xs font-mono
+           text-li-gray-500 bg-li-black-light;
+  }
+
+  /* ═══════════════════════════════════════════
+     FORM ELEMENTS
+     ═══════════════════════════════════════════ */
+
+  .input {
+    @apply bg-li-black-light border border-li-gray-800 text-white px-4 py-4 text-base transition-all duration-300 w-full focus:outline-none focus:border-li-gray-600;
+  }
+
+  /* ═══════════════════════════════════════════
+     BADGES & DECORATIONS
+     ═══════════════════════════════════════════ */
+
+  .badge {
+    @apply inline-flex items-center px-4 py-2 border border-li-gray-700 text-xs font-medium uppercase tracking-[0.1em] text-li-gray-300;
+  }
+
+  .line-accent {
+    @apply w-[60px] h-px bg-white;
+  }
+
+  .line-accent-cyan {
+    @apply w-[60px] h-px bg-li-cyan;
+  }
+
+  /* Dividers */
+  .divider {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, #404040, transparent);
+  }
+
+  .divider-gradient {
+    @apply h-px w-full;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 212, 255, 0.15) 20%,
+      rgba(0, 212, 255, 0.3) 50%,
+      rgba(0, 212, 255, 0.15) 80%,
+      transparent 100%
+    );
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTIONS & LAYOUT
+     ═══════════════════════════════════════════ */
+
+  .section-padding {
+    @apply py-32 px-6 md:py-48 md:px-8 lg:py-64 lg:px-16;
+  }
+
+  /* Section with depth gradient background */
+  .section-depth {
+    @apply relative;
+    background: linear-gradient(180deg, #050508 0%, #0a0a10 50%, #050508 100%);
+  }
+
+  /* Container — Palantir-style max-width */
+  .container-li {
+    @apply max-w-[1400px] mx-auto px-6 md:px-8 lg:px-16;
+  }
+
+  /* ═══════════════════════════════════════════
+     DATA DISPLAY (btut.ai scientific)
+     ═══════════════════════════════════════════ */
+
+  .metric-inline {
+    @apply inline-flex items-center gap-2 font-mono text-sm;
+  }
+  .metric-inline .metric-key {
+    @apply text-li-gray-500;
+  }
+  .metric-inline .metric-val {
+    @apply text-white font-medium;
+  }
+
+  /* ═══════════════════════════════════════════
+     BACKGROUNDS & EFFECTS
+     ═══════════════════════════════════════════ */
+
+  .grid-background {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gradient-top {
+    @apply pointer-events-none fixed top-0 left-0 right-0 z-10;
+    height: 400px;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, transparent 100%);
+  }
+
+  .gradient-bottom {
+    @apply pointer-events-none fixed bottom-0 left-0 right-0 z-10;
+    height: 400px;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, transparent 100%);
+  }
+
+  .glow-orb {
+    @apply absolute pointer-events-none;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  }
+
+  /* ═══════════════════════════════════════════
+     ANIMATION DELAYS
+     ═══════════════════════════════════════════ */
+
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
+  .animation-delay-1000 { animation-delay: 1000ms; }
+  .animation-delay-1500 { animation-delay: 1500ms; }
+
+  /* Status colors */
+  .status-success { @apply text-li-green; }
+  .status-warning { @apply text-li-yellow; }
+  .status-danger { @apply text-li-red; }
+  .status-info { @apply text-li-cyan; }
+}

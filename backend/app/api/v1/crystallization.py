@@ -1,0 +1,151 @@
+"""Crystallization job endpoints: trigger, status, metrics, cancel."""
+
+from __future__ import annotations
+
+import uuid
+
+from fastapi import APIRouter, Depends
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.auth import get_current_active_user
+from app.core.exceptions import NotFoundError, ValidationError
+from app.core.permissions import require_permission
+from app.db.session import get_db
+from app.models.crystallization import CrystallizationJob, TrainingMetric
+from app.models.dataset import Dataset
+from app.schemas.common import MessageResponse
+from app.schemas.crystallization import (
+    CrystallizationConfig,
+    CrystallizationJobResponse,
+    TrainingMetricResponse,
+)
+
+router = APIRouter(tags=["crystallization"])
+
+
+@router.post(
+    "/datasets/{dataset_id}/crystallize",
+    response_model=CrystallizationJobResponse,
+    status_code=201,
+)
+async def trigger_crystallization(
+    dataset_id: uuid.UUID,
+    config: CrystallizationConfig | None = None,
+    user=Depends(require_permission("run_crystallization")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Trigger a crystallization job for a dataset (operator+ only)."""
+    result = await db.execute(select(Dataset).where(Dataset.id == dataset_id))
+    dataset = result.scalar_one_or_none()
+    if dataset is None:
+        raise NotFoundError(detail="Dataset not found")
+
+    if dataset.status not in ("ready", "complete"):
+        raise ValidationError(
+            detail=f"Dataset must be in 'ready' or 'complete' status, currently '{dataset.status}'"
+        )
+
+    config_dict = config.model_dump(exclude_none=True) if config else {}
+
+    job = CrystallizationJob(
+        dataset_id=dataset_id,
+        status="queued",
+        config=config_dict,
+        created_by=user.id,
+    )
+    db.add(job)
+    await db.flush()
+
+    # Update dataset status
+    dataset.status = "crystallizing"
+    db.add(dataset)
+    await db.flush()
+    await db.refresh(job)
+
+    # Dispatch Celery task
+    try:
+        from app.celery_app import celery_app
+
+        celery_app.send_task(
+            "app.tasks.crystallization.run_crystallization",
+            args=[str(job.id)],
+            queue="crystallization",
+        )
+    except Exception:
+        pass
+
+    return job
+
+
+@router.get("/crystallization/{job_id}", response_model=CrystallizationJobResponse)
+async def get_job_status(
+    job_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get crystallization job status."""
+    result = await db.execute(
+        select(CrystallizationJob).where(CrystallizationJob.id == job_id)
+    )
+    job = result.scalar_one_or_none()
+    if job is None:
+        raise NotFoundError(detail="Crystallization job not found")
+    return job
+
+
+@router.get(
+    "/crystallization/{job_id}/metrics",
+    response_model=list[TrainingMetricResponse],
+)
+async def get_training_metrics(
+    job_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get training metrics time series for a job."""
+    # Verify job exists
+    job_result = await db.execute(
+        select(CrystallizationJob).where(CrystallizationJob.id == job_id)
+    )
+    if job_result.scalar_one_or_none() is None:
+        raise NotFoundError(detail="Crystallization job not found")
+
+    result = await db.execute(
+        select(TrainingMetric)
+        .where(TrainingMetric.job_id == job_id)
+        .order_by(TrainingMetric.epoch, TrainingMetric.step)
+    )
+    return result.scalars().all()
+
+
+@router.post("/crystallization/{job_id}/cancel", response_model=MessageResponse)
+async def cancel_job(
+    job_id: uuid.UUID,
+    user=Depends(require_permission("run_crystallization")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Cancel a running crystallization job."""
+    result = await db.execute(
+        select(CrystallizationJob).where(CrystallizationJob.id == job_id)
+    )
+    job = result.scalar_one_or_none()
+    if job is None:
+        raise NotFoundError(detail="Crystallization job not found")
+
+    if job.status not in ("queued", "running"):
+        raise ValidationError(detail=f"Cannot cancel job in '{job.status}' status")
+
+    job.status = "cancelled"
+    db.add(job)
+    await db.flush()
+
+    # Attempt to revoke Celery task
+    try:
+        from app.celery_app import celery_app
+
+        celery_app.control.revoke(str(job.id), terminate=True)
+    except Exception:
+        pass
+
+    return MessageResponse(message="Job cancelled")

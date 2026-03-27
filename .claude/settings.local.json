@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(tasklist /FI \"PID eq 8456\")",
+      "Bash(wmic process:*)",
+      "Bash(python -c \"import fastapi; print\\(''fastapi OK''\\)\")",
+      "Bash(npm install:*)",
+      "Bash(pip install:*)",
+      "WebFetch(domain:www.sguncch.com)",
+      "WebSearch",
+      "Bash(git clone:*)",
+      "Read(//tmp/**)",
+      "Read(//c/Users/diren/AppData/Local/Temp/sguncch/**)",
+      "Bash(cat /tmp/sguncch/data/*)",
+      "Bash(npx next:*)",
+      "WebFetch(domain:btut.ai)",
+      "WebFetch(domain:palantir.com)",
+      "WebFetch(domain:trumprx.gov)",
+      "WebFetch(domain:blueprintjs.com)",
+      "WebFetch(domain:www.palantir.com)",
+      "WebFetch(domain:www.designyourway.net)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.geeksforgeeks.org)",
+      "WebFetch(domain:fictivekin.com)",
+      "Bash(find app/ -name \"*.tsx\" -exec sed -i 's/font-display font-bold/font-display/g' {} +)",
+      "Bash(find app/ -name \"*.tsx\" -exec sed -i 's/font-display font-semibold/font-display/g' {} +)",
+      "Bash(chmod +x /c/Users/diren/Desktop/lsx-latentocean/scripts/setup-server.sh /c/Users/diren/Desktop/lsx-latentocean/scripts/deploy.sh)"
+    ]
+  }
+}
