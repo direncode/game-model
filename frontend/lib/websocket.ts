@@ -94,13 +94,13 @@ class WebSocketManager {
     const unsubs: (() => void)[] = [];
 
     if (handlers.onProgress) {
-      unsubs.push(this.on("crystallization:progress", handlers.onProgress));
+      unsubs.push(this.on("crystallization:progress", handlers.onProgress as EventHandler));
     }
     if (handlers.onComplete) {
-      unsubs.push(this.on("crystallization:complete", handlers.onComplete));
+      unsubs.push(this.on("crystallization:complete", handlers.onComplete as EventHandler));
     }
     if (handlers.onError) {
-      unsubs.push(this.on("crystallization:error", handlers.onError));
+      unsubs.push(this.on("crystallization:error", handlers.onError as EventHandler));
     }
 
     return () => {

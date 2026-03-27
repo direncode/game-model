@@ -26,8 +26,7 @@ fi
 # ─── 1. Pull latest code ───
 echo ""
 echo "→ [1/6] Pulling latest code..."
-git pull --recurse-submodules
-git submodule update --init --recursive
+git pull --no-recurse-submodules
 
 # ─── 2. Build images ───
 echo ""
