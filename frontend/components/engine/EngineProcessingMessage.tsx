@@ -10,21 +10,42 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Cpu, Loader2 } from "lucide-react";
+import { Cpu, Loader2, CheckCircle2 } from "lucide-react";
 import { useEngineStore } from "@/stores/engine";
 import EngineSimulation from "@/components/landing/EngineSimulation";
 
 export default function EngineProcessingMessage() {
   const {
+    engineStatus,
     lossHistory,
     currentEpoch,
     totalEpochs,
     metrics,
     progress,
     activeDatasetName,
+    discoveredModules,
   } = useEngineStore();
 
-  const progressPercent = Math.round(progress * 100);
+  const isComplete = engineStatus === "converged" || engineStatus === "error" || engineStatus === "idle";
+  const progressPercent = isComplete ? 100 : Math.round(progress * 100);
+
+  // If engine has moved past processing, show a compact completed state
+  if (isComplete) {
+    return (
+      <div className="flex items-center gap-2 py-1">
+        <CheckCircle2 className="w-4 h-4 text-green-400" />
+        <p className="text-sm text-li-text-secondary">
+          Analysis complete
+          {totalEpochs > 0 && (
+            <span className="text-li-text-muted">
+              {" "}— {totalEpochs} epochs
+              {metrics.loss > 0 && `, loss ${metrics.loss.toFixed(3)}`}
+            </span>
+          )}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
