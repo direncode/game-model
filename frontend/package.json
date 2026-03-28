@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^7.0.7",
+    "@clerk/nextjs": "^5.7.5",
     "@headlessui/react": "^1.7.18",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.0",
