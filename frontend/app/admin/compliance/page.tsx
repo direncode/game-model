@@ -1,8 +1,10 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
-import { cn } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import {
   Shield,
   CheckCircle2,
@@ -16,7 +18,27 @@ import {
   Key,
   UserCheck,
   Clock,
+  Users,
+  Activity,
+  Loader2,
 } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
+
+// ── Types ──────────────────────────────────────────────────────────
+
+interface ComplianceDashboardData {
+  total_users: number;
+  total_audit_entries: number;
+  top_actions: Array<{ action: string; count: number }>;
+}
 
 interface ComplianceControl {
   id: string;
@@ -25,6 +47,14 @@ interface ComplianceControl {
   status: "pass" | "fail" | "partial";
   category: string;
 }
+
+interface GdprItem {
+  name: string;
+  status: "ready" | "in_progress" | "not_started";
+  icon: React.ElementType;
+}
+
+// ── Static Data ────────────────────────────────────────────────────
 
 const soc2Controls: ComplianceControl[] = [
   {
@@ -99,12 +129,6 @@ const soc2Controls: ComplianceControl[] = [
   },
 ];
 
-interface GdprItem {
-  name: string;
-  status: "ready" | "in_progress" | "not_started";
-  icon: React.ElementType;
-}
-
 const gdprReadiness: GdprItem[] = [
   { name: "Data Subject Access Requests (DSAR)", status: "ready", icon: UserCheck },
   { name: "Right to Erasure", status: "ready", icon: XCircle },
@@ -134,9 +158,52 @@ const statusIcon = (status: string) => {
   return <AlertCircle className="w-4 h-4 text-li-warning" />;
 };
 
+const BAR_COLORS = [
+  "#06b6d4",
+  "#22d3ee",
+  "#67e8f9",
+  "#a5f3fc",
+  "#0891b2",
+  "#0e7490",
+  "#155e75",
+  "#164e63",
+  "#083344",
+  "#0c4a6e",
+];
+
+// ── Custom Tooltip ─────────────────────────────────────────────────
+
+function CustomTooltip({
+  active,
+  payload,
+}: {
+  active?: boolean;
+  payload?: Array<{ value: number; payload: { action: string } }>;
+}) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="bg-li-card border border-li-border rounded-lg px-3 py-2 shadow-lg">
+      <p className="text-xs text-li-text-primary font-medium">
+        {payload[0].payload.action}
+      </p>
+      <p className="text-xs text-li-primary font-data">
+        {formatNumber(payload[0].value)} events
+      </p>
+    </div>
+  );
+}
+
+// ── Page ───────────────────────────────────────────────────────────
+
 export default function CompliancePage() {
   const passCount = soc2Controls.filter((c) => c.status === "pass").length;
   const totalControls = soc2Controls.length;
+
+  const { data: dashboardData, isLoading: dashLoading } = useQuery({
+    queryKey: ["compliance-dashboard"],
+    queryFn: () =>
+      api.getComplianceDashboard() as Promise<ComplianceDashboardData>,
+  });
 
   return (
     <div className="min-h-screen">
@@ -154,8 +221,8 @@ export default function CompliancePage() {
             </p>
           </div>
 
-          {/* Summary stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {/* Live stats from API */}
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
             <div className="li-card text-center">
               <p className="text-3xl font-display text-li-accent">
                 {passCount}/{totalControls}
@@ -170,12 +237,80 @@ export default function CompliancePage() {
               <p className="text-sm text-li-text-muted mt-1">GDPR Items Ready</p>
             </div>
             <div className="li-card text-center">
-              <p className="text-3xl font-display text-li-primary">
-                {((passCount / totalControls) * 100).toFixed(0)}%
+              {dashLoading ? (
+                <Loader2 className="w-6 h-6 mx-auto animate-spin text-li-primary" />
+              ) : (
+                <p className="text-3xl font-display text-li-primary flex items-center justify-center gap-2">
+                  <Users className="w-6 h-6" />
+                  {dashboardData?.total_users != null
+                    ? formatNumber(dashboardData.total_users)
+                    : "--"}
+                </p>
+              )}
+              <p className="text-sm text-li-text-muted mt-1">Total Users</p>
+            </div>
+            <div className="li-card text-center">
+              {dashLoading ? (
+                <Loader2 className="w-6 h-6 mx-auto animate-spin text-li-primary" />
+              ) : (
+                <p className="text-3xl font-display text-li-primary flex items-center justify-center gap-2">
+                  <Activity className="w-6 h-6" />
+                  {dashboardData?.total_audit_entries != null
+                    ? formatNumber(dashboardData.total_audit_entries)
+                    : "--"}
+                </p>
+              )}
+              <p className="text-sm text-li-text-muted mt-1">
+                Total Audit Entries
               </p>
-              <p className="text-sm text-li-text-muted mt-1">Overall Compliance</p>
             </div>
           </div>
+
+          {/* Top Actions Bar Chart */}
+          {dashboardData?.top_actions && dashboardData.top_actions.length > 0 && (
+            <div className="li-card mb-8">
+              <h3 className="text-sm font-display text-li-text-primary mb-4 flex items-center gap-2">
+                <Activity className="w-4 h-4 text-li-primary" />
+                Top Actions
+              </h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={dashboardData.top_actions}
+                    layout="vertical"
+                    margin={{ top: 0, right: 24, bottom: 0, left: 0 }}
+                  >
+                    <XAxis
+                      type="number"
+                      tick={{ fill: "#94a3b8", fontSize: 11 }}
+                      axisLine={{ stroke: "#334155" }}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      type="category"
+                      dataKey="action"
+                      width={140}
+                      tick={{ fill: "#94a3b8", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip
+                      content={<CustomTooltip />}
+                      cursor={{ fill: "rgba(6,182,212,0.08)" }}
+                    />
+                    <Bar dataKey="count" radius={[0, 4, 4, 0]} barSize={20}>
+                      {dashboardData.top_actions.map((_, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={BAR_COLORS[index % BAR_COLORS.length]}
+                        />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* SOC 2 Controls */}

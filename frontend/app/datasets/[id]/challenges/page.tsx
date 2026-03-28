@@ -3,14 +3,17 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
+import toast from "react-hot-toast";
+import ChallengeForm from "@/components/forms/ChallengeForm";
+import type { ChallengeFormData } from "@/components/forms/ChallengeForm";
 import { StatusBadge } from "@/components/StatusBadge";
 import { EmptyState } from "@/components/EmptyState";
 import { PageLoader } from "@/components/LoadingSpinner";
 import { cn, formatDate } from "@/lib/utils";
 import type { Challenge } from "@/lib/types";
-import { AlertTriangle, Plus, Filter } from "lucide-react";
+import { AlertTriangle, Plus, Filter, X } from "lucide-react";
 
 const typeLabels: Record<string, string> = {
   module_assignment: "Module Assignment",
@@ -22,8 +25,10 @@ const typeLabels: Record<string, string> = {
 export default function ChallengesPage() {
   const params = useParams();
   const datasetId = params.id as string;
+  const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const { data: challenges, isLoading } = useQuery({
     queryKey: ["challenges", datasetId],
@@ -47,6 +52,23 @@ export default function ChallengesPage() {
     return result;
   }, [challenges, statusFilter, typeFilter]);
 
+  const createMutation = useMutation({
+    mutationFn: (data: ChallengeFormData) =>
+      api.createChallenge({
+        dataset_id: datasetId,
+        title: data.title,
+        challenge_type: data.type,
+        reasoning: data.reasoning,
+        evidence: data.evidence ? data.evidence : undefined,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["challenges", datasetId] });
+      setShowCreateModal(false);
+      toast.success("Challenge created successfully");
+    },
+    onError: (err: any) => toast.error(err.message || "Failed to create challenge"),
+  });
+
   if (isLoading) return <PageLoader />;
 
   return (
@@ -60,11 +82,37 @@ export default function ChallengesPage() {
             Contest and validate discovered structures
           </p>
         </div>
-        <button className="li-btn-primary flex items-center gap-2">
+        <button
+          onClick={() => setShowCreateModal(!showCreateModal)}
+          className="li-btn-primary flex items-center gap-2"
+        >
           <Plus className="w-4 h-4" />
           New Challenge
         </button>
       </div>
+
+      {/* Create Challenge Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-li-card border border-li-border rounded-xl shadow-xl w-full max-w-lg mx-4 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-display text-li-text-primary">
+                New Challenge
+              </h3>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="p-1 rounded hover:bg-li-surface-hover text-li-text-muted hover:text-li-text-primary transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <ChallengeForm
+              onSubmit={(data) => createMutation.mutate(data)}
+              loading={createMutation.isPending}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">

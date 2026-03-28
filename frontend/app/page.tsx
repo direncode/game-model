@@ -22,6 +22,9 @@ import {
   Boxes,
   Link2,
   Activity,
+  Search,
+  Bell,
+  Settings,
 } from "lucide-react";
 
 /* ─── Dashboard (authenticated) ─── */
@@ -52,6 +55,46 @@ function Dashboard() {
         <StatCard label="Total Entities" value={formatCompactNumber(totalEntities)} icon={Boxes} />
         <StatCard label="Total Edges" value={formatCompactNumber(totalEdges)} icon={Link2} />
         <StatCard label="Active Jobs" value={0} icon={Activity} />
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <Link
+          href="/datasets/new"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+        >
+          <Database className="w-5 h-5 text-li-primary" />
+          <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
+            Upload Dataset
+          </span>
+        </Link>
+        <Link
+          href="/search"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+        >
+          <Search className="w-5 h-5 text-li-primary" />
+          <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
+            Search Entities
+          </span>
+        </Link>
+        <Link
+          href="/alerts"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+        >
+          <Bell className="w-5 h-5 text-li-primary" />
+          <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
+            Manage Alerts
+          </span>
+        </Link>
+        <Link
+          href="/settings"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+        >
+          <Settings className="w-5 h-5 text-li-primary" />
+          <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
+            Account Settings
+          </span>
+        </Link>
       </div>
 
       <div>

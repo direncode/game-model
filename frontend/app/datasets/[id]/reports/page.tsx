@@ -175,14 +175,20 @@ export default function ReportsPage() {
                   </div>
                 </div>
               </div>
-              <a
-                href={report.download_url}
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await api.downloadReport(report.id);
+                    window.open(res.download_url, '_blank');
+                  } catch (err: any) {
+                    toast.error(err.message || "Failed to get download link");
+                  }
+                }}
                 className="li-btn-secondary flex items-center gap-2 text-sm"
-                download
               >
                 <Download className="w-4 h-4" />
                 Download
-              </a>
+              </button>
             </div>
           ))}
         </div>

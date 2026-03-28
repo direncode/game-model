@@ -9,6 +9,7 @@ import { PageLoader } from "@/components/LoadingSpinner";
 import { formatDateTime } from "@/lib/utils";
 import type { LineageEvent } from "@/lib/types";
 import { GitBranch, ChevronDown, ChevronRight, User, Clock } from "lucide-react";
+import LineageGraph from "@/components/graphs/LineageGraph";
 
 const eventTypeIcons: Record<string, string> = {
   upload: "Upload",
@@ -29,6 +30,11 @@ export default function LineagePage() {
     queryFn: () => api.getLineage(datasetId) as Promise<{ events: LineageEvent[] }>,
   });
 
+  const { data: graphData } = useQuery({
+    queryKey: ["lineage-graph", datasetId],
+    queryFn: () => api.getLineageGraph(datasetId),
+  });
+
   if (isLoading) return <PageLoader />;
 
   const events = (lineageData as any)?.events || (lineageData as any) || [];
@@ -44,22 +50,27 @@ export default function LineagePage() {
         </p>
       </div>
 
-      {/* Graph Placeholder */}
+      {/* Lineage Graph */}
       <div className="li-card">
         <h3 className="text-sm font-display text-li-text-primary mb-4">
           Lineage Graph
         </h3>
-        <div className="h-48 rounded-lg bg-li-bg border border-li-border flex items-center justify-center">
-          <div className="text-center">
-            <GitBranch className="w-8 h-8 text-li-text-muted mx-auto mb-2" />
-            <p className="text-sm text-li-text-muted">
-              D3 force-directed lineage graph
-            </p>
-            <p className="text-xs text-li-text-muted mt-1">
-              Visualizing data transformation pipeline
-            </p>
+        {(graphData as any)?.events?.length > 0 || events.length > 0 ? (
+          <LineageGraph
+            events={(graphData as any)?.events || events}
+            width={800}
+            height={300}
+          />
+        ) : (
+          <div className="h-48 rounded-lg bg-li-bg border border-li-border flex items-center justify-center">
+            <div className="text-center">
+              <GitBranch className="w-8 h-8 text-li-text-muted mx-auto mb-2" />
+              <p className="text-sm text-li-text-muted">
+                No lineage data to visualize
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Event Timeline */}

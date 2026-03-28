@@ -41,6 +41,14 @@ class Settings(BaseSettings):
     # ── External APIs ───────────────────────────────────────────────────
     ANTHROPIC_API_KEY: Optional[str] = None
 
+    # ── AWS SES (Email) ──────────────────────────────────────────────────
+    AWS_SES_REGION: str = "us-east-1"
+    AWS_SES_FROM_EMAIL: str = "noreply@latentocean.com"
+    APP_URL: str = "http://localhost:3000"
+
+    # ── Session Management ───────────────────────────────────────────────
+    SESSION_MAX_PER_USER: int = 10
+
     # ── Application ─────────────────────────────────────────────────────
     APP_NAME: str = "Latent Intelligence"
     APP_ENV: str = "development"

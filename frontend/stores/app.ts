@@ -10,6 +10,10 @@ interface User {
   email: string;
   name: string;
   role: string;
+  avatar_url?: string;
+  organization_id?: string;
+  email_verified?: boolean;
+  created_at?: string;
 }
 
 interface AuthState {
@@ -23,7 +27,7 @@ interface AuthState {
 interface AuthActions {
   setToken: (token: string, refreshToken?: string) => void;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   fetchUser: () => Promise<void>;
   hydrate: () => void;
 }
@@ -62,6 +66,7 @@ export const useAppStore = create<AppStore>()(
 
       setToken: (token: string, refreshToken?: string) => {
         api.setToken(token);
+        api.setRefreshToken(refreshToken ?? get().refreshToken);
         ws.connect(token);
         set({
           token,
@@ -75,6 +80,7 @@ export const useAppStore = create<AppStore>()(
         try {
           const res = await api.login({ email, password });
           api.setToken(res.access_token);
+          api.setRefreshToken(res.refresh_token);
           ws.connect(res.access_token);
           const user = (await api.getMe()) as User;
           set({
@@ -90,8 +96,20 @@ export const useAppStore = create<AppStore>()(
         }
       },
 
-      logout: () => {
+      logout: async () => {
+        const { refreshToken } = get();
+
+        // Server-side logout (best-effort)
+        if (refreshToken) {
+          try {
+            await api.logout(refreshToken);
+          } catch {
+            // Don't block logout if server call fails
+          }
+        }
+
         api.setToken(null);
+        api.setRefreshToken(null);
         ws.disconnect();
         set({
           user: null,
@@ -107,14 +125,46 @@ export const useAppStore = create<AppStore>()(
           const user = (await api.getMe()) as User;
           set({ user, isAuthenticated: true });
         } catch {
-          set({ user: null, isAuthenticated: false, token: null });
+          set({ user: null, isAuthenticated: false, token: null, refreshToken: null });
         }
       },
 
       hydrate: () => {
-        const { token } = get();
+        const { token, refreshToken } = get();
         if (token) {
           api.setToken(token);
+          api.setRefreshToken(refreshToken);
+
+          // Set up logout callback for auto-refresh failures
+          api.setOnLogout(() => {
+            const store = get();
+            api.setToken(null);
+            api.setRefreshToken(null);
+            ws.disconnect();
+            set({
+              user: null,
+              token: null,
+              refreshToken: null,
+              isAuthenticated: false,
+              activeDatasetId: null,
+            });
+            if (typeof window !== "undefined") {
+              window.location.href = "/login";
+            }
+          });
+
+          // Listen for token refresh events from the API client
+          if (typeof window !== "undefined") {
+            window.addEventListener("token-refreshed", ((e: CustomEvent) => {
+              set({
+                token: e.detail.accessToken,
+                refreshToken: e.detail.refreshToken,
+              });
+              api.setToken(e.detail.accessToken);
+              api.setRefreshToken(e.detail.refreshToken);
+            }) as EventListener);
+          }
+
           ws.connect(token);
           get().fetchUser();
         }
@@ -141,9 +191,13 @@ export const useAppStore = create<AppStore>()(
       partialize: (state) => ({
         token: state.token,
         refreshToken: state.refreshToken,
+        user: state.user,
         sidebarOpen: state.sidebarOpen,
         activeDatasetId: state.activeDatasetId,
       }),
     }
   )
 );
+
+// Re-export for backward compatibility during migration
+export const useAuthStore = useAppStore;

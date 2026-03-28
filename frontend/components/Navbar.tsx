@@ -16,8 +16,8 @@ export function Navbar() {
   const router = useRouter();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     router.push("/login");
   };
 
@@ -88,12 +88,12 @@ export function Navbar() {
                   </span>
                 </div>
                 <Link
-                  href="/admin"
+                  href="/settings"
                   className="flex items-center gap-3 px-4 py-2 text-sm text-li-text-secondary hover:bg-li-surface-hover transition-colors"
                   onClick={() => setShowUserMenu(false)}
                 >
                   <Settings className="w-4 h-4" />
-                  Settings
+                  Account Settings
                 </Link>
                 <button
                   onClick={handleLogout}

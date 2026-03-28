@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/store/auth";
+import { useAppStore } from "@/stores/app";
 import { api } from "@/lib/api";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { setAuth } = useAuthStore();
+  const appLogin = useAppStore((s) => s.login);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,13 +35,10 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await api.register({ email, name, password });
+      await api.register({ email, name, password, organization_name: organization || undefined });
       // Auto-login after registration
-      const loginRes = await api.login({ email, password });
-      api.setToken(loginRes.access_token);
-      const user = await api.getMe();
-      setAuth(user as any, loginRes.access_token);
-      toast.success("Account created successfully!");
+      await appLogin(email, password);
+      toast.success("Account created! Check your email to verify.");
       router.push("/");
     } catch (err: any) {
       toast.error(err.message || "Registration failed");

@@ -3,14 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/store/auth";
-import { api } from "@/lib/api";
+import { useAppStore } from "@/stores/app";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setAuth } = useAuthStore();
+  const login = useAppStore((s) => s.login);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,11 +20,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await api.login({ email, password });
-      // Fetch user info after login
-      api.setToken(res.access_token);
-      const user = await api.getMe();
-      setAuth(user as any, res.access_token);
+      await login(email, password);
       toast.success("Welcome back!");
       router.push("/");
     } catch (err: any) {
@@ -73,12 +68,20 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-li-text-secondary mb-1.5"
-            >
-              Password
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-li-text-secondary"
+              >
+                Password
+              </label>
+              <Link
+                href="/forgot-password"
+                className="text-xs text-li-primary hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <div className="relative">
               <input
                 id="password"

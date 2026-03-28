@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Bell, ChevronRight, Command, LogOut, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/auth";
+import { useAppStore } from "@/stores/app";
 
 interface BreadcrumbItem {
   label: string;
@@ -19,9 +21,12 @@ interface NavbarProps {
 export default function Navbar({
   breadcrumbs,
   onCommandPalette,
-  notificationCount = 0,
+  notificationCount: notificationCountProp,
 }: NavbarProps) {
   const { user, logout } = useAuthStore();
+  const router = useRouter();
+  const storeAlertCount = useAppStore((s) => (s as any).alerts?.length ?? 0);
+  const notificationCount = notificationCountProp ?? storeAlertCount;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -81,10 +86,18 @@ export default function Navbar({
         </button>
 
         {/* Notifications */}
-        <button className="relative p-2 rounded-md hover:bg-li-surface-hover transition-colors">
+        <button
+          onClick={() => router.push("/alerts")}
+          className="relative p-2 rounded-md hover:bg-li-surface-hover transition-colors"
+          title="Notifications"
+        >
           <Bell className="w-4 h-4 text-li-text-secondary" />
           {notificationCount > 0 && (
-            <span className="absolute top-1 right-1 w-2 h-2 bg-li-danger rounded-full" />
+            <>
+              <span className="absolute top-1 right-1 min-w-[16px] h-4 px-1 flex items-center justify-center rounded-full bg-li-danger text-[10px] font-bold text-white leading-none">
+                {notificationCount > 99 ? "99+" : notificationCount}
+              </span>
+            </>
           )}
         </button>
 
@@ -109,9 +122,9 @@ export default function Navbar({
                 <p className="text-xs text-li-text-muted">{user?.email}</p>
               </div>
               <button
-                onClick={() => {
+                onClick={async () => {
                   setDropdownOpen(false);
-                  logout();
+                  await logout();
                 }}
                 className="w-full flex items-center gap-2 px-3 py-2 text-sm text-li-danger hover:bg-li-surface-hover transition-colors"
               >

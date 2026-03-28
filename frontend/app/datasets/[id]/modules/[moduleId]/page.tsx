@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
+import toast from "react-hot-toast";
 import { StatusBadge } from "@/components/StatusBadge";
 import { PageLoader } from "@/components/LoadingSpinner";
 import { cn, percentColor, formatPercent } from "@/lib/utils";
@@ -17,7 +18,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Boxes, Crown, AlertTriangle, ChevronLeft, ChevronRight } from "lucide-react";
+import { Boxes, Crown, AlertTriangle, ChevronLeft, ChevronRight, Pencil, Check, X } from "lucide-react";
 
 const COLORS = [
   "#3B82F6",
@@ -34,7 +35,11 @@ export default function ModuleDetailPage() {
   const params = useParams();
   const datasetId = params.id as string;
   const moduleId = params.moduleId as string;
+  const queryClient = useQueryClient();
   const [entityPage, setEntityPage] = useState(1);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState("");
+  const [editDescription, setEditDescription] = useState("");
 
   const { data: module, isLoading: moduleLoading } = useQuery({
     queryKey: ["module", moduleId],
@@ -48,6 +53,27 @@ export default function ModuleDetailPage() {
         PaginatedResponse<Entity>
       >,
   });
+
+  const updateMutation = useMutation({
+    mutationFn: (data: { name?: string; description?: string }) =>
+      api.updateModule(moduleId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module", moduleId] });
+      setIsEditing(false);
+      toast.success("Module updated");
+    },
+    onError: (err: any) => toast.error(err.message || "Failed to update module"),
+  });
+
+  function startEditing() {
+    setEditName(module?.name || `Module ${module?.index}`);
+    setEditDescription(module?.description || "");
+    setIsEditing(true);
+  }
+
+  function handleSave() {
+    updateMutation.mutate({ name: editName, description: editDescription });
+  }
 
   if (moduleLoading) return <PageLoader />;
   if (!module) return <div className="text-li-text-muted">Module not found</div>;
@@ -71,9 +97,28 @@ export default function ModuleDetailPage() {
       <div className="flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-xl font-display text-li-text-primary">
-              {module.name || `Module ${module.index}`}
-            </h2>
+            {isEditing ? (
+              <input
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                className="li-input text-xl font-display"
+                autoFocus
+              />
+            ) : (
+              <>
+                <h2 className="text-xl font-display text-li-text-primary">
+                  {module.name || `Module ${module.index}`}
+                </h2>
+                <button
+                  onClick={startEditing}
+                  className="p-1 rounded hover:bg-li-surface-hover text-li-text-muted hover:text-li-primary transition-colors"
+                  title="Edit module"
+                >
+                  <Pencil className="w-4 h-4" />
+                </button>
+              </>
+            )}
             <span
               className={cn(
                 "li-badge",
@@ -117,13 +162,45 @@ export default function ModuleDetailPage() {
       </div>
 
       {/* Description */}
-      {module.description && (
-        <div className="li-card">
+      {isEditing ? (
+        <div className="li-card space-y-3">
           <h3 className="text-sm font-display text-li-text-primary mb-2">
             Description
           </h3>
-          <p className="text-sm text-li-text-secondary">{module.description}</p>
+          <textarea
+            value={editDescription}
+            onChange={(e) => setEditDescription(e.target.value)}
+            className="li-input w-full resize-none"
+            rows={3}
+            placeholder="Module description..."
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={handleSave}
+              disabled={updateMutation.isPending}
+              className="li-btn-primary flex items-center gap-2 text-sm"
+            >
+              <Check className="w-4 h-4" />
+              Save
+            </button>
+            <button
+              onClick={() => setIsEditing(false)}
+              className="li-btn-secondary flex items-center gap-2 text-sm"
+            >
+              <X className="w-4 h-4" />
+              Cancel
+            </button>
+          </div>
         </div>
+      ) : (
+        module.description && (
+          <div className="li-card">
+            <h3 className="text-sm font-display text-li-text-primary mb-2">
+              Description
+            </h3>
+            <p className="text-sm text-li-text-secondary">{module.description}</p>
+          </div>
+        )
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

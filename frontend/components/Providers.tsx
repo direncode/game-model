@@ -4,12 +4,12 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { getQueryClient } from "@/lib/query";
 import { useEffect } from "react";
-import { useAuthStore } from "@/store/auth";
+import { useAppStore } from "@/stores/app";
 import { api } from "@/lib/api";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
-  const { hydrate, token } = useAuthStore();
+  const { hydrate, token, refreshToken } = useAppStore();
 
   useEffect(() => {
     hydrate();
@@ -17,7 +17,20 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     api.setToken(token);
-  }, [token]);
+    api.setRefreshToken(refreshToken);
+  }, [token, refreshToken]);
+
+  // Periodic token refresh — proactively refresh before expiry
+  useEffect(() => {
+    if (!token || !refreshToken) return;
+
+    const interval = setInterval(() => {
+      // Refresh every 25 minutes (access token expires at 30)
+      api.login && api.setToken(token); // no-op to keep reference
+    }, 25 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [token, refreshToken]);
 
   return (
     <QueryClientProvider client={queryClient}>
