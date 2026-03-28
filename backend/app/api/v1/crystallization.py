@@ -67,7 +67,7 @@ async def trigger_crystallization(
         from app.celery_app import celery_app
 
         celery_app.send_task(
-            "app.tasks.crystallization.run_crystallization",
+            "crystallization.run",
             args=[str(job.id)],
             queue="crystallization",
         )

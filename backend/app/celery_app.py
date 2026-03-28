@@ -35,4 +35,4 @@ celery_app.conf.task_default_exchange = "default"
 celery_app.conf.task_default_routing_key = "default"
 
 # ── Auto-discover tasks ────────────────────────────────────────────
-celery_app.autodiscover_tasks(["app.tasks"])
+celery_app.autodiscover_tasks(["app.tasks", "app.services.crystallization"])

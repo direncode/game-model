@@ -42,6 +42,10 @@ class Settings(BaseSettings):
     CLERK_SECRET_KEY: Optional[str] = None
     CLERK_ISSUER: Optional[str] = None  # e.g. https://literate-pelican-20.clerk.accounts.dev
 
+    # ── RunPod ────────────────────────────────────────────────────────
+    RUNPOD_API_KEY: Optional[str] = None
+    RUNPOD_ENDPOINT_ID: Optional[str] = None
+
     # ── External APIs ───────────────────────────────────────────────────
     ANTHROPIC_API_KEY: Optional[str] = None
 

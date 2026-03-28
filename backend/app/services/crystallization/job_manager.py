@@ -2,6 +2,10 @@
 
 Defines the main crystallization task that orchestrates TCD-JEPA training,
 result parsing, and downstream pipeline triggering.
+
+Supports two execution backends:
+- RunPod Serverless (GPU) — used when RUNPOD_API_KEY is configured
+- Local execution — fallback when no RunPod credentials
 """
 
 from __future__ import annotations
@@ -27,14 +31,14 @@ def _get_redis() -> redis.Redis:
     return redis.from_url(settings.REDIS_URL, decode_responses=True)
 
 
-def _publish_progress(dataset_id: str, data: dict) -> None:
+def _publish_progress(job_id: str, data: dict) -> None:
     """Publish progress update via Redis pub/sub for WebSocket relay."""
     try:
         r = _get_redis()
-        channel = f"crystallization:progress:{dataset_id}"
+        channel = f"crystallization:{job_id}"
         r.publish(channel, json.dumps(data))
     except Exception:
-        logger.warning("Failed to publish progress for dataset=%s", dataset_id)
+        logger.warning("Failed to publish progress for job=%s", job_id)
 
 
 @celery_app.task(
@@ -48,42 +52,23 @@ def _publish_progress(dataset_id: str, data: dict) -> None:
     soft_time_limit=13800,  # 3h50m soft limit
 )
 def run_crystallization_task(
-    self, dataset_id: str, config: dict, job_id: str | None = None
+    self, job_id: str, config: dict | None = None
 ) -> dict:
     """Main crystallization Celery task.
 
-    Orchestrates:
-    1. Job status update to 'running'.
-    2. Config generation from dataset profile.
-    3. Dataset export from Neo4j to TCD-JEPA format.
-    4. TCD-JEPA training with progress publishing.
-    5. Result parsing and module storage.
-    6. Interpretation pipeline triggering.
-
-    Args:
-        dataset_id: UUID string of the dataset.
-        config: Crystallization configuration overrides.
-        job_id: UUID string of the job record (auto-generated if None).
-
-    Returns:
-        Dictionary with job results summary.
+    Routes to RunPod GPU when configured, otherwise runs locally.
     """
     import asyncio
 
-    job_id = job_id or str(uuid.uuid4())
-    logger.info(
-        "Crystallization task started: dataset=%s, job=%s",
-        dataset_id,
-        job_id,
-    )
+    config = config or {}
+    logger.info("Crystallization task started: job=%s", job_id)
 
     try:
-        # Run the async pipeline in a new event loop
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         try:
             result = loop.run_until_complete(
-                _run_crystallization_async(self, dataset_id, job_id, config)
+                _run_crystallization_async(self, job_id, config)
             )
         finally:
             loop.close()
@@ -91,157 +76,186 @@ def run_crystallization_task(
         return result
 
     except Exception as exc:
-        logger.exception(
-            "Crystallization task failed: dataset=%s, job=%s",
-            dataset_id,
-            job_id,
-        )
-        _publish_progress(dataset_id, {
+        logger.exception("Crystallization task failed: job=%s", job_id)
+        _publish_progress(job_id, {
             "job_id": job_id,
             "status": "failed",
             "error": str(exc),
         })
 
-        # Retry on transient failures
         if self.request.retries < self.max_retries:
             raise self.retry(exc=exc, countdown=60 * (self.request.retries + 1))
 
         raise
 
 
-async def _run_crystallization_async(
-    task, dataset_id: str, job_id: str, config: dict
-) -> dict:
-    """Async implementation of the crystallization pipeline."""
-    from app.services.crystallization.config_builder import ConfigBuilder
-    from app.services.crystallization.results_parser import ResultsParser
-    from app.services.crystallization.wrapper import TCDJEPAWrapper
+async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
+    """Async implementation — routes to RunPod or local execution."""
+    from app.services.crystallization.runpod_client import is_runpod_configured
 
     async with async_session_factory() as db:
-        # Step 1: Update job status
+        # Step 1: Get job and dataset info
         from app.models.crystallization import CrystallizationJob
+        from app.models.dataset import Dataset
 
+        job_result = await db.execute(
+            select(CrystallizationJob).where(CrystallizationJob.id == uuid.UUID(job_id))
+        )
+        job = job_result.scalar_one_or_none()
+        if not job:
+            raise ValueError(f"Job {job_id} not found")
+
+        dataset_id = str(job.dataset_id)
+
+        # Merge job config with task config
+        merged_config = {**(job.config or {}), **config}
+
+        result = await db.execute(
+            select(Dataset).where(Dataset.id == job.dataset_id)
+        )
+        dataset = result.scalar_one()
+
+        # Step 2: Update job status
         await db.execute(
             update(CrystallizationJob)
             .where(CrystallizationJob.id == uuid.UUID(job_id))
-            .values(
-                status="running",
-                started_at=datetime.now(timezone.utc),
-            )
+            .values(status="running", started_at=datetime.now(timezone.utc))
         )
         await db.commit()
 
-        _publish_progress(dataset_id, {
+        _publish_progress(job_id, {
             "job_id": job_id,
             "status": "running",
             "step": "initializing",
         })
 
-        # Step 2: Build config from dataset profile
-        from app.models.dataset import Dataset
+        # Step 3: Export dataset from Neo4j
+        entities, edges = await _export_dataset(dataset_id)
 
-        result = await db.execute(
-            select(Dataset).where(Dataset.id == uuid.UUID(dataset_id))
-        )
-        dataset = result.scalar_one()
-
-        profile_data = {
-            "entity_count": dataset.entity_count or 0,
-            "edge_count": dataset.edge_count or 0,
-            "density": dataset.density or 0.0,
-        }
-
-        builder = ConfigBuilder()
-        from app.services.ingestion.profiler import DatasetProfile
-
-        profile = DatasetProfile(
-            entity_count=profile_data["entity_count"],
-            edge_count=profile_data["edge_count"],
-            density=profile_data["density"],
-        )
-
-        import tempfile
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            full_config = builder.build(profile, output_dir=tmpdir, overrides=config)
-            config_path = f"{tmpdir}/tcd_jepa_config.yaml"
-
-            # Step 3: Export dataset from Neo4j to file
-            data_path = f"{tmpdir}/data"
-            await _export_dataset_to_files(dataset_id, data_path)
-
-            _publish_progress(dataset_id, {
-                "job_id": job_id,
-                "status": "running",
-                "step": "training",
-            })
-
-            # Step 4: Run TCD-JEPA training
-            def progress_callback(info: dict) -> None:
-                _publish_progress(dataset_id, {
-                    "job_id": job_id,
-                    "status": "running",
-                    "step": "training",
-                    **info,
-                })
-
-            wrapper = TCDJEPAWrapper()
-            training_result = await wrapper.run_training(
-                config_path, data_path, callback=progress_callback
-            )
-
-        # Step 5: Parse results
-        _publish_progress(dataset_id, {
+        _publish_progress(job_id, {
             "job_id": job_id,
             "status": "running",
-            "step": "parsing_results",
+            "step": "training",
+            "total_epochs": merged_config.get("epochs", 100),
         })
 
-        parser = ResultsParser()
-        checkpoint_path = training_result.get("checkpoint_path", "")
-        parsed = await parser.parse_training_output(training_result, checkpoint_path)
+        # Step 4: Run training (RunPod or local)
+        if is_runpod_configured():
+            training_result = await _run_via_runpod(
+                entities, edges, merged_config, dataset_id, job_id
+            )
+        else:
+            training_result = await _run_locally(
+                entities, edges, merged_config, dataset_id, job_id
+            )
 
-        # Step 6: Store results
-        await _store_crystallization_results(
-            db, dataset_id, job_id, parsed, training_result
-        )
+        # Step 5: Store results
+        await _store_results(db, dataset_id, job_id, training_result)
 
-        _publish_progress(dataset_id, {
+        _publish_progress(job_id, {
             "job_id": job_id,
             "status": "completed",
-            "module_count": len(parsed.get("modules", [])),
+            "module_count": len(training_result.get("modules", [])),
         })
 
-        # Step 7: Trigger interpretation pipeline
-        _trigger_interpretation(dataset_id, job_id)
-
         logger.info(
-            "Crystallization completed: dataset=%s, job=%s, modules=%d",
-            dataset_id,
+            "Crystallization completed: job=%s, modules=%d",
             job_id,
-            len(parsed.get("modules", [])),
+            len(training_result.get("modules", [])),
         )
 
         return {
             "job_id": job_id,
             "status": "completed",
-            "module_count": len(parsed.get("modules", [])),
-            "final_loss": training_result.get("final_loss"),
-            "checkpoint_path": checkpoint_path,
+            "module_count": len(training_result.get("modules", [])),
         }
 
 
-async def _export_dataset_to_files(dataset_id: str, data_path: str) -> None:
-    """Export dataset from Neo4j to file format for TCD-JEPA."""
-    import os
+async def _run_via_runpod(
+    entities: list, edges: list, config: dict,
+    dataset_id: str, job_id: str,
+) -> dict:
+    """Run TCD-JEPA training via RunPod Serverless GPU."""
+    from app.services.crystallization.runpod_client import RunPodClient
 
+    client = RunPodClient()
+
+    def on_progress(data: dict):
+        """Forward RunPod streaming progress to Redis."""
+        _publish_progress(job_id, {
+            "job_id": job_id,
+            "status": "running",
+            "step": "training",
+            **data,
+        })
+
+    result = await client.run_and_poll(
+        entities=entities,
+        edges=edges,
+        config=config,
+        dataset_id=dataset_id,
+        job_id=job_id,
+        progress_callback=on_progress,
+        poll_interval=2.0,
+        timeout=3600,
+    )
+
+    return result
+
+
+async def _run_locally(
+    entities: list, edges: list, config: dict,
+    dataset_id: str, job_id: str,
+) -> dict:
+    """Run TCD-JEPA locally (CPU fallback)."""
+    import tempfile
+
+    from app.services.crystallization.config_builder import ConfigBuilder
+    from app.services.crystallization.wrapper import TCDJEPAWrapper
+    from app.services.ingestion.profiler import DatasetProfile
+
+    profile = DatasetProfile(
+        entity_count=len(entities),
+        edge_count=len(edges),
+        density=(2 * len(edges)) / max(len(entities) * (len(entities) - 1), 1),
+    )
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        builder = ConfigBuilder()
+        builder.build(profile, output_dir=tmpdir, overrides=config)
+        config_path = f"{tmpdir}/tcd_jepa_config.yaml"
+
+        data_path = f"{tmpdir}/data"
+        import os
+        os.makedirs(data_path, exist_ok=True)
+
+        with open(f"{data_path}/entities.json", "w") as f:
+            json.dump(entities, f)
+        with open(f"{data_path}/edges.json", "w") as f:
+            json.dump(edges, f)
+
+        def progress_callback(info: dict):
+            _publish_progress(job_id, {
+                "job_id": job_id,
+                "status": "running",
+                "step": "training",
+                **info,
+            })
+
+        wrapper = TCDJEPAWrapper()
+        training_result = await wrapper.run_training(
+            config_path, data_path, callback=progress_callback
+        )
+
+    return training_result
+
+
+async def _export_dataset(dataset_id: str) -> tuple[list, list]:
+    """Export entities and edges from Neo4j for a dataset."""
     from app.db.neo4j import neo4j_connection
-
-    os.makedirs(data_path, exist_ok=True)
 
     dataset_label = dataset_id.replace("-", "_")
 
-    # Export entities
     entities = await neo4j_connection.execute_query(
         f"""
         MATCH (n:Entity:`{dataset_label}`)
@@ -249,10 +263,6 @@ async def _export_dataset_to_files(dataset_id: str, data_path: str) -> None:
         """,
     )
 
-    with open(os.path.join(data_path, "entities.json"), "w") as f:
-        json.dump(entities, f)
-
-    # Export relationships
     edges = await neo4j_connection.execute_query(
         f"""
         MATCH (a:Entity:`{dataset_label}`)-[r:RELATES_TO]->(b:Entity:`{dataset_label}`)
@@ -260,23 +270,27 @@ async def _export_dataset_to_files(dataset_id: str, data_path: str) -> None:
         """,
     )
 
-    with open(os.path.join(data_path, "edges.json"), "w") as f:
-        json.dump(edges, f)
-
-    logger.info(
-        "Exported %d entities, %d edges for dataset=%s",
-        len(entities),
-        len(edges),
-        dataset_id,
-    )
+    logger.info("Exported %d entities, %d edges for dataset=%s", len(entities), len(edges), dataset_id)
+    return entities, edges
 
 
-async def _store_crystallization_results(
-    db, dataset_id: str, job_id: str, parsed: dict, training_result: dict
-) -> None:
-    """Store parsed crystallization results in PostgreSQL."""
+async def _store_results(db, dataset_id: str, job_id: str, result: dict) -> None:
+    """Store crystallization results (modules + metrics) in PostgreSQL."""
     from app.models.crystallization import CrystallizationJob, TrainingMetric
     from app.models.module import Module, ModuleEntity
+
+    # Delete any existing modules for this dataset (re-run)
+    from sqlalchemy import delete
+    await db.execute(
+        delete(ModuleEntity).where(
+            ModuleEntity.module_id.in_(
+                select(Module.id).where(Module.dataset_id == uuid.UUID(dataset_id))
+            )
+        )
+    )
+    await db.execute(
+        delete(Module).where(Module.dataset_id == uuid.UUID(dataset_id))
+    )
 
     # Update job record
     await db.execute(
@@ -285,20 +299,24 @@ async def _store_crystallization_results(
         .values(
             status="completed",
             completed_at=datetime.now(timezone.utc),
-            final_link_auc=parsed.get("final_auc"),
-            final_knn_accuracy=parsed.get("final_knn"),
-            module_count=len(parsed.get("modules", [])),
-            training_log=parsed.get("training_log"),
-            checkpoint_path=training_result.get("checkpoint_path"),
+            final_link_auc=result.get("final_auc"),
+            final_knn_accuracy=result.get("final_knn"),
+            module_count=len(result.get("modules", [])),
+            training_log={
+                "total_epochs": result.get("total_epochs"),
+                "final_loss": result.get("final_loss"),
+                "training_time_seconds": result.get("training_time_seconds"),
+                "device": result.get("device"),
+            },
         )
     )
 
     # Store training metrics
-    for metric in parsed.get("metrics", []):
+    for metric in result.get("training_metrics", result.get("metrics", [])):
         db.add(TrainingMetric(
             job_id=uuid.UUID(job_id),
             epoch=metric["epoch"],
-            step=metric["step"],
+            step=metric.get("step", metric["epoch"]),
             loss=metric["loss"],
             link_auc=metric.get("auc"),
             knn_accuracy=metric.get("knn"),
@@ -306,12 +324,12 @@ async def _store_crystallization_results(
         ))
 
     # Store modules
-    for mod in parsed.get("modules", []):
+    for mod in result.get("modules", []):
         module = Module(
             job_id=uuid.UUID(job_id),
             dataset_id=uuid.UUID(dataset_id),
             module_index=mod["module_index"],
-            name=f"Module {mod['module_index']}",
+            name=mod.get("name", f"Module {mod['module_index']}"),
             entity_count=mod.get("entity_count", 0),
             dominant_type=mod.get("dominant_type"),
             purity_score=mod.get("purity_score"),
@@ -330,20 +348,3 @@ async def _store_crystallization_results(
             ))
 
     await db.commit()
-
-
-def _trigger_interpretation(dataset_id: str, job_id: str) -> None:
-    """Send task to the interpretation queue."""
-    try:
-        celery_app.send_task(
-            "interpretation.run",
-            args=[dataset_id, job_id],
-            queue="interpretation",
-        )
-        logger.info(
-            "Triggered interpretation pipeline: dataset=%s, job=%s",
-            dataset_id,
-            job_id,
-        )
-    except Exception:
-        logger.exception("Failed to trigger interpretation pipeline")
