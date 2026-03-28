@@ -42,7 +42,7 @@ def verify_password(plain: str, hashed: str) -> bool:
 def create_access_token(data: dict) -> str:
     """Create a short-lived JWT access token."""
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.utcnow() + timedelta(minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire, "type": "access"})
     return jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
 
@@ -50,7 +50,7 @@ def create_access_token(data: dict) -> str:
 def create_refresh_token(data: dict) -> str:
     """Create a long-lived JWT refresh token."""
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
+    expire = datetime.utcnow() + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
     to_encode.update({"exp": expire, "type": "refresh"})
     return jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
 
@@ -119,8 +119,8 @@ async def create_session(
         user_agent=user_agent,
         device_name=_parse_device_name(user_agent),
         is_active=True,
-        last_active_at=datetime.now(timezone.utc),
-        expires_at=datetime.now(timezone.utc) + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS),
+        last_active_at=datetime.utcnow(),
+        expires_at=datetime.utcnow() + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS),
     )
     db.add(session)
     await db.flush()
@@ -144,7 +144,7 @@ async def validate_session(db: AsyncSession, refresh_token: str) -> "Session | N
         return None
 
     # Check expiry
-    if session.expires_at < datetime.now(timezone.utc):
+    if session.expires_at < datetime.utcnow():
         session.is_active = False
         await db.flush()
         return None
@@ -155,8 +155,8 @@ async def validate_session(db: AsyncSession, refresh_token: str) -> "Session | N
 async def rotate_session_token(db: AsyncSession, session: "Session", new_refresh_token: str) -> None:
     """Rotate the refresh token hash on an existing session (token rotation)."""
     session.token_hash = hash_token(new_refresh_token)
-    session.last_active_at = datetime.now(timezone.utc)
-    session.expires_at = datetime.now(timezone.utc) + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
+    session.last_active_at = datetime.utcnow()
+    session.expires_at = datetime.utcnow() + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
     await db.flush()
 
 

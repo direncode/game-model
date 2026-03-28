@@ -139,7 +139,7 @@ async def login(body: UserLogin, request: Request, db: AsyncSession = Depends(ge
     access_tok = create_access_token(token_data)
 
     # Update last login
-    user.last_login_at = datetime.now(timezone.utc)
+    user.last_login_at = datetime.utcnow()
     await db.flush()
 
     return TokenResponse(
@@ -199,7 +199,7 @@ async def logout(body: LogoutRequest, db: AsyncSession = Depends(get_db)):
     try:
         payload = decode_token(body.refresh_token)
         exp = payload.get("exp", 0)
-        ttl = max(int(exp - datetime.now(timezone.utc).timestamp()), 0)
+        ttl = max(int(exp - datetime.utcnow().timestamp()), 0)
         if ttl > 0:
             await blacklist_token(hash_token(body.refresh_token), ttl)
     except Exception:
@@ -322,7 +322,7 @@ async def forgot_password(body: ForgotPasswordRequest, request: Request, db: Asy
     if user is not None:
         reset_token = secrets.token_urlsafe(32)
         user.password_reset_token = reset_token
-        user.password_reset_expires = datetime.now(timezone.utc) + timedelta(hours=1)
+        user.password_reset_expires = datetime.utcnow() + timedelta(hours=1)
         await db.flush()
 
         try:
@@ -346,7 +346,7 @@ async def reset_password(body: ResetPasswordRequest, db: AsyncSession = Depends(
     if user is None:
         raise UnauthorizedError(detail="Invalid or expired reset token")
 
-    if user.password_reset_expires and user.password_reset_expires < datetime.now(timezone.utc):
+    if user.password_reset_expires and user.password_reset_expires < datetime.utcnow():
         user.password_reset_token = None
         user.password_reset_expires = None
         await db.flush()

@@ -26,7 +26,10 @@
       "WebFetch(domain:fictivekin.com)",
       "Bash(find app/ -name \"*.tsx\" -exec sed -i 's/font-display font-bold/font-display/g' {} +)",
       "Bash(find app/ -name \"*.tsx\" -exec sed -i 's/font-display font-semibold/font-display/g' {} +)",
-      "Bash(chmod +x /c/Users/diren/Desktop/lsx-latentocean/scripts/setup-server.sh /c/Users/diren/Desktop/lsx-latentocean/scripts/deploy.sh)"
+      "Bash(chmod +x /c/Users/diren/Desktop/lsx-latentocean/scripts/setup-server.sh /c/Users/diren/Desktop/lsx-latentocean/scripts/deploy.sh)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
