@@ -1,35 +1,22 @@
 "use client";
 
 import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { Cpu, Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import { useEngineStore } from "@/stores/engine";
-import EngineSimulation from "@/components/landing/EngineSimulation";
 
 export default function EngineProcessingMessage() {
   const {
     engineStatus,
-    lossHistory,
     currentEpoch,
     totalEpochs,
     metrics,
     progress,
     activeDatasetName,
-    discoveredModules,
   } = useEngineStore();
 
   const isComplete = engineStatus === "converged" || engineStatus === "error" || engineStatus === "idle";
   const progressPercent = isComplete ? 100 : Math.round(progress * 100);
 
-  // If engine has moved past processing, show a compact completed state
   if (isComplete) {
     return (
       <div className="flex items-center gap-2 py-1">
@@ -38,7 +25,7 @@ export default function EngineProcessingMessage() {
           Analysis complete
           {totalEpochs > 0 && (
             <span className="text-li-text-muted">
-              {" "}— {totalEpochs} epochs
+              {" "}&mdash; {totalEpochs} epochs
               {metrics.loss > 0 && `, loss ${metrics.loss.toFixed(3)}`}
             </span>
           )}
@@ -48,8 +35,7 @@ export default function EngineProcessingMessage() {
   }
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
+    <div className="space-y-3">
       <div className="flex items-center gap-2">
         <Loader2 className="w-4 h-4 text-li-cyan animate-spin" />
         <p className="text-sm font-medium text-white">
@@ -57,7 +43,6 @@ export default function EngineProcessingMessage() {
         </p>
       </div>
 
-      {/* Progress bar */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
           <p className="text-xs text-li-text-muted font-mono">
@@ -79,82 +64,15 @@ export default function EngineProcessingMessage() {
         </div>
       </div>
 
-      {/* Compact visualization */}
-      <div className="rounded-xl overflow-hidden border border-li-border" style={{ height: "200px" }}>
-        <EngineSimulation compact />
-      </div>
-
-      {/* Mini loss chart */}
-      {lossHistory.length > 1 && (
-        <div className="li-card p-3">
-          <ResponsiveContainer width="100%" height={140}>
-            <LineChart data={lossHistory}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-              <XAxis
-                dataKey="epoch"
-                stroke="#64748b"
-                tick={{ fontSize: 10 }}
-              />
-              <YAxis
-                yAxisId="loss"
-                stroke="#64748b"
-                tick={{ fontSize: 10 }}
-                domain={["auto", "auto"]}
-              />
-              <YAxis
-                yAxisId="auc"
-                orientation="right"
-                stroke="#64748b"
-                tick={{ fontSize: 10 }}
-                domain={[0, 1]}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#0f172a",
-                  border: "1px solid #1e293b",
-                  borderRadius: "8px",
-                  fontSize: 11,
-                }}
-              />
-              <Line
-                yAxisId="loss"
-                type="monotone"
-                dataKey="loss"
-                stroke="#06B6D4"
-                strokeWidth={1.5}
-                dot={false}
-                name="Loss"
-              />
-              <Line
-                yAxisId="auc"
-                type="monotone"
-                dataKey="linkAuc"
-                stroke="#F59E0B"
-                strokeWidth={1.5}
-                dot={false}
-                name="Link AUC"
-              />
-            </LineChart>
-          </ResponsiveContainer>
+      {metrics.loss > 0 && (
+        <div className="flex items-center gap-4 text-xs text-li-text-muted font-mono">
+          <span>Loss: <span className="text-white">{metrics.loss.toFixed(4)}</span></span>
+          <span>AUC: <span className="text-white">{(metrics.linkAuc * 100).toFixed(1)}%</span></span>
+          {metrics.gpuUtilization > 0 && (
+            <span>GPU: <span className="text-white">{Math.round(metrics.gpuUtilization)}%</span></span>
+          )}
         </div>
       )}
-
-      {/* GPU utilization */}
-      <div className="flex items-center gap-3 text-xs">
-        <div className="flex items-center gap-1.5 text-li-text-muted">
-          <Cpu className="w-3 h-3" />
-          GPU
-        </div>
-        <div className="flex-1 h-1 bg-li-surface rounded-full overflow-hidden">
-          <div
-            className="h-full bg-white/60 rounded-full transition-all duration-500"
-            style={{ width: `${metrics.gpuUtilization}%` }}
-          />
-        </div>
-        <span className="text-li-text-muted font-mono w-8 text-right">
-          {Math.round(metrics.gpuUtilization)}%
-        </span>
-      </div>
     </div>
   );
 }
