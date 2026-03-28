@@ -21,8 +21,8 @@ const STAGE_CONFIG: { key: Stage; label: string; num: string }[] = [
 ];
 
 const MODULE_NAMES = [
-  "CMP Pipeline", "Netherlands Hub", "Singapore ATP", "Design-to-Fab",
-  "China Packaging", "Lithography", "Equipment", "Materials",
+  "Cluster α", "Cluster β", "Cluster γ", "Cluster δ",
+  "Cluster ε", "Cluster ζ", "Cluster η", "Cluster θ",
 ];
 
 function lerp(a: number, b: number, t: number): number {
