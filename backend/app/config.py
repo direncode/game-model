@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
+    # ── Clerk ─────────────────────────────────────────────────────────
+    CLERK_SECRET_KEY: Optional[str] = None
+    CLERK_ISSUER: Optional[str] = None  # e.g. https://literate-pelican-20.clerk.accounts.dev
+
     # ── External APIs ───────────────────────────────────────────────────
     ANTHROPIC_API_KEY: Optional[str] = None
 
