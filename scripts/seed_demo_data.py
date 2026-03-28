@@ -159,8 +159,8 @@ async def seed_demo_modules(session, dataset, num_modules, user_id):
         dataset_id=dataset.id,
         status="completed",
         config={"module_count": num_modules, "epochs": 100, "learning_rate": 0.001},
-        started_at=datetime.now(timezone.utc),
-        completed_at=datetime.now(timezone.utc),
+        started_at=datetime.utcnow(),
+        completed_at=datetime.utcnow(),
         final_link_auc=0.92 + random.uniform(0, 0.07),
         final_knn_accuracy=0.88 + random.uniform(0, 0.10),
         module_count=num_modules,
@@ -169,9 +169,7 @@ async def seed_demo_modules(session, dataset, num_modules, user_id):
     )
     session.add(job)
 
-    type_names = [et.name for et in (await session.execute(
-        __import__('sqlalchemy').select(EntityType).where(EntityType.dataset_id == dataset.id)
-    )).scalars().all()] if False else ["Type_A", "Type_B"]  # Simplified for seed script
+    type_names = ["Company", "Government", "Organization", "Military", "Media"]
 
     for i in range(num_modules):
         module = Module(
@@ -196,26 +194,41 @@ async def seed_demo_modules(session, dataset, num_modules, user_id):
 
 async def main():
     from app.db.session import async_session_factory, engine
-    from app.models import *  # noqa: F403 - ensure all models loaded
+    from app.models.user import User
+    from app.models.dataset import EntityType
+    from sqlalchemy import select
 
     print("Seeding Latent Intelligence demo data...")
 
     async with async_session_factory() as session:
         async with session.begin():
-            user = await seed_demo_user(session)
-            print(f"  Created demo user: {user.email}")
+            # Find existing user or create demo user
+            result = await session.execute(select(User).where(User.email == "diren@latentocean.com"))
+            user = result.scalar_one_or_none()
+
+            if user is None:
+                user = await seed_demo_user(session)
+                print(f"  Created demo user: {user.email}")
+            else:
+                print(f"  Using existing user: {user.email}")
 
             semi = await seed_semiconductor_dataset(session, user.id)
             print(f"  Created dataset: {semi.name}")
+            await seed_demo_modules(session, semi, 7, user.id)
+            print(f"    → 7 modules seeded")
 
             gdelt = await seed_gdelt_dataset(session, user.id)
             print(f"  Created dataset: {gdelt.name}")
+            await seed_demo_modules(session, gdelt, 16, user.id)
+            print(f"    → 16 modules seeded")
 
             edgar = await seed_sec_edgar_dataset(session, user.id)
             print(f"  Created dataset: {edgar.name}")
+            await seed_demo_modules(session, edgar, 12, user.id)
+            print(f"    → 12 modules seeded")
 
     print("\nDemo data seeded successfully!")
-    print("Login with: admin@latentintelligence.ai / demo2024!")
+    print("3 datasets with 35 total modules ready to explore.")
 
 if __name__ == "__main__":
     asyncio.run(main())
