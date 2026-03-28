@@ -8,7 +8,7 @@ import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
 
 export default function EngineDatasetPicker() {
-  const { setActiveDataset, addMessage } = useEngineStore();
+  const { setActiveDataset, addMessage, activeDatasetId } = useEngineStore();
 
   const { data: datasetsResponse, isLoading, isError } = useQuery({
     queryKey: ["datasets"],
@@ -27,6 +27,7 @@ export default function EngineDatasetPicker() {
     : (datasetsResponse as any)?.items || [];
 
   function handleSelect(ds: (typeof datasets)[0]) {
+    if (ds.id === activeDatasetId) return; // Already selected
     setActiveDataset(ds.id, ds.name);
     addMessage("user-action", { datasetName: ds.name, datasetId: ds.id });
   }
@@ -76,7 +77,11 @@ export default function EngineDatasetPicker() {
           <button
             key={ds.id}
             onClick={() => handleSelect(ds)}
-            className="group text-left li-card px-4 py-3 hover:border-li-gray-600 transition-all duration-200 cursor-pointer"
+            className={`group text-left li-card px-4 py-3 transition-all duration-200 cursor-pointer ${
+              ds.id === activeDatasetId
+                ? "border-li-cyan/50 bg-li-cyan/5"
+                : "hover:border-li-gray-600"
+            }`}
           >
             <div className="flex items-start gap-3">
               <Database className="w-4 h-4 text-li-text-muted mt-0.5 flex-shrink-0" />

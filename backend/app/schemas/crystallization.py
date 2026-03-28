@@ -15,7 +15,7 @@ class CrystallizationConfig(BaseModel):
     module_count: Optional[int] = Field(default=None, ge=2, le=100)
     epochs: Optional[int] = Field(default=None, ge=1, le=1000)
     learning_rate: Optional[float] = Field(default=None, gt=0.0, le=1.0)
-    module_capacity: Optional[str] = Field(default="balanced")
+    module_capacity: Optional[int] = Field(default=None, ge=1)
     ph_filtration_threshold: Optional[float] = Field(default=None, ge=0.0, le=1.0)
 
 
