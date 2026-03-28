@@ -338,14 +338,8 @@ export const useEngineStore = create<EngineState>()(
       },
     }),
     {
-      name: "li-engine-store",
-      partialize: (state) => ({
-        activeJobId: state.activeJobId,
-        activeDatasetId: state.activeDatasetId,
-        activeDatasetName: state.activeDatasetName,
-        engineStatus: state.engineStatus,
-        lastRunSummary: state.lastRunSummary,
-      }),
+      name: "li-engine-store-v2",
+      partialize: () => ({}),
     }
   )
 );
