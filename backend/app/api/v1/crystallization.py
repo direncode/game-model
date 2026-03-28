@@ -57,9 +57,8 @@ async def trigger_crystallization(
     db.add(job)
     await db.flush()
 
-    # Update dataset status
-    dataset.status = "crystallizing"
-    db.add(dataset)
+    # Keep dataset status as-is (don't set to crystallizing since the
+    # Celery worker will update it when it actually starts processing)
     await db.flush()
     await db.refresh(job)
 
