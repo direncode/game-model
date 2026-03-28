@@ -18,7 +18,7 @@ export function LoadingSpinner({ size = "md", className }: LoadingSpinnerProps) 
     <div className={cn("flex items-center justify-center", className)}>
       <div
         className={cn(
-          "rounded-full border-li-border border-t-li-primary animate-spin",
+          "rounded-full border-li-gray-800 border-t-white animate-spin",
           sizes[size]
         )}
       />

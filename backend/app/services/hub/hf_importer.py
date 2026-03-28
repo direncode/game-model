@@ -1,0 +1,439 @@
+"""Hugging Face Hub integration — search, preview, and import datasets.
+
+Uses the HF API for search/metadata and the `datasets` library for downloads.
+Converts tabular HF datasets into ParsedGraph objects for the AwakeningPipeline.
+"""
+
+from __future__ import annotations
+
+import logging
+import uuid
+from typing import Any
+
+import httpx
+import pandas as pd
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db.neo4j import Neo4jConnection
+from app.models.dataset import Dataset
+from app.services.hub.schema_mapper import SchemaMapper
+from app.services.ingestion.awakening_pipeline import AwakeningPipeline
+from app.services.ingestion.csv_adapter import ParsedEntity, ParsedGraph, ParsedRelationship
+
+logger = logging.getLogger(__name__)
+
+HF_API_BASE = "https://huggingface.co/api"
+
+# ─── Featured datasets curated for TCD-JEPA ─────────────────────────────────
+
+FEATURED_DATASETS = [
+    {
+        "id": "hf-internal-testing/fixtures_ade20k",
+        "name": "ADE20K Fixtures",
+        "description": "Scene understanding dataset with entity-relationship structure from ADE20K.",
+        "tags": ["computer-vision", "scene-understanding"],
+        "category": "Scientific",
+    },
+    {
+        "id": "citation_intent",
+        "name": "Citation Intent",
+        "description": "Academic citation network with intent labels — ideal for relationship discovery.",
+        "tags": ["text-classification", "citations", "graph"],
+        "category": "Scientific",
+    },
+    {
+        "id": "financial_phrasebank",
+        "name": "Financial PhraseBank",
+        "description": "Sentiment-labeled financial news sentences. Great for entity extraction + sentiment graphs.",
+        "tags": ["finance", "sentiment-analysis"],
+        "category": "Finance",
+    },
+    {
+        "id": "cora",
+        "name": "Cora Citation Network",
+        "description": "Classic citation graph dataset with 2,708 papers and 5,429 links across 7 classes.",
+        "tags": ["graph", "citation-network", "node-classification"],
+        "category": "Scientific",
+    },
+    {
+        "id": "pubmed",
+        "name": "PubMed Abstracts",
+        "description": "Biomedical literature abstracts — extract entities and discover hidden connections.",
+        "tags": ["healthcare", "biomedical", "text"],
+        "category": "Healthcare",
+    },
+    {
+        "id": "tweets_hate_speech_detection",
+        "name": "Hate Speech Detection",
+        "description": "Social media tweet dataset with labels — analyze network patterns and entity relationships.",
+        "tags": ["social-media", "text-classification"],
+        "category": "Social Networks",
+    },
+]
+
+CATEGORIES = [
+    {"name": "Finance", "tags": ["finance", "financial", "stock", "trading", "economics"]},
+    {"name": "Healthcare", "tags": ["healthcare", "medical", "biomedical", "clinical", "health"]},
+    {"name": "Social Networks", "tags": ["social", "network", "graph", "twitter", "reddit"]},
+    {"name": "NLP", "tags": ["text", "nlp", "language", "sentiment", "ner"]},
+    {"name": "Supply Chain", "tags": ["supply-chain", "logistics", "manufacturing", "procurement"]},
+    {"name": "Government", "tags": ["government", "policy", "legal", "regulation", "public"]},
+    {"name": "Scientific", "tags": ["science", "research", "citation", "academic", "biology"]},
+    {"name": "Computer Vision", "tags": ["image", "vision", "object-detection", "segmentation"]},
+]
+
+
+# ─── Search & Metadata ───────────────────────────────────────────────────────
+
+async def search_datasets(
+    query: str,
+    limit: int = 20,
+    offset: int = 0,
+    category: str | None = None,
+) -> list[dict[str, Any]]:
+    """Search Hugging Face datasets by keyword and optional category tag."""
+    params: dict[str, Any] = {
+        "search": query,
+        "limit": limit,
+        "offset": offset,
+        "sort": "downloads",
+        "direction": -1,
+    }
+
+    # If category specified, find matching tags and add as filter
+    if category:
+        cat_tags = next((c["tags"] for c in CATEGORIES if c["name"] == category), None)
+        if cat_tags:
+            params["search"] = f"{query} {cat_tags[0]}"
+
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.get(f"{HF_API_BASE}/datasets", params=params)
+        resp.raise_for_status()
+        raw = resp.json()
+
+    results = []
+    for item in raw:
+        results.append({
+            "id": item.get("id", ""),
+            "name": item.get("id", "").split("/")[-1],
+            "author": item.get("author", ""),
+            "description": item.get("description", "") or item.get("cardData", {}).get("description", ""),
+            "downloads": item.get("downloads", 0),
+            "likes": item.get("likes", 0),
+            "tags": item.get("tags", []),
+            "last_modified": item.get("lastModified", ""),
+        })
+
+    return results
+
+
+async def get_dataset_info(dataset_id: str) -> dict[str, Any]:
+    """Get detailed information about a specific HF dataset."""
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.get(f"{HF_API_BASE}/datasets/{dataset_id}")
+        resp.raise_for_status()
+        info = resp.json()
+
+    # Try to get the first available config and split info
+    configs = []
+    splits = []
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            split_resp = await client.get(
+                f"https://datasets-server.huggingface.co/splits",
+                params={"dataset": dataset_id},
+            )
+            if split_resp.status_code == 200:
+                split_data = split_resp.json()
+                for s in split_data.get("splits", []):
+                    config = s.get("config", "default")
+                    split_name = s.get("split", "train")
+                    if config not in configs:
+                        configs.append(config)
+                    if split_name not in splits:
+                        splits.append(split_name)
+    except Exception:
+        configs = ["default"]
+        splits = ["train"]
+
+    # Try to get column info from first rows
+    columns = []
+    sample_rows = []
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            rows_resp = await client.get(
+                f"https://datasets-server.huggingface.co/first-rows",
+                params={
+                    "dataset": dataset_id,
+                    "config": configs[0] if configs else "default",
+                    "split": splits[0] if splits else "train",
+                },
+            )
+            if rows_resp.status_code == 200:
+                rows_data = rows_resp.json()
+                for feat in rows_data.get("features", []):
+                    columns.append({
+                        "name": feat.get("column", {}).get("name", feat.get("name", "")),
+                        "type": feat.get("column", {}).get("type", feat.get("type", "unknown")),
+                    })
+                for row in rows_data.get("rows", [])[:5]:
+                    sample_rows.append(row.get("row", row))
+    except Exception:
+        pass
+
+    return {
+        "id": info.get("id", dataset_id),
+        "name": info.get("id", dataset_id).split("/")[-1],
+        "author": info.get("author", ""),
+        "description": info.get("description", ""),
+        "downloads": info.get("downloads", 0),
+        "likes": info.get("likes", 0),
+        "tags": info.get("tags", []),
+        "configs": configs,
+        "splits": splits,
+        "columns": columns,
+        "sample_rows": sample_rows[:5],
+        "last_modified": info.get("lastModified", ""),
+    }
+
+
+def get_featured() -> list[dict[str, Any]]:
+    """Return curated featured datasets for TCD-JEPA."""
+    return FEATURED_DATASETS
+
+
+def get_categories() -> list[dict[str, str | list[str]]]:
+    """Return available dataset categories with their HF tag mappings."""
+    return CATEGORIES
+
+
+# ─── Import Pipeline ─────────────────────────────────────────────────────────
+
+async def import_dataset(
+    hf_dataset_id: str,
+    user_id: uuid.UUID,
+    db: AsyncSession,
+    neo4j: Neo4jConnection,
+    minio_client: Any | None = None,
+    name: str | None = None,
+    config: str | None = None,
+    split: str | None = None,
+    max_rows: int = 10000,
+) -> dict[str, Any]:
+    """Import a Hugging Face dataset into the platform.
+
+    1. Download via the `datasets` library
+    2. Auto-detect schema mapping
+    3. Convert to ParsedGraph
+    4. Create Dataset record in PostgreSQL
+    5. Run AwakeningPipeline for Neo4j ingestion + profiling
+
+    Returns:
+        Dict with dataset_id and import summary.
+    """
+    logger.info("Importing HF dataset: %s (config=%s, split=%s)", hf_dataset_id, config, split)
+
+    # Step 1: Download dataset
+    from datasets import load_dataset
+
+    load_kwargs: dict[str, Any] = {"path": hf_dataset_id, "trust_remote_code": False}
+    if config:
+        load_kwargs["name"] = config
+    if split:
+        load_kwargs["split"] = split
+    else:
+        load_kwargs["split"] = "train"
+
+    try:
+        hf_ds = load_dataset(**load_kwargs)
+    except Exception as e:
+        logger.error("Failed to download HF dataset %s: %s", hf_dataset_id, e)
+        raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
+
+    # Convert to pandas DataFrame
+    df = hf_ds.to_pandas()
+    if len(df) > max_rows:
+        logger.info("Truncating dataset from %d to %d rows", len(df), max_rows)
+        df = df.head(max_rows)
+
+    # Step 2: Auto-detect schema
+    mapper = SchemaMapper()
+    schema = mapper.detect(df)
+
+    # Step 3: Convert to ParsedGraph
+    graph = _dataframe_to_graph(df, schema)
+
+    if not graph.entities:
+        raise ValueError(
+            f"No entities could be extracted from '{hf_dataset_id}'. "
+            "The dataset may not have suitable columns for graph conversion."
+        )
+
+    # Step 4: Create Dataset record
+    dataset_name = name or hf_dataset_id.split("/")[-1].replace("-", " ").title()
+    dataset = Dataset(
+        name=dataset_name,
+        description=f"Imported from Hugging Face: {hf_dataset_id}",
+        owner_id=user_id,
+        status="profiling",
+    )
+    db.add(dataset)
+    await db.flush()
+    await db.refresh(dataset)
+
+    # Step 5: Convert graph to CSV bytes and run AwakeningPipeline
+    csv_bytes = _graph_to_csv_bytes(graph)
+    pipeline = AwakeningPipeline(db=db, neo4j=neo4j, minio_client=minio_client)
+
+    result = await pipeline.run(
+        dataset_id=dataset.id,
+        user_id=user_id,
+        file_content=csv_bytes,
+        file_name=f"{hf_dataset_id.replace('/', '_')}.csv",
+        content_type="csv",
+        schema_mapping=schema.to_csv_adapter_mapping() if schema.is_edge_list else None,
+    )
+
+    logger.info(
+        "HF dataset '%s' imported as dataset_id=%s: %d entities, %d relationships",
+        hf_dataset_id,
+        dataset.id,
+        len(graph.entities),
+        len(graph.relationships),
+    )
+
+    return {
+        "dataset_id": str(dataset.id),
+        "dataset_name": dataset_name,
+        "hf_dataset_id": hf_dataset_id,
+        "entity_count": len(graph.entities),
+        "relationship_count": len(graph.relationships),
+        "status": result.get("status", "ready"),
+    }
+
+
+def _dataframe_to_graph(df: pd.DataFrame, schema) -> ParsedGraph:
+    """Convert a DataFrame to a ParsedGraph using the detected schema mapping."""
+    entities: dict[str, ParsedEntity] = {}
+    relationships: list[ParsedRelationship] = []
+
+    if schema.is_edge_list:
+        # Edge list: source and target columns directly form the graph
+        src_col = schema.source_column
+        tgt_col = schema.target_column
+        type_col = schema.relationship_type_column
+        entity_type_col = schema.entity_type_column
+
+        for _, row in df.iterrows():
+            src = str(row.get(src_col, "")).strip()
+            tgt = str(row.get(tgt_col, "")).strip()
+            if not src or not tgt:
+                continue
+
+            etype = str(row.get(entity_type_col, "")) if entity_type_col else None
+            if src not in entities:
+                entities[src] = ParsedEntity(name=src, entity_type=etype, attributes={})
+            if tgt not in entities:
+                entities[tgt] = ParsedEntity(name=tgt, entity_type=etype, attributes={})
+
+            rel_type = str(row.get(type_col, "related_to")) if type_col else "related_to"
+            weight = 1.0
+            if schema.weight_column:
+                try:
+                    weight = float(row.get(schema.weight_column, 1.0))
+                except (ValueError, TypeError):
+                    weight = 1.0
+
+            relationships.append(ParsedRelationship(
+                source=src,
+                target=tgt,
+                relationship_type=rel_type,
+                weight=weight,
+            ))
+    else:
+        # Entity table: each row is an entity, relationships from shared categorical values
+        id_col = schema.entity_id_column or schema.entity_name_column or df.columns[0]
+        name_col = schema.entity_name_column or id_col
+        type_col = schema.entity_type_column
+
+        for _, row in df.iterrows():
+            entity_id = str(row.get(id_col, "")).strip()
+            if not entity_id:
+                continue
+
+            entity_name = str(row.get(name_col, entity_id)).strip()
+            entity_type = str(row.get(type_col, "entity")) if type_col else "entity"
+
+            attrs = {}
+            for col in schema.attribute_columns:
+                val = row.get(col)
+                if pd.notna(val):
+                    attrs[col] = str(val)
+
+            entities[entity_id] = ParsedEntity(
+                name=entity_name,
+                entity_type=entity_type,
+                attributes=attrs,
+            )
+
+        # Build relationships from shared categorical values (entity_type, relationship columns)
+        if type_col:
+            _build_type_relationships(df, id_col, type_col, entities, relationships)
+
+        # Build relationships from explicit relationship columns
+        for rel_col in schema.relationship_columns:
+            for _, row in df.iterrows():
+                src = str(row.get(id_col, "")).strip()
+                tgt = str(row.get(rel_col, "")).strip()
+                if src and tgt and src in entities and tgt in entities:
+                    relationships.append(ParsedRelationship(
+                        source=src,
+                        target=tgt,
+                        relationship_type=rel_col,
+                    ))
+
+    return ParsedGraph(entities=list(entities.values()), relationships=relationships)
+
+
+def _build_type_relationships(
+    df: pd.DataFrame,
+    id_col: str,
+    type_col: str,
+    entities: dict[str, ParsedEntity],
+    relationships: list[ParsedRelationship],
+) -> None:
+    """Create relationships between entities that share the same type/category."""
+    grouped = df.groupby(type_col)[id_col].apply(list)
+    for type_val, members in grouped.items():
+        member_strs = [str(m).strip() for m in members if str(m).strip() in entities]
+        # Connect entities in same group (limit edges to avoid explosion)
+        max_edges_per_group = 50
+        edge_count = 0
+        for i, src in enumerate(member_strs):
+            for tgt in member_strs[i + 1:]:
+                if edge_count >= max_edges_per_group:
+                    break
+                relationships.append(ParsedRelationship(
+                    source=src,
+                    target=tgt,
+                    relationship_type=f"shared_{type_col}",
+                    weight=1.0,
+                ))
+                edge_count += 1
+            if edge_count >= max_edges_per_group:
+                break
+
+
+def _graph_to_csv_bytes(graph: ParsedGraph) -> bytes:
+    """Convert a ParsedGraph to CSV bytes for the AwakeningPipeline."""
+    import csv
+    import io
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["source", "target", "relationship_type", "weight"])
+
+    for rel in graph.relationships:
+        writer.writerow([rel.source, rel.target, rel.relationship_type, rel.weight])
+
+    return output.getvalue().encode("utf-8")

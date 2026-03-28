@@ -79,7 +79,7 @@ function ResultsTableMini() {
           {RESULTS_TCD_VS_BASELINE.map((r) => (
             <tr key={r.dataset} className="border-b border-li-gray-900/50">
               <td className="py-2 pr-3 text-li-gray-400">{r.dataset}</td>
-              <td className="py-2 px-2 text-right text-li-cyan font-medium">{r.tcdAuc}%</td>
+              <td className="py-2 px-2 text-right text-white font-medium">{r.tcdAuc}%</td>
               <td className="py-2 px-2 text-right text-li-gray-500">{r.baselineAuc}%</td>
               <td className="py-2 pl-2 text-right text-li-green">+{r.improvement}%</td>
             </tr>
@@ -106,11 +106,11 @@ function GNNComparisonMini() {
           {RESULTS_TCD_VS_GNN.map((r) => {
             const isTCD = r.method === "TCD-JEPA";
             return (
-              <tr key={r.method} className={`border-b border-li-gray-900/50 ${isTCD ? "bg-li-cyan/5" : ""}`}>
-                <td className={`py-1.5 pr-2 ${isTCD ? "text-li-cyan font-medium" : "text-li-gray-400"}`}>
+              <tr key={r.method} className={`border-b border-li-gray-900/50 ${isTCD ? "bg-white/5" : ""}`}>
+                <td className={`py-1.5 pr-2 ${isTCD ? "text-white font-medium" : "text-li-gray-400"}`}>
                   {r.method}
                 </td>
-                <td className={`py-1.5 px-1 text-right ${isTCD ? "text-li-cyan font-medium" : "text-white"}`}>
+                <td className={`py-1.5 px-1 text-right ${isTCD ? "text-white font-medium" : "text-white"}`}>
                   {r.semi}%
                 </td>
                 <td className="py-1.5 px-1 text-right text-white">{r.gdelt}%</td>
@@ -157,7 +157,7 @@ function ChallengeUIMini() {
         <div className="flex gap-2 mt-3">
           <span className="px-2 py-0.5 bg-li-green/10 text-li-green text-[10px] font-mono rounded">Validate</span>
           <span className="px-2 py-0.5 bg-li-red/10 text-li-red text-[10px] font-mono rounded">Invalidate</span>
-          <span className="px-2 py-0.5 bg-li-cyan/10 text-li-cyan text-[10px] font-mono rounded">Reassign</span>
+          <span className="px-2 py-0.5 bg-white/10 text-white text-[10px] font-mono rounded">Reassign</span>
         </div>
       </div>
       <div className="p-3 bg-li-depth-1 border border-li-green/20 rounded-lg">
@@ -242,7 +242,7 @@ export function MethodologyWalkthrough() {
                 onClick={() => setActiveStep(i)}
                 className={`w-full flex items-center gap-3 px-5 py-4 text-left transition-all duration-300 border-l-2 ${
                   isActive
-                    ? "bg-li-black-light border-l-li-cyan"
+                    ? "bg-li-black-light border-l-white"
                     : "border-l-transparent hover:bg-li-black-light/50"
                 }`}
               >

@@ -445,8 +445,8 @@ export function EngineSimulation() {
               <Pause className="w-4 h-4 text-white" />
             </button>
           ) : (
-            <button onClick={handlePlay} className="p-2 bg-li-cyan/20 rounded-lg hover:bg-li-cyan/30 transition-colors">
-              <Play className="w-4 h-4 text-li-cyan" />
+            <button onClick={handlePlay} className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
+              <Play className="w-4 h-4 text-white" />
             </button>
           )}
           <button onClick={handleReset} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
@@ -475,7 +475,7 @@ export function EngineSimulation() {
                 key={s}
                 onClick={() => setSpeed(s)}
                 className={`px-2 py-1 text-xs font-mono rounded transition-colors ${
-                  speed === s ? "bg-li-cyan/20 text-li-cyan" : "text-li-gray-500 hover:text-white"
+                  speed === s ? "bg-white/20 text-white" : "text-li-gray-500 hover:text-white"
                 }`}
               >
                 {s}x
@@ -497,9 +497,9 @@ export function EngineSimulation() {
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-medium transition-all duration-500 ${
                     isActive
-                      ? "bg-li-cyan text-black ring-2 ring-li-cyan/30"
+                      ? "bg-white text-black ring-2 ring-white/30"
                       : isPast
-                      ? "bg-li-cyan/20 text-li-cyan"
+                      ? "bg-white/20 text-white"
                       : "bg-li-gray-900 text-li-gray-600"
                   }`}
                 >
@@ -507,7 +507,7 @@ export function EngineSimulation() {
                 </div>
                 <span
                   className={`text-xs font-mono hidden sm:block transition-colors duration-300 ${
-                    isActive ? "text-li-cyan" : isPast ? "text-li-gray-400" : "text-li-gray-600"
+                    isActive ? "text-white" : isPast ? "text-li-gray-400" : "text-li-gray-600"
                   }`}
                 >
                   {s.label}
@@ -577,10 +577,10 @@ export function EngineSimulation() {
           <div className="absolute inset-0 flex items-center justify-center">
             <button
               onClick={handlePlay}
-              className="flex items-center gap-3 px-6 py-3 bg-li-cyan/10 border border-li-cyan/20 rounded-lg hover:bg-li-cyan/20 transition-colors group"
+              className="flex items-center gap-3 px-6 py-3 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-colors group"
             >
-              <Play className="w-5 h-5 text-li-cyan group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-mono text-li-cyan">Run Simulation</span>
+              <Play className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-mono text-white">Run Simulation</span>
             </button>
           </div>
         )}
@@ -612,7 +612,7 @@ export function EngineSimulation() {
         </div>
         <div>
           <p className="data-label">Link AUC</p>
-          <p className="font-mono text-lg font-medium text-li-cyan">
+          <p className="font-mono text-lg font-medium text-white">
             {(currentMetric.linkAuc * 100).toFixed(1)}%
           </p>
         </div>

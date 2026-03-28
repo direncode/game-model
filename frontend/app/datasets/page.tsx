@@ -22,7 +22,7 @@ export default function DatasetsPage() {
     <div className="min-h-screen">
       <Navbar />
       <Sidebar />
-      <main className="ml-64 pt-16">
+      <main className="ml-60 pt-14">
         <div className="p-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">

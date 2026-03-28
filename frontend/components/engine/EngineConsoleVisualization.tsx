@@ -40,7 +40,7 @@ export default function EngineConsoleVisualization() {
           <div className="absolute top-4 left-4 flex items-center gap-2 pointer-events-auto">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-li-border">
               <div className={`w-2 h-2 rounded-full ${
-                engineStatus === "processing" ? "bg-cyan-400 animate-pulse" : "bg-amber-400"
+                engineStatus === "processing" ? "bg-white animate-pulse" : "bg-amber-400"
               }`} />
               <span className="text-xs font-data text-white">
                 {engineStatus === "processing" ? "LIVE" : "CONVERGED"}
@@ -61,7 +61,7 @@ export default function EngineConsoleVisualization() {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-li-text-muted">Loss</span>
-                    <span className="font-data text-cyan-400">
+                    <span className="font-data text-white">
                       {metrics.loss > 0 ? metrics.loss.toFixed(4) : "—"}
                     </span>
                   </div>
@@ -80,7 +80,7 @@ export default function EngineConsoleVisualization() {
                   {/* Progress bar */}
                   <div className="h-1 bg-li-bg rounded-full overflow-hidden mt-1">
                     <div
-                      className="h-full bg-cyan-400 rounded-full transition-all duration-500"
+                      className="h-full bg-white rounded-full transition-all duration-500"
                       style={{ width: `${progress * 100}%` }}
                     />
                   </div>
@@ -109,7 +109,7 @@ export default function EngineConsoleVisualization() {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-li-text-muted">Link AUC</span>
-                    <span className="font-data text-cyan-400">
+                    <span className="font-data text-white">
                       {metrics.linkAuc > 0 ? (metrics.linkAuc * 100).toFixed(1) + "%" : "—"}
                     </span>
                   </div>
@@ -121,8 +121,8 @@ export default function EngineConsoleVisualization() {
           {/* Bottom: Progress text */}
           {engineStatus === "processing" && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-auto">
-              <div className="px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm border border-cyan-500/30">
-                <span className="text-sm font-data text-cyan-400">
+              <div className="px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/30">
+                <span className="text-sm font-data text-white">
                   TCD-JEPA is discovering hidden structure... {(progress * 100).toFixed(0)}%
                 </span>
               </div>

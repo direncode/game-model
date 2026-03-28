@@ -33,7 +33,7 @@ export default function DatasetLayout({
     <div className="min-h-screen">
       <Navbar />
       <Sidebar />
-      <main className="ml-64 pt-16">
+      <main className="ml-60 pt-14">
         <div className="border-b border-li-border bg-li-surface/30">
           <div className="px-8 pt-4">
             <nav className="flex gap-1 -mb-px overflow-x-auto">

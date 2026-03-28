@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuthStore } from "@/store/auth";
+import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
@@ -61,7 +61,7 @@ function Dashboard() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <Link
           href="/datasets/new"
-          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-gray-600 transition-colors"
         >
           <Database className="w-5 h-5 text-li-primary" />
           <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
@@ -70,7 +70,7 @@ function Dashboard() {
         </Link>
         <Link
           href="/search"
-          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-gray-600 transition-colors"
         >
           <Search className="w-5 h-5 text-li-primary" />
           <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
@@ -79,7 +79,7 @@ function Dashboard() {
         </Link>
         <Link
           href="/alerts"
-          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-gray-600 transition-colors"
         >
           <Bell className="w-5 h-5 text-li-primary" />
           <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
@@ -88,7 +88,7 @@ function Dashboard() {
         </Link>
         <Link
           href="/settings"
-          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-primary/30 transition-colors"
+          className="li-card py-3 px-4 flex items-center gap-3 group cursor-pointer hover:border-li-gray-600 transition-colors"
         >
           <Settings className="w-5 h-5 text-li-primary" />
           <span className="text-sm text-li-text-secondary group-hover:text-li-primary transition-colors">
@@ -112,7 +112,7 @@ function Dashboard() {
             {datasets.items.slice(0, 6).map((dataset: Dataset) => (
               <Link key={dataset.id} href={`/datasets/${dataset.id}`} className="li-card group cursor-pointer">
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-medium text-white group-hover:text-li-cyan transition-colors">
+                  <h3 className="font-medium text-white group-hover:text-white transition-colors">
                     {dataset.name}
                   </h3>
                   <StatusBadge status={dataset.status} />
@@ -209,7 +209,7 @@ function LandingPage() {
               Enterprise Structure Discovery
             </p>
             <h1 className="heading-display mt-6 opacity-0 animate-fade-in-up animation-delay-400">
-              Discover <em className="heading-italic text-li-warm">Hidden</em>
+              Discover <em className="heading-italic text-white">Hidden</em>
               <br />
               Structure
             </h1>
@@ -284,7 +284,7 @@ function LandingPage() {
           </Reveal>
           <Reveal delay={100}>
             <h2 className="heading-section max-w-3xl">
-              TCD-JEPA: <em className="heading-italic text-li-warm">Topological Crystallization</em> Dynamics
+              TCD-JEPA: <em className="heading-italic text-white">Topological Crystallization</em> Dynamics
             </h2>
           </Reveal>
           <Reveal delay={200}>
@@ -309,7 +309,7 @@ function LandingPage() {
           </Reveal>
           <Reveal delay={100}>
             <h2 className="heading-section mb-16">
-              From Raw Data to<br /><em className="heading-italic text-li-warm">Actionable Intelligence</em>
+              From Raw Data to<br /><em className="heading-italic text-white">Actionable Intelligence</em>
             </h2>
           </Reveal>
           <Reveal delay={200}>
@@ -332,7 +332,7 @@ function LandingPage() {
               </Reveal>
               <Reveal delay={100}>
                 <h2 className="heading-section">
-                  Built for<br /><em className="heading-italic text-li-warm">Enterprise Scale</em>
+                  Built for<br /><em className="heading-italic text-white">Enterprise Scale</em>
                 </h2>
               </Reveal>
               <Reveal delay={200}>
@@ -378,7 +378,7 @@ function LandingPage() {
         <div className="container-li text-center">
           <Reveal>
             <h2 className="heading-section">
-              Ready to Discover<br /><em className="heading-italic text-li-warm">Hidden Structure?</em>
+              Ready to Discover<br /><em className="heading-italic text-white">Hidden Structure?</em>
             </h2>
           </Reveal>
           <Reveal delay={200}>
@@ -449,19 +449,19 @@ function LandingPage() {
 
 /* ─── Page Router ─── */
 export default function HomePage() {
-  const { isAuthenticated } = useAuthStore();
+  const { isSignedIn, isLoaded } = useAuth();
   const router = useRouter();
 
-  // Authenticated users go to the Engine Console — the hero product
+  // Always redirect to engine — Clerk middleware handles auth redirect to /login
   useEffect(() => {
-    if (isAuthenticated) {
-      router.replace("/engine");
+    if (isLoaded) {
+      if (isSignedIn) {
+        router.replace("/engine");
+      } else {
+        router.replace("/login");
+      }
     }
-  }, [isAuthenticated, router]);
+  }, [isSignedIn, isLoaded, router]);
 
-  if (isAuthenticated) {
-    return <PageLoader />;
-  }
-
-  return <LandingPage />;
+  return <PageLoader />;
 }

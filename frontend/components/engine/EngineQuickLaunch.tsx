@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import Link from "next/link";
+import { Sparkles, ChevronDown, ChevronUp, Library } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
@@ -80,6 +81,13 @@ export default function EngineQuickLaunch() {
             </option>
           ))}
         </select>
+        <Link
+          href="/datasets/library"
+          className="flex items-center gap-1.5 mt-1.5 text-xs text-li-text-muted hover:text-white transition-colors"
+        >
+          <Library className="w-3 h-3" />
+          Browse Dataset Library
+        </Link>
       </div>
 
       {/* Config inputs row */}

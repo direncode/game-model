@@ -1,24 +1,19 @@
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-// Mutex to prevent multiple simultaneous refresh attempts
-let isRefreshing = false;
-let refreshPromise: Promise<{ access_token: string; refresh_token: string }> | null = null;
-
 class ApiClient {
   private baseUrl: string;
   private token: string | null = null;
-  private refreshToken: string | null = null;
-  private onLogout: (() => void) | null = null;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
   setToken(token: string | null) { this.token = token; }
-  setRefreshToken(token: string | null) { this.refreshToken = token; }
-  setOnLogout(callback: () => void) { this.onLogout = callback; }
+  // Legacy methods — no-ops for backward compatibility
+  setRefreshToken(_token: string | null) {}
+  setOnLogout(_callback: () => void) {}
 
-  private async request<T>(path: string, options: RequestInit = {}, retry = true): Promise<T> {
+  private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       ...options.headers as Record<string, string>,
@@ -27,71 +22,11 @@ class ApiClient {
 
     const res = await fetch(`${this.baseUrl}${path}`, { ...options, headers });
 
-    // Auto-refresh on 401
-    if (res.status === 401 && retry && this.refreshToken) {
-      const refreshed = await this.tryRefresh();
-      if (refreshed) {
-        // Retry the original request with the new token
-        return this.request<T>(path, options, false);
-      }
-      // Refresh failed — force logout
-      if (this.onLogout) this.onLogout();
-      throw new Error("Session expired. Please log in again.");
-    }
-
     if (!res.ok) {
       const error = await res.json().catch(() => ({ detail: res.statusText }));
       throw new Error(error.detail || `API Error: ${res.status}`);
     }
     return res.json();
-  }
-
-  private async tryRefresh(): Promise<boolean> {
-    if (!this.refreshToken) return false;
-
-    // Use mutex to prevent parallel refresh calls
-    if (isRefreshing && refreshPromise) {
-      try {
-        const result = await refreshPromise;
-        this.token = result.access_token;
-        this.refreshToken = result.refresh_token;
-        return true;
-      } catch {
-        return false;
-      }
-    }
-
-    isRefreshing = true;
-    refreshPromise = (async () => {
-      const res = await fetch(`${this.baseUrl}/api/v1/auth/refresh`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ refresh_token: this.refreshToken }),
-      });
-
-      if (!res.ok) throw new Error("Refresh failed");
-      return res.json() as Promise<{ access_token: string; refresh_token: string }>;
-    })();
-
-    try {
-      const result = await refreshPromise;
-      this.token = result.access_token;
-      this.refreshToken = result.refresh_token;
-
-      // Notify the store to persist the new tokens
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("token-refreshed", {
-          detail: { accessToken: result.access_token, refreshToken: result.refresh_token },
-        }));
-      }
-
-      return true;
-    } catch {
-      return false;
-    } finally {
-      isRefreshing = false;
-      refreshPromise = null;
-    }
   }
 
   // ── Auth ──────────────────────────────────────────────────────────
@@ -232,6 +167,30 @@ class ApiClient {
   async listAlerts() { return this.request("/api/v1/alerts"); }
   async updateAlert(id: string, data: object) { return this.request(`/api/v1/alerts/${id}`, { method: "PUT", body: JSON.stringify(data) }); }
   async deleteAlert(id: string) { return this.request(`/api/v1/alerts/${id}`, { method: "DELETE" }); }
+
+  // ── Dataset Hub ─────────────────────────────────────────────────
+
+  async searchHubDatasets(query: string, category?: string, limit = 20, offset = 0) {
+    const params = new URLSearchParams({ q: query, limit: String(limit), offset: String(offset) });
+    if (category) params.set("category", category);
+    return this.request(`/api/v1/hub/search?${params}`);
+  }
+
+  async getHubDatasetInfo(datasetId: string) {
+    return this.request(`/api/v1/hub/dataset/${encodeURIComponent(datasetId)}`);
+  }
+
+  async importHubDataset(data: { hf_dataset_id: string; name?: string; config?: string; split?: string; max_rows?: number }) {
+    return this.request("/api/v1/hub/import", { method: "POST", body: JSON.stringify(data) });
+  }
+
+  async getHubCategories() {
+    return this.request<Array<{ name: string; tags: string[] }>>("/api/v1/hub/categories");
+  }
+
+  async getHubFeatured() {
+    return this.request<Array<{ id: string; name: string; description: string; tags: string[]; category: string }>>("/api/v1/hub/featured");
+  }
 
 }
 

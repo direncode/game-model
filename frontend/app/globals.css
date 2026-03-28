@@ -32,7 +32,7 @@
   }
 
   ::selection {
-    background: rgba(0, 212, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
   }
 
@@ -78,9 +78,9 @@
     @apply text-xs font-medium uppercase tracking-[0.15em] text-li-gray-400;
   }
 
-  /* Overline — Palantir-style category label */
+  /* Overline — category label */
   .overline {
-    @apply text-xs font-mono font-medium uppercase tracking-[0.2em] text-li-cyan;
+    @apply text-xs font-mono font-medium uppercase tracking-[0.2em] text-li-gray-400;
   }
 
   /* Body text variants */
@@ -143,7 +143,7 @@
   }
   .btn-tertiary::after {
     content: "\21B3";
-    @apply text-li-cyan transition-all duration-300;
+    @apply text-li-gray-400 transition-all duration-300;
   }
 
   /* Ghost — text-only */
@@ -152,11 +152,11 @@
            text-sm font-medium transition-all duration-300 hover:text-white;
   }
 
-  /* Accent — cyan-tinted */
+  /* Accent — subtle white-tinted */
   .btn-accent {
-    @apply bg-li-cyan/10 border border-li-cyan/20 text-li-cyan px-6 py-3
+    @apply bg-white/5 border border-white/10 text-white px-6 py-3
            text-sm font-medium transition-all duration-300
-           hover:bg-li-cyan/20 hover:-translate-y-0.5;
+           hover:bg-white/10 hover:-translate-y-0.5;
   }
 
   /* Warm — gold CTA for serif contexts */
@@ -165,37 +165,40 @@
            transition-all duration-300 hover:bg-li-warm/80 hover:-translate-y-0.5;
   }
 
-  /* Legacy li-btn classes for backward compatibility */
+  /* Input — x.ai style */
   .li-input {
-    @apply w-full px-4 py-2.5 bg-li-black-light border border-li-gray-900 rounded-lg
+    @apply w-full px-4 py-2.5 bg-transparent border border-li-gray-800 rounded-lg
            text-white placeholder:text-li-gray-600
-           focus:outline-none focus:ring-2 focus:ring-li-cyan focus:border-transparent
+           focus:outline-none focus:border-li-gray-500
            transition-all duration-200 font-sans;
   }
 
+  /* Primary button — white fill, x.ai style */
   .li-btn-primary {
-    @apply px-6 py-2.5 bg-li-cyan hover:bg-li-cyan/80 text-black
+    @apply px-6 py-2.5 bg-white hover:bg-li-gray-200 text-black
            font-medium rounded-lg transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-2 focus:ring-offset-black
+           focus:outline-none focus:ring-2 focus:ring-white/30
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
+  /* Secondary button — outlined, x.ai style */
   .li-btn-secondary {
-    @apply px-6 py-2.5 bg-li-black-light hover:bg-li-black-elevated text-white
-           border border-li-gray-900 font-medium rounded-lg transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-li-gray-700 focus:ring-offset-2 focus:ring-offset-black
+    @apply px-6 py-2.5 bg-transparent hover:bg-white/5 text-white
+           border border-li-gray-700 hover:border-li-gray-500
+           font-medium rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-white/10
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .li-btn-danger {
     @apply px-6 py-2.5 bg-li-red hover:bg-li-red/80 text-white
            font-medium rounded-lg transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-li-red focus:ring-offset-2 focus:ring-offset-black
+           focus:outline-none focus:ring-2 focus:ring-li-red/30
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .li-btn-ghost {
-    @apply px-4 py-2 text-li-gray-400 hover:text-white hover:bg-li-black-elevated
+    @apply px-4 py-2 text-li-gray-400 hover:text-white hover:bg-white/5
            rounded-lg transition-all duration-200;
   }
 
@@ -221,7 +224,7 @@
     background: linear-gradient(90deg, transparent, #525252, transparent);
   }
 
-  /* Numbered methodology card (btut.ai 01-06 pattern) */
+  /* Numbered methodology card */
   .card-numbered {
     @apply bg-li-black border border-li-gray-900 p-10 md:p-12
            transition-all duration-500 relative;
@@ -230,7 +233,7 @@
     @apply bg-li-black-light border-li-gray-800;
   }
   .card-numbered .card-number {
-    @apply font-mono text-sm font-medium text-li-cyan mb-6 block;
+    @apply font-mono text-sm font-medium text-li-gray-400 mb-6 block;
   }
   .card-numbered .card-title {
     @apply font-display text-xl md:text-2xl text-white mb-4 tracking-tight;
@@ -240,15 +243,10 @@
     @apply text-sm text-li-gray-400 leading-relaxed;
   }
 
-  /* Metric card (btut.ai live convergence widget) */
+  /* Metric card */
   .card-metric {
-    @apply bg-li-depth-2 border border-li-border-accent p-6
-           transition-all duration-300 relative overflow-hidden;
-  }
-  .card-metric::before {
-    content: "";
-    @apply absolute top-0 left-0 right-0 h-px;
-    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    @apply bg-li-surface border border-li-gray-800 p-6
+           transition-all duration-300 relative overflow-hidden rounded-xl;
   }
   .card-metric .metric-value {
     @apply font-mono text-2xl font-medium text-white;
@@ -260,13 +258,13 @@
     @apply inline-flex items-center gap-1.5 mt-3;
   }
   .card-metric .metric-dot {
-    @apply w-1.5 h-1.5 rounded-full bg-li-cyan animate-pulse;
+    @apply w-1.5 h-1.5 rounded-full bg-white animate-pulse;
   }
 
-  /* Legacy li-card */
+  /* Card — x.ai style */
   .li-card {
-    @apply bg-li-black-light border border-li-gray-900 rounded-xl p-6
-           hover:border-li-gray-700 transition-all duration-200;
+    @apply bg-li-surface border border-li-gray-800 rounded-xl p-6
+           hover:border-li-gray-600 transition-all duration-200;
   }
 
   .li-badge {
@@ -326,7 +324,7 @@
   }
 
   .line-accent-cyan {
-    @apply w-[60px] h-px bg-li-cyan;
+    @apply w-[60px] h-px bg-li-gray-500;
   }
 
   /* Dividers */
@@ -339,9 +337,9 @@
     @apply h-px w-full;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(0, 212, 255, 0.15) 20%,
-      rgba(0, 212, 255, 0.3) 50%,
-      rgba(0, 212, 255, 0.15) 80%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.08) 80%,
       transparent 100%
     );
   }
@@ -432,5 +430,5 @@
   .status-success { @apply text-li-green; }
   .status-warning { @apply text-li-yellow; }
   .status-danger { @apply text-li-red; }
-  .status-info { @apply text-li-cyan; }
+  .status-info { @apply text-white; }
 }

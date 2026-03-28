@@ -13,6 +13,7 @@ from app.api.v1.embeddings import router as embeddings_router
 from app.api.v1.lineage import router as lineage_router
 from app.api.v1.modules import router as modules_router
 from app.api.v1.reports import router as reports_router
+from app.api.v1.hub import router as hub_router
 from app.api.v1.ws import router as ws_router
 
 router = APIRouter()
@@ -28,6 +29,7 @@ router.include_router(reports_router)
 router.include_router(embeddings_router)
 router.include_router(admin_router)
 router.include_router(alerts_router)
+router.include_router(hub_router)
 router.include_router(ws_router)
 
 # Also export as api_router for alternate import style

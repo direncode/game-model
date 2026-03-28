@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Cpu, ArrowRight, Sparkles } from "lucide-react";
+import { Cpu, ArrowRight, Sparkles, RotateCcw, Library } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEngineStore } from "@/stores/engine";
 
@@ -111,7 +111,7 @@ function ProcessingView() {
         </div>
         <div className="w-full h-1.5 bg-li-surface rounded-full overflow-hidden">
           <div
-            className="h-full bg-cyan-500 rounded-full transition-all duration-500"
+            className="h-full bg-white rounded-full transition-all duration-500"
             style={{ width: `${metrics.gpuUtilization}%` }}
           />
         </div>
@@ -152,11 +152,11 @@ function ConvergedView() {
           <Link
             key={mod.id}
             href={`/datasets/${activeDatasetId}/modules/${mod.id}`}
-            className="li-card px-4 py-3.5 hover:border-li-primary/40 transition-colors group"
+            className="li-card px-4 py-3.5 hover:border-li-gray-600 transition-colors group"
           >
             <div className="flex items-start justify-between">
               <div className="min-w-0">
-                <p className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors truncate">
+                <p className="text-sm font-medium text-white group-hover:text-white transition-colors truncate">
                   {mod.name}
                 </p>
                 <p className="text-xs text-li-text-muted mt-0.5">
@@ -192,7 +192,7 @@ function ConvergedView() {
               </div>
               <div className="w-full h-1.5 bg-li-surface rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-cyan-500 rounded-full"
+                  className="h-full bg-white rounded-full"
                   style={{ width: `${mod.purity_score * 100}%` }}
                 />
               </div>
@@ -204,12 +204,30 @@ function ConvergedView() {
       {activeDatasetId && (
         <Link
           href={`/datasets/${activeDatasetId}/modules`}
-          className="flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-white hover:text-li-gray-300 transition-colors"
         >
           View full results
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       )}
+
+      {/* Re-run actions */}
+      <div className="flex items-center gap-3 pt-2 border-t border-li-border">
+        <button
+          onClick={() => useEngineStore.getState().reset()}
+          className="li-btn-primary flex items-center gap-2 px-4 py-2 text-sm font-medium"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          New Analysis
+        </button>
+        <Link
+          href="/datasets/library"
+          className="flex items-center gap-1.5 text-sm text-li-text-secondary hover:text-li-text-primary transition-colors"
+        >
+          <Library className="w-3.5 h-3.5" />
+          Try Different Dataset
+        </Link>
+      </div>
     </div>
   );
 }
@@ -234,7 +252,7 @@ function IdleView() {
         </p>
         <Link
           href={`/datasets/${lastRunSummary.datasetId}/modules`}
-          className="flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors mt-2"
+          className="flex items-center gap-1.5 text-sm text-white hover:text-li-gray-300 transition-colors mt-2"
         >
           View results
           <ArrowRight className="w-3.5 h-3.5" />

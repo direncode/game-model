@@ -17,7 +17,7 @@ export default function EngineStatusBar() {
 
   const dotColor = {
     idle: "bg-green-400",
-    processing: "bg-cyan-400 animate-pulse",
+    processing: "bg-white animate-pulse",
     converged: "bg-amber-400",
     error: "bg-red-400",
   }[engineStatus];
@@ -51,7 +51,7 @@ export default function EngineStatusBar() {
             </span>
             <div className="w-24 h-1 bg-li-surface rounded-full overflow-hidden">
               <div
-                className="h-full bg-cyan-500 rounded-full transition-all duration-500"
+                className="h-full bg-white rounded-full transition-all duration-500"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
@@ -89,7 +89,7 @@ export default function EngineStatusBar() {
         {/* Right: Open Console link */}
         <Link
           href="/engine"
-          className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
+          className="text-xs text-white hover:text-li-gray-300 transition-colors font-medium"
         >
           Open Console
         </Link>

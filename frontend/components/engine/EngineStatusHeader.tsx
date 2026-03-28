@@ -22,7 +22,7 @@ export default function EngineStatusHeader() {
       label: "Ready",
     },
     processing: {
-      dot: "bg-cyan-400",
+      dot: "bg-white",
       animate: true,
       label: `Analyzing... ${Math.round(progress * 100)}%`,
     },
