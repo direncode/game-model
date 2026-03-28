@@ -10,9 +10,10 @@ import { useEngineStore } from "@/stores/engine";
 export default function EngineDatasetPicker() {
   const { setActiveDataset, addMessage } = useEngineStore();
 
-  const { data: datasetsResponse, isLoading } = useQuery({
+  const { data: datasetsResponse, isLoading, isError } = useQuery({
     queryKey: ["datasets"],
     queryFn: () => api.listDatasets(),
+    retry: 2,
   });
 
   const datasets: Array<{
@@ -36,6 +37,30 @@ export default function EngineDatasetPicker() {
         {[1, 2, 3].map((i) => (
           <div key={i} className="h-16 bg-li-surface rounded-xl animate-pulse" />
         ))}
+      </div>
+    );
+  }
+
+  if (isError || datasets.length === 0) {
+    return (
+      <div className="space-y-3">
+        <p className="text-xs text-li-text-muted uppercase tracking-wider font-medium">
+          Available Datasets
+        </p>
+        <div className="li-card px-4 py-6 text-center">
+          <p className="text-sm text-li-text-muted">
+            {isError
+              ? "Failed to load datasets. Make sure the API is running."
+              : "No datasets found."}
+          </p>
+          <Link
+            href="/datasets/library"
+            className="inline-flex items-center gap-2 text-sm text-white hover:text-li-cyan transition-colors mt-3"
+          >
+            <Library className="w-3.5 h-3.5" />
+            Browse Dataset Library
+          </Link>
+        </div>
       </div>
     );
   }

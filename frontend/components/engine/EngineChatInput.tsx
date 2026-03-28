@@ -253,7 +253,7 @@ export default function EngineChatInput() {
               className="li-btn-primary flex items-center gap-2 px-5 py-2 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Sparkles className="w-4 h-4" />
-              Ask TCD-JEPA
+              Run TCD-JEPA
             </button>
           )}
         </div>
