@@ -41,9 +41,9 @@ async def trigger_crystallization(
     if dataset is None:
         raise NotFoundError(detail="Dataset not found")
 
-    if dataset.status not in ("ready", "complete"):
+    if dataset.status not in ("ready", "complete", "crystallizing"):
         raise ValidationError(
-            detail=f"Dataset must be in 'ready' or 'complete' status, currently '{dataset.status}'"
+            detail=f"Dataset must be in 'ready', 'complete', or 'crystallizing' status, currently '{dataset.status}'"
         )
 
     config_dict = config.model_dump(exclude_none=True) if config else {}
