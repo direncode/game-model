@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Cpu,
   LayoutDashboard,
   Database,
   Box,
@@ -21,6 +22,7 @@ import {
   Compass,
   Bell,
   Building2,
+  Share2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/auth";
@@ -52,29 +54,40 @@ export default function Sidebar({ className }: SidebarProps) {
 
   const sections: NavSection[] = [
     {
-      title: "DISCOVER",
+      title: "ENGINE",
       items: [
-        { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { label: "Engine Console", href: "/engine", icon: Cpu },
+      ],
+    },
+    {
+      title: "DATA",
+      items: [
         { label: "Datasets", href: "/datasets", icon: Database },
       ],
     },
     {
-      title: "ANALYZE",
+      title: "EXPLORE",
       items: [
-        { label: "Modules", href: "/modules", icon: Box },
-        { label: "Connections", href: "/connections", icon: GitBranch },
+        {
+          label: "3D Explorer",
+          href: activeDatasetId ? `/datasets/${activeDatasetId}/explorer` : "#",
+          icon: Compass,
+          hidden: !activeDatasetId,
+        },
+        {
+          label: "Graph View",
+          href: activeDatasetId ? `/datasets/${activeDatasetId}/graph` : "#",
+          icon: Share2,
+          hidden: !activeDatasetId,
+        },
         {
           label: "Search",
           href: activeDatasetId ? `/datasets/${activeDatasetId}/search` : "#",
           icon: Search,
           hidden: !activeDatasetId,
         },
-        {
-          label: "Explorer",
-          href: activeDatasetId ? `/datasets/${activeDatasetId}/explorer` : "#",
-          icon: Compass,
-          hidden: !activeDatasetId,
-        },
+        { label: "Modules", href: "/modules", icon: Box },
+        { label: "Connections", href: "/connections", icon: GitBranch },
       ],
     },
     {

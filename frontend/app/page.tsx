@@ -450,20 +450,18 @@ function LandingPage() {
 /* ─── Page Router ─── */
 export default function HomePage() {
   const { isAuthenticated } = useAuthStore();
+  const router = useRouter();
 
-  if (!isAuthenticated) {
-    return <LandingPage />;
+  // Authenticated users go to the Engine Console — the hero product
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/engine");
+    }
+  }, [isAuthenticated, router]);
+
+  if (isAuthenticated) {
+    return <PageLoader />;
   }
 
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Sidebar />
-      <main className="ml-64 pt-16">
-        <div className="p-8">
-          <Dashboard />
-        </div>
-      </main>
-    </div>
-  );
+  return <LandingPage />;
 }

@@ -96,12 +96,12 @@ export default function CrystallizePage() {
       },
       onComplete: () => {
         setActiveJob((prev) => (prev ? { ...prev, status: "completed" } : prev));
-        toast.success("Crystallization complete!");
+        toast.success("TCD-JEPA discovered your modules!");
         router.push(`/datasets/${datasetId}/modules`);
       },
       onError: (data: any) => {
         setActiveJob((prev) => (prev ? { ...prev, status: "failed" } : prev));
-        toast.error(`Crystallization failed: ${data.error}`);
+        toast.error(`TCD-JEPA error: ${data.error}`);
       },
     });
 
@@ -124,9 +124,9 @@ export default function CrystallizePage() {
       )) as CrystallizationJob;
       setActiveJob(job);
       setLossHistory([]);
-      toast.success("Crystallization started");
+      toast.success("TCD-JEPA is analyzing your data...");
     } catch (err: any) {
-      toast.error(err.message || "Failed to start crystallization");
+      toast.error(err.message || "TCD-JEPA failed to start");
     } finally {
       setStarting(false);
     }
@@ -137,7 +137,7 @@ export default function CrystallizePage() {
     try {
       await api.cancelCrystallization(activeJob.id);
       setActiveJob((prev) => (prev ? { ...prev, status: "cancelled" } : prev));
-      toast.success("Crystallization cancelled");
+      toast.success("TCD-JEPA analysis cancelled");
     } catch (err: any) {
       toast.error(err.message || "Failed to cancel");
     }
@@ -156,11 +156,11 @@ export default function CrystallizePage() {
     <div className="space-y-8">
       <div>
         <h2 className="text-xl font-display text-li-text-primary">
-          Crystallization
+          TCD-JEPA Analysis
         </h2>
         <p className="text-sm text-li-text-secondary mt-1">
-          Discover latent modules in your dataset through topological
-          crystallization
+          Ask TCD-JEPA to discover hidden structure in your dataset through
+          topological crystallization
         </p>
       </div>
 
@@ -276,7 +276,7 @@ export default function CrystallizePage() {
             ) : (
               <Play className="w-4 h-4" />
             )}
-            Start Crystallization
+            Ask TCD-JEPA
           </button>
         </div>
       ) : (
@@ -290,7 +290,7 @@ export default function CrystallizePage() {
                 <div>
                   <h3 className="text-sm font-display text-li-text-primary">
                     {isRunning
-                      ? "Crystallization in Progress"
+                      ? "TCD-JEPA is Analyzing"
                       : `Crystallization ${activeJob?.status}`}
                   </h3>
                   <p className="text-xs text-li-text-muted font-data">
