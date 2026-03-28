@@ -10,6 +10,7 @@ import {
   Square,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@clerk/nextjs";
 import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
 
@@ -35,10 +36,16 @@ export default function EngineChatInput() {
   const datasetRef = useRef<HTMLDivElement>(null);
 
   const isProcessing = engineStatus === "processing";
+  const { isSignedIn, getToken } = useAuth();
 
   const { data: datasetsResponse } = useQuery({
     queryKey: ["datasets"],
-    queryFn: () => api.listDatasets(),
+    queryFn: async () => {
+      const token = await getToken();
+      if (token) api.setToken(token);
+      return api.listDatasets();
+    },
+    enabled: !!isSignedIn,
   });
 
   const datasets: Array<{ id: string; name: string }> = Array.isArray(
@@ -66,6 +73,10 @@ export default function EngineChatInput() {
 
   async function handleSubmit() {
     if (!activeDatasetId || !activeDatasetName || isProcessing) return;
+
+    // Ensure fresh token before API call
+    const token = await getToken();
+    if (token) api.setToken(token);
 
     const config: Record<string, any> = {};
     if (moduleCount) config.module_count = parseInt(moduleCount, 10);

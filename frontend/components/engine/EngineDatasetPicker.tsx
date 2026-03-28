@@ -4,15 +4,23 @@ import React from "react";
 import Link from "next/link";
 import { Database, Library, ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@clerk/nextjs";
 import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
 
 export default function EngineDatasetPicker() {
   const { setActiveDataset, addMessage, activeDatasetId } = useEngineStore();
+  const { isSignedIn, getToken } = useAuth();
 
   const { data: datasetsResponse, isLoading, isError } = useQuery({
     queryKey: ["datasets"],
-    queryFn: () => api.listDatasets(),
+    queryFn: async () => {
+      // Ensure token is fresh before making the request
+      const token = await getToken();
+      if (token) api.setToken(token);
+      return api.listDatasets();
+    },
+    enabled: !!isSignedIn,
     retry: 2,
   });
 
