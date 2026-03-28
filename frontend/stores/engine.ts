@@ -6,6 +6,15 @@ import toast from "react-hot-toast";
 
 // ─── Types ───────────────────────────────────────────────────────────
 
+export type ChatMessageType = "welcome" | "dataset-picker" | "user-action" | "processing" | "result" | "error";
+
+export interface ChatMessage {
+  id: string;
+  type: ChatMessageType;
+  timestamp: number;
+  data?: Record<string, any>;
+}
+
 interface EngineMetrics {
   loss: number;
   linkAuc: number;
@@ -67,6 +76,9 @@ interface EngineState {
   lastRunSummary: LastRunSummary | null;
   discoveredModules: DiscoveredModule[];
 
+  // Chat
+  chatMessages: ChatMessage[];
+
   // Actions
   startJob: (datasetId: string, datasetName: string, config?: Record<string, any>) => Promise<void>;
   cancelJob: () => Promise<void>;
@@ -74,6 +86,9 @@ interface EngineState {
   hydrateFromLastJob: (datasetId: string) => Promise<void>;
   reset: () => void;
   setActiveDataset: (id: string, name: string) => void;
+  addMessage: (type: ChatMessageType, data?: Record<string, any>) => void;
+  clearMessages: () => void;
+  initChat: () => void;
 }
 
 const DEFAULT_METRICS: EngineMetrics = {
@@ -101,6 +116,32 @@ export const useEngineStore = create<EngineState>()(
       lossHistory: [],
       lastRunSummary: null,
       discoveredModules: [],
+      chatMessages: [],
+
+      // ── Chat Actions ─────────────────────────────────────────────
+      addMessage: (type: ChatMessageType, data?: Record<string, any>) => {
+        const msg: ChatMessage = {
+          id: `msg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          type,
+          timestamp: Date.now(),
+          data,
+        };
+        set((state) => ({ chatMessages: [...state.chatMessages, msg] }));
+      },
+
+      clearMessages: () => {
+        set({ chatMessages: [] });
+      },
+
+      initChat: () => {
+        const { chatMessages, engineStatus, lastRunSummary } = get();
+        if (chatMessages.length > 0) return;
+        get().addMessage("welcome");
+        if (engineStatus === "converged" && lastRunSummary) {
+          get().addMessage("result");
+        }
+        get().addMessage("dataset-picker");
+      },
 
       // ── Set Active Dataset ─────────────────────────────────────────
       setActiveDataset: (id: string, name: string) => {
@@ -128,10 +169,12 @@ export const useEngineStore = create<EngineState>()(
 
           set({ activeJobId: jobId });
 
+          // Push chat messages
+          get().addMessage("user-action", { datasetName, datasetId });
+          get().addMessage("processing");
+
           // Subscribe to WebSocket for live updates
           get().subscribeToJob(jobId);
-
-          toast.success("TCD-JEPA is analyzing your data...");
         } catch (err: any) {
           set({ engineStatus: "error", errorMessage: err.message || "Failed to start engine" });
           toast.error(err.message || "TCD-JEPA failed to start");
@@ -215,6 +258,7 @@ export const useEngineStore = create<EngineState>()(
               },
             });
 
+            get().addMessage("result", { moduleCount: modules.length });
             toast.success(`TCD-JEPA discovered ${modules.length} modules!`);
           },
 
@@ -223,6 +267,7 @@ export const useEngineStore = create<EngineState>()(
               engineStatus: "error",
               errorMessage: data?.error || "TCD-JEPA encountered an error",
             });
+            get().addMessage("error", { error: data?.error || "TCD-JEPA encountered an error" });
             toast.error(data?.error || "TCD-JEPA encountered an error");
           },
         });
@@ -285,7 +330,11 @@ export const useEngineStore = create<EngineState>()(
           metrics: { ...DEFAULT_METRICS },
           lossHistory: [],
           discoveredModules: [],
+          chatMessages: [],
         });
+        // Re-initialize chat with welcome + dataset picker
+        get().addMessage("welcome");
+        get().addMessage("dataset-picker");
       },
     }),
     {

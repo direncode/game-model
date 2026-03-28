@@ -15,7 +15,7 @@ import { formatDate, formatCompactNumber } from "@/lib/utils";
 import type { Dataset } from "@/lib/types";
 import { Reveal } from "@/components/effects/ScrollReveal";
 import { AnimatedCounter } from "@/components/effects/AnimatedCounter";
-import { EngineSimulation } from "@/components/landing/EngineSimulation";
+import EngineSimulation from "@/components/landing/EngineSimulation";
 import { MethodologyWalkthrough } from "@/components/landing/MethodologyWalkthrough";
 import {
   Database,

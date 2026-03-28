@@ -1,0 +1,84 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { Database, Library, ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api";
+import { useEngineStore } from "@/stores/engine";
+
+export default function EngineDatasetPicker() {
+  const { setActiveDataset, addMessage } = useEngineStore();
+
+  const { data: datasetsResponse, isLoading } = useQuery({
+    queryKey: ["datasets"],
+    queryFn: () => api.listDatasets(),
+  });
+
+  const datasets: Array<{
+    id: string;
+    name: string;
+    entity_count?: number;
+    edge_count?: number;
+    description?: string;
+  }> = Array.isArray(datasetsResponse)
+    ? datasetsResponse
+    : (datasetsResponse as any)?.items || [];
+
+  function handleSelect(ds: (typeof datasets)[0]) {
+    setActiveDataset(ds.id, ds.name);
+    addMessage("user-action", { datasetName: ds.name, datasetId: ds.id });
+  }
+
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="h-16 bg-li-surface rounded-xl animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      <p className="text-xs text-li-text-muted uppercase tracking-wider font-medium">
+        Available Datasets
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {datasets.map((ds) => (
+          <button
+            key={ds.id}
+            onClick={() => handleSelect(ds)}
+            className="group text-left li-card px-4 py-3 hover:border-li-gray-600 transition-all duration-200 cursor-pointer"
+          >
+            <div className="flex items-start gap-3">
+              <Database className="w-4 h-4 text-li-text-muted mt-0.5 flex-shrink-0" />
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-white truncate group-hover:text-li-cyan transition-colors">
+                  {ds.name}
+                </p>
+                {(ds.entity_count || ds.edge_count) && (
+                  <p className="text-xs text-li-text-muted mt-0.5 font-mono">
+                    {ds.entity_count?.toLocaleString() || "—"} entities
+                    {ds.edge_count ? ` · ${ds.edge_count.toLocaleString()} edges` : ""}
+                  </p>
+                )}
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-li-text-muted opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-0.5 flex-shrink-0" />
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <Link
+        href="/datasets/library"
+        className="flex items-center gap-2 text-xs text-li-text-muted hover:text-white transition-colors pt-1"
+      >
+        <Library className="w-3.5 h-3.5" />
+        Browse Dataset Library
+      </Link>
+    </div>
+  );
+}

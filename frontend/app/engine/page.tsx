@@ -2,16 +2,12 @@
 
 import { useEffect } from "react";
 import { useEngineStore } from "@/stores/engine";
-import { useAppStore } from "@/stores/app";
-import EngineConsoleVisualization from "@/components/engine/EngineConsoleVisualization";
-import EngineStatusHeader from "@/components/engine/EngineStatusHeader";
-import EngineMetricsRow from "@/components/engine/EngineMetricsRow";
-import EngineQuickLaunch from "@/components/engine/EngineQuickLaunch";
-import EngineResultsFeed from "@/components/engine/EngineResultsFeed";
+import EngineChat from "@/components/engine/EngineChat";
+import EngineChatInput from "@/components/engine/EngineChatInput";
 
 export default function EngineConsolePage() {
-  const { activeDatasetId, activeJobId, engineStatus, hydrateFromLastJob } = useEngineStore();
-  const { token } = useAppStore();
+  const { activeDatasetId, activeJobId, engineStatus, hydrateFromLastJob } =
+    useEngineStore();
 
   // Hydrate engine state on mount (reconnect to running job if any)
   useEffect(() => {
@@ -21,34 +17,22 @@ export default function EngineConsolePage() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="min-h-screen bg-li-bg">
-      {/* Engine Header */}
-      <EngineStatusHeader />
-
-      {/* Main Visualization */}
-      <div className="relative" style={{ height: "55vh", minHeight: "400px" }}>
-        <EngineConsoleVisualization />
-      </div>
-
-      {/* Metrics Row */}
-      <div className="px-6 -mt-4 relative z-10">
-        <EngineMetricsRow />
-      </div>
-
-      {/* Bottom Section: Quick Launch + Results */}
-      <div className="px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Left: Quick Launch (2 cols) */}
-          <div className="lg:col-span-2">
-            <EngineQuickLaunch />
-          </div>
-
-          {/* Right: Results Feed (3 cols) */}
-          <div className="lg:col-span-3">
-            <EngineResultsFeed />
-          </div>
+    <div className="h-screen flex flex-col bg-li-bg">
+      {/* Minimal header */}
+      <header className="flex items-center justify-between px-6 py-4 border-b border-li-border flex-shrink-0">
+        <div>
+          <h1 className="text-lg font-display font-semibold text-white tracking-tight">
+            TCD-JEPA
+          </h1>
+          <p className="text-xs text-li-text-muted">Engine Console</p>
         </div>
-      </div>
+      </header>
+
+      {/* Chat thread */}
+      <EngineChat />
+
+      {/* Fixed bottom input */}
+      <EngineChatInput />
     </div>
   );
 }

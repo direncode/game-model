@@ -55,7 +55,7 @@ interface HoveredNode {
   screenY: number;
 }
 
-export function EngineSimulation() {
+export default function EngineSimulation({ compact = false }: { compact?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<number>(0);
@@ -435,106 +435,117 @@ export function EngineSimulation() {
 
   const stage = getStageFromProgress(progress);
 
+  // Auto-play in compact mode
+  useEffect(() => {
+    if (compact && !playing) {
+      handlePlay();
+    }
+  }, [compact]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="card-metric overflow-hidden">
-      {/* Controls */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          {playing ? (
-            <button onClick={handlePause} className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-              <Pause className="w-4 h-4 text-white" />
-            </button>
-          ) : (
-            <button onClick={handlePlay} className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
-              <Play className="w-4 h-4 text-white" />
-            </button>
-          )}
-          <button onClick={handleReset} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
-            <RotateCcw className="w-3.5 h-3.5 text-li-gray-500" />
-          </button>
-          <span className="data-label">{stage === "idle" ? "Ready" : stage}</span>
-        </div>
-        <div className="flex items-center gap-3">
-          {/* Zoom controls */}
-          <div className="flex items-center gap-1">
-            <button onClick={handleZoomOut} className="p-1.5 text-li-gray-500 hover:text-white transition-colors">
-              <ZoomOut className="w-3.5 h-3.5" />
-            </button>
-            <span className="text-[10px] font-mono text-li-gray-500 w-8 text-center">
-              {Math.round(zoom * 100)}%
-            </span>
-            <button onClick={handleZoomIn} className="p-1.5 text-li-gray-500 hover:text-white transition-colors">
-              <ZoomIn className="w-3.5 h-3.5" />
-            </button>
-          </div>
-          <div className="w-px h-4 bg-li-gray-800" />
-          {/* Speed controls */}
-          <div className="flex items-center gap-1">
-            {[1, 2, 4].map((s) => (
-              <button
-                key={s}
-                onClick={() => setSpeed(s)}
-                className={`px-2 py-1 text-xs font-mono rounded transition-colors ${
-                  speed === s ? "bg-white/20 text-white" : "text-li-gray-500 hover:text-white"
-                }`}
-              >
-                {s}x
+    <div className={compact ? "overflow-hidden h-full" : "card-metric overflow-hidden"}>
+      {/* Controls — hidden in compact mode */}
+      {!compact && (
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            {playing ? (
+              <button onClick={handlePause} className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                <Pause className="w-4 h-4 text-white" />
               </button>
-            ))}
+            ) : (
+              <button onClick={handlePlay} className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
+                <Play className="w-4 h-4 text-white" />
+              </button>
+            )}
+            <button onClick={handleReset} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+              <RotateCcw className="w-3.5 h-3.5 text-li-gray-500" />
+            </button>
+            <span className="data-label">{stage === "idle" ? "Ready" : stage}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            {/* Zoom controls */}
+            <div className="flex items-center gap-1">
+              <button onClick={handleZoomOut} className="p-1.5 text-li-gray-500 hover:text-white transition-colors">
+                <ZoomOut className="w-3.5 h-3.5" />
+              </button>
+              <span className="text-[10px] font-mono text-li-gray-500 w-8 text-center">
+                {Math.round(zoom * 100)}%
+              </span>
+              <button onClick={handleZoomIn} className="p-1.5 text-li-gray-500 hover:text-white transition-colors">
+                <ZoomIn className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="w-px h-4 bg-li-gray-800" />
+            {/* Speed controls */}
+            <div className="flex items-center gap-1">
+              {[1, 2, 4].map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setSpeed(s)}
+                  className={`px-2 py-1 text-xs font-mono rounded transition-colors ${
+                    speed === s ? "bg-white/20 text-white" : "text-li-gray-500 hover:text-white"
+                  }`}
+                >
+                  {s}x
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Pipeline Timeline */}
-      <div className="flex items-center gap-0 mb-6">
-        {STAGE_CONFIG.map((s, i) => {
-          const isActive = s.key === stage;
-          const isPast = STAGE_CONFIG.findIndex((sc) => sc.key === stage) > i;
+      {/* Pipeline Timeline — hidden in compact mode */}
+      {!compact && (
+        <div className="flex items-center gap-0 mb-6">
+          {STAGE_CONFIG.map((s, i) => {
+            const isActive = s.key === stage;
+            const isPast = STAGE_CONFIG.findIndex((sc) => sc.key === stage) > i;
 
-          return (
-            <div key={s.key} className="flex-1 flex items-center">
-              <div className="flex items-center gap-2 flex-1">
-                <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-medium transition-all duration-500 ${
-                    isActive
-                      ? "bg-white text-black ring-2 ring-white/30"
-                      : isPast
-                      ? "bg-white/20 text-white"
-                      : "bg-li-gray-900 text-li-gray-600"
-                  }`}
-                >
-                  {s.num}
-                </div>
-                <span
-                  className={`text-xs font-mono hidden sm:block transition-colors duration-300 ${
-                    isActive ? "text-white" : isPast ? "text-li-gray-400" : "text-li-gray-600"
-                  }`}
-                >
-                  {s.label}
-                </span>
-              </div>
-              {i < STAGE_CONFIG.length - 1 && (
-                <div className="flex-shrink-0 w-8 h-px mx-1">
+            return (
+              <div key={s.key} className="flex-1 flex items-center">
+                <div className="flex items-center gap-2 flex-1">
                   <div
-                    className="h-full transition-all duration-500"
-                    style={{
-                      background: isPast || isActive
-                        ? "linear-gradient(90deg, rgba(0,212,255,0.5), rgba(0,212,255,0.2))"
-                        : "rgba(26,26,26,1)",
-                    }}
-                  />
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-medium transition-all duration-500 ${
+                      isActive
+                        ? "bg-white text-black ring-2 ring-white/30"
+                        : isPast
+                        ? "bg-white/20 text-white"
+                        : "bg-li-gray-900 text-li-gray-600"
+                    }`}
+                  >
+                    {s.num}
+                  </div>
+                  <span
+                    className={`text-xs font-mono hidden sm:block transition-colors duration-300 ${
+                      isActive ? "text-white" : isPast ? "text-li-gray-400" : "text-li-gray-600"
+                    }`}
+                  >
+                    {s.label}
+                  </span>
                 </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                {i < STAGE_CONFIG.length - 1 && (
+                  <div className="flex-shrink-0 w-8 h-px mx-1">
+                    <div
+                      className="h-full transition-all duration-500"
+                      style={{
+                        background: isPast || isActive
+                          ? "linear-gradient(90deg, rgba(0,212,255,0.5), rgba(0,212,255,0.2))"
+                          : "rgba(26,26,26,1)",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Canvas + Tooltip */}
       <div
         ref={containerRef}
         className="relative bg-li-depth-1 border border-li-border-accent rounded-lg overflow-hidden"
-        style={{ height: 360 }}
+        style={{ height: compact ? "100%" : 360 }}
       >
         <canvas
           ref={canvasRef}
@@ -572,8 +583,8 @@ export function EngineSimulation() {
           </div>
         )}
 
-        {/* Run Simulation overlay */}
-        {stage === "idle" && !playing && (
+        {/* Run Simulation overlay — hidden in compact mode */}
+        {!compact && stage === "idle" && !playing && (
           <div className="absolute inset-0 flex items-center justify-center">
             <button
               onClick={handlePlay}
@@ -585,8 +596,8 @@ export function EngineSimulation() {
           </div>
         )}
 
-        {/* Zoom hint */}
-        {zoom !== 1 && (
+        {/* Zoom hint — hidden in compact mode */}
+        {!compact && zoom !== 1 && (
           <button
             onClick={handleResetView}
             className="absolute bottom-2 right-2 px-2 py-1 bg-li-black-elevated/80 border border-li-gray-800 rounded text-[10px] font-mono text-li-gray-500 hover:text-white transition-colors"
@@ -596,8 +607,8 @@ export function EngineSimulation() {
         )}
       </div>
 
-      {/* Metric Bar */}
-      <div className="grid grid-cols-4 gap-4 mt-4 pt-4 border-t border-li-border-accent">
+      {/* Metric Bar — hidden in compact mode */}
+      {!compact && <div className="grid grid-cols-4 gap-4 mt-4 pt-4 border-t border-li-border-accent">
         <div>
           <p className="data-label">Modules</p>
           <p className="font-mono text-lg font-medium text-white">
@@ -622,7 +633,7 @@ export function EngineSimulation() {
             {currentMetric.loss.toFixed(3)}
           </p>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
