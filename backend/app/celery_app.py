@@ -36,7 +36,10 @@ celery_app.conf.task_default_exchange = "default"
 celery_app.conf.task_default_routing_key = "default"
 
 # ── Auto-discover tasks ────────────────────────────────────────────
-celery_app.autodiscover_tasks(["app.tasks", "app.services.crystallization"])
+celery_app.autodiscover_tasks(["app.services.crystallization"])
+
+# Explicit imports for task modules not following autodiscovery conventions
+import app.tasks.fsd_crystallize  # noqa: E402, F401
 
 # ── Periodic tasks (Celery Beat) ───────────────────────────────────
 if settings.FSD_ENABLED:
