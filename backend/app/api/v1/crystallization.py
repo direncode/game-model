@@ -148,3 +148,29 @@ async def cancel_job(
         pass
 
     return MessageResponse(message="Job cancelled")
+
+
+@router.get("/gpu/spend")
+async def get_gpu_spend(user=Depends(get_current_active_user)):
+    """Get current month's GPU spend and budget status."""
+    from app.services.crystallization.runpod_client import is_runpod_configured
+
+    if not is_runpod_configured():
+        return {
+            "enabled": False,
+            "message": "GPU compute not configured",
+        }
+
+    from app.services.crystallization.runpod_client import SpendTracker
+
+    tracker = SpendTracker()
+    spent_cents = tracker.get_month_spend_cents()
+    budget_cents = settings.RUNPOD_MONTHLY_BUDGET_CENTS
+
+    return {
+        "enabled": True,
+        "spent_dollars": round(spent_cents / 100, 2),
+        "budget_dollars": round(budget_cents / 100, 2),
+        "remaining_dollars": round((budget_cents - spent_cents) / 100, 2),
+        "utilization_pct": round((spent_cents / budget_cents) * 100, 1) if budget_cents else 0,
+    }

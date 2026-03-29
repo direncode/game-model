@@ -45,6 +45,9 @@ class Settings(BaseSettings):
     # ── RunPod ────────────────────────────────────────────────────────
     RUNPOD_API_KEY: Optional[str] = None
     RUNPOD_ENDPOINT_ID: Optional[str] = None
+    RUNPOD_MONTHLY_BUDGET_CENTS: int = 5000  # $50.00 monthly cap
+    RUNPOD_MAX_JOB_SECONDS: int = 1800  # 30 min hard cap per job
+    RUNPOD_COOLDOWN_SECONDS: int = 30  # Min gap between job submissions
 
     # ── External APIs ───────────────────────────────────────────────────
     ANTHROPIC_API_KEY: Optional[str] = None
