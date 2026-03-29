@@ -14,6 +14,7 @@ import {
   FileText,
   Activity,
   Settings,
+  MapPin,
 } from "lucide-react";
 
 const exploreItems = [
@@ -25,6 +26,10 @@ const exploreItems = [
 
 const engineItems = [
   { href: "/engine", label: "Engine Console", icon: Cpu },
+];
+
+const liveDataItems = [
+  { href: "/franklin", label: "Franklin Street", icon: MapPin },
 ];
 
 const adminItems = [
@@ -100,6 +105,7 @@ export function Sidebar() {
       <div className="flex-1 px-2 space-y-5 overflow-y-auto">
         <NavSection label="Explore" items={exploreItems} pathname={pathname} />
         <NavSection label="Engine" items={engineItems} pathname={pathname} />
+        <NavSection label="Live Data" items={liveDataItems} pathname={pathname} />
         <NavSection label="Admin" items={adminItems} pathname={pathname} />
       </div>
 

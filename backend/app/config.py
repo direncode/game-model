@@ -60,6 +60,18 @@ class Settings(BaseSettings):
     # ── Session Management ───────────────────────────────────────────────
     SESSION_MAX_PER_USER: int = 10
 
+    # ── Franklin Street Data ──────────────────────────────────────────────
+    FSD_API_URL: str = "https://franklin-street-data.fly.dev"
+    FSD_SNAPSHOT_HOURS: str = "8,12,18,22"
+    FSD_PROXIMITY_RADIUS_M: float = 200.0
+    FSD_CORRELATION_THRESHOLD: float = 0.7
+    FSD_DAILY_CRON_HOUR: int = 4  # 4 AM UTC
+    FSD_ENABLED: bool = False  # Set True to enable daily crystallization
+
+    @property
+    def fsd_snapshot_hours_list(self) -> list[int]:
+        return [int(h.strip()) for h in self.FSD_SNAPSHOT_HOURS.split(",") if h.strip()]
+
     # ── Application ─────────────────────────────────────────────────────
     APP_NAME: str = "Latent Intelligence"
     APP_ENV: str = "development"

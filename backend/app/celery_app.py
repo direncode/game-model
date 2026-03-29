@@ -1,6 +1,7 @@
 """Celery application for asynchronous task processing."""
 
 from celery import Celery
+from celery.schedules import crontab
 from kombu import Exchange, Queue
 
 from app.config import settings
@@ -36,3 +37,12 @@ celery_app.conf.task_default_routing_key = "default"
 
 # ── Auto-discover tasks ────────────────────────────────────────────
 celery_app.autodiscover_tasks(["app.tasks", "app.services.crystallization"])
+
+# ── Periodic tasks (Celery Beat) ───────────────────────────────────
+if settings.FSD_ENABLED:
+    celery_app.conf.beat_schedule = {
+        "fsd-daily-crystallize": {
+            "task": "fsd.daily_crystallize",
+            "schedule": crontab(hour=settings.FSD_DAILY_CRON_HOUR, minute=0),
+        },
+    }
