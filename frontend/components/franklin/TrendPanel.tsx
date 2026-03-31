@@ -2,7 +2,7 @@
 
 import type { FSDTrends, FSDIntel, FSDHeatmapPoint, FSDSpot } from "@/lib/fsd-api";
 import { TrendingUp, CalendarDays } from "lucide-react";
-import HeatmapGrid from "./HeatmapGrid";
+import DensityMap from "./DensityMap";
 
 interface TrendPanelProps {
   trends: FSDTrends | undefined;
@@ -32,12 +32,9 @@ export default function TrendPanel({ trends, intel, heatmap, spots, isLoading }:
       </div>
 
       <div className="flex-1 min-h-0 flex">
-        {/* Heatmap canvas */}
+        {/* Mapbox density heatmap */}
         <div className="flex-[2] min-w-0 relative overflow-hidden">
-          <HeatmapGrid heatmap={heatmap} spots={spots} />
-          <div className="absolute bottom-1 left-2 text-[9px] font-mono text-li-gray-600">
-            BTUT density field
-          </div>
+          <DensityMap heatmap={heatmap} spots={spots} />
         </div>
 
         {/* Trending + Topics + Events */}
