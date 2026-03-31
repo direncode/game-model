@@ -99,7 +99,9 @@ def handler(job):
             # Extract modules from results
             modules = _extract_modules(results, entities, edges, config)
 
-            return {
+            # Must yield (not return) — RunPod only includes yielded values
+            # in the output list; return value in a generator is discarded.
+            yield {
                 "status": "completed",
                 "job_id": job_id,
                 "modules": modules,
@@ -114,7 +116,7 @@ def handler(job):
 
         except Exception as e:
             traceback.print_exc()
-            return {
+            yield {
                 "status": "failed",
                 "job_id": job_id,
                 "error": str(e),
