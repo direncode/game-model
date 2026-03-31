@@ -28,10 +28,16 @@ export default function TrendPanel({ trends, intel, isLoading }: TrendPanelProps
     );
   }
 
-  if (!trends?.has_data) {
+  if (!trends?.has_data && !chartData.length) {
     return (
-      <div className="h-full flex items-center justify-center text-sm text-li-text-muted">
-        No trend data available
+      <div className="h-full flex flex-col">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-li-border">
+          <TrendingUp className="w-4 h-4 text-li-cyan" />
+          <h3 className="text-sm font-medium text-white">Local Trends</h3>
+        </div>
+        <div className="flex-1 flex items-center justify-center text-xs text-li-text-muted">
+          No trend data available
+        </div>
       </div>
     );
   }
@@ -49,6 +55,9 @@ export default function TrendPanel({ trends, intel, isLoading }: TrendPanelProps
           <p className="text-[10px] uppercase tracking-wider text-li-text-muted mb-2">
             Type Interest
           </p>
+          {chartData.length === 0 ? (
+            <p className="text-xs text-li-gray-600 pt-4">No venue interest data</p>
+          ) : null}
           <ResponsiveContainer width="100%" height="90%">
             <BarChart data={chartData} layout="vertical" margin={{ left: 4, right: 16, top: 4, bottom: 4 }}>
               <XAxis type="number" domain={[0, 100]} tick={{ fill: "#555", fontSize: 10 }} axisLine={false} tickLine={false} />
@@ -95,16 +104,20 @@ export default function TrendPanel({ trends, intel, isLoading }: TrendPanelProps
                 Local Topics
               </p>
               <div className="space-y-1.5">
-                {trends.local_topics.slice(0, 5).map((t, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-xs text-li-gray-300 leading-snug flex-1">
-                      {t.topic}
-                    </span>
-                    <span className="text-[10px] font-mono text-li-text-muted flex-shrink-0">
-                      {t.score.toFixed(1)}
-                    </span>
-                  </div>
-                ))}
+                {trends.local_topics.slice(0, 5).map((t: any, i) => {
+                  const label = t.topic || t.text || t.keyword || t.name || "";
+                  if (!label) return null;
+                  return (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-xs text-white leading-snug flex-1">
+                        {label}
+                      </span>
+                      <span className="text-[10px] font-mono text-li-cyan flex-shrink-0">
+                        {typeof t.score === "number" ? t.score.toFixed(0) : ""}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

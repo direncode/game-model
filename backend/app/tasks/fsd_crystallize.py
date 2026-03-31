@@ -119,6 +119,12 @@ async def _run_fsd_pipeline() -> dict:
     }).encode("utf-8")
 
     async with async_session_factory() as db:
+        # Resolve system user first — needed for dataset owner_id
+        from app.models.user import User
+        admin_result = await db.execute(select(User).limit(1))
+        admin_user = admin_result.scalar_one_or_none()
+        system_user_id = admin_user.id if admin_user else uuid.UUID("ee53d11e-e90a-447c-a968-b11cb654af66")
+
         # Step 3: Find or create the FSD dataset
         result = await db.execute(
             select(Dataset).where(Dataset.name == FSD_DATASET_NAME)
@@ -133,7 +139,7 @@ async def _run_fsd_pipeline() -> dict:
                     "busyness profiles, spatial proximity, and temporal correlation edges. "
                     "Auto-refreshed daily via BTUT Mean-Field Game engine."
                 ),
-                owner_id=system_user_id,  # System-generated dataset
+                owner_id=system_user_id,
                 status="uploading",
             )
             db.add(dataset)
@@ -149,12 +155,6 @@ async def _run_fsd_pipeline() -> dict:
         # Step 4: Run awakening pipeline (normalize → validate → profile → Neo4j)
         logger.info("Step 4: Running awakening pipeline")
         from app.services.ingestion.awakening_pipeline import AwakeningPipeline
-
-        # Use the first admin user for automated ingestion
-        from app.models.user import User
-        admin_result = await db.execute(select(User).limit(1))
-        admin_user = admin_result.scalar_one_or_none()
-        system_user_id = admin_user.id if admin_user else uuid.UUID("ee53d11e-e90a-447c-a968-b11cb654af66")
 
         pipeline = AwakeningPipeline(db=db, neo4j=neo4j_connection, minio_client=None)
         awakening_result = await pipeline.run(

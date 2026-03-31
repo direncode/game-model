@@ -93,7 +93,7 @@ export default function FranklinMap({ spots, heatmap, convergence = [] }: Frankl
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/dark-v11",
       center: FRANKLIN_ST_CENTER,
-      zoom: 15.5,
+      zoom: 16,
       attributionControl: false,
       pitchWithRotate: false,
     });
@@ -185,7 +185,6 @@ export default function FranklinMap({ spots, heatmap, convergence = [] }: Frankl
             "interpolate", ["linear"], ["get", "busyness"], 0, 0.1, 100, 0.6
           ],
         },
-        minzoom: 13,
       });
 
       // ── Venue labels (high zoom) ───────────────────

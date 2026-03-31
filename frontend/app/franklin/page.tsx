@@ -64,7 +64,13 @@ export default function FranklinPage() {
   });
 
   const spotsData = spots.data?.spots ?? [];
-  const heatmapData = heatmap.data?.heatmap ?? [];
+  // Fall back to building heatmap from spot busyness if API heatmap is empty
+  const rawHeatmap = heatmap.data?.heatmap ?? [];
+  const heatmapData = rawHeatmap.length > 0
+    ? rawHeatmap
+    : spotsData
+        .filter((s) => s.lat && s.lon && s.busyness > 0)
+        .map((s) => [s.lat, s.lon, s.busyness] as [number, number, number]);
 
   return (
     <div className="flex h-screen bg-li-bg">
