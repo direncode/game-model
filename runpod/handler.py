@@ -203,7 +203,7 @@ def _run_training(config_path, data_path, config, device, job_id):
     final_knn = None
 
     try:
-        from train import train as tcd_train
+        from train_graph import train as tcd_train
 
         def progress_callback(info):
             nonlocal final_loss, final_auc, final_knn
@@ -226,6 +226,7 @@ def _run_training(config_path, data_path, config, device, job_id):
             })
 
         config_dict = {
+            **config,
             "config_path": config_path,
             "data_path": data_path,
             "device": device,

@@ -133,7 +133,7 @@ class TCDJEPAWrapper:
 
             # Import train module
             sys.path.insert(0, _TCD_JEPA_PATH)
-            from train import train as tcd_train
+            from train_graph import train as tcd_train
 
             # Run training with progress hook
             result = tcd_train(config, progress_callback=callback)
