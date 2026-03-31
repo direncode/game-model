@@ -16,10 +16,9 @@ RUN pip install --no-cache-dir \
 # Clone TCD-JEPA directly (submodule not available in RunPod GitHub builds)
 RUN git clone --depth 1 https://github.com/direncode/tcd-jepa.git /app/tcd-jepa
 
-# Clone handler from repo (avoids build context path issues)
-RUN git clone --depth 1 https://github.com/direncode/lsx-latentocean.git /tmp/repo \
-    && cp /tmp/repo/runpod/handler.py /app/handler.py \
-    && rm -rf /tmp/repo
+# Copy handler — RunPod checks out the private repo via OAuth before the build,
+# so handler.py is available in the build context (runpod/ directory)
+COPY handler.py /app/handler.py
 
 ENV TCD_JEPA_PATH=/app/tcd-jepa
 ENV PYTHONUNBUFFERED=1
