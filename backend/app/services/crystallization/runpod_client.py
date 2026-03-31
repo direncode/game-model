@@ -235,11 +235,27 @@ class RunPodClient:
                 # Generator handlers return output as a list of all yielded + returned values.
                 # Extract the final result dict (last item with status="completed", else last item).
                 if isinstance(output, list):
-                    output = next(
+                    # Generator handlers yield all progress items into a list.
+                    # Find the final completed result, or raise if handler reported failure.
+                    completed = next(
                         (item for item in reversed(output)
                          if isinstance(item, dict) and item.get("status") == "completed"),
-                        output[-1] if output else {},
+                        None,
                     )
+                    if completed is None:
+                        # Check if handler reported a failure
+                        failed = next(
+                            (item for item in reversed(output)
+                             if isinstance(item, dict) and item.get("status") == "failed"),
+                            None,
+                        )
+                        if failed:
+                            raise RuntimeError(
+                                f"Handler error: {failed.get('error', 'unknown')}"
+                            )
+                        # Fallback: use last item
+                        completed = output[-1] if output else {}
+                    output = completed
                 # Track spend based on actual execution time
                 elapsed = time.time() - start
                 cost_cents = elapsed * GPU_COST_PER_SEC_CENTS
