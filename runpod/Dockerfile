@@ -13,11 +13,11 @@ RUN pip install --no-cache-dir \
     matplotlib \
     seaborn
 
-# Copy TCD-JEPA source
-COPY tcd-jepa/ /app/tcd-jepa/
+# Clone TCD-JEPA directly (submodule not available in RunPod GitHub builds)
+RUN git clone --depth 1 https://github.com/direncode/tcd-jepa.git /app/tcd-jepa
 
 # Copy handler
-COPY runpod/handler.py /app/handler.py
+COPY handler.py /app/handler.py
 
 ENV TCD_JEPA_PATH=/app/tcd-jepa
 ENV PYTHONUNBUFFERED=1
