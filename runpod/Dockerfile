@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir \
 RUN git clone --depth 1 https://github.com/direncode/tcd-jepa.git /app/tcd-jepa
 
 # Copy handler
-COPY handler.py /app/handler.py
+COPY runpod/handler.py /app/handler.py
 
 ENV TCD_JEPA_PATH=/app/tcd-jepa
 ENV PYTHONUNBUFFERED=1
