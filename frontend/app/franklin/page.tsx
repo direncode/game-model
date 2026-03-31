@@ -100,7 +100,7 @@ export default function FranklinPage() {
           {/* Top row: Map + Venue List */}
           <div className="flex-1 min-h-0 flex">
             {/* Map */}
-            <div className="flex-[3] relative min-h-[400px] overflow-hidden">
+            <div className="flex-[3] relative overflow-hidden min-w-0">
               <FranklinMap
                 spots={spotsData}
                 heatmap={heatmapData}
