@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@clerk/nextjs";
 import { fetchFSDModules, triggerFSDCrystallization, type FSDModuleSummary } from "@/lib/fsd-api";
-import { Boxes, Clock, Zap, DollarSign } from "lucide-react";
+import { Boxes, Clock, Zap, DollarSign, ChevronDown } from "lucide-react";
+
+const SINGLETON_THRESHOLD = 2; // modules with ≤ this many venues get collapsed
 
 const MONTHLY_BUDGET_USD = 50;
 const COST_PER_RUN_USD = 1;
@@ -74,7 +76,28 @@ export default function ModulePanel() {
     }
   };
 
+  const [othersExpanded, setOthersExpanded] = useState(false);
   const isRunning = data?.status === "running" || triggering;
+
+  const { mainModules, otherModules, otherVenueCount } = useMemo(() => {
+    const modules = data?.modules ?? [];
+    // Sort all modules by entity_count descending
+    const sorted = [...modules].sort((a, b) => b.entity_count - a.entity_count);
+    const main: FSDModuleSummary[] = [];
+    const other: FSDModuleSummary[] = [];
+    for (const m of sorted) {
+      if (m.entity_count <= SINGLETON_THRESHOLD) {
+        other.push(m);
+      } else {
+        main.push(m);
+      }
+    }
+    return {
+      mainModules: main,
+      otherModules: other,
+      otherVenueCount: other.reduce((s, m) => s + m.entity_count, 0),
+    };
+  }, [data?.modules]);
 
   return (
     <div className="h-full flex flex-col">
@@ -146,10 +169,40 @@ export default function ModulePanel() {
       ) : data?.modules?.length ? (
         <div className="flex-1 overflow-y-auto p-3">
           <div className="grid grid-cols-2 gap-2">
-            {data.modules.map((m) => (
+            {mainModules.map((m) => (
               <ModuleCard key={m.id} module={m} />
             ))}
           </div>
+
+          {/* Collapsed "Other" group for tiny modules */}
+          {otherModules.length > 0 && (
+            <div className="mt-3">
+              <button
+                onClick={() => setOthersExpanded((v) => !v)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-li-gray-900/50 border border-li-border hover:border-li-gray-700 transition-colors text-left"
+              >
+                <span className="text-xs text-li-text-muted">
+                  Other{" "}
+                  <span className="font-mono text-li-cyan">
+                    {otherModules.length} modules · {otherVenueCount} venues
+                  </span>
+                </span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-li-text-muted transition-transform ${
+                    othersExpanded ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {othersExpanded && (
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  {otherModules.map((m) => (
+                    <ModuleCard key={m.id} module={m} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {data.module_count > 0 && (
             <p className="text-[10px] font-mono text-li-text-muted text-center mt-3">
               {data.module_count} modules · {data.modules.reduce((s, m) => s + m.entity_count, 0)} venues clustered
