@@ -245,8 +245,10 @@ def _run_training(config_path, data_path, config, device, job_id):
             "raw_result": result if isinstance(result, dict) else {},
         }
 
-    except ImportError:
-        # TCD-JEPA train module not available — run simulation
+    except Exception as e:
+        # TCD-JEPA not available or torch API mismatch (e.g. GradScaler moved
+        # between torch versions) — fall through to simulation mode.
+        print(f"TCD-JEPA unavailable ({type(e).__name__}: {e}), using simulation")
         return _simulate_training(config, metrics, start_time)
 
 
