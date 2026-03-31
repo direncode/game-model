@@ -128,7 +128,13 @@ export default function FranklinPage() {
           {/* Bottom row: Trends + Density + Modules */}
           <div className="h-72 flex-shrink-0 flex border-t border-li-border">
             <div className="flex-1 border-r border-li-border">
-              <TrendPanel trends={trends.data} intel={intel.data} isLoading={trends.isLoading} />
+              <TrendPanel
+                trends={trends.data}
+                intel={intel.data}
+                heatmap={heatmapData}
+                spots={spotsData}
+                isLoading={trends.isLoading || spots.isLoading}
+              />
             </div>
             <div className="flex-1 border-r border-li-border">
               <DensityPanel
