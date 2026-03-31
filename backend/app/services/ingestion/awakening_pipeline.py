@@ -324,7 +324,7 @@ class AwakeningPipeline:
         await self._db.execute(
             update(Dataset)
             .where(Dataset.id == dataset_id)
-            .values(status=status, updated_at=datetime.now(timezone.utc))
+            .values(status=status, updated_at=datetime.utcnow())
         )
         await self._db.flush()
 
@@ -343,7 +343,7 @@ class AwakeningPipeline:
                 edge_count=profile.edge_count,
                 density=profile.density,
                 raw_storage_path=storage_path,
-                updated_at=datetime.now(timezone.utc),
+                updated_at=datetime.utcnow(),
             )
         )
         await self._db.flush()

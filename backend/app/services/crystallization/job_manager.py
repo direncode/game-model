@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 import logging
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime
 
 import redis
 from celery import states
@@ -132,7 +132,7 @@ async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
             await db.execute(
                 update(CrystallizationJob)
                 .where(CrystallizationJob.id == uuid.UUID(job_id))
-                .values(status="running", started_at=datetime.now(timezone.utc))
+                .values(status="running", started_at=datetime.utcnow())
             )
             await db.commit()
 
@@ -193,7 +193,7 @@ async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
                         .where(CrystallizationJob.id == uuid.UUID(job_id))
                         .values(
                             status="failed",
-                            completed_at=datetime.now(timezone.utc),
+                            completed_at=datetime.utcnow(),
                             error_message=str(exc)[:1000],
                         )
                     )
@@ -351,7 +351,7 @@ async def _store_results(db, dataset_id: str, job_id: str, result: dict) -> None
         .where(CrystallizationJob.id == uuid.UUID(job_id))
         .values(
             status="completed",
-            completed_at=datetime.now(timezone.utc),
+            completed_at=datetime.utcnow(),
             final_link_auc=result.get("final_auc"),
             final_knn_accuracy=result.get("final_knn"),
             module_count=len(result.get("modules", [])),
