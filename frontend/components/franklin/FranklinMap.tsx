@@ -93,7 +93,7 @@ export default function FranklinMap({ spots, heatmap, convergence = [] }: Frankl
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/dark-v11",
       center: FRANKLIN_ST_CENTER,
-      zoom: 16,
+      zoom: 14,
       attributionControl: false,
       pitchWithRotate: false,
     });

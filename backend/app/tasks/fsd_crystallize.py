@@ -87,14 +87,21 @@ def daily_crystallize_fsd(self) -> dict:
 
 
 async def _run_fsd_pipeline() -> dict:
-    """Async implementation of the FSD pipeline."""
-    from sqlalchemy import select
+    """Async implementation of the FSD pipeline.
 
-    from app.db.neo4j import neo4j_connection
-    from app.db.session import async_session_factory
+    Creates fresh DB and Neo4j resources inside this event loop to avoid
+    'Future attached to a different loop' errors when called from a Celery worker.
+    """
+    from sqlalchemy import select
+    from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+    from neo4j import AsyncGraphDatabase
+
+    from app.config import settings
+    from app.db.neo4j import Neo4jConnection
     from app.models.crystallization import CrystallizationJob
     from app.models.dataset import Dataset
     from app.models.module import Module
+    from app.models.user import User
     from app.services.ingestion.fsd_adapter import adapt
 
     # Step 1: Build the graph via FSD adapter
@@ -118,9 +125,21 @@ async def _run_fsd_pipeline() -> dict:
         ],
     }).encode("utf-8")
 
-    async with async_session_factory() as db:
+    # Create fresh engine + session bound to THIS event loop
+    engine = create_async_engine(settings.DATABASE_URL, echo=False, pool_pre_ping=True)
+    session_factory = async_sessionmaker(engine, expire_on_commit=False)
+
+    # Create fresh Neo4j driver bound to THIS event loop
+    neo4j_driver = AsyncGraphDatabase.driver(
+        settings.NEO4J_URI,
+        auth=(settings.NEO4J_USER, settings.NEO4J_PASSWORD),
+    )
+    fresh_neo4j = Neo4jConnection()
+    fresh_neo4j._driver = neo4j_driver
+
+    try:
+      async with session_factory() as db:
         # Resolve system user first — needed for dataset owner_id
-        from app.models.user import User
         admin_result = await db.execute(select(User).limit(1))
         admin_user = admin_result.scalar_one_or_none()
         system_user_id = admin_user.id if admin_user else uuid.UUID("ee53d11e-e90a-447c-a968-b11cb654af66")
@@ -156,7 +175,7 @@ async def _run_fsd_pipeline() -> dict:
         logger.info("Step 4: Running awakening pipeline")
         from app.services.ingestion.awakening_pipeline import AwakeningPipeline
 
-        pipeline = AwakeningPipeline(db=db, neo4j=neo4j_connection, minio_client=None)
+        pipeline = AwakeningPipeline(db=db, neo4j=fresh_neo4j, minio_client=None)
         awakening_result = await pipeline.run(
             dataset_id=dataset_id,
             user_id=system_user_id,
@@ -248,3 +267,7 @@ async def _run_fsd_pipeline() -> dict:
             "entity_count": awakening_result["entity_count"],
             "edge_count": awakening_result["relationship_count"],
         }
+
+    finally:
+        await neo4j_driver.close()
+        await engine.dispose()

@@ -46,7 +46,7 @@ export default function DensityMap({ heatmap, spots }: DensityMapProps) {
       container: containerRef.current,
       style: "mapbox://styles/mapbox/dark-v11",
       center: FRANKLIN_CENTER,
-      zoom: 14.5,
+      zoom: 13.5,
       interactive: false,          // read-only density view
       attributionControl: false,
     });
@@ -76,12 +76,12 @@ export default function DensityMap({ heatmap, spots }: DensityMapProps) {
           "heatmap-color": [
             "interpolate", ["linear"], ["heatmap-density"],
             0,   "rgba(0,0,0,0)",
-            0.05,"rgba(0,20,50,0.5)",
-            0.2, "rgba(0,60,120,0.7)",
-            0.4, "rgba(0,120,180,0.8)",
-            0.6, "rgba(0,180,230,0.9)",
-            0.8, "rgba(0,212,255,0.95)",
-            1.0, "rgba(180,240,255,1)",
+            0.05,"rgba(40,0,0,0.5)",
+            0.2, "rgba(120,10,10,0.7)",
+            0.4, "rgba(200,40,0,0.85)",
+            0.6, "rgba(255,100,0,0.92)",
+            0.8, "rgba(255,180,0,0.96)",
+            1.0, "rgba(255,240,180,1)",
           ],
           "heatmap-opacity": 0.92,
         },
