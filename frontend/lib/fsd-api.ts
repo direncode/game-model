@@ -153,6 +153,25 @@ export function fetchIntel() {
   return fsdFetch<FSDIntel>(`/intel`);
 }
 
+export interface FSDConvergenceItem {
+  venue_name: string;
+  venue_type: string;
+  convergence_score: number;
+  matching_keywords: string[];
+  lat?: number;
+  lon?: number;
+}
+
+export interface FSDConvergence {
+  converging_venues: FSDConvergenceItem[];
+  top_keywords: string[];
+  timestamp: string;
+}
+
+export function fetchConvergence() {
+  return fsdFetch<FSDConvergence>(`/convergence`);
+}
+
 // ── Backend API (crystallized modules) ────────────────────
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";

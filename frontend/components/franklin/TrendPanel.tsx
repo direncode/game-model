@@ -50,9 +50,9 @@ export default function TrendPanel({ trends, intel, isLoading }: TrendPanelProps
             Type Interest
           </p>
           <ResponsiveContainer width="100%" height="90%">
-            <BarChart data={chartData} layout="vertical" margin={{ left: 60, right: 16, top: 4, bottom: 4 }}>
+            <BarChart data={chartData} layout="vertical" margin={{ left: 4, right: 16, top: 4, bottom: 4 }}>
               <XAxis type="number" domain={[0, 100]} tick={{ fill: "#555", fontSize: 10 }} axisLine={false} tickLine={false} />
-              <YAxis type="category" dataKey="name" tick={{ fill: "#888", fontSize: 10 }} axisLine={false} tickLine={false} width={56} />
+              <YAxis type="category" dataKey="name" tick={{ fill: "#888", fontSize: 10 }} axisLine={false} tickLine={false} width={72} />
               <Tooltip
                 contentStyle={{ background: "#111", border: "1px solid #222", borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: "#fff" }}

@@ -92,17 +92,23 @@ export default function DensityPanel({ density, status, intel, isLoading }: Dens
         {/* Signal feeds */}
         <div className="lg:w-52 p-3 border-t lg:border-t-0 lg:border-l border-li-border overflow-y-auto">
           {/* Weather */}
-          {intel?.weather && (
+          {intel?.weather && (intel.weather.conditions || intel.weather.temperature_f) && (
             <div className="mb-3 pb-3 border-b border-li-border">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Cloud className="w-3 h-3 text-li-cyan" />
                 <p className="text-[10px] uppercase tracking-wider text-li-text-muted">Weather</p>
               </div>
-              <p className="text-sm font-medium text-white">{intel.weather.temperature_f}°F</p>
-              <p className="text-[11px] text-li-gray-400">{intel.weather.conditions}</p>
-              <span className={`text-[10px] font-mono ${intel.weather.outdoor_friendly ? "text-li-green" : "text-li-yellow"}`}>
-                {intel.weather.outdoor_friendly ? "▲ outdoor friendly" : "▼ indoors preferred"}
-              </span>
+              {intel.weather.temperature_f != null && (
+                <p className="text-sm font-medium text-white">{Math.round(intel.weather.temperature_f)}°F</p>
+              )}
+              {intel.weather.conditions && (
+                <p className="text-[11px] text-li-gray-400">{intel.weather.conditions}</p>
+              )}
+              {intel.weather.outdoor_friendly != null && (
+                <span className={`text-[10px] font-mono ${intel.weather.outdoor_friendly ? "text-li-green" : "text-li-yellow"}`}>
+                  {intel.weather.outdoor_friendly ? "▲ outdoor friendly" : "▼ indoors preferred"}
+                </span>
+              )}
             </div>
           )}
 

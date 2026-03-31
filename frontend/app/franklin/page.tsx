@@ -2,7 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useFranklinStore } from "@/stores/franklin";
-import { fetchSpots, fetchHeatmap, fetchDensity, fetchTrends, fetchStatus, fetchIntel } from "@/lib/fsd-api";
+import { fetchSpots, fetchHeatmap, fetchDensity, fetchTrends, fetchStatus, fetchIntel, fetchConvergence } from "@/lib/fsd-api";
+import { useUIStore } from "@/stores/ui";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import HourSlider from "@/components/franklin/HourSlider";
@@ -16,6 +17,7 @@ import ModulePanel from "@/components/franklin/ModulePanel";
 
 export default function FranklinPage() {
   const { selectedHour } = useFranklinStore();
+  const { sidebarCollapsed } = useUIStore();
 
   // Hour-dependent queries
   const spots = useQuery({
@@ -55,6 +57,12 @@ export default function FranklinPage() {
     staleTime: 5 * 60_000,
   });
 
+  const convergence = useQuery({
+    queryKey: ["fsd-convergence"],
+    queryFn: fetchConvergence,
+    staleTime: 5 * 60_000,
+  });
+
   const spotsData = spots.data?.spots ?? [];
   const heatmapData = heatmap.data?.heatmap ?? [];
 
@@ -62,7 +70,7 @@ export default function FranklinPage() {
     <div className="flex h-screen bg-li-bg">
       <Sidebar />
 
-      <div className="flex-1 ml-60 flex flex-col min-h-0">
+      <div className={`flex-1 flex flex-col min-h-0 transition-all duration-200 ${sidebarCollapsed ? "ml-14" : "ml-60"}`}>
         <Navbar />
 
         {/* Header: Title + Hour Slider + Status */}
@@ -87,7 +95,11 @@ export default function FranklinPage() {
           <div className="flex-1 min-h-0 flex">
             {/* Map */}
             <div className="flex-[3] relative min-h-[400px]">
-              <FranklinMap spots={spotsData} heatmap={heatmapData} />
+              <FranklinMap
+                spots={spotsData}
+                heatmap={heatmapData}
+                convergence={convergence.data?.converging_venues}
+              />
               <VenueDetail />
 
               {/* Loading overlay */}
