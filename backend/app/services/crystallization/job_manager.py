@@ -21,7 +21,6 @@ from sqlalchemy import select, update
 
 from app.celery_app import celery_app
 from app.config import settings
-from app.db.session import async_session_factory
 
 logger = logging.getLogger(__name__)
 
@@ -90,85 +89,122 @@ def run_crystallization_task(
 
 
 async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
-    """Async implementation — routes to RunPod or local execution."""
+    """Async implementation — routes to RunPod or local execution.
+
+    Creates fresh DB and Neo4j resources inside this event loop to avoid
+    'Future attached to a different loop' errors when called from a Celery worker.
+    """
+    from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+    from neo4j import AsyncGraphDatabase
     from app.services.crystallization.runpod_client import is_runpod_configured
+    from app.models.crystallization import CrystallizationJob
+    from app.models.dataset import Dataset
 
-    async with async_session_factory() as db:
-        # Step 1: Get job and dataset info
-        from app.models.crystallization import CrystallizationJob
-        from app.models.dataset import Dataset
+    # Create fresh resources bound to THIS event loop
+    engine = create_async_engine(settings.DATABASE_URL, echo=False, pool_pre_ping=True)
+    session_factory = async_sessionmaker(engine, expire_on_commit=False)
+    neo4j_driver = AsyncGraphDatabase.driver(
+        settings.NEO4J_URI,
+        auth=(settings.NEO4J_USER, settings.NEO4J_PASSWORD),
+    )
 
-        job_result = await db.execute(
-            select(CrystallizationJob).where(CrystallizationJob.id == uuid.UUID(job_id))
-        )
-        job = job_result.scalar_one_or_none()
-        if not job:
-            raise ValueError(f"Job {job_id} not found")
-
-        dataset_id = str(job.dataset_id)
-
-        # Merge job config with task config
-        merged_config = {**(job.config or {}), **config}
-
-        result = await db.execute(
-            select(Dataset).where(Dataset.id == job.dataset_id)
-        )
-        dataset = result.scalar_one()
-
-        # Step 2: Update job status
-        await db.execute(
-            update(CrystallizationJob)
-            .where(CrystallizationJob.id == uuid.UUID(job_id))
-            .values(status="running", started_at=datetime.now(timezone.utc))
-        )
-        await db.commit()
-
-        _publish_progress(job_id, {
-            "job_id": job_id,
-            "status": "running",
-            "step": "initializing",
-        })
-
-        # Step 3: Export dataset from Neo4j
-        entities, edges = await _export_dataset(dataset_id)
-
-        _publish_progress(job_id, {
-            "job_id": job_id,
-            "status": "running",
-            "step": "training",
-            "total_epochs": merged_config.get("epochs", 100),
-        })
-
-        # Step 4: Run training (RunPod or local)
-        if is_runpod_configured():
-            training_result = await _run_via_runpod(
-                entities, edges, merged_config, dataset_id, job_id
+    try:
+        async with session_factory() as db:
+            # Step 1: Get job and dataset info
+            job_result = await db.execute(
+                select(CrystallizationJob).where(CrystallizationJob.id == uuid.UUID(job_id))
             )
-        else:
-            training_result = await _run_locally(
-                entities, edges, merged_config, dataset_id, job_id
+            job = job_result.scalar_one_or_none()
+            if not job:
+                raise ValueError(f"Job {job_id} not found")
+
+            dataset_id = str(job.dataset_id)
+
+            # Merge job config with task config
+            merged_config = {**(job.config or {}), **config}
+
+            result = await db.execute(
+                select(Dataset).where(Dataset.id == job.dataset_id)
             )
+            dataset = result.scalar_one()
 
-        # Step 5: Store results
-        await _store_results(db, dataset_id, job_id, training_result)
+            # Step 2: Update job status to running
+            await db.execute(
+                update(CrystallizationJob)
+                .where(CrystallizationJob.id == uuid.UUID(job_id))
+                .values(status="running", started_at=datetime.now(timezone.utc))
+            )
+            await db.commit()
 
-        _publish_progress(job_id, {
-            "job_id": job_id,
-            "status": "completed",
-            "module_count": len(training_result.get("modules", [])),
-        })
+            _publish_progress(job_id, {
+                "job_id": job_id,
+                "status": "running",
+                "step": "initializing",
+            })
 
-        logger.info(
-            "Crystallization completed: job=%s, modules=%d",
-            job_id,
-            len(training_result.get("modules", [])),
-        )
+            try:
+                # Step 3: Export dataset from Neo4j (pass fresh driver)
+                entities, edges = await _export_dataset(dataset_id, neo4j_driver)
 
-        return {
-            "job_id": job_id,
-            "status": "completed",
-            "module_count": len(training_result.get("modules", [])),
-        }
+                _publish_progress(job_id, {
+                    "job_id": job_id,
+                    "status": "running",
+                    "step": "training",
+                    "total_epochs": merged_config.get("epochs", 100),
+                })
+
+                # Step 4: Run training (RunPod or local)
+                if is_runpod_configured():
+                    training_result = await _run_via_runpod(
+                        entities, edges, merged_config, dataset_id, job_id
+                    )
+                else:
+                    training_result = await _run_locally(
+                        entities, edges, merged_config, dataset_id, job_id
+                    )
+
+                # Step 5: Store results
+                await _store_results(db, dataset_id, job_id, training_result)
+
+                _publish_progress(job_id, {
+                    "job_id": job_id,
+                    "status": "completed",
+                    "module_count": len(training_result.get("modules", [])),
+                })
+
+                logger.info(
+                    "Crystallization completed: job=%s, modules=%d",
+                    job_id,
+                    len(training_result.get("modules", [])),
+                )
+
+                return {
+                    "job_id": job_id,
+                    "status": "completed",
+                    "module_count": len(training_result.get("modules", [])),
+                }
+
+            except Exception as exc:
+                # Mark job as failed in DB so fsd_crystallize polling detects it quickly
+                logger.exception("Crystallization failed for job=%s", job_id)
+                try:
+                    await db.execute(
+                        update(CrystallizationJob)
+                        .where(CrystallizationJob.id == uuid.UUID(job_id))
+                        .values(
+                            status="failed",
+                            completed_at=datetime.now(timezone.utc),
+                            error_message=str(exc)[:1000],
+                        )
+                    )
+                    await db.commit()
+                except Exception:
+                    logger.exception("Could not mark job as failed in DB: job=%s", job_id)
+                raise
+
+    finally:
+        await neo4j_driver.close()
+        await engine.dispose()
 
 
 async def _run_via_runpod(
@@ -250,20 +286,37 @@ async def _run_locally(
     return training_result
 
 
-async def _export_dataset(dataset_id: str) -> tuple[list, list]:
-    """Export entities and edges from Neo4j for a dataset."""
-    from app.db.neo4j import neo4j_connection
+async def _export_dataset(dataset_id: str, neo4j_driver=None) -> tuple[list, list]:
+    """Export entities and edges from Neo4j for a dataset.
+
+    Accepts an optional pre-created driver to avoid using the module-level
+    singleton (which is uninitialized in Celery workers).
+    """
+    from app.db.neo4j import Neo4jConnection
 
     dataset_label = dataset_id.replace("-", "_")
 
-    entities = await neo4j_connection.execute_query(
+    if neo4j_driver is not None:
+        conn = Neo4jConnection()
+        conn._driver = neo4j_driver
+    else:
+        # Fallback: create fresh driver bound to current event loop
+        from neo4j import AsyncGraphDatabase
+        fresh_driver = AsyncGraphDatabase.driver(
+            settings.NEO4J_URI,
+            auth=(settings.NEO4J_USER, settings.NEO4J_PASSWORD),
+        )
+        conn = Neo4jConnection()
+        conn._driver = fresh_driver
+
+    entities = await conn.execute_query(
         f"""
         MATCH (n:Entity:`{dataset_label}`)
         RETURN n.name AS name, n.entity_type AS type, n.attributes AS attributes
         """,
     )
 
-    edges = await neo4j_connection.execute_query(
+    edges = await conn.execute_query(
         f"""
         MATCH (a:Entity:`{dataset_label}`)-[r:RELATES_TO]->(b:Entity:`{dataset_label}`)
         RETURN a.name AS source, b.name AS target, r.type AS type, r.weight AS weight
