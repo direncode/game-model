@@ -100,7 +100,7 @@ export default function FranklinPage() {
           {/* Top row: Map + Venue List */}
           <div className="flex-1 min-h-0 flex">
             {/* Map */}
-            <div className="flex-[3] relative min-h-[400px]">
+            <div className="flex-[3] relative min-h-[400px] overflow-hidden">
               <FranklinMap
                 spots={spotsData}
                 heatmap={heatmapData}
@@ -126,8 +126,8 @@ export default function FranklinPage() {
           </div>
 
           {/* Bottom row: Trends + Density + Modules */}
-          <div className="h-72 flex-shrink-0 flex border-t border-li-border">
-            <div className="flex-1 border-r border-li-border">
+          <div className="h-72 flex-shrink-0 flex border-t border-li-border overflow-hidden">
+            <div className="flex-1 border-r border-li-border overflow-hidden">
               <TrendPanel
                 trends={trends.data}
                 intel={intel.data}
