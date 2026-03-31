@@ -1,16 +1,30 @@
-"""Franklin Street Data endpoints: cached modules + manual trigger."""
+"""Franklin Street Data endpoints: cached modules + manual trigger.
+
+Read path: Redis cache → Postgres fallback → re-warm cache.
+Modules are always returned sorted by entity_count descending so the
+largest clusters (e.g. Restaurant · 6Pm, 65 venues) surface first.
+"""
 
 from __future__ import annotations
 
 import json
+import logging
 
 from fastapi import APIRouter, Depends
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.celery_app import celery_app
 from app.config import settings
 from app.core.auth import get_current_active_user
+from app.db.session import get_db
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/fsd", tags=["fsd"])
+
+FSD_CACHE_PREFIX = "fsd:latest"
+FSD_CACHE_TTL = 86_400  # 24 hours
 
 
 def _get_redis():
@@ -18,32 +32,116 @@ def _get_redis():
     return redis.from_url(settings.REDIS_URL, decode_responses=True)
 
 
-@router.get("/modules")
-async def get_fsd_modules(user=Depends(get_current_active_user)):
-    """Return cached FSD crystallization results from Redis."""
-    r = _get_redis()
-    prefix = "fsd:latest"
+def _sort_modules(modules: list[dict]) -> list[dict]:
+    """Sort modules by entity_count descending (largest clusters first)."""
+    return sorted(modules, key=lambda m: m.get("entity_count", 0), reverse=True)
 
-    status = r.get(f"{prefix}:status")
-    if not status:
+
+def _warm_redis_cache(r, *, status: str, timestamp: str, dataset_id: str,
+                      job_id: str, module_count: int, modules: list[dict]):
+    """Re-populate Redis cache from Postgres data."""
+    r.set(f"{FSD_CACHE_PREFIX}:status", status)
+    r.set(f"{FSD_CACHE_PREFIX}:timestamp", timestamp)
+    r.set(f"{FSD_CACHE_PREFIX}:dataset_id", dataset_id)
+    r.set(f"{FSD_CACHE_PREFIX}:job_id", job_id)
+    r.set(f"{FSD_CACHE_PREFIX}:module_count", str(module_count))
+    r.set(f"{FSD_CACHE_PREFIX}:modules", json.dumps(modules))
+    for suffix in ("status", "timestamp", "dataset_id", "job_id", "module_count", "modules"):
+        r.expire(f"{FSD_CACHE_PREFIX}:{suffix}", FSD_CACHE_TTL)
+
+
+async def _fallback_from_postgres(db: AsyncSession) -> dict | None:
+    """Load the latest completed crystallization from Postgres.
+
+    Returns a response dict or None if no completed job exists.
+    """
+    from app.models.crystallization import CrystallizationJob
+    from app.models.module import Module
+
+    # Find the most recent completed FSD job
+    job_result = await db.execute(
+        select(CrystallizationJob)
+        .where(CrystallizationJob.status == "completed")
+        .order_by(CrystallizationJob.completed_at.desc())
+        .limit(1)
+    )
+    job = job_result.scalar_one_or_none()
+    if job is None:
+        return None
+
+    # Load modules for that job's dataset
+    modules_result = await db.execute(
+        select(Module).where(Module.dataset_id == job.dataset_id)
+    )
+    modules = modules_result.scalars().all()
+
+    module_summaries = [
+        {
+            "id": str(m.id),
+            "name": m.name,
+            "module_index": m.module_index,
+            "entity_count": m.entity_count,
+            "dominant_type": m.dominant_type,
+            "purity_score": m.purity_score,
+        }
+        for m in modules
+    ]
+
+    timestamp = (job.completed_at or job.created_at).isoformat()
+
+    return {
+        "status": "completed",
+        "timestamp": timestamp,
+        "dataset_id": str(job.dataset_id),
+        "job_id": str(job.id),
+        "module_count": len(module_summaries),
+        "modules": _sort_modules(module_summaries),
+    }
+
+
+@router.get("/modules")
+async def get_fsd_modules(
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Return FSD crystallization results.
+
+    Read-through cache: tries Redis first, falls back to Postgres
+    and re-warms the cache on hit. Modules are always sorted by size.
+    """
+    r = _get_redis()
+
+    status = r.get(f"{FSD_CACHE_PREFIX}:status")
+    if status:
+        # Cache hit — serve from Redis
+        modules_json = r.get(f"{FSD_CACHE_PREFIX}:modules")
+        modules = json.loads(modules_json) if modules_json else []
+        return {
+            "status": status,
+            "timestamp": r.get(f"{FSD_CACHE_PREFIX}:timestamp"),
+            "dataset_id": r.get(f"{FSD_CACHE_PREFIX}:dataset_id"),
+            "job_id": r.get(f"{FSD_CACHE_PREFIX}:job_id"),
+            "module_count": int(r.get(f"{FSD_CACHE_PREFIX}:module_count") or 0),
+            "modules": _sort_modules(modules),
+            "error": r.get(f"{FSD_CACHE_PREFIX}:error"),
+        }
+
+    # Cache miss — fall back to Postgres
+    logger.info("Redis cache miss for FSD modules, falling back to Postgres")
+    pg_data = await _fallback_from_postgres(db)
+
+    if pg_data is None:
         return {
             "status": "no_data",
             "message": "No FSD crystallization has been run yet.",
             "modules": [],
         }
 
-    modules_json = r.get(f"{prefix}:modules")
-    modules = json.loads(modules_json) if modules_json else []
+    # Re-warm Redis cache so next request is fast
+    _warm_redis_cache(r, **pg_data)
+    logger.info("Re-warmed Redis cache from Postgres (%d modules)", pg_data["module_count"])
 
-    return {
-        "status": status,
-        "timestamp": r.get(f"{prefix}:timestamp"),
-        "dataset_id": r.get(f"{prefix}:dataset_id"),
-        "job_id": r.get(f"{prefix}:job_id"),
-        "module_count": int(r.get(f"{prefix}:module_count") or 0),
-        "modules": modules,
-        "error": r.get(f"{prefix}:error"),
-    }
+    return pg_data
 
 
 @router.post("/crystallize", status_code=202)
