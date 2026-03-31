@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useFranklinStore } from "@/stores/franklin";
-import { fetchSpots, fetchHeatmap, fetchDensity, fetchTrends, fetchStatus } from "@/lib/fsd-api";
+import { fetchSpots, fetchHeatmap, fetchDensity, fetchTrends, fetchStatus, fetchIntel } from "@/lib/fsd-api";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import HourSlider from "@/components/franklin/HourSlider";
@@ -47,6 +47,12 @@ export default function FranklinPage() {
     queryKey: ["fsd-status"],
     queryFn: fetchStatus,
     staleTime: 30_000,
+  });
+
+  const intel = useQuery({
+    queryKey: ["fsd-intel"],
+    queryFn: fetchIntel,
+    staleTime: 5 * 60_000,
   });
 
   const spotsData = spots.data?.spots ?? [];
@@ -104,12 +110,13 @@ export default function FranklinPage() {
           {/* Bottom row: Trends + Density + Modules */}
           <div className="h-72 flex-shrink-0 flex border-t border-li-border">
             <div className="flex-1 border-r border-li-border">
-              <TrendPanel trends={trends.data} isLoading={trends.isLoading} />
+              <TrendPanel trends={trends.data} intel={intel.data} isLoading={trends.isLoading} />
             </div>
             <div className="flex-1 border-r border-li-border">
               <DensityPanel
                 density={density.data}
                 status={status.data}
+                intel={intel.data}
                 isLoading={density.isLoading}
               />
             </div>

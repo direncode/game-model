@@ -1,11 +1,12 @@
 "use client";
 
-import type { FSDDensity, FSDStatus } from "@/lib/fsd-api";
-import { Activity, Zap } from "lucide-react";
+import type { FSDDensity, FSDStatus, FSDIntel } from "@/lib/fsd-api";
+import { Activity, Zap, Cloud } from "lucide-react";
 
 interface DensityPanelProps {
   density: FSDDensity | undefined;
   status: FSDStatus | undefined;
+  intel: FSDIntel | undefined;
   isLoading: boolean;
 }
 
@@ -25,7 +26,7 @@ function SignalBadge({ name, state }: { name: string; state: string }) {
   );
 }
 
-export default function DensityPanel({ density, status, isLoading }: DensityPanelProps) {
+export default function DensityPanel({ density, status, intel, isLoading }: DensityPanelProps) {
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -90,6 +91,21 @@ export default function DensityPanel({ density, status, isLoading }: DensityPane
 
         {/* Signal feeds */}
         <div className="lg:w-52 p-3 border-t lg:border-t-0 lg:border-l border-li-border overflow-y-auto">
+          {/* Weather */}
+          {intel?.weather && (
+            <div className="mb-3 pb-3 border-b border-li-border">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <Cloud className="w-3 h-3 text-li-cyan" />
+                <p className="text-[10px] uppercase tracking-wider text-li-text-muted">Weather</p>
+              </div>
+              <p className="text-sm font-medium text-white">{intel.weather.temperature_f}°F</p>
+              <p className="text-[11px] text-li-gray-400">{intel.weather.conditions}</p>
+              <span className={`text-[10px] font-mono ${intel.weather.outdoor_friendly ? "text-li-green" : "text-li-yellow"}`}>
+                {intel.weather.outdoor_friendly ? "▲ outdoor friendly" : "▼ indoors preferred"}
+              </span>
+            </div>
+          )}
+
           <p className="text-[10px] uppercase tracking-wider text-li-text-muted mb-2">
             Data Feeds
           </p>

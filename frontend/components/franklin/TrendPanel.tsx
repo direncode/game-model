@@ -2,15 +2,16 @@
 
 import { useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import type { FSDTrends } from "@/lib/fsd-api";
-import { TrendingUp } from "lucide-react";
+import type { FSDTrends, FSDIntel } from "@/lib/fsd-api";
+import { TrendingUp, CalendarDays } from "lucide-react";
 
 interface TrendPanelProps {
   trends: FSDTrends | undefined;
+  intel: FSDIntel | undefined;
   isLoading: boolean;
 }
 
-export default function TrendPanel({ trends, isLoading }: TrendPanelProps) {
+export default function TrendPanel({ trends, intel, isLoading }: TrendPanelProps) {
   const chartData = useMemo(() => {
     if (!trends?.type_interest) return [];
     return Object.entries(trends.type_interest)
@@ -89,12 +90,12 @@ export default function TrendPanel({ trends, isLoading }: TrendPanelProps) {
 
           {/* Local topics */}
           {trends.local_topics.length > 0 && (
-            <div>
+            <div className="mb-4">
               <p className="text-[10px] uppercase tracking-wider text-li-text-muted mb-2">
                 Local Topics
               </p>
               <div className="space-y-1.5">
-                {trends.local_topics.map((t, i) => (
+                {trends.local_topics.slice(0, 5).map((t, i) => (
                   <div key={i} className="flex items-start gap-2">
                     <span className="text-xs text-li-gray-300 leading-snug flex-1">
                       {t.topic}
@@ -102,6 +103,28 @@ export default function TrendPanel({ trends, isLoading }: TrendPanelProps) {
                     <span className="text-[10px] font-mono text-li-text-muted flex-shrink-0">
                       {t.score.toFixed(1)}
                     </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* UNC Events */}
+          {intel?.events && intel.events.count > 0 && (
+            <div>
+              <div className="flex items-center gap-1.5 mb-2">
+                <CalendarDays className="w-3 h-3 text-li-cyan" />
+                <p className="text-[10px] uppercase tracking-wider text-li-text-muted">
+                  UNC Events · {intel.events.count}
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                {intel.events.events.slice(0, 4).map((e, i) => (
+                  <div key={i} className="py-1 px-2 rounded bg-li-gray-900">
+                    <p className="text-[11px] text-white leading-snug">{e.name}</p>
+                    {e.date && (
+                      <p className="text-[10px] text-li-text-muted mt-0.5">{e.date}</p>
+                    )}
                   </div>
                 ))}
               </div>

@@ -166,16 +166,24 @@ export default function FranklinMap({ spots, heatmap }: FranklinMapProps) {
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Update data when spots/heatmap change
+  // Update data when spots/heatmap change — handle race condition where
+  // data arrives before Mapbox style finishes loading
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
+    if (!map) return;
 
-    const heatSrc = map.getSource("fsd-heatmap") as mapboxgl.GeoJSONSource;
-    if (heatSrc) heatSrc.setData(heatmapToGeoJSON(heatmap));
+    const doUpdate = () => {
+      const heatSrc = map.getSource("fsd-heatmap") as mapboxgl.GeoJSONSource;
+      if (heatSrc) heatSrc.setData(heatmapToGeoJSON(heatmap));
+      const venueSrc = map.getSource("fsd-venues") as mapboxgl.GeoJSONSource;
+      if (venueSrc) venueSrc.setData(spotsToGeoJSON(spots));
+    };
 
-    const venueSrc = map.getSource("fsd-venues") as mapboxgl.GeoJSONSource;
-    if (venueSrc) venueSrc.setData(spotsToGeoJSON(spots));
+    if (map.isStyleLoaded()) {
+      doUpdate();
+    } else {
+      map.once("load", doUpdate);
+    }
   }, [spots, heatmap]);
 
   if (!MAPBOX_TOKEN) {

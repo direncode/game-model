@@ -116,6 +116,43 @@ export function fetchStatus() {
   return fsdFetch<FSDStatus>(`/status`);
 }
 
+export interface FSDWeather {
+  conditions: string;
+  temperature_f: number;
+  wind_mph?: number;
+  humidity_pct?: number;
+  outdoor_friendly: boolean;
+  source?: string;
+}
+
+export interface FSDEvent {
+  name: string;
+  date?: string;
+  event_type?: string;
+  location?: string;
+  url?: string;
+}
+
+export interface FSDIntel {
+  weather?: FSDWeather;
+  demographics?: {
+    total_population?: number;
+    college_age_pct?: number;
+    median_income?: number;
+    source?: string;
+  };
+  events?: {
+    count: number;
+    events: FSDEvent[];
+    source?: string;
+  };
+  timestamp?: string;
+}
+
+export function fetchIntel() {
+  return fsdFetch<FSDIntel>(`/intel`);
+}
+
 // ── Backend API (crystallized modules) ────────────────────
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
