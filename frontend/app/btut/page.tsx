@@ -203,6 +203,183 @@ function SurvivorDetail({ ticker, onClose }: { ticker: string; onClose: () => vo
         <h3 className="text-xs uppercase tracking-wider text-li-red mb-2">Anomaly Narrative</h3>
         <p className="text-sm text-li-text-secondary leading-relaxed">{a.anomaly_story}</p>
       </div>
+
+      {/* ── ENRICHED METADATA ──────────────────────────────── */}
+      {(a as any).metadata && (() => {
+        const m = (a as any).metadata;
+        return (
+          <>
+            {/* Structural Role */}
+            {m.structural_role && (
+              <div className="flex items-center gap-3 bg-li-cyan/5 border border-li-cyan/10 rounded-lg p-4">
+                <span className="px-2 py-1 rounded text-[10px] font-mono font-bold bg-li-cyan/20 text-li-cyan border border-li-cyan/30">
+                  {m.structural_role.role}
+                </span>
+                <span className="text-sm text-li-text-secondary">{m.structural_role.description}</span>
+              </div>
+            )}
+
+            {/* Signal Decomposition */}
+            {m.signal_decomposition && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Signal Decomposition</h3>
+                <div className="grid grid-cols-3 gap-3">
+                  {Object.entries(m.signal_decomposition).map(([axis, d]: [string, any]) => (
+                    <div key={axis} className="bg-li-gray-900 rounded-lg p-3 space-y-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-li-text-muted capitalize">{axis}</span>
+                        <span className="text-[10px] font-mono text-li-text-muted">#{d.rank_in_axis} ({d.percentile}%ile)</span>
+                      </div>
+                      <div className="text-lg font-mono font-bold text-li-text-primary">{(d.raw_score * 100).toFixed(1)}</div>
+                      <div className="text-[10px] text-li-text-muted">
+                        {d.pct_of_composite}% of composite | weight {(d.weight * 100).toFixed(0)}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Anomaly Tags */}
+            {m.anomaly_taxonomy?.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Anomaly Tags</h3>
+                <div className="space-y-1">
+                  {m.anomaly_taxonomy.map((tag: any, i: number) => (
+                    <div key={i} className={cn(
+                      "flex items-start gap-3 rounded-lg p-3 text-xs",
+                      tag.severity === "critical" ? "bg-li-red/10 border border-li-red/20" :
+                      tag.severity === "high" ? "bg-li-yellow/10 border border-li-yellow/20" :
+                      tag.severity === "medium" ? "bg-li-purple/10 border border-li-purple/20" :
+                      "bg-li-gray-900 border border-li-gray-800"
+                    )}>
+                      <span className={cn(
+                        "px-1.5 py-0.5 rounded font-mono text-[9px] font-bold shrink-0",
+                        tag.severity === "critical" ? "bg-li-red/20 text-li-red" :
+                        tag.severity === "high" ? "bg-li-yellow/20 text-li-yellow" :
+                        tag.severity === "medium" ? "bg-li-purple/20 text-li-purple" :
+                        "bg-li-gray-800 text-li-text-muted"
+                      )}>{tag.tag}</span>
+                      <span className="text-li-text-secondary">{tag.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Fingerprint Analytics */}
+            {m.fingerprint_analytics?.total_bits && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Fingerprint Analytics</h3>
+                <div className="grid grid-cols-4 gap-3">
+                  <div className="bg-li-gray-900 rounded p-2 text-center">
+                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.entropy.toFixed(3)}</div>
+                    <div className="text-[9px] text-li-text-muted">Entropy</div>
+                  </div>
+                  <div className="bg-li-gray-900 rounded p-2 text-center">
+                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.transitions}</div>
+                    <div className="text-[9px] text-li-text-muted">Transitions</div>
+                  </div>
+                  <div className="bg-li-gray-900 rounded p-2 text-center">
+                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.avg_run_length}</div>
+                    <div className="text-[9px] text-li-text-muted">Avg Run</div>
+                  </div>
+                  <div className="bg-li-gray-900 rounded p-2 text-center">
+                    <div className="text-sm font-mono text-li-text-primary">{(m.fingerprint_analytics.flip_ratio * 100).toFixed(0)}%</div>
+                    <div className="text-[9px] text-li-text-muted">Flip Ratio</div>
+                  </div>
+                </div>
+                <p className="text-[10px] text-li-text-muted italic">{m.fingerprint_analytics.entropy_interpretation}</p>
+              </div>
+            )}
+
+            {/* Peer Network */}
+            {m.peer_network?.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Nearest Structural Peers</h3>
+                <div className="space-y-1">
+                  {m.peer_network.map((peer: any, i: number) => (
+                    <div key={i} className="flex items-center justify-between bg-li-gray-900 rounded px-3 py-1.5 text-xs">
+                      <div className="flex items-center gap-2">
+                        {peer.ticker && <span className="font-mono text-li-cyan">{peer.ticker}</span>}
+                        <span className="text-li-text-secondary">{peer.name}</span>
+                        <TypeBadge type={peer.type} />
+                        {peer.shared_cluster && <span className="text-[9px] text-li-green">same cluster</span>}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-1.5 bg-li-gray-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-li-cyan rounded-full" style={{ width: `${peer.similarity * 100}%` }} />
+                        </div>
+                        <span className="font-mono text-li-text-muted w-12 text-right">{(peer.similarity * 100).toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Confidence + Position */}
+            <div className="grid grid-cols-2 gap-4">
+              {m.confidence && (
+                <div className="bg-li-gray-900 rounded-lg p-4 space-y-2">
+                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Confidence Assessment</h3>
+                  <div className="flex items-center gap-3">
+                    <span className={cn(
+                      "text-2xl font-mono font-bold",
+                      m.confidence.level === "very_high" ? "text-li-green" :
+                      m.confidence.level === "high" ? "text-li-cyan" :
+                      m.confidence.level === "medium" ? "text-li-yellow" : "text-li-red"
+                    )}>{(m.confidence.score * 100).toFixed(0)}%</span>
+                    <span className="text-xs text-li-text-muted uppercase">{m.confidence.level}</span>
+                  </div>
+                  <div className="space-y-0.5">
+                    {m.confidence.factors.map((f: any, i: number) => (
+                      <div key={i} className="flex items-center justify-between text-[10px]">
+                        <span className="text-li-text-muted">{f.factor.replace(/_/g, " ")}</span>
+                        <span className="font-mono text-li-green">+{(f.impact * 100).toFixed(0)}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {m.relative_position && (
+                <div className="bg-li-gray-900 rounded-lg p-4 space-y-2">
+                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Relative Position</h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-li-text-muted">Global rank</span>
+                      <span className="font-mono text-li-text-primary">#{m.relative_position.global_rank} of {m.relative_position.type_total > 0 ? '298' : '298'} ({m.relative_position.global_percentile}%ile)</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-li-text-muted">Type rank</span>
+                      <span className="font-mono text-li-text-primary">#{m.relative_position.type_rank} of {m.relative_position.type_total} ({m.relative_position.type_percentile}%ile)</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-li-text-muted">Z-score</span>
+                      <span className={cn("font-mono", m.relative_position.composite_z_score > 1 ? "text-li-green" : "text-li-text-primary")}>
+                        {m.relative_position.sigma_label}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Data Quality */}
+            {m.data_quality && (
+              <div className="text-[10px] text-li-text-muted space-x-2">
+                {m.data_quality.map((q: string, i: number) => (
+                  <span key={i} className={cn(
+                    "inline-block px-2 py-0.5 rounded",
+                    q.startsWith("CLEAN") ? "bg-li-green/10 text-li-green" : "bg-li-yellow/10 text-li-yellow"
+                  )}>{q}</span>
+                ))}
+              </div>
+            )}
+          </>
+        );
+      })()}
     </div>
   );
 }

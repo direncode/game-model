@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import os
 from collections import defaultdict
 from pathlib import Path
@@ -125,6 +126,383 @@ class BTUTQueryEngine:
             len(self._survivors), len(self._by_ticker),
             len(self._by_cluster), len(self._by_type),
         )
+
+        # Enrich all survivors with computed metadata
+        self._enrich_all()
+
+    def _enrich_all(self):
+        """Compute rich metadata for every survivor after loading."""
+        if not self._survivors:
+            return
+
+        # Pre-compute global statistics for relative metrics
+        all_composites = [s["scores"].get("composite", 0) for s in self._survivors]
+        all_anomalies = [s["scores"].get("anomaly", 0) for s in self._survivors]
+        all_flips = [s["flips"] for s in self._survivors]
+        n = len(self._survivors)
+
+        global_stats = {
+            "composite_mean": sum(all_composites) / n,
+            "composite_std": (sum((x - sum(all_composites)/n)**2 for x in all_composites) / n) ** 0.5,
+            "anomaly_mean": sum(all_anomalies) / n,
+            "anomaly_std": (sum((x - sum(all_anomalies)/n)**2 for x in all_anomalies) / n) ** 0.5,
+            "flips_mean": sum(all_flips) / n,
+            "total_survivors": n,
+        }
+
+        # Build fingerprint index for peer similarity
+        fp_index: dict[str, list[int]] = defaultdict(list)
+        for i, s in enumerate(self._survivors):
+            fp_index[s["fingerprint"]].append(i)
+
+        for i, sv in enumerate(self._survivors):
+            sv["metadata"] = self._compute_metadata(sv, i, global_stats, fp_index)
+
+    def _compute_metadata(
+        self, sv: dict, idx: int, global_stats: dict, fp_index: dict,
+    ) -> dict:
+        """Compute 12 enriched metadata fields for a single survivor."""
+        scores = sv.get("scores", {})
+        fp = sv.get("fingerprint", "")
+        flips = sv.get("flips", 0)
+        cluster_id = sv.get("cluster", -1)
+        cluster_members = self._by_cluster.get(cluster_id, [])
+        entity_type = sv.get("type", "")
+
+        meta = {}
+
+        # ── 1. Structural Role Classification ───────────────────────
+        composite = scores.get("composite", 0)
+        anomaly = scores.get("anomaly", 0)
+        diversity = scores.get("diversity", 0)
+
+        if diversity >= 1.0 and anomaly > 0.9:
+            role = "PIONEER"
+            role_desc = "Unique structural fingerprint with extreme anomaly. Defines an entirely new region of the data geometry."
+        elif diversity >= 1.0 and len(cluster_members) <= 3:
+            role = "ISOLATE"
+            role_desc = "Occupies a sparsely populated micro-cluster. Structurally distinct from the bulk of the dataset."
+        elif flips < 40 and composite > 0.7:
+            role = "ANCHOR"
+            role_desc = "Lattice-stable with high signal. Maintains structural identity across rotations. Core representative."
+        elif flips >= 46:
+            role = "BOUNDARY"
+            role_desc = "Extremely sensitive to dimensional rotations. Sits at the edge between structural regions."
+        elif len(cluster_members) >= 10 and composite > global_stats["composite_mean"]:
+            role = "HUB"
+            role_desc = "Member of a large cluster with above-average signal. Represents a major structural grouping."
+        elif anomaly > 0.8 and scores.get("reconstruction", 0) > 0.7:
+            role = "BRIDGE"
+            role_desc = "High anomaly combined with high reconstruction value. Connects otherwise distant regions of the data."
+        else:
+            role = "MEMBER"
+            role_desc = "Standard cluster member contributing to coverage."
+
+        meta["structural_role"] = {"role": role, "description": role_desc}
+
+        # ── 2. Peer Network (top 5 by fingerprint Hamming distance) ──
+        peers = []
+        for j, other in enumerate(self._survivors):
+            if j == idx:
+                continue
+            fp_other = other.get("fingerprint", "")
+            min_len = min(len(fp), len(fp_other))
+            if min_len > 0:
+                matches = sum(1 for a, b in zip(fp[:min_len], fp_other[:min_len]) if a == b)
+                similarity = matches / min_len
+            else:
+                similarity = 0
+            peers.append({
+                "ticker": other.get("ticker", ""),
+                "name": other.get("company_name", "") or other.get("name", ""),
+                "type": other.get("type", ""),
+                "similarity": round(similarity, 3),
+                "shared_cluster": other.get("cluster", -1) == cluster_id,
+            })
+        peers.sort(key=lambda x: -x["similarity"])
+        meta["peer_network"] = peers[:5]
+
+        # ── 3. Cross-Resolution Stability ────────────────────────────
+        coarse = fp[:16] if len(fp) >= 16 else ""
+        medium = fp[16:32] if len(fp) >= 32 else ""
+        fine = fp[32:48] if len(fp) >= 48 else ""
+
+        coarse_flips = sum(int(c) for c in coarse) if coarse else 0
+        medium_flips = sum(int(c) for c in medium) if medium else 0
+        fine_flips = sum(int(c) for c in fine) if fine else 0
+
+        stability_profile = {
+            "coarse_flip_rate": round(coarse_flips / 16, 3) if coarse else 0,
+            "medium_flip_rate": round(medium_flips / 16, 3) if medium else 0,
+            "fine_flip_rate": round(fine_flips / 16, 3) if fine else 0,
+            "most_stable_resolution": (
+                "coarse" if coarse_flips <= medium_flips and coarse_flips <= fine_flips else
+                "medium" if medium_flips <= fine_flips else "fine"
+            ),
+            "cross_resolution_variance": round(
+                ((coarse_flips/16 - flips/48)**2 + (medium_flips/16 - flips/48)**2 + (fine_flips/16 - flips/48)**2) / 3, 4
+            ) if coarse else 0,
+        }
+        meta["resolution_stability"] = stability_profile
+
+        # ── 4. Fingerprint Analytics ─────────────────────────────────
+        if fp:
+            ones = fp.count("1")
+            zeros = fp.count("0")
+            total_bits = len(fp)
+            p = ones / total_bits if total_bits > 0 else 0.5
+
+            # Shannon entropy of flip pattern
+            entropy = 0
+            if 0 < p < 1:
+                entropy = -(p * math.log2(p) + (1-p) * math.log2(1-p))
+
+            # Run-length analysis (consecutive same bits)
+            runs = 1
+            for k in range(1, len(fp)):
+                if fp[k] != fp[k-1]:
+                    runs += 1
+            avg_run_length = total_bits / runs if runs > 0 else total_bits
+
+            # Transition density (how often the pattern switches)
+            transitions = sum(1 for k in range(1, len(fp)) if fp[k] != fp[k-1])
+
+            meta["fingerprint_analytics"] = {
+                "total_bits": total_bits,
+                "ones": ones,
+                "zeros": zeros,
+                "flip_ratio": round(ones / total_bits, 3),
+                "entropy": round(entropy, 4),
+                "entropy_interpretation": (
+                    "Maximum entropy -- equiprobable flipping" if entropy > 0.95 else
+                    "High entropy -- near-random flip pattern" if entropy > 0.8 else
+                    "Moderate entropy -- structured flip pattern" if entropy > 0.5 else
+                    "Low entropy -- highly ordered flip pattern"
+                ),
+                "runs": runs,
+                "avg_run_length": round(avg_run_length, 2),
+                "transitions": transitions,
+                "transition_density": round(transitions / max(total_bits - 1, 1), 3),
+            }
+        else:
+            meta["fingerprint_analytics"] = {}
+
+        # ── 5. Signal Decomposition ──────────────────────────────────
+        weights = {"diversity": 0.35, "reconstruction": 0.40, "anomaly": 0.25}
+        decomposition = {}
+        for axis, weight in weights.items():
+            val = scores.get(axis, 0)
+            contribution = val * weight
+            decomposition[axis] = {
+                "raw_score": round(val, 4),
+                "weight": weight,
+                "contribution": round(contribution, 4),
+                "pct_of_composite": round(contribution / max(composite, 0.001) * 100, 1),
+                "rank_in_axis": 0,  # Filled below
+            }
+
+        # Compute per-axis rank
+        for axis in weights:
+            sorted_by_axis = sorted(self._survivors, key=lambda x: -x["scores"].get(axis, 0))
+            for rank, s in enumerate(sorted_by_axis):
+                if s is sv:
+                    decomposition[axis]["rank_in_axis"] = rank + 1
+                    decomposition[axis]["percentile"] = round((1 - rank / max(len(self._survivors) - 1, 1)) * 100, 1)
+                    break
+
+        meta["signal_decomposition"] = decomposition
+
+        # ── 6. Anomaly Taxonomy ──────────────────────────────────────
+        anomaly_tags = []
+
+        if anomaly > 0.9:
+            anomaly_tags.append({
+                "tag": "EXTREME_OUTLIER",
+                "description": "Top 10% anomaly score. Structural profile diverges from 90%+ of its type.",
+                "severity": "critical",
+            })
+
+        if diversity >= 1.0:
+            anomaly_tags.append({
+                "tag": "UNIQUE_FINGERPRINT",
+                "description": "No other entity shares this exact 48-bit multi-resolution trajectory pattern.",
+                "severity": "high",
+            })
+
+        if len(cluster_members) == 1:
+            anomaly_tags.append({
+                "tag": "SINGLETON_CLUSTER",
+                "description": "Only entity in its micro-cluster. Completely isolated in structural space.",
+                "severity": "high",
+            })
+
+        if flips >= 46:
+            anomaly_tags.append({
+                "tag": "HYPER_DYNAMIC",
+                "description": f"Flips in {flips}/48 rotations (96%+). Maximum sensitivity to dimensional perturbation.",
+                "severity": "medium",
+            })
+
+        if flips <= 38:
+            anomaly_tags.append({
+                "tag": "LATTICE_STABLE",
+                "description": f"Only {flips}/48 flips. Resistant to dimensional rotations -- deep structural stability.",
+                "severity": "info",
+            })
+
+        if stability_profile.get("cross_resolution_variance", 0) > 0.01:
+            anomaly_tags.append({
+                "tag": "RESOLUTION_SENSITIVE",
+                "description": "Behavior varies significantly across coarse/medium/fine resolutions.",
+                "severity": "medium",
+            })
+
+        if scores.get("reconstruction", 0) > 0.8:
+            anomaly_tags.append({
+                "tag": "HIGH_COVERAGE_VALUE",
+                "description": "Removing this entity would leave a significant gap in dataset reconstruction.",
+                "severity": "high",
+            })
+
+        # Type-specific tags
+        if entity_type == "company":
+            cik = sv.get("cik", "")
+            if cik and int(cik) > 1900000:
+                anomaly_tags.append({
+                    "tag": "RECENT_CIK",
+                    "description": f"CIK {cik} is very recent (post-2022). Likely a SPAC, IPO, or newly formed entity.",
+                    "severity": "info",
+                })
+            elif cik and int(cik) < 100000:
+                anomaly_tags.append({
+                    "tag": "LEGACY_CIK",
+                    "description": f"CIK {cik} dates to the early SEC era. Long-lived entity with extensive filing history.",
+                    "severity": "info",
+                })
+
+        if entity_type == "filing":
+            form = sv["attributes"].get("form", "")
+            if form in ("4", "3", "5"):
+                anomaly_tags.append({
+                    "tag": "INSIDER_FILING",
+                    "description": f"Form {form} insider transaction. Structural outlier filings often indicate unusual insider activity.",
+                    "severity": "medium",
+                })
+            elif form in ("8-K",):
+                anomaly_tags.append({
+                    "tag": "MATERIAL_EVENT",
+                    "description": "Form 8-K material event filing. Structurally anomalous 8-Ks often signal significant corporate events.",
+                    "severity": "medium",
+                })
+
+        meta["anomaly_taxonomy"] = anomaly_tags
+
+        # ── 7. Cluster Context ───────────────────────────────────────
+        if cluster_members:
+            cluster_composites = [m["scores"].get("composite", 0) for m in cluster_members]
+            cluster_types = defaultdict(int)
+            for m in cluster_members:
+                cluster_types[m["type"]] += 1
+
+            rank_in_cluster = sorted(cluster_composites, reverse=True).index(composite) + 1
+
+            meta["cluster_context"] = {
+                "cluster_id": cluster_id,
+                "cluster_size": len(cluster_members),
+                "rank_in_cluster": rank_in_cluster,
+                "is_cluster_leader": rank_in_cluster == 1,
+                "cluster_avg_composite": round(sum(cluster_composites) / len(cluster_composites), 4),
+                "above_cluster_avg": composite > sum(cluster_composites) / len(cluster_composites),
+                "type_distribution": dict(cluster_types),
+                "type_homogeneity": round(max(cluster_types.values()) / len(cluster_members), 3),
+                "dominant_type": max(cluster_types, key=cluster_types.get),
+            }
+        else:
+            meta["cluster_context"] = {}
+
+        # ── 8. Relative Position ─────────────────────────────────────
+        composite_z = (composite - global_stats["composite_mean"]) / max(global_stats["composite_std"], 0.001)
+        anomaly_z = (anomaly - global_stats["anomaly_mean"]) / max(global_stats["anomaly_std"], 0.001)
+
+        # Global rank
+        sorted_global = sorted(self._survivors, key=lambda x: -x["scores"].get("composite", 0))
+        global_rank = next((r + 1 for r, s in enumerate(sorted_global) if s is sv), 0)
+
+        # Type rank
+        type_members = self._by_type.get(entity_type, [])
+        sorted_type = sorted(type_members, key=lambda x: -x["scores"].get("composite", 0))
+        type_rank = next((r + 1 for r, s in enumerate(sorted_type) if s is sv), 0)
+
+        meta["relative_position"] = {
+            "global_rank": global_rank,
+            "global_percentile": round((1 - global_rank / max(len(self._survivors), 1)) * 100, 1),
+            "type_rank": type_rank,
+            "type_total": len(type_members),
+            "type_percentile": round((1 - type_rank / max(len(type_members), 1)) * 100, 1),
+            "composite_z_score": round(composite_z, 2),
+            "anomaly_z_score": round(anomaly_z, 2),
+            "sigma_label": (
+                f"+{composite_z:.1f}sigma" if composite_z > 0 else f"{composite_z:.1f}sigma"
+            ),
+        }
+
+        # ── 9. Data Quality Signals ──────────────────────────────────
+        attrs = sv.get("attributes", {})
+        quality_signals = []
+
+        if entity_type == "company":
+            if not attrs.get("ticker"):
+                quality_signals.append("MISSING_TICKER: No ticker symbol -- may be OTC, foreign, or delisted")
+            if attrs.get("cik") and not attrs.get("company_name"):
+                quality_signals.append("MISSING_NAME: Has CIK but no company name in attributes")
+
+        if entity_type == "filing":
+            if not attrs.get("form"):
+                quality_signals.append("MISSING_FORM_TYPE: Filing without form type classification")
+            if not attrs.get("date"):
+                quality_signals.append("MISSING_DATE: Filing without date stamp")
+
+        if entity_type == "financial_fact":
+            if not attrs.get("concept"):
+                quality_signals.append("MISSING_CONCEPT: Financial fact without XBRL concept name")
+
+        meta["data_quality"] = quality_signals if quality_signals else ["CLEAN: All expected attributes present"]
+
+        # ── 10. Confidence Assessment ────────────────────────────────
+        confidence_factors = []
+        confidence_score = 0.5  # Base
+
+        if diversity >= 1.0:
+            confidence_factors.append(("unique_fingerprint", +0.15))
+            confidence_score += 0.15
+        if anomaly > 0.8:
+            confidence_factors.append(("high_anomaly", +0.10))
+            confidence_score += 0.10
+        if scores.get("reconstruction", 0) > 0.6:
+            confidence_factors.append(("good_reconstruction", +0.10))
+            confidence_score += 0.10
+        if len(cluster_members) >= 3:
+            confidence_factors.append(("cluster_support", +0.10))
+            confidence_score += 0.10
+        if not quality_signals or quality_signals[0].startswith("CLEAN"):
+            confidence_factors.append(("clean_data", +0.05))
+            confidence_score += 0.05
+        if stability_profile.get("cross_resolution_variance", 0) < 0.005:
+            confidence_factors.append(("stable_across_resolutions", +0.05))
+            confidence_score += 0.05
+
+        meta["confidence"] = {
+            "score": round(min(confidence_score, 1.0), 3),
+            "level": (
+                "very_high" if confidence_score >= 0.9 else
+                "high" if confidence_score >= 0.75 else
+                "medium" if confidence_score >= 0.6 else
+                "low"
+            ),
+            "factors": [{"factor": f, "impact": round(v, 2)} for f, v in confidence_factors],
+        }
+
+        return meta
 
     def _load_cache(self):
         """Lazy-load the entity cache for search."""
@@ -312,6 +690,7 @@ class BTUTQueryEngine:
                 "fingerprint": sv["fingerprint"],
                 "scores": sv["scores"],
                 "anomaly_story": sv["anomaly_story"],
+                "metadata": sv.get("metadata", {}),
             })
 
         return results
@@ -367,6 +746,7 @@ class BTUTQueryEngine:
                 "peers": peers,
             },
             "attributes": record["attributes"],
+            "metadata": record.get("metadata", {}),
         }
 
     def clusters(self, min_size: int = 1, top_n: int = 30) -> list[dict]:
@@ -537,6 +917,7 @@ class BTUTQueryEngine:
                 "fingerprint": sv["fingerprint"],
                 "scores": sv["scores"],
                 "anomaly_story": sv["anomaly_story"],
+                "metadata": sv.get("metadata", {}),
             })
 
         return {"results": results, "total": total, "filters_applied": filters}
@@ -696,6 +1077,7 @@ class BTUTQueryEngine:
                 "cluster": sv["cluster"],
                 "flips": sv["flips"],
                 "anomaly_story": sv["anomaly_story"],
+                "metadata": sv.get("metadata", {}),
             }
             for i, sv in enumerate(ranked[:n])
         ]
