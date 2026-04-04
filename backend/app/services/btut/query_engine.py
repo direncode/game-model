@@ -14,10 +14,28 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Default paths (relative to repo root)
-_REPO_ROOT = Path(__file__).resolve().parents[4]
-_DEFAULT_RESULT = _REPO_ROOT / "scripts" / "edgar_superpower_result.json"
-_DEFAULT_CACHE = _REPO_ROOT / "scripts" / "edgar_cache.json"
+# Search multiple locations for result files (local dev + Docker container)
+def _find_file(filename: str) -> str:
+    """Search common locations for a BTUT result file."""
+    candidates = [
+        # Docker container: /app/data/
+        Path("/app/data") / filename,
+        # Repo root (local dev): 4 levels up from this file
+        Path(__file__).resolve().parents[4] / "scripts" / filename,
+        # Repo root (local dev): 3 levels up (if running from backend/)
+        Path(__file__).resolve().parents[3] / "scripts" / filename,
+        # Current working directory
+        Path.cwd() / "scripts" / filename,
+        Path.cwd() / filename,
+    ]
+    for p in candidates:
+        if p.exists():
+            return str(p)
+    # Return first candidate as default (will log warning if missing)
+    return str(candidates[0])
+
+_DEFAULT_RESULT = _find_file("edgar_superpower_result.json")
+_DEFAULT_CACHE = _find_file("edgar_cache.json")
 
 
 class BTUTQueryEngine:
