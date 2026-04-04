@@ -192,6 +192,39 @@ class ApiClient {
     return this.request<Array<{ id: string; name: string; description: string; tags: string[]; category: string }>>("/api/v1/hub/featured");
   }
 
+  // ── BTUT Intelligence ─────────────────────────────────────────────
+
+  async getBTUTStatus() {
+    return this.request<import("./types").BTUTStatus>("/api/v1/btut/status");
+  }
+
+  async getBTUTSurvivors(params?: { top_n?: number; type?: string; sort_by?: string }) {
+    const q = new URLSearchParams();
+    if (params?.top_n) q.set("top_n", String(params.top_n));
+    if (params?.type) q.set("type", params.type);
+    if (params?.sort_by) q.set("sort_by", params.sort_by);
+    const qs = q.toString() ? `?${q}` : "";
+    return this.request<{ survivors: import("./types").BTUTSurvivor[]; total: number }>(`/api/v1/btut/survivors${qs}`);
+  }
+
+  async getBTUTAnalysis(ticker: string) {
+    return this.request<import("./types").BTUTAnalysis>(`/api/v1/btut/analyze/${encodeURIComponent(ticker)}`);
+  }
+
+  async getBTUTClusters(params?: { min_size?: number; top_n?: number }) {
+    const q = new URLSearchParams();
+    if (params?.min_size) q.set("min_size", String(params.min_size));
+    if (params?.top_n) q.set("top_n", String(params.top_n));
+    const qs = q.toString() ? `?${q}` : "";
+    return this.request<{ clusters: import("./types").BTUTCluster[]; total: number }>(`/api/v1/btut/clusters${qs}`);
+  }
+
+  async getBTUTSearch(keyword: string, field?: string) {
+    const q = new URLSearchParams({ q: keyword });
+    if (field) q.set("field", field);
+    return this.request<{ results: import("./types").BTUTSearchHit[]; total: number }>(`/api/v1/btut/search?${q}`);
+  }
+
 }
 
 export const api = new ApiClient(API_BASE);

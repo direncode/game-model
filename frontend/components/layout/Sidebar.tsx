@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Cpu,
+  BrainCircuit,
   LayoutDashboard,
   Database,
   Box,
@@ -57,6 +58,7 @@ export default function Sidebar({ className }: SidebarProps) {
       title: "ENGINE",
       items: [
         { label: "Engine Console", href: "/engine", icon: Cpu },
+        { label: "BTUT Intelligence", href: "/btut", icon: BrainCircuit },
       ],
     },
     {

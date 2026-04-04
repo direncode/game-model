@@ -14,6 +14,7 @@ from app.api.v1.lineage import router as lineage_router
 from app.api.v1.modules import router as modules_router
 from app.api.v1.reports import router as reports_router
 from app.api.v1.fsd import router as fsd_router
+from app.api.v1.btut import router as btut_router
 from app.api.v1.hub import router as hub_router
 from app.api.v1.ws import router as ws_router
 
@@ -31,6 +32,7 @@ router.include_router(embeddings_router)
 router.include_router(admin_router)
 router.include_router(alerts_router)
 router.include_router(fsd_router)
+router.include_router(btut_router)
 router.include_router(hub_router)
 router.include_router(ws_router)
 

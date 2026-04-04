@@ -1,3 +1,78 @@
+// BTUT Intelligence
+export interface BTUTScores {
+  composite: number;
+  diversity: number;
+  reconstruction: number;
+  anomaly: number;
+}
+
+export interface BTUTSurvivor {
+  rank: number;
+  name: string;
+  ticker: string;
+  type: string;
+  cik: string;
+  cluster: number;
+  flips: number;
+  fingerprint: string;
+  scores: BTUTScores;
+  anomaly_story: string;
+}
+
+export interface BTUTStatus {
+  pipeline_status: string;
+  total_entities: number;
+  total_clusters: number;
+  unique_fingerprints: number;
+  survivor_count: number;
+  reduction_ratio: number;
+  survivor_types: Record<string, number>;
+  reconstruction: Record<string, any>;
+  wall_seconds: number;
+}
+
+export interface BTUTCluster {
+  cluster_id: number;
+  member_count: number;
+  type_distribution: Record<string, number>;
+  avg_composite: number;
+  max_composite: number;
+  sample_members: Array<{ name: string; ticker: string; type: string; composite: number }>;
+}
+
+export interface BTUTAnalysis {
+  ticker: string;
+  company_name: string;
+  cik: string;
+  entity_type: string;
+  anomaly_story: string;
+  scores: BTUTScores;
+  lattice_profile: {
+    total_flips: number;
+    total_rotations: number;
+    flip_rate: number;
+    fingerprint_48bit: string;
+    coarse_resolution: string;
+    medium_resolution: string;
+    fine_resolution: string;
+  };
+  cluster: {
+    id: number;
+    total_members: number;
+    peers: Array<{ name: string; ticker: string; type: string; composite: number }>;
+  };
+  attributes: Record<string, any>;
+}
+
+export interface BTUTSearchHit {
+  name: string;
+  ticker: string;
+  type: string;
+  matched_field: string;
+  composite: number;
+  is_survivor: boolean;
+}
+
 // Auth
 export interface User {
   id: string;

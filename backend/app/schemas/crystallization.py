@@ -18,6 +18,36 @@ class CrystallizationConfig(BaseModel):
     module_capacity: Optional[int] = Field(default=None, ge=1)
     ph_filtration_threshold: Optional[float] = Field(default=None, ge=0.0, le=1.0)
 
+    # ── BTUT data reduction (pre-crystallization) ──────────────────────
+    btut_enabled: Optional[bool] = Field(
+        default=None,
+        description="Enable BTUT mean-field data reduction before TCD-JEPA training",
+    )
+    btut_budget_dollars: Optional[float] = Field(
+        default=None, gt=0.0, le=1000.0,
+        description="GPU compute budget for BTUT reduction ($)",
+    )
+    btut_cascade_depth: Optional[int] = Field(
+        default=None, ge=1, le=10,
+        description="Number of hierarchical cascade levels",
+    )
+    btut_thinning_strategy: Optional[str] = Field(
+        default=None,
+        description="Thinning strategy: composite|density|info_theoretic|boundary|stratified|spectral",
+    )
+    btut_target_reduction: Optional[float] = Field(
+        default=None, ge=1.0,
+        description="Target reduction ratio (e.g. 1000 = 1000x fewer entities)",
+    )
+    btut_quality_threshold: Optional[float] = Field(
+        default=None, ge=0.0, le=1.0,
+        description="Minimum coverage quality gate (0-1)",
+    )
+    btut_annealing_schedule: Optional[str] = Field(
+        default=None,
+        description="Sigma annealing: exponential|linear|cosine",
+    )
+
 
 class CrystallizationJobResponse(BaseModel):
     """Public representation of a crystallization job."""

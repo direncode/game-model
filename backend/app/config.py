@@ -72,6 +72,15 @@ class Settings(BaseSettings):
     def fsd_snapshot_hours_list(self) -> list[int]:
         return [int(h.strip()) for h in self.FSD_SNAPSHOT_HOURS.split(",") if h.strip()]
 
+    # ── BTUT Data Reduction ─────────────────────────────────────────────
+    BTUT_ENABLED: bool = True  # Global kill switch for BTUT pre-reduction
+    BTUT_DEFAULT_BUDGET_DOLLARS: float = 50.0  # Default GPU budget per job
+    BTUT_CHUNK_SIZE: int = 50_000  # Entities per GPU batch
+    BTUT_CHECKPOINT_DIR: str = "/tmp/btut_checkpoints"
+    BTUT_MMAP_DIR: str = "/tmp/btut_mmap"
+    BTUT_MAX_PREFILTER_MEMORY_MB: int = 512
+    BTUT_DEFAULT_THINNING_STRATEGY: str = "composite"
+
     # ── Application ─────────────────────────────────────────────────────
     APP_NAME: str = "Latent Intelligence"
     APP_ENV: str = "development"

@@ -146,6 +146,67 @@ async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
                 # Step 3: Export dataset from Neo4j (pass fresh driver)
                 entities, edges = await _export_dataset(dataset_id, neo4j_driver)
 
+                # Step 3.5: BTUT data reduction (Tier 1-8 cascade)
+                # Sits between raw export and TCD-JEPA training to reduce
+                # petabyte-scale datasets to signal-rich representatives.
+                btut_result = None
+                btut_enabled = merged_config.get(
+                    "btut_enabled", settings.BTUT_ENABLED
+                )
+                if btut_enabled and len(entities) > 200:
+                    try:
+                        from app.services.btut import BTUTTuner, BTUTConfig
+
+                        btut_config = BTUTConfig.auto_scale(
+                            entity_count=len(entities),
+                            budget_dollars=merged_config.get(
+                                "btut_budget_dollars",
+                                settings.BTUT_DEFAULT_BUDGET_DOLLARS,
+                            ),
+                            edge_count=len(edges),
+                        )
+                        tuner = BTUTTuner(btut_config)
+
+                        _publish_progress(job_id, {
+                            "job_id": job_id,
+                            "status": "running",
+                            "step": "btut_reduction",
+                            "entity_count": len(entities),
+                        })
+
+                        btut_result = await tuner.tune(
+                            entities, edges, job_id=job_id,
+                            progress_callback=lambda d: _publish_progress(
+                                job_id, {"job_id": job_id, "status": "running", **d}
+                            ),
+                        )
+
+                        # Replace entities/edges with reduced versions
+                        entities = btut_result.survivors
+                        edges = btut_result.survivor_edges
+
+                        logger.info(
+                            "BTUT reduction: %d → %d entities (%.0fx), quality=%.3f",
+                            btut_result.original_count,
+                            btut_result.survivor_count,
+                            btut_result.total_reduction_ratio,
+                            btut_result.quality_score,
+                        )
+
+                        _publish_progress(job_id, {
+                            "job_id": job_id,
+                            "status": "running",
+                            "step": "btut_complete",
+                            "reduction_ratio": round(btut_result.total_reduction_ratio, 1),
+                            "survivor_count": btut_result.survivor_count,
+                        })
+
+                    except Exception as btut_exc:
+                        logger.warning(
+                            "BTUT reduction failed (%s), proceeding with full dataset",
+                            btut_exc,
+                        )
+
                 _publish_progress(job_id, {
                     "job_id": job_id,
                     "status": "running",
@@ -178,11 +239,27 @@ async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
                         )
 
                 # Guaranteed last resort: simulate modules directly from entity data
-                if not training_result or not training_result.get("modules"):
-                    logger.info("No modules from training backends — running direct simulation")
+                modules_found = (
+                    isinstance(training_result, dict)
+                    and isinstance(training_result.get("modules"), list)
+                    and len(training_result["modules"]) > 0
+                )
+                if not modules_found:
+                    logger.info(
+                        "No modules from training backends (result_type=%s, modules_type=%s, count=%s) "
+                        "— running direct simulation",
+                        type(training_result).__name__,
+                        type(training_result.get("modules")).__name__ if isinstance(training_result, dict) else "N/A",
+                        len(training_result.get("modules", [])) if isinstance(training_result, dict) else "N/A",
+                    )
                     training_result = _simulate_modules(
                         entities, training_result or {}, merged_config
                     )
+
+                # Merge BTUT metrics into training result for storage
+                if btut_result is not None:
+                    training_result = training_result or {}
+                    training_result["btut_metrics"] = btut_result.to_training_log_entry()
 
                 # Step 5: Store results
                 await _store_results(db, dataset_id, job_id, training_result)
@@ -381,6 +458,7 @@ async def _store_results(db, dataset_id: str, job_id: str, result: dict) -> None
                 "final_loss": result.get("final_loss"),
                 "training_time_seconds": result.get("training_time_seconds"),
                 "device": result.get("device"),
+                **(result.get("btut_metrics", {}) or {}),
             },
         )
     )

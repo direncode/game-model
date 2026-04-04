@@ -10,6 +10,7 @@ import {
   Library,
   Plus,
   Cpu,
+  BrainCircuit,
   Shield,
   Users,
   FileText,
@@ -29,6 +30,7 @@ const exploreItems = [
 
 const engineItems = [
   { href: "/engine", label: "Engine Console", icon: Cpu },
+  { href: "/btut", label: "BTUT Intelligence", icon: BrainCircuit },
 ];
 
 const liveDataItems = [
