@@ -225,6 +225,36 @@ class ApiClient {
     return this.request<{ results: import("./types").BTUTSearchHit[]; total: number }>(`/api/v1/btut/search?${q}`);
   }
 
+  async getBTUTQuery(params: {
+    types?: string; min_composite?: number; max_composite?: number;
+    min_anomaly?: number; max_anomaly?: number;
+    min_flips?: number; max_flips?: number;
+    clusters?: string; has_ticker?: boolean;
+    sort_by?: string; sort_order?: string; limit?: number; offset?: number;
+  }) {
+    const q = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => { if (v !== undefined && v !== null && v !== "") q.set(k, String(v)); });
+    return this.request<{ results: import("./types").BTUTSurvivor[]; total: number; filters_applied: Record<string, any> }>(`/api/v1/btut/query?${q}`);
+  }
+
+  async getBTUTCompare(tickers: string[]) {
+    return this.request<{ entities: any[]; comparison: any }>(`/api/v1/btut/compare?tickers=${tickers.join(",")}`);
+  }
+
+  async getBTUTDistributions() {
+    return this.request<any>("/api/v1/btut/distributions");
+  }
+
+  async getBTUTAnomalies(topN = 20, type?: string) {
+    const q = new URLSearchParams({ top_n: String(topN) });
+    if (type) q.set("type", type);
+    return this.request<any[]>(`/api/v1/btut/anomalies?${q}`);
+  }
+
+  async getBTUTClusterDetail(clusterId: number) {
+    return this.request<any>(`/api/v1/btut/clusters/${clusterId}`);
+  }
+
 }
 
 export const api = new ApiClient(API_BASE);

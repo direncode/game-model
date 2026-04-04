@@ -449,6 +449,296 @@ class BTUTQueryEngine:
             "anomaly_story": record["anomaly_story"],
         }
 
+    # ------------------------------------------------------------------
+    # Advanced Query Methods
+    # ------------------------------------------------------------------
+
+    def query(
+        self,
+        types: list[str] | None = None,
+        min_composite: float | None = None,
+        max_composite: float | None = None,
+        min_anomaly: float | None = None,
+        max_anomaly: float | None = None,
+        min_flips: int | None = None,
+        max_flips: int | None = None,
+        clusters: list[int] | None = None,
+        has_ticker: bool | None = None,
+        sort_by: str = "composite",
+        sort_order: str = "desc",
+        limit: int = 100,
+        offset: int = 0,
+    ) -> dict:
+        """Advanced multi-filter query across all survivors.
+
+        Returns {results: [...], total: int, filters_applied: {...}}.
+        """
+        pool = list(self._survivors)
+        filters = {}
+
+        if types:
+            pool = [s for s in pool if s["type"] in types]
+            filters["types"] = types
+
+        if min_composite is not None:
+            pool = [s for s in pool if s["scores"].get("composite", 0) >= min_composite]
+            filters["min_composite"] = min_composite
+        if max_composite is not None:
+            pool = [s for s in pool if s["scores"].get("composite", 0) <= max_composite]
+            filters["max_composite"] = max_composite
+
+        if min_anomaly is not None:
+            pool = [s for s in pool if s["scores"].get("anomaly", 0) >= min_anomaly]
+            filters["min_anomaly"] = min_anomaly
+        if max_anomaly is not None:
+            pool = [s for s in pool if s["scores"].get("anomaly", 0) <= max_anomaly]
+            filters["max_anomaly"] = max_anomaly
+
+        if min_flips is not None:
+            pool = [s for s in pool if s["flips"] >= min_flips]
+            filters["min_flips"] = min_flips
+        if max_flips is not None:
+            pool = [s for s in pool if s["flips"] <= max_flips]
+            filters["max_flips"] = max_flips
+
+        if clusters:
+            pool = [s for s in pool if s["cluster"] in clusters]
+            filters["clusters"] = clusters
+
+        if has_ticker is True:
+            pool = [s for s in pool if s["ticker"]]
+            filters["has_ticker"] = True
+        elif has_ticker is False:
+            pool = [s for s in pool if not s["ticker"]]
+            filters["has_ticker"] = False
+
+        # Sort
+        reverse = sort_order == "desc"
+        if sort_by == "flips":
+            pool.sort(key=lambda x: x["flips"], reverse=reverse)
+        elif sort_by == "cluster":
+            pool.sort(key=lambda x: x["cluster"], reverse=reverse)
+        else:
+            pool.sort(key=lambda x: x["scores"].get(sort_by, 0), reverse=reverse)
+
+        total = len(pool)
+        page = pool[offset:offset + limit]
+
+        results = []
+        for i, sv in enumerate(page):
+            results.append({
+                "rank": offset + i + 1,
+                "name": sv["company_name"] or sv["name"],
+                "ticker": sv["ticker"],
+                "type": sv["type"],
+                "cik": sv["cik"],
+                "cluster": sv["cluster"],
+                "flips": sv["flips"],
+                "fingerprint": sv["fingerprint"],
+                "scores": sv["scores"],
+                "anomaly_story": sv["anomaly_story"],
+            })
+
+        return {"results": results, "total": total, "filters_applied": filters}
+
+    def compare(self, tickers: list[str]) -> dict:
+        """Side-by-side comparison of multiple entities."""
+        entities = []
+        for t in tickers:
+            record = self._by_ticker.get(t.upper())
+            if not record:
+                continue
+
+            cluster_members = self._by_cluster.get(record["cluster"], [])
+            fp = record["fingerprint"]
+
+            entities.append({
+                "ticker": record["ticker"],
+                "company_name": record["company_name"],
+                "type": record["type"],
+                "scores": record["scores"],
+                "flips": record["flips"],
+                "cluster": record["cluster"],
+                "cluster_size": len(cluster_members),
+                "fingerprint": fp,
+                "anomaly_story": record["anomaly_story"],
+            })
+
+        if not entities:
+            return {"entities": [], "comparison": {}}
+
+        # Compute comparison metrics
+        score_keys = ["composite", "diversity", "reconstruction", "anomaly"]
+        comparison = {}
+        for key in score_keys:
+            values = [e["scores"].get(key, 0) for e in entities]
+            comparison[key] = {
+                "values": {e["ticker"]: e["scores"].get(key, 0) for e in entities},
+                "max": max(values),
+                "min": min(values),
+                "spread": round(max(values) - min(values), 4),
+                "leader": entities[values.index(max(values))]["ticker"],
+            }
+
+        # Fingerprint similarity (Hamming distance)
+        if len(entities) >= 2:
+            fp_similarities = {}
+            for i in range(len(entities)):
+                for j in range(i + 1, len(entities)):
+                    fp_a = entities[i]["fingerprint"]
+                    fp_b = entities[j]["fingerprint"]
+                    min_len = min(len(fp_a), len(fp_b))
+                    if min_len > 0:
+                        matches = sum(1 for a, b in zip(fp_a[:min_len], fp_b[:min_len]) if a == b)
+                        similarity = round(matches / min_len, 3)
+                    else:
+                        similarity = 0
+                    pair_key = f"{entities[i]['ticker']}_vs_{entities[j]['ticker']}"
+                    fp_similarities[pair_key] = similarity
+            comparison["fingerprint_similarity"] = fp_similarities
+
+        # Same cluster?
+        cluster_ids = [e["cluster"] for e in entities]
+        comparison["same_cluster"] = len(set(cluster_ids)) == 1
+
+        return {"entities": entities, "comparison": comparison}
+
+    def distributions(self) -> dict:
+        """Score distributions and aggregate analytics across all survivors."""
+        if not self._survivors:
+            return {}
+
+        scores_by_axis = {"composite": [], "diversity": [], "reconstruction": [], "anomaly": []}
+        for sv in self._survivors:
+            for axis in scores_by_axis:
+                scores_by_axis[axis].append(sv["scores"].get(axis, 0))
+
+        import numpy as np
+
+        distributions = {}
+        for axis, values in scores_by_axis.items():
+            arr = np.array(values)
+            # Histogram: 10 bins from 0 to 1
+            hist, edges = np.histogram(arr, bins=10, range=(0, 1))
+            distributions[axis] = {
+                "mean": round(float(arr.mean()), 4),
+                "std": round(float(arr.std()), 4),
+                "min": round(float(arr.min()), 4),
+                "max": round(float(arr.max()), 4),
+                "p25": round(float(np.percentile(arr, 25)), 4),
+                "p50": round(float(np.percentile(arr, 50)), 4),
+                "p75": round(float(np.percentile(arr, 75)), 4),
+                "histogram": {
+                    "counts": hist.tolist(),
+                    "edges": [round(float(e), 2) for e in edges.tolist()],
+                },
+            }
+
+        # Flip distribution
+        flips = np.array([sv["flips"] for sv in self._survivors])
+        flip_hist, flip_edges = np.histogram(flips, bins=10, range=(0, 48))
+        distributions["flips"] = {
+            "mean": round(float(flips.mean()), 1),
+            "std": round(float(flips.std()), 1),
+            "min": int(flips.min()),
+            "max": int(flips.max()),
+            "histogram": {
+                "counts": flip_hist.tolist(),
+                "edges": [round(float(e), 1) for e in flip_edges.tolist()],
+            },
+        }
+
+        # Type breakdown with score stats
+        type_breakdown = {}
+        for t, members in self._by_type.items():
+            composites = [m["scores"].get("composite", 0) for m in members]
+            anomalies = [m["scores"].get("anomaly", 0) for m in members]
+            type_breakdown[t] = {
+                "count": len(members),
+                "pct": round(len(members) / max(len(self._survivors), 1) * 100, 1),
+                "composite_avg": round(sum(composites) / max(len(composites), 1), 4),
+                "anomaly_avg": round(sum(anomalies) / max(len(anomalies), 1), 4),
+            }
+
+        # Cluster size distribution
+        cluster_sizes = [len(members) for members in self._by_cluster.values()]
+        size_arr = np.array(cluster_sizes)
+        distributions["cluster_sizes"] = {
+            "total_clusters": len(cluster_sizes),
+            "mean_size": round(float(size_arr.mean()), 1),
+            "median_size": round(float(np.median(size_arr)), 1),
+            "max_size": int(size_arr.max()),
+            "singleton_clusters": int((size_arr == 1).sum()),
+        }
+
+        return {
+            "score_distributions": distributions,
+            "type_breakdown": type_breakdown,
+            "total_survivors": len(self._survivors),
+        }
+
+    def top_anomalies(self, n: int = 20, entity_type: str | None = None) -> list[dict]:
+        """Top N most anomalous entities ranked by anomaly score."""
+        pool = self._survivors
+        if entity_type:
+            pool = self._by_type.get(entity_type, [])
+
+        ranked = sorted(pool, key=lambda x: -x["scores"].get("anomaly", 0))
+
+        return [
+            {
+                "rank": i + 1,
+                "name": sv["company_name"] or sv["name"],
+                "ticker": sv["ticker"],
+                "type": sv["type"],
+                "anomaly_score": sv["scores"].get("anomaly", 0),
+                "composite_score": sv["scores"].get("composite", 0),
+                "cluster": sv["cluster"],
+                "flips": sv["flips"],
+                "anomaly_story": sv["anomaly_story"],
+            }
+            for i, sv in enumerate(ranked[:n])
+        ]
+
+    def cluster_detail(self, cluster_id: int) -> dict | None:
+        """Full detail for a specific cluster."""
+        members = self._by_cluster.get(cluster_id)
+        if not members:
+            return None
+
+        type_dist = defaultdict(int)
+        composites = []
+        anomalies = []
+        for m in members:
+            type_dist[m["type"]] += 1
+            composites.append(m["scores"].get("composite", 0))
+            anomalies.append(m["scores"].get("anomaly", 0))
+
+        sorted_members = sorted(members, key=lambda x: -x["scores"].get("composite", 0))
+
+        return {
+            "cluster_id": cluster_id,
+            "member_count": len(members),
+            "type_distribution": dict(type_dist),
+            "score_stats": {
+                "avg_composite": round(sum(composites) / len(composites), 4),
+                "max_composite": round(max(composites), 4),
+                "min_composite": round(min(composites), 4),
+                "avg_anomaly": round(sum(anomalies) / len(anomalies), 4),
+            },
+            "members": [
+                {
+                    "name": m["company_name"] or m["name"],
+                    "ticker": m["ticker"],
+                    "type": m["type"],
+                    "scores": m["scores"],
+                    "flips": m["flips"],
+                    "anomaly_story": m["anomaly_story"],
+                }
+                for m in sorted_members
+            ],
+        }
+
     def search(self, keyword: str, field: str | None = None) -> list[dict]:
         """Search across entities by keyword."""
         keyword_lower = keyword.lower()
