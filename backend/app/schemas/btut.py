@@ -23,6 +23,7 @@ class SurvivorResponse(BaseModel):
     fingerprint: str = ""
     scores: ScoresResponse = Field(default_factory=ScoresResponse)
     anomaly_story: str = ""
+    metadata: dict = Field(default_factory=dict)
 
 
 class SurvivorListResponse(BaseModel):
@@ -113,6 +114,7 @@ class CompanyAnalysisResponse(BaseModel):
     lattice_profile: LatticeProfile = Field(default_factory=LatticeProfile)
     cluster: ClusterInfo = Field(default_factory=ClusterInfo)
     attributes: dict = Field(default_factory=dict)
+    metadata: dict = Field(default_factory=dict)
 
 
 class ClusterResponse(BaseModel):
