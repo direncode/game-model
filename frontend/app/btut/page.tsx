@@ -83,10 +83,18 @@ function RoleBadge({ role }: { role: string }) {
   );
 }
 
-// ── Type Dot ────────────────────────────────────────────────────────
+// ── Type Dot (dynamic from dataset metadata) ───────────────────────
+const DEFAULT_TYPE_COLORS: Record<string, string> = {
+  company: "#00d4ff", filing: "#a371f7", financial_fact: "#3fb950",
+  paper: "#388bfd", author: "#f0883e", gene: "#3fb950", mesh_term: "#a371f7",
+  patent: "#00d4ff", inventor: "#f0883e", assignee: "#3fb950", cpc_class: "#a371f7",
+  country: "#00d4ff", commodity: "#3fb950", trade_flow: "#a371f7",
+  station: "#00d4ff", observation: "#f0883e", region: "#a371f7",
+};
+
 function TypeDot({ type }: { type: string }) {
-  const c = type === "company" ? "bg-li-cyan" : type === "filing" ? "bg-li-purple" : "bg-li-green";
-  return <div className={cn("w-2 h-2 rounded-full shrink-0", c)} title={type} />;
+  const hex = DEFAULT_TYPE_COLORS[type] || "#555";
+  return <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: hex }} title={type} />;
 }
 
 // ── Confidence Dot ──────────────────────────────────────────────────
@@ -379,6 +387,7 @@ function ScatterTooltip({ active, payload }: any) {
 // MAIN PAGE
 // =====================================================================
 export default function BTUTPage() {
+  const [datasetId, setDatasetId] = useState("edgar");
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [sortCol, setSortCol] = useState("composite");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
@@ -386,15 +395,21 @@ export default function BTUTPage() {
   const [filterRole, setFilterRole] = useState("");
   const [clusterFilter, setClusterFilter] = useState<number | null>(null);
 
-  // Data queries
-  const statusQ = useQuery({ queryKey: ["btut-status"], queryFn: () => api.getBTUTStatus() });
+  // Datasets list
+  const datasetsQ = useQuery({
+    queryKey: ["btut-datasets"],
+    queryFn: () => api.getBTUTDatasets(),
+  });
+
+  // Data queries (keyed by dataset)
+  const statusQ = useQuery({ queryKey: ["btut-status", datasetId], queryFn: () => api.getBTUTStatus(datasetId) });
   const survivorsQ = useQuery({
-    queryKey: ["btut-survivors-all"],
-    queryFn: () => api.getBTUTSurvivors({ top_n: 300 }),
+    queryKey: ["btut-survivors-all", datasetId],
+    queryFn: () => api.getBTUTSurvivors({ top_n: 300, dataset: datasetId }),
   });
   const clustersQ = useQuery({
-    queryKey: ["btut-clusters-all"],
-    queryFn: () => api.getBTUTClusters({ min_size: 1, top_n: 100 }),
+    queryKey: ["btut-clusters-all", datasetId],
+    queryFn: () => api.getBTUTClusters({ min_size: 1, top_n: 100, dataset: datasetId }),
   });
 
   const status = statusQ.data;
@@ -468,6 +483,19 @@ export default function BTUTPage() {
       <main className="ml-60 pt-14">
         {/* ═══════════════ STATUS BAR ═══════════════ */}
         <div className="border-b border-li-gray-900 bg-li-black flex items-center justify-between px-4">
+          {/* Dataset switcher */}
+          <select
+            value={datasetId}
+            onChange={(e) => { setDatasetId(e.target.value); setSelectedTicker(null); setFilterType(""); setFilterRole(""); setClusterFilter(null); }}
+            className="bg-li-black border border-li-gray-800 rounded px-2 py-1 text-xs font-mono text-li-cyan mr-3 focus:outline-none focus:border-li-cyan/50"
+          >
+            {(datasetsQ.data || []).map((ds) => (
+              <option key={ds.id} value={ds.id} disabled={!ds.has_results}>
+                {ds.name} {ds.has_results ? "" : "(no data)"}
+              </option>
+            ))}
+            {!datasetsQ.data && <option value="edgar">SEC EDGAR</option>}
+          </select>
           <div className="flex items-center gap-0.5 divide-x divide-li-gray-800">
             {status && [
               { l: "Entities", v: status.total_entities },

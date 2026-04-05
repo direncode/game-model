@@ -194,33 +194,33 @@ class ApiClient {
 
   // ── BTUT Intelligence ─────────────────────────────────────────────
 
-  async getBTUTStatus() {
-    return this.request<import("./types").BTUTStatus>("/api/v1/btut/status");
+  async getBTUTStatus(dataset = "edgar") {
+    return this.request<import("./types").BTUTStatus>(`/api/v1/btut/status?dataset=${dataset}`);
   }
 
-  async getBTUTSurvivors(params?: { top_n?: number; type?: string; sort_by?: string }) {
+  async getBTUTSurvivors(params?: { top_n?: number; type?: string; sort_by?: string; dataset?: string }) {
     const q = new URLSearchParams();
+    q.set("dataset", params?.dataset || "edgar");
     if (params?.top_n) q.set("top_n", String(params.top_n));
     if (params?.type) q.set("type", params.type);
     if (params?.sort_by) q.set("sort_by", params.sort_by);
-    const qs = q.toString() ? `?${q}` : "";
-    return this.request<{ survivors: import("./types").BTUTSurvivor[]; total: number }>(`/api/v1/btut/survivors${qs}`);
+    return this.request<{ survivors: import("./types").BTUTSurvivor[]; total: number }>(`/api/v1/btut/survivors?${q}`);
   }
 
-  async getBTUTAnalysis(ticker: string) {
-    return this.request<import("./types").BTUTAnalysis>(`/api/v1/btut/analyze/${encodeURIComponent(ticker)}`);
+  async getBTUTAnalysis(ticker: string, dataset = "edgar") {
+    return this.request<import("./types").BTUTAnalysis>(`/api/v1/btut/analyze/${encodeURIComponent(ticker)}?dataset=${dataset}`);
   }
 
-  async getBTUTClusters(params?: { min_size?: number; top_n?: number }) {
+  async getBTUTClusters(params?: { min_size?: number; top_n?: number; dataset?: string }) {
     const q = new URLSearchParams();
+    q.set("dataset", params?.dataset || "edgar");
     if (params?.min_size) q.set("min_size", String(params.min_size));
     if (params?.top_n) q.set("top_n", String(params.top_n));
-    const qs = q.toString() ? `?${q}` : "";
-    return this.request<{ clusters: import("./types").BTUTCluster[]; total: number }>(`/api/v1/btut/clusters${qs}`);
+    return this.request<{ clusters: import("./types").BTUTCluster[]; total: number }>(`/api/v1/btut/clusters?${q}`);
   }
 
-  async getBTUTSearch(keyword: string, field?: string) {
-    const q = new URLSearchParams({ q: keyword });
+  async getBTUTSearch(keyword: string, field?: string, dataset = "edgar") {
+    const q = new URLSearchParams({ q: keyword, dataset });
     if (field) q.set("field", field);
     return this.request<{ results: import("./types").BTUTSearchHit[]; total: number }>(`/api/v1/btut/search?${q}`);
   }
@@ -251,8 +251,12 @@ class ApiClient {
     return this.request<any[]>(`/api/v1/btut/anomalies?${q}`);
   }
 
-  async getBTUTClusterDetail(clusterId: number) {
-    return this.request<any>(`/api/v1/btut/clusters/${clusterId}`);
+  async getBTUTClusterDetail(clusterId: number, dataset = "edgar") {
+    return this.request<any>(`/api/v1/btut/clusters/${clusterId}?dataset=${dataset}`);
+  }
+
+  async getBTUTDatasets() {
+    return this.request<Array<{ id: string; name: string; description: string; entity_types: Array<{ name: string; color: string }>; lookup_field: string; lookup_label: string; has_results: boolean }>>("/api/v1/btut/datasets");
   }
 
 }

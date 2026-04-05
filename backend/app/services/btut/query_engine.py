@@ -15,28 +15,27 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Search multiple locations for result files (local dev + Docker container)
+
 def _find_file(filename: str) -> str:
     """Search common locations for a BTUT result file."""
     candidates = [
-        # Docker container: /app/data/
         Path("/app/data") / filename,
-        # Repo root (local dev): 4 levels up from this file
         Path(__file__).resolve().parents[4] / "scripts" / filename,
-        # Repo root (local dev): 3 levels up (if running from backend/)
+        Path(__file__).resolve().parents[4] / "scripts" / "results" / filename,
         Path(__file__).resolve().parents[3] / "scripts" / filename,
-        # Current working directory
         Path.cwd() / "scripts" / filename,
+        Path.cwd() / "scripts" / "results" / filename,
         Path.cwd() / filename,
     ]
     for p in candidates:
         if p.exists():
             return str(p)
-    # Return first candidate as default (will log warning if missing)
     return str(candidates[0])
 
-_DEFAULT_RESULT = _find_file("edgar_superpower_result.json")
-_DEFAULT_CACHE = _find_file("edgar_cache.json")
+
+def _result_file_for_dataset(dataset_id: str) -> str:
+    """Get the result file path for a dataset."""
+    return _find_file(f"{dataset_id}_superpower_result.json") if dataset_id != "edgar" else _find_file("edgar_superpower_result.json")
 
 
 class BTUTQueryEngine:
@@ -44,15 +43,27 @@ class BTUTQueryEngine:
 
     Loads the superpower result JSON at init, parses all survivors,
     builds in-memory indexes for O(1) lookups by ticker/name/cluster/type.
+    Supports multiple datasets via the adapter pattern.
     """
 
     def __init__(
         self,
+        dataset_id: str = "edgar",
         result_path: str | None = None,
         cache_path: str | None = None,
     ):
-        self._result_path = result_path or str(_DEFAULT_RESULT)
-        self._cache_path = cache_path or str(_DEFAULT_CACHE)
+        self._dataset_id = dataset_id
+        self._result_path = result_path or _result_file_for_dataset(dataset_id)
+        self._cache_path = cache_path or _find_file("edgar_cache.json")
+
+        # Load adapter for domain-specific logic
+        try:
+            from .adapters import get_adapter
+            self._adapter = get_adapter(dataset_id)
+            self._meta = self._adapter.get_meta()
+        except (ImportError, ValueError):
+            self._adapter = None
+            self._meta = None
 
         self._summary: dict = {}
         self._survivors: list[dict] = []
@@ -88,12 +99,20 @@ class BTUTQueryEngine:
             else:
                 attrs = attrs_raw
 
+            # Use adapter for display field mapping
+            if self._adapter:
+                display = self._adapter.get_display_fields({"type": entity.get("type", ""), "attributes": attrs})
+            else:
+                display = {"primary": attrs.get("company_name", ""), "secondary": attrs.get("ticker", "")}
+
+            lookup_field = self._meta.lookup_field if self._meta else "ticker"
+
             record = {
                 "name": entity.get("name", ""),
                 "type": entity.get("type", ""),
-                "ticker": attrs.get("ticker", ""),
-                "company_name": attrs.get("company_name", ""),
-                "cik": attrs.get("cik", ""),
+                "ticker": attrs.get(lookup_field, "") or attrs.get("ticker", ""),
+                "company_name": display.get("primary", "") or attrs.get("company_name", ""),
+                "cik": attrs.get("cik", "") or attrs.get(lookup_field, ""),
                 "attributes": attrs,
                 "cluster": s.get("cluster", -1),
                 "fingerprint": s.get("fingerprint_48bit", ""),
@@ -364,36 +383,15 @@ class BTUTQueryEngine:
                 "severity": "high",
             })
 
-        # Type-specific tags
-        if entity_type == "company":
-            cik = sv.get("cik", "")
-            if cik and int(cik) > 1900000:
-                anomaly_tags.append({
-                    "tag": "RECENT_CIK",
-                    "description": f"CIK {cik} is very recent (post-2022). Likely a SPAC, IPO, or newly formed entity.",
-                    "severity": "info",
-                })
-            elif cik and int(cik) < 100000:
-                anomaly_tags.append({
-                    "tag": "LEGACY_CIK",
-                    "description": f"CIK {cik} dates to the early SEC era. Long-lived entity with extensive filing history.",
-                    "severity": "info",
-                })
-
-        if entity_type == "filing":
-            form = sv["attributes"].get("form", "")
-            if form in ("4", "3", "5"):
-                anomaly_tags.append({
-                    "tag": "INSIDER_FILING",
-                    "description": f"Form {form} insider transaction. Structural outlier filings often indicate unusual insider activity.",
-                    "severity": "medium",
-                })
-            elif form in ("8-K",):
-                anomaly_tags.append({
-                    "tag": "MATERIAL_EVENT",
-                    "description": "Form 8-K material event filing. Structurally anomalous 8-Ks often signal significant corporate events.",
-                    "severity": "medium",
-                })
+        # Domain-specific tags from adapter
+        if self._adapter:
+            try:
+                domain_tags = self._adapter.get_anomaly_tags(
+                    sv, scores, len(cluster_members), flips,
+                )
+                anomaly_tags.extend(domain_tags)
+            except Exception:
+                pass  # Adapter tag failure shouldn't break enrichment
 
         meta["anomaly_taxonomy"] = anomaly_tags
 
@@ -447,26 +445,16 @@ class BTUTQueryEngine:
         }
 
         # ── 9. Data Quality Signals ──────────────────────────────────
-        attrs = sv.get("attributes", {})
-        quality_signals = []
+        if self._adapter:
+            quality_signals = self._adapter.get_data_quality_signals(sv)
+        else:
+            attrs = sv.get("attributes", {})
+            quality_signals = []
+            if entity_type == "company" and not attrs.get("ticker"):
+                quality_signals.append("MISSING_TICKER: No ticker symbol")
+            quality_signals = quality_signals or ["CLEAN: All expected attributes present"]
 
-        if entity_type == "company":
-            if not attrs.get("ticker"):
-                quality_signals.append("MISSING_TICKER: No ticker symbol -- may be OTC, foreign, or delisted")
-            if attrs.get("cik") and not attrs.get("company_name"):
-                quality_signals.append("MISSING_NAME: Has CIK but no company name in attributes")
-
-        if entity_type == "filing":
-            if not attrs.get("form"):
-                quality_signals.append("MISSING_FORM_TYPE: Filing without form type classification")
-            if not attrs.get("date"):
-                quality_signals.append("MISSING_DATE: Filing without date stamp")
-
-        if entity_type == "financial_fact":
-            if not attrs.get("concept"):
-                quality_signals.append("MISSING_CONCEPT: Financial fact without XBRL concept name")
-
-        meta["data_quality"] = quality_signals if quality_signals else ["CLEAN: All expected attributes present"]
+        meta["data_quality"] = quality_signals
 
         # ── 10. Confidence Assessment ────────────────────────────────
         confidence_factors = []
@@ -608,6 +596,8 @@ class BTUTQueryEngine:
         """Pipeline status and key metrics."""
         s = self._summary
         return {
+            "dataset_id": self._dataset_id,
+            "dataset_name": self._meta.display_name if self._meta else self._dataset_id,
             "pipeline_status": "ready" if self._survivors else "no_data",
             "total_entities": s.get("total_entities", 0),
             "total_clusters": s.get("clusters", 0),
@@ -1200,16 +1190,20 @@ class BTUTQueryEngine:
         return results
 
 
-# Singleton instance
-_engine: BTUTQueryEngine | None = None
+# Multi-dataset engine registry
+_engines: dict[str, BTUTQueryEngine] = {}
 
 
 def get_query_engine(
+    dataset_id: str = "edgar",
     result_path: str | None = None,
     cache_path: str | None = None,
 ) -> BTUTQueryEngine:
-    """Get or create the singleton query engine."""
-    global _engine
-    if _engine is None:
-        _engine = BTUTQueryEngine(result_path, cache_path)
-    return _engine
+    """Get or create a query engine for a specific dataset."""
+    if dataset_id not in _engines:
+        _engines[dataset_id] = BTUTQueryEngine(
+            dataset_id=dataset_id,
+            result_path=result_path,
+            cache_path=cache_path,
+        )
+    return _engines[dataset_id]
