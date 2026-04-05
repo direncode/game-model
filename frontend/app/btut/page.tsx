@@ -1,1092 +1,630 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Sidebar } from "@/components/Sidebar";
 import { Navbar } from "@/components/Navbar";
-import { StatCard } from "@/components/StatCard";
 import { cn } from "@/lib/utils";
 import {
-  BrainCircuit,
-  Activity,
-  Layers,
-  Fingerprint,
-  Users,
-  Search,
-  ChevronRight,
-  ArrowUpDown,
-  Zap,
-  Target,
-  Gauge,
-  X,
-  SlidersHorizontal,
-  BarChart3,
-  GitCompare,
-  AlertTriangle,
-  Terminal,
-  Filter,
-} from "lucide-react";
-import type {
-  BTUTStatus,
-  BTUTSurvivor,
-  BTUTAnalysis,
-  BTUTCluster,
-  BTUTSearchHit,
-} from "@/lib/types";
+  ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
+} from "recharts";
+import type { BTUTSurvivor, BTUTAnalysis } from "@/lib/types";
 
-// ── Tab definitions ─────────────────────────────────────────────────
-type Tab = "overview" | "survivors" | "query" | "clusters" | "compare" | "anomalies" | "search";
+// =====================================================================
+// SUB-COMPONENTS
+// =====================================================================
 
-const tabs: Array<{ id: Tab; label: string; icon: any }> = [
-  { id: "overview", label: "Overview", icon: Activity },
-  { id: "survivors", label: "Survivors", icon: Target },
-  { id: "query", label: "Query", icon: SlidersHorizontal },
-  { id: "clusters", label: "Clusters", icon: Layers },
-  { id: "compare", label: "Compare", icon: GitCompare },
-  { id: "anomalies", label: "Anomalies", icon: AlertTriangle },
-  { id: "search", label: "Search", icon: Search },
-];
+// ── Radial Gauge (SVG) ──────────────────────────────────────────────
+function Gauge({ value, label, color, max = 1 }: { value: number; label: string; color: string; max?: number }) {
+  const pct = Math.min(value / max, 1);
+  const r = 32;
+  const circ = 2 * Math.PI * r;
+  const dash = circ * 0.75; // 270 degree arc
+  const offset = dash * (1 - pct);
 
-// ── Score bar component ─────────────────────────────────────────────
-function ScoreBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <div className="space-y-1">
-      <div className="flex justify-between text-xs">
-        <span className="text-li-text-muted">{label}</span>
-        <span className="font-mono text-li-text-primary">{(value * 100).toFixed(1)}%</span>
-      </div>
-      <div className="h-1.5 bg-li-gray-900 rounded-full overflow-hidden">
-        <div className={cn("h-full rounded-full transition-all", color)} style={{ width: `${value * 100}%` }} />
-      </div>
+    <div className="flex flex-col items-center gap-1">
+      <svg width="80" height="52" viewBox="0 0 80 52">
+        <circle cx="40" cy="40" r={r} fill="none" stroke="#1a1a1a" strokeWidth="5"
+          strokeDasharray={`${dash} ${circ}`} strokeDashoffset="0"
+          transform="rotate(135 40 40)" strokeLinecap="round" />
+        <circle cx="40" cy="40" r={r} fill="none" stroke={color} strokeWidth="5"
+          strokeDasharray={`${dash} ${circ}`} strokeDashoffset={offset}
+          transform="rotate(135 40 40)" strokeLinecap="round"
+          className="transition-all duration-1000" />
+        <text x="40" y="38" textAnchor="middle" fill="white" fontSize="14" fontFamily="JetBrains Mono, monospace" fontWeight="bold">
+          {(value * 100).toFixed(0)}
+        </text>
+      </svg>
+      <span className="text-[9px] uppercase tracking-widest text-li-text-muted">{label}</span>
     </div>
   );
 }
 
-// ── Fingerprint visualizer ──────────────────────────────────────────
-function FingerprintViz({ fingerprint }: { fingerprint: string }) {
+// ── Micro Score Bar (inline in table) ───────────────────────────────
+function MicroBar({ value, color }: { value: number; color: string }) {
+  return (
+    <div className="flex items-center gap-1.5 w-20">
+      <div className="flex-1 h-1 bg-li-gray-900 rounded-full overflow-hidden">
+        <div className={cn("h-full rounded-full", color)} style={{ width: `${value * 100}%` }} />
+      </div>
+      <span className="text-[10px] font-mono text-li-text-primary w-7 text-right">{(value * 100).toFixed(0)}</span>
+    </div>
+  );
+}
+
+// ── Fingerprint (compact) ───────────────────────────────────────────
+function FP({ fp }: { fp: string }) {
   return (
     <div className="flex gap-[1px] items-center">
-      {fingerprint.split("").map((bit, i) => (
-        <div
-          key={i}
-          className={cn(
-            "w-[6px] h-4 rounded-[1px] transition-colors",
-            bit === "1" ? "bg-li-cyan" : "bg-li-gray-800",
-            i === 15 || i === 31 ? "ml-1" : "",
-          )}
-          title={`Rotation ${i + 1}: ${bit === "1" ? "flipped" : "stable"}`}
-        />
+      {fp.split("").map((b, i) => (
+        <div key={i} className={cn("w-[3px] h-3 rounded-[0.5px]", b === "1" ? "bg-li-cyan/70" : "bg-li-gray-800",
+          i === 15 || i === 31 ? "ml-[2px]" : "")} />
       ))}
     </div>
   );
 }
 
-// ── Type badge ──────────────────────────────────────────────────────
-function TypeBadge({ type }: { type: string }) {
+// ── Role Badge ──────────────────────────────────────────────────────
+function RoleBadge({ role }: { role: string }) {
   const colors: Record<string, string> = {
-    company: "bg-li-cyan/10 text-li-cyan border-li-cyan/20",
-    filing: "bg-li-purple/10 text-li-purple border-li-purple/20",
-    financial_fact: "bg-li-green/10 text-li-green border-li-green/20",
+    PIONEER: "bg-li-red/20 text-li-red border-li-red/30",
+    ISOLATE: "bg-li-purple/20 text-li-purple border-li-purple/30",
+    ANCHOR: "bg-li-green/20 text-li-green border-li-green/30",
+    BOUNDARY: "bg-li-yellow/20 text-li-yellow border-li-yellow/30",
+    HUB: "bg-li-cyan/20 text-li-cyan border-li-cyan/30",
+    BRIDGE: "bg-li-blue/20 text-li-blue border-li-blue/30",
+    MEMBER: "bg-li-gray-800 text-li-text-muted border-li-gray-700",
   };
   return (
-    <span className={cn("px-2 py-0.5 rounded text-[10px] font-mono uppercase border", colors[type] || "bg-li-gray-800 text-li-text-muted border-li-gray-700")}>
-      {type.replace("_", " ")}
-    </span>
+    <span className={cn("px-1.5 py-0.5 rounded text-[8px] font-mono font-bold border leading-none",
+      colors[role] || colors.MEMBER)}>{role}</span>
   );
 }
 
-// ── Survivor detail panel ───────────────────────────────────────────
-function SurvivorDetail({ ticker, onClose }: { ticker: string; onClose: () => void }) {
-  const { data, isLoading } = useQuery({
+// ── Type Dot ────────────────────────────────────────────────────────
+function TypeDot({ type }: { type: string }) {
+  const c = type === "company" ? "bg-li-cyan" : type === "filing" ? "bg-li-purple" : "bg-li-green";
+  return <div className={cn("w-2 h-2 rounded-full shrink-0", c)} title={type} />;
+}
+
+// ── Confidence Dot ──────────────────────────────────────────────────
+function ConfDot({ level }: { level: string }) {
+  const c = level === "very_high" ? "bg-li-green" : level === "high" ? "bg-li-cyan" :
+    level === "medium" ? "bg-li-yellow" : "bg-li-red";
+  return <div className={cn("w-2 h-2 rounded-full shrink-0", c)} title={level} />;
+}
+
+// ── Status Cell ─────────────────────────────────────────────────────
+function StatusCell({ label, value, unit }: { label: string; value: string | number; unit?: string }) {
+  return (
+    <div className="flex flex-col items-center px-3 py-1.5">
+      <span className="text-[8px] uppercase tracking-[0.12em] text-li-text-muted">{label}</span>
+      <span className="text-sm font-mono font-bold text-li-cyan">{typeof value === "number" ? value.toLocaleString() : value}</span>
+      {unit && <span className="text-[8px] text-li-text-muted">{unit}</span>}
+    </div>
+  );
+}
+
+// ── Severity Tag ────────────────────────────────────────────────────
+function SeverityTag({ tag, severity, desc }: { tag: string; severity: string; desc: string }) {
+  const c = severity === "critical" ? "bg-li-red/15 text-li-red border-li-red/20" :
+    severity === "high" ? "bg-li-yellow/15 text-li-yellow border-li-yellow/20" :
+    severity === "medium" ? "bg-li-purple/15 text-li-purple border-li-purple/20" :
+    "bg-li-gray-900 text-li-text-muted border-li-gray-800";
+  return (
+    <div className={cn("flex items-start gap-2 rounded px-2 py-1 text-[10px] border", c)}>
+      <span className="font-mono font-bold shrink-0">{tag}</span>
+      <span className="opacity-80">{desc}</span>
+    </div>
+  );
+}
+
+// =====================================================================
+// DOSSIER PANEL
+// =====================================================================
+function Dossier({ ticker, onClose }: { ticker: string; onClose: () => void }) {
+  const { data } = useQuery({
     queryKey: ["btut-analyze", ticker],
     queryFn: () => api.getBTUTAnalysis(ticker),
     enabled: !!ticker,
   });
 
-  if (isLoading) {
-    return (
-      <div className="li-card p-6 space-y-4 animate-pulse">
-        <div className="h-6 bg-li-gray-800 rounded w-1/3" />
-        <div className="h-4 bg-li-gray-800 rounded w-2/3" />
-        <div className="h-20 bg-li-gray-800 rounded" />
-      </div>
-    );
-  }
+  if (!data) return (
+    <div className="col-span-full lg:col-span-7 border border-li-gray-800 rounded bg-li-surface p-4 animate-pulse">
+      <div className="h-4 bg-li-gray-800 rounded w-1/3" />
+    </div>
+  );
 
-  if (!data) return null;
+  const a = data as BTUTAnalysis & { metadata?: any };
+  const m = a.metadata || {};
 
-  const a = data as BTUTAnalysis;
   return (
-    <div className="li-card p-6 space-y-6 border border-li-cyan/20">
+    <div className="col-span-full lg:col-span-7 border border-li-cyan/20 rounded bg-li-surface overflow-hidden">
       {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <div className="flex items-center gap-3">
-            <h2 className="text-xl font-display text-li-text-primary">{a.company_name}</h2>
-            <span className="font-mono text-li-cyan text-sm">{a.ticker}</span>
-            <TypeBadge type={a.entity_type} />
-          </div>
-          <p className="text-xs text-li-text-muted font-mono mt-1">CIK {a.cik}</p>
+      <div className="flex items-center justify-between px-4 py-2 border-b border-li-gray-800 bg-li-black">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-li-cyan text-lg font-bold">{a.ticker}</span>
+          <span className="text-sm text-li-text-secondary">{a.company_name}</span>
+          <span className="text-[10px] font-mono text-li-text-muted">CIK {a.cik}</span>
+          {m.structural_role && <RoleBadge role={m.structural_role.role} />}
         </div>
-        <button onClick={onClose} className="p-1 rounded hover:bg-li-gray-800 text-li-text-muted">
-          <X className="w-4 h-4" />
-        </button>
+        <button onClick={onClose} className="text-li-text-muted hover:text-white text-xs px-2 py-1">ESC</button>
       </div>
 
-      {/* Scores */}
-      <div className="grid grid-cols-4 gap-4">
-        <div className="text-center">
-          <div className="text-2xl font-mono font-bold text-li-cyan">{(a.scores.composite * 100).toFixed(1)}</div>
-          <div className="text-[10px] uppercase tracking-wider text-li-text-muted">Composite</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-mono font-bold text-li-green">{(a.scores.diversity * 100).toFixed(1)}</div>
-          <div className="text-[10px] uppercase tracking-wider text-li-text-muted">Diversity</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-mono font-bold text-li-blue">{(a.scores.reconstruction * 100).toFixed(1)}</div>
-          <div className="text-[10px] uppercase tracking-wider text-li-text-muted">Reconstruction</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-mono font-bold text-li-red">{(a.scores.anomaly * 100).toFixed(1)}</div>
-          <div className="text-[10px] uppercase tracking-wider text-li-text-muted">Anomaly</div>
-        </div>
-      </div>
-
-      {/* Lattice Profile */}
-      <div className="space-y-3">
-        <h3 className="text-xs uppercase tracking-wider text-li-text-muted">48-bit Lattice Fingerprint</h3>
-        <FingerprintViz fingerprint={a.lattice_profile.fingerprint_48bit} />
-        <div className="grid grid-cols-3 gap-3 text-xs">
-          <div className="bg-li-gray-900 rounded p-2">
-            <div className="text-li-text-muted mb-1">Coarse (4-bin)</div>
-            <div className="font-mono text-li-text-secondary">{a.lattice_profile.coarse_resolution}</div>
-          </div>
-          <div className="bg-li-gray-900 rounded p-2">
-            <div className="text-li-text-muted mb-1">Medium (8-bin)</div>
-            <div className="font-mono text-li-text-secondary">{a.lattice_profile.medium_resolution}</div>
-          </div>
-          <div className="bg-li-gray-900 rounded p-2">
-            <div className="text-li-text-muted mb-1">Fine (16-bin)</div>
-            <div className="font-mono text-li-text-secondary">{a.lattice_profile.fine_resolution}</div>
-          </div>
-        </div>
-        <div className="text-xs text-li-text-muted">
-          {a.lattice_profile.total_flips}/{a.lattice_profile.total_rotations} flips ({(a.lattice_profile.flip_rate * 100).toFixed(0)}%)
-        </div>
-      </div>
-
-      {/* Cluster Peers */}
-      {a.cluster.peers.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-xs uppercase tracking-wider text-li-text-muted">
-            Cluster {a.cluster.id} ({a.cluster.total_members} members)
-          </h3>
-          <div className="space-y-1">
-            {a.cluster.peers.map((p, i) => (
-              <div key={i} className="flex items-center justify-between text-xs bg-li-gray-900 rounded px-3 py-1.5">
-                <div className="flex items-center gap-2">
-                  {p.ticker && <span className="font-mono text-li-cyan">{p.ticker}</span>}
-                  <span className="text-li-text-secondary">{p.name}</span>
-                  <TypeBadge type={p.type} />
+      <div className="p-4 grid grid-cols-2 gap-4 max-h-[50vh] overflow-y-auto">
+        {/* Left: Scores + Tags */}
+        <div className="space-y-3">
+          {/* Score Cards */}
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { k: "composite", c: "#00d4ff" }, { k: "diversity", c: "#3fb950" },
+              { k: "reconstruction", c: "#388bfd" }, { k: "anomaly", c: "#f85149" },
+            ].map(({ k, c }) => (
+              <div key={k} className="bg-li-gray-900 rounded p-2 text-center">
+                <div className="text-lg font-mono font-bold" style={{ color: c }}>
+                  {((a.scores as any)[k] * 100).toFixed(1)}
                 </div>
-                <span className="font-mono text-li-text-muted">{p.composite.toFixed(4)}</span>
+                <div className="text-[8px] uppercase tracking-wider text-li-text-muted">{k}</div>
+                {m.signal_decomposition?.[k] && (
+                  <div className="text-[8px] font-mono text-li-text-muted mt-0.5">
+                    #{m.signal_decomposition[k].rank_in_axis} ({m.signal_decomposition[k].percentile}%ile)
+                  </div>
+                )}
               </div>
             ))}
           </div>
-        </div>
-      )}
 
-      {/* Anomaly Story */}
-      <div className="bg-li-red/5 border border-li-red/10 rounded-lg p-4">
-        <h3 className="text-xs uppercase tracking-wider text-li-red mb-2">Anomaly Narrative</h3>
-        <p className="text-sm text-li-text-secondary leading-relaxed">{a.anomaly_story}</p>
-      </div>
+          {/* Role description */}
+          {m.structural_role && (
+            <p className="text-[10px] text-li-text-secondary leading-relaxed bg-li-gray-900 rounded px-3 py-2">
+              {m.structural_role.description}
+            </p>
+          )}
 
-      {/* ── ENRICHED METADATA ──────────────────────────────── */}
-      {(a as any).metadata && (() => {
-        const m = (a as any).metadata;
-        return (
-          <>
-            {/* Structural Role */}
-            {m.structural_role && (
-              <div className="flex items-center gap-3 bg-li-cyan/5 border border-li-cyan/10 rounded-lg p-4">
-                <span className="px-2 py-1 rounded text-[10px] font-mono font-bold bg-li-cyan/20 text-li-cyan border border-li-cyan/30">
-                  {m.structural_role.role}
-                </span>
-                <span className="text-sm text-li-text-secondary">{m.structural_role.description}</span>
-              </div>
-            )}
-
-            {/* Signal Decomposition */}
-            {m.signal_decomposition && (
-              <div className="space-y-2">
-                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Signal Decomposition</h3>
-                <div className="grid grid-cols-3 gap-3">
-                  {Object.entries(m.signal_decomposition).map(([axis, d]: [string, any]) => (
-                    <div key={axis} className="bg-li-gray-900 rounded-lg p-3 space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-li-text-muted capitalize">{axis}</span>
-                        <span className="text-[10px] font-mono text-li-text-muted">#{d.rank_in_axis} ({d.percentile}%ile)</span>
-                      </div>
-                      <div className="text-lg font-mono font-bold text-li-text-primary">{(d.raw_score * 100).toFixed(1)}</div>
-                      <div className="text-[10px] text-li-text-muted">
-                        {d.pct_of_composite}% of composite | weight {(d.weight * 100).toFixed(0)}%
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Anomaly Tags */}
-            {m.anomaly_taxonomy?.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Anomaly Tags</h3>
-                <div className="space-y-1">
-                  {m.anomaly_taxonomy.map((tag: any, i: number) => (
-                    <div key={i} className={cn(
-                      "flex items-start gap-3 rounded-lg p-3 text-xs",
-                      tag.severity === "critical" ? "bg-li-red/10 border border-li-red/20" :
-                      tag.severity === "high" ? "bg-li-yellow/10 border border-li-yellow/20" :
-                      tag.severity === "medium" ? "bg-li-purple/10 border border-li-purple/20" :
-                      "bg-li-gray-900 border border-li-gray-800"
-                    )}>
-                      <span className={cn(
-                        "px-1.5 py-0.5 rounded font-mono text-[9px] font-bold shrink-0",
-                        tag.severity === "critical" ? "bg-li-red/20 text-li-red" :
-                        tag.severity === "high" ? "bg-li-yellow/20 text-li-yellow" :
-                        tag.severity === "medium" ? "bg-li-purple/20 text-li-purple" :
-                        "bg-li-gray-800 text-li-text-muted"
-                      )}>{tag.tag}</span>
-                      <span className="text-li-text-secondary">{tag.description}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Fingerprint Analytics */}
-            {m.fingerprint_analytics?.total_bits && (
-              <div className="space-y-2">
-                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Fingerprint Analytics</h3>
-                <div className="grid grid-cols-4 gap-3">
-                  <div className="bg-li-gray-900 rounded p-2 text-center">
-                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.entropy.toFixed(3)}</div>
-                    <div className="text-[9px] text-li-text-muted">Entropy</div>
-                  </div>
-                  <div className="bg-li-gray-900 rounded p-2 text-center">
-                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.transitions}</div>
-                    <div className="text-[9px] text-li-text-muted">Transitions</div>
-                  </div>
-                  <div className="bg-li-gray-900 rounded p-2 text-center">
-                    <div className="text-sm font-mono text-li-text-primary">{m.fingerprint_analytics.avg_run_length}</div>
-                    <div className="text-[9px] text-li-text-muted">Avg Run</div>
-                  </div>
-                  <div className="bg-li-gray-900 rounded p-2 text-center">
-                    <div className="text-sm font-mono text-li-text-primary">{(m.fingerprint_analytics.flip_ratio * 100).toFixed(0)}%</div>
-                    <div className="text-[9px] text-li-text-muted">Flip Ratio</div>
-                  </div>
-                </div>
-                <p className="text-[10px] text-li-text-muted italic">{m.fingerprint_analytics.entropy_interpretation}</p>
-              </div>
-            )}
-
-            {/* Peer Network */}
-            {m.peer_network?.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Nearest Structural Peers</h3>
-                <div className="space-y-1">
-                  {m.peer_network.map((peer: any, i: number) => (
-                    <div key={i} className="flex items-center justify-between bg-li-gray-900 rounded px-3 py-1.5 text-xs">
-                      <div className="flex items-center gap-2">
-                        {peer.ticker && <span className="font-mono text-li-cyan">{peer.ticker}</span>}
-                        <span className="text-li-text-secondary">{peer.name}</span>
-                        <TypeBadge type={peer.type} />
-                        {peer.shared_cluster && <span className="text-[9px] text-li-green">same cluster</span>}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-1.5 bg-li-gray-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-li-cyan rounded-full" style={{ width: `${peer.similarity * 100}%` }} />
-                        </div>
-                        <span className="font-mono text-li-text-muted w-12 text-right">{(peer.similarity * 100).toFixed(1)}%</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Confidence + Position */}
-            <div className="grid grid-cols-2 gap-4">
-              {m.confidence && (
-                <div className="bg-li-gray-900 rounded-lg p-4 space-y-2">
-                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Confidence Assessment</h3>
-                  <div className="flex items-center gap-3">
-                    <span className={cn(
-                      "text-2xl font-mono font-bold",
-                      m.confidence.level === "very_high" ? "text-li-green" :
-                      m.confidence.level === "high" ? "text-li-cyan" :
-                      m.confidence.level === "medium" ? "text-li-yellow" : "text-li-red"
-                    )}>{(m.confidence.score * 100).toFixed(0)}%</span>
-                    <span className="text-xs text-li-text-muted uppercase">{m.confidence.level}</span>
-                  </div>
-                  <div className="space-y-0.5">
-                    {m.confidence.factors.map((f: any, i: number) => (
-                      <div key={i} className="flex items-center justify-between text-[10px]">
-                        <span className="text-li-text-muted">{f.factor.replace(/_/g, " ")}</span>
-                        <span className="font-mono text-li-green">+{(f.impact * 100).toFixed(0)}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {m.relative_position && (
-                <div className="bg-li-gray-900 rounded-lg p-4 space-y-2">
-                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Relative Position</h3>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-li-text-muted">Global rank</span>
-                      <span className="font-mono text-li-text-primary">#{m.relative_position.global_rank} of {m.relative_position.type_total > 0 ? '298' : '298'} ({m.relative_position.global_percentile}%ile)</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-li-text-muted">Type rank</span>
-                      <span className="font-mono text-li-text-primary">#{m.relative_position.type_rank} of {m.relative_position.type_total} ({m.relative_position.type_percentile}%ile)</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-li-text-muted">Z-score</span>
-                      <span className={cn("font-mono", m.relative_position.composite_z_score > 1 ? "text-li-green" : "text-li-text-primary")}>
-                        {m.relative_position.sigma_label}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
+          {/* Anomaly tags */}
+          {m.anomaly_taxonomy?.length > 0 && (
+            <div className="space-y-1">
+              <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Anomaly Tags</span>
+              {m.anomaly_taxonomy.map((t: any, i: number) => (
+                <SeverityTag key={i} tag={t.tag} severity={t.severity} desc={t.description} />
+              ))}
             </div>
+          )}
 
-            {/* Data Quality */}
-            {m.data_quality && (
-              <div className="text-[10px] text-li-text-muted space-x-2">
-                {m.data_quality.map((q: string, i: number) => (
-                  <span key={i} className={cn(
-                    "inline-block px-2 py-0.5 rounded",
-                    q.startsWith("CLEAN") ? "bg-li-green/10 text-li-green" : "bg-li-yellow/10 text-li-yellow"
-                  )}>{q}</span>
+          {/* Confidence */}
+          {m.confidence && (
+            <div className="bg-li-gray-900 rounded px-3 py-2">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Confidence</span>
+                <span className={cn("text-sm font-mono font-bold",
+                  m.confidence.level === "very_high" ? "text-li-green" : m.confidence.level === "high" ? "text-li-cyan" : "text-li-yellow"
+                )}>{(m.confidence.score * 100).toFixed(0)}%</span>
+              </div>
+              <div className="space-y-0.5">
+                {m.confidence.factors?.map((f: any, i: number) => (
+                  <div key={i} className="flex justify-between text-[9px]">
+                    <span className="text-li-text-muted">{f.factor.replace(/_/g, " ")}</span>
+                    <span className="font-mono text-li-green">+{(f.impact * 100).toFixed(0)}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Right: Fingerprint + Peers + Position */}
+        <div className="space-y-3">
+          {/* Fingerprint */}
+          <div className="bg-li-gray-900 rounded px-3 py-2">
+            <span className="text-[8px] uppercase tracking-widest text-li-text-muted">48-bit Lattice Fingerprint</span>
+            <div className="mt-1.5 flex gap-[1px]">
+              {a.lattice_profile.fingerprint_48bit.split("").map((b, i) => (
+                <div key={i} className={cn("w-[5px] h-5 rounded-[1px]", b === "1" ? "bg-li-cyan" : "bg-li-gray-700",
+                  i === 15 || i === 31 ? "ml-1" : "")} />
+              ))}
+            </div>
+            <div className="flex justify-between mt-1 text-[8px] text-li-text-muted font-mono">
+              <span>COARSE (4-bin)</span><span>MEDIUM (8-bin)</span><span>FINE (16-bin)</span>
+            </div>
+            <div className="text-[10px] text-li-text-muted mt-1">
+              {a.lattice_profile.total_flips}/48 flips ({(a.lattice_profile.flip_rate * 100).toFixed(0)}%)
+            </div>
+            {m.fingerprint_analytics && (
+              <div className="grid grid-cols-4 gap-1 mt-2">
+                {[
+                  { l: "Entropy", v: m.fingerprint_analytics.entropy?.toFixed(3) },
+                  { l: "Transitions", v: m.fingerprint_analytics.transitions },
+                  { l: "Avg Run", v: m.fingerprint_analytics.avg_run_length },
+                  { l: "Flip%", v: `${(m.fingerprint_analytics.flip_ratio * 100).toFixed(0)}%` },
+                ].map(({ l, v }) => (
+                  <div key={l} className="text-center">
+                    <div className="text-[10px] font-mono text-li-text-primary">{v}</div>
+                    <div className="text-[7px] text-li-text-muted uppercase">{l}</div>
+                  </div>
                 ))}
               </div>
             )}
-          </>
-        );
-      })()}
+          </div>
+
+          {/* Peers */}
+          {m.peer_network?.length > 0 && (
+            <div className="bg-li-gray-900 rounded px-3 py-2">
+              <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Nearest Peers</span>
+              <div className="mt-1 space-y-0.5">
+                {m.peer_network.slice(0, 5).map((p: any, i: number) => (
+                  <div key={i} className="flex items-center justify-between text-[10px]">
+                    <div className="flex items-center gap-1.5">
+                      <TypeDot type={p.type} />
+                      <span className="font-mono text-li-cyan">{p.ticker || "-"}</span>
+                      <span className="text-li-text-muted truncate max-w-[100px]">{p.name}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-12 h-1 bg-li-gray-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-li-cyan rounded-full" style={{ width: `${p.similarity * 100}%` }} />
+                      </div>
+                      <span className="font-mono text-li-text-muted w-8 text-right">{(p.similarity * 100).toFixed(0)}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Position */}
+          {m.relative_position && (
+            <div className="bg-li-gray-900 rounded px-3 py-2 grid grid-cols-3 gap-2 text-center">
+              <div>
+                <div className="text-sm font-mono font-bold text-li-text-primary">#{m.relative_position.global_rank}</div>
+                <div className="text-[7px] uppercase text-li-text-muted">Global</div>
+              </div>
+              <div>
+                <div className="text-sm font-mono font-bold text-li-text-primary">#{m.relative_position.type_rank}</div>
+                <div className="text-[7px] uppercase text-li-text-muted">In Type</div>
+              </div>
+              <div>
+                <div className={cn("text-sm font-mono font-bold",
+                  m.relative_position.composite_z_score > 1 ? "text-li-green" : "text-li-text-primary"
+                )}>{m.relative_position.sigma_label}</div>
+                <div className="text-[7px] uppercase text-li-text-muted">Z-Score</div>
+              </div>
+            </div>
+          )}
+
+          {/* Cluster */}
+          {a.cluster.peers?.length > 0 && (
+            <div className="bg-li-gray-900 rounded px-3 py-2">
+              <span className="text-[8px] uppercase tracking-widest text-li-text-muted">
+                Cluster {a.cluster.id} ({a.cluster.total_members} members)
+              </span>
+              <div className="mt-1 space-y-0.5">
+                {a.cluster.peers.slice(0, 4).map((p, i) => (
+                  <div key={i} className="flex items-center justify-between text-[10px]">
+                    <div className="flex items-center gap-1.5">
+                      <TypeDot type={p.type} />
+                      <span className="font-mono text-li-cyan">{p.ticker || "-"}</span>
+                      <span className="text-li-text-muted truncate max-w-[120px]">{p.name}</span>
+                    </div>
+                    <span className="font-mono text-li-text-muted">{(p.composite * 100).toFixed(0)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Data quality */}
+          {m.data_quality && (
+            <div className="flex flex-wrap gap-1">
+              {m.data_quality.map((q: string, i: number) => (
+                <span key={i} className={cn("text-[8px] px-1.5 py-0.5 rounded font-mono",
+                  q.startsWith("CLEAN") ? "bg-li-green/10 text-li-green" : "bg-li-yellow/10 text-li-yellow"
+                )}>{q.split(":")[0]}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
-// ── Main page ───────────────────────────────────────────────────────
-export default function BTUTPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("overview");
-  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
-  const [survivorType, setSurvivorType] = useState<string>("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchInput, setSearchInput] = useState("");
+// =====================================================================
+// CLUSTER MATRIX
+// =====================================================================
+function ClusterMatrix({ clusters, onSelect }: { clusters: any[]; onSelect: (id: number) => void }) {
+  if (!clusters?.length) return null;
 
-  // Query builder state
-  const [qTypes, setQTypes] = useState("");
-  const [qMinComposite, setQMinComposite] = useState("");
-  const [qMinAnomaly, setQMinAnomaly] = useState("");
-  const [qMinFlips, setQMinFlips] = useState("");
-  const [qMaxFlips, setQMaxFlips] = useState("");
-  const [qHasTicker, setQHasTicker] = useState<string>("");
-  const [qSortBy, setQSortBy] = useState("composite");
-  const [qSortOrder, setQSortOrder] = useState("desc");
-  const [queryTrigger, setQueryTrigger] = useState(0);
-
-  // Compare state
-  const [compareInput, setCompareInput] = useState("RIG,OKLO,AMPG");
-  const [compareTickers, setCompareTickers] = useState<string[]>([]);
-
-  // Queries
-  const statusQ = useQuery({
-    queryKey: ["btut-status"],
-    queryFn: () => api.getBTUTStatus(),
-  });
-
-  const survivorsQ = useQuery({
-    queryKey: ["btut-survivors", survivorType],
-    queryFn: () => api.getBTUTSurvivors({ top_n: 50, type: survivorType || undefined }),
-    enabled: activeTab === "survivors" || activeTab === "overview",
-  });
-
-  const clustersQ = useQuery({
-    queryKey: ["btut-clusters"],
-    queryFn: () => api.getBTUTClusters({ min_size: 2, top_n: 50 }),
-    enabled: activeTab === "clusters",
-  });
-
-  const searchQ = useQuery({
-    queryKey: ["btut-search", searchQuery],
-    queryFn: () => api.getBTUTSearch(searchQuery),
-    enabled: !!searchQuery && activeTab === "search",
-  });
-
-  const advancedQ = useQuery({
-    queryKey: ["btut-query", qTypes, qMinComposite, qMinAnomaly, qMinFlips, qMaxFlips, qHasTicker, qSortBy, qSortOrder, queryTrigger],
-    queryFn: () => api.getBTUTQuery({
-      types: qTypes || undefined,
-      min_composite: qMinComposite ? parseFloat(qMinComposite) : undefined,
-      min_anomaly: qMinAnomaly ? parseFloat(qMinAnomaly) : undefined,
-      min_flips: qMinFlips ? parseInt(qMinFlips) : undefined,
-      max_flips: qMaxFlips ? parseInt(qMaxFlips) : undefined,
-      has_ticker: qHasTicker === "true" ? true : qHasTicker === "false" ? false : undefined,
-      sort_by: qSortBy,
-      sort_order: qSortOrder,
-      limit: 100,
-    }),
-    enabled: activeTab === "query" && queryTrigger > 0,
-  });
-
-  const compareQ = useQuery({
-    queryKey: ["btut-compare", compareTickers],
-    queryFn: () => api.getBTUTCompare(compareTickers),
-    enabled: activeTab === "compare" && compareTickers.length >= 2,
-  });
-
-  const anomaliesQ = useQuery({
-    queryKey: ["btut-anomalies"],
-    queryFn: () => api.getBTUTAnomalies(30),
-    enabled: activeTab === "anomalies",
-  });
-
-  const distributionsQ = useQuery({
-    queryKey: ["btut-distributions"],
-    queryFn: () => api.getBTUTDistributions(),
-    enabled: activeTab === "anomalies" || activeTab === "query",
-  });
-
-  const status = statusQ.data as BTUTStatus | undefined;
+  const maxSize = Math.max(...clusters.map((c: any) => c.member_count));
 
   return (
-    <div className="min-h-screen bg-li-bg">
+    <div className="flex flex-wrap gap-[2px] p-2">
+      {clusters.slice(0, 60).map((c: any) => {
+        const sizePct = Math.max(0.3, c.member_count / maxSize);
+        const dominantType = Object.entries(c.type_distribution || {}).sort((a: any, b: any) => b[1] - a[1])[0]?.[0] || "company";
+        const bgColor = dominantType === "company" ? "bg-li-cyan" : dominantType === "filing" ? "bg-li-purple" : "bg-li-green";
+
+        return (
+          <button
+            key={c.cluster_id}
+            onClick={() => onSelect(c.cluster_id)}
+            className={cn("rounded-sm transition-all hover:ring-1 hover:ring-white/30", bgColor)}
+            style={{ width: `${Math.max(8, sizePct * 28)}px`, height: `${Math.max(8, sizePct * 28)}px`, opacity: 0.2 + c.avg_composite * 0.8 }}
+            title={`Cluster ${c.cluster_id}: ${c.member_count} members, avg ${(c.avg_composite * 100).toFixed(0)}`}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+// =====================================================================
+// SCATTER TOOLTIP
+// =====================================================================
+function ScatterTooltip({ active, payload }: any) {
+  if (!active || !payload?.[0]) return null;
+  const d = payload[0].payload;
+  return (
+    <div className="bg-li-black border border-li-gray-800 rounded px-3 py-2 text-xs shadow-lg">
+      <div className="font-mono text-li-cyan font-bold">{d.ticker || d.name}</div>
+      <div className="text-li-text-muted">{d.type}</div>
+      <div className="mt-1 font-mono">
+        anomaly: {(d.anomaly * 100).toFixed(1)} | recon: {(d.reconstruction * 100).toFixed(1)}
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// MAIN PAGE
+// =====================================================================
+export default function BTUTPage() {
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [sortCol, setSortCol] = useState("composite");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [filterType, setFilterType] = useState("");
+  const [filterRole, setFilterRole] = useState("");
+  const [clusterFilter, setClusterFilter] = useState<number | null>(null);
+
+  // Data queries
+  const statusQ = useQuery({ queryKey: ["btut-status"], queryFn: () => api.getBTUTStatus() });
+  const survivorsQ = useQuery({
+    queryKey: ["btut-survivors-all"],
+    queryFn: () => api.getBTUTSurvivors({ top_n: 300 }),
+  });
+  const clustersQ = useQuery({
+    queryKey: ["btut-clusters-all"],
+    queryFn: () => api.getBTUTClusters({ min_size: 1, top_n: 100 }),
+  });
+
+  const status = statusQ.data;
+  const allSurvivors = (survivorsQ.data?.survivors || []) as (BTUTSurvivor & { metadata?: any })[];
+
+  // Sort & filter
+  const sortedSurvivors = useMemo(() => {
+    let pool = [...allSurvivors];
+
+    if (filterType) pool = pool.filter(s => s.type === filterType);
+    if (filterRole) pool = pool.filter(s => s.metadata?.structural_role?.role === filterRole);
+    if (clusterFilter !== null) pool = pool.filter(s => s.cluster === clusterFilter);
+
+    pool.sort((a, b) => {
+      let va: number, vb: number;
+      if (sortCol === "flips") { va = a.flips; vb = b.flips; }
+      else if (sortCol === "cluster") { va = a.cluster; vb = b.cluster; }
+      else { va = (a.scores as any)[sortCol] || 0; vb = (b.scores as any)[sortCol] || 0; }
+      return sortDir === "desc" ? vb - va : va - vb;
+    });
+
+    return pool;
+  }, [allSurvivors, sortCol, sortDir, filterType, filterRole, clusterFilter]);
+
+  // Scatter data
+  const scatterData = useMemo(() =>
+    allSurvivors.map(s => ({
+      anomaly: s.scores.anomaly,
+      reconstruction: s.scores.reconstruction,
+      composite: s.scores.composite,
+      ticker: s.ticker,
+      name: s.name,
+      type: s.type,
+    })),
+    [allSurvivors],
+  );
+
+  // Aggregate scores for gauges
+  const aggScores = useMemo(() => {
+    if (!allSurvivors.length) return { composite: 0, anomaly: 0, diversity: 0, reconstruction: 0 };
+    const n = allSurvivors.length;
+    return {
+      composite: allSurvivors.reduce((s, v) => s + v.scores.composite, 0) / n,
+      anomaly: allSurvivors.reduce((s, v) => s + v.scores.anomaly, 0) / n,
+      diversity: allSurvivors.reduce((s, v) => s + v.scores.diversity, 0) / n,
+      reconstruction: allSurvivors.reduce((s, v) => s + v.scores.reconstruction, 0) / n,
+    };
+  }, [allSurvivors]);
+
+  const handleSort = (col: string) => {
+    if (sortCol === col) setSortDir(d => d === "desc" ? "asc" : "desc");
+    else { setSortCol(col); setSortDir("desc"); }
+  };
+
+  const SortHeader = ({ col, children }: { col: string; children: React.ReactNode }) => (
+    <th onClick={() => handleSort(col)}
+      className={cn("px-2 py-1.5 text-left cursor-pointer hover:text-li-cyan transition-colors select-none",
+        sortCol === col ? "text-li-cyan" : "text-li-text-muted"
+      )}>
+      <div className="flex items-center gap-0.5">
+        {children}
+        {sortCol === col && <span className="text-[8px]">{sortDir === "desc" ? "\u25BC" : "\u25B2"}</span>}
+      </div>
+    </th>
+  );
+
+  return (
+    <div className="min-h-screen bg-li-bg text-li-text-primary">
       <Navbar />
       <Sidebar />
       <main className="ml-60 pt-14">
-        <div className="p-8 space-y-8">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="heading-section flex items-center gap-3">
-                <BrainCircuit className="w-6 h-6 text-li-cyan" />
-                BTUT Intelligence
-              </h1>
-              <p className="text-sm text-li-text-muted mt-1">
-                Mean-field game data reduction engine &mdash; structural signal extraction from SEC EDGAR
-              </p>
-            </div>
-            {status && (
-              <div className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider",
-                status.pipeline_status === "ready"
-                  ? "bg-li-green/10 text-li-green border border-li-green/20"
-                  : "bg-li-red/10 text-li-red border border-li-red/20",
-              )}>
-                {status.pipeline_status}
-              </div>
-            )}
+        {/* ═══════════════ STATUS BAR ═══════════════ */}
+        <div className="border-b border-li-gray-900 bg-li-black flex items-center justify-between px-4">
+          <div className="flex items-center gap-0.5 divide-x divide-li-gray-800">
+            {status && [
+              { l: "Entities", v: status.total_entities },
+              { l: "Clusters", v: status.total_clusters },
+              { l: "Fingerprints", v: status.unique_fingerprints },
+              { l: "Survivors", v: status.survivor_count },
+              { l: "Reduction", v: `${status.reduction_ratio}x` },
+              { l: "Variance", v: `${((status.reconstruction?.variance_preservation ?? 0) * 100).toFixed(1)}%` },
+              { l: "Coverage", v: `${((status.reconstruction?.coverages?.["1.0"] ?? 0) * 100).toFixed(1)}%` },
+              { l: "Time", v: `${status.wall_seconds.toFixed(1)}s` },
+            ].map(({ l, v }) => <StatusCell key={l} label={l} value={v} />)}
           </div>
-
-          {/* Stat Cards */}
-          {status && (
-            <div className="grid grid-cols-5 gap-4">
-              <StatCard label="Total Entities" value={status.total_entities.toLocaleString()} icon={Users} />
-              <StatCard label="Micro-Clusters" value={status.total_clusters.toLocaleString()} icon={Layers} />
-              <StatCard label="Fingerprints" value={status.unique_fingerprints.toLocaleString()} icon={Fingerprint} />
-              <StatCard label="Survivors" value={status.survivor_count.toLocaleString()} icon={Target} change={`${status.reduction_ratio}x reduction`} />
-              <StatCard label="Variance Kept" value={`${((status.reconstruction?.variance_preservation ?? 0) * 100).toFixed(1)}%`} icon={Gauge} change={`${status.wall_seconds.toFixed(1)}s processing`} />
-            </div>
-          )}
-
-          {/* Tabs */}
-          <div className="flex items-center gap-1 border-b border-li-gray-900">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  "flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px",
-                  activeTab === tab.id
-                    ? "text-li-cyan border-li-cyan"
-                    : "text-li-text-muted border-transparent hover:text-li-text-secondary hover:border-li-gray-700",
-                )}
-              >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-          <div className="space-y-6">
-            {/* ── OVERVIEW ────────────────────────────────────────── */}
-            {activeTab === "overview" && (
-              <>
-                {/* Type distribution */}
-                {status?.survivor_types && (
-                  <div className="li-card p-6">
-                    <h3 className="text-xs uppercase tracking-wider text-li-text-muted mb-4">Survivor Type Distribution</h3>
-                    <div className="grid grid-cols-3 gap-4">
-                      {Object.entries(status.survivor_types).map(([type, count]) => (
-                        <div key={type} className="flex items-center justify-between bg-li-gray-900 rounded-lg p-4">
-                          <div className="flex items-center gap-3">
-                            <TypeBadge type={type} />
-                            <span className="text-sm text-li-text-secondary capitalize">{type.replace("_", " ")}</span>
-                          </div>
-                          <span className="text-xl font-mono font-bold text-li-text-primary">{count}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Top 10 survivors preview */}
-                {survivorsQ.data && (
-                  <div className="li-card p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xs uppercase tracking-wider text-li-text-muted">Top Survivors by Composite Score</h3>
-                      <button onClick={() => setActiveTab("survivors")} className="text-xs text-li-cyan hover:underline flex items-center gap-1">
-                        View all <ChevronRight className="w-3 h-3" />
-                      </button>
-                    </div>
-                    <div className="space-y-1">
-                      {(survivorsQ.data.survivors as BTUTSurvivor[]).slice(0, 10).map((sv) => (
-                        <button
-                          key={sv.rank}
-                          onClick={() => sv.ticker && setSelectedTicker(sv.ticker)}
-                          className="w-full flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-li-gray-900 transition-colors text-left"
-                        >
-                          <span className="text-xs font-mono text-li-text-muted w-6">{sv.rank}</span>
-                          <span className="font-mono text-li-cyan text-sm w-16">{sv.ticker || "-"}</span>
-                          <span className="text-sm text-li-text-secondary flex-1 truncate">{sv.name}</span>
-                          <TypeBadge type={sv.type} />
-                          <span className="font-mono text-sm text-li-text-primary w-16 text-right">{(sv.scores.composite * 100).toFixed(1)}</span>
-                          <div className="w-24">
-                            <ScoreBar label="" value={sv.scores.anomaly} color="bg-li-red" />
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Selected detail */}
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </>
-            )}
-
-            {/* ── SURVIVORS ───────────────────────────────────────── */}
-            {activeTab === "survivors" && (
-              <>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-li-text-muted">Filter:</span>
-                  {["", "company", "filing", "financial_fact"].map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setSurvivorType(t)}
-                      className={cn(
-                        "px-3 py-1 rounded text-xs font-mono transition-colors",
-                        survivorType === t
-                          ? "bg-li-cyan/10 text-li-cyan border border-li-cyan/20"
-                          : "text-li-text-muted hover:text-li-text-secondary bg-li-gray-900",
-                      )}
-                    >
-                      {t || "All"}
-                    </button>
-                  ))}
-                </div>
-
-                {survivorsQ.data && (
-                  <div className="space-y-1">
-                    {(survivorsQ.data.survivors as BTUTSurvivor[]).map((sv) => (
-                      <button
-                        key={`${sv.rank}-${sv.name}`}
-                        onClick={() => sv.ticker && setSelectedTicker(sv.ticker)}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-li-gray-900 transition-colors text-left li-card"
-                      >
-                        <span className="text-xs font-mono text-li-text-muted w-8">{sv.rank}</span>
-                        <span className="font-mono text-li-cyan text-sm w-16">{sv.ticker || "-"}</span>
-                        <span className="text-sm text-li-text-secondary flex-1 truncate">{sv.name}</span>
-                        <TypeBadge type={sv.type} />
-                        <div className="flex items-center gap-4 text-xs font-mono">
-                          <div className="text-center w-14">
-                            <div className="text-li-text-primary">{(sv.scores.composite * 100).toFixed(1)}</div>
-                            <div className="text-li-text-muted text-[9px]">SCORE</div>
-                          </div>
-                          <div className="text-center w-14">
-                            <div className="text-li-red">{(sv.scores.anomaly * 100).toFixed(1)}</div>
-                            <div className="text-li-text-muted text-[9px]">ANOMALY</div>
-                          </div>
-                          <div className="text-center w-14">
-                            <div className="text-li-text-muted">{sv.flips}/48</div>
-                            <div className="text-li-text-muted text-[9px]">FLIPS</div>
-                          </div>
-                        </div>
-                        <FingerprintViz fingerprint={sv.fingerprint} />
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </>
-            )}
-
-            {/* ── CLUSTERS ────────────────────────────────────────── */}
-            {activeTab === "clusters" && clustersQ.data && (
-              <div className="space-y-2">
-                {(clustersQ.data.clusters as BTUTCluster[]).map((cl) => (
-                  <div key={cl.cluster_id} className="li-card p-4 flex items-start gap-6">
-                    <div className="text-center min-w-[60px]">
-                      <div className="text-lg font-mono font-bold text-li-text-primary">{cl.member_count}</div>
-                      <div className="text-[10px] text-li-text-muted uppercase">Members</div>
-                    </div>
-                    <div className="flex-1 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-li-text-muted">Cluster {cl.cluster_id}</span>
-                        <span className="text-xs text-li-text-muted">|</span>
-                        <span className="text-xs font-mono text-li-green">max {(cl.max_composite * 100).toFixed(1)}</span>
-                        <span className="text-xs font-mono text-li-text-muted">avg {(cl.avg_composite * 100).toFixed(1)}</span>
-                      </div>
-                      <div className="flex gap-2 flex-wrap">
-                        {Object.entries(cl.type_distribution).map(([type, count]) => (
-                          <div key={type} className="flex items-center gap-1">
-                            <TypeBadge type={type} />
-                            <span className="text-xs font-mono text-li-text-muted">{count}</span>
-                          </div>
-                        ))}
-                      </div>
-                      {cl.sample_members.length > 0 && (
-                        <div className="flex gap-2 flex-wrap">
-                          {cl.sample_members.map((m, i) => (
-                            <button
-                              key={i}
-                              onClick={() => m.ticker && setSelectedTicker(m.ticker)}
-                              className="text-xs text-li-cyan hover:underline font-mono"
-                            >
-                              {m.ticker ? `[${m.ticker}]` : m.name.substring(0, 20)}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </div>
-            )}
-
-            {/* ── QUERY BUILDER ────────────────────────────────────── */}
-            {activeTab === "query" && (
-              <>
-                <div className="li-card p-6 space-y-4">
-                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted flex items-center gap-2">
-                    <Filter className="w-3.5 h-3.5" /> Advanced Query Builder
-                  </h3>
-
-                  <div className="grid grid-cols-4 gap-4">
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Entity Types</label>
-                      <select value={qTypes} onChange={(e) => setQTypes(e.target.value)}
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary">
-                        <option value="">All types</option>
-                        <option value="company">Companies only</option>
-                        <option value="filing">Filings only</option>
-                        <option value="financial_fact">Financial facts only</option>
-                        <option value="company,filing">Companies + Filings</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Min Composite Score</label>
-                      <input type="number" step="0.05" min="0" max="1" value={qMinComposite}
-                        onChange={(e) => setQMinComposite(e.target.value)}
-                        placeholder="0.0"
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary font-mono" />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Min Anomaly Score</label>
-                      <input type="number" step="0.05" min="0" max="1" value={qMinAnomaly}
-                        onChange={(e) => setQMinAnomaly(e.target.value)}
-                        placeholder="0.0"
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary font-mono" />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Has Ticker</label>
-                      <select value={qHasTicker} onChange={(e) => setQHasTicker(e.target.value)}
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary">
-                        <option value="">Any</option>
-                        <option value="true">Yes (companies)</option>
-                        <option value="false">No (filings/facts)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-4 gap-4">
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Min Flips</label>
-                      <input type="number" min="0" max="48" value={qMinFlips}
-                        onChange={(e) => setQMinFlips(e.target.value)} placeholder="0"
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary font-mono" />
-                    </div>
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Max Flips</label>
-                      <input type="number" min="0" max="48" value={qMaxFlips}
-                        onChange={(e) => setQMaxFlips(e.target.value)} placeholder="48"
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary font-mono" />
-                    </div>
-                    <div>
-                      <label className="text-[10px] uppercase tracking-wider text-li-text-muted block mb-1">Sort By</label>
-                      <select value={qSortBy} onChange={(e) => setQSortBy(e.target.value)}
-                        className="w-full bg-li-gray-900 border border-li-gray-800 rounded px-3 py-2 text-sm text-li-text-primary">
-                        <option value="composite">Composite Score</option>
-                        <option value="anomaly">Anomaly Score</option>
-                        <option value="diversity">Diversity Score</option>
-                        <option value="reconstruction">Reconstruction Score</option>
-                        <option value="flips">Flip Count</option>
-                      </select>
-                    </div>
-                    <div className="flex items-end">
-                      <button onClick={() => setQueryTrigger(t => t + 1)}
-                        className="li-btn-primary w-full flex items-center justify-center gap-2">
-                        <Terminal className="w-4 h-4" /> Execute Query
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Query results */}
-                {advancedQ.data && (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs text-li-text-muted">
-                        {advancedQ.data.total} results
-                        {Object.keys(advancedQ.data.filters_applied || {}).length > 0 && (
-                          <> | Filters: {Object.entries(advancedQ.data.filters_applied).map(([k, v]) =>
-                            <span key={k} className="ml-1 px-1.5 py-0.5 bg-li-cyan/10 text-li-cyan rounded text-[10px] font-mono">{k}={String(v)}</span>
-                          )}</>
-                        )}
-                      </p>
-                    </div>
-
-                    {(advancedQ.data.results as BTUTSurvivor[]).map((sv) => (
-                      <button
-                        key={`${sv.rank}-${sv.name}`}
-                        onClick={() => sv.ticker && setSelectedTicker(sv.ticker)}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-li-gray-900 transition-colors text-left li-card"
-                      >
-                        <span className="text-xs font-mono text-li-text-muted w-8">{sv.rank}</span>
-                        <span className="font-mono text-li-cyan text-sm w-16">{sv.ticker || "-"}</span>
-                        <span className="text-sm text-li-text-secondary flex-1 truncate">{sv.name}</span>
-                        <TypeBadge type={sv.type} />
-                        <div className="flex items-center gap-4 text-xs font-mono">
-                          <div className="text-center w-14">
-                            <div className="text-li-text-primary">{(sv.scores.composite * 100).toFixed(1)}</div>
-                            <div className="text-li-text-muted text-[9px]">SCORE</div>
-                          </div>
-                          <div className="text-center w-14">
-                            <div className="text-li-red">{(sv.scores.anomaly * 100).toFixed(1)}</div>
-                            <div className="text-li-text-muted text-[9px]">ANOMALY</div>
-                          </div>
-                          <div className="text-center w-14">
-                            <div className="text-li-text-muted">{sv.flips}/48</div>
-                            <div className="text-li-text-muted text-[9px]">FLIPS</div>
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </>
-            )}
-
-            {/* ── COMPARE ─────────────────────────────────────────── */}
-            {activeTab === "compare" && (
-              <>
-                <div className="li-card p-6 space-y-4">
-                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted flex items-center gap-2">
-                    <GitCompare className="w-3.5 h-3.5" /> Side-by-Side Entity Comparison
-                  </h3>
-                  <div className="flex gap-3">
-                    <input
-                      type="text" value={compareInput}
-                      onChange={(e) => setCompareInput(e.target.value)}
-                      placeholder="Enter comma-separated tickers: RIG,OKLO,AMPG"
-                      className="flex-1 bg-li-gray-900 border border-li-gray-800 rounded-lg px-4 py-2.5 text-sm text-li-text-primary font-mono placeholder:text-li-text-muted focus:outline-none focus:border-li-cyan/50"
-                    />
-                    <button onClick={() => setCompareTickers(compareInput.split(",").map(t => t.trim().toUpperCase()).filter(Boolean))}
-                      className="li-btn-primary px-6">Compare</button>
-                  </div>
-                </div>
-
-                {compareQ.data && compareQ.data.entities?.length > 0 && (
-                  <>
-                    {/* Score comparison grid */}
-                    <div className="li-card p-6">
-                      <h3 className="text-xs uppercase tracking-wider text-li-text-muted mb-4">Score Comparison</h3>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                          <thead>
-                            <tr className="border-b border-li-gray-800">
-                              <th className="text-left text-li-text-muted py-2 pr-4 text-xs uppercase">Axis</th>
-                              {compareQ.data.entities.map((e: any) => (
-                                <th key={e.ticker} className="text-center text-li-cyan py-2 px-4 font-mono text-xs">{e.ticker}</th>
-                              ))}
-                              <th className="text-center text-li-text-muted py-2 px-4 text-xs">Spread</th>
-                              <th className="text-center text-li-green py-2 px-4 text-xs">Leader</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {["composite", "diversity", "reconstruction", "anomaly"].map((axis) => {
-                              const comp = compareQ.data.comparison[axis];
-                              if (!comp) return null;
-                              return (
-                                <tr key={axis} className="border-b border-li-gray-900">
-                                  <td className="py-2 pr-4 text-li-text-secondary capitalize">{axis}</td>
-                                  {compareQ.data.entities.map((e: any) => {
-                                    const val = comp.values[e.ticker] ?? 0;
-                                    const isMax = val === comp.max;
-                                    return (
-                                      <td key={e.ticker} className={cn("text-center py-2 px-4 font-mono", isMax ? "text-li-green font-bold" : "text-li-text-primary")}>
-                                        {(val * 100).toFixed(1)}
-                                      </td>
-                                    );
-                                  })}
-                                  <td className="text-center py-2 px-4 font-mono text-li-text-muted">{(comp.spread * 100).toFixed(1)}</td>
-                                  <td className="text-center py-2 px-4 font-mono text-li-green">{comp.leader}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-
-                      {/* Fingerprint similarity */}
-                      {compareQ.data.comparison.fingerprint_similarity && (
-                        <div className="mt-4 pt-4 border-t border-li-gray-900">
-                          <h4 className="text-xs text-li-text-muted mb-2">Fingerprint Similarity (Hamming)</h4>
-                          <div className="flex gap-3 flex-wrap">
-                            {Object.entries(compareQ.data.comparison.fingerprint_similarity).map(([pair, sim]: [string, any]) => (
-                              <div key={pair} className="bg-li-gray-900 rounded px-3 py-2 text-xs font-mono">
-                                <span className="text-li-text-muted">{pair.replace("_vs_", " vs ")}</span>
-                                <span className={cn("ml-2 font-bold", sim > 0.8 ? "text-li-green" : sim > 0.5 ? "text-li-yellow" : "text-li-red")}>
-                                  {(sim * 100).toFixed(1)}%
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                          <p className="text-xs text-li-text-muted mt-2">
-                            {compareQ.data.comparison.same_cluster ? "These entities share the same cluster." : "These entities occupy different clusters."}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Individual entity cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {compareQ.data.entities.map((e: any) => (
-                        <div key={e.ticker} className="li-card p-4 space-y-3">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <span className="font-mono text-li-cyan text-lg">{e.ticker}</span>
-                              <p className="text-xs text-li-text-secondary mt-0.5">{e.company_name}</p>
-                            </div>
-                            <TypeBadge type={e.type} />
-                          </div>
-                          <div className="space-y-2">
-                            <ScoreBar label="Composite" value={e.scores.composite} color="bg-li-cyan" />
-                            <ScoreBar label="Anomaly" value={e.scores.anomaly} color="bg-li-red" />
-                            <ScoreBar label="Diversity" value={e.scores.diversity} color="bg-li-green" />
-                            <ScoreBar label="Reconstruction" value={e.scores.reconstruction} color="bg-li-blue" />
-                          </div>
-                          <div className="text-xs text-li-text-muted">
-                            {e.flips}/48 flips | Cluster {e.cluster} ({e.cluster_size} members)
-                          </div>
-                          <FingerprintViz fingerprint={e.fingerprint} />
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-
-            {/* ── ANOMALIES ───────────────────────────────────────── */}
-            {activeTab === "anomalies" && anomaliesQ.data && (
-              <>
-                <div className="li-card p-6">
-                  <h3 className="text-xs uppercase tracking-wider text-li-text-muted flex items-center gap-2 mb-4">
-                    <AlertTriangle className="w-3.5 h-3.5 text-li-red" /> Top 30 Structural Anomalies
-                  </h3>
-                  <div className="space-y-1">
-                    {(anomaliesQ.data as any[]).map((a: any) => (
-                      <button
-                        key={a.rank}
-                        onClick={() => a.ticker && setSelectedTicker(a.ticker)}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-li-gray-900 transition-colors text-left"
-                      >
-                        <span className={cn(
-                          "text-xs font-mono w-8",
-                          a.rank <= 3 ? "text-li-red font-bold" : "text-li-text-muted"
-                        )}>{a.rank}</span>
-                        <span className="font-mono text-li-cyan text-sm w-16">{a.ticker || "-"}</span>
-                        <span className="text-sm text-li-text-secondary flex-1 truncate">{a.name}</span>
-                        <TypeBadge type={a.type} />
-                        <div className="w-32">
-                          <ScoreBar label="" value={a.anomaly_score} color="bg-li-red" />
-                        </div>
-                        <span className="font-mono text-xs text-li-red w-16 text-right">{(a.anomaly_score * 100).toFixed(1)}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Distribution chart */}
-                {distributionsQ.data?.score_distributions && (
-                  <div className="li-card p-6">
-                    <h3 className="text-xs uppercase tracking-wider text-li-text-muted flex items-center gap-2 mb-4">
-                      <BarChart3 className="w-3.5 h-3.5" /> Score Distributions
-                    </h3>
-                    <div className="grid grid-cols-2 gap-6">
-                      {["composite", "anomaly", "diversity", "reconstruction"].map((axis) => {
-                        const dist = distributionsQ.data.score_distributions[axis];
-                        if (!dist) return null;
-                        const maxCount = Math.max(...(dist.histogram?.counts || [1]));
-                        return (
-                          <div key={axis} className="space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm text-li-text-secondary capitalize">{axis}</span>
-                              <span className="text-xs font-mono text-li-text-muted">
-                                mean={dist.mean} | p50={dist.p50} | std={dist.std}
-                              </span>
-                            </div>
-                            <div className="flex items-end gap-[2px] h-16">
-                              {(dist.histogram?.counts || []).map((count: number, i: number) => (
-                                <div
-                                  key={i}
-                                  className={cn("flex-1 rounded-t transition-all", axis === "anomaly" ? "bg-li-red/60" : axis === "diversity" ? "bg-li-green/60" : axis === "reconstruction" ? "bg-li-blue/60" : "bg-li-cyan/60")}
-                                  style={{ height: `${(count / maxCount) * 100}%`, minHeight: count > 0 ? "2px" : "0" }}
-                                  title={`${dist.histogram.edges[i]}-${dist.histogram.edges[i+1]}: ${count}`}
-                                />
-                              ))}
-                            </div>
-                            <div className="flex justify-between text-[9px] font-mono text-li-text-muted">
-                              <span>0.0</span>
-                              <span>0.5</span>
-                              <span>1.0</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Type breakdown */}
-                    {distributionsQ.data.type_breakdown && (
-                      <div className="mt-6 pt-4 border-t border-li-gray-900">
-                        <h4 className="text-xs text-li-text-muted mb-3">Type Breakdown</h4>
-                        <div className="grid grid-cols-3 gap-4">
-                          {Object.entries(distributionsQ.data.type_breakdown).map(([type, stats]: [string, any]) => (
-                            <div key={type} className="bg-li-gray-900 rounded-lg p-3">
-                              <div className="flex items-center justify-between mb-2">
-                                <TypeBadge type={type} />
-                                <span className="text-lg font-mono font-bold text-li-text-primary">{stats.count}</span>
-                              </div>
-                              <div className="text-[10px] text-li-text-muted space-y-0.5">
-                                <div>{stats.pct}% of survivors</div>
-                                <div>Avg composite: {stats.composite_avg}</div>
-                                <div>Avg anomaly: {stats.anomaly_avg}</div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </>
-            )}
-
-            {/* ── SEARCH ──────────────────────────────────────────── */}
-            {activeTab === "search" && (
-              <>
-                <div className="flex gap-3">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-li-text-muted" />
-                    <input
-                      type="text"
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && setSearchQuery(searchInput)}
-                      placeholder="Search companies, filings, XBRL concepts..."
-                      className="w-full pl-10 pr-4 py-2.5 bg-li-gray-900 border border-li-gray-800 rounded-lg text-sm text-li-text-primary placeholder:text-li-text-muted focus:outline-none focus:border-li-cyan/50"
-                    />
-                  </div>
-                  <button
-                    onClick={() => setSearchQuery(searchInput)}
-                    className="li-btn-primary px-6"
-                  >
-                    Search
-                  </button>
-                </div>
-
-                {searchQ.data && (
-                  <div className="space-y-1">
-                    <p className="text-xs text-li-text-muted">{searchQ.data.total} results for &ldquo;{searchQuery}&rdquo;</p>
-                    {(searchQ.data.results as BTUTSearchHit[]).map((hit, i) => (
-                      <button
-                        key={i}
-                        onClick={() => hit.ticker && hit.is_survivor && setSelectedTicker(hit.ticker)}
-                        className="w-full flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-li-gray-900 transition-colors text-left"
-                      >
-                        <span className="font-mono text-li-cyan text-sm w-16">{hit.ticker || "-"}</span>
-                        <span className="text-sm text-li-text-secondary flex-1 truncate">{hit.name}</span>
-                        <TypeBadge type={hit.type} />
-                        {hit.is_survivor && (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-li-green/10 text-li-green border border-li-green/20">
-                            SURVIVOR
-                          </span>
-                        )}
-                        {hit.composite > 0 && (
-                          <span className="font-mono text-xs text-li-text-muted">{(hit.composite * 100).toFixed(1)}</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {selectedTicker && (
-                  <SurvivorDetail ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
-                )}
-              </>
-            )}
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-li-green animate-pulse" />
+            <span className="text-[10px] font-mono text-li-green uppercase tracking-wider">Ready</span>
           </div>
         </div>
+
+        {/* ═══════════════ MAIN GRID ═══════════════ */}
+        <div className="grid grid-cols-12 gap-0 h-[calc(100vh-3.5rem-2.5rem)]">
+
+          {/* ── LEFT: Table (col 1-7) ────────────────────────────── */}
+          <div className="col-span-7 border-r border-li-gray-900 flex flex-col overflow-hidden">
+
+            {/* Filter bar */}
+            <div className="flex items-center gap-2 px-3 py-1.5 border-b border-li-gray-900 bg-li-black/50">
+              <span className="text-[9px] text-li-text-muted uppercase tracking-wider">Filter:</span>
+              {["", "company", "filing", "financial_fact"].map(t => (
+                <button key={t} onClick={() => { setFilterType(t); setClusterFilter(null); }}
+                  className={cn("px-2 py-0.5 rounded text-[9px] font-mono",
+                    filterType === t ? "bg-li-cyan/15 text-li-cyan" : "text-li-text-muted hover:text-li-text-secondary")}>
+                  {t || "ALL"}
+                </button>
+              ))}
+              <span className="text-li-gray-800">|</span>
+              {["", "PIONEER", "ANCHOR", "HUB", "BOUNDARY", "ISOLATE", "BRIDGE"].map(r => (
+                <button key={r} onClick={() => setFilterRole(r)}
+                  className={cn("px-1.5 py-0.5 rounded text-[9px] font-mono",
+                    filterRole === r ? "bg-li-cyan/15 text-li-cyan" : "text-li-text-muted hover:text-li-text-secondary")}>
+                  {r || "ALL ROLES"}
+                </button>
+              ))}
+              {clusterFilter !== null && (
+                <button onClick={() => setClusterFilter(null)}
+                  className="px-2 py-0.5 rounded text-[9px] font-mono bg-li-yellow/15 text-li-yellow">
+                  Cluster {clusterFilter} x
+                </button>
+              )}
+              <span className="ml-auto text-[9px] font-mono text-li-text-muted">{sortedSurvivors.length} results</span>
+            </div>
+
+            {/* Table */}
+            <div className="flex-1 overflow-auto">
+              <table className="w-full text-[10px]">
+                <thead className="sticky top-0 bg-li-black z-10">
+                  <tr className="border-b border-li-gray-800">
+                    <th className="px-2 py-1.5 text-li-text-muted text-left w-6">#</th>
+                    <th className="px-2 py-1.5 text-li-text-muted text-left">ROLE</th>
+                    <SortHeader col="composite">TICKER</SortHeader>
+                    <th className="px-2 py-1.5 text-li-text-muted text-left">NAME</th>
+                    <th className="px-2 py-1.5 text-li-text-muted text-center">T</th>
+                    <SortHeader col="composite">COMP</SortHeader>
+                    <SortHeader col="anomaly">ANOM</SortHeader>
+                    <SortHeader col="diversity">DIV</SortHeader>
+                    <SortHeader col="reconstruction">REC</SortHeader>
+                    <SortHeader col="flips">FLIPS</SortHeader>
+                    <th className="px-2 py-1.5 text-li-text-muted text-center">C</th>
+                    <th className="px-2 py-1.5 text-li-text-muted text-left">FINGERPRINT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedSurvivors.map((sv, i) => {
+                    const isSelected = sv.ticker === selectedTicker;
+                    return (
+                      <tr key={`${sv.rank}-${sv.name}`}
+                        onClick={() => sv.ticker && setSelectedTicker(isSelected ? null : sv.ticker)}
+                        className={cn(
+                          "cursor-pointer border-b border-li-gray-900/50 transition-colors",
+                          isSelected ? "bg-li-cyan/5 border-l-2 border-l-li-cyan" : "hover:bg-li-gray-900/30",
+                        )}>
+                        <td className="px-2 py-1 text-li-text-muted font-mono">{i + 1}</td>
+                        <td className="px-2 py-1">
+                          <RoleBadge role={sv.metadata?.structural_role?.role || "MEMBER"} />
+                        </td>
+                        <td className="px-2 py-1 font-mono text-li-cyan font-bold">{sv.ticker || "-"}</td>
+                        <td className="px-2 py-1 text-li-text-secondary truncate max-w-[140px]">{sv.name}</td>
+                        <td className="px-2 py-1 text-center"><TypeDot type={sv.type} /></td>
+                        <td className="px-2 py-1"><MicroBar value={sv.scores.composite} color="bg-li-cyan" /></td>
+                        <td className="px-2 py-1"><MicroBar value={sv.scores.anomaly} color="bg-li-red" /></td>
+                        <td className="px-2 py-1"><MicroBar value={sv.scores.diversity} color="bg-li-green" /></td>
+                        <td className="px-2 py-1"><MicroBar value={sv.scores.reconstruction} color="bg-li-blue" /></td>
+                        <td className="px-2 py-1 font-mono text-li-text-muted text-center">{sv.flips}</td>
+                        <td className="px-2 py-1 font-mono text-li-text-muted text-center">{sv.cluster}</td>
+                        <td className="px-2 py-1"><FP fp={sv.fingerprint} /></td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* ── RIGHT (col 8-12) ─────────────────────────────────── */}
+          <div className="col-span-5 flex flex-col overflow-hidden">
+
+            {/* Gauges */}
+            <div className="flex items-center justify-around py-3 border-b border-li-gray-900">
+              <Gauge value={aggScores.composite} label="Composite" color="#00d4ff" />
+              <Gauge value={aggScores.anomaly} label="Anomaly" color="#f85149" />
+              <Gauge value={aggScores.diversity} label="Diversity" color="#3fb950" />
+              <Gauge value={aggScores.reconstruction} label="Recon" color="#388bfd" />
+            </div>
+
+            {/* Scatter plot */}
+            <div className="h-[240px] border-b border-li-gray-900 px-2 py-1">
+              <div className="text-[8px] uppercase tracking-widest text-li-text-muted px-2">Anomaly x Reconstruction</div>
+              <ResponsiveContainer width="100%" height="90%">
+                <ScatterChart margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+                  <XAxis dataKey="anomaly" type="number" domain={[0, 1]} tick={{ fontSize: 8, fill: "#555" }}
+                    axisLine={{ stroke: "#222" }} tickLine={false} />
+                  <YAxis dataKey="reconstruction" type="number" domain={[0, 1]} tick={{ fontSize: 8, fill: "#555" }}
+                    axisLine={{ stroke: "#222" }} tickLine={false} />
+                  <Tooltip content={<ScatterTooltip />} />
+                  <Scatter data={scatterData} cursor="pointer"
+                    onClick={(data: any) => data?.ticker && setSelectedTicker(data.ticker)}>
+                    {scatterData.map((d, i) => (
+                      <Cell key={i}
+                        fill={d.type === "company" ? "#00d4ff" : d.type === "filing" ? "#a371f7" : "#3fb950"}
+                        fillOpacity={0.6}
+                        r={Math.max(2, d.composite * 6)} />
+                    ))}
+                  </Scatter>
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Cluster matrix */}
+            <div className="flex-1 overflow-auto p-2">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Cluster Matrix</span>
+                <div className="flex items-center gap-2 text-[8px]">
+                  <span className="flex items-center gap-1"><div className="w-2 h-2 bg-li-cyan rounded-sm" /> Company</span>
+                  <span className="flex items-center gap-1"><div className="w-2 h-2 bg-li-purple rounded-sm" /> Filing</span>
+                  <span className="flex items-center gap-1"><div className="w-2 h-2 bg-li-green rounded-sm" /> Fact</span>
+                </div>
+              </div>
+              <ClusterMatrix clusters={clustersQ.data?.clusters || []} onSelect={setClusterFilter} />
+            </div>
+          </div>
+        </div>
+
+        {/* ═══════════════ DOSSIER (slides in at bottom) ═══════════════ */}
+        {selectedTicker && (
+          <div className="fixed bottom-0 left-60 right-0 z-50 border-t border-li-cyan/20 bg-li-bg shadow-2xl animate-fade-in-up">
+            <Dossier ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
+          </div>
+        )}
       </main>
     </div>
   );
