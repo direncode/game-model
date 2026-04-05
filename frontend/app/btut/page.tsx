@@ -133,11 +133,40 @@ function SeverityTag({ tag, severity, desc }: { tag: string; severity: string; d
 // DOSSIER PANEL
 // =====================================================================
 function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => void }) {
+  const [ragData, setRagData] = useState<any>(null);
+  const [ragLoading, setRagLoading] = useState(false);
+  const [reportTaskId, setReportTaskId] = useState<string | null>(null);
+  const [reportStatus, setReportStatus] = useState<any>(null);
+
   const { data } = useQuery({
     queryKey: ["btut-analyze", entityKey],
     queryFn: () => api.getBTUTAnalysis(entityKey),
     enabled: !!entityKey,
   });
+
+  const handleAnalyzeSources = async () => {
+    setRagLoading(true);
+    try {
+      const result = await api.getBTUTRAGAnalysis(entityKey);
+      setRagData(result);
+    } catch (e) { console.error(e); }
+    setRagLoading(false);
+  };
+
+  const handleGenerateReport = async () => {
+    try {
+      const result = await api.generateBTUTReport({ entity_keys: [entityKey], format: "pdf" });
+      setReportTaskId(result.task_id);
+      // Poll for completion
+      const poll = setInterval(async () => {
+        try {
+          const status = await api.getBTUTReportStatus(result.task_id);
+          setReportStatus(status);
+          if (status.status === "completed" || status.status === "failed") clearInterval(poll);
+        } catch { clearInterval(poll); }
+      }, 3000);
+    } catch (e) { console.error(e); }
+  };
 
   if (!data) return (
     <div className="col-span-full lg:col-span-7 border border-li-gray-800 rounded bg-li-surface p-4 animate-pulse">
@@ -158,7 +187,17 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
           <span className="text-[10px] font-mono text-li-text-muted">CIK {a.cik}</span>
           {m.structural_role && <RoleBadge role={m.structural_role.role} />}
         </div>
-        <button onClick={onClose} className="text-li-text-muted hover:text-white text-xs px-2 py-1">ESC</button>
+        <div className="flex items-center gap-2">
+          <button onClick={handleAnalyzeSources} disabled={ragLoading}
+            className="px-3 py-1 rounded text-[10px] font-mono bg-li-cyan/10 text-li-cyan border border-li-cyan/20 hover:bg-li-cyan/20 disabled:opacity-50">
+            {ragLoading ? "Analyzing..." : "Analyze Sources"}
+          </button>
+          <button onClick={handleGenerateReport}
+            className="px-3 py-1 rounded text-[10px] font-mono bg-li-purple/10 text-li-purple border border-li-purple/20 hover:bg-li-purple/20">
+            Generate Report
+          </button>
+          <button onClick={onClose} className="text-li-text-muted hover:text-white text-xs px-2 py-1">ESC</button>
+        </div>
       </div>
 
       <div className="p-4 grid grid-cols-2 gap-4 max-h-[50vh] overflow-y-auto">
@@ -332,6 +371,80 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
             </div>
           )}
         </div>
+
+        {/* ── RAG Analysis Section ──────────────────────────────── */}
+        {ragData?.synthesis && (
+          <div className="col-span-2 border-t border-li-gray-800 p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[8px] uppercase tracking-widest text-li-cyan">Primary Source Analysis</span>
+              {ragData.cached && <span className="text-[8px] px-1.5 py-0.5 rounded bg-li-gray-800 text-li-text-muted">cached</span>}
+              <span className="text-[8px] text-li-text-muted">{ragData.source_manifest?.chunk_count || 0} source chunks</span>
+            </div>
+
+            {ragData.synthesis.executive_summary && (
+              <div className="bg-li-cyan/5 border border-li-cyan/10 rounded p-3">
+                <span className="text-[8px] uppercase tracking-widest text-li-cyan">Executive Summary</span>
+                <p className="text-[10px] text-li-text-secondary mt-1 leading-relaxed">{ragData.synthesis.executive_summary}</p>
+              </div>
+            )}
+
+            {ragData.synthesis.source_evidence?.length > 0 && (
+              <div className="space-y-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Cited Evidence</span>
+                {ragData.synthesis.source_evidence.slice(0, 4).map((cit: any, i: number) => (
+                  <div key={i} className="bg-li-gray-900 rounded px-3 py-2 text-[9px]">
+                    <p className="text-li-text-secondary italic">{cit.excerpt?.substring(0, 200)}</p>
+                    {cit.relevance && <p className="text-li-text-muted mt-1">Relevance: {cit.relevance}</p>}
+                    {cit.source_url && (
+                      <a href={cit.source_url} target="_blank" rel="noopener noreferrer"
+                         className="text-li-cyan hover:underline text-[8px] mt-0.5 block">{cit.source_type}: {cit.source_id}</a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-3">
+              {ragData.synthesis.risk_assessment && (
+                <div className="bg-li-red/5 border border-li-red/10 rounded p-3">
+                  <span className="text-[8px] uppercase tracking-widest text-li-red">Risk</span>
+                  <p className="text-[9px] text-li-text-secondary mt-1">{ragData.synthesis.risk_assessment.substring(0, 300)}</p>
+                </div>
+              )}
+              {ragData.synthesis.opportunity_assessment && (
+                <div className="bg-li-green/5 border border-li-green/10 rounded p-3">
+                  <span className="text-[8px] uppercase tracking-widest text-li-green">Opportunity</span>
+                  <p className="text-[9px] text-li-text-secondary mt-1">{ragData.synthesis.opportunity_assessment.substring(0, 300)}</p>
+                </div>
+              )}
+            </div>
+
+            {ragData.synthesis.confidence_note && (
+              <p className="text-[9px] text-li-text-muted italic">{ragData.synthesis.confidence_note}</p>
+            )}
+          </div>
+        )}
+
+        {/* ── Report Status ──────────────────────────────────── */}
+        {reportTaskId && (
+          <div className="col-span-2 border-t border-li-gray-800 p-3 flex items-center gap-3">
+            {reportStatus?.status === "completed" ? (
+              <>
+                <span className="text-[10px] text-li-green font-mono">Report ready</span>
+                <span className="text-[10px] text-li-text-muted">{reportStatus.filename}</span>
+              </>
+            ) : reportStatus?.status === "failed" ? (
+              <span className="text-[10px] text-li-red font-mono">Report failed: {reportStatus.error}</span>
+            ) : (
+              <>
+                <div className="w-3 h-3 border-2 border-li-cyan border-t-transparent rounded-full animate-spin" />
+                <span className="text-[10px] text-li-text-muted font-mono">
+                  Generating report... {reportStatus?.progress?.step || ""}
+                </span>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

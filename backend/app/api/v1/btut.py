@@ -12,6 +12,8 @@ from app.schemas.btut import (
     MagnitudeResponse,
     SearchResultResponse,
     SurvivorListResponse,
+    RAGAnalysisResponse,
+    BTUTReportStatusResponse,
 )
 from app.schemas.common import MessageResponse
 from app.services.btut.query_engine import get_query_engine
@@ -194,6 +196,148 @@ async def btut_cluster_detail(cluster_id: int, dataset: str = Query(default="edg
         from app.core.exceptions import NotFoundError
         raise NotFoundError(detail=f"Cluster {cluster_id} not found")
     return result
+
+
+# ── RAG + Report Endpoints ────────────────────────────────────────────
+
+@router.post("/rag/{entity_key}")
+async def btut_rag_analyze(
+    entity_key: str,
+    dataset: str = Query(default="edgar"),
+    force_refresh: bool = Query(default=False),
+):
+    """Fetch primary sources + Claude synthesis for a BTUT entity."""
+    from app.services.btut.rag_engine import RAGEngine
+    from app.services.btut.rag_synthesizer import RAGSynthesizer, BTUTContext
+
+    # Get BTUT analysis
+    analysis = _engine(dataset).analyze(entity_key)
+    if not analysis:
+        from app.core.exceptions import NotFoundError
+        raise NotFoundError(detail=f"Entity '{entity_key}' not found")
+
+    # Fetch and index sources
+    rag = RAGEngine()
+    manifest = await rag.fetch_and_index(
+        entity_key=entity_key,
+        dataset_id=dataset,
+        entity_attrs=analysis.get("attributes", {}),
+        entity_type=analysis.get("entity_type", ""),
+        force_refresh=force_refresh,
+    )
+
+    # Search relevant chunks
+    chunks = await rag.search_chunks(entity_key, dataset, top_k=15)
+
+    # Build BTUT context
+    metadata = analysis.get("metadata", {})
+    ctx = BTUTContext(
+        entity_key=entity_key,
+        entity_name=analysis.get("company_name") or analysis.get("ticker", entity_key),
+        entity_type=analysis.get("entity_type", ""),
+        dataset_id=dataset,
+        scores=analysis.get("scores", {}),
+        structural_role=metadata.get("structural_role", {}).get("role", ""),
+        role_description=metadata.get("structural_role", {}).get("description", ""),
+        fingerprint=analysis.get("lattice_profile", {}).get("fingerprint_48bit", ""),
+        flips=analysis.get("lattice_profile", {}).get("total_flips", 0),
+        cluster_id=analysis.get("cluster", {}).get("id", -1),
+        cluster_size=analysis.get("cluster", {}).get("total_members", 0),
+        anomaly_tags=metadata.get("anomaly_taxonomy", []),
+        anomaly_story=analysis.get("anomaly_story", ""),
+        peer_network=metadata.get("peer_network", []),
+        attributes=analysis.get("attributes", {}),
+    )
+
+    # Synthesize
+    synthesizer = RAGSynthesizer()
+    synthesis, was_cached = await synthesizer.synthesize_cached(ctx, chunks)
+
+    return {
+        "synthesis": synthesis.to_dict(),
+        "source_manifest": {
+            "entity_key": manifest.entity_key,
+            "dataset_id": manifest.dataset_id,
+            "chunk_count": manifest.chunk_count,
+            "source_ids": manifest.source_ids,
+            "source_types": manifest.source_types,
+            "indexed_at": manifest.indexed_at,
+            "freshness_hours": manifest.freshness_hours,
+        },
+        "cached": was_cached,
+    }
+
+
+@router.get("/rag/{entity_key}/sources")
+async def btut_rag_sources(
+    entity_key: str,
+    dataset: str = Query(default="edgar"),
+):
+    """Check if primary sources exist for an entity."""
+    from app.services.btut.rag_engine import RAGEngine
+    rag = RAGEngine()
+    manifest = await rag.get_source_manifest(entity_key, dataset)
+    if manifest is None:
+        return {"entity_key": entity_key, "dataset_id": dataset, "chunk_count": 0, "source_ids": []}
+    return {
+        "entity_key": manifest.entity_key,
+        "dataset_id": manifest.dataset_id,
+        "chunk_count": manifest.chunk_count,
+        "source_ids": manifest.source_ids,
+        "source_types": manifest.source_types,
+        "indexed_at": manifest.indexed_at,
+        "freshness_hours": manifest.freshness_hours,
+    }
+
+
+@router.post("/report")
+async def btut_generate_report(request: dict):
+    """Dispatch async report generation. Returns task_id for polling."""
+    entity_keys = request.get("entity_keys", [])
+    dataset = request.get("dataset", "edgar")
+    report_format = request.get("format", "pdf")
+    report_type = request.get("report_type", "full_analysis")
+
+    if not entity_keys:
+        from app.core.exceptions import ValidationError
+        raise ValidationError(detail="entity_keys required")
+
+    try:
+        from app.tasks.btut_report import generate_btut_report_task
+        task = generate_btut_report_task.delay(
+            entity_keys=entity_keys,
+            dataset_id=dataset,
+            report_format=report_format,
+            report_type=report_type,
+        )
+        return {
+            "task_id": task.id,
+            "status": "started",
+            "entity_keys": entity_keys,
+            "format": report_format,
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+@router.get("/report/{task_id}")
+async def btut_report_status(task_id: str):
+    """Check report generation status. Returns download info when complete."""
+    try:
+        from celery.result import AsyncResult
+        result = AsyncResult(task_id)
+        if result.state == "PENDING":
+            return {"task_id": task_id, "status": "pending"}
+        elif result.state == "PROGRESS":
+            return {"task_id": task_id, "status": "progress", "progress": result.info or {}}
+        elif result.state == "SUCCESS":
+            return {"task_id": task_id, "status": "completed", **result.result}
+        elif result.state == "FAILURE":
+            return {"task_id": task_id, "status": "failed", "error": str(result.info)}
+        else:
+            return {"task_id": task_id, "status": result.state}
+    except Exception as e:
+        return {"task_id": task_id, "status": "error", "error": str(e)}
 
 
 @router.post("/ingest")

@@ -162,3 +162,59 @@ class SearchResultResponse(BaseModel):
     field: str | None = None
     results: list[SearchHit] = Field(default_factory=list)
     total: int = 0
+
+
+# ── RAG Response Schemas ────────────────────────────────────────────
+
+class CitationResponse(BaseModel):
+    source_id: str = ""
+    source_type: str = ""
+    source_url: str = ""
+    excerpt: str = ""
+    relevance: str = ""
+
+
+class RAGSynthesisResponse(BaseModel):
+    entity_key: str = ""
+    dataset_id: str = ""
+    executive_summary: str = ""
+    structural_analysis: str = ""
+    source_evidence: list[CitationResponse] = Field(default_factory=list)
+    anomaly_explanation: str = ""
+    risk_assessment: str = ""
+    opportunity_assessment: str = ""
+    confidence_note: str = ""
+    generated_at: str = ""
+    model: str = ""
+    chunk_count_used: int = 0
+
+
+class SourceManifestResponse(BaseModel):
+    entity_key: str = ""
+    dataset_id: str = ""
+    chunk_count: int = 0
+    source_ids: list[str] = Field(default_factory=list)
+    source_types: list[str] = Field(default_factory=list)
+    indexed_at: str = ""
+    freshness_hours: float = 0
+
+
+class RAGAnalysisResponse(BaseModel):
+    synthesis: RAGSynthesisResponse = Field(default_factory=RAGSynthesisResponse)
+    source_manifest: SourceManifestResponse = Field(default_factory=SourceManifestResponse)
+    cached: bool = False
+
+
+class BTUTReportRequest(BaseModel):
+    entity_keys: list[str] = Field(min_length=1, max_length=10)
+    dataset: str = "edgar"
+    format: str = "pdf"
+    report_type: str = "full_analysis"
+
+
+class BTUTReportStatusResponse(BaseModel):
+    task_id: str = ""
+    status: str = ""
+    progress: dict = Field(default_factory=dict)
+    download_url: str | None = None
+    filename: str | None = None

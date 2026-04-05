@@ -255,6 +255,18 @@ class ApiClient {
     return this.request<any>(`/api/v1/btut/clusters/${clusterId}?dataset=${dataset}`);
   }
 
+  async getBTUTRAGAnalysis(entityKey: string, dataset = "edgar", forceRefresh = false) {
+    return this.request<any>(`/api/v1/btut/rag/${encodeURIComponent(entityKey)}?dataset=${dataset}&force_refresh=${forceRefresh}`, { method: "POST" });
+  }
+
+  async generateBTUTReport(params: { entity_keys: string[]; dataset?: string; format?: string; report_type?: string }) {
+    return this.request<any>("/api/v1/btut/report", { method: "POST", body: JSON.stringify(params) });
+  }
+
+  async getBTUTReportStatus(taskId: string) {
+    return this.request<any>(`/api/v1/btut/report/${taskId}`);
+  }
+
   async getBTUTDatasets() {
     return this.request<Array<{ id: string; name: string; description: string; entity_types: Array<{ name: string; color: string }>; lookup_field: string; lookup_label: string; has_results: boolean }>>("/api/v1/btut/datasets");
   }
