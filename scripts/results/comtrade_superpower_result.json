@@ -1,0 +1,3004 @@
+{
+  "summary": {
+    "total_entities": 465,
+    "clusters": 11,
+    "unique_48bit_fingerprints": 71,
+    "survivors": 186,
+    "reduction": 2,
+    "survivor_types": {
+      "country": 11,
+      "trade_flow": 175
+    },
+    "reconstruction": {
+      "mean_nn": 0.2376,
+      "median_nn": 0.2912,
+      "p95_nn": 0.5304,
+      "variance_preservation": 1.0694,
+      "coverages": {
+        "0.5": 0.9054,
+        "1.0": 1.0,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 0.2
+  },
+  "survivors": [
+    {
+      "entity": {
+        "name": "country_DEU",
+        "type": "country",
+        "attributes": "{\"country_code\": \"DEU\", \"country_name\": \"DEU\", \"un_code\": \"276\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110101011011010011001111110100111111111001011110",
+      "flips": 32,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9134,
+        "anomaly": 1.0,
+        "composite": 0.9653
+      }
+    },
+    {
+      "entity": {
+        "name": "country_ARG",
+        "type": "country",
+        "attributes": "{\"country_code\": \"ARG\", \"country_name\": \"ARG\", \"un_code\": \"032\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "000110000110000001001110101000111101111010111101",
+      "flips": 24,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9054,
+        "anomaly": 0.9774,
+        "composite": 0.9565
+      }
+    },
+    {
+      "entity": {
+        "name": "country_EGY",
+        "type": "country",
+        "attributes": "{\"country_code\": \"EGY\", \"country_name\": \"EGY\", \"un_code\": \"818\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111110101111101001101111101111111101101101110111",
+      "flips": 37,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8787,
+        "anomaly": 0.6901,
+        "composite": 0.874
+      }
+    },
+    {
+      "entity": {
+        "name": "country_KOR",
+        "type": "country",
+        "attributes": "{\"country_code\": \"KOR\", \"country_name\": \"KOR\", \"un_code\": \"410\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111110111100111010111110111111101111101111111011",
+      "flips": 39,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9108,
+        "anomaly": 0.6067,
+        "composite": 0.866
+      }
+    },
+    {
+      "entity": {
+        "name": "country_CAN",
+        "type": "country",
+        "attributes": "{\"country_code\": \"CAN\", \"country_name\": \"CAN\", \"un_code\": \"124\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "110110111111001111111111111111101111111011110100",
+      "flips": 39,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9555,
+        "anomaly": 0.5138,
+        "composite": 0.8607
+      }
+    },
+    {
+      "entity": {
+        "name": "country_ITA",
+        "type": "country",
+        "attributes": "{\"country_code\": \"ITA\", \"country_name\": \"ITA\", \"un_code\": \"381\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "101111111111101111111111111001111111111111111100",
+      "flips": 42,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8512,
+        "anomaly": 0.6201,
+        "composite": 0.8455
+      }
+    },
+    {
+      "entity": {
+        "name": "country_AUS",
+        "type": "country",
+        "attributes": "{\"country_code\": \"AUS\", \"country_name\": \"AUS\", \"un_code\": \"036\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "101111011110101111110111101111111111110111111111",
+      "flips": 41,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8667,
+        "anomaly": 0.55,
+        "composite": 0.8342
+      }
+    },
+    {
+      "entity": {
+        "name": "country_ZAF",
+        "type": "country",
+        "attributes": "{\"country_code\": \"ZAF\", \"country_name\": \"ZAF\", \"un_code\": \"710\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111101111101111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7732,
+        "anomaly": 0.6127,
+        "composite": 0.8125
+      }
+    },
+    {
+      "entity": {
+        "name": "country_CHL",
+        "type": "country",
+        "attributes": "{\"country_code\": \"CHL\", \"country_name\": \"CHL\", \"un_code\": \"152\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111110111111111011101111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8298,
+        "anomaly": 0.5051,
+        "composite": 0.8082
+      }
+    },
+    {
+      "entity": {
+        "name": "country_NLD",
+        "type": "country",
+        "attributes": "{\"country_code\": \"NLD\", \"country_name\": \"NLD\", \"un_code\": \"528\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111011111111111111111111111111111111111011111101",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7901,
+        "anomaly": 0.4701,
+        "composite": 0.7836
+      }
+    },
+    {
+      "entity": {
+        "name": "country_PHL",
+        "type": "country",
+        "attributes": "{\"country_code\": \"PHL\", \"country_name\": \"PHL\", \"un_code\": \"608\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111101111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7734,
+        "anomaly": 0.6976,
+        "composite": 0.6587
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"CHE\", \"description\": \"CHN <-> CHE bilateral trade\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111101111111011111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8851,
+        "anomaly": 0.3294,
+        "composite": 0.7864
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"AUS\", \"description\": \"ITA <-> AUS bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111110111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.739,
+        "anomaly": 0.3511,
+        "composite": 0.7334
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"CHE\", \"description\": \"DEU <-> CHE bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "001110111111111111111110111111111111111111111101",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6562,
+        "anomaly": 0.3136,
+        "composite": 0.6909
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"ARG\", \"description\": \"ITA <-> ARG bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111101111111111101111111111111111011",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6446,
+        "anomaly": 0.3117,
+        "composite": 0.6858
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"CHE\", \"description\": \"CAN <-> CHE bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "011111111101111011111111111111111111111111111101",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.601,
+        "anomaly": 0.2984,
+        "composite": 0.665
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"COL\", \"description\": \"CHE <-> COL bilateral trade\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111111011111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6046,
+        "anomaly": 0.2805,
+        "composite": 0.6619
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"VNM\", \"description\": \"AUS <-> VNM bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111110111111111111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5884,
+        "anomaly": 0.3004,
+        "composite": 0.6605
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"ITA\", \"description\": \"CAN <-> ITA bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111101111011011111111101111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5752,
+        "anomaly": 0.3032,
+        "composite": 0.6559
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"ARG\", \"description\": \"KOR <-> ARG bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "011111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6041,
+        "anomaly": 0.2431,
+        "composite": 0.6524
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"VNM\", \"description\": \"ITA <-> VNM bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "111110111111101011111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5641,
+        "anomaly": 0.2825,
+        "composite": 0.6463
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"AUS\", \"description\": \"IND <-> AUS bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "111110111111111101111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5549,
+        "anomaly": 0.2966,
+        "composite": 0.6461
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"ITA\", \"description\": \"DEU <-> ITA bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111001111111011111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5437,
+        "anomaly": 0.2972,
+        "composite": 0.6418
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"CAN\", \"description\": \"KOR <-> CAN bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111110111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5649,
+        "anomaly": 0.2485,
+        "composite": 0.6381
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"COL\", \"description\": \"ITA <-> COL bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111110111111111111011111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5406,
+        "anomaly": 0.2754,
+        "composite": 0.6351
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"SGP\", \"description\": \"BRA <-> SGP bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111101110111111111111111101111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5289,
+        "anomaly": 0.2863,
+        "composite": 0.6331
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"MYS\", \"description\": \"ITA <-> MYS bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111101111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5372,
+        "anomaly": 0.2611,
+        "composite": 0.6302
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"VNM\", \"description\": \"SGP <-> VNM bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111110101",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5424,
+        "anomaly": 0.2483,
+        "composite": 0.629
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"CHE\", \"description\": \"MEX <-> CHE bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111111111111101011111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5281,
+        "anomaly": 0.2681,
+        "composite": 0.6283
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"IDN\", \"description\": \"AUS <-> IDN bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111110111111101111111111011",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5242,
+        "anomaly": 0.2722,
+        "composite": 0.6277
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"CHL\", \"description\": \"CHN <-> CHL bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111110",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.528,
+        "anomaly": 0.2298,
+        "composite": 0.6187
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"VNM\", \"description\": \"KOR <-> VNM bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5415,
+        "anomaly": 0.2058,
+        "composite": 0.6181
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"VNM\", \"description\": \"CAN <-> VNM bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111011111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5299,
+        "anomaly": 0.2076,
+        "composite": 0.6139
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"COL\", \"description\": \"GBR <-> COL bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111110111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.521,
+        "anomaly": 0.21,
+        "composite": 0.6109
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"EGY\", \"description\": \"CHE <-> EGY bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111110111110111111111011111110",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.499,
+        "anomaly": 0.2405,
+        "composite": 0.6097
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"CHL\", \"description\": \"IND <-> CHL bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111101111110111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4911,
+        "anomaly": 0.2468,
+        "composite": 0.6081
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"VNM\", \"description\": \"CHN <-> VNM bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111110111111011111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5047,
+        "anomaly": 0.2068,
+        "composite": 0.6035
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_NLD",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"NLD\", \"description\": \"CHN <-> NLD bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111110111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4829,
+        "anomaly": 0.2344,
+        "composite": 0.6017
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IDN_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IDN\", \"partner\": \"VNM\", \"description\": \"IDN <-> VNM bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111110111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4956,
+        "anomaly": 0.2122,
+        "composite": 0.6013
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"IDN\", \"description\": \"KOR <-> IDN bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111101111111111111111111111111111111111011",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4882,
+        "anomaly": 0.2187,
+        "composite": 0.6
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"COL\", \"description\": \"DEU <-> COL bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111011111111110111111111111111111111110",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4704,
+        "anomaly": 0.2396,
+        "composite": 0.5981
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_IND",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"IND\", \"description\": \"USA <-> IND bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111110111111111110111110111101111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4749,
+        "anomaly": 0.2246,
+        "composite": 0.5961
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"COL\", \"description\": \"IND <-> COL bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111001111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5002,
+        "anomaly": 0.1694,
+        "composite": 0.5924
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"COL\", \"description\": \"JPN <-> COL bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111110",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4737,
+        "anomaly": 0.1994,
+        "composite": 0.5894
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"ZAF\", \"description\": \"SGP <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111100111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3897,
+        "anomaly": 0.242,
+        "composite": 0.5664
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"CHE\", \"description\": \"ITA <-> CHE bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111110111111111101111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6563,
+        "anomaly": 0.3052,
+        "composite": 0.5138
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"AUS\", \"description\": \"KOR <-> AUS bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111110111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5765,
+        "anomaly": 0.2877,
+        "composite": 0.4775
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_MEX",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"MEX\", \"description\": \"KOR <-> MEX bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6868,
+        "anomaly": 0.3039,
+        "composite": 0.4673
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"COL\", \"description\": \"KOR <-> COL bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5494,
+        "anomaly": 0.2725,
+        "composite": 0.4629
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"CHE\", \"description\": \"AUS <-> CHE bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "101111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.7275,
+        "anomaly": 0.3228,
+        "composite": 0.4592
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"CHE\", \"description\": \"IND <-> CHE bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111110111111101111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5478,
+        "anomaly": 0.2484,
+        "composite": 0.4562
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"AUS\", \"description\": \"DEU <-> AUS bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111011111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.506,
+        "anomaly": 0.2751,
+        "composite": 0.4462
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_BRA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"BRA\", \"description\": \"DEU <-> BRA bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111011111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4989,
+        "anomaly": 0.2858,
+        "composite": 0.446
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"SGP\", \"description\": \"DEU <-> SGP bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5207,
+        "anomaly": 0.2383,
+        "composite": 0.4428
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_SAU",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"SAU\", \"description\": \"ITA <-> SAU bilateral trade\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111111111011111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5347,
+        "anomaly": 0.2065,
+        "composite": 0.4405
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"AUS\", \"description\": \"CAN <-> AUS bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111011",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6091,
+        "anomaly": 0.2826,
+        "composite": 0.431
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"ZAF\", \"description\": \"ITA <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111110111111111101111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4743,
+        "anomaly": 0.2582,
+        "composite": 0.4293
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"VNM\", \"description\": \"DEU <-> VNM bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111101111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.6343,
+        "anomaly": 0.3096,
+        "composite": 0.4186
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_THA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"THA\", \"description\": \"KOR <-> THA bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111011111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4609,
+        "anomaly": 0.2296,
+        "composite": 0.4168
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_JPN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"JPN\", \"description\": \"USA <-> JPN bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111110111111101111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4452,
+        "anomaly": 0.2191,
+        "composite": 0.4078
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"IDN\", \"description\": \"SGP <-> IDN bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111110111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4686,
+        "anomaly": 0.1769,
+        "composite": 0.4067
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"ITA\", \"description\": \"IND <-> ITA bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111011",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5585,
+        "anomaly": 0.266,
+        "composite": 0.4066
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ZAF_NGA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ZAF\", \"partner\": \"NGA\", \"description\": \"ZAF <-> NGA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3529,
+        "anomaly": 1.0,
+        "composite": 0.3923
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_TUR_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"TUR\", \"partner\": \"EGY\", \"description\": \"TUR <-> EGY bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.3637,
+        "anomaly": 0.9028,
+        "composite": 0.3871
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"EGY\", \"description\": \"GBR <-> EGY bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3379,
+        "anomaly": 0.9969,
+        "composite": 0.3855
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ARE_PHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ARE\", \"partner\": \"PHL\", \"description\": \"ARE <-> PHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3478,
+        "anomaly": 0.973,
+        "composite": 0.3835
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_FRA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"FRA\", \"description\": \"USA <-> FRA bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111101111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4208,
+        "anomaly": 0.1561,
+        "composite": 0.3824
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_VNM_NGA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"VNM\", \"partner\": \"NGA\", \"description\": \"VNM <-> NGA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3704,
+        "anomaly": 0.9317,
+        "composite": 0.3822
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_THA_PHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"THA\", \"partner\": \"PHL\", \"description\": \"THA <-> PHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3405,
+        "anomaly": 0.9681,
+        "composite": 0.3793
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_TUR",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"TUR\", \"description\": \"CHE <-> TUR bilateral trade\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111110",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5197,
+        "anomaly": 0.2114,
+        "composite": 0.3774
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"VNM\", \"description\": \"CHE <-> VNM bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.6698,
+        "anomaly": 0.2614,
+        "composite": 0.377
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_KOR",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"KOR\", \"description\": \"DEU <-> KOR bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.7673,
+        "anomaly": 0.2622,
+        "composite": 0.3736
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ARE_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ARE\", \"partner\": \"COL\", \"description\": \"ARE <-> COL bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111011111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.3754,
+        "anomaly": 0.1911,
+        "composite": 0.3729
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHL_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHL\", \"partner\": \"COL\", \"description\": \"CHL <-> COL bilateral trade\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111110",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5089,
+        "anomaly": 0.2032,
+        "composite": 0.371
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"ZAF\", \"description\": \"IND <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3385,
+        "anomaly": 0.9027,
+        "composite": 0.3622
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"SGP\", \"description\": \"IND <-> SGP bilateral trade\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111011",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.456,
+        "anomaly": 0.2508,
+        "composite": 0.3618
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"ARG\", \"description\": \"CHE <-> ARG bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.6093,
+        "anomaly": 0.2776,
+        "composite": 0.3569
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_TUR_NGA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"TUR\", \"partner\": \"NGA\", \"description\": \"TUR <-> NGA bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.4232,
+        "anomaly": 0.2739,
+        "composite": 0.3544
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_VNM_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"VNM\", \"partner\": \"COL\", \"description\": \"VNM <-> COL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.7411,
+        "anomaly": 0.2261,
+        "composite": 0.3541
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"ITA\", \"description\": \"CHN <-> ITA bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111101111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4957,
+        "anomaly": 0.2454,
+        "composite": 0.3471
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IDN_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IDN\", \"partner\": \"COL\", \"description\": \"IDN <-> COL bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.557,
+        "anomaly": 0.2103,
+        "composite": 0.3454
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"AUS\", \"description\": \"MEX <-> AUS bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "101111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4862,
+        "anomaly": 0.2385,
+        "composite": 0.3416
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"ITA\", \"description\": \"USA <-> ITA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6742,
+        "anomaly": 0.2761,
+        "composite": 0.3398
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"IDN\", \"description\": \"CHE <-> IDN bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5656,
+        "anomaly": 0.2548,
+        "composite": 0.3337
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"ARG\", \"description\": \"AUS <-> ARG bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.6127,
+        "anomaly": 0.2907,
+        "composite": 0.3337
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"EGY\", \"description\": \"NLD <-> EGY bilateral trade\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.3694,
+        "anomaly": 0.2725,
+        "composite": 0.3325
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"CAN\", \"description\": \"GBR <-> CAN bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.5301,
+        "anomaly": 0.1987,
+        "composite": 0.3317
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"SGP\", \"description\": \"CAN <-> SGP bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6863,
+        "anomaly": 0.2205,
+        "composite": 0.3307
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"IDN\", \"description\": \"MEX <-> IDN bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "101111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4807,
+        "anomaly": 0.2029,
+        "composite": 0.3305
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"IDN\", \"description\": \"DEU <-> IDN bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6866,
+        "anomaly": 0.2155,
+        "composite": 0.3296
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_TUR_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"TUR\", \"partner\": \"COL\", \"description\": \"TUR <-> COL bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111101111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4746,
+        "anomaly": 0.1864,
+        "composite": 0.3239
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"CHE\", \"description\": \"KOR <-> CHE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6486,
+        "anomaly": 0.2507,
+        "composite": 0.3232
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"ARG\", \"description\": \"CAN <-> ARG bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4991,
+        "anomaly": 0.2408,
+        "composite": 0.3181
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"EGY\", \"description\": \"USA <-> EGY bilateral trade\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111101111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4385,
+        "anomaly": 0.2165,
+        "composite": 0.317
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"COL\", \"description\": \"AUS <-> COL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6049,
+        "anomaly": 0.2939,
+        "composite": 0.3165
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"ARG\", \"description\": \"MEX <-> ARG bilateral trade\"}"
+      },
+      "cluster": 10,
+      "fingerprint_48bit": "101111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.4426,
+        "anomaly": 0.2073,
+        "composite": 0.3164
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"CHL\", \"description\": \"CHE <-> CHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6298,
+        "anomaly": 0.2342,
+        "composite": 0.3116
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"CHE\", \"description\": \"BRA <-> CHE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6309,
+        "anomaly": 0.2293,
+        "composite": 0.3108
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_GBR",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"GBR\", \"description\": \"DEU <-> GBR bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5432,
+        "anomaly": 0.3102,
+        "composite": 0.3107
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_NLD",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"NLD\", \"description\": \"USA <-> NLD bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4956,
+        "anomaly": 0.2112,
+        "composite": 0.3094
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"MYS\", \"description\": \"CAN <-> MYS bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5957,
+        "anomaly": 0.2112,
+        "composite": 0.307
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SAU_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SAU\", \"partner\": \"IDN\", \"description\": \"SAU <-> IDN bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5693,
+        "anomaly": 0.2518,
+        "composite": 0.3066
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"CHE\", \"description\": \"USA <-> CHE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6271,
+        "anomaly": 0.2108,
+        "composite": 0.3047
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"VNM\", \"description\": \"BRA <-> VNM bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5612,
+        "anomaly": 0.2546,
+        "composite": 0.304
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"ITA\", \"description\": \"GBR <-> ITA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5797,
+        "anomaly": 0.2794,
+        "composite": 0.3028
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"CHL\", \"description\": \"AUS <-> CHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5807,
+        "anomaly": 0.2759,
+        "composite": 0.3024
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_THA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"THA\", \"description\": \"SGP <-> THA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.391,
+        "anomaly": 0.5786,
+        "composite": 0.3022
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_ARE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"ARE\", \"description\": \"BRA <-> ARE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3377,
+        "anomaly": 0.6622,
+        "composite": 0.3018
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_BRA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"BRA\", \"description\": \"CHN <-> BRA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5894,
+        "anomaly": 0.2569,
+        "composite": 0.3011
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_SAU",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"SAU\", \"description\": \"SGP <-> SAU bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6033,
+        "anomaly": 0.2315,
+        "composite": 0.3003
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"SGP\", \"description\": \"KOR <-> SGP bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5869,
+        "anomaly": 0.2568,
+        "composite": 0.3001
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"ARG\", \"description\": \"JPN <-> ARG bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5933,
+        "anomaly": 0.2396,
+        "composite": 0.2983
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"ZAF\", \"description\": \"USA <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.4257,
+        "anomaly": 0.225,
+        "composite": 0.2965
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"AUS\", \"description\": \"GBR <-> AUS bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.4791,
+        "anomaly": 0.2424,
+        "composite": 0.296
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"COL\", \"description\": \"CHN <-> COL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6029,
+        "anomaly": 0.2136,
+        "composite": 0.2957
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"CAN\", \"description\": \"USA <-> CAN bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6053,
+        "anomaly": 0.2076,
+        "composite": 0.2951
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"EGY\", \"description\": \"ITA <-> EGY bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5815,
+        "anomaly": 0.2426,
+        "composite": 0.2944
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"AUS\", \"description\": \"CHN <-> AUS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5865,
+        "anomaly": 0.2339,
+        "composite": 0.2942
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"ZAF\", \"description\": \"CHE <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5316,
+        "anomaly": 0.262,
+        "composite": 0.2941
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHE_SAU",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHE\", \"partner\": \"SAU\", \"description\": \"CHE <-> SAU bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.6003,
+        "anomaly": 0.2081,
+        "composite": 0.2932
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"AUS\", \"description\": \"JPN <-> AUS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5982,
+        "anomaly": 0.2092,
+        "composite": 0.2927
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IDN_THA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IDN\", \"partner\": \"THA\", \"description\": \"IDN <-> THA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5637,
+        "anomaly": 0.2555,
+        "composite": 0.2905
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"COL\", \"description\": \"SGP <-> COL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5902,
+        "anomaly": 0.212,
+        "composite": 0.2902
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_FRA_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"FRA\", \"partner\": \"EGY\", \"description\": \"FRA <-> EGY bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3694,
+        "anomaly": 0.5644,
+        "composite": 0.29
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"SGP\", \"description\": \"MEX <-> SGP bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4451,
+        "anomaly": 0.2136,
+        "composite": 0.2898
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CAN_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CAN\", \"partner\": \"CHL\", \"description\": \"CAN <-> CHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5525,
+        "anomaly": 0.2669,
+        "composite": 0.2889
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"ITA\", \"description\": \"BRA <-> ITA bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5106,
+        "anomaly": 0.2706,
+        "composite": 0.2878
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_DEU",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"DEU\", \"description\": \"USA <-> DEU bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5488,
+        "anomaly": 0.268,
+        "composite": 0.2876
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"MYS\", \"description\": \"AUS <-> MYS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5451,
+        "anomaly": 0.2709,
+        "composite": 0.2869
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_THA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"THA\", \"description\": \"IND <-> THA bilateral trade\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.3804,
+        "anomaly": 0.2588,
+        "composite": 0.2868
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"CHE\", \"description\": \"GBR <-> CHE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5778,
+        "anomaly": 0.216,
+        "composite": 0.2862
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"VNM\", \"description\": \"MEX <-> VNM bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5542,
+        "anomaly": 0.2517,
+        "composite": 0.2857
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_CHE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"CHE\", \"description\": \"NLD <-> CHE bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5592,
+        "anomaly": 0.2413,
+        "composite": 0.2851
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"MYS\", \"description\": \"KOR <-> MYS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5628,
+        "anomaly": 0.2344,
+        "composite": 0.2848
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"IDN\", \"description\": \"USA <-> IDN bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5784,
+        "anomaly": 0.207,
+        "composite": 0.2842
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_MEX_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"MEX\", \"partner\": \"CHL\", \"description\": \"MEX <-> CHL bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.4705,
+        "anomaly": 0.2031,
+        "composite": 0.2827
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_MEX",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"MEX\", \"description\": \"ITA <-> MEX bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5396,
+        "anomaly": 0.2542,
+        "composite": 0.2805
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_NLD",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"NLD\", \"description\": \"AUS <-> NLD bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5433,
+        "anomaly": 0.2468,
+        "composite": 0.2801
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SAU_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SAU\", \"partner\": \"COL\", \"description\": \"SAU <-> COL bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4193,
+        "anomaly": 0.3838,
+        "composite": 0.2796
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_MEX",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"MEX\", \"description\": \"CHN <-> MEX bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.3517,
+        "anomaly": 0.5498,
+        "composite": 0.2792
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"CAN\", \"description\": \"DEU <-> CAN bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5537,
+        "anomaly": 0.226,
+        "composite": 0.2791
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_TUR_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"TUR\", \"partner\": \"MYS\", \"description\": \"TUR <-> MYS bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5253,
+        "anomaly": 0.211,
+        "composite": 0.2788
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IDN_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IDN\", \"partner\": \"EGY\", \"description\": \"IDN <-> EGY bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5226,
+        "anomaly": 0.2742,
+        "composite": 0.2787
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"CAN\", \"description\": \"JPN <-> CAN bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5548,
+        "anomaly": 0.222,
+        "composite": 0.2785
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ARE_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ARE\", \"partner\": \"MYS\", \"description\": \"ARE <-> MYS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.4967,
+        "anomaly": 0.3084,
+        "composite": 0.2769
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SGP_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SGP\", \"partner\": \"MYS\", \"description\": \"SGP <-> MYS bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.568,
+        "anomaly": 0.1936,
+        "composite": 0.2767
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_FRA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"FRA\", \"description\": \"GBR <-> FRA bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5424,
+        "anomaly": 0.2333,
+        "composite": 0.2764
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_COL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"COL\", \"description\": \"USA <-> COL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5655,
+        "anomaly": 0.1936,
+        "composite": 0.2757
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_KOR_ITA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"KOR\", \"partner\": \"ITA\", \"description\": \"KOR <-> ITA bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.499,
+        "anomaly": 0.2406,
+        "composite": 0.2757
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_PHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"PHL\", \"description\": \"ITA <-> PHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.5539,
+        "anomaly": 0.2116,
+        "composite": 0.2756
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_FRA_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"FRA\", \"partner\": \"VNM\", \"description\": \"FRA <-> VNM bilateral trade\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111011111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.4399,
+        "anomaly": 0.2234,
+        "composite": 0.2756
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_PHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"PHL\", \"description\": \"USA <-> PHL bilateral trade\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0032,
+        "reconstruction": 0.4358,
+        "anomaly": 0.3991,
+        "composite": 0.2752
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_SAU",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"SAU\", \"description\": \"USA <-> SAU bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5099,
+        "anomaly": 0.2202,
+        "composite": 0.2749
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"ARG\", \"description\": \"USA <-> ARG bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5182,
+        "anomaly": 0.2041,
+        "composite": 0.2742
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"IDN\", \"description\": \"GBR <-> IDN bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5115,
+        "anomaly": 0.2131,
+        "composite": 0.2738
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_FRA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"FRA\", \"description\": \"JPN <-> FRA bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4172,
+        "anomaly": 0.1874,
+        "composite": 0.2721
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_AUS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"AUS\", \"description\": \"USA <-> AUS bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5121,
+        "anomaly": 0.2052,
+        "composite": 0.272
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_NGA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"NGA\", \"description\": \"AUS <-> NGA bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5064,
+        "anomaly": 0.2001,
+        "composite": 0.2685
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_IND_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"IND\", \"partner\": \"MYS\", \"description\": \"IND <-> MYS bilateral trade\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4174,
+        "anomaly": 0.1691,
+        "composite": 0.2676
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_CHN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"CHN\", \"description\": \"USA <-> CHN bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4861,
+        "anomaly": 0.2096,
+        "composite": 0.2628
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"VNM\", \"description\": \"GBR <-> VNM bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.5006,
+        "anomaly": 0.1832,
+        "composite": 0.2619
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"ZAF\", \"description\": \"AUS <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4712,
+        "anomaly": 0.2169,
+        "composite": 0.2586
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SAU_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SAU\", \"partner\": \"ZAF\", \"description\": \"SAU <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4117,
+        "anomaly": 0.3061,
+        "composite": 0.2571
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_CHN_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"CHN\", \"partner\": \"SGP\", \"description\": \"CHN <-> SGP bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.391,
+        "anomaly": 0.3278,
+        "composite": 0.2543
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"ARG\", \"description\": \"DEU <-> ARG bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4665,
+        "anomaly": 0.2002,
+        "composite": 0.2525
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_AUS_TUR",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"AUS\", \"partner\": \"TUR\", \"description\": \"AUS <-> TUR bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4646,
+        "anomaly": 0.201,
+        "composite": 0.252
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"CHL\", \"description\": \"GBR <-> CHL bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4608,
+        "anomaly": 0.207,
+        "composite": 0.252
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_TUR_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"TUR\", \"partner\": \"VNM\", \"description\": \"TUR <-> VNM bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4811,
+        "anomaly": 0.1726,
+        "composite": 0.2515
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_VNM",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"VNM\", \"description\": \"NLD <-> VNM bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.47,
+        "anomaly": 0.1886,
+        "composite": 0.2511
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_MYS",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"MYS\", \"description\": \"NLD <-> MYS bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4591,
+        "anomaly": 0.1919,
+        "composite": 0.2475
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_VNM_PHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"VNM\", \"partner\": \"PHL\", \"description\": \"VNM <-> PHL bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4639,
+        "anomaly": 0.1634,
+        "composite": 0.2423
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_JPN_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"JPN\", \"partner\": \"SGP\", \"description\": \"JPN <-> SGP bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4533,
+        "anomaly": 0.1794,
+        "composite": 0.2421
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_TUR",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"TUR\", \"description\": \"GBR <-> TUR bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4526,
+        "anomaly": 0.1731,
+        "composite": 0.2402
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SAU_EGY",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SAU\", \"partner\": \"EGY\", \"description\": \"SAU <-> EGY bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4379,
+        "anomaly": 0.1941,
+        "composite": 0.2396
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_IDN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"IDN\", \"description\": \"ITA <-> IDN bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4448,
+        "anomaly": 0.1799,
+        "composite": 0.2388
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_GBR_IND",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"GBR\", \"partner\": \"IND\", \"description\": \"GBR <-> IND bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4522,
+        "anomaly": 0.1663,
+        "composite": 0.2384
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_BRA_ARG",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"BRA\", \"partner\": \"ARG\", \"description\": \"BRA <-> ARG bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4411,
+        "anomaly": 0.1786,
+        "composite": 0.237
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ITA_NGA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ITA\", \"partner\": \"NGA\", \"description\": \"ITA <-> NGA bilateral trade\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4508,
+        "anomaly": 0.1529,
+        "composite": 0.2344
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_USA_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"USA\", \"partner\": \"SGP\", \"description\": \"USA <-> SGP bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.438,
+        "anomaly": 0.1594,
+        "composite": 0.231
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_FRA_ARE",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"FRA\", \"partner\": \"ARE\", \"description\": \"FRA <-> ARE bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.3939,
+        "anomaly": 0.2036,
+        "composite": 0.2244
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"CHL\", \"description\": \"NLD <-> CHL bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4149,
+        "anomaly": 0.1661,
+        "composite": 0.2234
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_DEU_THA",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"DEU\", \"partner\": \"THA\", \"description\": \"DEU <-> THA bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.3821,
+        "anomaly": 0.218,
+        "composite": 0.2232
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_FRA_CAN",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"FRA\", \"partner\": \"CAN\", \"description\": \"FRA <-> CAN bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4083,
+        "anomaly": 0.1685,
+        "composite": 0.2214
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_SAU_CHL",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"SAU\", \"partner\": \"CHL\", \"description\": \"SAU <-> CHL bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.4029,
+        "anomaly": 0.1593,
+        "composite": 0.2169
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_NLD_SGP",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"NLD\", \"partner\": \"SGP\", \"description\": \"NLD <-> SGP bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.3979,
+        "anomaly": 0.1569,
+        "composite": 0.2143
+      }
+    },
+    {
+      "entity": {
+        "name": "flow_ARE_ZAF",
+        "type": "trade_flow",
+        "attributes": "{\"reporter\": \"ARE\", \"partner\": \"ZAF\", \"description\": \"ARE <-> ZAF bilateral trade\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111110",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0455,
+        "reconstruction": 0.3698,
+        "anomaly": 0.161,
+        "composite": 0.2041
+      }
+    }
+  ]
+}

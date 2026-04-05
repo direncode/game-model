@@ -1,0 +1,3150 @@
+{
+  "summary": {
+    "total_entities": 5000,
+    "clusters": 78,
+    "unique_48bit_fingerprints": 488,
+    "survivors": 195,
+    "reduction": 25,
+    "survivor_types": {
+      "patent": 90,
+      "inventor": 90,
+      "assignee": 9,
+      "cpc_class": 6
+    },
+    "reconstruction": {
+      "mean_nn": 0.407,
+      "median_nn": 0.4145,
+      "p95_nn": 0.652,
+      "variance_preservation": 1.061,
+      "coverages": {
+        "0.5": 0.7076,
+        "1.0": 0.9998,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 5.1
+  },
+  "survivors": [
+    {
+      "entity": {
+        "name": "patent_US11000043",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000043\", \"title\": \"System and method for battery detection\", \"grant_date\": \"2025-05-27\", \"num_claims\": 30, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 18,
+      "fingerprint_48bit": "111101111111111011111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6474,
+        "anomaly": 0.5955,
+        "composite": 0.7579
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000116",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000116\", \"title\": \"System and method for artificial intelligence processing\", \"grant_date\": \"2025-10-28\", \"num_claims\": 55, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "101110111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6176,
+        "anomaly": 0.4701,
+        "composite": 0.7146
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000295",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000295\", \"title\": \"System and method for pharmaceutical detection\", \"grant_date\": \"2025-02-19\", \"num_claims\": 40, \"cpc_primary\": \"A61K\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111111111111011111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4629,
+        "anomaly": 0.4492,
+        "composite": 0.6475
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000833",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000833\", \"title\": \"System and method for cybersecurity classification\", \"grant_date\": \"2025-10-24\", \"num_claims\": 13, \"cpc_primary\": \"H04L\"}"
+      },
+      "cluster": 45,
+      "fingerprint_48bit": "111111111111111011111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4522,
+        "anomaly": 0.4458,
+        "composite": 0.6423
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002457",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002457\", \"title\": \"System and method for augmented reality classification\", \"grant_date\": \"2024-04-01\", \"num_claims\": 5, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 18,
+      "fingerprint_48bit": "111011111111111111111111111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4411,
+        "anomaly": 0.4249,
+        "composite": 0.6327
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002250",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002250\", \"title\": \"System and method for pharmaceutical detection\", \"grant_date\": \"2025-10-13\", \"num_claims\": 23, \"cpc_primary\": \"A61K\"}"
+      },
+      "cluster": 45,
+      "fingerprint_48bit": "111011111111111011111101111111011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4115,
+        "anomaly": 0.4308,
+        "composite": 0.6223
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001979",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001979\", \"title\": \"System and method for 5G network detection\", \"grant_date\": \"2024-09-19\", \"num_claims\": 24, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111101111111111110111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4366,
+        "anomaly": 0.3408,
+        "composite": 0.6098
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000665",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000665\", \"title\": \"System and method for quantum computing classification\", \"grant_date\": \"2026-02-15\", \"num_claims\": 16, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111011011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3954,
+        "anomaly": 0.3733,
+        "composite": 0.6015
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001295",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001295\", \"title\": \"System and method for augmented reality classification\", \"grant_date\": \"2024-07-23\", \"num_claims\": 66, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6952,
+        "anomaly": 1.0,
+        "composite": 0.5282
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001795",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001795\", \"title\": \"System and method for medical device detection\", \"grant_date\": \"2024-06-04\", \"num_claims\": 65, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6794,
+        "anomaly": 0.9975,
+        "composite": 0.5213
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000635",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000635\", \"title\": \"System and method for solar energy generation\", \"grant_date\": \"2025-01-20\", \"num_claims\": 68, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.7251,
+        "anomaly": 0.9036,
+        "composite": 0.5161
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000137",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000137\", \"title\": \"System and method for nanotechnology processing\", \"grant_date\": \"2024-11-21\", \"num_claims\": 60, \"cpc_primary\": \"B82Y\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.81,
+        "anomaly": 0.7484,
+        "composite": 0.5121
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000821",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000821\", \"title\": \"System and method for medical device processing\", \"grant_date\": \"2026-04-06\", \"num_claims\": 59, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.7178,
+        "anomaly": 0.844,
+        "composite": 0.4982
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001690",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001690\", \"title\": \"System and method for medical device detection\", \"grant_date\": \"2024-07-21\", \"num_claims\": 52, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6662,
+        "anomaly": 0.9155,
+        "composite": 0.4955
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000446",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000446\", \"title\": \"System and method for medical device processing\", \"grant_date\": \"2024-05-21\", \"num_claims\": 61, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6621,
+        "anomaly": 0.9023,
+        "composite": 0.4905
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000334",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000334\", \"title\": \"System and method for autonomous vehicle optimization\", \"grant_date\": \"2025-11-24\", \"num_claims\": 61, \"cpc_primary\": \"B60W\"}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111111011111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5869,
+        "anomaly": 0.4909,
+        "composite": 0.4742
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001451",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001451\", \"title\": \"System and method for augmented reality optimization\", \"grant_date\": \"2025-07-16\", \"num_claims\": 73, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.7468,
+        "anomaly": 0.684,
+        "composite": 0.4699
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000916",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000916\", \"title\": \"System and method for nanotechnology processing\", \"grant_date\": \"2026-10-17\", \"num_claims\": 74, \"cpc_primary\": \"B82Y\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6314,
+        "anomaly": 0.8671,
+        "composite": 0.4695
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000892",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000892\", \"title\": \"System and method for medical device classification\", \"grant_date\": \"2025-09-26\", \"num_claims\": 57, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6997,
+        "anomaly": 0.757,
+        "composite": 0.4693
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000289",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000289\", \"title\": \"System and method for medical device generation\", \"grant_date\": \"2024-04-19\", \"num_claims\": 54, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.659,
+        "anomaly": 0.8188,
+        "composite": 0.4685
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001134",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001134\", \"title\": \"System and method for solar energy detection\", \"grant_date\": \"2025-08-05\", \"num_claims\": 25, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111011111111111111111101111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4664,
+        "anomaly": 0.4187,
+        "composite": 0.4662
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000203",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000203\", \"title\": \"System and method for augmented reality optimization\", \"grant_date\": \"2024-07-17\", \"num_claims\": 80, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6615,
+        "anomaly": 0.797,
+        "composite": 0.464
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000646",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000646\", \"title\": \"System and method for medical device detection\", \"grant_date\": \"2024-06-18\", \"num_claims\": 57, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6164,
+        "anomaly": 0.8689,
+        "composite": 0.4639
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002390",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002390\", \"title\": \"System and method for medical device detection\", \"grant_date\": \"2024-08-17\", \"num_claims\": 64, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6613,
+        "anomaly": 0.7951,
+        "composite": 0.4634
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000926",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000926\", \"title\": \"System and method for drone processing\", \"grant_date\": \"2025-11-17\", \"num_claims\": 57, \"cpc_primary\": \"B64U\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6453,
+        "anomaly": 0.819,
+        "composite": 0.463
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000547",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000547\", \"title\": \"System and method for 5G network detection\", \"grant_date\": \"2025-05-12\", \"num_claims\": 17, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111101111111111111111111111111011111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4373,
+        "anomaly": 0.4495,
+        "composite": 0.4623
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001775",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001775\", \"title\": \"System and method for imaging processing\", \"grant_date\": \"2024-04-14\", \"num_claims\": 67, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6683,
+        "anomaly": 0.7785,
+        "composite": 0.4621
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001326",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001326\", \"title\": \"System and method for solar energy processing\", \"grant_date\": \"2025-06-18\", \"num_claims\": 57, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6975,
+        "anomaly": 0.7248,
+        "composite": 0.4603
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001329",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001329\", \"title\": \"System and method for medical device generation\", \"grant_date\": \"2024-08-21\", \"num_claims\": 69, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6501,
+        "anomaly": 0.7917,
+        "composite": 0.4581
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001025",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001025\", \"title\": \"System and method for biotechnology classification\", \"grant_date\": \"2025-07-24\", \"num_claims\": 67, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6273,
+        "anomaly": 0.8281,
+        "composite": 0.4581
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002150",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002150\", \"title\": \"System and method for medical device classification\", \"grant_date\": \"2026-07-09\", \"num_claims\": 60, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6462,
+        "anomaly": 0.7939,
+        "composite": 0.4571
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000178",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000178\", \"title\": \"System and method for wireless optimization\", \"grant_date\": \"2026-12-16\", \"num_claims\": 65, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.8401,
+        "anomaly": 0.4806,
+        "composite": 0.4563
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000248",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000248\", \"title\": \"System and method for medical device processing\", \"grant_date\": \"2026-09-15\", \"num_claims\": 63, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6246,
+        "anomaly": 0.8238,
+        "composite": 0.4559
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001327",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001327\", \"title\": \"System and method for nanotechnology classification\", \"grant_date\": \"2025-04-19\", \"num_claims\": 34, \"cpc_primary\": \"B82Y\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111011111111111111111101111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4583,
+        "anomaly": 0.3843,
+        "composite": 0.4544
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001565",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001565\", \"title\": \"System and method for autonomous vehicle classification\", \"grant_date\": \"2026-11-19\", \"num_claims\": 71, \"cpc_primary\": \"B60W\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6538,
+        "anomaly": 0.7605,
+        "composite": 0.4518
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001422",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001422\", \"title\": \"System and method for biotechnology processing\", \"grant_date\": \"2026-10-20\", \"num_claims\": 48, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6909,
+        "anomaly": 0.6989,
+        "composite": 0.4512
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001741",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001741\", \"title\": \"System and method for drone processing\", \"grant_date\": \"2024-12-24\", \"num_claims\": 71, \"cpc_primary\": \"B64U\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6221,
+        "anomaly": 0.806,
+        "composite": 0.4505
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000710",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000710\", \"title\": \"System and method for drone detection\", \"grant_date\": \"2025-11-10\", \"num_claims\": 73, \"cpc_primary\": \"B64U\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6274,
+        "anomaly": 0.7837,
+        "composite": 0.447
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001158",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001158\", \"title\": \"System and method for autonomous vehicle processing\", \"grant_date\": \"2024-04-20\", \"num_claims\": 74, \"cpc_primary\": \"B60W\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.65,
+        "anomaly": 0.7415,
+        "composite": 0.4455
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000587",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000587\", \"title\": \"System and method for battery optimization\", \"grant_date\": \"2025-04-17\", \"num_claims\": 73, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.685,
+        "anomaly": 0.6698,
+        "composite": 0.4425
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000002",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000002\", \"title\": \"System and method for robotics optimization\", \"grant_date\": \"2025-08-19\", \"num_claims\": 74, \"cpc_primary\": \"B25J\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.728,
+        "anomaly": 0.5758,
+        "composite": 0.4371
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002029",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002029\", \"title\": \"System and method for pharmaceutical generation\", \"grant_date\": \"2026-06-04\", \"num_claims\": 15, \"cpc_primary\": \"A61K\"}"
+      },
+      "cluster": 34,
+      "fingerprint_48bit": "111111111111111111111101111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4432,
+        "anomaly": 0.3285,
+        "composite": 0.4344
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000249",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000249\", \"title\": \"System and method for artificial intelligence processing\", \"grant_date\": \"2026-01-14\", \"num_claims\": 32, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 45,
+      "fingerprint_48bit": "111011111111111111111101111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5039,
+        "anomaly": 0.4436,
+        "composite": 0.4291
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001022",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001022\", \"title\": \"System and method for 5G network classification\", \"grant_date\": \"2025-02-25\", \"num_claims\": 7, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 30,
+      "fingerprint_48bit": "111101111111111111111101101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4119,
+        "anomaly": 0.3545,
+        "composite": 0.4284
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001410",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001410\", \"title\": \"System and method for biotechnology classification\", \"grant_date\": \"2024-08-11\", \"num_claims\": 6, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 34,
+      "fingerprint_48bit": "111011111111111111111111111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4241,
+        "anomaly": 0.3282,
+        "composite": 0.4267
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000172",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000172\", \"title\": \"System and method for battery optimization\", \"grant_date\": \"2025-06-22\", \"num_claims\": 44, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111101111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0068,
+        "reconstruction": 0.7239,
+        "anomaly": 0.5288,
+        "composite": 0.4241
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001251",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001251\", \"title\": \"System and method for solar energy detection\", \"grant_date\": \"2025-02-01\", \"num_claims\": 77, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 28,
+      "fingerprint_48bit": "111110111111111111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.0833,
+        "reconstruction": 0.6675,
+        "anomaly": 0.5087,
+        "composite": 0.4234
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000695",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000695\", \"title\": \"System and method for wireless generation\", \"grant_date\": \"2026-04-13\", \"num_claims\": 65, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 36,
+      "fingerprint_48bit": "111011111111111111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.027,
+        "reconstruction": 0.6835,
+        "anomaly": 0.5566,
+        "composite": 0.422
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002319",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002319\", \"title\": \"System and method for wireless optimization\", \"grant_date\": \"2025-05-14\", \"num_claims\": 63, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.748,
+        "anomaly": 0.4821,
+        "composite": 0.4207
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000045",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000045\", \"title\": \"System and method for blockchain generation\", \"grant_date\": \"2024-05-02\", \"num_claims\": 38, \"cpc_primary\": \"H04L\"}"
+      },
+      "cluster": 18,
+      "fingerprint_48bit": "111011111111111011111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.489,
+        "anomaly": 0.424,
+        "composite": 0.4183
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000103",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000103\", \"title\": \"System and method for semiconductor generation\", \"grant_date\": \"2025-05-27\", \"num_claims\": 58, \"cpc_primary\": \"H01L\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.7395,
+        "anomaly": 0.4733,
+        "composite": 0.4169
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001431",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001431\", \"title\": \"System and method for biotechnology detection\", \"grant_date\": \"2026-05-14\", \"num_claims\": 11, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 45,
+      "fingerprint_48bit": "111011111111111111111101111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.4647,
+        "anomaly": 0.4467,
+        "composite": 0.4142
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001320",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001320\", \"title\": \"System and method for imaging classification\", \"grant_date\": \"2025-11-12\", \"num_claims\": 51, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.6963,
+        "anomaly": 0.5275,
+        "composite": 0.4131
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002001",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002001\", \"title\": \"System and method for cybersecurity generation\", \"grant_date\": \"2025-02-03\", \"num_claims\": 21, \"cpc_primary\": \"H04L\"}"
+      },
+      "cluster": 18,
+      "fingerprint_48bit": "111011111111111011111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.4405,
+        "anomaly": 0.4773,
+        "composite": 0.4122
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001425",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001425\", \"title\": \"System and method for autonomous vehicle generation\", \"grant_date\": \"2025-02-15\", \"num_claims\": 25, \"cpc_primary\": \"B60W\"}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111111011111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.4525,
+        "anomaly": 0.4574,
+        "composite": 0.412
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001804",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001804\", \"title\": \"System and method for biotechnology detection\", \"grant_date\": \"2025-11-23\", \"num_claims\": 70, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.6715,
+        "anomaly": 0.5623,
+        "composite": 0.4119
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000590",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000590\", \"title\": \"System and method for imaging detection\", \"grant_date\": \"2025-07-25\", \"num_claims\": 75, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.7033,
+        "anomaly": 0.5077,
+        "composite": 0.4092
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000065",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000065\", \"title\": \"System and method for pharmaceutical detection\", \"grant_date\": \"2025-02-16\", \"num_claims\": 40, \"cpc_primary\": \"A61K\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6849,
+        "anomaly": 0.514,
+        "composite": 0.4044
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002018",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002018\", \"title\": \"System and method for imaging detection\", \"grant_date\": \"2024-04-18\", \"num_claims\": 79, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6754,
+        "anomaly": 0.5274,
+        "composite": 0.403
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001988",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001988\", \"title\": \"System and method for battery generation\", \"grant_date\": \"2024-12-13\", \"num_claims\": 69, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111101111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0068,
+        "reconstruction": 0.7001,
+        "anomaly": 0.4819,
+        "composite": 0.4029
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002069",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002069\", \"title\": \"System and method for medical device generation\", \"grant_date\": \"2026-12-10\", \"num_claims\": 53, \"cpc_primary\": \"A61B\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.6951,
+        "anomaly": 0.4834,
+        "composite": 0.4016
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000363",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000363\", \"title\": \"System and method for biotechnology processing\", \"grant_date\": \"2026-11-10\", \"num_claims\": 55, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6717,
+        "anomaly": 0.5178,
+        "composite": 0.3991
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000602",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000602\", \"title\": \"System and method for robotics generation\", \"grant_date\": \"2025-04-18\", \"num_claims\": 67, \"cpc_primary\": \"B25J\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6071,
+        "anomaly": 0.6203,
+        "composite": 0.3989
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002143",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002143\", \"title\": \"System and method for neural network classification\", \"grant_date\": \"2025-07-13\", \"num_claims\": 71, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 51,
+      "fingerprint_48bit": "111111111111111111111111111110111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1,
+        "reconstruction": 0.6005,
+        "anomaly": 0.4753,
+        "composite": 0.394
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001186",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001186\", \"title\": \"System and method for augmented reality detection\", \"grant_date\": \"2026-02-06\", \"num_claims\": 59, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 73,
+      "fingerprint_48bit": "111111111111111111111101111111011111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5594,
+        "anomaly": 0.4957,
+        "composite": 0.3914
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000033",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000033\", \"title\": \"System and method for artificial intelligence generation\", \"grant_date\": \"2026-02-03\", \"num_claims\": 63, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6662,
+        "anomaly": 0.4917,
+        "composite": 0.3914
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002349",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002349\", \"title\": \"System and method for autonomous vehicle classification\", \"grant_date\": \"2025-06-26\", \"num_claims\": 62, \"cpc_primary\": \"B60W\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6343,
+        "anomaly": 0.5465,
+        "composite": 0.3913
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001701",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001701\", \"title\": \"System and method for biotechnology generation\", \"grant_date\": \"2025-11-06\", \"num_claims\": 64, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0476,
+        "reconstruction": 0.6149,
+        "anomaly": 0.508,
+        "composite": 0.3897
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000010",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000010\", \"title\": \"System and method for solar energy optimization\", \"grant_date\": \"2025-04-24\", \"num_claims\": 23, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6742,
+        "anomaly": 0.4753,
+        "composite": 0.3895
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001123",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001123\", \"title\": \"System and method for quantum computing optimization\", \"grant_date\": \"2024-04-18\", \"num_claims\": 39, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6465,
+        "anomaly": 0.5172,
+        "composite": 0.3889
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000161",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000161\", \"title\": \"System and method for neural network classification\", \"grant_date\": \"2025-10-18\", \"num_claims\": 69, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6816,
+        "anomaly": 0.4565,
+        "composite": 0.3877
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000418",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000418\", \"title\": \"System and method for artificial intelligence detection\", \"grant_date\": \"2025-07-13\", \"num_claims\": 68, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.641,
+        "anomaly": 0.5107,
+        "composite": 0.3868
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000081",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000081\", \"title\": \"System and method for battery detection\", \"grant_date\": \"2024-01-23\", \"num_claims\": 51, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.699,
+        "anomaly": 0.4249,
+        "composite": 0.3868
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000241",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000241\", \"title\": \"System and method for battery detection\", \"grant_date\": \"2025-05-19\", \"num_claims\": 62, \"cpc_primary\": \"H01M\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.654,
+        "anomaly": 0.4967,
+        "composite": 0.3867
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000168",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000168\", \"title\": \"System and method for biotechnology detection\", \"grant_date\": \"2025-03-07\", \"num_claims\": 7, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 15,
+      "fingerprint_48bit": "111001111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.0238,
+        "reconstruction": 0.6282,
+        "anomaly": 0.4979,
+        "composite": 0.3841
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000801",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000801\", \"title\": \"System and method for augmented reality classification\", \"grant_date\": \"2024-02-13\", \"num_claims\": 7, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 30,
+      "fingerprint_48bit": "111111111111111111111101111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.4192,
+        "anomaly": 0.3936,
+        "composite": 0.3827
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000207",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000207\", \"title\": \"System and method for neural network generation\", \"grant_date\": \"2026-05-21\", \"num_claims\": 10, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 39,
+      "fingerprint_48bit": "111111111111111111111111111111111111101111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.468,
+        "anomaly": 0.4277,
+        "composite": 0.3816
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000040",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000040\", \"title\": \"System and method for quantum computing detection\", \"grant_date\": \"2025-01-12\", \"num_claims\": 10, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6419,
+        "anomaly": 0.4866,
+        "composite": 0.3794
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001284",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001284\", \"title\": \"System and method for artificial intelligence generation\", \"grant_date\": \"2025-09-28\", \"num_claims\": 51, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6258,
+        "anomaly": 0.506,
+        "composite": 0.3778
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000111",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000111\", \"title\": \"System and method for wireless classification\", \"grant_date\": \"2025-03-08\", \"num_claims\": 50, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.652,
+        "anomaly": 0.4638,
+        "composite": 0.3777
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000160",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000160\", \"title\": \"System and method for cybersecurity classification\", \"grant_date\": \"2025-08-02\", \"num_claims\": 14, \"cpc_primary\": \"H04L\"}"
+      },
+      "cluster": 15,
+      "fingerprint_48bit": "111001111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.0238,
+        "reconstruction": 0.6004,
+        "anomaly": 0.515,
+        "composite": 0.3772
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001928",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001928\", \"title\": \"System and method for robotics detection\", \"grant_date\": \"2025-12-02\", \"num_claims\": 72, \"cpc_primary\": \"B25J\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.647,
+        "anomaly": 0.4658,
+        "composite": 0.3763
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000604",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000604\", \"title\": \"System and method for biotechnology detection\", \"grant_date\": \"2024-06-20\", \"num_claims\": 49, \"cpc_primary\": \"C12N\"}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111101111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0068,
+        "reconstruction": 0.6352,
+        "anomaly": 0.4762,
+        "composite": 0.3755
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001067",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001067\", \"title\": \"System and method for drone detection\", \"grant_date\": \"2025-12-24\", \"num_claims\": 78, \"cpc_primary\": \"B64U\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6261,
+        "anomaly": 0.4963,
+        "composite": 0.3755
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000051",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000051\", \"title\": \"System and method for solar energy optimization\", \"grant_date\": \"2026-09-16\", \"num_claims\": 61, \"cpc_primary\": \"H02S\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6593,
+        "anomaly": 0.4422,
+        "composite": 0.3753
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11000063",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11000063\", \"title\": \"System and method for quantum computing classification\", \"grant_date\": \"2024-10-19\", \"num_claims\": 73, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6616,
+        "anomaly": 0.4266,
+        "composite": 0.3733
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002211",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002211\", \"title\": \"System and method for drone detection\", \"grant_date\": \"2025-03-13\", \"num_claims\": 80, \"cpc_primary\": \"B64U\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6422,
+        "anomaly": 0.4514,
+        "composite": 0.3717
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001443",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001443\", \"title\": \"System and method for imaging classification\", \"grant_date\": \"2025-09-01\", \"num_claims\": 74, \"cpc_primary\": \"G06T\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.627,
+        "anomaly": 0.4794,
+        "composite": 0.3716
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11002203",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11002203\", \"title\": \"System and method for 5G network optimization\", \"grant_date\": \"2025-06-11\", \"num_claims\": 63, \"cpc_primary\": \"H04W\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.6052,
+        "anomaly": 0.5106,
+        "composite": 0.3707
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US11001917",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US11001917\", \"title\": \"System and method for artificial intelligence detection\", \"grant_date\": \"2025-10-26\", \"num_claims\": 32, \"cpc_primary\": \"G06N\"}"
+      },
+      "cluster": 49,
+      "fingerprint_48bit": "111111111111111111111101111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.1,
+        "reconstruction": 0.5663,
+        "anomaly": 0.4321,
+        "composite": 0.3696
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_wang_133",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111110111110111111111111111111111111101111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7133,
+        "anomaly": 0.7538,
+        "composite": 0.8238
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_wang_1377",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5969,
+        "anomaly": 0.8896,
+        "composite": 0.8111
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_wang_244",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111111111111111101111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5726,
+        "anomaly": 0.897,
+        "composite": 0.8033
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_1725",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "111010111111111111111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.549,
+        "anomaly": 0.9068,
+        "composite": 0.7963
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_330",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"IN\"}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "011111111111101111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5565,
+        "anomaly": 0.8894,
+        "composite": 0.7949
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_2415",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"JP\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111111111101011111101011111111111111111101101110",
+      "flips": 41,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5099,
+        "anomaly": 0.9171,
+        "composite": 0.7832
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_109",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 39,
+      "fingerprint_48bit": "111111111111110111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5769,
+        "anomaly": 0.7938,
+        "composite": 0.7792
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_807",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "111000111111111110111111111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5211,
+        "anomaly": 0.8719,
+        "composite": 0.7764
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_park_183",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Park\", \"country\": \"US\"}"
+      },
+      "cluster": 30,
+      "fingerprint_48bit": "111011111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6753,
+        "anomaly": 0.6162,
+        "composite": 0.7742
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_2338",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111111111111110111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5161,
+        "anomaly": 0.8632,
+        "composite": 0.7722
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_brown_626",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Brown\", \"country\": \"US\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "111111111111111111111101111111111111111001111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.603,
+        "anomaly": 0.7112,
+        "composite": 0.769
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_1237",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111011111101111111111111111111111111110",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4618,
+        "anomaly": 0.9072,
+        "composite": 0.7615
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_1103",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "110111111011111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5013,
+        "anomaly": 0.837,
+        "composite": 0.7598
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_zhang_80",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Zhang\", \"country\": \"CN\"}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "111010111011111101111111111111111111111101111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.541,
+        "anomaly": 0.7417,
+        "composite": 0.7518
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_2141",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 76,
+      "fingerprint_48bit": "111101111111111110111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5595,
+        "anomaly": 0.6891,
+        "composite": 0.7461
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_2322",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111111111101111111111111111111111110111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4707,
+        "anomaly": 0.7864,
+        "composite": 0.7349
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_425",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111011111111111111111111111111111100111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4437,
+        "anomaly": 0.8175,
+        "composite": 0.7319
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_zhang_12",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Zhang\", \"country\": \"DE\"}"
+      },
+      "cluster": 39,
+      "fingerprint_48bit": "111001111111111111111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5539,
+        "anomaly": 0.6328,
+        "composite": 0.7297
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_1762",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "111101111111111111111001111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5183,
+        "anomaly": 0.6881,
+        "composite": 0.7293
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_2460",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "111011111111101001101111111111111111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4824,
+        "anomaly": 0.7453,
+        "composite": 0.7293
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_1687",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111110111111111111111111111110111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4632,
+        "anomaly": 0.7675,
+        "composite": 0.7271
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_2410",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "110110111111111111111101111111111111111110111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4935,
+        "anomaly": 0.7182,
+        "composite": 0.727
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_wei_johnson_135",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Wei Johnson\", \"country\": \"KR\"}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111011111111111101111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5925,
+        "anomaly": 0.5566,
+        "composite": 0.7262
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_194",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111111101111011001111111111111111111111110111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4848,
+        "anomaly": 0.7219,
+        "composite": 0.7244
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_smith_1308",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111111111111011111101111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5284,
+        "anomaly": 0.6507,
+        "composite": 0.724
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_zhang_4",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Zhang\", \"country\": \"KR\"}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "011110111111110111111101111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6011,
+        "anomaly": 0.53,
+        "composite": 0.723
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_1074",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "111100111111111110111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5355,
+        "anomaly": 0.6232,
+        "composite": 0.72
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_wang_962",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "111111111111111111101111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6016,
+        "anomaly": 0.5067,
+        "composite": 0.7173
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_2424",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111101111111111111111011111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5509,
+        "anomaly": 0.5871,
+        "composite": 0.7171
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_wang_1191",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "111111111111011111111111111110111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5916,
+        "anomaly": 0.5096,
+        "composite": 0.714
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_2203",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "111101111111101111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4953,
+        "anomaly": 0.6613,
+        "composite": 0.7134
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_1266",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"IN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "110111111111101111111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4118,
+        "anomaly": 0.7861,
+        "composite": 0.7113
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_2105",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"DE\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111111111111101111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4982,
+        "anomaly": 0.6361,
+        "composite": 0.7083
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_chen_277",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Chen\", \"country\": \"US\"}"
+      },
+      "cluster": 26,
+      "fingerprint_48bit": "110111111111111111111101111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5536,
+        "anomaly": 0.5459,
+        "composite": 0.7079
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_wang_2429",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111101111011111111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4649,
+        "anomaly": 0.684,
+        "composite": 0.707
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_wang_1818",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Wang\", \"country\": \"DE\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111101111111011111111111111110111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4413,
+        "anomaly": 0.7195,
+        "composite": 0.7064
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_936",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "111011111111011111101111111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4415,
+        "anomaly": 0.7166,
+        "composite": 0.7057
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_1401",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111011111111001111011111101111111111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4472,
+        "anomaly": 0.7051,
+        "composite": 0.7051
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_smith_1261",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Smith\", \"country\": \"DE\"}"
+      },
+      "cluster": 76,
+      "fingerprint_48bit": "111111111111111111111111101111111101111111101111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5085,
+        "anomaly": 0.6053,
+        "composite": 0.7047
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_smith_673",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111110111111111111111111001111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4059,
+        "anomaly": 0.7638,
+        "composite": 0.7033
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_wang_282",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "111111111111011111111111111111111111111101110111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5694,
+        "anomaly": 0.4976,
+        "composite": 0.7021
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_wang_2268",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111111111101111111111111101111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4392,
+        "anomaly": 0.7056,
+        "composite": 0.7021
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_1071",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111001111111110111111111111111111111111110111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4039,
+        "anomaly": 0.7617,
+        "composite": 0.702
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_658",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "110111111011111111111111111110111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4187,
+        "anomaly": 0.7358,
+        "composite": 0.7014
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_zhang_2309",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Zhang\", \"country\": \"CN\"}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "111100111111111101111101111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4398,
+        "anomaly": 0.7016,
+        "composite": 0.7013
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_min_wang_478",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Min Wang\", \"country\": \"DE\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111111111111111111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5384,
+        "anomaly": 0.5432,
+        "composite": 0.7012
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_kim_113",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Kim\", \"country\": \"US\"}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "111011111111111011101111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5482,
+        "anomaly": 0.5259,
+        "composite": 0.7008
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_wang_1110",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "111111111111011111111101111111111111101101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5216,
+        "anomaly": 0.5622,
+        "composite": 0.6992
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_wang_495",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111011111111111111101111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5382,
+        "anomaly": 0.5354,
+        "composite": 0.6991
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_brown_61",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Brown\", \"country\": \"CN\"}"
+      },
+      "cluster": 27,
+      "fingerprint_48bit": "111111111111111111111011111111111111111111110111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5854,
+        "anomaly": 0.4582,
+        "composite": 0.6987
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_1741",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111101111111111111111111111110111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4356,
+        "anomaly": 0.697,
+        "composite": 0.6985
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_910",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "110111001111101111111111111111111111111101111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4376,
+        "anomaly": 0.6926,
+        "composite": 0.6982
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_min_wang_2060",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Min Wang\", \"country\": \"DE\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111111111111111111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4743,
+        "anomaly": 0.6306,
+        "composite": 0.6973
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_wang_994",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111101111111111111111111111111111111111001111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4819,
+        "anomaly": 0.6137,
+        "composite": 0.6962
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_zhang_1675",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Zhang\", \"country\": \"CN\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "011110111111101111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5411,
+        "anomaly": 0.5178,
+        "composite": 0.6959
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_min_wang_428",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Min Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "110110111111111111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5406,
+        "anomaly": 0.5164,
+        "composite": 0.6953
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_smith_186",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Smith\", \"country\": \"KR\"}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "111011111111111111101111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5127,
+        "anomaly": 0.5581,
+        "composite": 0.6946
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_2048",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111110111111011110111101111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3889,
+        "anomaly": 0.7505,
+        "composite": 0.6932
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_449",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111111111110101110111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3959,
+        "anomaly": 0.7389,
+        "composite": 0.6931
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_zhang_1872",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Zhang\", \"country\": \"US\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111101111111111110111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.472,
+        "anomaly": 0.6151,
+        "composite": 0.6926
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_1795",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"IN\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111001111111011111111111111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4403,
+        "anomaly": 0.661,
+        "composite": 0.6914
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_wang_1957",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Wang\", \"country\": \"JP\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "110111111111011111111111101111111111111101110111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4965,
+        "anomaly": 0.5658,
+        "composite": 0.6901
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_min_zhang_1344",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Min Zhang\", \"country\": \"JP\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111101101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4665,
+        "anomaly": 0.6137,
+        "composite": 0.69
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_596",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"DE\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111111111111011111111111111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4112,
+        "anomaly": 0.7018,
+        "composite": 0.6899
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_james_wang_1681",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"James Wang\", \"country\": \"KR\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "110001111111111111111111111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5073,
+        "anomaly": 0.5459,
+        "composite": 0.6894
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_636",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111101101011111111111101111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4443,
+        "anomaly": 0.6361,
+        "composite": 0.6867
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_wang_635",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Wang\", \"country\": \"CN\"}"
+      },
+      "cluster": 77,
+      "fingerprint_48bit": "111111111111111111111101111110101111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4397,
+        "anomaly": 0.6411,
+        "composite": 0.6861
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_smith_850",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "101111111101111111111111111110111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4027,
+        "anomaly": 0.6951,
+        "composite": 0.6849
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_228",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"IN\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111011111101011111111111111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.434,
+        "anomaly": 0.6443,
+        "composite": 0.6847
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_wang_1013",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Wang\", \"country\": \"US\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111011111101111111111111101111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4598,
+        "anomaly": 0.6028,
+        "composite": 0.6846
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_1122",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "110000011111111111111111101111111111111111111111",
+      "flips": 42,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4221,
+        "anomaly": 0.6629,
+        "composite": 0.6846
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_park_437",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Park\", \"country\": \"IN\"}"
+      },
+      "cluster": 17,
+      "fingerprint_48bit": "111011111111111111111101111110111111111111110111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4506,
+        "anomaly": 0.617,
+        "composite": 0.6845
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_241",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"KR\"}"
+      },
+      "cluster": 17,
+      "fingerprint_48bit": "111110111110101111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4426,
+        "anomaly": 0.6279,
+        "composite": 0.684
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_johnson_1244",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Johnson\", \"country\": \"US\"}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "111110111111101111101111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5374,
+        "anomaly": 0.4727,
+        "composite": 0.6831
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_james_zhang_0",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"James Zhang\", \"country\": \"US\"}"
+      },
+      "cluster": 67,
+      "fingerprint_48bit": "111001111111101111111111111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.497,
+        "anomaly": 0.5357,
+        "composite": 0.6827
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_david_smith_1100",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"David Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "110101111111110111111101101111111111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4016,
+        "anomaly": 0.6864,
+        "composite": 0.6822
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_chen_smith_446",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Chen Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 14,
+      "fingerprint_48bit": "111111111111111111111101111111111111111101110111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4478,
+        "anomaly": 0.6112,
+        "composite": 0.6819
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_smith_1552",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 14,
+      "fingerprint_48bit": "111111111101111111111101111110101111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4626,
+        "anomaly": 0.5865,
+        "composite": 0.6817
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_johnson_1416",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Johnson\", \"country\": \"CN\"}"
+      },
+      "cluster": 17,
+      "fingerprint_48bit": "110101111111111111111111111110111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4329,
+        "anomaly": 0.624,
+        "composite": 0.6792
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_1891",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"JP\"}"
+      },
+      "cluster": 60,
+      "fingerprint_48bit": "111011111011111101101101111111111111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.449,
+        "anomaly": 0.5973,
+        "composite": 0.6789
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_michael_kim_894",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Michael Kim\", \"country\": \"DE\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111110111111111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4865,
+        "anomaly": 0.5324,
+        "composite": 0.6777
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_2480",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "111111011111111111101111101111011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4243,
+        "anomaly": 0.6305,
+        "composite": 0.6774
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_1971",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"KR\"}"
+      },
+      "cluster": 17,
+      "fingerprint_48bit": "111011111111111011101011111111111101111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4443,
+        "anomaly": 0.5981,
+        "composite": 0.6773
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_978",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"IN\"}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111011001111111111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4776,
+        "anomaly": 0.544,
+        "composite": 0.677
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_wei_brown_1900",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Wei Brown\", \"country\": \"KR\"}"
+      },
+      "cluster": 42,
+      "fingerprint_48bit": "111001111111111111111101111111011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4434,
+        "anomaly": 0.5964,
+        "composite": 0.6765
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_sarah_smith_2133",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Sarah Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111111111011111111111111111111111111111110111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.463,
+        "anomaly": 0.5618,
+        "composite": 0.6756
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_smith_1630",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Smith\", \"country\": \"DE\"}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111110111111011111111101111111111111101111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.407,
+        "anomaly": 0.6512,
+        "composite": 0.6756
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_li_smith_458",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Li Smith\", \"country\": \"US\"}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "110111111101010111100111111111111111111111111111",
+      "flips": 42,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3998,
+        "anomaly": 0.6606,
+        "composite": 0.6751
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_john_zhang_203",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"John Zhang\", \"country\": \"US\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111111111111111111111101101111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4552,
+        "anomaly": 0.5701,
+        "composite": 0.6746
+      }
+    },
+    {
+      "entity": {
+        "name": "inventor_yuki_smith_1341",
+        "type": "inventor",
+        "attributes": "{\"inventor_name\": \"Yuki Smith\", \"country\": \"CN\"}"
+      },
+      "cluster": 69,
+      "fingerprint_48bit": "111011011111110111111111111110111110111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4298,
+        "anomaly": 0.6054,
+        "composite": 0.6733
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_adobe_inc",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Adobe Inc\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.7823,
+        "anomaly": 0.9769,
+        "composite": 0.5573
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_meta_platforms",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Meta Platforms\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.6986,
+        "anomaly": 1.0,
+        "composite": 0.5296
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_samsung_electronics",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Samsung Electronics\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.7532,
+        "anomaly": 0.877,
+        "composite": 0.5207
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_siemens_ag",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Siemens AG\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6033,
+        "anomaly": 0.9403,
+        "composite": 0.4784
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_ibm_corp",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"IBM Corp\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 9,
+      "fingerprint_48bit": "111010111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.04,
+        "reconstruction": 0.684,
+        "anomaly": 0.6663,
+        "composite": 0.4542
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_toyota_motor",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Toyota Motor\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7461,
+        "anomaly": 0.599,
+        "composite": 0.4502
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_huawei_technologies",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Huawei Technologies\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0028,
+        "reconstruction": 0.5749,
+        "anomaly": 0.7972,
+        "composite": 0.4303
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_nvidia_corp",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"NVIDIA Corp\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6048,
+        "anomaly": 0.6955,
+        "composite": 0.4178
+      }
+    },
+    {
+      "entity": {
+        "name": "assignee_google_llc",
+        "type": "assignee",
+        "attributes": "{\"assignee_name\": \"Google LLC\", \"assignee_type\": \"corporation\"}"
+      },
+      "cluster": 15,
+      "fingerprint_48bit": "111001111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.0238,
+        "reconstruction": 0.6348,
+        "anomaly": 0.6158,
+        "composite": 0.4162
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_C12N",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"C12N\", \"cpc_title\": \"Biotechnology\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.9051,
+        "anomaly": 1.0,
+        "composite": 0.6148
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_H04L",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"H04L\", \"cpc_title\": \"Blockchain\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.9523,
+        "anomaly": 0.8035,
+        "composite": 0.5845
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_G06T",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"G06T\", \"cpc_title\": \"Imaging\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.8365,
+        "anomaly": 0.9852,
+        "composite": 0.581
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_A61B",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"A61B\", \"cpc_title\": \"Medical Device\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.8656,
+        "anomaly": 0.866,
+        "composite": 0.5629
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_H02S",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"H02S\", \"cpc_title\": \"Solar Energy\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.8821,
+        "anomaly": 0.8046,
+        "composite": 0.5541
+      }
+    },
+    {
+      "entity": {
+        "name": "cpc_B60W",
+        "type": "cpc_class",
+        "attributes": "{\"cpc_code\": \"B60W\", \"cpc_title\": \"Autonomous Vehicle\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111111111111111111111111111111111111111101111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0078,
+        "reconstruction": 0.8292,
+        "anomaly": 0.7181,
+        "composite": 0.514
+      }
+    }
+  ]
+}

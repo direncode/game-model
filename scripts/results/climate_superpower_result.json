@@ -1,0 +1,3068 @@
+{
+  "summary": {
+    "total_entities": 5000,
+    "clusters": 67,
+    "unique_48bit_fingerprints": 230,
+    "survivors": 190,
+    "reduction": 26,
+    "survivor_types": {
+      "station": 181,
+      "region": 9
+    },
+    "reconstruction": {
+      "mean_nn": 0.4148,
+      "median_nn": 0.408,
+      "p95_nn": 0.7251,
+      "variance_preservation": 1.0958,
+      "coverages": {
+        "0.5": 0.6924,
+        "1.0": 0.9998,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 5.3
+  },
+  "survivors": [
+    {
+      "entity": {
+        "name": "station_GHCND_5303735",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5303735\", \"station_name\": \"Station WA-3735\", \"latitude\": 29.4124, \"longitude\": -108.2464, \"elevation\": 2988.9, \"state\": \"WA\", \"temp_avg_f\": 66.6, \"precip_annual_in\": 20.1}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111011111111111111111111111111101111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8063,
+        "anomaly": 0.1016,
+        "composite": 0.6979
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1303131",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1303131\", \"station_name\": \"Station GA-3131\", \"latitude\": 28.3992, \"longitude\": -115.801, \"elevation\": 2136.2, \"state\": \"GA\", \"temp_avg_f\": 61.3, \"precip_annual_in\": 5.9}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111110111111111111111111111011111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7626,
+        "anomaly": 0.1076,
+        "composite": 0.6819
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5302815",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5302815\", \"station_name\": \"Station WA-2815\", \"latitude\": 42.3171, \"longitude\": -120.1337, \"elevation\": 1278.6, \"state\": \"WA\", \"temp_avg_f\": 44.5, \"precip_annual_in\": 37.5}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "111110111111111111101111111111111111111111110111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7352,
+        "anomaly": 0.1148,
+        "composite": 0.6728
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5300262",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5300262\", \"station_name\": \"Station WA-262\", \"latitude\": 35.188, \"longitude\": -100.4554, \"elevation\": 2985.3, \"state\": \"WA\", \"temp_avg_f\": 54.5, \"precip_annual_in\": 10.6}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111110111111111111111111111101101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7365,
+        "anomaly": 0.1111,
+        "composite": 0.6724
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4604181",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4604181\", \"station_name\": \"Station SD-4181\", \"latitude\": 39.0819, \"longitude\": -120.2909, \"elevation\": 2834.1, \"state\": \"SD\", \"temp_avg_f\": 47.6, \"precip_annual_in\": 7.0}"
+      },
+      "cluster": 14,
+      "fingerprint_48bit": "111111111111011111111110111111111111111111101111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7276,
+        "anomaly": 0.1144,
+        "composite": 0.6697
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3101958",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3101958\", \"station_name\": \"Station NE-1958\", \"latitude\": 29.3084, \"longitude\": -102.3017, \"elevation\": 1552.0, \"state\": \"NE\", \"temp_avg_f\": 68.6, \"precip_annual_in\": 24.0}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111111001111111111111111111111110011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7423,
+        "anomaly": 0.09,
+        "composite": 0.6694
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4602520",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4602520\", \"station_name\": \"Station SD-2520\", \"latitude\": 32.6096, \"longitude\": -107.2127, \"elevation\": 2466.5, \"state\": \"SD\", \"temp_avg_f\": 53.9, \"precip_annual_in\": 8.0}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "110111111111111111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7071,
+        "anomaly": 0.1049,
+        "composite": 0.6591
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5001146",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5001146\", \"station_name\": \"Station VT-1146\", \"latitude\": 25.6564, \"longitude\": -122.0304, \"elevation\": 1924.8, \"state\": \"VT\", \"temp_avg_f\": 61.0, \"precip_annual_in\": 12.5}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111111111101111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7126,
+        "anomaly": 0.0958,
+        "composite": 0.659
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3003246",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3003246\", \"station_name\": \"Station MT-3246\", \"latitude\": 32.1509, \"longitude\": -124.5191, \"elevation\": 2290.7, \"state\": \"MT\", \"temp_avg_f\": 60.7, \"precip_annual_in\": 35.6}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111110111111111111111111111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7034,
+        "anomaly": 0.1085,
+        "composite": 0.6585
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0803758",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0803758\", \"station_name\": \"Station CO-3758\", \"latitude\": 27.205, \"longitude\": -86.1973, \"elevation\": 2731.4, \"state\": \"CO\", \"temp_avg_f\": 66.5, \"precip_annual_in\": 10.3}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111110111011111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6868,
+        "anomaly": 0.1176,
+        "composite": 0.6541
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3100716",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3100716\", \"station_name\": \"Station NE-716\", \"latitude\": 33.6945, \"longitude\": -116.1776, \"elevation\": 1954.7, \"state\": \"NE\", \"temp_avg_f\": 54.7, \"precip_annual_in\": 28.3}"
+      },
+      "cluster": 64,
+      "fingerprint_48bit": "111101111111111111111111111111111111111111111101",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6768,
+        "anomaly": 0.1151,
+        "composite": 0.6495
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5103777",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5103777\", \"station_name\": \"Station VA-3777\", \"latitude\": 37.8027, \"longitude\": -122.5491, \"elevation\": 2589.1, \"state\": \"VA\", \"temp_avg_f\": 53.4, \"precip_annual_in\": 30.5}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111101111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6903,
+        "anomaly": 0.0902,
+        "composite": 0.6487
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0602231",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0602231\", \"station_name\": \"Station CA-2231\", \"latitude\": 27.058, \"longitude\": -124.5059, \"elevation\": 2586.7, \"state\": \"CA\", \"temp_avg_f\": 63.9, \"precip_annual_in\": 7.9}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111111111111111101110101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6669,
+        "anomaly": 0.1059,
+        "composite": 0.6432
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4404331",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4404331\", \"station_name\": \"Station RI-4331\", \"latitude\": 30.3533, \"longitude\": -121.3284, \"elevation\": 2723.5, \"state\": \"RI\", \"temp_avg_f\": 70.1, \"precip_annual_in\": 7.7}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "111110111111111111111111101111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6728,
+        "anomaly": 0.0949,
+        "composite": 0.6428
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4503005",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4503005\", \"station_name\": \"Station SC-3005\", \"latitude\": 33.0535, \"longitude\": -120.4365, \"elevation\": 2882.8, \"state\": \"SC\", \"temp_avg_f\": 57.5, \"precip_annual_in\": 13.8}"
+      },
+      "cluster": 40,
+      "fingerprint_48bit": "111111111111111111111101111111101011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6686,
+        "anomaly": 0.0988,
+        "composite": 0.6422
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1804240",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1804240\", \"station_name\": \"Station IN-4240\", \"latitude\": 33.6853, \"longitude\": -107.6761, \"elevation\": 2819.2, \"state\": \"IN\", \"temp_avg_f\": 55.8, \"precip_annual_in\": 8.6}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "111110111101011111111111111111111011111101111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6655,
+        "anomaly": 0.1035,
+        "composite": 0.6421
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4603321",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4603321\", \"station_name\": \"Station SD-3321\", \"latitude\": 26.1319, \"longitude\": -107.4147, \"elevation\": 278.2, \"state\": \"SD\", \"temp_avg_f\": 68.1, \"precip_annual_in\": 29.7}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111011111111111111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6752,
+        "anomaly": 0.087,
+        "composite": 0.6418
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2904897",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2904897\", \"station_name\": \"Station MO-4897\", \"latitude\": 27.3902, \"longitude\": -102.7151, \"elevation\": 1740.9, \"state\": \"MO\", \"temp_avg_f\": 68.2, \"precip_annual_in\": 5.2}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111111111111111111111111110111111111111101111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6523,
+        "anomaly": 0.0978,
+        "composite": 0.6354
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2101771",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2101771\", \"station_name\": \"Station KY-1771\", \"latitude\": 34.3702, \"longitude\": -104.5994, \"elevation\": 2617.3, \"state\": \"KY\", \"temp_avg_f\": 57.1, \"precip_annual_in\": 13.7}"
+      },
+      "cluster": 65,
+      "fingerprint_48bit": "111111111111011111111111101111101011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6398,
+        "anomaly": 0.1114,
+        "composite": 0.6338
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0403157",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0403157\", \"station_name\": \"Station AZ-3157\", \"latitude\": 28.8049, \"longitude\": -91.5927, \"elevation\": 1055.9, \"state\": \"AZ\", \"temp_avg_f\": 59.9, \"precip_annual_in\": 6.3}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111010111111111111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6519,
+        "anomaly": 0.0822,
+        "composite": 0.6313
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5303092",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5303092\", \"station_name\": \"Station WA-3092\", \"latitude\": 39.2715, \"longitude\": -96.341, \"elevation\": 2886.8, \"state\": \"WA\", \"temp_avg_f\": 49.7, \"precip_annual_in\": 20.4}"
+      },
+      "cluster": 64,
+      "fingerprint_48bit": "111111111111111111111101101111101111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6415,
+        "anomaly": 0.0925,
+        "composite": 0.6297
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4004769",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4004769\", \"station_name\": \"Station OK-4769\", \"latitude\": 36.5317, \"longitude\": -116.2392, \"elevation\": 2556.3, \"state\": \"OK\", \"temp_avg_f\": 55.1, \"precip_annual_in\": 12.9}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "111110111111011111111111101111101101111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6359,
+        "anomaly": 0.0988,
+        "composite": 0.6291
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4202537",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4202537\", \"station_name\": \"Station PA-2537\", \"latitude\": 31.9039, \"longitude\": -110.8053, \"elevation\": 2568.4, \"state\": \"PA\", \"temp_avg_f\": 61.9, \"precip_annual_in\": 11.9}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111111111111111111101101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6426,
+        "anomaly": 0.0848,
+        "composite": 0.6282
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4103034",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4103034\", \"station_name\": \"Station OR-3034\", \"latitude\": 41.859, \"longitude\": -116.4813, \"elevation\": 2367.8, \"state\": \"OR\", \"temp_avg_f\": 39.2, \"precip_annual_in\": 8.8}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111011111111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6278,
+        "anomaly": 0.0952,
+        "composite": 0.6249
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0403577",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0403577\", \"station_name\": \"Station AZ-3577\", \"latitude\": 28.6951, \"longitude\": -103.6683, \"elevation\": 1955.9, \"state\": \"AZ\", \"temp_avg_f\": 62.6, \"precip_annual_in\": 23.2}"
+      },
+      "cluster": 52,
+      "fingerprint_48bit": "110101111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6385,
+        "anomaly": 0.0746,
+        "composite": 0.6241
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0502906",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0502906\", \"station_name\": \"Station AR-2906\", \"latitude\": 25.2197, \"longitude\": -71.8808, \"elevation\": 1276.5, \"state\": \"AR\", \"temp_avg_f\": 69.2, \"precip_annual_in\": 13.4}"
+      },
+      "cluster": 51,
+      "fingerprint_48bit": "111011111111111111111101111111101011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6273,
+        "anomaly": 0.0883,
+        "composite": 0.623
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3004036",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3004036\", \"station_name\": \"Station MT-4036\", \"latitude\": 29.997, \"longitude\": -104.2485, \"elevation\": 1514.6, \"state\": \"MT\", \"temp_avg_f\": 67.9, \"precip_annual_in\": 15.1}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111101111111111111111111101111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6286,
+        "anomaly": 0.0836,
+        "composite": 0.6223
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1701534",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1701534\", \"station_name\": \"Station IL-1534\", \"latitude\": 29.6303, \"longitude\": -99.5911, \"elevation\": 295.9, \"state\": \"IL\", \"temp_avg_f\": 67.5, \"precip_annual_in\": 21.6}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111111111111111111111111111110111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6334,
+        "anomaly": 0.0718,
+        "composite": 0.6213
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4204857",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4204857\", \"station_name\": \"Station PA-4857\", \"latitude\": 26.5868, \"longitude\": -76.6858, \"elevation\": 1303.6, \"state\": \"PA\", \"temp_avg_f\": 65.4, \"precip_annual_in\": 5.8}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111011111111111111111101101111111011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6161,
+        "anomaly": 0.0945,
+        "composite": 0.6201
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1803201",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1803201\", \"station_name\": \"Station IN-3201\", \"latitude\": 29.9059, \"longitude\": -124.4322, \"elevation\": 65.9, \"state\": \"IN\", \"temp_avg_f\": 64.4, \"precip_annual_in\": 15.8}"
+      },
+      "cluster": 61,
+      "fingerprint_48bit": "111111111111011111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6225,
+        "anomaly": 0.0839,
+        "composite": 0.62
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1804728",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1804728\", \"station_name\": \"Station IN-4728\", \"latitude\": 26.2114, \"longitude\": -68.8117, \"elevation\": 1269.3, \"state\": \"IN\", \"temp_avg_f\": 68.7, \"precip_annual_in\": 21.1}"
+      },
+      "cluster": 43,
+      "fingerprint_48bit": "111011111111111111111111101111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6122,
+        "anomaly": 0.0986,
+        "composite": 0.6195
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4203884",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4203884\", \"station_name\": \"Station PA-3884\", \"latitude\": 32.7511, \"longitude\": -110.2091, \"elevation\": 1881.4, \"state\": \"PA\", \"temp_avg_f\": 50.9, \"precip_annual_in\": 22.3}"
+      },
+      "cluster": 56,
+      "fingerprint_48bit": "111110111111111111111011111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6175,
+        "anomaly": 0.0871,
+        "composite": 0.6188
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4400301",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4400301\", \"station_name\": \"Station RI-301\", \"latitude\": 46.4352, \"longitude\": -117.0325, \"elevation\": 2794.1, \"state\": \"RI\", \"temp_avg_f\": 40.8, \"precip_annual_in\": 22.5}"
+      },
+      "cluster": 34,
+      "fingerprint_48bit": "110111111111111111101111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6128,
+        "anomaly": 0.0939,
+        "composite": 0.6186
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4103412",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4103412\", \"station_name\": \"Station OR-3412\", \"latitude\": 29.0124, \"longitude\": -78.9586, \"elevation\": 2893.2, \"state\": \"OR\", \"temp_avg_f\": 61.4, \"precip_annual_in\": 19.1}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111111111111011111111111100111111011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6019,
+        "anomaly": 0.1019,
+        "composite": 0.6162
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4601276",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4601276\", \"station_name\": \"Station SD-1276\", \"latitude\": 30.1061, \"longitude\": -77.081, \"elevation\": 843.9, \"state\": \"SD\", \"temp_avg_f\": 63.6, \"precip_annual_in\": 8.8}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111011111111011111111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6085,
+        "anomaly": 0.0874,
+        "composite": 0.6152
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5502622",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5502622\", \"station_name\": \"Station WI-2622\", \"latitude\": 44.7745, \"longitude\": -113.9233, \"elevation\": 1578.6, \"state\": \"WI\", \"temp_avg_f\": 29.5, \"precip_annual_in\": 11.7}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "111110111111111111101111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5926,
+        "anomaly": 0.0991,
+        "composite": 0.6118
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0201660",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0201660\", \"station_name\": \"Station AK-1660\", \"latitude\": 37.4319, \"longitude\": -81.6252, \"elevation\": 648.9, \"state\": \"AK\", \"temp_avg_f\": 42.3, \"precip_annual_in\": 6.6}"
+      },
+      "cluster": 38,
+      "fingerprint_48bit": "111111111111111111111111111110111111111111110111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6009,
+        "anomaly": 0.08,
+        "composite": 0.6104
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0404111",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0404111\", \"station_name\": \"Station AZ-4111\", \"latitude\": 27.2619, \"longitude\": -80.6002, \"elevation\": 2001.9, \"state\": \"AZ\", \"temp_avg_f\": 67.5, \"precip_annual_in\": 6.7}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111111111111111111111101111111111101111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5866,
+        "anomaly": 0.099,
+        "composite": 0.6094
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1703162",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1703162\", \"station_name\": \"Station IL-3162\", \"latitude\": 34.2558, \"longitude\": -105.1892, \"elevation\": 2071.9, \"state\": \"IL\", \"temp_avg_f\": 63.8, \"precip_annual_in\": 6.8}"
+      },
+      "cluster": 61,
+      "fingerprint_48bit": "111110011111111111111111111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.596,
+        "anomaly": 0.078,
+        "composite": 0.6079
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0603788",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0603788\", \"station_name\": \"Station CA-3788\", \"latitude\": 35.5893, \"longitude\": -86.2747, \"elevation\": 1904.4, \"state\": \"CA\", \"temp_avg_f\": 57.1, \"precip_annual_in\": 10.2}"
+      },
+      "cluster": 40,
+      "fingerprint_48bit": "111111011111111111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5955,
+        "anomaly": 0.0742,
+        "composite": 0.6068
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2303868",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2303868\", \"station_name\": \"Station ME-3868\", \"latitude\": 37.7822, \"longitude\": -98.7643, \"elevation\": 1829.0, \"state\": \"ME\", \"temp_avg_f\": 51.2, \"precip_annual_in\": 22.0}"
+      },
+      "cluster": 56,
+      "fingerprint_48bit": "111111111111111110111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.592,
+        "anomaly": 0.0798,
+        "composite": 0.6067
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5402056",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5402056\", \"station_name\": \"Station WV-2056\", \"latitude\": 32.5351, \"longitude\": -76.3543, \"elevation\": 2715.3, \"state\": \"WV\", \"temp_avg_f\": 46.9, \"precip_annual_in\": 15.1}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111101111111111011111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5707,
+        "anomaly": 0.1059,
+        "composite": 0.6048
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0803644",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0803644\", \"station_name\": \"Station CO-3644\", \"latitude\": 38.0136, \"longitude\": -99.2718, \"elevation\": 1955.5, \"state\": \"CO\", \"temp_avg_f\": 54.8, \"precip_annual_in\": 19.1}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111111111111111111011111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5835,
+        "anomaly": 0.076,
+        "composite": 0.6024
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3101997",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3101997\", \"station_name\": \"Station NE-1997\", \"latitude\": 47.6917, \"longitude\": -106.4738, \"elevation\": 749.8, \"state\": \"NE\", \"temp_avg_f\": 33.9, \"precip_annual_in\": 36.3}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "111111111111111111111111111110111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5626,
+        "anomaly": 0.0993,
+        "composite": 0.5999
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2601175",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2601175\", \"station_name\": \"Station MI-1175\", \"latitude\": 25.6231, \"longitude\": -86.1652, \"elevation\": 2041.9, \"state\": \"MI\", \"temp_avg_f\": 71.0, \"precip_annual_in\": 26.7}"
+      },
+      "cluster": 52,
+      "fingerprint_48bit": "111011111111111111111111111111111111111101111101",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5692,
+        "anomaly": 0.08,
+        "composite": 0.5977
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4400576",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4400576\", \"station_name\": \"Station RI-576\", \"latitude\": 34.6984, \"longitude\": -106.7836, \"elevation\": 419.8, \"state\": \"RI\", \"temp_avg_f\": 59.2, \"precip_annual_in\": 21.3}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111101",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5646,
+        "anomaly": 0.0753,
+        "composite": 0.5947
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3902720",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3902720\", \"station_name\": \"Station OH-2720\", \"latitude\": 28.598, \"longitude\": -89.4524, \"elevation\": 2746.0, \"state\": \"OH\", \"temp_avg_f\": 54.6, \"precip_annual_in\": 13.5}"
+      },
+      "cluster": 64,
+      "fingerprint_48bit": "111111111111111111111101111111001111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5483,
+        "anomaly": 0.0998,
+        "composite": 0.5943
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2903009",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2903009\", \"station_name\": \"Station MO-3009\", \"latitude\": 27.2741, \"longitude\": -68.782, \"elevation\": 57.3, \"state\": \"MO\", \"temp_avg_f\": 64.5, \"precip_annual_in\": 23.1}"
+      },
+      "cluster": 43,
+      "fingerprint_48bit": "111111111111111111111111111110011111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5628,
+        "anomaly": 0.0754,
+        "composite": 0.594
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3100368",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3100368\", \"station_name\": \"Station NE-368\", \"latitude\": 26.0972, \"longitude\": -75.7472, \"elevation\": 2223.8, \"state\": \"NE\", \"temp_avg_f\": 72.7, \"precip_annual_in\": 37.1}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111101111111111011111111101111101111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5388,
+        "anomaly": 0.0995,
+        "composite": 0.5904
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2804586",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2804586\", \"station_name\": \"Station MS-4586\", \"latitude\": 43.5803, \"longitude\": -100.0937, \"elevation\": 1094.3, \"state\": \"MS\", \"temp_avg_f\": 42.1, \"precip_annual_in\": 6.4}"
+      },
+      "cluster": 38,
+      "fingerprint_48bit": "111011111111111111111111101110111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5501,
+        "anomaly": 0.0766,
+        "composite": 0.5892
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4804559",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4804559\", \"station_name\": \"Station TX-4559\", \"latitude\": 31.298, \"longitude\": -94.4161, \"elevation\": 400.5, \"state\": \"TX\", \"temp_avg_f\": 57.7, \"precip_annual_in\": 24.4}"
+      },
+      "cluster": 51,
+      "fingerprint_48bit": "111011111111111111111111111111111111111111111101",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5447,
+        "anomaly": 0.0833,
+        "composite": 0.5887
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1300909",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1300909\", \"station_name\": \"Station GA-909\", \"latitude\": 28.7799, \"longitude\": -118.4758, \"elevation\": 2874.9, \"state\": \"GA\", \"temp_avg_f\": 67.2, \"precip_annual_in\": 35.8}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111111111111111111101111101111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5472,
+        "anomaly": 0.0732,
+        "composite": 0.5872
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2502357",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2502357\", \"station_name\": \"Station MA-2357\", \"latitude\": 32.4355, \"longitude\": -80.7017, \"elevation\": 2563.9, \"state\": \"MA\", \"temp_avg_f\": 62.6, \"precip_annual_in\": 16.9}"
+      },
+      "cluster": 29,
+      "fingerprint_48bit": "111111111111111111111111111111111011111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5429,
+        "anomaly": 0.0713,
+        "composite": 0.585
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3101363",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3101363\", \"station_name\": \"Station NE-1363\", \"latitude\": 30.9792, \"longitude\": -73.702, \"elevation\": 2199.7, \"state\": \"NE\", \"temp_avg_f\": 64.9, \"precip_annual_in\": 30.2}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111111011111111111111111111111111111101111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5133,
+        "anomaly": 0.1002,
+        "composite": 0.5803
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1302522",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1302522\", \"station_name\": \"Station GA-2522\", \"latitude\": 31.736, \"longitude\": -76.565, \"elevation\": 2943.9, \"state\": \"GA\", \"temp_avg_f\": 62.6, \"precip_annual_in\": 32.4}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111011111111111011111111111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4996,
+        "anomaly": 0.1043,
+        "composite": 0.5759
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0103924",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0103924\", \"station_name\": \"Station AL-3924\", \"latitude\": 33.0801, \"longitude\": -70.9466, \"elevation\": 2692.7, \"state\": \"AL\", \"temp_avg_f\": 62.4, \"precip_annual_in\": 27.2}"
+      },
+      "cluster": 50,
+      "fingerprint_48bit": "111011111111111111111111110111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5043,
+        "anomaly": 0.0736,
+        "composite": 0.5701
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3102604",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3102604\", \"station_name\": \"Station NE-2604\", \"latitude\": 39.4505, \"longitude\": -89.9901, \"elevation\": 1380.1, \"state\": \"NE\", \"temp_avg_f\": 35.1, \"precip_annual_in\": 47.5}"
+      },
+      "cluster": 46,
+      "fingerprint_48bit": "111001111111111001111111111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4883,
+        "anomaly": 0.0943,
+        "composite": 0.5689
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1603114",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1603114\", \"station_name\": \"Station ID-3114\", \"latitude\": 32.6749, \"longitude\": -87.2336, \"elevation\": 2836.1, \"state\": \"ID\", \"temp_avg_f\": 57.3, \"precip_annual_in\": 21.6}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111111111111111001111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4839,
+        "anomaly": 0.1011,
+        "composite": 0.5688
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2302805",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2302805\", \"station_name\": \"Station ME-2805\", \"latitude\": 25.545, \"longitude\": -93.172, \"elevation\": 1184.4, \"state\": \"ME\", \"temp_avg_f\": 63.1, \"precip_annual_in\": 33.9}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111111111111111111111101111011111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4997,
+        "anomaly": 0.0713,
+        "composite": 0.5677
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2204435",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2204435\", \"station_name\": \"Station LA-4435\", \"latitude\": 42.7234, \"longitude\": -79.6104, \"elevation\": 1117.8, \"state\": \"LA\", \"temp_avg_f\": 34.4, \"precip_annual_in\": 24.6}"
+      },
+      "cluster": 46,
+      "fingerprint_48bit": "011011111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4881,
+        "anomaly": 0.0815,
+        "composite": 0.5656
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2301859",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2301859\", \"station_name\": \"Station ME-1859\", \"latitude\": 27.3168, \"longitude\": -118.5951, \"elevation\": 2642.7, \"state\": \"ME\", \"temp_avg_f\": 59.6, \"precip_annual_in\": 46.5}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111101111110111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4884,
+        "anomaly": 0.0766,
+        "composite": 0.5645
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5300367",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5300367\", \"station_name\": \"Station WA-367\", \"latitude\": 36.2678, \"longitude\": -77.1353, \"elevation\": 2743.0, \"state\": \"WA\", \"temp_avg_f\": 50.6, \"precip_annual_in\": 25.4}"
+      },
+      "cluster": 22,
+      "fingerprint_48bit": "111001111111111101111101111111111111111101111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4726,
+        "anomaly": 0.1011,
+        "composite": 0.5643
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5300032",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5300032\", \"station_name\": \"Station WA-32\", \"latitude\": 26.3001, \"longitude\": -87.753, \"elevation\": 1938.5, \"state\": \"WA\", \"temp_avg_f\": 73.5, \"precip_annual_in\": 49.0}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111101111111111111111111111111111110111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.476,
+        "anomaly": 0.0949,
+        "composite": 0.5642
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3701467",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3701467\", \"station_name\": \"Station NC-1467\", \"latitude\": 30.3984, \"longitude\": -91.5495, \"elevation\": 2962.0, \"state\": \"NC\", \"temp_avg_f\": 62.8, \"precip_annual_in\": 31.4}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111111111111111101111111101111101011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4735,
+        "anomaly": 0.096,
+        "composite": 0.5634
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2001237",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2001237\", \"station_name\": \"Station KS-1237\", \"latitude\": 44.9735, \"longitude\": -107.6753, \"elevation\": 1268.2, \"state\": \"KS\", \"temp_avg_f\": 39.6, \"precip_annual_in\": 32.8}"
+      },
+      "cluster": 44,
+      "fingerprint_48bit": "111010111111111111111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4834,
+        "anomaly": 0.08,
+        "composite": 0.5634
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5301238",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5301238\", \"station_name\": \"Station WA-1238\", \"latitude\": 26.4387, \"longitude\": -103.7402, \"elevation\": 1881.0, \"state\": \"WA\", \"temp_avg_f\": 64.9, \"precip_annual_in\": 40.8}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111101111111111011111101111111011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4643,
+        "anomaly": 0.0982,
+        "composite": 0.5603
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3704517",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3704517\", \"station_name\": \"Station NC-4517\", \"latitude\": 25.4433, \"longitude\": -70.9019, \"elevation\": 835.6, \"state\": \"NC\", \"temp_avg_f\": 72.4, \"precip_annual_in\": 49.1}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111011111111111011111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4766,
+        "anomaly": 0.0733,
+        "composite": 0.559
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3802556",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3802556\", \"station_name\": \"Station ND-2556\", \"latitude\": 25.0809, \"longitude\": -70.3586, \"elevation\": 982.1, \"state\": \"ND\", \"temp_avg_f\": 65.5, \"precip_annual_in\": 36.2}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111111111111011111111111111111001111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4739,
+        "anomaly": 0.0775,
+        "composite": 0.5589
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5002514",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5002514\", \"station_name\": \"Station VT-2514\", \"latitude\": 26.6056, \"longitude\": -68.3977, \"elevation\": 680.3, \"state\": \"VT\", \"temp_avg_f\": 59.5, \"precip_annual_in\": 32.2}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111011111111111111111101111111001111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4721,
+        "anomaly": 0.0802,
+        "composite": 0.5589
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2000118",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2000118\", \"station_name\": \"Station KS-118\", \"latitude\": 27.8428, \"longitude\": -81.4267, \"elevation\": 1819.0, \"state\": \"KS\", \"temp_avg_f\": 64.6, \"precip_annual_in\": 33.7}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111111011111111111111101111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4786,
+        "anomaly": 0.0673,
+        "composite": 0.5582
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0804484",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0804484\", \"station_name\": \"Station CO-4484\", \"latitude\": 40.1877, \"longitude\": -96.5444, \"elevation\": 2783.6, \"state\": \"CO\", \"temp_avg_f\": 39.3, \"precip_annual_in\": 26.0}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111111111110111111111100111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4667,
+        "anomaly": 0.0856,
+        "composite": 0.5581
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2703740",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2703740\", \"station_name\": \"Station MN-3740\", \"latitude\": 27.1559, \"longitude\": -85.3806, \"elevation\": 2883.0, \"state\": \"MN\", \"temp_avg_f\": 67.9, \"precip_annual_in\": 24.1}"
+      },
+      "cluster": 36,
+      "fingerprint_48bit": "111111111111111111111111111111001111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4695,
+        "anomaly": 0.08,
+        "composite": 0.5578
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5604190",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5604190\", \"station_name\": \"Station WY-4190\", \"latitude\": 37.4427, \"longitude\": -107.3085, \"elevation\": 1616.2, \"state\": \"WY\", \"temp_avg_f\": 48.4, \"precip_annual_in\": 54.6}"
+      },
+      "cluster": 58,
+      "fingerprint_48bit": "111011111110111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4529,
+        "anomaly": 0.0822,
+        "composite": 0.5517
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2103069",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2103069\", \"station_name\": \"Station KY-3069\", \"latitude\": 30.9506, \"longitude\": -69.9744, \"elevation\": 1623.6, \"state\": \"KY\", \"temp_avg_f\": 58.6, \"precip_annual_in\": 20.2}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111011111111111111111111111111011011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4541,
+        "anomaly": 0.0752,
+        "composite": 0.5504
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4604553",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4604553\", \"station_name\": \"Station SD-4553\", \"latitude\": 45.0483, \"longitude\": -112.3087, \"elevation\": 2297.5, \"state\": \"SD\", \"temp_avg_f\": 33.2, \"precip_annual_in\": 34.5}"
+      },
+      "cluster": 26,
+      "fingerprint_48bit": "111011111110111111111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4475,
+        "anomaly": 0.0849,
+        "composite": 0.5502
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4704336",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4704336\", \"station_name\": \"Station TN-4336\", \"latitude\": 31.0491, \"longitude\": -92.1366, \"elevation\": 2683.2, \"state\": \"TN\", \"temp_avg_f\": 54.2, \"precip_annual_in\": 38.0}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111111111111111111111111111111011011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.448,
+        "anomaly": 0.0835,
+        "composite": 0.5501
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3103276",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3103276\", \"station_name\": \"Station NE-3276\", \"latitude\": 27.8027, \"longitude\": -72.6614, \"elevation\": 2084.4, \"state\": \"NE\", \"temp_avg_f\": 59.8, \"precip_annual_in\": 36.9}"
+      },
+      "cluster": 50,
+      "fingerprint_48bit": "111011111011111111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4454,
+        "anomaly": 0.0852,
+        "composite": 0.5495
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4903792",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4903792\", \"station_name\": \"Station UT-3792\", \"latitude\": 44.4796, \"longitude\": -85.4194, \"elevation\": 2962.5, \"state\": \"UT\", \"temp_avg_f\": 37.1, \"precip_annual_in\": 44.7}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111001111111111111111111111111111110111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4341,
+        "anomaly": 0.0985,
+        "composite": 0.5483
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0501519",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0501519\", \"station_name\": \"Station AR-1519\", \"latitude\": 41.2794, \"longitude\": -105.498, \"elevation\": 2929.3, \"state\": \"AR\", \"temp_avg_f\": 44.3, \"precip_annual_in\": 45.6}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111101111111111101111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4441,
+        "anomaly": 0.0788,
+        "composite": 0.5473
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0501776",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0501776\", \"station_name\": \"Station AR-1776\", \"latitude\": 30.6548, \"longitude\": -120.844, \"elevation\": 2844.0, \"state\": \"AR\", \"temp_avg_f\": 65.9, \"precip_annual_in\": 47.1}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4496,
+        "anomaly": 0.0678,
+        "composite": 0.5468
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3903040",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3903040\", \"station_name\": \"Station OH-3040\", \"latitude\": 35.8275, \"longitude\": -76.139, \"elevation\": 2582.1, \"state\": \"OH\", \"temp_avg_f\": 57.5, \"precip_annual_in\": 37.6}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111101111111111111111111101111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4501,
+        "anomaly": 0.0651,
+        "composite": 0.5463
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4800357",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4800357\", \"station_name\": \"Station TX-357\", \"latitude\": 34.1477, \"longitude\": -95.1056, \"elevation\": 2088.9, \"state\": \"TX\", \"temp_avg_f\": 54.6, \"precip_annual_in\": 27.5}"
+      },
+      "cluster": 18,
+      "fingerprint_48bit": "110111111111111111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4486,
+        "anomaly": 0.0628,
+        "composite": 0.5452
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3504667",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3504667\", \"station_name\": \"Station NM-4667\", \"latitude\": 25.8204, \"longitude\": -73.738, \"elevation\": 1864.3, \"state\": \"NM\", \"temp_avg_f\": 68.6, \"precip_annual_in\": 44.4}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111001111111111011111101111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4287,
+        "anomaly": 0.0904,
+        "composite": 0.5441
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1601940",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1601940\", \"station_name\": \"Station ID-1940\", \"latitude\": 46.9156, \"longitude\": -107.5423, \"elevation\": 1400.5, \"state\": \"ID\", \"temp_avg_f\": 35.5, \"precip_annual_in\": 49.5}"
+      },
+      "cluster": 58,
+      "fingerprint_48bit": "111010111111111111101111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4337,
+        "anomaly": 0.0816,
+        "composite": 0.5439
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4701229",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4701229\", \"station_name\": \"Station TN-1229\", \"latitude\": 28.6229, \"longitude\": -92.2502, \"elevation\": 2933.2, \"state\": \"TN\", \"temp_avg_f\": 64.6, \"precip_annual_in\": 58.9}"
+      },
+      "cluster": 50,
+      "fingerprint_48bit": "111001011111111011111111111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4353,
+        "anomaly": 0.0766,
+        "composite": 0.5433
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5102935",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5102935\", \"station_name\": \"Station VA-2935\", \"latitude\": 43.8227, \"longitude\": -118.8923, \"elevation\": 1925.4, \"state\": \"VA\", \"temp_avg_f\": 42.5, \"precip_annual_in\": 40.8}"
+      },
+      "cluster": 58,
+      "fingerprint_48bit": "111011111111111111101111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4359,
+        "anomaly": 0.0751,
+        "composite": 0.5432
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0104042",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0104042\", \"station_name\": \"Station AL-4042\", \"latitude\": 25.0823, \"longitude\": -88.6242, \"elevation\": 2438.2, \"state\": \"AL\", \"temp_avg_f\": 62.2, \"precip_annual_in\": 42.0}"
+      },
+      "cluster": 50,
+      "fingerprint_48bit": "111111111111111111111101110111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4349,
+        "anomaly": 0.0738,
+        "composite": 0.5424
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3003716",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3003716\", \"station_name\": \"Station MT-3716\", \"latitude\": 28.5231, \"longitude\": -89.8344, \"elevation\": 2241.0, \"state\": \"MT\", \"temp_avg_f\": 70.8, \"precip_annual_in\": 45.8}"
+      },
+      "cluster": 19,
+      "fingerprint_48bit": "111101011111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4271,
+        "anomaly": 0.0863,
+        "composite": 0.5424
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2403284",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2403284\", \"station_name\": \"Station MD-3284\", \"latitude\": 26.5103, \"longitude\": -100.0413, \"elevation\": 1856.2, \"state\": \"MD\", \"temp_avg_f\": 59.3, \"precip_annual_in\": 35.4}"
+      },
+      "cluster": 29,
+      "fingerprint_48bit": "111111111111111111111111111111110111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4366,
+        "anomaly": 0.066,
+        "composite": 0.5411
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5000868",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5000868\", \"station_name\": \"Station VT-868\", \"latitude\": 38.1138, \"longitude\": -102.5952, \"elevation\": 970.4, \"state\": \"VT\", \"temp_avg_f\": 53.8, \"precip_annual_in\": 54.3}"
+      },
+      "cluster": 45,
+      "fingerprint_48bit": "111011111111110101111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4337,
+        "anomaly": 0.0706,
+        "composite": 0.5411
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5602336",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5602336\", \"station_name\": \"Station WY-2336\", \"latitude\": 32.0188, \"longitude\": -78.589, \"elevation\": 2255.0, \"state\": \"WY\", \"temp_avg_f\": 51.2, \"precip_annual_in\": 24.8}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111101111111111111111101101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4278,
+        "anomaly": 0.0773,
+        "composite": 0.5404
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2900388",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2900388\", \"station_name\": \"Station MO-388\", \"latitude\": 43.1346, \"longitude\": -117.0228, \"elevation\": 2965.4, \"state\": \"MO\", \"temp_avg_f\": 39.8, \"precip_annual_in\": 58.6}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111111111110111111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4264,
+        "anomaly": 0.0737,
+        "composite": 0.539
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0502226",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0502226\", \"station_name\": \"Station AR-2226\", \"latitude\": 29.7858, \"longitude\": -105.7521, \"elevation\": 2669.8, \"state\": \"AR\", \"temp_avg_f\": 54.5, \"precip_annual_in\": 28.7}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111101111111111111111101111111111111111011111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4336,
+        "anomaly": 0.0616,
+        "composite": 0.5388
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3000244",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3000244\", \"station_name\": \"Station MT-244\", \"latitude\": 37.0482, \"longitude\": -111.5606, \"elevation\": 2983.6, \"state\": \"MT\", \"temp_avg_f\": 49.1, \"precip_annual_in\": 56.2}"
+      },
+      "cluster": 36,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4217,
+        "anomaly": 0.0788,
+        "composite": 0.5384
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0503435",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0503435\", \"station_name\": \"Station AR-3435\", \"latitude\": 25.4949, \"longitude\": -93.733, \"elevation\": 1130.7, \"state\": \"AR\", \"temp_avg_f\": 67.3, \"precip_annual_in\": 48.6}"
+      },
+      "cluster": 41,
+      "fingerprint_48bit": "111101111111111111111111111111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4291,
+        "anomaly": 0.0665,
+        "composite": 0.5383
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3700841",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3700841\", \"station_name\": \"Station NC-841\", \"latitude\": 48.4387, \"longitude\": -119.3226, \"elevation\": 946.4, \"state\": \"NC\", \"temp_avg_f\": 29.5, \"precip_annual_in\": 52.7}"
+      },
+      "cluster": 30,
+      "fingerprint_48bit": "111110111111111111111101111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4216,
+        "anomaly": 0.0698,
+        "composite": 0.5361
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1803387",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1803387\", \"station_name\": \"Station IN-3387\", \"latitude\": 38.161, \"longitude\": -99.7383, \"elevation\": 2242.2, \"state\": \"IN\", \"temp_avg_f\": 37.5, \"precip_annual_in\": 57.9}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111001111111111011111110111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4073,
+        "anomaly": 0.0819,
+        "composite": 0.5334
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1303514",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1303514\", \"station_name\": \"Station GA-3514\", \"latitude\": 34.3215, \"longitude\": -124.7485, \"elevation\": 2783.2, \"state\": \"GA\", \"temp_avg_f\": 55.0, \"precip_annual_in\": 58.9}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111111111111110111111101111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4109,
+        "anomaly": 0.0693,
+        "composite": 0.5317
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4402389",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4402389\", \"station_name\": \"Station RI-2389\", \"latitude\": 37.3244, \"longitude\": -107.1561, \"elevation\": 2717.4, \"state\": \"RI\", \"temp_avg_f\": 41.1, \"precip_annual_in\": 54.9}"
+      },
+      "cluster": 31,
+      "fingerprint_48bit": "111111111111111011111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4029,
+        "anomaly": 0.0725,
+        "composite": 0.5293
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1802315",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1802315\", \"station_name\": \"Station IN-2315\", \"latitude\": 29.8034, \"longitude\": -92.4982, \"elevation\": 2241.8, \"state\": \"IN\", \"temp_avg_f\": 64.0, \"precip_annual_in\": 50.8}"
+      },
+      "cluster": 22,
+      "fingerprint_48bit": "111011111111111111111110111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4003,
+        "anomaly": 0.0747,
+        "composite": 0.5288
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3202442",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3202442\", \"station_name\": \"Station NV-2442\", \"latitude\": 26.875, \"longitude\": -108.2448, \"elevation\": 2463.3, \"state\": \"NV\", \"temp_avg_f\": 63.8, \"precip_annual_in\": 59.0}"
+      },
+      "cluster": 22,
+      "fingerprint_48bit": "111011111111101111111101111111111011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3993,
+        "anomaly": 0.075,
+        "composite": 0.5285
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1601521",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1601521\", \"station_name\": \"Station ID-1521\", \"latitude\": 30.9872, \"longitude\": -81.2965, \"elevation\": 2592.5, \"state\": \"ID\", \"temp_avg_f\": 62.0, \"precip_annual_in\": 59.7}"
+      },
+      "cluster": 15,
+      "fingerprint_48bit": "111111011111111111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3929,
+        "anomaly": 0.0838,
+        "composite": 0.5281
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3702312",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3702312\", \"station_name\": \"Station NC-2312\", \"latitude\": 34.3221, \"longitude\": -77.4151, \"elevation\": 2262.5, \"state\": \"NC\", \"temp_avg_f\": 53.9, \"precip_annual_in\": 54.4}"
+      },
+      "cluster": 15,
+      "fingerprint_48bit": "111111111111111011111111111111111110111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3975,
+        "anomaly": 0.0753,
+        "composite": 0.5278
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3403089",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3403089\", \"station_name\": \"Station NJ-3089\", \"latitude\": 34.633, \"longitude\": -84.4099, \"elevation\": 2161.7, \"state\": \"NJ\", \"temp_avg_f\": 46.6, \"precip_annual_in\": 59.5}"
+      },
+      "cluster": 22,
+      "fingerprint_48bit": "101111111111111011111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3932,
+        "anomaly": 0.0771,
+        "composite": 0.5265
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3002132",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3002132\", \"station_name\": \"Station MT-2132\", \"latitude\": 42.2389, \"longitude\": -122.7277, \"elevation\": 1941.3, \"state\": \"MT\", \"temp_avg_f\": 37.0, \"precip_annual_in\": 52.5}"
+      },
+      "cluster": 26,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3998,
+        "anomaly": 0.0624,
+        "composite": 0.5255
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5401988",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5401988\", \"station_name\": \"Station WV-1988\", \"latitude\": 36.7782, \"longitude\": -111.621, \"elevation\": 2763.5, \"state\": \"WV\", \"temp_avg_f\": 55.0, \"precip_annual_in\": 51.7}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111001111111111101111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3942,
+        "anomaly": 0.0673,
+        "composite": 0.5245
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1204499",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1204499\", \"station_name\": \"Station FL-4499\", \"latitude\": 30.2934, \"longitude\": -93.1448, \"elevation\": 1592.5, \"state\": \"FL\", \"temp_avg_f\": 68.5, \"precip_annual_in\": 56.0}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111011111111111011111111111111111110111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3925,
+        "anomaly": 0.0683,
+        "composite": 0.5241
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0604464",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0604464\", \"station_name\": \"Station CA-4464\", \"latitude\": 47.0002, \"longitude\": -69.6458, \"elevation\": 1662.0, \"state\": \"CA\", \"temp_avg_f\": 31.7, \"precip_annual_in\": 33.5}"
+      },
+      "cluster": 54,
+      "fingerprint_48bit": "111011101111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3928,
+        "anomaly": 0.0674,
+        "composite": 0.5239
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3001591",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3001591\", \"station_name\": \"Station MT-1591\", \"latitude\": 44.8541, \"longitude\": -115.605, \"elevation\": 2410.0, \"state\": \"MT\", \"temp_avg_f\": 32.9, \"precip_annual_in\": 40.6}"
+      },
+      "cluster": 58,
+      "fingerprint_48bit": "111001111111110111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3889,
+        "anomaly": 0.0734,
+        "composite": 0.5239
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0401436",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0401436\", \"station_name\": \"Station AZ-1436\", \"latitude\": 28.0687, \"longitude\": -79.5812, \"elevation\": 904.0, \"state\": \"AZ\", \"temp_avg_f\": 60.5, \"precip_annual_in\": 53.1}"
+      },
+      "cluster": 55,
+      "fingerprint_48bit": "111001111111111111111111111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3853,
+        "anomaly": 0.0659,
+        "composite": 0.5206
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4400041",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4400041\", \"station_name\": \"Station RI-41\", \"latitude\": 26.6311, \"longitude\": -75.8763, \"elevation\": 1211.3, \"state\": \"RI\", \"temp_avg_f\": 65.1, \"precip_annual_in\": 56.8}"
+      },
+      "cluster": 41,
+      "fingerprint_48bit": "111011111111111111111101111111011011111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3842,
+        "anomaly": 0.0669,
+        "composite": 0.5204
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3804752",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3804752\", \"station_name\": \"Station ND-4752\", \"latitude\": 44.6152, \"longitude\": -104.8664, \"elevation\": 1261.4, \"state\": \"ND\", \"temp_avg_f\": 25.6, \"precip_annual_in\": 39.5}"
+      },
+      "cluster": 58,
+      "fingerprint_48bit": "111101111111111111101111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3868,
+        "anomaly": 0.0571,
+        "composite": 0.519
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1700751",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1700751\", \"station_name\": \"Station IL-751\", \"latitude\": 28.5002, \"longitude\": -70.3286, \"elevation\": 448.6, \"state\": \"IL\", \"temp_avg_f\": 56.7, \"precip_annual_in\": 49.3}"
+      },
+      "cluster": 29,
+      "fingerprint_48bit": "111111111111111111111111111111011110111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3869,
+        "anomaly": 0.0537,
+        "composite": 0.5182
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5600822",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5600822\", \"station_name\": \"Station WY-822\", \"latitude\": 33.0254, \"longitude\": -74.8518, \"elevation\": 1302.9, \"state\": \"WY\", \"temp_avg_f\": 58.3, \"precip_annual_in\": 47.4}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111011111111111001111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3736,
+        "anomaly": 0.0663,
+        "composite": 0.516
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4400017",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4400017\", \"station_name\": \"Station RI-17\", \"latitude\": 48.9069, \"longitude\": -94.8405, \"elevation\": 2913.2, \"state\": \"RI\", \"temp_avg_f\": 26.0, \"precip_annual_in\": 52.3}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111101111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3729,
+        "anomaly": 0.0664,
+        "composite": 0.5157
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4601375",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4601375\", \"station_name\": \"Station SD-1375\", \"latitude\": 44.4763, \"longitude\": -88.4623, \"elevation\": 2149.2, \"state\": \"SD\", \"temp_avg_f\": 35.7, \"precip_annual_in\": 54.3}"
+      },
+      "cluster": 54,
+      "fingerprint_48bit": "111001111111111011110111111111111111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3625,
+        "anomaly": 0.0718,
+        "composite": 0.513
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4502205",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4502205\", \"station_name\": \"Station SC-2205\", \"latitude\": 33.9016, \"longitude\": -82.9143, \"elevation\": 1326.1, \"state\": \"SC\", \"temp_avg_f\": 45.6, \"precip_annual_in\": 47.3}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111001111111111111111111111111011111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3661,
+        "anomaly": 0.0602,
+        "composite": 0.5115
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4100677",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4100677\", \"station_name\": \"Station OR-677\", \"latitude\": 45.454, \"longitude\": -76.4709, \"elevation\": 2797.1, \"state\": \"OR\", \"temp_avg_f\": 39.8, \"precip_annual_in\": 59.7}"
+      },
+      "cluster": 24,
+      "fingerprint_48bit": "111001111111111111111101111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3652,
+        "anomaly": 0.0584,
+        "composite": 0.5107
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5402523",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5402523\", \"station_name\": \"Station WV-2523\", \"latitude\": 32.1957, \"longitude\": -123.7043, \"elevation\": 2943.8, \"state\": \"WV\", \"temp_avg_f\": 56.5, \"precip_annual_in\": 23.0}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7649,
+        "anomaly": 0.104,
+        "composite": 0.507
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3800871",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3800871\", \"station_name\": \"Station ND-871\", \"latitude\": 41.9747, \"longitude\": -83.5682, \"elevation\": 2925.6, \"state\": \"ND\", \"temp_avg_f\": 46.1, \"precip_annual_in\": 38.7}"
+      },
+      "cluster": 54,
+      "fingerprint_48bit": "111111111111111011111101111111011111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3415,
+        "anomaly": 0.0644,
+        "composite": 0.5027
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1603554",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1603554\", \"station_name\": \"Station ID-3554\", \"latitude\": 47.5599, \"longitude\": -77.3739, \"elevation\": 2866.1, \"state\": \"ID\", \"temp_avg_f\": 40.8, \"precip_annual_in\": 49.4}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "110001111111111111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3383,
+        "anomaly": 0.0656,
+        "composite": 0.5017
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1804785",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1804785\", \"station_name\": \"Station IN-4785\", \"latitude\": 38.8988, \"longitude\": -97.1956, \"elevation\": 1660.0, \"state\": \"IN\", \"temp_avg_f\": 38.5, \"precip_annual_in\": 47.4}"
+      },
+      "cluster": 54,
+      "fingerprint_48bit": "111001111111111111111011111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3364,
+        "anomaly": 0.0649,
+        "composite": 0.5008
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3202196",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3202196\", \"station_name\": \"Station NV-2196\", \"latitude\": 41.3295, \"longitude\": -84.5202, \"elevation\": 2706.3, \"state\": \"NV\", \"temp_avg_f\": 39.2, \"precip_annual_in\": 40.9}"
+      },
+      "cluster": 54,
+      "fingerprint_48bit": "011111111111111111111111111111111111111101111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3356,
+        "anomaly": 0.062,
+        "composite": 0.4997
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0800194",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0800194\", \"station_name\": \"Station CO-194\", \"latitude\": 27.2375, \"longitude\": -119.4958, \"elevation\": 2216.4, \"state\": \"CO\", \"temp_avg_f\": 67.1, \"precip_annual_in\": 37.3}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111011111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7265,
+        "anomaly": 0.0936,
+        "composite": 0.489
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1002837",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1002837\", \"station_name\": \"Station DE-2837\", \"latitude\": 26.2139, \"longitude\": -91.4547, \"elevation\": 1999.6, \"state\": \"DE\", \"temp_avg_f\": 72.0, \"precip_annual_in\": 11.8}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "011111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7104,
+        "anomaly": 0.1035,
+        "composite": 0.485
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3702652",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3702652\", \"station_name\": \"Station NC-2652\", \"latitude\": 33.8378, \"longitude\": -92.8257, \"elevation\": 2122.6, \"state\": \"NC\", \"temp_avg_f\": 56.1, \"precip_annual_in\": 15.0}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111111111111111111011111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6866,
+        "anomaly": 0.1055,
+        "composite": 0.476
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3303445",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3303445\", \"station_name\": \"Station NH-3445\", \"latitude\": 26.9796, \"longitude\": -119.5211, \"elevation\": 2647.1, \"state\": \"NH\", \"temp_avg_f\": 66.6, \"precip_annual_in\": 22.5}"
+      },
+      "cluster": 28,
+      "fingerprint_48bit": "111111111111011111111111111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6751,
+        "anomaly": 0.0973,
+        "composite": 0.4694
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1002584",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1002584\", \"station_name\": \"Station DE-2584\", \"latitude\": 38.4416, \"longitude\": -102.5074, \"elevation\": 1949.0, \"state\": \"DE\", \"temp_avg_f\": 45.7, \"precip_annual_in\": 7.9}"
+      },
+      "cluster": 26,
+      "fingerprint_48bit": "111111111111111111111001111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6542,
+        "anomaly": 0.0908,
+        "composite": 0.4594
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2103037",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2103037\", \"station_name\": \"Station KY-3037\", \"latitude\": 30.8314, \"longitude\": -116.3664, \"elevation\": 2708.6, \"state\": \"KY\", \"temp_avg_f\": 57.6, \"precip_annual_in\": 9.9}"
+      },
+      "cluster": 28,
+      "fingerprint_48bit": "111110111111111111111111101111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6474,
+        "anomaly": 0.0907,
+        "composite": 0.4566
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0801727",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0801727\", \"station_name\": \"Station CO-1727\", \"latitude\": 31.9792, \"longitude\": -123.1682, \"elevation\": 2798.8, \"state\": \"CO\", \"temp_avg_f\": 63.9, \"precip_annual_in\": 18.7}"
+      },
+      "cluster": 28,
+      "fingerprint_48bit": "111110111111111111111111101111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6299,
+        "anomaly": 0.0907,
+        "composite": 0.4496
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5301597",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5301597\", \"station_name\": \"Station WA-1597\", \"latitude\": 33.5401, \"longitude\": -117.6175, \"elevation\": 2024.1, \"state\": \"WA\", \"temp_avg_f\": 57.2, \"precip_annual_in\": 23.2}"
+      },
+      "cluster": 28,
+      "fingerprint_48bit": "111111111111011111111111111111101111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6303,
+        "anomaly": 0.086,
+        "composite": 0.4486
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5400438",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5400438\", \"station_name\": \"Station WV-438\", \"latitude\": 39.1102, \"longitude\": -105.014, \"elevation\": 2132.3, \"state\": \"WV\", \"temp_avg_f\": 44.8, \"precip_annual_in\": 12.7}"
+      },
+      "cluster": 26,
+      "fingerprint_48bit": "111011111111111111101111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.624,
+        "anomaly": 0.0905,
+        "composite": 0.4472
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1803363",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1803363\", \"station_name\": \"Station IN-3363\", \"latitude\": 34.0988, \"longitude\": -102.0828, \"elevation\": 2745.0, \"state\": \"IN\", \"temp_avg_f\": 50.7, \"precip_annual_in\": 9.3}"
+      },
+      "cluster": 64,
+      "fingerprint_48bit": "101111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.7458,
+        "anomaly": 0.1194,
+        "composite": 0.4448
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4400815",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4400815\", \"station_name\": \"Station RI-815\", \"latitude\": 25.3913, \"longitude\": -117.3001, \"elevation\": 2671.0, \"state\": \"RI\", \"temp_avg_f\": 72.3, \"precip_annual_in\": 5.4}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "111010111111111111111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6158,
+        "anomaly": 0.0897,
+        "composite": 0.4437
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4901631",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4901631\", \"station_name\": \"Station UT-1631\", \"latitude\": 38.8441, \"longitude\": -124.1809, \"elevation\": 2441.3, \"state\": \"UT\", \"temp_avg_f\": 50.5, \"precip_annual_in\": 5.9}"
+      },
+      "cluster": 27,
+      "fingerprint_48bit": "111011111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6061,
+        "anomaly": 0.0815,
+        "composite": 0.4378
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5103791",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5103791\", \"station_name\": \"Station VA-3791\", \"latitude\": 34.009, \"longitude\": -109.9398, \"elevation\": 2236.0, \"state\": \"VA\", \"temp_avg_f\": 59.3, \"precip_annual_in\": 16.8}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111111111111111111101101111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6076,
+        "anomaly": 0.0763,
+        "composite": 0.4371
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1201956",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1201956\", \"station_name\": \"Station FL-1956\", \"latitude\": 36.9988, \"longitude\": -122.4779, \"elevation\": 905.8, \"state\": \"FL\", \"temp_avg_f\": 54.1, \"precip_annual_in\": 14.9}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111011111111101111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5985,
+        "anomaly": 0.0774,
+        "composite": 0.4338
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3103470",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3103470\", \"station_name\": \"Station NE-3470\", \"latitude\": 26.9938, \"longitude\": -68.0471, \"elevation\": 1604.3, \"state\": \"NE\", \"temp_avg_f\": 67.3, \"precip_annual_in\": 10.6}"
+      },
+      "cluster": 23,
+      "fingerprint_48bit": "111011111111111111111101101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5836,
+        "anomaly": 0.0955,
+        "composite": 0.4323
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5501017",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5501017\", \"station_name\": \"Station WI-1017\", \"latitude\": 25.2982, \"longitude\": -83.2882, \"elevation\": 2849.8, \"state\": \"WI\", \"temp_avg_f\": 70.9, \"precip_annual_in\": 12.3}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111011111111111111111101111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5692,
+        "anomaly": 0.0997,
+        "composite": 0.4276
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4200962",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4200962\", \"station_name\": \"Station PA-962\", \"latitude\": 43.4919, \"longitude\": -95.3627, \"elevation\": 2033.2, \"state\": \"PA\", \"temp_avg_f\": 44.6, \"precip_annual_in\": 5.6}"
+      },
+      "cluster": 13,
+      "fingerprint_48bit": "111010111111111111111111101111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.578,
+        "anomaly": 0.0834,
+        "composite": 0.4271
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5601944",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5601944\", \"station_name\": \"Station WY-1944\", \"latitude\": 31.4647, \"longitude\": -92.0832, \"elevation\": 1779.2, \"state\": \"WY\", \"temp_avg_f\": 59.9, \"precip_annual_in\": 21.5}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "011111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5608,
+        "anomaly": 0.0855,
+        "composite": 0.4207
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4601432",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4601432\", \"station_name\": \"Station SD-1432\", \"latitude\": 33.6449, \"longitude\": -122.392, \"elevation\": 2422.7, \"state\": \"SD\", \"temp_avg_f\": 52.6, \"precip_annual_in\": 38.4}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "110011111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5528,
+        "anomaly": 0.091,
+        "composite": 0.4189
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0502421",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0502421\", \"station_name\": \"Station AR-2421\", \"latitude\": 31.0094, \"longitude\": -95.0605, \"elevation\": 765.4, \"state\": \"AR\", \"temp_avg_f\": 57.9, \"precip_annual_in\": 13.2}"
+      },
+      "cluster": 35,
+      "fingerprint_48bit": "111111111111111111111011111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5568,
+        "anomaly": 0.0684,
+        "composite": 0.4148
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3404726",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3404726\", \"station_name\": \"Station NJ-4726\", \"latitude\": 29.7551, \"longitude\": -77.8476, \"elevation\": 2478.0, \"state\": \"NJ\", \"temp_avg_f\": 63.7, \"precip_annual_in\": 6.1}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111011011111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.7419,
+        "anomaly": 0.1131,
+        "composite": 0.4125
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4200516",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4200516\", \"station_name\": \"Station PA-516\", \"latitude\": 25.677, \"longitude\": -85.068, \"elevation\": 2842.7, \"state\": \"PA\", \"temp_avg_f\": 61.1, \"precip_annual_in\": 15.4}"
+      },
+      "cluster": 36,
+      "fingerprint_48bit": "111011111111111011111101111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5317,
+        "anomaly": 0.0974,
+        "composite": 0.412
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0104879",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0104879\", \"station_name\": \"Station AL-4879\", \"latitude\": 38.033, \"longitude\": -104.3949, \"elevation\": 2868.7, \"state\": \"AL\", \"temp_avg_f\": 45.5, \"precip_annual_in\": 6.8}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111110111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6629,
+        "anomaly": 0.0953,
+        "composite": 0.4057
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4503441",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4503441\", \"station_name\": \"Station SC-3441\", \"latitude\": 26.0735, \"longitude\": -124.4923, \"elevation\": 2385.5, \"state\": \"SC\", \"temp_avg_f\": 58.4, \"precip_annual_in\": 23.5}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0037,
+        "reconstruction": 0.931,
+        "anomaly": 0.1256,
+        "composite": 0.4051
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0804026",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0804026\", \"station_name\": \"Station CO-4026\", \"latitude\": 25.9002, \"longitude\": -88.6823, \"elevation\": 905.0, \"state\": \"CO\", \"temp_avg_f\": 73.8, \"precip_annual_in\": 25.8}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111111111111111111110111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6652,
+        "anomaly": 0.0786,
+        "composite": 0.4024
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2101608",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2101608\", \"station_name\": \"Station KY-1608\", \"latitude\": 43.3155, \"longitude\": -99.8034, \"elevation\": 2772.5, \"state\": \"KY\", \"temp_avg_f\": 52.9, \"precip_annual_in\": 31.9}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111111111111110111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5136,
+        "anomaly": 0.0869,
+        "composite": 0.4022
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5304561",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5304561\", \"station_name\": \"Station WA-4561\", \"latitude\": 40.2131, \"longitude\": -107.3858, \"elevation\": 1180.5, \"state\": \"WA\", \"temp_avg_f\": 48.0, \"precip_annual_in\": 23.1}"
+      },
+      "cluster": 53,
+      "fingerprint_48bit": "111011111111111111111111111110111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6555,
+        "anomaly": 0.0915,
+        "composite": 0.4017
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5600217",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5600217\", \"station_name\": \"Station WY-217\", \"latitude\": 40.0708, \"longitude\": -98.5547, \"elevation\": 1691.2, \"state\": \"WY\", \"temp_avg_f\": 52.3, \"precip_annual_in\": 36.9}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0004,
+        "reconstruction": 0.3776,
+        "anomaly": 1.0,
+        "composite": 0.4012
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1002324",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1002324\", \"station_name\": \"Station DE-2324\", \"latitude\": 32.2492, \"longitude\": -110.0246, \"elevation\": 2790.4, \"state\": \"DE\", \"temp_avg_f\": 63.9, \"precip_annual_in\": 16.3}"
+      },
+      "cluster": 65,
+      "fingerprint_48bit": "111111111111111111111111111111101011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6532,
+        "anomaly": 0.0854,
+        "composite": 0.3993
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3102358",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3102358\", \"station_name\": \"Station NE-2358\", \"latitude\": 27.2789, \"longitude\": -86.022, \"elevation\": 1780.3, \"state\": \"NE\", \"temp_avg_f\": 64.0, \"precip_annual_in\": 32.8}"
+      },
+      "cluster": 47,
+      "fingerprint_48bit": "111111111111111111111101111111011011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5,
+        "anomaly": 0.0942,
+        "composite": 0.3986
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3401878",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3401878\", \"station_name\": \"Station NJ-1878\", \"latitude\": 29.864, \"longitude\": -109.9366, \"elevation\": 1968.2, \"state\": \"NJ\", \"temp_avg_f\": 56.6, \"precip_annual_in\": 10.1}"
+      },
+      "cluster": 61,
+      "fingerprint_48bit": "111110111111011111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6467,
+        "anomaly": 0.081,
+        "composite": 0.3956
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4103048",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4103048\", \"station_name\": \"Station OR-3048\", \"latitude\": 27.2671, \"longitude\": -118.9343, \"elevation\": 336.2, \"state\": \"OR\", \"temp_avg_f\": 58.9, \"precip_annual_in\": 23.3}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111110111111111111111111111110111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6523,
+        "anomaly": 0.071,
+        "composite": 0.3953
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2204778",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2204778\", \"station_name\": \"Station LA-4778\", \"latitude\": 34.9195, \"longitude\": -102.9133, \"elevation\": 1536.0, \"state\": \"LA\", \"temp_avg_f\": 49.8, \"precip_annual_in\": 10.5}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111110111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.0037,
+        "reconstruction": 0.9101,
+        "anomaly": 0.1198,
+        "composite": 0.3953
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3801933",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3801933\", \"station_name\": \"Station ND-1933\", \"latitude\": 35.7922, \"longitude\": -89.0315, \"elevation\": 2495.2, \"state\": \"ND\", \"temp_avg_f\": 55.6, \"precip_annual_in\": 7.0}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111011111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6341,
+        "anomaly": 0.0952,
+        "composite": 0.3941
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4103428",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4103428\", \"station_name\": \"Station OR-3428\", \"latitude\": 28.1351, \"longitude\": -100.0806, \"elevation\": 130.8, \"state\": \"OR\", \"temp_avg_f\": 56.6, \"precip_annual_in\": 47.0}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111111111111111111101101111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5032,
+        "anomaly": 0.0703,
+        "composite": 0.3938
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4801476",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4801476\", \"station_name\": \"Station TX-1476\", \"latitude\": 25.0021, \"longitude\": -107.8658, \"elevation\": 2838.6, \"state\": \"TX\", \"temp_avg_f\": 59.3, \"precip_annual_in\": 41.3}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111101111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5013,
+        "anomaly": 0.0651,
+        "composite": 0.3918
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3403324",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3403324\", \"station_name\": \"Station NJ-3324\", \"latitude\": 27.858, \"longitude\": -91.9069, \"elevation\": 2107.0, \"state\": \"NJ\", \"temp_avg_f\": 69.2, \"precip_annual_in\": 19.3}"
+      },
+      "cluster": 65,
+      "fingerprint_48bit": "111111111111111111111111111111101011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6221,
+        "anomaly": 0.0927,
+        "composite": 0.3887
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4602757",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4602757\", \"station_name\": \"Station SD-2757\", \"latitude\": 35.2164, \"longitude\": -82.9252, \"elevation\": 2046.0, \"state\": \"SD\", \"temp_avg_f\": 53.8, \"precip_annual_in\": 20.6}"
+      },
+      "cluster": 21,
+      "fingerprint_48bit": "110011111111111111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4798,
+        "anomaly": 0.0798,
+        "composite": 0.3869
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4701612",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4701612\", \"station_name\": \"Station TN-1612\", \"latitude\": 26.3694, \"longitude\": -79.9363, \"elevation\": 2099.2, \"state\": \"TN\", \"temp_avg_f\": 63.3, \"precip_annual_in\": 10.8}"
+      },
+      "cluster": 59,
+      "fingerprint_48bit": "111111111111111111111111101111111011111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6173,
+        "anomaly": 0.0923,
+        "composite": 0.3867
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2101191",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2101191\", \"station_name\": \"Station KY-1191\", \"latitude\": 33.531, \"longitude\": -91.6226, \"elevation\": 2305.9, \"state\": \"KY\", \"temp_avg_f\": 58.1, \"precip_annual_in\": 5.9}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111110111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6147,
+        "anomaly": 0.0957,
+        "composite": 0.3865
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5300024",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5300024\", \"station_name\": \"Station WA-24\", \"latitude\": 36.6638, \"longitude\": -121.0549, \"elevation\": 2281.8, \"state\": \"WA\", \"temp_avg_f\": 50.8, \"precip_annual_in\": 31.1}"
+      },
+      "cluster": 20,
+      "fingerprint_48bit": "111110111111111111111111111110111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6158,
+        "anomaly": 0.0877,
+        "composite": 0.3849
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3203312",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3203312\", \"station_name\": \"Station NV-3312\", \"latitude\": 32.8302, \"longitude\": -119.5058, \"elevation\": 2472.3, \"state\": \"NV\", \"temp_avg_f\": 56.7, \"precip_annual_in\": 5.3}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111011111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6189,
+        "anomaly": 0.0805,
+        "composite": 0.3844
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2300774",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2300774\", \"station_name\": \"Station ME-774\", \"latitude\": 39.3281, \"longitude\": -79.5843, \"elevation\": 1644.6, \"state\": \"ME\", \"temp_avg_f\": 50.4, \"precip_annual_in\": 29.0}"
+      },
+      "cluster": 46,
+      "fingerprint_48bit": "111011111111111101111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4781,
+        "anomaly": 0.0719,
+        "composite": 0.3842
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1301844",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1301844\", \"station_name\": \"Station GA-1844\", \"latitude\": 27.3034, \"longitude\": -93.5267, \"elevation\": 1526.1, \"state\": \"GA\", \"temp_avg_f\": 67.8, \"precip_annual_in\": 7.2}"
+      },
+      "cluster": 49,
+      "fingerprint_48bit": "111111111111111111111111101111101011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6173,
+        "anomaly": 0.0817,
+        "composite": 0.384
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3401707",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3401707\", \"station_name\": \"Station NJ-1707\", \"latitude\": 28.404, \"longitude\": -124.2741, \"elevation\": 1423.8, \"state\": \"NJ\", \"temp_avg_f\": 64.6, \"precip_annual_in\": 23.4}"
+      },
+      "cluster": 61,
+      "fingerprint_48bit": "111110111111011111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6233,
+        "anomaly": 0.0698,
+        "composite": 0.3834
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1302797",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1302797\", \"station_name\": \"Station GA-2797\", \"latitude\": 34.5477, \"longitude\": -88.9024, \"elevation\": 2195.3, \"state\": \"GA\", \"temp_avg_f\": 52.5, \"precip_annual_in\": 11.4}"
+      },
+      "cluster": 62,
+      "fingerprint_48bit": "111111111111011111111111101111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5983,
+        "anomaly": 0.1006,
+        "composite": 0.3812
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3200589",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3200589\", \"station_name\": \"Station NV-589\", \"latitude\": 34.6814, \"longitude\": -69.9763, \"elevation\": 1149.9, \"state\": \"NV\", \"temp_avg_f\": 50.9, \"precip_annual_in\": 7.1}"
+      },
+      "cluster": 43,
+      "fingerprint_48bit": "111111111111111111111101101111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.6738,
+        "anomaly": 0.0878,
+        "composite": 0.379
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4503468",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4503468\", \"station_name\": \"Station SC-3468\", \"latitude\": 27.1147, \"longitude\": -111.5139, \"elevation\": 1097.9, \"state\": \"SC\", \"temp_avg_f\": 63.1, \"precip_annual_in\": 59.1}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111011111111111111111111111111111110111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4644,
+        "anomaly": 0.0664,
+        "composite": 0.3774
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3403951",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3403951\", \"station_name\": \"Station NJ-3951\", \"latitude\": 37.6236, \"longitude\": -98.4063, \"elevation\": 2471.7, \"state\": \"NJ\", \"temp_avg_f\": 51.2, \"precip_annual_in\": 16.8}"
+      },
+      "cluster": 40,
+      "fingerprint_48bit": "111111111111011111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.7317,
+        "anomaly": 0.0988,
+        "composite": 0.3757
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_5601454",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:5601454\", \"station_name\": \"Station WY-1454\", \"latitude\": 29.2965, \"longitude\": -97.2122, \"elevation\": 1175.4, \"state\": \"WY\", \"temp_avg_f\": 68.9, \"precip_annual_in\": 51.7}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111101111111111111111111110111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4577,
+        "anomaly": 0.0657,
+        "composite": 0.3745
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_0401972",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:0401972\", \"station_name\": \"Station AZ-1972\", \"latitude\": 28.522, \"longitude\": -69.3199, \"elevation\": 1913.4, \"state\": \"AZ\", \"temp_avg_f\": 66.3, \"precip_annual_in\": 58.9}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111111111111111111111101111111011110111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4395,
+        "anomaly": 0.0912,
+        "composite": 0.3736
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3300622",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3300622\", \"station_name\": \"Station NH-622\", \"latitude\": 44.2303, \"longitude\": -99.4584, \"elevation\": 2569.8, \"state\": \"NH\", \"temp_avg_f\": 36.8, \"precip_annual_in\": 32.4}"
+      },
+      "cluster": 33,
+      "fingerprint_48bit": "111011111111111011111111111111111111111101111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4361,
+        "anomaly": 0.0783,
+        "composite": 0.369
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_3102077",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:3102077\", \"station_name\": \"Station NE-2077\", \"latitude\": 29.5835, \"longitude\": -68.8463, \"elevation\": 2399.4, \"state\": \"NE\", \"temp_avg_f\": 56.4, \"precip_annual_in\": 24.8}"
+      },
+      "cluster": 36,
+      "fingerprint_48bit": "111011111111111011111101111111111111111101111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4335,
+        "anomaly": 0.0789,
+        "composite": 0.3681
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_1501990",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:1501990\", \"station_name\": \"Station HI-1990\", \"latitude\": 43.405, \"longitude\": -68.8902, \"elevation\": 2936.7, \"state\": \"HI\", \"temp_avg_f\": 36.0, \"precip_annual_in\": 17.0}"
+      },
+      "cluster": 37,
+      "fingerprint_48bit": "111101111111111111111101111111101111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4372,
+        "anomaly": 0.0669,
+        "composite": 0.3666
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4401096",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4401096\", \"station_name\": \"Station RI-1096\", \"latitude\": 47.8033, \"longitude\": -68.7112, \"elevation\": 1534.2, \"state\": \"RI\", \"temp_avg_f\": 37.1, \"precip_annual_in\": 11.7}"
+      },
+      "cluster": 56,
+      "fingerprint_48bit": "011111111111111111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.575,
+        "anomaly": 0.0788,
+        "composite": 0.3664
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_2501280",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:2501280\", \"station_name\": \"Station MA-1280\", \"latitude\": 33.1991, \"longitude\": -98.7914, \"elevation\": 1798.5, \"state\": \"MA\", \"temp_avg_f\": 63.3, \"precip_annual_in\": 40.6}"
+      },
+      "cluster": 16,
+      "fingerprint_48bit": "111101111111111111111101111111011111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4325,
+        "anomaly": 0.0691,
+        "composite": 0.3653
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4404149",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4404149\", \"station_name\": \"Station RI-4149\", \"latitude\": 25.8928, \"longitude\": -74.3511, \"elevation\": 2370.9, \"state\": \"RI\", \"temp_avg_f\": 60.9, \"precip_annual_in\": 41.1}"
+      },
+      "cluster": 66,
+      "fingerprint_48bit": "111011111111111111111101111111111011111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4224,
+        "anomaly": 0.0812,
+        "composite": 0.3643
+      }
+    },
+    {
+      "entity": {
+        "name": "station_GHCND_4101645",
+        "type": "station",
+        "attributes": "{\"station_id\": \"GHCND:4101645\", \"station_name\": \"Station OR-1645\", \"latitude\": 35.2985, \"longitude\": -71.4547, \"elevation\": 1171.2, \"state\": \"OR\", \"temp_avg_f\": 45.2, \"precip_annual_in\": 45.0}"
+      },
+      "cluster": 46,
+      "fingerprint_48bit": "111011111111111101111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.4198,
+        "anomaly": 0.0779,
+        "composite": 0.3624
+      }
+    },
+    {
+      "entity": {
+        "name": "region_NE",
+        "type": "region",
+        "attributes": "{\"region_name\": \"NE\", \"state_code\": \"NE\", \"fips\": \"31\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111110111101111000111111111111111111110111111111",
+      "flips": 42,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.944,
+        "anomaly": 0.9656,
+        "composite": 0.969
+      }
+    },
+    {
+      "entity": {
+        "name": "region_WA",
+        "type": "region",
+        "attributes": "{\"region_name\": \"WA\", \"state_code\": \"WA\", \"fips\": \"53\"}"
+      },
+      "cluster": 16,
+      "fingerprint_48bit": "111000001011011001110111111111111111111111110111",
+      "flips": 37,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9209,
+        "anomaly": 1.0,
+        "composite": 0.9684
+      }
+    },
+    {
+      "entity": {
+        "name": "region_SD",
+        "type": "region",
+        "attributes": "{\"region_name\": \"SD\", \"state_code\": \"SD\", \"fips\": \"46\"}"
+      },
+      "cluster": 16,
+      "fingerprint_48bit": "111000111111011011111111111111111111111100111011",
+      "flips": 40,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.914,
+        "anomaly": 0.724,
+        "composite": 0.8966
+      }
+    },
+    {
+      "entity": {
+        "name": "region_VA",
+        "type": "region",
+        "attributes": "{\"region_name\": \"VA\", \"state_code\": \"VA\", \"fips\": \"51\"}"
+      },
+      "cluster": 11,
+      "fingerprint_48bit": "111010111010111111111111111111111111111111011111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8904,
+        "anomaly": 0.7127,
+        "composite": 0.8844
+      }
+    },
+    {
+      "entity": {
+        "name": "region_UT",
+        "type": "region",
+        "attributes": "{\"region_name\": \"UT\", \"state_code\": \"UT\", \"fips\": \"49\"}"
+      },
+      "cluster": 63,
+      "fingerprint_48bit": "111001001111011111111111111111111111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8576,
+        "anomaly": 0.6781,
+        "composite": 0.8626
+      }
+    },
+    {
+      "entity": {
+        "name": "region_NJ",
+        "type": "region",
+        "attributes": "{\"region_name\": \"NJ\", \"state_code\": \"NJ\", \"fips\": \"34\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "111011111111111111111101111110011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8713,
+        "anomaly": 0.6021,
+        "composite": 0.849
+      }
+    },
+    {
+      "entity": {
+        "name": "region_AR",
+        "type": "region",
+        "attributes": "{\"region_name\": \"AR\", \"state_code\": \"AR\", \"fips\": \"05\"}"
+      },
+      "cluster": 16,
+      "fingerprint_48bit": "111110111111111111110111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8778,
+        "anomaly": 0.5754,
+        "composite": 0.845
+      }
+    },
+    {
+      "entity": {
+        "name": "region_IA",
+        "type": "region",
+        "attributes": "{\"region_name\": \"IA\", \"state_code\": \"IA\", \"fips\": \"19\"}"
+      },
+      "cluster": 46,
+      "fingerprint_48bit": "111111111111111001110111111111111011111111111110",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8074,
+        "anomaly": 0.6671,
+        "composite": 0.8397
+      }
+    },
+    {
+      "entity": {
+        "name": "region_OR",
+        "type": "region",
+        "attributes": "{\"region_name\": \"OR\", \"state_code\": \"OR\", \"fips\": \"41\"}"
+      },
+      "cluster": 34,
+      "fingerprint_48bit": "111111111011111111111101111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8557,
+        "anomaly": 0.5402,
+        "composite": 0.8273
+      }
+    }
+  ]
+}
