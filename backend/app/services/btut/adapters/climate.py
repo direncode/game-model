@@ -1,46 +1,53 @@
-"""NOAA Climate dataset adapter — weather stations, observations, regions."""
+"""NOAA Climate dataset adapter — real weather station data via api.weather.gov.
+
+NOAA's API is free and open — only requires a User-Agent header for identification.
+No API key needed. Uses api.weather.gov for stations and observations.
+"""
 
 from __future__ import annotations
 
 import json
-import os
 import time
 from urllib.request import Request, urlopen
-from urllib.parse import urlencode
+from collections import defaultdict
 
 from . import register_adapter
 from .base import BaseDatasetAdapter, DatasetMeta, EntityTypeConfig
 
-NOAA_BASE = "https://www.ncdc.noaa.gov/cdo-web/api/v2"
-REQUEST_DELAY = 0.25
+NOAA_STATIONS_URL = "https://api.weather.gov/stations"
+NOAA_UA = "LatentOcean/1.0 (direnavk@outlook.com)"
+REQUEST_DELAY = 0.12  # ~8 req/sec, well within limits
 
 
 def _noaa_get(url: str) -> dict | None:
     time.sleep(REQUEST_DELAY)
-    api_key = os.environ.get("NOAA_API_KEY", "")
-    if not api_key:
-        return None
-    req = Request(url, headers={"token": api_key, "User-Agent": "LatentOcean/1.0"})
+    req = Request(url, headers={
+        "User-Agent": NOAA_UA,
+        "Accept": "application/geo+json",
+    })
     try:
-        with urlopen(req, timeout=20) as resp:
+        with urlopen(req, timeout=15) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except Exception:
         return None
 
 
-# Major US state FIPS codes for fallback data
-US_STATES = [
-    ("AL", "01"), ("AK", "02"), ("AZ", "04"), ("AR", "05"), ("CA", "06"),
-    ("CO", "08"), ("CT", "09"), ("DE", "10"), ("FL", "12"), ("GA", "13"),
-    ("HI", "15"), ("ID", "16"), ("IL", "17"), ("IN", "18"), ("IA", "19"),
-    ("KS", "20"), ("KY", "21"), ("LA", "22"), ("ME", "23"), ("MD", "24"),
-    ("MA", "25"), ("MI", "26"), ("MN", "27"), ("MS", "28"), ("MO", "29"),
-    ("MT", "30"), ("NE", "31"), ("NV", "32"), ("NH", "33"), ("NJ", "34"),
-    ("NM", "35"), ("NY", "36"), ("NC", "37"), ("ND", "38"), ("OH", "39"),
-    ("OK", "40"), ("OR", "41"), ("PA", "42"), ("RI", "44"), ("SC", "45"),
-    ("SD", "46"), ("TN", "47"), ("TX", "48"), ("UT", "49"), ("VT", "50"),
-    ("VA", "51"), ("WA", "53"), ("WV", "54"), ("WI", "55"), ("WY", "56"),
-]
+# US state names for region entities
+US_STATES = {
+    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas",
+    "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware",
+    "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho",
+    "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas",
+    "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+    "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi",
+    "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada",
+    "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York",
+    "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma",
+    "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
+    "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
+    "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia",
+    "WI": "Wisconsin", "WY": "Wyoming",
+}
 
 
 @register_adapter("climate")
@@ -50,10 +57,10 @@ class ClimateAdapter(BaseDatasetAdapter):
         return DatasetMeta(
             dataset_id="climate",
             display_name="NOAA Climate",
-            description="US weather stations with temperature, precipitation, and extreme weather observations",
+            description="Real US weather stations with coordinates, elevation, and observation metadata from api.weather.gov",
             entity_types=[
-                EntityTypeConfig("station", "#00d4ff", "station_name", "station_id", ["latitude", "longitude", "elevation", "state"]),
-                EntityTypeConfig("observation", "#f0883e", "datatype", "value", ["date", "station_id"]),
+                EntityTypeConfig("station", "#00d4ff", "station_name", "station_id",
+                                 ["latitude", "longitude", "elevation_m", "state", "county"]),
                 EntityTypeConfig("region", "#a371f7", "region_name", "state_code", ["station_count"]),
             ],
             lookup_field="station_id",
@@ -62,85 +69,113 @@ class ClimateAdapter(BaseDatasetAdapter):
 
     def fetch_entities(self, limit: int = 10_000) -> list[dict]:
         entities = []
+        state_counts: dict[str, int] = defaultdict(int)
 
-        # Create region entities for all US states
-        for state, fips in US_STATES:
+        # Create region entities
+        for code, name in US_STATES.items():
             entities.append({
-                "name": f"region_{state}",
+                "name": f"region_{code}",
                 "type": "region",
                 "attributes": json.dumps({
-                    "region_name": state,
-                    "state_code": state,
-                    "fips": fips,
+                    "region_name": name,
+                    "state_code": code,
                 }),
             })
 
-        # Try NOAA API for stations
-        api_key = os.environ.get("NOAA_API_KEY", "")
-        if api_key:
-            offset = 1
-            while len(entities) < limit:
-                url = f"{NOAA_BASE}/stations?datasetid=GHCND&locationid=FIPS:US&limit=1000&offset={offset}"
-                data = _noaa_get(url)
-                if not data or "results" not in data:
-                    break
+        # Fetch real stations from NOAA
+        # api.weather.gov/stations returns paginated GeoJSON
+        url = f"{NOAA_STATIONS_URL}?limit=500"
+        page = 0
+        max_pages = (limit // 500) + 1
 
-                for station in data["results"]:
-                    sid = station.get("id", "")
-                    if not sid:
-                        continue
+        while url and page < max_pages and len(entities) < limit:
+            data = _noaa_get(url)
+            if not data:
+                break
 
-                    entities.append({
-                        "name": f"station_{sid.replace(':', '_')}",
-                        "type": "station",
-                        "attributes": json.dumps({
-                            "station_id": sid,
-                            "station_name": station.get("name", "")[:100],
-                            "latitude": station.get("latitude", 0),
-                            "longitude": station.get("longitude", 0),
-                            "elevation": station.get("elevation", 0),
-                            "min_date": station.get("mindate", ""),
-                            "max_date": station.get("maxdate", ""),
-                            "datacoverage": station.get("datacoverage", 0),
-                        }),
-                    })
+            features = data.get("features", [])
+            if not features:
+                break
 
-                offset += 1000
-                if len(data["results"]) < 1000:
-                    break
-        else:
-            # No API key — generate representative station entities
-            import random
-            rng = random.Random(42)
-            for i in range(min(limit - len(entities), 5000)):
-                state, fips = rng.choice(US_STATES)
-                lat = 25 + rng.random() * 24  # US latitude range
-                lon = -125 + rng.random() * 57  # US longitude range
-                elev = rng.random() * 3000
-                temp_avg = 50 + (lat - 37) * -1.5 + rng.gauss(0, 5)
+            for feature in features:
+                props = feature.get("properties", {})
+                geo = feature.get("geometry", {})
+                coords = geo.get("coordinates", [0, 0])
+
+                station_id = props.get("stationIdentifier", "")
+                if not station_id:
+                    continue
+
+                name = props.get("name", "")
+                state = props.get("state", "") or ""
+                county = props.get("county", "")
+                # Extract state code from county URL if available
+                if not state and county:
+                    # county format: https://api.weather.gov/zones/county/XXC001
+                    parts = county.split("/")
+                    if parts:
+                        zone_code = parts[-1]
+                        if len(zone_code) >= 2:
+                            state = zone_code[:2]
+
+                elevation = props.get("elevation", {})
+                elev_val = elevation.get("value", 0) if isinstance(elevation, dict) else 0
+
+                timezone = props.get("timeZone", "")
 
                 entities.append({
-                    "name": f"station_GHCND_{fips}{i:05d}",
+                    "name": f"station_{station_id}",
                     "type": "station",
                     "attributes": json.dumps({
-                        "station_id": f"GHCND:{fips}{i:05d}",
-                        "station_name": f"Station {state}-{i}",
-                        "latitude": round(lat, 4),
-                        "longitude": round(lon, 4),
-                        "elevation": round(elev, 1),
+                        "station_id": station_id,
+                        "station_name": name[:100],
+                        "latitude": round(coords[1], 4) if len(coords) > 1 else 0,
+                        "longitude": round(coords[0], 4) if coords else 0,
+                        "elevation_m": round(elev_val, 1) if elev_val else 0,
                         "state": state,
-                        "temp_avg_f": round(temp_avg, 1),
-                        "precip_annual_in": round(rng.uniform(5, 60), 1),
+                        "county": county.split("/")[-1] if county else "",
+                        "timezone": timezone,
                     }),
                 })
+
+                if state:
+                    state_counts[state] += 1
+
+            # Pagination
+            pagination = data.get("pagination", {})
+            url = pagination.get("next", None)
+            if not url:
+                # Try @context links
+                links = data.get("@context", [])
+                if isinstance(links, list):
+                    for link in links:
+                        if isinstance(link, dict) and "next" in link:
+                            url = link["next"]
+                            break
+                # Or try observationStations pattern
+                if not url:
+                    break
+
+            page += 1
+
+        # Update region entities with station counts
+        for ent in entities:
+            if ent["type"] == "region":
+                attrs = json.loads(ent["attributes"])
+                code = attrs["state_code"]
+                attrs["station_count"] = state_counts.get(code, 0)
+                ent["attributes"] = json.dumps(attrs)
 
         return entities[:limit]
 
     def fetch_edges(self, entities: list[dict]) -> list[dict]:
         edges = []
         stations = [e for e in entities if e["type"] == "station"]
-        regions = {json.loads(e["attributes"]).get("state_code", ""): e["name"]
-                   for e in entities if e["type"] == "region"}
+        regions = {}
+        for e in entities:
+            if e["type"] == "region":
+                attrs = json.loads(e["attributes"])
+                regions[attrs["state_code"]] = e["name"]
 
         # Station-region edges
         for station in stations:
@@ -148,24 +183,28 @@ class ClimateAdapter(BaseDatasetAdapter):
             state = attrs.get("state", "")
             if state in regions:
                 edges.append({
-                    "source": station["name"], "target": regions[state],
-                    "type": "in_region", "weight": 1.0,
+                    "source": station["name"],
+                    "target": regions[state],
+                    "type": "in_region",
+                    "weight": 1.0,
                 })
 
-        # Spatial neighbor edges (simplified: same state = neighbor)
-        by_state: dict[str, list[str]] = {}
+        # Spatial neighbor edges: connect stations in same state
+        by_state: dict[str, list[str]] = defaultdict(list)
         for station in stations:
             attrs = json.loads(station.get("attributes", "{}"))
             state = attrs.get("state", "")
             if state:
-                by_state.setdefault(state, []).append(station["name"])
+                by_state[state].append(station["name"])
 
         for state, members in by_state.items():
-            for i in range(min(len(members), 20)):
-                for j in range(i + 1, min(len(members), 20)):
+            for i in range(min(len(members), 15)):
+                for j in range(i + 1, min(len(members), 15)):
                     edges.append({
-                        "source": members[i], "target": members[j],
-                        "type": "spatial_neighbor", "weight": 0.6,
+                        "source": members[i],
+                        "target": members[j],
+                        "type": "spatial_neighbor",
+                        "weight": 0.6,
                     })
 
         return edges
@@ -176,47 +215,61 @@ class ClimateAdapter(BaseDatasetAdapter):
         entity_type = record.get("type", "")
 
         if entity_type == "station":
-            elevation = attrs.get("elevation", 0)
+            elev = attrs.get("elevation_m", 0)
             try:
-                elevation = float(elevation)
+                elev = float(elev)
             except (ValueError, TypeError):
-                elevation = 0
+                elev = 0
 
-            if elevation > 2000:
+            if elev > 2000:
                 tags.append({
                     "tag": "HIGH_ELEVATION",
                     "severity": "info",
-                    "description": f"Station at {elevation:.0f}m elevation — alpine/mountain station with unique climate patterns.",
+                    "description": f"Station at {elev:.0f}m elevation -- alpine/mountain station with unique microclimate.",
+                })
+            elif elev < -10:
+                tags.append({
+                    "tag": "BELOW_SEA_LEVEL",
+                    "severity": "medium",
+                    "description": f"Station at {elev:.0f}m -- below sea level, unusual geographic position.",
                 })
 
-            coverage = attrs.get("datacoverage", 1)
+            lat = attrs.get("latitude", 0)
             try:
-                coverage = float(coverage)
+                lat = float(lat)
             except (ValueError, TypeError):
-                coverage = 1
-            if coverage < 0.5:
+                lat = 40
+
+            if lat > 65:
                 tags.append({
-                    "tag": "LOW_DATA_COVERAGE",
+                    "tag": "ARCTIC_STATION",
                     "severity": "medium",
-                    "description": f"Data coverage {coverage:.0%} — significant gaps in observation history.",
+                    "description": f"Station at latitude {lat:.1f}N -- arctic/subarctic climate zone.",
+                })
+            elif lat < 20:
+                tags.append({
+                    "tag": "TROPICAL_STATION",
+                    "severity": "info",
+                    "description": f"Station at latitude {lat:.1f}N -- tropical climate zone.",
                 })
 
-            temp = attrs.get("temp_avg_f", 0)
+        elif entity_type == "region":
+            count = attrs.get("station_count", 0)
             try:
-                temp = float(temp)
+                count = int(count)
             except (ValueError, TypeError):
-                temp = 50
-            if temp > 80:
+                count = 0
+            if count == 0:
                 tags.append({
-                    "tag": "EXTREME_HEAT",
-                    "severity": "medium",
-                    "description": f"Average temperature {temp:.1f}F — extreme heat station.",
+                    "tag": "NO_STATIONS",
+                    "severity": "high",
+                    "description": "Region with no weather stations in the dataset -- data coverage gap.",
                 })
-            elif temp < 20:
+            elif count > 100:
                 tags.append({
-                    "tag": "EXTREME_COLD",
-                    "severity": "medium",
-                    "description": f"Average temperature {temp:.1f}F — extreme cold station.",
+                    "tag": "HIGH_DENSITY_REGION",
+                    "severity": "info",
+                    "description": f"{count} stations in region -- dense observation network.",
                 })
 
         return tags
