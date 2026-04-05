@@ -132,11 +132,11 @@ function SeverityTag({ tag, severity, desc }: { tag: string; severity: string; d
 // =====================================================================
 // DOSSIER PANEL
 // =====================================================================
-function Dossier({ ticker, onClose }: { ticker: string; onClose: () => void }) {
+function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => void }) {
   const { data } = useQuery({
-    queryKey: ["btut-analyze", ticker],
-    queryFn: () => api.getBTUTAnalysis(ticker),
-    enabled: !!ticker,
+    queryKey: ["btut-analyze", entityKey],
+    queryFn: () => api.getBTUTAnalysis(entityKey),
+    enabled: !!entityKey,
   });
 
   if (!data) return (
@@ -388,7 +388,7 @@ function ScatterTooltip({ active, payload }: any) {
 // =====================================================================
 export default function BTUTPage() {
   const [datasetId, setDatasetId] = useState("edgar");
-  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [sortCol, setSortCol] = useState("composite");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [filterType, setFilterType] = useState("");
@@ -486,7 +486,7 @@ export default function BTUTPage() {
           {/* Dataset switcher */}
           <select
             value={datasetId}
-            onChange={(e) => { setDatasetId(e.target.value); setSelectedTicker(null); setFilterType(""); setFilterRole(""); setClusterFilter(null); }}
+            onChange={(e) => { setDatasetId(e.target.value); setSelectedKey(null); setFilterType(""); setFilterRole(""); setClusterFilter(null); }}
             className="bg-li-black border border-li-gray-800 rounded px-2 py-1 text-xs font-mono text-li-cyan mr-3 focus:outline-none focus:border-li-cyan/50"
           >
             {(datasetsQ.data || []).map((ds) => (
@@ -568,10 +568,11 @@ export default function BTUTPage() {
                 </thead>
                 <tbody>
                   {sortedSurvivors.map((sv, i) => {
-                    const isSelected = sv.ticker === selectedTicker;
+                    const entityKey = sv.ticker || sv.name;
+                    const isSelected = entityKey === selectedKey;
                     return (
                       <tr key={`${sv.rank}-${sv.name}`}
-                        onClick={() => sv.ticker && setSelectedTicker(isSelected ? null : sv.ticker)}
+                        onClick={() => setSelectedKey(isSelected ? null : entityKey)}
                         className={cn(
                           "cursor-pointer border-b border-li-gray-900/50 transition-colors",
                           isSelected ? "bg-li-cyan/5 border-l-2 border-l-li-cyan" : "hover:bg-li-gray-900/30",
@@ -620,7 +621,7 @@ export default function BTUTPage() {
                     axisLine={{ stroke: "#222" }} tickLine={false} />
                   <Tooltip content={<ScatterTooltip />} />
                   <Scatter data={scatterData} cursor="pointer"
-                    onClick={(data: any) => data?.ticker && setSelectedTicker(data.ticker)}>
+                    onClick={(data: any) => setSelectedKey(data?.ticker || data?.name || null)}>
                     {scatterData.map((d, i) => (
                       <Cell key={i}
                         fill={d.type === "company" ? "#00d4ff" : d.type === "filing" ? "#a371f7" : "#3fb950"}
@@ -648,9 +649,9 @@ export default function BTUTPage() {
         </div>
 
         {/* ═══════════════ DOSSIER (slides in at bottom) ═══════════════ */}
-        {selectedTicker && (
+        {selectedKey && (
           <div className="fixed bottom-0 left-60 right-0 z-50 border-t border-li-cyan/20 bg-li-bg shadow-2xl animate-fade-in-up">
-            <Dossier ticker={selectedTicker} onClose={() => setSelectedTicker(null)} />
+            <Dossier entityKey={selectedKey} onClose={() => setSelectedKey(null)} />
           </div>
         )}
       </main>

@@ -196,9 +196,28 @@ async def btut_cluster_detail(cluster_id: int, dataset: str = Query(default="edg
     return result
 
 
-@router.post("/ingest", response_model=MessageResponse)
-async def btut_ingest():
-    """Trigger a new EDGAR ingestion + BTUT superpower pipeline."""
-    return MessageResponse(
-        message="Ingestion pipeline available via CLI: python -u scripts/edgar_superpower.py"
-    )
+@router.post("/ingest")
+async def btut_ingest(
+    dataset: str = Query(default="edgar"),
+    limit: int = Query(default=10000, ge=100, le=200000),
+    target_survivors: int = Query(default=500, ge=50, le=5000),
+):
+    """Trigger async BTUT ingestion via Celery. Returns task ID for tracking."""
+    try:
+        from app.tasks.btut_ingest import ingest_dataset_task
+        task = ingest_dataset_task.delay(
+            dataset_id=dataset,
+            limit=limit,
+            target_survivors=target_survivors,
+        )
+        return {
+            "message": f"BTUT ingestion started for {dataset}",
+            "task_id": task.id,
+            "dataset": dataset,
+            "limit": limit,
+            "target_survivors": target_survivors,
+        }
+    except Exception as e:
+        return MessageResponse(
+            message=f"Celery not available. Use CLI: python -u scripts/ingest_dataset.py --dataset {dataset} --limit {limit}"
+        )

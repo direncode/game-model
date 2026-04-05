@@ -48,8 +48,19 @@ class PubMedAdapter(BaseDatasetAdapter):
         authors_seen = set()
         mesh_seen = set()
 
-        # Search for recent high-impact papers
-        search_url = f"{PUBMED_BASE}/esearch.fcgi?db=pubmed&retmax={min(limit, 10000)}&sort=relevance&term=cancer+OR+genomics+OR+CRISPR+OR+immunotherapy&retmode=json"
+        # Search across 10+ biomedical topics for maximum diversity
+        search_topics = [
+            "cancer genomics", "CRISPR gene editing", "immunotherapy checkpoint",
+            "Alzheimer neurodegenerative", "COVID-19 SARS-CoV-2", "microbiome gut",
+            "stem cell regenerative", "antibiotic resistance", "protein folding structure",
+            "epigenetics methylation", "single cell RNA-seq", "machine learning clinical",
+            "drug discovery screening", "cardiovascular heart failure", "diabetes insulin",
+            "rare disease orphan", "vaccine mRNA", "brain-computer interface",
+            "synthetic biology", "population genetics GWAS",
+        ]
+        search_term = "+OR+".join(t.replace(" ", "+") for t in search_topics)
+        per_topic = max(500, limit // len(search_topics))
+        search_url = f"{PUBMED_BASE}/esearch.fcgi?db=pubmed&retmax={min(limit, 100000)}&sort=relevance&term={search_term}&retmode=json"
         search_data = _pubmed_get(search_url)
         if not search_data:
             return entities

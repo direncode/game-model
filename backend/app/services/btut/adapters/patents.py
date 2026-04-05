@@ -3,26 +3,25 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 from urllib.request import Request, urlopen
 
 from . import register_adapter
 from .base import BaseDatasetAdapter, DatasetMeta, EntityTypeConfig
 
-PATENTSVIEW_BASE = "https://api.patentsview.org/patents/query"
-REQUEST_DELAY = 0.2
+PATENTSVIEW_BASE = "https://search.patentsview.org/api/v1/patent/"
+REQUEST_DELAY = 1.5  # 45 req/min = 1.3s between requests
 
 
-def _pv_get(url: str, payload: dict | None = None) -> dict | None:
+def _pv_get(url: str) -> dict | None:
+    """Fetch from PatentsView Search API v1 (requires X-Api-Key)."""
     time.sleep(REQUEST_DELAY)
-    if payload:
-        data = json.dumps(payload).encode("utf-8")
-        req = Request(url, data=data, headers={
-            "Content-Type": "application/json",
-            "User-Agent": "LatentOcean/1.0",
-        })
-    else:
-        req = Request(url, headers={"User-Agent": "LatentOcean/1.0"})
+    api_key = os.environ.get("PATENTSVIEW_API_KEY", "")
+    headers = {"User-Agent": "LatentOcean/1.0", "Accept": "application/json"}
+    if api_key:
+        headers["X-Api-Key"] = api_key
+    req = Request(url, headers=headers)
     try:
         with urlopen(req, timeout=20) as resp:
             return json.loads(resp.read().decode("utf-8"))
@@ -54,40 +53,36 @@ class PatentsAdapter(BaseDatasetAdapter):
         assignees_seen = set()
         cpc_seen = set()
 
-        # Try PatentsView API first
-        try:
-            per_page = min(100, limit)
-            pages = min(limit // per_page, 10)
-
-            for page in range(pages):
-                payload = {
-                    "q": {"_gte": {"patent_date": "2024-01-01"}},
-                    "f": ["patent_number", "patent_title", "patent_date", "patent_num_claims", "patent_abstract"],
-                    "o": {"page": page + 1, "per_page": per_page},
-                }
-                data = _pv_get(PATENTSVIEW_BASE, payload)
-                if not data or "patents" not in data:
-                    break
-
-                for patent in data["patents"]:
-                    pnum = patent.get("patent_number", "")
-                    if not pnum:
+        # Try PatentsView Search API v1 (requires PATENTSVIEW_API_KEY env var)
+        api_key = os.environ.get("PATENTSVIEW_API_KEY", "")
+        if api_key:
+            try:
+                search_terms = ["artificial+intelligence", "machine+learning", "autonomous+vehicle",
+                                "quantum+computing", "blockchain", "neural+network", "robotics",
+                                "renewable+energy", "biotechnology", "semiconductor"]
+                for term in search_terms:
+                    url = f"{PATENTSVIEW_BASE}?q={term}&f=patent_number,patent_title,patent_date,patent_abstract&per_page=100"
+                    data = _pv_get(url)
+                    if not data or "patents" not in data:
                         continue
-                    entities.append({
-                        "name": f"patent_{pnum}",
-                        "type": "patent",
-                        "attributes": json.dumps({
-                            "patent_number": pnum,
-                            "title": (patent.get("patent_title") or "")[:200],
-                            "grant_date": patent.get("patent_date", ""),
-                            "num_claims": patent.get("patent_num_claims", 0),
-                            "abstract": (patent.get("patent_abstract") or "")[:300],
-                        }),
-                    })
-                if len(entities) >= limit:
-                    break
-        except Exception:
-            pass
+                    for patent in data["patents"]:
+                        pnum = patent.get("patent_number", "")
+                        if not pnum:
+                            continue
+                        entities.append({
+                            "name": f"patent_{pnum}",
+                            "type": "patent",
+                            "attributes": json.dumps({
+                                "patent_number": pnum,
+                                "title": (patent.get("patent_title") or "")[:200],
+                                "grant_date": patent.get("patent_date", ""),
+                                "abstract": (patent.get("patent_abstract") or "")[:300],
+                            }),
+                        })
+                    if len(entities) >= limit:
+                        break
+            except Exception:
+                pass
 
         # Fallback: generate synthetic patent data following real distribution
         if len(entities) < 100:

@@ -76,13 +76,12 @@ class BTUTQueryEngine:
         self._load()
 
     def _load(self):
-        """Load and index the result JSON."""
-        if not os.path.exists(self._result_path):
-            logger.warning("No result file at %s", self._result_path)
+        """Load and index results. Tries PostgreSQL first, falls back to JSON file."""
+        data = self._load_from_db()
+        if not data:
+            data = self._load_from_file()
+        if not data:
             return
-
-        with open(self._result_path) as f:
-            data = json.load(f)
 
         self._summary = data.get("summary", {})
         raw_survivors = data.get("survivors", [])
@@ -148,6 +147,38 @@ class BTUTQueryEngine:
 
         # Enrich all survivors with computed metadata
         self._enrich_all()
+
+    def _load_from_db(self) -> dict | None:
+        """Try loading latest result from PostgreSQL."""
+        try:
+            from sqlalchemy import create_engine, text
+            from app.config import settings
+            sync_url = settings.DATABASE_URL.replace("+asyncpg", "").replace("postgresql://", "postgresql+psycopg2://")
+            engine = create_engine(sync_url)
+
+            with engine.connect() as conn:
+                row = conn.execute(text(
+                    "SELECT summary, survivors FROM btut_runs "
+                    "WHERE dataset_id = :did AND status = 'completed' "
+                    "ORDER BY created_at DESC LIMIT 1"
+                ), {"did": self._dataset_id}).fetchone()
+
+                if row and row[0] and row[1]:
+                    logger.info("Loaded %s from PostgreSQL", self._dataset_id)
+                    return {"summary": row[0], "survivors": row[1]}
+        except Exception as e:
+            logger.debug("PostgreSQL load failed for %s: %s", self._dataset_id, e)
+        return None
+
+    def _load_from_file(self) -> dict | None:
+        """Load from JSON result file."""
+        if not os.path.exists(self._result_path):
+            logger.warning("No result file at %s", self._result_path)
+            return None
+        with open(self._result_path) as f:
+            data = json.load(f)
+        logger.info("Loaded %s from file: %s", self._dataset_id, self._result_path)
+        return data
 
     def _enrich_all(self):
         """Compute rich metadata for every survivor after loading."""
@@ -685,9 +716,19 @@ class BTUTQueryEngine:
 
         return results
 
-    def analyze(self, ticker: str) -> dict | None:
-        """Full analysis for a specific company by ticker."""
-        record = self._by_ticker.get(ticker.upper())
+    def analyze(self, key: str) -> dict | None:
+        """Full analysis for a specific entity by ticker, name, or lookup key."""
+        # Try ticker first
+        record = self._by_ticker.get(key.upper())
+        # Fall back to name lookup
+        if not record:
+            record = self._by_name.get(key)
+        # Try partial name match
+        if not record:
+            for name, rec in self._by_name.items():
+                if key.lower() in name.lower():
+                    record = rec
+                    break
         if not record:
             return None
 
@@ -768,9 +809,16 @@ class BTUTQueryEngine:
         cluster_list.sort(key=lambda x: -x["member_count"])
         return cluster_list[:top_n]
 
-    def magnitude(self, ticker: str) -> dict | None:
+    def magnitude(self, key: str) -> dict | None:
         """Magnitude profile details for a specific entity."""
-        record = self._by_ticker.get(ticker.upper())
+        record = self._by_ticker.get(key.upper())
+        if not record:
+            record = self._by_name.get(key)
+        if not record:
+            for name, rec in self._by_name.items():
+                if key.lower() in name.lower():
+                    record = rec
+                    break
         if not record:
             return None
 
