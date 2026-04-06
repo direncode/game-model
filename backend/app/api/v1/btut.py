@@ -198,7 +198,26 @@ async def btut_cluster_detail(cluster_id: int, dataset: str = Query(default="edg
     return result
 
 
-# ── RAG + Report Endpoints ────────────────────────────────────────────
+# ── Lineage + Report Endpoints ────────────────────────────────────────
+
+@router.get("/lineage/{entity_key}")
+async def btut_lineage(
+    entity_key: str,
+    dataset: str = Query(default="edgar"),
+):
+    """Trace the structural lineage of a BTUT survivor. No AI — the engine explains itself."""
+    from app.services.btut.lineage_tracer import LineageTracer
+
+    engine = _engine(dataset)
+    tracer = LineageTracer(engine)
+    lineage = tracer.trace(entity_key)
+
+    if lineage is None:
+        from app.core.exceptions import NotFoundError
+        raise NotFoundError(detail=f"Entity '{entity_key}' not found")
+
+    return lineage.to_dict()
+
 
 @router.post("/rag/{entity_key}")
 async def btut_rag_analyze(

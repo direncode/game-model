@@ -133,8 +133,8 @@ function SeverityTag({ tag, severity, desc }: { tag: string; severity: string; d
 // DOSSIER PANEL
 // =====================================================================
 function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => void }) {
-  const [ragData, setRagData] = useState<any>(null);
-  const [ragLoading, setRagLoading] = useState(false);
+  const [lineageData, setLineageData] = useState<any>(null);
+  const [lineageLoading, setLineageLoading] = useState(false);
   const [reportTaskId, setReportTaskId] = useState<string | null>(null);
   const [reportStatus, setReportStatus] = useState<any>(null);
 
@@ -144,20 +144,19 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
     enabled: !!entityKey,
   });
 
-  const handleAnalyzeSources = async () => {
-    setRagLoading(true);
+  const handleTraceLineage = async () => {
+    setLineageLoading(true);
     try {
-      const result = await api.getBTUTRAGAnalysis(entityKey);
-      setRagData(result);
+      const result = await api.getBTUTLineage(entityKey);
+      setLineageData(result);
     } catch (e) { console.error(e); }
-    setRagLoading(false);
+    setLineageLoading(false);
   };
 
   const handleGenerateReport = async () => {
     try {
       const result = await api.generateBTUTReport({ entity_keys: [entityKey], format: "pdf" });
       setReportTaskId(result.task_id);
-      // Poll for completion
       const poll = setInterval(async () => {
         try {
           const status = await api.getBTUTReportStatus(result.task_id);
@@ -188,9 +187,9 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
           {m.structural_role && <RoleBadge role={m.structural_role.role} />}
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={handleAnalyzeSources} disabled={ragLoading}
+          <button onClick={handleTraceLineage} disabled={lineageLoading}
             className="px-3 py-1 rounded text-[10px] font-mono bg-li-cyan/10 text-li-cyan border border-li-cyan/20 hover:bg-li-cyan/20 disabled:opacity-50">
-            {ragLoading ? "Analyzing..." : "Analyze Sources"}
+            {lineageLoading ? "Tracing..." : "Trace Lineage"}
           </button>
           <button onClick={handleGenerateReport}
             className="px-3 py-1 rounded text-[10px] font-mono bg-li-purple/10 text-li-purple border border-li-purple/20 hover:bg-li-purple/20">
@@ -372,55 +371,110 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
           )}
         </div>
 
-        {/* ── RAG Analysis Section ──────────────────────────────── */}
-        {ragData?.synthesis && (
+        {/* ── Structural Lineage ──────────────────────────────── */}
+        {lineageData && (
           <div className="col-span-2 border-t border-li-gray-800 p-4 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-[8px] uppercase tracking-widest text-li-cyan">Primary Source Analysis</span>
-              {ragData.cached && <span className="text-[8px] px-1.5 py-0.5 rounded bg-li-gray-800 text-li-text-muted">cached</span>}
-              <span className="text-[8px] text-li-text-muted">{ragData.source_manifest?.chunk_count || 0} source chunks</span>
-            </div>
+            <span className="text-[8px] uppercase tracking-widest text-li-cyan">Structural Lineage</span>
 
-            {ragData.synthesis.executive_summary && (
+            {/* Lineage summary */}
+            {lineageData.lineage_summary && (
               <div className="bg-li-cyan/5 border border-li-cyan/10 rounded p-3">
-                <span className="text-[8px] uppercase tracking-widest text-li-cyan">Executive Summary</span>
-                <p className="text-[10px] text-li-text-secondary mt-1 leading-relaxed">{ragData.synthesis.executive_summary}</p>
+                <p className="text-[10px] text-li-text-secondary leading-relaxed">{lineageData.lineage_summary}</p>
               </div>
             )}
 
-            {ragData.synthesis.source_evidence?.length > 0 && (
+            {/* Lineage chain — each stage of the pipeline */}
+            {lineageData.lineage_chain?.length > 0 && (
               <div className="space-y-1">
-                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Cited Evidence</span>
-                {ragData.synthesis.source_evidence.slice(0, 4).map((cit: any, i: number) => (
-                  <div key={i} className="bg-li-gray-900 rounded px-3 py-2 text-[9px]">
-                    <p className="text-li-text-secondary italic">{cit.excerpt?.substring(0, 200)}</p>
-                    {cit.relevance && <p className="text-li-text-muted mt-1">Relevance: {cit.relevance}</p>}
-                    {cit.source_url && (
-                      <a href={cit.source_url} target="_blank" rel="noopener noreferrer"
-                         className="text-li-cyan hover:underline text-[8px] mt-0.5 block">{cit.source_type}: {cit.source_id}</a>
-                    )}
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Pipeline Trace</span>
+                {lineageData.lineage_chain.map((node: any, i: number) => (
+                  <div key={i} className="flex items-start gap-3 bg-li-gray-900 rounded px-3 py-2">
+                    <span className={cn(
+                      "px-1.5 py-0.5 rounded text-[8px] font-mono font-bold shrink-0 mt-0.5",
+                      node.stage === "selection" ? "bg-li-green/20 text-li-green" :
+                      node.stage === "scoring" ? "bg-li-cyan/20 text-li-cyan" :
+                      node.stage === "magnitude" ? "bg-li-purple/20 text-li-purple" :
+                      "bg-li-gray-800 text-li-text-muted"
+                    )}>{node.stage}</span>
+                    <p className="text-[9px] text-li-text-secondary leading-relaxed">{node.description}</p>
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-3">
-              {ragData.synthesis.risk_assessment && (
-                <div className="bg-li-red/5 border border-li-red/10 rounded p-3">
-                  <span className="text-[8px] uppercase tracking-widest text-li-red">Risk</span>
-                  <p className="text-[9px] text-li-text-secondary mt-1">{ragData.synthesis.risk_assessment.substring(0, 300)}</p>
-                </div>
-              )}
-              {ragData.synthesis.opportunity_assessment && (
-                <div className="bg-li-green/5 border border-li-green/10 rounded p-3">
-                  <span className="text-[8px] uppercase tracking-widest text-li-green">Opportunity</span>
-                  <p className="text-[9px] text-li-text-secondary mt-1">{ragData.synthesis.opportunity_assessment.substring(0, 300)}</p>
-                </div>
-              )}
-            </div>
+            {/* Magnitude trail */}
+            {lineageData.magnitude_trail && (
+              <div className="grid grid-cols-3 gap-2">
+                {["coarse", "medium", "fine"].map((res) => {
+                  const t = lineageData.magnitude_trail[res];
+                  if (!t) return null;
+                  return (
+                    <div key={res} className="bg-li-gray-900 rounded p-2">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[8px] uppercase tracking-widest text-li-text-muted">{res}</span>
+                        <span className="text-[10px] font-mono text-li-text-primary">{t.flips}/{t.total}</span>
+                      </div>
+                      <p className="text-[8px] text-li-text-muted leading-relaxed">{t.interpretation}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
-            {ragData.synthesis.confidence_note && (
-              <p className="text-[9px] text-li-text-muted italic">{ragData.synthesis.confidence_note}</p>
+            {/* Cluster ancestry */}
+            {lineageData.cluster_ancestry && (
+              <div className="bg-li-gray-900 rounded p-3 space-y-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Cluster Ancestry</span>
+                <div className="grid grid-cols-3 gap-2 text-center text-[10px]">
+                  <div>
+                    <div className="font-mono text-li-text-primary text-lg">{lineageData.cluster_ancestry.cluster_size}</div>
+                    <div className="text-[8px] text-li-text-muted">Cluster Members</div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-li-red text-lg">{lineageData.cluster_ancestry.eliminated_count?.toLocaleString()}</div>
+                    <div className="text-[8px] text-li-text-muted">Eliminated</div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-li-green text-lg">{lineageData.cluster_ancestry.total_in_mega_cluster?.toLocaleString()}</div>
+                    <div className="text-[8px] text-li-text-muted">Total Entities</div>
+                  </div>
+                </div>
+                <p className="text-[9px] text-li-cyan mt-2">Selection: {lineageData.cluster_ancestry.survival_reason}</p>
+              </div>
+            )}
+
+            {/* Score provenance */}
+            {lineageData.score_provenance && (
+              <div className="space-y-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Score Provenance</span>
+                {Object.entries(lineageData.score_provenance).map(([axis, prov]: [string, any]) => (
+                  <div key={axis} className="bg-li-gray-900 rounded px-3 py-2 flex items-start gap-3">
+                    <div className="text-center min-w-[50px]">
+                      <div className="text-sm font-mono font-bold text-li-text-primary">{((prov.raw_score || 0) * 100).toFixed(1)}</div>
+                      <div className="text-[7px] uppercase text-li-text-muted">{axis}</div>
+                    </div>
+                    <p className="text-[9px] text-li-text-secondary leading-relaxed">{prov.explanation}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Peer survivors */}
+            {lineageData.peer_survivors?.length > 0 && (
+              <div className="space-y-1">
+                <span className="text-[8px] uppercase tracking-widest text-li-text-muted">Structural Peers</span>
+                {lineageData.peer_survivors.slice(0, 5).map((p: any, i: number) => (
+                  <div key={i} className="flex items-center justify-between bg-li-gray-900 rounded px-3 py-1.5 text-[9px]">
+                    <div className="flex items-center gap-2">
+                      <TypeDot type={p.type} />
+                      <span className="font-mono text-li-cyan">{p.ticker || "-"}</span>
+                      <span className="text-li-text-muted">{p.name}</span>
+                      {p.shared_cluster && <span className="text-[7px] text-li-green">same cluster</span>}
+                    </div>
+                    <span className="font-mono text-li-text-muted">{(p.similarity * 100).toFixed(0)}%</span>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         )}

@@ -255,6 +255,10 @@ class ApiClient {
     return this.request<any>(`/api/v1/btut/clusters/${clusterId}?dataset=${dataset}`);
   }
 
+  async getBTUTLineage(entityKey: string, dataset = "edgar") {
+    return this.request<any>(`/api/v1/btut/lineage/${encodeURIComponent(entityKey)}?dataset=${dataset}`);
+  }
+
   async getBTUTRAGAnalysis(entityKey: string, dataset = "edgar", forceRefresh = false) {
     return this.request<any>(`/api/v1/btut/rag/${encodeURIComponent(entityKey)}?dataset=${dataset}&force_refresh=${forceRefresh}`, { method: "POST" });
   }
