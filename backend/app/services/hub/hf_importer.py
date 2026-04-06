@@ -247,8 +247,34 @@ async def import_dataset(
     try:
         hf_ds = load_dataset(**load_kwargs)
     except Exception as e:
-        logger.error("Failed to download HF dataset %s: %s", hf_dataset_id, e)
-        raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
+        # If split not found, try to auto-detect available splits
+        if "Unknown split" in str(e) and not split:
+            logger.info("Split 'train' not found for %s, auto-detecting...", hf_dataset_id)
+            try:
+                from datasets import get_dataset_split_names
+                available_splits = get_dataset_split_names(hf_dataset_id, config_name=config)
+                if available_splits:
+                    fallback_split = available_splits[0]
+                    logger.info("Using fallback split '%s' for %s", fallback_split, hf_dataset_id)
+                    load_kwargs["split"] = fallback_split
+                    hf_ds = load_dataset(**load_kwargs)
+                else:
+                    raise
+            except ImportError:
+                # Older datasets library — try common split names
+                for fallback in ["test", "validation", "dev"]:
+                    try:
+                        load_kwargs["split"] = fallback
+                        hf_ds = load_dataset(**load_kwargs)
+                        logger.info("Using fallback split '%s' for %s", fallback, hf_dataset_id)
+                        break
+                    except Exception:
+                        continue
+                else:
+                    raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
+        else:
+            logger.error("Failed to download HF dataset %s: %s", hf_dataset_id, e)
+            raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
 
     # Convert to pandas DataFrame
     df = hf_ds.to_pandas()
@@ -281,17 +307,16 @@ async def import_dataset(
     await db.flush()
     await db.refresh(dataset)
 
-    # Step 5: Convert graph to CSV bytes and run AwakeningPipeline
-    csv_bytes = _graph_to_csv_bytes(graph)
+    # Step 5: Convert graph to JSON bytes (preserves entity types + attributes)
+    json_bytes = _graph_to_json_bytes(graph)
     pipeline = AwakeningPipeline(db=db, neo4j=neo4j, minio_client=minio_client)
 
     result = await pipeline.run(
         dataset_id=dataset.id,
         user_id=user_id,
-        file_content=csv_bytes,
-        file_name=f"{hf_dataset_id.replace('/', '_')}.csv",
-        content_type="csv",
-        schema_mapping=schema.to_csv_adapter_mapping() if schema.is_edge_list else None,
+        file_content=json_bytes,
+        file_name=f"{hf_dataset_id.replace('/', '_')}.json",
+        content_type="json",
     )
 
     logger.info(
@@ -302,6 +327,32 @@ async def import_dataset(
         len(graph.relationships),
     )
 
+    # Step 6: Auto-trigger crystallization
+    job_id = None
+    if result.get("status") == "ready":
+        try:
+            from app.models.crystallization import CrystallizationJob
+            from app.celery_app import celery_app
+
+            job = CrystallizationJob(
+                dataset_id=dataset.id,
+                status="queued",
+                config={},
+                created_by=user_id,
+            )
+            db.add(job)
+            await db.flush()
+            job_id = str(job.id)
+
+            celery_app.send_task(
+                "crystallization.run",
+                args=[job_id],
+                queue="crystallization",
+            )
+            logger.info("Auto-triggered crystallization job=%s for HF dataset '%s'", job_id, hf_dataset_id)
+        except Exception:
+            logger.warning("Could not auto-trigger crystallization for %s", hf_dataset_id, exc_info=True)
+
     return {
         "dataset_id": str(dataset.id),
         "dataset_name": dataset_name,
@@ -309,6 +360,7 @@ async def import_dataset(
         "entity_count": len(graph.entities),
         "relationship_count": len(graph.relationships),
         "status": result.get("status", "ready"),
+        "job_id": job_id,
     }
 
 
@@ -376,10 +428,6 @@ def _dataframe_to_graph(df: pd.DataFrame, schema) -> ParsedGraph:
                 attributes=attrs,
             )
 
-        # Build relationships from shared categorical values (entity_type, relationship columns)
-        if type_col:
-            _build_type_relationships(df, id_col, type_col, entities, relationships)
-
         # Build relationships from explicit relationship columns
         for rel_col in schema.relationship_columns:
             for _, row in df.iterrows():
@@ -392,22 +440,41 @@ def _dataframe_to_graph(df: pd.DataFrame, schema) -> ParsedGraph:
                         relationship_type=rel_col,
                     ))
 
+        # Build edges from ALL categorical columns (not just type_col)
+        categorical_cols = [type_col] if type_col else []
+        for col in df.columns:
+            if col in {id_col, name_col} or col in categorical_cols:
+                continue
+            if df[col].dtype == "object":
+                n_unique = df[col].nunique()
+                if 2 <= n_unique <= max(50, len(df) * 0.05):
+                    categorical_cols.append(col)
+
+        for cat_col in categorical_cols:
+            _build_categorical_relationships(df, id_col, cat_col, entities, relationships)
+
+        # Fallback: if graph is too sparse, add attribute-similarity edges
+        entity_list = list(entities.keys())
+        if entity_list and len(relationships) < len(entity_list):
+            _build_similarity_edges(entities, relationships, k=5)
+
     return ParsedGraph(entities=list(entities.values()), relationships=relationships)
 
 
-def _build_type_relationships(
+def _build_categorical_relationships(
     df: pd.DataFrame,
     id_col: str,
-    type_col: str,
+    cat_col: str,
     entities: dict[str, ParsedEntity],
     relationships: list[ParsedRelationship],
 ) -> None:
-    """Create relationships between entities that share the same type/category."""
-    grouped = df.groupby(type_col)[id_col].apply(list)
-    for type_val, members in grouped.items():
+    """Create relationships between entities that share a categorical value."""
+    grouped = df.groupby(cat_col)[id_col].apply(list)
+    max_edges_per_group = 200
+    for _val, members in grouped.items():
         member_strs = [str(m).strip() for m in members if str(m).strip() in entities]
-        # Connect entities in same group (limit edges to avoid explosion)
-        max_edges_per_group = 50
+        if len(member_strs) < 2:
+            continue
         edge_count = 0
         for i, src in enumerate(member_strs):
             for tgt in member_strs[i + 1:]:
@@ -416,7 +483,7 @@ def _build_type_relationships(
                 relationships.append(ParsedRelationship(
                     source=src,
                     target=tgt,
-                    relationship_type=f"shared_{type_col}",
+                    relationship_type=f"shared_{cat_col}",
                     weight=1.0,
                 ))
                 edge_count += 1
@@ -424,16 +491,87 @@ def _build_type_relationships(
                 break
 
 
-def _graph_to_csv_bytes(graph: ParsedGraph) -> bytes:
-    """Convert a ParsedGraph to CSV bytes for the AwakeningPipeline."""
-    import csv
-    import io
+def _build_similarity_edges(
+    entities: dict[str, ParsedEntity],
+    relationships: list[ParsedRelationship],
+    k: int = 5,
+) -> None:
+    """Connect entities by Jaccard similarity of attribute values.
 
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["source", "target", "relationship_type", "weight"])
+    Fallback when categorical edges are too sparse — ensures every entity
+    has at least some connections for meaningful crystallization.
+    """
+    names = list(entities.keys())
+    if len(names) < 2:
+        return
 
-    for rel in graph.relationships:
-        writer.writerow([rel.source, rel.target, rel.relationship_type, rel.weight])
+    # Build attribute fingerprints: set of "key=value" strings
+    fingerprints: dict[str, set[str]] = {}
+    for name, ent in entities.items():
+        fp = set()
+        if ent.entity_type:
+            fp.add(f"__type__={ent.entity_type}")
+        for attr_key, attr_val in (ent.attributes or {}).items():
+            fp.add(f"{attr_key}={attr_val}")
+        fingerprints[name] = fp
 
-    return output.getvalue().encode("utf-8")
+    existing = {(r.source, r.target) for r in relationships}
+    existing |= {(r.target, r.source) for r in relationships}
+
+    for name in names:
+        fp = fingerprints[name]
+        if not fp:
+            continue
+        # Score against all others
+        scored = []
+        for other in names:
+            if other == name or (name, other) in existing:
+                continue
+            other_fp = fingerprints[other]
+            if not other_fp:
+                continue
+            intersection = len(fp & other_fp)
+            union = len(fp | other_fp)
+            if union == 0:
+                continue
+            jaccard = intersection / union
+            if jaccard > 0:
+                scored.append((other, jaccard))
+
+        # Take top-k most similar
+        scored.sort(key=lambda x: -x[1])
+        for other, sim in scored[:k]:
+            if (name, other) not in existing:
+                relationships.append(ParsedRelationship(
+                    source=name,
+                    target=other,
+                    relationship_type="similar",
+                    weight=round(sim, 3),
+                ))
+                existing.add((name, other))
+                existing.add((other, name))
+
+
+def _graph_to_json_bytes(graph: ParsedGraph) -> bytes:
+    """Convert a ParsedGraph to JSON bytes preserving entities + relationships.
+
+    Uses the same format as fsd_crystallize.py so the JSON adapter can parse it.
+    """
+    import json
+
+    data = {
+        "entities": [
+            {"name": e.name, "type": e.entity_type, **(e.attributes or {})}
+            for e in graph.entities
+        ],
+        "relationships": [
+            {
+                "source": r.source,
+                "target": r.target,
+                "type": r.relationship_type or "related_to",
+                "weight": r.weight,
+            }
+            for r in graph.relationships
+        ],
+    }
+    return json.dumps(data).encode("utf-8")
