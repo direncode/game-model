@@ -145,8 +145,35 @@ class BTUTQueryEngine:
             len(self._by_cluster), len(self._by_type),
         )
 
-        # Enrich all survivors with computed metadata
-        self._enrich_all()
+        # NOTE: Metadata enrichment is now LAZY — computed on analyze(), not on load.
+        # This makes initial load instant. The survivors list serves fast without metadata.
+        self._metadata_cache: dict[int, dict] = {}  # idx -> metadata dict
+
+    def _get_metadata(self, idx: int) -> dict:
+        """Lazy-compute metadata for a single survivor on demand."""
+        if idx in self._metadata_cache:
+            return self._metadata_cache[idx]
+
+        sv = self._survivors[idx]
+
+        # Pre-compute global stats (cached after first call)
+        if not hasattr(self, "_global_stats"):
+            all_composites = [s["scores"].get("composite", 0) for s in self._survivors]
+            n = len(self._survivors)
+            mean_c = sum(all_composites) / n if n else 0
+            std_c = (sum((x - mean_c)**2 for x in all_composites) / n) ** 0.5 if n else 1
+            all_anomalies = [s["scores"].get("anomaly", 0) for s in self._survivors]
+            mean_a = sum(all_anomalies) / n if n else 0
+            std_a = (sum((x - mean_a)**2 for x in all_anomalies) / n) ** 0.5 if n else 1
+            self._global_stats = {
+                "composite_mean": mean_c, "composite_std": std_c,
+                "anomaly_mean": mean_a, "anomaly_std": std_a,
+                "total_survivors": n,
+            }
+
+        metadata = self._compute_metadata(sv, idx, self._global_stats, {})
+        self._metadata_cache[idx] = metadata
+        return metadata
 
     def _load_from_db(self) -> dict | None:
         """Try loading latest result from PostgreSQL."""
@@ -180,33 +207,7 @@ class BTUTQueryEngine:
         logger.info("Loaded %s from file: %s", self._dataset_id, self._result_path)
         return data
 
-    def _enrich_all(self):
-        """Compute rich metadata for every survivor after loading."""
-        if not self._survivors:
-            return
-
-        # Pre-compute global statistics for relative metrics
-        all_composites = [s["scores"].get("composite", 0) for s in self._survivors]
-        all_anomalies = [s["scores"].get("anomaly", 0) for s in self._survivors]
-        all_flips = [s["flips"] for s in self._survivors]
-        n = len(self._survivors)
-
-        global_stats = {
-            "composite_mean": sum(all_composites) / n,
-            "composite_std": (sum((x - sum(all_composites)/n)**2 for x in all_composites) / n) ** 0.5,
-            "anomaly_mean": sum(all_anomalies) / n,
-            "anomaly_std": (sum((x - sum(all_anomalies)/n)**2 for x in all_anomalies) / n) ** 0.5,
-            "flips_mean": sum(all_flips) / n,
-            "total_survivors": n,
-        }
-
-        # Build fingerprint index for peer similarity
-        fp_index: dict[str, list[int]] = defaultdict(list)
-        for i, s in enumerate(self._survivors):
-            fp_index[s["fingerprint"]].append(i)
-
-        for i, sv in enumerate(self._survivors):
-            sv["metadata"] = self._compute_metadata(sv, i, global_stats, fp_index)
+    # _enrich_all removed — metadata is now lazy-computed via _get_metadata(idx)
 
     def _compute_metadata(
         self, sv: dict, idx: int, global_stats: dict, fp_index: dict,
@@ -250,25 +251,46 @@ class BTUTQueryEngine:
 
         meta["structural_role"] = {"role": role, "description": role_desc}
 
-        # ── 2. Peer Network (top 5 by fingerprint Hamming distance) ──
+        # ── 2. Peer Network (fast: same cluster first, then sample) ──
+        # Instead of O(N²) all-pairs, check cluster peers first (fast), then a small sample
         peers = []
-        for j, other in enumerate(self._survivors):
-            if j == idx:
+        cluster_peers = self._by_cluster.get(cluster_id, [])
+
+        # Same-cluster peers (most relevant, fast)
+        for other in cluster_peers:
+            if other is sv:
                 continue
             fp_other = other.get("fingerprint", "")
             min_len = min(len(fp), len(fp_other))
-            if min_len > 0:
-                matches = sum(1 for a, b in zip(fp[:min_len], fp_other[:min_len]) if a == b)
-                similarity = matches / min_len
-            else:
-                similarity = 0
+            similarity = sum(1 for a, b in zip(fp[:min_len], fp_other[:min_len]) if a == b) / max(min_len, 1) if min_len > 0 else 0
             peers.append({
                 "ticker": other.get("ticker", ""),
                 "name": other.get("company_name", "") or other.get("name", ""),
                 "type": other.get("type", ""),
                 "similarity": round(similarity, 3),
-                "shared_cluster": other.get("cluster", -1) == cluster_id,
+                "shared_cluster": True,
             })
+
+        # Sample from other clusters (cap at 50 comparisons for speed)
+        if len(peers) < 5:
+            sample_count = 0
+            for other in self._survivors:
+                if other is sv or other.get("cluster", -1) == cluster_id:
+                    continue
+                fp_other = other.get("fingerprint", "")
+                min_len = min(len(fp), len(fp_other))
+                similarity = sum(1 for a, b in zip(fp[:min_len], fp_other[:min_len]) if a == b) / max(min_len, 1) if min_len > 0 else 0
+                peers.append({
+                    "ticker": other.get("ticker", ""),
+                    "name": other.get("company_name", "") or other.get("name", ""),
+                    "type": other.get("type", ""),
+                    "similarity": round(similarity, 3),
+                    "shared_cluster": False,
+                })
+                sample_count += 1
+                if sample_count >= 50:
+                    break
+
         peers.sort(key=lambda x: -x["similarity"])
         meta["peer_network"] = peers[:5]
 
@@ -711,7 +733,7 @@ class BTUTQueryEngine:
                 "fingerprint": sv["fingerprint"],
                 "scores": sv["scores"],
                 "anomaly_story": sv["anomaly_story"],
-                "metadata": sv.get("metadata", {}),
+                "metadata": {},  # Lazy — computed on analyze() only
             })
 
         return results
@@ -777,7 +799,7 @@ class BTUTQueryEngine:
                 "peers": peers,
             },
             "attributes": record["attributes"],
-            "metadata": record.get("metadata", {}),
+            "metadata": self._get_metadata(next((i for i, s in enumerate(self._survivors) if s is record), 0)),
         }
 
     def clusters(self, min_size: int = 1, top_n: int = 30) -> list[dict]:
@@ -955,7 +977,7 @@ class BTUTQueryEngine:
                 "fingerprint": sv["fingerprint"],
                 "scores": sv["scores"],
                 "anomaly_story": sv["anomaly_story"],
-                "metadata": sv.get("metadata", {}),
+                "metadata": {},  # Lazy — computed on analyze() only
             })
 
         return {"results": results, "total": total, "filters_applied": filters}
@@ -1115,7 +1137,7 @@ class BTUTQueryEngine:
                 "cluster": sv["cluster"],
                 "flips": sv["flips"],
                 "anomaly_story": sv["anomaly_story"],
-                "metadata": sv.get("metadata", {}),
+                "metadata": {},  # Lazy — computed on analyze() only
             }
             for i, sv in enumerate(ranked[:n])
         ]
