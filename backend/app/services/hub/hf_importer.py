@@ -282,6 +282,28 @@ async def import_dataset(
         logger.info("Truncating dataset from %d to %d rows", len(df), max_rows)
         df = df.head(max_rows)
 
+    # Drop columns with unhashable types (images, dicts, lists, bytes)
+    drop_cols = []
+    for col in df.columns:
+        try:
+            sample = df[col].dropna().iloc[0] if len(df[col].dropna()) > 0 else None
+            if sample is not None and isinstance(sample, (dict, list, bytes, bytearray)):
+                drop_cols.append(col)
+            elif sample is not None and hasattr(sample, "mode"):  # PIL Image
+                drop_cols.append(col)
+        except Exception:
+            drop_cols.append(col)
+
+    if drop_cols:
+        logger.info("Dropping non-serializable columns: %s", drop_cols)
+        df = df.drop(columns=drop_cols)
+
+    if df.empty or len(df.columns) == 0:
+        raise ValueError(
+            f"Dataset '{hf_dataset_id}' has no usable columns after removing "
+            f"images/binary data. Dropped: {drop_cols}"
+        )
+
     # Step 2: Auto-detect schema
     mapper = SchemaMapper()
     schema = mapper.detect(df)
