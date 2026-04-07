@@ -27,49 +27,107 @@ HF_API_BASE = "https://huggingface.co/api"
 # ─── Featured datasets curated for TCD-JEPA ─────────────────────────────────
 
 FEATURED_DATASETS = [
+    # Finance (rich tabular data with many entities)
     {
-        "id": "hf-internal-testing/fixtures_ade20k",
-        "name": "ADE20K Fixtures",
-        "description": "Scene understanding dataset with entity-relationship structure from ADE20K.",
-        "tags": ["computer-vision", "scene-understanding"],
+        "id": "financial_phrasebank",
+        "name": "Financial PhraseBank",
+        "description": "4,840 financial news sentences with sentiment labels. Rich entity extraction for financial graphs.",
+        "tags": ["finance", "sentiment-analysis"],
+        "category": "Finance",
+    },
+    {
+        "id": "zeroshot/twitter-financial-news-sentiment",
+        "name": "Twitter Financial News",
+        "description": "11,932 financial tweets with sentiment. Company mentions, market events, entity relationships.",
+        "tags": ["finance", "twitter", "sentiment"],
+        "category": "Finance",
+    },
+    # Scientific (citation networks, papers)
+    {
+        "id": "cora",
+        "name": "Cora Citation Network",
+        "description": "2,708 papers with 5,429 citation links across 7 classes. Classic graph dataset.",
+        "tags": ["graph", "citation-network", "node-classification"],
         "category": "Scientific",
     },
     {
         "id": "citation_intent",
         "name": "Citation Intent",
-        "description": "Academic citation network with intent labels — ideal for relationship discovery.",
+        "description": "1,969 citation sentences with intent labels. Academic relationship discovery.",
         "tags": ["text-classification", "citations", "graph"],
         "category": "Scientific",
     },
     {
-        "id": "financial_phrasebank",
-        "name": "Financial PhraseBank",
-        "description": "Sentiment-labeled financial news sentences. Great for entity extraction + sentiment graphs.",
-        "tags": ["finance", "sentiment-analysis"],
-        "category": "Finance",
-    },
-    {
-        "id": "cora",
-        "name": "Cora Citation Network",
-        "description": "Classic citation graph dataset with 2,708 papers and 5,429 links across 7 classes.",
-        "tags": ["graph", "citation-network", "node-classification"],
+        "id": "sciQ",
+        "name": "SciQ Science QA",
+        "description": "13,679 science exam questions with support text. Entity-rich scientific knowledge.",
+        "tags": ["science", "question-answering"],
         "category": "Scientific",
     },
+    # Healthcare
     {
-        "id": "pubmed",
-        "name": "PubMed Abstracts",
-        "description": "Biomedical literature abstracts — extract entities and discover hidden connections.",
-        "tags": ["healthcare", "biomedical", "text"],
+        "id": "medical_questions_pairs",
+        "name": "Medical Question Pairs",
+        "description": "3,048 medical question pairs with similarity labels. Healthcare entity relationships.",
+        "tags": ["healthcare", "medical", "similarity"],
         "category": "Healthcare",
     },
     {
+        "id": "health_fact",
+        "name": "Health Fact Checking",
+        "description": "12,288 health claims with veracity labels. Medical misinformation entity graphs.",
+        "tags": ["healthcare", "fact-checking"],
+        "category": "Healthcare",
+    },
+    # NLP / Text
+    {
+        "id": "ag_news",
+        "name": "AG News",
+        "description": "120,000 news articles across 4 categories. Massive entity extraction for news graphs.",
+        "tags": ["text-classification", "news"],
+        "category": "NLP",
+    },
+    {
+        "id": "conll2003",
+        "name": "CoNLL-2003 NER",
+        "description": "22,137 sentences with named entity annotations (PER, ORG, LOC, MISC). Pre-tagged entities.",
+        "tags": ["ner", "named-entity-recognition"],
+        "category": "NLP",
+    },
+    {
+        "id": "SetFit/20_newsgroups",
+        "name": "20 Newsgroups",
+        "description": "18,846 newsgroup posts across 20 topics. Rich for topic-based entity clustering.",
+        "tags": ["text-classification", "topic-modeling"],
+        "category": "NLP",
+    },
+    # Social Networks
+    {
         "id": "tweets_hate_speech_detection",
         "name": "Hate Speech Detection",
-        "description": "Social media tweet dataset with labels — analyze network patterns and entity relationships.",
+        "description": "31,962 tweets with hate speech labels. Social network entity patterns.",
         "tags": ["social-media", "text-classification"],
         "category": "Social Networks",
     },
+    {
+        "id": "amazon_polarity",
+        "name": "Amazon Reviews",
+        "description": "3.6M Amazon reviews with polarity. Product/reviewer entity relationships at scale.",
+        "tags": ["sentiment", "reviews", "commerce"],
+        "category": "Social Networks",
+    },
+    # Government / Legal
+    {
+        "id": "lex_glue",
+        "name": "LexGLUE Legal",
+        "description": "Legal document classification across multiple courts. Entity-rich legal graphs.",
+        "tags": ["legal", "text-classification"],
+        "category": "Government",
+    },
 ]
+
+# Minimum entities required for meaningful crystallization
+MIN_ENTITIES_FOR_IMPORT = 50
 
 CATEGORIES = [
     {"name": "Finance", "tags": ["finance", "financial", "stock", "trading", "economics"]},
@@ -315,6 +373,13 @@ async def import_dataset(
         raise ValueError(
             f"No entities could be extracted from '{hf_dataset_id}'. "
             "The dataset may not have suitable columns for graph conversion."
+        )
+
+    if len(graph.entities) < MIN_ENTITIES_FOR_IMPORT:
+        raise ValueError(
+            f"Dataset '{hf_dataset_id}' produced only {len(graph.entities)} entities "
+            f"(minimum {MIN_ENTITIES_FOR_IMPORT} required for meaningful crystallization). "
+            "Try a larger dataset or adjust max_rows."
         )
 
     # Step 4: Create Dataset record

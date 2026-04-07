@@ -57,6 +57,7 @@ class ImportResponse(BaseModel):
     entity_count: int
     relationship_count: int
     status: str
+    job_id: str | None = None
 
 
 class CategoryResponse(BaseModel):
@@ -117,6 +118,38 @@ async def import_hub_dataset(
         max_rows=body.max_rows,
     )
     return result
+
+
+@router.post("/import-all")
+async def import_all_featured(
+    max_rows: int = 10000,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+    neo4j: Neo4jConnection = Depends(get_neo4j),
+):
+    """Mass-import all featured datasets. Skips already-imported and too-small datasets."""
+    results = []
+    featured = hf_importer.get_featured()
+
+    for ds in featured:
+        try:
+            result = await hf_importer.import_dataset(
+                hf_dataset_id=ds["id"],
+                user_id=user.id,
+                db=db,
+                neo4j=neo4j,
+                max_rows=max_rows,
+            )
+            results.append({"id": ds["id"], "status": "success", "entities": result.get("entity_count", 0)})
+        except Exception as e:
+            results.append({"id": ds["id"], "status": "failed", "error": str(e)[:200]})
+
+    return {
+        "total": len(results),
+        "success": sum(1 for r in results if r["status"] == "success"),
+        "failed": sum(1 for r in results if r["status"] == "failed"),
+        "results": results,
+    }
 
 
 @router.get("/categories", response_model=list[CategoryResponse])
