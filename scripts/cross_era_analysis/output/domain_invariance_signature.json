@@ -1,0 +1,640 @@
+{
+  "lattices": [
+    {
+      "lattice_file": "linguistics_btut_result_v2.json",
+      "total_entities": 894,
+      "survivors": 289,
+      "reduction": 3,
+      "clusters": 23,
+      "unique_48bit_fingerprints": 125,
+      "variance_preservation": 1.0432,
+      "median_nn": 0.3351,
+      "mean_nn": 0.2894,
+      "p95_nn": 0.6045,
+      "wall_seconds": 0.4,
+      "survivor_types": {
+        "concept": 22,
+        "document_chunk": 228,
+        "event": 9,
+        "location": 9,
+        "person": 12,
+        "writing": 9
+      },
+      "composite": {
+        "n": 289,
+        "mean": 0.4348,
+        "std": 0.2074,
+        "p5": 0.2328,
+        "p50": 0.3229,
+        "p95": 0.8599,
+        "max": 0.963
+      },
+      "diversity": {
+        "n": 289,
+        "mean": 0.3478,
+        "std": 0.4187,
+        "p5": 0.0016,
+        "p50": 0.1,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 289,
+        "mean": 0.6386,
+        "std": 0.1284,
+        "p5": 0.4409,
+        "p50": 0.6581,
+        "p95": 0.8267,
+        "max": 0.9486
+      },
+      "anomaly": {
+        "n": 289,
+        "mean": 0.2305,
+        "std": 0.2812,
+        "p5": 0.069,
+        "p50": 0.0902,
+        "p95": 0.8955,
+        "max": 1.0
+      },
+      "lattice_id": "linguistics",
+      "domain_class": "research_dev",
+      "label": "Panini -> Transformer"
+    },
+    {
+      "lattice_file": "polymath_btut_result_v2.json",
+      "total_entities": 3714,
+      "survivors": 1195,
+      "reduction": 3,
+      "clusters": 66,
+      "unique_48bit_fingerprints": 406,
+      "variance_preservation": 1.2074,
+      "median_nn": 0.2543,
+      "mean_nn": 0.2239,
+      "p95_nn": 0.4951,
+      "wall_seconds": 3.1,
+      "survivor_types": {
+        "concept": 22,
+        "event": 9,
+        "location": 9,
+        "patent_chunk": 1134,
+        "person": 12,
+        "writing": 9
+      },
+      "composite": {
+        "n": 1195,
+        "mean": 0.3953,
+        "std": 0.1477,
+        "p5": 0.2642,
+        "p50": 0.3282,
+        "p95": 0.7049,
+        "max": 0.9481
+      },
+      "diversity": {
+        "n": 1195,
+        "mean": 0.2993,
+        "std": 0.4044,
+        "p5": 0.0005,
+        "p50": 0.037,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 1195,
+        "mean": 0.5717,
+        "std": 0.1324,
+        "p5": 0.3597,
+        "p50": 0.59,
+        "p95": 0.7842,
+        "max": 0.9405
+      },
+      "anomaly": {
+        "n": 1195,
+        "mean": 0.2474,
+        "std": 0.1412,
+        "p5": 0.1624,
+        "p50": 0.2112,
+        "p95": 0.651,
+        "max": 1.0
+      },
+      "lattice_id": "polymath",
+      "domain_class": "research_dev",
+      "label": "Newton+Leonardo+VonNeumann"
+    },
+    {
+      "lattice_file": "heterogeneous_btut_result_v2.json",
+      "total_entities": 1851,
+      "survivors": 595,
+      "reduction": 3,
+      "clusters": 36,
+      "unique_48bit_fingerprints": 249,
+      "variance_preservation": 1.0622,
+      "median_nn": 0.2579,
+      "mean_nn": 0.2425,
+      "p95_nn": 0.5621,
+      "wall_seconds": 1.2,
+      "survivor_types": {
+        "concept": 14,
+        "event": 9,
+        "location": 9,
+        "patent_chunk": 541,
+        "person": 13,
+        "writing": 9
+      },
+      "composite": {
+        "n": 595,
+        "mean": 0.4311,
+        "std": 0.1668,
+        "p5": 0.2755,
+        "p50": 0.3463,
+        "p95": 0.8053,
+        "max": 0.9263
+      },
+      "diversity": {
+        "n": 595,
+        "mean": 0.3625,
+        "std": 0.4277,
+        "p5": 0.0009,
+        "p50": 0.0556,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 595,
+        "mean": 0.6199,
+        "std": 0.1213,
+        "p5": 0.3969,
+        "p50": 0.6465,
+        "p95": 0.7901,
+        "max": 0.8721
+      },
+      "anomaly": {
+        "n": 595,
+        "mean": 0.2252,
+        "std": 0.1884,
+        "p5": 0.1195,
+        "p50": 0.1577,
+        "p95": 0.7089,
+        "max": 1.0
+      },
+      "lattice_id": "heterogeneous",
+      "domain_class": "research_dev",
+      "label": "Tesla+Shannon+crypto"
+    },
+    {
+      "lattice_file": "tesla_crossera_btut_result_v2.json",
+      "total_entities": 1679,
+      "survivors": 500,
+      "reduction": 3,
+      "clusters": 26,
+      "unique_48bit_fingerprints": 130,
+      "variance_preservation": 1.1156,
+      "median_nn": 0.266,
+      "mean_nn": 0.2461,
+      "p95_nn": 0.5577,
+      "wall_seconds": 1.0,
+      "survivor_types": {
+        "patent_chunk": 500
+      },
+      "composite": {
+        "n": 500,
+        "mean": 0.3757,
+        "std": 0.1274,
+        "p5": 0.2431,
+        "p50": 0.3283,
+        "p95": 0.658,
+        "max": 0.7569
+      },
+      "diversity": {
+        "n": 500,
+        "mean": 0.2504,
+        "std": 0.3805,
+        "p5": 0.0008,
+        "p50": 0.0278,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 500,
+        "mean": 0.6624,
+        "std": 0.1257,
+        "p5": 0.4249,
+        "p50": 0.6847,
+        "p95": 0.8423,
+        "max": 0.9587
+      },
+      "anomaly": {
+        "n": 500,
+        "mean": 0.0925,
+        "std": 0.0645,
+        "p5": 0.0687,
+        "p50": 0.0844,
+        "p95": 0.1129,
+        "max": 1.0
+      },
+      "lattice_id": "tesla_crossera",
+      "domain_class": "research_dev",
+      "label": "Tesla-era patents"
+    },
+    {
+      "lattice_file": "latk_mini_btut_result_v2.json",
+      "total_entities": 6459,
+      "survivors": 1498,
+      "reduction": 4,
+      "clusters": 87,
+      "unique_48bit_fingerprints": 467,
+      "variance_preservation": 1.2075,
+      "median_nn": 0.2782,
+      "mean_nn": 0.2531,
+      "p95_nn": 0.4985,
+      "wall_seconds": 7.6,
+      "survivor_types": {
+        "chunk": 1376,
+        "concept": 45,
+        "event": 20,
+        "location": 12,
+        "person": 29,
+        "writing": 16
+      },
+      "composite": {
+        "n": 1498,
+        "mean": 0.3672,
+        "std": 0.1564,
+        "p5": 0.2513,
+        "p50": 0.2958,
+        "p95": 0.7756,
+        "max": 0.8871
+      },
+      "diversity": {
+        "n": 1498,
+        "mean": 0.2399,
+        "std": 0.3799,
+        "p5": 0.0002,
+        "p50": 0.0101,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 1498,
+        "mean": 0.5507,
+        "std": 0.1123,
+        "p5": 0.3414,
+        "p50": 0.5615,
+        "p95": 0.7384,
+        "max": 0.9196
+      },
+      "anomaly": {
+        "n": 1498,
+        "mean": 0.2519,
+        "std": 0.1663,
+        "p5": 0.1603,
+        "p50": 0.1937,
+        "p95": 0.7033,
+        "max": 1.0
+      },
+      "lattice_id": "latk_mini",
+      "domain_class": "research_dev",
+      "label": "3-domain merged"
+    },
+    {
+      "lattice_file": "latk_physics_btut_result_v2.json",
+      "total_entities": 246464,
+      "survivors": 4999,
+      "reduction": 49,
+      "clusters": 1871,
+      "unique_48bit_fingerprints": 10607,
+      "variance_preservation": 0.9284,
+      "median_nn": 0.4123,
+      "mean_nn": 0.4101,
+      "p95_nn": 0.6281,
+      "wall_seconds": 477.7,
+      "survivor_types": {
+        "chunk": 2362,
+        "person": 1733,
+        "writing": 904
+      },
+      "composite": {
+        "n": 4999,
+        "mean": 0.5988,
+        "std": 0.1599,
+        "p5": 0.3899,
+        "p50": 0.7063,
+        "p95": 0.7831,
+        "max": 0.8959
+      },
+      "diversity": {
+        "n": 4999,
+        "mean": 0.5654,
+        "std": 0.4855,
+        "p5": 0.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 4999,
+        "mean": 0.6674,
+        "std": 0.0856,
+        "p5": 0.5599,
+        "p50": 0.6477,
+        "p95": 0.8356,
+        "max": 0.9793
+      },
+      "anomaly": {
+        "n": 4999,
+        "mean": 0.5359,
+        "std": 0.1149,
+        "p5": 0.3978,
+        "p50": 0.5068,
+        "p95": 0.76,
+        "max": 1.0
+      },
+      "lattice_id": "physics_arxiv",
+      "domain_class": "commercial_primary",
+      "label": "50k arXiv abstracts"
+    },
+    {
+      "lattice_file": "edgar_btut_result_v2.json",
+      "total_entities": 61041,
+      "survivors": 499,
+      "reduction": 122,
+      "clusters": 724,
+      "unique_48bit_fingerprints": 7348,
+      "variance_preservation": 0.9464,
+      "median_nn": 0.4996,
+      "mean_nn": 0.4951,
+      "p95_nn": 0.7681,
+      "wall_seconds": 64.6,
+      "survivor_types": {
+        "filing": 319,
+        "financial_fact": 180
+      },
+      "composite": {
+        "n": 499,
+        "mean": 0.5249,
+        "std": 0.2013,
+        "p5": 0.3108,
+        "p50": 0.402,
+        "p95": 0.7946,
+        "max": 0.8588
+      },
+      "diversity": {
+        "n": 499,
+        "mean": 0.5415,
+        "std": 0.4564,
+        "p5": 0.0,
+        "p50": 0.5,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 499,
+        "mean": 0.6287,
+        "std": 0.1272,
+        "p5": 0.435,
+        "p50": 0.6297,
+        "p95": 0.8135,
+        "max": 0.9013
+      },
+      "anomaly": {
+        "n": 499,
+        "mean": 0.3355,
+        "std": 0.2861,
+        "p5": 0.0672,
+        "p50": 0.0974,
+        "p95": 0.7617,
+        "max": 1.0
+      },
+      "lattice_id": "edgar",
+      "domain_class": "commercial_primary",
+      "label": "SEC financial filings + facts"
+    },
+    {
+      "lattice_file": "pubmed_btut_result.json",
+      "total_entities": 70113,
+      "survivors": 989,
+      "reduction": 70,
+      "clusters": 642,
+      "unique_48bit_fingerprints": 4736,
+      "variance_preservation": 0.86,
+      "median_nn": 0.4613,
+      "mean_nn": 0.4665,
+      "p95_nn": 0.7514,
+      "wall_seconds": 58.2,
+      "survivor_types": {
+        "paper": 140,
+        "author": 756,
+        "mesh_term": 93
+      },
+      "composite": {
+        "n": 989,
+        "mean": 0.5454,
+        "std": 0.1577,
+        "p5": 0.3353,
+        "p50": 0.5674,
+        "p95": 0.7801,
+        "max": 0.9259
+      },
+      "diversity": {
+        "n": 989,
+        "mean": 0.7158,
+        "std": 0.3771,
+        "p5": 0.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 989,
+        "mean": 0.6064,
+        "std": 0.1096,
+        "p5": 0.4466,
+        "p50": 0.598,
+        "p95": 0.8217,
+        "max": 0.9536
+      },
+      "anomaly": {
+        "n": 989,
+        "mean": 0.2092,
+        "std": 0.2636,
+        "p5": 0.0493,
+        "p50": 0.0581,
+        "p95": 0.7273,
+        "max": 1.0
+      },
+      "lattice_id": "pubmed",
+      "domain_class": "commercial_legacy",
+      "label": "biomedical literature"
+    },
+    {
+      "lattice_file": "patents_btut_result.json",
+      "total_entities": 6034,
+      "survivors": 937,
+      "reduction": 6,
+      "clusters": 70,
+      "unique_48bit_fingerprints": 323,
+      "variance_preservation": 1.0393,
+      "median_nn": 0.2233,
+      "mean_nn": 0.2287,
+      "p95_nn": 0.47,
+      "wall_seconds": 3.7,
+      "survivor_types": {
+        "patent": 432,
+        "inventor": 490,
+        "assignee": 9,
+        "cpc_class": 6
+      },
+      "composite": {
+        "n": 937,
+        "mean": 0.4354,
+        "std": 0.1303,
+        "p5": 0.2689,
+        "p50": 0.4096,
+        "p95": 0.6707,
+        "max": 0.806
+      },
+      "diversity": {
+        "n": 937,
+        "mean": 0.3011,
+        "std": 0.4029,
+        "p5": 0.0002,
+        "p50": 0.0213,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 937,
+        "mean": 0.5088,
+        "std": 0.1024,
+        "p5": 0.3835,
+        "p50": 0.4769,
+        "p95": 0.6942,
+        "max": 0.952
+      },
+      "anomaly": {
+        "n": 937,
+        "mean": 0.5059,
+        "std": 0.1541,
+        "p5": 0.308,
+        "p50": 0.4738,
+        "p95": 0.8056,
+        "max": 1.0
+      },
+      "lattice_id": "patents",
+      "domain_class": "commercial_legacy",
+      "label": "USPTO patents"
+    },
+    {
+      "lattice_file": "comtrade_btut_result.json",
+      "total_entities": 7556,
+      "survivors": 998,
+      "reduction": 7,
+      "clusters": 103,
+      "unique_48bit_fingerprints": 752,
+      "variance_preservation": 1.1787,
+      "median_nn": 0.2957,
+      "mean_nn": 0.279,
+      "p95_nn": 0.4878,
+      "wall_seconds": 5.6,
+      "survivor_types": {
+        "country": 9,
+        "commodity": 9,
+        "trade_flow": 980
+      },
+      "composite": {
+        "n": 998,
+        "mean": 0.4609,
+        "std": 0.1387,
+        "p5": 0.2669,
+        "p50": 0.525,
+        "p95": 0.6187,
+        "max": 0.9403
+      },
+      "diversity": {
+        "n": 998,
+        "mean": 0.6716,
+        "std": 0.3943,
+        "p5": 0.0002,
+        "p50": 1.0,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 998,
+        "mean": 0.4238,
+        "std": 0.106,
+        "p5": 0.2871,
+        "p50": 0.4033,
+        "p95": 0.6079,
+        "max": 0.8973
+      },
+      "anomaly": {
+        "n": 998,
+        "mean": 0.2251,
+        "std": 0.1128,
+        "p5": 0.1467,
+        "p50": 0.2089,
+        "p95": 0.271,
+        "max": 1.0
+      },
+      "lattice_id": "comtrade",
+      "domain_class": "commercial_legacy",
+      "label": "UN trade flows"
+    },
+    {
+      "lattice_file": "climate_btut_result.json",
+      "total_entities": 14657,
+      "survivors": 999,
+      "reduction": 14,
+      "clusters": 119,
+      "unique_48bit_fingerprints": 495,
+      "variance_preservation": 1.2261,
+      "median_nn": 0.3501,
+      "mean_nn": 0.3485,
+      "p95_nn": 0.5991,
+      "wall_seconds": 15.4,
+      "survivor_types": {
+        "station": 990,
+        "region": 9
+      },
+      "composite": {
+        "n": 999,
+        "mean": 0.3991,
+        "std": 0.1322,
+        "p5": 0.2793,
+        "p50": 0.3258,
+        "p95": 0.6142,
+        "max": 0.9633
+      },
+      "diversity": {
+        "n": 999,
+        "mean": 0.4157,
+        "std": 0.4194,
+        "p5": 0.0001,
+        "p50": 0.25,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "reconstruction_score": {
+        "n": 999,
+        "mean": 0.5677,
+        "std": 0.116,
+        "p5": 0.3779,
+        "p50": 0.5818,
+        "p95": 0.7282,
+        "max": 0.979
+      },
+      "anomaly": {
+        "n": 999,
+        "mean": 0.1062,
+        "std": 0.1019,
+        "p5": 0.0733,
+        "p50": 0.0895,
+        "p95": 0.1096,
+        "max": 1.0
+      },
+      "lattice_id": "climate",
+      "domain_class": "commercial_legacy",
+      "label": "climate stations"
+    }
+  ]
+}

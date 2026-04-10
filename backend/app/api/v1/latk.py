@@ -92,14 +92,24 @@ except Exception as exc:  # pragma: no cover
 
 
 LATTICE_REGISTRY: Dict[str, Path] = {
-    # Phase 1 v2 lattices (primary)
+    # --- Commercial primary corpora (the headline for investor demos) ---
+    "edgar": _CEA_DIR / "output" / "edgar_btut_result_v2.json",
+    "physics": _CEA_DIR / "output" / "latk_physics_btut_result_v2.json",
+    # --- Commercial legacy (Phase 0 format, hamming fallback) ---
+    # These are pre-patch BTUT runs and don't have embed_context/8D
+    # embeddings. The novelty query auto-falls-back to Hamming distance
+    # ranking so they still work for demos.
+    "pubmed": _CEA_DIR / "output" / "phase0_commercial" / "pubmed_btut_result.json",
+    "patents": _CEA_DIR / "output" / "phase0_commercial" / "patents_btut_result.json",
+    "comtrade": _CEA_DIR / "output" / "phase0_commercial" / "comtrade_btut_result.json",
+    "climate": _CEA_DIR / "output" / "phase0_commercial" / "climate_btut_result.json",
+    # --- Research dev-set corpora (tuned the parsing pipeline) ---
     "linguistics": _CEA_DIR / "output" / "linguistics_btut_result_v2.json",
     "polymath": _CEA_DIR / "output" / "polymath_btut_result_v2.json",
     "heterogeneous": _CEA_DIR / "output" / "heterogeneous_btut_result_v2.json",
     "tesla_crossera": _CEA_DIR / "output" / "tesla_crossera_btut_result_v2.json",
     "latk_mini": _CEA_DIR / "output" / "latk_mini_btut_result_v2.json",
-    "physics": _CEA_DIR / "output" / "latk_physics_btut_result_v2.json",
-    # Legacy Phase 0 lattices exposed via same API (fall back to hamming)
+    # --- Legacy Phase 0 research lattices (hamming fallback) ---
     "linguistics_legacy": _CEA_DIR / "output" / "linguistics_btut_result.json",
     "polymath_legacy": _CEA_DIR / "output" / "polymath_btut_result.json",
     "heterogeneous_legacy": _CEA_DIR / "output" / "heterogeneous_btut_result.json",
@@ -107,10 +117,18 @@ LATTICE_REGISTRY: Dict[str, Path] = {
 }
 
 # Per-lattice default entity_types filter. Applied when the caller does not
-# supply one explicitly. Used to suppress author `person` entities on
-# corpora where persons dominate the geometric top-N for text queries.
+# supply one explicitly. Used to suppress low-text-density entities that
+# dominate the geometric top-N for text queries.
 LATTICE_DEFAULT_FILTER: Dict[str, List[str]] = {
+    # Commercial primary
     "physics": ["writing", "chunk"],
+    "edgar": ["filing", "financial_fact"],
+    # Commercial legacy (each has its own dominant content type)
+    "pubmed": ["paper", "mesh_term"],
+    "patents": ["patent", "cpc_class"],
+    "comtrade": ["trade_flow", "commodity"],
+    "climate": ["station", "region"],
+    # Research dev-set
     "polymath": ["writing", "chunk", "concept", "event", "location"],
     "heterogeneous": ["writing", "chunk", "concept", "event", "location"],
     "tesla_crossera": ["patent_chunk"],
