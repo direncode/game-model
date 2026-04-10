@@ -1,0 +1,60 @@
+{
+  "run_at": "2026-04-10T18:08:12",
+  "results": [
+    {
+      "lattice": "linguistics",
+      "source_entities": 894,
+      "btut_survivors": 289,
+      "probes": 4,
+      "btut_top_k_hits": 18,
+      "btut_max_possible": 80,
+      "random_baseline_mean": 15.0,
+      "random_baseline_std": 3.033,
+      "btut_vs_random_advantage_pct": 20.0
+    },
+    {
+      "lattice": "heterogeneous",
+      "source_entities": 1851,
+      "btut_survivors": 595,
+      "probes": 4,
+      "btut_top_k_hits": 21,
+      "btut_max_possible": 80,
+      "random_baseline_mean": 18.0,
+      "random_baseline_std": 1.095,
+      "btut_vs_random_advantage_pct": 16.7
+    },
+    {
+      "lattice": "polymath",
+      "source_entities": 3714,
+      "btut_survivors": 1195,
+      "probes": 4,
+      "btut_top_k_hits": 29,
+      "btut_max_possible": 80,
+      "random_baseline_mean": 21.4,
+      "random_baseline_std": 3.382,
+      "btut_vs_random_advantage_pct": 35.5
+    },
+    {
+      "lattice": "latk_mini",
+      "source_entities": 6459,
+      "btut_survivors": 1498,
+      "probes": 4,
+      "btut_top_k_hits": 5,
+      "btut_max_possible": 80,
+      "random_baseline_mean": 5.6,
+      "random_baseline_std": 1.356,
+      "btut_vs_random_advantage_pct": -10.7
+    },
+    {
+      "lattice": "physics_50k_arxiv",
+      "source_entities": 266582,
+      "btut_survivors": 4999,
+      "probes": 5,
+      "btut_top_k_hits": 9,
+      "btut_max_possible": 100,
+      "random_baseline_mean": 3.6,
+      "random_baseline_std": 0.8,
+      "btut_vs_random_advantage_pct": 150.0
+    }
+  ]
+}

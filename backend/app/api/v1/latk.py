@@ -92,12 +92,28 @@ except Exception as exc:  # pragma: no cover
 
 
 LATTICE_REGISTRY: Dict[str, Path] = {
-    "latk_mini": _CEA_DIR / "output" / "latk_mini_btut_result_v2.json",
+    # Phase 1 v2 lattices (primary)
     "linguistics": _CEA_DIR / "output" / "linguistics_btut_result_v2.json",
+    "polymath": _CEA_DIR / "output" / "polymath_btut_result_v2.json",
+    "heterogeneous": _CEA_DIR / "output" / "heterogeneous_btut_result_v2.json",
+    "tesla_crossera": _CEA_DIR / "output" / "tesla_crossera_btut_result_v2.json",
+    "latk_mini": _CEA_DIR / "output" / "latk_mini_btut_result_v2.json",
     "physics": _CEA_DIR / "output" / "latk_physics_btut_result_v2.json",
     # Legacy Phase 0 lattices exposed via same API (fall back to hamming)
-    "latk_mini_legacy": _CEA_DIR / "output" / "latk_mini_btut_result.json",
     "linguistics_legacy": _CEA_DIR / "output" / "linguistics_btut_result.json",
+    "polymath_legacy": _CEA_DIR / "output" / "polymath_btut_result.json",
+    "heterogeneous_legacy": _CEA_DIR / "output" / "heterogeneous_btut_result.json",
+    "latk_mini_legacy": _CEA_DIR / "output" / "latk_mini_btut_result.json",
+}
+
+# Per-lattice default entity_types filter. Applied when the caller does not
+# supply one explicitly. Used to suppress author `person` entities on
+# corpora where persons dominate the geometric top-N for text queries.
+LATTICE_DEFAULT_FILTER: Dict[str, List[str]] = {
+    "physics": ["writing", "chunk"],
+    "polymath": ["writing", "chunk", "concept", "event", "location"],
+    "heterogeneous": ["writing", "chunk", "concept", "event", "location"],
+    "tesla_crossera": ["patent_chunk"],
 }
 
 
@@ -243,12 +259,16 @@ def list_lattices() -> List[LatticeInfo]:
 @router.post("/novelty", response_model=NoveltyResponse)
 def novelty(req: NoveltyRequest) -> NoveltyResponse:
     lattice = _get_lattice(req.lattice_id)
+    # Apply per-lattice default filter if the caller didn't specify one.
+    effective_types = req.entity_types
+    if effective_types is None:
+        effective_types = LATTICE_DEFAULT_FILTER.get(req.lattice_id)
     report = query_novelty(
         req.query,
         lattice,
         top_k=req.top_k,
         method=req.method,
-        entity_types=req.entity_types,
+        entity_types=effective_types,
     )
     return NoveltyResponse(
         query_text=report.query_text,
@@ -283,12 +303,15 @@ def route_to_ancestors(req: RouteToAncestorsRequest) -> RouteToAncestorsResponse
     entities in the lattice that its 8D neighborhood points at.
     """
     lattice = _get_lattice(req.lattice_id)
+    effective_types = req.entity_types
+    if effective_types is None:
+        effective_types = LATTICE_DEFAULT_FILTER.get(req.lattice_id)
     report = query_novelty(
         req.query,
         lattice,
         top_k=req.top_k * 2,
         method="combined",
-        entity_types=req.entity_types,
+        entity_types=effective_types,
     )
 
     ancestors = [
