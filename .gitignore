@@ -49,3 +49,13 @@ uploads/
 # Logs
 *.log
 logs/
+
+# LATK Phase 1 large build artifacts (raw ingest + full corpus)
+# These are regenerable from ingest_arxiv_physics.py + build_latk_physics_corpus.py.
+# The BTUT result file (much smaller) IS committed as a build artifact per repo convention.
+scripts/cross_era_analysis/output/latk_physics_arxiv.jsonl
+scripts/cross_era_analysis/output/latk_physics_arxiv.jsonl.cursor.json
+scripts/cross_era_analysis/output/latk_physics_corpus.json
+scripts/cross_era_analysis/output/latk_physics_arxiv_snapshot.jsonl
+scripts/cross_era_analysis/output/latk_physics_arxiv_test.jsonl
+scripts/cross_era_analysis/output/latk_physics_arxiv_test.jsonl.cursor.json

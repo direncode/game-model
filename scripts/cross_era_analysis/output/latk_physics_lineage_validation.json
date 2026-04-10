@@ -1,0 +1,134 @@
+{
+  "total": 7,
+  "ancestor_hits": 0,
+  "descendant_hits": 7,
+  "full_hits": 0,
+  "results": [
+    {
+      "lineage": "Maxwell -> QED",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.5546,
+      "top_entity_names": [
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1110_3412v6",
+        "latk_physics__arxiv_physics_optics__writing__arxiv_1307_4844v1",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1003_3592v2",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1001_2168v1",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1304_8062v2",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_1204_2984v1",
+        "latk_physics__arxiv_physics_optics__writing__arxiv_0411142v2",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1005_1844v1",
+        "latk_physics__arxiv_gr_qc__writing__arxiv_0905_2263v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_0911_4639v1"
+      ]
+    },
+    {
+      "lineage": "Einstein -> General Relativity",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.242,
+      "top_entity_names": [
+        "latk_physics__arxiv_gr_qc__writing__arxiv_2311_01495v1__c000",
+        "latk_physics__arxiv_gr_qc__writing__arxiv_0905_2263v1__c000",
+        "latk_physics__arxiv_gr_qc__writing__arxiv_1106_1103v2__c000",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1109_0402v1",
+        "latk_physics__arxiv_q_bio_pe__writing__arxiv_1105_4242v1",
+        "latk_physics__arxiv_astro_ph_sr__writing__arxiv_1006_2329v2__c000",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_2110_07021v1",
+        "latk_physics__arxiv_quant_ph__writing__arxiv_2303_12087v1__c000",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2602_19365v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_1908_03062v2__c000"
+      ]
+    },
+    {
+      "lineage": "Boltzmann -> Condensed Matter",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.2329,
+      "top_entity_names": [
+        "latk_physics__arxiv_cond_mat_str_el__writing__arxiv_0908_1724v3__c000",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1006_4632v2",
+        "latk_physics__arxiv_hep_ph__writing__arxiv_1209_5539v2",
+        "latk_physics__arxiv_physics_optics__writing__arxiv_1010_2527v2",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1012_3562v1",
+        "latk_physics__arxiv_hep_th__writing__arxiv_0903_0568v2",
+        "latk_physics__arxiv_quant_ph__writing__arxiv_1205_6131v2",
+        "latk_physics__arxiv_astro_ph_ga__writing__arxiv_1011_4593v1",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1304_5522v3",
+        "latk_physics__arxiv_hep_th__writing__arxiv_0909_4127v3"
+      ]
+    },
+    {
+      "lineage": "Feynman -> QFT",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.2694,
+      "top_entity_names": [
+        "latk_physics__arxiv_astro_ph_ga__writing__arxiv_1007_3499v2",
+        "latk_physics__arxiv_math_ph__writing__arxiv_0810_5552v1",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_1012_0289v1",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1205_5716v1",
+        "latk_physics__arxiv_hep_ph__writing__arxiv_0909_4163v1",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_1105_2643v2",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1512_04470v1",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1110_5891v1",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1205_3172v1",
+        "latk_physics__arxiv_hep_th__writing__arxiv_1008_5240v2"
+      ]
+    },
+    {
+      "lineage": "Dirac -> Quantum Mechanics",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.2939,
+      "top_entity_names": [
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_0710_3128v1",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1008_0260v1",
+        "latk_physics__arxiv_hep_th__writing__arxiv_0909_2275v2",
+        "latk_physics__arxiv_physics_gen_ph__writing__arxiv_0908_3244v1",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_1101_3015v3",
+        "latk_physics__arxiv_quant_ph__writing__arxiv_0810_2110v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_0811_0124v1",
+        "latk_physics__arxiv_hep_th__writing__arxiv_0907_4204v2",
+        "latk_physics__arxiv_physics_plasm_ph__writing__arxiv_0812_0703v1",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1003_3592v2"
+      ]
+    },
+    {
+      "lineage": "Heisenberg -> Quantum Optics",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.3111,
+      "top_entity_names": [
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_2203_06124v1__c000",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_2310_19910v1__c000",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2410_15468v1__c000",
+        "latk_physics__arxiv_quant_ph__writing__arxiv_1811_06808v2__c000",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1005_0122v1__c000",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1006_0088v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_9804001v3__c000",
+        "latk_physics__arxiv_hep_ph__writing__arxiv_2206_13520v1__c000",
+        "latk_physics__arxiv_gr_qc__writing__arxiv_0905_1493v2__c000",
+        "latk_physics__arxiv_physics_ins_det__writing__arxiv_1812_11175v1__c001"
+      ]
+    },
+    {
+      "lineage": "Planck -> Statistical Physics",
+      "ancestor_hit": false,
+      "descendant_hit": true,
+      "novelty": 0.2566,
+      "top_entity_names": [
+        "latk_physics__arxiv_gr_qc__writing__arxiv_0905_2263v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_1301_4588v1",
+        "latk_physics__arxiv_cond_mat_supr_con__writing__arxiv_1011_5818v1__c000",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1011_5591v1",
+        "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1206_2768v2",
+        "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2602_19365v1__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_0911_5216v1",
+        "latk_physics__arxiv_gr_qc__writing__arxiv_1106_1103v2__c000",
+        "latk_physics__arxiv_physics_class_ph__writing__arxiv_1908_03062v2__c000",
+        "latk_physics__arxiv_astro_ph_co__writing__arxiv_1104_4122v1"
+      ]
+    }
+  ]
+}

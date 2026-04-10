@@ -238,6 +238,28 @@ def run_btut_pipeline(
     n = len(filtered)
     _log(f"Embedding: {emb_32d.shape} -> {emb_8d.shape}")
 
+    # Capture LATK embed context: the minimal persisted state required to
+    # embed a new query text into this lattice's 8D space afterwards.
+    # See scripts/cross_era_analysis/latk_tool/fingerprint_core.py for the
+    # consumer side of this contract.
+    _latk_embed_context = {
+        "type_vocab": dict(getattr(embedder, "_type_vocab", {})),
+        "numeric_means": (
+            embedder.numeric_proj._means.tolist()
+            if embedder.numeric_proj is not None and embedder.numeric_proj._means is not None
+            else None
+        ),
+        "numeric_stds": (
+            embedder.numeric_proj._stds.tolist()
+            if embedder.numeric_proj is not None and embedder.numeric_proj._stds is not None
+            else None
+        ),
+        "numeric_keys": [],  # populated inside EntityEmbedder.embed; not exposed, left empty
+        "embedding_dim": int(config.embedding_dim),
+        "projection_seed": 42,
+        "embedder_seed": 42,
+    }
+
     # Type indexing
     type_map = {t: i for i, t in enumerate(unique_types)}
     entity_type_idx = np.array([type_map.get(e["type"], 0) for e in filtered], dtype=np.int32)
@@ -352,6 +374,22 @@ def run_btut_pipeline(
             },
         })
 
+    # LATK v2: persist per-survivor 8D embeddings + embed context so the
+    # query tools can project new text into this lattice's geometric space.
+    # Cost: ~48 KB per 1500-survivor lattice. Negligible vs the survivor
+    # payload itself. Skipped silently if the corpus was too small to
+    # produce meaningful coordinates.
+    try:
+        surv_emb_8d = emb_8d[selected].astype(np.float32)
+        embeddings_8d_flat = surv_emb_8d.flatten().tolist()
+    except Exception:
+        embeddings_8d_flat = []
+
     _log(f"Pipeline complete: {len(selected)} survivors, {wall_total:.1f}s")
 
-    return {"summary": summary, "survivors": survivors}
+    return {
+        "summary": summary,
+        "survivors": survivors,
+        "embed_context": _latk_embed_context,
+        "embeddings_8d": embeddings_8d_flat,
+    }
