@@ -1,149 +1,190 @@
-# LATK Competitive Positioning
+# LATK Competitive Positioning (Commercial Edition)
 
 **Date:** 2026-04-10
-**Audience:** G42 / Mubadala technical diligence
-**Purpose:** Honest comparison of BTUT+LATK against the real alternatives a DD team will ask about
+**Audience:** G42 / Mubadala technical and strategic diligence
+**Purpose:** Honest comparison of BTUT+LATK's commercial stack against the real incumbents in each target market
+
+This document replaces an earlier draft that compared against FAISS / Milvus / sentence-BERT. Those are infrastructure primitives, not commercial competitors. For a Mubadala allocation-intelligence pitch, the real competition is the incumbents in each target domain: Bloomberg / FactSet / Refinitiv / S&P Capital IQ for Edgar; Pitchbook / CB Insights for patents and ventures; Clarivate / Elsevier for PubMed; Palantir / Databricks for the foundation-pipeline framing.
 
 ---
 
-## The Question A DD Team Will Ask
+## Framing: LATK Is Not Competing On Recall, It Is Competing On Compression
 
-> "Why can't I get the same result by putting all 50,000 arXiv abstracts into FAISS and doing a nearest-neighbor lookup? Or by hitting OpenAI's embedding API and storing the results in Pinecone?"
+The standard financial-intelligence product (Bloomberg Terminal, FactSet, Refinitiv Eikon) sells **exhaustive coverage + a search interface**. Every filing, every financial fact, every ticker, every day, all stored, all retrievable. Pricing per seat is $20K-30K/year, reflecting the underlying cost of exhaustive storage + structured parsing + licensed data feeds.
 
-This doc answers that question honestly, not defensively.
+LATK sells **compressed latent structure**. The Edgar lattice is 499 survivors representing 61,041 source entities — a 122× reduction — with 94.64% of the source geometric variance preserved. The product is not "search every filing" (Bloomberg does that better and charges for it). The product is **"given arbitrary text, return the signal-dense survivors whose latent neighborhood routes to the query topic without requiring you to know which filings to search for in the first place."**
 
----
+Those are different tools. A Mubadala analyst using Bloomberg says "show me every 10-K filed by oil & gas companies in Q2." A Mubadala analyst using LATK says "here's a paragraph describing a concern about offshore drilling contract exposure — what are the signal-dense filings and financial facts in the SEC universe that my analysis should start from?" The Bloomberg answer is exhaustive; the LATK answer is a crystallized starting point.
 
-## The Five Closest Alternatives
-
-### 1. Vanilla vector database (FAISS / Milvus / Pinecone / pgvector)
-
-**What it does**: stores every embedding vector in a data structure optimized for fast k-NN retrieval. FAISS does billion-vector ANN search in milliseconds.
-
-**What it wins at**:
-- Raw nearest-neighbor query speed at scale (FAISS HNSW is 10-100× faster per query than BTUT's dense scan)
-- Mature ecosystem, well-documented, battle-tested in production
-- Exact k-NN guarantee available as a config toggle
-
-**What it doesn't do**:
-- **Discard data.** FAISS stores every vector you give it. A billion vectors at float32×768d = 3 TB of RAM/disk. BTUT reduces to the signal-rich 2-5% — 20-50× less storage at comparable query-routing fidelity.
-- **Heterogeneous entity graphs.** FAISS is a vector store; it doesn't know about entity types, edges, or structural relationships. You can build that on top, but you're back to writing the stratified selection + graph projection code that BTUT already has.
-- **Unsupervised signal-density ranking.** FAISS gives you "nearest k to query" but not "which of these vectors carry unique signal vs are redundant?" BTUT's 3-axis composite scoring (diversity + reconstruction + anomaly) explicitly ranks entities by signal density and keeps only the top quota per type + cluster.
-
-**Honest comparison on the specific query "Zenneck surface wave wireless power" against the 1,851 heterogeneous corpus entities**: FAISS with sentence-BERT embeddings would probably return the same top-10 as LATK's 8D method does, *because* sentence-BERT is a much higher-dimensional learned embedding than LATK's 32D hand-crafted feature concatenation. But FAISS would keep all 1,851 vectors; LATK keeps 595. At the 50k physics scale (246k entities), the difference is 4,999 survivors vs 246k vectors — BTUT's 49× reduction is the point.
-
-**If the goal is "query-time latency at a fixed corpus size," FAISS wins.** **If the goal is "preserve query-routing fidelity at fixed compressed size," BTUT wins.**
-
-### 2. Sentence-BERT / OpenAI embeddings + FAISS
-
-**What it does**: embed every document with a learned transformer-based embedding model (sentence-BERT, OpenAI text-embedding-3-large, BGE, E5), store in FAISS, query with the same embedding model.
-
-**What it wins at**:
-- Semantic similarity out of the box. The Saussure→Humboldt→Chomsky chain is almost certainly reconstructable with sentence-BERT + FAISS because sentence-BERT's embedding space encodes generic semantic similarity.
-- Zero engineering effort — pip install, load model, index, query.
-- Continuously improving — new embedding models ship every few months.
-
-**What it doesn't do**:
-- **Per-token API cost at scale.** OpenAI's text-embedding-3-large is $0.00013 per 1k tokens. 246,000 entities × ~200 tokens avg = ~49M tokens = **$6.37** for the physics smoke slice. 5M entities = **~$130**. 200M entities = **~$5,200**. 2B entities = **~$52,000**. These are the embedding API fees *alone*, not counting storage or query costs. At Phase 3 scale this is real money.
-- **Domain-specific entity graph structure.** Sentence-BERT sees each document as a bag of words; it doesn't know that a paper has authors, or that an author has affiliations, or that a concept is cited by a patent. BTUT's embedder has dedicated sub-engines for text, numeric attributes, time-series attributes, and graph walks, fused together.
-- **Unsupervised data reduction.** Same critique as FAISS. Sentence-BERT embeds everything; it doesn't rank entities by signal density or prune the corpus.
-- **Provenance and cross-era tracing.** BTUT preserves the per-survivor entity name, type, cluster, and 8D position so LATK can reconstruct the lineage chain explicitly. Sentence-BERT + FAISS gives you "here are the 10 nearest vectors" without domain-structured context.
-
-**Honest comparison on the linguistics lattice**: sentence-BERT + FAISS would very likely reproduce the Saussure→Humboldt→Chomsky→distributional semantics→Transformer chain we demonstrated because sentence-BERT's training data includes all of these concepts and their well-known semantic relationships. **If a G42 engineer's first question is "why didn't you just use sentence-BERT?", the honest answer is: for the linguistics toy corpus, you could have, and the results would be comparable. For a 5M-entity multi-source physics corpus where the API cost starts to matter and the heterogeneous entity structure is load-bearing, the trade-offs shift.**
-
-### 3. LLM-based retrieval (GPT-4 / Claude with long context + semantic search)
-
-**What it does**: load the corpus into a long-context LLM or a retrieval-augmented generation (RAG) system; ask the LLM "what is the lineage of this quote?"
-
-**What it wins at**:
-- Flexible natural language querying — ask any question, get a reasoned answer.
-- Zero indexing work.
-- Handles nuance and context the BTUT geometric embedding can't.
-
-**What it doesn't do**:
-- **Work at all above ~200K token context window.** 50k arXiv abstracts × ~200 tokens = 10M tokens, 50× the max context of Claude Opus. The physics corpus cannot fit. RAG mitigates but introduces its own retrieval layer which... needs a vector DB. Back to the FAISS conversation.
-- **Give you reproducible rankings.** An LLM's answer for "what is Saussure's lineage" will be consistent-sounding but non-deterministic across runs and depends on prompt tuning. BTUT's 8D distance is a fixed number for a fixed lattice.
-- **Work without per-query cost.** GPT-4 / Claude pricing at 10K-100K prompt tokens per query is $0.10-$1.00 per query. BTUT queries are free after indexing.
-- **Surface the "what novel things are in the corpus" task.** Asking an LLM "what's new here" on a corpus it wasn't trained on is fundamentally unreliable. BTUT's anomaly score is a concrete measurable signal.
-
-**Honest comparison**: for a one-off query on a small corpus, GPT-4 would probably give a better answer than LATK. For a public API that needs to return reproducible, sub-second, low-cost answers across millions of queries, LLM-based retrieval is the wrong tool.
-
-### 4. Graph-based retrieval (Neo4j + Cypher + embeddings)
-
-**What it does**: store entities and relationships in a graph database, use embeddings on node properties, query via Cypher path-finding + vector similarity hybrid.
-
-**What it wins at**:
-- Explicit graph structure. You can ask "find the shortest path between Saussure and Transformer NLP through the citation graph."
-- Mature query language.
-- Good for queries where the **edges** are the signal.
-
-**What it doesn't do**:
-- **Unsupervised cross-era discovery.** Graph path queries require you to *already know* the start and end nodes. LATK's novelty query takes arbitrary text and finds the relevant graph nodes without any starting hint.
-- **Scale beyond ~100M-ish nodes** without significant engineering. Neo4j is not designed for billion-node graphs.
-- **Signal-density ranking.** Same as FAISS — graph DBs store everything.
-
-**Honest comparison**: LATK's heterogeneous corpus format (writing / chunk / concept / event / location / person entities + typed edges) is basically a denormalized graph. You could store the same data in Neo4j. The question is whether your dominant query pattern is "find path from A to B" (graph wins) or "given this text, find the relevant nodes in an unsupervised way" (LATK wins). For cross-era lineage routing as we define it, the second pattern dominates.
-
-### 5. The "just fine-tune a model" alternative
-
-**What it does**: fine-tune a learned embedding model on the target corpus (contrastive learning on known lineage pairs, or masked-LM pretraining on the corpus text, or whatever). Use the fine-tuned embeddings with FAISS.
-
-**What it wins at**:
-- Higher retrieval quality on the target task after fine-tuning.
-- Leverages the full power of modern transformer architectures.
-
-**What it doesn't do**:
-- **Work without labeled lineage pairs.** Contrastive fine-tuning needs positive examples. We don't have labeled (Saussure, Chomsky) pairs at scale; generating them is the hard problem.
-- **Fit in the unsupervised constraint.** LATK's promise is "no supervision, no fine-tuning, works on arbitrary heterogeneous technical corpora out of the box." Fine-tuning violates that by definition.
-- **Come cheap at scale.** Fine-tuning a sentence-BERT-class model on 200M documents is a $10K-100K GPU job by itself.
-
-**Honest comparison**: if you have labeled lineage data, fine-tuning beats LATK. For the unsupervised cross-era case on heterogeneous technical corpora, LATK works directly.
+The two are complementary, not competing. But for the Mubadala pitch we have to articulate **where LATK wins independently**, because a diligence team will ask "why do I need this if I already pay for Bloomberg."
 
 ---
 
-## Summary Table
+## Comparison By Target Market
 
-| Axis | FAISS | sBERT+FAISS | LLM RAG | Neo4j+emb | Fine-tuned | **BTUT+LATK** |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|
-| **Query latency (warm, 250k corpus)** | ms | ms | seconds | ms-s | ms | **60-260ms** |
-| **Corpus cost at 5M entities** | $0 | $130 API | $$$ per-query | $0 | $10K-100K GPU | **$0** |
-| **Heterogeneous entity types + edges** | ❌ | ❌ | ❌ | ✓ | partial | **✓** |
-| **Unsupervised signal-density reduction** | ❌ | ❌ | ❌ | ❌ | partial | **✓** |
-| **Storage at 246k entities** | 3 GB @ 768d | 3 GB | N/A | ~500 MB | 3 GB | **~5 MB lattice** |
-| **Reproducible deterministic rankings** | ✓ | ✓ | ❌ | ✓ | ✓ | **✓** |
-| **Cross-era conceptual lineage without supervision** | partial | partial | unreliable | ❌ | needs labels | **✓** |
-| **Provenance per survivor** | ✓ | ✓ | ❌ | ✓ | ✓ | **✓ (name + type + cluster + 8D)** |
-| **Needs external API / paid model** | ❌ | ✓ | ✓ | ❌ | GPU | **❌** |
-| **Maturity** | high | high | medium | high | medium | **low (Phase 1)** |
+### 1. SEC Edgar / Financial Disclosure Intelligence
+
+**Incumbents**: Bloomberg Terminal, FactSet, Refinitiv Eikon (now LSEG), S&P Capital IQ, Koyfin (lower-tier). Also: the raw SEC EDGAR full-text search (free but unusable for signal extraction).
+
+**What the incumbents do**:
+- Exhaustive coverage of every filing, every company, every ticker
+- Structured parsing of financial statements into queryable tables (XBRL-backed)
+- Live market data overlay
+- Analyst estimates, consensus, price targets
+- Event databases, corporate actions, insider trading
+- Polished UI with charts, screeners, watchlists
+
+**What the incumbents cost**: ~$24K/seat/year (Bloomberg), ~$12K/seat/year (FactSet), similar for Refinitiv. Assuming 50-200 seats at a large allocator, that's $1.2M-$4.8M/year.
+
+**What LATK does that they don't**:
+- **Crystallized latent structure**: 122× compression with 94.6% variance preservation. The incumbents store everything; LATK returns the signal-dense ~0.8% of entities that carry the structural content. For an allocator overwhelmed by the volume of SEC filings, this is a filtering layer the incumbents don't provide.
+- **Zero per-query cost**: once the lattice is crystallized, queries are free. Bloomberg / FactSet / Refinitiv charge by the seat and by the data feed.
+- **Cross-filing lineage routing**: "what filings are geometrically similar to this one in the latent space, regardless of ticker / sector / SIC code taxonomy?" The incumbents let you filter by explicit metadata (sector, sub-sector, market cap); they don't do unsupervised latent neighborhood routing.
+- **Domain-invariant pipeline**: the same pipeline that crystallized Edgar also crystallized PubMed, Patents, Comtrade, Climate. The incumbents are each domain-specific products. LATK is cross-domain by construction.
+
+**What LATK does NOT do vs the incumbents**:
+- Does not claim full-universe coverage (current Edgar lattice is ~0.5% of the filing count by size).
+- Does not have live market data, consensus estimates, or price targets.
+- Does not have a polished analyst-facing UI. The current interface is a REST API.
+- Does not have licensed analyst reports or structured Wall Street commentary.
+- Does not replace a Bloomberg seat for a fundamental analyst who needs exhaustive triage.
+
+**The honest pitch to Mubadala for Edgar specifically**: "We don't replace your Bloomberg seats. We add a crystallized latent layer that your quant team can use to pre-filter the SEC universe to the signal-dense survivors before running their downstream analysis. At Phase 2 full-coverage, this becomes a primary screen on top of your existing Bloomberg workflow, not a replacement for it. Our advantage is compression, cross-domain, and zero-per-query-cost."
+
+### 2. PubMed / Biomedical Intelligence
+
+**Incumbents**: Clarivate (Web of Science + Cortellis), Elsevier (Scopus + Reaxys), IQVIA (pipeline intelligence), Evaluate (EvaluatePharma). Pricing $50K-500K/year for enterprise access.
+
+**What the incumbents do**:
+- Licensed biomedical literature databases with full-text + citation networks
+- Drug pipeline intelligence with phase-by-phase tracking
+- Patent intelligence cross-referenced to biomedical literature
+- Curated ontologies (MeSH, UMLS, SNOMED)
+
+**What LATK does that they don't**:
+- **Unsupervised signal compression**: 70k → 989 survivors at 70× with the same pipeline used on SEC Edgar. The curation layer the incumbents provide (hand-curated MeSH, hand-curated pipeline tracking) is expensive and slow; LATK's automated crystallization is a complementary fast-lane.
+- **Cross-domain fusion**: same pipeline connects PubMed papers to USPTO patents to SEC filings of biotech companies — one query can cross domain boundaries because every corpus lives in the same type-of latent geometry.
+- **No curation latency**: new papers added to PubMed can be crystallized overnight with the same pipeline; incumbents require manual taxonomic work.
+
+**Honest limitation**: the current PubMed lattice is 70k entities out of PubMed's ~35M papers. At 0.2% coverage this is a prototype. Phase 2 full-coverage is a 1-week ingest project but hasn't been done yet.
+
+### 3. USPTO Patents / Technology R&D Intelligence
+
+**Incumbents**: Pitchbook, CB Insights, PatSnap, Questel (Orbit), Google Patents (free). Pricing $25K-250K/year.
+
+**What the incumbents do**:
+- Exhaustive patent databases with cross-citation networks
+- Deal-flow intelligence (which startups filed which patents)
+- M&A and funding overlays
+- Sector-specific patent cluster analysis
+
+**What LATK does that they don't**:
+- **Cross-CPC geometric clustering**: the current CPC (Cooperative Patent Classification) taxonomy is human-curated and brittle. LATK's latent cluster structure discovers groupings that may cross CPC boundaries (e.g., a patent tagged G06N for neural networks might be geometrically closer in LATK's 8D space to patents tagged G06T for image processing, revealing cross-class technical kinship).
+- **Same-pipeline cross-domain**: a patent lineage query can also return relevant PubMed papers and relevant SEC filings from the companies that filed the patents, all in one query, because all three live in structurally-comparable lattices.
+
+**Honest limitation**: 6k patents ingested out of 12M USPTO grants = 0.05% coverage. Phase 2 full coverage is a USPTO bulk-download + parse project, estimated 2-3 weeks.
+
+### 4. UN Comtrade / International Trade Intelligence
+
+**Incumbents**: Trade Data Monitor, IHS Markit / S&P Global Panjiva, Descartes Datamyne, UN Comtrade itself (free bulk API).
+
+**What the incumbents do**:
+- Live trade flow data by country-pair, commodity (HS code), monthly or daily
+- Shipping manifest intelligence (bill of lading tracking)
+- Supply chain visibility
+
+**What LATK does that they don't**:
+- **Latent commodity clustering**: HS codes are a static taxonomy from 1988. LATK's unsupervised cluster discovery can surface groupings the HS taxonomy misses (e.g., "this new commodity category is geometrically similar to HS 85 electrical machinery but structurally different enough to deserve its own sub-cluster").
+- **Trade flow signal density**: 7,556 → 998 survivors = 7× compression of a trade flow graph, retaining the signal-dense flows and discarding the noise of tiny bilateral transactions.
+
+**Honest limitation**: the current Comtrade lattice is a small sample, not full bilateral matrix coverage. Phase 2 is a UN Comtrade bulk-API pull project, ~1 week.
+
+### 5. NOAA / GHCN Climate / Weather + Climate Intelligence
+
+**Incumbents**: NOAA (free raw), Copernicus (free raw at EU scale), commercial weather intelligence firms (Jupiter Intelligence, Climate Central, ClimateAI). Pricing ranges from free raw to $50-500K/year for commercial climate risk platforms.
+
+**What LATK does that they don't**:
+- **Station-level geometric clustering across observation types**: temperature, precipitation, humidity, pressure observations fused into a single lattice. The incumbents usually separate these.
+- **Zero per-query cost** on the crystallized lattice for ad-hoc climate risk queries.
+
+**Honest limitation**: 15k stations out of ~110k GHCN stations. Phase 2 full coverage is a NOAA bulk FTP pull, ~1 day.
+
+### 6. arXiv Physics / Research Frontier Intelligence
+
+**Incumbents**: Semantic Scholar, Google Scholar, Clarivate Web of Science, OpenAlex (free). None specifically productized for capital allocators.
+
+**What LATK does that they don't**:
+- **Multi-resolution crystallization preserves 92.84% variance at 49× compression** on a 246k-entity physics corpus, enabling research-frontier screening for deep-tech venture allocators without having to index the full arXiv corpus.
+- **Cross-domain connectivity**: arXiv physics lattice → USPTO patents lattice → SEC filings of deep-tech companies → PubMed biomedical papers (for biotech-adjacent physics) is a single-pipeline query path.
 
 ---
 
-## Where BTUT+LATK Actually Wins
+## Foundation-Pipeline Comparison (The Bigger Claim)
 
-Three axes where the method has a defensible advantage:
+The Edgar-specific comparison is one dimension. The bigger claim is that BTUT is a **general-purpose heterogeneous entity graph crystallizer** and the six commercial domains above are applications of the same underlying pipeline. For this framing, the competitive landscape shifts to data infrastructure platforms.
 
-1. **Extreme compression with preserved query-routing fidelity.** Vector DBs store everything. LATK keeps 2-5%. On a billion-vector corpus, this is the difference between 3 TB and 60 GB of lattice. Measured advantage over random subsampling at the 49× compression regime is +150%.
+### Palantir Foundry
 
-2. **Heterogeneous entity graph ingest as a first-class citizen.** The embedder has dedicated sub-engines for text + numeric + time-series + graph walks, with deterministic seeds so the same corpus always produces the same embedding. Vector DBs don't know about entity types; they treat everything as bag-of-vectors. LATK routes physics queries to writing+chunk entities automatically via per-lattice default type filters; tesla_crossera to patent_chunks; heterogeneous to a broader set including concepts and events.
+**What they do**: integrate heterogeneous enterprise data sources into a single graph-backed "ontology," provide workflow tools on top, charge governments and enterprises $M-$10M/year per deployment.
 
-3. **Unsupervised cross-era routing with dual-signal interpretation.** Given an arbitrary modern text, the combined method surfaces both the deep concept lineage (8D Euclidean, geometrically mediated) and the citation-chain lineage (48-bit hamming, token-level), as separate interpretable signals. No single retrieval method I've seen does this explicitly.
+**Where LATK differs**:
+- **LATK compresses; Palantir stores everything**. Foundry's value prop is "bring your data here and we'll make it queryable." LATK's value prop is "crystallize the signal-dense structure of each data source into a lattice that's ~1-2% of the original size."
+- **LATK's pipeline is deterministic and domain-invariant by construction**. Foundry requires per-deployment data modeling, ontology curation, and customization. LATK runs the same pipeline across all 6 commercial domains without customization.
+- **LATK is one developer + $0 licensing**. Foundry is a several-hundred-person engineering org and $M+ licenses.
 
-## Where BTUT+LATK Does Not Win
+**Where Palantir wins**: enterprise workflow depth, regulatory compliance tooling, government customer base, mature product surface.
 
-1. **Raw k-NN latency at fixed corpus size.** FAISS is faster per query. For a use case where you want "here are the k nearest neighbors in 2 ms," use FAISS.
+**Honest pitch**: LATK is not trying to be Foundry. LATK is the **crystallization primitive** that a Foundry-class enterprise data platform could use as an internal feature to compress their ontologies. If Palantir's internal team were looking for a domain-invariant entity graph reducer, LATK is a candidate; they're not going to license it but the comparison illustrates the conceptual niche.
 
-2. **Semantic nuance on small corpora.** Sentence-BERT was trained on billions of sentence pairs and encodes rich semantic similarity. LATK's 32D hand-crafted embedding is crude compared to sentence-BERT's 768D learned representation. On a small corpus where compression is not needed, sentence-BERT + FAISS is very likely a better choice.
+### Databricks (Delta Lake + Unity Catalog + Mosaic)
 
-3. **Maturity, ecosystem, tooling.** FAISS, Milvus, and Pinecone have been in production for years at hyperscaler scale. BTUT is a Phase 1 research tool with a live smoke slice at 246k entities. The scaling to 5M+ is credible but not yet demonstrated.
+**What they do**: lakehouse architecture for heterogeneous enterprise data, with ML model training on top. Charge per compute hour + storage.
 
-4. **Generic retrieval.** If the target task is "find all documents mentioning X," sentence-BERT + FAISS dominates. LATK's value is specifically in the cross-era structural lineage use case with heterogeneous entity graphs.
+**Where LATK differs**:
+- **Databricks stores everything in Delta Lake**; LATK compresses to ~1%. Different goals.
+- **Databricks' ML platform trains learned models**; LATK runs a deterministic pipeline with no learning. Different methodology.
+
+**Honest pitch**: LATK could run *on* Databricks as a Spark job, using Databricks as the underlying compute. Databricks is infrastructure; LATK is a specific pipeline that could be deployed on it.
+
+### Pure vector databases (FAISS, Milvus, Pinecone, Weaviate, Qdrant)
+
+Covered in the earlier draft. Summary: these are nearest-neighbor retrieval systems that store everything. LATK compresses first, then uses a thin retrieval layer (numpy dense scan) on the crystallized survivors. For the scale LATK operates at (thousands of survivors), FAISS-class retrieval speed isn't the bottleneck. For nearest-neighbor retrieval over uncompressed corpora at billions-of-vectors scale, FAISS wins by orders of magnitude. Different problems.
 
 ---
 
-## The Honest Summary for G42
+## The Honest Trade-Off Matrix
 
-BTUT+LATK is not trying to replace FAISS. It is a different tool for a different task: **unsupervised structural reduction of heterogeneous technical knowledge graphs to signal-dense lattices, with cross-era conceptual routing on top**. On generic k-NN, FAISS wins. On the specific task of "take heterogeneous technical corpus X, crystallize it to 2-5% survivors while preserving cross-era lineage routing fidelity, and serve the resulting lattice over a public API without per-query embedding costs," LATK is the working solution we can demo live right now, with measured results that beat the random baseline by 150% at the compression regime that matters.
+| Axis | Bloomberg/FactSet | Clarivate/Elsevier | Pitchbook/PatSnap | Palantir | Databricks | FAISS/Milvus | **BTUT+LATK** |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **Exhaustive coverage** | ✓✓✓ | ✓✓✓ | ✓✓✓ | ✓✓ | ✓✓✓ | ✓✓✓ | prototype (0.1-0.5%) |
+| **Cross-domain queries** | domain-specific | domain-specific | domain-specific | custom per-deployment | custom per-deployment | no domain model | **✓** |
+| **Zero per-query cost** | ❌ (per-seat) | ❌ (per-seat) | ❌ (per-seat) | ❌ (compute+license) | ❌ (compute hour) | ✓ | **✓** |
+| **Compressed latent structure** | ❌ | ❌ | ❌ | ❌ (stores all) | ❌ (stores all) | ❌ (stores all) | **✓ (122× on Edgar)** |
+| **Unsupervised structure discovery** | ❌ (taxonomy-driven) | ❌ (ontology-driven) | ❌ (sector-driven) | custom | ML-dependent | ❌ | **✓** |
+| **Deterministic reproducible output** | ✓ | ✓ | ✓ | ✓ | varies | ✓ | **✓ (seed=42)** |
+| **One-developer build cost** | impossible | impossible | impossible | impossible | impossible | possible | **✓ (built)** |
+| **Domain-invariance verified** | N/A | N/A | N/A | per-deployment | per-model | N/A | **✓ (11 corpora)** |
+| **Live public API demo** | no | no | no | no | no | no | **✓ (32.192.140.145)** |
+| **Annual cost for institutional buyer** | $1M-5M | $50K-500K | $25K-250K | $5M-50M | $100K-5M | compute only | **TBD** |
 
-If the G42 use case is generic high-recall retrieval over technical corpora, BTUT+LATK is the wrong tool; use sentence-BERT + FAISS or OpenAI embeddings + Pinecone. If the use case is **building a reduced, queryable, reproducible, zero-per-query-cost cross-era knowledge atlas over petabyte-scale heterogeneous technical corpora with explicit lineage routing as the headline operation**, BTUT+LATK is built for that specific thing.
+---
 
-The honest ask is "partner with us on Phase 1 completion so we can push from 246k entities live to 5M+ entities validated with historical ancestors, and then reconsider at each phase gate."
+## What This Positioning Implies For The Ask
+
+A defensible positioning for G42 / Mubadala:
+
+> **BTUT+LATK is not a Bloomberg replacement and is not a Palantir replacement. It is a new primitive — a domain-invariant heterogeneous entity graph crystallizer — that can be applied to any of the six canonical commercial data sources we've already validated against, producing compressed latent lattices with measurable signal preservation at extreme reduction ratios. The commercial product surface is the crystallized lattices themselves, served via a lightweight public API, with zero per-query cost and cross-domain connectivity by construction.**
+>
+> **Mubadala's allocation teams currently pay Bloomberg + FactSet + PatSnap + Clarivate + Trade Data Monitor + Jupiter Intelligence + Semantic Scholar (or their equivalents) for exhaustive coverage in each of six different domains. We are proposing a complementary layer — not a replacement — that sits on top of those exhaustive data sources, crystallizes them via a single unified pipeline, and provides cross-domain query routing at zero per-query cost. The Phase 2 ask is $15-40K to take each of the six current prototype lattices to full production coverage, which unlocks the cross-domain connectivity claim at meaningful scale.**
+
+The ask is **not** "replace your incumbent data vendors." The ask is "**fund the primitive that complements your incumbent stack and gives you a unified latent structure across all of them**." That is a smaller, more defensible ask with a much higher probability of a yes than "please pay us to replace Bloomberg."
+
+---
+
+## One-Line Competitive Summary
+
+LATK does not compete with Bloomberg, Clarivate, Pitchbook, Palantir, or FAISS on their home turf. LATK is a **domain-invariant crystallization primitive** whose output is a compressed latent lattice per data domain, complementing the exhaustive-coverage incumbents by providing zero-per-query cross-domain signal routing that none of them currently offer.
+
+---
+
+*Document version: 2026-04-10 (commercial positioning rewrite)*
