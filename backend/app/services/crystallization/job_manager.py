@@ -246,11 +246,13 @@ async def _run_crystallization_async(task, job_id: str, config: dict) -> dict:
                 )
                 if not modules_found:
                     logger.info(
-                        "No modules from training backends (result_type=%s, modules_type=%s, count=%s) "
+                        "No modules from training backends "
+                        "(result_type=%s, modules_type=%s, count=%s, keys=%s) "
                         "— running direct simulation",
                         type(training_result).__name__,
                         type(training_result.get("modules")).__name__ if isinstance(training_result, dict) else "N/A",
                         len(training_result.get("modules", [])) if isinstance(training_result, dict) else "N/A",
+                        list(training_result.keys())[:10] if isinstance(training_result, dict) else "N/A",
                     )
                     training_result = _simulate_modules(
                         entities, training_result or {}, merged_config

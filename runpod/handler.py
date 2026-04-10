@@ -463,4 +463,7 @@ def _extract_modules(results, entities, edges, config):
     return modules
 
 
-runpod.serverless.start({"handler": handler})
+runpod.serverless.start({
+    "handler": handler,
+    "return_aggregate_stream": True,
+})

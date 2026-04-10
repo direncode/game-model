@@ -232,30 +232,24 @@ class RunPodClient:
 
             if runpod_status == "COMPLETED":
                 output = status.get("output", {})
-                # Generator handlers return output as a list of all yielded + returned values.
+                logger.info(
+                    "RunPod raw output type=%s, len=%s, preview=%s",
+                    type(output).__name__,
+                    len(output) if isinstance(output, (list, dict)) else "N/A",
+                    str(output)[:500],
+                )
+                # Generator handlers return output as a list of all yielded + returned values
+                # (requires return_aggregate_stream=True on handler side).
                 # Extract the final result dict (last item with status="completed", else last item).
-                if isinstance(output, list):
-                    # Generator handlers yield all progress items into a list.
-                    # Find the final completed result, or raise if handler reported failure.
-                    completed = next(
-                        (item for item in reversed(output)
-                         if isinstance(item, dict) and item.get("status") == "completed"),
-                        None,
-                    )
-                    if completed is None:
-                        # Check if handler reported a failure
-                        failed = next(
-                            (item for item in reversed(output)
-                             if isinstance(item, dict) and item.get("status") == "failed"),
-                            None,
-                        )
-                        if failed:
-                            raise RuntimeError(
-                                f"Handler error: {failed.get('error', 'unknown')}"
-                            )
-                        # Fallback: use last item
-                        completed = output[-1] if output else {}
-                    output = completed
+                result = self._extract_result(output, status)
+                module_count = len(result.get("modules", [])) if isinstance(result, dict) else 0
+                logger.info(
+                    "RunPod parsed result: status=%s, modules=%d, keys=%s",
+                    result.get("status") if isinstance(result, dict) else "non-dict",
+                    module_count,
+                    list(result.keys()) if isinstance(result, dict) else "N/A",
+                )
+                output = result
                 # Track spend based on actual execution time
                 elapsed = time.time() - start
                 cost_cents = elapsed * GPU_COST_PER_SEC_CENTS
@@ -289,6 +283,70 @@ class RunPodClient:
             f"Job exceeded {timeout}s limit and was cancelled. "
             f"Cost: ${elapsed * GPU_COST_PER_SEC_CENTS / 100:.2f}"
         )
+
+
+    @staticmethod
+    def _extract_result(output: Any, status: dict) -> dict:
+        """Extract the final completed result from RunPod response.
+
+        Checks both ``output`` and ``stream`` because generator handlers
+        may place yielded values in either location depending on whether
+        ``return_aggregate_stream`` was set when the handler was registered.
+        """
+
+        def _find_completed(items: list) -> dict | None:
+            """Search a list of dicts for the final completed/failed result."""
+            if not items:
+                return None
+            # Search backwards for completed result
+            for item in reversed(items):
+                if isinstance(item, dict) and item.get("status") == "completed":
+                    return item
+            # Check for failure
+            for item in reversed(items):
+                if isinstance(item, dict) and item.get("status") == "failed":
+                    raise RuntimeError(
+                        f"Handler error: {item.get('error', 'unknown')}"
+                    )
+            # Last resort: return last dict item
+            for item in reversed(items):
+                if isinstance(item, dict):
+                    return item
+            return None
+
+        # Case 1: output is a list (return_aggregate_stream=True)
+        if isinstance(output, list) and output:
+            result = _find_completed(output)
+            if result:
+                return result
+
+        # Case 2: output is already the result dict
+        if isinstance(output, dict) and output:
+            return output
+
+        # Case 3: output is empty — check stream for the result
+        # (happens when return_aggregate_stream was missing)
+        stream = status.get("stream", [])
+        if isinstance(stream, list) and stream:
+            logger.warning(
+                "RunPod output was empty, checking stream (%d items)",
+                len(stream),
+            )
+            # Stream items may be wrapped: {"output": {...}} or bare dicts
+            unwrapped = []
+            for item in stream:
+                if isinstance(item, dict):
+                    inner = item.get("output", item)
+                    if isinstance(inner, dict):
+                        unwrapped.append(inner)
+            result = _find_completed(unwrapped)
+            if result:
+                return result
+
+        logger.warning(
+            "RunPod returned empty output and stream — no result available"
+        )
+        return {}
 
 
 def is_runpod_configured() -> bool:
