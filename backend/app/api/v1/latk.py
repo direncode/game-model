@@ -117,10 +117,22 @@ LATTICE_DEFAULT_FILTER: Dict[str, List[str]] = {
 }
 
 
+import threading as _threading
+
 _LATTICE_CACHE: Dict[str, Any] = {}
+_LATTICE_CACHE_LOCKS: Dict[str, _threading.Lock] = {}
+_LATTICE_CACHE_MASTER_LOCK = _threading.Lock()
 
 
 def _get_lattice(lattice_id: str):
+    """Thread-safe per-lattice lazy load with double-checked locking.
+
+    Under high concurrency (50+ simultaneous requests in the stress test)
+    the previous implementation raced on first load: multiple threads saw
+    the cache miss, all called ``load_lattice`` concurrently, wasted work
+    and exhausted starlette's sync thread pool. Now each lattice has its
+    own lock, and the first thread to acquire it loads while others wait.
+    """
     if not _LATK_AVAILABLE:
         raise HTTPException(
             status_code=503,
@@ -131,17 +143,51 @@ def _get_lattice(lattice_id: str):
             status_code=404,
             detail=f"Unknown lattice_id '{lattice_id}'. Known: {sorted(LATTICE_REGISTRY.keys())}",
         )
+    # Fast path: already cached, no locking needed
+    cached = _LATTICE_CACHE.get(lattice_id)
+    if cached is not None:
+        return cached
+
     path = LATTICE_REGISTRY[lattice_id]
     if not path.exists():
         raise HTTPException(
             status_code=404,
             detail=f"Lattice file not found on disk: {path}",
         )
-    if lattice_id in _LATTICE_CACHE:
-        return _LATTICE_CACHE[lattice_id]
-    lattice = load_lattice(path)
-    _LATTICE_CACHE[lattice_id] = lattice
-    return lattice
+
+    # Slow path: acquire per-lattice lock so only one thread loads
+    with _LATTICE_CACHE_MASTER_LOCK:
+        lock = _LATTICE_CACHE_LOCKS.setdefault(lattice_id, _threading.Lock())
+
+    with lock:
+        # Double check — another thread may have loaded while we waited
+        cached = _LATTICE_CACHE.get(lattice_id)
+        if cached is not None:
+            return cached
+        lattice = load_lattice(path)
+        _LATTICE_CACHE[lattice_id] = lattice
+        return lattice
+
+
+def prewarm_all_lattices() -> Dict[str, Any]:
+    """Load every registered lattice whose file exists into the cache.
+
+    Called automatically on router import (see bottom of file) so the
+    first request per lattice does not pay the cold-load cost. Returns a
+    summary dict for logging.
+    """
+    results: Dict[str, Any] = {"loaded": [], "skipped": [], "errors": []}
+    for lid, path in LATTICE_REGISTRY.items():
+        if not path.exists():
+            results["skipped"].append({"lattice_id": lid, "reason": "file missing"})
+            continue
+        try:
+            lat = load_lattice(path)
+            _LATTICE_CACHE[lid] = lat
+            results["loaded"].append({"lattice_id": lid, "size": lat.size, "has_v2": lat.has_v2})
+        except Exception as exc:  # pragma: no cover
+            results["errors"].append({"lattice_id": lid, "error": str(exc)})
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -348,3 +394,24 @@ def route_to_ancestors(req: RouteToAncestorsRequest) -> RouteToAncestorsResponse
         novelty_score=report.novelty_score,
         notes=report.notes,
     )
+
+
+# ---------------------------------------------------------------------------
+# Module-level prewarm on import
+# ---------------------------------------------------------------------------
+
+# Populate the lattice cache at module import time so the first request
+# per lattice doesn't pay the cold-load cost. This is safe because
+# load_lattice is side-effect-free and reads a JSON file into RAM; the
+# cost is bounded by the sum of v2 lattice file sizes (currently ~8 MB).
+if _LATK_AVAILABLE:
+    try:
+        _prewarm_summary = prewarm_all_lattices()
+        logger.info(
+            "LATK prewarm: loaded=%d skipped=%d errors=%d",
+            len(_prewarm_summary["loaded"]),
+            len(_prewarm_summary["skipped"]),
+            len(_prewarm_summary["errors"]),
+        )
+    except Exception as _exc:  # pragma: no cover
+        logger.warning("LATK prewarm failed: %s", _exc)
