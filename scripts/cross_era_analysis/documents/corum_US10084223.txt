@@ -1,0 +1,96 @@
+UNITED STATES PATENT
+US 10,084,223 B2
+MODULATED GUIDED SURFACE WAVES
+Inventors: James F. Corum, Kenneth L. Corum
+Assignee: CPG Technologies, LLC
+Issued: September 25, 2018
+
+ABSTRACT
+Disclosed are guided surface waveguide probes configured to excite electromagnetic fields that couple into guided surface waveguide modes along lossy conducting media such as Earth. These probes synthesize electric fields at complex Brewster angles of incidence, enabling energy transmission as bound surface waves rather than radiated fields.
+
+KEY TECHNICAL DISTINCTIONS
+
+Guided vs Radiated Fields: A guided electromagnetic field is one that is bound to a waveguide with energy concentrated near boundaries between media with different electromagnetic properties. In contrast, radiated fields spread geometrically (1/d decay) while guided fields exhibit exponential decay of e^(-d/sqrt(d)), producing a distinctive "knee" on field strength curves that is the signature of bound surface wave propagation.
+
+Core Physical Basis: The work references foundational theory from Jonathan Zenneck (1907) regarding electromagnetic wave propagation along flat conducting surfaces, and Sommerfeld's analysis of wireless telegraphy propagation phenomena. The guided surface wave is distinct from the Norton ground wave and from ordinary free-space radiation.
+
+PROBE GEOMETRY AND OPERATING PRINCIPLES
+
+Charge Terminal Configuration:
+- Elevated charge terminal T1 positioned along vertical axis normal to ground plane
+- Physical height at least four to five times the effective spherical diameter to reduce bound charge
+- Self-capacitance relationship: C = 4*pi*epsilon0*a where a is terminal radius
+- Free charge increases with elevation; bound charge decreases
+
+Wave Tilt Angle (tau):
+The wave tilt at Hankel crossover distance relates to complex effective height through:
+- tau = phase angle of complex effective height (h_eff)
+- h_eff = (1/I0*lambda0) * integral of I(z)*exp(j*beta*z) dz over physical height
+- Velocity factor Vf typically approximately 0.93-0.98 for wire conductors
+
+Brewster Angle Matching:
+At complex Brewster angle theta_i,B, reflection coefficient approaches zero. The incident electric field must satisfy:
+- Wave front incident at Hankel crossover distance Rx
+- Phase matching between field polarization and medium impedance
+- Zero or negligible reflection enabling efficient mode coupling into the bound surface wave mode
+
+FREQUENCY-DEPENDENT PARAMETERS
+
+Example calculations at 1.85 MHz:
+- Wavelength lambda0 drives geometric scaling
+- Hankel crossover distance Rx varies with conductivity (sigma) and permittivity (epsilon_r) of lossy medium
+- Phase constants: beta_w = 2*pi*f/c*Vw (wire), beta_c for coil structures
+- Operating frequency must align phase delay curves for tau = phi crossing
+
+FEED NETWORK COMPONENTS
+
+Helical Coil (Phase Delay Circuit):
+- Velocity factor: Vf = (H/D) / (N*lambda0) where H=axial length, D=diameter, N=turns
+- Phase delay: phi_c relates to spatial configuration
+- Characteristic impedance: Zc varies with frequency
+
+Vertical Feed Line Conductor:
+- Single-wire impedance: Zw = (120/pi) * ln(2h/a) for height h, radius a
+- Phase constant: beta_w = 2*pi*f*Vw/c*lambda0
+
+MODE-MATCHING CONDITION
+
+The probe achieves efficient coupling when:
+1. Electrical effective height generates the required wave tilt angle
+2. Phase delay (phi_U for coil, phi_y for wire) matches wave tilt angle tau
+3. Impedance resonance with respect to complex image ground plane at depth z1 below surface
+4. Image plane approximation: z1 approximately lambda0 / (2*pi*sqrt(sigma1/(omega*epsilon0)))
+
+RECEIVER STRUCTURES
+
+Linear Probe: Simple vertical conductor extracting open-circuit voltage proportional to effective height.
+Tuned Resonator: Charge terminal TR + coil LR (series-adjusted) with phase shift phi = tau matching transmitter wave tilt.
+Magnetic Coil: Inductive coupling to received ground currents (Zenneck surface currents).
+
+CRITICAL REFERENCES
+- Zenneck, J. (1907): "On the Propagation of Plane Electromagnetic Waves Along a Flat Conducting Surface"
+- Sommerfeld, A. (1909): Annalen der Physik Vol. 28
+- Collin, R.E. (1960): Field Theory of Guided Waves
+- Barlow and Brown (1962): Radio Surface Waves
+
+NOVEL CONTRIBUTIONS
+
+The patent claims practical realization of century-old theoretical predictions by providing specific geometries and phase-matching techniques to excite Zenneck waveguide modes without reflection, enabling efficient wireless power transmission over terrestrial surfaces using bound (non-radiative) surface waves rather than conventional broadcast radiation. The system uses modulated guided surface waves for information transmission in addition to power delivery.
+
+CLAIMS (representative)
+
+1. A method comprising generating a modulated guided surface wave at a guided surface waveguide probe, wherein the guided surface wave is a Zenneck surface wave bound to the interface between a lossy conducting medium and an insulating medium.
+
+2. The method of claim 1 wherein the modulation comprises amplitude, frequency, or phase modulation of the guided surface wave.
+
+3. A guided surface waveguide probe comprising a charge terminal elevated above a lossy conducting medium and a feed network coupled to the charge terminal, wherein the probe generates a wavefront incident on the surface at the complex Brewster angle of incidence.
+
+4. The probe of claim 3 wherein the feed network comprises a phase delay circuit for synthesizing a wave tilt angle that matches the complex Brewster angle.
+
+5. The probe of claim 3 wherein the lossy conducting medium is a terrestrial medium comprising soil, rock, or water.
+
+6. The probe of claim 3 wherein the wavefront excites a guided surface wave that is substantially bound to the interface.
+
+7. A method of receiving energy from a modulated guided surface wave comprising coupling a receive structure to the guided surface wave at a location distant from the probe.
+
+8. The receive structure of claim 7 comprising a linear probe, a tuned resonator, or a magnetic coil.

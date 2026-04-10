@@ -1,0 +1,94 @@
+JPEG IMAGE COMPRESSION STANDARD
+ISO/IEC 10918-1, ITU-T Recommendation T.81
+Joint Photographic Experts Group, 1992
+
+ABSTRACT
+JPEG (Joint Photographic Experts Group) is the international standard for lossy compression of continuous-tone still images. The standard specifies a baseline algorithm based on the Discrete Cosine Transform (DCT), uniform quantization, and entropy coding. JPEG achieves compression ratios of 10:1 to 50:1 with acceptable visual quality for natural images.
+
+BACKGROUND
+
+Continuous-tone images contain large amounts of data that cannot be efficiently compressed by lossless entropy coding alone. Natural images exhibit strong spatial correlations: nearby pixels tend to have similar values. They also contain perceptually irrelevant high-frequency content that can be discarded without significantly affecting image quality.
+
+JPEG exploits both of these properties by:
+1. Decorrelating the spatial signal using a frequency-domain transform (DCT)
+2. Quantizing the transform coefficients to remove perceptually irrelevant precision
+3. Entropy coding the quantized coefficients to remove statistical redundancy
+
+This is fundamentally different from lossless dictionary-based compression (LZ77, LZW) which preserves all bits exactly. JPEG is LOSSY: information is intentionally discarded during quantization.
+
+CORE ALGORITHM: DCT-BASED COMPRESSION
+
+Step 1: Color Space Conversion
+Convert RGB to YCbCr color space. The luminance channel Y is more perceptually important than the chrominance channels Cb and Cr, which can be subsampled (reduced in resolution) without significant quality loss.
+
+Step 2: Block Decomposition
+Divide the image into 8x8 pixel blocks. Each block is processed independently.
+
+Step 3: Discrete Cosine Transform
+Apply the 2D DCT to each 8x8 block. The DCT converts spatial pixel values into frequency coefficients. For an 8x8 block, the DCT produces 64 coefficients arranged in a 8x8 matrix:
+
+F(u,v) = (1/4) * C(u) * C(v) * sum_x sum_y f(x,y) * cos((2x+1)u*pi/16) * cos((2y+1)v*pi/16)
+
+where f(x,y) is the pixel value at position (x,y), F(u,v) is the DCT coefficient at frequency (u,v), and C(0) = 1/sqrt(2), C(k) = 1 for k > 0.
+
+The DC coefficient F(0,0) represents the average value of the block. The remaining AC coefficients represent spatial frequencies, with higher (u,v) corresponding to higher spatial frequencies.
+
+Step 4: Quantization
+Divide each DCT coefficient by a corresponding quantization value from a quantization table:
+
+F_q(u,v) = round(F(u,v) / Q(u,v))
+
+The quantization table is designed to discard perceptually less important high-frequency coefficients. Higher Q values mean coarser quantization (more compression, lower quality). Lower Q values mean finer quantization (less compression, higher quality).
+
+Step 5: Zigzag Scanning
+Reorder the quantized coefficients in a zigzag pattern to group low-frequency (typically nonzero) coefficients before high-frequency (typically zero) coefficients.
+
+Step 6: Entropy Coding
+Encode the zigzag-ordered coefficients using a combination of run-length encoding (for sequences of zeros) and Huffman coding (for nonzero coefficient values). This removes the remaining statistical redundancy in the quantized coefficient sequence.
+
+TRANSFORM-BASED PARADIGM
+
+JPEG establishes the transform-based compression paradigm:
+1. Transform the signal to a domain where energy is concentrated in few coefficients
+2. Quantize the coefficients to discard perceptually irrelevant precision
+3. Entropy code the quantized coefficients
+
+The key insight is the energy compaction property of the DCT: for natural images, most of the signal energy is concentrated in a few low-frequency DCT coefficients. This allows aggressive quantization of high-frequency coefficients without significantly affecting visual quality.
+
+Mathematical foundation:
+- Linear algebra (basis functions, orthogonal transforms)
+- Signal processing (frequency domain analysis)
+- Perceptual modeling (human visual system properties)
+- Information theory (entropy coding for the final stage)
+
+This is fundamentally different from:
+- Entropy coding alone (Huffman, arithmetic): cannot achieve high compression on natural images
+- Dictionary-based coding (LZ77, LZW): does not exploit the frequency structure of natural signals
+- Predictive coding: uses spatial prediction but not frequency decomposition
+
+DESCENDANTS AND VARIANTS
+
+The transform-based paradigm has evolved through multiple generations:
+- JPEG (1992): 8x8 DCT with quantization tables
+- MPEG-1, MPEG-2 (1990s): adds motion compensation between frames
+- H.264/AVC (2003): integer DCT, in-loop filtering, sub-pixel motion estimation
+- H.265/HEVC (2013): variable block size, more sophisticated prediction
+- AV1 (2018): asymmetric transforms, neural-network-aided prediction
+- JPEG 2000 (2000): wavelet transform replacing DCT
+- WebP, AVIF (2010s, 2020s): combine multiple techniques
+
+All of these are TRANSFORM-BASED compression methods. They differ from JPEG in the specific transform used (DCT, integer DCT, wavelet) and in the quantization, prediction, and entropy coding stages, but all share the fundamental paradigm of frequency-domain decomposition followed by perceptually-tuned quantization.
+
+CLAIMS-LIKE STRUCTURE
+
+JPEG specification includes:
+1. Color space conversion to YCbCr
+2. 8x8 block-based DCT
+3. Quantization using user-specified or default tables
+4. Zigzag scanning and run-length encoding
+5. Huffman entropy coding of the resulting symbols
+6. Bitstream syntax for storage and transmission
+
+The quantization step is the source of compression and information loss. The DCT, zigzag, and entropy coding stages are lossless. Compression ratio is controlled by the quantization table (typically scaled by a quality factor).
+
+This is a TRANSFORM-BASED, LOSSY compression method. It is fundamentally different from entropy coding (Huffman) and from dictionary coding (LZ). The mathematical foundation is signal processing and the discrete cosine transform. The compression mechanism is energy compaction in the transform domain followed by quantization of perceptually less important coefficients.

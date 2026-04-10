@@ -1,0 +1,80 @@
+SOURCE: Reynolds number and Osborne Reynolds (1883), Wikipedia contributors + summary of "An Experimental Investigation of the Circumstances which Determine Whether the Motion of Water Shall Be Direct or Sinuous"
+CITATION: https://en.wikipedia.org/wiki/Reynolds_number  |  Reynolds, O. (1883). Philosophical Transactions of the Royal Society of London, Vol. 174, pp. 935-982.
+
+# Reynolds Number: Technical Foundation and Osborne Reynolds' Experimental Work
+
+## Fundamental Definition and Formula
+
+The Reynolds number quantifies the relationship between inertial and viscous forces in fluid systems. Mathematically, it is expressed as:
+
+Re = rho * u * L / mu = u * L / nu
+
+where rho represents fluid density, u denotes flow velocity, L is the characteristic length dimension, mu indicates dynamic viscosity, and nu represents kinematic viscosity (nu = mu / rho). This dimensionless quantity fundamentally describes whether fluids will flow smoothly or chaotically. It is the ratio of inertial forces (proportional to rho * u^2 / L) to viscous forces (proportional to mu * u / L^2).
+
+## The Critical 1883 Experiments
+
+Osborne Reynolds conducted landmark research published in the Philosophical Transactions of the Royal Society in 1883 as An Experimental Investigation of the Circumstances which Determine Whether the Motion of Water Shall Be Direct or Sinuous, and of the Law of Resistance in Parallel Channels. His experimental apparatus, preserved at the University of Manchester, involved injecting a small stream of dyed water introduced into the centre of clear water flow in a larger pipe. By manipulating velocity through a flow control valve at the pipe's downstream end, Reynolds observed predictable behavioral changes.
+
+At low velocities, the dye remained distinct throughout the pipe's length as a straight, coherent filament, indicating laminar (sheet-like) motion—what Reynolds called direct motion. As velocity increased, the dyed layer broke up at a given point and diffused throughout the fluid's cross-section, marking the transition threshold and producing the chaotic mixing that Reynolds termed sinuous motion. This observation revealed that flow regime changes follow predictable physical principles rather than random occurrence.
+
+Reynolds systematically varied pipe diameter, fluid velocity, and temperature (which changes kinematic viscosity), and found that transition from direct to sinuous motion occurred at a consistent value of the dimensionless parameter that now bears his name. This was a triumph of dimensional analysis and similarity: the critical condition was not at a fixed velocity or pipe size, but at a fixed ratio combining both with viscosity.
+
+## Inertial Versus Viscous Force Dynamics
+
+The Reynolds number elegantly captures competition between two opposing fluid properties. Inertial forces—arising from fluid momentum and acceleration—promote chaotic, turbulent behavior by amplifying small disturbances. Conversely, viscosity inhibits turbulence by dampening velocity variations and smoothing out fluctuations through molecular diffusion of momentum. At low Reynolds numbers, viscous forces dominate, producing smooth, constant fluid motion. Higher Reynolds numbers enable chaotic eddies, vortices and other flow instabilities characteristic of turbulent conditions.
+
+This force balance determines practical flow characteristics. In polymer solutions and similar high-viscosity fluids, laminar conditions persist even at substantial velocities because viscous resistance overwhelms inertial tendencies. Creeping flow (Stokes flow) regimes at Re much less than 1 describe the motion of microorganisms, sedimentation of fine particles, and lubrication films.
+
+## Pipe Flow Transition Thresholds
+
+For fully developed flow within circular pipes, empirical observations establish critical Reynolds number boundaries:
+
+- Below Re_D < 2300: Laminar flow predominates
+- Re_D > 2900 (sometimes taken as 4000): Fully turbulent conditions establish
+- 2300-2900: Intermittent transition zone with irregular fluctuations and turbulent puffs and slugs
+
+The transition zone exhibits complex behavior where laminar flow tends to dominate in the fast-moving center of the pipe while slower-moving turbulent flow dominates near the wall. This stratification occurs because velocity gradients create localized conditions satisfying different flow regimes simultaneously. Modern understanding treats the laminar-turbulent transition in pipes as a subcritical bifurcation with metastable turbulent states (puffs) that can decay or split, studied extensively by Hof, Avila, and collaborators.
+
+## Characteristic Length and Hydraulic Diameter
+
+For non-circular conduits, engineers employ the hydraulic diameter concept: D_H = 4A/P, where A represents cross-sectional area and P denotes wetted perimeter. This normalization permits consistent Reynolds number calculations across rectangular, annular, and irregular channel geometries.
+
+## Dynamic Similitude and Scaling Parameters
+
+Reynolds' work established that geometrically similar systems exhibit comparable flow patterns when matching Reynolds numbers. This principle, known as dynamic similitude, enables engineers to conduct scale-model experiments—in wind tunnels or water channels—and extrapolate findings to full-scale applications. The requirement is:
+
+Re_model = Re_full-scale
+
+Such correspondence allows expensive full-scale testing to be replaced by economical laboratory studies on reduced-scale prototypes, provided other dimensionless parameters (Mach number for compressibility, Froude number for free-surface flows, Weber number for surface tension, Strouhal number for unsteady vortex shedding) remain appropriately matched. Reynolds similarity is foundational to the entire field of experimental fluid mechanics.
+
+## Boundary Layer and Flow Separation
+
+The Reynolds number governs boundary layer behavior—the fluid region adjacent to surfaces where viscous effects concentrate, a concept introduced by Ludwig Prandtl in 1904. Flat-plate boundary layers transition from laminar to turbulent behavior around Re_x approximately 5 x 10^5, where x measures distance from the leading edge. The laminar Blasius boundary layer solution gives velocity profile u(y) ~ f'(eta) with eta = y * sqrt(U / (nu * x)), while turbulent boundary layers are typically described by the logarithmic law of the wall: u+ = (1/kappa) * ln(y+) + B.
+
+Understanding this transition proves critical for aerodynamic design, as laminar and turbulent boundary layers generate substantially different drag characteristics. Laminar boundary layers have lower skin friction but separate more easily under adverse pressure gradients; turbulent boundary layers have higher skin friction but resist separation due to enhanced momentum transfer from outer flow to wall region. Laminar flow control and riblets are active areas of drag reduction research.
+
+## Energy Cascade and the Kolmogorov Description
+
+Fully developed turbulence at high Reynolds number exhibits the Richardson-Kolmogorov energy cascade: kinetic energy injected at large scales (integral length scale L) is transferred to smaller and smaller eddies through nonlinear vortex stretching until dissipation by viscosity takes over at the Kolmogorov microscale eta_K = (nu^3/epsilon)^(1/4), where epsilon is the energy dissipation rate. In the inertial subrange between L and eta_K, Kolmogorov's 1941 theory predicts an energy spectrum E(k) = C * epsilon^(2/3) * k^(-5/3), where k is the wavenumber and C is the Kolmogorov constant. The ratio L/eta_K scales as Re^(3/4), so the number of degrees of freedom in three-dimensional turbulence scales as Re^(9/4), making direct numerical simulation of high-Reynolds-number turbulence computationally overwhelming.
+
+## Historical Context
+
+Though George Stokes introduced related ideas in 1851, Arnold Sommerfeld formally named the quantity in 1908, honoring Reynolds' pioneering popularization work during the 1880s. This nomenclatural choice exemplifies how scientific conventions sometimes lag empirical discoveries—the parameter remained unnamed despite its fundamental importance until decades after Reynolds' revolutionary experiments.
+
+Remarkably, Leonardo da Vinci described turbulence in the early 1500s, observing and sketching water eddies around obstacles, hair-like vortex filaments, and the role of rotation in fluid motion. His qualitative descriptions anticipated by nearly four centuries the quantitative framework Reynolds established in 1883.
+
+## Contemporary Applications
+
+Modern fluid mechanics extensively applies Reynolds number analysis across diverse domains: aviation (chord Reynolds numbers assess airfoil performance variations, with typical values 10^6 to 10^8 for aircraft wings), physiology (blood flow analysis in arteries with Re of order 1-1000, microcirculation at Re much less than 1), industrial processes (mixing efficiency, pipe sizing, heat exchanger design), environmental science (atmospheric and oceanic motion prediction), astrophysics (stellar convection, accretion disks, interstellar medium), and microfluidics (lab-on-a-chip devices operating at Re less than 1 where laminar flow enables precise control).
+
+## Coherent Structures in Turbulent Flow
+
+Modern turbulence research has moved beyond statistical descriptions to focus on coherent structures: recurrent, spatially organized flow features that persist despite the overall chaotic flow. In turbulent boundary layers, these structures include streamwise streaks (elongated regions of alternating high and low streamwise velocity near the wall), hairpin vortices that lift off the wall and populate the outer layer, and large-scale motions that extend across the full boundary layer height. In free shear flows such as mixing layers and jets, Kelvin-Helmholtz rollers and streamwise rib vortices dominate. These coherent structures are now routinely visualized through particle image velocimetry (PIV), direct numerical simulation, and proper orthogonal decomposition (POD).
+
+## Instability Mechanisms and Transition Routes
+
+The transition from laminar to turbulent flow proceeds through distinct routes depending on the base flow and disturbance environment. In smooth pipes or boundary layers with low freestream turbulence, transition is initiated by linearly unstable Tollmien-Schlichting waves, which grow exponentially, become three-dimensional through secondary instability, and break down into turbulence through lambda vortices and hairpin vortices. At higher disturbance amplitudes, bypass transition occurs directly, skipping the TS-wave stage. Subcritical transition, typical of plane Couette flow and pipe flow, involves finite-amplitude disturbances exciting transiently growing non-modal instabilities that produce turbulent spots or puffs.
+
+## Closing Remarks
+
+The Reynolds number remains indispensable because it encapsulates complex fluid behavior into a single, easily calculated parameter—a remarkable achievement that continues validating Reynolds' nineteenth-century experimental insights in contemporary engineering practice. The fact that Leonardo observed the phenomena Reynolds would later quantify underscores the continuity of the intellectual tradition investigating turbulence, from Renaissance notebook sketches to modern computational fluid dynamics.

@@ -1,0 +1,3512 @@
+{
+  "entities": [
+    {
+      "name": "newton_alchemy__person__isaac_newton",
+      "type": "person",
+      "attributes": {
+        "name": "Isaac Newton",
+        "description": "English physicist, mathematician, and alchemist, 1642-1727",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__robert_boyle",
+      "type": "person",
+      "attributes": {
+        "name": "Robert Boyle",
+        "description": "English natural philosopher whose chemistry Newton studied extensively",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__george_starkey",
+      "type": "person",
+      "attributes": {
+        "name": "George Starkey",
+        "description": "American alchemist whose manuscripts Newton copied and expanded",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__jan_baptist_van_helmont",
+      "type": "person",
+      "attributes": {
+        "name": "Jan Baptist van Helmont",
+        "description": "Flemish alchemist whose work influenced Newton's chemistry",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__eirenaeus_philalethes",
+      "type": "person",
+      "attributes": {
+        "name": "Eirenaeus Philalethes",
+        "description": "Pseudonymous alchemist (George Starkey) whose works Newton annotated",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__john_maynard_keynes",
+      "type": "person",
+      "attributes": {
+        "name": "John Maynard Keynes",
+        "description": "Economist who acquired Newton's alchemical manuscripts at auction in 1936",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__lawrence_principe",
+      "type": "person",
+      "attributes": {
+        "name": "Lawrence Principe",
+        "description": "Modern historian of alchemy who reproduced Newton's experiments",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__person__william_newman",
+      "type": "person",
+      "attributes": {
+        "name": "William Newman",
+        "description": "Modern historian who decoded Newton's alchemical recipes",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "location",
+      "attributes": {
+        "name": "Trinity College Cambridge",
+        "description": "Newton's alchemical laboratory location 1669-1696",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_alchemy__location__the_royal_mint",
+      "type": "location",
+      "attributes": {
+        "name": "The Royal Mint",
+        "description": "Where Newton served as Warden and Master after leaving Cambridge",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_alchemy__location__portsmouth_papers",
+      "type": "location",
+      "attributes": {
+        "name": "Portsmouth Papers",
+        "description": "Archive holding Newton's alchemical manuscripts",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_alchemy__location__indiana_university_chymistry_project",
+      "type": "location",
+      "attributes": {
+        "name": "Indiana University Chymistry Project",
+        "description": "Modern digital edition of Newton's alchemical corpus",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__philosophical_mercury",
+      "type": "concept",
+      "attributes": {
+        "name": "Philosophical Mercury",
+        "description": "Alchemical substance Newton sought to prepare, purified metallic mercury with specific properties",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__green_lion",
+      "type": "concept",
+      "attributes": {
+        "name": "Green Lion",
+        "description": "Alchemical symbol for a specific reagent, possibly vitriol or lead-antimony compound",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__sophic_sulphur",
+      "type": "concept",
+      "attributes": {
+        "name": "Sophic Sulphur",
+        "description": "Alchemical principle representing combustibility and metallic body formation",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__regulus_of_antimony",
+      "type": "concept",
+      "attributes": {
+        "name": "Regulus of Antimony",
+        "description": "Specific metallic antimony preparation Newton worked with extensively",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__net",
+      "type": "concept",
+      "attributes": {
+        "name": "Net",
+        "description": "A specific alchemical preparation Newton called the Net, likely copper-antimony alloy",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__philosopher_s_stone",
+      "type": "concept",
+      "attributes": {
+        "name": "Philosopher's Stone",
+        "description": "The mythical substance enabling transmutation of base metals to gold",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__transmutation",
+      "type": "concept",
+      "attributes": {
+        "name": "Transmutation",
+        "description": "The alchemical transformation of one metal into another",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__calcination",
+      "type": "concept",
+      "attributes": {
+        "name": "Calcination",
+        "description": "Heating process to reduce substances to their primal matter",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__sublimation",
+      "type": "concept",
+      "attributes": {
+        "name": "Sublimation",
+        "description": "Alchemical purification by vaporizing and recondensing solids",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__putrefaction",
+      "type": "concept",
+      "attributes": {
+        "name": "Putrefaction",
+        "description": "Alchemical stage of decomposition preceding regeneration",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__concept__projection",
+      "type": "concept",
+      "attributes": {
+        "name": "Projection",
+        "description": "Final alchemical operation where the stone transmutes base metal",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__newton_begins_alchemical_studies",
+      "type": "event",
+      "attributes": {
+        "name": "Newton begins alchemical studies",
+        "description": "c. 1669, shortly after receiving his Cambridge degree",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__newton_s_praxis_manuscript",
+      "type": "event",
+      "attributes": {
+        "name": "Newton's Praxis manuscript",
+        "description": "c. 1695, late alchemical synthesis of procedures",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "event",
+      "attributes": {
+        "name": "Newton leaves Cambridge for the Mint",
+        "description": "1696, transitions from alchemy to currency",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__newton_s_alchemical_papers_deemed_not_fit_to_be_pr",
+      "type": "event",
+      "attributes": {
+        "name": "Newton's alchemical papers deemed not fit to be printed",
+        "description": "1727, after his death his library is catalogued",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+      "type": "event",
+      "attributes": {
+        "name": "Keynes auctions Newton alchemical manuscripts",
+        "description": "1936 Sotheby's auction disperses Newton's alchemy papers",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
+      "type": "event",
+      "attributes": {
+        "name": "Chymistry of Isaac Newton Project launches",
+        "description": "2005 digital edition begins",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_alchemy__writing__keynes_ms_28_praxis",
+      "type": "writing",
+      "attributes": {
+        "name": "Keynes MS 28 Praxis",
+        "description": "Newton's late alchemical synthesis manuscript describing procedures",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_alchemy__writing__keynes_ms_18",
+      "type": "writing",
+      "attributes": {
+        "name": "Keynes MS 18",
+        "description": "Newton's alchemical notebook with extensive reading notes",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_alchemy__writing__index_chemicus",
+      "type": "writing",
+      "attributes": {
+        "name": "Index Chemicus",
+        "description": "Newton's alphabetical index of alchemical terminology",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_alchemy__writing__clavis",
+      "type": "writing",
+      "attributes": {
+        "name": "Clavis",
+        "description": "Newton's key manuscript translating and commenting on an earlier alchemical work",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_alchemy__writing__commonplace_book_on_alchemy",
+      "type": "writing",
+      "attributes": {
+        "name": "Commonplace Book on Alchemy",
+        "description": "Newton's personal notes on alchemical reading",
+        "physics_regime": "newton_alchemy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_mechanics__person__edmond_halley",
+      "type": "person",
+      "attributes": {
+        "name": "Edmond Halley",
+        "description": "Astronomer who encouraged Newton to publish the Principia",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_mechanics__person__gottfried_leibniz",
+      "type": "person",
+      "attributes": {
+        "name": "Gottfried Leibniz",
+        "description": "Co-inventor of calculus, Newton's rival",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_mechanics__person__robert_hooke",
+      "type": "person",
+      "attributes": {
+        "name": "Robert Hooke",
+        "description": "Contemporaneous natural philosopher, priority dispute with Newton",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "location",
+      "attributes": {
+        "name": "Woolsthorpe Manor",
+        "description": "Newton's family home where he developed early theories",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_mechanics__location__royal_society",
+      "type": "location",
+      "attributes": {
+        "name": "Royal Society",
+        "description": "Learned society where Newton presented his work",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "newton_mechanics__concept__universal_gravitation",
+      "type": "concept",
+      "attributes": {
+        "name": "Universal Gravitation",
+        "description": "Newton's law that all massive bodies attract each other",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_mechanics__concept__laws_of_motion",
+      "type": "concept",
+      "attributes": {
+        "name": "Laws of Motion",
+        "description": "Newton's three fundamental laws of classical mechanics",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_mechanics__concept__calculus_of_fluxions",
+      "type": "concept",
+      "attributes": {
+        "name": "Calculus of Fluxions",
+        "description": "Newton's version of differential and integral calculus",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_mechanics__concept__absolute_space_and_time",
+      "type": "concept",
+      "attributes": {
+        "name": "Absolute Space and Time",
+        "description": "Newton's concept of fixed reference frame for motion",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_mechanics__concept__centripetal_force",
+      "type": "concept",
+      "attributes": {
+        "name": "Centripetal Force",
+        "description": "Newton's term for force directed toward center of orbit",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_mechanics__event__principia_published",
+      "type": "event",
+      "attributes": {
+        "name": "Principia published",
+        "description": "1687 first edition of Philosophiae Naturalis Principia Mathematica",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_mechanics__event__newton_s_annus_mirabilis",
+      "type": "event",
+      "attributes": {
+        "name": "Newton's annus mirabilis",
+        "description": "1665-1666 plague year when Newton developed key ideas",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+      "type": "writing",
+      "attributes": {
+        "name": "Philosophiae Naturalis Principia Mathematica",
+        "description": "1687 Newton's foundational physics text",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_mechanics__writing__method_of_fluxions",
+      "type": "writing",
+      "attributes": {
+        "name": "Method of Fluxions",
+        "description": "Newton's 1671 calculus treatise",
+        "physics_regime": "newton_mechanics",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_optics__person__christiaan_huygens",
+      "type": "person",
+      "attributes": {
+        "name": "Christiaan Huygens",
+        "description": "Contemporaneous natural philosopher, wave theory of light",
+        "physics_regime": "newton_optics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "newton_optics__concept__prism_experiment",
+      "type": "concept",
+      "attributes": {
+        "name": "Prism Experiment",
+        "description": "Newton's demonstration that white light contains all colors",
+        "physics_regime": "newton_optics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_optics__concept__corpuscular_theory_of_light",
+      "type": "concept",
+      "attributes": {
+        "name": "Corpuscular Theory of Light",
+        "description": "Newton's particle theory of light",
+        "physics_regime": "newton_optics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_optics__concept__newton_s_rings",
+      "type": "concept",
+      "attributes": {
+        "name": "Newton's Rings",
+        "description": "Interference pattern from a convex lens on a flat surface",
+        "physics_regime": "newton_optics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_optics__concept__chromatic_aberration",
+      "type": "concept",
+      "attributes": {
+        "name": "Chromatic Aberration",
+        "description": "Focus error due to different wavelengths bending differently",
+        "physics_regime": "newton_optics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_optics__event__opticks_published",
+      "type": "event",
+      "attributes": {
+        "name": "Opticks published",
+        "description": "1704 Newton's major work on light and color",
+        "physics_regime": "newton_optics",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_optics__writing__opticks",
+      "type": "writing",
+      "attributes": {
+        "name": "Opticks",
+        "description": "1704 Newton's comprehensive treatise on light",
+        "physics_regime": "newton_optics",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "newton_theology_control__concept__apocalyptic_prophecy",
+      "type": "concept",
+      "attributes": {
+        "name": "Apocalyptic Prophecy",
+        "description": "Newton's interpretation of Biblical prophecies about end times",
+        "physics_regime": "newton_theology_control",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_theology_control__concept__church_corruption",
+      "type": "concept",
+      "attributes": {
+        "name": "Church Corruption",
+        "description": "Newton's view that the church was corrupted after Constantine",
+        "physics_regime": "newton_theology_control",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "newton_theology_control__event__observations_upon_daniel_published_posthumously",
+      "type": "event",
+      "attributes": {
+        "name": "Observations upon Daniel published posthumously",
+        "description": "1733 Newton's theological work",
+        "physics_regime": "newton_theology_control",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "newton_theology_control__writing__observations_upon_the_prophecies_of_daniel",
+      "type": "writing",
+      "attributes": {
+        "name": "Observations upon the Prophecies of Daniel",
+        "description": "Newton's 1733 posthumous theological text",
+        "physics_regime": "newton_theology_control",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__john_von_neumann",
+      "type": "person",
+      "attributes": {
+        "name": "John von Neumann",
+        "description": "Hungarian-American mathematician and polymath, 1903-1957",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__arthur_burks",
+      "type": "person",
+      "attributes": {
+        "name": "Arthur Burks",
+        "description": "Editor who compiled Von Neumann's posthumous automata manuscript",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__stanislaw_ulam",
+      "type": "person",
+      "attributes": {
+        "name": "Stanislaw Ulam",
+        "description": "Polish mathematician who suggested the cellular space model to Von Neumann",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__john_conway",
+      "type": "person",
+      "attributes": {
+        "name": "John Conway",
+        "description": "British mathematician who invented Game of Life 1970",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__stephen_wolfram",
+      "type": "person",
+      "attributes": {
+        "name": "Stephen Wolfram",
+        "description": "Modern complexity theorist who classified cellular automata in 1983",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__leonard_adleman",
+      "type": "person",
+      "attributes": {
+        "name": "Leonard Adleman",
+        "description": "Modern computer scientist who demonstrated DNA computing 1994",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__edward_fredkin",
+      "type": "person",
+      "attributes": {
+        "name": "Edward Fredkin",
+        "description": "Physicist who proposed computational physics based on cellular automata",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__person__konrad_zuse",
+      "type": "person",
+      "attributes": {
+        "name": "Konrad Zuse",
+        "description": "German computer pioneer who proposed Rechnender Raum (computing universe)",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "location",
+      "attributes": {
+        "name": "Institute for Advanced Study Princeton",
+        "description": "Where Von Neumann worked on automata theory 1945-1957",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__location__los_alamos_national_laboratory",
+      "type": "location",
+      "attributes": {
+        "name": "Los Alamos National Laboratory",
+        "description": "Where Von Neumann and Ulam developed CA concepts",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__universal_constructor",
+      "type": "concept",
+      "attributes": {
+        "name": "Universal Constructor",
+        "description": "Von Neumann's machine capable of building copies of itself from instructions",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__self_reproduction",
+      "type": "concept",
+      "attributes": {
+        "name": "Self-Reproduction",
+        "description": "The ability of a machine to produce functional copies of itself",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__29_state_cellular_automaton",
+      "type": "concept",
+      "attributes": {
+        "name": "29-State Cellular Automaton",
+        "description": "Von Neumann's specific CA with 29 states per cell",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__transition_function",
+      "type": "concept",
+      "attributes": {
+        "name": "Transition Function",
+        "description": "The rule determining next-state of a cell from current state and neighbors",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__von_neumann_neighborhood",
+      "type": "concept",
+      "attributes": {
+        "name": "Von Neumann Neighborhood",
+        "description": "The four orthogonally adjacent cells in a 2D grid",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__computational_universality",
+      "type": "concept",
+      "attributes": {
+        "name": "Computational Universality",
+        "description": "Capability to simulate any Turing machine",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__self_description",
+      "type": "concept",
+      "attributes": {
+        "name": "Self-Description",
+        "description": "A machine's ability to contain a description of itself (quine property)",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__emergent_complexity",
+      "type": "concept",
+      "attributes": {
+        "name": "Emergent Complexity",
+        "description": "Complex behaviors arising from simple local rules",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__concept__computational_irreducibility",
+      "type": "concept",
+      "attributes": {
+        "name": "Computational Irreducibility",
+        "description": "Systems whose behavior can only be determined by running them",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__von_neumann_begins_ca_work",
+      "type": "event",
+      "attributes": {
+        "name": "Von Neumann begins CA work",
+        "description": "c. 1948 at Los Alamos with Ulam",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__hixon_symposium_lecture",
+      "type": "event",
+      "attributes": {
+        "name": "Hixon Symposium lecture",
+        "description": "1948 Von Neumann presents General and Logical Theory of Automata",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__von_neumann_death",
+      "type": "event",
+      "attributes": {
+        "name": "Von Neumann death",
+        "description": "February 8 1957 leaving automata manuscript unfinished",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__burks_publishes_theory_of_self_reproducing_automat",
+      "type": "event",
+      "attributes": {
+        "name": "Burks publishes Theory of Self-Reproducing Automata",
+        "description": "1966 posthumous edition",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__conway_invents_game_of_life",
+      "type": "event",
+      "attributes": {
+        "name": "Conway invents Game of Life",
+        "description": "1970 cellular automaton published in Scientific American",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
+      "type": "event",
+      "attributes": {
+        "name": "Wolfram classifies cellular automata",
+        "description": "1983 four-class classification published",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__event__adleman_demonstrates_dna_computing",
+      "type": "event",
+      "attributes": {
+        "name": "Adleman demonstrates DNA computing",
+        "description": "1994 molecular computation of Hamiltonian path",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "writing",
+      "attributes": {
+        "name": "Theory of Self-Reproducing Automata",
+        "description": "Von Neumann's posthumous 1966 book edited by Burks",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__writing__general_and_logical_theory_of_automata",
+      "type": "writing",
+      "attributes": {
+        "name": "General and Logical Theory of Automata",
+        "description": "Von Neumann's 1948 Hixon Symposium paper",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__writing__a_new_kind_of_science",
+      "type": "writing",
+      "attributes": {
+        "name": "A New Kind of Science",
+        "description": "Wolfram's 2002 comprehensive CA treatise",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_cellular_automata__writing__adleman_1994_molecular_computation_paper",
+      "type": "writing",
+      "attributes": {
+        "name": "Adleman 1994 Molecular Computation Paper",
+        "description": "First demonstration of DNA computing",
+        "physics_regime": "vn_cellular_automata",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_computing__person__alan_turing",
+      "type": "person",
+      "attributes": {
+        "name": "Alan Turing",
+        "description": "British mathematician whose universal machine concept influenced Von Neumann",
+        "physics_regime": "vn_computing",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_computing__person__j_presper_eckert",
+      "type": "person",
+      "attributes": {
+        "name": "J. Presper Eckert",
+        "description": "Co-designer of ENIAC whose work influenced the EDVAC report",
+        "physics_regime": "vn_computing",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_computing__person__john_mauchly",
+      "type": "person",
+      "attributes": {
+        "name": "John Mauchly",
+        "description": "Co-designer of ENIAC",
+        "physics_regime": "vn_computing",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_computing__location__university_of_pennsylvania_moore_school",
+      "type": "location",
+      "attributes": {
+        "name": "University of Pennsylvania Moore School",
+        "description": "Where EDVAC was designed",
+        "physics_regime": "vn_computing",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "vn_computing__concept__stored_program_architecture",
+      "type": "concept",
+      "attributes": {
+        "name": "Stored Program Architecture",
+        "description": "The Von Neumann architecture where instructions and data share memory",
+        "physics_regime": "vn_computing",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_computing__concept__memory_hierarchy",
+      "type": "concept",
+      "attributes": {
+        "name": "Memory Hierarchy",
+        "description": "Organization of fast registers, slow main memory, and storage",
+        "physics_regime": "vn_computing",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_computing__concept__arithmetic_logic_unit",
+      "type": "concept",
+      "attributes": {
+        "name": "Arithmetic Logic Unit",
+        "description": "The computing component that performs arithmetic operations",
+        "physics_regime": "vn_computing",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_computing__concept__control_unit",
+      "type": "concept",
+      "attributes": {
+        "name": "Control Unit",
+        "description": "The component that sequences instruction execution",
+        "physics_regime": "vn_computing",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_computing__event__edvac_report_drafted",
+      "type": "event",
+      "attributes": {
+        "name": "EDVAC Report drafted",
+        "description": "June 1945 First Draft of a Report on the EDVAC",
+        "physics_regime": "vn_computing",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_computing__writing__first_draft_of_a_report_on_the_edvac",
+      "type": "writing",
+      "attributes": {
+        "name": "First Draft of a Report on the EDVAC",
+        "description": "Von Neumann's 1945 architectural document",
+        "physics_regime": "vn_computing",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_quantum__person__david_hilbert",
+      "type": "person",
+      "attributes": {
+        "name": "David Hilbert",
+        "description": "German mathematician whose formalism Von Neumann applied to QM",
+        "physics_regime": "vn_quantum",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_quantum__person__paul_dirac",
+      "type": "person",
+      "attributes": {
+        "name": "Paul Dirac",
+        "description": "Physicist whose notation competed with Von Neumann's",
+        "physics_regime": "vn_quantum",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_quantum__concept__hilbert_space_formalism",
+      "type": "concept",
+      "attributes": {
+        "name": "Hilbert Space Formalism",
+        "description": "The mathematical framework for quantum mechanics",
+        "physics_regime": "vn_quantum",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_quantum__concept__measurement_problem",
+      "type": "concept",
+      "attributes": {
+        "name": "Measurement Problem",
+        "description": "The question of how quantum superpositions become classical outcomes",
+        "physics_regime": "vn_quantum",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_quantum__concept__wave_function_collapse",
+      "type": "concept",
+      "attributes": {
+        "name": "Wave Function Collapse",
+        "description": "The transition from superposition to definite state upon measurement",
+        "physics_regime": "vn_quantum",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_quantum__event__mathematical_foundations_published",
+      "type": "event",
+      "attributes": {
+        "name": "Mathematical Foundations published",
+        "description": "1932 German, 1955 English translation",
+        "physics_regime": "vn_quantum",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_quantum__writing__mathematical_foundations_of_quantum_mechanics",
+      "type": "writing",
+      "attributes": {
+        "name": "Mathematical Foundations of Quantum Mechanics",
+        "description": "Von Neumann's 1932 rigorous QM formalization",
+        "physics_regime": "vn_quantum",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "vn_game_theory__person__oskar_morgenstern",
+      "type": "person",
+      "attributes": {
+        "name": "Oskar Morgenstern",
+        "description": "Austrian economist, Von Neumann's Theory of Games coauthor",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_game_theory__person__john_nash",
+      "type": "person",
+      "attributes": {
+        "name": "John Nash",
+        "description": "American mathematician who extended Von Neumann's work with Nash equilibrium",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "vn_game_theory__concept__minimax_theorem",
+      "type": "concept",
+      "attributes": {
+        "name": "Minimax Theorem",
+        "description": "Von Neumann's foundational result for two-person zero-sum games",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_game_theory__concept__nash_equilibrium",
+      "type": "concept",
+      "attributes": {
+        "name": "Nash Equilibrium",
+        "description": "Extension of Von Neumann's work to non-zero-sum games",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_game_theory__concept__expected_utility",
+      "type": "concept",
+      "attributes": {
+        "name": "Expected Utility",
+        "description": "The decision-theoretic concept Von Neumann and Morgenstern axiomatized",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "vn_game_theory__event__theory_of_games_published",
+      "type": "event",
+      "attributes": {
+        "name": "Theory of Games published",
+        "description": "1944 Von Neumann and Morgenstern foundational work",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "vn_game_theory__writing__theory_of_games_and_economic_behavior",
+      "type": "writing",
+      "attributes": {
+        "name": "Theory of Games and Economic Behavior",
+        "description": "Von Neumann-Morgenstern 1944 foundational text",
+        "physics_regime": "vn_game_theory",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_flight__person__leonardo_da_vinci",
+      "type": "person",
+      "attributes": {
+        "name": "Leonardo da Vinci",
+        "description": "Italian polymath 1452-1519, inventor and engineer",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_flight__person__francesco_melzi",
+      "type": "person",
+      "attributes": {
+        "name": "Francesco Melzi",
+        "description": "Leonardo's pupil who preserved his notebooks after his death",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_flight__person__ludovico_sforza",
+      "type": "person",
+      "attributes": {
+        "name": "Ludovico Sforza",
+        "description": "Duke of Milan who employed Leonardo as court engineer",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_flight__person__adrian_nicholas",
+      "type": "person",
+      "attributes": {
+        "name": "Adrian Nicholas",
+        "description": "Modern skydiver who successfully tested Leonardo's parachute design in 2000",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_flight__person__igor_sikorsky",
+      "type": "person",
+      "attributes": {
+        "name": "Igor Sikorsky",
+        "description": "Modern helicopter pioneer whose designs were influenced by Leonardo's aerial screw",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_flight__location__milan",
+      "type": "location",
+      "attributes": {
+        "name": "Milan",
+        "description": "Where Leonardo served Sforza and made many engineering studies",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_flight__location__florence",
+      "type": "location",
+      "attributes": {
+        "name": "Florence",
+        "description": "Where Leonardo studied birds in flight",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_flight__location__codex_atlanticus_biblioteca_ambrosiana",
+      "type": "location",
+      "attributes": {
+        "name": "Codex Atlanticus Biblioteca Ambrosiana",
+        "description": "Milan library holding Leonardo's largest notebook collection",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_flight__location__british_library_codex_arundel",
+      "type": "location",
+      "attributes": {
+        "name": "British Library Codex Arundel",
+        "description": "Leonardo notebook held in British Library",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__aerial_screw",
+      "type": "concept",
+      "attributes": {
+        "name": "Aerial Screw",
+        "description": "Leonardo's helicopter-like rotating airfoil concept",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__ornithopter",
+      "type": "concept",
+      "attributes": {
+        "name": "Ornithopter",
+        "description": "Flapping-wing flying machine design",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__bird_flight_mechanics",
+      "type": "concept",
+      "attributes": {
+        "name": "Bird Flight Mechanics",
+        "description": "Leonardo's observations of wing motion, lift, and gliding",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__parachute_design",
+      "type": "concept",
+      "attributes": {
+        "name": "Parachute Design",
+        "description": "Leonardo's pyramid-shaped proto-parachute",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__lift_from_pressure_difference",
+      "type": "concept",
+      "attributes": {
+        "name": "Lift from Pressure Difference",
+        "description": "Leonardo's intuition about air pressure above and below a wing",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__concept__center_of_gravity_in_flight",
+      "type": "concept",
+      "attributes": {
+        "name": "Center of Gravity in Flight",
+        "description": "Leonardo's understanding of balance during flight",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+      "type": "event",
+      "attributes": {
+        "name": "Codex on the Flight of Birds written",
+        "description": "1505 Leonardo's dedicated notebook on bird flight",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_flight__event__leonardo_s_aerial_screw_sketch",
+      "type": "event",
+      "attributes": {
+        "name": "Leonardo's aerial screw sketch",
+        "description": "c. 1485-1490 helicopter precursor",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "event",
+      "attributes": {
+        "name": "Leonardo's parachute tested",
+        "description": "2000 Adrian Nicholas successfully tests Leonardo's design",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_flight__event__leonardo_s_notebooks_rediscovered",
+      "type": "event",
+      "attributes": {
+        "name": "Leonardo's notebooks rediscovered",
+        "description": "19th century Richter translation makes them widely accessible",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+      "type": "writing",
+      "attributes": {
+        "name": "Codex on the Flight of Birds",
+        "description": "Leonardo's 1505 dedicated flight manuscript",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_flight__writing__codex_atlanticus_flight_entries",
+      "type": "writing",
+      "attributes": {
+        "name": "Codex Atlanticus flight entries",
+        "description": "Various flight mechanics notes across Leonardo's largest codex",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_flight__writing__madrid_codex_ii_aerial_screw_notes",
+      "type": "writing",
+      "attributes": {
+        "name": "Madrid Codex II aerial screw notes",
+        "description": "Leonardo's rotor concept documentation",
+        "physics_regime": "leonardo_flight",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_fluids__person__osborne_reynolds",
+      "type": "person",
+      "attributes": {
+        "name": "Osborne Reynolds",
+        "description": "British engineer who formally described turbulence in 1883",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_fluids__person__claude_louis_navier",
+      "type": "person",
+      "attributes": {
+        "name": "Claude-Louis Navier",
+        "description": "French engineer who formulated fluid equations in 1822",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_fluids__person__george_gabriel_stokes",
+      "type": "person",
+      "attributes": {
+        "name": "George Gabriel Stokes",
+        "description": "British mathematician who completed the Navier-Stokes equations",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_fluids__location__codex_leicester",
+      "type": "location",
+      "attributes": {
+        "name": "Codex Leicester",
+        "description": "Leonardo's notebook owned by Bill Gates, focused on water and fluids",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__turbulenza",
+      "type": "concept",
+      "attributes": {
+        "name": "Turbulenza",
+        "description": "Leonardo's original term for turbulent water motion",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__eddy",
+      "type": "concept",
+      "attributes": {
+        "name": "Eddy",
+        "description": "Rotating fluid structure Leonardo extensively drew and described",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__vortex",
+      "type": "concept",
+      "attributes": {
+        "name": "Vortex",
+        "description": "Spiral fluid structure Leonardo observed in water",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__laminar_flow",
+      "type": "concept",
+      "attributes": {
+        "name": "Laminar Flow",
+        "description": "Smooth ordered flow contrasted with turbulent flow",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__flow_around_obstacles",
+      "type": "concept",
+      "attributes": {
+        "name": "Flow Around Obstacles",
+        "description": "Leonardo's systematic study of water meeting barriers",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__concept__wave_propagation",
+      "type": "concept",
+      "attributes": {
+        "name": "Wave Propagation",
+        "description": "Leonardo's observations of water waves",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_fluids__event__codex_leicester_compiled",
+      "type": "event",
+      "attributes": {
+        "name": "Codex Leicester compiled",
+        "description": "c. 1506-1510 Leonardo's hydraulics notebook",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_fluids__event__reynolds_turbulence_paper",
+      "type": "event",
+      "attributes": {
+        "name": "Reynolds turbulence paper",
+        "description": "1883 first formal description of laminar-turbulent transition",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_fluids__writing__codex_leicester",
+      "type": "writing",
+      "attributes": {
+        "name": "Codex Leicester",
+        "description": "Leonardo's 1506-1510 notebook on water and fluid motion",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_fluids__writing__codex_atlanticus_hydraulics_sections",
+      "type": "writing",
+      "attributes": {
+        "name": "Codex Atlanticus hydraulics sections",
+        "description": "Various fluid dynamics observations",
+        "physics_regime": "leonardo_fluids",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__person__andreas_vesalius",
+      "type": "person",
+      "attributes": {
+        "name": "Andreas Vesalius",
+        "description": "16th-century anatomist whose work superseded Leonardo's unpublished drawings",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__person__francesco_melzi",
+      "type": "person",
+      "attributes": {
+        "name": "Francesco Melzi",
+        "description": "Leonardo's heir who kept his anatomical drawings unpublished",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__location__royal_collection_windsor",
+      "type": "location",
+      "attributes": {
+        "name": "Royal Collection Windsor",
+        "description": "Holds Leonardo's anatomical drawings",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__concept__aortic_valve_mechanism",
+      "type": "concept",
+      "attributes": {
+        "name": "Aortic Valve Mechanism",
+        "description": "Leonardo's drawings correctly predict valve closure mechanism (confirmed by 2014 MRI)",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__concept__muscular_action",
+      "type": "concept",
+      "attributes": {
+        "name": "Muscular Action",
+        "description": "Leonardo's analysis of how muscles produce motion",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__concept__heart_as_pump",
+      "type": "concept",
+      "attributes": {
+        "name": "Heart as Pump",
+        "description": "Leonardo's recognition of cardiac function",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__event__leonardo_dissects_30_corpses",
+      "type": "event",
+      "attributes": {
+        "name": "Leonardo dissects 30 corpses",
+        "description": "c. 1489-1513 anatomical studies",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__event__mri_confirms_aortic_valve_prediction",
+      "type": "event",
+      "attributes": {
+        "name": "MRI confirms aortic valve prediction",
+        "description": "2014 modern imaging confirms Leonardo's fluid dynamics of valve",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "leonardo_anatomy__writing__anatomical_manuscripts",
+      "type": "writing",
+      "attributes": {
+        "name": "Anatomical Manuscripts",
+        "description": "Leonardo's drawings at Windsor",
+        "physics_regime": "leonardo_anatomy",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "leonardo_art_control__concept__sfumato",
+      "type": "concept",
+      "attributes": {
+        "name": "Sfumato",
+        "description": "Leonardo's smoky blending technique in painting",
+        "physics_regime": "leonardo_art_control",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_art_control__concept__linear_perspective",
+      "type": "concept",
+      "attributes": {
+        "name": "Linear Perspective",
+        "description": "Geometric rules for depicting 3D space on 2D surface",
+        "physics_regime": "leonardo_art_control",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_art_control__concept__paragone",
+      "type": "concept",
+      "attributes": {
+        "name": "Paragone",
+        "description": "Leonardo's debate comparing the arts",
+        "physics_regime": "leonardo_art_control",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "leonardo_art_control__writing__trattato_della_pittura",
+      "type": "writing",
+      "attributes": {
+        "name": "Trattato della Pittura",
+        "description": "Leonardo's Treatise on Painting compiled posthumously",
+        "physics_regime": "leonardo_art_control",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "modern_materials__person__linus_pauling",
+      "type": "person",
+      "attributes": {
+        "name": "Linus Pauling",
+        "description": "Chemist who developed ligand field theory foundations",
+        "physics_regime": "modern_materials",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_materials__concept__transition_metal_complex",
+      "type": "concept",
+      "attributes": {
+        "name": "Transition Metal Complex",
+        "description": "Coordination compound of a transition metal with ligands",
+        "physics_regime": "modern_materials",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_materials__concept__oxidation_state",
+      "type": "concept",
+      "attributes": {
+        "name": "Oxidation State",
+        "description": "The degree of oxidation of an atom in a compound",
+        "physics_regime": "modern_materials",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_materials__concept__coordination_number",
+      "type": "concept",
+      "attributes": {
+        "name": "Coordination Number",
+        "description": "Number of ligands around a central atom",
+        "physics_regime": "modern_materials",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_materials__concept__ligand_field_theory",
+      "type": "concept",
+      "attributes": {
+        "name": "Ligand Field Theory",
+        "description": "Theory of bonding in transition metal complexes",
+        "physics_regime": "modern_materials",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_materials__concept__d_orbital_splitting",
+      "type": "concept",
+      "attributes": {
+        "name": "d-Orbital Splitting",
+        "description": "The energy difference between d orbitals in a ligand field",
+        "physics_regime": "modern_materials",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_complexity__person__christopher_langton",
+      "type": "person",
+      "attributes": {
+        "name": "Christopher Langton",
+        "description": "Invented the concept of 'edge of chaos' in cellular automata",
+        "physics_regime": "modern_complexity",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_complexity__person__norman_packard",
+      "type": "person",
+      "attributes": {
+        "name": "Norman Packard",
+        "description": "Co-developer of edge of chaos concept",
+        "physics_regime": "modern_complexity",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_complexity__person__matthew_cook",
+      "type": "person",
+      "attributes": {
+        "name": "Matthew Cook",
+        "description": "Proved Wolfram's Rule 110 is Turing-complete",
+        "physics_regime": "modern_complexity",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_complexity__location__santa_fe_institute",
+      "type": "location",
+      "attributes": {
+        "name": "Santa Fe Institute",
+        "description": "Center for complexity research",
+        "physics_regime": "modern_complexity",
+        "entity_type": "location"
+      }
+    },
+    {
+      "name": "modern_complexity__concept__edge_of_chaos",
+      "type": "concept",
+      "attributes": {
+        "name": "Edge of Chaos",
+        "description": "The phase transition between order and chaos where computation emerges",
+        "physics_regime": "modern_complexity",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_complexity__concept__rule_110",
+      "type": "concept",
+      "attributes": {
+        "name": "Rule 110",
+        "description": "Elementary cellular automaton proved Turing-complete",
+        "physics_regime": "modern_complexity",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_complexity__concept__class_iv_cellular_automata",
+      "type": "concept",
+      "attributes": {
+        "name": "Class IV Cellular Automata",
+        "description": "Wolfram's class of complex computational CAs",
+        "physics_regime": "modern_complexity",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_complexity__concept__universal_turing_machine",
+      "type": "concept",
+      "attributes": {
+        "name": "Universal Turing Machine",
+        "description": "Computational model capable of simulating any other Turing machine",
+        "physics_regime": "modern_complexity",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_complexity__event__cook_proves_rule_110_universal",
+      "type": "event",
+      "attributes": {
+        "name": "Cook proves Rule 110 universal",
+        "description": "1998 proof that simplest non-trivial CA is Turing-complete",
+        "physics_regime": "modern_complexity",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "modern_complexity__writing__a_new_kind_of_science",
+      "type": "writing",
+      "attributes": {
+        "name": "A New Kind of Science",
+        "description": "Wolfram's 2002 comprehensive cellular automata analysis",
+        "physics_regime": "modern_complexity",
+        "entity_type": "writing"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__person__ludwig_prandtl",
+      "type": "person",
+      "attributes": {
+        "name": "Ludwig Prandtl",
+        "description": "German engineer who developed boundary layer theory",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__person__theodore_von_karman",
+      "type": "person",
+      "attributes": {
+        "name": "Theodore von Karman",
+        "description": "Aerodynamicist who described vortex streets",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "person"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__reynolds_number",
+      "type": "concept",
+      "attributes": {
+        "name": "Reynolds Number",
+        "description": "Dimensionless quantity predicting laminar-turbulent transition",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__boundary_layer",
+      "type": "concept",
+      "attributes": {
+        "name": "Boundary Layer",
+        "description": "Thin layer near a surface where fluid velocity transitions",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__navier_stokes_equations",
+      "type": "concept",
+      "attributes": {
+        "name": "Navier-Stokes Equations",
+        "description": "Mathematical equations describing fluid motion",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__karman_vortex_street",
+      "type": "concept",
+      "attributes": {
+        "name": "Karman Vortex Street",
+        "description": "Pattern of vortices shed behind a bluff body",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__lift_coefficient",
+      "type": "concept",
+      "attributes": {
+        "name": "Lift Coefficient",
+        "description": "Dimensionless measure of aerodynamic lift",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__concept__airfoil",
+      "type": "concept",
+      "attributes": {
+        "name": "Airfoil",
+        "description": "Cross-sectional shape designed to generate lift",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "concept"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__event__reynolds_publishes_turbulence_paper",
+      "type": "event",
+      "attributes": {
+        "name": "Reynolds publishes turbulence paper",
+        "description": "1883 foundational modern turbulence paper",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "event"
+      }
+    },
+    {
+      "name": "modern_aerodynamics__writing__reynolds_1883_experimental_investigation",
+      "type": "writing",
+      "attributes": {
+        "name": "Reynolds 1883 Experimental Investigation",
+        "description": "The foundational modern turbulence paper",
+        "physics_regime": "modern_aerodynamics",
+        "entity_type": "writing"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__writing__keynes_ms_28_praxis",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__writing__keynes_ms_18",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__writing__index_chemicus",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__event__newton_begins_alchemical_studies",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__event__newton_s_praxis_manuscript",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__concept__philosophical_mercury",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__concept__green_lion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__concept__sophic_sulphur",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__isaac_newton",
+      "target": "newton_alchemy__location__the_royal_mint",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__writing__keynes_ms_28_praxis",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__writing__keynes_ms_18",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__writing__index_chemicus",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__event__newton_begins_alchemical_studies",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__event__newton_s_praxis_manuscript",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__concept__philosophical_mercury",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__concept__green_lion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__concept__sophic_sulphur",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__robert_boyle",
+      "target": "newton_alchemy__location__the_royal_mint",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__writing__keynes_ms_28_praxis",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__writing__keynes_ms_18",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__writing__index_chemicus",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__event__newton_begins_alchemical_studies",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__event__newton_s_praxis_manuscript",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__concept__philosophical_mercury",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__concept__green_lion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__concept__sophic_sulphur",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__george_starkey",
+      "target": "newton_alchemy__location__the_royal_mint",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__writing__keynes_ms_28_praxis",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__writing__keynes_ms_18",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__writing__index_chemicus",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__event__newton_begins_alchemical_studies",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__event__newton_s_praxis_manuscript",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__concept__philosophical_mercury",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__concept__green_lion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__concept__sophic_sulphur",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_alchemy__person__jan_baptist_van_helmont",
+      "target": "newton_alchemy__location__the_royal_mint",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__writing__method_of_fluxions",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__event__principia_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__event__newton_s_annus_mirabilis",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__concept__universal_gravitation",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__concept__laws_of_motion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__concept__calculus_of_fluxions",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__edmond_halley",
+      "target": "newton_mechanics__location__royal_society",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__writing__method_of_fluxions",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__event__principia_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__event__newton_s_annus_mirabilis",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__concept__universal_gravitation",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__concept__laws_of_motion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__concept__calculus_of_fluxions",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__gottfried_leibniz",
+      "target": "newton_mechanics__location__royal_society",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__writing__method_of_fluxions",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__event__principia_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__event__newton_s_annus_mirabilis",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__concept__universal_gravitation",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__concept__laws_of_motion",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__concept__calculus_of_fluxions",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_mechanics__person__robert_hooke",
+      "target": "newton_mechanics__location__royal_society",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "newton_optics__person__christiaan_huygens",
+      "target": "newton_optics__writing__opticks",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "newton_optics__person__christiaan_huygens",
+      "target": "newton_optics__event__opticks_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_optics__person__christiaan_huygens",
+      "target": "newton_optics__concept__prism_experiment",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_optics__person__christiaan_huygens",
+      "target": "newton_optics__concept__corpuscular_theory_of_light",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "newton_optics__person__christiaan_huygens",
+      "target": "newton_optics__concept__newton_s_rings",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__writing__general_and_logical_theory_of_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__event__von_neumann_begins_ca_work",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__event__hixon_symposium_lecture",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__event__von_neumann_death",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__concept__universal_constructor",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__concept__self_reproduction",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__concept__29_state_cellular_automaton",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__john_von_neumann",
+      "target": "vn_cellular_automata__location__los_alamos_national_laboratory",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__writing__general_and_logical_theory_of_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__event__von_neumann_begins_ca_work",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__event__hixon_symposium_lecture",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__event__von_neumann_death",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__concept__universal_constructor",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__concept__self_reproduction",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__concept__29_state_cellular_automaton",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__arthur_burks",
+      "target": "vn_cellular_automata__location__los_alamos_national_laboratory",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__writing__general_and_logical_theory_of_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__event__von_neumann_begins_ca_work",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__event__hixon_symposium_lecture",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__event__von_neumann_death",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__concept__universal_constructor",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__concept__self_reproduction",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__concept__29_state_cellular_automaton",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__stanislaw_ulam",
+      "target": "vn_cellular_automata__location__los_alamos_national_laboratory",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__writing__general_and_logical_theory_of_automata",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__event__von_neumann_begins_ca_work",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__event__hixon_symposium_lecture",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__event__von_neumann_death",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__concept__universal_constructor",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__concept__self_reproduction",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__concept__29_state_cellular_automaton",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_cellular_automata__person__john_conway",
+      "target": "vn_cellular_automata__location__los_alamos_national_laboratory",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__writing__first_draft_of_a_report_on_the_edvac",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__event__edvac_report_drafted",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__concept__stored_program_architecture",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__concept__memory_hierarchy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__concept__arithmetic_logic_unit",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__alan_turing",
+      "target": "vn_computing__location__university_of_pennsylvania_moore_school",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__writing__first_draft_of_a_report_on_the_edvac",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__event__edvac_report_drafted",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__concept__stored_program_architecture",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__concept__memory_hierarchy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__concept__arithmetic_logic_unit",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__j_presper_eckert",
+      "target": "vn_computing__location__university_of_pennsylvania_moore_school",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__writing__first_draft_of_a_report_on_the_edvac",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__event__edvac_report_drafted",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__concept__stored_program_architecture",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__concept__memory_hierarchy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__concept__arithmetic_logic_unit",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_computing__person__john_mauchly",
+      "target": "vn_computing__location__university_of_pennsylvania_moore_school",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "vn_quantum__person__david_hilbert",
+      "target": "vn_quantum__writing__mathematical_foundations_of_quantum_mechanics",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_quantum__person__david_hilbert",
+      "target": "vn_quantum__event__mathematical_foundations_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__david_hilbert",
+      "target": "vn_quantum__concept__hilbert_space_formalism",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__david_hilbert",
+      "target": "vn_quantum__concept__measurement_problem",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__david_hilbert",
+      "target": "vn_quantum__concept__wave_function_collapse",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__paul_dirac",
+      "target": "vn_quantum__writing__mathematical_foundations_of_quantum_mechanics",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_quantum__person__paul_dirac",
+      "target": "vn_quantum__event__mathematical_foundations_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__paul_dirac",
+      "target": "vn_quantum__concept__hilbert_space_formalism",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__paul_dirac",
+      "target": "vn_quantum__concept__measurement_problem",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_quantum__person__paul_dirac",
+      "target": "vn_quantum__concept__wave_function_collapse",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__oskar_morgenstern",
+      "target": "vn_game_theory__writing__theory_of_games_and_economic_behavior",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_game_theory__person__oskar_morgenstern",
+      "target": "vn_game_theory__event__theory_of_games_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__oskar_morgenstern",
+      "target": "vn_game_theory__concept__minimax_theorem",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__oskar_morgenstern",
+      "target": "vn_game_theory__concept__nash_equilibrium",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__oskar_morgenstern",
+      "target": "vn_game_theory__concept__expected_utility",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__john_nash",
+      "target": "vn_game_theory__writing__theory_of_games_and_economic_behavior",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "vn_game_theory__person__john_nash",
+      "target": "vn_game_theory__event__theory_of_games_published",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__john_nash",
+      "target": "vn_game_theory__concept__minimax_theorem",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__john_nash",
+      "target": "vn_game_theory__concept__nash_equilibrium",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "vn_game_theory__person__john_nash",
+      "target": "vn_game_theory__concept__expected_utility",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__writing__codex_atlanticus_flight_entries",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__writing__madrid_codex_ii_aerial_screw_notes",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__event__leonardo_s_aerial_screw_sketch",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__concept__aerial_screw",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__concept__ornithopter",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__concept__bird_flight_mechanics",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__location__milan",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__leonardo_da_vinci",
+      "target": "leonardo_flight__location__florence",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__writing__codex_atlanticus_flight_entries",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__writing__madrid_codex_ii_aerial_screw_notes",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__event__leonardo_s_aerial_screw_sketch",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__concept__aerial_screw",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__concept__ornithopter",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__concept__bird_flight_mechanics",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__location__milan",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__francesco_melzi",
+      "target": "leonardo_flight__location__florence",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__writing__codex_atlanticus_flight_entries",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__writing__madrid_codex_ii_aerial_screw_notes",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__event__leonardo_s_aerial_screw_sketch",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__concept__aerial_screw",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__concept__ornithopter",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__concept__bird_flight_mechanics",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__location__milan",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__ludovico_sforza",
+      "target": "leonardo_flight__location__florence",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__writing__codex_atlanticus_flight_entries",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__writing__madrid_codex_ii_aerial_screw_notes",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__event__leonardo_s_aerial_screw_sketch",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__concept__aerial_screw",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__concept__ornithopter",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__concept__bird_flight_mechanics",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__location__milan",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_flight__person__adrian_nicholas",
+      "target": "leonardo_flight__location__florence",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__writing__codex_leicester",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__writing__codex_atlanticus_hydraulics_sections",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__event__codex_leicester_compiled",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__event__reynolds_turbulence_paper",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__concept__turbulenza",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__concept__eddy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__concept__vortex",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__osborne_reynolds",
+      "target": "leonardo_fluids__location__codex_leicester",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__writing__codex_leicester",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__writing__codex_atlanticus_hydraulics_sections",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__event__codex_leicester_compiled",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__event__reynolds_turbulence_paper",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__concept__turbulenza",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__concept__eddy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__concept__vortex",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__claude_louis_navier",
+      "target": "leonardo_fluids__location__codex_leicester",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__writing__codex_leicester",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__writing__codex_atlanticus_hydraulics_sections",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__event__codex_leicester_compiled",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__event__reynolds_turbulence_paper",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__concept__turbulenza",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__concept__eddy",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__concept__vortex",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_fluids__person__george_gabriel_stokes",
+      "target": "leonardo_fluids__location__codex_leicester",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__writing__anatomical_manuscripts",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__event__leonardo_dissects_30_corpses",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__event__mri_confirms_aortic_valve_prediction",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__concept__aortic_valve_mechanism",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__concept__muscular_action",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__concept__heart_as_pump",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__andreas_vesalius",
+      "target": "leonardo_anatomy__location__royal_collection_windsor",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__writing__anatomical_manuscripts",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__event__leonardo_dissects_30_corpses",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__event__mri_confirms_aortic_valve_prediction",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__concept__aortic_valve_mechanism",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__concept__muscular_action",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__concept__heart_as_pump",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "leonardo_anatomy__person__francesco_melzi",
+      "target": "leonardo_anatomy__location__royal_collection_windsor",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "modern_materials__person__linus_pauling",
+      "target": "modern_materials__concept__transition_metal_complex",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_materials__person__linus_pauling",
+      "target": "modern_materials__concept__oxidation_state",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_materials__person__linus_pauling",
+      "target": "modern_materials__concept__coordination_number",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__event__cook_proves_rule_110_universal",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__concept__edge_of_chaos",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__concept__rule_110",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__concept__class_iv_cellular_automata",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__christopher_langton",
+      "target": "modern_complexity__location__santa_fe_institute",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__event__cook_proves_rule_110_universal",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__concept__edge_of_chaos",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__concept__rule_110",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__concept__class_iv_cellular_automata",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__norman_packard",
+      "target": "modern_complexity__location__santa_fe_institute",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__writing__a_new_kind_of_science",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__event__cook_proves_rule_110_universal",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__concept__edge_of_chaos",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__concept__rule_110",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__concept__class_iv_cellular_automata",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_complexity__person__matthew_cook",
+      "target": "modern_complexity__location__santa_fe_institute",
+      "type": "worked_at",
+      "weight": 0.6
+    },
+    {
+      "source": "modern_aerodynamics__person__ludwig_prandtl",
+      "target": "modern_aerodynamics__writing__reynolds_1883_experimental_investigation",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "modern_aerodynamics__person__ludwig_prandtl",
+      "target": "modern_aerodynamics__event__reynolds_publishes_turbulence_paper",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__ludwig_prandtl",
+      "target": "modern_aerodynamics__concept__reynolds_number",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__ludwig_prandtl",
+      "target": "modern_aerodynamics__concept__boundary_layer",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__ludwig_prandtl",
+      "target": "modern_aerodynamics__concept__navier_stokes_equations",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__theodore_von_karman",
+      "target": "modern_aerodynamics__writing__reynolds_1883_experimental_investigation",
+      "type": "authored",
+      "weight": 0.8
+    },
+    {
+      "source": "modern_aerodynamics__person__theodore_von_karman",
+      "target": "modern_aerodynamics__event__reynolds_publishes_turbulence_paper",
+      "type": "involved_in",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__theodore_von_karman",
+      "target": "modern_aerodynamics__concept__reynolds_number",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__theodore_von_karman",
+      "target": "modern_aerodynamics__concept__boundary_layer",
+      "type": "developed",
+      "weight": 0.7
+    },
+    {
+      "source": "modern_aerodynamics__person__theodore_von_karman",
+      "target": "modern_aerodynamics__concept__navier_stokes_equations",
+      "type": "developed",
+      "weight": 0.7
+    }
+  ]
+}

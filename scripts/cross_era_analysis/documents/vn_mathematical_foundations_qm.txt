@@ -1,0 +1,75 @@
+SOURCE: John von Neumann, Mathematische Grundlagen der Quantenmechanik (1932); English translation Mathematical Foundations of Quantum Mechanics (Princeton University Press, 1955, trans. Robert T. Beyer)
+CITATION: Wikipedia "Mathematical Foundations of Quantum Mechanics", "Measurement in quantum mechanics", "Hilbert space" (accessed 2026-04-10); Von Neumann (1932/1955) Mathematical Foundations of Quantum Mechanics, Princeton University Press
+
+== Introductory Considerations (Chapter 1) ==
+
+Von Neumann opens the book by surveying the state of quantum mechanics as of 1932, noting the coexistence of two rival formalisms — Schrödinger's wave mechanics and Heisenberg, Born, and Jordan's matrix mechanics — and the formal bridge between them provided by Dirac's transformation theory. He observes that Dirac's approach, while physically compelling, rests on mathematically unsound objects such as the delta function. Von Neumann sets himself the task of constructing a unified formalism that is as intuitive as Dirac's while being as rigorous as the standards of 20th-century mathematical analysis demand. The instrument he chooses is the abstract Hilbert space — a term he himself coined — and the theory of self-adjoint operators on it.
+
+He argues that wave mechanics and matrix mechanics are not two theories but two concrete realizations of a single abstract structure: the separable complex Hilbert space. Wave functions are one orthonormal basis; matrix elements are the coefficients relative to another. The physically meaningful objects are neither the wave functions nor the matrices, but the geometric relations in the underlying Hilbert space — inner products, projections, spectra — which are invariant under the change of representation.
+
+== The Hilbert Space Formalism (Chapters 2 and 3) ==
+
+Von Neumann formalizes the state of a quantum system as a unit vector psi in a complex separable Hilbert space H. Physical observables are represented by self-adjoint (Hermitian) linear operators on H. Each eigenvector of an operator A corresponds to a possible measurement outcome, and the associated eigenvalue is the numerical value of the observable in that state. Because self-adjoint operators in general have both discrete and continuous spectra, Von Neumann devotes a substantial portion of the book to a careful development of the spectral theorem for unbounded self-adjoint operators — a piece of mathematics that was genuinely new at the time and that appears here for the first time in a physically motivated treatment.
+
+The expectation value of an observable A in a state psi is given by the Hilbert-space inner product
+
+  <A> = <psi, A psi>
+
+and the probability of obtaining a particular outcome a_i is the squared modulus of the projection of psi onto the eigenspace corresponding to a_i, namely
+
+  P(a_i) = ||P_i psi||^2
+
+where P_i is the orthogonal projection operator onto that eigenspace. Mixed states — statistical ensembles rather than pure states — are represented by density operators rho, and the expectation value generalizes to <A> = tr(rho A). The density operator formalism is itself a Von Neumann invention and is indispensable in subsequent discussions of measurement and thermodynamics.
+
+== The Measurement Problem (Chapter 3, and later extensive development) ==
+
+Von Neumann identifies two fundamentally different kinds of evolution undergone by a quantum state:
+
+  Process 1. Measurement. When a measurement of observable A is performed and outcome a_i is obtained, the state psi collapses discontinuously into the projection onto the eigenspace of a_i, renormalized to unit length. This process is stochastic, non-unitary, and irreversible.
+
+  Process 2. Unitary evolution. Between measurements the state evolves continuously and deterministically according to the Schrödinger equation, i hbar d|psi>/dt = H |psi>. This process is causal, unitary, and reversible.
+
+The deep tension between these two processes — one reversible and deterministic, the other irreversible and stochastic — is the heart of what came to be called the measurement problem. Von Neumann's treatment is remarkable for its honesty: he does not attempt to derive Process 1 from Process 2, nor to declare one of the two unphysical. Instead he shows that the dividing line between "measured system" and "measurement apparatus" can be drawn at many different points without changing the predicted statistics of the measurement outcomes. This is the content of what is now called the Von Neumann chain: the system under study can be entangled with the apparatus (itself a quantum system), which in turn can be entangled with the observer's sensory apparatus, which in turn can be entangled with the observer's brain, and so on. At each stage, a unitary evolution describes the joint system; and at any stage one can collapse the wave function and still obtain the same probabilities for measurement outcomes. The "cut" between quantum and classical is movable.
+
+== Deductive Development of the Theory (Chapter 4) ==
+
+Chapter 4 develops the entire formal machinery of quantum mechanics from a small set of axioms:
+
+  (A1) States are unit vectors in a complex separable Hilbert space, with vectors differing by a global phase identified.
+  (A2) Observables are self-adjoint operators on that Hilbert space.
+  (A3) The only possible outcomes of a measurement of A are the spectral values of A.
+  (A4) The probability of obtaining outcome a_i in state psi is ||P_i psi||^2.
+  (A5) Immediately after a measurement yielding a_i, the state is P_i psi / ||P_i psi||.
+  (A6) Between measurements the state evolves unitarily under the Schrödinger equation with Hamiltonian H.
+
+From these six postulates, together with the spectral theorem and the definition of tensor-product Hilbert spaces for composite systems, Von Neumann derives the Born rule, the Heisenberg uncertainty relations, the reduction of the density matrix under partial trace, the rules of composition for independent systems, and the statistical mechanics of quantum ensembles. This axiomatic deductive presentation became the template for every subsequent textbook treatment.
+
+== The Hidden Variables Theorem and its Controversy ==
+
+In a celebrated appendix, Von Neumann presents what he believed to be a proof that no "hidden variables" theory can reproduce the predictions of quantum mechanics. His argument relies on five assumptions, of which the most consequential is the additivity postulate:
+
+  <aR + bS> = a<R> + b<S>
+
+for any observables R and S and any real coefficients a and b. He shows that this postulate, together with the other assumptions, leads to a contradiction with any dispersion-free state of a quantum system, and concludes that hidden variables are impossible.
+
+In 1935 the physicist and philosopher Grete Hermann pointed out that the additivity postulate is unjustified for non-commuting observables in dispersion-free states: although it holds for the statistical averages of any quantum state, it need not hold for individual hidden-variable assignments when R and S do not commute. Her critique was largely ignored at the time. In 1952 David Bohm exhibited an explicit hidden-variable theory reproducing all the predictions of nonrelativistic quantum mechanics, demonstrating by construction that Von Neumann's theorem could not have the sweeping consequences he had claimed. The lesson is subtle: Von Neumann's mathematics is correct, but the additivity postulate is a stronger constraint than physical intuition suggests, and it excludes precisely the kind of hidden-variable theories that subsequent workers found compelling.
+
+== Reception and Legacy ==
+
+Contemporary reviewers compared the book to the great foundational texts of nineteenth-century mathematical analysis. Freeman Dyson cited it as the work from which he learned quantum mechanics. The Hilbert-space formalism it introduced — complete with self-adjoint operators, density matrices, the projection postulate, the tensor product of systems, and the two-process account of dynamics — remains the standard mathematical language of quantum physics nearly a century later.
+
+== Thermodynamics and the Entropy of Mixed States ==
+
+A chapter that is often overlooked but that had a long afterlife in quantum information theory is Von Neumann's treatment of the entropy of a mixed state. For a density operator rho he defines the quantity
+
+  S(rho) = -tr(rho log rho)
+
+which reduces to the classical Boltzmann-Gibbs entropy when rho is diagonal in the energy basis and vanishes identically for any pure state. He demonstrates that S(rho) is invariant under unitary evolution (so the entropy of an isolated quantum system is conserved) but is, in general, non-decreasing under the averaging operations associated with measurement or with tracing out a subsystem (so that entropy can appear "through ignorance" even in a fundamentally reversible world). This functional is now called the Von Neumann entropy; it is the quantum analog of the Shannon entropy and plays the central role in the theory of quantum information, quantum communication, and the thermodynamics of black holes.
+
+== Composite Systems and the Origin of Entanglement ==
+
+Another structurally important development is the systematic treatment of composite systems via the tensor product. If system A is described by Hilbert space H_A and system B by H_B, then the joint system is described by the tensor product H_A tensor H_B, and the most general joint state is a unit vector in this product space. Von Neumann emphasizes that the joint states include, in addition to separable product states |psi_A> tensor |psi_B>, a large class of non-product states — what Schrödinger would soon call "entangled" states — for which no individual state can be assigned to either subsystem. The measurement of an observable on A can, in this entangled regime, instantaneously change the statistics of measurements on B, even when A and B are arbitrarily far apart. Von Neumann's treatment prefigures the entire later discussion of non-locality, Bell's inequalities, and quantum teleportation.
+
+== Deduction as Program ==
+
+Von Neumann ends the book with a deliberately cautious tone about what his axiomatization has and has not accomplished. He is clear that the mathematical framework is consistent, general, and predictive; he is equally clear that the interpretive questions — what the wave function is, when collapse occurs, where the boundary between observer and observed should be drawn — remain open. His program is not to close those questions but to sharpen them: to give them a precise mathematical backbone so that future physicists could debate them in a common language. This combination of axiomatic rigor and interpretive openness is one of the most durable features of his style, and is the reason the book continues to be read both by working quantum physicists and by philosophers of science.

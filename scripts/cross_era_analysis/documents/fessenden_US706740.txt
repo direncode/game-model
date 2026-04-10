@@ -1,0 +1,85 @@
+================================================================
+US PATENT 706,740 - WIRELESS SIGNALING
+================================================================
+
+Patent Number:   US 706,740 A
+Title:           Wireless Signaling
+Inventor:        Reginald A. Fessenden, Manteo, North Carolina
+Filing Date:     September 28, 1901
+Issue Date:      August 12, 1902
+Application No.: US76836/01A
+Source:          https://patents.google.com/patent/US706740A/en
+
+================================================================
+PHYSICS REGIME: RADIATIVE / HERTZIAN WAVE
+================================================================
+This patent describes selective wireless signaling using
+radiated electromagnetic waves (Hertzian waves) from multiple
+radiating conductors at the transmitting station, received by
+tuned receiving conductors operating a coherer. It is a
+RADIATIVE far-field wireless telegraphy system, not a
+surface-wave or conduction-based system.
+
+================================================================
+ABSTRACT / SUMMARY
+================================================================
+
+The invention concerns selective signaling in systems where the
+signal is transmitted by waves or impulses. It generates
+persistent signals of differing characteristics at a single
+transmitting station and employs tuned receiving apparatus that
+responds only to their combined (conjoint) action.
+
+================================================================
+SPECIFICATION SUMMARY
+================================================================
+
+Fessenden's system employs multiple radiation sources that each
+generate waves or impulses of different periodicities. At the
+receiving station, receiving conductors tuned to their respective
+transmitting conductors work together to produce beats that
+operate an indicator only through their joint action.
+
+Apparatus:
+- Two or more radiating conductors connected to induction-coil
+  terminals at the transmitting station.
+- Receiving conductors, each tuned to one of the sending
+  conductors, connected to a coherer or wave-responsive
+  mechanism.
+
+Principle of operation:
+- Two wave series of differing periodicity, persisting
+  simultaneously, produce increasing phase differences
+  (electrical "beats").
+- The receiver responds only when the combined oscillations
+  achieve a predetermined phase differential.
+- This enables selective signaling between stations where
+  non-target receivers fail to reach the operating phase
+  condition.
+
+================================================================
+CLAIMS (summary)
+================================================================
+
+The patent contains nine numbered claims covering combinations
+of:
+- Plural wave sources of different periodicities.
+- Tuned receiving conductors corresponding to each transmitter.
+- Wave-responsive devices operative only at predetermined
+  phase relations of the received oscillations.
+
+Claims emphasize the conjoint action of multiple wave sets to
+produce an operative effect by phase-dependent mechanisms.
+
+================================================================
+NOTES ON PHYSICS (for structural discrimination experiment)
+================================================================
+
+Fessenden's system here relies on radiated Hertzian electromagnetic
+waves propagating through space from elevated radiating conductors
+to elevated receiving conductors. The detection mechanism (coherer)
+responds to the far-field electromagnetic wave impinging on the
+receiving antenna. This is the canonical "radio broadcasting"
+regime — RADIATIVE, far-field, Poynting-vector energy transport
+through free space — in contrast to Tesla's later surface-wave /
+ground-conduction systems (e.g. US 1,119,732).

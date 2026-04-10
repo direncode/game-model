@@ -1,0 +1,86 @@
+================================================================
+US PATENT 706,737 - WIRELESS TELEGRAPHY
+================================================================
+
+Patent Number:   US 706,737 A
+Title:           Wireless Telegraphy
+Inventor:        Reginald A. Fessenden, Allegheny, Pennsylvania
+Filing Date:     May 29, 1901
+Issue Date:      August 12, 1902
+Source:          https://patents.google.com/patent/US706737A/en
+
+================================================================
+PHYSICS REGIME: RADIATIVE / HERTZIAN WAVE (low-frequency CW)
+================================================================
+This patent describes improvements to wireless transmission by
+radiated electromagnetic waves at lower-than-usual frequencies,
+achieved by distributing large capacity across the radiating
+portion of the sending antenna. It is still a free-space
+radiative wireless telegraphy system.
+
+================================================================
+SPECIFICATION SUMMARY
+================================================================
+
+Fessenden introduces improvements to wireless transmission using
+electromagnetic waves at lower frequencies than previously
+considered practical. The invention centers on optimizing the
+sending conductor through strategic distribution of electrical
+capacity and inductance.
+
+Key passages (paraphrased):
+- "The capacity of the sending-conductor can be regulated in
+  several ways," including adjusting the surface area of the
+  radiating portion.
+- A critical innovation involves constructing the conductor
+  with "large capacity distributed with substantial uniformity
+  over its radiating portion."
+
+Motivation:
+- Traditional high-frequency approaches (around 2,000,000 periods
+  per second) cannot produce useful mechanical movement in
+  receiving instruments because the mechanical elements cannot
+  vibrate at such rates.
+- Fessenden's solution uses lower oscillation frequencies,
+  achieved by increasing capacity while reducing inductance on
+  the sending conductor.
+
+Resonance principle:
+- The design achieves enhanced voltage by matching the
+  alternator/dynamo periodicity to the sending-conductor's
+  natural period.
+- Voltages amplify dramatically through resonance: from an
+  impressed voltage of "five to ten" volts, potentials on the
+  radiating conductor may reach "a hundred thousand volts."
+
+Dynamo requirements:
+- Low internal resistance.
+- Pure sine-wave output.
+- Sufficient ventilation for currents of "hundreds or even
+  thousands of amperes."
+
+================================================================
+CLAIMS (summary)
+================================================================
+
+Claims cover:
+- Sending conductors with large, distributed capacity for
+  radiating lower-frequency electromagnetic waves.
+- Resonant matching of alternator frequency to antenna natural
+  period.
+- Combined dynamo + low-inductance, high-capacity radiating
+  conductor systems for wireless telegraphy.
+
+================================================================
+NOTES ON PHYSICS (for structural discrimination experiment)
+================================================================
+
+Although Fessenden deliberately lowers the operating frequency
+relative to the spark-gap 2-MHz regime of early Hertzian work,
+the system remains RADIATIVE. Energy is broadcast as
+electromagnetic waves from an elevated conductor with distributed
+capacity acting as a tuned antenna. The ground is not used as a
+low-loss conduction medium (as in Tesla's surface-wave system);
+rather, the elevated conductor is engineered as a resonant
+radiator. This should classify as radiative/Hertzian in the
+structural discriminator.

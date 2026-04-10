@@ -1,0 +1,95 @@
+UNITED STATES PATENT
+US 6,298,137 B1
+RING-BASED PUBLIC KEY CRYPTOSYSTEM METHOD
+Inventors: Jeffrey Hoffstein, Jill Pipher, Joseph H. Silverman
+Issued: October 2, 2001
+Filed: April 5, 2000
+
+ABSTRACT
+This patent describes a public key cryptosystem using ring-based mathematics rather than traditional number-theoretic approaches. The system, known as NTRU (N-th degree Truncated polynomial Ring Units), enables encryption and decryption through operations on polynomial rings with modular reduction. The security is based on the difficulty of finding short vectors in lattices of large dimension, fundamentally different from classical public-key cryptosystems based on factoring or discrete logarithms.
+
+BACKGROUND
+
+Classical public-key cryptosystems (RSA, Diffie-Hellman, ElGamal, ECC) rely on the difficulty of integer factorization or discrete logarithms. These problems are believed to be hard for classical computers but are known to be solvable in polynomial time by quantum computers using Shor's algorithm. This motivates the search for cryptosystems based on alternative hard problems that resist quantum attack.
+
+Lattice-based cryptography is one such alternative. The shortest vector problem (SVP) and the closest vector problem (CVP) in high-dimensional lattices are known to be NP-hard in the worst case and have no known quantum algorithms with significant speedup. These properties make lattice-based cryptosystems attractive candidates for post-quantum cryptography.
+
+MATHEMATICAL FOUNDATION
+
+Core Problem: The shortest vector problem (SVP) in lattices.
+
+The system uses a mixing system based on polynomial algebra and reduction modulo two numbers, p and q, combined with an unmixing system whose validity depends on elementary probability theory. This fundamentally differs from RSA and Diffie-Hellman approaches that depend on group-theoretic operations.
+
+Ring Structure:
+- Operations conducted in polynomial rings: R = Z[X]/(X^N - 1)
+- Elements represented as degree N-1 polynomials with integer coefficients
+- Star multiplication implements cyclic convolution
+- Coefficients reduced modulo p (small) and q (large)
+
+PARAMETERS
+
+Four integers: (N, K, p, q) where N determines polynomial degree, K is a security parameter, p and q are relatively prime moduli.
+
+Example parameter sets for secure implementations:
+- N = 167, p = 3, q = 128
+- N = 263, p = 3, q = 128
+- Larger N for higher security levels
+
+KEY GENERATION
+
+1. Generate a random polynomial f in R with small coefficients
+2. Generate a random polynomial g in R with small coefficients
+3. Compute Fp = f^(-1) mod p (inverse of f modulo p)
+4. Compute Fq = f^(-1) mod q (inverse of f modulo q)
+5. Compute h = p * Fq * g mod q (the public key)
+6. Private key: f, Fp; Public key: h
+
+ENCRYPTION
+
+To encrypt a message m (small polynomial):
+1. Choose a random small polynomial r
+2. Compute e = r * h + m mod q
+
+DECRYPTION
+
+To decrypt ciphertext e:
+1. Compute a = f * e mod q (with coefficients in [-q/2, q/2])
+2. Compute b = a mod p
+3. Compute m = Fp * b mod p
+
+The decryption works because the small coefficients of f, r, m, g ensure that f*e mod q does not wrap around the modular boundary, allowing recovery of m.
+
+LATTICE INTERPRETATION
+
+The security can be analyzed in terms of an associated lattice. The pair (1, h) generates a lattice L of dimension 2N. Recovering the private key f from the public key h is equivalent to finding a short vector in this lattice.
+
+The patent states: "Security relies on the experimentally observed fact that for most lattices, it is very difficult to find the shortest vector if there are a large number of vectors which are only moderately longer than the shortest vector."
+
+COMPUTATIONAL ADVANTAGES
+
+The system requires O(N^2) operations to encode or decode a message block of length N, making it considerably faster than the O(N^3) operations required by RSA. This makes NTRU particularly suitable for resource-constrained environments and high-throughput applications.
+
+POST-QUANTUM PROPERTIES
+
+While not explicitly discussed in the patent, NTRU is widely considered a post-quantum cryptosystem because:
+1. The shortest vector problem in arbitrary lattices is NP-hard (worst case)
+2. No known quantum algorithm provides exponential speedup for SVP
+3. The system's security parameters can be scaled to maintain hardness against improved attack algorithms
+
+CLAIMS
+
+1. A public-key cryptosystem comprising operations on polynomial rings R = Z[X]/(X^N - 1) with reduction modulo two relatively prime integers p and q.
+
+2. The system of claim 1 wherein encryption comprises computing e = r*h + m mod q where r is a random small polynomial, h is the public key, and m is the message polynomial.
+
+3. The system of claim 1 wherein decryption comprises sequential reduction modulo q and modulo p using the private key polynomial f and its inverse Fp.
+
+4. The system of claim 1 wherein security is based on the computational difficulty of finding shortest vectors in associated lattices.
+
+5. The system of claim 1 wherein N is at least 100.
+
+6. A method for key generation comprising generating random small polynomials f and g, computing inverses of f modulo p and modulo q, and forming the public key h = p*Fq*g mod q.
+
+7. A digital signature scheme based on the polynomial ring operations of claim 1.
+
+This is the foundational lattice-based public-key cryptosystem. It differs fundamentally from RSA and Diffie-Hellman by relying on lattice problems rather than number-theoretic problems. NTRU and its descendants (Ring-LWE, Module-LWE schemes) form the basis of modern post-quantum cryptography.

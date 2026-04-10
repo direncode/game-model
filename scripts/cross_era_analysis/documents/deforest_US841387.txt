@@ -1,0 +1,137 @@
+================================================================
+US PATENT 841,387 - DEVICE FOR AMPLIFYING FEEBLE
+                    ELECTRICAL CURRENTS (AUDION)
+================================================================
+
+Patent Number:   US 841,387 A
+Title:           Device for Amplifying Feeble Electrical Currents
+Inventor:        Lee de Forest, New York (citizen of the
+                 United States)
+Filing Date:     October 25, 1906
+Issue Date:      January 15, 1907
+Source:          https://patents.google.com/patent/US841387A/en
+
+================================================================
+PHYSICS REGIME: RADIATIVE WIRELESS (detector/amplifier for
+                Hertzian-wave receiving systems)
+================================================================
+This is the foundational Audion patent — the three-electrode
+vacuum tube used as an amplifier / detector for feeble currents
+produced by an antenna in a wireless-telegraph receiver. The
+Audion itself is a device, but its intended application context
+is receiving radiated Hertzian waves. The patent explicitly
+shows an embodiment where the local circuit is the receiving
+circuit of a wireless-telegraph system including an antenna V
+and an oscillation detector T.
+
+================================================================
+INVENTOR DECLARATION (paraphrased from patent preamble)
+================================================================
+
+Lee de Forest, a citizen of the United States and a resident of
+New York, declares the invention of a new and useful device for
+amplifying feeble electrical currents.
+
+================================================================
+CORE APPARATUS
+================================================================
+
+"A represents an evacuated vessel inclosing a sensitive
+conducting gaseous medium maintained in a condition of
+molecular activity."
+
+Three electrodes are sealed within the vessel:
+- A heated filament E (of platinum, tantalum, carbon, or other
+  suitable material), heated and preferably maintained
+  incandescent by a battery B.
+- Two non-heated plate electrodes D, positioned near the
+  filament, unequally spaced in some claims.
+
+The patent describes the residual gas inside the vessel as the
+conducting medium whose ionization state is perturbed by the
+incoming signal.
+
+================================================================
+SIGNAL MODULATION MECHANISMS
+================================================================
+
+De Forest describes several mechanisms by which a feeble input
+signal modulates current in the local circuit:
+
+1. Magnetic field interaction:
+   An incoming signal's magnetic field can "react upon the
+   field set up by the magnet N-S, thereby causing a slight
+   variation in the separation between the electrodes D E."
+
+2. Electrostatic effects:
+   "The increase in electrostatic attraction between D E will
+   cause E to recede from D, and thereby alter the current in
+   the local circuit."
+
+3. Ion motion control:
+   Signals could "vary the motions of the ions around the
+   filament."
+
+Any of these mechanisms allow a small input current or field
+variation to produce a relatively large change in the plate-
+filament current through the ionized gas — the amplifying
+action.
+
+================================================================
+WIRELESS APPLICATION (EMBODIMENT OF FIG. 2)
+================================================================
+
+"In Fig. 2 I have shown the line as constituting the local
+circuit of a wireless-telegraph receiving system including the
+battery B and oscillation-detector T, the latter being
+connected in series with an antenna V."
+
+So the Audion is explicitly positioned as part of a receiving
+set for radiated Hertzian waves: an elevated antenna V feeds
+the oscillation detector T, and the Audion amplifies the
+resulting feeble current in the local circuit.
+
+================================================================
+REPRESENTATIVE CLAIMS
+================================================================
+
+Claim 1 (paraphrased):
+Apparatus comprising an evacuated vessel inclosing a gaseous
+medium maintained in a condition of molecular activity, two
+electrodes sealed within said vessel, a local receiving
+circuit associated with said electrodes, and means whereby the
+separation of said electrodes may be varied by the currents to
+be amplified.
+
+Claim 6 (paraphrased):
+A heated electrode and two non-heated electrodes sealed within
+said vessel, the non-heated electrodes being unequally spaced
+with respect to said heated electrode.
+
+Additional claims cover combinations of the evacuated vessel,
+filament, plate electrodes, and local amplifier/detector
+circuits for telegraph, wireless telegraphy, and telemicrophone
+(audio) transmission applications.
+
+================================================================
+APPLICATION AREAS (listed by de Forest)
+================================================================
+
+- Telegraph systems.
+- Wireless telegraphy (receiving Hertzian waves).
+- Telemicrophone (audio) transmission.
+
+================================================================
+NOTES ON PHYSICS (for structural discrimination experiment)
+================================================================
+
+The Audion is the canonical receive-side amplifier for
+radiative wireless. Its context-of-use in this patent
+(Figure 2) is an antenna-fed wireless-telegraph receiver
+detecting radiated electromagnetic waves. There is no notion
+of ground-return conduction, surface waves along the Earth,
+or a Tesla-style Earth-resonant system. This patent should
+classify as RADIATIVE / HERTZIAN-wave receiving apparatus —
+a strong negative control for a structural discriminator
+attempting to distinguish surface-wave Tesla-type systems
+from radiative Hertz-type systems in the same time period.

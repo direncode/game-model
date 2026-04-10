@@ -1,0 +1,183 @@
+{
+  "summary": {
+    "total_entities": 1851,
+    "clusters": 36,
+    "unique_48bit_fingerprints": 249,
+    "survivors": 595,
+    "reduction": 3,
+    "survivor_types": {
+      "person": 13,
+      "patent_chunk": 541,
+      "location": 9,
+      "concept": 14,
+      "writing": 9,
+      "event": 9
+    },
+    "reconstruction": {
+      "mean_nn": 0.2425,
+      "median_nn": 0.2579,
+      "p95_nn": 0.5621,
+      "variance_preservation": 1.0622,
+      "coverages": {
+        "0.5": 0.8817,
+        "1.0": 1.0,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 0.8
+  },
+  "regime_survival": {
+    "info_dictionary_based": {
+      "original": 66,
+      "survivors": 18,
+      "rate": 0.2727272727272727,
+      "enrichment": 0.8484339190221543
+    },
+    "crypto_symmetric": {
+      "original": 67,
+      "survivors": 28,
+      "rate": 0.417910447761194,
+      "enrichment": 1.3000877963125548
+    },
+    "modern_surface_wave": {
+      "original": 258,
+      "survivors": 116,
+      "rate": 0.4496124031007752,
+      "enrichment": 1.3987101817471175
+    },
+    "radiative_radio": {
+      "original": 263,
+      "survivors": 132,
+      "rate": 0.5019011406844106,
+      "enrichment": 1.5613764897594018
+    },
+    "tesla_surface_wave": {
+      "original": 514,
+      "survivors": 109,
+      "rate": 0.21206225680933852,
+      "enrichment": 0.6597096426119086
+    },
+    "inductive_non_radiative": {
+      "original": 130,
+      "survivors": 39,
+      "rate": 0.3,
+      "enrichment": 0.9332773109243697
+    },
+    "crypto_number_theoretic": {
+      "original": 110,
+      "survivors": 24,
+      "rate": 0.21818181818181817,
+      "enrichment": 0.6787471352177235
+    },
+    "info_entropy_coding": {
+      "original": 118,
+      "survivors": 48,
+      "rate": 0.4067796610169492,
+      "enrichment": 1.2654607605754167
+    },
+    "crypto_lattice": {
+      "original": 131,
+      "survivors": 19,
+      "rate": 0.1450381679389313,
+      "enrichment": 0.4512027711848098
+    },
+    "control_tesla_non_wireless": {
+      "original": 67,
+      "survivors": 18,
+      "rate": 0.26865671641791045,
+      "enrichment": 0.8357707262009282
+    },
+    "info_transform_based": {
+      "original": 127,
+      "survivors": 44,
+      "rate": 0.3464566929133858,
+      "enrichment": 1.0778005690465162
+    }
+  },
+  "regime_scores": [
+    {
+      "regime": "crypto_symmetric",
+      "n": 28,
+      "mean_composite": 0.5193357142857142,
+      "mean_anomaly": 0.40280714285714286,
+      "mean_diversity": 0.44740714285714284
+    },
+    {
+      "regime": "radiative_radio",
+      "n": 132,
+      "mean_composite": 0.4667469696969697,
+      "mean_anomaly": 0.1904590909090909,
+      "mean_diversity": 0.47079848484848486
+    },
+    {
+      "regime": "tesla_surface_wave",
+      "n": 109,
+      "mean_composite": 0.4535908256880734,
+      "mean_anomaly": 0.2383229357798165,
+      "mean_diversity": 0.5766073394495412
+    },
+    {
+      "regime": "crypto_lattice",
+      "n": 19,
+      "mean_composite": 0.45143684210526314,
+      "mean_anomaly": 0.34874736842105264,
+      "mean_diversity": 0.3174
+    },
+    {
+      "regime": "control_tesla_non_wireless",
+      "n": 18,
+      "mean_composite": 0.4377,
+      "mean_anomaly": 0.16125,
+      "mean_diversity": 0.6215388888888889
+    },
+    {
+      "regime": "info_dictionary_based",
+      "n": 18,
+      "mean_composite": 0.43659444444444445,
+      "mean_anomaly": 0.22986666666666666,
+      "mean_diversity": 0.3204944444444444
+    },
+    {
+      "regime": "crypto_number_theoretic",
+      "n": 24,
+      "mean_composite": 0.4233208333333333,
+      "mean_anomaly": 0.32761666666666667,
+      "mean_diversity": 0.23900833333333332
+    },
+    {
+      "regime": "info_entropy_coding",
+      "n": 48,
+      "mean_composite": 0.41680625,
+      "mean_anomaly": 0.19128541666666668,
+      "mean_diversity": 0.31162083333333335
+    },
+    {
+      "regime": "inductive_non_radiative",
+      "n": 39,
+      "mean_composite": 0.4051076923076923,
+      "mean_anomaly": 0.24462820512820513,
+      "mean_diversity": 0.25306410256410256
+    },
+    {
+      "regime": "info_transform_based",
+      "n": 44,
+      "mean_composite": 0.4002886363636364,
+      "mean_anomaly": 0.23699090909090909,
+      "mean_diversity": 0.202975
+    },
+    {
+      "regime": "modern_surface_wave",
+      "n": 116,
+      "mean_composite": 0.37108793103448273,
+      "mean_anomaly": 0.180525,
+      "mean_diversity": 0.1352405172413793
+    }
+  ],
+  "cross_method_validation": {
+    "sw_survivors": 209,
+    "sw_chunks_in_corpus": 720,
+    "sw_survival_rate": 0.2902777777777778,
+    "vs_baseline": 0.9030322128851541
+  }
+}

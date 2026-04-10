@@ -1,0 +1,42 @@
+UNITED STATES PATENT
+MODERN DIPOLE ANTENNA FOR RADIO FREQUENCY TRANSMISSION
+(Representative modern radio antenna patent — control sample)
+
+ABSTRACT
+Disclosed is a dipole antenna for radio frequency transmission and reception in the range 100 MHz to 6 GHz, suitable for use in modern wireless communication systems including cellular, Wi-Fi, and satellite radio applications.
+
+BACKGROUND
+Modern wireless communication relies on the transmission of radio frequency electromagnetic waves between antennas. A transmitting antenna converts electrical signals into electromagnetic radiation which propagates through free space to a receiving antenna, where it is converted back into electrical signals. The efficiency of this process depends on the impedance matching between the antenna and the feed line, the radiation pattern of the antenna, and the gain characteristics.
+
+Conventional dipole antennas comprise two conductive elements excited at a common feed point. The length of each element is typically one-quarter of the operating wavelength, making the total antenna length half a wavelength at the operating frequency. This configuration is known as a half-wave dipole and exhibits an omnidirectional radiation pattern in the plane perpendicular to the antenna axis.
+
+SPECIFICATION
+The present invention provides an improved dipole antenna comprising first and second conductive elements of length substantially equal to one-quarter of the free-space wavelength at the center operating frequency. The elements are arranged collinearly with a feed point at the center. A balun transformer is coupled to the feed point to convert the balanced antenna impedance to an unbalanced impedance compatible with coaxial feed lines.
+
+The antenna is designed for operation at frequencies in the range 2.4 GHz to 5.8 GHz, covering common Wi-Fi and wireless LAN bands. At 2.4 GHz the wavelength in free space is approximately 125 mm, making each element approximately 31 mm in length. At 5.8 GHz the wavelength is 52 mm and each element is approximately 13 mm.
+
+The radiation pattern exhibits the characteristic figure-eight shape in the H-plane with maximum radiation perpendicular to the antenna axis and null along the axis. The peak gain is approximately 2.15 dBi. The input impedance at resonance is approximately 73 ohms.
+
+Far-field electromagnetic waves are radiated from the antenna and propagate outward through space following the inverse-distance law for field strength (1/r) and the inverse-square law for power density (1/r²). The radiated energy is not bound to any waveguide and propagates independently of any receiver.
+
+CLAIMS
+
+1. A dipole antenna comprising first and second elongated conductive elements arranged along a common axis with a feed point disposed between them, each element having a length substantially equal to one-quarter of the operating wavelength in free space.
+
+2. The antenna of claim 1, wherein the operating frequency is in the range 2.4 GHz to 5.8 GHz.
+
+3. The antenna of claim 1, further comprising a balun transformer coupled to the feed point.
+
+4. The antenna of claim 1, wherein the radiation pattern comprises an omnidirectional lobe in the plane perpendicular to the common axis.
+
+5. The antenna of claim 1, wherein the input impedance at the feed point is approximately 73 ohms at the center operating frequency.
+
+6. A method of radiating electromagnetic waves comprising exciting a dipole antenna with an alternating current signal at the feed point of the antenna such that electromagnetic waves are emitted from the antenna elements and propagate outward into free space.
+
+7. The method of claim 6, wherein the alternating current signal has a frequency in the range 2.4 GHz to 5.8 GHz.
+
+8. The method of claim 6, wherein the electromagnetic waves comprise far-field radiation characterized by a field strength that decays as 1/r with distance r from the antenna.
+
+9. A wireless communication system comprising a transmitting dipole antenna and a receiving dipole antenna separated by a distance across which electromagnetic waves propagate as free-space radiation.
+
+10. The system of claim 9, wherein the transmitting antenna and the receiving antenna operate at a common frequency selected from a range of 100 MHz to 6 GHz.

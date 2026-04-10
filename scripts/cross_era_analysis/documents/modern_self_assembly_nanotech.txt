@@ -1,0 +1,70 @@
+SOURCE: Molecular self-assembly and Molecular nanotechnology, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/Molecular_self-assembly  |  https://en.wikipedia.org/wiki/Molecular_nanotechnology
+
+# Molecular Self-Assembly and Nanotechnology: A Technical Overview
+
+## Core Definition and Mechanisms
+
+Molecular self-assembly is the process by which molecules adopt a defined arrangement without guidance or management from an outside source. Two broad categories exist: intermolecular self-assembly (multiple molecules organizing together into supramolecular architectures) and intramolecular folding (single molecule conformational changes producing defined tertiary structures, as in protein folding).
+
+The driving forces behind self-assembly involve non-covalent interactions. Assembly of molecules in such systems is directed through non-covalent interactions including hydrogen bonding, metal coordination, hydrophobic forces, van der Waals forces, pi-stacking interactions, and electrostatic interactions, as well as electromagnetic interactions. These weak but numerous interactions create thermodynamic driving forces favoring organized structures over random distributions. Although individual non-covalent bonds are weak (typically 1-10 kcal/mol compared to 50-100 kcal/mol for covalent bonds), the collective effect of many cooperative interactions produces robust assemblies.
+
+Self-assembly is thermodynamically driven: the final assembled state represents a local or global minimum of free energy. Kinetic pathways matter because many assemblies pass through metastable intermediates, and reversible bond formation allows error correction during assembly (annealing out misassembled configurations).
+
+## Supramolecular Chemistry Framework
+
+Molecular self-assembly constitutes a key concept in supramolecular chemistry. The resulting structures demonstrate remarkable diversity: a variety of different shapes and sizes can be obtained using molecular self-assembly. Common supramolecular assemblies include colloids, biomolecular condensates, micelles, vesicles, liquid crystal phases, and Langmuir monolayers formed by surfactant molecules at interfaces.
+
+Researchers have constructed Borromean rings—interlocking structures where removal of one ring unlocks each of the other rings—using both DNA and synthetic building blocks. This demonstrates the precision possible through directed molecular assembly and the ability to produce topologically nontrivial structures by design. Other engineered supramolecular topologies include catenanes (interlocked rings) and rotaxanes (a ring threaded on an axle with stoppers), both of which have been incorporated into molecular machines.
+
+## DNA Nanotechnology Applications
+
+DNA nanotechnology represents a major application domain for self-assembly. DNA nanotechnology uses the unique molecular recognition properties of DNA and other nucleic acids to create self-assembling branched DNA complexes with useful properties. Critically, DNA is thus used as a structural material rather than as a carrier of biological information, to make structures such as complex 2D and 3D lattices (both tile-based as well as using the DNA origami method) and three-dimensional structures in the shapes of polyhedra.
+
+The DNA origami technique, introduced by Paul Rothemund in 2006, enables programmable construction of geometric structures through careful strand design. A long scaffold strand (typically from the M13mp18 bacteriophage genome) is folded by hundreds of short staple strands into arbitrary two- and three-dimensional shapes with approximately 6-nanometer spatial resolution. These DNA scaffolds serve additional functions: DNA structures have been used as templates in the assembly of other molecules such as gold nanoparticles and streptavidin proteins, enabling hierarchical assembly of complex nanostructures combining multiple material types.
+
+Ned Seeman's pioneering work in the 1980s laid the groundwork by designing immobile Holliday junctions with four arms that can tile the plane. His crossover-based DX and TX tiles enabled the construction of extended periodic lattices and programmed finite assemblies, directly presaging tile-based molecular computation.
+
+## Molecular Machines and Rotary Motors
+
+Molecular machines—supramolecular assemblies that perform mechanical work in response to external stimuli—represent a frontier application of self-assembly. Examples include light-driven molecular rotors (Feringa's motors), acid-base-switchable rotaxanes and catenanes, and protein-based machines such as ATP synthase and bacterial flagellar motors. These artificial machines typically exploit conformational switches between stable states triggered by pH, redox chemistry, photon absorption, or metal binding. Interlocked architectures—rotaxanes and catenanes—provide the mechanical coupling between moving parts.
+
+## Two-Dimensional Monolayer Self-Assembly
+
+Surface-based self-assembly produces highly ordered molecular films. The spontaneous assembly of a single layer of molecules at interfaces is usually referred to as two-dimensional self-assembly. Self-assembled monolayers (SAMs) of alkanethiols on gold surfaces provide a canonical example: the sulfur head group chemisorbs to gold, while the alkyl tails interact through van der Waals forces to form ordered, densely packed layers.
+
+Historical progress accelerated with instrumental development: early direct proofs showing that non-surface active molecules can assemble into higher-order architectures at solid interfaces came with the development of scanning tunneling microscopy and shortly thereafter atomic force microscopy, which enabled real-space visualization of molecular arrangements on surfaces.
+
+Two primary strategies emerged for 2D self-assembly: self-assembly following ultra-high-vacuum deposition and annealing, and self-assembly at the solid-liquid interface. The field has advanced to incorporate crystal engineering at the nanoscopic scale, enabling researchers to design both molecular components and environmental conditions to produce highly crystalline architectures with predictable properties.
+
+## Drexler's Engines of Creation and Molecular Nanotechnology
+
+K. Eric Drexler's 1986 book Engines of Creation articulated a sweeping vision of molecular nanotechnology (MNT): molecular assemblers—programmable machines that could build nearly any structure atom by atom from simple feedstocks. Drexler's vision drew directly on von Neumann's universal constructor, proposing that mechanical molecular machines could achieve the same self-replicating, general-purpose fabrication capability in the physical world that von Neumann had demonstrated was logically possible in cellular automaton space.
+
+The key concepts of Drexler's framework include: the molecular assembler, a device capable of guiding chemical reactions by positioning reactive molecules with atomic precision; mechanosynthesis, controlled chemistry through mechanical positioning of reactants; diamondoid materials as a primary construction medium due to their strength and computational simulability; and exponentially self-replicating assemblers as a path to bulk manufacturing. Drexler's Nanosystems (1992) provided detailed engineering analyses of molecular gears, bearings, manipulator arms, and molecular-scale computers.
+
+While Drexler's vision remains contested—Richard Smalley and others questioned the feasibility of mechanosynthesis with highly reactive species—components of it have been realized experimentally. DNA-based molecular robots have been shown to pick up and sort molecular cargo. Scanning probe lithography demonstrates atomically precise surface modification. The basic principle of programmable self-assembly is now experimentally routine, even if universal molecular assemblers remain speculative.
+
+## Connection to Von Neumann's Universal Constructor
+
+Von Neumann's universal constructor, formalized in the late 1940s within a 29-state cellular automaton, demonstrated that a machine could in principle build copies of itself given suitable raw materials and an instruction tape describing its own construction. Molecular self-assembly research embodies a physical-chemistry instantiation of this idea: DNA strands encode assembly instructions in their sequences, bind through programmable Watson-Crick complementarity, and spontaneously organize into predesigned structures. Autocatalytic reaction networks in prebiotic chemistry, self-replicating peptides (Ghadiri's work), and synthetic RNA replicators all instantiate the self-reproducing automaton idea in real molecules.
+
+Modern DNA origami, molecular robotics, and supramolecular chemistry collectively form what might be called the experimental realization of von Neumann's abstract vision: machines that encode their own blueprints, assemble through local interactions, and replicate themselves from simple building blocks.
+
+## Biological Self-Assembly Systems
+
+Self-assembly plays fundamental roles in living systems. Molecular self-assembly underlies the construction of biologic macromolecular assemblies and biomolecular condensates in living organisms, and so is crucial to the function of cells. Specific examples include lipid bilayer membrane formation driven by hydrophobic effects, DNA double helix stabilization through hydrogen bonding and pi-stacking, protein quaternary structure assembly through shape-complementary interfaces, microtubule and actin filament polymerization, and ribosome assembly from dozens of RNA and protein components.
+
+Notably, molecular self-assembly of incorrectly folded proteins into insoluble amyloid fibers is responsible for infectious prion-related neurodegenerative diseases, underscoring that self-assembly processes, while generally producing functional structures, can generate pathogenic assemblies when template information becomes corrupted.
+
+Gecko adhesion exemplifies self-assembly in structural biology: hierarchical beta-keratin architectures (lamellae, setae, spatulae) exploit van der Waals forces at nanometer scales, enabling dry adhesion to smooth surfaces. Bioinspired adhesive materials mimicking gecko setae demonstrate how understanding biological self-assembly enables synthetic applications.
+
+## Bottom-Up Nanotechnology Approaches
+
+Molecular self-assembly is an important aspect of bottom-up approaches to nanotechnology. Using molecular self-assembly, the final (desired) structure is programmed in the shape and functional groups of the molecules. This contrasts sharply with top-down approaches like photolithography that carve desired structures from bulk material. Bottom-up methods potentially offer atomic precision, massive parallelism (every molecule is a factory), and energy efficiency.
+
+In the speculative vision of molecular nanotechnology, microchips of the future might be made by molecular self-assembly. An advantage to constructing nanostructure using molecular self-assembly for biological materials is that they will degrade back into individual molecules that can be broken down by the body, enabling biomedical applications such as targeted drug delivery with biocompatible disposal.
+
+## Conclusion
+
+Molecular self-assembly unites supramolecular chemistry, DNA nanotechnology, molecular machines, surface science, and biology around the common principle that complex, functional structures can emerge spontaneously from properly designed molecular building blocks. Traced intellectually to von Neumann's universal constructor and elaborated in Drexler's vision of molecular assemblers, the field has progressed from theoretical speculation to routine experimental practice, producing DNA origami shapes, programmable nanomachines, and self-assembled materials with applications in medicine, electronics, and manufacturing.

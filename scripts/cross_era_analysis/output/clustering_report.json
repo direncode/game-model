@@ -1,0 +1,104 @@
+{
+  "target": {
+    "id": "tesla_US1119732",
+    "title": "Apparatus for Transmitting Electrical Energy (Tesla, 1902/1914) - Wardenclyffe",
+    "year": 1902,
+    "type": "tesla_surface_wave",
+    "features": {
+      "word_count": 2080,
+      "number_density": 10.096,
+      "unit_density": 0.962,
+      "claim_ratio": 0.258,
+      "claim_keyword_density": 46.642,
+      "has_non_radiation_distinction": 0,
+      "kw_ground_grounded": 5.288,
+      "kw_elevated_terminal": 3.365,
+      "kw_quarter_wave": 0.962,
+      "kw_resonance": 3.846,
+      "kw_free_oscillation": 0.481,
+      "kw_non_radiative": 0.0,
+      "kw_radiation_contrast": 0.0,
+      "kw_terminal_geometry": 10.096,
+      "kw_propagation_medium": 0.481,
+      "kw_standing_wave": 0.0
+    }
+  },
+  "feature_names": [
+    "claim_keyword_density",
+    "claim_ratio",
+    "has_non_radiation_distinction",
+    "kw_elevated_terminal",
+    "kw_free_oscillation",
+    "kw_ground_grounded",
+    "kw_non_radiative",
+    "kw_propagation_medium",
+    "kw_quarter_wave",
+    "kw_radiation_contrast",
+    "kw_resonance",
+    "kw_standing_wave",
+    "kw_terminal_geometry",
+    "number_density",
+    "unit_density",
+    "word_count"
+  ],
+  "pairwise_distances_to_target": [
+    {
+      "id": "tesla_US645576",
+      "year": 1897,
+      "dist": 6.0134198313997445
+    },
+    {
+      "id": "tesla_US649621",
+      "year": 1900,
+      "dist": 6.726080776556035
+    },
+    {
+      "id": "tesla_US1119732",
+      "year": 1902,
+      "dist": 0.0
+    },
+    {
+      "id": "corum_US9923385",
+      "year": 2015,
+      "dist": 7.104156298445019
+    },
+    {
+      "id": "corum_US9912031",
+      "year": 2013,
+      "dist": 6.411616903860313
+    },
+    {
+      "id": "marconi_US586193",
+      "year": 1896,
+      "dist": 6.883565118629872
+    },
+    {
+      "id": "tesla_ac_motor_US382280",
+      "year": 1887,
+      "dist": 5.40916096429973
+    },
+    {
+      "id": "modern_radio_antenna",
+      "year": 2020,
+      "dist": 8.141737062066197
+    }
+  ],
+  "clusters": {
+    "1": [
+      "tesla_US645576",
+      "tesla_US649621"
+    ],
+    "2": [
+      "tesla_US1119732",
+      "tesla_ac_motor_US382280"
+    ],
+    "0": [
+      "corum_US9923385"
+    ],
+    "3": [
+      "corum_US9912031",
+      "marconi_US586193",
+      "modern_radio_antenna"
+    ]
+  }
+}

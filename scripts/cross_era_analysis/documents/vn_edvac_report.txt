@@ -1,0 +1,76 @@
+SOURCE: John von Neumann, First Draft of a Report on the EDVAC (30 June 1945), Moore School of Electrical Engineering, University of Pennsylvania
+CITATION: Wikipedia "First Draft of a Report on the EDVAC", "EDVAC", "Von Neumann architecture" (accessed 2026-04-10); Von Neumann (1945) First Draft of a Report on the EDVAC, contract W-670-ORD-4926
+
+== Introduction and Scope ==
+
+The First Draft of a Report on the EDVAC was a 101-page internal memorandum written by John von Neumann in the spring of 1945 while consulting for the ENIAC project at the Moore School. Although styled as a preliminary technical note, the document became the first written description of what is now universally called the stored-program computer, or the Von Neumann architecture. Its influence on the design of every subsequent general-purpose computer is difficult to overstate.
+
+Von Neumann organized the machine into six major subdivisions, using the language of biological organs to convey that each was a functional module rather than a piece of circuitry:
+
+  CA  Central Arithmetic unit
+  CC  Central Control unit
+  M   Memory
+  I   Input organ
+  O   Output organ
+  R   outside Recording medium
+
+This division is the direct ancestor of the modern five-component description (ALU, control unit, memory, input, output, with the external store folded into input/output).
+
+== The Stored-Program Principle ==
+
+The single most important conceptual advance in the report is the unification of instruction storage and data storage. Von Neumann writes in Section 14.0: "The orders which are received by CC come from M, i.e. from the same place where the numerical material is stored." This sentence, short as it is, abolishes the distinction between program and data that had characterized every prior computing machine, from Babbage's Analytical Engine to the plugboard-programmed ENIAC. By making orders and numbers indistinguishable at the level of the memory bus, the machine can read, write, and modify its own program as freely as it reads and writes numerical data. This is the foundation of the assembler, the compiler, the loader, the interpreter, and — ultimately — every program that manipulates other programs.
+
+== Number Representation and Word Format ==
+
+Numbers are represented in binary notation. Von Neumann devotes considerable space (Sections 5-7) to defending the choice of binary over decimal, citing the greater simplicity and reliability of two-state circuit elements. The fundamental word, which he calls the "minor cycle," is 32 bits wide and comprises:
+
+  - 27 to 30 binary digits for the numerical value
+  - one sign bit
+  - one bit that distinguishes numbers from instructions
+  - remaining bits reserved for future use
+
+Arithmetic is fixed-point with the binary point immediately after the sign bit, so all numerical values lie strictly between -1 and +1. Subtraction is implemented via two's complement, which reduces subtraction to addition followed by sign inversion. Multiplication, division, and square root are built up from shift-and-add primitives operating on one bit per machine cycle; a thirty-bit multiply was estimated to require approximately 302 microseconds.
+
+== The Arithmetic Unit (CA) ==
+
+The central arithmetic unit performs addition, subtraction, multiplication, division, and square-root extraction. Von Neumann argues that no other primitive operations should be hard-wired, because any transcendental function — logarithm, trigonometric, exponential — can be computed by table lookup plus interpolation using the five primitives. The CA processes one binary digit per elementary cycle and is driven by a master clock that also synchronizes the memory and control units.
+
+== Logical Design: E-Elements ==
+
+Von Neumann introduces the concept of an "E element," a basic digital building block inspired explicitly by the McCulloch-Pitts model of the biological neuron. Each E element is implemented by one or two vacuum tubes and has a few inputs plus one output; the output fires when the weighted sum of the inputs exceeds a threshold, with some inputs optionally negated ("inhibit" inputs). Using E elements he constructs two-input AND gates, OR gates, flip-flops, and the delay lines of the memory hierarchy. The use of a biological metaphor is not merely cosmetic: Von Neumann is consciously drawing a parallel between the operation of the machine and the operation of the brain, a theme he would return to repeatedly in later work.
+
+Logic diagrams in the report use arrowhead symbols for unit time delays, making explicit the synchronous pipelined nature of the design.
+
+== Memory Organization (M) ==
+
+Von Neumann considers two physical implementations for the main memory.
+
+The first is the mercury acoustic delay line, organized into 256 "delay-line organs" (DLAs) of 1024 bits each (32 minor cycles per DLA, or one "major cycle"). Addresses within this memory require 13 bits: 8 to select the DLA and 5 to select the minor cycle within it. The total capacity is therefore 256 kilobits, of which Von Neumann estimates 2048 minor cycles (64 kilobits) are required for a working machine and 8192 minor cycles (256 kilobits) are a realistic design goal.
+
+The second is the iconoscope tube memory — a cathode-ray tube whose phosphor screen stores one bit per scan position as a capacitive charge that must be periodically refreshed. Von Neumann estimates a retention time of approximately one second before a refresh cycle is required. He notes that the iconoscope is preferable on grounds of random access time but less mature technologically than the delay line.
+
+== The Control Unit (CC) ==
+
+The central control unit fetches instructions from M, decodes them, and dispatches signals to CA, M, I, and O. Instructions are executed sequentially unless a jump order transfers control elsewhere; conditional branching is supported by sign-based selection orders that route control based on the sign of the most recent arithmetic result. Each instruction is a 13-bit word (in the delay-line design) identifying the memory location of the next operand or the next instruction.
+
+The instruction set includes arithmetic operations, load and store operations between CA and M, conditional branches driven by sign bits, and I/O commands directed at the input and output organs I and O. Several bits are reserved for addressable memory expansion in future versions of the machine.
+
+== Input, Output, and External Recording ==
+
+The input organ I transfers data from the external recording medium R into the memory M, and the output organ O writes data from M onto R. R is envisioned as magnetic wire, magnetic tape, or punched paper — the report does not commit to a specific medium. Error detection and correction are mentioned as desirable but the report does not develop a specific scheme; this is left for future design iterations.
+
+== Circuit Implementation and Performance ==
+
+Vacuum tubes are chosen over electromechanical relays on the grounds of speed: a vacuum tube flip-flop operates in approximately one microsecond, whereas a relay requires about ten milliseconds, a ten-thousand-fold difference. All timing is driven by a crystal-controlled master oscillator that supplies a single clock to every organ.
+
+== Legacy and the Von Neumann Bottleneck ==
+
+The Draft was released in only a handful of mimeographed copies but spread rapidly through the nascent computing community. Its influence can be traced in essentially every stored-program machine built thereafter: EDSAC, ILLIAC, IAS, UNIVAC, and on through contemporary architectures. The principle that instructions and data share a single addressable memory is still called Von Neumann architecture, and the throughput constraint imposed by a single bus between CPU and memory is still called the Von Neumann bottleneck — a term coined by John Backus in his 1977 Turing Award lecture: "Surely there must be a less primitive way of making big changes in the store than by pushing vast numbers of words back and forth through the von Neumann bottleneck."
+
+== The Biological Metaphor ==
+
+A feature of the Draft that has attracted less attention than the stored-program concept, but is structurally no less important, is the persistent biological framing of the entire discussion. Von Neumann calls each subsystem an "organ," models the elementary logic element on the McCulloch-Pitts neuron, and speaks of the machine's "memory" and "input and output organs" as if it were a living system. This is not a decorative choice. Von Neumann had been reading McCulloch and Pitts's 1943 paper "A Logical Calculus of the Ideas Immanent in Nervous Activity" and regarded the idealized neuron as the cleanest available model of a binary computing element. The biological framing in the EDVAC report is the direct ancestor of the biological framing of the later Theory of Self-Reproducing Automata: in both cases Von Neumann sought to identify the logical principles that computing machines and living systems share, and to build formal theories of those principles independent of the particular physical substrate in which they are realized.
+
+== Subsequent Refinements ==
+
+Although the First Draft was the founding document, it was quickly supplemented by a sequence of more detailed reports from the Princeton Institute for Advanced Study group: the 1946 "Preliminary Discussion of the Logical Design of an Electronic Computing Instrument" by Burks, Goldstine, and Von Neumann, and the 1947-48 "Planning and Coding of Problems for an Electronic Computing Instrument." These documents filled in the programming model, the subroutine mechanism, and the structure of a typical scientific computation. Together with the First Draft they constitute the earliest systematic theory of stored-program computing and are the conceptual source of every subsequent architecture from the IAS machine through modern RISC processors.

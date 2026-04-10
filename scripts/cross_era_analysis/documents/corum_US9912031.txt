@@ -1,0 +1,78 @@
+UNITED STATES PATENT
+US 9,912,031 B2
+EXCITATION AND USE OF GUIDED SURFACE WAVE MODES ON LOSSY MEDIA
+Inventors: James F. Corum, Kenneth L. Corum
+Assignee: CPG Technologies, LLC
+Filed: March 7, 2013
+Issued: March 6, 2018
+
+ABSTRACT
+Disclosed are various embodiments for launching a guided surface wave along a surface of a lossy conducting medium. The apparatus includes a guided surface waveguide probe configured to excite a guided surface wave having at least one field component that is bound to the interface between the lossy conducting medium and an insulating medium.
+
+BACKGROUND
+
+For over a century, signals transmitted by radio waves involved radiation fields launched using conventional antenna structures. The use of radiated electromagnetic waves for the transmission of energy has been deemed impractical due to the inverse square law of radiation loss: energy transmitted via radiated waves spreads out in three dimensions and dissipates rapidly with distance.
+
+In contrast to ordinary radio transmission, the present invention concerns the launching of guided surface waves along the interface between two media of different electromagnetic properties. A guided surface wave is a bound propagating mode whose energy is concentrated near the interface and which decays exponentially with distance above the surface.
+
+DEFINITIONS AND DISTINCTIONS
+
+A guided electromagnetic field is a propagating electromagnetic wave whose energy is concentrated within or near boundaries between media having different electromagnetic properties. In this sense, a guided electromagnetic field is one that is bound to a waveguide. If there is no load for a guided electromagnetic wave, then no energy is consumed at the waveguide.
+
+A radiated electromagnetic field comprises electromagnetic energy that is emitted from a source structure in the form of waves that are not bound to a waveguide. Radiated electromagnetic fields characteristically free propagate through space independent of the source. Once radiated, these fields propagate outward and are lost regardless of whether a receiver is present.
+
+Field strength characteristics distinguish the two modes decisively. For a guided surface wave, the field strength as a function of distance d from the launching apparatus falls off at a rate of approximately exp(−αd) / sqrt(d), where α is an attenuation constant dependent on the conductivity of the lossy medium. For a radiated wave, the field strength falls off at a rate of 1/d (for the far field), which corresponds to a 1/d² reduction in power.
+
+The guided surface wave considered here is of the Zenneck-Sommerfeld type, distinguished from the conventional Norton ground wave and from ordinary radio wave propagation.
+
+GUIDED SURFACE WAVEGUIDE PROBE
+
+A guided surface waveguide probe comprises a charge terminal T1 elevated above a lossy conducting medium, coupled to an excitation source via a feed network. The charge terminal T1 is positioned at a height relative to the lossy conducting medium such that electromagnetic waves emitted from the probe are launched at the complex Brewster angle of incidence at the interface between the lossy conducting medium and an insulating medium above the lossy conducting medium.
+
+When the complex Brewster angle condition is satisfied, the wavefront emitted from the charge terminal substantially mode-matches a Zenneck surface wave bound to the interface. This mode-matching condition is the critical design requirement of the invention.
+
+FREQUENCY SPECIFICATIONS
+
+Example operating frequencies include 1.85 MHz and 59 MHz. At these frequencies:
+- 1.85 MHz: free-space wavelength ≈ 162 meters
+- 59 MHz: free-space wavelength ≈ 5.08 meters
+
+The frequency of operation is selected such that the charge terminal height and the feed network parameters establish the complex Brewster angle condition at the desired operating frequency.
+
+TERMINAL GEOMETRY
+
+The charge terminal T1 may comprise a sphere, a disk, a cylinder, a cone, a torus, a hood, one or more rings, or any other randomized shape. The charge terminal is characterized by its self-capacitance C1, which depends on its shape, size, and height above ground.
+
+The charge terminal is placed at a height above the lossy conducting medium such that bound surface charge is coupled to the surface of the lossy conducting medium via the feed network. The height of the charge terminal is selected to establish the complex Brewster angle at the operating frequency.
+
+FEED NETWORK
+
+The feed network comprises an inductor coupled between an excitation source and the charge terminal T1. The feed network is configured to generate a phase delay such that the wavefront incident on the lossy conducting medium satisfies the complex Brewster angle condition.
+
+In various embodiments, the feed network comprises a helical coil configured as a slow-wave structure. The helical coil has a phase velocity less than the speed of light in free space, allowing a compact physical implementation of a distributed transmission line with a specified electrical length.
+
+HISTORICAL REFERENCES
+
+The present invention builds upon theoretical foundations established by:
+- Zenneck, J. (1907). "Uber die Fortpflanzung ebener elektromagnetischer Wellen längs einer ebenen Leiterfläche."
+- Sommerfeld, A. (1909). "Uber die Ausbreitung der Wellen in der Drahtlosen Telegraphie."
+- Goubau, G. (1950). "Surface Waves and Their Application to Transmission Lines."
+- Barlow, H.M. and Brown, J. (1962). "Radio Surface Waves."
+
+CLAIMS (representative)
+
+1. An apparatus comprising a guided surface waveguide probe configured to excite a guided surface wave mode on a lossy conducting medium, the probe comprising a charge terminal elevated above the lossy conducting medium and a feed network coupled to the charge terminal.
+
+2. The apparatus of claim 1, wherein the guided surface waveguide probe is configured to generate a wavefront incident on the lossy conducting medium at a complex Brewster angle of incidence, the complex Brewster angle being a function of electromagnetic properties of the lossy conducting medium.
+
+3. The apparatus of claim 1, wherein the feed network comprises a coil having an inductance selected to establish a phase delay sufficient to position the charge terminal at a height at which the wavefront is incident at the complex Brewster angle.
+
+4. The apparatus of claim 1, wherein the charge terminal has a shape selected from the group consisting of a sphere, a disk, a cylinder, a cone, a torus, a hood, and a combination thereof.
+
+5. A method for launching a guided surface wave along a lossy conducting medium, comprising exciting a charge terminal elevated above the lossy conducting medium with an excitation source through a feed network such that a wavefront is generated that is incident on the surface of the lossy conducting medium at the complex Brewster angle of incidence.
+
+6. The method of claim 5, wherein the guided surface wave is a Zenneck surface wave bound to the interface between the lossy conducting medium and an insulating medium above the lossy conducting medium.
+
+7. The method of claim 5, wherein the frequency of excitation is in the range of 0.1 MHz to 10 MHz.
+
+8. A guided surface wave receive structure comprising a linear probe or tuned resonator configured to extract energy from a guided surface wave propagating along a lossy conducting medium.

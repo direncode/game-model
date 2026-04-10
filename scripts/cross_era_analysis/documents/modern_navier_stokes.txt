@@ -1,0 +1,90 @@
+SOURCE: Navier-Stokes equations, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations
+
+# Navier-Stokes Equations: Mathematical Description of Fluid Motion
+
+## Fundamental Formulation
+
+The Navier-Stokes equations describe viscous fluid motion through a system of partial differential equations. These equations mathematically express momentum balance for Newtonian fluids and make use of the conservation of mass. Together with a state equation relating density, pressure, and temperature, they form a closed system governing the evolution of velocity, pressure, and density fields in a continuum fluid.
+
+The equations derive from applying Newton's second law to a fluid element, incorporating pressure gradient forces, viscous stress gradients, and external body forces such as gravity. The general Cauchy momentum equation serves as the foundation: the material derivative of velocity equals pressure gradient effects divided by density, stress tensor divergence divided by density, and body accelerations:
+
+Du/Dt = (1/rho) * div(sigma) + g
+
+where D/Dt = d/dt + (u . grad) is the material (substantial) derivative, sigma is the Cauchy stress tensor, and g is the body force per unit mass. For a Newtonian fluid, sigma is a linear function of the strain-rate tensor, and substituting this constitutive law into the Cauchy momentum equation yields the Navier-Stokes equations.
+
+## Compressible Flow Representation
+
+For compressible fluids, the momentum equation incorporates bulk viscosity and shear viscosity effects. The constitutive relationship assumes the deviatoric stress is linear in the strain-rate tensor and depends on two viscosity coefficients: dynamic viscosity mu and bulk viscosity zeta (also called second viscosity).
+
+The stress tensor decomposition separates isotropic pressure components from deviatoric shear components. In three dimensions, this becomes:
+
+sigma = -[p - zeta*(div u)]*I + mu*[grad(u) + grad(u)^T - (2/3)*(div u)*I]
+
+The Stokes hypothesis, setting bulk viscosity to zero, represents a common simplification that proves valid for monoatomic gases but generally fails for other substances including polyatomic gases, liquids, and non-equilibrium flows.
+
+The compressible Navier-Stokes system couples the momentum equation with the continuity equation dp/dt + div(rho*u) = 0 and an energy equation accounting for internal energy, work done by pressure and viscous stresses, and heat conduction (often via Fourier's law). An equation of state such as the ideal gas law p = rho*R*T closes the system.
+
+## Incompressible Flow Equation
+
+The incompressible formulation assumes constant density, eliminating pressure and density waves and replacing the continuity equation with the divergence-free condition div(u) = 0. For uniform viscosity, the momentum equation simplifies substantially:
+
+Du/Dt = nu*laplacian(u) - (1/rho)*grad(p) + (1/rho)*f
+
+where nu = mu/rho represents kinematic viscosity and f is body force per unit volume. The Laplacian term characterizes momentum diffusion—viscosity operates analogously to heat conduction, smoothing velocity gradients across fluid domains.
+
+This equation governs most engineering applications at low Mach numbers (less than roughly 0.3). For incompressible flows, the pressure field satisfies a Poisson equation derived from taking the divergence of the momentum equations and enforcing incompressibility:
+
+laplacian(p) = -rho * div((u . grad)u)
+
+This elliptic equation for pressure couples globally: pressure at any point depends instantaneously on the entire velocity field, reflecting the infinite speed of pressure signals in the incompressible limit.
+
+## Convective Acceleration and Nonlinearity
+
+Convective acceleration represents acceleration changes across spatial coordinates rather than temporal evolution. This is the effect of acceleration of a flow with respect to space, exemplified by fluid deceleration in diverging ducts. Mathematically it is the (u . grad)u term, which is nonlinear in the velocity field and is responsible for turbulence, vortex stretching, and the general difficulty of solving the Navier-Stokes equations.
+
+The nonlinear convection term (u . grad)u can be reformulated using the vector identity:
+
+(u . grad)u = (curl u) x u + (1/2)*grad(|u|^2)
+
+where (curl u) x u is the Lamb vector, linking velocity, vorticity omega = curl(u), and kinetic energy. Taking the curl of the Navier-Stokes equation yields the vorticity equation, which eliminates pressure and reveals the central role of vortex stretching in three-dimensional flows:
+
+Domega/Dt = (omega . grad)u + nu*laplacian(omega)
+
+The term (omega . grad)u, absent in two dimensions, amplifies vorticity through the interaction of vortex lines with velocity gradients and is central to the turbulent energy cascade.
+
+## Mathematical Structure and Weak Formulations
+
+The incompressible Navier-Stokes equation constitutes a composite system decomposable into solenoidal and irrotational components via Helmholtz decomposition. This projection operator approach reveals the equation as an integro-differential equation similar to Coulomb's and Biot-Savart's law, not convenient for numerical computation.
+
+Weak or variational formulations provide mathematically equivalent but computationally superior alternatives to strong forms. These weak formulations underpin modern finite element and numerical discretization methods. Jean Leray introduced weak solutions (now called Leray-Hopf solutions) in 1934 and proved their global existence for the 3D Navier-Stokes equations, but their uniqueness and regularity remain open problems.
+
+## The Millennium Prize Existence and Smoothness Problem
+
+Despite extensive applications and centuries of study, fundamental mathematical questions remain unresolved. The conjecture that the 3D incompressible Navier-Stokes equations have smooth (meaning infinitely differentiable) or bounded solutions for all time, given smooth initial data of finite energy, has not yet been proven.
+
+This Navier-Stokes existence and smoothness problem ranks among the Millennium Prize Problems formulated by the Clay Mathematics Institute in 2000, with a one-million-dollar award offered for its solution or counterexample. The problem can be stated in two forms: proving global smooth existence for smooth initial data, or exhibiting a smooth initial condition for which the solution develops a singularity in finite time.
+
+In two dimensions the corresponding problem is solved: smooth solutions exist globally and are unique. The difficulty in three dimensions stems from vortex stretching and the lack of a sufficient a priori estimate to control solution regularity. Partial results include the Caffarelli-Kohn-Nirenberg theorem on the size of possible singular sets, Serrin-type conditional regularity criteria, and small-data global existence results.
+
+## Historical Development
+
+The equations evolved progressively from 1822 (Claude-Louis Navier) through 1842-1850 (George Gabriel Stokes). Navier introduced his version of the equations based on a molecular model of fluids, incorporating intermolecular forces that he identified with what we now call viscosity. Stokes, working from continuum mechanics and the constitutive assumption of linear relationship between stress and rate of strain, arrived at essentially the same equations from a more modern standpoint. Their development coupled conservation principles with constitutive assumptions about Newtonian fluid stress responses.
+
+Subsequent contributions from Boussinesq, Reynolds (who introduced Reynolds decomposition and Reynolds stresses for turbulence), Prandtl (boundary layer theory), Taylor, von Karman, and Kolmogorov built the modern theoretical and practical framework for fluid mechanics around the Navier-Stokes foundation.
+
+## Reynolds-Averaged Navier-Stokes and Turbulence Closure
+
+Solving the full Navier-Stokes equations for turbulent flow at high Reynolds number is computationally prohibitive because of the enormous range of scales that must be resolved (scaling as Re^(9/4) in three dimensions). Engineering practice therefore relies on Reynolds-averaged Navier-Stokes (RANS) equations, obtained by decomposing the velocity into mean and fluctuating components u = U + u' and averaging. The nonlinear convection term produces the Reynolds stress tensor -rho*<u' (x) u'>, which must be modeled through a turbulence closure.
+
+Standard turbulence models include the mixing length model, k-epsilon, k-omega SST, Reynolds-stress models, and more recently Spalart-Allmaras and hybrid RANS-LES methods such as DES (detached eddy simulation). Large eddy simulation (LES) explicitly resolves the energy-containing scales and models only the subgrid-scale motions, while direct numerical simulation (DNS) resolves all scales and is used as a research tool for turbulence physics at moderate Reynolds numbers.
+
+## Computational Fluid Dynamics
+
+Practical numerical solution of the Navier-Stokes equations is the domain of computational fluid dynamics (CFD). Discretization methods include finite difference, finite volume, finite element, and spectral methods. Time integration ranges from explicit Runge-Kutta schemes to fully implicit solvers. Pressure-velocity coupling for incompressible flow is handled through projection methods (Chorin) or SIMPLE-family algorithms (Patankar and Spalding). Unstructured grids, adaptive mesh refinement, and parallel computing on GPUs enable CFD simulations with billions of cells on modern supercomputers.
+
+## Practical Applications
+
+The equations model diverse phenomena: aircraft and automotive aerodynamics, cardiovascular hemodynamics, atmospheric and oceanic circulation, pollution transport, astrophysical flows, plasma physics (through magnetohydrodynamics, where Navier-Stokes is coupled with Maxwell's equations), industrial mixing, and microfluidics. Their universal applicability across scales and phenomena demonstrates their centrality to continuum mechanics, despite remaining mathematical puzzles regarding three-dimensional regularity and long-time behavior of solutions.
+
+Leonardo da Vinci observed and sketched the qualitative phenomena now governed by the Navier-Stokes equations—vortex streets behind obstacles, free-surface turbulence, jet mixing, and complex vortical structures—more than three centuries before Navier wrote down the equations that describe these flows mathematically. His notebooks record in words and pictures the same phenomena that modern CFD renders numerically.

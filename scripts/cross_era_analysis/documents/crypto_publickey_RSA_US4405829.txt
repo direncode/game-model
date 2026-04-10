@@ -1,0 +1,88 @@
+UNITED STATES PATENT
+US 4,405,829
+CRYPTOGRAPHIC COMMUNICATIONS SYSTEM AND METHOD
+Inventors: Ronald L. Rivest, Adi Shamir, Leonard M. Adleman
+Issued: September 20, 1983
+Filed: December 14, 1977
+
+ABSTRACT
+A cryptographic communications system based on the computational difficulty of factoring the product of two large prime numbers. The system enables both encryption (secret messages) and digital signatures (authenticated messages) using a public encryption key and a private decryption key. The security depends on the practical impossibility of factoring the modulus n = p*q where p and q are large primes.
+
+MATHEMATICAL FOUNDATION
+
+Core Problem: Integer factorization. Given a composite number n = p*q where p and q are large primes, recover p and q. Despite centuries of mathematical research, no polynomial-time algorithm is known for this problem.
+
+The patent states: "the security of the system is dependent upon the ability to determine p and q which are the prime factors of n."
+
+The patent notes: "using known computer-implemented factorization methods, on the order of 10^9 years is required to factor a 200 digit long number."
+
+KEY COMPONENTS
+
+Modulus (n): Product of two large prime numbers (n = p * q)
+Public Exponent (e): Relatively prime to (p-1)(q-1)
+Private Exponent (d): Multiplicative inverse of e modulo lambda(n) where lambda is the Carmichael function
+
+Key Generation Procedure:
+1. Choose two large random primes p and q
+2. Compute n = p * q
+3. Compute phi(n) = (p-1)(q-1)
+4. Choose e relatively prime to phi(n)
+5. Compute d such that e*d = 1 mod phi(n)
+6. Public key: (n, e); Private key: (n, d); discard p and q (or keep secret)
+
+ENCRYPTION
+
+To encrypt a message M (where 0 <= M < n):
+C = M^e mod n
+
+DECRYPTION
+
+To decrypt a ciphertext C:
+M' = C^d mod n
+
+The correctness of decryption follows from Fermat's little theorem and the Chinese remainder theorem. The exponent pair (e, d) inverts each other modulo n because of the relationship d = e^(-1) mod phi(n).
+
+DIGITAL SIGNATURES
+
+The system also enables digital signatures. To sign a message M, the signer computes:
+S = M^d mod n (using the private key)
+
+Anyone can verify the signature by computing:
+M' = S^e mod n (using the public key)
+
+If M' = M, the signature is valid. The signer cannot later deny the validity of the signature because only the holder of the private key d could have produced S.
+
+FUNCTIONAL ARCHITECTURE
+
+The patent describes "exponentiation by repeated squaring and multiplication" hardware using:
+- Message register (M)
+- Exponent register (e or d)
+- Modulus register (n)
+- Modular multiplier for sequential computation
+
+The modular exponentiation is the computationally dominant operation. The patent describes hardware optimization for this operation using repeated squaring techniques.
+
+DUAL CAPABILITIES
+
+1. Privacy mode: Public encryption key protects messages from eavesdroppers
+2. Digital signatures: Private decryption key authenticates messages without requiring pre-shared secrets
+
+The signer cannot later deny the validity of his signature because only the holder of the private key could have generated it.
+
+CLAIMS
+
+1. A cryptographic communications system comprising means for generating a pair of keys (e, d) related by the property that e*d = 1 mod lambda(n) where n is the product of two large primes p and q.
+
+2. The system of claim 1 wherein encryption is performed by computing C = M^e mod n.
+
+3. The system of claim 1 wherein decryption is performed by computing M = C^d mod n.
+
+4. The system of claim 1 wherein the security is based on the computational difficulty of factoring n into its prime factors p and q.
+
+5. A method for digital signature comprising signing a message M by computing S = M^d mod n using the private key d, and verifying the signature by computing M = S^e mod n using the public key e.
+
+6. The system of claim 1 wherein n has at least 200 decimal digits.
+
+7. A trapdoor one-way function comprising f(x) = x^e mod n where the trapdoor information is the factorization of n into p and q.
+
+This is the foundational public-key cryptography invention based on integer factorization. The security model is computational hardness of factoring large composite numbers. RSA differs from Diffie-Hellman in using factoring rather than discrete logarithms as the underlying hard problem.

@@ -1,0 +1,84 @@
+SOURCE: Transition metal, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/Transition_metal
+
+# Technical Analysis of Transition Metal Chemistry
+
+## Oxidation States and Electronic Properties
+
+Transition metals exhibit characteristic variable oxidation states. A defining characteristic is that transition metals exhibit two or more oxidation states, usually differing by one. The vanadium example illustrates this range, with oxidation states spanning from -1 to +5.
+
+The maximum oxidation states follow predictable trends. In the first transition series, oxidation states correlate with valence electron count from titanium (+4) through manganese (+7), declining thereafter. Higher periods show elevated maxima—ruthenium reaches +8, iridium achieves +9.
+
+## D-Orbital Structure and Electron Configuration
+
+Transition metals possess the general electronic configuration [noble gas](n-1)d(0-10)ns(0-2). The (n-1)d orbitals are very significant because they influence such properties as magnetic character, variable oxidation states, formation of coloured compounds.
+
+The Madelung rule predicts d-orbital filling follows s-orbital completion, though exceptions occur. Chromium exemplifies this: the rule predicts 3d4 4s2, but the actual ground state is 3d5 4s1. These anomalies result from nuclear charge effects and electron-electron interactions including Coulomb repulsion and exchange energy.
+
+## Coordination Complex Formation
+
+Transition metals bind multiple ligands, enabling diverse complex formation. Metals bind to a variety of ligands to form coordination complexes that are often coloured. These complexes exhibit properties absent in main-group compounds.
+
+Crystal field stabilization energy and the Irving-Williams series of stability constants provide frameworks for understanding complex chemistry. Ligand field theory extends crystal field theory by incorporating covalent bonding contributions, molecular orbital formation between metal d-orbitals and ligand orbitals, and pi-backbonding in complexes with ligands such as CO, CN-, and phosphines.
+
+The octahedral complex geometry, tetrahedral geometry, and square-planar geometry each produce characteristic d-orbital splitting patterns. In octahedral fields, the d-orbitals split into lower-energy t2g (dxy, dxz, dyz) and higher-energy eg (dz2, dx2-y2) sets. In tetrahedral fields, the splitting inverts and is smaller in magnitude, typically 4/9 that of the octahedral field.
+
+## Coloration Mechanisms: d-d and Charge-Transfer Transitions
+
+Two principal electronic transition types produce color in metal compounds:
+
+D-d transitions involve electron movement between d orbitals. In octahedral complexes, d-d transitions are forbidden by the Laporte rule and only occur because of vibronic coupling. Tetrahedral complexes exhibit greater color intensity due to absence of centrosymmetry. Molar absorptivity ranges approximately 5-500 M-1 cm-1.
+
+Spin-forbidden transitions produce weaker colors. Manganese(II) with d5 configuration displays much weaker coloration than spin-allowed transitions; [Mn(H2O)6]2+ shows maximum molar absorptivity of approximately 0.04 M-1 cm-1.
+
+Charge-transfer transitions occur when an electron may jump from a predominantly ligand orbital to a predominantly metal orbital, producing ligand-to-metal charge-transfer (LMCT) transitions. These occur most readily when metal oxidation states are elevated. Conversely, metal-to-ligand charge-transfer (MLCT) transitions predominate when metals occupy low oxidation states with easily-reduced ligands. Charge-transfer transitions generate more intense colors than d-d mechanisms.
+
+## Magnetic Properties
+
+Transition metals demonstrate paramagnetism when unpaired d electrons exist. In octahedral complexes containing four to seven d electrons, both high-spin and low-spin configurations are possible. Tetrahedral complexes remain high-spin due to minimal crystal field splitting; orbital energy gains from lower-energy orbital occupation cannot overcome spin-pairing energies.
+
+Certain configurations are diamagnetic: octahedral, low-spin, d6 and square-planar d8 complexes exhibit paired electrons throughout all orbitals.
+
+Ferromagnetic materials like metallic iron demonstrate aligned spin vectors in crystalline structures. All of the elements that are ferromagnetic near room temperature are transition metals (iron, cobalt and nickel) or inner transition metals (gadolinium).
+
+## Redox Chemistry of First-Row Transition Metals
+
+Iron exhibits stable oxidation states of +2 (ferrous) and +3 (ferric), with interconversion via single-electron transfer reactions fundamental to biological electron transport. Copper exhibits +1 (cuprous) and +2 (cupric) states, with disproportionation of Cu(I) to Cu(0) and Cu(II) occurring in aqueous solution absent stabilizing ligands. Mercury exhibits +1 and +2 states, with Hg(I) existing as the dimeric Hg2(2+) cation rather than monomeric Hg+. Antimony, though a metalloid, exhibits +3 and +5 oxidation states with distinctive Lewis acid behavior. Lead exhibits +2 and +4 states, with the +2 state stabilized by relativistic effects on the 6s electrons (the inert pair effect).
+
+## Special Cases: Group 12 Elements
+
+Zinc, cadmium, and mercury present classification challenges. These elements possess d10 s2 electron configurations with complete d-shells, potentially excluding them from transition metal classification. However, they can use their d orbitals for bonding even though they are not known in oxidation states that would formally require breaking open the d-subshell.
+
+The disputed 2007 synthesis of mercury(IV) fluoride (HgF4) reinforces arguments for reclassifying group 12 elements as transition metals. Copernicium is predicted to exhibit transition-metal behavior through relativistically destabilized 6d orbitals, potentially accessing higher oxidation states than +2.
+
+## Catalytic Mechanisms
+
+Transition metals function as effective catalysts through multiple pathways. The variable oxidation states enable redox cycling at catalyst surfaces. Iron in the Haber process and vanadium(V) oxide in the contact process exemplify industrial applications. The mechanism involves formation of bonds between reactant molecules and atoms of the surface of the catalyst, concentrating reactants and weakening substrate bonds.
+
+Autocatalysis represents an interesting catalytic phenomenon. The permanganate-oxalate reaction exemplifies this: initially produced Mn2+ reacts with permanganate to form Mn3+, subsequently regenerating Mn2+ through oxalate reaction, thereby amplifying catalytic production.
+
+Homogeneous transition-metal catalysis encompasses hydroformylation (oxo process) using cobalt or rhodium carbonyls, olefin metathesis using ruthenium or molybdenum alkylidenes, cross-coupling reactions such as the Suzuki, Heck, and Negishi couplings using palladium complexes, and asymmetric hydrogenation using chiral rhodium or ruthenium catalysts. Heterogeneous catalysis includes platinum and palladium hydrogenation catalysts, zeolite-supported transition metals for petroleum cracking, and iron-based Fischer-Tropsch synthesis.
+
+## Organometallic Chemistry
+
+Organometallic chemistry of transition metals centers on complexes containing metal-carbon bonds. The 18-electron rule provides guidance for stable complex formulation: stable complexes typically possess 18 valence electrons counted as the sum of metal d-electrons plus electrons donated by ligands. Ferrocene, dibenzenechromium, and metal carbonyls such as Fe(CO)5, Ni(CO)4, and Cr(CO)6 exemplify this principle. Sigma-bonded alkyl complexes, pi-bonded olefin and alkyne complexes, carbene (alkylidene) complexes, and carbyne (alkylidyne) complexes collectively enable diverse catalytic and synthetic applications.
+
+## Ligand Field Theory in Detail
+
+Ligand field theory combines crystal field theory with molecular orbital theory to provide a more complete description of bonding in transition metal complexes. In an octahedral complex, the six ligand sigma-donor orbitals combine with metal s, p, and d orbitals to form bonding and antibonding molecular orbitals. The metal t2g orbitals (dxy, dxz, dyz) are nonbonding with respect to sigma donation but can interact with ligand pi-orbitals, while the eg orbitals (dz2, dx2-y2) form sigma antibonding molecular orbitals with ligand combinations of matching symmetry.
+
+The crystal field splitting parameter Delta_o (also called 10Dq) represents the energy gap between the t2g and eg sets. Its magnitude depends on the ligand's position in the spectrochemical series: I- < Br- < Cl- < F- < OH- < H2O < NH3 < en < CN- approximately equal to CO. Strong-field ligands produce large Delta_o favoring low-spin configurations, while weak-field ligands produce small Delta_o favoring high-spin configurations. The pairing energy P must be overcome before electrons occupy the higher-energy eg orbitals.
+
+Pi-acceptor ligands such as CO, CN-, and phosphines accept electron density from filled metal t2g orbitals into their empty pi* antibonding orbitals, a phenomenon called pi-backbonding. This stabilizes low oxidation states, strengthens the metal-ligand bond, and is responsible for the stability of metal carbonyls such as Ni(CO)4, Fe(CO)5, Cr(CO)6, and Mn2(CO)10. Pi-donor ligands such as halides and alkoxides donate electron density from their filled pi orbitals into empty metal t2g orbitals, destabilizing low oxidation states and favoring higher ones.
+
+## Jahn-Teller Distortions
+
+Certain electronic configurations of transition metal complexes are geometrically unstable with respect to distortion. The Jahn-Teller theorem states that any non-linear molecule in a degenerate electronic ground state will distort to lift the degeneracy and lower its energy. In octahedral complexes, the high-spin d4 configuration (Mn(III), Cr(II)) and the low-spin d7 configuration (Co(II) in low-spin, Ni(III)) display strong Jahn-Teller distortions because of uneven occupation of the eg orbitals. Copper(II) with d9 is the classic example: Cu(II) complexes typically display tetragonal elongation, with two trans axial bonds longer than the four equatorial bonds. Weaker Jahn-Teller effects are associated with uneven t2g occupation (for example d1, d2, low-spin d5) but are small because t2g orbitals are non-bonding and less directly involved in metal-ligand interactions.
+
+## Spectrochemical Analysis and Tanabe-Sugano Diagrams
+
+Electronic absorption spectra of transition metal complexes are analyzed using Tanabe-Sugano diagrams, which plot the energies of electronic states as functions of the ligand field strength. For a d3 configuration (such as Cr(III)) in an octahedral field, the ground state is 4A2g, and spin-allowed transitions to 4T2g, 4T1g(F), and 4T1g(P) states give three characteristic absorption bands. Racah parameters B and C describe electron-electron repulsion in the free ion and are reduced in the complex through the nephelauxetic effect, reflecting expansion of metal d-orbitals onto ligand orbitals.
+
+## Summary
+
+Transition metal chemistry derives fundamentally from partially-filled d-orbital structures. These orbitals generate variable oxidation states, colorful coordination complexes through d-d and charge-transfer transitions, magnetic properties from unpaired electrons, and catalytic versatility through redox cycling. Ligand field theory provides the quantitative framework unifying these phenomena, relating observable properties such as absorption spectra, magnetic susceptibility, and redox potentials to the underlying electronic structure. The elements Newton studied extensively in his alchemical laboratory—mercury, antimony, iron, copper, lead—span this range of behaviors and illustrate many of the classic phenomena of transition metal chemistry, from the variable oxidation states of iron and copper to the distinctive stereochemistries of mercury and lead compounds.

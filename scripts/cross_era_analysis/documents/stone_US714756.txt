@@ -1,0 +1,161 @@
+================================================================
+US PATENT 714,756 - METHOD OF SELECTIVE ELECTRIC SIGNALING
+================================================================
+
+Patent Number:   US 714,756 A
+Title:           Method of Selective Electric Signaling
+Inventor:        John Stone Stone, Boston, Massachusetts
+Filing Date:     February 8, 1900
+Publication:     December 2, 1902
+Assignees:       Louis E. Whicher, Alexander P. Browne,
+                 Brainerd T. Judkins (Trustees)
+Source:          https://patents.google.com/patent/US714756A/en
+
+Note: The original user request listed this as "Fessenden, 1902 -
+Wireless Telegraphy". The patent number US 714,756 is actually
+John Stone Stone's selective signaling patent — a closely
+related early-radio control that still fits the "radiative
+Hertzian wave" negative-control role for the experiment.
+
+================================================================
+PHYSICS REGIME: RADIATIVE / HERTZIAN WAVE (tuned broadcast)
+================================================================
+Stone's patent describes generating free, unguided, simple
+harmonic electromagnetic waves from a vertical radiating
+conductor and selectively receiving them with resonant tuned
+circuits at distant stations. This is canonical tuned-radio
+broadcasting — radiative far-field transmission.
+
+================================================================
+ABSTRACT
+================================================================
+
+The patent describes a method for transmitting wireless signals
+using electromagnetic waves generated through forced harmonic
+oscillations in vertical conductors. The innovation enables
+selective communication between specific transmitting and
+receiving stations by tuning apparatus to particular frequencies,
+preventing interference from nearby stations operating at
+different frequencies.
+
+================================================================
+SPECIFICATION HIGHLIGHTS
+================================================================
+
+Background problem:
+Electromagnetic waves developed from vertical conductors
+possessed superior transmission range compared to horizontal
+conductor methods. However, existing systems lacked selective
+transmission — signals reached all receivers indiscriminately.
+
+Key solution:
+The invention establishes "forced simple harmonic electric
+vibrations" in elevated conductors at predetermined frequencies,
+paired with resonant circuits at receiving stations tuned to
+match those frequencies. This produces frequency-selective
+wireless communication.
+
+Technical principles:
+Stone distinguishes between natural vibrations (circuits
+restoring equilibrium after a disturbance) and forced vibrations
+(externally imposed periodic oscillations). Resonant LC
+circuits — condensers and inductance coils — achieve frequency
+selectivity through impedance matching.
+
+Acoustic analogy (paraphrased from the patent):
+The transmitter corresponds to a tuning fork emitting a single
+simple musical tone; the receiver corresponds to an acoustic
+resonator capable of absorbing the energy of that single tone
+only.
+
+================================================================
+APPARATUS
+================================================================
+
+Transmitting station:
+- Alternating-current generator producing moderate-frequency
+  current.
+- Step-up transformer (spark coil) elevating voltage.
+- Condenser charged to breakdown threshold.
+- Spark gap initiating oscillatory discharge.
+- Auxiliary inductance coil (L) providing impedance isolation.
+- Primary / secondary transformer coils coupling energy to the
+  elevated radiating conductor.
+
+Receiving station:
+- Vertical conductor receiving electromagnetic waves.
+- Induction coil extracting vibratory EMF.
+- Tuned resonant circuit (condenser-inductor configuration).
+- Coherer responsive only to the resonant frequency.
+- Telegraph relay or translating device actuated by the coherer.
+
+================================================================
+OPERATIONAL PRINCIPLE
+================================================================
+
+When electromagnetic waves impact a receiving antenna, induced
+oscillations develop across a broad frequency spectrum. Only
+energy matching the receiving circuit's resonant frequency
+achieves maximum potential difference at the condenser terminals
+and triggers the detection apparatus. Non-resonant frequencies
+produce negligible voltage.
+
+================================================================
+CONSTRUCTION NOTES
+================================================================
+
+High-frequency coils should be designed so that "the potential
+energy of the displacement currents in the coil shall be small
+compared to the kinetic energy of the conduction current"
+flowing through it. Recommended practice:
+- Widely separated wire turns.
+- Minimal wire insulation thickness.
+- Air-core construction (no iron).
+- Skeleton frames minimizing dielectric surface contact.
+- Air-gap condensers (solid dielectrics avoided).
+
+Multiple-station configuration:
+Apparatus may share a single elevated conductor for several
+stations operating at distinct frequencies. Substantial
+auxiliary inductance in the coupling circuits "swamps the effect
+of the mutual inductance" between circuits, preventing frequency
+crosstalk.
+
+================================================================
+REPRESENTATIVE CLAIMS
+================================================================
+
+Claim 1 (paraphrased):
+"The method of developing free or unguided simple harmonic
+electromagnetic waves of a definite frequency, which consists in
+producing forced simple harmonic electric vibrations of the same
+frequency in an elevated conductor."
+
+Claim 7 (paraphrased):
+"The method of rendering a circuit resonant to a given high
+frequency, which consists in balancing the reactance of an
+air-condenser by the reactance of a coil, the amplitude of whose
+potential energy is small compared to the amplitude of its
+kinetic energy when it is supporting a current of said given
+high frequency."
+
+Claim 30 (paraphrased):
+Independently developing forced harmonic vibrations at different
+frequencies in elevated conductors while receiving the resulting
+electromagnetic wave energies "each to the exclusion of the rest
+in a separate circuit resonant to the same frequency."
+
+Claims 34-38: Selective reception methods using multiple circuits
+or multiple elevated conductors with auxiliary-inductance
+specifications.
+
+================================================================
+NOTES ON PHYSICS (for structural discrimination experiment)
+================================================================
+
+Stone's system is the archetypal tuned-radio broadcast: "free or
+unguided simple harmonic electromagnetic waves" explicitly
+radiated from an elevated conductor, received by resonant
+tuned circuits. The word "unguided" is itself a direct contrast
+with Tesla's surface-guided / ground-conduction scheme. This
+patent should classify cleanly as RADIATIVE / HERTZIAN.

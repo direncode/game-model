@@ -1,0 +1,74 @@
+A MATHEMATICAL THEORY OF COMMUNICATION
+Claude E. Shannon
+The Bell System Technical Journal, Vol. 27, pp. 379-423, 623-656, July, October 1948
+
+ABSTRACT
+The recent development of various methods of modulation such as PCM and PPM which exchange bandwidth for signal-to-noise ratio has intensified the interest in a general theory of communication. This paper presents a mathematical theory of communication, in which entropy is introduced as a measure of information and the channel capacity theorem establishes the maximum rate at which information can be reliably transmitted over a noisy channel.
+
+INTRODUCTION
+
+The fundamental problem of communication is that of reproducing at one point either exactly or approximately a message selected at another point. Frequently the messages have meaning; that is they refer to or are correlated according to some system with certain physical or conceptual entities. These semantic aspects of communication are irrelevant to the engineering problem. The significant aspect is that the actual message is one selected from a set of possible messages.
+
+INFORMATION SOURCES AND ENTROPY
+
+Consider a discrete information source that produces a sequence of symbols chosen from a finite alphabet. The source is characterized by the probabilities of the various symbols and their statistical interdependencies.
+
+The entropy H of a discrete source is defined as:
+
+H = -sum(p_i * log(p_i))
+
+where p_i is the probability of symbol i. The entropy measures the average information content per symbol from the source. It is the minimum number of bits per symbol needed to represent messages from the source on average, and any compression scheme must use at least H bits per symbol on average.
+
+Properties of entropy:
+1. H is non-negative
+2. H = 0 when one symbol has probability 1 and all others have probability 0
+3. H is maximized when all symbols are equally likely
+4. For an n-symbol source, H_max = log(n)
+
+The entropy H is a measure of the uncertainty in the source. It quantifies the information content per symbol. Higher entropy means more uncertainty per symbol and more bits needed to represent it.
+
+CHANNEL CAPACITY
+
+Consider a discrete noisy channel with input X and output Y. The mutual information I(X;Y) measures the information about X conveyed by Y:
+
+I(X;Y) = H(X) - H(X|Y)
+
+The channel capacity C is the maximum mutual information over all input distributions:
+
+C = max I(X;Y)
+
+The channel coding theorem (Theorem 11) states: For any channel with capacity C, and any rate R less than C, there exists a coding scheme that achieves an arbitrarily small probability of error. Conversely, no coding scheme can achieve rates greater than C with arbitrarily small error.
+
+This is the fundamental theorem of information theory: it establishes that reliable communication at rates up to C bits per channel use is possible, and shows that this is the absolute maximum.
+
+SOURCE CODING THEOREM
+
+The source coding theorem (Theorem 9) establishes the limit of compression: a source with entropy H bits per symbol can be encoded with an average of H + epsilon bits per symbol for any epsilon greater than 0, but cannot be encoded with fewer than H bits per symbol on average.
+
+This means entropy is the fundamental limit of lossless data compression. Any encoding scheme that compresses below the entropy must lose information.
+
+CONTINUOUS SOURCES AND CHANNELS
+
+For continuous sources, the differential entropy is defined as:
+
+h(X) = -integral p(x) log p(x) dx
+
+For a Gaussian channel with bandwidth W, signal power P, and noise power N (white Gaussian noise), the channel capacity is:
+
+C = W * log(1 + P/N) bits per second
+
+This is the Shannon-Hartley theorem. It establishes the fundamental limit of reliable communication over a Gaussian channel in terms of bandwidth and signal-to-noise ratio.
+
+KEY CONCEPTS
+
+Information: A quantitative measure based on probability, not meaning.
+Entropy: The average information content per symbol from a source.
+Mutual information: The information that one random variable conveys about another.
+Channel capacity: The maximum reliable communication rate.
+Coding: Mapping source symbols to channel inputs to achieve efficient and reliable transmission.
+
+This theory provides a mathematical foundation for: data compression, error-correcting codes, cryptography, channel design, and statistical signal processing. It establishes hard limits on what is achievable in communication systems and characterizes the trade-offs between rate, reliability, complexity, and resources.
+
+The theory is based on probability theory and statistical inference, not on the physical mechanisms of any particular communication system. It applies equally to analog telephone systems, digital data transmission, biological information processing, and quantum communication. The mathematical structure is universal even though the physical implementations vary widely.
+
+Information theory establishes that information is a measurable physical quantity, that communication has fundamental limits set by entropy and channel capacity, and that these limits can be approached arbitrarily closely with sufficiently sophisticated coding.

@@ -1,0 +1,60 @@
+SOURCE: John von Neumann and Oskar Morgenstern, Theory of Games and Economic Behavior (Princeton University Press, 1944; second edition 1947; third edition 1953)
+CITATION: Wikipedia "Theory of Games and Economic Behavior", "Minimax theorem", "Zero-sum game" (accessed 2026-04-10); Von Neumann and Morgenstern (1944) Theory of Games and Economic Behavior, Princeton University Press; Von Neumann (1928) "Zur Theorie der Gesellschaftsspiele," Mathematische Annalen 100: 295-320
+
+== Chapter 1: Formulation of the Economic Problem ==
+
+Theory of Games and Economic Behavior opens with a programmatic critique of existing mathematical economics. Von Neumann and Morgenstern argue that economic theory, as then practiced, imports the tools of nineteenth-century mathematical physics — differential equations, variational principles, equilibrium-of-forces metaphors — without noticing that the phenomena of exchange and strategy are of a fundamentally different mathematical character. The essential feature of an economic situation, they insist, is that the participants are decision-makers whose choices interact with the choices of other decision-makers. A Robinson Crusoe economy, in which a single agent maximizes utility against a passive environment, is genuinely a problem of calculus of variations; but as soon as a second agent is present, each is optimizing against the choices of the other, and no calculus can resolve the resulting circularity without new conceptual tools. The appropriate mathematical instrument, they argue, is the theory of games.
+
+They are careful to distinguish their program from the then-fashionable attempts to treat economies as stochastic systems. Uncertainty in their theory is not statistical noise but strategic opacity: each player's ignorance of the other's plans. The appropriate response to this opacity is not larger samples but richer equilibrium concepts — specifically, mixed strategies and the minimax solution.
+
+The authors also articulate a methodological stance that would shape formal economics for decades. A good economic theory should be axiomatic in the manner of a mathematical theory; it should derive its conclusions from a small number of explicit assumptions by deductive argument; it should distinguish sharply between the definitions of its primitive concepts and the empirical questions about whether those concepts describe the world; and it should be willing to begin with very simple toy models (two players, a fixed finite set of pure strategies, a known payoff matrix) rather than insist on immediate realism. Their recurring methodological refrain is that one should not expect to derive the theory of the stock market without first understanding the theory of matching pennies.
+
+== Chapter 3: The Theory of Two-Person Zero-Sum Games ==
+
+The heart of the book is Chapter 3, which presents the theory of the two-person zero-sum game — a game in which the sum of the payoffs to the two players is zero, so that one player's gain is exactly the other's loss. This is the mathematically simplest, and conceptually purest, setting for strategic conflict.
+
+A finite two-person zero-sum game in normal form is specified by a matrix A = (a_ij), where i ranges over the pure strategies of player 1 and j over the pure strategies of player 2. The entry a_ij is the payoff to player 1 (and therefore -a_ij the payoff to player 2) when player 1 plays i and player 2 plays j. A pure strategy pair (i, j) is a saddle point of A if
+
+  a_ij = max_i min_j a_ij = min_j max_i a_ij
+
+That is, row i minimizes the maximum loss that player 2 can inflict, and column j simultaneously maximizes the minimum gain that player 1 can secure. If a saddle point exists in pure strategies, the value of the game is well defined and both players have a natural "safe" choice. But most games do not have saddle points in pure strategies — the classical example being matching pennies, for which every pure pair is strictly dominated by the player who would switch.
+
+Von Neumann and Morgenstern overcome this obstacle by introducing mixed strategies: probability distributions x = (x_1, ..., x_n) over player 1's pure strategies and y = (y_1, ..., y_m) over player 2's pure strategies. The expected payoff to player 1 when the two play mixtures x and y is the bilinear form
+
+  f(x, y) = sum_ij x_i a_ij y_j = x^T A y
+
+The players now face a problem of choosing probability distributions over their pure strategies so as to optimize this expected payoff against the worst possible response. The key insight — due originally to Émile Borel and systematically developed by Von Neumann — is that probability provides a way out of the conundrum of strategic indeterminacy: by randomizing, a player can prevent the opponent from exploiting any fixed choice.
+
+== The Minimax Theorem: Statement ==
+
+The central theorem of Chapter 3 — and arguably of the entire book — is the minimax theorem, first proved by Von Neumann in 1928. In modern notation it states:
+
+  For any finite matrix A in R^{n x m},
+    max_{x in Delta_n} min_{y in Delta_m} x^T A y = min_{y in Delta_m} max_{x in Delta_n} x^T A y
+
+where Delta_n and Delta_m are the standard probability simplexes in R^n and R^m respectively. The common value of the two sides is called the value of the game and is denoted v. A pair of mixed strategies (x*, y*) achieving this common value is called a minimax solution; it is a Nash equilibrium of the zero-sum game, and for zero-sum games Nash equilibrium, minimax, and maximin all coincide.
+
+The practical content of the theorem is striking: in every finite two-person zero-sum game there exists a pair of mixed strategies such that neither player can improve on the guaranteed expected payoff unilaterally. Strategic conflict in its purest form has a determinate mathematical solution.
+
+== The Minimax Theorem: Proof ==
+
+Von Neumann's original 1928 proof used a fixed-point argument derived from Brouwer's theorem, applied to a cleverly defined continuous self-map of the product simplex Delta_n x Delta_m. The 1944 book presents an improved and more elementary proof based on the theory of convex sets and supporting hyperplanes. The essential idea is:
+
+  1. Consider the set K = {A y : y in Delta_m}, the image of player 2's simplex under the linear map A. This is a convex polytope in R^n.
+  2. The quantity min_y max_i (A y)_i is the minimum, over points of K, of the largest coordinate — that is, the radius of the smallest "downward cone" touching K from above.
+  3. Dually, max_x min_j (x^T A)_j can be identified with a supporting hyperplane of K.
+  4. The separating hyperplane theorem for disjoint convex sets then produces a mixed strategy x* for player 1 and a mixed strategy y* for player 2 that witness the equality of the two optimization problems.
+
+Von Neumann reportedly remarked in later years: "I thought there was nothing worth publishing until the minimax theorem was proved." He regarded it as the first genuinely mathematical result in the theory of strategic behavior, and the book's extensive treatment of n-person games in Chapters 5 through 9 is explicitly built on the two-person zero-sum theory as its foundation.
+
+== Dominance and Solution Procedures ==
+
+Before presenting the general theorem, Von Neumann and Morgenstern develop a number of reductions by which the size of the matrix A can be decreased. A row that is componentwise dominated by another row can be deleted (player 1 would never use the dominated row in any best response); symmetrically, a dominated column can be deleted. Repeated application of these dominance rules often reduces a game to a 2 x 2 or 3 x 3 matrix for which the minimax solution can be written in closed form. For larger games they describe an iterative method closely related to what is today called fictitious play, in which each player best-responds to the empirical distribution of the opponent's past moves; they prove that the time averages of this process converge to a minimax solution.
+
+== Equivalence with Linear Programming ==
+
+A remarkable observation, noted in the second edition, is that the minimax problem for a finite two-person zero-sum game is mathematically equivalent to a pair of dual linear programs. George Dantzig discovered the precise equivalence shortly after Dantzig's own development of the simplex method; thereafter every result about linear programming could be read as a statement about zero-sum games and vice versa. This equivalence converted a formal curiosity into a constructive algorithm: any zero-sum game can be solved in polynomial time by linear programming, and the strategic indeterminacy that had seemed paralyzing in classical game theory was transformed into a routine computation.
+
+== N-Person Games and Expected Utility ==
+
+Chapters 5 through 9 extend the analysis to games with three or more players, introducing coalitions, characteristic functions, and imputations. A celebrated structural result is that any non-zero-sum game for n players is equivalent to a zero-sum game with n + 1 players (the extra player being a fictitious agent who absorbs any residual imbalance in payoffs). The second edition, published in 1947, added an axiomatic derivation of expected utility theory: given preferences over lotteries satisfying a handful of plausible axioms (completeness, transitivity, continuity, and independence), the preferences can be represented by the expected value of a real-valued utility function, unique up to positive affine transformations. This axiomatization became the foundation of modern decision theory under risk.

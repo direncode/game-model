@@ -1,0 +1,787 @@
+{
+  "summary": {
+    "total_entities": 3714,
+    "clusters": 66,
+    "unique_48bit_fingerprints": 406,
+    "survivors": 795,
+    "reduction": 4,
+    "survivor_types": {
+      "writing": 9,
+      "event": 9,
+      "location": 9,
+      "concept": 14,
+      "patent_chunk": 745,
+      "person": 9
+    },
+    "reconstruction": {
+      "mean_nn": 0.294,
+      "median_nn": 0.3091,
+      "p95_nn": 0.5944,
+      "variance_preservation": 1.2239,
+      "coverages": {
+        "0.5": 0.8465,
+        "1.0": 1.0,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 1.8
+  },
+  "regime_survival": {
+    "newton_alchemy": {
+      "original": 351,
+      "survivors": 107,
+      "rate": 0.30484330484330485,
+      "enrichment": 1.4241358920604203
+    },
+    "vn_cellular_automata": {
+      "original": 246,
+      "survivors": 71,
+      "rate": 0.2886178861788618,
+      "enrichment": 1.3483356342997392
+    },
+    "newton_mechanics": {
+      "original": 170,
+      "survivors": 71,
+      "rate": 0.4176470588235294,
+      "enrichment": 1.951120976692564
+    },
+    "leonardo_anatomy": {
+      "original": 373,
+      "survivors": 59,
+      "rate": 0.1581769436997319,
+      "enrichment": 0.738954929434974
+    },
+    "leonardo_flight": {
+      "original": 217,
+      "survivors": 53,
+      "rate": 0.24423963133640553,
+      "enrichment": 1.1410138248847927
+    },
+    "vn_quantum": {
+      "original": 115,
+      "survivors": 12,
+      "rate": 0.10434782608695652,
+      "enrichment": 0.48748154224774404
+    },
+    "modern_complexity": {
+      "original": 400,
+      "survivors": 32,
+      "rate": 0.08,
+      "enrichment": 0.3737358490566038
+    },
+    "vn_game_theory": {
+      "original": 201,
+      "survivors": 35,
+      "rate": 0.17412935323383086,
+      "enrichment": 0.8134797709565381
+    },
+    "leonardo_art_control": {
+      "original": 169,
+      "survivors": 105,
+      "rate": 0.621301775147929,
+      "enrichment": 2.9025343306910796
+    },
+    "leonardo_fluids": {
+      "original": 404,
+      "survivors": 70,
+      "rate": 0.17326732673267325,
+      "enrichment": 0.8094526433775453
+    },
+    "newton_optics": {
+      "original": 174,
+      "survivors": 52,
+      "rate": 0.2988505747126437,
+      "enrichment": 1.3961396660160488
+    },
+    "modern_aerodynamics": {
+      "original": 296,
+      "survivors": 19,
+      "rate": 0.06418918918918919,
+      "enrichment": 0.29987251402345744
+    },
+    "newton_theology_control": {
+      "original": 171,
+      "survivors": 71,
+      "rate": 0.4152046783625731,
+      "enrichment": 1.9397109125013792
+    },
+    "vn_computing": {
+      "original": 109,
+      "survivors": 17,
+      "rate": 0.1559633027522936,
+      "enrichment": 0.7286134671975074
+    },
+    "modern_materials": {
+      "original": 318,
+      "survivors": 21,
+      "rate": 0.0660377358490566,
+      "enrichment": 0.30850836596653614
+    }
+  },
+  "top_25_overall": [
+    {
+      "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+      "type": "event",
+      "regime": "newton_alchemy",
+      "composite": 0.9481,
+      "anomaly": 1.0,
+      "diversity": 1.0,
+      "fingerprint": "111111111111111111111111111111111010111111111011",
+      "cluster": 18
+    },
+    {
+      "name": "leonardo_flight__concept__ornithopter",
+      "type": "concept",
+      "regime": "leonardo_flight",
+      "composite": 0.939,
+      "anomaly": 1.0,
+      "diversity": 1.0,
+      "fingerprint": "100000000011110001011111110001111110011100111110",
+      "cluster": 47
+    },
+    {
+      "name": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "event",
+      "regime": "newton_alchemy",
+      "composite": 0.9328,
+      "anomaly": 0.9264,
+      "diversity": 1.0,
+      "fingerprint": "100111111011110111111111101111111111111111111111",
+      "cluster": 18
+    },
+    {
+      "name": "newton_alchemy__writing__clavis",
+      "type": "writing",
+      "regime": "newton_alchemy",
+      "composite": 0.9275,
+      "anomaly": 0.9746,
+      "diversity": 1.0,
+      "fingerprint": "111111101011111111111111011011111111101111111111",
+      "cluster": 18
+    },
+    {
+      "name": "newton_alchemy__person__william_newman",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.9093,
+      "anomaly": 1.0,
+      "diversity": 1.0,
+      "fingerprint": "111111110111111011111111111111111111111111001111",
+      "cluster": 47
+    },
+    {
+      "name": "newton_mechanics__event__principia_published",
+      "type": "event",
+      "regime": "newton_mechanics",
+      "composite": 0.9064,
+      "anomaly": 0.8888,
+      "diversity": 1.0,
+      "fingerprint": "111111111111110111111101111111111111111111011111",
+      "cluster": 19
+    },
+    {
+      "name": "newton_alchemy__location__portsmouth_papers",
+      "type": "location",
+      "regime": "newton_alchemy",
+      "composite": 0.9053,
+      "anomaly": 0.8619,
+      "diversity": 1.0,
+      "fingerprint": "111111111011111111111110101111111111111111101110",
+      "cluster": 18
+    },
+    {
+      "name": "newton_alchemy__person__jan_baptist_van_helmont",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.8894,
+      "anomaly": 0.8084,
+      "diversity": 1.0,
+      "fingerprint": "111011111011111111111111111111111111111111111111",
+      "cluster": 64
+    },
+    {
+      "name": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+      "type": "writing",
+      "regime": "vn_cellular_automata",
+      "composite": 0.8866,
+      "anomaly": 0.8654,
+      "diversity": 1.0,
+      "fingerprint": "111111111111111110111111111111111111111111111111",
+      "cluster": 18
+    },
+    {
+      "name": "leonardo_flight__person__adrian_nicholas",
+      "type": "person",
+      "regime": "leonardo_flight",
+      "composite": 0.8826,
+      "anomaly": 0.7276,
+      "diversity": 1.0,
+      "fingerprint": "111111111011110111111111110111111111111111111111",
+      "cluster": 47
+    },
+    {
+      "name": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "location",
+      "regime": "newton_alchemy",
+      "composite": 0.8811,
+      "anomaly": 0.8054,
+      "diversity": 1.0,
+      "fingerprint": "110111111011111111101111111111101111111111111111",
+      "cluster": 33
+    },
+    {
+      "name": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "event",
+      "regime": "leonardo_flight",
+      "composite": 0.8809,
+      "anomaly": 0.9512,
+      "diversity": 1.0,
+      "fingerprint": "111111111011111111101111111111101111111111111101",
+      "cluster": 11
+    },
+    {
+      "name": "newton_alchemy__person__robert_boyle",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.88,
+      "anomaly": 0.6897,
+      "diversity": 1.0,
+      "fingerprint": "111111111011110111110111110111111111111111111111",
+      "cluster": 64
+    },
+    {
+      "name": "newton_alchemy__person__john_maynard_keynes",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.8754,
+      "anomaly": 0.6905,
+      "diversity": 1.0,
+      "fingerprint": "111111110111111110111111111111111111111111111111",
+      "cluster": 64
+    },
+    {
+      "name": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "location",
+      "regime": "newton_mechanics",
+      "composite": 0.8751,
+      "anomaly": 0.798,
+      "diversity": 1.0,
+      "fingerprint": "111111101011110111111111111111111101111110111011",
+      "cluster": 19
+    },
+    {
+      "name": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+      "type": "writing",
+      "regime": "newton_mechanics",
+      "composite": 0.8722,
+      "anomaly": 0.9174,
+      "diversity": 1.0,
+      "fingerprint": "111111101111010111111110110111111111111111111111",
+      "cluster": 28
+    },
+    {
+      "name": "newton_alchemy__location__the_royal_mint",
+      "type": "location",
+      "regime": "newton_alchemy",
+      "composite": 0.8689,
+      "anomaly": 0.8679,
+      "diversity": 1.0,
+      "fingerprint": "100111101011111111111111111111101011111111111111",
+      "cluster": 42
+    },
+    {
+      "name": "modern_complexity__person__matthew_cook",
+      "type": "person",
+      "regime": "modern_complexity",
+      "composite": 0.8664,
+      "anomaly": 0.7905,
+      "diversity": 1.0,
+      "fingerprint": "111111111111110111111101111111111111111111111011",
+      "cluster": 54
+    },
+    {
+      "name": "newton_alchemy__person__isaac_newton",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.8571,
+      "anomaly": 0.5766,
+      "diversity": 1.0,
+      "fingerprint": "111111111011111111111111110011111111111111111111",
+      "cluster": 47
+    },
+    {
+      "name": "vn_game_theory__concept__expected_utility",
+      "type": "concept",
+      "regime": "vn_game_theory",
+      "composite": 0.8471,
+      "anomaly": 0.6623,
+      "diversity": 1.0,
+      "fingerprint": "101001101011011110101111010111101011111011011111",
+      "cluster": 19
+    },
+    {
+      "name": "newton_alchemy__person__lawrence_principe",
+      "type": "person",
+      "regime": "newton_alchemy",
+      "composite": 0.8459,
+      "anomaly": 0.6733,
+      "diversity": 1.0,
+      "fingerprint": "111111111111111010111111111011111111111111111111",
+      "cluster": 62
+    },
+    {
+      "name": "vn_quantum__event__mathematical_foundations_published",
+      "type": "event",
+      "regime": "vn_quantum",
+      "composite": 0.8409,
+      "anomaly": 0.6888,
+      "diversity": 1.0,
+      "fingerprint": "111111111010111111111111111011111111111111111111",
+      "cluster": 18
+    },
+    {
+      "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
+      "type": "event",
+      "regime": "newton_alchemy",
+      "composite": 0.8375,
+      "anomaly": 0.8214,
+      "diversity": 1.0,
+      "fingerprint": "101111111011111111111111111111111111111111111011",
+      "cluster": 19
+    },
+    {
+      "name": "newton_alchemy__concept__net",
+      "type": "concept",
+      "regime": "newton_alchemy",
+      "composite": 0.8368,
+      "anomaly": 0.5377,
+      "diversity": 1.0,
+      "fingerprint": "110011111111111011111111110011111111111111111110",
+      "cluster": 64
+    },
+    {
+      "name": "leonardo_art_control__concept__paragone",
+      "type": "concept",
+      "regime": "leonardo_art_control",
+      "composite": 0.8361,
+      "anomaly": 0.5612,
+      "diversity": 1.0,
+      "fingerprint": "111111110111110111111111110011101111111011111111",
+      "cluster": 47
+    }
+  ],
+  "per_figure_top_15": {
+    "newton": [
+      {
+        "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+        "type": "event",
+        "regime": "newton_alchemy",
+        "composite": 0.9481,
+        "anomaly": 1.0,
+        "diversity": 1.0,
+        "fingerprint": "111111111111111111111111111111111010111111111011"
+      },
+      {
+        "name": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+        "type": "event",
+        "regime": "newton_alchemy",
+        "composite": 0.9328,
+        "anomaly": 0.9264,
+        "diversity": 1.0,
+        "fingerprint": "100111111011110111111111101111111111111111111111"
+      },
+      {
+        "name": "newton_alchemy__writing__clavis",
+        "type": "writing",
+        "regime": "newton_alchemy",
+        "composite": 0.9275,
+        "anomaly": 0.9746,
+        "diversity": 1.0,
+        "fingerprint": "111111101011111111111111011011111111101111111111"
+      },
+      {
+        "name": "newton_alchemy__person__william_newman",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.9093,
+        "anomaly": 1.0,
+        "diversity": 1.0,
+        "fingerprint": "111111110111111011111111111111111111111111001111"
+      },
+      {
+        "name": "newton_mechanics__event__principia_published",
+        "type": "event",
+        "regime": "newton_mechanics",
+        "composite": 0.9064,
+        "anomaly": 0.8888,
+        "diversity": 1.0,
+        "fingerprint": "111111111111110111111101111111111111111111011111"
+      },
+      {
+        "name": "newton_alchemy__location__portsmouth_papers",
+        "type": "location",
+        "regime": "newton_alchemy",
+        "composite": 0.9053,
+        "anomaly": 0.8619,
+        "diversity": 1.0,
+        "fingerprint": "111111111011111111111110101111111111111111101110"
+      },
+      {
+        "name": "newton_alchemy__person__jan_baptist_van_helmont",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.8894,
+        "anomaly": 0.8084,
+        "diversity": 1.0,
+        "fingerprint": "111011111011111111111111111111111111111111111111"
+      },
+      {
+        "name": "newton_alchemy__location__trinity_college_cambridge",
+        "type": "location",
+        "regime": "newton_alchemy",
+        "composite": 0.8811,
+        "anomaly": 0.8054,
+        "diversity": 1.0,
+        "fingerprint": "110111111011111111101111111111101111111111111111"
+      },
+      {
+        "name": "newton_alchemy__person__robert_boyle",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.88,
+        "anomaly": 0.6897,
+        "diversity": 1.0,
+        "fingerprint": "111111111011110111110111110111111111111111111111"
+      },
+      {
+        "name": "newton_alchemy__person__john_maynard_keynes",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.8754,
+        "anomaly": 0.6905,
+        "diversity": 1.0,
+        "fingerprint": "111111110111111110111111111111111111111111111111"
+      },
+      {
+        "name": "newton_mechanics__location__woolsthorpe_manor",
+        "type": "location",
+        "regime": "newton_mechanics",
+        "composite": 0.8751,
+        "anomaly": 0.798,
+        "diversity": 1.0,
+        "fingerprint": "111111101011110111111111111111111101111110111011"
+      },
+      {
+        "name": "newton_mechanics__writing__philosophiae_naturalis_principia_mathematica",
+        "type": "writing",
+        "regime": "newton_mechanics",
+        "composite": 0.8722,
+        "anomaly": 0.9174,
+        "diversity": 1.0,
+        "fingerprint": "111111101111010111111110110111111111111111111111"
+      },
+      {
+        "name": "newton_alchemy__location__the_royal_mint",
+        "type": "location",
+        "regime": "newton_alchemy",
+        "composite": 0.8689,
+        "anomaly": 0.8679,
+        "diversity": 1.0,
+        "fingerprint": "100111101011111111111111111111101011111111111111"
+      },
+      {
+        "name": "newton_alchemy__person__isaac_newton",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.8571,
+        "anomaly": 0.5766,
+        "diversity": 1.0,
+        "fingerprint": "111111111011111111111111110011111111111111111111"
+      },
+      {
+        "name": "newton_alchemy__person__lawrence_principe",
+        "type": "person",
+        "regime": "newton_alchemy",
+        "composite": 0.8459,
+        "anomaly": 0.6733,
+        "diversity": 1.0,
+        "fingerprint": "111111111111111010111111111011111111111111111111"
+      }
+    ],
+    "vonneumann": [
+      {
+        "name": "vn_cellular_automata__writing__theory_of_self_reproducing_automata",
+        "type": "writing",
+        "regime": "vn_cellular_automata",
+        "composite": 0.8866,
+        "anomaly": 0.8654,
+        "diversity": 1.0,
+        "fingerprint": "111111111111111110111111111111111111111111111111"
+      },
+      {
+        "name": "vn_game_theory__concept__expected_utility",
+        "type": "concept",
+        "regime": "vn_game_theory",
+        "composite": 0.8471,
+        "anomaly": 0.6623,
+        "diversity": 1.0,
+        "fingerprint": "101001101011011110101111010111101011111011011111"
+      },
+      {
+        "name": "vn_quantum__event__mathematical_foundations_published",
+        "type": "event",
+        "regime": "vn_quantum",
+        "composite": 0.8409,
+        "anomaly": 0.6888,
+        "diversity": 1.0,
+        "fingerprint": "111111111010111111111111111011111111111111111111"
+      },
+      {
+        "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
+        "type": "event",
+        "regime": "vn_cellular_automata",
+        "composite": 0.8113,
+        "anomaly": 0.7223,
+        "diversity": 1.0,
+        "fingerprint": "111110111010110111111111101111111111111111101111"
+      },
+      {
+        "name": "vn_cellular_automata__writing__a_new_kind_of_science",
+        "type": "writing",
+        "regime": "vn_cellular_automata",
+        "composite": 0.793,
+        "anomaly": 0.6442,
+        "diversity": 1.0,
+        "fingerprint": "111111101011111111111111111011111111111111111111"
+      },
+      {
+        "name": "vn_cellular_automata__concept__self_reproduction",
+        "type": "concept",
+        "regime": "vn_cellular_automata",
+        "composite": 0.7775,
+        "anomaly": 0.4668,
+        "diversity": 1.0,
+        "fingerprint": "101110110011111011101110101111101111111011011011"
+      },
+      {
+        "name": "vn_mathematical_foundations_qm__c101",
+        "type": "patent_chunk",
+        "regime": "vn_quantum",
+        "composite": 0.7223,
+        "anomaly": 0.2452,
+        "diversity": 1.0,
+        "fingerprint": "111111111011111111111111111111111110111111111111"
+      },
+      {
+        "name": "vn_cellular_automata_transitions__c087",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.7156,
+        "anomaly": 0.2377,
+        "diversity": 1.0,
+        "fingerprint": "111111111111110111111101111111111111111111111111"
+      },
+      {
+        "name": "vn_self_reproducing_automata__c066",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.6895,
+        "anomaly": 0.2343,
+        "diversity": 1.0,
+        "fingerprint": "110111111011011111111111111111111011111110111111"
+      },
+      {
+        "name": "vn_monte_carlo_control__c028",
+        "type": "patent_chunk",
+        "regime": "vn_game_theory",
+        "composite": 0.6849,
+        "anomaly": 0.2397,
+        "diversity": 1.0,
+        "fingerprint": "111111111111100111111111111011111111111111111111"
+      },
+      {
+        "name": "vn_self_reproducing_automata__c098",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.6685,
+        "anomaly": 0.2192,
+        "diversity": 1.0,
+        "fingerprint": "111111111111111111101111110111111111111111111111"
+      },
+      {
+        "name": "vn_cellular_automata_transitions__c029",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.6286,
+        "anomaly": 0.2153,
+        "diversity": 1.0,
+        "fingerprint": "111111101111111101111110111111111111111111111111"
+      },
+      {
+        "name": "vn_cellular_automata_transitions__c049",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.6257,
+        "anomaly": 0.2399,
+        "diversity": 1.0,
+        "fingerprint": "111111101011111101111111111111111111111110111111"
+      },
+      {
+        "name": "vn_self_reproducing_automata__c086",
+        "type": "patent_chunk",
+        "regime": "vn_cellular_automata",
+        "composite": 0.617,
+        "anomaly": 0.2036,
+        "diversity": 1.0,
+        "fingerprint": "110101111111111111111101111111111111111111111100"
+      },
+      {
+        "name": "vn_edvac_report__c063",
+        "type": "patent_chunk",
+        "regime": "vn_computing",
+        "composite": 0.6155,
+        "anomaly": 0.2194,
+        "diversity": 1.0,
+        "fingerprint": "110111111111011111111111111111111111111110111111"
+      }
+    ],
+    "leonardo": [
+      {
+        "name": "leonardo_flight__concept__ornithopter",
+        "type": "concept",
+        "regime": "leonardo_flight",
+        "composite": 0.939,
+        "anomaly": 1.0,
+        "diversity": 1.0,
+        "fingerprint": "100000000011110001011111110001111110011100111110"
+      },
+      {
+        "name": "leonardo_flight__person__adrian_nicholas",
+        "type": "person",
+        "regime": "leonardo_flight",
+        "composite": 0.8826,
+        "anomaly": 0.7276,
+        "diversity": 1.0,
+        "fingerprint": "111111111011110111111111110111111111111111111111"
+      },
+      {
+        "name": "leonardo_flight__event__leonardo_s_parachute_tested",
+        "type": "event",
+        "regime": "leonardo_flight",
+        "composite": 0.8809,
+        "anomaly": 0.9512,
+        "diversity": 1.0,
+        "fingerprint": "111111111011111111101111111111101111111111111101"
+      },
+      {
+        "name": "leonardo_art_control__concept__paragone",
+        "type": "concept",
+        "regime": "leonardo_art_control",
+        "composite": 0.8361,
+        "anomaly": 0.5612,
+        "diversity": 1.0,
+        "fingerprint": "111111110111110111111111110011101111111011111111"
+      },
+      {
+        "name": "leonardo_fluids__person__george_gabriel_stokes",
+        "type": "person",
+        "regime": "leonardo_fluids",
+        "composite": 0.8227,
+        "anomaly": 0.6712,
+        "diversity": 1.0,
+        "fingerprint": "111111110111011011111111111111111111111111111111"
+      },
+      {
+        "name": "leonardo_anatomy__writing__anatomical_manuscripts",
+        "type": "writing",
+        "regime": "leonardo_anatomy",
+        "composite": 0.8189,
+        "anomaly": 0.7516,
+        "diversity": 1.0,
+        "fingerprint": "111111111011110111111111111111101111111111111111"
+      },
+      {
+        "name": "leonardo_fluids__concept__laminar_flow",
+        "type": "concept",
+        "regime": "leonardo_fluids",
+        "composite": 0.8082,
+        "anomaly": 0.3923,
+        "diversity": 1.0,
+        "fingerprint": "111111110011111111111111111111111111111110111111"
+      },
+      {
+        "name": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
+        "type": "event",
+        "regime": "leonardo_flight",
+        "composite": 0.7866,
+        "anomaly": 0.6754,
+        "diversity": 1.0,
+        "fingerprint": "111111111011110111101111111111101111111111101111"
+      },
+      {
+        "name": "leonardo_art_control__concept__sfumato",
+        "type": "concept",
+        "regime": "leonardo_art_control",
+        "composite": 0.7804,
+        "anomaly": 0.3471,
+        "diversity": 1.0,
+        "fingerprint": "111111111111110110111111111011101111111111111111"
+      },
+      {
+        "name": "leonardo_flight__concept__lift_from_pressure_difference",
+        "type": "concept",
+        "regime": "leonardo_flight",
+        "composite": 0.7777,
+        "anomaly": 0.3153,
+        "diversity": 1.0,
+        "fingerprint": "111111111111110111111111111111101111111111111111"
+      },
+      {
+        "name": "leonardo_fluids__concept__vortex",
+        "type": "concept",
+        "regime": "leonardo_fluids",
+        "composite": 0.7742,
+        "anomaly": 0.3248,
+        "diversity": 1.0,
+        "fingerprint": "111111111111100111101111111111111111111111111111"
+      },
+      {
+        "name": "leonardo_flight__writing__codex_on_the_flight_of_birds",
+        "type": "writing",
+        "regime": "leonardo_flight",
+        "composite": 0.7703,
+        "anomaly": 0.5978,
+        "diversity": 1.0,
+        "fingerprint": "111111101011110111111111111111101111111010111111"
+      },
+      {
+        "name": "leonardo_art_control__c132",
+        "type": "patent_chunk",
+        "regime": "leonardo_art_control",
+        "composite": 0.7421,
+        "anomaly": 0.2443,
+        "diversity": 1.0,
+        "fingerprint": "111111111011111011111111111011111111111111101111"
+      },
+      {
+        "name": "leonardo_art_control__c060",
+        "type": "patent_chunk",
+        "regime": "leonardo_art_control",
+        "composite": 0.7229,
+        "anomaly": 0.2925,
+        "diversity": 1.0,
+        "fingerprint": "111101110111111111111101111111111111111111111111"
+      },
+      {
+        "name": "leonardo_art_control__c085",
+        "type": "patent_chunk",
+        "regime": "leonardo_art_control",
+        "composite": 0.7153,
+        "anomaly": 0.2666,
+        "diversity": 1.0,
+        "fingerprint": "111111110111111011111111111111111101111111101111"
+      }
+    ]
+  }
+}

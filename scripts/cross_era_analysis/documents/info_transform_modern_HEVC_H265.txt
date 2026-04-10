@@ -1,0 +1,81 @@
+H.265 / HEVC HIGH EFFICIENCY VIDEO CODING STANDARD
+ITU-T Recommendation H.265, ISO/IEC 23008-2
+Joint Collaborative Team on Video Coding (JCT-VC), 2013
+
+ABSTRACT
+H.265, also known as HEVC (High Efficiency Video Coding), is the successor to H.264/AVC. It achieves approximately 50% bit-rate reduction compared to H.264 at the same visual quality. The standard uses the same fundamental transform-based compression paradigm as JPEG and earlier video standards but with substantially more sophisticated prediction, transform, and entropy coding stages.
+
+BACKGROUND
+
+Modern video applications (4K/8K streaming, virtual reality, surveillance) require efficient compression of very high resolution video. H.264/AVC, while widely deployed, was designed in the early 2000s and is approaching its compression efficiency limits. H.265/HEVC was developed to enable next-generation video applications by providing significantly better compression at comparable visual quality.
+
+The fundamental architecture of HEVC follows the transform-based compression paradigm established by JPEG and refined through MPEG-1, MPEG-2, MPEG-4, and H.264. Each video frame is decomposed into blocks, each block is predicted from previously coded data, the prediction residual is transformed to the frequency domain, the transform coefficients are quantized, and the quantized coefficients are entropy coded.
+
+CORE ARCHITECTURE
+
+Coding Tree Units (CTUs):
+HEVC uses Coding Tree Units of variable size (16x16, 32x32, or 64x64 pixels). Each CTU can be recursively partitioned into smaller Coding Units (CUs) using a quadtree structure. This allows efficient encoding of both fine details (small CUs) and large flat regions (large CUs).
+
+Intra Prediction:
+For I-frames (intra-coded), each block is predicted from neighboring previously coded blocks within the same frame. HEVC supports 35 intra prediction modes including DC, planar, and 33 angular modes covering different directions. The prediction residual (original minus prediction) is then transformed and coded.
+
+Inter Prediction:
+For P-frames and B-frames (inter-coded), each block is predicted from blocks in previously coded reference frames using motion vectors. HEVC uses sub-pixel motion compensation with 1/4-pixel accuracy for luma and 1/8-pixel for chroma. Multiple reference frames can be used.
+
+Integer DCT Transform:
+The prediction residual is transformed using an integer approximation of the discrete cosine transform. HEVC supports transform sizes of 4x4, 8x8, 16x16, and 32x32, allowing the encoder to choose the optimal transform size for each block.
+
+Quantization:
+The transform coefficients are quantized using a uniform quantizer with scale factors derived from the quantization parameter QP. Higher QP gives more compression and lower quality. The quantization is the lossy step.
+
+Entropy Coding (CABAC):
+HEVC uses Context-Adaptive Binary Arithmetic Coding (CABAC) for entropy coding the quantized coefficients and other syntax elements. CABAC is significantly more efficient than the Huffman coding used in JPEG and the variable-length codes used in MPEG-2.
+
+In-Loop Filtering:
+HEVC includes deblocking filter and sample adaptive offset (SAO) filtering applied after reconstruction to reduce blocking artifacts and improve subjective quality.
+
+TRANSFORM-BASED PARADIGM (CONTINUED FROM JPEG)
+
+HEVC continues the transform-based compression paradigm established by JPEG:
+
+1. Decompose the signal into blocks
+2. Predict each block from previously coded data
+3. Transform the prediction residual to the frequency domain
+4. Quantize the transform coefficients
+5. Entropy code the quantized coefficients
+
+The fundamental insight remains the same: natural signals (images, video frames) are efficiently represented in the frequency domain after appropriate prediction. Energy is concentrated in low-frequency coefficients which can be coded efficiently, while high-frequency coefficients can be heavily quantized without significant perceptual loss.
+
+What HEVC adds beyond JPEG and earlier video standards:
+- More sophisticated prediction (35 intra modes, sub-pixel motion)
+- Variable transform sizes (4x4 to 32x32)
+- Recursive quadtree CU partitioning
+- CABAC entropy coding (more efficient than Huffman)
+- In-loop filtering for artifact reduction
+- Multiple reference frames
+
+But the underlying paradigm is the same as JPEG 1992: transform-based compression with quantization and entropy coding.
+
+MATHEMATICAL FOUNDATION
+
+The mathematical foundation of HEVC includes:
+- Discrete cosine transform (integer approximation)
+- Linear algebra (block prediction, transform matrices)
+- Information theory (CABAC, entropy coding)
+- Perceptual modeling (visual masking, just noticeable differences)
+- Optimization theory (rate-distortion optimization for mode selection)
+
+The energy compaction property of the DCT remains the foundation: for natural images and video frames (especially after prediction), the DCT concentrates signal energy in a few low-frequency coefficients. This enables efficient quantization and coding.
+
+DISTINCTION FROM OTHER COMPRESSION PARADIGMS
+
+HEVC, like JPEG, is a TRANSFORM-BASED compression method. It is fundamentally different from:
+
+- Entropy coding alone (Huffman): cannot achieve high compression on natural images/video; uses no transform
+- Dictionary-based coding (LZ77/LZW): no transform, no quantization, lossless only, designed for general data not signals
+- Predictive coding without transforms: less efficient because spatial correlation is not converted to frequency domain
+- Neural compression (modern): uses learned representations rather than fixed DCT, but still follows transform-quantize-code structure
+
+The transform-quantize-entropy-code architecture is the dominant paradigm for modern image and video compression. It is the descendant of JPEG (1992) and MPEG-1 (1993). It will likely continue to dominate until neural compression methods mature sufficiently to displace it.
+
+This is a TRANSFORM-BASED LOSSY COMPRESSION method using the discrete cosine transform, sophisticated prediction, and arithmetic entropy coding. The mathematical foundation is signal processing and information theory. The compression mechanism is energy compaction in the transform domain followed by quantization of perceptually less important coefficients.

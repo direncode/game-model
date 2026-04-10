@@ -1,0 +1,75 @@
+A METHOD FOR THE CONSTRUCTION OF MINIMUM-REDUNDANCY CODES
+David A. Huffman
+Proceedings of the Institute of Radio Engineers, Vol. 40, No. 9, pp. 1098-1101, September 1952
+US Patent 2,591,058 (related)
+
+ABSTRACT
+A method is described for constructing the minimum-redundancy code for any ensemble of symbols. The code is constructed by iteratively combining the two least probable symbols into a single composite symbol until only one symbol remains. This produces an optimal prefix code that achieves the minimum average length for any uniquely decodable code.
+
+INTRODUCTION
+
+The problem of efficient encoding of an ensemble of messages was formulated by Shannon and Fano. Both Shannon and Fano provided algorithms that produce codes whose average length is close to the entropy of the source. However, these methods do not always produce the optimal code. The present paper describes an algorithm that always produces a minimum-redundancy code.
+
+PROBLEM STATEMENT
+
+Given a finite set of symbols S = {s_1, s_2, ..., s_n} with associated probabilities {p_1, p_2, ..., p_n}, find a set of binary codewords {c_1, c_2, ..., c_n} such that:
+
+1. The code is uniquely decodable (no codeword is a prefix of another)
+2. The average codeword length L = sum(p_i * length(c_i)) is minimized
+
+The minimum possible average length is bounded below by the entropy H = -sum(p_i * log_2(p_i)).
+
+CONSTRUCTION ALGORITHM
+
+The Huffman coding algorithm proceeds as follows:
+
+1. Sort the symbols by their probabilities in ascending order.
+2. Take the two symbols with the smallest probabilities. Combine them into a composite symbol whose probability is the sum of the two probabilities.
+3. Replace the two original symbols with the composite symbol in the sorted list.
+4. Repeat steps 2-3 until only one symbol remains.
+5. Build the binary tree by tracing back the combinations: each composite symbol becomes an internal node with the two combined symbols as children.
+6. Assign a 0 to one branch and a 1 to the other branch at each internal node.
+7. The codeword for each original symbol is the sequence of bits along the path from root to leaf.
+
+OPTIMALITY PROOF
+
+The Huffman algorithm produces a code that achieves the minimum average length for any uniquely decodable code. The proof proceeds by induction on the number of symbols. The key observation is that in any optimal prefix code, the two symbols with the smallest probabilities must be at the deepest level of the tree. By combining them and recursively constructing an optimal code for the reduced set, the overall code is optimal.
+
+EXAMPLE
+
+Consider symbols A, B, C, D, E with probabilities 0.40, 0.20, 0.15, 0.15, 0.10.
+
+Step 1: Combine D (0.15) and E (0.10) into DE (0.25)
+Step 2: Combine B (0.20) and C (0.15) into BC (0.35)
+Step 3: Combine BC (0.35) and DE (0.25) into BCDE (0.60)
+Step 4: Combine A (0.40) and BCDE (0.60) into root (1.00)
+
+Tracing back, we assign codewords:
+A: 0 (length 1)
+B: 100 (length 3)
+C: 101 (length 3)
+D: 110 (length 3)
+E: 111 (length 3)
+
+Average length = 0.40 * 1 + 0.20 * 3 + 0.15 * 3 + 0.15 * 3 + 0.10 * 3 = 2.20 bits per symbol
+Entropy H = -(0.40*log2(0.40) + 0.20*log2(0.20) + 0.15*log2(0.15) + 0.15*log2(0.15) + 0.10*log2(0.10)) = 2.146 bits per symbol
+
+The Huffman code achieves 2.20 bits per symbol, very close to the entropy lower bound.
+
+SIGNIFICANCE
+
+Huffman coding is the foundational entropy coding algorithm. It establishes that for any source with known symbol probabilities, the minimum-redundancy code can be constructed efficiently. The algorithm is widely used in modern data compression standards including JPEG, MP3, MPEG, and ZIP/DEFLATE.
+
+The mathematical foundation is probability theory and prefix code theory. The method relies on the observation that frequency-based variable-length coding can approach the entropy limit established by Shannon's source coding theorem.
+
+This is an ENTROPY CODING method. The code lengths are determined by the symbol probabilities. Symbols that occur more frequently get shorter codewords; symbols that occur less frequently get longer codewords. The optimization is over the set of all possible prefix codes.
+
+KEY CONCEPTS
+
+Prefix code: A code where no codeword is a prefix of another. Uniquely decodable without ambiguity.
+Variable-length coding: Different symbols have different codeword lengths.
+Frequency-based encoding: Codewords are assigned based on symbol frequencies.
+Optimal coding: Achieves the minimum average length for the given probability distribution.
+Entropy bound: The Huffman code achieves at most one bit per symbol above the entropy.
+
+This method is the entropy-coding paradigm: compression is achieved by exploiting the statistical regularities of the source. The fundamental basis is Shannon's information theory and the concept of entropy as the limit of compression.

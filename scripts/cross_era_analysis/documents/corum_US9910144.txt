@@ -1,0 +1,61 @@
+UNITED STATES PATENT
+US 9,910,144 B2
+EXCITATION AND USE OF GUIDED SURFACE WAVE MODES ON LOSSY MEDIA
+Inventors: James F. Corum, Kenneth L. Corum
+Assignee: CPG Technologies, LLC
+Issued: March 6, 2018
+
+ABSTRACT
+Disclosed are methods to launch electromagnetic energy as guided surface waves, also termed Zenneck surface wave modes, along conductive media like Earth, rather than radiating energy into free space. The guided surface wave is bound to the interface between the lossy conducting medium and an insulating medium above the lossy conducting medium.
+
+CORE CONCEPT
+
+The patent describes methods to launch electromagnetic energy as guided surface waves along conductive media like Earth, rather than radiating energy into free space. A guided surface wave is a bound propagating mode whose energy is concentrated near the interface between two media of different electromagnetic properties.
+
+KEY TECHNICAL DISTINCTIONS
+
+Guided electromagnetic fields remain concentrated within or near boundaries between media having different electromagnetic properties. Radiated fields spread geometrically and dissipate regardless of receiver presence. Guided surface waves fall off exponentially as exp(-alpha*d)/sqrt(d), while radiated fields decrease at 1/d for field strength (1/d^2 for power).
+
+The distinction between guided and radiated electromagnetic waves is physical and fundamental. A guided wave is a bound mode of propagation along a waveguide structure (in this case the Earth-air interface). A radiated wave is a free-space wave that propagates independently of its source and is lost if not intercepted. This fundamental physical distinction is the basis of the present invention.
+
+PRIMARY INNOVATION: POLYPHASE WAVEGUIDE PROBES
+
+The structure employs charge terminals T1 and T2 positioned along a vertical axis, fed with precisely-controlled voltage magnitudes and phases to synthesize fields matching a Zenneck surface wave mode at a complex Brewster angle. The polyphase excitation produces a wavefront that satisfies the boundary conditions for a bound surface wave mode rather than a radiating mode.
+
+The guided surface waveguide probe includes:
+- A first charge terminal T1 elevated above a lossy conducting medium
+- A second charge terminal T2 positioned between T1 and the lossy conducting medium
+- A feed network coupled to the charge terminals with polyphase excitation
+- Phase and amplitude control of T1 and T2 to synthesize the complex Brewster angle wavefront
+
+EXPERIMENTAL RESULTS
+
+59 MHz test showed measured field strengths aligning with theoretical Zenneck curves, producing the distinctive exponential/sqrt(d) decay signature that distinguishes guided surface waves from conventional ground wave propagation.
+
+1.85 MHz measurements demonstrated propagation superiority over conventional Norton ground wave predictions at distances under 15 miles. The Norton ground wave model predicts field strength that decays more rapidly than the observed behavior; the guided surface wave model matches the experimental data.
+
+HISTORICAL REFERENCES
+
+Zenneck, J. (1907): Foundational paper on planar electromagnetic wave propagation along conducting surfaces. "Uber die Fortpflanzung ebener elektromagnetischer Wellen längs einer ebenen Leiterfläche und ihre Beziehung zur drahtlosen Telegraphie."
+
+Sommerfeld, A. (1909): "Uber die Ausbreitung der Wellen in der Drahtlosen Telegraphie," Annalen der Physik Vol. 28.
+
+Barlow, H.M. and Brown, J. (1962): Radio Surface Waves. Describes cylindrically-symmetric waveguide modes and surface wave propagation.
+
+Cullen, A.L. (1954): The Excitation of Plane Surface Waves. Addresses the efficient generation of surface waves from practical antenna structures.
+
+Goubau, G. (1950): Surface Waves and Their Application to Transmission Lines.
+
+CLAIMS
+
+1. A method comprising launching a guided surface wave along a lossy conducting medium using a guided surface waveguide probe configured to synthesize a wavefront incident on the surface of the lossy conducting medium at the complex Brewster angle of incidence.
+
+2. The method of claim 1 wherein the guided surface wave is a Zenneck surface wave bound to the interface between the lossy conducting medium and an insulating medium above the lossy conducting medium.
+
+3. An apparatus comprising a guided surface waveguide probe including a plurality of charge terminals positioned along a vertical axis, wherein the charge terminals are driven with polyphase excitation to synthesize a complex Brewster angle wavefront.
+
+4. The apparatus of claim 3 wherein the operating frequency is in the range of 0.1 MHz to 100 MHz.
+
+5. The apparatus of claim 3 wherein the lossy conducting medium is terrestrial.
+
+6. A method of receiving energy comprising coupling a receive structure to a guided surface wave at a location remote from a guided surface waveguide probe, wherein the guided surface wave is substantially bound to the interface between a lossy conducting medium and an insulating medium.

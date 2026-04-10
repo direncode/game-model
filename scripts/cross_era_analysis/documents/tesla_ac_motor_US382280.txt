@@ -1,0 +1,41 @@
+UNITED STATES PATENT OFFICE.
+NIKOLA TESLA, OF NEW YORK, N. Y., ASSIGNOR TO THE TESLA ELECTRIC COMPANY, OF SAME PLACE.
+ELECTRICAL TRANSMISSION OF POWER.
+SPECIFICATION forming part of Letters Patent No. 382,280, dated May 1, 1888.
+Application filed October 12, 1887. Serial No. 252,132. (No model.)
+
+To all whom it may concern:
+Be it known that I, NIKOLA TESLA, from Smiljan Lika, border country of Austria-Hungary, now residing at New York, in the county and State of New York, have invented certain new and useful Improvements in the Electrical Transmission of Power, of which the following is a specification, reference being had to the drawings accompanying and forming a part of the same.
+
+In my application Serial No. 252,133, filed October 12, 1887, I have shown and described a mode or plan of operating electrical motors by means of alternating currents which involved a novel method of transforming and transmitting electrical energy. In my present application I have described a method and apparatus for the electrical transmission of power constituting a modification of said plan and possessing certain new characteristics.
+
+The transmission of power by means of alternating currents of electricity, which has been heretofore proposed, has usually been performed by employing a single alternating-current circuit extending from the generator to the motor or translating device. This single circuit, when the distance between generator and motor is considerable, presents many disadvantages, chief among which are the loss of power by leakage and the difficulty of maintaining the proper synchronism between the generator and motor.
+
+I have found that these disadvantages may be obviated and the efficiency of the transmission greatly increased by employing, in place of the single circuit, a system of multiple circuits conveying currents differing in phase, and connecting the generator and motor by means of such a system. In this way I obtain a transmission of power which is practically independent of the distance and which is free from the losses which attend the ordinary method.
+
+The motors which I employ in this system are of the type described in my application referred to. They consist of two or more sets of energizing-coils or helices placed upon a common field-magnet in such manner that the axes of the coils are at angles to each other, and adapted to be traversed by alternating currents differing in phase. The magnetic poles produced in the field-magnet are thereby caused to move or shift progressively around the field, setting up a rotating magnetic field in which an armature composed of a closed coil or a mass of iron is placed. The armature rotates in synchronism with the shifting poles, and thus constitutes the rotor of the motor.
+
+In the present apparatus the generator is similarly constructed, having two or more sets of coils arranged at angles to each other and rotated in a magnetic field so as to generate alternating currents differing in phase. These currents are conveyed by separate circuits to the motor, where they energize the corresponding sets of coils therein and produce the rotating field which drives the armature.
+
+Referring to the drawing, Figure 1 is a diagrammatic illustration of the transmitting and receiving apparatus. G is the generator, provided with two sets of coils a and b arranged at right angles to each other and rotated in the field of the magnet M. The two sets of coils produce alternating currents differing in phase by a quarter period. These currents are conveyed by the two independent circuits c and d to the corresponding sets of coils a' and b' in the motor M'. The motor has a rotating armature A which is driven by the rotating magnetic field produced by the coils a' and b'.
+
+The important feature of this arrangement is that the circuits c and d are independent of each other, so that the current in one does not interfere with the current in the other. The result is that the motor runs in strict synchronism with the generator and the transmission is substantially loss-free.
+
+I have found this method of transmission particularly advantageous for the transmission of power over long distances, where the losses in the ordinary single-circuit system are prohibitive.
+
+The details of the generator and motor construction are as follows. The generator has a field-magnet excited by a continuous current from a separate source. The armature comprises two sets of coils wound upon a common core and arranged at right angles to each other. As the armature rotates, each set of coils generates an alternating current, and since the coils are displaced by a quarter turn, the currents differ in phase by a quarter period.
+
+The motor has a similar field-magnet, but in this case the field-magnet is stationary and the armature rotates within it. The field-magnet carries two sets of coils arranged at right angles to each other, and these are connected to the corresponding coils of the generator by the two independent circuits. The alternating currents in these coils produce a rotating magnetic field which drives the armature.
+
+What I claim is—
+
+1. The method of electrically transmitting power which consists in generating at a transmitting-station alternating currents differing in phase, conveying them by independent circuits to a receiving-station, and there energizing the coils of a motor arranged to produce a rotating magnetic field.
+
+2. The combination of a generator having two or more sets of coils arranged to produce alternating currents differing in phase, a motor having two or more sets of coils adapted to receive said currents and produce a rotating magnetic field, and independent circuits connecting the generator and motor.
+
+3. The method of transmitting power electrically between distant points which consists in generating at the transmitting-station by the rotation of a set of coils in a magnetic field, alternating currents differing in phase, and utilizing said currents at the receiving-station to produce by their joint action a progressive movement of the magnetic poles of a motor.
+
+NIKOLA TESLA.
+Witnesses:
+ROBT. F. GAYLORD,
+EDWARD T. EVANS.

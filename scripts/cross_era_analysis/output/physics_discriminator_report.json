@@ -1,0 +1,194 @@
+{
+  "scored_documents": [
+    {
+      "id": "tesla_ac_motor_US382280",
+      "year": 1887,
+      "type": "control_tesla_non_wireless",
+      "sw": 0.0,
+      "ind": 7.007,
+      "rad": 0.0,
+      "shared": 2.002
+    },
+    {
+      "id": "witricity_US7741734",
+      "year": 2010,
+      "type": "inductive_non_radiative",
+      "sw": 10.803999999999998,
+      "ind": 70.828,
+      "rad": 6.002,
+      "shared": 21.608999999999998
+    },
+    {
+      "id": "witricity_US8686598",
+      "year": 2014,
+      "type": "inductive_non_radiative",
+      "sw": 3.326,
+      "ind": 60.975,
+      "rad": 6.652,
+      "shared": 12.195
+    },
+    {
+      "id": "corum_US9912031",
+      "year": 2013,
+      "type": "modern_surface_wave",
+      "sw": 105.171,
+      "ind": 3.506,
+      "rad": 14.023,
+      "shared": 0.0
+    },
+    {
+      "id": "corum_US9923385",
+      "year": 2015,
+      "type": "modern_surface_wave",
+      "sw": 95.959,
+      "ind": 6.313,
+      "rad": 15.152,
+      "shared": 1.263
+    },
+    {
+      "id": "corum_US10084223",
+      "year": 2018,
+      "type": "modern_surface_wave",
+      "sw": 92.06,
+      "ind": 3.452,
+      "rad": 9.206,
+      "shared": 2.302
+    },
+    {
+      "id": "corum_US9910144",
+      "year": 2018,
+      "type": "modern_surface_wave",
+      "sw": 130.014,
+      "ind": 1.383,
+      "rad": 16.598,
+      "shared": 0.0
+    },
+    {
+      "id": "marconi_US586193",
+      "year": 1896,
+      "type": "radiative_radio",
+      "sw": 21.684,
+      "ind": 0.0,
+      "rad": 10.204,
+      "shared": 0.0
+    },
+    {
+      "id": "fessenden_US706737",
+      "year": 1902,
+      "type": "radiative_radio",
+      "sw": 7.653,
+      "ind": 0.0,
+      "rad": 35.714,
+      "shared": 10.204
+    },
+    {
+      "id": "fessenden_US706740",
+      "year": 1902,
+      "type": "radiative_radio",
+      "sw": 2.551,
+      "ind": 0.0,
+      "rad": 43.367,
+      "shared": 0.0
+    },
+    {
+      "id": "stone_US714756",
+      "year": 1902,
+      "type": "radiative_radio",
+      "sw": 10.458,
+      "ind": 1.307,
+      "rad": 24.837,
+      "shared": 13.072
+    },
+    {
+      "id": "deforest_US841387",
+      "year": 1907,
+      "type": "radiative_radio",
+      "sw": 8.902999999999999,
+      "ind": 2.967,
+      "rad": 20.772,
+      "shared": 1.484
+    },
+    {
+      "id": "modern_radio_antenna",
+      "year": 2020,
+      "type": "radiative_radio",
+      "sw": 1.529,
+      "ind": 0.0,
+      "rad": 44.343,
+      "shared": 1.529
+    },
+    {
+      "id": "tesla_US645576",
+      "year": 1897,
+      "type": "tesla_surface_wave",
+      "sw": 8.679,
+      "ind": 0.0,
+      "rad": 0.0,
+      "shared": 0.643
+    },
+    {
+      "id": "tesla_US649621",
+      "year": 1900,
+      "type": "tesla_surface_wave",
+      "sw": 24.733,
+      "ind": 0.0,
+      "rad": 0.485,
+      "shared": 3.88
+    },
+    {
+      "id": "tesla_US1119732",
+      "year": 1902,
+      "type": "tesla_surface_wave",
+      "sw": 9.135,
+      "ind": 0.0,
+      "rad": 0.0,
+      "shared": 4.807
+    }
+  ],
+  "group_means": {
+    "Tesla surface wave (1897-1902)": {
+      "sw": 14.182333333333332,
+      "ind": 0.0,
+      "rad": 0.16166666666666665
+    },
+    "Modern Corum surface wave (2013-2018)": {
+      "sw": 105.801,
+      "ind": 3.6635,
+      "rad": 13.74475
+    },
+    "WiTricity inductive (2010-2014)": {
+      "sw": 7.0649999999999995,
+      "ind": 65.9015,
+      "rad": 6.327
+    },
+    "Radio era + modern radio": {
+      "sw": 8.796333333333331,
+      "ind": 0.7123333333333334,
+      "rad": 29.872833333333336
+    }
+  },
+  "predictions": [
+    {
+      "description": "Tesla patents dominated by surface-wave vocabulary",
+      "confirmed": true,
+      "detail": "SW=14.18 vs IND=0.00 vs RAD=0.16"
+    },
+    {
+      "description": "Modern Corum patents dominated by surface-wave vocabulary",
+      "confirmed": true,
+      "detail": "SW=105.80 vs IND=3.66 vs RAD=13.74"
+    },
+    {
+      "description": "WiTricity patents dominated by inductive/near-field vocabulary",
+      "confirmed": true,
+      "detail": "SW=7.06 vs IND=65.90 vs RAD=6.33"
+    },
+    {
+      "description": "Radio patents dominated by radiative vocabulary",
+      "confirmed": true,
+      "detail": "SW=8.80 vs IND=0.71 vs RAD=29.87"
+    }
+  ],
+  "confirmed_count": 4,
+  "total_predictions": 4
+}

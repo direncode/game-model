@@ -1,0 +1,184 @@
+[
+  {
+    "id": "tesla_US645576",
+    "title": "System of Transmission of Electrical Energy (Tesla, 1897/1900)",
+    "year": 1897,
+    "type": "tesla_surface_wave",
+    "file": "tesla_US645576.txt"
+  },
+  {
+    "id": "tesla_US649621",
+    "title": "Apparatus for Transmission of Electrical Energy (Tesla, 1900)",
+    "year": 1900,
+    "type": "tesla_surface_wave",
+    "file": "tesla_US649621.txt"
+  },
+  {
+    "id": "tesla_US1119732",
+    "title": "Apparatus for Transmitting Electrical Energy (Tesla, 1902/1914) - Wardenclyffe",
+    "year": 1902,
+    "type": "tesla_surface_wave",
+    "file": "tesla_US1119732.txt"
+  },
+  {
+    "id": "corum_US9923385",
+    "title": "Excitation and Use of Guided Surface Waves (Corum, 2015/2018)",
+    "year": 2015,
+    "type": "modern_surface_wave",
+    "file": "corum_US9923385.txt"
+  },
+  {
+    "id": "corum_US9912031",
+    "title": "Excitation and Use of Guided Surface Wave Modes on Lossy Media (Corum, 2013/2018)",
+    "year": 2013,
+    "type": "modern_surface_wave",
+    "file": "corum_US9912031.txt"
+  },
+  {
+    "id": "corum_US10084223",
+    "title": "Modulated Guided Surface Waves (Corum, 2018)",
+    "year": 2018,
+    "type": "modern_surface_wave",
+    "file": "corum_US10084223.txt"
+  },
+  {
+    "id": "corum_US9910144",
+    "title": "Excitation and Use of Guided Surface Wave Modes on Lossy Media - Polyphase (Corum, 2018)",
+    "year": 2018,
+    "type": "modern_surface_wave",
+    "file": "corum_US9910144.txt"
+  },
+  {
+    "id": "witricity_US7741734",
+    "title": "Wireless Non-Radiative Energy Transfer (Soljacic/MIT, 2010)",
+    "year": 2010,
+    "type": "inductive_non_radiative",
+    "file": "witricity_US7741734.txt"
+  },
+  {
+    "id": "witricity_US8686598",
+    "title": "Wireless Energy Transfer for Supplying Power and Heat (WiTricity, 2014)",
+    "year": 2014,
+    "type": "inductive_non_radiative",
+    "file": "witricity_US8686598.txt"
+  },
+  {
+    "id": "marconi_US586193",
+    "title": "Transmitting Electrical Signals (Marconi, 1896/1897)",
+    "year": 1896,
+    "type": "radiative_radio",
+    "file": "marconi_US586193.txt"
+  },
+  {
+    "id": "tesla_ac_motor_US382280",
+    "title": "Electrical Transmission of Power - AC Polyphase (Tesla, 1887/1888)",
+    "year": 1887,
+    "type": "control_tesla_non_wireless",
+    "file": "tesla_ac_motor_US382280.txt"
+  },
+  {
+    "id": "modern_radio_antenna",
+    "title": "Modern Dipole Antenna for RF Transmission (control, modern)",
+    "year": 2020,
+    "type": "radiative_radio",
+    "file": "modern_radio_antenna.txt"
+  },
+  {
+    "id": "fessenden_US706737",
+    "title": "Apparatus for Wireless Telegraphy (Fessenden, 1902)",
+    "year": 1902,
+    "type": "radiative_radio",
+    "file": "fessenden_US706737.txt"
+  },
+  {
+    "id": "fessenden_US706740",
+    "title": "Wireless Signaling (Fessenden, 1902)",
+    "year": 1902,
+    "type": "radiative_radio",
+    "file": "fessenden_US706740.txt"
+  },
+  {
+    "id": "deforest_US841387",
+    "title": "Device for Amplifying Feeble Electric Currents - Audion (de Forest, 1907)",
+    "year": 1907,
+    "type": "radiative_radio",
+    "file": "deforest_US841387.txt"
+  },
+  {
+    "id": "stone_US714756",
+    "title": "Wireless Telegraphy (John Stone Stone, 1902)",
+    "year": 1902,
+    "type": "radiative_radio",
+    "file": "stone_US714756.txt"
+  },
+  {
+    "id": "crypto_DH_US4200770",
+    "title": "Diffie-Hellman Key Exchange (1980)",
+    "year": 1980,
+    "type": "crypto_number_theoretic",
+    "file": "crypto_publickey_DH_US4200770.txt"
+  },
+  {
+    "id": "crypto_RSA_US4405829",
+    "title": "RSA Cryptosystem (1983)",
+    "year": 1983,
+    "type": "crypto_number_theoretic",
+    "file": "crypto_publickey_RSA_US4405829.txt"
+  },
+  {
+    "id": "crypto_NTRU_US6298137",
+    "title": "NTRU Lattice Cryptosystem (2001)",
+    "year": 2001,
+    "type": "crypto_lattice",
+    "file": "crypto_pq_NTRU_US6298137.txt"
+  },
+  {
+    "id": "crypto_modern_PQ_US10097351",
+    "title": "Modern Lattice Post-Quantum (2018)",
+    "year": 2018,
+    "type": "crypto_lattice",
+    "file": "crypto_pq_modern_US10097351.txt"
+  },
+  {
+    "id": "crypto_AES",
+    "title": "AES Symmetric Cipher (2001)",
+    "year": 2001,
+    "type": "crypto_symmetric",
+    "file": "crypto_symmetric_AES_control.txt"
+  },
+  {
+    "id": "info_SHANNON1948",
+    "title": "Shannon Mathematical Theory of Communication (1948)",
+    "year": 1948,
+    "type": "info_entropy_coding",
+    "file": "info_entropy_SHANNON1948.txt"
+  },
+  {
+    "id": "info_HUFFMAN1952",
+    "title": "Huffman Minimum-Redundancy Codes (1952)",
+    "year": 1952,
+    "type": "info_entropy_coding",
+    "file": "info_entropy_HUFFMAN1952.txt"
+  },
+  {
+    "id": "info_LZ1984",
+    "title": "Lempel-Ziv Data Compression (1984)",
+    "year": 1984,
+    "type": "info_dictionary_based",
+    "file": "info_dictionary_LZ_US4464650.txt"
+  },
+  {
+    "id": "info_JPEG1992",
+    "title": "JPEG DCT Image Compression (1992)",
+    "year": 1992,
+    "type": "info_transform_based",
+    "file": "info_transform_JPEG_DCT.txt"
+  },
+  {
+    "id": "info_HEVC2013",
+    "title": "HEVC H.265 Video Compression (2013)",
+    "year": 2013,
+    "type": "info_transform_based",
+    "file": "info_transform_modern_HEVC_H265.txt"
+  }
+]

@@ -1,0 +1,103 @@
+UNITED STATES PATENT
+US 8,686,598 B2
+WIRELESS ENERGY TRANSFER FOR SUPPLYING POWER AND HEAT TO A DEVICE
+Assignee: WiTricity Corp
+Issued: April 1, 2014
+
+ABSTRACT
+Described is a non-radiative, or near-field, wireless energy transfer scheme using coupled electromagnetic resonators. The system transfers power through oscillating magnetic fields rather than radiative transmission, making it fundamentally different from broadcast wireless power systems.
+
+CORE TECHNOLOGY
+
+The technology employs coupled electromagnetic resonators with long-lived oscillatory resonant modes to mediate energy transfer. The resonators are specifically designed such that the energy stored by the electric field is primarily confined within the structure and that the energy stored by the magnetic field is primarily in the region surrounding the resonator, enabling energy exchange mediated primarily by the resonant magnetic near-field.
+
+This is a non-radiative wireless power transfer system. Energy is not radiated into free space. Instead, energy is transferred through the overlapping magnetic near-fields of two tuned resonators. The system cannot transmit to distances larger than the near-field region (typically a wavelength).
+
+TECHNICAL SPECIFICATIONS
+
+Resonator Characteristics:
+- Quality Factor (Q): Systems utilize high-Q resonators (defined as Q greater than 100)
+- Geometric Mean Requirement: sqrt(Q1*Q2) greater than 100 for efficient coupled systems
+- Strong-Coupling Factor (U): U greater than 0.2 gives greater than 1% efficiency; U greater than 9 gives greater than 80% efficiency; U greater than 45 gives greater than 95% efficiency
+
+Frequency Range:
+- Operating frequencies specified as below 10 GHz
+- Examples demonstrate MHz-range operation
+
+Resonator Components:
+
+Inductive Element: For a circular single-turn loop: L approximately mu0*x*(ln(8x/a) - 2), where x is radius of enclosed surface and a is conductor radius.
+
+Capacitive Elements: Discrete capacitor plates or distributed capacitance between multi-loop windings. Fixed or variable implementations for tuning.
+
+DISTANCE AND COUPLING
+
+- Designed for mid-range distances from centimeters to meters
+- Coupling-time between resonators much shorter than resonators' loss-times
+- Distance D between source and device resonators measured in multiple system examples
+
+Unlike broadcast radiation which propagates to infinity (subject to losses), this near-field coupling scheme requires the receiver to be within the near-field region of the transmitter. The coupling is between two specific resonators, not a general broadcast.
+
+RESONATOR TYPES
+
+Magnetic Resonators (Primary Focus):
+Electric field energy confined within structure; magnetic field energy extends into surrounding region. The patent notes these are preferred for wireless energy transfer applications in populated environments because most everyday materials including animals, plants, and humans are non-magnetic (i.e., relative permeability mu_r approximately 1), so their interaction with magnetic fields is minimal.
+
+Electric Resonators (Alternative):
+Magnetic field energy confined; electric field extends outward. Can be used when magnetic resonators are impractical.
+
+SYSTEM ARCHITECTURE
+
+Basic Configuration: A source resonator connected to power generator transfers energy wirelessly to a device resonator connected to a load, with both resonators designed to exchange energy wirelessly through their coupled magnetic near-fields.
+
+Scaling Capability:
+- Single source to multiple devices
+- Multiple sources to single or multiple devices
+- Intermediate repeater resonators extending range
+- Device resonators may receive energy from a source resonator, convert a portion of that energy to electric power for powering or charging a device, and simultaneously pass a portion of the received energy onto other device or mobile device resonators.
+
+IMPEDANCE MATCHING
+
+The patent describes extensive impedance matching network topologies, including:
+- Direct coupling configurations
+- Indirect transformer coupling
+- Symmetric and asymmetric drive configurations
+- Networks with series and parallel capacitors and inductors for frequency and impedance tuning
+
+EFFICIENCY OPTIMIZATION
+
+Transfer efficiency is maximized when:
+- Resonator Q-factors are high
+- Strong-coupling factor U much greater than 1 (strong-coupling regime)
+- Resonant frequencies properly matched
+- Impedance conditions optimized
+- System parameters remain within tolerance ranges
+
+HEAT TRANSFER APPLICATIONS
+
+The patent extends the technology to include heating: the magnetic energy transferred by the source to the device may be converted into electrical energy by one or more device resonators and converted into thermal energy by one or more device heating elements. Applications include sterilization, drying, and temperature maintenance.
+
+PRACTICAL APPLICATIONS CITED
+- Vehicles (buses, hybrid cars, electric vehicles)
+- Consumer electronics (laptops, cell phones, portable music players)
+- Medical devices (wearable, implantable)
+- Industrial equipment and sensors
+- Home appliances
+
+CLAIMS
+
+1. A wireless energy transfer apparatus comprising a source resonator configured to generate oscillating magnetic fields at a resonant frequency and a device resonator tuned to the same resonant frequency and positioned within the near-field region of the source resonator.
+
+2. The apparatus of claim 1 wherein the source resonator and device resonator each have a quality factor Q greater than 100.
+
+3. The apparatus of claim 1 wherein the energy transfer is mediated by oscillating magnetic near-fields.
+
+4. The apparatus of claim 1 wherein the source resonator comprises an inductive element and a capacitive element.
+
+5. The apparatus of claim 1 further comprising a device heating element configured to convert received electrical energy into thermal energy.
+
+6. A method of wirelessly transferring energy comprising exciting a source resonator at a resonant frequency and coupling energy to a device resonator tuned to the same resonant frequency through oscillating magnetic near-fields within the near-field region.
+
+7. The method of claim 6 wherein the transfer is non-radiative.
+
+This wireless power transfer system is distinct from systems that rely on radiating waves propagating through free space. It is also distinct from systems that launch guided surface waves along the interface between two media. This is specifically a near-field magnetic resonant coupling system.

@@ -1,0 +1,57 @@
+UNITED STATES PATENT
+US 4,200,770
+CRYPTOGRAPHIC APPARATUS AND METHOD
+Inventors: Martin E. Hellman, Bailey W. Diffie, Ralph C. Merkle
+Issued: April 29, 1980
+Filed: September 6, 1977
+
+ABSTRACT
+A cryptographic system for secure communication over insecure channels without prior key arrangement. Two parties exchange transformed signals that are easy to compute but difficult to invert, deriving an identical shared secret key through modular exponentiation. An eavesdropper observing only the public exchange cannot feasibly compute the shared key.
+
+BACKGROUND
+
+The 1976 Diffie-Hellman paper "New Directions in Cryptography" proposed that public key cryptosystems were plausible but provided neither proof that public key cryptosystems exist, nor a demonstration system. The present invention addresses this gap by implementing a practical one-way function based on modular exponentiation in a finite field.
+
+Conventional cryptosystems require prior secret key distribution, which presents operational difficulty in many settings. The invention enables two parties to establish a shared secret over a completely public communication channel, with computational security based on the difficulty of computing discrete logarithms in a large prime field.
+
+MATHEMATICAL FOUNDATION
+
+Core Problem: The discrete logarithm problem in modular arithmetic.
+
+Key Mathematical Operation: The system relies on raising numbers to powers modulo a large prime:
+Y1 = a^X1 mod q
+Y2 = a^X2 mod q
+Shared Key K = a^(X1*X2) mod q
+
+Technical Specifications:
+- q: a large prime number
+- a: a random number, such that 1 <= a <= q-1, generally a generator of the multiplicative group modulo q
+- X1, X2: independent random numbers chosen uniformly from the set of integers (1, 2, ..., q-1), kept secret by the respective parties
+
+The patent specifies that inverting these transformations (i.e., computing X from Y given a and q) requires approximately q^(1/2) operations using known algorithms (Pollard rho, baby-step giant-step), with recommended q values around 200 bits to achieve infeasibility.
+
+The security relies on the computational asymmetry between exponentiation (easy) and discrete logarithm (hard) in the multiplicative group of integers modulo a prime.
+
+ONE-WAY FUNCTION PROPERTY
+
+The function f(x) = a^x mod q is computable in polynomial time but its inverse (the discrete logarithm) requires sub-exponential time with the best known algorithms. This computational asymmetry is the foundation of all subsequent public-key cryptography based on the discrete logarithm assumption.
+
+CLAIMS
+
+1. A secure key generator transforming signals such that the transformation is infeasible to invert, comprising means for raising a fixed base to a secret exponent modulo a large prime.
+
+2. The protocol of claim 1 wherein each party generates and transforms a secret exponent, exchanges the transformed value with the other party, and combines its own secret exponent with the received transformation to derive an identical shared key.
+
+3. The system of claim 2 wherein the transformation is Y = a^X mod q where q is a large prime and a is a generator of the multiplicative group.
+
+4. The system of claim 3 wherein the shared key is K = Y'^X mod q = a^(XX') mod q where Y' is the value received from the other party.
+
+5. The system of claim 1 wherein q has approximately 200 binary digits or more.
+
+6. A method for secure key distribution comprising the steps of: generating a random secret X1 at a first location; computing Y1 = a^X1 mod q where a and q are public parameters; transmitting Y1 over an insecure channel to a second location; receiving Y2 = a^X2 mod q from the second location; and computing the shared key K = Y2^X1 mod q.
+
+7. The method of claim 6 wherein the security depends on the computational difficulty of solving the discrete logarithm problem in the multiplicative group of integers modulo q.
+
+8. The system of claim 1 wherein the one-way function is modular exponentiation in a prime field.
+
+This is the foundational public-key cryptography invention. All subsequent public-key cryptosystems based on the discrete logarithm problem (ElGamal, DSA, ECDH, etc.) derive from the principles disclosed herein. The security model is computational hardness of discrete logarithms in finite cyclic groups.

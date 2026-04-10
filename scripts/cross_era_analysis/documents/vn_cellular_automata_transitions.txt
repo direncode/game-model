@@ -1,0 +1,98 @@
+SOURCE: Transition functions of Von Neumann's 29-state cellular automaton (scholarly reconstruction, after Burks 1966)
+CITATION: Wikipedia "Von Neumann cellular automaton" and "Von Neumann universal constructor" (accessed 2026-04-10); Von Neumann and Burks (1966) Theory of Self-Reproducing Automata, Part II, Chs. 1-3
+
+== The State Set ==
+
+Burks' editorial reconstruction of Von Neumann's 29-state transition function divides the state set Q into five functional classes:
+
+  Q = {U} cup S cup C cup T_ord cup T_spec
+  |Q| = 1 + 8 + 4 + 8 + 8 = 29
+
+Here U is the unique ground state, S = {S, S0, S00, S000, S01, S1, S10, S11} is the set of eight sensitized (transition) states, C = {C00, C01, C10, C11} is the set of confluent states, T_ord is the set of ordinary transmission states, and T_spec the set of special transmission states. Each transmission state carries both a polarity (ordinary or special), a direction d in {N, E, S, W}, and an excitation bit e in {0, 1}, yielding 2 * 4 * 2 = 16 transmission states in total.
+
+A cell updates synchronously based on its current state and the states of its four orthogonal neighbors (the von Neumann neighborhood, radius 1). The global rule F: Q^5 -> Q is thus a function of a quintuple (q, n_N, n_E, n_S, n_W).
+
+== Transmission Rules (OR Logic) ==
+
+For an ordinary transmission cell with direction d and excitation e:
+
+  Rule OT-1 (propagation): A quiescent ordinary transmission cell becomes excited on the next time step if and only if at least one adjacent transmission cell (ordinary or of the same polarity) is excited and points into the cell.
+
+  Rule OT-2 (relaxation): An excited ordinary transmission cell becomes quiescent on the next time step unless it is re-excited by incoming pulses.
+
+  Rule OT-3 (antagonism): If an ordinary transmission cell is struck by an excited special transmission cell pointing into it, the cell reverts to the ground state U in the next step. The symmetric rule applies to special transmission struck by ordinary.
+
+In shorthand:
+  OT[d, 0] + (any T-state with direction d' pointing into this cell, excited, same polarity) -> OT[d, 1]
+  OT[d, 1] + (no sustaining excitation) -> OT[d, 0]
+  OT[d, *] + T_spec[d', 1] pointing in -> U
+
+These rules encode an OR logic: any one excited input suffices to turn the cell on.
+
+== Confluent Rules (AND-with-Delay Logic) ==
+
+The four confluent states are labeled by two binary flags: the first records "am I excited now," the second "will I be excited next cycle," yielding C00, C01, C10, C11. A confluent cell's update is:
+
+  Rule CF-1 (AND): A confluent cell becomes "next-excited" (second flag = 1) on the next time step if and only if every adjacent ordinary transmission cell that points into the confluent cell is excited, and at least one non-direction-conflicting ordinary transmission cell exists to drive it.
+
+  Rule CF-2 (shift): Each time step, the "next-excited" flag shifts into the "now-excited" flag. Thus C00 -> C00 (no inputs), C00 -> C01 (AND satisfied), C01 -> C10 (nothing new), C10 -> C00 or C01 depending on fresh inputs.
+
+  Rule CF-3 (delivery): An excited confluent cell excites any adjacent non-directed ordinary or special transmission cells on the next step.
+
+  Rule CF-4 (destruction): An excited special transmission cell pointing into a confluent cell reverts the confluent cell to U.
+
+Confluent cells thus act as clocked AND gates, introducing a one-cycle delay and holding two bits of state. This delay-plus-AND is what permits the construction of arbitrarily deep logical circuits in the CA plane.
+
+== Sensitization (Construction) Rules ==
+
+A ground cell U becomes sensitized when struck by an excited ordinary transmission cell, entering state S. From S the cell traverses a binary tree of states, reading one binary input from the stimulating neighbor per time step:
+
+  U + excited OT pointing in     -> S
+  S + input 0                    -> S0
+  S + input 1                    -> S1
+  S0 + input 0                   -> S00
+  S0 + input 1                   -> S01
+  S00 + input 0                  -> S000
+  S1 + input 0                   -> S10
+  S1 + input 1                   -> S11
+
+The terminal states determine the outcome:
+
+  S000 (input stream 1000) -> east-directed ordinary transmission, quiescent
+  S001 -> north-directed ordinary transmission, quiescent
+  S010 -> west-directed ordinary transmission, quiescent
+  S011 -> south-directed ordinary transmission, quiescent
+  S100 -> east-directed special transmission, quiescent
+  S101 -> north-directed special transmission, quiescent
+  S110 -> west-directed special transmission, quiescent
+  S111 -> confluent state C00
+
+Thus four input cycles suffice to construct any ordinary transmission cell (the path 1 -> S -> S0 -> S00 -> S000 -> OT[E,0]), and three cycles suffice to construct a confluent or special transmission cell along a shorter branch.
+
+== Burks' Commentary on the Rules ==
+
+Burks notes in his editorial introduction that the specific encoding of the sensitization tree was chosen by Von Neumann to minimize the number of states required to distinguish the sixteen possible terminal outcomes while preserving a uniform "pulse-train" interface with the already-existing transmission and confluent machinery. The choice is not unique — Burks observes that a slightly different tree would have allowed simpler destruction rules at the cost of one more intermediate state — but the chosen encoding has the virtue that every constructive pulse train begins with a single "1" from the construction arm, which acts as a synchronization signal.
+
+Burks also highlights that Von Neumann's transition function is state-symmetric in a restricted sense: the global rule F is invariant under 90-degree rotation of the grid when one simultaneously rotates the directional labels of all transmission states. It is NOT, however, invariant under reflection, because the sensitization tree breaks the symmetry between "left turn" and "right turn" in the construction sequence. This asymmetry is intentional and enables oriented construction arms.
+
+== Destruction and Clearing ==
+
+The antagonism rules between ordinary and special transmission allow the universal constructor to erase scaffolding once a sub-assembly is complete. The constructor emits a pulse train through ordinary transmission lines to build the new structure, then activates a dormant special transmission arm that traces over the scaffolding and reverts it to ground state. The offspring thus appears clean, surrounded by empty grid, ready to be activated by a final "start" pulse.
+
+== Computational Universality ==
+
+By combining confluent (AND) and transmission (OR) logic with the delay implicit in the confluent shift rule, Von Neumann showed that any finite Boolean circuit, and therefore any finite-state machine, can be built inside the grid. A Turing machine is obtained by building a finite-state controller and a linear tape of ordinary transmission cells serving as data. The universal constructor, in turn, is obtained by embedding a Turing machine whose program interprets a second tape as a construction description. This demonstrates the logical universality of Von Neumann's automaton: it can compute anything computable, and it can build anything it can describe.
+
+== Initial Conditions and Quiescent Configurations ==
+
+A configuration of the grid is said to be quiescent at time t if, absent external input, every cell retains its current state at time t+1 under the global transition rule F. The ground state U is quiescent by definition. A configuration consisting of a finite island of ordinary transmission cells in their 0-excitation form, surrounded by an infinite sea of U, is also quiescent provided no transmission cell points into a neighbor from which it can receive a driving pulse. Burks emphasizes that the class of quiescent configurations forms a natural domain for the initial state of a constructed automaton, because one can place the automaton into the grid without triggering spurious activity, and then activate it by injecting a single pulse into a designated starting cell.
+
+== Encoding Descriptions on Transmission Tapes ==
+
+In the universal constructor, the description tape is encoded as a linear array of ordinary transmission cells and confluent cells, with each binary digit represented by the presence or absence of an excitation pulse at a designated tape position. The read head of the constructor is a small configuration of special and ordinary transmission cells that scans the tape, one position per machine cycle, and feeds the resulting pulse train into the construction arm. The construction arm is a long, oriented ribbon of ordinary transmission cells whose tip extends into the region where the new automaton will be built; each time a pulse train arrives at the tip it sensitizes a ground cell into the appropriate terminal state.
+
+Because the tape encoding is itself made of transmission and confluent cells, the same machinery that constructs the new automaton can also copy the tape: the constructor reads the original tape, passes each bit to the construction arm, and simultaneously passes the bit to a parallel tape-writing arm that lays down a duplicate tape next to the new automaton. After construction is complete, the scaffold is cleared using special transmission pulses, and a final "start" pulse activates the offspring.
+
+== Parameter Counts ==
+
+Burks' appendix records that the full specification of the 29-state transition function, enumerating every rule for every possible combination of neighbor states, occupies several pages of tabular data. The number of distinct cases to be enumerated is bounded above by 29^5 = 20,511,149 in principle, but the vast majority of these are handled by a small number of default rules (ground stays ground, quiescent remains quiescent in the absence of driving pulses), so that the "interesting" rule table contains only on the order of a few hundred distinct entries. This compactness is crucial: it means the rule can be understood and verified by hand, and it means the transition function itself carries only a small amount of information relative to the configurations it animates.

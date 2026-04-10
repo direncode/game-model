@@ -1,0 +1,56 @@
+UNITED STATES PATENT
+US 9,923,385 B2
+EXCITATION AND USE OF GUIDED SURFACE WAVES
+Inventors: James F. Corum, Kenneth L. Corum
+Assignee: CPG Technologies, LLC
+Filed: June 2, 2015
+Issued: March 20, 2018
+
+ABSTRACT
+Disclosed are various embodiments for transmitting and receiving energy conveyed in the form of a guided surface-waveguide mode along the surface of a lossy medium such as, e.g., a terrestrial medium excited by a guided surface waveguide probe.
+
+BACKGROUND
+For over a century, signals transmitted by radio waves involved radiation fields launched using conventional antenna structures. In contrast to radio science, electrical power distribution systems in the last century involved the transmission of energy guided along electrical conductors. This understanding of the distinction between radio frequency (RF) and power transmission has existed since the early 1900's.
+
+KEY DISTINCTION: GUIDED vs RADIATED WAVES
+
+Guided electromagnetic fields: a propagating electromagnetic wave whose energy is concentrated within or near boundaries between media having different electromagnetic properties. In this sense, a guided electromagnetic field is one that is bound to a waveguide and may be characterized as being conveyed by the current flowing in the waveguide. If there is no load for a guided electromagnetic wave, then no energy is consumed.
+
+Radiated electromagnetic fields: electromagnetic energy that is emitted from a source structure in the form of waves that are not bound to a waveguide. Radiated electromagnetic fields are characterized by free electromagnetic fields that emanate from the source structure and spread out in space. Once radiated, these waves propagate independently of the receiver and are lost regardless of whether a receiver is present.
+
+The surface wave in the Zenneck-Sommerfeld guided wave sense is distinct from ground wave propagation in the Weyl-Norton-FCC sense.
+
+FREQUENCY SPECIFICATIONS
+Example operating frequency: 1.85 MHz. At 1.85 MHz the free-space wavelength is approximately 162 meters. The guided surface wave probe is designed to match the complex Brewster angle at this frequency.
+
+TERMINAL GEOMETRY
+Charge terminal T1 specifications:
+- Shape: sphere, disk, cylinder, cone, torus, hood, one or more rings, or any other randomized shape
+- Height requirement: at least four times the spherical diameter
+- Self-capacitance varies with elevation above ground plane
+- Coupling to earth via feed network with polyphase excitation synthesizing fields at the complex Brewster angle
+
+The guided surface waveguide probe includes a charge terminal T1 elevated above a lossy conducting medium. The charge terminal T1 is coupled to an excitation source via a feed network. The feed network comprises a receiver network coupled between the charge terminal T1 and the lossy conducting medium with the charge terminal T1 being positioned such that charge is distributed across the charge terminal T1.
+
+HISTORICAL REFERENCES
+Zenneck, Jonathan (1907): "Uber die Fortpflanzung ebener elektromagnetischer Wellen längs einer ebenen Leiterfläche und ihre Beziehung zur drahtlosen Telegraphie"
+Sommerfeld, A. (1909): "Uber die Ausbreitung der Wellen in der Drahtlosen Telegraphie"
+Barlow, H.M. and Brown, J. (1962): Radio Surface Waves
+Cullen, A.L. (1954): "The Excitation of Plane Surface Waves"
+
+CLAIMS (summary)
+1. A method of transmitting energy comprising launching a guided surface wave along a surface of a lossy conducting medium using a guided surface waveguide probe having a charge terminal elevated above the lossy conducting medium and configured to generate a wavefront incident on the surface at the complex Brewster angle of the lossy conducting medium.
+
+2. A guided surface waveguide probe comprising a charge terminal elevated above a lossy conducting medium and a feed network coupled to the charge terminal configured to generate a wavefront incident at the complex Brewster angle at a frequency of operation.
+
+3. The probe of claim 2 wherein the frequency of operation is in the range of 0.1 MHz to 10 MHz.
+
+4. The probe of claim 2 wherein the charge terminal comprises a sphere having a diameter.
+
+5. The probe of claim 2 wherein the feed network comprises a coil having inductance.
+
+6. The probe of claim 2 wherein the wavefront substantially mode-matches a Zenneck surface wave bound to the interface between the lossy conducting medium and an insulating medium above the lossy conducting medium.
+
+7. A method of receiving energy guided along a lossy conducting medium as a guided surface wave, comprising extracting electrical energy from the guided surface wave using a guided surface waveguide receiver.
+
+The disclosed apparatus launches a Zenneck surface wave that propagates as a bound mode along the lossy medium (earth) interface with the insulating medium (atmosphere). The non-radiative nature of the bound mode enables efficient energy transmission to distant receivers with minimal losses that scale as 1/sqrt(distance) rather than 1/distance squared as in ordinary radio transmission. This method is distinguished from radiated wave transmission by the fact that the guided surface wave is bound to the waveguide interface and does not lose energy through radiation into free space.

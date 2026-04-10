@@ -1,0 +1,97 @@
+[
+  {
+    "id": "info_dictionary_LZ_US4464650",
+    "year": 1984,
+    "expected": "dictionary_based",
+    "ent": 30.267000000000003,
+    "dict": 72.63900000000001,
+    "trans": 2.421,
+    "scores_detail": {
+      "ent_entropy": 7.264,
+      "ent_probability": 8.475,
+      "ent_codeword": 14.528,
+      "dict_dictionary": 52.058,
+      "dict_repetition": 16.949,
+      "dict_pointer": 3.632,
+      "trans_transform": 0.0,
+      "trans_quantization": 0.0,
+      "trans_block": 2.421
+    }
+  },
+  {
+    "id": "info_entropy_HUFFMAN1952",
+    "year": 1952,
+    "expected": "entropy_coding",
+    "ent": 81.71199999999999,
+    "dict": 5.188,
+    "trans": 0.0,
+    "scores_detail": {
+      "ent_entropy": 20.752,
+      "ent_probability": 20.752,
+      "ent_codeword": 40.208,
+      "dict_dictionary": 0.0,
+      "dict_repetition": 5.188,
+      "dict_pointer": 0.0,
+      "trans_transform": 0.0,
+      "trans_quantization": 0.0,
+      "trans_block": 0.0
+    }
+  },
+  {
+    "id": "info_entropy_SHANNON1948",
+    "year": 1948,
+    "expected": "entropy_coding",
+    "ent": 38.022999999999996,
+    "dict": 0.0,
+    "trans": 2.535,
+    "scores_detail": {
+      "ent_entropy": 29.151,
+      "ent_probability": 8.872,
+      "ent_codeword": 0.0,
+      "dict_dictionary": 0.0,
+      "dict_repetition": 0.0,
+      "dict_pointer": 0.0,
+      "trans_transform": 0.0,
+      "trans_quantization": 0.0,
+      "trans_block": 2.535
+    }
+  },
+  {
+    "id": "info_transform_JPEG_DCT",
+    "year": 1992,
+    "expected": "transform_based",
+    "ent": 33.613,
+    "dict": 10.804,
+    "trans": 108.043,
+    "scores_detail": {
+      "ent_entropy": 13.205,
+      "ent_probability": 15.606,
+      "ent_codeword": 4.802,
+      "dict_dictionary": 8.403,
+      "dict_repetition": 2.401,
+      "dict_pointer": 0.0,
+      "trans_transform": 37.215,
+      "trans_quantization": 52.821,
+      "trans_block": 18.007
+    }
+  },
+  {
+    "id": "info_transform_modern_HEVC_H265",
+    "year": 2013,
+    "expected": "transform_based",
+    "ent": 26.996,
+    "dict": 7.042,
+    "trans": 90.375,
+    "scores_detail": {
+      "ent_entropy": 12.911,
+      "ent_probability": 8.216,
+      "ent_codeword": 5.869,
+      "dict_dictionary": 3.521,
+      "dict_repetition": 2.347,
+      "dict_pointer": 1.174,
+      "trans_transform": 23.474,
+      "trans_quantization": 35.211,
+      "trans_block": 31.69
+    }
+  }
+]

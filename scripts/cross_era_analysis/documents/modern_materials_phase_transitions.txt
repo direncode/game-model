@@ -1,0 +1,88 @@
+SOURCE: Phase transition, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/Phase_transition
+
+# Technical Analysis of Phase Transitions: Classification and Critical Phenomena
+
+## Ehrenfest Classification Framework
+
+Paul Ehrenfest developed a foundational scheme for categorizing phase transitions based on thermodynamic free energy discontinuities. First-order phase transitions exhibit a discontinuity in the first derivative of the free energy with respect to some thermodynamic variable. In contrast, second-order phase transitions are continuous in the first derivative but exhibit discontinuity in a second derivative of the free energy.
+
+This distinction proves critical for understanding transition mechanics. First-order transitions involve density changes—the inverse of the free energy's first derivative relative to pressure—making them easily identifiable through observable property shifts.
+
+The modern classification scheme groups transitions into two categories: first-order transitions (which involve latent heat) and continuous (higher-order) transitions. The classical examples of first-order transitions are melting, boiling, sublimation, and their reverses (freezing, condensation, deposition). The superfluid transition in liquid helium, the ferromagnetic Curie point transition, and superconducting transitions represent classic continuous transitions.
+
+## Latent Heat and Energy Considerations
+
+First-order transitions are characterized by latent heat absorption or release. Such transitions involve a latent heat and absorb or release a fixed (and typically large) amount of energy per volume. During melting or boiling, the temperature of the system will stay constant as heat is added, creating a mixed-phase region where both states coexist. This thermodynamic signature distinguishes these transitions from continuous transformations.
+
+The Clausius-Clapeyron equation relates the slope of phase coexistence curves in the pressure-temperature plane to the latent heat and volume change across the transition: dP/dT = L/(T*deltaV), where L is the molar latent heat, T the temperature, and deltaV the molar volume change.
+
+## Order Parameters and Symmetry Breaking
+
+Order parameters serve as measurable indicators of phase structure. An order parameter normally takes on the value of zero in one phase (usually above the critical point) and nonzero in the other. Ferromagnetic systems exemplify this concept: magnetization serves as the order parameter, vanishing above the Curie point and emerging progressively below it as temperature decreases.
+
+Symmetry considerations underpin phase transitions fundamentally. The cooling of fluids into crystalline solids breaks continuous translation symmetry: each point in the fluid has the same properties, but each point in a crystal does not. The high-temperature phase typically preserves more symmetries than the low-temperature phase through spontaneous symmetry breaking mechanisms.
+
+Examples of order parameters include the density difference between liquid and gas at the liquid-gas critical point, the magnetization in ferromagnets, the superfluid density in liquid helium-4 below the lambda point, the Cooper pair wavefunction amplitude in superconductors, and structure factors distinguishing crystalline from amorphous states.
+
+## Critical Phenomena and Exponents
+
+Continuous phase transitions display remarkable mathematical properties near criticality. The heat capacity near a critical temperature follows power-law behavior: C is proportional to |T_c - T|^(-alpha), where alpha represents a critical exponent. Heat capacity of amorphous materials has such a behaviour near the glass transition temperature where the universal critical exponent alpha = 0.59.
+
+Other critical exponents include beta (order parameter exponent: M ~ (Tc - T)^beta), gamma (susceptibility exponent: chi ~ |T - Tc|^(-gamma)), delta (critical isotherm exponent), nu (correlation length exponent: xi ~ |T - Tc|^(-nu)), and eta (anomalous dimension, correlation function decay).
+
+Critical exponents satisfy scaling relations: alpha + 2*beta + gamma = 2 (Rushbrooke), beta = gamma/(delta - 1) (Widom), nu*d = 2 - alpha (Josephson, where d is spatial dimension), and gamma = nu*(2 - eta) (Fisher). These relationships reveal that only two independent exponents characterize a transition, with others derivable through mathematical constraints. There are only two independent exponents, e.g. nu and eta.
+
+## Universality Classes
+
+A striking feature of phase transitions emerges in universality: disparate physical systems exhibit identical critical exponents. The critical exponents at the liquid-gas critical point have been found to be independent of the chemical composition of the fluid and match ferromagnetic transition exponents precisely. This universality stems from renormalization group theory, which predicts that thermodynamic properties of a system near a phase transition depend only on a small number of features, such as dimensionality and symmetry.
+
+Important universality classes include the Ising universality class (uniaxial magnets, liquid-gas transitions), the XY universality class (planar magnets, superfluid helium-4), the Heisenberg universality class (isotropic ferromagnets), and the mean-field universality class (applicable above the upper critical dimension).
+
+## Second-Order Transitions: Distinctive Features
+
+Second-order transitions present continuous order parameters but exhibit divergent susceptibility—the change in extensive properties responding to intensive variable variations. The correlation length diverges catastrophically, and power law decay of correlations near criticality characterizes the approach to the transition point. These transitions lack latent heat, distinguishing them from first-order phenomena.
+
+Critical opalescence exemplifies the physical manifestation of diverging correlation length: fluids near their liquid-gas critical point become visibly opaque as density fluctuations occur on all length scales, including wavelengths of visible light.
+
+## Metastability and Phase Coexistence
+
+Disorder can broaden first-order transitions across finite temperature ranges. When cooling rates exceed critical thresholds, liquids may vitrify into glassy states rather than crystallizing, with molecular motions becoming sufficiently sluggish that rearrangement becomes kinetically impossible. Phase coexistence can persist at low temperatures when first-order transitions are arrested incompletely, yielding two magnetic phases coexisting, down to the lowest temperature.
+
+Superheating, supercooling, and supersaturation represent metastable states where a system persists in a phase beyond its equilibrium boundary due to energy barriers against nucleation of the stable phase. Homogeneous nucleation and heterogeneous nucleation (at surfaces, impurities) govern the kinetics of first-order transitions.
+
+## Landau Theory and Mean Field Approximations
+
+Landau's phenomenological approach to second-order transitions expands the free energy as a power series in the order parameter psi: F(psi, T) = F_0(T) + a(T)*psi^2 + b*psi^4 + ..., where the sign of a(T) changes at the critical temperature. Below Tc, the minimum shifts from psi = 0 to psi = sqrt(-a/(2b)), yielding the mean-field prediction beta = 1/2.
+
+Mean field theory offers simplified predictions for phase behavior, assuming that each particle experiences an averaged field from all others. While useful for preliminary analysis, this approach occasionally fails to capture exact behavior—notably, the two-dimensional Ising model shows logarithmic rather than simple divergences that mean field theory would predict. Mean-field exponents are exact above the upper critical dimension (d = 4 for the Ising model), but below it fluctuations dominate and non-trivial exponents emerge.
+
+## Critical Dynamics and Renormalization Group
+
+Beyond static properties, critical dynamics emerge near transitions. Critical slowing down or speeding up appears as enhanced fluctuations before the phase transition, as a consequence of lower degree of stability of the initial phase. These temporal phenomena split static universality classes into smaller dynamic universality categories.
+
+Renormalization group theory, developed by Kenneth Wilson, provides the modern theoretical framework for understanding critical phenomena. By iteratively coarse-graining the system and rescaling, one obtains fixed points that characterize universality classes. The relevant and irrelevant operators near these fixed points determine critical exponents and universal amplitude ratios.
+
+## Liquid-Solid Transitions
+
+The freezing of a liquid into a crystalline solid represents a canonical first-order transition involving substantial latent heat (the heat of fusion), a density discontinuity, and breaking of continuous translational and rotational symmetry. Crystallization kinetics involve nucleation of crystalline domains followed by growth, with the morphology determined by interfacial energy anisotropy, diffusion rates, and temperature gradients.
+
+## Topological Phase Transitions
+
+Beyond the Landau-Ginzburg framework of symmetry breaking, certain phase transitions involve changes in topological order without any local order parameter or symmetry breaking. The Berezinskii-Kosterlitz-Thouless (BKT) transition in two-dimensional systems with continuous symmetry (such as the XY model or superfluid thin films) is driven by the unbinding of vortex-antivortex pairs. Below the BKT transition temperature, vortices are bound in pairs and the system exhibits quasi-long-range order with power-law correlations; above the transition, free vortices proliferate and correlations decay exponentially. This transition received the 2016 Nobel Prize in Physics for its discoverers.
+
+Topological phases of matter, including topological insulators, quantum Hall states, and topological superconductors, are characterized by quantized topological invariants rather than conventional order parameters. Transitions between such phases involve gap closing at specific points in the Brillouin zone and change the value of a topological invariant such as the Chern number.
+
+## Quantum Phase Transitions
+
+Phase transitions can also occur at zero temperature as a function of a nonthermal control parameter such as pressure, magnetic field, or chemical doping. These quantum phase transitions are driven by quantum fluctuations rather than thermal fluctuations, and the critical point is located at T = 0 and a particular value of the control parameter. The quantum critical region at small but finite temperature above the quantum critical point often exhibits unusual metallic behavior (strange metals), non-Fermi-liquid properties, and anomalous scaling. Heavy-fermion compounds, high-temperature superconductors, and frustrated magnets provide experimental examples.
+
+The quantum-to-classical mapping relates a d-dimensional quantum system to a (d+1)-dimensional classical system at its critical point, with the extra dimension corresponding to imaginary time of extent 1/T. Quantum critical exponents are related to classical exponents through this mapping but are modified by the dynamic exponent z, which relates spatial and temporal scaling: omega ~ k^z.
+
+## Solidification, Crystal Growth, and Polymorphism
+
+Liquid-to-solid phase transitions (freezing, crystallization) are typically first-order and exhibit rich phenomenology. Undercooling of the liquid below the equilibrium freezing temperature is required to drive nucleation of the solid phase, with the nucleation rate depending exponentially on the free-energy barrier separating liquid and solid. Homogeneous nucleation (in the bulk) is usually outcompeted by heterogeneous nucleation at container walls, impurities, or seed crystals. Once nucleated, crystals grow through atomic attachment at favorable surface sites (kinks, steps on terraces), with growth morphology determined by the anisotropy of attachment kinetics and the interplay between thermal and solutal diffusion.
+
+Polymorphism refers to the existence of multiple crystalline forms of the same substance, with different arrangements of atoms producing distinct physical properties. Ice has at least 19 known crystalline phases at various pressures and temperatures; carbon exists as graphite, diamond, fullerenes, and carbon nanotubes; iron transitions among body-centered cubic (alpha-Fe), face-centered cubic (gamma-Fe), and body-centered cubic (delta-Fe) with temperature. Martensitic transformations, diffusionless solid-state transitions producing rapid shape changes, are exploited in shape-memory alloys and transformation-toughened ceramics.
+
+The convergence of these concepts—order parameters, critical exponents, universality classes, symmetry breaking, topological invariants, and quantum fluctuations—creates a comprehensive theoretical framework enabling prediction and interpretation of phase transitions across seemingly unrelated physical systems, from magnetic materials to quantum fluids to cosmological phenomena.

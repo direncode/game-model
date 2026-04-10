@@ -1,0 +1,81 @@
+UNITED STATES PATENT
+US 7,741,734 B2
+WIRELESS NON-RADIATIVE ENERGY TRANSFER
+Inventors: Marin Soljacic, Aristeidis Karalis, John D. Joannopoulos
+Assignee: Massachusetts Institute of Technology (later licensed to WiTricity Corp)
+Issued: June 22, 2010
+
+ABSTRACT
+The patent describes electromagnetic energy transfer between two resonator structures separated by distances larger than their characteristic sizes. Energy transfers through coupling of resonant-field evanescent tails rather than radiative means, enabling mid-range wireless power delivery using high-Q electromagnetic resonators.
+
+BACKGROUND
+
+Previous wireless power approaches have significant limitations: radiative antenna schemes waste energy into free space due to the inverse square law; directed radiation such as lasers or microwave beams requires line-of-sight and precise pointing; traditional induction operates only at very close range where the transmission distance is much less than the device dimensions (L_TRANS much less than L_DEV).
+
+The present invention addresses these limitations by using resonant coupling between high-Q electromagnetic structures. Energy is transferred through the coupling of the evanescent near-field tails of two resonant structures tuned to the same frequency. This approach enables mid-range operation where the transmission distance is a few times the device characteristic size.
+
+KEY TECHNICAL MECHANISM
+
+Coupling Approach: The system uses resonant coupling between high-Q structures. As stated: "two same-frequency resonant objects tend to couple, while interacting weakly with off-resonant environmental objects."
+
+Distance Capability: The transfer distance D must satisfy D less than lambda1 and D less than lambda2 where lambda represents resonant wavelength. This enables coupling at distances larger than the characteristic size of each resonator but within the near-field region where evanescent fields dominate.
+
+Non-Radiative Nature: This is a non-radiative wireless power transfer mechanism. The energy transfer occurs through the evanescent fields of the resonators, not through radiating waves. Both resonators must be within each other's "radiation caustic" boundary where fields decay exponentially before becoming oscillatory. No propagating electromagnetic wave is emitted into free space.
+
+RESONATOR IMPLEMENTATIONS
+
+Dielectric Disk Cavities:
+- Support whispering-gallery modes with high radiation-Q values
+- Demonstrated: Q=1992, lambda/r=20
+- Permittivity values: epsilon approximately 65-147
+- Operating principle: TE-polarized modes with slow azimuthal field variations
+
+Capacitively-Loaded Conducting Wire Loops:
+- Single-coil copper designs with quality factors Q approximately 1000-1500
+- Operating frequencies: 5 MHz for 1 m loops, 17 MHz for 30 cm loops, 380 MHz for 1 cm loops
+- Characteristic wavelength ratios: lambda/r approximately 50-80 for near-field coupling
+
+COUPLING PARAMETERS
+
+The coupling coefficient kappa represents the energy transfer rate between the two resonators. The critical performance metric kappa/sqrt(Gamma1*Gamma2) must exceed 0.2-5 depending on application requirements.
+
+For dielectric disks at separation D/r=10: kappa/Gamma approximately 1.16
+For dielectric disks at separation D/r=3: kappa/Gamma approximately 42.49
+
+LOSS MECHANISMS
+
+- Radiation losses: From mode leakage into free space
+- Ohmic losses: Resistive heating in conductors
+- Material absorption: Bulk dielectric losses
+
+Achievable efficiency: at least 40% for optimized dielectric disk systems with medium-range distances (D/r less than 10).
+
+CRITICAL DISTINCTION FROM SURFACE-WAVE SYSTEMS
+
+This technology uses evanescent field coupling of electromagnetic resonances. This is NOT surface wave propagation. The energy does not travel along a conducting interface. The energy couples between two discrete resonators through their near-field tails.
+
+The key difference: surface waves propagate along an interface (e.g., Earth-air) and can travel long distances; evanescent coupling occurs between two specific resonators that must both be within each other's near-field region. The surface wave is a propagating mode along a waveguide; the evanescent coupling is a localized exchange between paired oscillators.
+
+SAFETY ADVANTAGE
+
+Human safety advantage of magnetic loop systems: "Humans are also non-magnetic and can sustain strong magnetic fields without undergoing any risk." This makes magnetic near-field coupling preferable to electric field coupling for applications near biological tissue.
+
+CLAIMS
+
+1. An apparatus for wireless non-radiative energy transfer between a source resonator and a device resonator, wherein the source resonator and device resonator are coupled through evanescent field tails of their respective resonant modes.
+
+2. The apparatus of claim 1 wherein the source resonator and device resonator have quality factors Q greater than 100.
+
+3. The apparatus of claim 1 wherein the source resonator and device resonator are tuned to the same resonant frequency.
+
+4. The apparatus of claim 1 wherein the energy transfer is mediated by magnetic near-field coupling rather than electric field coupling.
+
+5. The apparatus of claim 1 wherein the distance between the source resonator and the device resonator is larger than the characteristic size of each resonator but smaller than the resonant wavelength.
+
+6. A method for transferring energy wirelessly comprising exciting a source resonator at its resonant frequency and coupling energy to a device resonator tuned to the same resonant frequency through evanescent field tails.
+
+7. The method of claim 6 wherein the source and device resonators are capacitively-loaded conducting wire loops.
+
+8. The method of claim 6 wherein the source and device resonators are dielectric disk cavities supporting whispering-gallery modes.
+
+This apparatus is a near-field resonant coupling system. It is distinct from broadcast radiation systems which radiate electromagnetic waves into free space, and distinct from surface wave systems which launch bound waves along a conducting interface.

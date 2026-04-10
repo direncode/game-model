@@ -1,0 +1,80 @@
+UNITED STATES PATENT
+US 4,464,650
+APPARATUS AND METHOD FOR COMPRESSING DATA SIGNALS
+Inventors: Abraham Lempel, Jacob Ziv (et al.)
+Issued: August 7, 1984
+
+ABSTRACT
+This patent describes an apparatus and method for compressing digital data signals using an adaptive, dictionary-based approach that reconstructs the original data without loss. The method does not require prior statistical knowledge of the source and adapts during processing.
+
+BACKGROUND
+
+Existing data compression methods (Huffman coding, Tunstall coding, arithmetic coding) require prior knowledge of source statistics to construct optimal code tables. These methods assume the source is stationary and that probabilities can be estimated accurately. In practice, real data sources are often non-stationary and exhibit complex temporal dependencies that simple statistical models do not capture.
+
+The Lempel-Ziv approach addresses these limitations by using a dictionary-based encoding that adapts to the source as data is processed. The compressor builds a dictionary of previously-seen data patterns and replaces repeated patterns with references to dictionary entries. This achieves compression without requiring prior statistical knowledge.
+
+CORE COMPRESSION ALGORITHM
+
+Parsing Strategy: The system segments input data streams into adaptive units. Each segment comprises a prefix and the next data symbol signal occurring in the data stream following the prefix. The prefix represents the longest match with a previous segment.
+
+Search Tree Mechanism: Rather than using fixed code tables, the invention constructs an incremental search tree that grows during processing. Input symbols are traced through this tree from root to leaf, with each path representing a previously-encountered data pattern. When a leaf is reached, a pointer encodes that segment's location and the novel symbol appended to it.
+
+Dictionary Construction: As data is processed, new patterns are added to the dictionary. The dictionary grows incrementally, capturing the structure of the source data without requiring prior knowledge of its statistical properties.
+
+INFORMATION THEORY FOUNDATION
+
+The patent positions itself against established methods by claiming to be "asymptotically optimal without any word length constraints with respect to either the input or output data." Unlike Huffman coding (which requires fixed input segment lengths and prior probability knowledge) or Tunstall coding (which constrains output to fixed-length words), this approach gradually extends encoding capacity as dependencies in symbol probabilities emerge.
+
+The asymptotic optimality is proven in the original Lempel-Ziv 1977 and 1978 papers. As the input length increases, the compression ratio approaches the entropy of the source for any stationary ergodic source. This is achieved without ever explicitly computing or knowing the source statistics.
+
+DICTIONARY-BASED PARADIGM
+
+The Lempel-Ziv approach establishes the dictionary-based compression paradigm:
+
+1. Compression is achieved by replacing repeated patterns with references
+2. The dictionary is built adaptively from the data itself
+3. No prior statistical model is needed
+4. Long-range dependencies are captured naturally
+5. The method is asymptotically optimal for any stationary source
+
+This is fundamentally different from entropy coding (Huffman, arithmetic coding):
+- Entropy coding: assigns codewords to symbols based on their probabilities
+- Dictionary coding: replaces repeated patterns with references to dictionary entries
+- Entropy coding optimizes over symbol distributions
+- Dictionary coding optimizes over pattern repetitions
+
+COMPRESSION MECHANICS
+
+Key properties of the Lempel-Ziv algorithm:
+- No a priori statistical knowledge required: the system adapts during processing
+- Reversibility guaranteed: decoded data is identical and indistinguishable from original
+- Linear complexity: processing time and memory scale proportionally with input volume
+- Economy binary encoding: pointer values undergo additional optimization through a balanced prefix tree structure
+
+VARIANTS AND DESCENDANTS
+
+The Lempel-Ziv approach has spawned numerous variants:
+- LZ77: sliding window dictionary
+- LZ78: explicit dictionary
+- LZW (Lempel-Ziv-Welch): with bit-packed codes
+- DEFLATE (used in ZIP, gzip, PNG): combines LZ77 with Huffman coding
+- LZMA (used in 7-zip, xz): with arithmetic coding and longer matches
+- Brotli (used in modern web compression): with static dictionary and context modeling
+
+All of these descendants share the dictionary-based paradigm: compression by pattern reference rather than by entropy assignment.
+
+CLAIMS
+
+1. A method for compressing a digital data signal comprising parsing the data into segments using a search tree, where each segment is the longest prefix matching a previous segment plus one new symbol.
+
+2. The method of claim 1 wherein the search tree is constructed incrementally during processing.
+
+3. The method of claim 1 wherein no prior statistical knowledge of the source is required.
+
+4. An apparatus for implementing the method of claim 1 comprising memory for the search tree and processing logic for tree traversal and update.
+
+5. The method of claim 1 wherein the compressed output comprises pointer values into the search tree plus appended symbols.
+
+6. A decoder for reversing the compression of claim 1, comprising means for reconstructing the search tree from the compressed signal and outputting the original data symbols.
+
+This is a DICTIONARY-BASED COMPRESSION method. It is fundamentally different from entropy coding methods (Huffman, arithmetic coding) which assign variable-length codewords based on symbol frequency. The Lempel-Ziv approach instead replaces repeated patterns with references to a dynamically-constructed dictionary. Both approaches achieve asymptotic optimality, but through fundamentally different mechanisms.

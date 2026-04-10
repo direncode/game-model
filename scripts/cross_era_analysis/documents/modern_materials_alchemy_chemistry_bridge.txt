@@ -1,0 +1,66 @@
+SOURCE: History of chemistry, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/History_of_chemistry
+
+# The Alchemical Foundations of Modern Chemistry
+
+## From Mystical Art to Experimental Science
+
+The transformation from alchemy to chemistry represents one of history's most significant intellectual shifts. While alchemy was unsuccessful in explaining the nature of matter, by performing experiments and recording the results, alchemists set the stage for modern chemistry. The procedures they developed for preparing, purifying, and characterizing substances became the foundational practices of laboratory chemistry.
+
+## Islamic Alchemy and Chemical Innovation
+
+The bridge between ancient and modern chemistry emerged powerfully through Islamic scholarship. The 8th-century alchemist Jabir ibn Hayyan (known in Latin as Geber) fundamentally advanced chemical practice by introducing a systematic classification of chemical substances and crucially, provided instructions for deriving an inorganic compound (sal ammoniac or ammonium chloride) from organic substances (such as plants, blood, and hair) by chemical means.
+
+Jabir is also credited with developing or refining procedures for the preparation of mineral acids. His works describe the distillation of vinegar to concentrate acetic acid, the preparation of nitric acid (aqua fortis) from saltpeter and vitriol, and procedures that would later enable the isolation of sulfuric acid (oil of vitriol) through the distillation of iron or copper sulfates. Aqua regia, the mixture of nitric and hydrochloric acids capable of dissolving gold, emerged from these acid preparations and became one of alchemy's most important practical discoveries.
+
+This methodological systematization proved transformative. Rather than pursuing purely mystical transmutation, Islamic alchemists developed reproducible procedures for isolating and transforming actual compounds—work that required genuine understanding of chemical processes, even if their theoretical frameworks remained incomplete.
+
+## Practical Chemical Procedures in Alchemical Texts
+
+Early alchemists in Greco-Roman Egypt in the first centuries AD not only conducted experiments but invented chemical apparatuses. Significantly, practical procedures that later became standard chemistry were already being refined: the bain-marie, or water bath, is named for Mary the Jewess. Her work also gives the first descriptions of the tribikos and kerotakis. These were distillation and crystallization apparatus—fundamental tools for isolating and purifying chemical compounds.
+
+Additionally, Cleopatra the Alchemist described furnaces and has been credited with the invention of the alembic, the essential apparatus for distillation that would dominate chemistry laboratories for centuries.
+
+Lawrence Principe's scholarship, particularly in The Secrets of Alchemy, has demonstrated that many alchemical recipes describe genuine chemical reactions when translated from their coded language. Principe and others have successfully reproduced historical alchemical procedures in modern laboratories, showing that operations such as the preparation of "philosophical mercury" (an amalgam of mercury with other metals), the calcination of lead to form lead oxide (litharge, massicot, or red lead depending on conditions), the sublimation of mercury chloride, and the production of potassium nitrate by leaching saltpeter from manure deposits all correspond to well-defined chemical transformations.
+
+## The Paracelsian Revolution
+
+Paracelsus represented a crucial transitional figure. Rather than accepting Aristotle's four-element theory uncritically, he developed the tria prima—sulphur, mercury, and salt as fundamental principles. His reasoning was notably empirical: Paracelsus saw these principles as fundamental and justified them by recourse to the description of how wood burns in fire. Mercury included the cohesive principle, so that when it left the wood (in smoke) the wood fell apart.
+
+This explanation, while ultimately incorrect in its theoretical basis, reflected genuine observation of chemical behavior during combustion—the visible separation of volatile smoke, flammable flames, and solid ash represented real chemical phenomena being systematically described. Paracelsus also championed the application of chemistry to medicine (iatrochemistry), preparing mineral remedies including compounds of mercury, antimony, and arsenic. His focus on dosage and preparation methodology introduced quantitative thinking into pharmaceutical chemistry.
+
+## The Preparation of the Strong Acids
+
+The mineral acids—sulfuric, nitric, and hydrochloric—represent perhaps the most consequential chemical products developed during the alchemical era. Sulfuric acid (oil of vitriol) was prepared by the dry distillation of hydrated iron(II) sulfate (green vitriol) or copper(II) sulfate (blue vitriol), yielding sulfur trioxide which dissolved in water to form concentrated sulfuric acid. Nitric acid (aqua fortis) was produced by distilling saltpeter (potassium nitrate) with green vitriol or alum, the nitric oxides condensing into the concentrated acid.
+
+The mixture of three parts hydrochloric acid with one part nitric acid, aqua regia, possessed the remarkable property of dissolving gold and platinum—substances that resist attack by either acid alone. This capability made aqua regia central to alchemical gold refinement and to the isolation of precious metals, and it remains in use in modern chemistry.
+
+Hydrochloric acid (spirit of salt) was prepared by the action of sulfuric acid on common salt (sodium chloride), evolving hydrogen chloride gas which was collected and dissolved in water. These acid preparations required iron retorts, glass receivers, and controlled heating—apparatus that persisted into the modern era.
+
+## Robert Boyle's Revolutionary Methodology
+
+Robert Boyle emerged as perhaps the most significant bridge figure. His landmark work The Sceptical Chymist (1661) fundamentally transformed chemical practice by advocating for a rigorous approach to experimentation among chemists. Critically, in the work, Boyle questioned some commonly held alchemical theories and argued for practitioners to be more philosophical and less commercially focused.
+
+Boyle rejected the classical four elements entirely, proposing instead a mechanistic alternative of atoms and chemical reactions that could be subject to rigorous experiment. His practical innovations proved equally important: he was the first to use indicators which changed colors with acidity, transforming subjective observation into measurable phenomena. He also performed numerous investigations with an air pump, and noted that the mercury fell as air was pumped out, leading to Boyle's law relating gas pressure and volume.
+
+## The Problem of Alchemical Language
+
+A critical impediment to alchemical progress was semantic chaos. There was no systematic naming scheme for new compounds, and the language was esoteric and vague to the point that the terminologies meant different things to different people. The secretive vocabulary was intentional: alchemists developed an arcane and secretive technical vocabulary designed to conceal information from the uninitiated. Terms such as "green lion," "philosophical mercury," "the red king," and "the green dragon" could refer to entirely different substances in different texts.
+
+This linguistic opacity contrasted sharply with emerging chemistry. Jan Baptist van Helmont's work represents this transition—he conducted several experiments involving gases and notably coined a name for them, "gas," from the Greek word chaos, establishing standardized nomenclature for previously unnamed phenomena.
+
+## Quantification and Conservation
+
+The shift toward measurable, reproducible results accelerated the alchemy-to-chemistry transition. Antoine Lavoisier's demonstration with careful measurements that transmutation of water to earth was not possible, but that the sediment observed from boiling water came from the container, exemplified this new rigor. His crucial insight involved weighing reactants precisely: he burnt phosphorus and sulfur in air, and proved that the products weighed more than the original samples, with the mass gained being lost from the air.
+
+This quantitative approach crystallized in the Law of Conservation of Mass, which is also called Lavoisier's Law—a principle that rendered alchemical transmutation theoretically impossible while validating the experimental methods alchemists had developed. Lavoisier, working with Guyton de Morveau, Berthollet, and Fourcroy, introduced the systematic nomenclature that replaced alchemical code names with names describing composition (e.g., "sulfuric acid" rather than "oil of vitriol").
+
+## Distillation, Sublimation, and Crystallization
+
+The three fundamental separation techniques of alchemy—distillation, sublimation, and crystallization—remain essential to modern chemistry. Distillation exploits volatility differences to separate liquid mixtures and is used for the production of alcoholic spirits, the purification of water, the refining of petroleum, and countless laboratory procedures. Sublimation, the direct conversion of solid to gas without an intervening liquid phase, was used by alchemists to purify mercury, sulfur, and camphor, and remains in use for purification of compounds such as iodine and benzoic acid. Crystallization from solution, used by alchemists to prepare pure salts such as potassium nitrate, remains a primary method for purification and characterization of solid compounds.
+
+## Legacy of Experimental Apparatus and Procedures
+
+Alchemists' practical innovations endured. Their apparatus—distillation equipment, furnaces, water baths, and crystallization vessels—became the standard tools of chemistry laboratories. More importantly, the fundamental chemical procedures they had refined over centuries—distillation to separate volatile compounds, crystallization to isolate salts, calcination through heating, and the combination of substances to produce new compounds—remained valid and essential.
+
+The transformation from alchemy to chemistry was therefore not a rejection of alchemical practice, but rather a methodological refinement. Alchemists had developed genuine chemical techniques while operating within frameworks of mystical theory. Their successors retained the procedures while discarding the esoteric language and unsupported theoretical claims, replacing them with quantitative measurement, clear nomenclature, and reproducible methodology.

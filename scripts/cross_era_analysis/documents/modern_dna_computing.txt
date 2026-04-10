@@ -1,0 +1,74 @@
+SOURCE: DNA computing, Wikipedia contributors, retrieved 2026
+CITATION: https://en.wikipedia.org/wiki/DNA_computing
+
+# DNA Computing: Molecular Computation and Self-Assembly
+
+## Adleman's Foundational Demonstration
+
+Leonard Adleman of the University of Southern California established DNA computing as a practical field in 1994 through a landmark experiment. His work demonstrated that DNA molecules could serve as computational substrates by solving a combinatorial problem. Specifically, Adleman's group demonstrated a proof-of-concept use of DNA as a form of computation which solved the seven-point Hamiltonian path problem. The experimental apparatus, designated the TT-100, consisted of a test tube containing 100 microliters of DNA solution.
+
+The Hamiltonian path problem required finding a route through seven cities visiting each exactly once—mathematically isomorphic to a special case of the traveling salesman problem. Adleman created DNA fragments representing individual cities, with each fragment capable of binding to others through complementary Watson-Crick base pairing. When mixed in solution, these fragments spontaneously assembled into longer strands representing possible routes. Chemical reactions then eliminated DNA sequences representing longer, non-optimal paths, leaving solutions to the problem. Although the complete process required approximately one week and verification presented technical challenges, this experiment established proof-of-concept that biological molecules could perform logical operations.
+
+Adleman's approach exemplified DNA computing's paradigm: encode the problem structure in nucleotide sequences, allow hybridization to generate all possible solutions in parallel, and use biochemical filters (gel electrophoresis, PCR amplification, affinity purification) to extract the correct answer from a combinatorial pool.
+
+## Molecular Computation Mechanisms
+
+DNA computing exploits fundamental properties of nucleic acids to implement computational logic. The field encompasses multiple methodological approaches, each utilizing different biochemical principles.
+
+### Strand Displacement and Toehold-Mediated Mechanisms
+
+Strand displacement constitutes the most fundamental operation in DNA computing and molecular programming. The mechanism involves one DNA strand competitively binding and displacing another from a double-stranded complex. Toehold-mediated strand displacement (TMSD) represents a refined variant where an input DNA strand binds to a sticky end, or toehold, on another DNA molecule, which allows it to displace another strand segment from the molecule. This approach enables construction of modular logic components—AND, OR, and NOT gates—that cascade into larger computational networks without requiring enzymatic catalysis.
+
+The elegance of toehold exchange systems lies in their programmability. By varying the nucleotide sequences of sticky ends, researchers can control which strand displacement reactions occur, effectively programming molecular behavior. Such systems do not require enzymes or any chemical capability of the DNA, relying instead on Watson-Crick base-pairing thermodynamics. Energy for these reactions derives from the net increase in base-pairing as toehold regions become fully hybridized in product complexes.
+
+### DNAzymes and Catalytic DNA
+
+Catalytic DNA molecules, termed deoxyribozymes or DNAzymes, represent an alternative computational substrate. These RNA-cleaving DNA enzymes undergo conformational changes upon binding appropriate oligonucleotide inputs, activating fluorogenic substrates through catalytic cleavage. Commonly employed DNAzymes include the E6 and 8-17 variants, chosen because they allow cleaving of a substrate in any arbitrary location.
+
+However, DNAzyme-based systems face significant limitations. These enzymes require metal cofactors such as Zn2+ or Mn2+ for function, rendering them unsuitable for biological applications. Additionally, once a DNAzyme catalyzes a reaction, it becomes used and cannot initiate subsequent reactions, necessitating continuous replenishment through stirred-tank reactors.
+
+## DNA Self-Assembly and Algorithmic Architecture
+
+Contemporary DNA computing research increasingly emphasizes bottom-up self-assembly approaches pioneered by Ned Seeman in the 1980s. Rather than manually constructing computational circuits, researchers now design DNA sequences that spontaneously organize into programmed structures. This approach directly realizes the dream expressed by John von Neumann decades earlier: a self-assembling, self-replicating machine whose blueprint is encoded in its own structural components.
+
+### Winfree's Chemical Reaction Networks and Tile Assembly
+
+Erik Winfree's group demonstrated that DNA can be used as a substrate to implement arbitrary chemical reactions. This discovery opened pathways for designing biochemical controllers with computational power equivalent to Turing machines. The technical architecture operates at multiple abstraction levels: high-level programming languages express chemical reaction networks (CRNs), which then translate into domain-level DNA designs before final implementation using DNA strands.
+
+Chemical reaction networks represent reaction pathways through notation like A + B -> C, expressing molecular interactions abstractly. By implementing CRNs through DNA strand displacement cascades, researchers achieve universal computation without external enzymes.
+
+Winfree's abstract Tile Assembly Model (aTAM) formalizes DNA tile-based computation. In this framework, square tiles carry glue labels on each of their four sides; tiles bind when glue labels match and the total binding strength meets or exceeds a temperature threshold. The aTAM is Turing-universal: any computation expressible as a Turing machine can be performed by tile assembly. Physical realization employs double-crossover (DX) DNA tiles whose sticky ends encode the glue labels.
+
+### Rothemund's DNA Origami and Sierpinski Structures
+
+Paul Rothemund's DNA origami technique enabled programmable self-assembly of complex two-dimensional DNA nanostructures. His experiments demonstrated DNA arrays displaying fractals—specifically, representations of the Sierpinski triangle pattern. By designing DNA tiles with precisely defined sticky ends functioning as Wang tiles, computation can be incorporated into the assembly of DNA arrays, increasing its scope beyond simple periodic arrays. These self-assembled structures encode algorithmic information within their geometric organization, allowing computation to emerge from molecular self-organization processes.
+
+The Sierpinski triangle represents a cellular automaton outcome (Rule 90 or a XOR-based assembly rule), suggesting that DNA tile systems can perform universal computation through assembly dynamics. Each tile's binding pattern encodes logical rules, and the growing array executes computations through sequential addition of tiles.
+
+DNA origami uses a long single-stranded scaffold (typically the 7249-nucleotide M13mp18 viral genome) folded into arbitrary two- or three-dimensional shapes by hybridization with hundreds of short staple strands. This technique enables routine construction of nanoscale shapes—smiley faces, letters, gears, boxes, twisted bundles—with approximately 6-nanometer resolution.
+
+## Parallel Computation and Scalability
+
+DNA computing exploits massive parallelism inherent in molecular systems. A single test tube contains approximately 10^23 DNA molecules, enabling simultaneous exploration of numerous computational pathways. DNA computing is a form of parallel computing in that it takes advantage of the many different molecules of DNA to try many different possibilities at once. This parallelism advantage particularly benefits combinatorial optimization problems where solution spaces are exponentially large.
+
+However, fundamental computational limits constrain DNA systems identically to electronic computers. Problems requiring exponential space (EXPSPACE complexity) remain intractable; DNA merely trades execution speed for parallelism, not computational power. For exponentially complex problems, the amount of DNA required is too large to be practical.
+
+## Applications and Circuit Development
+
+Contemporary research has progressed beyond academic demonstrations toward practical applications. In 2002, researchers created a DNA computer capable of playing tic-tac-toe, implementing logical functions through enzyme interactions. The system utilized nine bins corresponding to game squares, with DNA enzymes simulating AND logic gates and fluorescence indicating the computer's moves.
+
+Caltech and IBM partnerships advanced DNA chip technology, producing integrated circuits capable of computing square roots through strand displacement cascades. Lulu Qian and colleagues developed DNA-based artificial neural networks recognizing 100-bit handwritten digits by programming weight molecules into test tubes containing input DNA strands. These applications demonstrate progression from theoretical demonstrations to information-processing systems addressing real problems.
+
+## Molecular Self-Replication: Realizing Von Neumann's Dream
+
+Von Neumann's universal constructor postulated a machine that could copy itself given raw materials and an instruction tape encoding its own construction. DNA computing realizes this vision at molecular scale: the double helix stores information digitally in four-letter base sequences; DNA polymerase enzymes copy templates with high fidelity; and in the tile assembly and strand displacement frameworks, researchers can design DNA systems that assemble copies of themselves through programmed hybridization. Self-replicating tile sets, synthetic minimal ribosomes, and autocatalytic DNA networks all instantiate the self-reproducing automaton idea in wet chemistry.
+
+## Technical Limitations and Performance Characteristics
+
+Despite conceptual advantages, DNA computers exhibit significant performance challenges. Square-root circuits require over 100 hours to complete—a stark contrast to electronic systems. Localized computing approaches, inspired by cache memory principles in computer architecture, attempt acceleration by spatially confining DNA circuits on breadboard-like substrates, ensuring physical proximity of the computing gates. Such localization potentially reduces computation time by orders of magnitude through reducing diffusion delays.
+
+Reversible DNA computing represents another advancement, enabling gate reusability through designs employing double-stranded DNA gates or hairpin complexes. These techniques bring the technology one step closer to the silicon-based computing used in PCs, addressing practical deployment concerns.
+
+## Conclusion
+
+DNA computing represents a paradigmatic shift in computational substrate, leveraging molecular biology rather than silicon electronics. From Adleman's initial Hamiltonian path solution through contemporary DNA origami and chemical reaction networks, the field has evolved toward sophisticated programmable systems. While DNA cannot surpass fundamental computational limits, its unique properties—massive parallelism, molecular biocompatibility, and programmable self-assembly—position it for specialized applications in biological environments and information storage systems where electronic computation proves impractical.

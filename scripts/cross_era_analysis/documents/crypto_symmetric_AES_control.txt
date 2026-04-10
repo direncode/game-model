@@ -1,0 +1,69 @@
+SYMMETRIC BLOCK CIPHER SPECIFICATION
+ADVANCED ENCRYPTION STANDARD (AES) / RIJNDAEL
+NIST FIPS PUB 197
+Designers: Joan Daemen, Vincent Rijmen
+Standardized: 2001 (after NIST AES competition 1997-2000)
+
+ABSTRACT
+The Advanced Encryption Standard (AES) is a symmetric block cipher selected by NIST as the successor to DES. AES operates on 128-bit blocks using a key of 128, 192, or 256 bits. The cipher uses a substitution-permutation network with 10, 12, or 14 rounds depending on key size. AES is a SYMMETRIC cipher: the same key is used for encryption and decryption.
+
+BACKGROUND
+
+Symmetric (or secret-key) cryptography requires both parties to share a secret key in advance. This is in contrast to public-key (asymmetric) cryptography where parties can establish secure communication without prior secret sharing. Symmetric ciphers are computationally efficient and suitable for bulk data encryption, but they require a separate key distribution mechanism.
+
+The Data Encryption Standard (DES) was the previous standard, designed in the 1970s with a 56-bit key. By the late 1990s, DES was considered insecure due to its short key length, motivating NIST to select a successor. After a 4-year competition involving cryptanalysis of multiple candidate ciphers, the Rijndael cipher (designed by Daemen and Rijmen) was selected as AES in 2000 and standardized as FIPS PUB 197 in 2001.
+
+DESIGN PHILOSOPHY
+
+AES is a substitution-permutation network (SPN) block cipher. Unlike Feistel ciphers (DES), AES processes the entire block in each round through a series of byte-level substitutions, byte permutations, and column mixing operations. The design aims for:
+- Resistance to all known cryptanalytic attacks (linear, differential, integral, etc.)
+- High performance on a wide range of hardware platforms
+- Simplicity and elegance of mathematical structure
+- Adequate security margins
+
+MATHEMATICAL STRUCTURE
+
+AES operates on a 4x4 matrix of bytes called the state. Each round consists of four operations:
+
+1. SubBytes: Each byte is replaced by its image under a fixed S-box. The S-box is constructed from the multiplicative inverse in the finite field GF(2^8) followed by an affine transformation.
+
+2. ShiftRows: Each row of the state is cyclically shifted by a different offset (0, 1, 2, 3 bytes for rows 0-3).
+
+3. MixColumns: Each column is multiplied by a fixed polynomial in GF(2^8)[x]/(x^4 + 1). This provides diffusion.
+
+4. AddRoundKey: The state is XORed with a round key derived from the cipher key via the key schedule.
+
+The cipher applies these operations in 10, 12, or 14 rounds for 128, 192, and 256-bit keys respectively. The final round omits the MixColumns step.
+
+KEY SCHEDULE
+
+The key schedule expands the cipher key into a sequence of round keys. For AES-128, the original 128-bit key is expanded into 11 round keys (one for the initial AddRoundKey and one for each of the 10 rounds). The expansion uses a combination of byte rotation, S-box substitution, and constant XOR.
+
+SECURITY MODEL
+
+AES security relies on the computational difficulty of distinguishing the cipher's output from random for any unknown key. The best known attacks are:
+- Brute force: 2^128 operations for AES-128 (infeasible)
+- Biclique attacks: ~2^126 operations (theoretical, no practical impact)
+- Side-channel attacks: implementation-specific, not fundamental to the cipher
+
+The mathematical foundation is the substitution-permutation network design and the algebraic structure of GF(2^8). AES does NOT rely on number-theoretic problems like factoring or discrete logarithms.
+
+DISTINCTION FROM PUBLIC-KEY CRYPTOGRAPHY
+
+AES is fundamentally different from public-key cryptosystems:
+
+1. Symmetric: Same key for encryption and decryption (vs. RSA, DH which have public/private key pairs)
+
+2. Computational basis: AES security relies on the design of substitution-permutation operations and finite field arithmetic, NOT on number-theoretic hardness assumptions like factoring or discrete logarithms.
+
+3. Performance: AES is orders of magnitude faster than RSA or other public-key systems for bulk data encryption. AES-128 can encrypt at gigabytes per second on modern hardware.
+
+4. Key length: AES uses 128-256 bit keys to achieve security, while public-key systems require thousands of bits.
+
+5. Quantum resistance: Grover's algorithm provides only quadratic speedup against AES, requiring 2^64 operations for AES-128 (still infeasible). AES is considered quantum-resistant. RSA and DH are NOT quantum-resistant due to Shor's algorithm.
+
+USE IN PRACTICE
+
+AES is used as the symmetric component in hybrid cryptosystems. Public-key cryptography (RSA, DH, ECDH) is used to establish or exchange a session key, and AES is then used for the bulk encryption of data using that session key. This combines the convenience of public-key key distribution with the efficiency of symmetric encryption.
+
+This is a SYMMETRIC BLOCK CIPHER. It serves as a control sample for the cryptography domain experiment because it represents a fundamentally different mathematical structure than public-key cryptosystems. Where public-key systems (RSA, DH, NTRU) rely on hard mathematical problems in number theory or lattices, AES relies on the design of substitution-permutation networks and the algebraic structure of small finite fields.

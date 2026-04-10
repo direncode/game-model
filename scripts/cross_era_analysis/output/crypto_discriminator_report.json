@@ -1,0 +1,107 @@
+[
+  {
+    "id": "crypto_pq_modern_US10097351",
+    "year": 2018,
+    "expected": "lattice_pq",
+    "scores": {
+      "nt_modular": 0.0,
+      "nt_factoring": 0.0,
+      "nt_discrete_log": 0.0,
+      "nt_publickey_general": 12.376,
+      "lat_lattice": 73.02,
+      "lat_polynomial_ring": 2.475,
+      "lat_lwe": 40.842,
+      "lat_postquantum": 13.614,
+      "sym_block_cipher": 2.475,
+      "sym_aes_specific": 13.614
+    },
+    "word_count": 808,
+    "nt": 12.376,
+    "lat": 129.951,
+    "sym": 16.089000000000002
+  },
+  {
+    "id": "crypto_pq_NTRU_US6298137",
+    "year": 2001,
+    "expected": "lattice_pq",
+    "scores": {
+      "nt_modular": 21.396,
+      "nt_factoring": 5.631,
+      "nt_discrete_log": 4.505,
+      "nt_publickey_general": 24.775,
+      "lat_lattice": 34.91,
+      "lat_polynomial_ring": 34.91,
+      "lat_lwe": 4.505,
+      "lat_postquantum": 18.018,
+      "sym_block_cipher": 0.0,
+      "sym_aes_specific": 5.631
+    },
+    "word_count": 888,
+    "nt": 56.307,
+    "lat": 92.34299999999999,
+    "sym": 5.631
+  },
+  {
+    "id": "crypto_publickey_DH_US4200770",
+    "year": 1980,
+    "expected": "number_theoretic_pk",
+    "scores": {
+      "nt_modular": 37.538,
+      "nt_factoring": 1.502,
+      "nt_discrete_log": 37.538,
+      "nt_publickey_general": 12.012,
+      "lat_lattice": 0.0,
+      "lat_polynomial_ring": 1.502,
+      "lat_lwe": 0.0,
+      "lat_postquantum": 0.0,
+      "sym_block_cipher": 10.511,
+      "sym_aes_specific": 1.502
+    },
+    "word_count": 666,
+    "nt": 88.59,
+    "lat": 1.502,
+    "sym": 12.013
+  },
+  {
+    "id": "crypto_publickey_RSA_US4405829",
+    "year": 1983,
+    "expected": "number_theoretic_pk",
+    "scores": {
+      "nt_modular": 25.281,
+      "nt_factoring": 37.921,
+      "nt_discrete_log": 2.809,
+      "nt_publickey_general": 37.921,
+      "lat_lattice": 0.0,
+      "lat_polynomial_ring": 2.809,
+      "lat_lwe": 0.0,
+      "lat_postquantum": 0.0,
+      "sym_block_cipher": 0.0,
+      "sym_aes_specific": 7.022
+    },
+    "word_count": 712,
+    "nt": 103.93199999999999,
+    "lat": 2.809,
+    "sym": 7.022
+  },
+  {
+    "id": "crypto_symmetric_AES_control",
+    "year": 2001,
+    "expected": "symmetric_cipher",
+    "scores": {
+      "nt_modular": 0.0,
+      "nt_factoring": 2.532,
+      "nt_discrete_log": 8.861,
+      "nt_publickey_general": 26.582,
+      "lat_lattice": 1.266,
+      "lat_polynomial_ring": 1.266,
+      "lat_lwe": 0.0,
+      "lat_postquantum": 7.595,
+      "sym_block_cipher": 59.494,
+      "sym_aes_specific": 67.089
+    },
+    "word_count": 790,
+    "nt": 37.975,
+    "lat": 10.126999999999999,
+    "sym": 126.583
+  }
+]
