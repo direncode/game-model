@@ -137,6 +137,12 @@ class NoveltyRequest(BaseModel):
     lattice_id: str = Field(..., description="Lattice key from /latk/lattices")
     top_k: int = Field(20, ge=1, le=100)
     method: str = Field("combined", description="'combined' | '8d' | 'hamming'")
+    entity_types: Optional[List[str]] = Field(
+        None,
+        description="Optional filter; if set, only return matches whose entity_type is in this list. "
+                    "Useful for physics queries where you want to suppress author 'person' entities and "
+                    "restrict to 'writing' or 'chunk' content.",
+    )
 
 
 class NearestEntity(BaseModel):
@@ -165,6 +171,10 @@ class RouteToAncestorsRequest(BaseModel):
     query: str = Field(..., min_length=1, max_length=10_000)
     lattice_id: str
     top_k: int = Field(20, ge=1, le=100)
+    entity_types: Optional[List[str]] = Field(
+        None,
+        description="Optional filter; same semantics as the /novelty endpoint's field.",
+    )
 
 
 class AncestorEntity(BaseModel):
@@ -233,7 +243,13 @@ def list_lattices() -> List[LatticeInfo]:
 @router.post("/novelty", response_model=NoveltyResponse)
 def novelty(req: NoveltyRequest) -> NoveltyResponse:
     lattice = _get_lattice(req.lattice_id)
-    report = query_novelty(req.query, lattice, top_k=req.top_k, method=req.method)
+    report = query_novelty(
+        req.query,
+        lattice,
+        top_k=req.top_k,
+        method=req.method,
+        entity_types=req.entity_types,
+    )
     return NoveltyResponse(
         query_text=report.query_text,
         novelty_score=report.novelty_score,
@@ -267,7 +283,13 @@ def route_to_ancestors(req: RouteToAncestorsRequest) -> RouteToAncestorsResponse
     entities in the lattice that its 8D neighborhood points at.
     """
     lattice = _get_lattice(req.lattice_id)
-    report = query_novelty(req.query, lattice, top_k=req.top_k * 2, method="combined")
+    report = query_novelty(
+        req.query,
+        lattice,
+        top_k=req.top_k * 2,
+        method="combined",
+        entity_types=req.entity_types,
+    )
 
     ancestors = [
         AncestorEntity(

@@ -200,9 +200,11 @@ def _query_novelty_combined(
         for idx, dist in all_hamming:
             dist_hamming[idx] = int(dist)
 
-    # Highest RRF score first; overshoot if type filter
-    overshoot = top_k * 10 if entity_types else top_k
-    ranked = sorted(rrf_scores.items(), key=lambda kv: -kv[1])[:overshoot]
+    # Highest RRF score first. When a type filter is active, rank the FULL
+    # lattice so the filter doesn't get starved by type imbalance in the
+    # geometric top-N (e.g. physics lattices where person entities dominate).
+    full_ranked = sorted(rrf_scores.items(), key=lambda kv: -kv[1])
+    ranked = full_ranked if entity_types else full_ranked[:top_k]
 
     matches: List[NoveltyMatch] = []
     for idx, _score in ranked:
@@ -266,8 +268,9 @@ def _query_novelty_8d(
     """Phase 1 path: 8D Euclidean nearest neighbor."""
     assert lattice.embed_context is not None
     query_8d = embed_query_to_8d(query_text, lattice.embed_context)
-    # Overshoot top_k so the type filter has candidates
-    overshoot = top_k * 10 if entity_types else top_k
+    # When a type filter is active, rank the FULL lattice so the filter
+    # doesn't get starved by type imbalance in the top-N.
+    overshoot = lattice.size if entity_types else top_k
     ranked = rank_lattice_by_8d(query_8d, lattice, top_k=overshoot)
 
     matches: List[NoveltyMatch] = []
@@ -326,7 +329,7 @@ def _query_novelty_hamming(
     entity_types: Optional[List[str]] = None,
 ) -> NoveltyReport:
     """Phase 0 legacy path: Hamming distance in the 48-bit fingerprint space."""
-    overshoot = top_k * 10 if entity_types else top_k
+    overshoot = lattice.size if entity_types else top_k
     ranked = rank_lattice_by_hamming(query_text, lattice, top_k=overshoot)
     query_fp = fingerprint_text_legacy(query_text)
 
