@@ -48,3 +48,4 @@ from . import pubmed  # noqa: E402, F401
 from . import patents  # noqa: E402, F401
 from . import comtrade  # noqa: E402, F401
 from . import climate  # noqa: E402, F401
+from . import tesla  # noqa: E402, F401
