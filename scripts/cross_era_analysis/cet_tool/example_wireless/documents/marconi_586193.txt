@@ -1,0 +1,41 @@
+UNITED STATES PATENT OFFICE.
+GUGLIELMO MARCONI, OF LONDON, ENGLAND.
+TRANSMITTING ELECTRICAL SIGNALS.
+SPECIFICATION forming part of Letters Patent No. 586,193, dated July 13, 1897.
+Application filed December 7, 1896. Serial No. 614,723. (No model.)
+
+To all whom it may concern:
+Be it known that I, GUGLIELMO MARCONI, of 71 Hereford Road, Bayswater, in the county of London, England, electrician, have invented Improvements in Transmitting Electrical Impulses and Signals and in Apparatus Therefor, (for which I have obtained Provisional Protection in Great Britain, by Letters Patent No. 12,039, dated June 2, 1896,) of which the following is a specification.
+
+According to this invention electrical actions or manifestations are transmitted through the air, earth, or water by means of electric oscillations of high frequency. The apparatus employed at the transmitting-station consists of an induction-coil or equivalent means for producing electric oscillations and a radiator for directing the oscillations through the air. The radiator comprises a metallic surface or plate elevated above the ground and connected to one terminal of the spark-gap of the induction-coil. The other terminal of the spark-gap is connected to the earth.
+
+When the induction-coil is excited sparks pass across the spark-gap and electric oscillations are set up in the circuit comprising the elevated plate and the earth connection. These oscillations cause the emission of electromagnetic waves which are propagated outward through space.
+
+At the receiving-station a similar arrangement of elevated plate and earth connection is employed, connected to a coherer or other detector responsive to the incoming electromagnetic waves. The electromagnetic waves striking the receiving plate induce oscillatory currents therein which actuate the detector.
+
+Figure 1 of the accompanying drawings shows the transmitting apparatus. A is an induction-coil of any suitable type. B is the spark-gap across which sparks pass when the coil is excited. One terminal of the spark-gap is connected to a metallic plate C elevated above the ground on a pole or mast. The other terminal is connected to a metal plate D buried in the earth or otherwise connected to earth.
+
+Figure 2 shows the receiving apparatus. E is a coherer of the Branly type comprising a glass tube containing metal filings. F is the receiving plate elevated on a pole. G is the earth connection. H is a battery and relay for operating a signaling device J such as a Morse inker.
+
+The action of the apparatus is as follows. When sparks pass in the transmitting spark-gap electromagnetic waves are emitted in all directions. Those waves which strike the receiving plate induce currents which cause the metal filings in the coherer to cohere and become conducting. The current from the battery then flows through the coherer and the relay, and the relay operates the signaling device.
+
+The range of transmission depends upon the height of the transmitting and receiving plates, the power of the induction-coil, and the sensitivity of the coherer. With the apparatus described signals have been transmitted over distances of several miles.
+
+For improved transmission over longer distances the elevated plates may be replaced by vertical wires or antennae, and the induction-coil may be replaced by a transformer of higher power. The electromagnetic waves radiated from such an apparatus propagate in all directions with decreasing intensity as the distance from the transmitter increases.
+
+The electromagnetic waves produced by the apparatus are of the Hertzian type, being electromagnetic radiation capable of propagating through free space. The waves are detected by their effect on the coherer at the receiving station, which is caused to become conducting by the electromagnetic impulse of the arriving wave.
+
+I claim—
+
+1. Improvements in transmitting electrical impulses and signals through the air, earth or water by means of electric oscillations consisting of an apparatus at the transmitting-station comprising an induction-coil, a spark-gap, and an elevated radiator connected to one terminal of the spark-gap and an earth connection connected to the other terminal.
+
+2. Apparatus for receiving electrical signals transmitted through the air, earth or water by means of electric oscillations, comprising an elevated receiving-plate, an earth connection, a coherer or equivalent detector connected between the plate and the earth, and means for indicating the action of the coherer.
+
+3. The combination with a transmitting-apparatus comprising an induction-coil, a spark-gap, an elevated radiator and an earth connection, of a receiving-apparatus comprising an elevated receiving-plate, an earth connection, a coherer, and a signaling device operated by the coherer.
+
+4. A method of transmitting electrical signals through the air, earth or water which consists in producing electric oscillations at a transmitting-station and causing said oscillations to be radiated as electromagnetic waves, and detecting said waves at a receiving-station by means of a coherer or similar detector.
+
+GUGLIELMO MARCONI.
+Witnesses:
+CHARLES W. RUSSELL,
+HENRY A. LECOQ.

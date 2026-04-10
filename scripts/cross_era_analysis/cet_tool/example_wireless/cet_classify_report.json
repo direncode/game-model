@@ -1,0 +1,75 @@
+{
+  "corpus": "Example: Wireless Power Across Eras",
+  "accuracy": {
+    "correct": 5,
+    "total": 5,
+    "percentage": 100.0
+  },
+  "classifications": [
+    {
+      "id": "tesla_645576",
+      "title": "Tesla System of Transmission of Electrical Energy (1897)",
+      "year": 1897,
+      "expected": "surface_wave",
+      "predicted": "surface_wave",
+      "margin": 2892.9999999999995,
+      "scores": {
+        "surface_wave": 2.893,
+        "radiative": 0.0
+      },
+      "correct": true
+    },
+    {
+      "id": "tesla_649621",
+      "title": "Tesla Apparatus for Transmission of Electrical Energy (1900)",
+      "year": 1900,
+      "expected": "surface_wave",
+      "predicted": "surface_wave",
+      "margin": 27.9979381443299,
+      "scores": {
+        "surface_wave": 13.579,
+        "radiative": 0.485
+      },
+      "correct": true
+    },
+    {
+      "id": "tesla_1119732",
+      "title": "Tesla Apparatus for Transmitting Electrical Energy (Wardenclyffe, 1902)",
+      "year": 1902,
+      "expected": "surface_wave",
+      "predicted": "surface_wave",
+      "margin": 4808.0,
+      "scores": {
+        "surface_wave": 4.808,
+        "radiative": 0.0
+      },
+      "correct": true
+    },
+    {
+      "id": "corum_9923385",
+      "title": "Corum CPG Technologies Guided Surface Waves (2015)",
+      "year": 2015,
+      "expected": "surface_wave",
+      "predicted": "surface_wave",
+      "margin": 12.000316806589577,
+      "scores": {
+        "surface_wave": 75.758,
+        "radiative": 6.313
+      },
+      "correct": true
+    },
+    {
+      "id": "marconi_586193",
+      "title": "Marconi Transmitting Electrical Signals (1896, control)",
+      "year": 1896,
+      "expected": "radiative",
+      "predicted": "radiative",
+      "margin": 6378.0,
+      "scores": {
+        "surface_wave": 0.0,
+        "radiative": 6.378
+      },
+      "correct": true
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+# Example CET config: wireless power transmission
+#
+# Two regimes: surface_wave (Tesla/Corum) and radiative (Marconi et al.).
+# Keyword groups are paradigm-specific physics vocabulary.
+
+chunk_target_words: 15
+
+btut:
+  enabled: false  # CLI tool runs keyword discriminator only; BTUT requires production pipeline
+  target_survivors: 500
+
+regimes:
+  - name: surface_wave
+    description: "Non-radiative guided surface wave (Zenneck-type) physics"
+    keyword_groups:
+      bound_wave:
+        - "surface wave"
+        - "guided surface wave"
+        - "zenneck"
+        - "bound to the interface"
+        - "bound wave"
+        - "guided wave"
+        - "sommerfeld"
+        - "brewster angle"
+      non_radiative:
+        - "non-radiative"
+        - "non radiative"
+        - "not radiation"
+        - "not to be confounded"
+        - "true conduction"
+      earth_interface:
+        - "through the earth"
+        - "through the natural media"
+        - "earth-air interface"
+        - "lossy conducting medium"
+        - "terrestrial medium"
+        - "atmosphere as a conduct"
+      quarter_wave:
+        - "quarter of the period"
+        - "quarter wave"
+        - "quarter wavelength"
+        - "one-quarter of the wave"
+        - "standing wave"
+      ground_elevated:
+        - "elevated terminal"
+        - "elevated conductor"
+        - "elevated antenna"
+        - "grounded circuit"
+        - "charge terminal"
+
+  - name: radiative
+    description: "Free-space electromagnetic radiation (Hertzian waves)"
+    keyword_groups:
+      radiation:
+        - "electromagnetic radiation"
+        - "electrical radiation"
+        - "radiated"
+        - "radiating"
+        - "hertzian wave"
+        - "far field"
+        - "free space propagation"
+      radio_apparatus:
+        - "dipole antenna"
+        - "half-wave dipole"
+        - "antenna gain"
+        - "radiation pattern"
+      broadcasting:
+        - "unguided"
+        - "free or unguided"
+        - "broadcast"
+        - "in all directions"
+        - "propagates outward"
