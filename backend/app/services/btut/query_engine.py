@@ -739,18 +739,31 @@ class BTUTQueryEngine:
         return results
 
     def analyze(self, key: str) -> dict | None:
-        """Full analysis for a specific entity by ticker, name, or lookup key."""
-        # Try ticker first
-        record = self._by_ticker.get(key.upper())
-        # Fall back to name lookup
+        """Full analysis for a specific entity by ticker, name, display name, or any key."""
+        record = None
+
+        # Try ticker/lookup key
+        record = self._by_ticker.get(key.upper()) or self._by_ticker.get(key)
+
+        # Try exact entity name
         if not record:
             record = self._by_name.get(key)
-        # Try partial name match
+
+        # Try matching against company_name (display name)
         if not record:
-            for name, rec in self._by_name.items():
-                if key.lower() in name.lower():
-                    record = rec
+            for sv in self._survivors:
+                if sv.get("company_name") == key or sv.get("name") == key:
+                    record = sv
                     break
+
+        # Try partial match on name or company_name
+        if not record:
+            key_lower = key.lower()
+            for sv in self._survivors:
+                if key_lower in sv.get("name", "").lower() or key_lower in sv.get("company_name", "").lower():
+                    record = sv
+                    break
+
         if not record:
             return None
 
@@ -833,13 +846,18 @@ class BTUTQueryEngine:
 
     def magnitude(self, key: str) -> dict | None:
         """Magnitude profile details for a specific entity."""
-        record = self._by_ticker.get(key.upper())
+        # Reuse analyze's robust lookup
+        analysis = self.analyze(key)
+        if not analysis:
+            return None
+        # Find the record by matching ticker/name from analysis
+        record = self._by_ticker.get(analysis.get("ticker", "").upper())
         if not record:
             record = self._by_name.get(key)
         if not record:
-            for name, rec in self._by_name.items():
-                if key.lower() in name.lower():
-                    record = rec
+            for sv in self._survivors:
+                if sv.get("name") == key or sv.get("company_name") == key:
+                    record = sv
                     break
         if not record:
             return None

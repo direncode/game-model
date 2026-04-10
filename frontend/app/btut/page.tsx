@@ -133,25 +133,18 @@ function SeverityTag({ tag, severity, desc }: { tag: string; severity: string; d
 // DOSSIER PANEL
 // =====================================================================
 function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => void }) {
-  const [lineageData, setLineageData] = useState<any>(null);
-  const [lineageLoading, setLineageLoading] = useState(false);
   const [reportTaskId, setReportTaskId] = useState<string | null>(null);
   const [reportStatus, setReportStatus] = useState<any>(null);
 
-  const { data } = useQuery({
-    queryKey: ["btut-analyze", entityKey],
-    queryFn: () => api.getBTUTAnalysis(entityKey),
+  // Load convergent metadata (analysis + lineage) in one call
+  const { data: convergentData, isLoading: convergentLoading } = useQuery({
+    queryKey: ["btut-convergent", entityKey],
+    queryFn: () => api.getBTUTConvergent(entityKey),
     enabled: !!entityKey,
   });
 
-  const handleTraceLineage = async () => {
-    setLineageLoading(true);
-    try {
-      const result = await api.getBTUTLineage(entityKey);
-      setLineageData(result);
-    } catch (e) { console.error(e); }
-    setLineageLoading(false);
-  };
+  const data = convergentData?.analysis;
+  const lineageData = convergentData?.lineage;
 
   const handleGenerateReport = async () => {
     try {
@@ -167,7 +160,7 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
     } catch (e) { console.error(e); }
   };
 
-  if (!data) return (
+  if (!data || convergentLoading) return (
     <div className="col-span-full lg:col-span-7 border border-li-gray-800 rounded bg-li-surface p-4 animate-pulse">
       <div className="h-4 bg-li-gray-800 rounded w-1/3" />
     </div>
@@ -187,10 +180,7 @@ function Dossier({ entityKey, onClose }: { entityKey: string; onClose: () => voi
           {m.structural_role && <RoleBadge role={m.structural_role.role} />}
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={handleTraceLineage} disabled={lineageLoading}
-            className="px-3 py-1 rounded text-[10px] font-mono bg-li-cyan/10 text-li-cyan border border-li-cyan/20 hover:bg-li-cyan/20 disabled:opacity-50">
-            {lineageLoading ? "Tracing..." : "Trace Lineage"}
-          </button>
+          <span className="text-[9px] font-mono text-li-cyan">CONVERGENT METADATA</span>
           <button onClick={handleGenerateReport}
             className="px-3 py-1 rounded text-[10px] font-mono bg-li-purple/10 text-li-purple border border-li-purple/20 hover:bg-li-purple/20">
             Generate Report

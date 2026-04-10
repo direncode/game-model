@@ -255,6 +255,10 @@ class ApiClient {
     return this.request<any>(`/api/v1/btut/clusters/${clusterId}?dataset=${dataset}`);
   }
 
+  async getBTUTConvergent(entityKey: string, dataset = "edgar") {
+    return this.request<any>(`/api/v1/btut/convergent/${encodeURIComponent(entityKey)}?dataset=${dataset}`);
+  }
+
   async getBTUTLineage(entityKey: string, dataset = "edgar") {
     return this.request<any>(`/api/v1/btut/lineage/${encodeURIComponent(entityKey)}?dataset=${dataset}`);
   }

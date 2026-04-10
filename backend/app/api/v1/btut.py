@@ -200,6 +200,29 @@ async def btut_cluster_detail(cluster_id: int, dataset: str = Query(default="edg
 
 # ── Lineage + Report Endpoints ────────────────────────────────────────
 
+@router.get("/convergent/{entity_key}")
+async def btut_convergent_metadata(
+    entity_key: str,
+    dataset: str = Query(default="edgar"),
+):
+    """Full convergent metadata — BTUT analysis + lineage trace combined."""
+    from app.services.btut.lineage_tracer import LineageTracer
+
+    engine = _engine(dataset)
+    analysis = engine.analyze(entity_key)
+    if not analysis:
+        from app.core.exceptions import NotFoundError
+        raise NotFoundError(detail=f"Entity '{entity_key}' not found")
+
+    tracer = LineageTracer(engine)
+    lineage = tracer.trace(entity_key)
+
+    return {
+        "analysis": analysis,
+        "lineage": lineage.to_dict() if lineage else None,
+    }
+
+
 @router.get("/lineage/{entity_key}")
 async def btut_lineage(
     entity_key: str,
