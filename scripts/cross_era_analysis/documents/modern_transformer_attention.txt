@@ -1,0 +1,72 @@
+SOURCE: "Attention Is All You Need" (Vaswani et al., 2017) and the Transformer architecture
+CITATION: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). Attention is all you need. Advances in Neural Information Processing Systems, 30.
+
+The Transformer architecture, introduced by Vaswani et al. in 2017 in the paper "Attention Is All You Need," is the foundational architecture of modern natural language processing. It replaced the previously dominant recurrent neural network (RNN) architectures used in machine translation and sequence modeling. The Transformer has become the universal architecture for language models, vision models, speech models, and many other domains. Every large language model in production today — GPT, Claude, Gemini, LLaMA, Mistral — is built on the Transformer architecture.
+
+THE CORE INNOVATION: SELF-ATTENTION
+
+The key innovation of the Transformer is self-attention. Self-attention computes, for each position in a sequence, a weighted sum of the representations at all other positions, where the weights are determined by learned affinity functions between pairs of positions. This allows each position to attend directly to any other position in the sequence, regardless of distance.
+
+In previous architectures (RNNs, LSTMs), long-range dependencies were handled through recurrent state that had to propagate sequentially through the sequence. This created bottlenecks: information had to survive many time steps to influence a distant position. Self-attention eliminates this bottleneck by computing direct pairwise interactions between all positions.
+
+SCALED DOT-PRODUCT ATTENTION
+
+The self-attention mechanism uses three learned projections of each input vector: query (Q), key (K), and value (V). For each query position, the attention weights over all key positions are computed as:
+
+    Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V
+
+Where d_k is the dimension of the key vectors. The scaling by sqrt(d_k) prevents the dot products from becoming too large in high dimensions, which would cause the softmax to saturate.
+
+The intuition is: each query asks "which other positions are relevant to me?" The keys answer that question via dot-product similarity. The values are then combined using the attention weights to produce the output for that query position.
+
+MULTI-HEAD ATTENTION
+
+The Transformer uses multi-head attention: instead of computing a single attention distribution, it computes several (typically 8-16) attention heads in parallel, each with its own learned Q, K, V projections. The heads can learn to attend to different aspects of the input — some heads focus on syntactic dependencies, others on semantic relations, others on positional patterns.
+
+The outputs of the multiple heads are concatenated and projected back to the original dimension. This gives the Transformer flexibility to capture different kinds of relationships simultaneously.
+
+POSITIONAL ENCODING
+
+Self-attention is permutation-invariant: the output does not depend on the order of the inputs. This is a problem for language, where word order matters. To encode positions, the Transformer adds positional encodings to the input embeddings. The original paper uses sinusoidal positional encodings: a fixed function of position. Later variants use learned positional embeddings, relative position encodings, or rotary position embeddings (RoPE).
+
+The positional encoding gives each position a unique signature that the attention mechanism can use to distinguish positions. Two identical tokens at different positions have different positional encodings, and the model can learn to treat them differently.
+
+ENCODER-DECODER STRUCTURE
+
+The original Transformer has an encoder-decoder structure for machine translation. The encoder processes the source sentence and produces a sequence of context vectors. The decoder generates the target sentence one word at a time, attending to the encoder outputs and to its own previous outputs.
+
+Later variants use encoder-only (BERT), decoder-only (GPT), or encoder-decoder (T5) architectures depending on the task. Encoder-only models are used for classification and understanding tasks. Decoder-only models are used for generation tasks. Encoder-decoder models are used for sequence-to-sequence tasks like translation and summarization.
+
+LAYER STRUCTURE
+
+Each Transformer layer consists of two sub-layers: a multi-head self-attention sub-layer and a position-wise feedforward network. Residual connections and layer normalization wrap each sub-layer. The layers are stacked: a typical model has 12-96 layers depending on model size.
+
+The feedforward network is applied independently to each position (it is a two-layer neural network that acts on each position's vector). The feedforward network provides position-wise non-linear transformation, while the self-attention provides cross-position information flow.
+
+SCALING BEHAVIOR
+
+The Transformer scales remarkably well. Models with more parameters, trained on more data, with more compute, consistently produce better results on language tasks. This scaling law was documented by OpenAI's GPT-3 paper in 2020 and has been confirmed by many subsequent studies. Modern models have billions to trillions of parameters and are trained on trillions of tokens.
+
+The scaling success of Transformers has made them the dominant architecture in NLP. Every significant language model since 2018 has been a Transformer variant. The architecture has also been adapted for vision (Vision Transformer, ViT), audio (Whisper), proteins (AlphaFold), and many other domains.
+
+CONNECTION TO DISTRIBUTIONAL SEMANTICS
+
+Self-attention can be understood as a computational realization of distributional semantics in the sense of Saussure, Harris, and Firth. Each word's representation at each layer is computed as a function of its relations to other words in the input. The meaning of a word is literally determined by its distributional relations in the current context.
+
+This is a direct operationalization of Saussure's 1916 claim that "in language there are only differences, and no positive terms." In a Transformer, a word's representation is not a fixed vector but a function of the context in which it appears. The same word in different contexts has different representations, because the attention patterns over surrounding words differ.
+
+Firth's 1957 dictum "You shall know a word by the company it keeps" applies with full force: in self-attention, a word is known entirely by the company it keeps, as mediated by the learned attention weights. The Transformer architecture is the most complete operationalization to date of the Saussure-Firth tradition of relational meaning.
+
+CONNECTION TO GENERATIVE GRAMMAR
+
+The relationship between Transformers and Chomskyan generative grammar is more subtle. Transformers are not grammar-based: they do not contain explicit phrase structure rules or hierarchical parsing. However, research has shown that Transformers implicitly learn hierarchical structures. Probing experiments have found that BERT's attention heads correspond to dependency relations and constituency structures. Transformers appear to approximate grammar without being given explicit grammatical rules.
+
+The theoretical question of what class of grammars Transformers can represent is an active research area. Some results suggest they are at least as powerful as finite-state machines and approach context-free or context-sensitive power depending on depth and attention pattern. Transformers are not a direct implementation of any level of the Chomsky hierarchy, but they implicitly capture many of the structural properties that formal grammar theory studies.
+
+THE HUMBOLDT-CHOMSKY CONNECTION
+
+Humboldt's 1836 phrase "the infinite use of finite means" applies to Transformers in a specific way. A finite set of model parameters (weights, attention patterns, embeddings) produces an infinite set of possible outputs. The model learns to compose meanings from a finite vocabulary and finite structural patterns to generate novel sentences it has never seen.
+
+Humboldt anticipated this property in philosophical language. Chomsky formalized it in terms of recursive grammars. Transformers operationalize it at scale: billions of parameters learning distributional patterns that allow the generation of fluent text on arbitrary topics. The lineage from Humboldt (1836) to Chomsky (1957) to Transformers (2017) is a clear cross-era transmission of the core generative insight.
+
+For computational historiography, the Transformer is a modern artifact that can be structurally compared with pre-modern theoretical claims about language. It implements distributional semantics (Saussure 1916, Harris 1954, Firth 1957), it achieves the generative property Humboldt described (1836), and it connects to formal grammar theory in non-trivial ways (Chomsky 1956 et seq.). Every one of these connections is a cross-era match that BTUT-style structural analysis should detect.

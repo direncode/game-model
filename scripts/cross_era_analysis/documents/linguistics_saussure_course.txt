@@ -1,0 +1,54 @@
+SOURCE: Ferdinand de Saussure, "Cours de linguistique generale" / "Course in General Linguistics" (posthumous 1916, from lectures 1906-1911)
+CITATION: Saussure 1916; Wade Baskin translation (1959); Roy Harris translation (1983); Culler "Ferdinand de Saussure" (1986)
+
+Ferdinand de Saussure's "Course in General Linguistics" was compiled by his students Charles Bally and Albert Sechehaye from lecture notes after Saussure's death in 1913. It is one of the founding documents of 20th-century structural linguistics and, through its influence on structuralism and semiotics, one of the most influential books in the humanities. Saussure did not intend these lectures to be published, and the text we have is a reconstruction, but its ideas have shaped linguistics, anthropology, literary theory, and philosophy for over a century.
+
+THE SIGN
+
+Saussure's central concept is the linguistic sign. A sign is a two-sided psychological entity consisting of a signifier (signifiant — an acoustic image or sound pattern) and a signified (signifie — a concept). The sign is the union of these two sides. Saussure insisted that neither side exists independently: there is no sound pattern without a concept attached to it, no concept without an acoustic image to express it.
+
+The relation between signifier and signified is arbitrary. There is no natural reason why the sound pattern "tree" should be linked to the concept of a tree. Different languages use different sound patterns for the same concept (arbre in French, Baum in German, ki in Japanese). The link is purely conventional, established by the collective agreement of a speech community.
+
+This arbitrariness is one of Saussure's most emphasized claims. It distinguishes his approach from earlier theories that sought natural connections between words and things. For Saussure, language is a system of arbitrary signs held in place by social convention.
+
+LANGUE VERSUS PAROLE
+
+Saussure distinguished between langue (the language system shared by a speech community) and parole (individual speech acts). Langue is the abstract set of rules and conventions; parole is the concrete utterances produced by individuals. Linguistics, Saussure argued, is primarily the study of langue, not parole. The individual variations in actual speech are infinite and idiosyncratic; the underlying system is structured and describable.
+
+This distinction parallels Noam Chomsky's later distinction between competence (a speaker's knowledge of the language) and performance (actual linguistic behavior). Chomsky credits Saussure for the insight while arguing that his own version is more precisely formulated. Both distinctions isolate the object of linguistic theory from the noise of individual performance.
+
+SYNCHRONY AND DIACHRONY
+
+Saussure insisted on the primacy of synchronic analysis over diachronic analysis. Diachronic linguistics studies how languages change over time; synchronic linguistics studies a language as a coherent system at a given moment. Saussure argued that the synchronic state of a language is the primary object of study, because speakers use language based on its current system, not on its historical origins.
+
+This was a methodological revolution in 1916. Nineteenth-century linguistics had been dominated by historical and comparative studies of sound change, etymology, and the reconstruction of proto-languages. Saussure did not reject diachronic linguistics, but he argued that synchronic analysis has logical priority: you must understand the system before you can study how it changes.
+
+The synchronic-diachronic distinction has been foundational for 20th-century structural linguistics and remains relevant in contemporary linguistics. Modern formal semantics, phonology, and syntax are primarily synchronic disciplines. Historical linguistics has continued alongside synchronic linguistics but typically assumes that synchronic states are well-defined objects.
+
+VALUE AND DIFFERENCE
+
+Saussure's most radical claim is that linguistic signs have no positive content. The value of a sign is entirely determined by its relations to other signs in the system. Saussure wrote that "in language there are only differences, and no positive terms." A phoneme has meaning not because it corresponds to a particular sound in isolation, but because it differs from other phonemes in the system. A word has meaning not because it corresponds to a particular thing, but because it differs from other words in the system.
+
+This is the structuralist insight: meaning is relational, not referential. The value of a unit is its place in a system of oppositions. Modern distributional semantics in computational linguistics is a direct descendant of this insight. Word2Vec, GloVe, and contextual embeddings represent word meanings as vectors in a space, where the meaning of a word is its position relative to other words. This operationalizes Saussure's claim that meaning is differential.
+
+J. R. Firth, the British linguist, famously paraphrased this as "You shall know a word by the company it keeps" — a direct restatement of Saussure's relational theory of meaning. Firth's 1957 formulation is cited in modern NLP papers as the justification for distributional semantics. The chain Saussure (1916) -> Firth (1957) -> Word2Vec (2013) is one of the clearest cross-era transmissions in modern computational linguistics.
+
+PARADIGMATIC AND SYNTAGMATIC RELATIONS
+
+Saussure identified two types of relations among linguistic signs. Syntagmatic relations hold between signs that co-occur in a sentence: the relation between "the" and "cat" in "the cat sat on the mat." These are relations in praesentia, present in the actual utterance. Paradigmatic relations (Saussure called them "associative" relations) hold between signs that could substitute for each other in a given slot: "the cat", "the dog", "the mouse" all have the same syntagmatic position. These are relations in absentia, defined by potential substitution.
+
+This distinction maps directly to modern concepts in computational linguistics. Syntagmatic relations correspond to sequence relations in n-gram models, recurrent neural networks, and transformers. Paradigmatic relations correspond to substitutability, which is the basis of distributional semantics. Words that have similar paradigmatic relations (appear in similar contexts) are semantically similar. This is the distributional hypothesis, and it is Saussure's paradigmatic-syntagmatic distinction operationalized for large-scale text analysis.
+
+THE SYSTEM
+
+For Saussure, language is a system (systeme). Every element is defined by its relations to every other element. This is the holistic aspect of structuralism: you cannot understand one sign without understanding its place in the system, and the system is not the sum of its parts but a web of interdependencies.
+
+Modern graph-based representations of meaning — WordNet, knowledge graphs, semantic networks — operationalize this systemic view. Every concept is a node connected to other concepts by labeled edges; the meaning of a concept is its position in the graph. This is structurally identical to Saussure's view of language as a system of differences.
+
+SAUSSURE AND MODERN COMPUTATIONAL LINGUISTICS
+
+The parallels between Saussure's system and modern computational linguistics are numerous and explicit. Distributional semantics operationalizes his relational theory of meaning. Word embeddings are vectorizations of his value concept. Contextual models implement his langue/parole distinction (the model captures langue; individual predictions are parole). Graph-based knowledge representations implement his systemic view.
+
+The chain of influence runs through J. R. Firth in the 1950s, Zellig Harris in the 1950s-60s (who developed distributional analysis methods), and then into the modern NLP era starting with latent semantic analysis in the 1980s and leading to Word2Vec, GloVe, BERT, and modern transformer models. At each stage, the underlying structural insight is Saussure's: meaning is differential, relational, and systemic.
+
+For computational historiography, the Saussure text exemplifies a 1916 work that explicitly anticipates the mathematical vocabulary of 21st-century vector space models. The specific terms — value, difference, syntagmatic, paradigmatic, system — map to modern NLP concepts in ways that BTUT-style structural analysis should detect.

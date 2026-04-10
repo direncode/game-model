@@ -1,0 +1,65 @@
+SOURCE: Modern Distributional Semantics and Vector Space Models of Meaning
+CITATION: Harris 1954; Firth 1957; Schutze 1993; Mikolov et al. 2013 (Word2Vec); Pennington et al. 2014 (GloVe); Vaswani et al. 2017 (Transformer); Wikipedia "Distributional semantics"
+
+Distributional semantics is the computational approach to meaning in natural language processing that represents word meanings as vectors in a high-dimensional space, where the position of a word is determined by its patterns of co-occurrence with other words in large text corpora. It is the foundation of modern NLP, used in every neural language model from Word2Vec (2013) through BERT (2018) to GPT-4 and Claude. Its core claim — that meaning is determined by distributional patterns — has deep historical roots in structural linguistics.
+
+THE DISTRIBUTIONAL HYPOTHESIS
+
+The central claim of distributional semantics is the distributional hypothesis: words that occur in similar contexts have similar meanings. Zellig Harris stated it explicitly in 1954: "If A and B have almost identical environments except chiefly for sentences which contain both, we say they are synonyms." J. R. Firth, the British linguist, gave the most famous formulation in 1957: "You shall know a word by the company it keeps."
+
+The distributional hypothesis is empirically testable. Given a large corpus, we can measure how similar two words are by comparing the distributions of words that appear near them. Synonyms ("big", "large") should have similar distributions. Antonyms ("hot", "cold") are interestingly close in distribution but with important differences. Unrelated words ("banana", "democracy") should have very different distributions.
+
+HARRIS AND FIRTH: THE STRUCTURALIST ROOTS
+
+Zellig Harris and J. R. Firth were both structural linguists influenced by Ferdinand de Saussure's 1916 Course in General Linguistics. Harris worked in the American structural tradition; Firth led the London school of British linguistics. Both insisted that meaning is not a property of a word in isolation but a property of the word's relations to other words in the language system.
+
+Harris's 1954 paper "Distributional Structure" argues that the distribution of a linguistic element — the set of contexts in which it can occur — is the objective basis for meaning. Two elements with the same distribution are equivalent; different distributions mean different meanings. Harris was explicitly developing a structuralist approach to meaning, continuing Saussure's project of treating language as a system of differences.
+
+Firth's 1957 paper "A synopsis of linguistic theory" introduced the concept of collocation: the tendency of words to appear together. Firth argued that studying collocations is the right way to study meaning, because meaning lives in the patterns of word combination, not in isolated lexical entries. His famous dictum "You shall know a word by the company it keeps" is the clearest statement of the distributional hypothesis in the pre-computational era.
+
+Both Harris and Firth were continuing Saussure's 1916 claim that "in language there are only differences, and no positive terms." Saussure had argued that the value of a linguistic sign is entirely relational — determined by its contrast with other signs in the system. Harris and Firth operationalized this insight for empirical study of text.
+
+LATENT SEMANTIC ANALYSIS
+
+The first large-scale computational implementation of distributional semantics was Latent Semantic Analysis (LSA), developed in the late 1980s by Deerwester, Dumais, Furnas, Landauer, and Harshman. LSA constructs a word-document matrix where each entry is the frequency of a word in a document, applies singular value decomposition to reduce dimensionality, and produces a vector representation of each word in a low-dimensional space.
+
+LSA was the first clear demonstration that distributional co-occurrence could be computed at scale and used for practical tasks like information retrieval, synonym detection, and measuring text similarity. It also demonstrated that dimensionality reduction (compressing the word-document matrix) captured semantic structure that the raw counts did not.
+
+WORD2VEC AND NEURAL EMBEDDINGS
+
+The modern era of distributional semantics began with Word2Vec, introduced by Tomas Mikolov and colleagues at Google in 2013. Word2Vec trains a neural network to predict a word from its context (CBOW model) or to predict the context from a word (Skip-gram model). The weights of the trained network produce word vectors of typically 100-300 dimensions.
+
+Word2Vec vectors exhibit remarkable semantic properties. Semantically similar words are close in vector space. Vector arithmetic produces meaningful relations: king - man + woman = queen (approximately). This algebraic structure of meaning was not anticipated by the distributional hypothesis in its original form, but it is a consequence of training neural networks to predict distributions.
+
+Word2Vec and its variants (GloVe from Stanford, fastText from Facebook) have been used as the foundation for thousands of NLP systems. The core insight — that distributional patterns in text can be captured as vectors — has been the organizing principle of modern NLP since 2013.
+
+CONTEXTUAL EMBEDDINGS AND BERT
+
+In 2018, contextual embeddings replaced static word embeddings as the dominant approach. BERT (Bidirectional Encoder Representations from Transformers), introduced by Devlin et al., computes a vector for each word in the context of its entire sentence. The same word can have different vectors in different contexts: "bank" in "river bank" has a different vector than "bank" in "money bank."
+
+Contextual embeddings solve a long-standing problem in distributional semantics: polysemy. A single static vector cannot capture the multiple senses of a polysemous word. Contextual vectors compute a different representation for each occurrence, effectively disambiguating senses based on surrounding context.
+
+BERT and similar models (GPT, T5, RoBERTa) use transformer architectures with self-attention. The attention mechanism allows each word's vector to be updated based on its relations to all other words in the input. This is a massive scaling up of Saussure's relational theory: every word's meaning is computed from its relations to every other word.
+
+TRANSFORMERS AND SELF-ATTENTION
+
+The Transformer architecture, introduced by Vaswani et al. in 2017 ("Attention Is All You Need"), is the foundation of modern large language models. A transformer consists of layers of self-attention and feedforward networks. Self-attention computes, for each position in the input, a weighted combination of all other positions, where the weights are learned from data.
+
+Self-attention is a mechanism for implementing relational meaning at scale. Each word's representation in each layer is computed as a weighted sum of all other words' representations, with weights determined by the learned attention pattern. This is the computational realization of Saussure's claim that meaning is relational: the meaning of a word is literally computed as a function of its relations to other words.
+
+Modern language models (GPT-3, GPT-4, Claude, LLaMA) are all built on transformer architectures. They train on trillions of words of text and learn distributional patterns that allow them to generate fluent, contextually appropriate text. The computational scale has increased enormously, but the underlying insight is the same: meaning can be captured from distributional patterns.
+
+THE SAUSSURE-TO-TRANSFORMERS LINEAGE
+
+The chain of influence runs clearly from Saussure's 1916 relational theory of meaning through Harris and Firth in the 1950s to latent semantic analysis in the 1980s to Word2Vec in 2013 to modern transformer models. At each stage, the core claim is the same: meaning is determined by distributional relations, not by intrinsic properties of words.
+
+Saussure stated it philosophically: "in language there are only differences."
+Harris operationalized it: the distribution of a word determines its meaning.
+Firth gave it a memorable formulation: you shall know a word by the company it keeps.
+LSA computed it at scale using SVD on word-document matrices.
+Word2Vec computed it more efficiently using neural networks and prediction tasks.
+BERT and modern transformers compute it contextually for each occurrence.
+
+This is one of the cleanest cross-era intellectual transmissions in the history of computational linguistics. The idea is genuinely Saussure's. The formalization and scaling happened a century later. The specific vocabulary — differential meaning, relational structure, system of differences — maps directly to modern NLP concepts.
+
+For computational historiography, this is a particularly clear case of a 1916 theoretical insight being operationalized in 21st-century engineering systems. The idea was not obvious in 1916; structuralism was a minority position in linguistics, and reference-based theories of meaning (where a word's meaning is what it refers to) dominated philosophy. It took 50 years to move from Saussure to Harris and Firth, and another 60 years to reach computational scale with LSA and Word2Vec. The full lineage spans a century.

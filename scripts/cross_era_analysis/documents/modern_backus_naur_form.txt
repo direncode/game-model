@@ -1,0 +1,83 @@
+SOURCE: Backus-Naur Form (BNF) for programming language specification, introduced 1959-1960
+CITATION: Backus 1959 ICIP paper; Naur 1960 ALGOL 60 report; Knuth 1964 "Backus Normal Form vs. Backus Naur Form"; modern parser generator documentation
+
+Backus-Naur Form (BNF) is a metasyntactic notation for specifying context-free grammars, particularly for the syntax of programming languages. It was introduced by John Backus in his 1959 paper at the International Conference on Information Processing in Paris for the specification of ALGOL 58. Peter Naur refined the notation for ALGOL 60 in 1960, and the combined form became known as Backus-Naur Form. BNF has been the standard notation for programming language syntax specification for over 60 years.
+
+THE BNF NOTATION
+
+BNF consists of a set of production rules of the form:
+
+    <non-terminal> ::= alternative1 | alternative2 | ... | alternativeN
+
+Each rule specifies how a non-terminal symbol can be rewritten. The left-hand side is a non-terminal enclosed in angle brackets. The right-hand side is one or more alternatives, separated by the pipe character |, each alternative being a sequence of terminals and non-terminals.
+
+A simple example for arithmetic expressions:
+
+    <expression> ::= <term> | <expression> "+" <term> | <expression> "-" <term>
+    <term> ::= <factor> | <term> "*" <factor> | <term> "/" <factor>
+    <factor> ::= <number> | "(" <expression> ")"
+    <number> ::= <digit> | <digit> <number>
+    <digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+These five rules define a grammar for arithmetic expressions with addition, subtraction, multiplication, division, parentheses, and multi-digit numbers. Any valid arithmetic expression can be derived from the <expression> non-terminal by repeated application of the rules.
+
+BNF IS A CONTEXT-FREE GRAMMAR NOTATION
+
+BNF is equivalent in power to context-free grammars (Type 2 in the Chomsky hierarchy). The left-hand side of every rule is a single non-terminal. The right-hand side can be any string of terminals and non-terminals. This is exactly the form of a context-free rule. Any language that can be described in BNF is context-free, and any context-free language can be described in BNF.
+
+This equivalence was recognized soon after BNF was introduced. Chomsky had published his hierarchy of formal languages in 1956, and the connection between BNF and context-free grammars was straightforward. What Backus had done for practical reasons (specifying ALGOL's syntax) turned out to be a specific notation for the grammatical formalism Chomsky had developed for theoretical reasons.
+
+EXTENDED BNF
+
+Extended BNF (EBNF) adds convenience operators to BNF without changing its expressive power. The operators include optionality [ ], repetition { }, grouping ( ), and numeric repetition. For example:
+
+    <identifier> ::= <letter> { <letter> | <digit> }
+
+This rule says that an identifier consists of a letter followed by zero or more letters or digits, using the { } repetition operator. In pure BNF this would require a recursive rule:
+
+    <identifier> ::= <letter> | <letter> <identifier_tail>
+    <identifier_tail> ::= <letter> | <digit> | <letter> <identifier_tail> | <digit> <identifier_tail>
+
+EBNF is more compact and readable. Modern language specifications typically use EBNF or a similar notation.
+
+BNF IN MODERN PROGRAMMING LANGUAGE DESIGN
+
+Every major programming language since ALGOL 60 has been specified using BNF or a variant. The syntax sections of language reference manuals for C, C++, Java, Python, JavaScript, Haskell, Rust, Go, and essentially every other significant language are written in BNF notation. The formal definition of a language's syntax is a BNF grammar; everything else (semantics, standard library, implementation) is separate.
+
+BNF is also the input to parser generators. Tools like YACC, Bison, ANTLR, and Lex/Flex read BNF grammars and produce source code for parsers. The programmer writes the grammar; the parser is generated automatically. This separation of grammar specification from parser implementation is a direct application of BNF's formal clarity.
+
+BNF AND PANINI
+
+Several computer scientists and linguists have noted a striking parallel between BNF and the grammar system of Panini's Ashtadhyayi (4th century BCE). Panini's Sanskrit grammar uses a system of compact rules with meta-rules for interaction and abbreviatory devices for ranges of symbols. The functional structure of Panini's sutras is equivalent to that of BNF rules.
+
+Specifically:
+- Panini's sutras correspond to BNF production rules.
+- Panini's pratyahara abbreviations (named ranges of phonemes from the Shiva sutras) correspond to character classes in BNF or EBNF.
+- Panini's paribhasha meta-rules correspond to meta-rules for BNF grammar interpretation (e.g., rules for resolving ambiguity, rules for applying productions in a specific order).
+- Panini's samjna technical terms correspond to non-terminal names in BNF.
+
+The parallel is not merely superficial. Subhash Kak, Frits Staal, and others have argued that Panini's grammar is a working context-free or context-sensitive grammar in the modern formal sense. The rules are precise enough to be implemented as a computer program, and several researchers have done exactly that, producing Sanskrit morphological analyzers based directly on Panini's sutras.
+
+Bhate and Kak's 1991 paper "Panini's grammar and computer science" argues that Panini's system is formally equivalent to modern formal grammars. They note that Panini uses recursion, rule ordering, abbreviatory devices, and meta-rules — all features of modern formal grammar systems. The specific parallels with BNF are:
+
+1. Panini's sutras are rewriting rules.
+2. Panini's rules are ordered; BNF rules are unordered but can encode ordering through auxiliary non-terminals.
+3. Panini's pratyaharas are character classes.
+4. Panini's samjnas are types / non-terminals.
+5. Panini's grammar handles recursion and generates infinite languages from finite means.
+
+The structural parallel between BNF and Panini's Ashtadhyayi spans 2,360 years and is one of the most remarkable cross-era convergences in the history of mathematics and linguistics.
+
+BNF AS A META-LANGUAGE
+
+One of BNF's key properties is that it is a meta-language: a formal language for specifying other formal languages. BNF itself can be specified in BNF. This self-describing property is characteristic of precise formal systems.
+
+Panini's grammar has the same property. The meta-language used to state Panini's sutras is itself defined within the Ashtadhyayi. The first book establishes the vocabulary and conventions; the remaining books apply them to describe Sanskrit. Panini explicitly distinguished object-language (Sanskrit) from meta-language (the grammatical apparatus for describing Sanskrit). This distinction is fundamental in modern logic and computer science, where it is known as the object-language/meta-language distinction.
+
+LEGACY AND CONTEMPORARY USE
+
+BNF remains the standard notation for specifying the syntax of formal languages. It is taught in every compilers course and every programming language theory course. Modern extensions (ABNF in RFC specifications, parsing expression grammars or PEG) add features but preserve the BNF framework.
+
+In computational linguistics, BNF has been used to describe natural language grammars, particularly in the context of unification-based grammar formalisms (HPSG, LFG). Modern statistical and neural NLP systems have moved beyond explicit grammar specifications, but the conceptual framework of rule-based generative grammar — for which BNF is the notation — remains present in the theoretical background.
+
+For computational historiography, the BNF-Panini parallel is a striking example of independent convergence. Backus did not know about Panini when he invented BNF. Panini could not have known about Chomsky or programming languages. Yet they arrived at essentially the same notational apparatus for describing rule-based generative grammars, separated by more than two millennia. The parallel is not coincidence; it reflects the structural fact that rule-based generative grammar is the natural formalism for precise specification of linguistic or computational systems.

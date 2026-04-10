@@ -1,0 +1,60 @@
+SOURCE: Noam Chomsky, "Syntactic Structures" (1957)
+CITATION: Chomsky 1957; Mouton publishing; Wikipedia "Syntactic Structures"; standard linguistics textbooks
+
+"Syntactic Structures" by Noam Chomsky, published in 1957, is the foundational text of generative grammar and one of the most influential books in 20th-century linguistics. At 118 pages it is short, but its impact on linguistics, philosophy of language, and computer science was immediate and lasting. It launched the Chomskyan revolution in linguistic theory and established the mathematical framework that now bears his name in formal language theory.
+
+THE CENTRAL ARGUMENT
+
+Chomsky's central argument is that a grammar is a generative device: a finite set of rules that can produce all and only the grammatical sentences of a language. This is in contrast to the descriptive approach of American structural linguistics (Bloomfield, Harris, Hockett), which cataloged linguistic forms and their distributions without providing a generative account of how sentences are constructed.
+
+The generative grammar framework makes a testable claim: the grammar of a language is a finite object that produces an infinite set of sentences. The criterion for adequacy is that the grammar should generate exactly the grammatical sentences and no ungrammatical ones. If a grammar generates ungrammatical strings, or fails to generate grammatical ones, it is incorrect and must be revised.
+
+THE HIERARCHY OF GRAMMARS
+
+Chomsky introduced a hierarchy of increasingly powerful grammars. At the bottom are finite-state grammars, which can be represented as finite automata. Above them are phrase structure grammars (context-free grammars), which allow rules of the form "NP -> Det N" where a non-terminal symbol is rewritten as a string of terminals and non-terminals. Above those are context-sensitive grammars, where rewrite rules can be conditioned on context. At the top are unrestricted rewrite systems (Turing-equivalent).
+
+This hierarchy, now known as the Chomsky hierarchy, is foundational in theoretical computer science. It is used to classify formal languages and to understand the expressive power of different parsing algorithms. Type 3 languages (regular) are recognized by finite automata; Type 2 (context-free) by pushdown automata; Type 1 (context-sensitive) by linear-bounded automata; Type 0 (recursively enumerable) by Turing machines.
+
+Chomsky proved that English cannot be adequately described by a finite-state grammar. He constructed examples of center-embedded sentences like "the cat the dog the mouse saw chased fled" that require unbounded nesting. A finite-state grammar cannot track the nesting depth. A phrase structure grammar can, because it can use recursive rules.
+
+PHRASE STRUCTURE RULES
+
+Chomsky introduced the rewrite rules of phrase structure grammar: S -> NP VP, NP -> Det N, VP -> V NP, etc. These rules specify that a sentence S is composed of a noun phrase NP and a verb phrase VP, a noun phrase is composed of a determiner and a noun, and so on. Applying these rules recursively generates sentences with arbitrary embedding.
+
+The rules are context-free: each rule rewrites a single symbol without regard to what surrounds it. This makes them efficient to parse and easy to reason about, but limits their expressive power. Some linguistic phenomena — agreement, unbounded dependencies — cannot be captured by context-free rules alone.
+
+TRANSFORMATIONS
+
+To handle phenomena beyond the reach of phrase structure grammar, Chomsky introduced transformations: rules that take a tree structure as input and produce a modified tree structure as output. The classic example is passive transformation: the active "John saw Mary" is transformed into the passive "Mary was seen by John" by a rule that moves the object to subject position, inserts "was" and "by", and marks the verb as past participle.
+
+Transformations allow the grammar to relate surface structures to deeper underlying structures. The passive sentence shares a deep structure with the active sentence; they differ only in which transformation has been applied. This is the deep structure / surface structure distinction that became central to generative grammar for several decades.
+
+COLORLESS GREEN IDEAS SLEEP FURIOUSLY
+
+One of the most famous passages in "Syntactic Structures" is Chomsky's observation that the sentence "Colorless green ideas sleep furiously" is grammatical but nonsensical. It violates no grammatical rules but has no coherent meaning. The companion sentence "Furiously sleep ideas green colorless" is both ungrammatical and nonsensical.
+
+This example demonstrates that grammaticality is independent of meaningfulness. The grammar must generate sentences based on structural rules, not semantic ones. A sentence can be perfectly well-formed grammatically and still be meaningless. A theory of grammar that reduces grammaticality to meaningfulness is inadequate.
+
+The example has been repeatedly tested in modern computational linguistics. Language models trained on text corpora can assign probabilities to both sentences. High-quality models assign higher probability to the grammatical version than the ungrammatical one, showing that even statistical models can distinguish grammaticality from semantic coherence.
+
+COMPETENCE VERSUS PERFORMANCE
+
+Chomsky distinguished between linguistic competence (a speaker's knowledge of the grammar) and linguistic performance (actual speech behavior, which includes slips, hesitations, and errors). The grammar describes competence, not performance. Performance is noisy; competence is the underlying system that the speaker has internalized.
+
+This distinction parallels Saussure's langue vs parole. Chomsky credits the parallel while arguing that his formulation is more precise.
+
+GENERATIVE GRAMMAR AS SCIENCE
+
+Chomsky's broader argument is that linguistics should be a science with testable theories, precise formalisms, and competing hypotheses. A grammar is a theory of a language. Different grammars make different predictions. We prefer the grammar that correctly generates the grammatical sentences, fails to generate the ungrammatical ones, and does so with the simplest rules and smallest number of primitives.
+
+This methodological stance transformed linguistics from a largely descriptive discipline into a hypothesis-testing science. It also connected linguistics tightly to mathematical logic, computability theory, and theoretical computer science. Chomsky's hierarchy of grammars is studied in every undergraduate theoretical computer science course.
+
+LEGACY
+
+"Syntactic Structures" initiated a research program that has shaped linguistics for seven decades. Later developments include: the Aspects of the Theory of Syntax (1965) with its standard theory of grammar, the Principles and Parameters framework (1980s), the Minimalist Program (1990s+). At each stage, the core commitment has remained: language is a rule-governed generative system, and the grammar is a finite object producing an infinite set of sentences by recursive rule application.
+
+In computer science, the Chomsky hierarchy is the standard framework for thinking about formal languages, parsing, and compilation. Backus-Naur Form, used to specify programming language syntax, is a notation for context-free grammars. Regular expressions correspond to regular grammars. Parser generators like YACC and ANTLR produce parsers for context-free languages. The connection between linguistics and computer science runs through Chomsky's work.
+
+Modern computational linguistics uses many Chomskyan concepts — constituency, dependency, phrase structure, transformations — alongside statistical and neural methods. Even deep learning models for language incorporate notions of phrase structure through their attention patterns. The generative grammar tradition continues to influence the field.
+
+Crucially for our investigation: Chomsky has explicitly credited both Panini's Ashtadhyayi and the Port-Royal Grammar as precursors to his framework. The Sanskrit grammatical tradition provided a 2500-year-old example of rule-based generative grammar. The Port-Royal rationalists provided a 300-year-old example of deep-surface distinction. The generative grammar revolution built on these precedents while adding mathematical formalism and the hierarchy of formal grammars.
