@@ -50,9 +50,30 @@ router = APIRouter(prefix="/latk", tags=["latk"])
 # ---------------------------------------------------------------------------
 
 # The latk_tool package lives outside the backend package in
-# scripts/cross_era_analysis/. Add it to sys.path at import time.
-_REPO_ROOT = Path(__file__).resolve().parents[4]
-_CEA_DIR = _REPO_ROOT / "scripts" / "cross_era_analysis"
+# scripts/cross_era_analysis/. Find it at import time by trying a few
+# candidate locations.
+#
+# On the host (where this file is at `backend/app/api/v1/latk.py`),
+# ``parents[4]`` is the repo root.
+#
+# Inside the production docker container (where backend/ is copied into
+# ``/app`` so this file is at `/app/app/api/v1/latk.py`), ``parents[3]``
+# is ``/app`` and the scripts tree must be mounted at
+# ``/app/scripts/cross_era_analysis`` via docker-compose.override.yml.
+#
+# An explicit ``LATK_CEA_DIR`` env var always wins.
+_THIS = Path(__file__).resolve()
+_CANDIDATES: List[Path] = []
+_env_override = os.environ.get("LATK_CEA_DIR")
+if _env_override:
+    _CANDIDATES.append(Path(_env_override))
+_CANDIDATES.extend([
+    _THIS.parents[4] / "scripts" / "cross_era_analysis",  # host repo layout
+    _THIS.parents[3] / "scripts" / "cross_era_analysis",  # container with /app as root
+    Path("/app/scripts/cross_era_analysis"),               # explicit container path
+    Path("/scripts/cross_era_analysis"),                   # alt container mount
+])
+_CEA_DIR = next((p for p in _CANDIDATES if p.exists()), _CANDIDATES[0])
 if str(_CEA_DIR) not in sys.path:
     sys.path.insert(0, str(_CEA_DIR))
 
