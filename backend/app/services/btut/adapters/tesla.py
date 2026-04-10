@@ -166,24 +166,104 @@ PEOPLE = [
     ("bloyce_fitzgerald", "Bloyce Fitzgerald", "agent", "FBI agent who supervised seizure of Tesla's documents"),
 ]
 
-# Major writings and lectures
+# Major writings, lectures, articles — COMPLETE from Wikipedia + Tesla Universe
 WRITINGS = [
+    # Lectures (major)
+    ("lecture_aiee_1888", "A New System of Alternate Current Motors and Transformers", "1888", "lecture", "AIEE, New York"),
     ("lecture_columbia_1891", "Experiments with Alternate Currents of High Potential and High Frequency", "1891", "lecture", "Columbia College, New York"),
-    ("lecture_london_1892", "Experiments with Alternate Currents of Very High Frequency and Their Application to Methods of Artificial Illumination", "1892", "lecture", "Royal Institution, London"),
+    ("article_phenomena_1891", "Phenomena of Alternating Currents of Very High Frequency", "1891", "article", "Electrical World"),
+    ("lecture_london_1892", "Experiments with Alternate Currents of Very High Frequency", "1892", "lecture", "Royal Institution, London"),
+    ("article_dissipation_1892", "On the Dissipation of the Electrical Energy of the Hertz Resonator", "1892", "article", "Electrical Engineer"),
     ("lecture_philadelphia_1893", "On Light and Other High Frequency Phenomena", "1893", "lecture", "Franklin Institute, Philadelphia"),
-    ("lecture_niagara_1897", "On Electricity", "1897", "lecture", "Niagara Falls"),
-    ("article_century_1900", "The Problem of Increasing Human Energy", "1900", "article", "Century Magazine"),
-    ("article_talking_planets_1901", "Talking with the Planets", "1901", "article", "Collier's Weekly"),
-    ("article_transmission_1904", "The Transmission of Electrical Energy Without Wires", "1904", "article", "Electrical World and Engineer"),
+    ("lecture_st_louis_1893", "On Light and Other High Frequency Phenomena", "1893", "lecture", "National Electric Light Association, St. Louis"),
+    # 1890s articles
+    ("article_oscillators_1893", "Tesla's Oscillator and Other Inventions", "1895", "article", "Century Magazine"),
+    ("article_earth_electricity_1896", "Earth Electricity to Kill Monopoly", "1896", "article", "The World Sunday Magazine"),
+    ("lecture_electricity_1897", "On Electricity", "1897", "lecture", "Electrical Review"),
+    ("article_electrotherapy_1898", "High Frequency Oscillators for Electro-therapeutic and Other Purposes", "1898", "article", "Electrical Engineer"),
+    ("article_artillery_1898", "Plans to Dispense With Artillery of the Present Type", "1898", "article", "The Sun, New York"),
+    ("article_efforts_1898", "Tesla Describes His Efforts in Various Fields of Work", "1898", "article", "Electrical Review"),
+    ("article_interrupters_1899", "On Current Interrupters", "1899", "article", "Electrical Review"),
+    # Colorado Springs Notes
     ("colorado_springs_notes", "Colorado Springs Notes 1899-1900", "1899", "notebook", "Colorado Springs laboratory"),
-    ("my_inventions_1919", "My Inventions: The Autobiography of Nikola Tesla", "1919", "autobiography", "Electrical Experimenter magazine"),
-    ("article_world_system_1905", "The World System of Wireless Telegraphy", "1905", "article", "Telegraph and Telephone Age"),
-    ("article_rotating_field_1888", "A New System of Alternate Current Motors and Transformers", "1888", "article", "AIEE paper"),
-    ("lecture_st_louis_1893", "On the Dissipation of the Electrical Energy of the Hertz Resonator", "1893", "lecture", "National Electric Light Association"),
-    ("article_bladeless_turbine_1911", "Tesla's New Monarch of Machines", "1911", "article", "New York Herald"),
-    ("article_death_beam_1934", "A Machine to End War", "1934-1935", "article", "Liberty magazine"),
-    ("article_birthday_1930", "Man's Greatest Achievement", "1930", "article", "Milwaukee Sentinel"),
-    ("article_interplanetary_1937", "Sending of Messages to Planets Predicted by Dr. Tesla", "1937", "article", "New York Times"),
+    # 1900s articles — Tesla's most ambitious writing period
+    ("article_century_1900", "The Problem of Increasing Human Energy", "1900", "article", "Century Magazine"),
+    ("article_discovery_1901", "Tesla's New Discovery", "1901", "article", "The Sun, New York"),
+    ("article_talking_planets_1901", "Talking With Planets", "1901", "article", "Collier's Weekly"),
+    ("article_wardenclyffe_1902", "Inventor Tesla's Plant Nearing Completion", "1902", "article", "Brooklyn Eagle"),
+    ("article_transmission_1904", "The Transmission of Electrical Energy Without Wires", "1904", "article", "Electrical World"),
+    ("article_electric_autos_1904", "Electric Autos", "1904", "article", "Manufacturers' Record"),
+    ("article_peace_1905", "The Transmission of Electrical Energy Without Wires as a Means for Furthering Peace", "1905", "article", "Electrical World and Engineer"),
+    ("article_tuned_lightning_1907", "Tuned Lightning", "1907", "article", "English Mechanic and World of Science"),
+    ("article_wireless_torpedo_1907", "Tesla's Wireless Torpedo", "1907", "article", "New York Times"),
+    ("article_possibilities_1907", "Possibilities of Wireless", "1907", "article", "New York Times"),
+    ("article_future_wireless_1908", "The Future of the Wireless Art", "1908", "article", "Wireless Telegraphy and Telephony"),
+    ("article_vision_1908", "Mr. Tesla's Vision", "1908", "article", "New York Times"),
+    ("article_new_wireless_1909", "Nikola Tesla's New Wireless", "1909", "article", "The Electrical Engineer, London"),
+    # 1910s
+    ("article_gas_turbines_1911", "Dr. Tesla Talks of Gas Turbines", "1911", "article", "Motor World"),
+    ("article_monarch_machines_1911", "Tesla's New Monarch of Machines", "1911", "article", "New York Herald"),
+    ("article_solar_radiation_1912", "The Disturbing Influence of Solar Radiation On Wireless Transmission", "1912", "article", "Electrical Review"),
+    ("article_cosmic_forces_1915", "How Cosmic Forces Shape Our Destinies", "1915", "article", "New York American"),
+    ("article_recollections_1915", "Some Personal Recollections", "1915", "article", "Scientific American"),
+    ("article_wonder_world_1915", "The Wonder World To Be Created By Electricity", "1915", "article", "Manufacturer's Record"),
+    ("article_wireless_vision_1915", "Nikola Tesla Sees a Wireless Vision", "1915", "article", "New York Times"),
+    ("article_bolts_thor_1915", "Tesla's New Device Like Bolts of Thor", "1915", "article", "New York Times"),
+    ("article_wonders_future_1916", "Wonders of the Future", "1916", "article", "Collier's Weekly"),
+    ("article_battleships_1917", "Electric Drive for Battle Ships", "1917", "article", "New York Herald"),
+    ("article_war_views_1917", "Tesla's Views on Electricity and the War", "1917", "article", "Electrical Experimenter"),
+    # My Inventions (serialized autobiography)
+    ("my_inventions_1919", "My Inventions: The Autobiography of Nikola Tesla", "1919", "autobiography", "Electrical Experimenter"),
+    ("article_illusions_1919", "Famous Scientific Illusions", "1919", "article", "Electrical Experimenter"),
+    ("article_true_wireless_1919", "The True Wireless", "1919", "article", "Electrical Experimenter"),
+    ("article_oscillators_1919", "Electrical Oscillators", "1919", "article", "Electrical Experimenter"),
+    ("article_statics_1919", "The Effect of Statics on Wireless Transmission", "1919", "article", "Electrical Experimenter"),
+    ("article_moon_rotation_1919", "The Moon's Rotation", "1919", "article", "Electrical Experimenter"),
+    # 1920s-1930s
+    ("article_rain_control_1920", "Rain Can Be Controlled and Hydraulic Force Provided", "1920", "article", "Syracuse Herald"),
+    ("article_woman_boss_1926", "When Woman is Boss", "1926", "interview", "Colliers"),
+    ("article_world_system_1927", "World System of Wireless Transmission of Energy", "1927", "article", "Telegraph and Telephone Age"),
+    ("article_radio_theories_1929", "Nikola Tesla Tells of New Radio Theories", "1929", "article", "New York Herald Tribune"),
+    ("article_motive_power_1931", "Our Future Motive Power", "1931", "article", "Everyday Science and Mechanics"),
+    ("article_pioneer_radio_1932", "Pioneer Radio Engineer Gives Views On Power", "1932", "article", "New York Herald Tribune"),
+    ("article_cosmic_rays_1932", "The Eternal Source of Energy of the Universe, Origin and Intensity of Cosmic Rays", "1932", "article", "New York"),
+    ("article_cosmic_ray_motor_1932", "Tesla Cosmic Ray Motor May Transmit Power Round Earth", "1932", "article", "Brooklyn Eagle"),
+    ("article_power_development_1934", "Tesla on Power Development and Future Marvels", "1934", "article", "New York World Telegram"),
+    ("article_peace_ray_1934", "Tesla Invents Peace Ray", "1934", "article", "New York Sun"),
+    ("article_death_beam_1935", "A Machine to End War", "1935", "article", "Liberty magazine"),
+    ("article_concentrated_energy_1935", "The New Art of Projecting Concentrated Non-dispersive Energy Through Natural Media", "1935", "article", "Unpublished manuscript"),
+    ("article_shore_beam_1935", "Tesla Predicts Ships Powered by Shore Beam", "1935", "article", "New York Herald Tribune"),
+    ("article_end_aircraft_1934", "Dr. Tesla Visions the End of Aircraft In War", "1934", "article", "Every Week Magazine"),
+    # Poetry
+    ("poem_olympian_gossip", "Fragments of Olympian Gossip", "1928", "poem", "Written for George Sylvester Viereck"),
+]
+
+# Timeline events (key moments in Tesla's life)
+TIMELINE_EVENTS = [
+    ("event_birth", "Born in Smiljan", "1856-07-10", "Midnight during thunderstorm"),
+    ("event_rotating_field", "Discovers rotating magnetic field principle", "1882-02-01", "Budapest City Park revelation"),
+    ("event_first_motor", "Builds first induction motor", "1883-01-01", "Strasbourg prototype"),
+    ("event_arrives_america", "Arrives in New York City", "1884-06-06", "With 4 cents in his pocket"),
+    ("event_edison_employment", "Hired by Thomas Edison", "1884-06-08", "Edison Machine Works"),
+    ("event_leaves_edison", "Leaves Edison after dispute", "1885-01-01", "Disagreement over payment"),
+    ("event_ac_patents", "Files foundational AC patents", "1888-05-01", "7 patents in one day"),
+    ("event_westinghouse_deal", "Licenses patents to Westinghouse", "1888-07-01", "$60,000 + royalties"),
+    ("event_citizenship", "Becomes US citizen", "1891-07-30", "New York City"),
+    ("event_lab_fire", "South Fifth Avenue lab destroyed by fire", "1895-03-13", "Years of research lost"),
+    ("event_radio_demo", "Demonstrates radio-controlled boat", "1898-09-01", "Madison Square Garden, New York"),
+    ("event_colorado_springs", "Begins Colorado Springs experiments", "1899-06-01", "High-voltage wireless tests"),
+    ("event_artificial_lightning", "Creates artificial lightning bolts", "1899-07-01", "130-foot discharges"),
+    ("event_cosmic_signals", "Claims to receive extraterrestrial signals", "1899-12-01", "Colorado Springs"),
+    ("event_wardenclyffe_begins", "Construction of Wardenclyffe Tower begins", "1901-01-01", "Shoreham, Long Island"),
+    ("event_morgan_funding", "J.P. Morgan provides $150,000", "1901-03-01", "For Wardenclyffe project"),
+    ("event_morgan_withdraws", "J.P. Morgan refuses additional funding", "1904-01-01", "Wardenclyffe project stalls"),
+    ("event_wardenclyffe_demolished", "Wardenclyffe Tower demolished", "1917-07-04", "Dynamited for scrap"),
+    ("event_edison_medal", "Receives Edison Medal from AIEE", "1917-05-18", "Highest honor in electrical engineering"),
+    ("event_death", "Dies at New Yorker Hotel", "1943-01-07", "Room 3327, age 86"),
+    ("event_papers_seized", "Government seizes Tesla's papers", "1943-01-09", "Office of Alien Property"),
+    ("event_trump_examines", "Dr. John Trump examines papers", "1943-01-26", "Concludes no weaponizable technology"),
+    ("event_papers_belgrade", "Papers shipped to Belgrade museum", "1952-01-01", "80 trunks to Nikola Tesla Museum"),
+    ("event_fbi_declassified", "FBI declassifies Tesla files", "2016-09-21", "250+ pages released"),
 ]
 
 # Key scientific concepts and inventions
@@ -254,6 +334,7 @@ class TeslaAdapter(BaseDatasetAdapter):
                 EntityTypeConfig("concept", "#a371f7", "concept_name", "", ["description"]),
                 EntityTypeConfig("location", "#d29922", "location_name", "location_type", ["significance"]),
                 EntityTypeConfig("document", "#f85149", "title", "date_range", ["description"]),
+                EntityTypeConfig("event", "#d29922", "event_name", "date", ["description"]),
             ],
             lookup_field="patent_number",
             lookup_label="ID",
@@ -339,6 +420,19 @@ class TeslaAdapter(BaseDatasetAdapter):
                     "date_range": date_range,
                     "description": desc,
                     "source": "FBI/FOIA",
+                }),
+            })
+
+        # Timeline Events
+        for eid, title, date, desc in TIMELINE_EVENTS:
+            entities.append({
+                "name": f"event_{eid}",
+                "type": "event",
+                "attributes": json.dumps({
+                    "event_name": title,
+                    "date": date,
+                    "description": desc,
+                    "year": int(date[:4]) if date[:4].isdigit() else 0,
                 }),
             })
 
@@ -500,6 +594,59 @@ class TeslaAdapter(BaseDatasetAdapter):
                         "source": entity["name"], "target": "person_sava_kosanovic",
                         "type": "about", "weight": 0.9,
                     })
+
+        # Timeline event edges
+        event_location_map = {
+            "event_event_birth": "location_smiljan",
+            "event_event_rotating_field": "location_budapest",
+            "event_event_first_motor": "location_strasbourg",
+            "event_event_arrives_america": "location_edison_machine_works",
+            "event_event_edison_employment": "location_edison_machine_works",
+            "event_event_lab_fire": "location_new_york_lab_south_5th",
+            "event_event_colorado_springs": "location_colorado_springs",
+            "event_event_artificial_lightning": "location_colorado_springs",
+            "event_event_cosmic_signals": "location_colorado_springs",
+            "event_event_wardenclyffe_begins": "location_wardenclyffe",
+            "event_event_wardenclyffe_demolished": "location_wardenclyffe",
+            "event_event_death": "location_new_yorker_hotel",
+        }
+        for ename, lname in event_location_map.items():
+            if ename in entity_names and lname in entity_names:
+                edges.append({"source": ename, "target": lname, "type": "occurred_at", "weight": 0.9})
+
+        # All events connect to Tesla
+        for entity in entities:
+            if entity["type"] == "event" and "person_nikola_tesla" in entity_names:
+                edges.append({"source": entity["name"], "target": "person_nikola_tesla", "type": "involves", "weight": 0.8})
+
+        # Event -> person edges for specific events
+        event_person_map = {
+            "event_event_edison_employment": [("person_thomas_edison", "employed_by")],
+            "event_event_leaves_edison": [("person_thomas_edison", "left")],
+            "event_event_westinghouse_deal": [("person_george_westinghouse", "deal_with")],
+            "event_event_morgan_funding": [("person_jp_morgan", "funded_by")],
+            "event_event_morgan_withdraws": [("person_jp_morgan", "rejected_by")],
+            "event_event_trump_examines": [("person_john_trump", "examined_by")],
+            "event_event_papers_seized": [("person_bloyce_fitzgerald", "seized_by")],
+        }
+        for ename, connections in event_person_map.items():
+            if ename in entity_names:
+                for pname, etype in connections:
+                    full_pname = pname if pname.startswith("person_") else f"person_{pname}"
+                    if full_pname in entity_names:
+                        edges.append({"source": ename, "target": full_pname, "type": etype, "weight": 0.8})
+
+        # Temporal sequence between events
+        event_entities = sorted(
+            [e for e in entities if e["type"] == "event"],
+            key=lambda e: json.loads(e["attributes"]).get("date", ""),
+        )
+        for i in range(len(event_entities) - 1):
+            edges.append({
+                "source": event_entities[i]["name"],
+                "target": event_entities[i + 1]["name"],
+                "type": "followed_by", "weight": 0.5,
+            })
 
         return edges
 

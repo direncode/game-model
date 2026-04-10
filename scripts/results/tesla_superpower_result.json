@@ -1,79 +1,48 @@
 {
   "summary": {
-    "total_entities": 184,
-    "clusters": 7,
-    "unique_48bit_fingerprints": 49,
-    "survivors": 143,
+    "total_entities": 252,
+    "clusters": 9,
+    "unique_48bit_fingerprints": 41,
+    "survivors": 218,
     "reduction": 1,
     "survivor_types": {
-      "patent": 74,
-      "writing": 15,
-      "person": 17,
+      "patent": 82,
+      "writing": 60,
+      "person": 15,
       "concept": 17,
       "location": 13,
-      "document": 7
+      "document": 7,
+      "event": 24
     },
     "reconstruction": {
-      "mean_nn": 0.0843,
+      "mean_nn": 0.0481,
       "median_nn": 0.0,
-      "p95_nn": 0.4404,
-      "variance_preservation": 1.0482,
+      "p95_nn": 0.3861,
+      "variance_preservation": 1.0118,
       "coverages": {
-        "0.5": 0.9837,
+        "0.5": 0.9881,
         "1.0": 1.0,
         "1.5": 1.0,
         "2.0": 1.0
       }
     },
-    "wall_seconds": 0.1
+    "wall_seconds": 0.3
   },
   "survivors": [
     {
       "entity": {
-        "name": "patent_US1365547",
+        "name": "patent_US514973",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US1365547\", \"title\": \"Flow-Meter\", \"grant_date\": \"1921-01-11\", \"year\": 1921, \"decade\": \"1920s\", \"concepts\": [\"flow-meter\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111101111111111111111111111111111111111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.7456,
-        "anomaly": 0.3216,
-        "composite": 0.7286
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US517900",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US517900\", \"title\": \"Steam Engine\", \"grant_date\": \"1894-04-10\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"engine\", \"steam\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111110111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6677,
-        "anomaly": 0.2916,
-        "composite": 0.69
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US447920",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US447920\", \"title\": \"Method of Operating Arc-Lamps\", \"grant_date\": \"1891-03-10\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US514973\", \"title\": \"Electrical Meter\", \"grant_date\": \"1894-02-20\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"meter\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111110111101111",
-      "flips": 46,
+      "fingerprint_48bit": "011111111111111111111111111111111111111111111111",
+      "flips": 47,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.6389,
-        "anomaly": 0.3159,
-        "composite": 0.6845
+        "reconstruction": 0.7153,
+        "anomaly": 0.7031,
+        "composite": 0.8119
       }
     },
     {
@@ -82,814 +51,30 @@
         "type": "patent",
         "attributes": "{\"patent_number\": \"US382280\", \"title\": \"Electrical Transmission of Power\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"transmission\", \"AC\", \"polyphase\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111101111111111111111111111111101111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.5709,
-        "anomaly": 0.3177,
-        "composite": 0.6578
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US405859",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US405859\", \"title\": \"Method of Electrical Power Transmission\", \"grant_date\": \"1889-06-25\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"transmission\", \"power\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111110111111111111111111111111111111101111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.536,
-        "anomaly": 0.2484,
-        "composite": 0.6265
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US390820",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US390820\", \"title\": \"Regulator for Alternate Current Motors\", \"grant_date\": \"1888-10-09\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111101111110111111111111111111011111",
-      "flips": 45,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.498,
-        "anomaly": 0.2683,
-        "composite": 0.6163
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US464666",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US464666\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1891-12-08\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.501,
-        "anomaly": 0.9788,
-        "composite": 0.4482
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US359748",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US359748\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1887-03-22\", \"year\": 1887, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.44,
-        "anomaly": 1.0,
-        "composite": 0.4291
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1314718",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1314718\", \"title\": \"Ship's Log\", \"grant_date\": \"1919-09-02\", \"year\": 1919, \"decade\": \"1910s\", \"concepts\": [\"navigation\", \"maritime\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111101111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.6926,
-        "anomaly": 0.3202,
-        "composite": 0.4271
+        "diversity": 1.0,
+        "reconstruction": 0.679,
+        "anomaly": 0.753,
+        "composite": 0.8098
       }
     },
     {
       "entity": {
-        "name": "patent_US406968",
+        "name": "patent_US685012",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US406968\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1889-07-16\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.4367,
-        "anomaly": 0.9633,
-        "composite": 0.4186
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US390414",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US390414\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1888-10-02\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US685012\", \"title\": \"Means for Increasing the Intensity of Electrical Oscillations\", \"grant_date\": \"1900-03-21\", \"year\": 1900, \"decade\": \"1900s\", \"concepts\": [\"oscillation\", \"resonance\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111101111111111111111111011111",
-      "flips": 46,
+      "fingerprint_48bit": "111111111111111111111111111111111111101111111111",
+      "flips": 47,
       "scores": {
         "diversity": 0.5,
-        "reconstruction": 0.4514,
-        "anomaly": 0.2496,
-        "composite": 0.418
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US416192",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US416192\", \"title\": \"Method of Operating Electro-Magnetic Motors\", \"grant_date\": \"1889-12-03\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5004,
-        "anomaly": 0.5911,
-        "composite": 0.4179
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US335786",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US335786\", \"title\": \"Electric Arc Lamp\", \"grant_date\": \"1886-02-09\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.455,
-        "anomaly": 0.9271,
-        "composite": 0.4168
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US568177",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US568177\", \"title\": \"Apparatus for Producing Ozone\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"ozone\", \"chemistry\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7811,
-        "anomaly": 0.368,
-        "composite": 0.4075
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US514167",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US514167\", \"title\": \"Electrical Conductor\", \"grant_date\": \"1894-02-06\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"conductor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7915,
-        "anomaly": 0.3373,
-        "composite": 0.404
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US609249",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US609249\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7656,
-        "anomaly": 0.3531,
-        "composite": 0.3976
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US514973",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US514973\", \"title\": \"Electrical Meter\", \"grant_date\": \"1894-02-20\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"meter\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7756,
-        "anomaly": 0.335,
-        "composite": 0.3971
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1061206",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1061206\", \"title\": \"Turbine\", \"grant_date\": \"1909-10-21\", \"year\": 1909, \"decade\": \"1900s\", \"concepts\": [\"turbine\", \"bladeless\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7215,
-        "anomaly": 0.4094,
-        "composite": 0.394
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US685957",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US685957\", \"title\": \"Apparatus for the Utilization of Radiant Energy\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"radiant-energy\", \"solar\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.6151,
-        "anomaly": 0.3035,
-        "composite": 0.3919
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US514972",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US514972\", \"title\": \"Electric Railway System\", \"grant_date\": \"1894-02-20\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"railway\", \"transportation\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.6279,
-        "anomaly": 0.2772,
-        "composite": 0.3904
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1113716",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1113716\", \"title\": \"Fountain\", \"grant_date\": \"1914-10-13\", \"year\": 1914, \"decade\": \"1910s\", \"concepts\": [\"fountain\", \"hydraulic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7422,
-        "anomaly": 0.3548,
-        "composite": 0.3886
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US609246",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US609246\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5997,
-        "anomaly": 0.2986,
-        "composite": 0.3845
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US787412",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US787412\", \"title\": \"Art of Transmitting Electrical Energy through the Natural Mediums\", \"grant_date\": \"1905-04-18\", \"year\": 1905, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"transmission\", \"earth-resonance\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7533,
-        "anomaly": 0.3203,
-        "composite": 0.3845
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US511560",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US511560\", \"title\": \"System of Electrical Power Transmission\", \"grant_date\": \"1893-12-26\", \"year\": 1893, \"decade\": \"1890s\", \"concepts\": [\"transmission\", \"system\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.3333,
-        "reconstruction": 0.5163,
-        "anomaly": 0.2412,
-        "composite": 0.3835
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US390721",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US390721\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1888-10-09\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.4495,
-        "anomaly": 0.7997,
-        "composite": 0.3828
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US725605",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US725605\", \"title\": \"System of Signaling\", \"grant_date\": \"1903-04-14\", \"year\": 1903, \"decade\": \"1900s\", \"concepts\": [\"signaling\", \"wireless\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7239,
-        "anomaly": 0.3558,
-        "composite": 0.3816
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US336961",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US336961\", \"title\": \"Regulator for Dynamo Electric Machines\", \"grant_date\": \"1886-03-02\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7377,
-        "anomaly": 0.3323,
-        "composite": 0.3813
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US568178",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US568178\", \"title\": \"Method of Regulating Apparatus for Producing Electric Currents of High Frequency\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"high-frequency\", \"regulation\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7516,
-        "anomaly": 0.3093,
-        "composite": 0.381
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1209359",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1209359\", \"title\": \"Speed-Indicator\", \"grant_date\": \"1916-12-19\", \"year\": 1916, \"decade\": \"1910s\", \"concepts\": [\"speedometer\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7231,
-        "anomaly": 0.3318,
-        "composite": 0.3753
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US685953",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US685953\", \"title\": \"Apparatus for Utilizing Effects Transmitted from a Distance to a Receiving Device through Natural Media\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"radio\", \"reception\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7222,
-        "anomaly": 0.3085,
-        "composite": 0.3691
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US609245",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US609245\", \"title\": \"Electrical Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6972,
-        "anomaly": 0.3414,
-        "composite": 0.3673
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US514169",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US514169\", \"title\": \"Reciprocating Engine\", \"grant_date\": \"1894-02-06\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"engine\", \"mechanical\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5814,
-        "anomaly": 0.2553,
-        "composite": 0.3664
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US396121",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US396121\", \"title\": \"Thermo Magnetic Motor\", \"grant_date\": \"1888-01-15\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"thermomagnetic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7153,
-        "anomaly": 0.3042,
-        "composite": 0.3653
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1655113",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1655113\", \"title\": \"Method of Aerial Transportation\", \"grant_date\": \"1928-01-03\", \"year\": 1928, \"decade\": \"1920s\", \"concepts\": [\"VTOL\", \"aviation\", \"flying-machine\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6996,
-        "anomaly": 0.3267,
-        "composite": 0.3646
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US511559",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US511559\", \"title\": \"Electrical Transmission of Power\", \"grant_date\": \"1893-12-26\", \"year\": 1893, \"decade\": \"1890s\", \"concepts\": [\"transmission\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7001,
-        "anomaly": 0.3258,
-        "composite": 0.3645
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US609250",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US609250\", \"title\": \"Electrical Igniter for Gas Engines\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"igniter\", \"engine\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5582,
-        "anomaly": 0.2419,
-        "composite": 0.3537
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US382282",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US382282\", \"title\": \"Method of Converting and Distributing Electric Currents\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"AC\", \"conversion\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5238,
-        "anomaly": 0.2858,
-        "composite": 0.351
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1329559",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1329559\", \"title\": \"Valvular Conduit\", \"grant_date\": \"1920-02-03\", \"year\": 1920, \"decade\": \"1920s\", \"concepts\": [\"valvular-conduit\", \"fluidics\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6566,
-        "anomaly": 0.3395,
-        "composite": 0.3506
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US416193",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US416193\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1889-12-03\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5333,
-        "anomaly": 0.2673,
-        "composite": 0.3502
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US577670",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US577670\", \"title\": \"Apparatus for Producing Electric Currents of High Frequency\", \"grant_date\": \"1897-02-23\", \"year\": 1897, \"decade\": \"1890s\", \"concepts\": [\"high-frequency\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6511,
-        "anomaly": 0.3445,
-        "composite": 0.3496
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1061142",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1061142\", \"title\": \"Fluid Propulsion\", \"grant_date\": \"1909-10-21\", \"year\": 1909, \"decade\": \"1900s\", \"concepts\": [\"turbine\", \"fluid-dynamics\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6711,
-        "anomaly": 0.3104,
-        "composite": 0.3491
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1266175",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1266175\", \"title\": \"Lightning-Protector\", \"grant_date\": \"1918-05-14\", \"year\": 1918, \"decade\": \"1910s\", \"concepts\": [\"lightning\", \"protection\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6697,
-        "anomaly": 0.3117,
-        "composite": 0.3489
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US433703",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US433703\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1890-08-05\", \"year\": 1890, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.4838,
-        "anomaly": 0.3393,
-        "composite": 0.3483
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US382281",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US382281\", \"title\": \"Electrical Transmission of Power\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"transmission\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6607,
-        "anomaly": 0.3237,
-        "composite": 0.3483
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US350954",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US350954\", \"title\": \"Regulator for Dynamo Electric Machines\", \"grant_date\": \"1886-10-19\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6635,
-        "anomaly": 0.312,
-        "composite": 0.3465
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US511915",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US511915\", \"title\": \"Electrical Transmission of Power\", \"grant_date\": \"1894-01-02\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"transmission\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6381,
-        "anomaly": 0.3456,
-        "composite": 0.3447
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US593138",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US593138\", \"title\": \"Electrical Transformer\", \"grant_date\": \"1897-11-02\", \"year\": 1897, \"decade\": \"1890s\", \"concepts\": [\"transformer\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6684,
-        "anomaly": 0.2791,
-        "composite": 0.3402
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US418248",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US418248\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1889-12-31\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6481,
-        "anomaly": 0.3057,
-        "composite": 0.3388
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US723188",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US723188\", \"title\": \"Method of Signaling\", \"grant_date\": \"1903-03-17\", \"year\": 1903, \"decade\": \"1900s\", \"concepts\": [\"signaling\", \"wireless\", \"radio\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6556,
-        "anomaly": 0.2919,
-        "composite": 0.3383
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US401520",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US401520\", \"title\": \"Method of Operating Electro Magnetic Motors\", \"grant_date\": \"1889-04-16\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.5132,
-        "anomaly": 0.2504,
-        "composite": 0.3379
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US428057",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US428057\", \"title\": \"Pyromagneto Electric Generator\", \"grant_date\": \"1890-05-13\", \"year\": 1890, \"decade\": \"1890s\", \"concepts\": [\"generator\", \"pyromagnetic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6395,
-        "anomaly": 0.3121,
-        "composite": 0.3369
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US568180",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US568180\", \"title\": \"Apparatus for Producing Electrical Currents of High Frequency\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"high-frequency\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6511,
-        "anomaly": 0.2912,
-        "composite": 0.3363
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1274816",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1274816\", \"title\": \"Speed Indicator\", \"grant_date\": \"1918-08-06\", \"year\": 1918, \"decade\": \"1910s\", \"concepts\": [\"speedometer\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.635,
-        "anomaly": 0.3112,
-        "composite": 0.3349
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US1655114",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US1655114\", \"title\": \"Apparatus for Aerial Transportation\", \"grant_date\": \"1928-01-03\", \"year\": 1928, \"decade\": \"1920s\", \"concepts\": [\"VTOL\", \"aviation\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
-      "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6294,
-        "anomaly": 0.3164,
-        "composite": 0.3339
+        "reconstruction": 0.6586,
+        "anomaly": 0.7371,
+        "composite": 0.6227
       }
     },
     {
@@ -902,42 +87,90 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6567,
-        "anomaly": 0.2698,
-        "composite": 0.3332
+        "diversity": 0.0057,
+        "reconstruction": 0.8269,
+        "anomaly": 1.0,
+        "composite": 0.5828
       }
     },
     {
       "entity": {
-        "name": "patent_US334823",
+        "name": "patent_US685955",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US334823\", \"title\": \"Commutator for Dynamo Electric Machines\", \"grant_date\": \"1886-01-26\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"commutator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US685955\", \"title\": \"Apparatus for Utilizing Effects Transmitted From A Distance To A Receiving Device Through Natural Media\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"radio\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.644,
-        "anomaly": 0.2898,
-        "composite": 0.3331
+        "diversity": 0.0057,
+        "reconstruction": 0.8991,
+        "anomaly": 0.8454,
+        "composite": 0.573
       }
     },
     {
       "entity": {
-        "name": "patent_US1119732",
+        "name": "patent_US514167",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US1119732\", \"title\": \"Apparatus for Transmitting Electrical Energy\", \"grant_date\": \"1914-12-01\", \"year\": 1914, \"decade\": \"1910s\", \"concepts\": [\"wireless\", \"transmission\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US514167\", \"title\": \"Electrical Conductor\", \"grant_date\": \"1894-02-06\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"conductor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.7699,
+        "anomaly": 0.7946,
+        "composite": 0.565
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US396121",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US396121\", \"title\": \"Thermo Magnetic Motor\", \"grant_date\": \"1888-01-15\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"thermomagnetic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.7703,
+        "anomaly": 0.8448,
+        "composite": 0.5631
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US514170",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US514170\", \"title\": \"Incandescent Electric Light\", \"grant_date\": \"1894-02-06\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"lighting\", \"incandescent\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111101111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5457,
+        "anomaly": 0.657,
+        "composite": 0.5575
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1365547",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1365547\", \"title\": \"Flow-Meter\", \"grant_date\": \"1921-01-11\", \"year\": 1921, \"decade\": \"1920s\", \"concepts\": [\"flow-meter\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6224,
-        "anomaly": 0.323,
-        "composite": 0.3328
+        "diversity": 0.0057,
+        "reconstruction": 0.8182,
+        "anomaly": 0.8949,
+        "composite": 0.553
       }
     },
     {
@@ -950,106 +183,154 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6289,
-        "anomaly": 0.3099,
-        "composite": 0.3321
+        "diversity": 0.0057,
+        "reconstruction": 0.7938,
+        "anomaly": 0.9313,
+        "composite": 0.5523
       }
     },
     {
       "entity": {
-        "name": "patent_US555190",
+        "name": "patent_US381970",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US555190\", \"title\": \"Alternating Motor\", \"grant_date\": \"1896-02-25\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US381970\", \"title\": \"System of Electrical Distribution\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"AC\", \"distribution\", \"polyphase\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6227,
-        "anomaly": 0.3006,
-        "composite": 0.3273
+        "diversity": 0.0057,
+        "reconstruction": 0.7667,
+        "anomaly": 0.974,
+        "composite": 0.5522
       }
     },
     {
       "entity": {
-        "name": "patent_US455069",
+        "name": "patent_US787412",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US455069\", \"title\": \"Electric Incandescent Lamp\", \"grant_date\": \"1891-06-30\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"lighting\", \"incandescent\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
-      },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
-      "flips": 47,
-      "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.4799,
-        "anomaly": 0.2458,
-        "composite": 0.3234
-      }
-    },
-    {
-      "entity": {
-        "name": "patent_US455068",
-        "type": "patent",
-        "attributes": "{\"patent_number\": \"US455068\", \"title\": \"Electrical Meter\", \"grant_date\": \"1891-06-30\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"meter\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US787412\", \"title\": \"Art of Transmitting Electrical Energy through the Natural Mediums\", \"grant_date\": \"1905-04-18\", \"year\": 1905, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"transmission\", \"earth-resonance\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6306,
-        "anomaly": 0.2668,
-        "composite": 0.322
+        "diversity": 0.0057,
+        "reconstruction": 0.8184,
+        "anomaly": 0.8807,
+        "composite": 0.5495
       }
     },
     {
       "entity": {
-        "name": "patent_US487796",
+        "name": "patent_US1209359",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US487796\", \"title\": \"System of Electrical Transmission of Power\", \"grant_date\": \"1892-12-13\", \"year\": 1892, \"decade\": \"1890s\", \"concepts\": [\"transmission\", \"power\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US1209359\", \"title\": \"Speed-Indicator\", \"grant_date\": \"1916-12-19\", \"year\": 1916, \"decade\": \"1910s\", \"concepts\": [\"speedometer\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6176,
-        "anomaly": 0.2873,
-        "composite": 0.3219
+        "diversity": 0.0057,
+        "reconstruction": 0.7844,
+        "anomaly": 0.9284,
+        "composite": 0.5479
       }
     },
     {
       "entity": {
-        "name": "patent_US613735",
+        "name": "patent_US1113716",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US613735\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-11-08\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US1113716\", \"title\": \"Fountain\", \"grant_date\": \"1914-10-13\", \"year\": 1914, \"decade\": \"1910s\", \"concepts\": [\"fountain\", \"hydraulic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6234,
-        "anomaly": 0.2758,
-        "composite": 0.3214
+        "diversity": 0.0057,
+        "reconstruction": 0.8126,
+        "anomaly": 0.8523,
+        "composite": 0.5401
       }
     },
     {
       "entity": {
-        "name": "patent_US464667",
+        "name": "patent_US350954",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US464667\", \"title\": \"Electrical Condenser\", \"grant_date\": \"1891-12-08\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"condenser\", \"capacitor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US350954\", \"title\": \"Regulator for Dynamo Electric Machines\", \"grant_date\": \"1886-10-19\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.5876,
-        "anomaly": 0.3317,
-        "composite": 0.321
+        "diversity": 0.0057,
+        "reconstruction": 0.7937,
+        "anomaly": 0.8568,
+        "composite": 0.5337
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1266175",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1266175\", \"title\": \"Lightning-Protector\", \"grant_date\": \"1918-05-14\", \"year\": 1918, \"decade\": \"1910s\", \"concepts\": [\"lightning\", \"protection\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8099,
+        "anomaly": 0.8104,
+        "composite": 0.5286
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US611719",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US611719\", \"title\": \"Electrical Circuit Controller\", \"grant_date\": \"1898-10-04\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8064,
+        "anomaly": 0.8091,
+        "composite": 0.5268
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1061206",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1061206\", \"title\": \"Turbine\", \"grant_date\": \"1909-10-21\", \"year\": 1909, \"decade\": \"1900s\", \"concepts\": [\"turbine\", \"bladeless\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7334,
+        "anomaly": 0.9161,
+        "composite": 0.5244
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1329559",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1329559\", \"title\": \"Valvular Conduit\", \"grant_date\": \"1920-02-03\", \"year\": 1920, \"decade\": \"1920s\", \"concepts\": [\"valvular-conduit\", \"fluidics\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7806,
+        "anomaly": 0.8406,
+        "composite": 0.5244
       }
     },
     {
@@ -1062,42 +343,106 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6143,
-        "anomaly": 0.2818,
-        "composite": 0.3193
+        "diversity": 0.0057,
+        "reconstruction": 0.7371,
+        "anomaly": 0.8782,
+        "composite": 0.5164
       }
     },
     {
       "entity": {
-        "name": "patent_US459772",
+        "name": "patent_US568176",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US459772\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1891-09-22\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US568176\", \"title\": \"Apparatus for Producing Electrical Currents of High Frequency and Potential\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"high-frequency\", \"tesla-coil\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.4517,
-        "anomaly": 0.5418,
-        "composite": 0.3192
+        "diversity": 0.0057,
+        "reconstruction": 0.819,
+        "anomaly": 0.7427,
+        "composite": 0.5153
       }
     },
     {
       "entity": {
-        "name": "patent_US609248",
+        "name": "patent_US487796",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US609248\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US487796\", \"title\": \"System of Electrical Transmission of Power\", \"grant_date\": \"1892-12-13\", \"year\": 1892, \"decade\": \"1890s\", \"concepts\": [\"transmission\", \"power\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6314,
-        "anomaly": 0.2466,
-        "composite": 0.3173
+        "diversity": 0.0057,
+        "reconstruction": 0.7665,
+        "anomaly": 0.8235,
+        "composite": 0.5145
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1119732",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1119732\", \"title\": \"Apparatus for Transmitting Electrical Energy\", \"grant_date\": \"1914-12-01\", \"year\": 1914, \"decade\": \"1910s\", \"concepts\": [\"wireless\", \"transmission\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7723,
+        "anomaly": 0.8087,
+        "composite": 0.5131
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1314718",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1314718\", \"title\": \"Ship's Log\", \"grant_date\": \"1919-09-02\", \"year\": 1919, \"decade\": \"1910s\", \"concepts\": [\"navigation\", \"maritime\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7693,
+        "anomaly": 0.8093,
+        "composite": 0.512
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1655113",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1655113\", \"title\": \"Method of Aerial Transportation\", \"grant_date\": \"1928-01-03\", \"year\": 1928, \"decade\": \"1920s\", \"concepts\": [\"VTOL\", \"aviation\", \"flying-machine\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7476,
+        "anomaly": 0.8078,
+        "composite": 0.503
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1061142",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1061142\", \"title\": \"Fluid Propulsion\", \"grant_date\": \"1909-10-21\", \"year\": 1909, \"decade\": \"1900s\", \"concepts\": [\"turbine\", \"fluid-dynamics\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6808,
+        "anomaly": 0.9146,
+        "composite": 0.503
       }
     },
     {
@@ -1110,74 +455,362 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6094,
-        "anomaly": 0.2741,
-        "composite": 0.3154
+        "diversity": 0.0057,
+        "reconstruction": 0.7459,
+        "anomaly": 0.7987,
+        "composite": 0.5001
       }
     },
     {
       "entity": {
-        "name": "patent_US405858",
+        "name": "patent_US609248",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US405858\", \"title\": \"Electro Magnetic Motor\", \"grant_date\": \"1889-06-25\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US609248\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.4618,
-        "anomaly": 0.5094,
-        "composite": 0.3151
+        "diversity": 0.0057,
+        "reconstruction": 0.6965,
+        "anomaly": 0.8705,
+        "composite": 0.4982
       }
     },
     {
       "entity": {
-        "name": "patent_US609251",
+        "name": "patent_US382282",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US609251\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US382282\", \"title\": \"Method of Converting and Distributing Electric Currents\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"AC\", \"conversion\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111111111111111111111111101111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5424,
+        "anomaly": 0.6581,
+        "composite": 0.4982
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US613809",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US613809\", \"title\": \"Method of and Apparatus for Controlling Mechanism of Moving Vehicle or Vehicles\", \"grant_date\": \"1898-07-01\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"remote-control\", \"teleautomaton\", \"robotics\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.5895,
-        "anomaly": 0.2942,
-        "composite": 0.3124
+        "diversity": 0.0057,
+        "reconstruction": 0.7627,
+        "anomaly": 0.7578,
+        "composite": 0.4965
       }
     },
     {
       "entity": {
-        "name": "patent_US455067",
+        "name": "patent_US517900",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US455067\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1891-06-30\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US517900\", \"title\": \"Steam Engine\", \"grant_date\": \"1894-04-10\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"engine\", \"steam\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6976,
+        "anomaly": 0.8497,
+        "composite": 0.4935
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US447920",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US447920\", \"title\": \"Method of Operating Arc-Lamps\", \"grant_date\": \"1891-03-10\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7425,
+        "anomaly": 0.7731,
+        "composite": 0.4923
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US401520",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US401520\", \"title\": \"Method of Operating Electro Magnetic Motors\", \"grant_date\": \"1889-04-16\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 1,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.4606,
-        "anomaly": 0.2312,
-        "composite": 0.312
+        "diversity": 0.1667,
+        "reconstruction": 0.5921,
+        "anomaly": 0.7877,
+        "composite": 0.4921
       }
     },
     {
       "entity": {
-        "name": "patent_US335787",
+        "name": "patent_US455068",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US335787\", \"title\": \"Electric Arc Lamp\", \"grant_date\": \"1886-02-09\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US455068\", \"title\": \"Electrical Meter\", \"grant_date\": \"1891-06-30\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"meter\", \"measurement\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.5655,
-        "anomaly": 0.3194,
-        "composite": 0.3091
+        "diversity": 0.0057,
+        "reconstruction": 0.7567,
+        "anomaly": 0.7466,
+        "composite": 0.4913
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US568180",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US568180\", \"title\": \"Apparatus for Producing Electrical Currents of High Frequency\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"high-frequency\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7667,
+        "anomaly": 0.725,
+        "composite": 0.4899
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US685953",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US685953\", \"title\": \"Apparatus for Utilizing Effects Transmitted from a Distance to a Receiving Device through Natural Media\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"radio\", \"reception\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.6395,
+        "anomaly": 0.741,
+        "composite": 0.4848
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US609249",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US609249\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7074,
+        "anomaly": 0.7873,
+        "composite": 0.4818
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US723188",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US723188\", \"title\": \"Method of Signaling\", \"grant_date\": \"1903-03-17\", \"year\": 1903, \"decade\": \"1900s\", \"concepts\": [\"signaling\", \"wireless\", \"radio\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7054,
+        "anomaly": 0.7651,
+        "composite": 0.4754
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US334823",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US334823\", \"title\": \"Commutator for Dynamo Electric Machines\", \"grant_date\": \"1886-01-26\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"commutator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7133,
+        "anomaly": 0.7371,
+        "composite": 0.4716
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US428057",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US428057\", \"title\": \"Pyromagneto Electric Generator\", \"grant_date\": \"1890-05-13\", \"year\": 1890, \"decade\": \"1890s\", \"concepts\": [\"generator\", \"pyromagnetic\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7145,
+        "anomaly": 0.732,
+        "composite": 0.4708
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US609247",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US609247\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6631,
+        "anomaly": 0.7706,
+        "composite": 0.4599
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1655114",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1655114\", \"title\": \"Apparatus for Aerial Transportation\", \"grant_date\": \"1928-01-03\", \"year\": 1928, \"decade\": \"1920s\", \"concepts\": [\"VTOL\", \"aviation\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7103,
+        "anomaly": 0.6936,
+        "composite": 0.4595
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US382845",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US382845\", \"title\": \"Commutator for Dynamo Electric Machines\", \"grant_date\": \"1888-05-15\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"commutator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6699,
+        "anomaly": 0.757,
+        "composite": 0.4592
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US381969",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US381969\", \"title\": \"Electro Magnetic Motor\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.5925,
+        "anomaly": 0.6516,
+        "composite": 0.4582
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US413353",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US413353\", \"title\": \"Method of Obtaining Direct Current from Alternating Currents\", \"grant_date\": \"1889-10-22\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"AC\", \"DC\", \"conversion\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6915,
+        "anomaly": 0.7125,
+        "composite": 0.4567
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US464666",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US464666\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1891-12-08\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7051,
+        "anomaly": 0.6878,
+        "composite": 0.456
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US649621",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US649621\", \"title\": \"Apparatus for Transmission of Electrical Energy\", \"grant_date\": \"1900-05-15\", \"year\": 1900, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"transmission\", \"energy\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6793,
+        "anomaly": 0.7213,
+        "composite": 0.454
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US514972",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US514972\", \"title\": \"Electric Railway System\", \"grant_date\": \"1894-02-20\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"railway\", \"transportation\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5868,
+        "anomaly": 0.6954,
+        "composite": 0.4523
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US593138",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US593138\", \"title\": \"Electrical Transformer\", \"grant_date\": \"1897-11-02\", \"year\": 1897, \"decade\": \"1890s\", \"concepts\": [\"transformer\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6497,
+        "anomaly": 0.7568,
+        "composite": 0.4511
       }
     },
     {
@@ -1190,26 +823,554 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6002,
-        "anomaly": 0.261,
-        "composite": 0.3084
+        "diversity": 0.0057,
+        "reconstruction": 0.6839,
+        "anomaly": 0.7016,
+        "composite": 0.451
       }
     },
     {
       "entity": {
-        "name": "patent_US381969",
+        "name": "patent_US568177",
         "type": "patent",
-        "attributes": "{\"patent_number\": \"US381969\", \"title\": \"Electro Magnetic Motor\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+        "attributes": "{\"patent_number\": \"US568177\", \"title\": \"Apparatus for Producing Ozone\", \"grant_date\": \"1896-09-22\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"ozone\", \"chemistry\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.5702,
-        "anomaly": 0.2976,
-        "composite": 0.3056
+        "diversity": 0.0057,
+        "reconstruction": 0.6642,
+        "anomaly": 0.7223,
+        "composite": 0.4482
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US390415",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US390415\", \"title\": \"Dynamo Electric Machine or Motor\", \"grant_date\": \"1888-10-02\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6675,
+        "anomaly": 0.7143,
+        "composite": 0.4476
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US336961",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US336961\", \"title\": \"Regulator for Dynamo Electric Machines\", \"grant_date\": \"1886-03-02\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6824,
+        "anomaly": 0.6796,
+        "composite": 0.4449
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US1274816",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US1274816\", \"title\": \"Speed Indicator\", \"grant_date\": \"1918-08-06\", \"year\": 1918, \"decade\": \"1910s\", \"concepts\": [\"speedometer\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.692,
+        "anomaly": 0.6568,
+        "composite": 0.443
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US382281",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US382281\", \"title\": \"Electrical Transmission of Power\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"transmission\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6384,
+        "anomaly": 0.735,
+        "composite": 0.4411
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US567818",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US567818\", \"title\": \"Electrical Condenser\", \"grant_date\": \"1896-09-15\", \"year\": 1896, \"decade\": \"1890s\", \"concepts\": [\"condenser\", \"capacitor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7083,
+        "anomaly": 0.5886,
+        "composite": 0.4324
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US462418",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US462418\", \"title\": \"Method of and Apparatus for Electrical Conversion and Distribution\", \"grant_date\": \"1891-11-03\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"conversion\", \"distribution\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5781,
+        "anomaly": 0.6188,
+        "composite": 0.4297
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US577671",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US577671\", \"title\": \"Manufacture of Electrical Condensers Coils and Similar Devices\", \"grant_date\": \"1897-02-23\", \"year\": 1897, \"decade\": \"1890s\", \"concepts\": [\"condenser\", \"coil\", \"manufacturing\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6405,
+        "anomaly": 0.6688,
+        "composite": 0.4254
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US459772",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US459772\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1891-09-22\", \"year\": 1891, \"decade\": \"1890s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6287,
+        "anomaly": 0.6766,
+        "composite": 0.4226
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US405858",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US405858\", \"title\": \"Electro Magnetic Motor\", \"grant_date\": \"1889-06-25\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6294,
+        "anomaly": 0.6623,
+        "composite": 0.4193
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US609251",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US609251\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-08-16\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6229,
+        "anomaly": 0.663,
+        "composite": 0.4169
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US335786",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US335786\", \"title\": \"Electric Arc Lamp\", \"grant_date\": \"1886-02-09\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6017,
+        "anomaly": 0.6869,
+        "composite": 0.4144
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US335787",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US335787\", \"title\": \"Electric Arc Lamp\", \"grant_date\": \"1886-02-09\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"lighting\", \"arc-lamp\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5528,
+        "anomaly": 0.7383,
+        "composite": 0.4077
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US685957",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US685957\", \"title\": \"Apparatus for the Utilization of Radiant Energy\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"radiant-energy\", \"solar\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6193,
+        "anomaly": 0.6304,
+        "composite": 0.4073
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US645576",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US645576\", \"title\": \"System of Transmission of Electrical Energy\", \"grant_date\": \"1900-03-20\", \"year\": 1900, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"transmission\", \"energy\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6384,
+        "anomaly": 0.5919,
+        "composite": 0.4054
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US416192",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US416192\", \"title\": \"Method of Operating Electro-Magnetic Motors\", \"grant_date\": \"1889-12-03\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5971,
+        "anomaly": 0.6515,
+        "composite": 0.4037
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US416195",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US416195\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1889-12-03\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5513,
+        "anomaly": 0.7195,
+        "composite": 0.4024
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US512340",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US512340\", \"title\": \"Coil for Electro-Magnets\", \"grant_date\": \"1894-01-09\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"coil\", \"tesla-coil\", \"electromagnet\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6374,
+        "anomaly": 0.5716,
+        "composite": 0.3999
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US433700",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US433700\", \"title\": \"Alternating-Current Electro-Magnetic Motor\", \"grant_date\": \"1890-08-05\", \"year\": 1890, \"decade\": \"1890s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6248,
+        "anomaly": 0.5918,
+        "composite": 0.3999
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US613735",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US613735\", \"title\": \"Electric Circuit Controller\", \"grant_date\": \"1898-11-08\", \"year\": 1898, \"decade\": \"1890s\", \"concepts\": [\"circuit\", \"controller\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5939,
+        "anomaly": 0.6376,
+        "composite": 0.399
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US433702",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US433702\", \"title\": \"Electrical Transformer Or Induction Device\", \"grant_date\": \"1890-08-05\", \"year\": 1890, \"decade\": \"1890s\", \"concepts\": [\"transformer\", \"induction\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6091,
+        "anomaly": 0.6073,
+        "composite": 0.3975
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US382279",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US382279\", \"title\": \"Electro Magnetic Motor\", \"grant_date\": \"1888-05-01\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.509,
+        "anomaly": 0.5987,
+        "composite": 0.397
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US416191",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US416191\", \"title\": \"Electro-Magnetic Motor\", \"grant_date\": \"1889-12-03\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"motor\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.4843,
+        "anomaly": 0.5794,
+        "composite": 0.3969
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US390820",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US390820\", \"title\": \"Regulator for Alternate Current Motors\", \"grant_date\": \"1888-10-09\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"motor\", \"AC\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5323,
+        "anomaly": 0.7178,
+        "composite": 0.3944
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US336962",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US336962\", \"title\": \"Regulator for Dynamo Electric Machines\", \"grant_date\": \"1886-03-02\", \"year\": 1886, \"decade\": \"1880s\", \"concepts\": [\"dynamo\", \"regulator\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6115,
+        "anomaly": 0.5892,
+        "composite": 0.3939
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US685956",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US685956\", \"title\": \"Apparatus for Utilizing Effects Transmitted through Natural Media\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"wireless\", \"radio\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5995,
+        "anomaly": 0.6063,
+        "composite": 0.3934
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US514169",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US514169\", \"title\": \"Reciprocating Engine\", \"grant_date\": \"1894-02-06\", \"year\": 1894, \"decade\": \"1890s\", \"concepts\": [\"engine\", \"mechanical\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5878,
+        "anomaly": 0.6246,
+        "composite": 0.3933
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US390721",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US390721\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1888-10-09\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5067,
+        "anomaly": 0.5785,
+        "composite": 0.3911
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US685958",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US685958\", \"title\": \"Method of Utilizing of Radiant Energy\", \"grant_date\": \"1901-11-05\", \"year\": 1901, \"decade\": \"1900s\", \"concepts\": [\"radiant-energy\", \"solar\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6004,
+        "anomaly": 0.5868,
+        "composite": 0.3889
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US390414",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US390414\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1888-10-02\", \"year\": 1888, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5233,
+        "anomaly": 0.7036,
+        "composite": 0.3872
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US405859",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US405859\", \"title\": \"Method of Electrical Power Transmission\", \"grant_date\": \"1889-06-25\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"transmission\", \"power\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5854,
+        "anomaly": 0.5866,
+        "composite": 0.3828
+      }
+    },
+    {
+      "entity": {
+        "name": "patent_US406968",
+        "type": "patent",
+        "attributes": "{\"patent_number\": \"US406968\", \"title\": \"Dynamo Electric Machine\", \"grant_date\": \"1889-07-16\", \"year\": 1889, \"decade\": \"1880s\", \"concepts\": [\"dynamo\"], \"country\": \"US\", \"inventor\": \"Nikola Tesla\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.5202,
+        "anomaly": 0.4346,
+        "composite": 0.3605
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_electrotherapy_1898",
+        "type": "writing",
+        "attributes": "{\"title\": \"High Frequency Oscillators for Electro-therapeutic and Other Purposes\", \"year\": \"1898\", \"type\": \"article\", \"venue\": \"Electrical Engineer\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "111111111111111111111110111111111111110111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7654,
+        "anomaly": 1.0,
+        "composite": 0.9062
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_world_system_1927",
+        "type": "writing",
+        "attributes": "{\"title\": \"World System of Wireless Transmission of Energy\", \"year\": \"1927\", \"type\": \"article\", \"venue\": \"Telegraph and Telephone Age\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111111101111111111111111011111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8107,
+        "anomaly": 0.8669,
+        "composite": 0.891
       }
     },
     {
@@ -1218,115 +1379,371 @@
         "type": "writing",
         "attributes": "{\"title\": \"Colorado Springs Notes 1899-1900\", \"year\": \"1899\", \"type\": \"notebook\", \"venue\": \"Colorado Springs laboratory\"}"
       },
-      "cluster": 5,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111101011",
-      "flips": 45,
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111011111111110111111111111111111111111",
+      "flips": 46,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.828,
-        "anomaly": 0.8632,
-        "composite": 0.897
+        "reconstruction": 0.7689,
+        "anomaly": 0.8878,
+        "composite": 0.8795
       }
     },
     {
       "entity": {
-        "name": "writing_article_world_system_1905",
+        "name": "writing_article_concentrated_energy_1935",
         "type": "writing",
-        "attributes": "{\"title\": \"The World System of Wireless Telegraphy\", \"year\": \"1905\", \"type\": \"article\", \"venue\": \"Telegraph and Telephone Age\"}"
+        "attributes": "{\"title\": \"The New Art of Projecting Concentrated Non-dispersive Energy Through Natural Media\", \"year\": \"1935\", \"type\": \"article\", \"venue\": \"Unpublished manuscript\"}"
       },
-      "cluster": 5,
-      "fingerprint_48bit": "111111111110111111111111111111111111111111111111",
+      "cluster": 3,
+      "fingerprint_48bit": "101111101111111111111111111111111111111111101111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7884,
+        "anomaly": 0.7688,
+        "composite": 0.8576
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_cosmic_rays_1932",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Eternal Source of Energy of the Universe, Origin and Intensity of Cosmic Rays\", \"year\": \"1932\", \"type\": \"article\", \"venue\": \"New York\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111101111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7429,
+        "anomaly": 0.7967,
+        "composite": 0.8463
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_lecture_aiee_1888",
+        "type": "writing",
+        "attributes": "{\"title\": \"A New System of Alternate Current Motors and Transformers\", \"year\": \"1888\", \"type\": \"lecture\", \"venue\": \"AIEE, New York\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111110111111110111111111101011111111111111111",
+      "flips": 43,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6654,
+        "anomaly": 0.8926,
+        "composite": 0.8393
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_vision_1908",
+        "type": "writing",
+        "attributes": "{\"title\": \"Mr. Tesla's Vision\", \"year\": \"1908\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111101111111111111111111111011111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7353,
+        "anomaly": 0.7398,
+        "composite": 0.8291
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_gas_turbines_1911",
+        "type": "writing",
+        "attributes": "{\"title\": \"Dr. Tesla Talks of Gas Turbines\", \"year\": \"1911\", \"type\": \"article\", \"venue\": \"Motor World\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111101111111111110111111111111111111111111101111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7242,
+        "anomaly": 0.7495,
+        "composite": 0.8271
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_wireless_vision_1915",
+        "type": "writing",
+        "attributes": "{\"title\": \"Nikola Tesla Sees a Wireless Vision\", \"year\": \"1915\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111011101111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7064,
+        "anomaly": 0.7136,
+        "composite": 0.8109
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_interrupters_1899",
+        "type": "writing",
+        "attributes": "{\"title\": \"On Current Interrupters\", \"year\": \"1899\", \"type\": \"article\", \"venue\": \"Electrical Review\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111111011111111",
       "flips": 47,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.7858,
-        "anomaly": 0.9007,
-        "composite": 0.8895
+        "reconstruction": 0.6752,
+        "anomaly": 0.6828,
+        "composite": 0.7908
       }
     },
     {
       "entity": {
-        "name": "writing_article_transmission_1904",
+        "name": "writing_article_recollections_1915",
         "type": "writing",
-        "attributes": "{\"title\": \"The Transmission of Electrical Energy Without Wires\", \"year\": \"1904\", \"type\": \"article\", \"venue\": \"Electrical World and Engineer\"}"
+        "attributes": "{\"title\": \"Some Personal Recollections\", \"year\": \"1915\", \"type\": \"article\", \"venue\": \"Scientific American\"}"
       },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111011111111111100111111111111111111111111",
-      "flips": 45,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6516,
-        "anomaly": 0.907,
-        "composite": 0.8374
-      }
-    },
-    {
-      "entity": {
-        "name": "writing_article_rotating_field_1888",
-        "type": "writing",
-        "attributes": "{\"title\": \"A New System of Alternate Current Motors and Transformers\", \"year\": \"1888\", \"type\": \"article\", \"venue\": \"AIEE paper\"}"
-      },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111011111111111101110111111111111111111011",
+      "cluster": 6,
+      "fingerprint_48bit": "111111111111111111101111111101011111111011111111",
       "flips": 44,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.6435,
-        "anomaly": 0.7381,
-        "composite": 0.7919
+        "reconstruction": 0.6172,
+        "anomaly": 0.65,
+        "composite": 0.7594
       }
     },
     {
       "entity": {
-        "name": "writing_lecture_niagara_1897",
+        "name": "writing_article_death_beam_1935",
         "type": "writing",
-        "attributes": "{\"title\": \"On Electricity\", \"year\": \"1897\", \"type\": \"lecture\", \"venue\": \"Niagara Falls\"}"
+        "attributes": "{\"title\": \"A Machine to End War\", \"year\": \"1935\", \"type\": \"article\", \"venue\": \"Liberty magazine\"}"
       },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111011111111111111111111111",
+      "cluster": 3,
+      "fingerprint_48bit": "111111111111111111111111111111111111111001111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6305,
+        "anomaly": 0.5053,
+        "composite": 0.7285
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_wonders_future_1916",
+        "type": "writing",
+        "attributes": "{\"title\": \"Wonders of the Future\", \"year\": \"1916\", \"type\": \"article\", \"venue\": \"Collier's Weekly\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111101101",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5829,
+        "anomaly": 0.5749,
+        "composite": 0.7269
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_radio_theories_1929",
+        "type": "writing",
+        "attributes": "{\"title\": \"Nikola Tesla Tells of New Radio Theories\", \"year\": \"1929\", \"type\": \"article\", \"venue\": \"New York Herald Tribune\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111101111",
       "flips": 47,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.5849,
-        "anomaly": 0.8298,
-        "composite": 0.7914
+        "reconstruction": 0.6335,
+        "anomaly": 0.4537,
+        "composite": 0.7168
       }
     },
     {
       "entity": {
-        "name": "writing_my_inventions_1919",
+        "name": "writing_article_end_aircraft_1934",
         "type": "writing",
-        "attributes": "{\"title\": \"My Inventions: The Autobiography of Nikola Tesla\", \"year\": \"1919\", \"type\": \"autobiography\", \"venue\": \"Electrical Experimenter magazine\"}"
+        "attributes": "{\"title\": \"Dr. Tesla Visions the End of Aircraft In War\", \"year\": \"1934\", \"type\": \"article\", \"venue\": \"Every Week Magazine\"}"
       },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111101111111111111111111011111",
+      "cluster": 3,
+      "fingerprint_48bit": "100111111111111111111111111111111111111111111111",
       "flips": 46,
       "scores": {
-        "diversity": 0.5,
-        "reconstruction": 0.7594,
-        "anomaly": 0.8147,
-        "composite": 0.6824
+        "diversity": 1.0,
+        "reconstruction": 0.5688,
+        "anomaly": 0.5345,
+        "composite": 0.7112
       }
     },
     {
       "entity": {
-        "name": "writing_lecture_st_louis_1893",
+        "name": "writing_article_wardenclyffe_1902",
         "type": "writing",
-        "attributes": "{\"title\": \"On the Dissipation of the Electrical Energy of the Hertz Resonator\", \"year\": \"1893\", \"type\": \"lecture\", \"venue\": \"National Electric Light Association\"}"
+        "attributes": "{\"title\": \"Inventor Tesla's Plant Nearing Completion\", \"year\": \"1902\", \"type\": \"article\", \"venue\": \"Brooklyn Eagle\"}"
       },
-      "cluster": 5,
-      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "cluster": 7,
+      "fingerprint_48bit": "101111111111111110111111111111111111111011111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6288,
+        "anomaly": 0.4105,
+        "composite": 0.7041
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_cosmic_ray_motor_1932",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla Cosmic Ray Motor May Transmit Power Round Earth\", \"year\": \"1932\", \"type\": \"article\", \"venue\": \"Brooklyn Eagle\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111011111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 0.3333,
-        "reconstruction": 0.6077,
-        "anomaly": 0.9499,
-        "composite": 0.5972
+        "diversity": 0.5,
+        "reconstruction": 0.717,
+        "anomaly": 0.7887,
+        "composite": 0.659
       }
     },
     {
       "entity": {
-        "name": "writing_article_bladeless_turbine_1911",
+        "name": "writing_article_earth_electricity_1896",
+        "type": "writing",
+        "attributes": "{\"title\": \"Earth Electricity to Kill Monopoly\", \"year\": \"1896\", \"type\": \"article\", \"venue\": \"The World Sunday Magazine\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111011111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.766,
+        "anomaly": 0.801,
+        "composite": 0.5941
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_century_1900",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Problem of Increasing Human Energy\", \"year\": \"1900\", \"type\": \"article\", \"venue\": \"Century Magazine\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111111111111110111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5969,
+        "anomaly": 0.6828,
+        "composite": 0.5845
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_possibilities_1907",
+        "type": "writing",
+        "attributes": "{\"title\": \"Possibilities of Wireless\", \"year\": \"1907\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111011111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6346,
+        "anomaly": 0.5875,
+        "composite": 0.5757
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_solar_radiation_1912",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Disturbing Influence of Solar Radiation On Wireless Transmission\", \"year\": \"1912\", \"type\": \"article\", \"venue\": \"Electrical Review\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.7908,
+        "anomaly": 0.7617,
+        "composite": 0.5651
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_shore_beam_1935",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla Predicts Ships Powered by Shore Beam\", \"year\": \"1935\", \"type\": \"article\", \"venue\": \"New York Herald Tribune\"}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111111111111111111111111101111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.692,
+        "anomaly": 0.6124,
+        "composite": 0.5466
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_true_wireless_1919",
+        "type": "writing",
+        "attributes": "{\"title\": \"The True Wireless\", \"year\": \"1919\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.7253,
+        "anomaly": 0.7055,
+        "composite": 0.5365
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_lecture_london_1892",
+        "type": "writing",
+        "attributes": "{\"title\": \"Experiments with Alternate Currents of Very High Frequency\", \"year\": \"1892\", \"type\": \"lecture\", \"venue\": \"Royal Institution, London\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7738,
+        "anomaly": 0.8846,
+        "composite": 0.5327
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_peace_ray_1934",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla Invents Peace Ray\", \"year\": \"1934\", \"type\": \"article\", \"venue\": \"New York Sun\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6902,
+        "anomaly": 0.9516,
+        "composite": 0.516
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_monarch_machines_1911",
         "type": "writing",
         "attributes": "{\"title\": \"Tesla's New Monarch of Machines\", \"year\": \"1911\", \"type\": \"article\", \"venue\": \"New York Herald\"}"
       },
@@ -1334,26 +1751,106 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.8131,
-        "anomaly": 0.9659,
-        "composite": 0.5698
+        "diversity": 0.0057,
+        "reconstruction": 0.7579,
+        "anomaly": 0.8296,
+        "composite": 0.5126
       }
     },
     {
       "entity": {
-        "name": "writing_lecture_london_1892",
+        "name": "writing_lecture_electricity_1897",
         "type": "writing",
-        "attributes": "{\"title\": \"Experiments with Alternate Currents of Very High Frequency and Their Application to Methods of Artificial Illumination\", \"year\": \"1892\", \"type\": \"lecture\", \"venue\": \"Royal Institution, London\"}"
+        "attributes": "{\"title\": \"On Electricity\", \"year\": \"1897\", \"type\": \"lecture\", \"venue\": \"Electrical Review\"}"
       },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111011111",
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7233,
+        "anomaly": 0.8747,
+        "composite": 0.51
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_efforts_1898",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla Describes His Efforts in Various Fields of Work\", \"year\": \"1898\", \"type\": \"article\", \"venue\": \"Electrical Review\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7422,
+        "anomaly": 0.8281,
+        "composite": 0.5059
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_new_wireless_1909",
+        "type": "writing",
+        "attributes": "{\"title\": \"Nikola Tesla's New Wireless\", \"year\": \"1909\", \"type\": \"article\", \"venue\": \"The Electrical Engineer, London\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
       "flips": 47,
       "scores": {
         "diversity": 0.2,
-        "reconstruction": 0.5819,
-        "anomaly": 1.0,
-        "composite": 0.5527
+        "reconstruction": 0.6785,
+        "anomaly": 0.6434,
+        "composite": 0.5023
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_future_wireless_1908",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Future of the Wireless Art\", \"year\": \"1908\", \"type\": \"article\", \"venue\": \"Wireless Telegraphy and Telephony\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.757,
+        "anomaly": 0.7855,
+        "composite": 0.5012
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_bolts_thor_1915",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla's New Device Like Bolts of Thor\", \"year\": \"1915\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7407,
+        "anomaly": 0.7864,
+        "composite": 0.4949
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_dissipation_1892",
+        "type": "writing",
+        "attributes": "{\"title\": \"On the Dissipation of the Electrical Energy of the Hertz Resonator\", \"year\": \"1892\", \"type\": \"article\", \"venue\": \"Electrical Engineer\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7438,
+        "anomaly": 0.7814,
+        "composite": 0.4949
       }
     },
     {
@@ -1366,42 +1863,74 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7281,
-        "anomaly": 0.785,
-        "composite": 0.4906
+        "diversity": 0.0057,
+        "reconstruction": 0.7222,
+        "anomaly": 0.7841,
+        "composite": 0.4869
       }
     },
     {
       "entity": {
-        "name": "writing_article_interplanetary_1937",
+        "name": "writing_poem_olympian_gossip",
         "type": "writing",
-        "attributes": "{\"title\": \"Sending of Messages to Planets Predicted by Dr. Tesla\", \"year\": \"1937\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+        "attributes": "{\"title\": \"Fragments of Olympian Gossip\", \"year\": \"1928\", \"type\": \"poem\", \"venue\": \"Written for George Sylvester Viereck\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.6634,
+        "anomaly": 0.6053,
+        "composite": 0.4867
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_war_views_1917",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla's Views on Electricity and the War\", \"year\": \"1917\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6749,
-        "anomaly": 0.783,
-        "composite": 0.4688
+        "diversity": 0.0057,
+        "reconstruction": 0.7302,
+        "anomaly": 0.7675,
+        "composite": 0.486
       }
     },
     {
       "entity": {
-        "name": "writing_article_talking_planets_1901",
+        "name": "writing_article_transmission_1904",
         "type": "writing",
-        "attributes": "{\"title\": \"Talking with the Planets\", \"year\": \"1901\", \"type\": \"article\", \"venue\": \"Collier's Weekly\"}"
+        "attributes": "{\"title\": \"The Transmission of Electrical Energy Without Wires\", \"year\": \"1904\", \"type\": \"article\", \"venue\": \"Electrical World\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.6729,
+        "anomaly": 0.569,
+        "composite": 0.4814
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_peace_1905",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Transmission of Electrical Energy Without Wires as a Means for Furthering Peace\", \"year\": \"1905\", \"type\": \"article\", \"venue\": \"Electrical World and Engineer\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7046,
-        "anomaly": 0.6989,
-        "composite": 0.4596
+        "diversity": 0.0057,
+        "reconstruction": 0.6914,
+        "anomaly": 0.7996,
+        "composite": 0.4785
       }
     },
     {
@@ -1414,58 +1943,362 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6291,
-        "anomaly": 0.8188,
-        "composite": 0.4594
+        "diversity": 0.0057,
+        "reconstruction": 0.6696,
+        "anomaly": 0.8198,
+        "composite": 0.4748
       }
     },
     {
       "entity": {
-        "name": "writing_article_century_1900",
+        "name": "writing_article_tuned_lightning_1907",
         "type": "writing",
-        "attributes": "{\"title\": \"The Problem of Increasing Human Energy\", \"year\": \"1900\", \"type\": \"article\", \"venue\": \"Century Magazine\"}"
+        "attributes": "{\"title\": \"Tuned Lightning\", \"year\": \"1907\", \"type\": \"article\", \"venue\": \"English Mechanic and World of Science\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6325,
-        "anomaly": 0.6976,
-        "composite": 0.4305
+        "diversity": 0.0057,
+        "reconstruction": 0.6989,
+        "anomaly": 0.7514,
+        "composite": 0.4694
       }
     },
     {
       "entity": {
-        "name": "writing_article_birthday_1930",
+        "name": "writing_article_illusions_1919",
         "type": "writing",
-        "attributes": "{\"title\": \"Man's Greatest Achievement\", \"year\": \"1930\", \"type\": \"article\", \"venue\": \"Milwaukee Sentinel\"}"
+        "attributes": "{\"title\": \"Famous Scientific Illusions\", \"year\": \"1919\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.6193,
+        "anomaly": 0.5959,
+        "composite": 0.4667
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_rain_control_1920",
+        "type": "writing",
+        "attributes": "{\"title\": \"Rain Can Be Controlled and Hydraulic Force Provided\", \"year\": \"1920\", \"type\": \"article\", \"venue\": \"Syracuse Herald\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6496,
-        "anomaly": 0.6207,
-        "composite": 0.4181
+        "diversity": 0.0057,
+        "reconstruction": 0.6823,
+        "anomaly": 0.7118,
+        "composite": 0.4529
       }
     },
     {
       "entity": {
-        "name": "person_nikola_tesla",
-        "type": "person",
-        "attributes": "{\"full_name\": \"Nikola Tesla\", \"role\": \"inventor\", \"description\": \"Serbian-American inventor, electrical/mechanical engineer, futurist\"}"
+        "name": "writing_article_talking_planets_1901",
+        "type": "writing",
+        "attributes": "{\"title\": \"Talking With Planets\", \"year\": \"1901\", \"type\": \"article\", \"venue\": \"Collier's Weekly\"}"
       },
-      "cluster": 5,
-      "fingerprint_48bit": "111111110111111111111101111101111111111111111111",
-      "flips": 45,
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
       "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8832,
-        "anomaly": 0.9403,
-        "composite": 0.9383
+        "diversity": 0.1667,
+        "reconstruction": 0.6201,
+        "anomaly": 0.5752,
+        "composite": 0.4502
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_power_development_1934",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla on Power Development and Future Marvels\", \"year\": \"1934\", \"type\": \"article\", \"venue\": \"New York World Telegram\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6559,
+        "anomaly": 0.7396,
+        "composite": 0.4493
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_woman_boss_1926",
+        "type": "writing",
+        "attributes": "{\"title\": \"When Woman is Boss\", \"year\": \"1926\", \"type\": \"interview\", \"venue\": \"Colliers\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6744,
+        "anomaly": 0.6985,
+        "composite": 0.4464
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_pioneer_radio_1932",
+        "type": "writing",
+        "attributes": "{\"title\": \"Pioneer Radio Engineer Gives Views On Power\", \"year\": \"1932\", \"type\": \"article\", \"venue\": \"New York Herald Tribune\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6806,
+        "anomaly": 0.6588,
+        "composite": 0.439
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_wonder_world_1915",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Wonder World To Be Created By Electricity\", \"year\": \"1915\", \"type\": \"article\", \"venue\": \"Manufacturer's Record\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6067,
+        "anomaly": 0.7725,
+        "composite": 0.4378
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_discovery_1901",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla's New Discovery\", \"year\": \"1901\", \"type\": \"article\", \"venue\": \"The Sun, New York\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.67,
+        "anomaly": 0.643,
+        "composite": 0.4307
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_wireless_torpedo_1907",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla's Wireless Torpedo\", \"year\": \"1907\", \"type\": \"article\", \"venue\": \"New York Times\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6888,
+        "anomaly": 0.5985,
+        "composite": 0.4271
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_motive_power_1931",
+        "type": "writing",
+        "attributes": "{\"title\": \"Our Future Motive Power\", \"year\": \"1931\", \"type\": \"article\", \"venue\": \"Everyday Science and Mechanics\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5967,
+        "anomaly": 0.7247,
+        "composite": 0.4219
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_cosmic_forces_1915",
+        "type": "writing",
+        "attributes": "{\"title\": \"How Cosmic Forces Shape Our Destinies\", \"year\": \"1915\", \"type\": \"article\", \"venue\": \"New York American\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6887,
+        "anomaly": 0.5249,
+        "composite": 0.4087
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_oscillators_1893",
+        "type": "writing",
+        "attributes": "{\"title\": \"Tesla's Oscillator and Other Inventions\", \"year\": \"1895\", \"type\": \"article\", \"venue\": \"Century Magazine\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6246,
+        "anomaly": 0.6086,
+        "composite": 0.404
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_my_inventions_1919",
+        "type": "writing",
+        "attributes": "{\"title\": \"My Inventions: The Autobiography of Nikola Tesla\", \"year\": \"1919\", \"type\": \"autobiography\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6604,
+        "anomaly": 0.5456,
+        "composite": 0.4026
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_statics_1919",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Effect of Statics on Wireless Transmission\", \"year\": \"1919\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6197,
+        "anomaly": 0.5888,
+        "composite": 0.3971
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_electric_autos_1904",
+        "type": "writing",
+        "attributes": "{\"title\": \"Electric Autos\", \"year\": \"1904\", \"type\": \"article\", \"venue\": \"Manufacturers' Record\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5751,
+        "anomaly": 0.6511,
+        "composite": 0.3948
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_battleships_1917",
+        "type": "writing",
+        "attributes": "{\"title\": \"Electric Drive for Battle Ships\", \"year\": \"1917\", \"type\": \"article\", \"venue\": \"New York Herald\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6129,
+        "anomaly": 0.5746,
+        "composite": 0.3908
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_moon_rotation_1919",
+        "type": "writing",
+        "attributes": "{\"title\": \"The Moon's Rotation\", \"year\": \"1919\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5832,
+        "anomaly": 0.6075,
+        "composite": 0.3871
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_oscillators_1919",
+        "type": "writing",
+        "attributes": "{\"title\": \"Electrical Oscillators\", \"year\": \"1919\", \"type\": \"article\", \"venue\": \"Electrical Experimenter\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5904,
+        "anomaly": 0.5788,
+        "composite": 0.3829
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_lecture_st_louis_1893",
+        "type": "writing",
+        "attributes": "{\"title\": \"On Light and Other High Frequency Phenomena\", \"year\": \"1893\", \"type\": \"lecture\", \"venue\": \"National Electric Light Association, St. Louis\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5623,
+        "anomaly": 0.5853,
+        "composite": 0.3733
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_phenomena_1891",
+        "type": "writing",
+        "attributes": "{\"title\": \"Phenomena of Alternating Currents of Very High Frequency\", \"year\": \"1891\", \"type\": \"article\", \"venue\": \"Electrical World\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5816,
+        "anomaly": 0.5377,
+        "composite": 0.3691
+      }
+    },
+    {
+      "entity": {
+        "name": "writing_article_artillery_1898",
+        "type": "writing",
+        "attributes": "{\"title\": \"Plans to Dispense With Artillery of the Present Type\", \"year\": \"1898\", \"type\": \"article\", \"venue\": \"The Sun, New York\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.5805,
+        "anomaly": 0.4474,
+        "composite": 0.346
       }
     },
     {
@@ -1475,109 +2308,29 @@
         "attributes": "{\"full_name\": \"Katharine Johnson\", \"role\": \"confidante\", \"description\": \"Wife of Robert Johnson, close personal friend of Tesla\"}"
       },
       "cluster": 6,
-      "fingerprint_48bit": "111111111111111111111111111111111011111111101111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.9019,
-        "anomaly": 0.8896,
-        "composite": 0.9332
-      }
-    },
-    {
-      "entity": {
-        "name": "person_guglielmo_marconi",
-        "type": "person",
-        "attributes": "{\"full_name\": \"Guglielmo Marconi\", \"role\": \"rival\", \"description\": \"Radio pioneer, patent dispute with Tesla over radio invention\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111111111111111101111111111011111111111111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8255,
-        "anomaly": 1.0,
-        "composite": 0.9302
-      }
-    },
-    {
-      "entity": {
-        "name": "person_george_westinghouse",
-        "type": "person",
-        "attributes": "{\"full_name\": \"George Westinghouse\", \"role\": \"patron\", \"description\": \"Industrialist who licensed Tesla's AC patents, funded Niagara Falls\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111110111111111111111111111111111111101011",
-      "flips": 45,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.795,
-        "anomaly": 0.9577,
-        "composite": 0.9074
-      }
-    },
-    {
-      "entity": {
-        "name": "person_sava_kosanovic",
-        "type": "person",
-        "attributes": "{\"full_name\": \"Sava Kosanovic\", \"role\": \"nephew\", \"description\": \"Yugoslav ambassador, fought for Tesla's papers after death\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111101111011111111111101110111111011111111111111",
-      "flips": 43,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8034,
-        "anomaly": 0.6766,
-        "composite": 0.8405
-      }
-    },
-    {
-      "entity": {
-        "name": "person_bloyce_fitzgerald",
-        "type": "person",
-        "attributes": "{\"full_name\": \"Bloyce Fitzgerald\", \"role\": \"agent\", \"description\": \"FBI agent who supervised seizure of Tesla's documents\"}"
-      },
-      "cluster": 5,
-      "fingerprint_48bit": "110101111011111111111101111111111111111111111111",
-      "flips": 44,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8214,
-        "anomaly": 0.5751,
-        "composite": 0.8224
-      }
-    },
-    {
-      "entity": {
-        "name": "person_john_jacob_astor",
-        "type": "person",
-        "attributes": "{\"full_name\": \"John Jacob Astor IV\", \"role\": \"patron\", \"description\": \"Investor in Tesla's projects, died on Titanic 1912\"}"
-      },
-      "cluster": 5,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111101111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8192,
-        "anomaly": 0.3552,
-        "composite": 0.7665
-      }
-    },
-    {
-      "entity": {
-        "name": "person_robert_underwood_johnson",
-        "type": "person",
-        "attributes": "{\"full_name\": \"Robert Underwood Johnson\", \"role\": \"friend\", \"description\": \"Editor of Century Magazine, close friend and literary ally\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
+      "fingerprint_48bit": "111111111101111111111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 0.3333,
-        "reconstruction": 0.9304,
-        "anomaly": 0.9223,
-        "composite": 0.7194
+        "diversity": 0.5,
+        "reconstruction": 0.781,
+        "anomaly": 0.8965,
+        "composite": 0.7115
+      }
+    },
+    {
+      "entity": {
+        "name": "person_mark_twain",
+        "type": "person",
+        "attributes": "{\"full_name\": \"Mark Twain\", \"role\": \"friend\", \"description\": \"Close friend, frequent visitor to Tesla's laboratory\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111111111111110111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6927,
+        "anomaly": 0.8357,
+        "composite": 0.661
       }
     },
     {
@@ -1586,46 +2339,46 @@
         "type": "person",
         "attributes": "{\"full_name\": \"Koloman Czito\", \"role\": \"machinist\", \"description\": \"Longtime machinist and lab assistant to Tesla\"}"
       },
-      "cluster": 5,
-      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
-      "flips": 47,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 0.3333,
-        "reconstruction": 0.9544,
-        "anomaly": 0.7435,
-        "composite": 0.6843
+        "diversity": 0.0057,
+        "reconstruction": 0.9234,
+        "anomaly": 1.0,
+        "composite": 0.6214
       }
     },
     {
       "entity": {
-        "name": "person_jp_morgan",
+        "name": "person_george_westinghouse",
         "type": "person",
-        "attributes": "{\"full_name\": \"J.P. Morgan\", \"role\": \"financier\", \"description\": \"Funded Wardenclyffe Tower project, later withdrew support\"}"
+        "attributes": "{\"full_name\": \"George Westinghouse\", \"role\": \"patron\", \"description\": \"Industrialist who licensed Tesla's AC patents, funded Niagara Falls\"}"
       },
       "cluster": 5,
-      "fingerprint_48bit": "111111111111111111111101111111111111111111111111",
+      "fingerprint_48bit": "111111110111111111111111111111111111111111111111",
       "flips": 47,
       "scores": {
         "diversity": 0.3333,
-        "reconstruction": 0.9435,
-        "anomaly": 0.6533,
-        "composite": 0.6574
+        "reconstruction": 0.7258,
+        "anomaly": 0.8262,
+        "composite": 0.6135
       }
     },
     {
       "entity": {
-        "name": "person_thomas_edison",
+        "name": "person_nikola_tesla",
         "type": "person",
-        "attributes": "{\"full_name\": \"Thomas Edison\", \"role\": \"rival\", \"description\": \"Rival inventor, DC power advocate, War of Currents opponent\"}"
+        "attributes": "{\"full_name\": \"Nikola Tesla\", \"role\": \"inventor\", \"description\": \"Serbian-American inventor, electrical/mechanical engineer, futurist\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "110111111111111111111111111111111011111111111111",
-      "flips": 46,
+      "cluster": 1,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
       "scores": {
-        "diversity": 0.5,
-        "reconstruction": 0.8116,
-        "anomaly": 0.5854,
-        "composite": 0.646
+        "diversity": 0.1667,
+        "reconstruction": 0.7079,
+        "anomaly": 0.9348,
+        "composite": 0.5752
       }
     },
     {
@@ -1638,26 +2391,42 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.9347,
-        "anomaly": 0.7867,
-        "composite": 0.5736
+        "diversity": 0.0057,
+        "reconstruction": 0.8344,
+        "anomaly": 0.8851,
+        "composite": 0.557
       }
     },
     {
       "entity": {
-        "name": "person_lord_kelvin",
+        "name": "person_robert_underwood_johnson",
         "type": "person",
-        "attributes": "{\"full_name\": \"Lord Kelvin\", \"role\": \"peer\", \"description\": \"William Thomson, initially opposed AC, later acknowledged Tesla\"}"
+        "attributes": "{\"full_name\": \"Robert Underwood Johnson\", \"role\": \"friend\", \"description\": \"Editor of Century Magazine, close friend and literary ally\"}"
       },
-      "cluster": 4,
-      "fingerprint_48bit": "111111111111111111111111110111111111111111111111",
-      "flips": 47,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 0.2,
-        "reconstruction": 0.775,
-        "anomaly": 0.6662,
-        "composite": 0.5465
+        "diversity": 0.0057,
+        "reconstruction": 0.7927,
+        "anomaly": 0.8423,
+        "composite": 0.5297
+      }
+    },
+    {
+      "entity": {
+        "name": "person_bloyce_fitzgerald",
+        "type": "person",
+        "attributes": "{\"full_name\": \"Bloyce Fitzgerald\", \"role\": \"agent\", \"description\": \"FBI agent who supervised seizure of Tesla's documents\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7739,
+        "anomaly": 0.867,
+        "composite": 0.5283
       }
     },
     {
@@ -1670,10 +2439,26 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.8525,
-        "anomaly": 0.6943,
-        "composite": 0.5176
+        "diversity": 0.0057,
+        "reconstruction": 0.7386,
+        "anomaly": 0.9058,
+        "composite": 0.5239
+      }
+    },
+    {
+      "entity": {
+        "name": "person_lord_kelvin",
+        "type": "person",
+        "attributes": "{\"full_name\": \"Lord Kelvin\", \"role\": \"peer\", \"description\": \"William Thomson, initially opposed AC, later acknowledged Tesla\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7096,
+        "anomaly": 0.8932,
+        "composite": 0.5091
       }
     },
     {
@@ -1682,14 +2467,46 @@
         "type": "person",
         "attributes": "{\"full_name\": \"Thomas Commerford Martin\", \"role\": \"editor\", \"description\": \"Electrical engineer, editor who compiled Tesla's early works\"}"
       },
+      "cluster": 1,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.6161,
+        "anomaly": 0.8031,
+        "composite": 0.5056
+      }
+    },
+    {
+      "entity": {
+        "name": "person_jp_morgan",
+        "type": "person",
+        "attributes": "{\"full_name\": \"J.P. Morgan\", \"role\": \"financier\", \"description\": \"Funded Wardenclyffe Tower project, later withdrew support\"}"
+      },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.8485,
-        "anomaly": 0.5345,
-        "composite": 0.4761
+        "diversity": 0.0057,
+        "reconstruction": 0.7764,
+        "anomaly": 0.7597,
+        "composite": 0.5025
+      }
+    },
+    {
+      "entity": {
+        "name": "person_guglielmo_marconi",
+        "type": "person",
+        "attributes": "{\"full_name\": \"Guglielmo Marconi\", \"role\": \"rival\", \"description\": \"Radio pioneer, patent dispute with Tesla over radio invention\"}"
+      },
+      "cluster": 2,
+      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.6281,
+        "anomaly": 0.8259,
+        "composite": 0.5015
       }
     },
     {
@@ -1702,26 +2519,26 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7687,
-        "anomaly": 0.6577,
-        "composite": 0.475
+        "diversity": 0.0057,
+        "reconstruction": 0.7562,
+        "anomaly": 0.7456,
+        "composite": 0.4909
       }
     },
     {
       "entity": {
-        "name": "person_mark_twain",
+        "name": "person_sava_kosanovic",
         "type": "person",
-        "attributes": "{\"full_name\": \"Mark Twain\", \"role\": \"friend\", \"description\": \"Close friend, frequent visitor to Tesla's laboratory\"}"
+        "attributes": "{\"full_name\": \"Sava Kosanovic\", \"role\": \"nephew\", \"description\": \"Yugoslav ambassador, fought for Tesla's papers after death\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7741,
-        "anomaly": 0.6006,
-        "composite": 0.4629
+        "diversity": 0.0057,
+        "reconstruction": 0.7211,
+        "anomaly": 0.7807,
+        "composite": 0.4856
       }
     },
     {
@@ -1730,174 +2547,14 @@
         "type": "concept",
         "attributes": "{\"concept_name\": \"Fluorescent Lighting\", \"description\": \"Early high-frequency gas discharge lighting\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "111011111010111111111101111111101111111111111111",
-      "flips": 43,
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111101",
+      "flips": 46,
       "scores": {
         "diversity": 1.0,
-        "reconstruction": 0.8738,
+        "reconstruction": 0.8854,
         "anomaly": 1.0,
-        "composite": 0.9495
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_death_ray",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Directed Energy Weapon (Teleforce)\", \"description\": \"Charged particle beam weapon concept\"}"
-      },
-      "cluster": 5,
-      "fingerprint_48bit": "110101110111011111111111111111111111111111111111",
-      "flips": 44,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8586,
-        "anomaly": 0.8233,
-        "composite": 0.8993
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_earth_resonance",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Earth Resonance\", \"description\": \"Using Earth's natural electromagnetic resonance\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "110111111011111111111101111111111111111111111101",
-      "flips": 44,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.9443,
-        "anomaly": 0.5457,
-        "composite": 0.8641
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_wireless_transmission",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Wireless Transmission of Energy\", \"description\": \"Transmission of power without wires through the Earth\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "101011111011111111111101111111111011111111111111",
-      "flips": 43,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8705,
-        "anomaly": 0.5202,
-        "composite": 0.8283
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_wardenclyffe_system",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Wardenclyffe Tower System\", \"description\": \"Wireless power transmission tower on Long Island\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "110101111111111111111111111111111111111111111111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8532,
-        "anomaly": 0.5336,
-        "composite": 0.8247
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_ball_lightning",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Ball Lightning\", \"description\": \"Experimental production of artificial ball lightning\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111011111111111111111111111011111111111111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.7872,
-        "anomaly": 0.5681,
-        "composite": 0.8069
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_earthquake_machine",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Mechanical Oscillator\", \"description\": \"Electromechanical oscillator, alleged earthquake effects\"}"
-      },
-      "cluster": 4,
-      "fingerprint_48bit": "111101111111111110111111111111111111111111111111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.7679,
-        "anomaly": 0.5191,
-        "composite": 0.787
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_bladeless_turbine",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Bladeless Turbine\", \"description\": \"Boundary layer disk turbine for fluid propulsion\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111010111111111111111111111011111111101111",
-      "flips": 44,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.7952,
-        "anomaly": 0.4658,
-        "composite": 0.7845
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_remote_control",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Remote Control (Teleautomaton)\", \"description\": \"First radio-controlled vehicle, demonstrated 1898\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111011111111111101111111111111111111101111",
-      "flips": 45,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8176,
-        "anomaly": 0.4261,
-        "composite": 0.7836
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_rotating_magnetic_field",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Rotating Magnetic Field\", \"description\": \"Fundamental principle behind AC motors\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111110111111111111111011111111111111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.734,
-        "anomaly": 0.5137,
-        "composite": 0.772
-      }
-    },
-    {
-      "entity": {
-        "name": "concept_tesla_coil",
-        "type": "concept",
-        "attributes": "{\"concept_name\": \"Tesla Coil\", \"description\": \"Resonant transformer for high-voltage, high-frequency experiments\"}"
-      },
-      "cluster": 1,
-      "fingerprint_48bit": "111111111111111101110111111011111111111111001101",
-      "flips": 42,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6057,
-        "anomaly": 0.6035,
-        "composite": 0.7431
+        "composite": 0.9542
       }
     },
     {
@@ -1907,77 +2564,109 @@
         "attributes": "{\"concept_name\": \"World Wireless System\", \"description\": \"Global communication and power distribution network\"}"
       },
       "cluster": 6,
-      "fingerprint_48bit": "111111111111111111111100111111111111111111111111",
+      "fingerprint_48bit": "111111111011111111111111111111111111111110111111",
       "flips": 46,
       "scores": {
         "diversity": 0.5,
-        "reconstruction": 0.8573,
-        "anomaly": 0.7066,
-        "composite": 0.6946
+        "reconstruction": 0.8213,
+        "anomaly": 0.9576,
+        "composite": 0.7429
       }
     },
     {
       "entity": {
-        "name": "concept_alternating_current",
+        "name": "concept_cosmic_rays",
         "type": "concept",
-        "attributes": "{\"concept_name\": \"Alternating Current (AC)\", \"description\": \"The foundation of modern power distribution\"}"
+        "attributes": "{\"concept_name\": \"Cosmic Ray Motor\", \"description\": \"Theoretical motor powered by cosmic radiation\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 0.5,
-        "reconstruction": 0.816,
-        "anomaly": 0.687,
-        "composite": 0.6732
+        "diversity": 0.2,
+        "reconstruction": 0.8464,
+        "anomaly": 0.9098,
+        "composite": 0.636
       }
     },
     {
       "entity": {
-        "name": "concept_radiant_energy",
+        "name": "concept_earth_resonance",
         "type": "concept",
-        "attributes": "{\"concept_name\": \"Radiant Energy\", \"description\": \"Capture of energy from natural radiation\"}"
+        "attributes": "{\"concept_name\": \"Earth Resonance\", \"description\": \"Using Earth's natural electromagnetic resonance\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7726,
-        "anomaly": 0.7033,
-        "composite": 0.4879
+        "diversity": 0.0057,
+        "reconstruction": 0.9128,
+        "anomaly": 0.9727,
+        "composite": 0.6103
       }
     },
     {
       "entity": {
-        "name": "concept_plasma",
+        "name": "concept_remote_control",
         "type": "concept",
-        "attributes": "{\"concept_name\": \"High-Frequency Plasma\", \"description\": \"Early plasma physics experiments\"}"
+        "attributes": "{\"concept_name\": \"Remote Control (Teleautomaton)\", \"description\": \"First radio-controlled vehicle, demonstrated 1898\"}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111111111111111111111111111011111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.8071,
+        "anomaly": 0.834,
+        "composite": 0.6013
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_magnifying_transmitter",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Magnifying Transmitter\", \"description\": \"Enhanced Tesla coil for global energy transmission\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.7749,
+        "anomaly": 0.8469,
+        "composite": 0.5917
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_rotating_magnetic_field",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Rotating Magnetic Field\", \"description\": \"Fundamental principle behind AC motors\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7267,
-        "anomaly": 0.7543,
-        "composite": 0.4823
+        "diversity": 0.0057,
+        "reconstruction": 0.8396,
+        "anomaly": 0.9505,
+        "composite": 0.5755
       }
     },
     {
       "entity": {
-        "name": "concept_x_ray",
+        "name": "concept_ball_lightning",
         "type": "concept",
-        "attributes": "{\"concept_name\": \"X-Ray Experimentation\", \"description\": \"Early X-ray imaging experiments, shadow photographs\"}"
+        "attributes": "{\"concept_name\": \"Ball Lightning\", \"description\": \"Experimental production of artificial ball lightning\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7509,
-        "anomaly": 0.6435,
-        "composite": 0.4643
+        "diversity": 0.0057,
+        "reconstruction": 0.7992,
+        "anomaly": 0.9834,
+        "composite": 0.5675
       }
     },
     {
@@ -1990,106 +2679,138 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7259,
-        "anomaly": 0.5324,
-        "composite": 0.4265
+        "diversity": 0.0057,
+        "reconstruction": 0.7904,
+        "anomaly": 0.9828,
+        "composite": 0.5638
       }
     },
     {
       "entity": {
-        "name": "location_edison_machine_works",
-        "type": "location",
-        "attributes": "{\"location_name\": \"Edison Machine Works, New York\", \"location_type\": \"employment\", \"significance\": \"Tesla's brief employment under Edison\"}"
+        "name": "concept_tesla_coil",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Tesla Coil\", \"description\": \"Resonant transformer for high-voltage, high-frequency experiments\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "110101111110011111111111110111111011111110111111",
-      "flips": 41,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8146,
-        "anomaly": 1.0,
-        "composite": 0.9258
-      }
-    },
-    {
-      "entity": {
-        "name": "location_new_york_lab_south_5th",
-        "type": "location",
-        "attributes": "{\"location_name\": \"South Fifth Avenue Lab, New York\", \"location_type\": \"laboratory\", \"significance\": \"Tesla's lab destroyed by fire, 1895\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111111111111111110111111111111111111110111",
-      "flips": 46,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8067,
-        "anomaly": 0.9459,
-        "composite": 0.9091
-      }
-    },
-    {
-      "entity": {
-        "name": "location_new_yorker_hotel",
-        "type": "location",
-        "attributes": "{\"location_name\": \"New Yorker Hotel, Room 3327\", \"location_type\": \"residence\", \"significance\": \"Tesla's final residence, died here 1943\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111110111111111111111111111111111111111111111",
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
       "flips": 47,
       "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6851,
-        "anomaly": 0.7088,
-        "composite": 0.8012
+        "diversity": 0.2,
+        "reconstruction": 0.6983,
+        "anomaly": 0.8552,
+        "composite": 0.5631
       }
     },
     {
       "entity": {
-        "name": "location_waldorf_astoria",
-        "type": "location",
-        "attributes": "{\"location_name\": \"Waldorf-Astoria Hotel\", \"location_type\": \"residence\", \"significance\": \"Tesla's residence for 20 years\"}"
+        "name": "concept_wardenclyffe_system",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Wardenclyffe Tower System\", \"description\": \"Wireless power transmission tower on Long Island\"}"
       },
-      "cluster": 3,
-      "fingerprint_48bit": "111011111111111111111111111111111111111111100111",
-      "flips": 45,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.64,
-        "anomaly": 0.6644,
-        "composite": 0.7721
+        "diversity": 0.0057,
+        "reconstruction": 0.8085,
+        "anomaly": 0.8772,
+        "composite": 0.5447
       }
     },
     {
       "entity": {
-        "name": "location_new_york_lab_houston_st",
-        "type": "location",
-        "attributes": "{\"location_name\": \"Houston Street Lab, New York\", \"location_type\": \"laboratory\", \"significance\": \"Lab where Tesla developed high-frequency experiments\"}"
+        "name": "concept_wireless_transmission",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Wireless Transmission of Energy\", \"description\": \"Transmission of power without wires through the Earth\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
-      "flips": 47,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 0.5,
-        "reconstruction": 0.8344,
-        "anomaly": 0.9369,
-        "composite": 0.743
+        "diversity": 0.0057,
+        "reconstruction": 0.8304,
+        "anomaly": 0.7889,
+        "composite": 0.5314
       }
     },
     {
       "entity": {
-        "name": "location_strasbourg",
-        "type": "location",
-        "attributes": "{\"location_name\": \"Strasbourg\", \"location_type\": \"early_career\", \"significance\": \"First AC motor prototype built here\"}"
+        "name": "concept_radio",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Radio Communication\", \"description\": \"Wireless signaling, priority dispute with Marconi\"}"
       },
-      "cluster": 2,
-      "fingerprint_48bit": "111111111011111111111111111111111111111111101111",
-      "flips": 46,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6041,
-        "anomaly": 0.5916,
-        "composite": 0.7395
+        "diversity": 0.0057,
+        "reconstruction": 0.7058,
+        "anomaly": 0.9775,
+        "composite": 0.5287
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_x_ray",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"X-Ray Experimentation\", \"description\": \"Early X-ray imaging experiments, shadow photographs\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8021,
+        "anomaly": 0.8109,
+        "composite": 0.5255
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_death_ray",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Directed Energy Weapon (Teleforce)\", \"description\": \"Charged particle beam weapon concept\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7669,
+        "anomaly": 0.8375,
+        "composite": 0.5181
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_plasma",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"High-Frequency Plasma\", \"description\": \"Early plasma physics experiments\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7449,
+        "anomaly": 0.8338,
+        "composite": 0.5084
+      }
+    },
+    {
+      "entity": {
+        "name": "concept_radiant_energy",
+        "type": "concept",
+        "attributes": "{\"concept_name\": \"Radiant Energy\", \"description\": \"Capture of energy from natural radiation\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7273,
+        "anomaly": 0.8435,
+        "composite": 0.5038
       }
     },
     {
@@ -2099,29 +2820,109 @@
         "attributes": "{\"location_name\": \"World's Columbian Exposition, Chicago\", \"location_type\": \"exhibition\", \"significance\": \"AC power demonstration, 1893\"}"
       },
       "cluster": 6,
-      "fingerprint_48bit": "110111111111111111111111111111111011111111111111",
-      "flips": 46,
+      "fingerprint_48bit": "111111111111111111100011111111111111111110111111",
+      "flips": 44,
       "scores": {
-        "diversity": 0.5,
-        "reconstruction": 0.8754,
-        "anomaly": 0.7829,
-        "composite": 0.7209
+        "diversity": 1.0,
+        "reconstruction": 0.8148,
+        "anomaly": 0.9918,
+        "composite": 0.9239
       }
     },
     {
       "entity": {
-        "name": "location_smiljan",
+        "name": "location_wardenclyffe",
         "type": "location",
-        "attributes": "{\"location_name\": \"Smiljan, Croatia\", \"location_type\": \"birthplace\", \"significance\": \"Tesla's birthplace, 1856\"}"
+        "attributes": "{\"location_name\": \"Wardenclyffe Tower, Shoreham, Long Island\", \"location_type\": \"laboratory\", \"significance\": \"Wireless transmission tower, 1901-1917\"}"
+      },
+      "cluster": 8,
+      "fingerprint_48bit": "111111111111101111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.2,
+        "reconstruction": 0.7699,
+        "anomaly": 0.8354,
+        "composite": 0.5868
+      }
+    },
+    {
+      "entity": {
+        "name": "location_strasbourg",
+        "type": "location",
+        "attributes": "{\"location_name\": \"Strasbourg\", \"location_type\": \"early_career\", \"significance\": \"First AC motor prototype built here\"}"
+      },
+      "cluster": 5,
+      "fingerprint_48bit": "111111110111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.7415,
+        "anomaly": 0.678,
+        "composite": 0.5828
+      }
+    },
+    {
+      "entity": {
+        "name": "location_new_york_lab_south_5th",
+        "type": "location",
+        "attributes": "{\"location_name\": \"South Fifth Avenue Lab, New York\", \"location_type\": \"laboratory\", \"significance\": \"Tesla's lab destroyed by fire, 1895\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.752,
-        "anomaly": 0.9807,
-        "composite": 0.549
+        "diversity": 0.0057,
+        "reconstruction": 0.7956,
+        "anomaly": 1.0,
+        "composite": 0.5702
+      }
+    },
+    {
+      "entity": {
+        "name": "location_edison_machine_works",
+        "type": "location",
+        "attributes": "{\"location_name\": \"Edison Machine Works, New York\", \"location_type\": \"employment\", \"significance\": \"Tesla's brief employment under Edison\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111011111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.7389,
+        "anomaly": 0.7414,
+        "composite": 0.5684
+      }
+    },
+    {
+      "entity": {
+        "name": "location_new_yorker_hotel",
+        "type": "location",
+        "attributes": "{\"location_name\": \"New Yorker Hotel, Room 3327\", \"location_type\": \"residence\", \"significance\": \"Tesla's final residence, died here 1943\"}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.6952,
+        "anomaly": 0.719,
+        "composite": 0.5162
+      }
+    },
+    {
+      "entity": {
+        "name": "location_new_york_lab_houston_st",
+        "type": "location",
+        "attributes": "{\"location_name\": \"Houston Street Lab, New York\", \"location_type\": \"laboratory\", \"significance\": \"Lab where Tesla developed high-frequency experiments\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7453,
+        "anomaly": 0.7627,
+        "composite": 0.4908
       }
     },
     {
@@ -2130,14 +2931,14 @@
         "type": "location",
         "attributes": "{\"location_name\": \"Graz Polytechnic\", \"location_type\": \"education\", \"significance\": \"Where Tesla studied engineering\"}"
       },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
-      "flips": 47,
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
       "scores": {
-        "diversity": 0.3333,
-        "reconstruction": 0.6239,
-        "anomaly": 0.72,
-        "composite": 0.5462
+        "diversity": 0.0057,
+        "reconstruction": 0.7111,
+        "anomaly": 0.8042,
+        "composite": 0.4875
       }
     },
     {
@@ -2150,26 +2951,42 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.7501,
-        "anomaly": 0.8539,
-        "composite": 0.5166
+        "diversity": 0.0057,
+        "reconstruction": 0.7318,
+        "anomaly": 0.7689,
+        "composite": 0.4869
       }
     },
     {
       "entity": {
-        "name": "location_wardenclyffe",
+        "name": "location_smiljan",
         "type": "location",
-        "attributes": "{\"location_name\": \"Wardenclyffe Tower, Shoreham, Long Island\", \"location_type\": \"laboratory\", \"significance\": \"Wireless transmission tower, 1901-1917\"}"
+        "attributes": "{\"location_name\": \"Smiljan, Croatia\", \"location_type\": \"birthplace\", \"significance\": \"Tesla's birthplace, 1856\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6832,
-        "anomaly": 0.7351,
-        "composite": 0.4601
+        "diversity": 0.0057,
+        "reconstruction": 0.7222,
+        "anomaly": 0.7635,
+        "composite": 0.4818
+      }
+    },
+    {
+      "entity": {
+        "name": "location_budapest",
+        "type": "location",
+        "attributes": "{\"location_name\": \"Budapest Telephone Exchange\", \"location_type\": \"early_career\", \"significance\": \"Where Tesla conceived the rotating magnetic field\"}"
+      },
+      "cluster": 1,
+      "fingerprint_48bit": "110111111111111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.6141,
+        "anomaly": 0.6517,
+        "composite": 0.4669
       }
     },
     {
@@ -2182,26 +2999,26 @@
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.5957,
-        "anomaly": 0.7709,
-        "composite": 0.4341
+        "diversity": 0.0057,
+        "reconstruction": 0.6781,
+        "anomaly": 0.7548,
+        "composite": 0.4619
       }
     },
     {
       "entity": {
-        "name": "location_budapest",
+        "name": "location_waldorf_astoria",
         "type": "location",
-        "attributes": "{\"location_name\": \"Budapest Telephone Exchange\", \"location_type\": \"early_career\", \"significance\": \"Where Tesla conceived the rotating magnetic field\"}"
+        "attributes": "{\"location_name\": \"Waldorf-Astoria Hotel\", \"location_type\": \"residence\", \"significance\": \"Tesla's residence for 20 years\"}"
       },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6345,
-        "anomaly": 0.6618,
-        "composite": 0.4223
+        "diversity": 0.0057,
+        "reconstruction": 0.6897,
+        "anomaly": 0.6599,
+        "composite": 0.4429
       }
     },
     {
@@ -2211,61 +3028,13 @@
         "attributes": "{\"title\": \"Dr. John G. Trump MIT Examination Report\", \"date_range\": \"1943\", \"description\": \"Trump's assessment that papers contained no weaponizable technology\", \"source\": \"FBI/FOIA\"}"
       },
       "cluster": 6,
-      "fingerprint_48bit": "110111111011111111111101110111111111111111110111",
-      "flips": 43,
+      "fingerprint_48bit": "111111111011111111111111111111111111111110111111",
+      "flips": 46,
       "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.817,
-        "anomaly": 0.9687,
-        "composite": 0.919
-      }
-    },
-    {
-      "entity": {
-        "name": "document_fbi_part2",
-        "type": "document",
-        "attributes": "{\"title\": \"FBI File Part 2 of 3\", \"date_range\": \"1943-2016\", \"description\": \"Contains inventory of seized papers and equipment\", \"source\": \"FBI/FOIA\"}"
-      },
-      "cluster": 6,
-      "fingerprint_48bit": "110111111011111111111111111111111011111111111101",
-      "flips": 44,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.8048,
-        "anomaly": 0.8587,
-        "composite": 0.8866
-      }
-    },
-    {
-      "entity": {
-        "name": "document_fbi_part1",
-        "type": "document",
-        "attributes": "{\"title\": \"FBI File Part 1 of 3\", \"date_range\": \"1943-2016\", \"description\": \"FOIA release of 253 pages on Tesla investigation\", \"source\": \"FBI/FOIA\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111111111111111111111111111110111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.6387,
-        "anomaly": 0.8292,
-        "composite": 0.8128
-      }
-    },
-    {
-      "entity": {
-        "name": "document_kosanovic_file",
-        "type": "document",
-        "attributes": "{\"title\": \"Sava Kosanovic Investigation File\", \"date_range\": \"1943-1950\", \"description\": \"FBI surveillance of Tesla's nephew as Yugoslav ambassador\", \"source\": \"FBI/FOIA\"}"
-      },
-      "cluster": 3,
-      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
-      "flips": 47,
-      "scores": {
-        "diversity": 1.0,
-        "reconstruction": 0.652,
-        "anomaly": 0.5009,
-        "composite": 0.736
+        "diversity": 0.5,
+        "reconstruction": 0.7458,
+        "anomaly": 0.7166,
+        "composite": 0.6525
       }
     },
     {
@@ -2274,14 +3043,14 @@
         "type": "document",
         "attributes": "{\"title\": \"FBI File Part 3 of 3\", \"date_range\": \"1943-2016\", \"description\": \"Additional 64 pages released March 2018\", \"source\": \"FBI/FOIA\"}"
       },
-      "cluster": 6,
-      "fingerprint_48bit": "111111111011111111111111111111111111111111111111",
-      "flips": 47,
+      "cluster": 3,
+      "fingerprint_48bit": "110111111111111111111111111101111111111111111111",
+      "flips": 46,
       "scores": {
         "diversity": 0.3333,
-        "reconstruction": 0.7341,
+        "reconstruction": 0.6727,
         "anomaly": 1.0,
-        "composite": 0.6603
+        "composite": 0.6358
       }
     },
     {
@@ -2290,14 +3059,14 @@
         "type": "document",
         "attributes": "{\"title\": \"Office of Alien Property Seizure Report\", \"date_range\": \"1943\", \"description\": \"Initial seizure of Tesla's belongings from New Yorker Hotel\", \"source\": \"FBI/FOIA\"}"
       },
-      "cluster": 0,
-      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
-      "flips": 48,
+      "cluster": 5,
+      "fingerprint_48bit": "111111110111111111111111111111111111111111111111",
+      "flips": 47,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6272,
-        "anomaly": 0.8948,
-        "composite": 0.4777
+        "diversity": 0.3333,
+        "reconstruction": 0.605,
+        "anomaly": 0.729,
+        "composite": 0.5409
       }
     },
     {
@@ -2306,14 +3075,446 @@
         "type": "document",
         "attributes": "{\"title\": \"Papers Shipped to Belgrade\", \"date_range\": \"1952\", \"description\": \"80 trunks of Tesla's papers shipped to Nikola Tesla Museum\", \"source\": \"FBI/FOIA\"}"
       },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111011111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.6589,
+        "anomaly": 0.7235,
+        "composite": 0.5319
+      }
+    },
+    {
+      "entity": {
+        "name": "document_kosanovic_file",
+        "type": "document",
+        "attributes": "{\"title\": \"Sava Kosanovic Investigation File\", \"date_range\": \"1943-1950\", \"description\": \"FBI surveillance of Tesla's nephew as Yugoslav ambassador\", \"source\": \"FBI/FOIA\"}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111101111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5594,
+        "anomaly": 0.461,
+        "composite": 0.514
+      }
+    },
+    {
+      "entity": {
+        "name": "document_fbi_part2",
+        "type": "document",
+        "attributes": "{\"title\": \"FBI File Part 2 of 3\", \"date_range\": \"1943-2016\", \"description\": \"Contains inventory of seized papers and equipment\", \"source\": \"FBI/FOIA\"}"
+      },
       "cluster": 0,
       "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
       "flips": 48,
       "scores": {
-        "diversity": 0.0088,
-        "reconstruction": 0.6316,
-        "anomaly": 0.7984,
-        "composite": 0.4553
+        "diversity": 0.0057,
+        "reconstruction": 0.6681,
+        "anomaly": 0.7019,
+        "composite": 0.4447
+      }
+    },
+    {
+      "entity": {
+        "name": "document_fbi_part1",
+        "type": "document",
+        "attributes": "{\"title\": \"FBI File Part 1 of 3\", \"date_range\": \"1943-2016\", \"description\": \"FOIA release of 253 pages on Tesla investigation\", \"source\": \"FBI/FOIA\"}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6167,
+        "anomaly": 0.5933,
+        "composite": 0.397
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_leaves_edison",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Leaves Edison after dispute\", \"date\": \"1885-01-01\", \"description\": \"Disagreement over payment\", \"year\": 1885}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111111111111101111101111111111111111101111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9164,
+        "anomaly": 1.0,
+        "composite": 0.9666
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_morgan_withdraws",
+        "type": "event",
+        "attributes": "{\"event_name\": \"J.P. Morgan refuses additional funding\", \"date\": \"1904-01-01\", \"description\": \"Wardenclyffe project stalls\", \"year\": 1904}"
+      },
+      "cluster": 3,
+      "fingerprint_48bit": "110111110111011111111111111111111111111111111111",
+      "flips": 45,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8559,
+        "anomaly": 0.888,
+        "composite": 0.9143
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_birth",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Born in Smiljan\", \"date\": \"1856-07-10\", \"description\": \"Midnight during thunderstorm\", \"year\": 1856}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111011101111111111111111111111111111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8264,
+        "anomaly": 0.8332,
+        "composite": 0.8889
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_colorado_springs",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Begins Colorado Springs experiments\", \"date\": \"1899-06-01\", \"description\": \"High-voltage wireless tests\", \"year\": 1899}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111101",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8696,
+        "anomaly": 0.747,
+        "composite": 0.8846
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_ac_patents",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Files foundational AC patents\", \"date\": \"1888-05-01\", \"description\": \"7 patents in one day\", \"year\": 1888}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111001111111111111111101011111111111111111",
+      "flips": 44,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8454,
+        "anomaly": 0.7452,
+        "composite": 0.8745
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_rotating_field",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Discovers rotating magnetic field principle\", \"date\": \"1882-02-01\", \"description\": \"Budapest City Park revelation\", \"year\": 1882}"
+      },
+      "cluster": 7,
+      "fingerprint_48bit": "111111111111101111111111111111111111101111111111",
+      "flips": 46,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7821,
+        "anomaly": 0.801,
+        "composite": 0.8631
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_citizenship",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Becomes US citizen\", \"date\": \"1891-07-30\", \"description\": \"New York City\", \"year\": 1891}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111110111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7849,
+        "anomaly": 0.6256,
+        "composite": 0.8203
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_wardenclyffe_demolished",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Wardenclyffe Tower demolished\", \"date\": \"1917-07-04\", \"description\": \"Dynamited for scrap\", \"year\": 1917}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.9178,
+        "anomaly": 0.6244,
+        "composite": 0.5816
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_westinghouse_deal",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Licenses patents to Westinghouse\", \"date\": \"1888-07-01\", \"description\": \"$60,000 + royalties\", \"year\": 1888}"
+      },
+      "cluster": 6,
+      "fingerprint_48bit": "111111111011111111111111111111111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.835,
+        "anomaly": 0.5865,
+        "composite": 0.5681
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_trump_examines",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Dr. John Trump examines papers\", \"date\": \"1943-01-26\", \"description\": \"Concludes no weaponizable technology\", \"year\": 1943}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.9,
+        "anomaly": 0.8196,
+        "composite": 0.5669
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_morgan_funding",
+        "type": "event",
+        "attributes": "{\"event_name\": \"J.P. Morgan provides $150,000\", \"date\": \"1901-03-01\", \"description\": \"For Wardenclyffe project\", \"year\": 1901}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.9509,
+        "anomaly": 0.7254,
+        "composite": 0.5637
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_fbi_declassified",
+        "type": "event",
+        "attributes": "{\"event_name\": \"FBI declassifies Tesla files\", \"date\": \"2016-09-21\", \"description\": \"250+ pages released\", \"year\": 2016}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8644,
+        "anomaly": 0.8411,
+        "composite": 0.558
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_wardenclyffe_begins",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Construction of Wardenclyffe Tower begins\", \"date\": \"1901-01-01\", \"description\": \"Shoreham, Long Island\", \"year\": 1901}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8851,
+        "anomaly": 0.776,
+        "composite": 0.5501
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_papers_belgrade",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Papers shipped to Belgrade museum\", \"date\": \"1952-01-01\", \"description\": \"80 trunks to Nikola Tesla Museum\", \"year\": 1952}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8503,
+        "anomaly": 0.8145,
+        "composite": 0.5457
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_artificial_lightning",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Creates artificial lightning bolts\", \"date\": \"1899-07-01\", \"description\": \"130-foot discharges\", \"year\": 1899}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8753,
+        "anomaly": 0.7403,
+        "composite": 0.5372
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_papers_seized",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Government seizes Tesla's papers\", \"date\": \"1943-01-09\", \"description\": \"Office of Alien Property\", \"year\": 1943}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8284,
+        "anomaly": 0.743,
+        "composite": 0.5191
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_radio_demo",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Demonstrates radio-controlled boat\", \"date\": \"1898-09-01\", \"description\": \"Madison Square Garden, New York\", \"year\": 1898}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8376,
+        "anomaly": 0.6897,
+        "composite": 0.5095
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_arrives_america",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Arrives in New York City\", \"date\": \"1884-06-06\", \"description\": \"With 4 cents in his pocket\", \"year\": 1884}"
+      },
+      "cluster": 4,
+      "fingerprint_48bit": "111111111111111111111111111101111111111111111111",
+      "flips": 47,
+      "scores": {
+        "diversity": 0.1667,
+        "reconstruction": 0.777,
+        "anomaly": 0.5519,
+        "composite": 0.5071
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_lab_fire",
+        "type": "event",
+        "attributes": "{\"event_name\": \"South Fifth Avenue lab destroyed by fire\", \"date\": \"1895-03-13\", \"description\": \"Years of research lost\", \"year\": 1895}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8156,
+        "anomaly": 0.6897,
+        "composite": 0.5007
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_death",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Dies at New Yorker Hotel\", \"date\": \"1943-01-07\", \"description\": \"Room 3327, age 86\", \"year\": 1943}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8294,
+        "anomaly": 0.6195,
+        "composite": 0.4886
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_edison_employment",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Hired by Thomas Edison\", \"date\": \"1884-06-08\", \"description\": \"Edison Machine Works\", \"year\": 1884}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7915,
+        "anomaly": 0.654,
+        "composite": 0.4821
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_cosmic_signals",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Claims to receive extraterrestrial signals\", \"date\": \"1899-12-01\", \"description\": \"Colorado Springs\", \"year\": 1899}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.8285,
+        "anomaly": 0.5837,
+        "composite": 0.4793
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_edison_medal",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Receives Edison Medal from AIEE\", \"date\": \"1917-05-18\", \"description\": \"Highest honor in electrical engineering\", \"year\": 1917}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.7973,
+        "anomaly": 0.5788,
+        "composite": 0.4656
+      }
+    },
+    {
+      "entity": {
+        "name": "event_event_first_motor",
+        "type": "event",
+        "attributes": "{\"event_name\": \"Builds first induction motor\", \"date\": \"1883-01-01\", \"description\": \"Strasbourg prototype\", \"year\": 1883}"
+      },
+      "cluster": 0,
+      "fingerprint_48bit": "111111111111111111111111111111111111111111111111",
+      "flips": 48,
+      "scores": {
+        "diversity": 0.0057,
+        "reconstruction": 0.6365,
+        "anomaly": 0.8253,
+        "composite": 0.4629
       }
     }
   ]
