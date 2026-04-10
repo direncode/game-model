@@ -665,7 +665,12 @@ export default function BTUTPage() {
               { l: "Time", v: `${status.wall_seconds.toFixed(1)}s` },
             ].map(({ l, v }) => <StatusCell key={l} label={l} value={v} />)}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/v1/btut/export/convergent?dataset=${datasetId}&top_n=500`}
+              target="_blank" rel="noopener noreferrer"
+              className="px-2 py-1 rounded text-[9px] font-mono bg-li-purple/10 text-li-purple border border-li-purple/20 hover:bg-li-purple/20">
+              Export Raw
+            </a>
             <div className="w-2 h-2 rounded-full bg-li-green animate-pulse" />
             <span className="text-[10px] font-mono text-li-green uppercase tracking-wider">Ready</span>
           </div>

@@ -200,6 +200,36 @@ async def btut_cluster_detail(cluster_id: int, dataset: str = Query(default="edg
 
 # ── Lineage + Report Endpoints ────────────────────────────────────────
 
+@router.get("/export/convergent")
+async def btut_export_all_convergent(
+    dataset: str = Query(default="edgar"),
+    top_n: int = Query(default=100, ge=1, le=1000),
+):
+    """Export raw convergent metadata for all survivors as JSON. Full BTUT provenance dump."""
+    from app.services.btut.lineage_tracer import LineageTracer
+
+    engine = _engine(dataset)
+    tracer = LineageTracer(engine)
+    survivors = engine.survivors(top_n=top_n)
+
+    export = []
+    for sv in survivors:
+        key = sv.get("ticker") or sv.get("name", "")
+        analysis = engine.analyze(key)
+        lineage = tracer.trace(key)
+        export.append({
+            "entity_key": key,
+            "analysis": analysis,
+            "lineage": lineage.to_dict() if lineage else None,
+        })
+
+    from fastapi.responses import JSONResponse
+    return JSONResponse(
+        content={"dataset": dataset, "count": len(export), "convergent_metadata": export},
+        headers={"Content-Disposition": f"attachment; filename=btut_{dataset}_convergent_export.json"},
+    )
+
+
 @router.get("/convergent/{entity_key}")
 async def btut_convergent_metadata(
     entity_key: str,
