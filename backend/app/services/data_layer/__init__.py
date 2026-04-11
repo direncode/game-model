@@ -11,8 +11,9 @@ routes calls through them and adds:
   2. Manifold projection: 8D unit hypersphere (compute) + 3D S² (display).
   3. Four-signal causal linking scaffold (cosine wired, 3 stubs).
   4. Vertical export contracts for niv / tcd_jepa / data.
-
-The ``LatentOceanDataLayer`` class is re-exported from here after Task 5
-of the implementation plan.
 """
 from __future__ import annotations
+
+from .core import LatentOceanDataLayer
+
+__all__ = ["LatentOceanDataLayer"]
