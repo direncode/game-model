@@ -25,6 +25,12 @@ from app.services.data_layer.manifold import (
     project_8d_to_unit_sphere,
     project_8d_to_s2,
 )
+from app.services.data_layer.linking import (
+    link_by_cosine,
+    link_by_foreign_key,
+    link_by_semantic_field,
+    link_by_url_hierarchy,
+)
 
 
 # ── Task 1: types + errors ──────────────────────────────────────────────
@@ -90,3 +96,34 @@ def test_project_8d_to_s2_degenerate_small_sample():
     coords = project_8d_to_s2(pts)
     assert coords.shape == (2, 3)
     assert np.all(np.isfinite(coords))
+
+
+# ── Task 3: causal linking scaffold ─────────────────────────────────────
+def test_link_by_cosine_identifies_identical_vectors():
+    s_a = [{"entity": {"name": "a0"}}, {"entity": {"name": "a1"}}]
+    s_b = [{"entity": {"name": "b0"}}, {"entity": {"name": "b1"}}]
+    e_a = np.array(
+        [[1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0]], dtype=np.float32
+    )
+    e_b = np.array(
+        [[1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0]], dtype=np.float32
+    )
+    links = link_by_cosine(s_a, e_a, s_b, e_b, threshold=0.9)
+    names = {(lk.source_a, lk.source_b) for lk in links}
+    assert ("a0", "b0") in names
+    assert ("a1", "b1") not in names
+    for lk in links:
+        assert lk.signal == "cosine"
+        assert 0.0 <= lk.strength <= 1.0 + 1e-6
+
+
+def test_link_by_cosine_handles_empty():
+    assert link_by_cosine([], np.zeros((0, 8)), [], np.zeros((0, 8))) == []
+
+
+def test_link_stubs_return_empty():
+    s_a = [{"entity": {"name": "x"}}]
+    s_b = [{"entity": {"name": "y"}}]
+    assert link_by_foreign_key(s_a, s_b) == []
+    assert link_by_semantic_field(s_a, s_b) == []
+    assert link_by_url_hierarchy(s_a, s_b) == []
