@@ -17,6 +17,7 @@ from app.api.v1.fsd import router as fsd_router
 from app.api.v1.btut import router as btut_router
 from app.api.v1.hub import router as hub_router
 from app.api.v1.latk import router as latk_router
+from app.api.v1.data_layer import router as data_layer_router
 from app.api.v1.ws import router as ws_router
 
 router = APIRouter()
@@ -35,6 +36,7 @@ router.include_router(alerts_router)
 router.include_router(fsd_router)
 router.include_router(btut_router)
 router.include_router(latk_router)
+router.include_router(data_layer_router)
 router.include_router(hub_router)
 router.include_router(ws_router)
 

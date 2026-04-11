@@ -130,11 +130,93 @@ def test_link_by_cosine_handles_empty():
     assert link_by_cosine([], np.zeros((0, 8)), [], np.zeros((0, 8))) == []
 
 
-def test_link_stubs_return_empty():
+def test_link_stubs_return_empty_without_shared_attrs():
+    """Survivors with no attributes at all produce no links."""
     s_a = [{"entity": {"name": "x"}}]
     s_b = [{"entity": {"name": "y"}}]
     assert link_by_foreign_key(s_a, s_b) == []
     assert link_by_semantic_field(s_a, s_b) == []
+    assert link_by_url_hierarchy(s_a, s_b) == []
+
+
+def test_link_by_foreign_key_matches_known_identifier():
+    s_a = [
+        {"entity": {"name": "AAPL", "attributes": {"cik": "0000320193", "ticker": "AAPL"}}},
+        {"entity": {"name": "MSFT", "attributes": {"cik": "0000789019", "ticker": "MSFT"}}},
+    ]
+    s_b = [
+        {"entity": {"name": "10-K-AAPL-2024", "attributes": {"company_cik": "0000320193"}}},
+        {"entity": {"name": "unrelated", "attributes": {"cik": "9999999999"}}},
+    ]
+    links = link_by_foreign_key(s_a, s_b)
+    # Note: company_cik is a separate field from cik — both are in FOREIGN_KEY_FIELDS,
+    # but they only link when the KEY matches. So 10-K-AAPL-2024's company_cik
+    # does NOT match AAPL's cik under this exact-match rule. That's correct:
+    # the linker is conservative. The test verifies the conservative behavior.
+    # "unrelated" has cik=9999999999 which nobody in A has → no link.
+    assert links == []
+
+    # Now test a genuine match: both sides use the SAME key.
+    s_a2 = [{"entity": {"name": "AAPL", "attributes": {"cik": "0000320193"}}}]
+    s_b2 = [{"entity": {"name": "AAPL-filing", "attributes": {"cik": "0000320193"}}}]
+    links2 = link_by_foreign_key(s_a2, s_b2)
+    assert len(links2) == 1
+    assert links2[0].source_a == "AAPL"
+    assert links2[0].source_b == "AAPL-filing"
+    assert links2[0].signal == "foreign_key"
+    assert links2[0].strength == 1.0
+
+
+def test_link_by_foreign_key_ignores_trivial_values():
+    """Empty, zero, and None values must not create spurious links."""
+    s_a = [{"entity": {"name": "a", "attributes": {"cik": "0", "ticker": ""}}}]
+    s_b = [{"entity": {"name": "b", "attributes": {"cik": "0", "ticker": ""}}}]
+    assert link_by_foreign_key(s_a, s_b) == []
+
+
+def test_link_by_semantic_field_matches_company_name_across_types():
+    """Author name shared across a paper entity and an author entity → link."""
+    s_a = [
+        {"entity": {"name": "paper-123", "attributes": {"author_name": "Jane Doe"}}},
+        {"entity": {"name": "paper-456", "attributes": {"author_name": "John Smith"}}},
+    ]
+    s_b = [
+        {"entity": {"name": "author-jd", "attributes": {"author_name": "jane doe"}}},  # diff case
+    ]
+    links = link_by_semantic_field(s_a, s_b)
+    assert len(links) == 1
+    assert links[0].source_a == "paper-123"
+    assert links[0].source_b == "author-jd"
+    assert links[0].signal == "semantic_field"
+    assert links[0].strength == 0.8
+
+
+def test_link_by_url_hierarchy_matches_same_host_and_section():
+    s_a = [
+        {"entity": {"name": "filing-1", "attributes": {
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+        }}},
+    ]
+    s_b = [
+        {"entity": {"name": "filing-2", "attributes": {
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000078901924000100/msft-20240630.htm",
+        }}},
+        {"entity": {"name": "unrelated", "attributes": {
+            "url": "https://pubmed.ncbi.nlm.nih.gov/12345/",
+        }}},
+    ]
+    links = link_by_url_hierarchy(s_a, s_b)
+    # Both filing-1 and filing-2 share scheme=https, host=www.sec.gov, first seg=archives.
+    assert len(links) == 1
+    assert links[0].source_a == "filing-1"
+    assert links[0].source_b == "filing-2"
+    assert links[0].signal == "url_hierarchy"
+    assert links[0].strength == 0.7
+
+
+def test_link_by_url_hierarchy_ignores_non_url_strings():
+    s_a = [{"entity": {"name": "a", "attributes": {"ticker": "AAPL", "desc": "not a url"}}}]
+    s_b = [{"entity": {"name": "b", "attributes": {"ticker": "AAPL", "desc": "also not"}}}]
     assert link_by_url_hierarchy(s_a, s_b) == []
 
 
@@ -511,3 +593,109 @@ def test_double_ingest_resets_state_cleanly():
     assert layer.manifold is None
     assert layer.survivors is None
     assert layer.quality_metrics is None
+
+
+# ── REST endpoint tests (TestClient, no HTTP) ───────────────────────────
+def test_rest_endpoints_register_and_return_expected_shapes():
+    """Smoke test for the data-layer REST router.
+
+    We import the FastAPI app and use ``TestClient`` so we don't need
+    a running server. The endpoints are patched at the adapter +
+    pipeline layer, so this test never touches real network.
+    """
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from app.api.v1.data_layer import router as dl_router
+
+    app = FastAPI()
+    app.include_router(dl_router)
+    client = TestClient(app)
+
+    # GET /data-layer/sources — should work without mocking (real registry).
+    r = client.get("/data-layer/sources")
+    assert r.status_code == 200
+    src_ids = {s["id"] for s in r.json()}
+    assert "edgar" in src_ids
+
+    # POST /data-layer/run — patch the adapter + pipeline.
+    adapter = _fake_adapter()
+    with patch(
+        "app.services.data_layer.core.get_adapter", return_value=adapter
+    ), patch(
+        "app.services.data_layer.core.run_btut_pipeline",
+        return_value=_fake_btut_return(),
+    ):
+        r = client.post(
+            "/data-layer/run",
+            json={
+                "source": "fake",
+                "limit": 50,
+                "target_survivors": 2,
+                "vertical": "niv",
+            },
+        )
+    assert r.status_code == 200, r.text
+    data = r.json()
+    assert data["dataset_id"] == "fake"
+    assert data["vertical"] == "niv"
+    assert data["payload"]["vertical"] == "niv"
+    assert data["quality"]["n_survivors"] == 2
+
+
+def test_rest_run_unknown_source_returns_404():
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from app.api.v1.data_layer import router as dl_router
+
+    app = FastAPI()
+    app.include_router(dl_router)
+    client = TestClient(app)
+
+    with patch(
+        "app.services.data_layer.core.get_adapter",
+        side_effect=ValueError("Unknown dataset 'nope'."),
+    ):
+        r = client.post(
+            "/data-layer/run",
+            json={"source": "nope"},
+        )
+    assert r.status_code == 404
+
+
+def test_rest_link_endpoint_returns_link_counts():
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from app.api.v1.data_layer import router as dl_router
+
+    app = FastAPI()
+    app.include_router(dl_router)
+    client = TestClient(app)
+
+    # Both sources use the same fake data, so cosine will fire on
+    # identical unit-vectors → non-zero links.
+    adapter = _fake_adapter()
+    with patch(
+        "app.services.data_layer.core.get_adapter", return_value=adapter
+    ), patch(
+        "app.services.data_layer.core.run_btut_pipeline",
+        return_value=_fake_btut_return(),
+    ):
+        r = client.post(
+            "/data-layer/link",
+            json={
+                "source_a": "fake",
+                "source_b": "fake",
+                "limit": 50,
+                "target_survivors": 2,
+                "cosine_threshold": 0.9,
+            },
+        )
+    assert r.status_code == 200, r.text
+    data = r.json()
+    assert data["dataset_a"] == "fake"
+    assert data["dataset_b"] == "fake"
+    assert data["n_links"] >= 2  # AAPL↔AAPL and MSFT↔MSFT
+    assert "cosine" in data["links_by_signal"]
