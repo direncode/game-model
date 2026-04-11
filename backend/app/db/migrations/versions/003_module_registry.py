@@ -22,12 +22,11 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.create_table(
         "module_registry",
-        sa.Column(
-            "id",
-            UUID(as_uuid=True),
-            primary_key=True,
-            server_default=sa.text("gen_random_uuid()"),
-        ),
+        # No server-side default for `id` — both the model and the
+        # ModuleRegistryService generate UUIDs in Python (uuid.uuid4),
+        # matching the convention from 001_initial / 002_auth_upgrade
+        # and avoiding an implicit pgcrypto extension dependency.
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column("vertical", sa.String(32), nullable=False),
         sa.Column("module_type", sa.String(32), nullable=False),
         sa.Column("module_hash", sa.String(64), nullable=False),
