@@ -31,6 +31,12 @@ from app.services.data_layer.linking import (
     link_by_semantic_field,
     link_by_url_hierarchy,
 )
+from app.services.data_layer.verticals import (
+    EXPORTERS,
+    export_niv,
+    export_tcd_jepa,
+    export_data,
+)
 
 
 # ── Task 1: types + errors ──────────────────────────────────────────────
@@ -127,3 +133,90 @@ def test_link_stubs_return_empty():
     assert link_by_foreign_key(s_a, s_b) == []
     assert link_by_semantic_field(s_a, s_b) == []
     assert link_by_url_hierarchy(s_a, s_b) == []
+
+
+# ── Task 4: vertical exporters ──────────────────────────────────────────
+def _make_fake_state():
+    """Build a namespace-like object mimicking core state for exporter tests."""
+    class FakeState:
+        pass
+
+    st = FakeState()
+    st.ingest_result = IngestResult(
+        source_id="edgar",
+        entities=[],
+        edges=[],
+        unique_types=["company"],
+        fetch_seconds=1.0,
+    )
+    st.btut_result = BTUTRunResult(
+        summary={"reduction": 10},
+        survivors=[],
+        embeddings_8d=np.zeros((2, 8), dtype=np.float32),
+        wall_seconds=2.0,
+    )
+    st.manifold = ManifoldCoords(
+        coords_8d_unit=np.ones((2, 8), dtype=np.float32) / np.sqrt(8),
+        coords_3d_s2=np.ones((2, 3), dtype=np.float32) / np.sqrt(3),
+        projection_method="l2_normalize_8d+pca_s2",
+    )
+    st.survivors = [
+        Survivor(
+            entity={"name": "AAPL", "type": "company"},
+            cluster=0,
+            scores={"composite": 0.9},
+            fingerprint="0101",
+            coord_8d=[1.0] + [0.0] * 7,
+            coord_3d=[1.0, 0.0, 0.0],
+        ),
+        Survivor(
+            entity={"name": "MSFT", "type": "company"},
+            cluster=1,
+            scores={"composite": 0.8},
+            fingerprint="1010",
+            coord_8d=[0.0, 1.0] + [0.0] * 6,
+            coord_3d=[0.0, 1.0, 0.0],
+        ),
+    ]
+    st.quality_metrics = QualityMetrics(
+        n_input=20,
+        n_survivors=2,
+        reduction_ratio=10,
+        variance_preservation=0.85,
+        wall_seconds=3.0,
+        estimated_cost_usd=0.05,
+    )
+    return st
+
+
+def test_export_niv_has_expected_keys():
+    payload = export_niv(_make_fake_state())
+    assert payload["vertical"] == "niv"
+    assert payload["dataset_id"] == "edgar"
+    assert payload["n_survivors"] == 2
+    assert len(payload["survivors"]) == 2
+    assert "quality" in payload
+    assert "coord_8d" in payload["survivors"][0]
+
+
+def test_export_tcd_jepa_is_matrix_shaped():
+    payload = export_tcd_jepa(_make_fake_state())
+    assert payload["vertical"] == "tcd_jepa"
+    assert len(payload["embeddings_8d"]) == 2
+    assert len(payload["embeddings_8d"][0]) == 8
+    assert payload["entity_ids"] == ["AAPL", "MSFT"]
+    assert payload["entity_types"] == ["company", "company"]
+
+
+def test_export_data_contains_everything():
+    payload = export_data(_make_fake_state())
+    assert payload["vertical"] == "data"
+    assert "ingest" in payload
+    assert "btut_summary" in payload
+    assert "manifold" in payload
+    assert "coords_8d_unit" in payload["manifold"]
+    assert "coords_3d_s2" in payload["manifold"]
+
+
+def test_exporters_registry_has_three():
+    assert set(EXPORTERS.keys()) == {"niv", "tcd_jepa", "data"}
