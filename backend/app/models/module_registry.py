@@ -12,7 +12,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 
-from sqlalchemy import String, Float, Text, Index, text
+from sqlalchemy import Float, Index, String, Text, UniqueConstraint, text
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -46,11 +46,10 @@ class ModuleRegistryEntry(Base):
     created_at: Mapped[datetime] = mapped_column(server_default=text("now()"))
 
     __table_args__ = (
-        Index(
-            "uq_module_registry_provenance_hash",
+        UniqueConstraint(
             "provenance_job_id",
             "module_hash",
-            unique=True,
+            name="uq_module_registry_provenance_hash",
         ),
         Index("ix_module_registry_vertical", "vertical"),
         Index("ix_module_registry_quality", "quality_score"),
