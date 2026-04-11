@@ -56,7 +56,9 @@ def main() -> int:
         layer.export_for_vertical(vertical, write_path=path)
 
     q = layer.get_quality_metrics()
-    print("\n[demo] ─── Quality Metrics ─────────────────────")
+    # Plain ASCII only — Windows cp1252 consoles choke on box-drawing chars.
+    print("")
+    print("[demo] --- Quality Metrics -----------------------")
     print(f"  n_input               : {q.n_input}")
     print(f"  n_survivors           : {q.n_survivors}")
     print(f"  reduction_ratio       : {q.reduction_ratio}x")
