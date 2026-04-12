@@ -14,7 +14,7 @@ interface FranklinState {
 }
 
 export const useFranklinStore = create<FranklinState>((set) => ({
-  selectedHour: new Date().getHours(),
+  selectedHour: 12, // static default; hydrated client-side in HourSlider
   selectedVenue: null,
   venueSearch: "",
   amenityFilter: null,

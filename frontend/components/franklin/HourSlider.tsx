@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useFranklinStore } from "@/stores/franklin";
 
 const formatHour = (h: number) => {
@@ -10,6 +11,14 @@ const formatHour = (h: number) => {
 
 export default function HourSlider() {
   const { selectedHour, setHour } = useFranklinStore();
+  const hydrated = useRef(false);
+
+  useEffect(() => {
+    if (!hydrated.current) {
+      hydrated.current = true;
+      setHour(new Date().getHours());
+    }
+  }, [setHour]);
 
   return (
     <div className="flex items-center gap-4">
