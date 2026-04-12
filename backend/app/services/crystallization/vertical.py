@@ -60,37 +60,38 @@ class TCDJEPAVertical:
         )
 
     # ──────────────────────── stage 2: crystallize ────────────────────────
-    async def crystallize(self) -> list[CrystallizedModule]:
-        """Stage 2 — delegate to the existing TCDJEPAWrapper batch path."""
+    async def crystallize(
+        self,
+        *,
+        job_id: str | None = None,
+        progress_callback: Any | None = None,
+    ) -> list[CrystallizedModule]:
+        """Stage 2 — run TCD-JEPA crystallization.
+
+        Execution strategy (mirrors job_manager.py):
+        1. Try RunPod GPU if configured (budget + cooldown enforced).
+        2. Fall back to local TCDJEPAWrapper (GPU or CPU).
+        3. Extract modules from whichever path succeeded.
+        """
         if self.current_bundle is None:
             raise TCDVerticalError(
                 "must ingest a BTUTSurvivorBundle before crystallize()",
                 stage="crystallize",
             )
-        if self._wrapper is None:
-            raise TCDVerticalError(
-                "no TCDJEPAWrapper configured on this vertical",
-                stage="crystallize",
-            )
+
+        bundle = self.current_bundle
+        provenance = (bundle.metadata or {}).get("provenance_job_id")
+        effective_job_id = job_id or provenance or "tcd-adhoc"
 
         try:
-            from .bundle_serializer import serialize_bundle
-
-            config_path, data_dir = serialize_bundle(
-                self.current_bundle, self.config
-            )
-            result = await self._wrapper.run_training(
-                config_path=config_path,
-                data_path=data_dir,
-            )
-            checkpoint = result.get("checkpoint_path", "(latest)")
-            raw_modules = await self._wrapper.extract_modules(
-                checkpoint_path=checkpoint
+            training_result = await self._try_runpod(
+                bundle, effective_job_id, progress_callback
             )
         except Exception as exc:
             raise TCDVerticalError(str(exc), stage="crystallize") from exc
 
-        provenance = (self.current_bundle.metadata or {}).get("provenance_job_id")
+        raw_modules = training_result.get("modules", [])
+
         modules: list[CrystallizedModule] = []
         for i, raw in enumerate(raw_modules):
             modules.append(
@@ -107,6 +108,95 @@ class TCDJEPAVertical:
                 )
             )
         return modules
+
+    async def _try_runpod(
+        self,
+        bundle: BTUTSurvivorBundle,
+        job_id: str,
+        progress_callback: Any | None,
+    ) -> dict:
+        """Try RunPod first, fall back to local wrapper.
+
+        Matches the same RunPod → local → simulation cascade that
+        job_manager.py uses, but adapted for the vertical's bundle
+        input format.
+        """
+        from .bundle_serializer import serialize_bundle
+        from .runpod_client import is_runpod_configured
+
+        # Prepare the config + entities/edges for both RunPod and local paths.
+        config_path, data_dir = serialize_bundle(bundle, self.config)
+
+        import yaml
+        with open(config_path) as f:
+            config = yaml.safe_load(f)
+
+        # Build entity/edge lists in the format RunPodClient expects.
+        entities = [
+            {"name": eid, "index": i}
+            for i, eid in enumerate(bundle.ids)
+        ]
+        edges = [
+            {"source": bundle.ids[s], "target": bundle.ids[t], "weight": w}
+            for s, t, w in bundle.edges
+            if s < len(bundle.ids) and t < len(bundle.ids)
+        ]
+
+        # ── Path 1: RunPod GPU ───────────────────────────────────────
+        training_result = None
+        if is_runpod_configured():
+            try:
+                from .runpod_client import RunPodClient
+
+                client = RunPodClient()
+                logger.info(
+                    "TCD vertical: dispatching to RunPod (job=%s, %d entities)",
+                    job_id, len(entities),
+                )
+                training_result = await client.run_and_poll(
+                    entities=entities,
+                    edges=edges,
+                    config=config,
+                    dataset_id=f"tcd-vertical-{self.preset.value}",
+                    job_id=job_id,
+                    progress_callback=progress_callback,
+                    poll_interval=2.0,
+                    timeout=3600,
+                )
+                logger.info(
+                    "TCD vertical: RunPod completed (job=%s, modules=%d)",
+                    job_id,
+                    len(training_result.get("modules", [])),
+                )
+            except Exception as runpod_exc:
+                logger.warning(
+                    "TCD vertical: RunPod failed (%s), falling back to local",
+                    runpod_exc,
+                )
+
+        # ── Path 2: Local wrapper (GPU or CPU) ───────────────────────
+        if training_result is None:
+            if self._wrapper is None:
+                raise TCDVerticalError(
+                    "no TCDJEPAWrapper configured and RunPod unavailable",
+                    stage="crystallize",
+                )
+            logger.info(
+                "TCD vertical: running locally (job=%s, %d entities)",
+                job_id, len(entities),
+            )
+            result = await self._wrapper.run_training(
+                config_path=config_path,
+                data_path=data_dir,
+                callback=progress_callback,
+            )
+            checkpoint = result.get("checkpoint_path", "(latest)")
+            raw_modules = await self._wrapper.extract_modules(
+                checkpoint_path=checkpoint
+            )
+            training_result = {"modules": raw_modules}
+
+        return training_result
 
     # ──────────────────────── stage 3: interpret ────────────────────────
     async def interpret(self, modules: list[Any]) -> list[dict]:
