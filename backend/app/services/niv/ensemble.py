@@ -75,7 +75,6 @@ class NIVEnsemble:
         ada = AdaBoostClassifier(
             n_estimators=cfg.ada_n_estimators,
             estimator=DecisionTreeClassifier(max_depth=1),
-            algorithm="SAMME",
             random_state=42,
         )
         mlp = MLPClassifier(
