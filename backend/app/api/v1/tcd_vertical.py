@@ -270,3 +270,193 @@ async def export_endpoint(
             },
         )
     raise ValidationError(detail="onnx export not yet implemented")
+
+
+# ══════════════════════════════════════════════════════════════════
+# DEMO ENDPOINT
+# ══════════════════════════════════════════════════════════════════
+
+
+@router.post("/verticals/demo", status_code=202)
+async def start_demo():
+    """Launch the auto-demo pipeline (no auth required for demos)."""
+    import asyncio
+
+    session_id = str(uuid.uuid4())
+    job_id = str(uuid.uuid4())
+
+    # Store session in Redis
+    await _set_session(uuid.UUID(session_id), {
+        "preset": "trading",
+        "created_at": datetime.utcnow().isoformat(),
+        "owner": "demo",
+        "demo": True,
+    })
+
+    # Launch demo in background (not Celery — must be fast + local)
+    from app.services.crystallization.demo_runner import run_demo
+
+    asyncio.create_task(run_demo(session_id, job_id))
+
+    return {
+        "session_id": session_id,
+        "job_id": job_id,
+        "ws_url": f"/ws/crystallization/{job_id}",
+    }
+
+
+# ══════════════════════════════════════════════════════════════════
+# INTELLIGENCE ENDPOINTS
+# ══════════════════════════════════════════════════════════════════
+
+
+@router.get("/verticals/{session_id}/intelligence")
+async def intelligence_summary(
+    session_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+):
+    """Get all 7 intelligence engine results for a session."""
+    from app.services.crystallization import intelligence_cache
+    from app.schemas.tcd_vertical import (
+        IntelligenceEngineResponse,
+        IntelligenceInsightResponse,
+        IntelligenceSummaryResponse,
+    )
+
+    all_results = await intelligence_cache.get_all_results(str(session_id))
+    if not all_results:
+        raise NotFoundError(detail="No intelligence data — run demo or crystallization first")
+
+    engines = {}
+    total = 0
+    for eng, insights in all_results.items():
+        if eng == "convergence_history":
+            continue
+        parsed = [IntelligenceInsightResponse(**i) for i in insights]
+        engines[eng] = IntelligenceEngineResponse(
+            engine=eng, insights=parsed, insight_count=len(parsed)
+        )
+        total += len(parsed)
+
+    return IntelligenceSummaryResponse(engines=engines, total_insights=total)
+
+
+@router.get("/verticals/{session_id}/intelligence/{engine}")
+async def intelligence_engine(
+    session_id: uuid.UUID,
+    engine: str,
+    user=Depends(get_current_active_user),
+):
+    """Get results from a single intelligence engine."""
+    from app.services.crystallization import intelligence_cache
+    from app.schemas.tcd_vertical import (
+        IntelligenceEngineResponse,
+        IntelligenceInsightResponse,
+    )
+
+    valid = {"deep_signals", "causal", "topological", "temporal", "meta", "oracle", "uncertainty", "convergence_history"}
+    if engine.replace("-", "_") not in valid:
+        raise ValidationError(detail=f"Unknown engine: {engine}")
+
+    engine_key = engine.replace("-", "_")
+    result = await intelligence_cache.get_engine_result(str(session_id), engine_key)
+    if result is None:
+        raise NotFoundError(detail=f"No {engine} data — run demo first")
+
+    if engine_key == "convergence_history":
+        return {"engine": "convergence_history", "data": result}
+
+    parsed = [IntelligenceInsightResponse(**i) for i in result]
+    return IntelligenceEngineResponse(
+        engine=engine_key, insights=parsed, insight_count=len(parsed)
+    )
+
+
+# ══════════════════════════════════════════════════════════════════
+# AI AGENT ENDPOINT
+# ══════════════════════════════════════════════════════════════════
+
+
+@router.post("/verticals/{session_id}/agent/query")
+async def agent_query_endpoint(
+    session_id: uuid.UUID,
+    body: dict,
+    user=Depends(get_current_active_user),
+):
+    """Ask the TCD-JEPA AI agent a question about the crystallization."""
+    from app.services.crystallization.agent import query_agent
+
+    question = body.get("question", "")
+    if not question:
+        raise ValidationError(detail="question is required")
+
+    result = await query_agent(str(session_id), question)
+    return result
+
+
+# ══════════════════════════════════════════════════════════════════
+# MARKETPLACE ENDPOINTS
+# ══════════════════════════════════════════════════════════════════
+
+
+@router.get("/verticals/{session_id}/marketplace")
+async def marketplace_endpoint(
+    session_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all modules with pricing for the marketplace."""
+    from app.services.crystallization.marketplace import estimate_price
+
+    sess = await _get_session(session_id)
+    preset = VerticalPreset(sess["preset"])
+    svc = ModuleRegistryService(db)
+    rows = await svc.list(vertical=preset)
+
+    modules = []
+    for r in rows:
+        pricing = estimate_price(r)
+        modules.append({
+            "id": str(r.id),
+            "vertical": r.vertical,
+            "module_type": r.module_type,
+            "purity": r.purity,
+            "quality_score": r.quality_score,
+            "members": r.members,
+            "price_credits": pricing["price_credits"],
+            "tier": pricing["tier"],
+        })
+    return {"modules": modules, "total": len(modules)}
+
+
+@router.get("/modules/{module_id}/pricing")
+async def module_pricing_endpoint(
+    module_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get pricing for a single module."""
+    from app.services.crystallization.marketplace import estimate_price
+
+    svc = ModuleRegistryService(db)
+    row = await svc.get(module_id)
+    if row is None:
+        raise NotFoundError(detail="module not found")
+    pricing = estimate_price(row)
+    return {"module_id": str(module_id), **pricing}
+
+
+@router.post("/modules/{module_id}/license")
+async def license_module_endpoint(
+    module_id: uuid.UUID,
+    user=Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Generate a license key for a module."""
+    from app.services.crystallization.marketplace import generate_license_key
+
+    svc = ModuleRegistryService(db)
+    row = await svc.get(module_id)
+    if row is None:
+        raise NotFoundError(detail="module not found")
+    return generate_license_key(str(module_id))

@@ -63,3 +63,84 @@ class RouteResponse(BaseModel):
 
 class ExportFormatQuery(BaseModel):
     format: Literal["json", "pt", "onnx"] = "json"
+
+
+# ── Intelligence schemas ─────────────────────────────────────────
+
+
+class IntelligenceInsightResponse(BaseModel):
+    category: str
+    severity: str
+    title: str
+    description: str
+    confidence: float
+    evidence: list[str] = []
+    persistence_bars: list[dict] | None = None
+
+
+class IntelligenceEngineResponse(BaseModel):
+    engine: str
+    insights: list[IntelligenceInsightResponse]
+    insight_count: int
+
+
+class IntelligenceSummaryResponse(BaseModel):
+    engines: dict[str, IntelligenceEngineResponse]
+    total_insights: int
+
+
+# ── Demo schemas ─────────────────────────────────────────────────
+
+
+class DemoStartResponse(BaseModel):
+    session_id: str
+    job_id: str
+    ws_url: str
+
+
+# ── Agent schemas ────────────────────────────────────────────────
+
+
+class AgentQueryRequest(BaseModel):
+    question: str
+
+
+class AgentQueryResponse(BaseModel):
+    answer: str
+    sources: list[str]
+    confidence: float
+    engine: str | None
+
+
+# ── Marketplace schemas ──────────────────────────────────────────
+
+
+class ModulePricingResponse(BaseModel):
+    module_id: str
+    price_credits: float
+    tier: str
+    pricing_factors: dict
+
+
+class MarketplaceModuleResponse(BaseModel):
+    id: uuid.UUID
+    vertical: str
+    module_type: str
+    purity: float
+    quality_score: float
+    members: list[str]
+    price_credits: float
+    tier: str
+
+
+class MarketplaceResponse(BaseModel):
+    modules: list[MarketplaceModuleResponse]
+    total: int
+
+
+class LicenseResponse(BaseModel):
+    license_key: str
+    module_id: str
+    issued_at: str
+    valid_until: str
+    tier: str

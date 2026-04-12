@@ -43,6 +43,7 @@ import app.tasks.fsd_crystallize  # noqa: E402, F401
 import app.tasks.btut_ingest  # noqa: E402, F401
 import app.tasks.btut_report  # noqa: E402, F401
 import app.tasks.data_layer_run  # noqa: E402, F401
+import app.tasks.ocean_build  # noqa: E402, F401
 import app.tasks.tcd_crystallize  # noqa: E402, F401
 import app.services.crystallization.job_manager  # noqa: E402, F401
 
