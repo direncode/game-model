@@ -331,3 +331,166 @@ async def data_layer_job_status(job_id: str) -> JobStatusResponse:
         progress=progress,
         result=result,
     )
+
+
+# ── Ocean Orchestrator endpoints ───────────────────────────────────────
+class OceanBuildRequest(BaseModel):
+    sources: list[str] | None = None
+    limits: dict[str, int] | None = None
+    default_limit: int = Field(500, ge=1, le=100_000)
+    target_survivors: int = Field(100, ge=1, le=10_000)
+    budget_dollars: float = Field(5.0, ge=0.0)
+    cosine_threshold: float = Field(0.75, ge=0.0, le=1.0)
+
+
+class OceanSourceSummary(BaseModel):
+    source_id: str
+    n_input: int
+    n_survivors: int
+    reduction_ratio: int
+    coverage_at_1_0: float
+    variance_ratio: float
+    wall_seconds: float
+    cost_usd: float
+
+
+class OceanCrossLink(BaseModel):
+    source_a: str
+    source_b: str
+    n_links: int
+    links_by_signal: dict[str, int]
+
+
+class OceanSurvivorOut(BaseModel):
+    name: str
+    type: str
+    source_id: str
+    display_name: str
+    cluster: int
+    composite_score: float
+    coord_3d: list[float] | None
+
+
+class OceanManifestResponse(BaseModel):
+    sources: list[OceanSourceSummary]
+    n_total_survivors: int
+    survivors: list[OceanSurvivorOut]
+    cross_links: list[OceanCrossLink]
+    link_matrix: dict[str, dict[str, int]]
+    total_cost_usd: float
+    total_wall_seconds: float
+    benchmark: list[dict]
+
+
+def _manifest_to_response(manifest) -> OceanManifestResponse:
+    """Convert an OceanManifest dataclass to the Pydantic response model.
+
+    OceanManifest.sources is dict[str, SourceResult] where quality
+    metrics live on SourceResult.quality. OceanManifest.unified_survivors
+    is list[dict] with plain dict entries. OceanManifest.cross_links
+    is list[CrossLinkResult] with .pair tuple.
+    """
+    # Sources: dict values → flat list
+    sources = []
+    for src_id, sr in manifest.sources.items():
+        q = sr.quality
+        sources.append(
+            OceanSourceSummary(
+                source_id=src_id,
+                n_input=q.n_input,
+                n_survivors=q.n_survivors,
+                reduction_ratio=q.reduction_ratio,
+                coverage_at_1_0=float(q.coverage_at_1_0),
+                variance_ratio=float(q.variance_ratio),
+                wall_seconds=float(sr.wall_seconds),
+                cost_usd=float(q.estimated_cost_usd),
+            )
+        )
+
+    # Survivors: list[dict] → list[OceanSurvivorOut]
+    survivors = [
+        OceanSurvivorOut(
+            name=str(sv.get("name", "")),
+            type=str(sv.get("type", "")),
+            source_id=str(sv.get("source_id", "")),
+            display_name=str(sv.get("display_name", sv.get("name", ""))),
+            cluster=int(sv.get("cluster", 0)),
+            composite_score=float(sv.get("composite_score", 0)),
+            coord_3d=[float(c) for c in sv["coord_3d"]] if sv.get("coord_3d") else None,
+        )
+        for sv in manifest.unified_survivors
+    ]
+
+    # Cross-links: CrossLinkResult has .pair tuple
+    cross_links = [
+        OceanCrossLink(
+            source_a=cl.pair[0],
+            source_b=cl.pair[1],
+            n_links=cl.n_links,
+            links_by_signal={k: int(v) for k, v in cl.links_by_signal.items()},
+        )
+        for cl in manifest.cross_links
+    ]
+
+    link_matrix = {
+        k: {kk: int(vv) for kk, vv in v.items()}
+        for k, v in manifest.link_matrix.items()
+    }
+    benchmark = [
+        {bk: (float(bv) if isinstance(bv, (int, float)) else str(bv)) for bk, bv in entry.items()}
+        for entry in manifest.benchmark
+    ]
+    return OceanManifestResponse(
+        sources=sources,
+        n_total_survivors=len(survivors),
+        survivors=survivors,
+        cross_links=cross_links,
+        link_matrix=link_matrix,
+        total_cost_usd=float(manifest.total_cost_usd),
+        total_wall_seconds=float(manifest.total_wall_seconds),
+        benchmark=benchmark,
+    )
+
+
+@router.post("/ocean/build", response_model=OceanManifestResponse)
+async def ocean_build(req: OceanBuildRequest) -> OceanManifestResponse:
+    """Synchronous multi-source ocean build.
+
+    Runs OceanOrchestrator.build_ocean() and returns the full manifest.
+    For large builds consider the async variant.
+    """
+    from app.services.data_layer.orchestrator import OceanOrchestrator
+
+    orch = OceanOrchestrator(
+        target_survivors=req.target_survivors,
+        budget_dollars=req.budget_dollars,
+        cosine_threshold=req.cosine_threshold,
+    )
+    try:
+        manifest = orch.build_ocean(
+            sources=req.sources,
+            limits=req.limits,
+            default_limit=req.default_limit,
+        )
+    except UnknownSourceError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+    except DataLayerError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+
+    return _manifest_to_response(manifest)
+
+
+@router.post("/ocean/build-async", response_model=JobSubmitResponse)
+async def ocean_build_async(req: OceanBuildRequest) -> JobSubmitResponse:
+    """Submit an async ocean build job. Returns immediately with a job_id."""
+    from app.tasks.ocean_build import ocean_build_task
+
+    task = ocean_build_task.delay(
+        sources=req.sources,
+        limits=req.limits,
+        default_limit=req.default_limit,
+        target_survivors=req.target_survivors,
+        budget_dollars=req.budget_dollars,
+        cosine_threshold=req.cosine_threshold,
+    )
+    return JobSubmitResponse(job_id=task.id)

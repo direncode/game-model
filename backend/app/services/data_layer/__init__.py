@@ -15,5 +15,6 @@ routes calls through them and adds:
 from __future__ import annotations
 
 from .core import LatentOceanDataLayer
+from .orchestrator import OceanOrchestrator
 
-__all__ = ["LatentOceanDataLayer"]
+__all__ = ["LatentOceanDataLayer", "OceanOrchestrator"]

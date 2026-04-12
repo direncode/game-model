@@ -13,7 +13,7 @@
 
 const API_BASE =
   (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_API_URL) ||
-  "http://localhost:8000";
+  "https://latentocean.com";
 
 // ── Type mirrors for REST request/response schemas ────────────────────
 
@@ -186,9 +186,82 @@ export const dataLayerClient = {
       body: JSON.stringify(req),
     });
   },
+
+  async buildOcean(req: OceanBuildRequest): Promise<OceanManifestResponse> {
+    return dlFetch<OceanManifestResponse>("/data-layer/ocean/build", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
+  },
+
+  async buildOceanAsync(req: OceanBuildRequest): Promise<{ job_id: string; status: string }> {
+    return dlFetch<{ job_id: string; status: string }>("/data-layer/ocean/build-async", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
+  },
 };
 
 // ── Formatting helpers ──────────────────────────────────────────────────
+
+// ── Ocean types ────────────────────────────────────────────────────────
+
+export interface OceanBuildRequest {
+  sources?: string[];
+  limits?: Record<string, number>;
+  default_limit?: number;
+  target_survivors?: number;
+  budget_dollars?: number;
+  cosine_threshold?: number;
+}
+
+export interface OceanSourceSummary {
+  source_id: string;
+  n_input: number;
+  n_survivors: number;
+  reduction_ratio: number;
+  coverage_at_1_0: number;
+  variance_ratio: number;
+  wall_seconds: number;
+  cost_usd: number;
+}
+
+export interface OceanCrossLink {
+  source_a: string;
+  source_b: string;
+  n_links: number;
+  links_by_signal: Record<string, number>;
+}
+
+export interface OceanSurvivorOut {
+  name: string;
+  type: string;
+  source_id: string;
+  display_name: string;
+  cluster: number;
+  composite_score: number;
+  coord_3d: [number, number, number] | null;
+}
+
+export interface OceanManifestResponse {
+  sources: OceanSourceSummary[];
+  n_total_survivors: number;
+  survivors: OceanSurvivorOut[];
+  cross_links: OceanCrossLink[];
+  link_matrix: Record<string, Record<string, number>>;
+  total_cost_usd: number;
+  total_wall_seconds: number;
+  benchmark: Record<string, unknown>[];
+}
+
+export const SOURCE_COLORS: Record<string, string> = {
+  edgar: "#00d4ff",
+  pubmed: "#3fb950",
+  patents: "#a371f7",
+  comtrade: "#d29922",
+  climate: "#388bfd",
+  tesla: "#f85149",
+};
 
 export function formatCost(usd: number): string {
   if (usd < 0.01) return `$${(usd * 100).toFixed(3)}¢`;

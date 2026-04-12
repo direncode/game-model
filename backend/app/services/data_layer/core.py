@@ -79,6 +79,7 @@ class LatentOceanDataLayer:
         log_callback: Callable[[str], None] | None = None,
         ingest_max_retries: int = 3,
         ingest_backoff_seconds: float = 2.0,
+        lineage: "DataLayerLineageBridge | None" = None,
     ) -> None:
         self.budget_dollars = budget_dollars
         self.target_survivors = target_survivors
@@ -86,6 +87,7 @@ class LatentOceanDataLayer:
         self._log_cb = log_callback
         self.ingest_max_retries = ingest_max_retries
         self.ingest_backoff_seconds = ingest_backoff_seconds
+        self.lineage = lineage  # optional sync lineage recorder
 
         # Per-run state — reset on each ingest().
         self.ingest_result: IngestResult | None = None
@@ -194,6 +196,8 @@ class LatentOceanDataLayer:
             f"n_entities={len(entities)} n_edges={len(edges)} "
             f"wall={fetch_seconds:.1f}s"
         )
+        if self.lineage:
+            self.lineage.record("ingest", inputs={"source": meta.dataset_id, "limit": limit}, outputs={"n_entities": len(entities), "n_edges": len(edges)})
         return result
 
     # ── Stage 2: BTUT ───────────────────────────────────────────────────
@@ -242,6 +246,8 @@ class LatentOceanDataLayer:
             f"reduction={summary.get('reduction', '?')}x wall={wall:.1f}s "
             f"variance={summary.get('reconstruction', {}).get('variance_preservation', '?')}"
         )
+        if self.lineage:
+            self.lineage.record("btut_reduce", inputs={"n_input": len((ingest_result or self.ingest_result).entities)}, outputs={"n_survivors": n_surv, "reduction": summary.get("reduction")})
         return result
 
     # ── Stage 3: manifold projection ────────────────────────────────────
@@ -280,6 +286,8 @@ class LatentOceanDataLayer:
             f"coords_3d={None if coords_3d_s2 is None else coords_3d_s2.shape} "
             f"wall={wall:.1f}s"
         )
+        if self.lineage:
+            self.lineage.record("manifold_project", outputs={"coords_8d_shape": list(coords_8d_unit.shape)})
         return manifold
 
     # ── Display name resolution ─────────────────────────────────────────

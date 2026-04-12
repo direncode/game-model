@@ -9,12 +9,20 @@ import {
   formatCost,
   formatReduction,
   describeCoverage,
+  SOURCE_COLORS,
   type SourceInfo,
   type RunResponse,
   type LinkResponse,
   type QualityMetrics,
   type VerticalName,
+  type CostBreakdown,
+  type OceanManifestResponse,
+  type OceanBuildRequest,
 } from "@/lib/data-layer";
+import OceanGlobe from "@/components/ocean/OceanGlobe";
+import OceanLinkMatrix from "@/components/ocean/OceanLinkMatrix";
+import OceanBenchmark from "@/components/ocean/OceanBenchmark";
+import OceanPipelineMonitor from "@/components/ocean/OceanPipelineMonitor";
 
 // ── Sub-components ──────────────────────────────────────────────────
 
@@ -43,7 +51,7 @@ function QualityPanel({ q }: { q: QualityMetrics }) {
   );
 }
 
-function CostBreakdownPanel({ breakdown }: { breakdown: Record<string, number> }) {
+function CostBreakdownPanel({ breakdown }: { breakdown: CostBreakdown }) {
   return (
     <div className="bg-li-depth-1 border border-li-border rounded-lg p-4">
       <div className="text-[10px] uppercase tracking-widest text-li-text-muted mb-3">Cost Breakdown</div>
@@ -56,6 +64,197 @@ function CostBreakdownPanel({ breakdown }: { breakdown: Record<string, number> }
         ))}
       </div>
     </div>
+  );
+}
+
+// ── Ocean Build tab ────────────────────────────────────────────────
+
+const ALL_SOURCES = ["edgar", "pubmed", "patents", "comtrade", "climate", "tesla"];
+
+function OceanBuildTab({
+  onBuilt,
+}: {
+  onBuilt: (data: OceanManifestResponse) => void;
+}) {
+  const [selectedSources, setSelectedSources] = useState<string[]>([...ALL_SOURCES]);
+  const [defaultLimit, setDefaultLimit] = useState(500);
+  const [targetSurvivors, setTargetSurvivors] = useState(100);
+  const [pipelineProgress, setPipelineProgress] = useState<
+    Record<string, "pending" | "running" | "done" | "failed">
+  >({});
+  const [pipelineMsg, setPipelineMsg] = useState<string | undefined>();
+
+  const build = useMutation({
+    mutationFn: (req: OceanBuildRequest) => dataLayerClient.buildOcean(req),
+    onMutate: () => {
+      const prog: Record<string, "pending" | "running" | "done" | "failed"> = {};
+      selectedSources.forEach((s) => (prog[s] = "running"));
+      setPipelineProgress(prog);
+      setPipelineMsg("Building ocean manifest...");
+    },
+    onSuccess: (data) => {
+      const prog: Record<string, "pending" | "running" | "done" | "failed"> = {};
+      selectedSources.forEach((s) => (prog[s] = "done"));
+      setPipelineProgress(prog);
+      setPipelineMsg(`Complete: ${data.n_total_survivors} survivors across ${data.sources.length} sources`);
+      onBuilt(data);
+    },
+    onError: (err) => {
+      const prog: Record<string, "pending" | "running" | "done" | "failed"> = {};
+      selectedSources.forEach((s) => (prog[s] = "failed"));
+      setPipelineProgress(prog);
+      setPipelineMsg(`Error: ${(err as Error).message}`);
+    },
+  });
+
+  function toggleSource(src: string) {
+    setSelectedSources((prev) =>
+      prev.includes(src) ? prev.filter((s) => s !== src) : [...prev, src],
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-li-depth-1 border border-li-border rounded-lg p-5">
+        <h3 className="text-sm font-medium text-li-text-primary mb-4">Ocean Build Configuration</h3>
+
+        {/* Source checkboxes */}
+        <div className="mb-4">
+          <label className="block text-[10px] uppercase tracking-widest text-li-text-muted mb-2">
+            Sources
+          </label>
+          <div className="flex flex-wrap gap-3">
+            {ALL_SOURCES.map((src) => (
+              <label key={src} className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={selectedSources.includes(src)}
+                  onChange={() => toggleSource(src)}
+                  className="accent-[var(--color)]"
+                  style={{ "--color": SOURCE_COLORS[src] } as React.CSSProperties}
+                />
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: SOURCE_COLORS[src] }}
+                />
+                <span className="text-sm text-li-text-primary font-mono">{src}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest text-li-text-muted mb-1">
+              Default Limit
+            </label>
+            <input
+              type="number"
+              value={defaultLimit}
+              onChange={(e) => setDefaultLimit(+e.target.value)}
+              className="w-full bg-li-depth-2 border border-li-border rounded px-3 py-2 text-sm text-li-text-primary font-mono"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest text-li-text-muted mb-1">
+              Target Survivors
+            </label>
+            <input
+              type="number"
+              value={targetSurvivors}
+              onChange={(e) => setTargetSurvivors(+e.target.value)}
+              className="w-full bg-li-depth-2 border border-li-border rounded px-3 py-2 text-sm text-li-text-primary font-mono"
+            />
+          </div>
+        </div>
+
+        <button
+          onClick={() =>
+            build.mutate({
+              sources: selectedSources,
+              default_limit: defaultLimit,
+              target_survivors: targetSurvivors,
+            })
+          }
+          disabled={build.isPending || selectedSources.length === 0}
+          className="mt-4 px-6 py-2 bg-li-cyan text-black text-sm font-medium rounded hover:bg-li-cyan/80 disabled:opacity-50 transition-colors"
+        >
+          {build.isPending ? "Building Ocean..." : "Build Ocean"}
+        </button>
+      </div>
+
+      {/* Pipeline monitor */}
+      {Object.keys(pipelineProgress).length > 0 && (
+        <OceanPipelineMonitor
+          sources={selectedSources}
+          progress={pipelineProgress}
+          currentMessage={pipelineMsg}
+        />
+      )}
+
+      {build.isError && (
+        <div className="bg-li-red/10 border border-li-red/30 rounded-lg p-4 text-sm text-li-red">
+          Error: {(build.error as Error).message}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Ocean Globe tab ────────────────────────────────────────────────
+
+function OceanGlobeTab({ data }: { data: OceanManifestResponse | null }) {
+  if (!data) {
+    return (
+      <div className="text-li-text-muted text-sm p-8">
+        Build an ocean first to view the S2 globe visualization.
+      </div>
+    );
+  }
+  return <OceanGlobe survivors={data.survivors} height={600} />;
+}
+
+// ── Ocean Link Matrix tab ──────────────────────────────────────────
+
+function OceanLinkMatrixTab({ data }: { data: OceanManifestResponse | null }) {
+  if (!data) {
+    return (
+      <div className="text-li-text-muted text-sm p-8">
+        Build an ocean first to view the link matrix.
+      </div>
+    );
+  }
+  const sourceIds = data.sources.map((s) => s.source_id);
+  return <OceanLinkMatrix linkMatrix={data.link_matrix} sourceIds={sourceIds} height={500} />;
+}
+
+// ── Ocean Benchmark tab ────────────────────────────────────────────
+
+function OceanBenchmarkTab({ data }: { data: OceanManifestResponse | null }) {
+  if (!data) {
+    return (
+      <div className="text-li-text-muted text-sm p-8">
+        Build an ocean first to view the benchmark comparison.
+      </div>
+    );
+  }
+  const rows = data.sources.map((s) => ({
+    source: s.source_id,
+    n_input: s.n_input,
+    n_survivors: s.n_survivors,
+    reduction_ratio: s.reduction_ratio,
+    coverage_at_1_0: s.coverage_at_1_0,
+    variance_ratio: s.variance_ratio,
+    n_clusters: ((data.benchmark.find((b) => (b as Record<string, unknown>).source === s.source_id) as Record<string, unknown> | undefined)?.n_clusters as number) ?? 0,
+    wall_seconds: s.wall_seconds,
+    cost_usd: s.cost_usd,
+  }));
+  return (
+    <OceanBenchmark
+      benchmark={rows}
+      totalCost={data.total_cost_usd}
+      totalWall={data.total_wall_seconds}
+    />
   );
 }
 
@@ -316,6 +515,10 @@ function LinkTab() {
 // ── Main page ───────────────────────────────────────────────────────
 
 const TABS = [
+  { id: "ocean-build", label: "Ocean Build" },
+  { id: "ocean-globe", label: "Ocean Globe" },
+  { id: "link-matrix", label: "Link Matrix" },
+  { id: "benchmark", label: "Benchmark" },
   { id: "sources", label: "Sources" },
   { id: "run", label: "Run Pipeline" },
   { id: "link", label: "Cross-Source Link" },
@@ -324,7 +527,13 @@ const TABS = [
 type TabId = (typeof TABS)[number]["id"];
 
 export default function DataLayerPage() {
-  const [activeTab, setActiveTab] = useState<TabId>("sources");
+  const [activeTab, setActiveTab] = useState<TabId>("ocean-build");
+  const [oceanData, setOceanData] = useState<OceanManifestResponse | null>(null);
+
+  function handleOceanBuilt(data: OceanManifestResponse) {
+    setOceanData(data);
+    setActiveTab("ocean-globe");
+  }
 
   return (
     <div className="flex h-screen bg-li-black">
@@ -342,12 +551,12 @@ export default function DataLayerPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-1 mb-6 border-b border-li-border">
+            <div className="flex gap-1 mb-6 border-b border-li-border overflow-x-auto">
               {TABS.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                     activeTab === tab.id
                       ? "text-li-cyan border-li-cyan"
                       : "text-li-text-muted border-transparent hover:text-li-text-secondary"
@@ -359,6 +568,10 @@ export default function DataLayerPage() {
             </div>
 
             {/* Tab content */}
+            {activeTab === "ocean-build" && <OceanBuildTab onBuilt={handleOceanBuilt} />}
+            {activeTab === "ocean-globe" && <OceanGlobeTab data={oceanData} />}
+            {activeTab === "link-matrix" && <OceanLinkMatrixTab data={oceanData} />}
+            {activeTab === "benchmark" && <OceanBenchmarkTab data={oceanData} />}
             {activeTab === "sources" && <SourcesTab />}
             {activeTab === "run" && <RunTab />}
             {activeTab === "link" && <LinkTab />}
