@@ -21,6 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Network,
+  TrendingDown,
 } from "lucide-react";
 
 const exploreItems = [
@@ -38,6 +39,7 @@ const engineItems = [
 ];
 
 const liveDataItems = [
+  { href: "/niv", label: "NIV Macro", icon: TrendingDown },
   { href: "/franklin", label: "Franklin Street", icon: MapPin },
   { href: "/dunc", label: "D-U-N-C Football", icon: Goal },
 ];

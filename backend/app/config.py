@@ -57,6 +57,12 @@ class Settings(BaseSettings):
     AWS_SES_FROM_EMAIL: str = "noreply@latentocean.com"
     APP_URL: str = "http://localhost:3000"
 
+    # ── NIV (National Impact Velocity) ──────────────────────────────────
+    FRED_API_KEY: Optional[str] = None
+    NIV_VINTAGE: str = "realtime"       # "realtime" (ALFRED) or "latest"
+    NIV_BTUT_THINNING: bool = False
+    NIV_CRYSTALLIZATION: bool = False
+
     # ── Session Management ───────────────────────────────────────────────
     SESSION_MAX_PER_USER: int = 10
 
