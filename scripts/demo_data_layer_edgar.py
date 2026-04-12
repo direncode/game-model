@@ -56,13 +56,27 @@ def main() -> int:
         layer.export_for_vertical(vertical, write_path=path)
 
     q = layer.get_quality_metrics()
-    print("\n[demo] ─── Quality Metrics ─────────────────────")
-    print(f"  n_input               : {q.n_input}")
-    print(f"  n_survivors           : {q.n_survivors}")
-    print(f"  reduction_ratio       : {q.reduction_ratio}x")
-    print(f"  variance_preservation : {q.variance_preservation:.3f}")
-    print(f"  wall_seconds          : {q.wall_seconds:.1f}")
-    print(f"  estimated_cost_usd    : ${q.estimated_cost_usd:.4f}")
+    # Plain ASCII only — Windows cp1252 consoles choke on box-drawing chars.
+    print("")
+    print("[demo] --- Quality Metrics (honest) ------------------")
+    print(f"  n_input                   : {q.n_input}")
+    print(f"  n_survivors               : {q.n_survivors}")
+    print(f"  reduction_ratio           : {q.reduction_ratio}x")
+    print(f"  variance_ratio            : {q.variance_ratio:.3f}")
+    print(f"  coverage_at_1_0           : {q.coverage_at_1_0:.3f}")
+    print(f"  reconstruction_median_nn  : {q.reconstruction_median_nn:.3f}")
+    print(f"  n_clusters                : {q.n_clusters}")
+    print(f"  unique_fingerprints       : {q.unique_fingerprints}")
+    print(f"  wall_seconds              : {q.wall_seconds:.1f}")
+    print("")
+    print("[demo] --- Cost Breakdown (real model) ---------------")
+    for k, v in q.cost_breakdown.items():
+        print(f"  {k:<26s}: ${v:.6f}")
+    print("")
+    print("[demo] --- Top 5 survivors by composite score --------")
+    top = sorted(layer.get_survivors(), key=lambda s: -s.scores.get("composite", 0))[:5]
+    for s in top:
+        print(f"  [{s.scores.get('composite', 0):.3f}] {s.display_name} ({s.entity['type']})")
     print("[demo] Done.")
     return 0
 
