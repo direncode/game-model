@@ -19,6 +19,11 @@ from app.schemas.niv import (
     OrthogonalVarianceRequest,
     OrthogonalVarianceResponse,
     TearsheetRequest,
+    NIVHistoryFullItem,
+    NIVHistoryFullResponse,
+    EnsembleExplainResponse,
+    WalkForwardSeriesItem,
+    WalkForwardSeriesResponse,
 )
 from app.services.niv.config import NIVConfig
 from app.services.niv.vertical import NIVVertical
@@ -281,6 +286,87 @@ async def niv_tearsheet(req: TearsheetRequest):
     latest = results[-1] if results else None
     sheet = generate_tearsheet_json(niv_result=latest)
     return sheet
+
+
+# ── Bloomberg-grade endpoints ──────────────────────────────────────────
+
+@router.get("/history/full", response_model=NIVHistoryFullResponse)
+async def niv_history_full():
+    """Full history with per-month component breakdown + NBER dates."""
+    _, results = await _ensure_data()
+    v = _get_vertical()
+    items = []
+    for r in results:
+        items.append(NIVHistoryFullItem(
+            date=r.date,
+            niv_score=r.niv_score,
+            recession_probability=r.recession_probability,
+            smoothed_niv=r.smoothed_niv,
+            thrust=r.components.thrust,
+            efficiency_squared=r.components.efficiency_squared,
+            slack=r.components.slack,
+            drag_total=r.components.drag.total,
+            drag_spread=r.components.drag.spread,
+            drag_real_rate=r.components.drag.real_rate,
+            drag_vol=r.components.drag.vol,
+            alert_level=r.alert.level,
+            dollar_stakes=r.alert.dollar_stakes,
+        ))
+    nber = [[s, e] for s, e in v.config.nber_recessions]
+    return NIVHistoryFullResponse(data=items, count=len(items), nber_recessions=nber)
+
+
+@router.get("/ensemble/explain", response_model=EnsembleExplainResponse)
+async def niv_ensemble_explain():
+    """Per-learner predictions + LR coefficients for current month."""
+    import numpy as np
+    from app.services.niv.features import FEATURE_NAMES
+    from app.services.niv.ensemble import NIVEnsemble
+
+    features = await _ensure_feature_frame()
+    v = _get_vertical()
+
+    feature_cols = [c for c in features.columns if c != "recession"]
+    X = features[feature_cols].values
+    y = features["recession"].values
+
+    ensemble = NIVEnsemble(cfg=v.config)
+    ensemble.fit(X, y)
+    explanation = ensemble.explain(X[-1:])
+
+    per_learner = {k: float(v[0]) for k, v in explanation.per_learner.items()}
+    combined = float(explanation.combined[0])
+    disagreement = max(per_learner.values()) - min(per_learner.values())
+
+    lr_coefs = {}
+    if explanation.lr_coefficients is not None:
+        for i, name in enumerate(FEATURE_NAMES[:len(explanation.lr_coefficients)]):
+            lr_coefs[name] = float(explanation.lr_coefficients[i])
+
+    return EnsembleExplainResponse(
+        date=str(features.index[-1]),
+        per_learner=per_learner,
+        combined=combined,
+        lr_coefficients=lr_coefs,
+        feature_names=list(FEATURE_NAMES),
+        disagreement=disagreement,
+    )
+
+
+@router.get("/walkforward/series", response_model=WalkForwardSeriesResponse)
+async def niv_walkforward_series():
+    """Walk-forward per-step prediction time series with conformal bands."""
+    features = await _ensure_feature_frame()
+    v = _get_vertical()
+    result = v.fit_walkforward(features)
+    return WalkForwardSeriesResponse(
+        predictions=[WalkForwardSeriesItem(**p) for p in result.predictions],
+        horizons=list(result.horizons),
+        auc_by_horizon={str(k): v for k, v in result.auc_by_horizon.items()},
+        brier_by_horizon={str(k): v for k, v in result.brier_by_horizon.items()},
+        f1_by_horizon={str(k): v for k, v in result.f1_by_horizon.items()},
+        n_folds=result.n_folds,
+    )
 
 
 @router.post("/crystallize")
