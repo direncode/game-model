@@ -19,12 +19,15 @@ Design notes:
   * Foreign-key and semantic-field use *positive* allowlists rather
     than skip lists. Allowlists fail closed: if a new adapter adds a
     noisy attribute, the linker ignores it until we add it here.
-  * All four signals scan the ``entity["attributes"]`` dict of the raw
-    BTUT survivor records (not the typed ``Survivor`` dataclass), so
-    this module stays independent of ``types.Survivor``'s shape.
+  * All four signals scan the ``entity["attributes"]`` of the raw
+    BTUT survivor records. **Every shipped BTUT adapter serializes
+    attributes as a JSON string**, not a dict — ``_entity_attrs``
+    transparently json-loads that string before searching. If you add
+    a new adapter that uses dict-valued attributes, this still works.
 """
 from __future__ import annotations
 
+import json
 from urllib.parse import urlparse
 
 import numpy as np
@@ -86,10 +89,26 @@ def _normalize_value(v: object) -> str:
 
 
 def _entity_attrs(survivor: dict) -> dict:
-    """Return ``survivor["entity"]["attributes"]`` with safe fallbacks."""
+    """Return ``survivor["entity"]["attributes"]`` as a dict with safe fallbacks.
+
+    Every shipped BTUT adapter serializes attributes as a JSON-encoded
+    string (``json.dumps({...})``) rather than a dict. This helper
+    transparently json-loads that string so downstream linker code can
+    treat attributes as a dict regardless of which adapter produced them.
+    If parsing fails for any reason (malformed JSON, non-string, non-dict),
+    we return ``{}`` — the linker fails closed, not noisily.
+    """
     ent = survivor.get("entity") or {}
-    attrs = ent.get("attributes") or {}
-    return attrs if isinstance(attrs, dict) else {}
+    attrs = ent.get("attributes")
+    if isinstance(attrs, dict):
+        return attrs
+    if isinstance(attrs, str):
+        try:
+            parsed = json.loads(attrs)
+        except (ValueError, TypeError):
+            return {}
+        return parsed if isinstance(parsed, dict) else {}
+    return {}
 
 
 def _entity_name(survivor: dict) -> str:
