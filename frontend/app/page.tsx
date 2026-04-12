@@ -25,6 +25,8 @@ import {
   Search,
   Bell,
   Settings,
+  MapPin,
+  Goal,
 } from "lucide-react";
 
 /* ─── Dashboard (authenticated) ─── */
@@ -95,6 +97,112 @@ function Dashboard() {
             Account Settings
           </span>
         </Link>
+      </div>
+
+      {/* Live Adapters — streaming sources that feed the engine in real time */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-display text-xl text-white" style={{ letterSpacing: "-0.01em" }}>
+            Live Adapters
+          </h2>
+          <span className="text-xs font-mono text-li-gray-600 uppercase tracking-wider">
+            Streaming into BTUT → TCD-JEPA
+          </span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Link
+            href="/dunc"
+            className="li-card group cursor-pointer hover:border-li-cyan transition-colors"
+          >
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-md bg-li-black-surface border border-li-border flex items-center justify-center">
+                  <Goal className="w-5 h-5 text-li-cyan" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-white leading-tight">
+                    D-U-N-C Football
+                  </h3>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-li-cyan mt-0.5">
+                    Live · 10 Hz
+                  </p>
+                </div>
+              </div>
+              <span className="text-[10px] font-mono text-li-green">● LIVE</span>
+            </div>
+            <p className="text-sm text-li-text-secondary leading-relaxed">
+              Streaming GPS/RFID tracking from match play. Digital twins,
+              tactical convergence detection, role-scoped AI for manager and
+              staff. Feeds directly into the engine.
+            </p>
+            <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+              <div>
+                <p className="text-xs font-mono text-white">22</p>
+                <p className="text-[10px] text-li-gray-600 uppercase tracking-wider">twins</p>
+              </div>
+              <div>
+                <p className="text-xs font-mono text-white">3</p>
+                <p className="text-[10px] text-li-gray-600 uppercase tracking-wider">edge types</p>
+              </div>
+              <div>
+                <p className="text-xs font-mono text-white">10 Hz</p>
+                <p className="text-[10px] text-li-gray-600 uppercase tracking-wider">rate</p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/franklin"
+            className="li-card group cursor-pointer hover:border-li-warm transition-colors"
+          >
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-md bg-li-black-surface border border-li-border flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-li-warm" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-white leading-tight">
+                    Franklin Street
+                  </h3>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-li-warm mt-0.5">
+                    Live · multi-hour
+                  </p>
+                </div>
+              </div>
+              <span className="text-[10px] font-mono text-li-green">● LIVE</span>
+            </div>
+            <p className="text-sm text-li-text-secondary leading-relaxed">
+              Multi-hour venue busyness graph — spatial proximity and
+              busyness-correlation edges for the awakening pipeline.
+            </p>
+          </Link>
+
+          <Link
+            href="/datasets/new"
+            className="li-card group cursor-pointer hover:border-li-gray-600 transition-colors"
+          >
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-md bg-li-black-surface border border-li-border flex items-center justify-center">
+                  <Database className="w-5 h-5 text-li-text-secondary" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-white leading-tight">
+                    Upload Adapter
+                  </h3>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-li-text-muted mt-0.5">
+                    CSV · JSON · Hub
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-li-text-secondary leading-relaxed">
+              Bring your own dataset — CSV edge lists, JSON adjacency, or a
+              Hugging Face hub import. Feeds the same pipeline as the live
+              streams.
+            </p>
+          </Link>
+        </div>
       </div>
 
       <div>

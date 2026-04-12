@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  D-U-N-C Embed Snippet for thebigdunc.com
+  ----------------------------------------
+  This page is fully static. It contains no D-U-N-C logic — it simply
+  iframes the /dunc/embed/:id route on the Latent Ocean host. All code
+  and state live on Latent Ocean. Drop this file on thebigdunc.com as
+  index.html (or match.html) and it will render the full D-U-N-C
+  experience.
+
+  Configuration:
+    - Change LATENT_OCEAN_HOST to the canonical Latent Ocean origin
+      (https://latentocean.com in production).
+    - The match id is read from ?match=<id> in the browser URL. If no
+      match id is present, we show the landing page instead of an embed.
+    - ?role=manager|technical_staff passes through.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D-U-N-C</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #000;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter,
+          sans-serif;
+      }
+      .frame-host {
+        position: fixed;
+        inset: 0;
+        display: flex;
+      }
+      iframe {
+        flex: 1;
+        border: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame-host">
+      <iframe
+        id="dunc-frame"
+        title="D-U-N-C — Latent Ocean"
+        allow="autoplay; fullscreen"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+    <script>
+      (function () {
+        // Change this in production to https://latentocean.com
+        var LATENT_OCEAN_HOST = "https://latentocean.com";
+        var params = new URLSearchParams(window.location.search);
+        var matchId = params.get("match");
+        var role = params.get("role") || "manager";
+        var target;
+        if (matchId) {
+          target =
+            LATENT_OCEAN_HOST +
+            "/dunc/embed/" +
+            encodeURIComponent(matchId) +
+            "?role=" +
+            encodeURIComponent(role);
+        } else {
+          target = LATENT_OCEAN_HOST + "/dunc";
+        }
+        document.getElementById("dunc-frame").src = target;
+      })();
+    </script>
+  </body>
+</html>
