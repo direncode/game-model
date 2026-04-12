@@ -50,6 +50,7 @@ export function useDuncMatchStream(matchId: string | null) {
               ball: frame.ball,
               players: frame.players,
               insights: frame.insights,
+              active_scenarios: frame.active_scenarios,
             });
           } else if (frame.type === "prelude") {
             applyPrelude(frame.recent_insights);

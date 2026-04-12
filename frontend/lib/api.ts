@@ -3,15 +3,17 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 class ApiClient {
   private baseUrl: string;
   private token: string | null = null;
+  private refreshToken: string | null = null;
+  private onLogout: (() => void) | null = null;
+  private refreshPromise: Promise<boolean> | null = null;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
   setToken(token: string | null) { this.token = token; }
-  // Legacy methods — no-ops for backward compatibility
-  setRefreshToken(_token: string | null) {}
-  setOnLogout(_callback: () => void) {}
+  setRefreshToken(token: string | null) { this.refreshToken = token; }
+  setOnLogout(callback: () => void) { this.onLogout = callback; }
 
   private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
     const headers: Record<string, string> = {
@@ -22,11 +24,53 @@ class ApiClient {
 
     const res = await fetch(`${this.baseUrl}${path}`, { ...options, headers });
 
+    // Auto-refresh on 401 (skip for auth endpoints to avoid loops)
+    if (res.status === 401 && this.refreshToken && !path.includes("/auth/")) {
+      const refreshed = await this.tryRefresh();
+      if (refreshed) {
+        headers["Authorization"] = `Bearer ${this.token}`;
+        const retry = await fetch(`${this.baseUrl}${path}`, { ...options, headers });
+        if (!retry.ok) {
+          const error = await retry.json().catch(() => ({ detail: retry.statusText }));
+          throw new Error(error.detail || `API Error: ${retry.status}`);
+        }
+        return retry.json();
+      }
+      this.onLogout?.();
+      throw new Error("Session expired. Please log in again.");
+    }
+
     if (!res.ok) {
       const error = await res.json().catch(() => ({ detail: res.statusText }));
       throw new Error(error.detail || `API Error: ${res.status}`);
     }
     return res.json();
+  }
+
+  private async tryRefresh(): Promise<boolean> {
+    if (this.refreshPromise) return this.refreshPromise;
+    this.refreshPromise = (async () => {
+      try {
+        const res = await fetch(`${this.baseUrl}/api/v1/auth/refresh`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh_token: this.refreshToken }),
+        });
+        if (!res.ok) return false;
+        const data = await res.json();
+        this.token = data.access_token;
+        this.refreshToken = data.refresh_token;
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("token-refreshed", { detail: data }));
+        }
+        return true;
+      } catch {
+        return false;
+      } finally {
+        this.refreshPromise = null;
+      }
+    })();
+    return this.refreshPromise;
   }
 
   // ── Generic methods ───────────────────────────────────────────────
@@ -52,7 +96,14 @@ class ApiClient {
   }
 
   async logout(refreshToken: string) {
-    return this.request("/api/v1/auth/logout", { method: "POST", body: JSON.stringify({ refresh_token: refreshToken }) }, false).catch(() => {});
+    return this.request("/api/v1/auth/logout", { method: "POST", body: JSON.stringify({ refresh_token: refreshToken }) }).catch(() => {});
+  }
+
+  async refreshTokens(refreshToken: string) {
+    return this.request<{ access_token: string; refresh_token: string }>("/api/v1/auth/refresh", {
+      method: "POST",
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    });
   }
 
   async logoutAll() {

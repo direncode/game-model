@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUser, useClerk } from "@clerk/nextjs";
+import { useAppStore } from "@/stores/app";
 import {
   LogOut,
   Settings,
@@ -13,8 +13,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 export function Navbar() {
-  const { user } = useUser();
-  const { signOut } = useClerk();
+  const user = useAppStore((s) => s.user);
+  const signOut = useAppStore((s) => s.logout);
   const router = useRouter();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -24,14 +24,14 @@ export function Navbar() {
   };
 
   // Get user initials for avatar
-  const initials = user?.fullName
-    ? user.fullName
+  const initials = user?.name
+    ? user.name
         .split(" ")
         .map((n: string) => n[0])
         .join("")
         .toUpperCase()
         .slice(0, 2)
-    : user?.firstName?.[0]?.toUpperCase() || "U";
+    : "U";
 
   return (
     <nav className="h-14 bg-black fixed top-0 left-60 right-0 z-50 flex items-center justify-between px-6 border-b border-li-gray-900">
@@ -73,9 +73,9 @@ export function Navbar() {
               <div className="absolute right-0 top-full mt-2 w-56 bg-li-surface border border-li-gray-800 rounded-xl shadow-2xl py-1.5 z-50">
                 <div className="px-4 py-2.5 border-b border-li-gray-800">
                   <p className="text-sm font-medium text-white">
-                    {user?.fullName || user?.firstName || "User"}
+                    {user?.name || "User"}
                   </p>
-                  <p className="text-xs text-li-text-muted mt-0.5">{user?.primaryEmailAddress?.emailAddress}</p>
+                  <p className="text-xs text-li-text-muted mt-0.5">{user?.email}</p>
                 </div>
                 <Link
                   href="/settings"

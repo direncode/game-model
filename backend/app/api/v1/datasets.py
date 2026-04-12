@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 import uuid
 
 from fastapi import APIRouter, Depends, UploadFile, File
+
+logger = logging.getLogger(__name__)
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -29,20 +32,18 @@ router = APIRouter(prefix="/datasets", tags=["datasets"])
 @router.get("", response_model=PaginatedResponse[DatasetResponse])
 async def list_datasets(
     pagination: PaginationParams = Depends(),
-    user=Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """List datasets accessible to the current user (paginated)."""
+    """List all datasets (auth removed — public access)."""
     offset = (pagination.page - 1) * pagination.per_page
 
     # Count
-    count_q = select(func.count()).select_from(Dataset).where(Dataset.owner_id == user.id)
+    count_q = select(func.count()).select_from(Dataset)
     total = (await db.execute(count_q)).scalar_one()
 
     # Fetch page
     q = (
         select(Dataset)
-        .where(Dataset.owner_id == user.id)
         .order_by(Dataset.created_at.desc())
         .offset(offset)
         .limit(pagination.per_page)
@@ -124,7 +125,7 @@ async def upload_dataset_file(
             queue="default",
         )
     except Exception:
-        pass  # Celery not available in dev — continue gracefully
+        logger.warning("Celery task dispatch failed for dataset %s — broker may be unavailable", dataset_id, exc_info=True)
 
     return MessageResponse(message=f"File '{file.filename}' uploaded. Profiling started.")
 

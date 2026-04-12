@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import logging
 import secrets
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import List
 
 from fastapi import APIRouter, Depends, Request
+
+logger = logging.getLogger(__name__)
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -95,7 +98,7 @@ async def register(body: UserRegister, request: Request, db: AsyncSession = Depe
         from app.services.email import send_verification_email
         await send_verification_email(user.email, verification_token)
     except Exception:
-        pass  # Email sending failure shouldn't block registration
+        logger.warning("Failed to send verification email to %s", user.email, exc_info=True)
 
     return user
 
@@ -203,7 +206,7 @@ async def logout(body: LogoutRequest, db: AsyncSession = Depends(get_db)):
         if ttl > 0:
             await blacklist_token(hash_token(body.refresh_token), ttl)
     except Exception:
-        pass  # Token may already be expired
+        pass  # Token may already be expired — safe to ignore
 
     return {"message": "Logged out successfully"}
 
@@ -329,7 +332,7 @@ async def forgot_password(body: ForgotPasswordRequest, request: Request, db: Asy
             from app.services.email import send_password_reset_email
             await send_password_reset_email(user.email, reset_token)
         except Exception:
-            pass  # Don't reveal email existence through errors
+            logger.warning("Failed to send password reset email to %s", user.email, exc_info=True)
 
     # Always return the same response
     return {"message": "If an account with that email exists, a reset link has been sent."}
@@ -401,6 +404,6 @@ async def resend_verification(
         from app.services.email import send_verification_email
         await send_verification_email(user.email, verification_token)
     except Exception:
-        pass
+        logger.warning("Failed to resend verification email to %s", user.email, exc_info=True)
 
     return {"message": "Verification email sent"}

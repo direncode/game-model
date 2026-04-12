@@ -111,7 +111,7 @@ class WebSocketManager {
 
   // Alert subscription helper
   subscribeToAlerts(handler: (alert: { id: string; type: string; message: string; severity: string }) => void) {
-    return this.on("alert", handler);
+    return this.on("alert", handler as EventHandler);
   }
 }
 

@@ -11,6 +11,7 @@
 // - Fatigue is shown as a thin ring around the dot that turns warm → red as
 //   the player approaches match-end load.
 
+import { useMemo } from "react";
 import { useDuncStore } from "@/lib/dunc/store";
 import { PITCH_X, PITCH_Y, type DuncPlayerTick } from "@/lib/dunc/types";
 import { cn } from "@/lib/utils";
@@ -38,9 +39,19 @@ export function PitchView({
 }) {
   const ball = useDuncStore((s) => s.ball);
   const players = useDuncStore((s) => s.players);
+  const prevPlayers = useDuncStore((s) => s.prevPlayers);
+  const activeScenarios = useDuncStore((s) => s.activeScenarios);
 
   const hilite = new Set(highlightedIds);
   const roleSet = selectedRoleFilter ? new Set(selectedRoleFilter) : null;
+  const hasActiveScenario = activeScenarios.length > 0;
+
+  // Build a map of previous positions for ghost overlay
+  const prevMap = useMemo(() => {
+    const m = new Map<string, { x: number; y: number }>();
+    for (const p of prevPlayers) m.set(p.id, { x: p.x, y: p.y });
+    return m;
+  }, [prevPlayers]);
 
   return (
     <div className={cn("relative w-full", compact ? "aspect-[105/68]" : "aspect-[105/68]")}>
@@ -52,6 +63,9 @@ export function PitchView({
       >
         {/* Pitch background */}
         <defs>
+          <marker id="dunc-arrow" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto">
+            <path d="M0,0 L4,2 L0,4" fill="none" stroke="#00d4ff" strokeWidth="0.5" />
+          </marker>
           <linearGradient id="dunc-pitch-bg" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stopColor="#0a1f14" />
             <stop offset="100%" stopColor="#05140c" />
@@ -93,6 +107,39 @@ export function PitchView({
           <rect x={-0.5} y={30.34} width={0.5} height={7.32} stroke="#3fb950" />
           <rect x={PITCH_X} y={30.34} width={0.5} height={7.32} stroke="#3fb950" />
         </g>
+
+        {/* Ghost overlay — shows previous positions when a scenario is active */}
+        {hasActiveScenario && (
+          <g opacity={0.3}>
+            {players.map((p) => {
+              const prev = prevMap.get(p.id);
+              if (!prev) return null;
+              const dx = p.x - prev.x;
+              const dy = p.y - prev.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 0.5) return null; // no meaningful movement
+              const team = TEAM_COLORS[p.team];
+              return (
+                <g key={`ghost-${p.id}`}>
+                  {/* Ghost dot at previous position */}
+                  <circle cx={prev.x} cy={prev.y} r={1.4} fill={team} opacity={0.4} />
+                  {/* Arrow from previous to current */}
+                  <line
+                    x1={prev.x}
+                    y1={prev.y}
+                    x2={p.x}
+                    y2={p.y}
+                    stroke={team}
+                    strokeWidth={0.3}
+                    strokeDasharray="1 0.5"
+                    opacity={0.5}
+                    markerEnd="url(#dunc-arrow)"
+                  />
+                </g>
+              );
+            })}
+          </g>
+        )}
 
         {/* Players */}
         <g>

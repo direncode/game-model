@@ -99,7 +99,7 @@ export default function ExplorerPage() {
       <div className="li-card p-0 overflow-hidden" style={{ height: "calc(100vh - 220px)" }}>
         <Module3DExplorer
           modules={explorerData.modules}
-          connections={explorerData.connections}
+          relationships={explorerData.connections}
         />
       </div>
 

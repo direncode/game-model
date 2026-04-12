@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth-shim";
 import { fetchFSDModules, triggerFSDCrystallization, type FSDModuleSummary } from "@/lib/fsd-api";
 import { Boxes, Clock, Zap, DollarSign, ChevronDown } from "lucide-react";
 

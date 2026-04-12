@@ -4,49 +4,16 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { getQueryClient } from "@/lib/query";
 import { useEffect } from "react";
-import { useUser, useAuth } from "@clerk/nextjs";
 import { useAppStore } from "@/stores/app";
-import { api } from "@/lib/api";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
-  const { user: clerkUser, isLoaded: userLoaded } = useUser();
-  const { getToken, isSignedIn } = useAuth();
+  const hydrate = useAppStore((s) => s.hydrate);
 
-  // Sync Clerk user to app store
+  // Hydrate auth state on mount (restore token if one exists in localStorage)
   useEffect(() => {
-    if (userLoaded && clerkUser && isSignedIn) {
-      useAppStore.getState().setClerkUser({
-        id: clerkUser.id,
-        email: clerkUser.primaryEmailAddress?.emailAddress || "",
-        name: clerkUser.fullName || clerkUser.firstName || "User",
-        imageUrl: clerkUser.imageUrl,
-      });
-    } else if (userLoaded && !isSignedIn) {
-      useAppStore.getState().logout();
-    }
-  }, [clerkUser, userLoaded, isSignedIn]);
-
-  // Set up API client with Clerk token
-  useEffect(() => {
-    if (!isSignedIn) {
-      api.setToken(null);
-      return;
-    }
-
-    // Get initial token
-    getToken().then((token) => {
-      if (token) api.setToken(token);
-    });
-
-    // Refresh token periodically (Clerk tokens expire in ~60s)
-    const interval = setInterval(async () => {
-      const token = await getToken();
-      if (token) api.setToken(token);
-    }, 50_000); // Refresh every 50 seconds
-
-    return () => clearInterval(interval);
-  }, [isSignedIn, getToken]);
+    hydrate();
+  }, [hydrate]);
 
   return (
     <QueryClientProvider client={queryClient}>

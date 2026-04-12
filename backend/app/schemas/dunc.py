@@ -19,6 +19,7 @@ MatchStatus = Literal["idle", "running", "paused", "finished"]
 class MatchCreateRequest(BaseModel):
     preset: str = Field(default="demo", description="Simulator preset name")
     seed: int | None = Field(default=None, description="Optional deterministic seed")
+    hz: float = Field(default=10.0, ge=1.0, le=120.0, description="Tick rate in Hz")
 
 
 class MatchSummaryOut(BaseModel):

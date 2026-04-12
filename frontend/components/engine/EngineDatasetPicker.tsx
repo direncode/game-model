@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Database, Library, ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth-shim";
 import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
 

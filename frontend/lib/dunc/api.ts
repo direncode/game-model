@@ -13,9 +13,7 @@ import type {
   DuncScenario,
 } from "./types";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window !== "undefined" ? "" : "http://localhost:8000");
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://latentocean.com";
 
 async function j<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -40,10 +38,10 @@ export const duncApi = {
     return j<DuncMatchSummary[]>("/api/v1/dunc/matches");
   },
 
-  createMatch(preset = "demo", seed: number | null = null) {
+  createMatch(preset = "demo", seed: number | null = null, hz: number = 10) {
     return j<DuncMatchSummary>("/api/v1/dunc/matches", {
       method: "POST",
-      body: JSON.stringify({ preset, seed }),
+      body: JSON.stringify({ preset, seed, hz }),
     });
   },
 
@@ -86,17 +84,14 @@ export const duncApi = {
 };
 
 // Compute the matching WebSocket URL for a match stream.
+// Uses the alt WS route at /api/v1/dunc/matches/{id}/ws so it goes through
+// the same /api/ nginx proxy as REST calls — no separate WS proxy needed.
 export function duncWsUrl(matchId: string): string {
-  // If NEXT_PUBLIC_API_URL is explicit, respect its scheme; otherwise derive
-  // from window.location so the frontend just works behind any proxy.
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    const u = new URL(process.env.NEXT_PUBLIC_API_URL);
-    const proto = u.protocol === "https:" ? "wss:" : "ws:";
-    return `${proto}//${u.host}/ws/dunc/matches/${matchId}`;
-  }
+  // Always derive from window.location so it works through any proxy/domain.
+  // Falls back to localhost only on SSR (which never actually connects a WS).
   if (typeof window === "undefined") {
-    return `ws://localhost:8000/ws/dunc/matches/${matchId}`;
+    return `ws://localhost:8000/api/v1/dunc/matches/${matchId}/ws`;
   }
   const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-  return `${proto}//${window.location.host}/ws/dunc/matches/${matchId}`;
+  return `${proto}//${window.location.host}/api/v1/dunc/matches/${matchId}/ws`;
 }

@@ -62,6 +62,7 @@ class TacticalEngine:
         twins: DigitalTwinRegistry,
         ball_xy: tuple[float, float],
         stream: InsightStream,
+        active_scenarios: list[dict] | None = None,
     ) -> None:
         """Advance one tick. Any new insights are pushed into `stream`."""
         snapshot = [
@@ -87,7 +88,7 @@ class TacticalEngine:
         self._window.append(snapshot)
 
         # ── Cheap heuristic detectors every tick ──────────────────────
-        for insight in self._scenario.detect(t, snapshot, ball_xy):
+        for insight in self._scenario.detect(t, snapshot, ball_xy, active_scenarios):
             stream.push(insight)
 
         # ── Windowed BTUT convergence at most at `convergence_hz` ─────

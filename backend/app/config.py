@@ -1,9 +1,13 @@
 """Application configuration loaded from environment variables."""
 
+import logging
+import secrets
 from typing import Optional
 
-from pydantic import field_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+logger = logging.getLogger(__name__)
 
 
 class Settings(BaseSettings):
@@ -33,7 +37,7 @@ class Settings(BaseSettings):
     ELASTICSEARCH_URL: str = "http://localhost:9200"
 
     # ── JWT / Auth ──────────────────────────────────────────────────────
-    JWT_SECRET_KEY: str = "CHANGE-ME-IN-PRODUCTION"
+    JWT_SECRET_KEY: str = ""
     JWT_ALGORITHM: str = "HS256"
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
@@ -92,6 +96,22 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
     APP_DEBUG: bool = False
     CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
+
+    @model_validator(mode="after")
+    def _ensure_jwt_secret(self) -> "Settings":
+        if not self.JWT_SECRET_KEY:
+            if self.APP_ENV == "production":
+                raise ValueError(
+                    "JWT_SECRET_KEY must be set in production. "
+                    "Generate one with: python -c \"import secrets; print(secrets.token_urlsafe(64))\""
+                )
+            generated = secrets.token_urlsafe(32)
+            object.__setattr__(self, "JWT_SECRET_KEY", generated)
+            logger.warning(
+                "JWT_SECRET_KEY not set — generated ephemeral key for development. "
+                "Sessions will not survive restarts. Set JWT_SECRET_KEY in .env for persistence."
+            )
+        return self
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod

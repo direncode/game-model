@@ -1,11 +1,6 @@
-// Zustand store for D-U-N-C live match state.
-//
-// One store holds everything the UI cares about for a live match: the last
-// tick, recent insights, and the user's selected role. The WS client hook
-// writes into this store — components read selectors.
-
 import { create } from "zustand";
 import type {
+  DuncActiveScenario,
   DuncBallTick,
   DuncInsight,
   DuncMatchSummary,
@@ -24,7 +19,9 @@ interface DuncState {
   clockSec: number;
   ball: DuncBallTick | null;
   players: DuncPlayerTick[];
+  prevPlayers: DuncPlayerTick[]; // previous tick — for ghost overlay
   insights: DuncInsight[];
+  activeScenarios: DuncActiveScenario[];
 
   applyTick: (payload: {
     t: number;
@@ -32,6 +29,7 @@ interface DuncState {
     ball: DuncBallTick;
     players: DuncPlayerTick[];
     insights: DuncInsight[];
+    active_scenarios?: DuncActiveScenario[];
   }) => void;
 
   applyPrelude: (recent_insights: DuncInsight[]) => void;
@@ -40,15 +38,8 @@ interface DuncState {
 
 const MAX_INSIGHTS = 80;
 
-// localStorage persistence for role — cheap and works without middleware.
-function loadRole(): DuncRole {
-  if (typeof window === "undefined") return "manager";
-  const v = window.localStorage.getItem("dunc.role");
-  return v === "technical_staff" ? "technical_staff" : "manager";
-}
-
 export const useDuncStore = create<DuncState>((set) => ({
-  role: loadRole(),
+  role: "manager" as DuncRole,
   setRole: (role) => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("dunc.role", role);
@@ -63,7 +54,9 @@ export const useDuncStore = create<DuncState>((set) => ({
   clockSec: 0,
   ball: null,
   players: [],
+  prevPlayers: [],
   insights: [],
+  activeScenarios: [],
 
   applyTick: (payload) =>
     set((state) => {
@@ -74,8 +67,10 @@ export const useDuncStore = create<DuncState>((set) => ({
         lastTick: payload.t,
         clockSec: payload.clock_sec,
         ball: payload.ball,
+        prevPlayers: state.players, // snapshot current as "previous"
         players: payload.players,
         insights: merged,
+        activeScenarios: payload.active_scenarios || [],
       };
     }),
 
@@ -90,6 +85,8 @@ export const useDuncStore = create<DuncState>((set) => ({
       clockSec: 0,
       ball: null,
       players: [],
+      prevPlayers: [],
       insights: [],
+      activeScenarios: [],
     }),
 }));

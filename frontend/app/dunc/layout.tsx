@@ -1,19 +1,22 @@
+"use client";
+
 // D-U-N-C vertical layout — dark enterprise shell.
-//
-// Intentionally minimal: the header is a single line with the D-U-N-C mark
-// and the role switcher. Everything else is left to child pages so the
-// /dunc/embed/[id] route can skip the header entirely without layout hacks.
+// Hydrates the role from localStorage on mount to avoid SSR mismatch.
 
-import type { Metadata } from "next";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "D-U-N-C — Tactical Football Intelligence",
-  description:
-    "Live digital twins, tactical insight, and AI-assisted match intelligence, powered by Latent Ocean.",
-};
+import { useEffect } from "react";
+import { useDuncStore } from "@/lib/dunc/store";
+import type { DuncRole } from "@/lib/dunc/types";
 
 export default function DuncLayout({ children }: { children: React.ReactNode }) {
+  const setRole = useDuncStore((s) => s.setRole);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("dunc.role");
+    if (stored === "technical_staff") {
+      setRole("technical_staff");
+    }
+  }, [setRole]);
+
   return (
     <div className="min-h-screen bg-li-black text-li-white flex flex-col">
       {children}

@@ -59,16 +59,6 @@ export interface DuncBallTick {
   vy: number;
 }
 
-export interface DuncTick {
-  type: "tick";
-  match_id: string;
-  t: number;
-  clock_sec: number;
-  ball: DuncBallTick;
-  players: DuncPlayerTick[];
-  insights: DuncInsight[];
-}
-
 export interface DuncPrelude {
   type: "prelude";
   match_id: string;
@@ -87,6 +77,23 @@ export interface DuncAgentReply {
   answer: string;
   citations: string[];
   style: "concise" | "detailed";
+}
+
+export interface DuncActiveScenario {
+  name: string;
+  remaining_sec: number;
+  affected_count: number;
+}
+
+export interface DuncTick {
+  type: "tick";
+  match_id: string;
+  t: number;
+  clock_sec: number;
+  ball: DuncBallTick;
+  players: DuncPlayerTick[];
+  insights: DuncInsight[];
+  active_scenarios: DuncActiveScenario[];
 }
 
 // Pitch constants — mirror backend simulator.

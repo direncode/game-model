@@ -126,14 +126,16 @@ class MatchRuntime:
 
                 frame = self.simulator.step()
                 self.twins.ingest(frame)
+                active_scenarios = self.simulator.get_active_scenarios()
                 self.engine.tick(
                     t=frame.t,
                     twins=self.twins,
                     ball_xy=(frame.ball.x, frame.ball.y),
                     stream=self.insights,
+                    active_scenarios=active_scenarios,
                 )
 
-                payload = self._build_tick_payload(frame)
+                payload = self._build_tick_payload(frame, active_scenarios)
                 await self._broadcast(payload)
 
                 if frame.t >= self.preset.duration_seconds:
@@ -146,7 +148,7 @@ class MatchRuntime:
             logger.info("dunc: match %s loop stopped", self.id)
 
     # ── frame serialization ───────────────────────────────────────────
-    def _build_tick_payload(self, frame) -> dict:
+    def _build_tick_payload(self, frame, active_scenarios: list[dict] | None = None) -> dict:
         twins = {tw.player_id: tw for tw in self.twins.all()}
         players_out = []
         for sample in frame.players:
@@ -182,6 +184,7 @@ class MatchRuntime:
             },
             "players": players_out,
             "insights": new_insights,
+            "active_scenarios": active_scenarios or [],
         }
 
     async def _broadcast(self, payload: dict) -> None:

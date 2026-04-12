@@ -1,19 +1,13 @@
-"""Synthetic match simulator.
+"""Synthetic match simulator — Premier League intensity.
 
-Generates 22 players + ball on a standard 105×68 pitch at a target Hz with
-realistic-enough dynamics to exercise the full dunc pipeline end to end.
-The goal is NOT football-grade physics; it is a deterministic, seedable
-stream with enough structure that tactical detectors have something to
-detect (formation, pressing triggers, under-runs, etc.).
+Every player runs at real speeds (walk 1.5m/s, jog 4m/s, run 7m/s, sprint
+9.5m/s). The ball travels at real passing speed (ground pass 12-18m/s, long
+ball 20-25m/s). Possession transfers trigger visible ball flight. Scenarios
+produce immediate, dramatic formation shifts — not gradual drifts.
 
-Design notes:
-- Deterministic given `seed` — critical for tests and reproducible demos.
-- Formation is 4-3-3 for both teams. Role anchors are pitch-relative.
-- Players drift around their anchor via a small harmonic oscillator plus
-  a goal-seeking term toward the ball when it enters their zone.
-- The ball follows scripted beats (kickoff → build-up → transition → …),
-  but can be nudged into scenarios (`trigger("under_run")`) which perturb
-  specific players for ~5 seconds.
+Architecture: each tick the engine (1) picks a play phase, (2) computes
+a target position for every player from role+ball+phase, (3) moves each
+player toward target at realistic speed, (4) handles passing and turnovers.
 """
 
 from __future__ import annotations
@@ -28,33 +22,28 @@ from app.services.dunc.adapters import BallSample, TrackingFrame, TrackingSample
 PITCH_X = 105.0
 PITCH_Y = 68.0
 
-# ── 4-3-3 anchor coordinates (home, attacking +x) ──────────────────────
-#
-# Tuples are (x, y). Home mirrors to away via (PITCH_X - x, PITCH_Y - y).
-# Role labels follow conventional abbreviations. Numbers are shirt-like.
+# 4-3-3 base positions
 _HOME_4_3_3: list[tuple[str, int, float, float]] = [
     ("GK",  1,  5.0, 34.0),
-    ("LB",  3, 20.0, 12.0),
-    ("LCB", 4, 20.0, 26.0),
-    ("RCB", 5, 20.0, 42.0),
-    ("RB",  2, 20.0, 56.0),
-    ("LCM", 8, 40.0, 22.0),
+    ("LB",  3, 25.0, 10.0),
+    ("LCB", 4, 22.0, 26.0),
+    ("RCB", 5, 22.0, 42.0),
+    ("RB",  2, 25.0, 58.0),
+    ("LCM", 8, 42.0, 22.0),
     ("CM",  6, 40.0, 34.0),
-    ("RCM", 10, 40.0, 46.0),
-    ("LW", 11, 62.0, 16.0),
-    ("ST",  9, 65.0, 34.0),
-    ("RW",  7, 62.0, 52.0),
+    ("RCM", 10, 42.0, 46.0),
+    ("LW", 11, 65.0, 12.0),
+    ("ST",  9, 68.0, 34.0),
+    ("RW",  7, 65.0, 56.0),
 ]
 
 
 @dataclass
 class MatchPreset:
-    """Parameters controlling how the simulator runs a match."""
-
     name: str = "demo"
     hz: float = 10.0
     seed: int = 1337
-    duration_seconds: float = 5400.0  # 90 minutes
+    duration_seconds: float = 5400.0
 
 
 @dataclass
@@ -63,19 +52,22 @@ class _PlayerState:
     team: Literal["home", "away"]
     number: int
     role: str
-    anchor_x: float
-    anchor_y: float
+    base_x: float
+    base_y: float
     x: float
     y: float
     vx: float = 0.0
     vy: float = 0.0
-    phase: float = 0.0
+    target_x: float = 0.0
+    target_y: float = 0.0
+    phase_offset: float = 0.0
+    has_ball: bool = False
+    # Speed profile
+    max_speed: float = 9.0       # sprint m/s
+    jog_speed: float = 4.5       # jog m/s
+    positioning_iq: float = 0.85
+    # Scenario
     perturb_until: float = 0.0
-    perturb_dx: float = 0.0
-    perturb_dy: float = 0.0
-    # Temporary anchor shift — used by scenarios that must actually move
-    # the player's rest position (pressing shift, formation change, …).
-    # The shift is added to (anchor_x, anchor_y) while `perturb_until > t`.
     anchor_shift_x: float = 0.0
     anchor_shift_y: float = 0.0
 
@@ -86,14 +78,16 @@ class _BallState:
     y: float = PITCH_Y / 2
     vx: float = 0.0
     vy: float = 0.0
-    beat_until: float = 0.0
-    target_x: float = PITCH_X / 2
-    target_y: float = PITCH_Y / 2
+    # Ball flight: when in_flight, ball travels at flight_speed to flight_target
+    in_flight: bool = False
+    flight_target_x: float = 0.0
+    flight_target_y: float = 0.0
+    flight_speed: float = 0.0
+    carrier_id: str = ""
+    carrier_team: Literal["home", "away"] = "home"
 
 
 class MatchSimulator:
-    """Deterministic football match simulator."""
-
     def __init__(self, preset: MatchPreset | None = None) -> None:
         self.preset = preset or MatchPreset()
         self._rng = random.Random(self.preset.seed)
@@ -101,240 +95,483 @@ class MatchSimulator:
         self._dt: float = 1.0 / max(self.preset.hz, 1e-6)
         self.players: list[_PlayerState] = []
         self.ball: _BallState = _BallState()
+        self._phase: float = 0.0
+        self._next_pass_t: float = 0.0
+        self._play_phase: str = "buildUp"
         self._pending_scenarios: list[str] = []
+        self._active_scenario_map: dict[str, float] = {}  # name → perturb_until
         self._build_formation()
 
-    # ── lifecycle ──────────────────────────────────────────────────────
     def reset(self) -> None:
-        """Rewind to kickoff. Preserves preset/seed for determinism."""
         self._rng = random.Random(self.preset.seed)
         self.t = 0.0
         self.players = []
         self.ball = _BallState()
+        self._phase = 0.0
+        self._next_pass_t = 0.0
+        self._play_phase = "buildUp"
         self._pending_scenarios = []
+        self._active_scenario_map = {}
         self._build_formation()
 
     def trigger(self, scenario: str) -> None:
-        """Schedule a scripted scenario for the next step.
-
-        Supported scenarios (v0):
-            Legacy 3: `under_run`, `pressing_shift`, `convergence`
-            Pressing library: `high_press`, `counter_press`, `trap_sideline`,
-                `trap_corner`, `mid_block`, `low_block`, `man_mark`, `zonal`,
-                `drop_deep`, `hold_line`, `step_up`
-        """
         self._pending_scenarios.append(scenario)
 
-    # ── one tick of simulation ─────────────────────────────────────────
+    def get_active_scenarios(self) -> list[dict]:
+        """Return currently active scenario perturbations with time remaining."""
+        out = []
+        for name, until in list(self._active_scenario_map.items()):
+            remaining = until - self.t
+            if remaining <= 0:
+                del self._active_scenario_map[name]
+                continue
+            affected = sum(
+                1 for p in self.players
+                if p.team == "home" and p.perturb_until > self.t
+                and abs(p.anchor_shift_x) > 0.5 or abs(p.anchor_shift_y) > 0.5
+            )
+            out.append({
+                "name": name,
+                "remaining_sec": round(remaining, 1),
+                "affected_count": affected,
+            })
+        return out
+
     def step(self) -> TrackingFrame:
-        """Advance one tick and return the current frame."""
-        # Apply any pending scenarios before integrating.
-        for scenario in self._pending_scenarios:
-            self._apply_scenario(scenario)
+        for s in self._pending_scenarios:
+            self._apply_scenario(s)
         self._pending_scenarios.clear()
 
-        self._advance_ball()
-        for p in self.players:
-            self._advance_player(p)
+        self._phase += self._dt * 2.0
+        self._update_play_phase()
+        self._update_all_targets()
+        self._move_all_players()
+        self._update_ball()
+        self._maybe_pass()
 
         self.t += self._dt
 
         samples = [
             TrackingSample(
-                t=self.t,
-                player_id=p.player_id,
-                team=p.team,
-                number=p.number,
-                role=p.role,
-                x=p.x,
-                y=p.y,
-                vx=p.vx,
-                vy=p.vy,
+                t=self.t, player_id=p.player_id, team=p.team,
+                number=p.number, role=p.role,
+                x=p.x, y=p.y, vx=p.vx, vy=p.vy,
             )
             for p in self.players
         ]
         return TrackingFrame(
             t=self.t,
-            ball=BallSample(
-                t=self.t,
-                x=self.ball.x,
-                y=self.ball.y,
-                vx=self.ball.vx,
-                vy=self.ball.vy,
-            ),
+            ball=BallSample(t=self.t, x=self.ball.x, y=self.ball.y,
+                            vx=self.ball.vx, vy=self.ball.vy),
             players=samples,
         )
 
-    # ── internals ──────────────────────────────────────────────────────
+    # ── formation ──────────────────────────────────────────────────────
     def _build_formation(self) -> None:
-        for role, number, ax, ay in _HOME_4_3_3:
-            self.players.append(
-                _PlayerState(
-                    player_id=f"H{number:02d}",
-                    team="home",
-                    number=number,
-                    role=role,
-                    anchor_x=ax,
-                    anchor_y=ay,
-                    x=ax + self._rng.uniform(-0.5, 0.5),
-                    y=ay + self._rng.uniform(-0.5, 0.5),
-                    phase=self._rng.uniform(0, math.tau),
-                )
-            )
-            self.players.append(
-                _PlayerState(
-                    player_id=f"A{number:02d}",
-                    team="away",
-                    number=number,
-                    role=role,
-                    anchor_x=PITCH_X - ax,
-                    anchor_y=PITCH_Y - ay,
-                    x=PITCH_X - ax + self._rng.uniform(-0.5, 0.5),
-                    y=PITCH_Y - ay + self._rng.uniform(-0.5, 0.5),
-                    phase=self._rng.uniform(0, math.tau),
-                )
-            )
+        for role, number, bx, by in _HOME_4_3_3:
+            self.players.append(_PlayerState(
+                player_id=f"H{number:02d}", team="home", number=number, role=role,
+                base_x=bx, base_y=by,
+                x=bx + self._rng.uniform(-1, 1), y=by + self._rng.uniform(-1, 1),
+                target_x=bx, target_y=by,
+                phase_offset=self._rng.uniform(0, math.tau),
+                max_speed=self._rng.uniform(8.5, 10.5),
+                jog_speed=self._rng.uniform(3.8, 5.2),
+                positioning_iq=self._rng.uniform(0.75, 0.98),
+            ))
+            self.players.append(_PlayerState(
+                player_id=f"A{number:02d}", team="away", number=number, role=role,
+                base_x=PITCH_X - bx, base_y=PITCH_Y - by,
+                x=PITCH_X - bx + self._rng.uniform(-1, 1),
+                y=PITCH_Y - by + self._rng.uniform(-1, 1),
+                target_x=PITCH_X - bx, target_y=PITCH_Y - by,
+                phase_offset=self._rng.uniform(0, math.tau),
+                max_speed=self._rng.uniform(8.0, 10.0),
+                jog_speed=self._rng.uniform(3.5, 5.0),
+                positioning_iq=self._rng.uniform(0.70, 0.95),
+            ))
+        cm = next(p for p in self.players if p.player_id == "H06")
+        cm.has_ball = True
+        self.ball.carrier_id = cm.player_id
+        self.ball.carrier_team = "home"
+        self.ball.x = cm.x
+        self.ball.y = cm.y
+        self._next_pass_t = self.t + self._rng.uniform(1.0, 2.5)
 
-    def _advance_ball(self) -> None:
-        # Pick a new beat target every 2–4 seconds.
-        if self.t >= self.ball.beat_until:
-            self.ball.beat_until = self.t + self._rng.uniform(2.0, 4.0)
-            self.ball.target_x = self._rng.uniform(15.0, PITCH_X - 15.0)
-            self.ball.target_y = self._rng.uniform(8.0, PITCH_Y - 8.0)
+    # ── play phase ─────────────────────────────────────────────────────
+    def _update_play_phase(self) -> None:
+        cycle = (self.t % 16.0) / 16.0
+        if cycle < 0.30:
+            self._play_phase = "buildUp"
+        elif cycle < 0.50:
+            self._play_phase = "progression"
+        elif cycle < 0.70:
+            self._play_phase = "finalThird"
+        elif cycle < 0.82:
+            self._play_phase = "pressing"
+        else:
+            self._play_phase = "transition"
 
-        # Move ball toward target with moderate speed + damping.
-        dx = self.ball.target_x - self.ball.x
-        dy = self.ball.target_y - self.ball.y
-        dist = max(math.hypot(dx, dy), 1e-6)
-        desired = min(dist / max(self.ball.beat_until - self.t, 1e-3), 18.0)
-        self.ball.vx = 0.6 * self.ball.vx + 0.4 * (dx / dist) * desired
-        self.ball.vy = 0.6 * self.ball.vy + 0.4 * (dy / dist) * desired
-        self.ball.x = _clip(self.ball.x + self.ball.vx * self._dt, 0.0, PITCH_X)
-        self.ball.y = _clip(self.ball.y + self.ball.vy * self._dt, 0.0, PITCH_Y)
+    # ── target computation ─────────────────────────────────────────────
+    def _update_all_targets(self) -> None:
+        bx, by = self.ball.x, self.ball.y
 
-    def _advance_player(self, p: _PlayerState) -> None:
-        p.phase += self._dt * 0.6
+        for p in self.players:
+            if self.t >= p.perturb_until:
+                p.anchor_shift_x *= 0.92  # decay shift smoothly
+                p.anchor_shift_y *= 0.92
+                if abs(p.anchor_shift_x) < 0.5:
+                    p.anchor_shift_x = 0.0
+                if abs(p.anchor_shift_y) < 0.5:
+                    p.anchor_shift_y = 0.0
 
-        # Clear anchor shift once the perturbation window expires.
-        if self.t >= p.perturb_until:
-            p.anchor_shift_x = 0.0
-            p.anchor_shift_y = 0.0
+            eff_bx = p.base_x + p.anchor_shift_x
+            eff_by = p.base_y + p.anchor_shift_y
 
-        effective_anchor_x = p.anchor_x + p.anchor_shift_x
-        effective_anchor_y = p.anchor_y + p.anchor_shift_y
-        anchor_dx = effective_anchor_x - p.x
-        anchor_dy = effective_anchor_y - p.y
+            ph = self._phase + p.phase_offset
+            iq = p.positioning_iq
 
-        ball_dx = self.ball.x - p.x
-        ball_dy = self.ball.y - p.y
-        ball_dist = math.hypot(ball_dx, ball_dy)
+            # Off-ball cycling — constant motion, amplitude varies by role
+            amp = 4.0 + iq * 3.0
+            cx = math.sin(ph) * amp
+            cy = math.cos(ph * 0.7) * amp * 0.8
 
-        # Goal-seek ball only if it is within the player's zone (~18m).
-        seek_gain = 0.0
-        if ball_dist < 18.0 and p.role not in ("GK",):
-            seek_gain = 0.25 * (18.0 - ball_dist) / 18.0
+            if p.team == "home":
+                self._target_home(p, bx, by, eff_bx, eff_by, cx, cy, iq)
+            else:
+                self._target_away(p, bx, by, eff_bx, eff_by, cx, cy, iq)
 
-        # Harmonic drift around anchor + ball pull + slight noise.
-        ax = 1.5 * anchor_dx + seek_gain * ball_dx + math.sin(p.phase) * 0.4
-        ay = 1.5 * anchor_dy + seek_gain * ball_dy + math.cos(p.phase) * 0.4
+            # Ball carrier drives forward
+            if p.has_ball:
+                if p.team == "home":
+                    p.target_x = min(90.0, p.x + 3.0)
+                else:
+                    p.target_x = max(15.0, p.x - 3.0)
 
-        if self.t < p.perturb_until:
-            ax += p.perturb_dx
-            ay += p.perturb_dy
+    def _target_home(self, p, bx, by, base_x, base_y, cx, cy, iq):
+        r = p.role
+        predicted = bx + 6.0
 
-        damping = 0.72
-        p.vx = damping * p.vx + ax * self._dt * 1.6
-        p.vy = damping * p.vy + ay * self._dt * 1.6
+        if r == "GK":
+            p.target_x = 7.0 + (8.0 if self._play_phase == "buildUp" else 2.0)
+            p.target_y = _clip(by * 0.15 + 31.0 + cy * 0.3, 24.0, 44.0)
+        elif r == "LB":
+            push = 22.0 if self._play_phase == "finalThird" else 10.0
+            p.target_x = _clip(base_x + push + cx, 12.0, 70.0)
+            p.target_y = _clip(base_y + cy, 2.0, 22.0)
+        elif r in ("LCB", "RCB"):
+            adv = iq * (14.0 if self._play_phase == "buildUp" else 5.0)
+            p.target_x = _clip(base_x + adv + cx * 0.4, 12.0, 55.0)
+            p.target_y = _clip(base_y + (by - 34.0) * 0.12 + cy * 0.5, 16.0, 52.0)
+        elif r == "RB":
+            if bx > 45.0 and iq > 0.82:
+                p.target_x = _clip(bx - 5.0 + cx, 18.0, 62.0)
+                p.target_y = _clip(58.0 + cy, 48.0, 66.0)
+            else:
+                p.target_x = _clip(base_x + (bx - 30.0) * 0.25 + cx, 14.0, 55.0)
+                p.target_y = _clip(base_y + cy, 46.0, 66.0)
+        elif r == "CM":
+            p.target_x = _clip(predicted - 14.0 + cx * 0.4, 25.0, 65.0)
+            p.target_y = _clip(34.0 + (by - 34.0) * 0.2 + cy * 0.4, 18.0, 50.0)
+        elif r in ("LCM", "RCM"):
+            is_right = "R" in r
+            push = iq * (16.0 if self._play_phase == "finalThird" else 8.0)
+            p.target_x = _clip(predicted + push + cx, 28.0, 82.0)
+            p.target_y = _clip((48.0 if is_right else 20.0) + cy, 8.0, 60.0)
+        elif r == "LW":
+            p.target_x = _clip(bx + 16.0 * iq + cx, 35.0, 95.0)
+            p.target_y = _clip(8.0 + cy, 2.0, 22.0)
+        elif r == "RW":
+            p.target_x = _clip(bx + 18.0 * iq + cx, 38.0, 98.0)
+            p.target_y = _clip(60.0 + cy, 46.0, 66.0)
+        elif r == "ST":
+            p.target_x = _clip(max(58.0, predicted + 14.0) + cx * 0.5, 45.0, 98.0)
+            p.target_y = _clip(34.0 + (by - 34.0) * 0.3 + cy * 0.6, 18.0, 50.0)
 
-        # Cap player speed at ~9.5 m/s (sprinting).
-        speed = math.hypot(p.vx, p.vy)
-        if speed > 9.5:
-            p.vx *= 9.5 / speed
-            p.vy *= 9.5 / speed
+    def _target_away(self, p, bx, by, base_x, base_y, cx, cy, iq):
+        r = p.role
+        if r == "GK":
+            p.target_x = _clip(98.0 - (8.0 if self._play_phase == "buildUp" else 2.0), 92.0, 104.0)
+            p.target_y = _clip(by * 0.15 + 31.0 + cy * 0.3, 24.0, 44.0)
+        elif r == "ST":
+            p.target_x = _clip(bx - 14.0 + cx * 0.5, 7.0, 60.0)
+            p.target_y = _clip(34.0 + (by - 34.0) * 0.3 + cy * 0.6, 18.0, 50.0)
+        elif r in ("LW", "RW"):
+            is_lw = r == "LW"
+            p.target_x = _clip(bx - 16.0 * iq + cx, 7.0, 70.0)
+            p.target_y = _clip((60.0 if is_lw else 8.0) + cy, 2.0, 66.0)
+        elif r in ("LCM", "RCM", "CM"):
+            block_x = bx + (6.0 if self._play_phase == "pressing" else 16.0)
+            is_r = "R" in r or r == "CM"
+            p.target_x = _clip(block_x + cx, 25.0, 85.0)
+            p.target_y = _clip((42.0 if is_r else 26.0) + (by - 34.0) * 0.15 + cy, 10.0, 58.0)
+        elif r in ("LCB", "RCB"):
+            p.target_x = _clip(base_x + cx * 0.3, 62.0, 100.0)
+            p.target_y = _clip(base_y + (by - 34.0) * 0.1 + cy * 0.4, 16.0, 52.0)
+        elif r in ("LB", "RB"):
+            p.target_x = _clip(base_x + cx, 55.0, 98.0)
+            p.target_y = _clip(base_y + cy, 2.0, 66.0)
 
-        p.x = _clip(p.x + p.vx * self._dt, 0.5, PITCH_X - 0.5)
-        p.y = _clip(p.y + p.vy * self._dt, 0.5, PITCH_Y - 0.5)
+    # ── movement — actual velocity, not lerp ───────────────────────────
+    def _move_all_players(self) -> None:
+        dt = self._dt
+        for p in self.players:
+            dx = p.target_x - p.x
+            dy = p.target_y - p.y
+            dist = math.hypot(dx, dy)
 
+            if dist < 0.2:
+                # At target — micro-sway only
+                p.x += self._rng.uniform(-0.15, 0.15)
+                p.y += self._rng.uniform(-0.15, 0.15)
+                p.vx = self._rng.uniform(-0.3, 0.3)
+                p.vy = self._rng.uniform(-0.3, 0.3)
+            else:
+                # Choose speed based on distance to target
+                if dist > 12.0:
+                    speed = p.max_speed  # sprint
+                elif dist > 5.0:
+                    speed = p.max_speed * 0.75  # run
+                elif dist > 2.0:
+                    speed = p.jog_speed  # jog
+                else:
+                    speed = p.jog_speed * 0.6  # decel near target
+
+                # Don't overshoot
+                step = min(speed * dt, dist)
+                nx = dx / dist
+                ny = dy / dist
+
+                old_x, old_y = p.x, p.y
+                p.x += nx * step
+                p.y += ny * step
+
+                # Add small lateral wobble for realism
+                perp_x = -ny * self._rng.uniform(-0.05, 0.05)
+                perp_y = nx * self._rng.uniform(-0.05, 0.05)
+                p.x += perp_x
+                p.y += perp_y
+
+                p.x = _clip(p.x, 0.5, PITCH_X - 0.5)
+                p.y = _clip(p.y, 0.5, PITCH_Y - 0.5)
+                p.vx = (p.x - old_x) / max(dt, 1e-6)
+                p.vy = (p.y - old_y) / max(dt, 1e-6)
+
+    # ── ball physics ───────────────────────────────────────────────────
+    def _update_ball(self) -> None:
+        dt = self._dt
+        old_bx, old_by = self.ball.x, self.ball.y
+
+        if self.ball.in_flight:
+            # Ball flying to target at flight_speed
+            dx = self.ball.flight_target_x - self.ball.x
+            dy = self.ball.flight_target_y - self.ball.y
+            dist = math.hypot(dx, dy)
+
+            if dist < self.ball.flight_speed * dt * 1.5:
+                # Arrived
+                self.ball.x = self.ball.flight_target_x
+                self.ball.y = self.ball.flight_target_y
+                self.ball.in_flight = False
+            else:
+                step = self.ball.flight_speed * dt
+                self.ball.x += (dx / dist) * step
+                self.ball.y += (dy / dist) * step
+        else:
+            # Ball tracks carrier
+            carrier = next((p for p in self.players if p.player_id == self.ball.carrier_id), None)
+            if carrier is None:
+                self._assign_nearest_carrier()
+                carrier = next((p for p in self.players if p.player_id == self.ball.carrier_id), None)
+            if carrier:
+                # Tight follow — ball is at the player's feet
+                self.ball.x += (carrier.x - self.ball.x) * 0.5
+                self.ball.y += (carrier.y - self.ball.y) * 0.5
+
+        self.ball.x = _clip(self.ball.x, 0.0, PITCH_X)
+        self.ball.y = _clip(self.ball.y, 0.0, PITCH_Y)
+        self.ball.vx = (self.ball.x - old_bx) / max(dt, 1e-6)
+        self.ball.vy = (self.ball.y - old_by) / max(dt, 1e-6)
+
+    def _assign_nearest_carrier(self) -> None:
+        team_players = [p for p in self.players if p.team == self.ball.carrier_team and p.role != "GK"]
+        if not team_players:
+            team_players = [p for p in self.players if p.team == self.ball.carrier_team]
+        if not team_players:
+            return
+        nearest = min(team_players, key=lambda p: (p.x - self.ball.x)**2 + (p.y - self.ball.y)**2)
+        for p in self.players:
+            p.has_ball = False
+        nearest.has_ball = True
+        self.ball.carrier_id = nearest.player_id
+
+    # ── passing with real ball flight ──────────────────────────────────
+    def _maybe_pass(self) -> None:
+        if self.ball.in_flight:
+            return
+        if self.t < self._next_pass_t:
+            return
+
+        carrier = next((p for p in self.players if p.player_id == self.ball.carrier_id), None)
+        if carrier is None:
+            return
+
+        teammates = [
+            p for p in self.players
+            if p.team == carrier.team and p.player_id != carrier.player_id and p.role != "GK"
+        ]
+        if not teammates:
+            self._next_pass_t = self.t + 0.8
+            return
+
+        def weight(t):
+            dist = math.hypot(t.x - carrier.x, t.y - carrier.y)
+            if dist < 3.0 or dist > 50.0:
+                return 0.01
+            w = 10.0
+            if dist < 15.0:
+                w *= 3.5
+            elif dist < 25.0:
+                w *= 1.8
+            else:
+                w *= 0.5
+            if carrier.team == "home" and t.x > carrier.x:
+                w *= 1.5
+            elif carrier.team == "away" and t.x < carrier.x:
+                w *= 1.5
+            w *= 0.5 + t.positioning_iq
+            return w
+
+        weights = [(t, weight(t)) for t in teammates]
+        total = sum(w for _, w in weights)
+        if total < 0.1:
+            self._next_pass_t = self.t + 0.5
+            return
+
+        r = self._rng.random() * total
+        target = teammates[0]
+        for t, w in weights:
+            r -= w
+            if r <= 0:
+                target = t
+                break
+
+        # Compute pass speed — short pass ~14 m/s, long ~22 m/s
+        pass_dist = math.hypot(target.x - carrier.x, target.y - carrier.y)
+        if pass_dist < 15.0:
+            pass_speed = self._rng.uniform(12.0, 16.0)
+        elif pass_dist < 30.0:
+            pass_speed = self._rng.uniform(16.0, 22.0)
+        else:
+            pass_speed = self._rng.uniform(20.0, 28.0)
+
+        # Lead the target slightly
+        lead = min(pass_dist / pass_speed * 0.3, 1.5)
+        target_bx = target.x + target.vx * lead
+        target_by = target.y + target.vy * lead
+
+        # Release ball
+        carrier.has_ball = False
+        self.ball.in_flight = True
+        self.ball.flight_target_x = _clip(target_bx, 1.0, PITCH_X - 1.0)
+        self.ball.flight_target_y = _clip(target_by, 1.0, PITCH_Y - 1.0)
+        self.ball.flight_speed = pass_speed
+        self.ball.carrier_id = target.player_id
+        self.ball.carrier_team = target.team
+        target.has_ball = True
+
+        # Occasional turnover
+        if self._rng.random() < 0.10:
+            self._turnover()
+
+        self._next_pass_t = self.t + self._rng.uniform(0.8, 2.5)
+
+    def _turnover(self) -> None:
+        for p in self.players:
+            p.has_ball = False
+        opp = "away" if self.ball.carrier_team == "home" else "home"
+        opponents = [p for p in self.players if p.team == opp and p.role != "GK"]
+        if not opponents:
+            return
+        nearest = min(opponents, key=lambda p: (p.x - self.ball.x)**2 + (p.y - self.ball.y)**2)
+        nearest.has_ball = True
+        self.ball.carrier_id = nearest.player_id
+        self.ball.carrier_team = opp
+        self.ball.in_flight = False
+
+    # ── scenarios — DRAMATIC, IMMEDIATE shifts ─────────────────────────
     def _apply_scenario(self, scenario: str) -> None:
-        """Perturb the simulation to produce a recognizable tactical event."""
+        # Track the scenario for get_active_scenarios() and insight generation.
+        # Use the max perturb_until that this scenario sets.
+        perturb_durations = {
+            "under_run": 5.0, "pressing_shift": 8.0, "convergence": 4.0,
+            "high_press": 10.0, "counter_press": 10.0, "trap_sideline": 7.0,
+            "trap_corner": 6.0, "mid_block": 12.0, "low_block": 12.0,
+            "man_mark": 10.0, "zonal": 10.0, "drop_deep": 10.0,
+            "hold_line": 15.0, "step_up": 10.0,
+        }
+        dur = perturb_durations.get(scenario, 8.0)
+        self._active_scenario_map[scenario] = self.t + dur
+
         if scenario == "under_run":
-            # Home striker fails to make his run: freeze his forward drive
-            # while midfielders keep pushing.
             for p in self.players:
                 if p.team == "home" and p.role == "ST":
-                    p.perturb_until = self.t + 4.0
-                    p.perturb_dx = -3.0
-                    p.perturb_dy = 0.0
+                    p.perturb_until = self.t + 5.0
+                    p.anchor_shift_x = -20.0
+                    p.anchor_shift_y = 0.0
         elif scenario == "pressing_shift":
-            # Away team triggers a high press: shift their anchors ~25m toward
-            # the home goal. This is a real positional move, not just a
-            # velocity kick, so the players actually rest in the home half
-            # until the perturbation window expires.
             for p in self.players:
                 if p.team == "away" and p.role != "GK":
-                    p.perturb_until = self.t + 6.0
-                    p.anchor_shift_x = -25.0
-                    p.anchor_shift_y = 0.0
+                    p.perturb_until = self.t + 8.0
+                    p.anchor_shift_x = -30.0
         elif scenario == "convergence":
-            # Three home midfielders collapse toward the ball carrier in a
-            # tight triangle — a classic complex convergence moment.
             for p in self.players:
                 if p.team == "home" and p.role in ("LCM", "CM", "RCM"):
-                    p.perturb_until = self.t + 3.5
-                    p.perturb_dx = (self.ball.x - p.x) * 0.15
-                    p.perturb_dy = (self.ball.y - p.y) * 0.15
+                    p.perturb_until = self.t + 4.0
+                    p.anchor_shift_x = (self.ball.x - p.base_x) * 0.8
+                    p.anchor_shift_y = (self.ball.y - p.base_y) * 0.8
         elif scenario in ("high_press", "counter_press"):
-            # Home pushes the entire outfield line forward into opponent half.
+            # DRAMATIC: entire home outfield surges 30m forward
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
-                    p.perturb_until = self.t + 8.0
-                    p.anchor_shift_x = +25.0
+                    p.perturb_until = self.t + 10.0
+                    p.anchor_shift_x = +30.0
         elif scenario == "trap_sideline":
-            # Home wide midfielders slide toward the near touchline to funnel
-            # the opposition ball carrier outward.
             for p in self.players:
                 if p.team == "home" and p.role in ("LCM", "LW", "LB"):
-                    p.perturb_until = self.t + 6.0
-                    p.anchor_shift_y = -8.0
+                    p.perturb_until = self.t + 7.0
+                    p.anchor_shift_y = -12.0
+                elif p.team == "home" and p.role in ("RCM", "RW", "RB"):
+                    p.perturb_until = self.t + 7.0
+                    p.anchor_shift_y = -6.0
         elif scenario == "trap_corner":
-            # Everyone collapses toward the corner flag the ball is nearest to.
-            corner_x = 100.0 if self.ball.x > 52.5 else 5.0
+            corner_x = 95.0 if self.ball.x > 52.5 else 10.0
             corner_y = 63.0 if self.ball.y > 34.0 else 5.0
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
-                    p.perturb_until = self.t + 5.0
-                    p.anchor_shift_x = (corner_x - p.anchor_x) * 0.45
-                    p.anchor_shift_y = (corner_y - p.anchor_y) * 0.45
+                    p.perturb_until = self.t + 6.0
+                    p.anchor_shift_x = (corner_x - p.base_x) * 0.55
+                    p.anchor_shift_y = (corner_y - p.base_y) * 0.55
         elif scenario == "mid_block":
-            # Home outfielders settle in a compact mid-block around the halfway line.
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
-                    p.perturb_until = self.t + 10.0
-                    p.anchor_shift_x = (45.0 - p.anchor_x) * 0.4
+                    p.perturb_until = self.t + 12.0
+                    p.anchor_shift_x = (48.0 - p.base_x) * 0.5
         elif scenario == "low_block":
-            # Home defenders and mids drop very deep.
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
-                    p.perturb_until = self.t + 10.0
-                    p.anchor_shift_x = (20.0 - p.anchor_x) * 0.55
+                    p.perturb_until = self.t + 12.0
+                    p.anchor_shift_x = (18.0 - p.base_x) * 0.65
         elif scenario == "man_mark":
-            # Each away player gets a matching home shadow — cheap trick: nudge
-            # every home outfielder toward the nearest away player.
             away = [p for p in self.players if p.team == "away" and p.role != "GK"]
             for p in self.players:
-                if p.team != "home" or p.role == "GK":
+                if p.team != "home" or p.role == "GK" or not away:
                     continue
-                if not away:
-                    continue
-                closest = min(
-                    away,
-                    key=lambda a: (a.x - p.x) ** 2 + (a.y - p.y) ** 2,
-                )
-                p.perturb_until = self.t + 8.0
-                p.anchor_shift_x = (closest.anchor_x - p.anchor_x) * 0.6
-                p.anchor_shift_y = (closest.anchor_y - p.anchor_y) * 0.6
+                closest = min(away, key=lambda a: (a.x - p.x)**2 + (a.y - p.y)**2)
+                p.perturb_until = self.t + 10.0
+                p.anchor_shift_x = (closest.base_x - p.base_x) * 0.7
+                p.anchor_shift_y = (closest.base_y - p.base_y) * 0.7
         elif scenario == "zonal":
-            # Undo any anchor shifts and hold formation — defensive zonal reset.
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
                     p.perturb_until = self.t + 10.0
@@ -343,22 +580,20 @@ class MatchSimulator:
         elif scenario == "drop_deep":
             for p in self.players:
                 if p.team == "home" and p.role != "GK":
-                    p.perturb_until = self.t + 8.0
-                    p.anchor_shift_x = -10.0
+                    p.perturb_until = self.t + 10.0
+                    p.anchor_shift_x = -15.0
         elif scenario == "hold_line":
-            # Back line compresses to same x (coordinate across the backline).
             backline = [p for p in self.players if p.team == "home" and p.role in ("LB", "LCB", "RCB", "RB")]
             if backline:
-                avg_x = sum(p.anchor_x for p in backline) / len(backline)
+                avg_x = sum(p.base_x for p in backline) / len(backline)
                 for p in backline:
-                    p.perturb_until = self.t + 12.0
-                    p.anchor_shift_x = (avg_x - p.anchor_x)
+                    p.perturb_until = self.t + 15.0
+                    p.anchor_shift_x = (avg_x - p.base_x)
         elif scenario == "step_up":
-            # Back line +8m up the pitch.
             for p in self.players:
                 if p.team == "home" and p.role in ("LB", "LCB", "RCB", "RB"):
-                    p.perturb_until = self.t + 8.0
-                    p.anchor_shift_x = +8.0
+                    p.perturb_until = self.t + 10.0
+                    p.anchor_shift_x = +12.0
 
 
 def _clip(v: float, lo: float, hi: float) -> float:

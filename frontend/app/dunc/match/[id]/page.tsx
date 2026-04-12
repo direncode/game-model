@@ -18,6 +18,7 @@ import { useParams } from "next/navigation";
 import { duncApi } from "@/lib/dunc/api";
 import { useDuncStore } from "@/lib/dunc/store";
 import { useDuncMatchStream } from "@/lib/dunc/ws";
+import { ActiveScenarioBanner } from "@/components/dunc/ActiveScenarioBanner";
 import { AIAgentDrawer } from "@/components/dunc/AIAgentDrawer";
 import { GameApproachWindow } from "@/components/dunc/GameApproachWindow";
 import { InsightFeed } from "@/components/dunc/InsightFeed";
@@ -90,6 +91,8 @@ export default function MatchPage() {
           <RoleSwitcher />
         </div>
       </header>
+
+      <ActiveScenarioBanner />
 
       {/* Main body */}
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-[1.4fr_1fr] gap-3 p-3 overflow-auto">

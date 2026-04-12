@@ -17,6 +17,7 @@ export default function DuncHomePage() {
   const [matches, setMatches] = useState<DuncMatchSummary[]>([]);
   const [starting, setStarting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hz, setHz] = useState(30);
 
   useEffect(() => {
     let mounted = true;
@@ -33,7 +34,7 @@ export default function DuncHomePage() {
     setStarting(true);
     setError(null);
     try {
-      const m = await duncApi.createMatch("demo");
+      const m = await duncApi.createMatch("demo", null, hz);
       router.push(`/dunc/match/${m.id}`);
     } catch (e) {
       setError((e as Error).message);
@@ -81,6 +82,24 @@ export default function DuncHomePage() {
             >
               {starting ? "Starting…" : "Start demo match"}
             </button>
+
+            {/* Hz selector */}
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] uppercase tracking-widest text-li-text-muted font-mono">
+                Tick rate
+              </span>
+              <select
+                value={hz}
+                onChange={(e) => setHz(Number(e.target.value))}
+                className="bg-li-black-surface border border-li-border rounded-sm px-2 py-1.5 text-[12px] font-mono text-li-white focus:outline-none focus:border-li-cyan appearance-none cursor-pointer"
+              >
+                <option value={10}>10 Hz</option>
+                <option value={20}>20 Hz</option>
+                <option value={30}>30 Hz</option>
+                <option value={60}>60 Hz</option>
+              </select>
+            </div>
+
             <Link
               href="#active"
               className="text-sm text-li-text-secondary hover:text-li-white"

@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Navbar } from "@/components/Navbar";
@@ -557,19 +555,13 @@ function LandingPage() {
 
 /* ─── Page Router ─── */
 export default function HomePage() {
-  const { isSignedIn, isLoaded } = useAuth();
-  const router = useRouter();
-
-  // Always redirect to engine — Clerk middleware handles auth redirect to /login
-  useEffect(() => {
-    if (isLoaded) {
-      if (isSignedIn) {
-        router.replace("/engine");
-      } else {
-        router.replace("/login");
-      }
-    }
-  }, [isSignedIn, isLoaded, router]);
-
-  return <PageLoader />;
+  return (
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <div className="flex-1 ml-60 p-8">
+        <Navbar />
+        <Dashboard />
+      </div>
+    </div>
+  );
 }

@@ -10,7 +10,7 @@ import {
   Square,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth-shim";
 import { api } from "@/lib/api";
 import { useEngineStore } from "@/stores/engine";
 

@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { api } from "@/lib/api";
 
 // ─── Auth Slice ──────────────────────────────────────────────────────────────
-// Auth is now handled by Clerk. This store keeps app-specific user data and UI state.
+// Auth state + app-specific user data and UI state.
 
 interface User {
   id: string;
@@ -21,6 +22,7 @@ interface AuthState {
   refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  hydrated: boolean;
 }
 
 interface AuthActions {
@@ -28,8 +30,8 @@ interface AuthActions {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   fetchUser: () => Promise<void>;
-  hydrate: () => void;
-  setClerkUser: (clerkUser: { id: string; email: string; name: string; imageUrl?: string }) => void;
+  hydrate: () => Promise<void>;
+  setUser: (userData: { id: string; email: string; name: string; imageUrl?: string }) => void;
 }
 
 // ─── UI Slice ────────────────────────────────────────────────────────────────
@@ -63,8 +65,11 @@ export const useAppStore = create<AppStore>()(
       refreshToken: null,
       isAuthenticated: false,
       isLoading: false,
+      hydrated: false,
 
       setToken: (token: string, refreshToken?: string) => {
+        api.setToken(token);
+        if (refreshToken) api.setRefreshToken(refreshToken);
         set({
           token,
           refreshToken: refreshToken ?? get().refreshToken,
@@ -72,13 +77,31 @@ export const useAppStore = create<AppStore>()(
         });
       },
 
-      // Legacy login — kept for backward compatibility but Clerk handles this now
-      login: async (_email: string, _password: string) => {
-        // No-op: Clerk handles login via useSignIn hook
-        throw new Error("Use Clerk sign-in instead");
+      login: async (email: string, password: string) => {
+        const data = await api.login({ email, password });
+        api.setToken(data.access_token);
+        api.setRefreshToken(data.refresh_token);
+        set({
+          token: data.access_token,
+          refreshToken: data.refresh_token,
+          isAuthenticated: true,
+        });
+        // Fetch user profile
+        try {
+          const user = await api.getMe() as User;
+          set({ user });
+        } catch {
+          // Token works but profile fetch failed — still authenticated
+        }
       },
 
       logout: async () => {
+        const { refreshToken } = get();
+        if (refreshToken) {
+          await api.logout(refreshToken);
+        }
+        api.setToken(null);
+        api.setRefreshToken(null);
         set({
           user: null,
           token: null,
@@ -89,22 +112,33 @@ export const useAppStore = create<AppStore>()(
       },
 
       fetchUser: async () => {
-        // No-op: User data comes from Clerk
+        try {
+          const user = await api.getMe() as User;
+          set({ user });
+        } catch {
+          await get().logout();
+        }
       },
 
-      hydrate: () => {
-        // No-op: Clerk handles session hydration
+      hydrate: async () => {
+        const { token, refreshToken } = get();
+        if (token) {
+          api.setToken(token);
+          if (refreshToken) api.setRefreshToken(refreshToken);
+        }
+        // Auth validation deferred — backend may not be running.
+        // When a backend is available, fetchUser() can be called to validate.
+        set({ hydrated: true });
       },
 
-      // Set user from Clerk session data
-      setClerkUser: (clerkUser) => {
+      setUser: (userData) => {
         set({
           user: {
-            id: clerkUser.id,
-            email: clerkUser.email,
-            name: clerkUser.name,
-            role: "operator", // Default role — backend can override
-            avatar_url: clerkUser.imageUrl,
+            id: userData.id,
+            email: userData.email,
+            name: userData.name,
+            role: "operator",
+            avatar_url: userData.imageUrl,
             email_verified: true,
           },
           isAuthenticated: true,
@@ -130,12 +164,26 @@ export const useAppStore = create<AppStore>()(
     {
       name: "li-app-store",
       partialize: (state) => ({
+        token: state.token,
+        refreshToken: state.refreshToken,
         sidebarOpen: state.sidebarOpen,
         activeDatasetId: state.activeDatasetId,
       }),
     }
   )
 );
+
+// Listen for token refresh events from the API client
+if (typeof window !== "undefined") {
+  window.addEventListener("token-refreshed", ((e: CustomEvent) => {
+    const { access_token, refresh_token } = e.detail;
+    useAppStore.setState({ token: access_token, refreshToken: refresh_token });
+  }) as EventListener);
+
+  api.setOnLogout(() => {
+    useAppStore.getState().logout();
+  });
+}
 
 // Re-export for backward compatibility during migration
 export const useAuthStore = useAppStore;

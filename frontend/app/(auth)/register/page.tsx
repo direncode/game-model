@@ -3,25 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSignUp } from "@clerk/nextjs";
+import { api } from "@/lib/api";
+import { useAppStore } from "@/stores/app";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { signUp, setActive, isLoaded } = useSignUp();
+  const login = useAppStore((s) => s.login);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [pendingVerification, setPendingVerification] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isLoaded || !signUp) return;
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
@@ -31,46 +29,12 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const [firstName, ...lastParts] = name.trim().split(" ");
-      const lastName = lastParts.join(" ") || undefined;
-
-      await signUp.create({
-        emailAddress: email,
-        password,
-        firstName,
-        lastName,
-      });
-
-      // Send email verification
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-      setPendingVerification(true);
-      toast.success("Check your email for a verification code");
+      await api.register({ email, name, password });
+      await login(email, password);
+      toast.success("Account created!");
+      router.push("/engine");
     } catch (err: any) {
-      const message = err.errors?.[0]?.longMessage || err.message || "Registration failed";
-      toast.error(message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerification = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isLoaded || !signUp) return;
-    setLoading(true);
-
-    try {
-      const result = await signUp.attemptEmailAddressVerification({
-        code: verificationCode,
-      });
-
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        toast.success("Account created!");
-        router.push("/engine");
-      }
-    } catch (err: any) {
-      const message = err.errors?.[0]?.longMessage || "Verification failed";
-      toast.error(message);
+      toast.error(err.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -87,50 +51,11 @@ export default function RegisterPage() {
           Latent Intelligence
         </h1>
         <p className="text-sm text-li-text-secondary">
-          {pendingVerification ? "Verify your email" : "Create your account"}
+          Create your account
         </p>
       </div>
 
-      {/* Verification step */}
-      {pendingVerification ? (
-        <div className="li-card">
-          <form onSubmit={handleVerification} className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-li-text-secondary mb-1.5">
-                Verification Code
-              </label>
-              <input
-                type="text"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                className="li-input text-center tracking-[0.3em] text-lg"
-                placeholder="000000"
-                maxLength={6}
-                required
-              />
-              <p className="text-xs text-li-text-muted mt-2">
-                Enter the 6-digit code sent to {email}
-              </p>
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="li-btn-primary w-full flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <div className="w-5 h-5 rounded-full border-2 border-black/30 border-t-black animate-spin" />
-              ) : (
-                <>
-                  Verify Email
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-      ) : (
-        <>
-          {/* Registration form */}
+      {/* Registration form */}
           <div className="li-card">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
@@ -225,7 +150,7 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                disabled={loading || !isLoaded}
+                disabled={loading}
                 className="li-btn-primary w-full flex items-center justify-center gap-2"
               >
                 {loading ? (
@@ -240,14 +165,12 @@ export default function RegisterPage() {
             </form>
           </div>
 
-          <p className="text-center text-sm text-li-text-muted mt-6">
-            Already have an account?{" "}
-            <Link href="/login" className="text-white hover:underline">
-              Sign in
-            </Link>
-          </p>
-        </>
-      )}
+      <p className="text-center text-sm text-li-text-muted mt-6">
+        Already have an account?{" "}
+        <Link href="/login" className="text-white hover:underline">
+          Sign in
+        </Link>
+      </p>
     </div>
   );
 }

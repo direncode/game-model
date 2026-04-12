@@ -82,24 +82,6 @@ export function AIAgentDrawer({ matchId }: { matchId: string }) {
             <div className="text-[10px] uppercase tracking-widest text-li-text-muted font-mono">
               Assistant — {role === "manager" ? "Manager view" : "Tech staff view"}
             </div>
-            {turns.length === 0 && (
-              <div className="text-li-text-secondary">
-                Ask about what the engine is seeing. Examples:
-                <ul className="mt-2 space-y-1">
-                  {SUGGESTED.map((s) => (
-                    <li key={s}>
-                      <button
-                        type="button"
-                        onClick={() => ask(s)}
-                        className="text-left w-full text-li-cyan hover:underline"
-                      >
-                        → {s}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
             {turns.map((t) => (
               <div key={t.id} className="space-y-1">
                 <div className="text-li-text-secondary">
@@ -126,6 +108,22 @@ export function AIAgentDrawer({ matchId }: { matchId: string }) {
                   </div>
                 )}
               </div>
+            ))}
+          </div>
+          {/* Permanent quick-ask buttons */}
+          <div className="border-t border-li-border px-3 py-2 space-y-1">
+            <div className="text-[9px] uppercase tracking-widest text-li-text-muted font-mono mb-1">
+              Quick ask
+            </div>
+            {SUGGESTED.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => ask(s)}
+                className="block w-full text-left text-[11px] text-li-cyan hover:underline py-0.5"
+              >
+                → {s}
+              </button>
             ))}
           </div>
           <form
