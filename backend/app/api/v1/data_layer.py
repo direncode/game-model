@@ -59,9 +59,14 @@ class QualityMetricsOut(BaseModel):
     n_input: int
     n_survivors: int
     reduction_ratio: int
-    variance_preservation: float
+    variance_ratio: float
+    coverage_at_1_0: float
+    reconstruction_median_nn: float
+    n_clusters: int
+    unique_fingerprints: int
     wall_seconds: float
     estimated_cost_usd: float
+    cost_breakdown: dict
 
 
 class RunResponse(BaseModel):
@@ -126,9 +131,14 @@ def _quality_from(layer: LatentOceanDataLayer) -> QualityMetricsOut:
         n_input=q.n_input,
         n_survivors=q.n_survivors,
         reduction_ratio=q.reduction_ratio,
-        variance_preservation=q.variance_preservation,
+        variance_ratio=q.variance_ratio,
+        coverage_at_1_0=q.coverage_at_1_0,
+        reconstruction_median_nn=q.reconstruction_median_nn,
+        n_clusters=q.n_clusters,
+        unique_fingerprints=q.unique_fingerprints,
         wall_seconds=q.wall_seconds,
         estimated_cost_usd=q.estimated_cost_usd,
+        cost_breakdown=q.cost_breakdown,
     )
 
 

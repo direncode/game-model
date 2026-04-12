@@ -55,7 +55,15 @@ class ManifoldCoords:
 
 @dataclass
 class Survivor:
-    """A surviving entity with its scores + manifold coordinates attached."""
+    """A surviving entity with its scores + manifold coordinates attached.
+
+    ``display_name`` is the human-friendly label resolved from the
+    adapter's primary_field (e.g. ``ticker`` for EDGAR companies,
+    ``title`` for PubMed papers). Falls back to ``entity["name"]`` if
+    no primary_field is configured or the attribute is missing. Used
+    for cross-source link display and UI presentation so you never
+    see auto-generated ids like ``company_1013871``.
+    """
 
     entity: dict
     cluster: int
@@ -63,18 +71,48 @@ class Survivor:
     fingerprint: str
     coord_8d: list[float]
     coord_3d: list[float] | None
+    display_name: str = ""
 
 
 @dataclass
 class QualityMetrics:
-    """Summary quality metrics reported after a full run."""
+    """Summary quality metrics reported after a full run.
+
+    Notes on the individual metrics:
+
+      * ``variance_ratio`` — ``var(survivors) / var(full_population)``
+        in the 8D projection space. **Not** a preservation ratio: BTUT
+        deliberately over-samples outliers, so values > 1.0 mean the
+        survivor set has *more* variance than the input, which is the
+        intended behavior of anomaly-weighted selection. A healthy run
+        is roughly in [0.9, 1.5].
+
+      * ``coverage_at_1_0`` — fraction of input points whose nearest
+        survivor is within distance 1.0 in the 8D space. This is the
+        honest "can I reconstruct the population from survivors"
+        number. Closer to 1.0 = better coverage. From BTUT's summary.
+
+      * ``reconstruction_median_nn`` — median nearest-neighbor distance
+        from input to survivors in 8D space. Lower is better.
+
+      * ``n_clusters`` / ``unique_fingerprints`` — BTUT's own internal
+        diversity measures of the survivor set.
+
+      * ``estimated_cost_usd`` — a real model in ``costs.py``, not a
+        made-up coefficient. Breaks down into ``cost_breakdown``.
+    """
 
     n_input: int
     n_survivors: int
     reduction_ratio: int
-    variance_preservation: float
+    variance_ratio: float
+    coverage_at_1_0: float
+    reconstruction_median_nn: float
+    n_clusters: int
+    unique_fingerprints: int
     wall_seconds: float
     estimated_cost_usd: float
+    cost_breakdown: dict
 
 
 @dataclass

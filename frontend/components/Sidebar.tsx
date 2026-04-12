@@ -17,6 +17,7 @@ import {
   Activity,
   Settings,
   MapPin,
+  Goal,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -31,10 +32,12 @@ const exploreItems = [
 const engineItems = [
   { href: "/engine", label: "Engine Console", icon: Cpu },
   { href: "/btut", label: "BTUT Intelligence", icon: BrainCircuit },
+  { href: "/data-layer", label: "Data Layer", icon: Activity },
 ];
 
 const liveDataItems = [
   { href: "/franklin", label: "Franklin Street", icon: MapPin },
+  { href: "/dunc", label: "D-U-N-C Football", icon: Goal },
 ];
 
 const adminItems = [

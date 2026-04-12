@@ -258,4 +258,8 @@ For everything else — plumbing, endpoints, schemas, registry model, adapter, o
 
 ---
 
-**Next step:** invoke `superpowers:writing-plans` to produce the detailed implementation plan from this design.
+**Implementation plan:** [`docs/plans/2026-04-10-tcd-jepa-vertical.md`](2026-04-10-tcd-jepa-vertical.md)
+
+**Implementation status:** Shipped on branch `feat/tcd-vertical`. Final commit range: `eecbcd9..11ab670`. 44 new tests passing, 1 skipped (Task 18 followup), 0 regressions against the existing 61-test backend suite.
+
+**Follow-ups tracked in [`docs/plans/2026-04-10-tcd-jepa-vertical-followups.md`](2026-04-10-tcd-jepa-vertical-followups.md).**

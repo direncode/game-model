@@ -52,11 +52,17 @@ def test_types_are_importable_dataclasses():
         n_input=100,
         n_survivors=10,
         reduction_ratio=10,
-        variance_preservation=0.9,
+        variance_ratio=0.9,
+        coverage_at_1_0=0.85,
+        reconstruction_median_nn=0.4,
+        n_clusters=5,
+        unique_fingerprints=42,
         wall_seconds=1.0,
         estimated_cost_usd=0.01,
+        cost_breakdown={"adapter_usd": 0.0, "compute_usd": 0.01, "storage_usd": 0.0, "total_usd": 0.01},
     )
     assert ql.reduction_ratio == 10
+    assert ql.coverage_at_1_0 == 0.85
 
 
 def test_errors_are_exceptions():
@@ -174,6 +180,47 @@ def test_link_by_foreign_key_ignores_trivial_values():
     assert link_by_foreign_key(s_a, s_b) == []
 
 
+def test_link_by_foreign_key_parses_json_string_attributes():
+    """Regression: every shipped BTUT adapter serializes attributes as a
+    json.dumps(...) string, not a dict. The linker must transparently
+    parse that string or it silently drops every real-world attribute.
+    This caught a bug where link_by_foreign_key returned [] on live EDGAR
+    data despite passing all unit tests with dict-valued attributes.
+    """
+    import json as _j
+    s_a = [
+        {"entity": {"name": "AAPL", "attributes": _j.dumps({"cik": "0000320193"})}},
+    ]
+    s_b = [
+        {"entity": {"name": "AAPL-filing", "attributes": _j.dumps({"cik": "0000320193"})}},
+    ]
+    links = link_by_foreign_key(s_a, s_b)
+    assert len(links) == 1
+    assert links[0].strength == 1.0
+
+
+def test_link_by_semantic_field_parses_json_string_attributes():
+    import json as _j
+    s_a = [
+        {"entity": {"name": "paper", "attributes": _j.dumps({"author_name": "Jane Doe"})}},
+    ]
+    s_b = [
+        {"entity": {"name": "author", "attributes": _j.dumps({"author_name": "jane doe"})}},
+    ]
+    assert len(link_by_semantic_field(s_a, s_b)) == 1
+
+
+def test_link_by_url_hierarchy_parses_json_string_attributes():
+    import json as _j
+    s_a = [{"entity": {"name": "a", "attributes": _j.dumps(
+        {"url": "https://www.sec.gov/Archives/edgar/data/1/foo.htm"}
+    )}}]
+    s_b = [{"entity": {"name": "b", "attributes": _j.dumps(
+        {"url": "https://www.sec.gov/Archives/edgar/data/2/bar.htm"}
+    )}}]
+    assert len(link_by_url_hierarchy(s_a, s_b)) == 1
+
+
 def test_link_by_semantic_field_matches_company_name_across_types():
     """Author name shared across a paper entity and an author entity → link."""
     s_a = [
@@ -267,9 +314,14 @@ def _make_fake_state():
         n_input=20,
         n_survivors=2,
         reduction_ratio=10,
-        variance_preservation=0.85,
+        variance_ratio=0.85,
+        coverage_at_1_0=0.75,
+        reconstruction_median_nn=0.3,
+        n_clusters=3,
+        unique_fingerprints=17,
         wall_seconds=3.0,
         estimated_cost_usd=0.05,
+        cost_breakdown={"adapter_usd": 0.01, "compute_usd": 0.03, "storage_usd": 0.01, "total_usd": 0.05},
     )
     return st
 
@@ -320,14 +372,25 @@ def _fake_adapter(entities=None, edges=None, dataset_id="fake"):
 
 
 def _fake_btut_return():
-    """Return shape mirroring run_btut_pipeline's actual output."""
+    """Return shape mirroring run_btut_pipeline's actual output.
+
+    Matches the current BTUT summary contract: total_entities,
+    survivors, reduction, wall_seconds, clusters, unique_48bit_fingerprints,
+    and a reconstruction dict with variance_preservation + coverages.
+    """
     return {
         "summary": {
             "total_entities": 2,
             "survivors": 2,
             "reduction": 1,
             "wall_seconds": 0.1,
-            "reconstruction": {"variance_preservation": 0.95},
+            "clusters": 2,
+            "unique_48bit_fingerprints": 2,
+            "reconstruction": {
+                "variance_preservation": 0.95,
+                "median_nn": 0.4,
+                "coverages": {"0.5": 0.5, "1.0": 0.85, "1.5": 0.95, "2.0": 1.0},
+            },
         },
         "survivors": [
             {
@@ -475,7 +538,16 @@ def test_get_quality_metrics_populates_fields():
     q = layer.get_quality_metrics()
     assert q.n_survivors == 2
     assert q.reduction_ratio == 1
-    assert q.variance_preservation == 0.95
+    assert q.variance_ratio == 0.95
+    assert q.coverage_at_1_0 == 0.85  # from fake reconstruction.coverages
+    assert q.reconstruction_median_nn == 0.4
+    assert q.n_clusters == 2
+    assert q.unique_fingerprints == 2
+    # Cost model should run and produce a real breakdown with 4 keys.
+    assert set(q.cost_breakdown.keys()) == {
+        "adapter_usd", "compute_usd", "storage_usd", "total_usd",
+    }
+    assert q.estimated_cost_usd == q.cost_breakdown["total_usd"]
 
 
 def test_get_survivors_before_manifold_raises():
@@ -576,6 +648,167 @@ def test_run_without_vertical_returns_quality_dict():
     assert "n_survivors" in result
     assert result["n_survivors"] == 2
     assert result["dataset_id"] == "fake"
+
+
+def test_ingest_retries_on_exception_then_succeeds():
+    """Adapter.fetch_entities raises twice, then succeeds on attempt 3.
+    Layer should retry with exp backoff and return the successful result.
+    """
+    layer = LatentOceanDataLayer(
+        ingest_max_retries=3, ingest_backoff_seconds=0.01
+    )
+    adapter = MagicMock()
+    adapter.get_meta.return_value = MagicMock(dataset_id="flaky")
+    # Fail twice, then succeed.
+    call_log = []
+
+    def flaky_fetch(limit):
+        call_log.append("fetch")
+        if len(call_log) < 3:
+            raise ConnectionError("transient network error")
+        return [{"name": "X", "type": "t", "attributes": {}}]
+
+    adapter.fetch_entities.side_effect = flaky_fetch
+    adapter.fetch_edges.return_value = []
+    result = layer.ingest(adapter)
+    assert result.source_id == "flaky"
+    assert len(call_log) == 3  # two failures + one success
+    assert len(result.entities) == 1
+
+
+def test_ingest_raises_after_all_retries_exhausted():
+    layer = LatentOceanDataLayer(
+        ingest_max_retries=2, ingest_backoff_seconds=0.01
+    )
+    adapter = MagicMock()
+    adapter.get_meta.return_value = MagicMock(dataset_id="broken")
+    adapter.fetch_entities.side_effect = ConnectionError("always broken")
+    with pytest.raises(ConnectionError):
+        layer.ingest(adapter)
+
+
+def test_display_name_resolves_from_adapter_primary_field():
+    """After project_to_manifold, Survivor.display_name should come from
+    the adapter's primary_field (e.g. ticker for EDGAR), not the
+    auto-generated entity.name."""
+    layer = LatentOceanDataLayer()
+    # Real-shaped adapter with meta + EntityTypeConfig
+    from app.services.btut.adapters.base import DatasetMeta, EntityTypeConfig
+
+    adapter = MagicMock()
+    adapter.get_meta.return_value = DatasetMeta(
+        dataset_id="fake",
+        display_name="Fake",
+        description="",
+        entity_types=[
+            EntityTypeConfig(
+                name="company",
+                color="#fff",
+                primary_field="ticker",
+            ),
+        ],
+    )
+    adapter.fetch_entities.return_value = [
+        # Real adapters serialize attributes as JSON strings.
+        {"name": "company_1013871", "type": "company",
+         "attributes": '{"ticker": "AAPL", "cik": "0000320193"}'},
+        {"name": "company_789019", "type": "company",
+         "attributes": '{"ticker": "MSFT", "cik": "0000789019"}'},
+    ]
+    adapter.fetch_edges.return_value = []
+
+    with patch(
+        "app.services.data_layer.core.run_btut_pipeline",
+        return_value={
+            "summary": {
+                "total_entities": 2, "survivors": 2, "reduction": 1,
+                "wall_seconds": 0.1, "clusters": 2,
+                "unique_48bit_fingerprints": 2,
+                "reconstruction": {
+                    "variance_preservation": 0.9,
+                    "median_nn": 0.3,
+                    "coverages": {"1.0": 0.9},
+                },
+            },
+            "survivors": [
+                {"entity": {"name": "company_1013871", "type": "company",
+                            "attributes": '{"ticker": "AAPL"}'},
+                 "cluster": 0, "fingerprint_48bit": "", "flips": 0, "scores": {}},
+                {"entity": {"name": "company_789019", "type": "company",
+                            "attributes": '{"ticker": "MSFT"}'},
+                 "cluster": 0, "fingerprint_48bit": "", "flips": 0, "scores": {}},
+            ],
+            "embeddings_8d": [1.0] + [0.0] * 7 + [0.0, 1.0] + [0.0] * 6,
+        },
+    ):
+        layer.ingest(adapter)
+        layer.apply_btut_tuner()
+        layer.project_to_manifold()
+
+    survs = layer.get_survivors()
+    # display_name resolves from primary_field=ticker, NOT entity.name
+    display = {s.display_name for s in survs}
+    assert "AAPL" in display
+    assert "MSFT" in display
+    assert "company_1013871" not in display
+
+
+def test_chunked_run_splits_and_reduces():
+    """run_chunked() should call run_btut_pipeline once per chunk plus
+    once for the final pass, and the reported n_input should reflect
+    the ORIGINAL total (not the union-survivor count)."""
+    layer = LatentOceanDataLayer(target_survivors=10)
+    entities = [
+        {"name": f"e{i}", "type": "x", "attributes": {}}
+        for i in range(50)
+    ]
+    adapter = MagicMock()
+    adapter.get_meta.return_value = MagicMock(dataset_id="fake")
+    adapter.fetch_entities.return_value = entities
+    adapter.fetch_edges.return_value = []
+
+    # Fake BTUT: echo 5 of the input back as survivors each call.
+    call_count = {"n": 0}
+
+    def fake_btut(entities, edges, unique_types, target_survivors, **kw):
+        call_count["n"] += 1
+        n_out = min(target_survivors, max(1, len(entities) // 2))
+        return {
+            "summary": {
+                "total_entities": len(entities),
+                "survivors": n_out,
+                "reduction": max(len(entities) // max(n_out, 1), 1),
+                "wall_seconds": 0.01,
+                "clusters": 1,
+                "unique_48bit_fingerprints": n_out,
+                "reconstruction": {
+                    "variance_preservation": 1.0,
+                    "median_nn": 0.1,
+                    "coverages": {"1.0": 1.0},
+                },
+            },
+            "survivors": [
+                {"entity": entities[i], "cluster": 0,
+                 "fingerprint_48bit": "", "flips": 0, "scores": {}}
+                for i in range(n_out)
+            ],
+            "embeddings_8d": [1.0, 0, 0, 0, 0, 0, 0, 0] * n_out,
+        }
+
+    with patch(
+        "app.services.data_layer.core.get_adapter", return_value=adapter
+    ), patch(
+        "app.services.data_layer.core.run_btut_pipeline", side_effect=fake_btut
+    ):
+        result = layer.run_chunked("fake", limit=50, chunk_size=25)
+
+    # 50 / 25 = 2 chunks → 2 chunk calls + 1 final call = 3 total
+    assert call_count["n"] == 3
+    # n_input in quality should be the original total (50), not the
+    # union-survivor count that the second pass actually received.
+    assert result["n_input"] == 50
+    assert result["n_chunks"] == 2
+    assert result["chunk_size"] == 25
 
 
 def test_double_ingest_resets_state_cleanly():
