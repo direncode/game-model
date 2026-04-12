@@ -115,7 +115,17 @@ class TCDJEPAVertical:
             logger.warning(
                 "no interpretation_fn configured; returning modules unchanged"
             )
-            return [dict(m) if not isinstance(m, dict) else m for m in modules]
+            from dataclasses import asdict
+
+            def _to_dict(m: Any) -> dict:
+                if isinstance(m, dict):
+                    return m
+                try:
+                    return asdict(m)
+                except TypeError:
+                    return vars(m)
+
+            return [_to_dict(m) for m in modules]
         try:
             return await self._interpret_fn(modules)
         except Exception as exc:

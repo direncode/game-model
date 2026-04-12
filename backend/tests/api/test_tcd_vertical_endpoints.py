@@ -1,21 +1,18 @@
 """Smoke tests for the /api/v1/tcd/* endpoints.
 
-Uses FastAPI's TestClient with dependency_overrides to stub the auth
-chain, the DB session, and Redis. This validates the routing, schema
-validation, and happy-path wiring — not the real persistence layer
-(that's covered by test_module_registry.py).
+Uses FastAPI's TestClient with dependency_overrides to stub auth,
+DB, and Redis. Monkeypatches _get_permissions_for_role to grant all
+permissions so require_permission closures always pass.
 """
 from __future__ import annotations
 
-import json
 import uuid
-from unittest.mock import AsyncMock
 
 import pytest
 from fastapi.testclient import TestClient
 
 from app.core.auth import get_current_active_user
-from app.core.permissions import require_permission
+from app.core import permissions as perms_module
 from app.db.session import get_db
 from app.main import app
 
@@ -23,11 +20,11 @@ from app.main import app
 class _FakeUser:
     id = uuid.uuid4()
     email = "tester@example.com"
+    role = "operator"
+    is_active = True
 
 
 class _FakeRegistry:
-    """Minimal async stub matching ModuleRegistryService's surface."""
-
     def __init__(self) -> None:
         self.rows: list = []
 
@@ -39,8 +36,6 @@ class _FakeRegistry:
 
 
 class _FakeRedis:
-    """In-memory dict pretending to be an async Redis client."""
-
     def __init__(self) -> None:
         self._store: dict[str, str] = {}
 
@@ -49,6 +44,17 @@ class _FakeRedis:
 
     async def setex(self, key: str, ttl: int, value: str) -> None:
         self._store[key] = value
+
+
+def _all_permissions(role: str) -> set[str]:
+    """Grant every permission to any role — test-only."""
+    return {
+        "read_modules", "read_connections", "view_lineage",
+        "create_challenges", "annotate_modules", "export_reports",
+        "run_crystallization", "manage_datasets", "resolve_challenges",
+        "manage_users", "manage_roles", "configure_system",
+        "access_audit_logs", "export_audit_reports",
+    }
 
 
 @pytest.fixture
@@ -62,14 +68,15 @@ def client(monkeypatch):
     app.dependency_overrides[get_current_active_user] = _fake_user
     app.dependency_overrides[get_db] = _fake_db
 
+    # Grant all permissions so require_permission closures always pass.
+    monkeypatch.setattr(perms_module, "_get_permissions_for_role", _all_permissions)
+
     # Stub ModuleRegistryService
     from app.api.v1 import tcd_vertical as _v
 
-    monkeypatch.setattr(
-        _v, "ModuleRegistryService", lambda session: _FakeRegistry()
-    )
+    monkeypatch.setattr(_v, "ModuleRegistryService", lambda session: _FakeRegistry())
 
-    # Stub Redis with an in-memory fake
+    # Stub Redis
     fake_redis = _FakeRedis()
 
     async def _fake_get_redis():
@@ -86,18 +93,23 @@ def client(monkeypatch):
 def test_list_modules_unknown_session_404(client: TestClient):
     fake_id = uuid.uuid4()
     r = client.get(f"/api/v1/tcd/verticals/{fake_id}/modules")
-    # Session not in Redis → 404 (or 401/403 if auth layer intervenes first)
-    assert r.status_code in (401, 403, 404)
+    assert r.status_code == 404
+
+
+def test_create_session_and_list_modules(client: TestClient):
+    """Happy path: create session → list modules (empty registry)."""
+    create = client.post("/api/v1/tcd/verticals", json={"preset": "generic"})
+    assert create.status_code == 201
+    session_id = create.json()["id"]
+
+    r = client.get(f"/api/v1/tcd/verticals/{session_id}/modules")
+    assert r.status_code == 200
+    assert r.json()["total"] == 0
+    assert r.json()["modules"] == []
 
 
 def test_route_with_empty_registry_returns_sentinel(client: TestClient):
-    create = client.post(
-        "/api/v1/tcd/verticals", json={"preset": "generic"}
-    )
-    if create.status_code in (401, 403):
-        pytest.skip(
-            "require_permission not overridable in this app layout"
-        )
+    create = client.post("/api/v1/tcd/verticals", json={"preset": "trading"})
     assert create.status_code == 201
     session_id = create.json()["id"]
 
@@ -112,14 +124,64 @@ def test_route_with_empty_registry_returns_sentinel(client: TestClient):
     assert decisions[0]["reason"] == "empty_registry"
 
 
-def test_export_unknown_module_404_or_auth_error(client: TestClient):
+def test_crystallize_dispatches_and_returns_202(client: TestClient, monkeypatch):
+    """Crystallize endpoint should return 202 and dispatch a Celery task."""
+    create = client.post("/api/v1/tcd/verticals", json={"preset": "generic"})
+    assert create.status_code == 201
+    session_id = create.json()["id"]
+
+    # The endpoint does `from app.celery_app import celery_app` at call time,
+    # so we monkeypatch the module-level object in app.celery_app.
+    from unittest.mock import MagicMock
+
+    import app.celery_app as _ca
+
+    mock_send = MagicMock()
+    monkeypatch.setattr(_ca.celery_app, "send_task", mock_send)
+
+    btut_id = str(uuid.uuid4())
+    r = client.post(
+        f"/api/v1/tcd/verticals/{session_id}/crystallize",
+        json={"btut_job_id": btut_id},
+    )
+    assert r.status_code == 202
+    assert r.json()["status"] == "queued"
+    assert r.json()["btut_job_id"] == btut_id
+    mock_send.assert_called_once()
+
+
+def test_incremental_push_validates_length_mismatch(client: TestClient):
+    create = client.post("/api/v1/tcd/verticals", json={"preset": "generic"})
+    assert create.status_code == 201
+    session_id = create.json()["id"]
+
+    r = client.post(
+        f"/api/v1/tcd/verticals/{session_id}/incremental",
+        json={"embeddings": [[0.0, 0.0]], "ids": ["a", "b"]},
+    )
+    assert r.status_code in (400, 422)  # FastAPI may raise 422 before our handler
+
+
+def test_incremental_push_success(client: TestClient):
+    create = client.post("/api/v1/tcd/verticals", json={"preset": "generic"})
+    assert create.status_code == 201
+    session_id = create.json()["id"]
+
+    r = client.post(
+        f"/api/v1/tcd/verticals/{session_id}/incremental",
+        json={"embeddings": [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]], "ids": ["a", "b"]},
+    )
+    assert r.status_code == 200
+    assert r.json()["pushed"] == 2
+
+
+def test_export_unknown_module_404(client: TestClient):
     fake = uuid.uuid4()
     r = client.get(f"/api/v1/tcd/modules/{fake}/export?format=json")
-    assert r.status_code in (401, 403, 404)
+    assert r.status_code == 404
 
 
 def test_tcd_router_is_mounted():
-    """Sanity: the 6 expected paths are registered under /api/v1/tcd."""
     paths = {r.path for r in app.routes if "/api/v1/tcd" in getattr(r, "path", "")}
     assert "/api/v1/tcd/verticals" in paths
     assert "/api/v1/tcd/verticals/{session_id}/crystallize" in paths

@@ -108,7 +108,16 @@ async def crystallize_endpoint(
     user=Depends(require_permission("run_crystallization")),
     db: AsyncSession = Depends(get_db),
 ):
-    await _get_session(session_id)
+    await _get_session(session_id)  # validates session exists in Redis
+
+    from app.celery_app import celery_app
+
+    celery_app.send_task(
+        "tcd_vertical.crystallize",
+        args=[str(session_id), str(body.btut_job_id)],
+        kwargs={"min_quality": body.min_quality},
+        queue="crystallization",
+    )
     return {
         "session_id": str(session_id),
         "btut_job_id": str(body.btut_job_id),
