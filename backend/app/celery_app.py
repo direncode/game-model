@@ -42,6 +42,7 @@ celery_app.autodiscover_tasks(["app.services.crystallization"])
 import app.tasks.fsd_crystallize  # noqa: E402, F401
 import app.tasks.btut_ingest  # noqa: E402, F401
 import app.tasks.btut_report  # noqa: E402, F401
+import app.tasks.data_layer_run  # noqa: E402, F401
 import app.services.crystallization.job_manager  # noqa: E402, F401
 
 # ── Periodic tasks (Celery Beat) ───────────────────────────────────

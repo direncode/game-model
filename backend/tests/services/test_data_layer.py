@@ -932,3 +932,121 @@ def test_rest_link_endpoint_returns_link_counts():
     assert data["dataset_b"] == "fake"
     assert data["n_links"] >= 2  # AAPL↔AAPL and MSFT↔MSFT
     assert "cosine" in data["links_by_signal"]
+
+
+# ── TCD-JEPA bridge tests ───────────────────────────────────────────
+def test_tcd_jepa_bridge_export_to_bundle():
+    from app.services.data_layer.bridge_tcd_jepa import export_to_bundle
+
+    payload = {
+        "vertical": "tcd_jepa",
+        "dataset_id": "edgar",
+        "embeddings_8d": [[1.0, 0, 0, 0, 0, 0, 0, 0], [0, 1.0, 0, 0, 0, 0, 0, 0]],
+        "entity_ids": ["AAPL", "MSFT"],
+        "entity_types": ["company", "company"],
+        "clusters": [0, 1],
+    }
+    bundle = export_to_bundle(payload, provenance_job_id="test-123")
+    assert bundle.embeddings.shape == (2, 8)
+    assert bundle.ids == ["AAPL", "MSFT"]
+    assert bundle.edges == []
+    assert bundle.metadata["provenance_job_id"] == "test-123"
+
+
+def test_tcd_jepa_bridge_data_layer_to_vertical():
+    from app.services.data_layer.bridge_tcd_jepa import data_layer_to_vertical
+
+    adapter = _fake_adapter()
+    with patch(
+        "app.services.data_layer.core.get_adapter", return_value=adapter
+    ), patch(
+        "app.services.data_layer.core.run_btut_pipeline",
+        return_value=_fake_btut_return(),
+    ):
+        vertical, bundle = data_layer_to_vertical(
+            "fake", limit=50, target_survivors=2,
+        )
+    assert vertical.current_bundle is not None
+    assert vertical.current_bundle.embeddings.shape[0] == 2
+
+
+# ── NIV bridge tests ────────────────────────────────────────────────
+def test_niv_bridge_payload_to_search_index():
+    from app.services.data_layer.bridge_niv import (
+        niv_payload_to_search_index,
+        find_nearest_survivors,
+    )
+
+    payload = {
+        "vertical": "niv",
+        "dataset_id": "edgar",
+        "n_survivors": 2,
+        "survivors": [
+            {"entity": {"name": "AAPL"}, "coord_8d": [1.0, 0, 0, 0, 0, 0, 0, 0], "scores": {"composite": 0.9}, "cluster": 0},
+            {"entity": {"name": "MSFT"}, "coord_8d": [0, 1.0, 0, 0, 0, 0, 0, 0], "scores": {"composite": 0.8}, "cluster": 1},
+        ],
+    }
+    index = niv_payload_to_search_index(payload)
+    assert len(index) == 2
+    assert index[0]["id"] == "AAPL"
+    assert len(index[0]["vector"]) == 8
+
+    hits = find_nearest_survivors([1.0, 0, 0, 0, 0, 0, 0, 0], index, top_k=2)
+    assert hits[0]["id"] == "AAPL"
+    assert hits[0]["similarity"] > hits[1]["similarity"]
+
+
+# ── Async endpoint tests ────────────────────────────────────────────
+def test_rest_async_run_returns_job_id():
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+    from app.api.v1.data_layer import router as dl_router
+
+    app = FastAPI()
+    app.include_router(dl_router)
+    client = TestClient(app)
+
+    with patch("app.tasks.data_layer_run.data_layer_run_task") as mock_task:
+        mock_task.delay.return_value = MagicMock(id="test-job-123")
+        r = client.post("/data-layer/run-async", json={"source": "edgar", "limit": 500})
+    assert r.status_code == 200
+    assert r.json()["job_id"] == "test-job-123"
+    assert r.json()["status"] == "submitted"
+
+
+def test_rest_job_status_returns_pending():
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+    from app.api.v1.data_layer import router as dl_router
+
+    app = FastAPI()
+    app.include_router(dl_router)
+    client = TestClient(app)
+
+    with patch("celery.result.AsyncResult") as mock_ar_class:
+        mock_ar = MagicMock()
+        mock_ar.state = "PENDING"
+        mock_ar_class.return_value = mock_ar
+        r = client.get("/data-layer/job/fake-id-999")
+
+    assert r.status_code == 200
+    data = r.json()
+    assert data["job_id"] == "fake-id-999"
+    assert data["status"] == "PENDING"
+
+
+# ── Cost model test ──────────────────────────────────────────────────
+def test_cost_model_produces_real_breakdown():
+    from app.services.data_layer.costs import estimate_run_cost
+
+    cost = estimate_run_cost(
+        ingest_wall_seconds=5.0,
+        btut_wall_seconds=4.0,
+        manifold_wall_seconds=1.0,
+        output_bytes=1_000_000,
+    )
+    assert cost.total_usd > 0
+    assert cost.adapter_usd > 0
+    assert cost.compute_usd > 0
+    assert cost.storage_usd > 0
+    assert abs(cost.total_usd - cost.adapter_usd - cost.compute_usd - cost.storage_usd) < 1e-10

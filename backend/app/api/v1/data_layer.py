@@ -236,3 +236,98 @@ async def data_layer_link(req: LinkRequest) -> LinkResponse:
         ],
         max_links_returned=MAX,
     )
+
+
+# ── Async (Celery) endpoints ────────────────────────────────────────────
+class AsyncRunRequest(BaseModel):
+    source: str
+    limit: int = Field(500, ge=1, le=1_000_000)
+    target_survivors: int = Field(300, ge=1, le=50_000)
+    budget_dollars: float = Field(50.0, ge=0.0)
+    vertical: Literal["niv", "tcd_jepa", "data"] | None = None
+    chunk_size: int | None = Field(
+        default=None,
+        ge=100,
+        description="If set, triggers two-pass chunked cascade.",
+    )
+
+
+class AsyncLinkRequest(BaseModel):
+    source_a: str
+    source_b: str
+    limit: int = Field(500, ge=1, le=1_000_000)
+    target_survivors: int = Field(300, ge=1, le=50_000)
+    budget_dollars: float = Field(50.0, ge=0.0)
+    cosine_threshold: float = Field(0.75, ge=0.0, le=1.0)
+
+
+class JobSubmitResponse(BaseModel):
+    job_id: str
+    status: str = "submitted"
+
+
+class JobStatusResponse(BaseModel):
+    job_id: str
+    status: str
+    progress: dict | None = None
+    result: dict | None = None
+
+
+@router.post("/run-async", response_model=JobSubmitResponse)
+async def data_layer_run_async(req: AsyncRunRequest) -> JobSubmitResponse:
+    """Submit an async data layer pipeline run. Returns immediately with a job_id."""
+    from app.tasks.data_layer_run import data_layer_run_task
+
+    task = data_layer_run_task.delay(
+        source=req.source,
+        limit=req.limit,
+        target_survivors=req.target_survivors,
+        budget_dollars=req.budget_dollars,
+        vertical=req.vertical,
+        chunk_size=req.chunk_size,
+    )
+    return JobSubmitResponse(job_id=task.id)
+
+
+@router.post("/link-async", response_model=JobSubmitResponse)
+async def data_layer_link_async(req: AsyncLinkRequest) -> JobSubmitResponse:
+    """Submit an async cross-source causal linking job."""
+    from app.tasks.data_layer_run import data_layer_link_task
+
+    task = data_layer_link_task.delay(
+        source_a=req.source_a,
+        source_b=req.source_b,
+        limit=req.limit,
+        target_survivors=req.target_survivors,
+        budget_dollars=req.budget_dollars,
+        cosine_threshold=req.cosine_threshold,
+    )
+    return JobSubmitResponse(job_id=task.id)
+
+
+@router.get("/job/{job_id}", response_model=JobStatusResponse)
+async def data_layer_job_status(job_id: str) -> JobStatusResponse:
+    """Poll the status of an async data layer job."""
+    from celery.result import AsyncResult
+
+    from app.celery_app import celery_app as app
+
+    ar = AsyncResult(job_id, app=app)
+    state = ar.state
+
+    progress = None
+    result = None
+
+    if state == "PROGRESS":
+        progress = ar.info if isinstance(ar.info, dict) else {"message": str(ar.info)}
+    elif state == "SUCCESS":
+        result = ar.result if isinstance(ar.result, dict) else {"value": ar.result}
+    elif state == "FAILURE":
+        result = {"error": str(ar.result)}
+
+    return JobStatusResponse(
+        job_id=job_id,
+        status=state,
+        progress=progress,
+        result=result,
+    )
