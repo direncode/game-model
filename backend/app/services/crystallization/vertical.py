@@ -74,12 +74,18 @@ class TCDJEPAVertical:
             )
 
         try:
-            await self._wrapper.run_training(
-                config_path=str(self.preset.value),
-                data_path="(bundle-provided)",
+            from .bundle_serializer import serialize_bundle
+
+            config_path, data_dir = serialize_bundle(
+                self.current_bundle, self.config
             )
+            result = await self._wrapper.run_training(
+                config_path=config_path,
+                data_path=data_dir,
+            )
+            checkpoint = result.get("checkpoint_path", "(latest)")
             raw_modules = await self._wrapper.extract_modules(
-                checkpoint_path="(latest)"
+                checkpoint_path=checkpoint
             )
         except Exception as exc:
             raise TCDVerticalError(str(exc), stage="crystallize") from exc

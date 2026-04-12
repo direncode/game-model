@@ -9,11 +9,12 @@ GET    /verticals/{id}/modules       list modules
 POST   /verticals/{id}/route         route signal
 GET    /modules/{module_id}/export   export module
 
-Zero edits to existing routes. This router is registered additively
-in main.py.
+Sessions stored in Redis (key prefix `tcd_session:`). Survives
+multi-worker deployments and server restarts within the 7-day TTL.
 """
 from __future__ import annotations
 
+import json
 import uuid
 from datetime import datetime
 
@@ -24,6 +25,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.auth import get_current_active_user
 from app.core.exceptions import NotFoundError, ValidationError
 from app.core.permissions import require_permission
+from app.core.redis import get_redis
 from app.db.session import get_db
 from app.schemas.tcd_vertical import (
     CrystallizeRequest,
@@ -51,10 +53,33 @@ from app.services.crystallization.vertical_types import (
 
 router = APIRouter(tags=["tcd-vertical"])
 
+_SESSION_PREFIX = "tcd_session:"
+_SESSION_TTL = 7 * 24 * 3600  # 7 days
 
-# In-process session map. For production, replace with Redis/DB-backed
-# sessions. Stateless-except-for-the-registry is fine for v1.
-_VERTICAL_SESSIONS: dict[uuid.UUID, dict] = {}
+# In-memory incremental crystallizer cache. Stateful (holds the numpy
+# sliding window), so it can't be serialized to Redis. Keyed by
+# session_id str. Lost on restart — that's acceptable for incremental
+# pushes, which are by definition ephemeral streaming operations.
+_INCREMENTAL_CACHE: dict[str, "IncrementalCrystallizer"] = {}
+
+
+async def _get_session(session_id: uuid.UUID) -> dict:
+    """Retrieve a TCD vertical session from Redis or raise 404."""
+    r = await get_redis()
+    raw = await r.get(f"{_SESSION_PREFIX}{session_id}")
+    if raw is None:
+        raise NotFoundError(detail="vertical session not found")
+    return json.loads(raw)
+
+
+async def _set_session(session_id: uuid.UUID, data: dict) -> None:
+    """Store a TCD vertical session in Redis with TTL."""
+    r = await get_redis()
+    await r.setex(
+        f"{_SESSION_PREFIX}{session_id}",
+        _SESSION_TTL,
+        json.dumps(data, default=str),
+    )
 
 
 @router.post(
@@ -65,15 +90,14 @@ async def create_vertical(
     user=Depends(require_permission("run_crystallization")),
 ):
     session_id = uuid.uuid4()
-    _VERTICAL_SESSIONS[session_id] = {
-        "preset": body.preset,
-        "created_at": datetime.utcnow(),
-        "owner": user.id,
-    }
+    now = datetime.utcnow()
+    await _set_session(session_id, {
+        "preset": body.preset.value,
+        "created_at": now.isoformat(),
+        "owner": str(user.id),
+    })
     return VerticalCreateResponse(
-        id=session_id,
-        preset=body.preset,
-        created_at=_VERTICAL_SESSIONS[session_id]["created_at"],
+        id=session_id, preset=body.preset, created_at=now,
     )
 
 
@@ -84,8 +108,7 @@ async def crystallize_endpoint(
     user=Depends(require_permission("run_crystallization")),
     db: AsyncSession = Depends(get_db),
 ):
-    if session_id not in _VERTICAL_SESSIONS:
-        raise NotFoundError(detail="vertical session not found")
+    await _get_session(session_id)
     return {
         "session_id": str(session_id),
         "btut_job_id": str(body.btut_job_id),
@@ -99,17 +122,18 @@ async def incremental_endpoint(
     body: IncrementalPushRequest,
     user=Depends(require_permission("run_crystallization")),
 ):
-    if session_id not in _VERTICAL_SESSIONS:
-        raise NotFoundError(detail="vertical session not found")
+    await _get_session(session_id)
     if len(body.embeddings) != len(body.ids):
         raise ValidationError(detail="embeddings and ids length mismatch")
+
     from app.services.crystallization.online import IncrementalCrystallizer
     from app.services.crystallization.vertical_types import BTUTSurvivorBundle
 
-    sess = _VERTICAL_SESSIONS[session_id]
-    crystallizer = sess.setdefault(
-        "incremental", IncrementalCrystallizer(window_size=1024)
-    )
+    sid = str(session_id)
+    if sid not in _INCREMENTAL_CACHE:
+        _INCREMENTAL_CACHE[sid] = IncrementalCrystallizer(window_size=1024)
+    crystallizer = _INCREMENTAL_CACHE[sid]
+
     bundle = BTUTSurvivorBundle(
         embeddings=np.asarray(body.embeddings, dtype=np.float32),
         ids=body.ids,
@@ -135,9 +159,8 @@ async def list_modules_endpoint(
     user=Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    if session_id not in _VERTICAL_SESSIONS:
-        raise NotFoundError(detail="vertical session not found")
-    preset = _VERTICAL_SESSIONS[session_id]["preset"]
+    sess = await _get_session(session_id)
+    preset = VerticalPreset(sess["preset"])
     svc = ModuleRegistryService(db)
     rows = await svc.list(
         vertical=preset, min_purity=min_purity, min_quality=min_quality
@@ -165,9 +188,8 @@ async def route_endpoint(
     user=Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ):
-    if session_id not in _VERTICAL_SESSIONS:
-        raise NotFoundError(detail="vertical session not found")
-    preset: VerticalPreset = _VERTICAL_SESSIONS[session_id]["preset"]
+    sess = await _get_session(session_id)
+    preset = VerticalPreset(sess["preset"])
 
     svc = ModuleRegistryService(db)
     rows = await svc.list(vertical=preset)

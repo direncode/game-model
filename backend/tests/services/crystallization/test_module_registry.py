@@ -59,11 +59,13 @@ async def test_register_deduplicates_on_provenance_and_hash(session):
     svc = ModuleRegistryService(session)
     m = _mk_module("m1")
     first = await svc.register_many([m])
-    second = await svc.register_many([m])  # same provenance + same hash
+    m.quality_score = 0.99  # re-run with better score
+    second = await svc.register_many([m])  # same provenance + same hash → update
     assert len(first) == 1
-    assert len(second) == 0  # dedupe
+    assert len(second) == 1  # returns the updated row
     listed = await svc.list()
-    assert len(listed) == 1
+    assert len(listed) == 1  # still one row
+    assert listed[0].quality_score == 0.99  # mutable fields updated
 
 
 async def test_list_filters_by_min_quality(session):

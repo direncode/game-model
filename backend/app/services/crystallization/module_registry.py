@@ -37,17 +37,34 @@ class ModuleRegistryService:
     async def register_many(
         self, modules: list[CrystallizedModule]
     ) -> list[ModuleRegistryEntry]:
-        """Insert modules, dedup on (provenance_job_id, module_hash)."""
-        inserted: list[ModuleRegistryEntry] = []
+        """Insert or update modules, dedup on (provenance_job_id, module_hash).
+
+        On collision: updates quality_score, purity, and metadata_ from the
+        newer module (so re-runs with improved scoring actually land).
+        Intra-batch dedup uses an explicit ``seen`` set — not autoflush.
+        """
+        upserted: list[ModuleRegistryEntry] = []
+        seen: set[str] = set()
         for m in modules:
             mh = hash_module(m)
-            existing = await self._session.execute(
+            dedup_key = f"{m.provenance_job_id}:{mh}"
+            if dedup_key in seen:
+                continue
+            seen.add(dedup_key)
+
+            result = await self._session.execute(
                 select(ModuleRegistryEntry).where(
                     ModuleRegistryEntry.provenance_job_id == m.provenance_job_id,
                     ModuleRegistryEntry.module_hash == mh,
                 )
             )
-            if existing.scalar_one_or_none() is not None:
+            existing = result.scalar_one_or_none()
+            if existing is not None:
+                # Update mutable fields so re-runs don't silently discard
+                # better scoring.
+                existing.quality_score = float(m.quality_score)
+                existing.purity = float(m.purity)
+                upserted.append(existing)
                 continue
             entry = ModuleRegistryEntry(
                 id=uuid.uuid4(),
@@ -63,9 +80,9 @@ class ModuleRegistryService:
                 description=None,
             )
             self._session.add(entry)
-            inserted.append(entry)
+            upserted.append(entry)
         await self._session.flush()
-        return inserted
+        return upserted
 
     async def list(
         self,

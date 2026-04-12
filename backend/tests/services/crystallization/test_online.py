@@ -17,11 +17,14 @@ def _bundle(n: int = 10, d: int = 8) -> BTUTSurvivorBundle:
     )
 
 
-def test_incremental_crystallizer_warmup_no_features():
+def test_incremental_crystallizer_first_push_seeds_window():
     crystallizer = IncrementalCrystallizer(window_size=64)
-    # tcd_jepa.topology likely unavailable in test env; returns [] regardless.
     features = crystallizer.push(_bundle())
-    assert features == []
+    # First push: if tcd_jepa.topology is available, may discover features.
+    # If not, returns []. Either outcome is valid — the contract is that
+    # push() returns a list and seeds the window.
+    assert isinstance(features, list)
+    assert crystallizer.window_length() == 10
 
 
 def test_incremental_crystallizer_window_bounded():

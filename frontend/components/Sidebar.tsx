@@ -20,6 +20,7 @@ import {
   Goal,
   ChevronLeft,
   ChevronRight,
+  Network,
 } from "lucide-react";
 
 const exploreItems = [
@@ -32,6 +33,7 @@ const exploreItems = [
 const engineItems = [
   { href: "/engine", label: "Engine Console", icon: Cpu },
   { href: "/btut", label: "BTUT Intelligence", icon: BrainCircuit },
+  { href: "/tcd-jepa", label: "TCD-JEPA Modules", icon: Network },
   { href: "/data-layer", label: "Data Layer", icon: Activity },
 ];
 

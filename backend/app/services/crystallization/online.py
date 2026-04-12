@@ -105,25 +105,31 @@ class IncrementalCrystallizer:
     def _compute_persistence(self) -> list[PersistenceFeature]:
         """Run persistent homology over the current window.
 
-        Uses tcd_jepa.topology if available; falls back to an empty
-        list if not. This is plumbing around the existing ML code —
-        not a learning-mode spot.
+        Uses tcd_jepa.topology.PersistentHomologyComputer if available;
+        falls back to an empty list when the tcd-jepa package or torch
+        is not importable (e.g. in lightweight test envs).
         """
         try:
+            import torch
             from tcd_jepa.topology.persistent_homology import (
-                compute_persistent_homology,
+                PersistentHomologyComputer,
             )
         except ImportError:
             return []
 
         pts = np.stack(list(self._window))
         try:
-            diagram = compute_persistent_homology(pts, max_dim=1)
+            computer = PersistentHomologyComputer(max_homology_dim=1)
+            ph_result = computer.compute(torch.tensor(pts, dtype=torch.float32))
         except Exception:
             return []
 
         features: list[PersistenceFeature] = []
-        for dim, bars in enumerate(diagram):
+        for dim_key in ("H0", "H1"):
+            bars = ph_result.get(dim_key)
+            if bars is None:
+                continue
+            dim = int(dim_key[1])
             for birth, death in bars:
                 if np.isfinite(death):
                     features.append(
