@@ -29,6 +29,18 @@ class ApiClient {
     return res.json();
   }
 
+  // ── Generic methods ───────────────────────────────────────────────
+  async get<T = any>(path: string): Promise<T> {
+    return this.request<T>(path);
+  }
+
+  async post<T = any>(path: string, body?: any): Promise<T> {
+    return this.request<T>(path, {
+      method: "POST",
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+  }
+
   // ── Auth ──────────────────────────────────────────────────────────
 
   async register(data: { email: string; name: string; password: string; organization_name?: string }) {
