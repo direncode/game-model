@@ -215,34 +215,98 @@ export default function DuncHomePage() {
           )}
         </section>
 
-        {/* Three scenarios */}
-        <section className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <ScenarioCard
-            title="Under-runs"
-            body="See exactly who broke from the attacking line, with position, velocity, and timestamp evidence."
-          />
-          <ScenarioCard
-            title="Complex convergence"
-            body="When the staff sees a tight central overload, D-U-N-C turns it into a single-sentence picture for the manager."
-          />
-          <ScenarioCard
-            title="Pressing shifts"
-            body="One click moves the whole staff to a shared view of the opposition's new block shape."
-          />
+        {/* Three articulated demo scenarios */}
+        <section className="mt-20">
+          <div className="mb-5">
+            <div className="text-[10px] uppercase tracking-widest text-li-cyan font-mono mb-1">
+              Demo scenarios
+            </div>
+            <h2 className="font-display text-2xl text-li-white leading-tight">
+              Three frictions D-U-N-C removes from a matchday
+            </h2>
+            <p className="text-sm text-li-text-secondary mt-2 max-w-2xl">
+              Every scenario below is scripted in the live match demo. Trigger
+              it from the manager console and watch the pitch, the twins, and
+              the backchannel line up behind a single shared picture.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ScenarioCard
+              tag="Scenario 01 · Accountability"
+              title="The striker under-ran, then blamed the midfield"
+              situation="9 peels off, the line drops three metres, and the ball dies between the lines. Two seconds later he's screaming at the 8 and the 10."
+              friction="Manager has no way to prove, in the moment, who actually broke the line. Without evidence, the row stays a row."
+              resolution="D-U-N-C freezes the frame, highlights the striker's under-run with position delta, velocity drop and timestamp. One tap surfaces a clip the manager can put in front of the player."
+              trigger="Under-run"
+            />
+            <ScenarioCard
+              tag="Scenario 02 · Translation"
+              title="Technical staff saw a convergence the manager can't read"
+              situation="Three central midfielders collapse on the ball carrier inside a 6m radius for 1.4s — a complex, multi-body convergence pattern the analysts picked up live."
+              friction="On the touchline, the manager doesn't have 20 seconds to parse a heatmap. He needs one sentence, now."
+              resolution="D-U-N-C compresses the convergence into a single line addressed to the manager's role — 'Away 6-8-10 collapsing central, left half-space open 18m' — with a one-click jump to the live overlay."
+              trigger="Convergence"
+            />
+            <ScenarioCard
+              tag="Scenario 03 · Alignment"
+              title="Manager wants the whole staff on a new pressing model"
+              situation="Opposition are playing through the first line. The manager decides mid-half to shift from mid-block to high press with a sideline trap."
+              friction="Normally this takes three separate conversations — GK coach, analysts, assistant — and by the time everyone is aligned the window has closed."
+              resolution="Manager issues one instruction. D-U-N-C pushes the new pressing model to every staff screen, updates the block lines and pressing traps overlay, and confirms affected players and duration in the active-scenario banner."
+              trigger="Pressing shift"
+            />
+          </div>
         </section>
       </main>
     </div>
   );
 }
 
-function ScenarioCard({ title, body }: { title: string; body: string }) {
+function ScenarioCard({
+  tag,
+  title,
+  situation,
+  friction,
+  resolution,
+  trigger,
+}: {
+  tag: string;
+  title: string;
+  situation: string;
+  friction: string;
+  resolution: string;
+  trigger: string;
+}) {
   return (
-    <div className="border border-li-border bg-li-black-surface rounded-md p-4">
-      <div className="text-[10px] uppercase tracking-widest text-li-cyan font-mono mb-2">
-        Core scenario
+    <div className="border border-li-border bg-li-black-surface rounded-md p-5 flex flex-col gap-3">
+      <div className="text-[10px] uppercase tracking-widest text-li-cyan font-mono">
+        {tag}
       </div>
-      <div className="text-lg text-li-white mb-1">{title}</div>
-      <div className="text-sm text-li-text-secondary leading-relaxed">
+      <div className="font-display text-lg text-li-white leading-snug">
+        {title}
+      </div>
+      <ScenarioRow label="Situation" body={situation} />
+      <ScenarioRow label="Friction" body={friction} />
+      <ScenarioRow label="D-U-N-C" body={resolution} />
+      <div className="mt-auto pt-3 border-t border-li-border flex items-center justify-between">
+        <span className="text-[9px] uppercase tracking-widest text-li-text-muted font-mono">
+          Trigger in match
+        </span>
+        <span className="text-[10px] font-mono uppercase tracking-wider text-li-cyan border border-li-cyan/30 rounded-sm px-1.5 py-0.5">
+          {trigger}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function ScenarioRow({ label, body }: { label: string; body: string }) {
+  return (
+    <div>
+      <div className="text-[9px] uppercase tracking-widest text-li-text-muted font-mono mb-0.5">
+        {label}
+      </div>
+      <div className="text-[13px] text-li-text-secondary leading-relaxed">
         {body}
       </div>
     </div>
