@@ -21,6 +21,7 @@ import { useDuncMatchStream } from "@/lib/dunc/ws";
 import { ActiveScenarioBanner } from "@/components/dunc/ActiveScenarioBanner";
 import { AIAgentDrawer } from "@/components/dunc/AIAgentDrawer";
 import { ManagerBackchannel, StaffBackchannel } from "@/components/dunc/Backchannel";
+import { ManagerTerminal } from "@/components/dunc/ManagerTerminal";
 import { OverlayToggles } from "@/components/dunc/OverlayToggles";
 import { PLScoreboard } from "@/components/dunc/PLScoreboard";
 import { GameApproachWindow } from "@/components/dunc/GameApproachWindow";
@@ -110,6 +111,9 @@ export default function MatchPage() {
             </div>
             <PitchView highlightedIds={highlighted} />
           </div>
+
+          {/* Manager Terminal — ABOVE twin cards */}
+          <ManagerTerminal matchId={matchId} />
 
           {/* Twin rail */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 min-w-0">

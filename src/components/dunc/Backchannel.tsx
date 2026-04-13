@@ -86,6 +86,27 @@ export function StaffBackchannel() {
         </span>
       </div>
 
+      {/* Manager instructions received */}
+      {(() => {
+        const mgrMsgs = messages.filter((m) => m.from === "manager").slice(-3).reverse();
+        if (mgrMsgs.length === 0) return null;
+        return (
+          <div className="px-3 py-1.5 border-b border-li-cyan/20 bg-li-cyan/5">
+            <div className="text-[9px] uppercase tracking-widest text-li-cyan font-mono mb-1 font-bold">
+              ⚡ From manager
+            </div>
+            {mgrMsgs.map((m) => (
+              <div key={m.id} className="text-[10px] text-li-white py-0.5">
+                <span className="text-[9px] font-mono text-li-cyan tabular-nums mr-1">
+                  {Math.floor(m.timestamp / 60)}:{String(Math.floor(m.timestamp % 60)).padStart(2, "0")}
+                </span>
+                {m.text}
+              </div>
+            ))}
+          </div>
+        );
+      })()}
+
       {/* Quick-forward recent insights */}
       {recentInsights.length > 0 && (
         <div className="px-3 py-1.5 border-b border-li-green/10">
