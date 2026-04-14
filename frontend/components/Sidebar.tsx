@@ -36,6 +36,7 @@ const engineItems = [
   { href: "/btut", label: "BTUT Intelligence", icon: BrainCircuit },
   { href: "/tcd-jepa", label: "TCD-JEPA Modules", icon: Network },
   { href: "/data-layer", label: "Data Layer", icon: Activity },
+  { href: "/data-estate", icon: Database, label: "Data Estate" },
 ];
 
 const liveDataItems = [

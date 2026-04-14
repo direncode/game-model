@@ -21,6 +21,7 @@ from app.api.v1.data_layer import router as data_layer_router
 from app.api.v1.dunc import router as dunc_router
 from app.api.v1.tcd_vertical import router as tcd_vertical_router
 from app.api.v1.niv import router as niv_router
+from app.api.v1.data_estate_vertical import router as data_estate_router
 from app.api.v1.ws import router as ws_router
 
 router = APIRouter()
@@ -45,6 +46,7 @@ router.include_router(dunc_router)
 router.include_router(tcd_vertical_router, prefix="/tcd")
 router.include_router(niv_router)
 router.include_router(ws_router)
+router.include_router(data_estate_router)
 
 # Also export as api_router for alternate import style
 api_router = router

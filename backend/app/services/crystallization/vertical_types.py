@@ -18,6 +18,7 @@ class VerticalPreset(str, Enum):
     INFERENCE = "inference"
     SOVEREIGN = "sovereign"
     GENERIC = "generic"
+    DATA_ESTATE = "data_estate"
 
 
 @dataclass

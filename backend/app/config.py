@@ -91,6 +91,16 @@ class Settings(BaseSettings):
     BTUT_MAX_PREFILTER_MEMORY_MB: int = 512
     BTUT_DEFAULT_THINNING_STRATEGY: str = "composite"
 
+    # ── Data Estate ─────────────────────────────────────────────────
+    DATA_ESTATE_ENABLED: bool = False
+    DATA_ESTATE_MODEL_PROVIDER: str = "anthropic"
+    DATA_ESTATE_MODEL_NAME: str = "claude-sonnet-4-6"
+    DATA_ESTATE_EMBED_MODEL: str = ""
+    DATA_ESTATE_MAX_SUBMISSION_SIZE: int = 10_485_760  # 10MB
+    DATA_ESTATE_AUTO_APPROVE: bool = False
+    XAI_API_KEY: Optional[str] = None
+    OPENAI_API_KEY: Optional[str] = None
+
     # ── Application ─────────────────────────────────────────────────────
     APP_NAME: str = "Latent Intelligence"
     APP_ENV: str = "development"

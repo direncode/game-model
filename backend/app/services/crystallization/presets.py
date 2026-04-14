@@ -64,6 +64,24 @@ PRESETS: dict[VerticalPreset, PresetConfig] = {
         prune_threshold=0.2,
         max_modules=48,
     ),
+
+    # Data Estate vertical — warm exploration for diverse document estates.
+    # Temperature is above GENERIC (1.2 vs 1.0) because document collections
+    # are inherently diverse (different topics, authors, time periods) and
+    # the crystallizer needs to explore broadly before settling. Trajectory
+    # length is moderate (300 steps) to map knowledge topology without
+    # excessive compute. Full H0/H1/H2 enabled — H2 boundaries are a core
+    # value proposition (detecting documentation gaps). Module capacity is
+    # high (96) because knowledge bases have many distinct topic clusters.
+    # Prune threshold 0.15 keeps more modules alive for coverage.
+    VerticalPreset.DATA_ESTATE: PresetConfig(
+        langevin_temperature=1.2,
+        langevin_steps=300,
+        langevin_noise_scale=0.12,
+        homology_max_dim=2,
+        prune_threshold=0.15,
+        max_modules=96,
+    ),
 }
 
 
