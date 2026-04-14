@@ -152,7 +152,7 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
           </div>
         </div>
         {activeScenarios.length > 0 && (
-          <span className="text-[10px] font-mono text-li-cyan animate-pulse">
+          <span className="text-[10px] font-mono text-li-cyan animate-pulse motion-reduce:animate-none">
             {activeScenarios.length} active
           </span>
         )}
@@ -167,7 +167,7 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
               <div className={cn("text-[9px] uppercase tracking-widest font-mono mb-1.5", gInfo.color)}>
                 {gInfo.label}
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1" role="group" aria-label={`${gInfo.label} triggers`}>
                 {triggers.map((t) => {
                   const isActive = activeNames.has(t.key);
                   const isExpanded = expanded === t.key;
@@ -183,6 +183,7 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
                           className={cn(
                             "flex-1 flex items-center justify-between px-2.5 py-1.5 text-left rounded-sm transition-all",
                             "border",
+                            "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
                             isActive
                               ? "bg-li-cyan/15 border-li-cyan/40 text-li-cyan"
                               : "bg-li-black-elevated border-li-border text-li-text-secondary hover:border-li-cyan/40 hover:text-li-white",
@@ -190,7 +191,7 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
                         >
                           <div className="flex items-center gap-2">
                             {isActive && (
-                              <span className="w-1.5 h-1.5 rounded-full bg-li-cyan animate-pulse" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-li-cyan animate-pulse motion-reduce:animate-none" />
                             )}
                             <span className="text-[11px] font-mono uppercase tracking-wider">
                               {t.label}
@@ -206,14 +207,17 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
                           <button
                             type="button"
                             onClick={() => toggleExpand(t.key)}
+                            aria-label={`Configure ${t.label}`}
                             className={cn(
                               "p-1.5 rounded-sm border transition-colors",
+                              "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
                               isExpanded
                                 ? "border-li-cyan/40 text-li-cyan bg-li-cyan/10"
                                 : "border-li-border text-li-text-muted hover:text-li-white",
                             )}
                           >
                             <Settings2 className="w-3 h-3" />
+                            <span className="sr-only">Settings</span>
                           </button>
                         )}
                       </div>
@@ -269,7 +273,7 @@ export function PressingTriggers({ matchId }: { matchId: string }) {
                           <button
                             type="button"
                             onClick={() => fire(t.key)}
-                            className="w-full flex items-center justify-center gap-1.5 px-2 py-1 text-[10px] font-mono uppercase tracking-wider bg-li-cyan text-li-black rounded-sm hover:bg-li-cyan/90"
+                            className="w-full flex items-center justify-center gap-1.5 px-2 py-1 text-[10px] font-mono uppercase tracking-wider bg-li-cyan text-li-black rounded-sm hover:bg-li-cyan/90 focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
                           >
                             <Zap className="w-3 h-3" />
                             Apply {t.label}

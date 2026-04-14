@@ -43,7 +43,8 @@ export function OverlayToggles() {
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="w-full px-3 py-2 flex items-center justify-between hover:bg-li-purple/10 transition-colors"
+        className="w-full px-3 py-2 flex items-center justify-between hover:bg-li-purple/10 transition-colors focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
+        aria-expanded={expanded}
       >
         <div className="flex items-center gap-2">
           <Eye className="w-3 h-3 text-li-purple" />
@@ -98,9 +99,12 @@ function OverlayGroup({
               type="button"
               onClick={() => toggle(item.key)}
               title={item.hint}
+              role="switch"
+              aria-checked={on}
               className={cn(
                 "flex items-center gap-1.5 px-2 py-1 rounded-sm text-[10px] font-mono transition-all text-left",
                 "border",
+                "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
                 on
                   ? "bg-li-purple/15 border-li-purple/40 text-li-purple"
                   : "bg-li-black-elevated border-li-border text-li-text-muted hover:text-li-white hover:border-li-purple/30",

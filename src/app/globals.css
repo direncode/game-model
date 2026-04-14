@@ -10,8 +10,8 @@
   --color-li-gray-900: #1a1a1a;
   --color-li-gray-800: #262626;
   --color-li-gray-700: #404040;
-  --color-li-gray-600: #525252;
-  --color-li-gray-500: #737373;
+  --color-li-gray-600: #6b6b6b;
+  --color-li-gray-500: #808080;
   --color-li-gray-400: #a3a3a3;
   --color-li-gray-300: #d4d4d4;
   --color-li-gray-200: #e5e5e5;
@@ -44,9 +44,9 @@
   --color-li-border-light: #2a2a2a;
   --color-li-border-accent: #333333;
   --color-li-text-primary: #ffffff;
-  --color-li-text-secondary: #888888;
-  --color-li-text-muted: #555555;
-  --color-li-text-tertiary: #666666;
+  --color-li-text-secondary: #9a9a9a;
+  --color-li-text-muted: #737373;
+  --color-li-text-tertiary: #808080;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", monospace;
