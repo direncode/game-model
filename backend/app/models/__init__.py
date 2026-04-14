@@ -6,6 +6,7 @@ from app.models.challenge import Challenge, ChallengeComment, FeedbackConstraint
 from app.models.governance import LineageEvent, UserRole, DataClassification
 from app.models.delivery import Report, AlertRule, AlertEvent, ApiKey
 from app.models.audit import AuditLog
+from app.models.qr_identity import QRIdentity, QRScanLog
 
 __all__ = [
     "User", "Organization", "Session",
@@ -16,4 +17,5 @@ __all__ = [
     "LineageEvent", "UserRole", "DataClassification",
     "Report", "AlertRule", "AlertEvent", "ApiKey",
     "AuditLog",
+    "QRIdentity", "QRScanLog",
 ]
