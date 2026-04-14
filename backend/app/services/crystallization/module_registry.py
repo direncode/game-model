@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import uuid
 from typing import Any
 
@@ -16,6 +17,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.module_registry import ModuleRegistryEntry
 from .vertical_types import CrystallizedModule, VerticalPreset
+
+logger = logging.getLogger(__name__)
 
 
 def hash_module(module: CrystallizedModule) -> str:
@@ -44,6 +47,7 @@ class ModuleRegistryService:
         Intra-batch dedup uses an explicit ``seen`` set — not autoflush.
         """
         upserted: list[ModuleRegistryEntry] = []
+        created: list[ModuleRegistryEntry] = []
         seen: set[str] = set()
         for m in modules:
             mh = hash_module(m)
@@ -81,7 +85,24 @@ class ModuleRegistryService:
             )
             self._session.add(entry)
             upserted.append(entry)
+            created.append(entry)
         await self._session.flush()
+
+        # Auto-mint QR identities for newly registered modules
+        try:
+            from app.services.qr_identity.identity_service import QRIdentityService
+            qr_svc = QRIdentityService(self._session)
+            for entry in created:
+                await qr_svc.mint(
+                    subject_type="module",
+                    subject_id=entry.id,
+                    tier="org",
+                    minted_by="system:crystallization",
+                    metadata={"vertical": entry.vertical, "module_type": entry.module_type},
+                )
+        except Exception:
+            logger.warning("QR auto-mint failed for batch, continuing", exc_info=True)
+
         return upserted
 
     async def list(
