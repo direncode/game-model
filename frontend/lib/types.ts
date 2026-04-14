@@ -256,3 +256,40 @@ export interface PaginatedResponse<T> {
   page_size: number;
   total_pages: number;
 }
+
+// --- QR Digital Identity ---
+
+export interface QRIdentity {
+  id: string;
+  code: string;
+  subject_type: string;
+  subject_id: string;
+  tier: "public" | "org" | "admin";
+  org_id: string | null;
+  minted_by: string;
+  minted_at: string;
+  revoked_at: string | null;
+  metadata: Record<string, unknown> | null;
+}
+
+export interface QRScanResult {
+  qr_identity: QRIdentity;
+  access_granted: string;
+  entity_summary: Record<string, unknown>;
+  lineage: Record<string, unknown> | null;
+}
+
+export interface QRCodeImage {
+  code: string;
+  image_base64: string;
+  url: string;
+}
+
+export interface QRScanLog {
+  id: string;
+  qr_identity_id: string;
+  scanned_by: string | null;
+  scanned_at: string;
+  access_granted: string;
+  ip_address: string | null;
+}

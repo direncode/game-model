@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
 class ApiClient {
   private baseUrl: string;
@@ -83,6 +83,10 @@ class ApiClient {
       method: "POST",
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
+  }
+
+  async delete<T = any>(path: string): Promise<T> {
+    return this.request<T>(path, { method: "DELETE" });
   }
 
   // ── Auth ──────────────────────────────────────────────────────────
