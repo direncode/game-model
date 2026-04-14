@@ -41,7 +41,7 @@ class QRScanResult(BaseModel):
     qr_identity: QRIdentityOut
     access_granted: str
     entity_summary: dict[str, Any]
-    lineage: list[dict[str, Any]] | None = None
+    lineage: dict[str, Any] | None = None
 
 
 class QRScanLogOut(BaseModel):
