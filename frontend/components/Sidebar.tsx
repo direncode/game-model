@@ -22,6 +22,7 @@ import {
   ChevronRight,
   Network,
   TrendingDown,
+  Workflow,
 } from "lucide-react";
 
 const exploreItems = [
@@ -37,6 +38,7 @@ const engineItems = [
   { href: "/tcd-jepa", label: "TCD-JEPA Modules", icon: Network },
   { href: "/data-layer", label: "Data Layer", icon: Activity },
   { href: "/data-estate", icon: Database, label: "Data Estate" },
+  { href: "/flow-engine", icon: Workflow, label: "Flow Engine" },
 ];
 
 const liveDataItems = [
