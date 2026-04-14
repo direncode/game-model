@@ -94,9 +94,9 @@ export default function QRScanPage() {
         {lineage && (
           <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
             <h2 className="text-white font-medium mb-3">Lineage</h2>
-            {lineage.summary && (
+            {"summary" in lineage && (
               <div className="text-gray-400 text-sm mb-3">
-                {(lineage.summary as Record<string, unknown>).event_count} provenance events tracked
+                {String((lineage.summary as Record<string, unknown>).event_count ?? 0)} provenance events tracked
               </div>
             )}
             <pre className="text-gray-400 text-sm overflow-x-auto max-h-96">
