@@ -161,9 +161,9 @@ class TestQRScanResult:
             qr_identity=QRIdentityOut(**identity_data),
             access_granted="admin",
             entity_summary={"rows": 1000},
-            lineage=[{"step": "ingest", "ts": "2026-01-01"}],
+            lineage={"summary": {"event_count": 1, "depth": "shallow"}},
         )
-        assert len(result.lineage) == 1
+        assert "summary" in result.lineage
 
 
 # ── QRScanLogOut ─────────────────────────────────────────────────────
