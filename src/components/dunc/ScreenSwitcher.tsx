@@ -67,6 +67,7 @@ export function ScreenSwitcher({ matchId }: { matchId: string }) {
             href={s.href(matchId)}
             className={cn(
               "flex items-center gap-1.5 px-3 py-1 rounded-sm text-[11px] font-mono uppercase tracking-wider transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
               active
                 ? "bg-li-white text-li-black"
                 : "text-li-text-secondary hover:text-li-white",

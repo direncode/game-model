@@ -35,6 +35,7 @@ export function TwinCard({
       className={cn(
         "w-full text-left bg-li-black-surface border border-li-border rounded-md px-2.5 py-2",
         "hover:border-li-border-accent transition-colors",
+        "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
         "border-l-2",
         teamBand,
         selected && "ring-1 ring-li-cyan/60 border-li-cyan/50",

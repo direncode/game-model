@@ -1,6 +1,6 @@
 "use client";
 
-// /match/[id] — live match dashboard.
+// /dunc/match/[id] — live match dashboard.
 //
 // Layout (desktop):
 //   ┌──────────────────────────────────────────────┬───────────────────┐
