@@ -29,7 +29,13 @@
       "Bash(chmod +x /c/Users/diren/Desktop/lsx-latentocean/scripts/setup-server.sh /c/Users/diren/Desktop/lsx-latentocean/scripts/deploy.sh)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(python -c ':*)",
+      "Bash(python -m pytest tests/services/test_data_layer.py --tb=line -q)",
+      "Bash(python -m pytest tests/services/test_orchestrator.py -v --tb=short)",
+      "Bash(python -m pytest tests/services/test_data_layer.py tests/services/test_orchestrator.py -q --tb=line)",
+      "Bash(python scripts/demo_ocean_full.py)",
+      "Bash(cmd //c \"del .git\\\\\\\\index.lock\")"
     ]
   }
 }

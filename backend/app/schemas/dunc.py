@@ -12,7 +12,12 @@ from pydantic import BaseModel, Field
 
 
 Role = Literal["manager", "technical_staff"]
-Scenario = Literal["under_run", "pressing_shift", "convergence"]
+Scenario = Literal[
+    "under_run", "pressing_shift", "convergence",
+    "high_press", "counter_press", "trap_sideline", "trap_corner",
+    "mid_block", "low_block", "man_mark", "zonal",
+    "drop_deep", "hold_line", "step_up",
+]
 MatchStatus = Literal["idle", "running", "paused", "finished"]
 
 
@@ -20,6 +25,7 @@ class MatchCreateRequest(BaseModel):
     preset: str = Field(default="demo", description="Simulator preset name")
     seed: int | None = Field(default=None, description="Optional deterministic seed")
     hz: float = Field(default=10.0, ge=1.0, le=120.0, description="Tick rate in Hz")
+    pl_preset: str | None = Field(default=None, description="PL match preset key, e.g. 'ars_vs_mci'")
 
 
 class MatchSummaryOut(BaseModel):

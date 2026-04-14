@@ -20,7 +20,6 @@ from app.api.v1.latk import router as latk_router
 from app.api.v1.data_layer import router as data_layer_router
 from app.api.v1.dunc import router as dunc_router
 from app.api.v1.tcd_vertical import router as tcd_vertical_router
-from app.api.v1.niv import router as niv_router
 from app.api.v1.data_estate_vertical import router as data_estate_router
 from app.api.v1.qr_identity import router as qr_identity_router
 from app.api.v1.flow_engine import router as flow_engine_router
@@ -46,7 +45,6 @@ router.include_router(data_layer_router)
 router.include_router(hub_router)
 router.include_router(dunc_router)
 router.include_router(tcd_vertical_router, prefix="/tcd")
-router.include_router(niv_router)
 router.include_router(ws_router)
 router.include_router(data_estate_router)
 router.include_router(qr_identity_router)

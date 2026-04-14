@@ -64,11 +64,11 @@ class LatentOceanDataLayer:
         >>> layer.ingest("edgar", limit=10_000)
         >>> layer.apply_btut_tuner()
         >>> layer.project_to_manifold()
-        >>> payload = layer.export_for_vertical("niv")
+        >>> payload = layer.export_for_vertical("tcd_jepa")
 
     Or the one-shot form:
 
-        >>> layer.run("edgar", vertical="niv", limit=10_000)
+        >>> layer.run("edgar", vertical="tcd_jepa", limit=10_000)
     """
 
     def __init__(
@@ -434,13 +434,13 @@ class LatentOceanDataLayer:
     # ── Stage 5: vertical export ────────────────────────────────────────
     def export_for_vertical(
         self,
-        vertical_name: Literal["niv", "tcd_jepa", "data"] | str,
+        vertical_name: Literal["tcd_jepa", "data"] | str,
         write_path: Path | None = None,
     ) -> dict:
         """Format current state into the handoff contract for a vertical.
 
         Args:
-            vertical_name: One of ``"niv"``, ``"tcd_jepa"``, ``"data"``.
+            vertical_name: One of ``"tcd_jepa"``, ``"data"``.
             write_path: Optional path — if given, also writes the dict
                 as JSON (UTF-8, ``indent=2``) at that path. Parent dirs
                 are created as needed.

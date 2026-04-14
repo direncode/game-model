@@ -44,7 +44,7 @@ class ManifoldCoords:
     """Output of ``LatentOceanDataLayer.project_to_manifold()``.
 
     ``coords_8d_unit`` is always populated and is what downstream
-    compute (cosine linking, NIV search, TCD-JEPA training) uses.
+    compute (cosine linking, manifold search, TCD-JEPA training) uses.
     ``coords_3d_s2`` is optional, for 3D UI display only.
     """
 

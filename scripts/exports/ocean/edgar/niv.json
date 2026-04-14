@@ -1,0 +1,2425 @@
+{
+  "vertical": "niv",
+  "dataset_id": "edgar",
+  "n_survivors": 100,
+  "survivors": [
+    {
+      "entity": {
+        "name": "company_1389170",
+        "type": "company",
+        "attributes": "{\"cik\": \"1389170\", \"ticker\": \"TRGP\", \"company_name\": \"Targa Resources Corp.\"}"
+      },
+      "coord_8d": [
+        -0.12190902233123779,
+        -0.7641888856887817,
+        0.03525400161743164,
+        0.3792543411254883,
+        0.36874037981033325,
+        -0.10767274349927902,
+        0.14687176048755646,
+        -0.2948603630065918
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9517,
+        "anomaly": 0.2556,
+        "composite": 0.7946
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1745201",
+        "type": "company",
+        "attributes": "{\"cik\": \"1745201\", \"ticker\": \"VIK\", \"company_name\": \"Viking Holdings Ltd\"}"
+      },
+      "coord_8d": [
+        -0.18902745842933655,
+        -0.3567189872264862,
+        0.7575041055679321,
+        -0.10899894684553146,
+        0.19704732298851013,
+        -0.4026559591293335,
+        0.13898907601833344,
+        -0.17620889842510223
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.9097,
+        "anomaly": 0.2365,
+        "composite": 0.773
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_2488",
+        "type": "company",
+        "attributes": "{\"cik\": \"2488\", \"ticker\": \"AMD\", \"company_name\": \"ADVANCED MICRO DEVICES INC\"}"
+      },
+      "coord_8d": [
+        0.05980253592133522,
+        -0.21540261805057526,
+        0.1244688555598259,
+        0.4828268587589264,
+        -0.5910007357597351,
+        -0.5667951107025146,
+        0.07937710732221603,
+        -0.15675386786460876
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.8291,
+        "anomaly": 0.2389,
+        "composite": 0.7414
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_1300514",
+        "type": "company",
+        "attributes": "{\"cik\": \"1300514\", \"ticker\": \"LVS\", \"company_name\": \"LAS VEGAS SANDS CORP\"}"
+      },
+      "coord_8d": [
+        -0.37194088101387024,
+        -0.310446172952652,
+        0.6527076959609985,
+        0.2978910207748413,
+        0.21574850380420685,
+        -0.13662545382976532,
+        -0.028355242684483528,
+        -0.42953336238861084
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.815,
+        "anomaly": 0.2241,
+        "composite": 0.732
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1133421",
+        "type": "company",
+        "attributes": "{\"cik\": \"1133421\", \"ticker\": \"NOC\", \"company_name\": \"NORTHROP GRUMMAN CORP /DE/\"}"
+      },
+      "coord_8d": [
+        -0.1798294484615326,
+        -0.7256876230239868,
+        0.6043360233306885,
+        0.2341170310974121,
+        0.11975821107625961,
+        -0.06928689777851105,
+        -0.0031795029062777758,
+        0.043049465864896774
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7956,
+        "anomaly": 0.2198,
+        "composite": 0.7232
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_915191",
+        "type": "company",
+        "attributes": "{\"cik\": \"915191\", \"ticker\": \"FRFHF\", \"company_name\": \"FAIRFAX FINANCIAL HOLDINGS LTD/ CAN\"}"
+      },
+      "coord_8d": [
+        -0.26328879594802856,
+        -0.43497511744499207,
+        0.7074097394943237,
+        0.08235541731119156,
+        -0.16575759649276733,
+        -0.32106813788414,
+        0.09199804067611694,
+        -0.30861109495162964
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7674,
+        "anomaly": 0.2567,
+        "composite": 0.7211
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1075124",
+        "type": "company",
+        "attributes": "{\"cik\": \"1075124\", \"ticker\": \"TRI\", \"company_name\": \"THOMSON REUTERS CORP /CAN/\"}"
+      },
+      "coord_8d": [
+        -0.02834964729845524,
+        -0.5064557194709778,
+        0.6731640100479126,
+        0.08094386011362076,
+        -0.16210678219795227,
+        -0.4581547975540161,
+        -0.10518188774585724,
+        0.1890755593776703
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7741,
+        "anomaly": 0.2396,
+        "composite": 0.7195
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_820318",
+        "type": "company",
+        "attributes": "{\"cik\": \"820318\", \"ticker\": \"COHR\", \"company_name\": \"COHERENT CORP.\"}"
+      },
+      "coord_8d": [
+        -0.28234797716140747,
+        -0.30780595541000366,
+        0.1154843121767044,
+        0.7267012596130371,
+        0.20001111924648285,
+        0.08464491367340088,
+        0.049747467041015625,
+        -0.4842104911804199
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7838,
+        "anomaly": 0.2114,
+        "composite": 0.7164
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_865752",
+        "type": "company",
+        "attributes": "{\"cik\": \"865752\", \"ticker\": \"MNST\", \"company_name\": \"Monster Beverage Corp\"}"
+      },
+      "coord_8d": [
+        0.08158781379461288,
+        -0.657078206539154,
+        0.5418121814727783,
+        -0.1815911829471588,
+        -0.03195621073246002,
+        -0.24983830749988556,
+        0.1195734515786171,
+        0.3966330289840698
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7547,
+        "anomaly": 0.2087,
+        "composite": 0.7041
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_16875",
+        "type": "company",
+        "attributes": "{\"cik\": \"16875\", \"ticker\": \"CP\", \"company_name\": \"CANADIAN PACIFIC KANSAS CITY LTD/CN\"}"
+      },
+      "coord_8d": [
+        -0.2063073366880417,
+        -0.7200237512588501,
+        0.5494634509086609,
+        0.26465484499931335,
+        -0.15308302640914917,
+        -0.10015346109867096,
+        0.07686089724302292,
+        -0.16636769473552704
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7349,
+        "anomaly": 0.2344,
+        "composite": 0.7026
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_898293",
+        "type": "company",
+        "attributes": "{\"cik\": \"898293\", \"ticker\": \"JBL\", \"company_name\": \"JABIL INC\"}"
+      },
+      "coord_8d": [
+        -0.23142029345035553,
+        -0.3092450797557831,
+        0.18335478007793427,
+        0.6997636556625366,
+        -0.21427364647388458,
+        -0.02037574164569378,
+        0.04812924191355705,
+        -0.5280901789665222
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7257,
+        "anomaly": 0.2328,
+        "composite": 0.6985
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1013871",
+        "type": "company",
+        "attributes": "{\"cik\": \"1013871\", \"ticker\": \"NRG\", \"company_name\": \"NRG ENERGY, INC.\"}"
+      },
+      "coord_8d": [
+        0.12957434356212616,
+        0.23919342458248138,
+        0.29072925448417664,
+        0.35145044326782227,
+        -0.2230345904827118,
+        -0.7480113506317139,
+        0.32730257511138916,
+        0.03954501450061798
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7147,
+        "anomaly": 0.2083,
+        "composite": 0.688
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_1701605",
+        "type": "company",
+        "attributes": "{\"cik\": \"1701605\", \"ticker\": \"BKR\", \"company_name\": \"Baker Hughes Co\"}"
+      },
+      "coord_8d": [
+        0.010666224174201488,
+        -0.16820158064365387,
+        0.5556142926216125,
+        0.25284451246261597,
+        -0.5650538206100464,
+        -0.46116212010383606,
+        0.25884032249450684,
+        0.0015198526671156287
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7072,
+        "anomaly": 0.2137,
+        "composite": 0.6863
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1858681",
+        "type": "company",
+        "attributes": "{\"cik\": \"1858681\", \"ticker\": \"APO\", \"company_name\": \"Apollo Global Management, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.24846264719963074,
+        -0.2302505224943161,
+        0.5096375942230225,
+        0.3159491717815399,
+        -0.4278460144996643,
+        -0.21784479916095734,
+        0.23473826050758362,
+        -0.48998570442199707
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.677,
+        "anomaly": 0.2497,
+        "composite": 0.6832
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1415404",
+        "type": "company",
+        "attributes": "{\"cik\": \"1415404\", \"ticker\": \"SATS\", \"company_name\": \"EchoStar CORP\"}"
+      },
+      "coord_8d": [
+        -0.02274402603507042,
+        -0.48005807399749756,
+        0.7618138194084167,
+        0.0083369305357337,
+        -0.05658210441470146,
+        -0.3056434392929077,
+        0.019307028502225876,
+        0.30266305804252625
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6964,
+        "anomaly": 0.2175,
+        "composite": 0.6829
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1691493",
+        "type": "company",
+        "attributes": "{\"cik\": \"1691493\", \"ticker\": \"NU\", \"company_name\": \"Nu Holdings Ltd.\"}"
+      },
+      "coord_8d": [
+        -0.28473854064941406,
+        -0.44729259610176086,
+        0.5643076300621033,
+        0.2917945086956024,
+        -0.005619751289486885,
+        -0.21069876849651337,
+        0.1997651606798172,
+        -0.48055651783943176
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6856,
+        "anomaly": 0.234,
+        "composite": 0.6827
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_277948",
+        "type": "company",
+        "attributes": "{\"cik\": \"277948\", \"ticker\": \"CSX\", \"company_name\": \"CSX CORP\"}"
+      },
+      "coord_8d": [
+        0.09704131633043289,
+        -0.475301593542099,
+        0.6633177399635315,
+        0.05310586839914322,
+        -0.038514867424964905,
+        -0.08899345248937607,
+        0.074534572660923,
+        0.553987443447113
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.7157,
+        "anomaly": 0.1755,
+        "composite": 0.6802
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_49938",
+        "type": "company",
+        "attributes": "{\"cik\": \"49938\", \"ticker\": \"IMO\", \"company_name\": \"IMPERIAL OIL LTD\"}"
+      },
+      "coord_8d": [
+        -0.21223296225070953,
+        0.08791639655828476,
+        0.05900641158223152,
+        0.6057962775230408,
+        -0.046510111540555954,
+        -0.3177937865257263,
+        0.1444554477930069,
+        -0.6728547215461731
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6726,
+        "anomaly": 0.2382,
+        "composite": 0.6786
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_878927",
+        "type": "company",
+        "attributes": "{\"cik\": \"878927\", \"ticker\": \"ODFL\", \"company_name\": \"OLD DOMINION FREIGHT LINE, INC.\"}"
+      },
+      "coord_8d": [
+        -0.045765336602926254,
+        0.005748984403908253,
+        0.4086455702781677,
+        0.6252580881118774,
+        -0.2440854161977768,
+        -0.13672739267349243,
+        0.5923449397087097,
+        -0.1038702055811882
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.3721,
+        "anomaly": 0.7171,
+        "composite": 0.6781
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_946770",
+        "type": "company",
+        "attributes": "{\"cik\": \"946770\", \"ticker\": \"DTEGY\", \"company_name\": \"DEUTSCHE TELEKOM AG\"}"
+      },
+      "coord_8d": [
+        -0.12771575152873993,
+        -0.374149352312088,
+        0.729889452457428,
+        0.4201975166797638,
+        -0.11902301758527756,
+        -0.33866578340530396,
+        -0.07360132783651352,
+        -0.010878943838179111
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6541,
+        "anomaly": 0.2278,
+        "composite": 0.6686
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1091667",
+        "type": "company",
+        "attributes": "{\"cik\": \"1091667\", \"ticker\": \"CHTR\", \"company_name\": \"CHARTER COMMUNICATIONS, INC. /MO/\"}"
+      },
+      "coord_8d": [
+        -0.0737752914428711,
+        -0.572257936000824,
+        0.5618267059326172,
+        0.36187925934791565,
+        -0.35648995637893677,
+        -0.18355083465576172,
+        0.22458721697330475,
+        -0.09621292352676392
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6498,
+        "anomaly": 0.2324,
+        "composite": 0.668
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_200406",
+        "type": "company",
+        "attributes": "{\"cik\": \"200406\", \"ticker\": \"JNJ\", \"company_name\": \"JOHNSON & JOHNSON\"}"
+      },
+      "coord_8d": [
+        -0.24171705543994904,
+        -0.45140427350997925,
+        0.5135614275932312,
+        0.4482913613319397,
+        -0.2592989504337311,
+        -0.1610485315322876,
+        0.19252724945545197,
+        -0.3779647946357727
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6341,
+        "anomaly": 0.2448,
+        "composite": 0.6648
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_789019",
+        "type": "company",
+        "attributes": "{\"cik\": \"789019\", \"ticker\": \"MSFT\", \"company_name\": \"MICROSOFT CORP\"}"
+      },
+      "coord_8d": [
+        -0.11365857720375061,
+        -0.2931697368621826,
+        0.7752094268798828,
+        0.20748302340507507,
+        -0.19839251041412354,
+        -0.43733179569244385,
+        0.07317481189966202,
+        0.1454685777425766
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6393,
+        "anomaly": 0.233,
+        "composite": 0.664
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1944048",
+        "type": "company",
+        "attributes": "{\"cik\": \"1944048\", \"ticker\": \"KVUE\", \"company_name\": \"Kenvue Inc.\"}"
+      },
+      "coord_8d": [
+        -0.24172620475292206,
+        -0.2590286135673523,
+        0.6838765740394592,
+        0.36933690309524536,
+        -0.22453366219997406,
+        -0.41023144125938416,
+        0.12556540966033936,
+        -0.18948300182819366
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6186,
+        "anomaly": 0.2452,
+        "composite": 0.6587
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1027664",
+        "type": "company",
+        "attributes": "{\"cik\": \"1027664\", \"ticker\": \"ESLT\", \"company_name\": \"ELBIT SYSTEMS LTD\"}"
+      },
+      "coord_8d": [
+        -0.06688576936721802,
+        -0.5075294971466064,
+        0.2685956656932831,
+        0.4887278079986572,
+        -0.4257444143295288,
+        -0.07451928406953812,
+        0.44991061091423035,
+        -0.19419221580028534
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6262,
+        "anomaly": 0.2313,
+        "composite": 0.6583
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_70858",
+        "type": "company",
+        "attributes": "{\"cik\": \"70858\", \"ticker\": \"BAC\", \"company_name\": \"BANK OF AMERICA CORP /DE/\"}"
+      },
+      "coord_8d": [
+        -0.04710390418767929,
+        -0.48536577820777893,
+        0.6904483437538147,
+        0.35918834805488586,
+        -0.2791483998298645,
+        -0.1555383801460266,
+        0.015751652419567108,
+        0.2325984537601471
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6392,
+        "anomaly": 0.2082,
+        "composite": 0.6577
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_40533",
+        "type": "company",
+        "attributes": "{\"cik\": \"40533\", \"ticker\": \"GD\", \"company_name\": \"GENERAL DYNAMICS CORP\"}"
+      },
+      "coord_8d": [
+        -0.20664049685001373,
+        -0.15008392930030823,
+        0.3148033916950226,
+        0.6422891020774841,
+        -0.007303635589778423,
+        -0.4521140158176422,
+        0.11277533322572708,
+        -0.45382755994796753
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6299,
+        "anomaly": 0.2187,
+        "composite": 0.6566
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_936958",
+        "type": "company",
+        "attributes": "{\"cik\": \"936958\", \"ticker\": \"MDY\", \"company_name\": \"SPDR S&P MIDCAP 400 ETF TRUST\"}"
+      },
+      "coord_8d": [
+        0.08912204951047897,
+        0.15248261392116547,
+        -0.309488445520401,
+        0.5224688053131104,
+        -0.25105270743370056,
+        -0.10172116011381149,
+        0.5720210671424866,
+        -0.446617066860199
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6461,
+        "anomaly": 0.1917,
+        "composite": 0.6564
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_1594805",
+        "type": "company",
+        "attributes": "{\"cik\": \"1594805\", \"ticker\": \"SHOP\", \"company_name\": \"SHOPIFY INC.\"}"
+      },
+      "coord_8d": [
+        -0.03582506626844406,
+        0.2377147078514099,
+        -0.1494995653629303,
+        0.5069247484207153,
+        -0.3695738613605499,
+        -0.1463521420955658,
+        0.5455290079116821,
+        -0.4552800953388214
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6295,
+        "anomaly": 0.2025,
+        "composite": 0.6524
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_62709",
+        "type": "company",
+        "attributes": "{\"cik\": \"62709\", \"ticker\": \"MRSH\", \"company_name\": \"MARSH & MCLENNAN COMPANIES, INC.\"}"
+      },
+      "coord_8d": [
+        -0.15234972536563873,
+        -0.3161325454711914,
+        0.1596493124961853,
+        0.4567491114139557,
+        -0.10420200228691101,
+        -0.1797124594449997,
+        0.5646559596061707,
+        -0.5298595428466797
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6159,
+        "anomaly": 0.2153,
+        "composite": 0.6502
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_2809",
+        "type": "company",
+        "attributes": "{\"cik\": \"2809\", \"ticker\": \"AEM\", \"company_name\": \"AGNICO EAGLE MINES LTD\"}"
+      },
+      "coord_8d": [
+        -0.20026080310344696,
+        0.05787744000554085,
+        0.25443968176841736,
+        0.6743860840797424,
+        -0.10848873853683472,
+        -0.37362372875213623,
+        0.003298375057056546,
+        -0.5344477295875549
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6162,
+        "anomaly": 0.2145,
+        "composite": 0.6501
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1002910",
+        "type": "company",
+        "attributes": "{\"cik\": \"1002910\", \"ticker\": \"AEE\", \"company_name\": \"AMEREN CORP\"}"
+      },
+      "coord_8d": [
+        -0.24864676594734192,
+        0.019769631326198578,
+        0.3780202865600586,
+        0.7635509371757507,
+        -0.13649708032608032,
+        -0.270403116941452,
+        -0.0840056985616684,
+        -0.3362564444541931
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6303,
+        "anomaly": 0.1885,
+        "composite": 0.6492
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_66740",
+        "type": "company",
+        "attributes": "{\"cik\": \"66740\", \"ticker\": \"MMM\", \"company_name\": \"3M CO\"}"
+      },
+      "coord_8d": [
+        0.07556861639022827,
+        0.022484853863716125,
+        0.35829630494117737,
+        0.5367364287376404,
+        0.22091679275035858,
+        -0.6053813695907593,
+        0.40252912044525146,
+        0.0010851804399862885
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6474,
+        "anomaly": 0.159,
+        "composite": 0.6487
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_1535527",
+        "type": "company",
+        "attributes": "{\"cik\": \"1535527\", \"ticker\": \"CRWD\", \"company_name\": \"CrowdStrike Holdings, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.17150986194610596,
+        -0.5575344562530518,
+        0.6206620931625366,
+        0.20189493894577026,
+        -0.16251645982265472,
+        0.17311766743659973,
+        0.4206137955188751,
+        -0.021434398368000984
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6291,
+        "anomaly": 0.1851,
+        "composite": 0.6479
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_106040",
+        "type": "company",
+        "attributes": "{\"cik\": \"106040\", \"ticker\": \"WDC\", \"company_name\": \"WESTERN DIGITAL CORP\"}"
+      },
+      "coord_8d": [
+        -0.11068959534168243,
+        -0.21099953353405,
+        0.6382186412811279,
+        0.5906809568405151,
+        -0.24032920598983765,
+        -0.3445829749107361,
+        -0.09240514785051346,
+        0.044336751103401184
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6075,
+        "anomaly": 0.2086,
+        "composite": 0.6452
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_16918",
+        "type": "company",
+        "attributes": "{\"cik\": \"16918\", \"ticker\": \"STZ\", \"company_name\": \"CONSTELLATION BRANDS, INC.\"}"
+      },
+      "coord_8d": [
+        -0.009635444730520248,
+        -0.4690455198287964,
+        0.7323504686355591,
+        0.11304423958063126,
+        -0.11702591180801392,
+        -0.2723997235298157,
+        0.19805462658405304,
+        0.32197049260139465
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6157,
+        "anomaly": 0.1921,
+        "composite": 0.6443
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1549802",
+        "type": "company",
+        "attributes": "{\"cik\": \"1549802\", \"ticker\": \"JD\", \"company_name\": \"JD.com, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.21127307415008545,
+        -0.1743505746126175,
+        0.3192025423049927,
+        0.47926726937294006,
+        -0.459267795085907,
+        -0.15563592314720154,
+        0.3695318102836609,
+        -0.4708237648010254
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5912,
+        "anomaly": 0.23,
+        "composite": 0.644
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1318220",
+        "type": "company",
+        "attributes": "{\"cik\": \"1318220\", \"ticker\": \"WCN\", \"company_name\": \"Waste Connections, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.07493159174919128,
+        -0.16600282490253448,
+        0.53712397813797,
+        0.6665849089622498,
+        -0.2988971769809723,
+        -0.373344361782074,
+        -0.03156694397330284,
+        -0.06533502042293549
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.6072,
+        "anomaly": 0.2026,
+        "composite": 0.6435
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_35527",
+        "type": "company",
+        "attributes": "{\"cik\": \"35527\", \"ticker\": \"FITB\", \"company_name\": \"FIFTH THIRD BANCORP\"}"
+      },
+      "coord_8d": [
+        -0.17873626947402954,
+        -0.31781038641929626,
+        0.32387056946754456,
+        0.4879057705402374,
+        -0.4541730284690857,
+        -0.08059336245059967,
+        0.44391998648643494,
+        -0.3380420506000519
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5748,
+        "anomaly": 0.2282,
+        "composite": 0.637
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_1158838",
+        "type": "company",
+        "attributes": "{\"cik\": \"1158838\", \"ticker\": \"ATEYY\", \"company_name\": \"ADVANTEST CORP\"}"
+      },
+      "coord_8d": [
+        -0.02416589856147766,
+        -0.2794836759567261,
+        0.5365538597106934,
+        0.47527778148651123,
+        -0.1989392638206482,
+        -0.5207414031028748,
+        0.28091415762901306,
+        -0.1336590200662613
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5728,
+        "anomaly": 0.2082,
+        "composite": 0.6312
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_310158",
+        "type": "company",
+        "attributes": "{\"cik\": \"310158\", \"ticker\": \"MRK\", \"company_name\": \"Merck & Co., Inc.\"}"
+      },
+      "coord_8d": [
+        -0.0021209046244621277,
+        -0.27291542291641235,
+        0.737891674041748,
+        0.34270748496055603,
+        -0.25365662574768066,
+        -0.2948104441165924,
+        0.13539212942123413,
+        0.3065849840641022
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.58,
+        "anomaly": 0.1862,
+        "composite": 0.6285
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1477333",
+        "type": "company",
+        "attributes": "{\"cik\": \"1477333\", \"ticker\": \"NET\", \"company_name\": \"Cloudflare, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.22505758702754974,
+        0.026020340621471405,
+        0.6354471445083618,
+        0.44669967889785767,
+        -0.27630680799484253,
+        -0.35177668929100037,
+        0.23508931696414948,
+        -0.29996511340141296
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5488,
+        "anomaly": 0.226,
+        "composite": 0.626
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1900304",
+        "type": "company",
+        "attributes": "{\"cik\": \"1900304\", \"ticker\": \"HLN\", \"company_name\": \"Haleon plc\"}"
+      },
+      "coord_8d": [
+        0.049000807106494904,
+        -0.5000382661819458,
+        0.48958510160446167,
+        0.34333401918411255,
+        0.3120681047439575,
+        -0.22286900877952576,
+        0.40516188740730286,
+        0.28067004680633545
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5933,
+        "anomaly": 0.1491,
+        "composite": 0.6246
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_717826",
+        "type": "company",
+        "attributes": "{\"cik\": \"717826\", \"ticker\": \"ERIC\", \"company_name\": \"ERICSSON LM TELEPHONE CO\"}"
+      },
+      "coord_8d": [
+        -0.13776801526546478,
+        0.27854257822036743,
+        -0.15636859834194183,
+        0.7184969782829285,
+        -0.05585205554962158,
+        0.13501618802547455,
+        0.31734517216682434,
+        -0.4905998706817627
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5805,
+        "anomaly": 0.1655,
+        "composite": 0.6236
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_9631",
+        "type": "company",
+        "attributes": "{\"cik\": \"9631\", \"ticker\": \"BNS\", \"company_name\": \"BANK OF NOVA SCOTIA\"}"
+      },
+      "coord_8d": [
+        -0.11968124657869339,
+        0.1247171014547348,
+        -0.06990945339202881,
+        0.6649160981178284,
+        -0.18681055307388306,
+        -0.059079840779304504,
+        0.40129998326301575,
+        -0.5689384937286377
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5578,
+        "anomaly": 0.1929,
+        "composite": 0.6214
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_92122",
+        "type": "company",
+        "attributes": "{\"cik\": \"92122\", \"ticker\": \"SO\", \"company_name\": \"SOUTHERN CO\"}"
+      },
+      "coord_8d": [
+        -0.1437399685382843,
+        -0.03156394883990288,
+        0.5227795243263245,
+        0.522847592830658,
+        -0.3443939685821533,
+        -0.42992502450942993,
+        0.2419937252998352,
+        -0.2639524042606354
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5336,
+        "anomaly": 0.2143,
+        "composite": 0.617
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_2073893",
+        "type": "company",
+        "attributes": "{\"cik\": \"2073893\", \"ticker\": \"DLMAY\", \"company_name\": \"Dollarama Inc./ADR\"}"
+      },
+      "coord_8d": [
+        -0.05953981727361679,
+        0.11036486178636551,
+        0.24072898924350739,
+        0.778104305267334,
+        -0.2758234739303589,
+        -0.35412275791168213,
+        0.24868103861808777,
+        -0.23990440368652344
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5327,
+        "anomaly": 0.1823,
+        "composite": 0.6087
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_943452",
+        "type": "company",
+        "attributes": "{\"cik\": \"943452\", \"ticker\": \"WAB\", \"company_name\": \"WESTINGHOUSE AIR BRAKE TECHNOLOGIES CORP\"}"
+      },
+      "coord_8d": [
+        -0.019947055727243423,
+        -0.5984031558036804,
+        0.573254406452179,
+        0.3101884722709656,
+        -0.06427702307701111,
+        -0.05145811662077904,
+        0.3671661913394928,
+        0.2740217447280884
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5453,
+        "anomaly": 0.1521,
+        "composite": 0.6062
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_29905",
+        "type": "company",
+        "attributes": "{\"cik\": \"29905\", \"ticker\": \"DOV\", \"company_name\": \"DOVER Corp\"}"
+      },
+      "coord_8d": [
+        -0.11940760910511017,
+        -0.08892016112804413,
+        0.5717587471008301,
+        0.39209121465682983,
+        0.15019628405570984,
+        -0.13898995518684387,
+        0.6627179384231567,
+        -0.12696196138858795
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5382,
+        "anomaly": 0.1412,
+        "composite": 0.6006
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_1063761",
+        "type": "company",
+        "attributes": "{\"cik\": \"1063761\", \"ticker\": \"SPG\", \"company_name\": \"SIMON PROPERTY GROUP INC.\"}"
+      },
+      "coord_8d": [
+        -0.043060701340436935,
+        0.1670454740524292,
+        -0.03641732409596443,
+        0.7295242547988892,
+        -0.1696958690881729,
+        -0.2567354440689087,
+        0.435381144285202,
+        -0.3904399573802948
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5143,
+        "anomaly": 0.1757,
+        "composite": 0.5996
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_1109357",
+        "type": "company",
+        "attributes": "{\"cik\": \"1109357\", \"ticker\": \"EXC\", \"company_name\": \"EXELON CORP\"}"
+      },
+      "coord_8d": [
+        -0.23285077512264252,
+        -0.1322024017572403,
+        0.569889485836029,
+        0.6253289580345154,
+        0.03858513757586479,
+        -0.10480085760354996,
+        0.33025339245796204,
+        -0.30158481001853943
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.5149,
+        "anomaly": 0.1578,
+        "composite": 0.5954
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_936340",
+        "type": "company",
+        "attributes": "{\"cik\": \"936340\", \"ticker\": \"DTE\", \"company_name\": \"DTE ENERGY CO\"}"
+      },
+      "coord_8d": [
+        0.025107478722929955,
+        0.06921634078025818,
+        -0.14177456498146057,
+        0.8366730213165283,
+        -0.2578586935997009,
+        -0.061205100268125534,
+        0.3871198892593384,
+        -0.2331482470035553
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.507,
+        "anomaly": 0.1609,
+        "composite": 0.593
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_1539838",
+        "type": "company",
+        "attributes": "{\"cik\": \"1539838\", \"ticker\": \"FANG\", \"company_name\": \"Diamondback Energy, Inc.\"}"
+      },
+      "coord_8d": [
+        0.016895828768610954,
+        -0.1726696491241455,
+        0.623897135257721,
+        0.4161788523197174,
+        -0.3828572630882263,
+        -0.12427835911512375,
+        0.4283350706100464,
+        0.2489006519317627
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4857,
+        "anomaly": 0.1366,
+        "composite": 0.5784
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_769397",
+        "type": "company",
+        "attributes": "{\"cik\": \"769397\", \"ticker\": \"ADSK\", \"company_name\": \"Autodesk, Inc.\"}"
+      },
+      "coord_8d": [
+        0.09912171214818954,
+        0.09188837558031082,
+        0.04781269282102585,
+        0.8236043453216553,
+        0.026225607842206955,
+        -0.2595910429954529,
+        0.4752024710178375,
+        -0.08502087742090225
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4605,
+        "anomaly": 0.1336,
+        "composite": 0.5676
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1467373",
+        "type": "company",
+        "attributes": "{\"cik\": \"1467373\", \"ticker\": \"ACN\", \"company_name\": \"Accenture plc\"}"
+      },
+      "coord_8d": [
+        0.010645237751305103,
+        0.1172957569360733,
+        0.46020936965942383,
+        0.5664072632789612,
+        -0.30909425020217896,
+        -0.3802461326122284,
+        0.4613334834575653,
+        -0.02374209277331829
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4443,
+        "anomaly": 0.1471,
+        "composite": 0.5645
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_1445930",
+        "type": "company",
+        "attributes": "{\"cik\": \"1445930\", \"ticker\": \"KB\", \"company_name\": \"KB Financial Group Inc.\"}"
+      },
+      "coord_8d": [
+        -0.12925228476524353,
+        0.09054754674434662,
+        0.38123008608818054,
+        0.8029749989509583,
+        -0.22160141170024872,
+        -0.2064712792634964,
+        0.27183419466018677,
+        -0.13913457095623016
+      ],
+      "scores": {
+        "diversity": 1.0,
+        "reconstruction": 0.4405,
+        "anomaly": 0.1452,
+        "composite": 0.5625
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_887028",
+        "type": "company",
+        "attributes": "{\"cik\": \"887028\", \"ticker\": \"RTNTF\", \"company_name\": \"RIO TINTO LTD\"}"
+      },
+      "coord_8d": [
+        0.0408589169383049,
+        -0.7230464220046997,
+        0.5210257172584534,
+        -0.1690778285264969,
+        0.07310791313648224,
+        -0.2593871057033539,
+        0.21625640988349915,
+        0.23682500422000885
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7869,
+        "anomaly": 0.2042,
+        "composite": 0.5408
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_842180",
+        "type": "company",
+        "attributes": "{\"cik\": \"842180\", \"ticker\": \"BBVA\", \"company_name\": \"BANCO BILBAO VIZCAYA ARGENTARIA, S.A.\"}"
+      },
+      "coord_8d": [
+        0.026329750195145607,
+        -0.7709950804710388,
+        0.09873929619789124,
+        0.19748316705226898,
+        0.08911552280187607,
+        0.056928642094135284,
+        0.5819770097732544,
+        -0.07902296632528305
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7721,
+        "anomaly": 0.1924,
+        "composite": 0.5319
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_745732",
+        "type": "company",
+        "attributes": "{\"cik\": \"745732\", \"ticker\": \"ROST\", \"company_name\": \"ROSS STORES, INC.\"}"
+      },
+      "coord_8d": [
+        0.0497867688536644,
+        0.18695297837257385,
+        0.2729203402996063,
+        0.37348172068595886,
+        -0.3217931389808655,
+        -0.716288685798645,
+        0.25308725237846375,
+        -0.26061931252479553
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7474,
+        "anomaly": 0.2285,
+        "composite": 0.5311
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_1973239",
+        "type": "company",
+        "attributes": "{\"cik\": \"1973239\", \"ticker\": \"ARM\", \"company_name\": \"ARM HOLDINGS PLC /UK\"}"
+      },
+      "coord_8d": [
+        -0.07779736816883087,
+        0.38392212986946106,
+        -0.3408971130847931,
+        0.5734387040138245,
+        0.1487673819065094,
+        -0.15364888310432434,
+        0.18817560374736786,
+        -0.566002607345581
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7478,
+        "anomaly": 0.2123,
+        "composite": 0.5272
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_10795",
+        "type": "company",
+        "attributes": "{\"cik\": \"10795\", \"ticker\": \"BDX\", \"company_name\": \"BECTON DICKINSON & CO\"}"
+      },
+      "coord_8d": [
+        0.1203809604048729,
+        -0.5935985445976257,
+        0.508417010307312,
+        -0.0840202197432518,
+        -0.22413480281829834,
+        -0.15406689047813416,
+        0.299965500831604,
+        0.45127567648887634
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7213,
+        "anomaly": 0.1834,
+        "composite": 0.5094
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1167379",
+        "type": "company",
+        "attributes": "{\"cik\": \"1167379\", \"ticker\": \"ALC\", \"company_name\": \"ALCON INC\"}"
+      },
+      "coord_8d": [
+        0.35022589564323425,
+        -0.35462504625320435,
+        0.19508647918701172,
+        0.16985657811164856,
+        -0.1743585169315338,
+        -0.25248315930366516,
+        0.4703374207019806,
+        0.6077063083648682
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.7092,
+        "anomaly": 0.1848,
+        "composite": 0.5049
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_1099219",
+        "type": "company",
+        "attributes": "{\"cik\": \"1099219\", \"ticker\": \"MET\", \"company_name\": \"METLIFE INC\"}"
+      },
+      "coord_8d": [
+        -0.1262950897216797,
+        0.09184759855270386,
+        -0.11506984382867813,
+        0.7399393320083618,
+        0.07733365893363953,
+        -0.331076979637146,
+        0.04595443233847618,
+        -0.5451221466064453
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6685,
+        "anomaly": 0.2177,
+        "composite": 0.4968
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_947263",
+        "type": "company",
+        "attributes": "{\"cik\": \"947263\", \"ticker\": \"TD\", \"company_name\": \"TORONTO DOMINION BANK\"}"
+      },
+      "coord_8d": [
+        -0.2697993516921997,
+        -0.14850418269634247,
+        0.600937008857727,
+        0.22783048450946808,
+        -0.1530705988407135,
+        -0.11267247796058655,
+        0.497123122215271,
+        -0.4570182263851166
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6684,
+        "anomaly": 0.2175,
+        "composite": 0.4967
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_34088",
+        "type": "company",
+        "attributes": "{\"cik\": \"34088\", \"ticker\": \"XOM\", \"company_name\": \"EXXON MOBIL CORP\"}"
+      },
+      "coord_8d": [
+        -0.038990456610918045,
+        -0.7040762901306152,
+        0.2029840648174286,
+        0.43480801582336426,
+        0.2137327343225479,
+        0.1342751830816269,
+        0.456927090883255,
+        0.001390146790072322
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6856,
+        "anomaly": 0.1788,
+        "composite": 0.4939
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_56873",
+        "type": "company",
+        "attributes": "{\"cik\": \"56873\", \"ticker\": \"KR\", \"company_name\": \"KROGER CO\"}"
+      },
+      "coord_8d": [
+        -0.13078854978084564,
+        -0.06980868428945541,
+        0.6222103834152222,
+        0.30115506052970886,
+        -0.17868974804878235,
+        -0.5391254425048828,
+        0.3312165141105652,
+        -0.2605576813220978
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.6103,
+        "anomaly": 0.2221,
+        "composite": 0.4746
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_46619",
+        "type": "company",
+        "attributes": "{\"cik\": \"46619\", \"ticker\": \"HEI\", \"company_name\": \"HEICO CORP\"}"
+      },
+      "coord_8d": [
+        -0.001768392277881503,
+        -0.5254104733467102,
+        0.688607394695282,
+        -0.21783119440078735,
+        -0.04164827987551689,
+        -0.27129390835762024,
+        0.19651047885417938,
+        0.2972520589828491
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.7396,
+        "anomaly": 0.2077,
+        "composite": 0.4644
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_1524472",
+        "type": "company",
+        "attributes": "{\"cik\": \"1524472\", \"ticker\": \"XYL\", \"company_name\": \"Xylem Inc.\"}"
+      },
+      "coord_8d": [
+        -0.24409358203411102,
+        -0.29076048731803894,
+        0.24386784434318542,
+        0.5018301010131836,
+        -0.18468345701694489,
+        -0.0586891695857048,
+        0.5063900351524353,
+        -0.500588059425354
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5803,
+        "anomaly": 0.2213,
+        "composite": 0.4624
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1413447",
+        "type": "company",
+        "attributes": "{\"cik\": \"1413447\", \"ticker\": \"NXPI\", \"company_name\": \"NXP Semiconductors N.V.\"}"
+      },
+      "coord_8d": [
+        -0.0023572950158268213,
+        0.0710359662771225,
+        -0.27588531374931335,
+        0.7692863941192627,
+        0.08491351455450058,
+        0.22413913905620575,
+        0.4283851981163025,
+        -0.29337942600250244
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5993,
+        "anomaly": 0.1367,
+        "composite": 0.4489
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_1868275",
+        "type": "company",
+        "attributes": "{\"cik\": \"1868275\", \"ticker\": \"CEG\", \"company_name\": \"Constellation Energy Corp\"}"
+      },
+      "coord_8d": [
+        0.04114295914769173,
+        -0.2584647834300995,
+        0.6820487976074219,
+        0.11583123356103897,
+        -0.20507128536701202,
+        -0.3073493540287018,
+        0.4034435749053955,
+        0.3919326961040497
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.581,
+        "anomaly": 0.1574,
+        "composite": 0.4467
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_1588489",
+        "type": "company",
+        "attributes": "{\"cik\": \"1588489\", \"ticker\": \"GBTC\", \"company_name\": \"Grayscale Bitcoin Trust ETF\"}"
+      },
+      "coord_8d": [
+        0.16228678822517395,
+        -0.5100452899932861,
+        0.05392269790172577,
+        0.16964329779148102,
+        -0.009062056429684162,
+        0.2959480881690979,
+        0.7240351438522339,
+        0.26445433497428894
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6801,
+        "anomaly": 0.1786,
+        "composite": 0.4333
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_1121404",
+        "type": "company",
+        "attributes": "{\"cik\": \"1121404\", \"ticker\": \"SNY\", \"company_name\": \"Sanofi\"}"
+      },
+      "coord_8d": [
+        -0.061029303818941116,
+        -0.394893079996109,
+        0.8100701570510864,
+        0.07122348994016647,
+        -0.1255515217781067,
+        -0.31022408604621887,
+        0.09689512103796005,
+        0.2401200830936432
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6515,
+        "anomaly": 0.21,
+        "composite": 0.4298
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_773840",
+        "type": "company",
+        "attributes": "{\"cik\": \"773840\", \"ticker\": \"HON\", \"company_name\": \"HONEYWELL INTERNATIONAL INC\"}"
+      },
+      "coord_8d": [
+        0.13797646760940552,
+        0.05785718932747841,
+        0.3016505241394043,
+        0.8463034629821777,
+        -0.16171622276306152,
+        -0.2881806790828705,
+        0.16241951286792755,
+        0.18658001720905304
+      ],
+      "scores": {
+        "diversity": 0.5,
+        "reconstruction": 0.5191,
+        "anomaly": 0.1422,
+        "composite": 0.4182
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_1613103",
+        "type": "company",
+        "attributes": "{\"cik\": \"1613103\", \"ticker\": \"MDT\", \"company_name\": \"Medtronic plc\"}"
+      },
+      "coord_8d": [
+        0.16141994297504425,
+        -0.38351601362228394,
+        -0.08809025585651398,
+        0.44532808661460876,
+        -0.18848130106925964,
+        -0.14142011106014252,
+        0.7507513761520386,
+        -0.04036921262741089
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6124,
+        "anomaly": 0.1861,
+        "composite": 0.4082
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_73309",
+        "type": "company",
+        "attributes": "{\"cik\": \"73309\", \"ticker\": \"NUE\", \"company_name\": \"NUCOR CORP\"}"
+      },
+      "coord_8d": [
+        0.2676456570625305,
+        -0.08509298413991928,
+        -0.2467861771583557,
+        0.7269780039787292,
+        -0.14154623448848724,
+        -0.3356434106826782,
+        0.44430625438690186,
+        -0.04030704125761986
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.6234,
+        "anomaly": 0.1594,
+        "composite": 0.4059
+      },
+      "cluster": 7
+    },
+    {
+      "entity": {
+        "name": "company_1122411",
+        "type": "company",
+        "attributes": "{\"cik\": \"1122411\", \"ticker\": \"ASX\", \"company_name\": \"ASE Technology Holding Co., Ltd.\"}"
+      },
+      "coord_8d": [
+        0.1853533685207367,
+        0.32301369309425354,
+        -0.04018889740109444,
+        0.21147377789020538,
+        0.48237141966819763,
+        -0.22612866759300232,
+        0.719020426273346,
+        0.11900953203439713
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.856,
+        "anomaly": 0.2497,
+        "composite": 0.4058
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1001085",
+        "type": "company",
+        "attributes": "{\"cik\": \"1001085\", \"ticker\": \"BN\", \"company_name\": \"BROOKFIELD Corp /ON/\"}"
+      },
+      "coord_8d": [
+        -0.27504101395606995,
+        0.03429265692830086,
+        -0.0973052978515625,
+        0.5518246293067932,
+        0.1182415708899498,
+        -0.16807439923286438,
+        -0.15659770369529724,
+        -0.7365085482597351
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.862,
+        "anomaly": 0.2368,
+        "composite": 0.4049
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1045810",
+        "type": "company",
+        "attributes": "{\"cik\": \"1045810\", \"ticker\": \"NVDA\", \"company_name\": \"NVIDIA CORP\"}"
+      },
+      "coord_8d": [
+        -0.2870687246322632,
+        -0.4589737355709076,
+        0.6403993964195251,
+        0.46152809262275696,
+        -0.015725595876574516,
+        -0.03509673476219177,
+        0.20025336742401123,
+        -0.2055107206106186
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5898,
+        "anomaly": 0.2023,
+        "composite": 0.4032
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_1551182",
+        "type": "company",
+        "attributes": "{\"cik\": \"1551182\", \"ticker\": \"ETN\", \"company_name\": \"Eaton Corp plc\"}"
+      },
+      "coord_8d": [
+        -0.268192321062088,
+        -0.03426685556769371,
+        0.4178016483783722,
+        0.6486427187919617,
+        -0.10614928603172302,
+        -0.24052219092845917,
+        0.10965431481599808,
+        -0.500460147857666
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5808,
+        "anomaly": 0.208,
+        "composite": 0.401
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_813672",
+        "type": "company",
+        "attributes": "{\"cik\": \"813672\", \"ticker\": \"CDNS\", \"company_name\": \"CADENCE DESIGN SYSTEMS INC\"}"
+      },
+      "coord_8d": [
+        0.04433378949761391,
+        -0.1528676599264145,
+        0.32801109552383423,
+        0.6342151761054993,
+        -0.0809398964047432,
+        0.013956711627542973,
+        0.6741427183151245,
+        0.06026168912649155
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.3649,
+        "anomaly": 1.0,
+        "composite": 0.3969
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1640147",
+        "type": "company",
+        "attributes": "{\"cik\": \"1640147\", \"ticker\": \"SNOW\", \"company_name\": \"Snowflake Inc.\"}"
+      },
+      "coord_8d": [
+        0.12652164697647095,
+        -0.2535475194454193,
+        0.45442983508110046,
+        0.5236644148826599,
+        -0.4192332327365875,
+        -0.383375883102417,
+        0.22942155599594116,
+        0.2522048056125641
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.577,
+        "anomaly": 0.1851,
+        "composite": 0.3938
+      },
+      "cluster": 6
+    },
+    {
+      "entity": {
+        "name": "company_73124",
+        "type": "company",
+        "attributes": "{\"cik\": \"73124\", \"ticker\": \"NTRS\", \"company_name\": \"NORTHERN TRUST CORP\"}"
+      },
+      "coord_8d": [
+        0.3580361604690552,
+        -0.09006653726100922,
+        0.20998205244541168,
+        0.14572754502296448,
+        0.23591671884059906,
+        -0.5230016708374023,
+        0.25653335452079773,
+        0.6351159811019897
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.8279,
+        "anomaly": 0.2327,
+        "composite": 0.3903
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_48898",
+        "type": "company",
+        "attributes": "{\"cik\": \"48898\", \"ticker\": \"HUBB\", \"company_name\": \"HUBBELL INC\"}"
+      },
+      "coord_8d": [
+        0.06744126975536346,
+        -0.024779589846730232,
+        -0.4135253131389618,
+        0.6947588324546814,
+        -0.08191320300102234,
+        -0.3611028790473938,
+        0.10876897722482681,
+        -0.43841636180877686
+      ],
+      "scores": {
+        "diversity": 0.0588,
+        "reconstruction": 0.7894,
+        "anomaly": 0.2076,
+        "composite": 0.3882
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_895728",
+        "type": "company",
+        "attributes": "{\"cik\": \"895728\", \"ticker\": \"ENB\", \"company_name\": \"ENBRIDGE INC\"}"
+      },
+      "coord_8d": [
+        -0.1839742362499237,
+        -0.09449559450149536,
+        0.6430069804191589,
+        0.6730333566665649,
+        -0.0862119048833847,
+        -0.271757036447525,
+        0.015193895436823368,
+        -0.09631778299808502
+      ],
+      "scores": {
+        "diversity": 0.3333,
+        "reconstruction": 0.5613,
+        "anomaly": 0.1737,
+        "composite": 0.3846
+      },
+      "cluster": 0
+    },
+    {
+      "entity": {
+        "name": "company_2057673",
+        "type": "company",
+        "attributes": "{\"cik\": \"2057673\", \"ticker\": \"AED\", \"company_name\": \"Brand Meditech Ltd\"}"
+      },
+      "coord_8d": [
+        0.09309642761945724,
+        -0.4592200815677643,
+        0.5512774586677551,
+        0.0809951052069664,
+        -0.11466571688652039,
+        -0.389616459608078,
+        0.5256567597389221,
+        0.16946609318256378
+      ],
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.6326,
+        "anomaly": 0.1689,
+        "composite": 0.3828
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_1341439",
+        "type": "company",
+        "attributes": "{\"cik\": \"1341439\", \"ticker\": \"ORCL\", \"company_name\": \"ORACLE CORP\"}"
+      },
+      "coord_8d": [
+        -0.2422572374343872,
+        -0.5149878263473511,
+        0.36937060952186584,
+        0.6522313952445984,
+        -0.000747275014873594,
+        -0.13294027745723724,
+        -0.0697038322687149,
+        -0.3028635084629059
+      ],
+      "scores": {
+        "diversity": 0.0588,
+        "reconstruction": 0.7546,
+        "anomaly": 0.2329,
+        "composite": 0.3806
+      },
+      "cluster": 2
+    },
+    {
+      "entity": {
+        "name": "company_21344",
+        "type": "company",
+        "attributes": "{\"cik\": \"21344\", \"ticker\": \"KO\", \"company_name\": \"COCA COLA CO\"}"
+      },
+      "coord_8d": [
+        0.20108777284622192,
+        -0.061328232288360596,
+        0.5004123449325562,
+        0.3121577501296997,
+        -0.0849684476852417,
+        -0.6685654520988464,
+        0.0060761794447898865,
+        0.3920602798461914
+      ],
+      "scores": {
+        "diversity": 0.05,
+        "reconstruction": 0.7683,
+        "anomaly": 0.2156,
+        "composite": 0.3787
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_4977",
+        "type": "company",
+        "attributes": "{\"cik\": \"4977\", \"ticker\": \"AFL\", \"company_name\": \"AFLAC INC\"}"
+      },
+      "coord_8d": [
+        -0.3122507631778717,
+        -0.3023424744606018,
+        0.6451542377471924,
+        0.26178470253944397,
+        0.021491272374987602,
+        -0.3461780846118927,
+        0.013677701354026794,
+        -0.4537014961242676
+      ],
+      "scores": {
+        "diversity": 0.05,
+        "reconstruction": 0.7541,
+        "anomaly": 0.2326,
+        "composite": 0.3773
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_1045520",
+        "type": "company",
+        "attributes": "{\"cik\": \"1045520\", \"ticker\": \"CM\", \"company_name\": \"CANADIAN IMPERIAL BANK OF COMMERCE /CAN/\"}"
+      },
+      "coord_8d": [
+        -0.13288089632987976,
+        -0.5085249543190002,
+        0.7397085428237915,
+        0.29139772057533264,
+        -0.1390225887298584,
+        -0.09792342036962509,
+        0.23462410271167755,
+        0.08774351328611374
+      ],
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.6039,
+        "anomaly": 0.192,
+        "composite": 0.377
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_885725",
+        "type": "company",
+        "attributes": "{\"cik\": \"885725\", \"ticker\": \"BSX\", \"company_name\": \"BOSTON SCIENTIFIC CORP\"}"
+      },
+      "coord_8d": [
+        -0.12819035351276398,
+        0.13879840075969696,
+        -0.16084495186805725,
+        0.7587631344795227,
+        0.1029166728258133,
+        -0.21948227286338806,
+        -0.22440750896930695,
+        -0.5035738945007324
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.803,
+        "anomaly": 0.2124,
+        "composite": 0.3753
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_715153",
+        "type": "company",
+        "attributes": "{\"cik\": \"715153\", \"ticker\": \"HMC\", \"company_name\": \"HONDA MOTOR CO LTD\"}"
+      },
+      "coord_8d": [
+        -0.012350618839263916,
+        0.24778153002262115,
+        -0.08644035458564758,
+        0.5140001773834229,
+        0.25896281003952026,
+        -0.5957149267196655,
+        0.22627794742584229,
+        -0.4400499761104584
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.7925,
+        "anomaly": 0.2276,
+        "composite": 0.3749
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_32604",
+        "type": "company",
+        "attributes": "{\"cik\": \"32604\", \"ticker\": \"EMR\", \"company_name\": \"EMERSON ELECTRIC CO\"}"
+      },
+      "coord_8d": [
+        0.3682318925857544,
+        -0.12407661229372025,
+        0.03205080330371857,
+        0.17136819660663605,
+        0.09964537620544434,
+        0.21043451130390167,
+        0.6104532480239868,
+        0.625900149345398
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.7487,
+        "anomaly": 0.2637,
+        "composite": 0.3663
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1381197",
+        "type": "company",
+        "attributes": "{\"cik\": \"1381197\", \"ticker\": \"IBKR\", \"company_name\": \"Interactive Brokers Group, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.014671659097075462,
+        -0.1456322818994522,
+        0.3861296474933624,
+        0.7465105652809143,
+        -0.03269539400935173,
+        -0.2536456882953644,
+        0.4440130591392517,
+        0.09823057800531387
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.3735,
+        "anomaly": 0.8599,
+        "composite": 0.3653
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1116132",
+        "type": "company",
+        "attributes": "{\"cik\": \"1116132\", \"ticker\": \"TPR\", \"company_name\": \"TAPESTRY, INC.\"}"
+      },
+      "coord_8d": [
+        0.06038416549563408,
+        0.3363557457923889,
+        0.08219736814498901,
+        0.6322752833366394,
+        -0.4250977337360382,
+        -0.5300362706184387,
+        0.06657335162162781,
+        -0.10301241278648376
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.7623,
+        "anomaly": 0.2225,
+        "composite": 0.3615
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1783180",
+        "type": "company",
+        "attributes": "{\"cik\": \"1783180\", \"ticker\": \"CARR\", \"company_name\": \"CARRIER GLOBAL Corp\"}"
+      },
+      "coord_8d": [
+        -0.17123128473758698,
+        -0.6615316867828369,
+        0.5656339526176453,
+        0.18152554333209991,
+        0.28985217213630676,
+        0.0861361026763916,
+        0.29785215854644775,
+        -0.0035932634491473436
+      ],
+      "scores": {
+        "diversity": 0.05,
+        "reconstruction": 0.7343,
+        "anomaly": 0.192,
+        "composite": 0.3592
+      },
+      "cluster": 4
+    },
+    {
+      "entity": {
+        "name": "company_1138118",
+        "type": "company",
+        "attributes": "{\"cik\": \"1138118\", \"ticker\": \"CBRE\", \"company_name\": \"CBRE GROUP, INC.\"}"
+      },
+      "coord_8d": [
+        -0.1361325979232788,
+        -0.02421325445175171,
+        -0.31922388076782227,
+        0.640950620174408,
+        0.10388777405023575,
+        -0.2163463681936264,
+        0.07374969869852066,
+        -0.6364924907684326
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.752,
+        "anomaly": 0.2256,
+        "composite": 0.3581
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_316709",
+        "type": "company",
+        "attributes": "{\"cik\": \"316709\", \"ticker\": \"SCHW\", \"company_name\": \"SCHWAB CHARLES CORP\"}"
+      },
+      "coord_8d": [
+        0.26222988963127136,
+        0.3289146423339844,
+        -0.5079473257064819,
+        0.6585241556167603,
+        0.13621999323368073,
+        -0.17463922500610352,
+        0.28618931770324707,
+        0.02066398411989212
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.7757,
+        "anomaly": 0.186,
+        "composite": 0.3577
+      },
+      "cluster": 1
+    },
+    {
+      "entity": {
+        "name": "company_1937926",
+        "type": "company",
+        "attributes": "{\"cik\": \"1937926\", \"ticker\": \"BAM\", \"company_name\": \"Brookfield Asset Management Ltd.\"}"
+      },
+      "coord_8d": [
+        -0.19860216975212097,
+        -0.07910560816526413,
+        0.20125101506710052,
+        0.6205755472183228,
+        -0.37606188654899597,
+        -0.19363439083099365,
+        0.19302818179130554,
+        -0.5590232014656067
+      ],
+      "scores": {
+        "diversity": 0.125,
+        "reconstruction": 0.6372,
+        "anomaly": 0.2331,
+        "composite": 0.3569
+      },
+      "cluster": 3
+    },
+    {
+      "entity": {
+        "name": "company_1437107",
+        "type": "company",
+        "attributes": "{\"cik\": \"1437107\", \"ticker\": \"WBD\", \"company_name\": \"Warner Bros. Discovery, Inc.\"}"
+      },
+      "coord_8d": [
+        -0.11684466153383255,
+        0.4052896499633789,
+        0.38212838768959045,
+        0.5836591124534607,
+        0.08102273941040039,
+        -0.38354021310806274,
+        0.39812028408050537,
+        -0.15244664251804352
+      ],
+      "scores": {
+        "diversity": 0.25,
+        "reconstruction": 0.577,
+        "anomaly": 0.1523,
+        "composite": 0.3564
+      },
+      "cluster": 5
+    },
+    {
+      "entity": {
+        "name": "company_937966",
+        "type": "company",
+        "attributes": "{\"cik\": \"937966\", \"ticker\": \"ASML\", \"company_name\": \"ASML HOLDING NV\"}"
+      },
+      "coord_8d": [
+        0.20948158204555511,
+        0.14137649536132812,
+        0.09615541249513626,
+        0.7420574426651001,
+        0.38183629512786865,
+        -0.1154923066496849,
+        0.15526746213436127,
+        0.4393059015274048
+      ],
+      "scores": {
+        "diversity": 0.0027,
+        "reconstruction": 0.7263,
+        "anomaly": 0.253,
+        "composite": 0.3547
+      },
+      "cluster": 1
+    }
+  ],
+  "quality": {
+    "n_input": 500,
+    "n_survivors": 100,
+    "reduction_ratio": 5,
+    "variance_ratio": 1.1489,
+    "coverage_at_1_0": 1.0,
+    "reconstruction_median_nn": 0.3588,
+    "n_clusters": 8,
+    "unique_fingerprints": 71,
+    "wall_seconds": 0.1,
+    "estimated_cost_usd": 5.8e-05,
+    "cost_breakdown": {
+      "adapter_usd": 5.6e-05,
+      "compute_usd": 1e-06,
+      "storage_usd": 0.0,
+      "total_usd": 5.8e-05
+    }
+  }
+}

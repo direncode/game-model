@@ -20,6 +20,10 @@ import { useDuncStore } from "@/lib/dunc/store";
 import { useDuncMatchStream } from "@/lib/dunc/ws";
 import { ActiveScenarioBanner } from "@/components/dunc/ActiveScenarioBanner";
 import { AIAgentDrawer } from "@/components/dunc/AIAgentDrawer";
+import { ManagerBackchannel, StaffBackchannel } from "@/components/dunc/Backchannel";
+import { ManagerTerminal } from "@/components/dunc/ManagerTerminal";
+import { OverlayToggles } from "@/components/dunc/OverlayToggles";
+import { PLScoreboard } from "@/components/dunc/PLScoreboard";
 import { GameApproachWindow } from "@/components/dunc/GameApproachWindow";
 import { InsightFeed } from "@/components/dunc/InsightFeed";
 import { PitchView } from "@/components/dunc/PitchView";
@@ -100,25 +104,31 @@ export default function MatchPage() {
         <div className="flex flex-col gap-3 min-w-0">
           <div className="border border-li-border bg-li-black-surface rounded-md p-3">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-li-text-muted font-mono">
-                Live pitch
-              </div>
+              <PLScoreboard />
               <div className="text-[10px] font-mono text-li-text-muted">
-                {players.length} twins · 10 Hz
+                {players.length} twins
               </div>
             </div>
             <PitchView highlightedIds={highlighted} />
           </div>
+
+          {/* Manager Terminal — ABOVE twin cards */}
+          <ManagerTerminal matchId={matchId} />
 
           {/* Twin rail */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 min-w-0">
             <TwinRail title="Home" players={home} selected={selected} onSelect={setSelected} />
             <TwinRail title="Away" players={away} selected={selected} onSelect={setSelected} />
           </div>
+
+          {/* Analytics overlay toggles — technical staff only */}
+          <OverlayToggles />
         </div>
 
-        {/* Right column: triggers + approach + feed */}
+        {/* Right column: triggers + approach + backchannel + feed */}
         <div className="flex flex-col gap-3 min-w-0">
+          {/* Manager: received messages from staff + approach window */}
+          <ManagerBackchannel />
           <PressingTriggers matchId={matchId} />
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-widest text-li-text-muted font-mono">
@@ -126,6 +136,8 @@ export default function MatchPage() {
             </span>
             <ScenarioControls matchId={matchId} />
           </div>
+          {/* Staff: send channel to manager */}
+          <StaffBackchannel />
           <GameApproachWindow />
           <div className="border border-li-border bg-li-black-surface rounded-md flex flex-col min-h-0">
             <div className="px-3 py-2 border-b border-li-border flex items-center justify-between">

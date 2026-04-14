@@ -101,7 +101,12 @@ async def dunc_adapter_snapshot(
 # ── match lifecycle ───────────────────────────────────────────────────
 @router.post("/matches", response_model=MatchSummaryOut)
 async def create_match(req: MatchCreateRequest) -> MatchSummaryOut:
-    preset = MatchPreset(name=req.preset, seed=req.seed or 1337, hz=req.hz)
+    preset = MatchPreset(
+        name=req.preset,
+        seed=req.seed or 1337,
+        hz=req.hz,
+        pl_preset_key=req.pl_preset,
+    )
     runtime = MatchRuntime(preset=preset)
     get_registry().put(runtime.id, runtime)
     await runtime.start()

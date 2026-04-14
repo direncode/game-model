@@ -1,0 +1,891 @@
+TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                                           1
+
+RF Coils, Helical Resonators and Voltage
+Magnification by Coherent Spatial Modes
+
+K.L. Corum* and J.F. Corum**
+
+"Is there, I ask, can there be, a more interesting study than that of alternating currents."
+             Nikola Tesla, (Life Fellow, and 1892 Vice President of the AIEE)1
+
+Abstract ­ By modeling a wire-wound coil as an anisotropically             II. CYLINDRICAL HELICES
+conducting cylindrical boundary, one may start from Maxwell's
+equations and deduce the structure's resonant behavior. Not           A. Problem Formulation
+only can the propagation factor and characteristic impedance be
+determined for such a helically disposed surface waveguide, but       A uniform helix is described by its radius (r = a), its pitch
+also its resonances, "self-capacitance" (so-called), and its voltage
+magnification by standing waves. Further, the Tesla coil passes       (or turn-to-turn wire spacing "s"), and its pitch angle ,
+to a conventional lumped element inductor as the helix is
+electrically shortened.                                               which is the angle that the tangent to the helix makes with a
+
+Keywords ­ coil, helix, surface wave, resonator, inductor, Tesla.     plane perpendicular to the axis of the structure (z).
+
+                I. INTRODUCTION                                       Geometrically,  = cot-1(2a/s). The wave equation is not
+
+  One of the more significant challenges in electrical                separable in helical coordinates and there exists no rigorous
+science is that of constricting a great deal of insulated             solution of Maxwell's equations for the solenoidal helix.3
+conductor into a compact spatial volume and determining
+the resulting structure's electrical properties. The problem          However, at radio frequencies a wire-wound helix with
+is not only of interest at very low frequencies, where the
+arrangement can be treated as a lumped element (an                    many turns per free-space wavelength (e.g., a Tesla coil)
+inductor), but also at frequencies where the current
+distribution over the structure is not uniform and the                may be modeled as an idealized anisotropically conducting
+conventional lumped element assumption fails. A simple
+helical coil geometry is considered in the following note. (It        cylindrical surface that conducts only in the helical
+is a common misconception that a full field analysis is
+necessary only at relatively high frequencies. In point of            direction. The conductivity normal to the helical path is
+fact, it is essential whenever the current distribution over the
+structure is not uniform.)                                            taken to be zero. (This cylindrical tube-shaped structure is
+                                                                      the classic sheath helix model due to Ollendorf.4) Formally,
+  Adler, Chu and Fano have pointed out that there are three           for time-harmonic fields (assume ejt time variation), the
+important characteristics of high Q linear systems: (1) their
+free oscillations are slightly damped; (2) Their input                homogeneou2svEvvecto+rkH2elmEvvhol=tz0equati(ofnosr r  a )         (1)
+impedance has a rapid and radical variation around                         H  H 
+resonance; (3) Their field distributions possess characteristic
+space patterns that accompany the sharply selective                   where k = (µ)½ = 2/ = ko(rµr), must be solved subject to
+behavior of the system. It is this third feature that is often        a set of appropriate boundary conditions. [The passage to
+"...overlooked in lumped networks and is of great                     quasistatic field theory and lumped circuit analysis occurs as
+importance in understanding distributed resonant systems."2           the wavelength becomes infinite (or, equivalently, as
+A helically wound Tesla coil is just such a system, as will           c   ).] The Helmholtz equation is separable in eleven three-
+be shown in the following note. (The analysis is performed
+during the linear system ­ pre-discharge epoch, while the             dimensional orthogonal coordinate systems so that product
+voltage rise phenomenon is occurring. The system has a                solutions may be formed. The helical coordinate system is
+nonlinear load during discharge, of course.)                          not one of them.
+
+*Kenneth L. Corum is at CPG Technologies, LLC, 104 River Rd.,           The helical structure supports propagation along the
+Plymouth, NH, 03264.                                                  longitudinal (z) axis with traveling wave variations of the
+                                                                      form ej(t - z), where  is to be determined. (We have
+**James F. Corum is Chief Scientist at the Institute for Software     temporarily neglected dissipation so that the propagation
+                                                                      factor  =  + j  j .) The fields may be decomposed
+Research, Inc., 1000 Technology Drive, Suite 1110, Fairmont, WV
+26554.                                                                into transverse and longitudinal components, there being
+
+                                                                      both TE and TM modes present along this anisotropic wave
+
+                                                                      guide. Further, the  operator      separates          i-nt(oja) ztvra, ntosvgeirvsee
+                                                                      and a longitudinal operator, that  is,  =  t
+
+                                                                      the  Laplacian  operator  2        =    2  -    2  ,     so  that  the
+                                                                                                              t
+                                                                      [ ] [ ( )] D'Alembertian
+                                                                                      operator,  2 + k 2         =    2     +  k2 -2     , and
+                                                                                                                      t
+
+                                                                      Equation (1) separates into the operations:
+
+ 2001 IEEE
+       TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                                                           2
+
+                2    v   t         2    v   t                              I 0 ( r)  =  I1 ( r)         and        K 0 ( r)          =     -     K1 ( r)  (7)
+                t    Ev                 Ev                                  r                                        r
+                   H t        -       H t        =0                 (2)
+
+on the transverse field components, and the operations                   and the fact that K0(r) diverges as r  0 , expressions for
+
+                   E                    E                                the fields within the helix (r  a) can be found. Outside the
+                   H                    H      
+                2        z    -    2       z     =0                 (3)  helix (r  a) , the I0(r) diverges as r   , and
+                t        z                 z
+
+on the longitudinal field components. In these expressions,              expressions for the external fields are readily determined.
+                                                                         However, these expressions are all in terms of the unknown
+the all important radial wave number, , is given by                      constants Ai, Bo, Ci, Do and the propagation constant .
+                                                                         These constants and the propagation factor can be
+       ( )  2 = -  2 + k 2 =  2 - k 2 .                             (4)  determined by imposing the anisotropic boundary
+                                                                         conditions across the helical surface at r = a.
+
+The central issue for wave propagation on helical structures             C. Sheath Helix Boundary Conditions
+is the behavior of  as the frequency and helix geometry (a,
+s, and ) are varied.                                                       There are three boundary conditions to be considered at
+                                                                         the surface of the anisotropic sheath helix. One may
+  Unlike the case of a TEM transmission line, and this is                summarize these as follows:
+important, E z  0 and H z  0 on the helix wave guide.
+                                                                              (1) The Maxwell boundary conditions at the
+Furthermore,   k (where k2 = 2µ is the plane wave                                  cylindrical surface make the internal and external
+                                                                                   components of field strength along (i.e., parallel to)
+propagation constant). From the cylindrical symmetry, the                          the wire vanish as r  a : E(a) = 0. This may be
+axial component of the internal (i) and external (o) time-
+harmonic fields will each be a superposition of forward                         writtenv  as                   v
+propagating modes in the form of a product of radial,                                  E                       E
+azimuthal, and axial functions of the form                                                i   (a  -  )  =         o   (a  +  )   =         0              (8)
+                                                                                          ||                      ||
+( ) [ ] E
+i,o    r,, z  = Ani,o In ( nr ) + Bni,o K n ( nr ) e j(t -n - nz)   (5)    (2) The components of the electric field strength normal
+z
+                                                                                to the wire are continuous across the cylindrical
+
+( ) [ ] H                                                                       boundary aEsv ai p(par-o)ach=ed fErvoom(aw+it)hin or without: (9)
+i  ,o  r,, z  = Cni,o In ( nr ) + Dni,o K n ( nr ) e j(t -n - n z)  (6)
+z
+
+where the eight constants A, B, C, D [both inside                          (3) Finally, the components of the magnetic field
+(superscript i) and outside (superscript o)] are to be
+determined for each mode from the boundary conditions                           strength along the wire are continuous across the
+and the driving source, and n is the propagation constant
+along the helix for the nth mode. There will also be a set of                   cylindrical bHvo|ui| (nad-ar)y: =         v  o   (a  +  )     .           (10)
+linearly superposed backward propagating modes, too, but,                                                                 H  ||
+for the time being, we will consider only the forward
+propagating modes. The radial functions In(x) and Kn(x)                  Imposing these boundary conditions on the expressions for
+are the modified Bessel functions of the first and second
+kind, respectively, of order n and argument x. For the case              the internal and external fields gives four equations in the
+of interest, we have circular symmetry azimuthally around
+the solenoid, so we take only the mode with n = 0.5,6 (This              four remaining unknown constants Ai, Bo, Ci, Do and the
+has been called the helix transmission line To mode.7)
+                                                                         propagation constant .
+
+                                                                                Ai I 0 (a) sin       -  jµ     Ci     I1 (a) cos                 =0       (11)
+                                                                                                         
+
+                                                                           B o K 0 (a) sin        +     jµ  Do        K1 (a) cos                 =0       (12)
+                                                                                                         
+
+B. Physical Constraints                                                    Ai I 0 (a) cos     +         jµ C i    I1 (a) sin
+                                                                                                         
+                                                                                                                jµ                                        (13)
+                                                                                                                 
+In order to find the other field components inside and                          = B o K 0 (a) cos           -             Do     K1 (a) sin
+outside of the helix, one employs Ampere's law and
+Faraday's law to solve for Er, E, Hr, and H in terms of                    C i I 0 (a) sin    +         jµ  Ai    I1 (a) sin
+derivatives of Ez and Hz. Consider the n = 0 mode                                                        
+(azimuthal symmetry in the fields). Physically, the fields                                                      j                                         (14)
+must be finite at r = 0 and vanish as r   . From the                                                             
+                                                                                = D o K 0 (a) sin           -             Bo     K1 (a) cos
+properties of the modified Bessel functions, this implies
+that Ao, Bi, Co, Di must all vanish. Using the modified                  These are four linear equations in five unknowns and the
+Bessel function derivative relations
+                                                                         solutions may be found either by direct algebraic
+
+                                                                         substitution or by the method of determinants.
+
+                                                                     2001 IEEE
+             TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                               3
+
+D. Field Distributions and Propagating Modes                             While they might appear formidable at first blush, this set of
+
+                                                                         field expressions is an extremely useful tool for determining
+
+  Simultaneous solution of the first three boundary                      the properties of both lumped and distributed RF coils. The
+condition equations (for the n = 0 case) permits one to
+express all the constants (Bo, Ci, Do) in terms of A0i .                 asymptotic behavior of the Kn(r) is exponential, which
+
+Using these constants and the field expressions determined               implies that the helix fields are actually surface waves
+for (r  a) and (r  a) in paragraph B, one has the fields                 guided by the helix.8 In passing, one should also note that,
+
+inside and outside of the helical structure all in terms of the          both internally and externally, the ratio of the longitudinal to
+constant Ai (which can be directly related to the source
+driving function). The result is the following set of                    azimuthal field components is given by the expression
+forward propagating TE and TM fields.
+                                                                               E z = cot = 2z                                       (27)
+                                                                               E                  s
+
+                                                                         so the field ratio is the ratio of the circumference to the helix
+
+(For r  a )                                                              pitch, Ez » E. This is the basis, in Maxwell's equations, for
+
+E  i  =  A0i    I 0 ( r) e j( t -  z)                              (15)  the assertion made long ago by Contaxes and Hatch that this
+   z                                                                     field ratio is a basic geometrical property of coils.9 (They
+
+                                                                         had based their arguments upon inductor formulae which
+
+             j                                                           presuppose that the velocity of propagation on the helix is
+             
+E  i  =         A0i  I1 ( r) e j( t -  z)                          (16)  infinite, i.e. - there are no standing waves on the coils.) The
+   r
+                                                                         same results were obtained in the quasi-static approximation
+                                                                         by Fano, Chu and Adler.10
+
+Ei    =-     I 0 ( a) tan       A0i  I1 ( r) e j( t -  z)          (17)  Equations (15)-(26) for the propagating waves may be
+             I1 ( a)
+                                                                         plotted to show the propagating field structure about the
+                                                                         helix.11,12 Remember that the helix has been assumed to be
+
+                  I 0 ( a) tan                                           infinitely long, so there are only forward traveling waves at
+             jµ   I1 ( a)
+H  i  =                              A0i I 0 ( r) e j( t -  z)     (18)  present. Later, with the introduction of an arbitrary load
+   z
+                                                                         impedance, reflected waves will occur and a standing wave
+
+                                                                         distribution will arise, as with any wave guiding system.
+
+H  i  =          I 0 ( a) tan        A0i I1 ( r) e j( t -  z)      (19)  E. Propagation Constant
+   r    µ        I1 ( a)
+
+H  i  =      j 0     A0i  I1 ( r) e j( t -  z)                     (20)    Equation (14) for the anisotropic boundary conditions
+                                                                         remains and has not yet been used. After simultaneously
+                                                                         solving Equations (11)-(13) for the constants (Bo, Ci, Do) in
+(For r  a )                                                              terms of A0i , one may substitute these directly into
+                                                                         Equation (14) to get the eigenvalue equation for :
+             I 0 (a)
+E  o  =      K 0 (a)  A0i  K 0 ( r) e  j( t -  z)                  (21)
+   z
+                                                                               (ka) 2 K1 ( a) I1 ( a) = ( a) 2 tan 2  .
+                                                                               K 0 ( a) I 0 ( a)                                    (28)
+
+E  o  =  -    j   I 0 (a)     A0i  K1 ( r) e    j( t -  z)         (22)
+   r              K 0 (a)
+                                                                         This is an extremely important equation, and it must be
+Eo    =-     I 0 (a)      tan   A0i  K1 ( r) e j( t -  z)          (23)  solved for  when the frequency, , and the helix parameters
+             K1 (a)                                                      "a" and "s" (and the angle ) are specified. Since this is the
+                                                                         characteristic determinant of Equations (11)-(14), it is called
+H  o  =-             I 0 (a)    tan    A0i  K 0 ( r) e j( t -  z)  (24)  the determinantal equation for .
+   z         jµ      K1 (a)
+                                                                           A trivial set of solutions occurs when 2 = 0. From
+H  o  =          I 0 (a) tan       A0i K1 ( r ) e j( t -  z)       (25)  Equation (4), these are TEM waves with  = ±k. However,
+   r     µ       K1 (a)                                                  for slow waves on the helix, a >> ka (because g << o). It
+                                                                         should be recalled that we have been treating only the
+H  o  =  -   j 0      I 0 (a)   A0i    K1 ( r) e   j( t -  z)      (26)  cylindrically symmetric (n = 0) case. At ultra-high and
+                      K 0 (a)                                            super high frequencies, the fields will no longer retain their
+                                                                         circumferential symmetry and higher order modes will
+                                                                         begin to become of interest. The determinantal equation for
+                                                                         these modes can readily be obtained, and is given in the
+                                                                         literature.
+
+                                                                           The transcendental expression given by Equation (28) is
+                                                                         readily solved numerically for a given geometry. When
+
+                                                                    2001 IEEE
+      TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                                    4
+
+ a  10 , which occurs in the regime where either the
+
+circumference of the helix is greater than o/4 or there are                  1
+
+not a huge number of turns per wavelength (as in traveling             0.9
+
+wave tubes), the ratio of modified Bessel functions                    0.8
+
+(K1I1 K 0 I 0 )  1 , and   k csc . The phase velocity,                 0.7
+
+vp, in this case becomes
+
+                                                                       0.6
+                          
+         p     =                 c sin  .                        (29)  0.5
+
+The earliest work on the helix problem was that of                     0.4
+Pocklington13 (of antenna integral equation fame), whose
+                                                                       0.3
+analysis was in this regime. This expression is not very
+
+useful when there are a large number of turns per                      0.2
+
+wavelength along the helix or the helix diameter is small in           0.1
+
+terms of a free-space wavelength (as is the case with Tesla
+
+coils). In such cases it is best to actually solve Equation                  0  1 .10 3
+                                                                       1 .10 4
+(28) numerically for the propagation constant.                                                               0.01            0.1
+
+A useful engineering approximation has been found for                  Fig. 1. Vf verses D/o for coils of N = 1/s = 10,000; 5,000; 2,500;
+                                                                       1,000; 500; 250; 100; 50 turns/o, respectively (left to right).
+the fundamental resonance of helices with a large number of
+                                                                       velocity factor has been plotted in Fig. 1 as a function of
+turns per wavelength, such as we are presently considering.            D/o for a variety of wire spacings. Tightly wound coils are
+                                                                       slow wave structures. Experimentally, the wave velocity
+The separation constant may be expressed in terms of the               and velocity factor may be determined by measuring the
+                                                                       axial length of standing wave patterns on the helical
+wave number, k, and the velocity factor, Vf = vp/c = k/, as            structure with a movable probe.
+
+      2  =  -  k2  1 -        c2      =  -  k2     1 -    1      (30)
+                                                               
+                                2                       V  2   
+                                p                          f
+
+where vp is the phase velocity along the axis of the helix,
+and k =  c = 2 o . That is,
+
+    =p                    1                        1                   F. Helix Characteristic Impedance
+       c
+Vf          =                         =                          (31)
+
+               1 +    2                            M        2          There are several expressions that are used in the helix
+                                                   2   a
+                          k                1  +                        literature as "impedance parameters" (the issue is that there
+
+                                                                       are both TE and TM waves on the anisotropic structure),
+
+where  is to be determined as a root of Equation (28). [The            and we direct our attention to a "Transmission Line
+parameter M has been defined as M = a.] By plotting the
+left-hand and right-hand sides of Equation (28) for assumed            Characteristic Impedance" obtained many years ago by
+values of a, and graphically determining the intersection
+point, an approximation for M has been determined by                   Sichak. This relation is particularly useful when
+Kandoian and Sichak14 which is appropriate for quarter-
+wave resonance and is valid for helices with 5ND 2 o 1                 considering the helix as a resonator and for working with
+
+(where N = 1/s is the number of turns per unit length and D            Smith charts and impedance diagrams.
+= 2a is the helix diameter), i.e. - for helices with diameters
+considerably less than a free-space wavelength. Kandoian               The derivation proceeds as follows. Considering the helix
+and Sichak found that M may be represented approximately
+as M = 202D5/(s)2.5. In all our publications, we have                  as a single conductor waveguide, one may determine an
+reexpressed their solution in terms of the velocity factor for
+propagating waves by the simple formula:                               equivalent transmission line characteristic impedance in
+
+                                                                       three steps. First, as with a coaxial line, one employs
+
+                                                                       Equation (22) and defines a transverse voltage in some
+                                                                       plane z = 0: (Pierce attributes this step to Schelkunoff.15)
+
+                                                                                       v
+
+                                                                                Vt (0) = - E(r,0) · r^ dr
+
+                                                                                                       a
+
+    Vf =                           1                             (32)            = j I 0 ( a) Ai                             (33)
+                                                                                    K 0 ( a)
+                                                                                                           K1 ( r) dr
+
+                                                                                                           a
+
+               1+         20  D     2.5    D      0.5                           = j  I 0 ( a) Ai
+                              s            o                                      2
+
+where D = 2a is the helix diameter. We have found that this            Note that use has been made of the integral relation
+expression gives acceptable results (errors less than 10%)
+for most practical applications that involve wave                                K1 ( x) dx = - K 0 ( x) .                   (34)
+propagation on helical resonators with azimuthal field
+symmetry (i.e., the To transmission line mode). The axial              Then, following Sichak,16 an effective characteristic
+                                                                       impedance may be found from the ratio of the transverse
+
+                                                                  2001 IEEE
+              TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                                                                    5
+
+voltage to the conduction current (which is determined from                                             I n ( x) = j -n J n ( jx)                                         ( 44)
+
+the fields). The longitudinal conduction current follows as:                                                         
+                                                                                                                     2
+          v                             2    va                                                     K   n  (  x)  =     j n+1    H  (1)  (  j  x)   .                     (45)
+          H(a)                               E                                                                                      n
+   Iz=          ·  dl^     -      j                 ·n^ dACS
+
+                                        00                                              where the ordinary Bessel function of order n and complex
+
+       2                                            a                                   argument and the Hankle function of the first kind of order n
+  = Ho(a) a d - j2 Ezo(r) r dr
+                                                                                  (35)  and complex argument have been introduced. So, Equation
+
+       0                                         0                                      (43) for the characteristic impedance may also be written as
+
+    =  -   6jk0a Ai        I0( a)       K1( a)   +                                                  Zc     =  j   c  30    J     (  jM  )  H   (1)  (  jM  )              (46)
+                           K0( a)                   I1( a)                                                                                     0
+                                                                                                                              0
+                                                          
+
+where use has been made of the fact that  = k/Zo and the                                which is the expression originally given by Sichak.
+modified Bessel integral relations                                                        Second, we have previously employed the equation
+
+           x n I n -1 ( x) dx = x n I n ( x)                                      (36)                 Zc     = 60      ln       4h        -                              (47)
+                                                                                                                Vf               D             1
+                                                                                                                                                
+
+           x n K n -1 ( x) dx = - x n K n ( x) .                                  (37)  as an analytical expression for the helical transmission line
+                                                                                        characteristic impedance near quarter-wave resonance
+The effective "characteristic impedance" for an isolated                                ( h = g 4 ). The axial height of the coil is h, and D is its
+helical waveguide is then found (just as for a TEM
+transmission line) from the ratio of the transverse voltage to                          diameter (both measured in the same units). The formula
+the longitudinal conduction current, Z c =Vt I z , as
+                                                                                        was actually derived by Schelkunoff as the "average
+
+                                                                                        effective characteristic impedance" in his classic
+
+                                                                                        transmission line model of the biconical antenna. The only
+
+                                   I 0 ( a) K 0 (                                       modification was to include slow-wave effects. How does
+          k                       K1 ( a) + I1 (                             
+Zc  = 60                                               a)                      .  (38)  this compare against Equation (43)? The small argument
+      a                                                a)
+                   I  0  (  a  )                             K  0   (  a  )             asymptotic expressions for the n = 0 modified Bessel
+
+                                                                                        functions of the first and second kind are
+
+Making use of the Bessel Wronskian17                                                                I0 (x)  1                                                             (48)
+
+    W (I n ( x), K n ( x)) =            I1(x)          K1(x)                      (39)        K0 (x)       -  0.577        +  ln    x    =    ln    1.124       .         (49)
+                                        I1 ( x)                                                                                     2              x          
+                                                       K     (  x)
+                                                          1
+
+which may be expanded using the derivative relations                                    For slow waves ( g  ko ) Equation (30) gives
+
+                I1 ( x)        =  I0 (x)  -  I1(x)                                (40)    2  g , and Equation (43) passes to
+                                               x
+                                                                                                                                     60                  0.358         .
+                                                    K1(x)                                                                     Zc      Vf       ln            D     g      (50)
+                                                       x
+                K  1    (  x)  =  -  K0 (x)  -                                    (41)
+
+W (I n ( x), K n ( x)) = - [I 0 ( x) K1 ( x) + I1 ( x) K 0 ( x)]                        This is to be compared with the Schelkunoff approximate
+                                                                                        expression evaluated for quarter-wave resonance
+                            = -1                                                  (42)
+
+                                     x                                                  Zc    = 60         g         -        =        60      ln      0.368    g     .   (51)
+                                                                                                Vf  ln     D            1              Vf                  D
+to give the helical wave guide effective characteristic                                                                  
+
+impedance as                                                                            So, near resonance, the two formulae differ by only a few
+                                                                                        percent, which accounts for the success of the prior models.
+                   Zc       =  60    I 0 ( a) K 0 ( a)              .             (43)
+                               Vf
+
+                                                                                            III. TRANSMISSION LINE MODELING
+
+This important impedance expression is useful for Smith                                 The formal analysis presented in section II, though
+chart and engineering calculations. It is worth noting that,
+for a helical anisotropic wave guide, the effective                                     fraught with peril, has resulted in a very practical model for
+characteristic impedance is not merely a function of the
+geometrical configuration of the conductors (as it would be                             the RF engineer. The choice of helix geometrical
+for lossless TEM coaxial cables and twin-lead transmission
+lines), but it is also a function of the excitation frequency.                          parameters and operating frequency now [by Equation (28)]
+
+G. Remarks                                                                              specify the parameter . [Alternatively, by Equation (32),
+
+  There are two observations that we wish to make at this                               they specify the velocity factor, Vf, and  is specified by
+point. First, we note that18
+                                                                                        Equation (30).] So we have the axial propagation factor
+
+                                                                                                               g = 2  g = 2 V f 0                                         (52)
+
+                                                                                        for the anisotropic helix waveguide. Further, we have its
+
+                                                                                        characteristic impedance. [In fact, the entire quest of the
+
+                                                                                   2001 IEEE
+      TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW  6
+
+Section II was merely to obtain these two parameters (Zc
+and g ) for the helix.] Consequently, the input and load
+impedances, for a low-loss line of axial length h, are related
+in this model by the familiar equation
+
+Z in  = Zc       Z L cos( g h) + jZ c sin( g h)      .       (53)
+                 Z c cos( g h) + jZ L sin( g h)
+
+The "voltage" is distributed along the line as the
+
+interference pattern of the forward and backward traveling
+
+wave pair that are solutions of the transmission line wave
+
+equation and are, for the present, assumed to be
+
+monochromatic and coherent. The voltage distribution
+
+along a lossy line is given by the familiar expression
+
+V(x) = VL cosh x + (IL Zc )sinh x                            (54)
+
+   [  VL (1+ (Zc ZL) x)cosg x
+          ] + j((Zc ZL) + x)sing x
+
+where the distance x is measured back from the load, VL is         Figure 2. A capacitively tuned distributed resonator.
+the load voltage, IL is the load current,  is the attenuation
+constant, and the other parameters are as defined above. For       to give this voltage standing wave distribution along the
+                                                                   resonator. There is a voltage null at the base (x = - h), a
+( ) a low loss, non-radiating, quarter wave line  g h =  2 ,       voltage maximum at the top (x = 0), and a sine wave
+                                                                   envelope along the structure. It is of interest to study the
+open circuited at the load end ( Z L =  ), these give the          behavior of the system when the operating frequency is
+                                                                   fixed. As the electrical length of the helical waveguide is
+voltage step-up (or magnification) ratio between the top and       shortened from 90° to 15° , the resonating capacitor must
+bottom of the resonator as19,20,21,22,23,24                        be increased in size. (See Figure 3.) Further, the voltage
+                                                                   distribution passes from the loop of a sinusoid (at 90° ) to
+                   VL       =     -  j     1                 (55)  the linear portion of the sinusoid (for heights less than 15° .
+                 V (-h)                   h                        At such short heights, only the first term in the Taylor series
+                                                                   expansion for the expression about x = - h is needed, and the
+where V (- h) is the voltage induced in the base of the            voltage rises as it would along the secondary turns of a
+                                                                   transformer with uniform current. Under such conditions,
+structure. This is a Tesla coil resonance transformer.25,26        one passes to the lumped-element regime and the high
+                                                                   VSWR advantage discovered by Tesla is lost.
+(Obviously, the load may be a capacitive electrode, which
+                                                                       V. PASSAGE TO LUMPED ELEMENTS
+has the dual role of electrically shortening the required
+                                                                   A. Classical Inductors.
+structure for system resonance and holding off high voltage
+                                                                   Lumped element circuit theory assumes that there are no
+discharges until a desired potential is attained. It should        wave interference phenomena present, that is - the current
+                                                                   entering and leaving the circuit element's terminals are
+also be obvious that when one measures the voltage                 identical. This is manifested by two phenomena:
+
+distribution along the structure under the electrode, the
+
+voltage will be a superposition of the actual transmission
+line standing wave pattern plus the inverse r potential of the
+
+top electrode.)
+
+By means of conventional distributed-element theory, a
+
+thorny boundary value problem has been reduced to a very
+
+simple RF transmission line. In fact, the entire design and
+
+tuning exercise (see Figure 2) can now be performed
+conveniently on a Smith chart.27,28
+
+IV. TUNED DISTRIBUTED SYSTEMS
+
+  We now turn to the tuning of an ensemble of helical                   1. The current distribution function is spatially
+resonators. From Equation (54), the voltage distribution                     uniform across each element.
+along a quarter-wave structure can be approximated by
+                                                                        2. The spatial phase delay between circuit
+V ( x) = VTop    cos     x     =  VTop    sin1 +  x          (56)            extremities is zero.
+                     2   h                        h     2  
+                                                                   The phase retardation effects of item 2 occur in two ways:
+                                                                   first, because c is not really infinite, the time required for an
+where x is measured back from the load as shown in Fig. 2.         effect to propagate through space from one part of a circuit
+The forward and backward traveling waves have superposed
+
+                                                              2001 IEEE
+    TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW                                    7
+
+Figure 3. The solid curve is the voltage rise along a quarter wave resonator and shows the passage to lumped elements. As the load
+capacitance increases (with resonant frequency held constant), the transmission line must be shortened . . . until it behaves as a
+lumped inductance with a uniform current and linear voltage rise.
+
+to another is appreciable as compared with the period of the             Sichak has employed the expression for the helix
+                                                                       characteristic impedance and the propagation factor
+changing current; second, the time required for an effect to           expression, and he makes the following assertion, "The
+                                                                       standard formula for the inductance of a long solenoid can
+propagate along circuit conductors is appreciable as                   be obtained by treating the solenoid as a short length of
+                                                                       short-circuited helical transmission line and using Equation
+compared with the period of the current. Ramo and                      (43) for the characteristic impedance Zc and the
+                                                                       propagation constant from Equation (28)."32 That is, since
+Whinnery observe that item 1 is closely related to item 2,             tan(x)  x for small x, the short line's terminal point
+
+and comment, "If, at a given instant, the current varies
+
+along a path... there must be a temporary piling up, or a
+decreasing, of charge at various points around the loop."29
+
+The current distribution under such circumstances will be
+
+spatially nonuniform. (The equation of continuity still is             impedance becomes
+
+satisfied, of course.) King states, "All of lumped element              ( ) Z in = jL = jZ c tan  g h
+
+electric circuit theory is based upon [these] two inherent                         c  g  h                                      (58)
+                                                                                      p
+assumptions ... so much so that it is seldom considered                       gh0           60         I0  (  a)  K0  (  a)  .
+
+necessary to even mention the existence of such restrictions           According to Sichak, this passes to the classical lumped
+on the generality of the theory."30 The issue is that these            element formula for inductance.
+
+restrictions are often overlooked. Furthermore, the standard
+
+handbook formulae for inductances are all based upon the
+
+two assumptions. To see this, consider how the standard                B. What About the Issue of Coil Self-Capacitance?
+
+formula for "inductance" was obtained. The field integral
+
+is, indeed, a function of the current distribution, as is the            The behavior of distributed networks (such as wires,
+                                                                       periodic physical structures, helices, corrugated wave
+flux. But, under the assumption that I (l' ) = I o is spatially        guides, antennas, etc.) may be conveniently represented at a
+                                                                       pair of terminals by lumped elements. Paris and Hurd have
+uniform, one may factor out the current from under the                 said, "It is customary in practice to speak of stray or
+                                                                       distributed effects when the behavior of a circuit or device
+integral sign so that the magnetic flux per unit current is            cannot be predicted on the basis of ordinary network
+                                                                       theory."33 The failure of any lumped element circuit model
+by  the strictly geometrical  formdurvlvla'-·orvdf'vlNe.umann31        to describe the real world lies at its core inherent
+  given                                                                presupposition: the speed of light is assumed infinite in the
+    L  = µ                                                       (57)  wave equation (all regions of the universe can be
+    Io  4                                                              communicated with instantaneously34). Consequently,
+                                                                       lumped element circuit theory does not (and cannot)
+                              l l'                                     accurately embody a world of second order partial
+
+It is this process (which neglects spatial variations in the
+
+current distribution on coils) that has been used in the
+
+handbook formulae for self and mutual inductance. Of
+
+course, the uniform current assumption has no validity for
+
+coils operating anywhere near self-resonance!
+
+                                                                  2001 IEEE
+       TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW  8
+
+differential equations in space and time. Lumped elements        physical quantity. This is purely an empirical determination
+"have no physical dimensions and no preferred orientation        for characterizing the impedance of a structure at a pair of
+in space; they can be moved around and rotated at will."35       terminals. The intent was to represent the true coil (which
+Not so for real world coils.                                     has a nonuniform current distribution) by a lumped element
+                                                                 coil (with an assumed uniform current distribution) in
+  What is coil self-capacitance? Physical arguments start        parallel with a non-physical effective capacitance. The
+by drawing turn-to-turn capacitors and stray capacitances        formula will not (and, being lumped, can not) give the
+extended out through space to the environment. The matter        voltage magnification by VSWR due to physically true
+is concerned with physically resolving the fact that the RF      current standing waves on the structure but it does permit a
+reactance of a coil is not that calculated by employing          terminal point representation for the resonator's feed point
+handbook (uniform current) formulae for inductance, nor is       reactance. The same (or an even better) formula could be
+it that obtained by measuring L at 1 kHz and multiplying by      obtained from the field solution by performing "numerical
+. The concept of coil "self capacitance" is an attempt to        experiments" with Equations (43) and (53). Figure 4
+circumvent transmission line effects on small coils when the     compares the exact field solution, Medhurst's
+current distribution begins to depart from its DC behavior.      approximation, and the lumped element representation for
+The notion has been developed by starting with Maxwell's         the reactance of a coil as a function of its axial length. If
+equations and using only the first two terms in the Taylor       impedance is the only item of interest, the empirical
+series expansion for the distributed current to obtaining an     Medhurst approximation is acceptable out to about 60º.
+expression for the self-impedance of a generalized closed
+circuit.36 Upon extracting Neumann's formula for the self                  0 10 20 30 40 50 60 70 80 90
+inductance, the remaining negative component of the
+reactance permits an expression for the coil self-               Figure 4. Graph of terminal point inductive reactance as a
+capacitance. These formulae are valid for a parallel             function of coil electrical length in degrees: true (solid),
+combination of an inductance and a capacitance when the          Medhurst's empirical parasitic element characterization
+                                                                 (dashed), and conventional lumped element formula (dotted).
+operating frequency is well below 1 LC L . They permit
+                                                                                    VI. DISCUSSION
+a coil with a slightly nonuniform current distribution to be
+                                                                 A. Performance Parameters
+treated as though the current were uniform and the coil was
+                                                                   It has been asserted by some that the performance of a
+shunted with a lumped element capacitance. There are a           Tesla coil is to be measured by the ratio of discharge length
+great number of formulae for coil self capacitance.37,38         to the Tesla coil height. From Figure 3, this is a delusion.
+                                                                 By that measure, (since electrical breakdown is inversely
+None are of particular value for quarter-wave helical            proportional to electrode curvature ­ the bigger the ball, the
+                                                                 smaller the curvature and the higher the breakdown
+resonators anywhere near the 90° point. They do have some        potential) one would make the coil very short so that the top
+                                                                 electrode could be immense ­ and the breakdown potential
+merit for coils constructed of "many-turns-of-fine-wire" if      very large. The delusion is that the short coil is then made
+                                                                 to operate in the lumped element regime (where the current
+they are operated well below their self-resonances, but these    distribution is uniform) and the voltage rise is limited to no
+                                                                 more than that possible from the expression
+"induction coils" are not really Tesla coils. The practice of
+
+using "many turns of fine wire" to construct Tesla coils is
+
+self-defeating. Tesla, in fact, abandoned the practice prior
+
+to 1893. (By 1897 he was advocating "heavy cable #8".)
+
+Medhurst attempted to characterize a grounded-base coil
+
+with a nonuniform current (i.e., one with spatial modes) as a
+
+lumped-element inductor (with a known low frequency
+
+inductance formula) in parallel with a parasitic, empirically
+
+obtained, non-physical, lumped-element capacitor. By
+
+constructing many coils, measuring their self-resonant
+
+frequencies and low frequency inductances (where I(z) is
+
+uniform ­ and, of course, not the same as at the resonant
+
+frequency), he was able to deduce a set of sinusoidal steady-
+
+state "self-capacitances". To these he fit a curve that was
+
+specified in terms of the coil's length-to-diameter ratio. The
+
+empirically obtained "self-capacitance" closely matched the
+
+curve
+
+       C o (h,  D)  =    0.1126  h  + 0.08  +  0.27    D  (59)
+                                 D             hD    
+
+where Co is in picofarads, h is the axial length (or height) of
+the coil and D is the coil's diameter (both in cm). Of
+course, this is merely a statistical determination appropriate
+for computations in the given h/D regime, and not at all a
+
+                                                           2001 IEEE
+         TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW  9
+
+         V2 = V1 C1 C 2  (60)                                    wire" philosophy) that the forward and backward waves are
+                                                                 so uncorrelated that the voltage distribution is virtually
+which, not only, presupposes lumped elements, but also           uniform ­ no minima and no maxima over the structure!
+
+total energy transfer to the secondary (i.e., correct switching  C. Other Models for the Helix.
+
+durations), and lossless systems. With this misguided              In addition to the helix characteristic impedance
+                                                                 employed above, there are a variety of wave impedance
+philosophy, a far greater amount of energy is required to        parameters that have been developed that are of some
+                                                                 interest for applications to traveling wave tubes and even
+bring the electrode up to breakdown and match the                applied to model coils.44 Further, the helix analysis above
+                                                                 has been based upon Ollendorf's helix model, which
+performance of a relatively simple distributed resonator         represents the helically wound coil as an anisotropic sheath
+                                                                 conductance. There are other helix models. The thin-wire
+operating in the standing wave regime. Tesla has                 model of Kogan can be derived from either the electric
+                                                                 Hertz vector or from the vector potential.45,46 Bondar also
+commented upon this misuse of helical coil resonators, and       studied the thin wire model.47 The tape helix model of
+                                                                 Sensiper48 brings out many of the periodic properties of
+states, "A large capacity and a small self inductance is the     wave propagation on helices. It is unfortunate that we have
+poorest kind of circuit which can be constructed."39 It          not space in this present note to present experimental
+                                                                 measurements. Such a note was prepared for Tesla coil
+should now be clear why Tesla was right and this is true.        experimenters, and printed several years ago in the literature
+                                                                 for hobbyists.49
+The breakdown is set by the electrode size. Because,
+                                                                 D. Polychromatic Excitation
+voltage rise is proportional to 1 l (a genuine performance
+                                                                   We note that the discussion above (including the work of
+parameter for resonators), the same potential can be attained    Medhurst), was framed within the sinusoidal steady state.
+                                                                 Many experimentalists excite their coils with transient
+with far less energy by using standing waves on a system         pulses, and such waveforms are finite energy signals, while
+                                                                 periodic waveforms are finite power signals. Conceptually
+that is, say, electrically 75º tall than one that is merely 10º  (and practically) the passage to a pulse-type (finite energy)
+                                                                 wide-band response may be obtained in terms of the
+tall and operating in the lumped element regime. While we        synthetic pulse idea: given the Fourier spectrum of the
+                                                                 transient excitation waveform, determine the system
+know that nature does not deal in infinities, we can now         response to each separate spectral component and then
+                                                                 combine to obtain the result.50 This is particularly easy to
+appreciate why Tesla would say, "With such coils, I have         do for high Q resonators since the coherence time of waves
+                                                                 on the structure is so long. The canonical variables are,
+found that there was practically no limit to the tension         essentially, adiabatic invariants.
+available,"40 and on another occasion, "I have produced
+
+electrical discharges the actual path of which, from end to
+
+end, was probably more than 100 feet long; but it would not
+be difficult to reach lengths one hundred times as great."41
+
+While Equation (60) is bounded, Equation (55) gives the
+
+fundamental limit for which to strive for voltage step-up.
+
+Virtually all high performance Tesla coils are velocity
+
+inhibited, distributed-element, slow wave transmission line
+
+helical resonators. By the way, Tesla said that he
+
+discovered this striking nature of RF coils experimentally in
+
+1894, "That was the first single step toward ... my
+magnifying transmitter."42 Interestingly, the above analysis
+
+also holds when the helical coil is pulled out into a linear
+
+conductor. Examples of this are given by quarter-wave
+
+coaxial transmission line resonators (unbalanced
+
+"monopole-mode" Tesla coils) and parallel-wire
+
+transmission line resonators (balanced "dipole-mode" Tesla
+
+coils).
+
+B. Fundamental Limits                                            VII. CONCLUSIONS
+
+  The extension of the present analysis to                         The present note has modeled RF coils as slow-wave
+quasimonochromatic, partially coherent wave distributions        anisotropic waveguides. A solution of the boundary value
+should be self-evident. The key performance parameter for        problem has given not only the fields, but also the
+high voltage Tesla coils is the VSWR on the resonant             eigenvalue equation for the propagation parameter (), the
+structure itself ­ the higher the better! This depends upon      velocity factor (Vf), the wave effective characteristic
+the ability of the forward and backward waves to                 impedance (Zc), and the limiting voltage magnification
+constructively interfere, and it is intimately related to the
+fringe "Visibility Function" of partially coherent beams in      (1  h) caused by wave interference or cavity modes. These
+optics.43 In fact, a true Tesla coil is a slow-wave
+transmission line analog of a Fabry-Perot                        parameters permit a comprehensive engineering description
+resonator/interferometer with a conducting surface at one        of helix design as a simple surface-wave transmission line,
+plane and a high impedance interface at the other. With LC-      and they are appropriate for designing and tuning Tesla coil
+discharge excited Tesla coils, it is possible to have such a     helical resonators on conventional Smith charts. Further,
+poorly designed resonator (as in the "many turns of fine         this development analytically clarifies the smooth
+                                                                 conceptual transition from field theory - to distributed
+                                                                 elements - to lumped elements.
+
+                          2001 IEEE
+TELSIKS 2001, University of Nis, Yugoslavia (September 19-21, 2001) and MICROWAVE REVIEW  10
+
+               ACKNOWLEDGEMENT                                        25E.A. Abramyan, Indust. Electron Accelerators and Applications,
+
+  The Authors wish to thank Mr. Scott Kapin for preparing                Hemisphere Publishing Co., 1988, pp. 88-89. (See Fig. 6.4b.)
+the figures and Mr. Basil Pinzone for technical suggestions.          26W. Heise, "Tesla Transformatoren," ElektroTechniche
+
+                      REFERENCES                                         Zeitschrift, Vol. 85, 1964, pp. 1-8.
+                                                                      27J.F. Corum and K.L. Corum, "A Technical Analysis of the Extra
+1 The quote is taken from Tesla's lectures before the Institution of
+   Electrical Engineers (London) and the Royal Institution               Coil as a Slow Wave Helical Resonator," Proc. 1986 Intl. Tesla
+   (London), February 3 and 4, 1892, published in the Journal of
+   the IEE (London), Vol. XXI, 1892, p. 51. Reprinted in                 Symp., Colorado Springs, CO, 1986, Chapt. 2, pp. 1-24.
+   Experiments with Alternate Currents of High Potential and High     28J.F. Corum and K.L. Corum, "The Application of Transmission
+   Frequency, by Nikola Tesla, McGraw-Hill, 1904, p. 6. [From
+   "Obituary," Electrical Engineering, Vol. 62, January, 1943, p.        Line Resonators to High Voltage RF Power Processing: History,
+   76, we see that he was elected a Fellow of the AIEE in 1917,          Analysis and Experiment, Proceedings of the 19th Southeastern
+   and that he served as AIEE Vice-President from 1892-1894.]
+                                                                         Symposium on System Theory, March, 1987, pp. 45-49.
+2 R. Adler, L.J. Chu, and R. Fano, Electromagnetic Energy             29S. Ramo and J.R. Whinnery, Fields and Waves in Modern Radio,
+   Transmission and Radiation, Wiley, 1960, p. 202.
+                                                                         Wiley, 2nd ed., 1953, pp. 222-223.
+3 J.R. Pierce, "Theory of the Beam-Type Traveling-Wave Tube,"         30R.W.P. King, Electromagnetic Engineering, McGraw-Hill, 1945,
+   Proceedings of the IRE, 1947, pp. 111-123. (See Appendix B,
+   "Propagation of a Wave Along a Helix".)                               (reprinted by Dover in 1963 as Fundamental Electromagnetic
+
+4 F. Ollendorf, Die Grundlagen der Hochfrequenztechnik,                  Theory), p. 421.
+   Springer, Berlin, 1926, pp. 79-87.                                 31F. Neumann, "Die mathematischen Gesetze der inducirten
+
+5 R.E. Collin, Foundations for Microwave Engineering, McGraw-            elektrischen Ströme," Berl. Akad. der Wiss., Abh. 1845.
+   Hill, 1966, pp. 392-398, 476-482.                                  32W. Sichak, loc cit.
+                                                                      33D.T. Paris and F.K. Hurd, Basic Electromagnetic Theory,
+6 P. Vizmuller, Filters with Helical and Folded Helical
+   Resonators, Artech House, 1987, pp. 77-85.                            McGraw-Hill, 1969, p. 527.
+                                                                      34J.D. Jackson, Classical Electrodynamics, 2nd edition, Wiley,
+7 J.D.Kraus, Antennas, McGraw-Hill, 2nd ed., 1988, p. 274.
+8 R.E. Collin, Foundations for Microwave Engineering, McGraw-            1975, pp. 598-600.
+                                                                      35R.E. Scott, Linear Circuits, Addison-Wesley, 1960, p. 4.
+   Hill, 1966, pp. 392-398.                                           36R.W.P. King, Electromagnetic Engineering, McGraw-Hill, 1945,
+9 N. Contaxes and A.J. Hatch, "High-Frequency Solenoidal Coils,"
+                                                                         (reprinted by Dover in 1963 as Fundamental Electromagnetic
+   Jour. Appl. Phys., Vol. 40, 1969, pp. 3548-3550.
+10 R. Fano, L.J. Chu, and R.B. Adler, Electromagnetic Fields,            Theory), Chapter VI.
+                                                                      37See, for example: "On the Effect of Distributed Capacity in
+   Energy and Forces, Wiley, 1960, pp. 257 -259.
+11R. Rudenberg, "Electromagnetic Waves in Transformer Coils              Single Layer Coils," by J.C. Hubbard, Phys. Rev., Vol. 9, 1917,
+
+   Treated by Maxwell's Equations," Jour. Applied Physics, Vol.          p. 529; "Distributed Capacity and Its Effect," by S. Cohen, The
+   12, 1941, pp. 219-229. See Fig. 6.
+12D. Watkins, Topics in Electromag. Theory, Wiley, 1958, p. 44.          Electrical Experimenter, May, 1917, pp. 33, 65; "The Effective
+13H.C. Pocklington, "Electrical Oscillations in Wires," Proc.
+   Cambridge Philosophical Society, Vol. 9, 1897, pp. 324-332.           Self-Capacity, Inductance and Resistance of Coils," by G.W.O.
+14A.G. Kandoian, and W. Sichak, "Wide Frequency Range Tuned
+   Helical Antennas and Circuits," Electrical Communications,            Howe, Jour. IEE (London), Vol. 60, 1922, pp. 67-72.;
+   Vol. 30, 1953, pp. 294-299.
+15J.R. Pierce, 1947, loc cit.                                            "Distributed Capacity of Single Layer Coils," by A.J. Palermo,
+16W. Sichak, "Coaxial Line with Helical Inner Conductor,"
+   Proceedings of the IRE, 1954, pp. 1315-1319. (Corrections,            Proc. I.R.E., Vol. 22, 1934, p. 897.
+   February, 1955, p. 148.)                                           38R.G. Medhurst, "H.F. Resistance and Self-Capacitance of Single-
+17G.N. Watson, A Treatise on the Theory of Bessel Functions,
+   Cambridge University Press, 2nd edition, 1944, pp. 79-80.             Layer Solenoids," Wireless Engr., Pt. 1 - February, 1947, pp.
+18H.B. Dwight, Table of Integrals, 4th ed., 1961, pp. 195, 197.
+19F.E. Terman, "Resonant Lines in Radio Circuits," Electrical            35-43; Pt. 2 - March, 1947, pp. 80-92. (pp. 84, 86.)
+   Engineering, July, 1934, pp. 1046-1053.                            39L.I. Anderson, Tesla on His Work with Alternating Currents, Sun
+20D.H. Sloan, "A Radiofrequency High-Voltage Generator,"
+   Physical Review, Vol. 47, 1935, pp. 62-71.                            Publishing Co., 1992, p. 74.
+21 E.U. Condon, "Forced Oscillations," Journal of Applied Physics,    40N. Tesla, "Some Experiments in Tesla's Laboratory with
+   Vol. 12, 1941, pp. 129-132.
+22R.I. Sarbacher and W.A. Edson, Hyper and Ultra-High                    Currents of High Potential and High Frequency," Electrical
+   Frequency Engineering, Wiley, 1943, pp. 351-353.
+23J.D. Ryder, Networks, Lines and Fields, Prentice-Hall, 2nd             Review (NY), March 29, 1899, pp. 195-197, 204.
+   edition, 1955, p. 348.                                             41N. Tesla, "The Problem of Increasing Human Energy," Century
+24E.C. Jordan and K.G. Balmain, Electromagnetic Waves and
+   Radiating Sys., Prentice-Hall, 2nd edition, 1968, pp. 226-231.        Illustrated Magazine, June 1900, pp. 175-211.
+                                                                      42L.I. Anderson , loc cit, p. 72.
+                                                                      43M. Born and E. Wolf, Principles of Optics, 5th edition, Pergamon
+
+                                                                         Press, 1975, p. 506.
+                                                                      44J.A. Mezak, "Modeling Helical Air Coils for Wireless and RF
+
+                                                                         Applications," RF Design, January, 1998, pp. 77-79.
+                                                                      45K.H. Kogan, Soviet Phys. Doklady, Vol. 66, 1949, pp. 867-870.
+                                                                      46K.H. Kogan, Soviet Phys. Doklady, Vol. 107, 1956, pp. 541-544.
+                                                                      47V.M Bondar, "Propagation of an Electromagnetic Wave along a
+
+                                                                         Filamentary Helix," Radiotekhnika, No. 11, 1985, pp. 82-84.
+                                                                      48S. Sensiper, "Electromagnetic Wave Propagation on Helical
+
+                                                                         Structures," Proc. of the IRE, February, 1955, pp. 149-161.
+                                                                      49K.L. Corum and J.F. Corum, "Tesla Coils and the Failure of
+
+                                                                         Lumped-Element Circuit Theory," TCBA News, Vol. 19, No. 2,
+
+                                                                         April/May/June, 2000, pp. 14-18.
+                                                                      50L.A. Robinson, W.B. Weir and L. Young, "An RF Time-Domain
+
+                                                                         Reflectometer Not in Real Time," IEEE Transactions
+
+                                                                         Microwave Theory, Vol. MTT-20, 1972, pp. 855-857.
+
+ 2001 IEEE
+

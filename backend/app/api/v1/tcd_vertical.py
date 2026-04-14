@@ -82,6 +82,38 @@ async def _set_session(session_id: uuid.UUID, data: dict) -> None:
     )
 
 
+@router.get("/verticals/latest")
+async def get_latest_session():
+    """Return the most recently created session that has cached intelligence data."""
+    r = await get_redis()
+    keys = await r.keys(f"{_SESSION_PREFIX}*")
+    if not keys:
+        raise NotFoundError(detail="No TCD-JEPA sessions found")
+
+    # Find session with the most intelligence cache entries
+    best_id = None
+    best_count = 0
+    for key in keys:
+        sid = key.replace(_SESSION_PREFIX, "")
+        intel_keys = await r.keys(f"tcd_intelligence:{sid}:*")
+        if len(intel_keys) > best_count:
+            best_count = len(intel_keys)
+            best_id = sid
+
+    if not best_id or best_count == 0:
+        raise NotFoundError(detail="No sessions with cached intelligence found")
+
+    session_data = await r.get(f"{_SESSION_PREFIX}{best_id}")
+    session = json.loads(session_data) if session_data else {}
+
+    return {
+        "session_id": best_id,
+        "preset": session.get("preset", "unknown"),
+        "created_at": session.get("created_at"),
+        "intelligence_engines_cached": best_count,
+    }
+
+
 @router.post(
     "/verticals", response_model=VerticalCreateResponse, status_code=201
 )
@@ -279,8 +311,16 @@ async def export_endpoint(
 
 @router.post("/verticals/demo", status_code=202)
 async def start_demo():
-    """Launch the auto-demo pipeline (no auth required for demos)."""
-    import asyncio
+    """Launch the auto-demo pipeline (no auth required for demos).
+
+    Runs synchronously in the request (takes ~8s) because Uvicorn --reload
+    kills fire-and-forget asyncio tasks. For production (no --reload), this
+    can be switched back to asyncio.create_task.
+    """
+    import logging
+
+    from app.services.crystallization.demo_runner import run_demo
+    from starlette.responses import JSONResponse
 
     session_id = str(uuid.uuid4())
     job_id = str(uuid.uuid4())
@@ -293,10 +333,13 @@ async def start_demo():
         "demo": True,
     })
 
-    # Launch demo in background (not Celery — must be fast + local)
-    from app.services.crystallization.demo_runner import run_demo
-
-    asyncio.create_task(run_demo(session_id, job_id))
+    # Run demo synchronously — takes ~8s on CPU.
+    try:
+        await run_demo(session_id, job_id)
+    except Exception:
+        logging.getLogger(__name__).exception(
+            "Demo task failed: session=%s", session_id
+        )
 
     return {
         "session_id": session_id,

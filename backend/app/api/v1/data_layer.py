@@ -52,7 +52,7 @@ class RunRequest(BaseModel):
     target_survivors: int = Field(100, ge=1, le=10_000)
     budget_dollars: float = Field(5.0, ge=0.0)
     compute_3d_display: bool = True
-    vertical: Literal["niv", "tcd_jepa", "data"] | None = None
+    vertical: Literal["tcd_jepa", "data"] | None = None
 
 
 class QualityMetricsOut(BaseModel):
@@ -244,7 +244,7 @@ class AsyncRunRequest(BaseModel):
     limit: int = Field(500, ge=1, le=1_000_000)
     target_survivors: int = Field(300, ge=1, le=50_000)
     budget_dollars: float = Field(50.0, ge=0.0)
-    vertical: Literal["niv", "tcd_jepa", "data"] | None = None
+    vertical: Literal["tcd_jepa", "data"] | None = None
     chunk_size: int | None = Field(
         default=None,
         ge=100,

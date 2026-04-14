@@ -1,0 +1,57 @@
+{
+  "graph": {
+    "entities": 406023,
+    "edges": 773267,
+    "types": {
+      "company": 10426,
+      "filing": 193075,
+      "financial_fact": 202522
+    }
+  },
+  "btut": {
+    "btut": {
+      "original_count": 406023,
+      "survivor_count": 5,
+      "total_reduction_ratio": 81204.6,
+      "original_edge_count": 773267,
+      "survivor_edge_count": 0,
+      "edge_reduction_ratio": 773267.0,
+      "prefilter": {
+        "original": 406023,
+        "entropy_rejected": 0,
+        "bloom_dedup": 90778,
+        "lsh_near_dedup": 0,
+        "survivors": 315245,
+        "seconds": 35.98
+      },
+      "cascade": [],
+      "quality": {
+        "signal_quality": 0.2554,
+        "reconstruction_error": 0.0,
+        "coverage": 1.0,
+        "cluster_stability": 0.5,
+        "downstream_compatibility": 0.4,
+        "composite": 0.7161
+      },
+      "budget": {
+        "gpu_seconds": 0.4,
+        "gpu_cost_dollars": 0.0001,
+        "remaining_dollars": 50.0
+      },
+      "timing": {
+        "wall_clock": 286.99,
+        "prefilter": 35.98,
+        "embedding": 160.36,
+        "cascade": 0.14,
+        "thinning": 0.0,
+        "quality_check": 0.0
+      },
+      "clusters": 1,
+      "device": "cpu",
+      "dim_schedule": [
+        32,
+        16
+      ]
+    }
+  }
+}

@@ -33,7 +33,6 @@ from app.services.data_layer.linking import (
 )
 from app.services.data_layer.verticals import (
     EXPORTERS,
-    export_niv,
     export_tcd_jepa,
     export_data,
 )
@@ -326,16 +325,6 @@ def _make_fake_state():
     return st
 
 
-def test_export_niv_has_expected_keys():
-    payload = export_niv(_make_fake_state())
-    assert payload["vertical"] == "niv"
-    assert payload["dataset_id"] == "edgar"
-    assert payload["n_survivors"] == 2
-    assert len(payload["survivors"]) == 2
-    assert "quality" in payload
-    assert "coord_8d" in payload["survivors"][0]
-
-
 def test_export_tcd_jepa_is_matrix_shaped():
     payload = export_tcd_jepa(_make_fake_state())
     assert payload["vertical"] == "tcd_jepa"
@@ -355,8 +344,8 @@ def test_export_data_contains_everything():
     assert "coords_3d_s2" in payload["manifold"]
 
 
-def test_exporters_registry_has_three():
-    assert set(EXPORTERS.keys()) == {"niv", "tcd_jepa", "data"}
+def test_exporters_registry_has_two():
+    assert set(EXPORTERS.keys()) == {"tcd_jepa", "data"}
 
 
 # ── Tasks 5-10: facade integration tests ────────────────────────────────
@@ -561,20 +550,20 @@ def test_export_for_vertical_returns_dict():
     layer = LatentOceanDataLayer()
     _prime_layer_through_btut(layer)
     layer.project_to_manifold()
-    payload = layer.export_for_vertical("niv")
-    assert payload["vertical"] == "niv"
-    assert payload["n_survivors"] == 2
+    payload = layer.export_for_vertical("tcd_jepa")
+    assert payload["vertical"] == "tcd_jepa"
+    assert len(payload["entity_ids"]) == 2
 
 
 def test_export_for_vertical_writes_file_when_path_given(tmp_path):
     layer = LatentOceanDataLayer()
     _prime_layer_through_btut(layer)
     layer.project_to_manifold()
-    out = tmp_path / "niv.json"
-    payload = layer.export_for_vertical("niv", write_path=out)
+    out = tmp_path / "tcd_jepa.json"
+    payload = layer.export_for_vertical("tcd_jepa", write_path=out)
     assert out.exists()
     loaded = _json.loads(out.read_text())
-    assert loaded["vertical"] == "niv"
+    assert loaded["vertical"] == "tcd_jepa"
     assert loaded == payload
 
 
@@ -589,7 +578,7 @@ def test_export_for_vertical_unknown_raises():
 def test_export_for_vertical_before_manifold_raises():
     layer = LatentOceanDataLayer()
     with pytest.raises(NoManifoldError):
-        layer.export_for_vertical("niv")
+        layer.export_for_vertical("tcd_jepa")
 
 
 # ── Task 9: link_causally ───────────────────────────────────────────────
@@ -628,8 +617,8 @@ def test_run_one_shot_full_pipeline():
         "app.services.data_layer.core.run_btut_pipeline",
         return_value=_fake_btut_return(),
     ):
-        payload = layer.run("fake", vertical="niv", limit=50)
-    assert payload["vertical"] == "niv"
+        payload = layer.run("fake", vertical="tcd_jepa", limit=50)
+    assert payload["vertical"] == "tcd_jepa"
     assert payload["n_survivors"] == 2
     assert layer.manifold is not None
     assert layer.quality_metrics is not None
@@ -865,14 +854,14 @@ def test_rest_endpoints_register_and_return_expected_shapes():
                 "source": "fake",
                 "limit": 50,
                 "target_survivors": 2,
-                "vertical": "niv",
+                "vertical": "tcd_jepa",
             },
         )
     assert r.status_code == 200, r.text
     data = r.json()
     assert data["dataset_id"] == "fake"
-    assert data["vertical"] == "niv"
-    assert data["payload"]["vertical"] == "niv"
+    assert data["vertical"] == "tcd_jepa"
+    assert data["payload"]["vertical"] == "tcd_jepa"
     assert data["quality"]["n_survivors"] == 2
 
 
@@ -968,32 +957,6 @@ def test_tcd_jepa_bridge_data_layer_to_vertical():
         )
     assert vertical.current_bundle is not None
     assert vertical.current_bundle.embeddings.shape[0] == 2
-
-
-# ── NIV bridge tests ────────────────────────────────────────────────
-def test_niv_bridge_payload_to_search_index():
-    from app.services.data_layer.bridge_niv import (
-        niv_payload_to_search_index,
-        find_nearest_survivors,
-    )
-
-    payload = {
-        "vertical": "niv",
-        "dataset_id": "edgar",
-        "n_survivors": 2,
-        "survivors": [
-            {"entity": {"name": "AAPL"}, "coord_8d": [1.0, 0, 0, 0, 0, 0, 0, 0], "scores": {"composite": 0.9}, "cluster": 0},
-            {"entity": {"name": "MSFT"}, "coord_8d": [0, 1.0, 0, 0, 0, 0, 0, 0], "scores": {"composite": 0.8}, "cluster": 1},
-        ],
-    }
-    index = niv_payload_to_search_index(payload)
-    assert len(index) == 2
-    assert index[0]["id"] == "AAPL"
-    assert len(index[0]["vector"]) == 8
-
-    hits = find_nearest_survivors([1.0, 0, 0, 0, 0, 0, 0, 0], index, top_k=2)
-    assert hits[0]["id"] == "AAPL"
-    assert hits[0]["similarity"] > hits[1]["similarity"]
 
 
 # ── Async endpoint tests ────────────────────────────────────────────

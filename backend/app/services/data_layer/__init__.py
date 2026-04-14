@@ -10,7 +10,7 @@ routes calls through them and adds:
      get_survivors / export_for_vertical / run.
   2. Manifold projection: 8D unit hypersphere (compute) + 3D S² (display).
   3. Four-signal causal linking scaffold (cosine wired, 3 stubs).
-  4. Vertical export contracts for niv / tcd_jepa / data.
+  4. Vertical export contracts for tcd_jepa / data.
 """
 from __future__ import annotations
 

@@ -21,6 +21,14 @@ export default function TCDJEPAPage() {
   const activeTab = useTCDStore((s) => s.activeTab);
   const setActiveTab = useTCDStore((s) => s.setActiveTab);
   const status = useTCDStore((s) => s.status);
+  const loadLatest = useTCDStore((s) => s.loadLatest);
+
+  // Auto-load the latest cached session on mount
+  useEffect(() => {
+    if (status === "idle") {
+      loadLatest();
+    }
+  }, [status, loadLatest]);
 
   return (
     <div className="min-h-screen bg-li-bg">

@@ -6,7 +6,7 @@ Two distinct projection paths for two distinct audiences:
     projection from ``btut.pipeline`` already preserves pairwise
     distances (Johnson–Lindenstrauss); L2-normalizing it lets us use
     cosine similarity (== dot product on unit vectors) everywhere
-    downstream (cosine linking, NIV manifold search, TCD-JEPA).
+    downstream (cosine linking, manifold search, TCD-JEPA).
 
   * ``project_8d_to_s2`` — display-only. Projects unit-8D onto the
     2-sphere in R³ via PCA so humans get a variance-maximizing view.

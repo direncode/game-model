@@ -1,4 +1,4 @@
-"""Vertical export contracts for NIV, TCD-JEPA, and the Data vertical.
+"""Vertical export contracts for TCD-JEPA and the Data vertical.
 
 Each exporter takes a state object (the ``LatentOceanDataLayer`` instance
 itself, or any object with the same attribute shape) and returns a dict
@@ -12,29 +12,6 @@ from dataclasses import asdict
 from typing import Any, Callable
 
 import numpy as np
-
-
-def export_niv(state: Any) -> dict:
-    """NIV (finance) vertical.
-
-    Wants: survivors with full attributes + 8D coords + scores.
-    Does NOT need 3D viz coords or full raw ingest payload.
-    """
-    return {
-        "vertical": "niv",
-        "dataset_id": state.ingest_result.source_id,
-        "n_survivors": len(state.survivors),
-        "survivors": [
-            {
-                "entity": s.entity,
-                "coord_8d": s.coord_8d,
-                "scores": s.scores,
-                "cluster": s.cluster,
-            }
-            for s in state.survivors
-        ],
-        "quality": asdict(state.quality_metrics),
-    }
 
 
 def export_tcd_jepa(state: Any) -> dict:
@@ -87,7 +64,6 @@ def export_data(state: Any) -> dict:
 
 
 EXPORTERS: dict[str, Callable[[Any], dict]] = {
-    "niv": export_niv,
     "tcd_jepa": export_tcd_jepa,
     "data": export_data,
 }

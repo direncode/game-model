@@ -294,7 +294,7 @@ async def import_dataset(
     # Step 1: Download dataset
     from datasets import load_dataset
 
-    load_kwargs: dict[str, Any] = {"path": hf_dataset_id, "trust_remote_code": False}
+    load_kwargs: dict[str, Any] = {"path": hf_dataset_id}
     if config:
         load_kwargs["name"] = config
     if split:
@@ -302,15 +302,19 @@ async def import_dataset(
     else:
         load_kwargs["split"] = "train"
 
+    hf_ds = None
     try:
         hf_ds = load_dataset(**load_kwargs)
     except Exception as e:
+        err_str = str(e)
         # If split not found, try to auto-detect available splits
-        if "Unknown split" in str(e) and not split:
+        if "Unknown split" in err_str and not split:
             logger.info("Split 'train' not found for %s, auto-detecting...", hf_dataset_id)
             try:
                 from datasets import get_dataset_split_names
-                available_splits = get_dataset_split_names(hf_dataset_id, config_name=config)
+                available_splits = get_dataset_split_names(
+                    hf_dataset_id, config_name=config,
+                )
                 if available_splits:
                     fallback_split = available_splits[0]
                     logger.info("Using fallback split '%s' for %s", fallback_split, hf_dataset_id)
@@ -330,9 +334,26 @@ async def import_dataset(
                         continue
                 else:
                     raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
+        # If config/subset is required, try the dataset ID as config name
+        elif "Config name is missing" in err_str or "specify a configuration" in err_str.lower():
+            logger.info("Config required for %s, trying dataset name as config...", hf_dataset_id)
+            base_name = hf_dataset_id.split("/")[-1]
+            load_kwargs["name"] = base_name
+            try:
+                hf_ds = load_dataset(**load_kwargs)
+            except Exception:
+                # Try 'default' config
+                load_kwargs["name"] = "default"
+                try:
+                    hf_ds = load_dataset(**load_kwargs)
+                except Exception:
+                    raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
         else:
             logger.error("Failed to download HF dataset %s: %s", hf_dataset_id, e)
             raise ValueError(f"Failed to download dataset '{hf_dataset_id}': {e}") from e
+
+    if hf_ds is None:
+        raise ValueError(f"Failed to load dataset '{hf_dataset_id}': no data returned")
 
     # Convert to pandas DataFrame
     df = hf_ds.to_pandas()

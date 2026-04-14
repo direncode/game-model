@@ -68,7 +68,7 @@ export default function AuditPage() {
       const qs = buildQueryString();
       // Use the API client's internal request by constructing the URL with filters
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/v1/admin/audit?${qs}`,
+        `${process.env.NEXT_PUBLIC_API_URL || ""}/api/v1/admin/audit?${qs}`,
         {
           headers: {
             "Content-Type": "application/json",

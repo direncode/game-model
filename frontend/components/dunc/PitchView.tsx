@@ -16,6 +16,16 @@ import { useDuncStore } from "@/lib/dunc/store";
 import { PITCH_X, PITCH_Y, type DuncPlayerTick } from "@/lib/dunc/types";
 import { cn } from "@/lib/utils";
 
+// Overlay components — lazy-loaded only when toggled on
+import { CoverShadows } from "@/components/dunc/overlays/CoverShadows";
+import { HalfSpaces } from "@/components/dunc/overlays/HalfSpaces";
+import { PassingLanes } from "@/components/dunc/overlays/PassingLanes";
+import { PressingTraps } from "@/components/dunc/overlays/PressingTraps";
+import { BlockLines } from "@/components/dunc/overlays/BlockLines";
+import { DangerZones } from "@/components/dunc/overlays/DangerZones";
+import { FatigueOverlay } from "@/components/dunc/overlays/FatigueOverlay";
+import { TerritorialControl } from "@/components/dunc/overlays/TerritorialControl";
+
 const TEAM_COLORS = {
   home: "#00d4ff", // li-cyan
   away: "#c9a96e", // li-warm
@@ -41,10 +51,20 @@ export function PitchView({
   const players = useDuncStore((s) => s.players);
   const prevPlayers = useDuncStore((s) => s.prevPlayers);
   const activeScenarios = useDuncStore((s) => s.activeScenarios);
+  const overlays = useDuncStore((s) => s.overlays);
 
   const hilite = new Set(highlightedIds);
   const roleSet = selectedRoleFilter ? new Set(selectedRoleFilter) : null;
   const hasActiveScenario = activeScenarios.length > 0;
+
+  // Build set of affected player IDs across all active scenarios
+  const affectedIds = useMemo(() => {
+    const s = new Set<string>();
+    for (const sc of activeScenarios) {
+      for (const id of sc.affected_ids ?? []) s.add(id);
+    }
+    return s;
+  }, [activeScenarios]);
 
   // Build a map of previous positions for ghost overlay
   const prevMap = useMemo(() => {
@@ -108,6 +128,16 @@ export function PitchView({
           <rect x={PITCH_X} y={30.34} width={0.5} height={7.32} stroke="#3fb950" />
         </g>
 
+        {/* Analytics overlays — toggled by technical staff */}
+        {overlays.has("territorial") && <TerritorialControl />}
+        {overlays.has("half_spaces") && <HalfSpaces />}
+        {overlays.has("danger_zones") && <DangerZones />}
+        {overlays.has("fatigue") && <FatigueOverlay />}
+        {overlays.has("block_lines") && <BlockLines />}
+        {overlays.has("pressing_traps") && <PressingTraps />}
+        {overlays.has("cover_shadows") && <CoverShadows />}
+        {overlays.has("passing_lanes") && <PassingLanes />}
+
         {/* Ghost overlay — shows previous positions when a scenario is active */}
         {hasActiveScenario && (
           <g opacity={0.3}>
@@ -151,6 +181,7 @@ export function PitchView({
                 key={p.id}
                 p={p}
                 highlighted={hilite.has(p.id)}
+                affected={affectedIds.has(p.id)}
                 compact={compact}
               />
             );
@@ -178,10 +209,12 @@ export function PitchView({
 function PlayerDot({
   p,
   highlighted,
+  affected,
   compact,
 }: {
   p: DuncPlayerTick;
   highlighted: boolean;
+  affected: boolean;
   compact: boolean;
 }) {
   const r = highlighted ? 2.6 : 2.1;
@@ -190,6 +223,31 @@ function PlayerDot({
 
   return (
     <g>
+      {/* Scenario-affected outer glow — bright magenta/purple ring */}
+      {affected && (
+        <circle
+          cx={p.x}
+          cy={p.y}
+          r={r + 1.4}
+          fill="none"
+          stroke="#a371f7"
+          strokeWidth={0.6}
+          opacity={0.9}
+        >
+          <animate
+            attributeName="r"
+            values={`${r + 1.0};${r + 1.8};${r + 1.0}`}
+            dur="1.2s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.9;0.4;0.9"
+            dur="1.2s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      )}
       {/* Fatigue ring */}
       <circle
         cx={p.x}

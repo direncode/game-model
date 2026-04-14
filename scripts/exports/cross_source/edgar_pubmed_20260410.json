@@ -1,0 +1,147 @@
+{
+  "demo": "cross_source",
+  "sources": [
+    "edgar",
+    "pubmed"
+  ],
+  "quality_edgar": {
+    "n_input": 500,
+    "n_survivors": 100,
+    "reduction_ratio": 5,
+    "variance_preservation": 1.249,
+    "wall_seconds": 0.1
+  },
+  "quality_pubmed": {
+    "n_input": 500,
+    "n_survivors": 76,
+    "reduction_ratio": 6,
+    "variance_preservation": 1.0542,
+    "wall_seconds": 0.2
+  },
+  "n_links_total": 285,
+  "links_by_signal": {
+    "cosine": 285
+  },
+  "top_20_links": [
+    {
+      "source_a": "company_1013871",
+      "source_b": "author_saya,_hideyuki",
+      "signal": "cosine",
+      "strength": 0.9681
+    },
+    {
+      "source_a": "company_1099219",
+      "source_b": "author_biswas,_partha_protim",
+      "signal": "cosine",
+      "strength": 0.9672
+    },
+    {
+      "source_a": "company_1000275",
+      "source_b": "author_murata,_mitsuru",
+      "signal": "cosine",
+      "strength": 0.963
+    },
+    {
+      "source_a": "company_1030894",
+      "source_b": "author_sultana,_nusrat",
+      "signal": "cosine",
+      "strength": 0.9579
+    },
+    {
+      "source_a": "company_1099800",
+      "source_b": "author_safiabadi_tali,_seyed_hamid",
+      "signal": "cosine",
+      "strength": 0.9578
+    },
+    {
+      "source_a": "company_715153",
+      "source_b": "author_biswas,_partha_protim",
+      "signal": "cosine",
+      "strength": 0.9576
+    },
+    {
+      "source_a": "company_310158",
+      "source_b": "author_yamamoto,_michio",
+      "signal": "cosine",
+      "strength": 0.9506
+    },
+    {
+      "source_a": "company_1099219",
+      "source_b": "author_pouikli,_andromachi",
+      "signal": "cosine",
+      "strength": 0.9485
+    },
+    {
+      "source_a": "company_1058090",
+      "source_b": "author_yamamoto,_michio",
+      "signal": "cosine",
+      "strength": 0.9369
+    },
+    {
+      "source_a": "company_49938",
+      "source_b": "author_biswas,_partha_protim",
+      "signal": "cosine",
+      "strength": 0.9351
+    },
+    {
+      "source_a": "company_831259",
+      "source_b": "author_belliato,_mirko",
+      "signal": "cosine",
+      "strength": 0.9345
+    },
+    {
+      "source_a": "company_898173",
+      "source_b": "author_sultana,_nusrat",
+      "signal": "cosine",
+      "strength": 0.9279
+    },
+    {
+      "source_a": "company_874766",
+      "source_b": "author_sultana,_nusrat",
+      "signal": "cosine",
+      "strength": 0.9241
+    },
+    {
+      "source_a": "company_885725",
+      "source_b": "author_pouikli,_andromachi",
+      "signal": "cosine",
+      "strength": 0.9193
+    },
+    {
+      "source_a": "company_2073893",
+      "source_b": "author_sultana,_nusrat",
+      "signal": "cosine",
+      "strength": 0.9175
+    },
+    {
+      "source_a": "company_1276187",
+      "source_b": "author_angel,_jonathan_b",
+      "signal": "cosine",
+      "strength": 0.916
+    },
+    {
+      "source_a": "company_1243429",
+      "source_b": "author_sultana,_nusrat",
+      "signal": "cosine",
+      "strength": 0.9157
+    },
+    {
+      "source_a": "company_1138118",
+      "source_b": "author_biswas,_partha_protim",
+      "signal": "cosine",
+      "strength": 0.9151
+    },
+    {
+      "source_a": "company_1701605",
+      "source_b": "author_akimoto,_masahiro",
+      "signal": "cosine",
+      "strength": 0.9144
+    },
+    {
+      "source_a": "company_899051",
+      "source_b": "author_yamamoto,_michio",
+      "signal": "cosine",
+      "strength": 0.9129
+    }
+  ]
+}

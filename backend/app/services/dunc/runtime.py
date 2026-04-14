@@ -185,6 +185,7 @@ class MatchRuntime:
             "players": players_out,
             "insights": new_insights,
             "active_scenarios": active_scenarios or [],
+            "match_info": self.simulator.get_match_info(),
         }
 
     async def _broadcast(self, payload: dict) -> None:

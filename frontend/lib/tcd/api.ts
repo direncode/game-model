@@ -7,6 +7,17 @@ import type {
 
 const API = "/api/v1/tcd";
 
+export async function fetchLatestSession(): Promise<{
+  session_id: string;
+  preset: string;
+  created_at: string;
+  intelligence_engines_cached: number;
+} | null> {
+  const res = await fetch(`${API}/verticals/latest`);
+  if (!res.ok) return null;
+  return res.json();
+}
+
 export async function startDemo(): Promise<{
   session_id: string;
   job_id: string;

@@ -1,0 +1,209 @@
+{
+  "demo": "cross_source",
+  "sources": [
+    "edgar",
+    "pubmed"
+  ],
+  "quality_edgar": {
+    "n_input": 500,
+    "n_survivors": 100,
+    "reduction_ratio": 5,
+    "variance_ratio": 1.1489,
+    "coverage_at_1_0": 1.0,
+    "reconstruction_median_nn": 0.3588,
+    "n_clusters": 8,
+    "unique_fingerprints": 71,
+    "wall_seconds": 0.1,
+    "estimated_cost_usd": 7.2e-05,
+    "cost_breakdown": {
+      "adapter_usd": 7e-05,
+      "compute_usd": 2e-06,
+      "storage_usd": 0.0,
+      "total_usd": 7.2e-05
+    }
+  },
+  "quality_pubmed": {
+    "n_input": 500,
+    "n_survivors": 76,
+    "reduction_ratio": 6,
+    "variance_ratio": 1.0542,
+    "coverage_at_1_0": 1.0,
+    "reconstruction_median_nn": 0.4351,
+    "n_clusters": 12,
+    "unique_fingerprints": 74,
+    "wall_seconds": 0.2,
+    "estimated_cost_usd": 0.000671,
+    "cost_breakdown": {
+      "adapter_usd": 0.000669,
+      "compute_usd": 2e-06,
+      "storage_usd": 0.0,
+      "total_usd": 0.000671
+    }
+  },
+  "n_links_total": 258,
+  "links_by_signal": {
+    "cosine": 258
+  },
+  "top_20_links": [
+    {
+      "source_a_id": "company_1013871",
+      "source_a_display": "NRG ENERGY, INC.",
+      "source_b_id": "author_saya,_hideyuki",
+      "source_b_display": "Saya, Hideyuki",
+      "signal": "cosine",
+      "strength": 0.9681
+    },
+    {
+      "source_a_id": "company_1099219",
+      "source_a_display": "METLIFE INC",
+      "source_b_id": "author_biswas,_partha_protim",
+      "source_b_display": "Biswas, Partha Protim",
+      "signal": "cosine",
+      "strength": 0.9672
+    },
+    {
+      "source_a_id": "company_715153",
+      "source_a_display": "HONDA MOTOR CO LTD",
+      "source_b_id": "author_biswas,_partha_protim",
+      "source_b_display": "Biswas, Partha Protim",
+      "signal": "cosine",
+      "strength": 0.9576
+    },
+    {
+      "source_a_id": "company_1539838",
+      "source_a_display": "Diamondback Energy, Inc.",
+      "source_b_id": "author_murata,_mitsuru",
+      "source_b_display": "Murata, Mitsuru",
+      "signal": "cosine",
+      "strength": 0.9537
+    },
+    {
+      "source_a_id": "company_310158",
+      "source_a_display": "Merck & Co., Inc.",
+      "source_b_id": "author_yamamoto,_michio",
+      "source_b_display": "Yamamoto, Michio",
+      "signal": "cosine",
+      "strength": 0.9506
+    },
+    {
+      "source_a_id": "company_1099219",
+      "source_a_display": "METLIFE INC",
+      "source_b_id": "author_pouikli,_andromachi",
+      "source_b_display": "Pouikli, Andromachi",
+      "signal": "cosine",
+      "strength": 0.9485
+    },
+    {
+      "source_a_id": "company_1063761",
+      "source_a_display": "SIMON PROPERTY GROUP INC.",
+      "source_b_id": "author_sultana,_nusrat",
+      "source_b_display": "Sultana, Nusrat",
+      "signal": "cosine",
+      "strength": 0.9477
+    },
+    {
+      "source_a_id": "company_49938",
+      "source_a_display": "IMPERIAL OIL LTD",
+      "source_b_id": "author_biswas,_partha_protim",
+      "source_b_display": "Biswas, Partha Protim",
+      "signal": "cosine",
+      "strength": 0.9351
+    },
+    {
+      "source_a_id": "company_1318220",
+      "source_a_display": "Waste Connections, Inc.",
+      "source_b_id": "author_keino,_dai",
+      "source_b_display": "Keino, Dai",
+      "signal": "cosine",
+      "strength": 0.9275
+    },
+    {
+      "source_a_id": "company_106040",
+      "source_a_display": "WESTERN DIGITAL CORP",
+      "source_b_id": "author_keino,_dai",
+      "source_b_display": "Keino, Dai",
+      "signal": "cosine",
+      "strength": 0.9251
+    },
+    {
+      "source_a_id": "company_1640147",
+      "source_a_display": "Snowflake Inc.",
+      "source_b_id": "author_yamamoto,_michio",
+      "source_b_display": "Yamamoto, Michio",
+      "signal": "cosine",
+      "strength": 0.9209
+    },
+    {
+      "source_a_id": "company_885725",
+      "source_a_display": "BOSTON SCIENTIFIC CORP",
+      "source_b_id": "author_pouikli,_andromachi",
+      "source_b_display": "Pouikli, Andromachi",
+      "signal": "cosine",
+      "strength": 0.9193
+    },
+    {
+      "source_a_id": "company_2073893",
+      "source_a_display": "Dollarama Inc./ADR",
+      "source_b_id": "author_sultana,_nusrat",
+      "source_b_display": "Sultana, Nusrat",
+      "signal": "cosine",
+      "strength": 0.9175
+    },
+    {
+      "source_a_id": "company_1138118",
+      "source_a_display": "CBRE GROUP, INC.",
+      "source_b_id": "author_biswas,_partha_protim",
+      "source_b_display": "Biswas, Partha Protim",
+      "signal": "cosine",
+      "strength": 0.9151
+    },
+    {
+      "source_a_id": "company_1701605",
+      "source_a_display": "Baker Hughes Co",
+      "source_b_id": "author_akimoto,_masahiro",
+      "source_b_display": "Akimoto, Masahiro",
+      "signal": "cosine",
+      "strength": 0.9144
+    },
+    {
+      "source_a_id": "company_895728",
+      "source_a_display": "ENBRIDGE INC",
+      "source_b_id": "author_keino,_dai",
+      "source_b_display": "Keino, Dai",
+      "signal": "cosine",
+      "strength": 0.9129
+    },
+    {
+      "source_a_id": "company_73309",
+      "source_a_display": "NUCOR CORP",
+      "source_b_id": "author_kevadiya,_bhavesh_d",
+      "source_b_display": "Kevadiya, Bhavesh D",
+      "signal": "cosine",
+      "strength": 0.9101
+    },
+    {
+      "source_a_id": "company_1701605",
+      "source_a_display": "Baker Hughes Co",
+      "source_b_id": "author_sumii,_shinichiro",
+      "source_b_display": "Sumii, Shinichiro",
+      "signal": "cosine",
+      "strength": 0.9094
+    },
+    {
+      "source_a_id": "company_1640147",
+      "source_a_display": "Snowflake Inc.",
+      "source_b_id": "author_murata,_mitsuru",
+      "source_b_display": "Murata, Mitsuru",
+      "signal": "cosine",
+      "strength": 0.9084
+    },
+    {
+      "source_a_id": "company_1973239",
+      "source_a_display": "ARM HOLDINGS PLC /UK",
+      "source_b_id": "author_kanevsky,_isis",
+      "source_b_display": "Kanevsky, Isis",
+      "signal": "cosine",
+      "strength": 0.9076
+    }
+  ]
+}

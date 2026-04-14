@@ -417,8 +417,12 @@ async def btut_ingest(
     dataset: str = Query(default="edgar"),
     limit: int = Query(default=10000, ge=100, le=200000),
     target_survivors: int = Query(default=500, ge=50, le=5000),
+    sync: bool = Query(default=False),
 ):
-    """Trigger async BTUT ingestion via Celery. Returns task ID for tracking."""
+    """Trigger BTUT ingestion. Use sync=true to run inline (blocking)."""
+    if sync:
+        return await _btut_ingest_sync(dataset, limit, target_survivors)
+
     try:
         from app.tasks.btut_ingest import ingest_dataset_task
         task = ingest_dataset_task.delay(
@@ -435,5 +439,58 @@ async def btut_ingest(
         }
     except Exception as e:
         return MessageResponse(
-            message=f"Celery not available. Use CLI: python -u scripts/ingest_dataset.py --dataset {dataset} --limit {limit}"
+            message=f"Celery not available. Use sync=true or CLI: python -u scripts/ingest_dataset.py --dataset {dataset} --limit {limit}"
         )
+
+
+async def _btut_ingest_sync(dataset_id: str, limit: int, target_survivors: int):
+    """Run BTUT ingestion synchronously (blocking). Used when Celery is unavailable."""
+    import asyncio
+    import json
+    import time
+    from pathlib import Path
+
+    from app.services.btut.adapters import get_adapter
+    from app.services.btut.pipeline import run_btut_pipeline
+
+    adapter = get_adapter(dataset_id)
+    meta = adapter.get_meta()
+
+    t0 = time.time()
+    entities = await asyncio.get_event_loop().run_in_executor(None, lambda: adapter.fetch_entities(limit=limit))
+    edges = await asyncio.get_event_loop().run_in_executor(None, lambda: adapter.fetch_edges(entities))
+
+    unique_types = [t.name for t in meta.entity_types]
+    result = await asyncio.get_event_loop().run_in_executor(
+        None,
+        lambda: run_btut_pipeline(
+            entities=entities, edges=edges,
+            unique_types=unique_types, target_survivors=target_survivors,
+        ),
+    )
+
+    # Save to disk (same paths as Celery task)
+    for results_dir in [Path("/app/data"), Path(__file__).resolve().parents[3] / "scripts" / "results"]:
+        try:
+            results_dir.mkdir(parents=True, exist_ok=True)
+            with open(results_dir / f"{dataset_id}_superpower_result.json", "w") as f:
+                json.dump(result, f, indent=2)
+        except (OSError, PermissionError):
+            continue
+
+    # Clear cached query engine
+    try:
+        from app.services.btut.query_engine import _engines
+        _engines.pop(dataset_id, None)
+    except Exception:
+        pass
+
+    summary = result.get("summary", {})
+    return {
+        "status": "completed",
+        "dataset": dataset_id,
+        "entities": summary.get("total_entities", 0),
+        "clusters": summary.get("clusters", 0),
+        "survivors": summary.get("survivors", 0),
+        "wall_seconds": round(time.time() - t0, 1),
+    }

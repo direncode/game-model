@@ -38,10 +38,10 @@ export const duncApi = {
     return j<DuncMatchSummary[]>("/api/v1/dunc/matches");
   },
 
-  createMatch(preset = "demo", seed: number | null = null, hz: number = 10) {
+  createMatch(preset = "demo", seed: number | null = null, hz: number = 10, pl_preset: string | null = null) {
     return j<DuncMatchSummary>("/api/v1/dunc/matches", {
       method: "POST",
-      body: JSON.stringify({ preset, seed, hz }),
+      body: JSON.stringify({ preset, seed, hz, pl_preset }),
     });
   },
 

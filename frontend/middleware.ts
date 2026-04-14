@@ -16,7 +16,6 @@ const PUBLIC_PREFIXES = [
   "/sso-callback",
   "/api",
   "/dunc",
-  "/niv",
 ];
 
 function isPublicRoute(pathname: string): boolean {

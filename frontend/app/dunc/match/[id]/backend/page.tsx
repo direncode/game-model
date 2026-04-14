@@ -10,7 +10,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useDuncStore } from "@/lib/dunc/store";
 import {
   Activity,
   Cpu,
@@ -29,6 +30,15 @@ import type { DuncInsight, DuncMatchSummary } from "@/lib/dunc/types";
 export default function BackendScreen() {
   const params = useParams<{ id: string }>();
   const matchId = params.id;
+  const router = useRouter();
+  const role = useDuncStore((s) => s.role);
+
+  // Manager cannot access backend screen — redirect
+  useEffect(() => {
+    if (role === "manager") {
+      router.replace(`/dunc/match/${matchId}`);
+    }
+  }, [role, matchId, router]);
 
   useDuncMatchStream(matchId);
 

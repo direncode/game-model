@@ -52,7 +52,7 @@ export interface QualityMetrics {
   cost_breakdown: CostBreakdown;
 }
 
-export type VerticalName = "niv" | "tcd_jepa" | "data";
+export type VerticalName = "tcd_jepa" | "data";
 
 export interface RunRequest {
   source: string;
@@ -105,21 +105,6 @@ export interface LinkResponse {
 
 // Vertical export payload shapes (for when the frontend consumes
 // exports directly rather than going through /data-layer/run).
-
-export interface SurvivorNivPayload {
-  entity: Record<string, unknown>;
-  coord_8d: number[];
-  scores: Record<string, number>;
-  cluster: number;
-}
-
-export interface NivExport {
-  vertical: "niv";
-  dataset_id: string;
-  n_survivors: number;
-  survivors: SurvivorNivPayload[];
-  quality: QualityMetrics;
-}
 
 export interface TcdJepaExport {
   vertical: "tcd_jepa";

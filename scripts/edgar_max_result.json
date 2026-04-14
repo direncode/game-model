@@ -1,0 +1,3200 @@
+{
+  "summary": {
+    "total_entities": 69102,
+    "total_edges": 196741,
+    "clusters": 52,
+    "survivors": 244,
+    "reduction": 283,
+    "btut_seconds": 18.5,
+    "api_seconds": 820.0,
+    "type_counts": {
+      "company": 10426,
+      "filing": 39098,
+      "financial_fact": 22053
+    },
+    "survivor_types": {
+      "company": 23,
+      "financial_fact": 217,
+      "filing": 4
+    },
+    "magnitude_classes": {
+      "medium": 36520,
+      "low": 31461,
+      "high": 1121
+    }
+  },
+  "survivors": [
+    {
+      "entity": {
+        "name": "company_1110803",
+        "type": "company",
+        "attributes": "{\"cik\": \"1110803\", \"ticker\": \"ILMN\", \"company_name\": \"ILLUMINA, INC.\"}"
+      },
+      "cluster": 3,
+      "magnitude_class": "high",
+      "stability": 1.0092577934265137,
+      "flips": 15,
+      "fingerprint": "1111111111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1590717",
+        "type": "company",
+        "attributes": "{\"cik\": \"1590717\", \"ticker\": \"CTRE\", \"company_name\": \"CareTrust REIT, Inc.\"}"
+      },
+      "cluster": 9,
+      "magnitude_class": "medium",
+      "stability": 0.669267475605011,
+      "flips": 14,
+      "fingerprint": "1111011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1046311",
+        "type": "company",
+        "attributes": "{\"cik\": \"1046311\", \"ticker\": \"CHH\", \"company_name\": \"CHOICE HOTELS INTERNATIONAL INC /DE\"}"
+      },
+      "cluster": 8,
+      "magnitude_class": "medium",
+      "stability": 0.7334063649177551,
+      "flips": 15,
+      "fingerprint": "0111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1841408",
+        "type": "company",
+        "attributes": "{\"cik\": \"1841408\", \"ticker\": \"DAVE\", \"company_name\": \"Dave Inc./DE\"}"
+      },
+      "cluster": 8,
+      "magnitude_class": "medium",
+      "stability": 0.7337918281555176,
+      "flips": 15,
+      "fingerprint": "0111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1561861",
+        "type": "company",
+        "attributes": "{\"cik\": \"1561861\", \"ticker\": \"AERO\", \"company_name\": \"Grupo Aeromexico, S.A.B. de C.V.\"}"
+      },
+      "cluster": 25,
+      "magnitude_class": "medium",
+      "stability": 0.7163228988647461,
+      "flips": 14,
+      "fingerprint": "1111111101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1013605",
+        "type": "company",
+        "attributes": "{\"cik\": \"1013605\", \"ticker\": \"PDS\", \"company_name\": \"PRECISION DRILLING Corp\"}"
+      },
+      "cluster": 1,
+      "magnitude_class": "medium",
+      "stability": 0.8317741751670837,
+      "flips": 15,
+      "fingerprint": "1111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1937987",
+        "type": "company",
+        "attributes": "{\"cik\": \"1937987\", \"ticker\": \"FBYD\", \"company_name\": \"Falcon's Beyond Global, Inc.\"}"
+      },
+      "cluster": 17,
+      "magnitude_class": "medium",
+      "stability": 0.5818905830383301,
+      "flips": 13,
+      "fingerprint": "1111110001111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1606498",
+        "type": "company",
+        "attributes": "{\"cik\": \"1606498\", \"ticker\": \"AVNS\", \"company_name\": \"AVANOS MEDICAL, INC.\"}"
+      },
+      "cluster": 18,
+      "magnitude_class": "medium",
+      "stability": 0.8997244834899902,
+      "flips": 14,
+      "fingerprint": "1111110111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1124524",
+        "type": "company",
+        "attributes": "{\"cik\": \"1124524\", \"ticker\": \"CYRX\", \"company_name\": \"Cryoport, Inc.\"}"
+      },
+      "cluster": 2,
+      "magnitude_class": "medium",
+      "stability": 0.7333676218986511,
+      "flips": 15,
+      "fingerprint": "1111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_2068454",
+        "type": "company",
+        "attributes": "{\"cik\": \"2068454\", \"ticker\": \"KOYN\", \"company_name\": \"CSLM Digital Asset Acquisition Corp III, Ltd\"}"
+      },
+      "cluster": 23,
+      "magnitude_class": "medium",
+      "stability": 0.7781710624694824,
+      "flips": 12,
+      "fingerprint": "1111010001111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1628808",
+        "type": "company",
+        "attributes": "{\"cik\": \"1628808\", \"ticker\": \"PROF\", \"company_name\": \"Profound Medical Corp.\"}"
+      },
+      "cluster": 18,
+      "magnitude_class": "medium",
+      "stability": 0.7103884220123291,
+      "flips": 14,
+      "fingerprint": "1111110111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1432133",
+        "type": "company",
+        "attributes": "{\"cik\": \"1432133\", \"ticker\": \"KLTR\", \"company_name\": \"KALTURA INC\"}"
+      },
+      "cluster": 26,
+      "magnitude_class": "high",
+      "stability": 1.3264714479446411,
+      "flips": 14,
+      "fingerprint": "1111111111111010",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1863006",
+        "type": "company",
+        "attributes": "{\"cik\": \"1863006\", \"ticker\": \"VLN\", \"company_name\": \"Valens Semiconductor Ltd.\"}"
+      },
+      "cluster": 18,
+      "magnitude_class": "medium",
+      "stability": 0.7514651417732239,
+      "flips": 14,
+      "fingerprint": "1111110111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1888525",
+        "type": "company",
+        "attributes": "{\"cik\": \"1888525\", \"ticker\": \"UBXG\", \"company_name\": \"U-BX Technology Ltd.\"}"
+      },
+      "cluster": 13,
+      "magnitude_class": "medium",
+      "stability": 0.5758271217346191,
+      "flips": 15,
+      "fingerprint": "1011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_862651",
+        "type": "company",
+        "attributes": "{\"cik\": \"862651\", \"ticker\": \"INVU\", \"company_name\": \"Investview, Inc.\"}"
+      },
+      "cluster": 13,
+      "magnitude_class": "medium",
+      "stability": 0.674541175365448,
+      "flips": 15,
+      "fingerprint": "1011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_13156",
+        "type": "company",
+        "attributes": "{\"cik\": \"13156\", \"ticker\": \"GLXZ\", \"company_name\": \"Galaxy Gaming, Inc.\"}"
+      },
+      "cluster": 17,
+      "magnitude_class": "medium",
+      "stability": 0.6365624666213989,
+      "flips": 14,
+      "fingerprint": "1111110101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_921299",
+        "type": "company",
+        "attributes": "{\"cik\": \"921299\", \"ticker\": \"KYNB\", \"company_name\": \"KYNTRA BIO, INC.\"}"
+      },
+      "cluster": 1,
+      "magnitude_class": "medium",
+      "stability": 0.7196016311645508,
+      "flips": 15,
+      "fingerprint": "1111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1996192",
+        "type": "company",
+        "attributes": "{\"cik\": \"1996192\", \"ticker\": \"LSH\", \"company_name\": \"Lakeside Holding Ltd\"}"
+      },
+      "cluster": 27,
+      "magnitude_class": "medium",
+      "stability": 0.7610915303230286,
+      "flips": 14,
+      "fingerprint": "0111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_919567",
+        "type": "company",
+        "attributes": "{\"cik\": \"919567\", \"ticker\": \"RCG\", \"company_name\": \"RENN Fund, Inc.\"}"
+      },
+      "cluster": 27,
+      "magnitude_class": "high",
+      "stability": 1.0558494329452515,
+      "flips": 14,
+      "fingerprint": "0111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1319150",
+        "type": "company",
+        "attributes": "{\"cik\": \"1319150\", \"ticker\": \"PBMLF\", \"company_name\": \"Pacific Booker Minerals Inc.\"}"
+      },
+      "cluster": 30,
+      "magnitude_class": "medium",
+      "stability": 0.6216416358947754,
+      "flips": 14,
+      "fingerprint": "0011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1905920",
+        "type": "company",
+        "attributes": "{\"cik\": \"1905920\", \"ticker\": \"GLXG\", \"company_name\": \"Galaxy Payroll Group Ltd\"}"
+      },
+      "cluster": 17,
+      "magnitude_class": "medium",
+      "stability": 0.6794633269309998,
+      "flips": 14,
+      "fingerprint": "1111110101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1758057",
+        "type": "company",
+        "attributes": "{\"cik\": \"1758057\", \"ticker\": \"LAZRQ\", \"company_name\": \"Luminar Technologies, Inc./DE\"}"
+      },
+      "cluster": 27,
+      "magnitude_class": "medium",
+      "stability": 0.6331912875175476,
+      "flips": 14,
+      "fingerprint": "0111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "company_1994373",
+        "type": "company",
+        "attributes": "{\"cik\": \"1994373\", \"ticker\": \"HNIT\", \"company_name\": \"Huineng Technology Corp\"}"
+      },
+      "cluster": 1,
+      "magnitude_class": "medium",
+      "stability": 0.8315812945365906,
+      "flips": 15,
+      "fingerprint": "1111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1318605_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 361000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1318605\", \"filed\": \"2026-01-29\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 16,
+      "magnitude_class": "high",
+      "stability": 1.3875761032104492,
+      "flips": 15,
+      "fingerprint": "1111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1067983_AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAmortizedCostBasis\", \"value\": 17525000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1067983\", \"filed\": \"2026-03-02\", \"label\": \"Debt Securities, Available-for-sale, Amortized Cost\"}"
+      },
+      "cluster": 20,
+      "magnitude_class": "high",
+      "stability": 1.2565890550613403,
+      "flips": 14,
+      "fingerprint": "1111110011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_200406_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 8594000000, \"unit\": \"USD\", \"period_end\": \"2025-12-28\", \"form\": \"10-K\", \"company_cik\": \"200406\", \"filed\": \"2026-02-11\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 23,
+      "magnitude_class": "medium",
+      "stability": 0.9287974238395691,
+      "flips": 14,
+      "fingerprint": "1111010111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1141391_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 2756000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1141391\", \"filed\": \"2026-02-11\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 45,
+      "magnitude_class": "high",
+      "stability": 1.3222544193267822,
+      "flips": 13,
+      "fingerprint": "1111110111101110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_909832_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 2833000000, \"unit\": \"USD\", \"period_end\": \"2026-02-15\", \"form\": \"10-Q\", \"company_cik\": \"909832\", \"filed\": \"2026-03-11\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 3,
+      "magnitude_class": "medium",
+      "stability": 0.9635332226753235,
+      "flips": 13,
+      "fingerprint": "1111110110110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1551152_AssetsFairValueAdjustment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsFairValueAdjustment\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2013-06-30\", \"form\": \"10-Q\", \"company_cik\": \"1551152\", \"filed\": \"2013-08-09\", \"label\": \"Assets, Fair Value Adjustment\"}"
+      },
+      "cluster": 40,
+      "magnitude_class": "medium",
+      "stability": 0.6218615770339966,
+      "flips": 14,
+      "fingerprint": "1111011111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_723125_AssetImpairmentCharges",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetImpairmentCharges\", \"value\": 16000000, \"unit\": \"USD\", \"period_end\": \"2018-11-29\", \"form\": \"10-Q\", \"company_cik\": \"723125\", \"filed\": \"2018-12-19\", \"label\": \"Asset Impairment Charges\"}"
+      },
+      "cluster": 5,
+      "magnitude_class": "medium",
+      "stability": 0.9481608271598816,
+      "flips": 15,
+      "fingerprint": "1111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1321655_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 8900392000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1321655\", \"filed\": \"2026-02-17\", \"label\": \"Assets\"}"
+      },
+      "cluster": 15,
+      "magnitude_class": "high",
+      "stability": 1.593596339225769,
+      "flips": 15,
+      "fingerprint": "1111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_18230_AcceleratedShareRepurchasesSettlementPaymentOrReceipt",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AcceleratedShareRepurchasesSettlementPaymentOrReceipt\", \"value\": 500000000, \"unit\": \"USD\", \"period_end\": \"2018-05-31\", \"form\": \"10-Q\", \"company_cik\": \"18230\", \"filed\": \"2018-08-07\", \"label\": \"Accelerated Share Repurchases, Settlement (Payment) or Receipt\"}"
+      },
+      "cluster": 34,
+      "magnitude_class": "medium",
+      "stability": 0.6853156089782715,
+      "flips": 15,
+      "fingerprint": "1110111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_40545_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax\", \"value\": 49000000, \"unit\": \"USD\", \"period_end\": \"2019-03-31\", \"form\": \"10-Q\", \"company_cik\": \"40545\", \"filed\": \"2019-04-30\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Cumulative Changes in Net Gain (Loss) from Cash Flow Hedges, Effect Net of Tax\"}"
+      },
+      "cluster": 10,
+      "magnitude_class": "medium",
+      "stability": 0.9223963618278503,
+      "flips": 15,
+      "fingerprint": "1101111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1094517_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 377281000000, \"unit\": \"USD\", \"period_end\": \"2013-03-31\", \"form\": \"20-F\", \"company_cik\": \"1094517\", \"filed\": \"2013-06-24\", \"label\": \"Assets\"}"
+      },
+      "cluster": 28,
+      "magnitude_class": "medium",
+      "stability": 0.8623300194740295,
+      "flips": 14,
+      "fingerprint": "1111111011111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1707925_AccruedInsuranceCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedInsuranceCurrent\", \"value\": 21000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1707925\", \"filed\": \"2026-02-25\", \"label\": \"Accrued Insurance, Current\"}"
+      },
+      "cluster": 2,
+      "magnitude_class": "medium",
+      "stability": 0.8736993670463562,
+      "flips": 15,
+      "fingerprint": "1111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_51143_AccruedEnvironmentalLossContingenciesNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedEnvironmentalLossContingenciesNoncurrent\", \"value\": 207000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"51143\", \"filed\": \"2026-02-24\", \"label\": \"Accrued Environmental Loss Contingencies, Noncurrent\"}"
+      },
+      "cluster": 12,
+      "magnitude_class": "high",
+      "stability": 1.5453834533691406,
+      "flips": 15,
+      "fingerprint": "1111111111111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_50863_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent\", \"value\": 45000000, \"unit\": \"USD\", \"period_end\": \"2022-12-31\", \"form\": \"10-K\", \"company_cik\": \"50863\", \"filed\": \"2023-01-27\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets, Current\"}"
+      },
+      "cluster": 10,
+      "magnitude_class": "high",
+      "stability": 1.494071125984192,
+      "flips": 15,
+      "fingerprint": "1101111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_97476_AllowanceForDoubtfulAccountsReceivableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivableCurrent\", \"value\": 22000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"97476\", \"filed\": \"2026-02-06\", \"label\": \"Accounts Receivable, Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 31,
+      "magnitude_class": "medium",
+      "stability": 0.8582534193992615,
+      "flips": 14,
+      "fingerprint": "1111111101111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1108524_AdditionalPaidInCapital",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdditionalPaidInCapital\", \"value\": 2627183000, \"unit\": \"USD\", \"period_end\": \"2013-04-30\", \"form\": \"10-Q\", \"company_cik\": \"1108524\", \"filed\": \"2013-05-24\", \"label\": \"Additional Paid in Capital\"}"
+      },
+      "cluster": 30,
+      "magnitude_class": "medium",
+      "stability": 0.6105714440345764,
+      "flips": 14,
+      "fingerprint": "0011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1744489_AociTaxAttributableToParent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AociTaxAttributableToParent\", \"value\": 610000000, \"unit\": \"USD\", \"period_end\": \"2025-12-27\", \"form\": \"10-Q\", \"company_cik\": \"1744489\", \"filed\": \"2026-02-02\", \"label\": \"AOCI Tax, Attributable to Parent\"}"
+      },
+      "cluster": 5,
+      "magnitude_class": "medium",
+      "stability": 0.880312979221344,
+      "flips": 15,
+      "fingerprint": "1111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_316709_AlternativeExcessNetCapital",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AlternativeExcessNetCapital\", \"value\": 1959000000, \"unit\": \"USD\", \"period_end\": \"2019-03-31\", \"form\": \"10-Q\", \"company_cik\": \"316709\", \"filed\": \"2019-05-08\", \"label\": \"Alternative Excess Net Capital\"}"
+      },
+      "cluster": 40,
+      "magnitude_class": "high",
+      "stability": 1.0727413892745972,
+      "flips": 14,
+      "fingerprint": "1111011111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1596532_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 439200000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1596532\", \"filed\": \"2026-02-17\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 48,
+      "magnitude_class": "high",
+      "stability": 1.129418134689331,
+      "flips": 13,
+      "fingerprint": "0111111101110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_820313_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2021-12-31\", \"form\": \"10-K\", \"company_cik\": \"820313\", \"filed\": \"2024-02-07\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets, Current\"}"
+      },
+      "cluster": 21,
+      "magnitude_class": "high",
+      "stability": 1.2745170593261719,
+      "flips": 13,
+      "fingerprint": "0111111001111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1543151_AmortizationOfFinancingCostsAndDiscounts",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfFinancingCostsAndDiscounts\", \"value\": 16000000, \"unit\": \"USD\", \"period_end\": \"2024-12-31\", \"form\": \"10-K\", \"company_cik\": \"1543151\", \"filed\": \"2025-02-14\", \"label\": \"Amortization of Debt Issuance Costs and Discounts\"}"
+      },
+      "cluster": 45,
+      "magnitude_class": "medium",
+      "stability": 0.9623532295227051,
+      "flips": 15,
+      "fingerprint": "1111101111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_766704_AssetImpairmentCharges",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetImpairmentCharges\", \"value\": 121283000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"766704\", \"filed\": \"2026-02-12\", \"label\": \"Asset Impairment Charges\"}"
+      },
+      "cluster": 38,
+      "magnitude_class": "high",
+      "stability": 1.7088152170181274,
+      "flips": 14,
+      "fingerprint": "1111011011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1119639_AccruedIncomeTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedIncomeTaxesCurrent\", \"value\": 1265000000, \"unit\": \"USD\", \"period_end\": \"2011-09-30\", \"form\": \"6-K\", \"company_cik\": \"1119639\", \"filed\": \"2011-11-22\", \"label\": \"Accrued Income Taxes, Current\"}"
+      },
+      "cluster": 41,
+      "magnitude_class": "medium",
+      "stability": 0.7466728091239929,
+      "flips": 14,
+      "fingerprint": "1111011111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1144967_AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAmortizedCostBasis\", \"value\": 58217100000, \"unit\": \"USD\", \"period_end\": \"2022-03-31\", \"form\": \"20-F\", \"company_cik\": \"1144967\", \"filed\": \"2022-07-29\", \"label\": \"Debt Securities, Available-for-sale, Amortized Cost\"}"
+      },
+      "cluster": 47,
+      "magnitude_class": "medium",
+      "stability": 0.6602861285209656,
+      "flips": 14,
+      "fingerprint": "1100111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1613103_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -4330000000, \"unit\": \"USD\", \"period_end\": \"2026-01-23\", \"form\": \"10-Q\", \"company_cik\": \"1613103\", \"filed\": \"2026-02-24\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 10,
+      "magnitude_class": "medium",
+      "stability": 0.741993248462677,
+      "flips": 15,
+      "fingerprint": "1101111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1613103_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 91485000000, \"unit\": \"USD\", \"period_end\": \"2026-01-23\", \"form\": \"10-Q\", \"company_cik\": \"1613103\", \"filed\": \"2026-02-24\", \"label\": \"Assets\"}"
+      },
+      "cluster": 44,
+      "magnitude_class": "high",
+      "stability": 1.2097281217575073,
+      "flips": 13,
+      "fingerprint": "1101010111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_92122_AllowanceForDoubtfulAccountsReceivableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivableCurrent\", \"value\": 84000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"92122\", \"filed\": \"2026-02-19\", \"label\": \"Accounts Receivable, Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 16,
+      "magnitude_class": "medium",
+      "stability": 0.84718257188797,
+      "flips": 15,
+      "fingerprint": "1111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1535527_AccountsPayableRelatedPartiesCurrentAndNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableRelatedPartiesCurrentAndNoncurrent\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2023-01-31\", \"form\": \"10-K\", \"company_cik\": \"1535527\", \"filed\": \"2023-03-09\", \"label\": \"Accounts Payable, Related Parties\"}"
+      },
+      "cluster": 2,
+      "magnitude_class": "high",
+      "stability": 1.3278638124465942,
+      "flips": 15,
+      "fingerprint": "1111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_2023554_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 58000000, \"unit\": \"USD\", \"period_end\": \"2026-01-02\", \"form\": \"10-Q\", \"company_cik\": \"2023554\", \"filed\": \"2026-01-30\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 9,
+      "magnitude_class": "medium",
+      "stability": 0.6479015946388245,
+      "flips": 14,
+      "fingerprint": "1111011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_64803_AllowanceForDoubtfulAccountsReceivable",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivable\", \"value\": 182000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"64803\", \"filed\": \"2026-02-10\", \"label\": \"Accounts Receivable, Allowance for Credit Loss\"}"
+      },
+      "cluster": 16,
+      "magnitude_class": "medium",
+      "stability": 0.9509429931640625,
+      "flips": 15,
+      "fingerprint": "1111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_64803_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 253538000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"64803\", \"filed\": \"2026-02-10\", \"label\": \"Assets\"}"
+      },
+      "cluster": 1,
+      "magnitude_class": "high",
+      "stability": 1.5302461385726929,
+      "flips": 15,
+      "fingerprint": "1111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_64803_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 74714000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"64803\", \"filed\": \"2026-02-10\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 7,
+      "magnitude_class": "high",
+      "stability": 1.1988253593444824,
+      "flips": 14,
+      "fingerprint": "0111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1404912_AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAmortizedCostBasis\", \"value\": 69142293000, \"unit\": \"USD\", \"period_end\": \"2022-03-31\", \"form\": \"10-Q\", \"company_cik\": \"1404912\", \"filed\": \"2022-05-06\", \"label\": \"Debt Securities, Available-for-sale, Amortized Cost\"}"
+      },
+      "cluster": 35,
+      "magnitude_class": "medium",
+      "stability": 0.7326028347015381,
+      "flips": 14,
+      "fingerprint": "1111011110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_62709_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 58710000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"62709\", \"filed\": \"2026-02-09\", \"label\": \"Assets\"}"
+      },
+      "cluster": 2,
+      "magnitude_class": "high",
+      "stability": 1.3544496297836304,
+      "flips": 15,
+      "fingerprint": "1111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1050915_AccountsPayableTradeCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableTradeCurrent\", \"value\": 2832600000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1050915\", \"filed\": \"2026-02-19\", \"label\": \"Accounts Payable, Trade, Current\"}"
+      },
+      "cluster": 1,
+      "magnitude_class": "high",
+      "stability": 1.5170167684555054,
+      "flips": 15,
+      "fingerprint": "1111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_36104_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 692345000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"36104\", \"filed\": \"2026-02-23\", \"label\": \"Assets\"}"
+      },
+      "cluster": 37,
+      "magnitude_class": "high",
+      "stability": 1.4951802492141724,
+      "flips": 12,
+      "fingerprint": "1111011111101010",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1053507_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 1112500000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1053507\", \"filed\": \"2026-02-24\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 21,
+      "magnitude_class": "high",
+      "stability": 1.1322660446166992,
+      "flips": 14,
+      "fingerprint": "0111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_87347_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 24151000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"87347\", \"filed\": \"2026-01-23\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 15,
+      "magnitude_class": "medium",
+      "stability": 0.7941531538963318,
+      "flips": 15,
+      "fingerprint": "1111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1559720_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\", \"value\": 13486000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1559720\", \"filed\": \"2026-02-12\", \"label\": \"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents\"}"
+      },
+      "cluster": 46,
+      "magnitude_class": "high",
+      "stability": 1.124006986618042,
+      "flips": 14,
+      "fingerprint": "1101111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_883241_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 258724000, \"unit\": \"USD\", \"period_end\": \"2026-01-31\", \"form\": \"10-Q\", \"company_cik\": \"883241\", \"filed\": \"2026-02-25\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 14,
+      "magnitude_class": "high",
+      "stability": 1.09632408618927,
+      "flips": 13,
+      "fingerprint": "1111011101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_884887_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -604000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"884887\", \"filed\": \"2026-02-11\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 12,
+      "magnitude_class": "high",
+      "stability": 1.261186957359314,
+      "flips": 12,
+      "fingerprint": "0111111000111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1506307_AllowanceForDoubtfulAccountsReceivable",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivable\", \"value\": 1000000, \"unit\": \"USD\", \"period_end\": \"2023-12-31\", \"form\": \"10-K\", \"company_cik\": \"1506307\", \"filed\": \"2024-02-20\", \"label\": \"Accounts Receivable, Allowance for Credit Loss\"}"
+      },
+      "cluster": 40,
+      "magnitude_class": "medium",
+      "stability": 0.6989178657531738,
+      "flips": 14,
+      "fingerprint": "1111011111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_26172_AccrualForTaxesOtherThanIncomeTaxesCurrentAndNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccrualForTaxesOtherThanIncomeTaxesCurrentAndNoncurrent\", \"value\": 318000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"26172\", \"filed\": \"2026-02-10\", \"label\": \"Accrual for Taxes Other than Income Taxes\"}"
+      },
+      "cluster": 32,
+      "magnitude_class": "high",
+      "stability": 1.4112650156021118,
+      "flips": 13,
+      "fingerprint": "1111111001011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1534701_AssetRetirementObligationAccretionExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetRetirementObligationAccretionExpense\", \"value\": 34000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1534701\", \"filed\": \"2026-02-20\", \"label\": \"Asset Retirement Obligation, Accretion Expense\"}"
+      },
+      "cluster": 3,
+      "magnitude_class": "high",
+      "stability": 1.444198727607727,
+      "flips": 15,
+      "fingerprint": "1111111111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1937926_GeneralAndAdministrativeExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"GeneralAndAdministrativeExpense\", \"value\": 56000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1937926\", \"filed\": \"2026-03-02\", \"label\": \"General and Administrative Expense\"}"
+      },
+      "cluster": 17,
+      "magnitude_class": "high",
+      "stability": 1.3434720039367676,
+      "flips": 14,
+      "fingerprint": "1111110101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1510295_AvailableForSaleSecurities",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecurities\", \"value\": 2000000, \"unit\": \"USD\", \"period_end\": \"2011-09-30\", \"form\": \"10-Q\", \"company_cik\": \"1510295\", \"filed\": \"2011-11-09\", \"label\": \"Available-for-sale Securities\"}"
+      },
+      "cluster": 12,
+      "magnitude_class": "medium",
+      "stability": 0.9427269101142883,
+      "flips": 15,
+      "fingerprint": "1111111111111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_4904_AssetRetirementObligationAccretionExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetRetirementObligationAccretionExpense\", \"value\": 170000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"4904\", \"filed\": \"2026-02-12\", \"label\": \"Asset Retirement Obligation, Accretion Expense\"}"
+      },
+      "cluster": 41,
+      "magnitude_class": "medium",
+      "stability": 0.7733271718025208,
+      "flips": 13,
+      "fingerprint": "1100111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1437107_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 4826000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1437107\", \"filed\": \"2026-02-27\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 38,
+      "magnitude_class": "medium",
+      "stability": 0.9319652915000916,
+      "flips": 14,
+      "fingerprint": "1111011011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_756894_AssetsOfDisposalGroupIncludingDiscontinuedOperation",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperation\", \"value\": 100000000, \"unit\": \"USD\", \"period_end\": \"2009-12-31\", \"form\": \"40-F\", \"company_cik\": \"756894\", \"filed\": \"2011-03-31\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets\"}"
+      },
+      "cluster": 9,
+      "magnitude_class": "high",
+      "stability": 1.5719412565231323,
+      "flips": 14,
+      "fingerprint": "1111011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1060391_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax\", \"value\": 11200000, \"unit\": \"USD\", \"period_end\": \"2018-12-31\", \"form\": \"10-K\", \"company_cik\": \"1060391\", \"filed\": \"2019-02-08\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Cumulative Changes in Net Gain (Loss) from Cash Flow Hedges, Effect Net of Tax\"}"
+      },
+      "cluster": 24,
+      "magnitude_class": "high",
+      "stability": 1.411372184753418,
+      "flips": 14,
+      "fingerprint": "1101011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1792789_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 5645000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1792789\", \"filed\": \"2026-02-18\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 13,
+      "magnitude_class": "medium",
+      "stability": 0.5620830655097961,
+      "flips": 15,
+      "fingerprint": "1011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_86312_AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedLossBeforeTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedLossBeforeTax\", \"value\": 2849000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"86312\", \"filed\": \"2026-02-12\", \"label\": \"Debt Securities, Available-for-sale, Accumulated Gross Unrealized Loss, before Tax\"}"
+      },
+      "cluster": 5,
+      "magnitude_class": "medium",
+      "stability": 0.7667648792266846,
+      "flips": 15,
+      "fingerprint": "1111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1858681_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalWarrantIssued\", \"value\": 54000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1858681\", \"filed\": \"2026-02-25\", \"label\": \"Adjustments to Additional Paid in Capital, Warrant Issued\"}"
+      },
+      "cluster": 24,
+      "magnitude_class": "high",
+      "stability": 1.4220062494277954,
+      "flips": 14,
+      "fingerprint": "1101011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1783879_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 38137000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K/A\", \"company_cik\": \"1783879\", \"filed\": \"2026-02-20\", \"label\": \"Assets\"}"
+      },
+      "cluster": 50,
+      "magnitude_class": "medium",
+      "stability": 0.7848131656646729,
+      "flips": 13,
+      "fingerprint": "1111111101111100",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_75362_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax\", \"value\": -15100000, \"unit\": \"USD\", \"period_end\": \"2013-12-31\", \"form\": \"10-K\", \"company_cik\": \"75362\", \"filed\": \"2014-02-27\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Cumulative Changes in Net Gain (Loss) from Cash Flow Hedges, Effect Net of Tax\"}"
+      },
+      "cluster": 8,
+      "magnitude_class": "high",
+      "stability": 1.4005087614059448,
+      "flips": 15,
+      "fingerprint": "0111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1701605_AmortizationOfIntangibleAssets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfIntangibleAssets\", \"value\": 250000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1701605\", \"filed\": \"2026-02-05\", \"label\": \"Amortization of Intangible Assets\"}"
+      },
+      "cluster": 32,
+      "magnitude_class": "high",
+      "stability": 1.4325824975967407,
+      "flips": 14,
+      "fingerprint": "1111111011011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1701605_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 40881000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1701605\", \"filed\": \"2026-02-05\", \"label\": \"Assets\"}"
+      },
+      "cluster": 24,
+      "magnitude_class": "medium",
+      "stability": 0.8326376080513,
+      "flips": 14,
+      "fingerprint": "1101011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_866787_AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax\", \"value\": 2000000, \"unit\": \"USD\", \"period_end\": \"2026-02-14\", \"form\": \"10-Q\", \"company_cik\": \"866787\", \"filed\": \"2026-03-20\", \"label\": \"Debt Securities, Available-for-sale, Accumulated Gross Unrealized Gain, before Tax\"}"
+      },
+      "cluster": 22,
+      "magnitude_class": "high",
+      "stability": 1.3933788537979126,
+      "flips": 14,
+      "fingerprint": "1111110111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1389170_AssetRetirementObligationAccretionExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetRetirementObligationAccretionExpense\", \"value\": 6200000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1389170\", \"filed\": \"2026-02-19\", \"label\": \"Asset Retirement Obligation, Accretion Expense\"}"
+      },
+      "cluster": 7,
+      "magnitude_class": "high",
+      "stability": 1.4424619674682617,
+      "flips": 14,
+      "fingerprint": "1111111101011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_277135_AccruedIncomeTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedIncomeTaxesCurrent\", \"value\": 49000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"277135\", \"filed\": \"2026-02-19\", \"label\": \"Accrued Income Taxes, Current\"}"
+      },
+      "cluster": 0,
+      "magnitude_class": "high",
+      "stability": 1.3274948596954346,
+      "flips": 16,
+      "fingerprint": "1111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_65984_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 251000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"65984\", \"filed\": \"2026-02-19\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 4,
+      "magnitude_class": "high",
+      "stability": 1.2249910831451416,
+      "flips": 15,
+      "fingerprint": "1111111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_712515_AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2017-03-31\", \"form\": \"10-K\", \"company_cik\": \"712515\", \"filed\": \"2019-05-24\", \"label\": \"Adjustments to Additional Paid in Capital, Equity Component of Convertible Debt, Subsequent Adjustments\"}"
+      },
+      "cluster": 38,
+      "magnitude_class": "high",
+      "stability": 1.4509690999984741,
+      "flips": 14,
+      "fingerprint": "1110110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1413447_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalWarrantIssued\", \"value\": 168000000, \"unit\": \"USD\", \"period_end\": \"2016-12-31\", \"form\": \"20-F\", \"company_cik\": \"1413447\", \"filed\": \"2019-03-01\", \"label\": \"Adjustments to Additional Paid in Capital, Warrant Issued\"}"
+      },
+      "cluster": 34,
+      "magnitude_class": "high",
+      "stability": 1.2980737686157227,
+      "flips": 15,
+      "fingerprint": "1110111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_721371_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 58083000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"721371\", \"filed\": \"2026-02-05\", \"label\": \"Assets\"}"
+      },
+      "cluster": 46,
+      "magnitude_class": "high",
+      "stability": 1.6510692834854126,
+      "flips": 12,
+      "fingerprint": "1110111001111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_721371_AssetsFairValueDisclosure",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsFairValueDisclosure\", \"value\": 809000000, \"unit\": \"USD\", \"period_end\": \"2015-03-31\", \"form\": \"10-Q\", \"company_cik\": \"721371\", \"filed\": \"2015-05-05\", \"label\": \"Assets, Fair Value Disclosure\"}"
+      },
+      "cluster": 45,
+      "magnitude_class": "high",
+      "stability": 1.3795394897460938,
+      "flips": 13,
+      "fingerprint": "1111111001111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1120193_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 745000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1120193\", \"filed\": \"2026-02-12\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 50,
+      "magnitude_class": "high",
+      "stability": 1.3514620065689087,
+      "flips": 15,
+      "fingerprint": "1111111111111101",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1393311_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 20208604000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1393311\", \"filed\": \"2026-02-12\", \"label\": \"Assets\"}"
+      },
+      "cluster": 5,
+      "magnitude_class": "high",
+      "stability": 1.5459412336349487,
+      "flips": 15,
+      "fingerprint": "1111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1783180_AmortizationOfIntangibleAssets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfIntangibleAssets\", \"value\": 884000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1783180\", \"filed\": \"2026-02-05\", \"label\": \"Amortization of Intangible Assets\"}"
+      },
+      "cluster": 19,
+      "magnitude_class": "medium",
+      "stability": 0.6170316934585571,
+      "flips": 14,
+      "fingerprint": "1011111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1783180_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent\", \"value\": 592000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1783180\", \"filed\": \"2026-02-05\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets, Current\"}"
+      },
+      "cluster": 19,
+      "magnitude_class": "high",
+      "stability": 1.0963728427886963,
+      "flips": 14,
+      "fingerprint": "1011111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1099800_AccruedIncomeTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedIncomeTaxesCurrent\", \"value\": 192500000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1099800\", \"filed\": \"2026-02-25\", \"label\": \"Accrued Income Taxes, Current\"}"
+      },
+      "cluster": 5,
+      "magnitude_class": "high",
+      "stability": 1.5348135232925415,
+      "flips": 15,
+      "fingerprint": "1111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1067701_CapitalLeasesFutureMinimumPaymentsDueCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CapitalLeasesFutureMinimumPaymentsDueCurrent\", \"value\": 47000000, \"unit\": \"USD\", \"period_end\": \"2018-12-31\", \"form\": \"10-K\", \"company_cik\": \"1067701\", \"filed\": \"2019-01-23\", \"label\": \"Capital Leases, Future Minimum Payments Due, Next Twelve Months\"}"
+      },
+      "cluster": 44,
+      "magnitude_class": "high",
+      "stability": 1.4229679107666016,
+      "flips": 13,
+      "fingerprint": "1101010111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_56873_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax\", \"value\": -14000000, \"unit\": \"USD\", \"period_end\": \"2013-02-02\", \"form\": \"10-K\", \"company_cik\": \"56873\", \"filed\": \"2013-04-02\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Cumulative Changes in Net Gain (Loss) from Cash Flow Hedges, Effect Net of Tax\"}"
+      },
+      "cluster": 39,
+      "magnitude_class": "high",
+      "stability": 1.1823431253433228,
+      "flips": 14,
+      "fingerprint": "0111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_56873_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent\", \"value\": 589000000, \"unit\": \"USD\", \"period_end\": \"2024-08-17\", \"form\": \"10-Q\", \"company_cik\": \"56873\", \"filed\": \"2024-09-20\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets, Current\"}"
+      },
+      "cluster": 36,
+      "magnitude_class": "high",
+      "stability": 1.0165648460388184,
+      "flips": 14,
+      "fingerprint": "1111111010111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1178670_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 1080197000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1178670\", \"filed\": \"2026-02-12\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 17,
+      "magnitude_class": "high",
+      "stability": 1.1400351524353027,
+      "flips": 14,
+      "fingerprint": "1111110101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_27904_AociTaxAttributableToParent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AociTaxAttributableToParent\", \"value\": 282000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"27904\", \"filed\": \"2026-02-11\", \"label\": \"AOCI Tax, Attributable to Parent\"}"
+      },
+      "cluster": 48,
+      "magnitude_class": "high",
+      "stability": 1.3933950662612915,
+      "flips": 14,
+      "fingerprint": "1111110110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1041061_AccrualForTaxesOtherThanIncomeTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccrualForTaxesOtherThanIncomeTaxesCurrent\", \"value\": 52000000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"1041061\", \"filed\": \"2020-02-20\", \"label\": \"Accrual for Taxes Other than Income Taxes, Current\"}"
+      },
+      "cluster": 3,
+      "magnitude_class": "high",
+      "stability": 1.4500707387924194,
+      "flips": 15,
+      "fingerprint": "1111111111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1050446_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 61641082000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1050446\", \"filed\": \"2026-02-19\", \"label\": \"Assets\"}"
+      },
+      "cluster": 27,
+      "magnitude_class": "high",
+      "stability": 1.237686276435852,
+      "flips": 14,
+      "fingerprint": "0111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1633917_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 8114000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1633917\", \"filed\": \"2026-02-03\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 36,
+      "magnitude_class": "medium",
+      "stability": 0.7915613055229187,
+      "flips": 14,
+      "fingerprint": "1111111010111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1633917_AvailableForSaleSecuritiesAmortizedCost",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecuritiesAmortizedCost\", \"value\": 4247000000, \"unit\": \"USD\", \"period_end\": \"2018-03-31\", \"form\": \"10-Q\", \"company_cik\": \"1633917\", \"filed\": \"2018-04-26\", \"label\": \"Available-for-sale Securities, Amortized Cost Basis\"}"
+      },
+      "cluster": 6,
+      "magnitude_class": "medium",
+      "stability": 0.7071676254272461,
+      "flips": 14,
+      "fingerprint": "1111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_35527_AccumulatedDepreciationDepletionAndAmortizationExpensePropertyPlantAndEquipmentCurrentCharge",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationExpensePropertyPlantAndEquipmentCurrentCharge\", \"value\": 225000000, \"unit\": \"USD\", \"period_end\": \"2010-12-31\", \"form\": \"10-K\", \"company_cik\": \"35527\", \"filed\": \"2011-02-28\", \"label\": \"Accumulated Depreciation, Depletion and Amortization Expense, Property, Plant and Equipment, Current Charge (Deprecated 2011-01-31)\"}"
+      },
+      "cluster": 33,
+      "magnitude_class": "medium",
+      "stability": 0.5861732959747314,
+      "flips": 14,
+      "fingerprint": "1110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_35527_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax\", \"value\": 422000000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"35527\", \"filed\": \"2020-03-02\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Cumulative Changes in Net Gain (Loss) from Cash Flow Hedges, Effect Net of Tax\"}"
+      },
+      "cluster": 35,
+      "magnitude_class": "high",
+      "stability": 1.4216543436050415,
+      "flips": 14,
+      "fingerprint": "1111011110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_35527_AssetsThatContinueToBeRecognizedSecuritizedOrAssetBackedFinancingArrangementAssetsAndAnyOtherFinancialAssetsManagedTogetherNetCreditLossesDuringPeriod",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsThatContinueToBeRecognizedSecuritizedOrAssetBackedFinancingArrangementAssetsAndAnyOtherFinancialAssetsManagedTogetherNetCreditLossesDuringPeriod\", \"value\": 99000000, \"unit\": \"USD\", \"period_end\": \"2019-09-30\", \"form\": \"10-Q\", \"company_cik\": \"35527\", \"filed\": \"2019-11-08\", \"label\": \"Assets that Continue to be Recognized, Securitized or Asset-backed Financing Arrangement Assets and any Other Financial Assets Managed Together, Net Credit Losses During Period\"}"
+      },
+      "cluster": 47,
+      "magnitude_class": "medium",
+      "stability": 0.7956584095954895,
+      "flips": 13,
+      "fingerprint": "0110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1561550_AccruedPayrollTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedPayrollTaxesCurrent\", \"value\": 1626000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"1561550\", \"filed\": \"2020-02-25\", \"label\": \"Accrued Payroll Taxes, Current\"}"
+      },
+      "cluster": 8,
+      "magnitude_class": "high",
+      "stability": 1.500146508216858,
+      "flips": 15,
+      "fingerprint": "0111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1561550_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 6643844000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1561550\", \"filed\": \"2026-02-18\", \"label\": \"Assets\"}"
+      },
+      "cluster": 33,
+      "magnitude_class": "high",
+      "stability": 1.4241913557052612,
+      "flips": 14,
+      "fingerprint": "1110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1172724_AssetRetirementObligationAccretionExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetRetirementObligationAccretionExpense\", \"value\": 13900000, \"unit\": \"USD\", \"period_end\": \"2015-12-31\", \"form\": \"20-F\", \"company_cik\": \"1172724\", \"filed\": \"2016-04-13\", \"label\": \"Asset Retirement Obligation, Accretion Expense\"}"
+      },
+      "cluster": 6,
+      "magnitude_class": "medium",
+      "stability": 0.8568981289863586,
+      "flips": 14,
+      "fingerprint": "1111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1315098_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 684441000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1315098\", \"filed\": \"2026-02-11\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 26,
+      "magnitude_class": "high",
+      "stability": 1.557879090309143,
+      "flips": 14,
+      "fingerprint": "0111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_946581_AccruedMarketingCostsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedMarketingCostsCurrent\", \"value\": 77100000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"946581\", \"filed\": \"2026-02-04\", \"label\": \"Accrued Marketing Costs, Current\"}"
+      },
+      "cluster": 44,
+      "magnitude_class": "high",
+      "stability": 1.3510689735412598,
+      "flips": 14,
+      "fingerprint": "1101110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1588489_InvestmentOwnedAtCost",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"InvestmentOwnedAtCost\", \"value\": 2841465000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1588489\", \"filed\": \"2026-02-25\", \"label\": \"Investment Owned, at Cost\"}"
+      },
+      "cluster": 32,
+      "magnitude_class": "high",
+      "stability": 1.7359424829483032,
+      "flips": 13,
+      "fingerprint": "1111110011011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1125259_DerivativeInstrumentsNotDesignatedAsHedgingInstrumentsGainLossNet",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"DerivativeInstrumentsNotDesignatedAsHedgingInstrumentsGainLossNet\", \"value\": -13000000, \"unit\": \"USD\", \"period_end\": \"2015-05-31\", \"form\": \"10-Q\", \"company_cik\": \"1125259\", \"filed\": \"2015-07-02\", \"label\": \"Derivative Instruments Not Designated as Hedging Instruments, Gain (Loss), Net\"}"
+      },
+      "cluster": 34,
+      "magnitude_class": "high",
+      "stability": 1.2935372591018677,
+      "flips": 15,
+      "fingerprint": "1110111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1396009_AllowanceForDoubtfulAccountsReceivableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivableCurrent\", \"value\": 10500000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1396009\", \"filed\": \"2026-02-19\", \"label\": \"Accounts Receivable, Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 7,
+      "magnitude_class": "medium",
+      "stability": 0.823506772518158,
+      "flips": 14,
+      "fingerprint": "1111111111011011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_827054_AllocatedShareBasedCompensationExpenseNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllocatedShareBasedCompensationExpenseNetOfTax\", \"value\": 57500000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"827054\", \"filed\": \"2026-02-05\", \"label\": \"Share-based Payment Arrangement, Expense, after Tax\"}"
+      },
+      "cluster": 39,
+      "magnitude_class": "high",
+      "stability": 1.3726991415023804,
+      "flips": 15,
+      "fingerprint": "1111111111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_947484_AccruedLiabilitiesAndOtherLiabilities",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesAndOtherLiabilities\", \"value\": 1989275000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"947484\", \"filed\": \"2020-02-28\", \"label\": \"Accrued Liabilities and Other Liabilities\"}"
+      },
+      "cluster": 14,
+      "magnitude_class": "high",
+      "stability": 1.451727271080017,
+      "flips": 14,
+      "fingerprint": "1111111001111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1069183_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -11806000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1069183\", \"filed\": \"2026-02-25\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 45,
+      "magnitude_class": "high",
+      "stability": 1.4863429069519043,
+      "flips": 15,
+      "fingerprint": "1111101111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1327811_AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax\", \"value\": 36000000, \"unit\": \"USD\", \"period_end\": \"2026-01-31\", \"form\": \"10-K\", \"company_cik\": \"1327811\", \"filed\": \"2026-03-06\", \"label\": \"Debt Securities, Available-for-sale, Accumulated Gross Unrealized Gain, before Tax\"}"
+      },
+      "cluster": 39,
+      "magnitude_class": "high",
+      "stability": 1.400189995765686,
+      "flips": 13,
+      "fingerprint": "1111011110101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_943819_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 3818801000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"943819\", \"filed\": \"2026-01-30\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 12,
+      "magnitude_class": "high",
+      "stability": 1.5699528455734253,
+      "flips": 12,
+      "fingerprint": "1111110100011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1780312_CashAndCashEquivalentsPeriodIncreaseDecrease",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashAndCashEquivalentsPeriodIncreaseDecrease\", \"value\": 26499, \"unit\": \"USD\", \"period_end\": \"2020-03-31\", \"form\": \"10-Q\", \"company_cik\": \"1780312\", \"filed\": \"2020-05-14\", \"label\": \"Cash and Cash Equivalents, Period Increase (Decrease)\"}"
+      },
+      "cluster": 36,
+      "magnitude_class": "medium",
+      "stability": 0.7718399167060852,
+      "flips": 13,
+      "fingerprint": "1110011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_2035989_AccruedEnvironmentalLossContingenciesNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedEnvironmentalLossContingenciesNoncurrent\", \"value\": 60000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"2035989\", \"filed\": \"2026-02-18\", \"label\": \"Accrued Environmental Loss Contingencies, Noncurrent\"}"
+      },
+      "cluster": 32,
+      "magnitude_class": "medium",
+      "stability": 0.9010736346244812,
+      "flips": 14,
+      "fingerprint": "1111111011011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1020569_AccountsReceivableNetCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsReceivableNetCurrent\", \"value\": 1443669000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1020569\", \"filed\": \"2026-02-12\", \"label\": \"Accounts Receivable, after Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 7,
+      "magnitude_class": "medium",
+      "stability": 0.7740998268127441,
+      "flips": 14,
+      "fingerprint": "1111111101011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1781335_AccountsPayableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableCurrent\", \"value\": 2142000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1781335\", \"filed\": \"2026-02-05\", \"label\": \"Accounts Payable, Current\"}"
+      },
+      "cluster": 36,
+      "magnitude_class": "medium",
+      "stability": 0.983482837677002,
+      "flips": 12,
+      "fingerprint": "0111011011111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1781335_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -1087000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1781335\", \"filed\": \"2026-02-05\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 6,
+      "magnitude_class": "high",
+      "stability": 1.4580637216567993,
+      "flips": 14,
+      "fingerprint": "1111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1781335_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 10653000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1781335\", \"filed\": \"2026-02-05\", \"label\": \"Assets\"}"
+      },
+      "cluster": 42,
+      "magnitude_class": "high",
+      "stability": 1.1232441663742065,
+      "flips": 13,
+      "fingerprint": "1111010111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1781335_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 6501000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1781335\", \"filed\": \"2026-02-05\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 39,
+      "magnitude_class": "high",
+      "stability": 1.6622060537338257,
+      "flips": 15,
+      "fingerprint": "1111111111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_100517_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 27466000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"100517\", \"filed\": \"2026-02-12\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 10,
+      "magnitude_class": "high",
+      "stability": 1.4701741933822632,
+      "flips": 15,
+      "fingerprint": "1101111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_100517_AircraftRental",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AircraftRental\", \"value\": 252000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"100517\", \"filed\": \"2026-02-12\", \"label\": \"Aircraft Rental\"}"
+      },
+      "cluster": 19,
+      "magnitude_class": "high",
+      "stability": 1.0534144639968872,
+      "flips": 14,
+      "fingerprint": "1011111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_100517_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 76448000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"100517\", \"filed\": \"2026-02-12\", \"label\": \"Assets\"}"
+      },
+      "cluster": 49,
+      "magnitude_class": "high",
+      "stability": 1.1268125772476196,
+      "flips": 12,
+      "fingerprint": "1110010111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1524472_CashAndCashEquivalentsAtCarryingValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashAndCashEquivalentsAtCarryingValue\", \"value\": 1479000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1524472\", \"filed\": \"2026-02-25\", \"label\": \"Cash and Cash Equivalents, at Carrying Value\"}"
+      },
+      "cluster": 22,
+      "magnitude_class": "high",
+      "stability": 1.1761910915374756,
+      "flips": 14,
+      "fingerprint": "1111110111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1289490_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 29264046000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1289490\", \"filed\": \"2026-02-20\", \"label\": \"Assets\"}"
+      },
+      "cluster": 50,
+      "magnitude_class": "medium",
+      "stability": 0.8971357345581055,
+      "flips": 13,
+      "fingerprint": "0111110111111101",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1681459_AssetsHeldForSaleNotPartOfDisposalGroupCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsHeldForSaleNotPartOfDisposalGroupCurrent\", \"value\": 17600000, \"unit\": \"USD\", \"period_end\": \"2019-09-30\", \"form\": \"10-Q\", \"company_cik\": \"1681459\", \"filed\": \"2019-11-12\", \"label\": \"Assets Held-for-sale, Not Part of Disposal Group, Current\"}"
+      },
+      "cluster": 25,
+      "magnitude_class": "medium",
+      "stability": 0.8627877831459045,
+      "flips": 14,
+      "fingerprint": "1111111101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_875045_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 2931200000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"875045\", \"filed\": \"2026-02-06\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 31,
+      "magnitude_class": "high",
+      "stability": 1.3048540353775024,
+      "flips": 14,
+      "fingerprint": "1011011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1637459_AmortizationOfDebtDiscountPremium",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfDebtDiscountPremium\", \"value\": 15000000, \"unit\": \"USD\", \"period_end\": \"2025-12-27\", \"form\": \"10-K\", \"company_cik\": \"1637459\", \"filed\": \"2026-02-12\", \"label\": \"Amortization of Debt Discount (Premium)\"}"
+      },
+      "cluster": 31,
+      "magnitude_class": "medium",
+      "stability": 0.9752236008644104,
+      "flips": 14,
+      "fingerprint": "1111111101111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_895126_AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments\", \"value\": 2000000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"895126\", \"filed\": \"2022-02-24\", \"label\": \"Adjustments to Additional Paid in Capital, Equity Component of Convertible Debt, Subsequent Adjustments\"}"
+      },
+      "cluster": 23,
+      "magnitude_class": "high",
+      "stability": 1.932442545890808,
+      "flips": 13,
+      "fingerprint": "1111110101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1082554_AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt\", \"value\": 10800000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"1082554\", \"filed\": \"2021-02-24\", \"label\": \"Adjustments to Additional Paid in Capital, Equity Component of Convertible Debt\"}"
+      },
+      "cluster": 9,
+      "magnitude_class": "high",
+      "stability": 1.2837930917739868,
+      "flips": 14,
+      "fingerprint": "1111011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1713445_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\", \"value\": 391427000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1713445\", \"filed\": \"2026-02-06\", \"label\": \"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect\"}"
+      },
+      "cluster": 29,
+      "magnitude_class": "medium",
+      "stability": 0.975996196269989,
+      "flips": 14,
+      "fingerprint": "1011111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1037646_AmortizationOfAcquiredIntangibleAssets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfAcquiredIntangibleAssets\", \"value\": 1300000, \"unit\": \"USD\", \"period_end\": \"2013-03-31\", \"form\": \"10-Q\", \"company_cik\": \"1037646\", \"filed\": \"2013-05-03\", \"label\": \"Amortization of Acquired Intangible Assets (Deprecated 2013-01-31)\"}"
+      },
+      "cluster": 50,
+      "magnitude_class": "high",
+      "stability": 1.4482043981552124,
+      "flips": 14,
+      "fingerprint": "1111111011101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_814547_AccountsReceivableNetNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsReceivableNetNoncurrent\", \"value\": 31462000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"814547\", \"filed\": \"2026-01-28\", \"label\": \"Accounts Receivable, after Allowance for Credit Loss, Noncurrent\"}"
+      },
+      "cluster": 15,
+      "magnitude_class": "medium",
+      "stability": 0.6140367388725281,
+      "flips": 15,
+      "fingerprint": "1111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1876042_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalWarrantIssued\", \"value\": 23592000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1876042\", \"filed\": \"2026-03-09\", \"label\": \"Adjustments to Additional Paid in Capital, Warrant Issued\"}"
+      },
+      "cluster": 25,
+      "magnitude_class": "high",
+      "stability": 1.522171139717102,
+      "flips": 14,
+      "fingerprint": "1111111101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1590364_BelowMarketLeaseNet",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"BelowMarketLeaseNet\", \"value\": 5556000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1590364\", \"filed\": \"2026-02-27\", \"label\": \"Below Market Lease, Net\"}"
+      },
+      "cluster": 33,
+      "magnitude_class": "medium",
+      "stability": 0.6118704676628113,
+      "flips": 14,
+      "fingerprint": "1110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1754301_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 1013000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1754301\", \"filed\": \"2026-02-04\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 48,
+      "magnitude_class": "high",
+      "stability": 1.1119771003723145,
+      "flips": 14,
+      "fingerprint": "1111110110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1996862_AllowanceForNotesAndLoansReceivableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForNotesAndLoansReceivableCurrent\", \"value\": 20000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1996862\", \"filed\": \"2026-02-19\", \"label\": \"Financing Receivable, Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 6,
+      "magnitude_class": "medium",
+      "stability": 0.7268428802490234,
+      "flips": 14,
+      "fingerprint": "1111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1096343_AvailableForSaleDebtSecuritiesAmortizedCostBasis",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAmortizedCostBasis\", \"value\": 17895918000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1096343\", \"filed\": \"2026-02-26\", \"label\": \"Debt Securities, Available-for-sale, Amortized Cost\"}"
+      },
+      "cluster": 8,
+      "magnitude_class": "medium",
+      "stability": 0.9689375758171082,
+      "flips": 15,
+      "fingerprint": "0111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_916365_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 3017177000, \"unit\": \"USD\", \"period_end\": \"2025-12-27\", \"form\": \"10-K\", \"company_cik\": \"916365\", \"filed\": \"2026-02-19\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 41,
+      "magnitude_class": "medium",
+      "stability": 0.6568939089775085,
+      "flips": 13,
+      "fingerprint": "1100111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1166003_AllowanceForDoubtfulAccountsReceivableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AllowanceForDoubtfulAccountsReceivableCurrent\", \"value\": 40000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1166003\", \"filed\": \"2026-02-05\", \"label\": \"Accounts Receivable, Allowance for Credit Loss, Current\"}"
+      },
+      "cluster": 45,
+      "magnitude_class": "high",
+      "stability": 1.218776822090149,
+      "flips": 13,
+      "fingerprint": "1111111001111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_920148_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 3270100000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"920148\", \"filed\": \"2026-02-24\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 38,
+      "magnitude_class": "high",
+      "stability": 1.288514494895935,
+      "flips": 14,
+      "fingerprint": "1111011011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_920148_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 18392700000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"920148\", \"filed\": \"2026-02-24\", \"label\": \"Assets\"}"
+      },
+      "cluster": 23,
+      "magnitude_class": "high",
+      "stability": 1.5496858358383179,
+      "flips": 14,
+      "fingerprint": "1111010111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_91576_AssetsOfDisposalGroupIncludingDiscontinuedOperation",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperation\", \"value\": 211000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"91576\", \"filed\": \"2026-02-23\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets\"}"
+      },
+      "cluster": 13,
+      "magnitude_class": "high",
+      "stability": 1.2329672574996948,
+      "flips": 15,
+      "fingerprint": "1011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1757898_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -42700000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1757898\", \"filed\": \"2026-02-06\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 37,
+      "magnitude_class": "high",
+      "stability": 1.384272575378418,
+      "flips": 14,
+      "fingerprint": "1111111110111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_85535_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 377446000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"85535\", \"filed\": \"2026-02-19\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 43,
+      "magnitude_class": "medium",
+      "stability": 0.9817709922790527,
+      "flips": 14,
+      "fingerprint": "1111111110011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_108312_AccrualForTaxesOtherThanIncomeTaxesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccrualForTaxesOtherThanIncomeTaxesCurrent\", \"value\": 18746000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"108312\", \"filed\": \"2026-02-04\", \"label\": \"Accrual for Taxes Other than Income Taxes, Current\"}"
+      },
+      "cluster": 16,
+      "magnitude_class": "high",
+      "stability": 1.4493361711502075,
+      "flips": 15,
+      "fingerprint": "1111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1560385_AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt\", \"value\": 62000000, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"1560385\", \"filed\": \"2022-02-25\", \"label\": \"Adjustments to Additional Paid in Capital, Equity Component of Convertible Debt\"}"
+      },
+      "cluster": 51,
+      "magnitude_class": "high",
+      "stability": 1.1863205432891846,
+      "flips": 14,
+      "fingerprint": "1110111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_40704_AccountsPayableCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableCurrent\", \"value\": 3634400000, \"unit\": \"USD\", \"period_end\": \"2026-02-22\", \"form\": \"10-Q\", \"company_cik\": \"40704\", \"filed\": \"2026-03-18\", \"label\": \"Accounts Payable, Current\"}"
+      },
+      "cluster": 21,
+      "magnitude_class": "high",
+      "stability": 1.0880502462387085,
+      "flips": 14,
+      "fingerprint": "0111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1126328_AssetsDesignatedToClosedBlockEquitySecuritiesAtFairValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsDesignatedToClosedBlockEquitySecuritiesAtFairValue\", \"value\": 900000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1126328\", \"filed\": \"2026-02-18\", \"label\": \"Assets Designated to Closed Block, Equity Securities, at Fair Value\"}"
+      },
+      "cluster": 42,
+      "magnitude_class": "medium",
+      "stability": 0.7221466898918152,
+      "flips": 13,
+      "fingerprint": "1100011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_928876_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 37768000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"6-K\", \"company_cik\": \"928876\", \"filed\": \"2026-03-02\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 47,
+      "magnitude_class": "medium",
+      "stability": 0.7309391498565674,
+      "flips": 13,
+      "fingerprint": "0110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_75677_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 302100000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"75677\", \"filed\": \"2026-02-26\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 7,
+      "magnitude_class": "high",
+      "stability": 1.0393253564834595,
+      "flips": 14,
+      "fingerprint": "1111111101011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_91440_AccruedMarketingCostsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedMarketingCostsCurrent\", \"value\": 38500000, \"unit\": \"USD\", \"period_end\": \"2026-01-03\", \"form\": \"10-K\", \"company_cik\": \"91440\", \"filed\": \"2026-02-12\", \"label\": \"Accrued Marketing Costs, Current\"}"
+      },
+      "cluster": 20,
+      "magnitude_class": "high",
+      "stability": 1.3500661849975586,
+      "flips": 14,
+      "fingerprint": "1111110011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1874178_CashAndCashEquivalentsAtCarryingValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashAndCashEquivalentsAtCarryingValue\", \"value\": 3579000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1874178\", \"filed\": \"2026-02-12\", \"label\": \"Cash and Cash Equivalents, at Carrying Value\"}"
+      },
+      "cluster": 40,
+      "magnitude_class": "high",
+      "stability": 1.2318159341812134,
+      "flips": 14,
+      "fingerprint": "1111011111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1874178_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\", \"value\": -1715000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1874178\", \"filed\": \"2026-02-12\", \"label\": \"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect\"}"
+      },
+      "cluster": 10,
+      "magnitude_class": "medium",
+      "stability": 0.8984501957893372,
+      "flips": 15,
+      "fingerprint": "1101111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1736297_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect\", \"value\": 87640000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1736297\", \"filed\": \"2026-02-20\", \"label\": \"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect\"}"
+      },
+      "cluster": 14,
+      "magnitude_class": "high",
+      "stability": 1.4844269752502441,
+      "flips": 12,
+      "fingerprint": "1101011011101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_51253_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 2796000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"51253\", \"filed\": \"2026-02-27\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 11,
+      "magnitude_class": "high",
+      "stability": 1.1214350461959839,
+      "flips": 15,
+      "fingerprint": "1111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_352541_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 24991000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"352541\", \"filed\": \"2026-02-20\", \"label\": \"Assets\"}"
+      },
+      "cluster": 27,
+      "magnitude_class": "high",
+      "stability": 1.3463493585586548,
+      "flips": 14,
+      "fingerprint": "0111110111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_906163_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedAssets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedAssets\", \"value\": 47000000, \"unit\": \"USD\", \"period_end\": \"2012-12-31\", \"form\": \"10-K\", \"company_cik\": \"906163\", \"filed\": \"2014-02-20\", \"label\": \"Business Combination, Recognized Identifiable Assets Acquired and Liabilities Assumed, Assets\"}"
+      },
+      "cluster": 18,
+      "magnitude_class": "high",
+      "stability": 1.2761729955673218,
+      "flips": 14,
+      "fingerprint": "1111110111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1642896_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 324309000, \"unit\": \"USD\", \"period_end\": \"2026-01-31\", \"form\": \"10-K\", \"company_cik\": \"1642896\", \"filed\": \"2026-03-16\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 15,
+      "magnitude_class": "high",
+      "stability": 1.4493709802627563,
+      "flips": 15,
+      "fingerprint": "1111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1852131_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 33855000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1852131\", \"filed\": \"2026-01-30\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 4,
+      "magnitude_class": "medium",
+      "stability": 0.6832957863807678,
+      "flips": 15,
+      "fingerprint": "1111111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1101302_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -71400000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1101302\", \"filed\": \"2026-02-11\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 37,
+      "magnitude_class": "high",
+      "stability": 1.5356546640396118,
+      "flips": 14,
+      "fingerprint": "1111111100111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1101302_AssetsHeldForSaleAtCarryingValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsHeldForSaleAtCarryingValue\", \"value\": 6000000, \"unit\": \"USD\", \"period_end\": \"2011-12-31\", \"form\": \"10-K\", \"company_cik\": \"1101302\", \"filed\": \"2012-02-24\", \"label\": \"Assets Held-for-sale, at Carrying Value (Deprecated 2014-01-31)\"}"
+      },
+      "cluster": 15,
+      "magnitude_class": "medium",
+      "stability": 0.8524570465087891,
+      "flips": 15,
+      "fingerprint": "1111111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1046102_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 1784800000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1046102\", \"filed\": \"2026-02-25\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 46,
+      "magnitude_class": "high",
+      "stability": 1.5408140420913696,
+      "flips": 14,
+      "fingerprint": "1111011111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_47217_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -654000000, \"unit\": \"USD\", \"period_end\": \"2026-01-31\", \"form\": \"10-Q\", \"company_cik\": \"47217\", \"filed\": \"2026-02-25\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 38,
+      "magnitude_class": "high",
+      "stability": 1.4088048934936523,
+      "flips": 13,
+      "fingerprint": "1111111111100110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_106535_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 16613000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"106535\", \"filed\": \"2026-02-13\", \"label\": \"Assets\"}"
+      },
+      "cluster": 25,
+      "magnitude_class": "medium",
+      "stability": 0.9877605438232422,
+      "flips": 14,
+      "fingerprint": "1111111101111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1659166_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent\", \"value\": 20800000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1659166\", \"filed\": \"2026-02-25\", \"label\": \"Disposal Group, Including Discontinued Operation, Assets, Current\"}"
+      },
+      "cluster": 30,
+      "magnitude_class": "medium",
+      "stability": 0.723384439945221,
+      "flips": 14,
+      "fingerprint": "0011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1324948_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 7200000, \"unit\": \"USD\", \"period_end\": \"2025-12-27\", \"form\": \"10-Q\", \"company_cik\": \"1324948\", \"filed\": \"2026-02-05\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 26,
+      "magnitude_class": "high",
+      "stability": 1.5014909505844116,
+      "flips": 14,
+      "fingerprint": "0111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1792580_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 20390000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1792580\", \"filed\": \"2026-02-23\", \"label\": \"Assets\"}"
+      },
+      "cluster": 42,
+      "magnitude_class": "high",
+      "stability": 1.6905878782272339,
+      "flips": 13,
+      "fingerprint": "1100011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_920522_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 10224000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"920522\", \"filed\": \"2026-02-20\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 48,
+      "magnitude_class": "high",
+      "stability": 1.0933408737182617,
+      "flips": 14,
+      "fingerprint": "1111110110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1048695_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 305188000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1048695\", \"filed\": \"2026-02-05\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 22,
+      "magnitude_class": "high",
+      "stability": 1.1938947439193726,
+      "flips": 13,
+      "fingerprint": "1111010111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1071739_AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax\", \"value\": 2214000, \"unit\": \"USD\", \"period_end\": \"2014-06-30\", \"form\": \"10-Q\", \"company_cik\": \"1071739\", \"filed\": \"2014-07-22\", \"label\": \"AOCI, Debt Securities, Available-for-sale, Adjustment, after Tax\"}"
+      },
+      "cluster": 21,
+      "magnitude_class": "medium",
+      "stability": 0.8935028910636902,
+      "flips": 14,
+      "fingerprint": "1111101101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1880661_GeneralAndAdministrativeExpense",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"GeneralAndAdministrativeExpense\", \"value\": 702173000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1880661\", \"filed\": \"2026-02-17\", \"label\": \"General and Administrative Expense\"}"
+      },
+      "cluster": 6,
+      "magnitude_class": "high",
+      "stability": 1.4696635007858276,
+      "flips": 14,
+      "fingerprint": "1111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_864749_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 9312000000, \"unit\": \"USD\", \"period_end\": \"2026-01-02\", \"form\": \"10-K\", \"company_cik\": \"864749\", \"filed\": \"2026-02-25\", \"label\": \"Assets\"}"
+      },
+      "cluster": 51,
+      "magnitude_class": "medium",
+      "stability": 0.7743934988975525,
+      "flips": 13,
+      "fingerprint": "1110110111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1049502_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 859000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1049502\", \"filed\": \"2026-02-24\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 28,
+      "magnitude_class": "high",
+      "stability": 1.4495264291763306,
+      "flips": 14,
+      "fingerprint": "1111111011111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1025378_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 17990232000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1025378\", \"filed\": \"2026-02-11\", \"label\": \"Assets\"}"
+      },
+      "cluster": 41,
+      "magnitude_class": "medium",
+      "stability": 0.9133560657501221,
+      "flips": 14,
+      "fingerprint": "1111011111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1820953_AccountsPayableCurrentAndNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableCurrentAndNoncurrent\", \"value\": 57228000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1820953\", \"filed\": \"2026-02-05\", \"label\": \"Accounts Payable\"}"
+      },
+      "cluster": 13,
+      "magnitude_class": "high",
+      "stability": 1.29603910446167,
+      "flips": 15,
+      "fingerprint": "1011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1043219_AccountsPayableAndOtherAccruedLiabilities",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableAndOtherAccruedLiabilities\", \"value\": 272362000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1043219\", \"filed\": \"2026-02-12\", \"label\": \"Accounts Payable and Other Accrued Liabilities\"}"
+      },
+      "cluster": 26,
+      "magnitude_class": "high",
+      "stability": 1.3132047653198242,
+      "flips": 13,
+      "fingerprint": "1111010101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1957132_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 335347000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1957132\", \"filed\": \"2026-03-02\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 24,
+      "magnitude_class": "medium",
+      "stability": 0.8817422986030579,
+      "flips": 14,
+      "fingerprint": "1101011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1957132_CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents\", \"value\": 777289000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1957132\", \"filed\": \"2026-03-02\", \"label\": \"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents\"}"
+      },
+      "cluster": 28,
+      "magnitude_class": "medium",
+      "stability": 0.976412832736969,
+      "flips": 13,
+      "fingerprint": "1101011110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1743881_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 8691000, \"unit\": \"USD\", \"period_end\": \"2020-09-30\", \"form\": \"10-Q\", \"company_cik\": \"1743881\", \"filed\": \"2020-11-05\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 47,
+      "magnitude_class": "medium",
+      "stability": 0.9545125961303711,
+      "flips": 14,
+      "fingerprint": "1100111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1564708_AssetImpairmentCharges",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetImpairmentCharges\", \"value\": 13000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1564708\", \"filed\": \"2026-02-06\", \"label\": \"Asset Impairment Charges\"}"
+      },
+      "cluster": 29,
+      "magnitude_class": "high",
+      "stability": 1.3537009954452515,
+      "flips": 14,
+      "fingerprint": "1111110111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1037976_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 17801100000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1037976\", \"filed\": \"2026-02-19\", \"label\": \"Assets\"}"
+      },
+      "cluster": 22,
+      "magnitude_class": "medium",
+      "stability": 0.8320366740226746,
+      "flips": 13,
+      "fingerprint": "1111010111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_832101_AvailableForSaleSecuritiesFairValueDisclosure",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecuritiesFairValueDisclosure\", \"value\": 2789000, \"unit\": \"USD\", \"period_end\": \"2013-03-31\", \"form\": \"10-Q\", \"company_cik\": \"832101\", \"filed\": \"2013-05-06\", \"label\": \"Available-for-sale Securities, Fair Value Disclosure (Deprecated 2013-01-31)\"}"
+      },
+      "cluster": 51,
+      "magnitude_class": "medium",
+      "stability": 0.7277461886405945,
+      "flips": 14,
+      "fingerprint": "1110111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1177394_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 475539000, \"unit\": \"USD\", \"period_end\": \"2025-11-30\", \"form\": \"10-K\", \"company_cik\": \"1177394\", \"filed\": \"2026-01-27\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 4,
+      "magnitude_class": "medium",
+      "stability": 0.653764545917511,
+      "flips": 15,
+      "fingerprint": "1111111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1468174_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 14036000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1468174\", \"filed\": \"2026-02-13\", \"label\": \"Assets\"}"
+      },
+      "cluster": 2,
+      "magnitude_class": "medium",
+      "stability": 0.709764301776886,
+      "flips": 15,
+      "fingerprint": "1111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_764478_AdjustmentsToAdditionalPaidInCapitalDividendsInExcessOfRetainedEarnings",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalDividendsInExcessOfRetainedEarnings\", \"value\": -802000000, \"unit\": \"USD\", \"period_end\": \"2024-02-03\", \"form\": \"10-K\", \"company_cik\": \"764478\", \"filed\": \"2024-03-15\", \"label\": \"Adjustments to Additional Paid in Capital, Dividends in Excess of Retained Earnings\"}"
+      },
+      "cluster": 11,
+      "magnitude_class": "medium",
+      "stability": 0.9826399683952332,
+      "flips": 15,
+      "fingerprint": "1111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1618673_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 7370500000, \"unit\": \"USD\", \"period_end\": \"2025-12-27\", \"form\": \"10-Q\", \"company_cik\": \"1618673\", \"filed\": \"2026-02-04\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 46,
+      "magnitude_class": "high",
+      "stability": 1.2572647333145142,
+      "flips": 13,
+      "fingerprint": "0111111101011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1032975_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 817924000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1032975\", \"filed\": \"2026-01-28\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 3,
+      "magnitude_class": "high",
+      "stability": 1.0530261993408203,
+      "flips": 15,
+      "fingerprint": "1111111111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1319161_AmortizationOfFinancingCostsAndDiscounts",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfFinancingCostsAndDiscounts\", \"value\": 1000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1319161\", \"filed\": \"2026-02-09\", \"label\": \"Amortization of Debt Issuance Costs and Discounts\"}"
+      },
+      "cluster": 19,
+      "magnitude_class": "high",
+      "stability": 1.0440317392349243,
+      "flips": 14,
+      "fingerprint": "1011111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_929008_AccountsAndOtherReceivablesNetCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsAndOtherReceivablesNetCurrent\", \"value\": 460300000, \"unit\": \"USD\", \"period_end\": \"2025-09-30\", \"form\": \"10-Q\", \"company_cik\": \"929008\", \"filed\": \"2025-10-30\", \"label\": \"Accounts and Other Receivables, Net, Current\"}"
+      },
+      "cluster": 11,
+      "magnitude_class": "medium",
+      "stability": 0.9647974371910095,
+      "flips": 15,
+      "fingerprint": "1111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1095073_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 62514000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1095073\", \"filed\": \"2026-02-26\", \"label\": \"Assets\"}"
+      },
+      "cluster": 9,
+      "magnitude_class": "high",
+      "stability": 1.5443671941757202,
+      "flips": 14,
+      "fingerprint": "1111011111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1069258_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 2100000, \"unit\": \"USD\", \"period_end\": \"2025-12-28\", \"form\": \"10-K\", \"company_cik\": \"1069258\", \"filed\": \"2026-02-23\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 37,
+      "magnitude_class": "high",
+      "stability": 1.0430755615234375,
+      "flips": 14,
+      "fingerprint": "1111111100111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1433270_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 338847000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1433270\", \"filed\": \"2026-02-11\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 18,
+      "magnitude_class": "high",
+      "stability": 1.0689609050750732,
+      "flips": 14,
+      "fingerprint": "1111110111111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1433270_AssetRetirementObligationLiabilitiesIncurred",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetRetirementObligationLiabilitiesIncurred\", \"value\": 697000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1433270\", \"filed\": \"2026-02-11\", \"label\": \"Asset Retirement Obligation, Liabilities Incurred\"}"
+      },
+      "cluster": 50,
+      "magnitude_class": "medium",
+      "stability": 0.9904711842536926,
+      "flips": 14,
+      "fingerprint": "1111111011111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_2082866_AmortizationMethodQualifiedAffordableHousingProjectInvestments",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationMethodQualifiedAffordableHousingProjectInvestments\", \"value\": 215600000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"2082866\", \"filed\": \"2026-03-02\", \"label\": \"Amortization Method Qualified Affordable Housing Project Investments\"}"
+      },
+      "cluster": 11,
+      "magnitude_class": "high",
+      "stability": 1.6878644227981567,
+      "flips": 15,
+      "fingerprint": "1111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1531152_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 485786000, \"unit\": \"USD\", \"period_end\": \"2018-11-03\", \"form\": \"10-Q\", \"company_cik\": \"1531152\", \"filed\": \"2018-12-07\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 34,
+      "magnitude_class": "medium",
+      "stability": 0.6623650193214417,
+      "flips": 15,
+      "fingerprint": "1110111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_719413_AccumulatedCapitalizedInterestCosts",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedCapitalizedInterestCosts\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2019-12-31\", \"form\": \"10-K\", \"company_cik\": \"719413\", \"filed\": \"2020-02-10\", \"label\": \"Accumulated Capitalized Interest Costs\"}"
+      },
+      "cluster": 24,
+      "magnitude_class": "medium",
+      "stability": 0.9168571829795837,
+      "flips": 14,
+      "fingerprint": "1101011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1097149_AccruedMarketingCostsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedMarketingCostsCurrent\", \"value\": 29941000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1097149\", \"filed\": \"2026-02-27\", \"label\": \"Accrued Marketing Costs, Current\"}"
+      },
+      "cluster": 39,
+      "magnitude_class": "high",
+      "stability": 1.5295480489730835,
+      "flips": 15,
+      "fingerprint": "1111111111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1097149_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 6233693000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1097149\", \"filed\": \"2026-02-27\", \"label\": \"Assets\"}"
+      },
+      "cluster": 49,
+      "magnitude_class": "high",
+      "stability": 1.3525786399841309,
+      "flips": 14,
+      "fingerprint": "1111111110110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_5513_AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax\", \"value\": 822000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"5513\", \"filed\": \"2026-02-17\", \"label\": \"Debt Securities, Available-for-sale, Accumulated Gross Unrealized Gain, before Tax\"}"
+      },
+      "cluster": 16,
+      "magnitude_class": "medium",
+      "stability": 0.9671866297721863,
+      "flips": 15,
+      "fingerprint": "1111111111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_40729_AccountsPayableCurrentAndNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableCurrentAndNoncurrent\", \"value\": 420000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"40729\", \"filed\": \"2026-02-25\", \"label\": \"Accounts Payable\"}"
+      },
+      "cluster": 11,
+      "magnitude_class": "high",
+      "stability": 1.7714351415634155,
+      "flips": 15,
+      "fingerprint": "1111111011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_40729_AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax\", \"value\": 20000000, \"unit\": \"USD\", \"period_end\": \"2021-03-31\", \"form\": \"10-Q\", \"company_cik\": \"40729\", \"filed\": \"2021-05-03\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Foreign Currency Translation Adjustment, Net of Tax\"}"
+      },
+      "cluster": 35,
+      "magnitude_class": "medium",
+      "stability": 0.9248142242431641,
+      "flips": 13,
+      "fingerprint": "1111010110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1739104_CashAndCashEquivalentsAtCarryingValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashAndCashEquivalentsAtCarryingValue\", \"value\": 545000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1739104\", \"filed\": \"2026-02-24\", \"label\": \"Cash and Cash Equivalents, at Carrying Value\"}"
+      },
+      "cluster": 4,
+      "magnitude_class": "high",
+      "stability": 1.1651369333267212,
+      "flips": 15,
+      "fingerprint": "1111111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1360901_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 170272000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1360901\", \"filed\": \"2026-02-20\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 36,
+      "magnitude_class": "medium",
+      "stability": 0.752863883972168,
+      "flips": 13,
+      "fingerprint": "1110011011111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_89089_AccountsReceivableNoncurrentOriginatedFiveOrMoreYearsBeforeLatestFiscalYear",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsReceivableNoncurrentOriginatedFiveOrMoreYearsBeforeLatestFiscalYear\", \"value\": 51518000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"89089\", \"filed\": \"2026-02-12\", \"label\": \"Accounts Receivable, Noncurrent, Originated, More than Five Years before Current Fiscal Year\"}"
+      },
+      "cluster": 14,
+      "magnitude_class": "high",
+      "stability": 1.142171859741211,
+      "flips": 13,
+      "fingerprint": "1111111100111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_89089_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 2198683000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"89089\", \"filed\": \"2026-02-12\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 47,
+      "magnitude_class": "high",
+      "stability": 1.0790375471115112,
+      "flips": 14,
+      "fingerprint": "1100111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_939767_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 3476000, \"unit\": \"USD\", \"period_end\": \"2026-01-02\", \"form\": \"10-K\", \"company_cik\": \"939767\", \"filed\": \"2026-02-10\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 43,
+      "magnitude_class": "high",
+      "stability": 1.5309572219848633,
+      "flips": 14,
+      "fingerprint": "1111111110011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_939767_AmortizationOfDebtDiscountPremium",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfDebtDiscountPremium\", \"value\": 5285000, \"unit\": \"USD\", \"period_end\": \"2016-03-31\", \"form\": \"10-Q\", \"company_cik\": \"939767\", \"filed\": \"2016-05-04\", \"label\": \"Amortization of Debt Discount (Premium)\"}"
+      },
+      "cluster": 44,
+      "magnitude_class": "high",
+      "stability": 1.1504863500595093,
+      "flips": 13,
+      "fingerprint": "1110111011111110",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_939767_AmortizationOfFinancingCostsAndDiscounts",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AmortizationOfFinancingCostsAndDiscounts\", \"value\": 0, \"unit\": \"USD\", \"period_end\": \"2018-12-28\", \"form\": \"10-K\", \"company_cik\": \"939767\", \"filed\": \"2019-02-22\", \"label\": \"Amortization of Debt Issuance Costs and Discounts\"}"
+      },
+      "cluster": 28,
+      "magnitude_class": "high",
+      "stability": 1.1681748628616333,
+      "flips": 13,
+      "fingerprint": "1101011111101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1474735_AccountsPayableAndAccruedLiabilitiesNoncurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableAndAccruedLiabilitiesNoncurrent\", \"value\": 53767000, \"unit\": \"USD\", \"period_end\": \"2014-03-31\", \"form\": \"10-Q\", \"company_cik\": \"1474735\", \"filed\": \"2014-05-08\", \"label\": \"Accounts Payable and Accrued Liabilities, Noncurrent\"}"
+      },
+      "cluster": 20,
+      "magnitude_class": "medium",
+      "stability": 0.7717525362968445,
+      "flips": 14,
+      "fingerprint": "1111110111111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_749251_AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue\", \"value\": 155877000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"749251\", \"filed\": \"2026-02-12\", \"label\": \"APIC, Share-based Payment Arrangement, Increase for Cost Recognition\"}"
+      },
+      "cluster": 35,
+      "magnitude_class": "medium",
+      "stability": 0.705811083316803,
+      "flips": 14,
+      "fingerprint": "1111011110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1878848_AccountsPayableAndAccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccountsPayableAndAccruedLiabilitiesCurrent\", \"value\": 576268000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1878848\", \"filed\": \"2026-02-05\", \"label\": \"Accounts Payable and Accrued Liabilities, Current\"}"
+      },
+      "cluster": 31,
+      "magnitude_class": "high",
+      "stability": 1.1912907361984253,
+      "flips": 14,
+      "fingerprint": "1111111101111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1878848_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 343678000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1878848\", \"filed\": \"2026-02-05\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 23,
+      "magnitude_class": "high",
+      "stability": 1.1621850728988647,
+      "flips": 14,
+      "fingerprint": "1111010111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1878848_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 7027577000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1878848\", \"filed\": \"2026-02-05\", \"label\": \"Assets\"}"
+      },
+      "cluster": 46,
+      "magnitude_class": "high",
+      "stability": 1.399842619895935,
+      "flips": 13,
+      "fingerprint": "1111110110011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1964738_EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations\", \"value\": 7000000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1964738\", \"filed\": \"2026-02-27\", \"label\": \"Effect of Exchange Rate on Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Including Disposal Group and Discontinued Operations\"}"
+      },
+      "cluster": 21,
+      "magnitude_class": "high",
+      "stability": 1.4115060567855835,
+      "flips": 14,
+      "fingerprint": "0111011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "filing_000173825026000002",
+        "type": "filing",
+        "attributes": "{\"accession\": \"0001738250-26-000002\", \"form\": \"4\", \"date\": \"2026-03-13\", \"description\": \"FORM 4\", \"size\": 4671, \"company_cik\": \"801337\", \"company_name\": \"WEBSTER FINANCIAL CORP\"}"
+      },
+      "cluster": 0,
+      "magnitude_class": "high",
+      "stability": 1.333950400352478,
+      "flips": 16,
+      "fingerprint": "1111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1609711_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 29200000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1609711\", \"filed\": \"2026-02-25\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 42,
+      "magnitude_class": "medium",
+      "stability": 0.7510695457458496,
+      "flips": 13,
+      "fingerprint": "1100011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1047127_AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsFairValue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsFairValue\", \"value\": 7060000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1047127\", \"filed\": \"2026-02-20\", \"label\": \"Debt Securities, Available-for-Sale, Fair Value, Maturity, Allocated and Single Maturity Date, after Year 5 Through 10\"}"
+      },
+      "cluster": 29,
+      "magnitude_class": "high",
+      "stability": 1.0022677183151245,
+      "flips": 13,
+      "fingerprint": "1101011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1773383_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 4100660000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"1773383\", \"filed\": \"2026-02-09\", \"label\": \"Assets\"}"
+      },
+      "cluster": 51,
+      "magnitude_class": "high",
+      "stability": 1.0125597715377808,
+      "flips": 14,
+      "fingerprint": "1110111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1289460_CapitalLeasedAssetsGross",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CapitalLeasedAssetsGross\", \"value\": 700000, \"unit\": \"USD\", \"period_end\": \"2012-12-25\", \"form\": \"10-K\", \"company_cik\": \"1289460\", \"filed\": \"2013-02-22\", \"label\": \"Capital Leased Assets, Gross\"}"
+      },
+      "cluster": 4,
+      "magnitude_class": "medium",
+      "stability": 0.7203967571258545,
+      "flips": 15,
+      "fingerprint": "1111111111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1824920_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 89721000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1824920\", \"filed\": \"2026-02-25\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 20,
+      "magnitude_class": "medium",
+      "stability": 0.8213586211204529,
+      "flips": 13,
+      "fingerprint": "1111110101111011",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_927066_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": -122783000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"927066\", \"filed\": \"2026-02-11\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 19,
+      "magnitude_class": "medium",
+      "stability": 0.7732324004173279,
+      "flips": 14,
+      "fingerprint": "1011111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_927066_AssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetsCurrent\", \"value\": 4058003000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"927066\", \"filed\": \"2026-02-11\", \"label\": \"Assets, Current\"}"
+      },
+      "cluster": 30,
+      "magnitude_class": "medium",
+      "stability": 0.8185566067695618,
+      "flips": 14,
+      "fingerprint": "0011111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_88205_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 306100000, \"unit\": \"USD\", \"period_end\": \"2020-03-28\", \"form\": \"10-Q\", \"company_cik\": \"88205\", \"filed\": \"2020-05-01\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 49,
+      "magnitude_class": "medium",
+      "stability": 0.8792540431022644,
+      "flips": 13,
+      "fingerprint": "1111011011101111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1943896_AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax\", \"value\": 2626000, \"unit\": \"USD\", \"period_end\": \"2026-01-31\", \"form\": \"10-K\", \"company_cik\": \"1943896\", \"filed\": \"2026-03-19\", \"label\": \"Debt Securities, Available-for-sale, Accumulated Gross Unrealized Gain, before Tax\"}"
+      },
+      "cluster": 29,
+      "magnitude_class": "high",
+      "stability": 1.0848973989486694,
+      "flips": 14,
+      "fingerprint": "1111110111011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_49600_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 5431807000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"49600\", \"filed\": \"2026-02-11\", \"label\": \"Assets\"}"
+      },
+      "cluster": 33,
+      "magnitude_class": "medium",
+      "stability": 0.6924942135810852,
+      "flips": 14,
+      "fingerprint": "1110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_74260_AvailableForSaleSecuritiesContinuousUnrealizedLossPosition12MonthsOrLongerAggregateLosses",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecuritiesContinuousUnrealizedLossPosition12MonthsOrLongerAggregateLosses\", \"value\": 26500000, \"unit\": \"USD\", \"period_end\": \"2019-03-31\", \"form\": \"10-Q\", \"company_cik\": \"74260\", \"filed\": \"2019-05-08\", \"label\": \"Available-for-sale Securities, Continuous Unrealized Loss Position, 12 Months or Longer, Aggregate Loss (Deprecated 2018-01-31)\"}"
+      },
+      "cluster": 49,
+      "magnitude_class": "medium",
+      "stability": 0.7379355430603027,
+      "flips": 14,
+      "fingerprint": "1111111110110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_74260_AvailableForSaleSecuritiesContinuousUnrealizedLossPositionLessThan12MonthsAggregateLosses",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AvailableForSaleSecuritiesContinuousUnrealizedLossPositionLessThan12MonthsAggregateLosses\", \"value\": 10200000, \"unit\": \"USD\", \"period_end\": \"2019-03-31\", \"form\": \"10-Q\", \"company_cik\": \"74260\", \"filed\": \"2019-05-08\", \"label\": \"Available-for-sale Securities, Continuous Unrealized Loss Position, Less than 12 Months, Aggregate Loss (Deprecated 2018-01-31)\"}"
+      },
+      "cluster": 33,
+      "magnitude_class": "high",
+      "stability": 1.1500288248062134,
+      "flips": 14,
+      "fingerprint": "1110011111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_31791_AssetImpairmentCharges",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AssetImpairmentCharges\", \"value\": 4784000, \"unit\": \"USD\", \"period_end\": \"2025-12-28\", \"form\": \"10-K\", \"company_cik\": \"31791\", \"filed\": \"2026-02-24\", \"label\": \"Asset Impairment Charges\"}"
+      },
+      "cluster": 43,
+      "magnitude_class": "high",
+      "stability": 1.004693627357483,
+      "flips": 13,
+      "fingerprint": "0110111110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_31791_Assets",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"Assets\", \"value\": 12168411000, \"unit\": \"USD\", \"period_end\": \"2025-12-28\", \"form\": \"10-K\", \"company_cik\": \"31791\", \"filed\": \"2026-02-24\", \"label\": \"Assets\"}"
+      },
+      "cluster": 20,
+      "magnitude_class": "high",
+      "stability": 1.105298399925232,
+      "flips": 13,
+      "fingerprint": "0111111011011111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_795403_CapitalLeasesFutureMinimumPaymentsDue",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CapitalLeasesFutureMinimumPaymentsDue\", \"value\": 4500000, \"unit\": \"USD\", \"period_end\": \"2018-12-31\", \"form\": \"10-K\", \"company_cik\": \"795403\", \"filed\": \"2019-02-22\", \"label\": \"Capital Leases, Future Minimum Payments Due\"}"
+      },
+      "cluster": 41,
+      "magnitude_class": "medium",
+      "stability": 0.9446436762809753,
+      "flips": 14,
+      "fingerprint": "1111011111110111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1856525_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment\", \"value\": 201000000, \"unit\": \"USD\", \"period_end\": \"2026-02-01\", \"form\": \"10-K\", \"company_cik\": \"1856525\", \"filed\": \"2026-03-24\", \"label\": \"Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment\"}"
+      },
+      "cluster": 43,
+      "magnitude_class": "high",
+      "stability": 1.4498294591903687,
+      "flips": 13,
+      "fingerprint": "0111011101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1592386_CashAndCashEquivalentsPeriodIncreaseDecrease",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"CashAndCashEquivalentsPeriodIncreaseDecrease\", \"value\": 203160000, \"unit\": \"USD\", \"period_end\": \"2018-12-31\", \"form\": \"10-K\", \"company_cik\": \"1592386\", \"filed\": \"2019-03-01\", \"label\": \"Cash and Cash Equivalents, Period Increase (Decrease)\"}"
+      },
+      "cluster": 34,
+      "magnitude_class": "medium",
+      "stability": 0.683096706867218,
+      "flips": 15,
+      "fingerprint": "1110111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_1492691_AccruedLiabilitiesCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccruedLiabilitiesCurrent\", \"value\": 66638000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"1492691\", \"filed\": \"2026-02-19\", \"label\": \"Accrued Liabilities, Current\"}"
+      },
+      "cluster": 26,
+      "magnitude_class": "high",
+      "stability": 1.2012531757354736,
+      "flips": 14,
+      "fingerprint": "0111111101111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_2080126_DepositsAssetsCurrent",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"DepositsAssetsCurrent\", \"value\": 36938000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-Q\", \"company_cik\": \"2080126\", \"filed\": \"2026-03-16\", \"label\": \"Deposits Assets, Current\"}"
+      },
+      "cluster": 14,
+      "magnitude_class": "high",
+      "stability": 1.7025203704833984,
+      "flips": 14,
+      "fingerprint": "1111111001111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "fact_34903_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "type": "financial_fact",
+        "attributes": "{\"concept\": \"AccumulatedOtherComprehensiveIncomeLossNetOfTax\", \"value\": 2047000, \"unit\": \"USD\", \"period_end\": \"2025-12-31\", \"form\": \"10-K\", \"company_cik\": \"34903\", \"filed\": \"2026-02-12\", \"label\": \"Accumulated Other Comprehensive Income (Loss), Net of Tax\"}"
+      },
+      "cluster": 35,
+      "magnitude_class": "high",
+      "stability": 1.0682774782180786,
+      "flips": 14,
+      "fingerprint": "1111011110111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "filing_000177219826000005",
+        "type": "filing",
+        "attributes": "{\"accession\": \"0001772198-26-000005\", \"form\": \"4\", \"date\": \"2026-02-13\", \"description\": \"FORM 4\", \"size\": 5289, \"company_cik\": \"1584207\", \"company_name\": \"OneMain Holdings, Inc.\"}"
+      },
+      "cluster": 0,
+      "magnitude_class": "low",
+      "stability": 0.4426102638244629,
+      "flips": 16,
+      "fingerprint": "1111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "filing_000153986526000003",
+        "type": "filing",
+        "attributes": "{\"accession\": \"0001539865-26-000003\", \"form\": \"4\", \"date\": \"2026-02-19\", \"description\": \"FORM 4\", \"size\": 5066, \"company_cik\": \"1801169\", \"company_name\": \"Opendoor Technologies Inc.\"}"
+      },
+      "cluster": 0,
+      "magnitude_class": "low",
+      "stability": 0.43292436003685,
+      "flips": 16,
+      "fingerprint": "1111111111111111",
+      "is_anchor": false
+    },
+    {
+      "entity": {
+        "name": "filing_000001616026000030",
+        "type": "filing",
+        "attributes": "{\"accession\": \"0000016160-26-000030\", \"form\": \"4\", \"date\": \"2026-01-14\", \"description\": \"PRIMARY DOCUMENT\", \"size\": 4858, \"company_cik\": \"16160\", \"company_name\": \"CAL-MAINE FOODS INC\"}"
+      },
+      "cluster": 0,
+      "magnitude_class": "low",
+      "stability": 0.37666788697242737,
+      "flips": 16,
+      "fingerprint": "1111111111111111",
+      "is_anchor": false
+    }
+  ]
+}

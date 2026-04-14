@@ -3,6 +3,7 @@ import type {
   DuncActiveScenario,
   DuncBallTick,
   DuncInsight,
+  DuncMatchInfo,
   DuncMatchSummary,
   DuncPlayerTick,
   DuncRole,
@@ -22,6 +23,9 @@ interface DuncState {
   prevPlayers: DuncPlayerTick[]; // previous tick — for ghost overlay
   insights: DuncInsight[];
   activeScenarios: DuncActiveScenario[];
+  matchInfo: DuncMatchInfo | null;
+  overlays: Set<string>;
+  toggleOverlay: (key: string) => void;
 
   applyTick: (payload: {
     t: number;
@@ -30,6 +34,7 @@ interface DuncState {
     players: DuncPlayerTick[];
     insights: DuncInsight[];
     active_scenarios?: DuncActiveScenario[];
+    match_info?: DuncMatchInfo;
   }) => void;
 
   applyPrelude: (recent_insights: DuncInsight[]) => void;
@@ -57,6 +62,15 @@ export const useDuncStore = create<DuncState>((set) => ({
   prevPlayers: [],
   insights: [],
   activeScenarios: [],
+  matchInfo: null,
+  overlays: new Set<string>(),
+  toggleOverlay: (key) =>
+    set((s) => {
+      const next = new Set(s.overlays);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return { overlays: next };
+    }),
 
   applyTick: (payload) =>
     set((state) => {
@@ -67,10 +81,11 @@ export const useDuncStore = create<DuncState>((set) => ({
         lastTick: payload.t,
         clockSec: payload.clock_sec,
         ball: payload.ball,
-        prevPlayers: state.players, // snapshot current as "previous"
+        prevPlayers: state.players,
         players: payload.players,
         insights: merged,
         activeScenarios: payload.active_scenarios || [],
+        matchInfo: payload.match_info || state.matchInfo,
       };
     }),
 
@@ -88,5 +103,6 @@ export const useDuncStore = create<DuncState>((set) => ({
       prevPlayers: [],
       insights: [],
       activeScenarios: [],
+      matchInfo: null,
     }),
 }));

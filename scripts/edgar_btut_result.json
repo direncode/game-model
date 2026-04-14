@@ -1,0 +1,46 @@
+{
+  "btut": {
+    "original_count": 11510,
+    "survivor_count": 5,
+    "total_reduction_ratio": 2302.0,
+    "original_edge_count": 2687,
+    "survivor_edge_count": 0,
+    "edge_reduction_ratio": 2687.0,
+    "prefilter": {
+      "original": 11510,
+      "entropy_rejected": 0,
+      "bloom_dedup": 1975,
+      "lsh_near_dedup": 0,
+      "survivors": 9535,
+      "seconds": 0.46
+    },
+    "cascade": [],
+    "quality": {
+      "signal_quality": 0.2932,
+      "reconstruction_error": 0.0,
+      "coverage": 1.0,
+      "cluster_stability": 0.5,
+      "downstream_compatibility": 0.55,
+      "composite": 0.7386
+    },
+    "budget": {
+      "gpu_seconds": 0.0,
+      "gpu_cost_dollars": 0.0,
+      "remaining_dollars": 50.0
+    },
+    "timing": {
+      "wall_clock": 2.68,
+      "prefilter": 0.46,
+      "embedding": 0.85,
+      "cascade": 0.0,
+      "thinning": 0.0,
+      "quality_check": 0.0
+    },
+    "clusters": 2,
+    "device": "cpu",
+    "dim_schedule": [
+      32,
+      16
+    ]
+  }
+}

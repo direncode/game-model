@@ -187,7 +187,7 @@ class BTUTQueryEngine:
                 row = conn.execute(text(
                     "SELECT summary, survivors FROM btut_runs "
                     "WHERE dataset_id = :did AND status = 'completed' "
-                    "ORDER BY created_at DESC LIMIT 1"
+                    "ORDER BY total_entities DESC LIMIT 1"
                 ), {"did": self._dataset_id}).fetchone()
 
                 if row and row[0] and row[1]:

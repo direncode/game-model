@@ -22,7 +22,7 @@ from app.services.dunc.adapters import BallSample, TrackingFrame, TrackingSample
 PITCH_X = 105.0
 PITCH_Y = 68.0
 
-# 4-3-3 base positions
+# Default 4-3-3 base positions (used when no PL preset is active)
 _HOME_4_3_3: list[tuple[str, int, float, float]] = [
     ("GK",  1,  5.0, 34.0),
     ("LB",  3, 25.0, 10.0),
@@ -44,6 +44,7 @@ class MatchPreset:
     hz: float = 10.0
     seed: int = 1337
     duration_seconds: float = 5400.0
+    pl_preset_key: str | None = None   # e.g. "ars_vs_mci"
 
 
 @dataclass
@@ -99,7 +100,15 @@ class MatchSimulator:
         self._next_pass_t: float = 0.0
         self._play_phase: str = "buildUp"
         self._pending_scenarios: list[str] = []
-        self._active_scenario_map: dict[str, float] = {}  # name → perturb_until
+        self._active_scenario_map: dict[str, float] = {}
+        self._pl_preset = None
+        self._match_events: list[dict] = []
+        self._home_score: int = 0
+        self._away_score: int = 0
+        self._home_xg: float = 0.0
+        self._away_xg: float = 0.0
+        self._next_event_t: float = self._rng.uniform(60, 300)
+        self._load_pl_preset()
         self._build_formation()
 
     def reset(self) -> None:
@@ -112,7 +121,60 @@ class MatchSimulator:
         self._play_phase = "buildUp"
         self._pending_scenarios = []
         self._active_scenario_map = {}
+        self._match_events = []
+        self._home_score = 0
+        self._away_score = 0
+        self._home_xg = 0.0
+        self._away_xg = 0.0
+        self._next_event_t = self._rng.uniform(60, 300)
+        self._load_pl_preset()
         self._build_formation()
+
+    def _load_pl_preset(self) -> None:
+        if not self.preset.pl_preset_key:
+            return
+        try:
+            from app.services.dunc.pl_presets import PL_PRESETS
+            self._pl_preset = PL_PRESETS.get(self.preset.pl_preset_key)
+        except Exception:
+            self._pl_preset = None
+
+    def get_match_info(self) -> dict:
+        """Return match metadata for the frontend scoreboard."""
+        if self._pl_preset:
+            p = self._pl_preset
+            return {
+                "home_team": p.home_team,
+                "away_team": p.away_team,
+                "home_short": p.home_short,
+                "away_short": p.away_short,
+                "home_color": p.home_color,
+                "away_color": p.away_color,
+                "home_score": self._home_score,
+                "away_score": self._away_score,
+                "home_xg": round(self._home_xg, 2),
+                "away_xg": round(self._away_xg, 2),
+                "competition": p.competition,
+                "matchday": p.matchday,
+                "venue": p.venue,
+                "home_manager": p.home_tactics.manager,
+                "away_manager": p.away_tactics.manager,
+                "context": p.context,
+                "events": self._match_events[-10:],
+            }
+        return {
+            "home_team": "Home",
+            "away_team": "Away",
+            "home_short": "HOM",
+            "away_short": "AWY",
+            "home_color": "#00d4ff",
+            "away_color": "#c9a96e",
+            "home_score": self._home_score,
+            "away_score": self._away_score,
+            "home_xg": round(self._home_xg, 2),
+            "away_xg": round(self._away_xg, 2),
+            "events": self._match_events[-10:],
+        }
 
     def trigger(self, scenario: str) -> None:
         self._pending_scenarios.append(scenario)
@@ -125,15 +187,16 @@ class MatchSimulator:
             if remaining <= 0:
                 del self._active_scenario_map[name]
                 continue
-            affected = sum(
-                1 for p in self.players
-                if p.team == "home" and p.perturb_until > self.t
-                and abs(p.anchor_shift_x) > 0.5 or abs(p.anchor_shift_y) > 0.5
-            )
+            affected_ids = [
+                p.player_id for p in self.players
+                if p.perturb_until > self.t
+                and (abs(p.anchor_shift_x) > 0.5 or abs(p.anchor_shift_y) > 0.5)
+            ]
             out.append({
                 "name": name,
                 "remaining_sec": round(remaining, 1),
-                "affected_count": affected,
+                "affected_count": len(affected_ids),
+                "affected_ids": affected_ids,
             })
         return out
 
@@ -148,6 +211,7 @@ class MatchSimulator:
         self._move_all_players()
         self._update_ball()
         self._maybe_pass()
+        self._maybe_match_event()
 
         self.t += self._dt
 
@@ -168,6 +232,20 @@ class MatchSimulator:
 
     # ── formation ──────────────────────────────────────────────────────
     def _build_formation(self) -> None:
+        if self._pl_preset:
+            self._build_pl_formation()
+        else:
+            self._build_default_formation()
+        # Give ball to a home midfielder
+        cm = next((p for p in self.players if p.team == "home" and p.role == "CM"), self.players[0])
+        cm.has_ball = True
+        self.ball.carrier_id = cm.player_id
+        self.ball.carrier_team = "home"
+        self.ball.x = cm.x
+        self.ball.y = cm.y
+        self._next_pass_t = self.t + self._rng.uniform(1.0, 2.5)
+
+    def _build_default_formation(self) -> None:
         for role, number, bx, by in _HOME_4_3_3:
             self.players.append(_PlayerState(
                 player_id=f"H{number:02d}", team="home", number=number, role=role,
@@ -190,13 +268,36 @@ class MatchSimulator:
                 jog_speed=self._rng.uniform(3.5, 5.0),
                 positioning_iq=self._rng.uniform(0.70, 0.95),
             ))
-        cm = next(p for p in self.players if p.player_id == "H06")
-        cm.has_ball = True
-        self.ball.carrier_id = cm.player_id
-        self.ball.carrier_team = "home"
-        self.ball.x = cm.x
-        self.ball.y = cm.y
-        self._next_pass_t = self.t + self._rng.uniform(1.0, 2.5)
+
+    def _build_pl_formation(self) -> None:
+        """Build formation from PL preset with real player attributes."""
+        p = self._pl_preset
+        for plp in p.home_squad:
+            self.players.append(_PlayerState(
+                player_id=f"H{plp.number:02d}", team="home", number=plp.number,
+                role=plp.role, base_x=plp.base_x, base_y=plp.base_y,
+                x=plp.base_x + self._rng.uniform(-1, 1),
+                y=plp.base_y + self._rng.uniform(-1, 1),
+                target_x=plp.base_x, target_y=plp.base_y,
+                phase_offset=self._rng.uniform(0, math.tau),
+                max_speed=plp.max_speed,
+                jog_speed=plp.max_speed * 0.48,
+                positioning_iq=plp.positioning_iq,
+            ))
+        for plp in p.away_squad:
+            ax = PITCH_X - plp.base_x
+            ay = PITCH_Y - plp.base_y
+            self.players.append(_PlayerState(
+                player_id=f"A{plp.number:02d}", team="away", number=plp.number,
+                role=plp.role, base_x=ax, base_y=ay,
+                x=ax + self._rng.uniform(-1, 1),
+                y=ay + self._rng.uniform(-1, 1),
+                target_x=ax, target_y=ay,
+                phase_offset=self._rng.uniform(0, math.tau),
+                max_speed=plp.max_speed,
+                jog_speed=plp.max_speed * 0.48,
+                positioning_iq=plp.positioning_iq,
+            ))
 
     # ── play phase ─────────────────────────────────────────────────────
     def _update_play_phase(self) -> None:
@@ -498,6 +599,89 @@ class MatchSimulator:
         self.ball.carrier_id = nearest.player_id
         self.ball.carrier_team = opp
         self.ball.in_flight = False
+
+    # ── match events (goals, shots, cards, corners) ─────────────────────
+    def _maybe_match_event(self) -> None:
+        if self.t < self._next_event_t:
+            return
+        minute = int(self.t / 60)
+
+        # Determine which team has the ball
+        carrier = next((p for p in self.players if p.has_ball), None)
+        team = carrier.team if carrier else "home"
+
+        # Event probabilities scaled to real PL match rates
+        # ~25 shots per match, ~10 corners, ~20 fouls, ~3 cards, ~2.7 goals
+        roll = self._rng.random()
+
+        if roll < 0.08:
+            # SHOT — use xG from PL preset if available
+            is_on_target = self._rng.random() < 0.35
+            attacker = self._pick_attacker(team)
+            xg = self._rng.uniform(0.03, 0.25)
+
+            if self._pl_preset:
+                # Use real player xG data to scale shot quality
+                squad = self._pl_preset.home_squad if team == "home" else self._pl_preset.away_squad
+                pl_player = next((p for p in squad if p.number == attacker.number), None)
+                if pl_player and pl_player.xg90 > 0:
+                    xg = self._rng.uniform(0.05, min(0.45, pl_player.xg90 * 1.5))
+
+            if team == "home":
+                self._home_xg += xg
+            else:
+                self._away_xg += xg
+
+            # GOAL check — probability = xG
+            scored = self._rng.random() < xg * 2.2  # slight boost for excitement
+            if scored:
+                if team == "home":
+                    self._home_score += 1
+                else:
+                    self._away_score += 1
+                self._match_events.append({
+                    "minute": minute,
+                    "type": "goal",
+                    "team": team,
+                    "player": attacker.player_id,
+                    "player_number": attacker.number,
+                    "xg": round(xg, 2),
+                })
+            else:
+                self._match_events.append({
+                    "minute": minute,
+                    "type": "shot_on_target" if is_on_target else "shot",
+                    "team": team,
+                    "player": attacker.player_id,
+                    "player_number": attacker.number,
+                    "xg": round(xg, 2),
+                })
+        elif roll < 0.15:
+            # CORNER
+            self._match_events.append({
+                "minute": minute,
+                "type": "corner",
+                "team": team,
+            })
+        elif roll < 0.25:
+            # FOUL
+            fouler = self._rng.choice([p for p in self.players if p.team != team and p.role != "GK"])
+            is_card = self._rng.random() < 0.15
+            self._match_events.append({
+                "minute": minute,
+                "type": "yellow_card" if is_card else "foul",
+                "team": "away" if team == "home" else "home",
+                "player": fouler.player_id,
+                "player_number": fouler.number,
+            })
+
+        self._next_event_t = self.t + self._rng.uniform(30, 180)
+
+    def _pick_attacker(self, team: str) -> _PlayerState:
+        attackers = [p for p in self.players if p.team == team and p.role in ("ST", "LW", "RW", "RCM", "LCM")]
+        if not attackers:
+            attackers = [p for p in self.players if p.team == team and p.role != "GK"]
+        return self._rng.choice(attackers) if attackers else self.players[0]
 
     # ── scenarios — DRAMATIC, IMMEDIATE shifts ─────────────────────────
     def _apply_scenario(self, scenario: str) -> None:

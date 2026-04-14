@@ -335,7 +335,6 @@ function RunTab() {
             <select value={vertical} onChange={e => setVertical(e.target.value as VerticalName | "")}
               className="w-full bg-li-depth-2 border border-li-border rounded px-3 py-2 text-sm text-li-text-primary font-mono">
               <option value="">None (summary only)</option>
-              <option value="niv">NIV (finance)</option>
               <option value="tcd_jepa">TCD-JEPA (AI)</option>
               <option value="data">Data (full audit)</option>
             </select>

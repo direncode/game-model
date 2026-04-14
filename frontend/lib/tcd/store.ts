@@ -30,6 +30,7 @@ interface TCDState {
   agentOpen: boolean;
 
   // Actions
+  loadLatest: () => Promise<void>;
   startDemo: () => Promise<void>;
   applyStreamEvent: (event: StreamEvent) => void;
   fetchModules: () => Promise<void>;
@@ -57,6 +58,24 @@ export const useTCDStore = create<TCDState>((set, get) => ({
   activeTab: "live",
   activeIntelligenceTab: "causal",
   agentOpen: false,
+
+  loadLatest: async () => {
+    try {
+      const latest = await api.fetchLatestSession();
+      if (!latest) return;
+      set({ sessionId: latest.session_id, status: "complete" });
+      // Fetch all cached data
+      const state = get();
+      await Promise.allSettled([
+        state.fetchModules(),
+        state.fetchIntelligence(),
+        state.fetchConvergence(),
+        state.fetchMarketplace(),
+      ]);
+    } catch {
+      // No cached session — that's fine, user can run demo
+    }
+  },
 
   startDemo: async () => {
     try {

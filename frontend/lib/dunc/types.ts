@@ -83,6 +83,7 @@ export interface DuncActiveScenario {
   name: string;
   remaining_sec: number;
   affected_count: number;
+  affected_ids: string[];
 }
 
 export interface DuncTick {
@@ -94,6 +95,35 @@ export interface DuncTick {
   players: DuncPlayerTick[];
   insights: DuncInsight[];
   active_scenarios: DuncActiveScenario[];
+}
+
+export interface DuncMatchEvent {
+  minute: number;
+  type: string;
+  team: string;
+  player?: string;
+  player_number?: number;
+  xg?: number;
+}
+
+export interface DuncMatchInfo {
+  home_team: string;
+  away_team: string;
+  home_short: string;
+  away_short: string;
+  home_color: string;
+  away_color: string;
+  home_score: number;
+  away_score: number;
+  home_xg: number;
+  away_xg: number;
+  competition?: string;
+  matchday?: string;
+  venue?: string;
+  home_manager?: string;
+  away_manager?: string;
+  context?: string;
+  events: DuncMatchEvent[];
 }
 
 // Pitch constants — mirror backend simulator.

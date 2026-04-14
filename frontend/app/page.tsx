@@ -233,7 +233,7 @@ function Dashboard() {
                     <p className="text-xs text-li-gray-600">Edges</p>
                   </div>
                   <div>
-                    <p className="text-lg font-mono font-medium text-white">{dataset.density.toFixed(3)}</p>
+                    <p className="text-lg font-mono font-medium text-white">{(dataset.density ?? 0).toFixed(3)}</p>
                     <p className="text-xs text-li-gray-600">Density</p>
                   </div>
                 </div>

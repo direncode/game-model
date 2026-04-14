@@ -10,7 +10,8 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { BarChart3, Flame, Gauge, TrendingUp, Users } from "lucide-react";
 import { PitchView } from "@/components/dunc/PitchView";
 import { ScreenSwitcher } from "@/components/dunc/ScreenSwitcher";
@@ -22,6 +23,14 @@ import { cn } from "@/lib/utils";
 export default function AnalyticsScreen() {
   const params = useParams<{ id: string }>();
   const matchId = params.id;
+  const router = useRouter();
+  const role = useDuncStore((s) => s.role);
+
+  useEffect(() => {
+    if (role === "manager") {
+      router.replace(`/dunc/match/${matchId}`);
+    }
+  }, [role, matchId, router]);
 
   useDuncMatchStream(matchId);
 

@@ -1,16 +1,12 @@
 "use client";
 
-// ScreenSwitcher — three-way pill toggle for the match dashboard.
-//
-// Ported from the multi-screen-backend-demo reference repo, adapted to our
-// dark li-* palette. The reference used three screens: Technical (Backend),
-// Technical (Analytics), and Manager. Same split here; each is a distinct
-// Next.js route under /dunc/match/[id]/ so deep-linking and back-button
-// behavior Just Work.
+// ScreenSwitcher — role-gated screen navigation.
+// Manager sees only their view. Technical staff sees Backend + Analytics + Manager.
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BarChart3, Cpu, Users } from "lucide-react";
+import { useDuncStore } from "@/lib/dunc/store";
 import { cn } from "@/lib/utils";
 
 interface Screen {
@@ -19,6 +15,7 @@ interface Screen {
   icon: React.ComponentType<{ className?: string }>;
   href: (matchId: string) => string;
   matchPath: (matchId: string) => RegExp;
+  staffOnly: boolean;
 }
 
 const SCREENS: Screen[] = [
@@ -28,6 +25,7 @@ const SCREENS: Screen[] = [
     icon: Cpu,
     href: (id) => `/dunc/match/${id}/backend`,
     matchPath: (id) => new RegExp(`/dunc/match/${id}/backend/?$`),
+    staffOnly: true,
   },
   {
     key: "analytics",
@@ -35,6 +33,7 @@ const SCREENS: Screen[] = [
     icon: BarChart3,
     href: (id) => `/dunc/match/${id}/analytics`,
     matchPath: (id) => new RegExp(`/dunc/match/${id}/analytics/?$`),
+    staffOnly: true,
   },
   {
     key: "manager",
@@ -42,14 +41,24 @@ const SCREENS: Screen[] = [
     icon: Users,
     href: (id) => `/dunc/match/${id}`,
     matchPath: (id) => new RegExp(`/dunc/match/${id}/?$`),
+    staffOnly: false,
   },
 ];
 
 export function ScreenSwitcher({ matchId }: { matchId: string }) {
   const pathname = usePathname() || "";
+  const role = useDuncStore((s) => s.role);
+
+  const visibleScreens = role === "manager"
+    ? SCREENS.filter((s) => !s.staffOnly)
+    : SCREENS;
+
+  // Manager only has one screen — don't show a switcher at all
+  if (visibleScreens.length <= 1) return null;
+
   return (
     <div className="inline-flex items-center gap-0.5 bg-li-black-surface border border-li-border rounded-md p-0.5">
-      {SCREENS.map((s) => {
+      {visibleScreens.map((s) => {
         const Icon = s.icon;
         const active = s.matchPath(matchId).test(pathname);
         return (
