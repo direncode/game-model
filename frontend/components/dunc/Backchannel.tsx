@@ -118,7 +118,7 @@ export function StaffBackchannel() {
               key={i.id}
               type="button"
               onClick={() => forwardInsight(i)}
-              className="block w-full text-left text-[10px] text-li-text-secondary hover:text-li-green py-0.5 truncate"
+              className="block w-full text-left text-[10px] text-li-text-secondary hover:text-li-green py-0.5 truncate focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
             >
               → {i.title}
             </button>
@@ -142,9 +142,10 @@ export function StaffBackchannel() {
         />
         <button
           type="submit"
-          className="px-2 py-1 bg-li-green text-li-black rounded-sm hover:bg-li-green/90"
+          className="px-2 py-1 bg-li-green text-li-black rounded-sm hover:bg-li-green/90 focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
         >
           <Send className="w-3 h-3" />
+          <span className="sr-only">Send message</span>
         </button>
       </form>
     </div>
@@ -176,7 +177,7 @@ export function ManagerBackchannel() {
   return (
     <div className="border border-li-green/30 bg-li-green/5 rounded-md overflow-hidden">
       <div className="px-3 py-1.5 border-b border-li-green/20 flex items-center gap-2">
-        <Radio className="w-3 h-3 text-li-green animate-pulse" />
+        <Radio className="w-3 h-3 text-li-green animate-pulse motion-reduce:animate-none" />
         <span className="text-[9px] uppercase tracking-widest text-li-green font-mono font-bold">
           From technical staff
         </span>

@@ -35,8 +35,10 @@ export function RoleSwitcher() {
             type="button"
             onClick={() => setRole(opt.key)}
             title={opt.hint}
+            aria-pressed={role === opt.key}
             className={cn(
               "px-3 py-1 text-[11px] font-mono uppercase tracking-wider transition-colors rounded-sm",
+              "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
               role === opt.key
                 ? "bg-li-white text-li-black"
                 : "text-li-text-secondary hover:text-li-white",

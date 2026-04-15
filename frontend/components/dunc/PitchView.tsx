@@ -225,28 +225,30 @@ function PlayerDot({
     <g>
       {/* Scenario-affected outer glow — bright magenta/purple ring */}
       {affected && (
-        <circle
-          cx={p.x}
-          cy={p.y}
-          r={r + 1.4}
-          fill="none"
-          stroke="#a371f7"
-          strokeWidth={0.6}
-          opacity={0.9}
-        >
-          <animate
-            attributeName="r"
-            values={`${r + 1.0};${r + 1.8};${r + 1.0}`}
-            dur="1.2s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="opacity"
-            values="0.9;0.4;0.9"
-            dur="1.2s"
-            repeatCount="indefinite"
-          />
-        </circle>
+        <g className="motion-reduce:hidden">
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r={r + 1.4}
+            fill="none"
+            stroke="#a371f7"
+            strokeWidth={0.6}
+            opacity={0.9}
+          >
+            <animate
+              attributeName="r"
+              values={`${r + 1.0};${r + 1.8};${r + 1.0}`}
+              dur="1.2s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="opacity"
+              values="0.9;0.4;0.9"
+              dur="1.2s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
       )}
       {/* Fatigue ring */}
       <circle

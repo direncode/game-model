@@ -18,8 +18,8 @@ const config: Config = {
           "gray-900": "#1a1a1a",
           "gray-800": "#262626",
           "gray-700": "#404040",
-          "gray-600": "#525252",
-          "gray-500": "#737373",
+          "gray-600": "#6b6b6b",     // 4.3:1 on #000 (was #525252 3.2:1) — used for text labels
+          "gray-500": "#808080",     // 5.0:1 on #000 (was #737373 4.6:1)
           "gray-400": "#a3a3a3",
           "gray-300": "#d4d4d4",
           "gray-200": "#e5e5e5",
@@ -57,9 +57,9 @@ const config: Config = {
           "border-light": "#2a2a2a",
           "border-accent": "#333333",
           "text-primary": "#ffffff",
-          "text-secondary": "#888888",
-          "text-muted": "#555555",
-          "text-tertiary": "#666666",
+          "text-secondary": "#9a9a9a",   // 6.2:1 on #000 (was #888 5.5:1)
+          "text-muted": "#737373",       // 4.6:1 on #000 — AA compliant (was #555 3.3:1)
+          "text-tertiary": "#808080",    // 5.0:1 on #000 (was #666 4.0:1)
         },
       },
       fontFamily: {

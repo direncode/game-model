@@ -68,8 +68,9 @@ export function AIAgentDrawer({ matchId }: { matchId: string }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="h-12 flex items-center justify-center border-b border-li-border hover:bg-li-black-surface"
+        className="h-12 flex items-center justify-center border-b border-li-border hover:bg-li-black-surface focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
         aria-label={open ? "Collapse AI agent" : "Expand AI agent"}
+        aria-expanded={open}
       >
         <span className="font-mono text-[11px] uppercase tracking-widest text-li-cyan">
           {open ? "◢ D-U-N-C AI" : "AI"}
@@ -122,7 +123,7 @@ export function AIAgentDrawer({ matchId }: { matchId: string }) {
                 key={s}
                 type="button"
                 onClick={() => ask(s)}
-                className="block w-full text-left text-[11px] text-li-cyan hover:underline py-0.5"
+                className="block w-full text-left text-[11px] text-li-cyan hover:underline py-0.5 focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
               >
                 → {s}
               </button>
@@ -143,7 +144,7 @@ export function AIAgentDrawer({ matchId }: { matchId: string }) {
             />
             <button
               type="submit"
-              className="px-3 py-1 text-[11px] font-mono uppercase tracking-wider bg-li-cyan text-li-black rounded-sm hover:bg-li-cyan/90"
+              className="px-3 py-1 text-[11px] font-mono uppercase tracking-wider bg-li-cyan text-li-black rounded-sm hover:bg-li-cyan/90 focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black"
             >
               Ask
             </button>
@@ -230,7 +231,7 @@ function ActiveScenarioDetail() {
   for (const sc of scenarios) {
     toShow.push({ ...sc, detected: false });
   }
-  for (const kind of recentCoreKinds) {
+  for (const kind of Array.from(recentCoreKinds)) {
     if (!toShow.find((s) => s.name === kind)) {
       toShow.push({ name: kind, remaining_sec: 0, affected_count: 0, detected: true });
     }
@@ -259,7 +260,7 @@ function ActiveScenarioDetail() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {(sc.remaining_sec > 0 || sc.detected) && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-li-red animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-li-red animate-pulse motion-reduce:animate-none" />
                 )}
                 <span className={cn(
                   "text-[11px] font-mono font-bold",
@@ -383,7 +384,7 @@ function CoreScenarioMonitor() {
                     className={cn(
                       "w-2 h-2 rounded-full",
                       isActive
-                        ? "bg-li-red animate-pulse"
+                        ? "bg-li-red animate-pulse motion-reduce:animate-none"
                         : hasDetected
                           ? "bg-li-yellow"
                           : "bg-li-gray-700",

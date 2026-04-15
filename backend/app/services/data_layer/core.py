@@ -31,7 +31,7 @@ import numpy as np
 
 from app.services.btut.adapters import get_adapter
 from app.services.btut.adapters.base import BaseDatasetAdapter
-from app.services.btut.pipeline import run_btut_pipeline
+from engine.reduce.pipeline import run_btut_pipeline
 
 from .costs import estimate_run_cost
 from .errors import (
@@ -99,6 +99,26 @@ class LatentOceanDataLayer:
         self._bytes_written: int = 0
         # Adapter reference held between stages so we can resolve display names.
         self._adapter: BaseDatasetAdapter | None = None
+
+    # ── Engine bridge ─────────────────────────────────────────────────
+
+    @classmethod
+    def from_engine_config(cls, config: "EngineConfig") -> "LatentOceanDataLayer":
+        """Create a data layer from an engine config."""
+        return cls(
+            budget_dollars=config.budget_dollars,
+            target_survivors=config.target_survivors,
+            compute_3d_display=config.compute_3d_display,
+        )
+
+    def to_engine(self) -> "LatentOceanEngine":
+        """Get the underlying engine (for direct primitive access)."""
+        from engine import LatentOceanEngine, EngineConfig
+        return LatentOceanEngine(EngineConfig(
+            budget_dollars=self.budget_dollars,
+            target_survivors=self.target_survivors,
+            compute_3d_display=self.compute_3d_display,
+        ))
 
     # ── Internal helpers ────────────────────────────────────────────────
     def _log(self, msg: str) -> None:

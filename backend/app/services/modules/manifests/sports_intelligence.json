@@ -1,0 +1,83 @@
+{
+  "id": "sports_intelligence",
+  "version": "1.0.0",
+  "display_name": "DUNC Sports Intelligence",
+  "description": "Football analytics and scouting intelligence. Reduces large player datasets to identify undervalued talent using structural intelligence.",
+  "icon": "trophy",
+  "adapter_type": "generic",
+  "adapter_config": {
+    "sport": "football",
+    "data_sources": ["fbref", "transfermarkt"]
+  },
+  "views": [
+    {
+      "id": "dunc_dashboard",
+      "component": "DUNCDashboard",
+      "route": "/dunc",
+      "label": "DUNC Dashboard",
+      "icon": "trophy"
+    },
+    {
+      "id": "dunc_players",
+      "component": "DUNCPlayers",
+      "route": "/dunc/players",
+      "label": "Player Scouting",
+      "icon": "users"
+    },
+    {
+      "id": "dunc_challenges",
+      "component": "DUNCChallenges",
+      "route": "/dunc/challenges",
+      "label": "Challenges",
+      "icon": "target"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "player",
+      "color": "#ef4444",
+      "primary_field": "name",
+      "secondary_field": "position",
+      "icon": "user"
+    },
+    {
+      "name": "club",
+      "color": "#3b82f6",
+      "primary_field": "club_name",
+      "secondary_field": "league",
+      "icon": "shield"
+    },
+    {
+      "name": "match",
+      "color": "#10b981",
+      "primary_field": "home_team",
+      "secondary_field": "away_team",
+      "icon": "calendar"
+    }
+  ],
+  "actions": [
+    {
+      "id": "ingest_players",
+      "label": "Ingest Player Data",
+      "endpoint": "/api/v1/dunc/ingest",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "run_scouting",
+      "label": "Run Scouting Report",
+      "endpoint": "/api/v1/dunc/scout",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Scouting {player_count} players across {league_count} leagues.",
+    "discovery": "Top undervalued find: {top_player} (composite score: {score})."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "starter",
+  "is_core": false
+}

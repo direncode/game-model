@@ -346,6 +346,53 @@ class ApiClient {
     return this.request<Array<{ id: string; name: string; description: string; entity_types: Array<{ name: string; color: string }>; lookup_field: string; lookup_label: string; has_results: boolean }>>("/api/v1/btut/datasets");
   }
 
+  // ── Engine (Latent Ocean Core) ────────────────────────────────────
+
+  async engineStatus() {
+    return this.request<any>("/api/v1/engine/status");
+  }
+
+  async engineReduce(data: {
+    entities: any[];
+    edges?: any[];
+    entity_types?: string[];
+    budget_dollars?: number;
+    target_survivors?: number;
+  }) {
+    return this.request<any>("/api/v1/engine/reduce", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async engineConnect(data: {
+    connection_string: string;
+    schema?: string;
+    limit?: number;
+  }) {
+    return this.request<any>("/api/v1/engine/connect", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async engineInfer(data: {
+    source_type: 'database' | 'file' | 'api' | 's3' | 'stream';
+    source_connection_string?: string;
+    source_url?: string;
+    source_uri?: string;
+    file_content?: string;
+    file_name?: string;
+    limit?: number;
+    budget_dollars?: number;
+    dry_run?: boolean;
+  }) {
+    return this.request<any>("/api/v1/engine/infer", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
 }
 
 export const api = new ApiClient(API_BASE);

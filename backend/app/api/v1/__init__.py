@@ -24,6 +24,10 @@ from app.api.v1.data_estate_vertical import router as data_estate_router
 from app.api.v1.qr_identity import router as qr_identity_router
 from app.api.v1.flow_engine import router as flow_engine_router
 from app.api.v1.ws import router as ws_router
+from app.api.v1.sso import router as sso_router
+from app.api.v1.api_keys import router as api_keys_router
+from app.api.v1.module_marketplace import router as module_marketplace_router
+from app.api.v1.engine import router as engine_router
 
 router = APIRouter()
 
@@ -49,6 +53,10 @@ router.include_router(ws_router)
 router.include_router(data_estate_router)
 router.include_router(qr_identity_router)
 router.include_router(flow_engine_router)
+router.include_router(sso_router)
+router.include_router(api_keys_router)
+router.include_router(module_marketplace_router)
+router.include_router(engine_router)
 
 # Also export as api_router for alternate import style
 api_router = router

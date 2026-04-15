@@ -1,0 +1,73 @@
+{
+  "id": "core_reduction",
+  "version": "1.0.0",
+  "display_name": "BTUT Reduction Engine",
+  "description": "Core lattice-threaded data reduction engine. Transforms millions of entities into a compact survivor set using multi-resolution thinning and composite scoring.",
+  "icon": "cpu",
+  "adapter_type": "generic",
+  "adapter_config": {},
+  "views": [
+    {
+      "id": "btut_overview",
+      "component": "BTUTOverview",
+      "route": "/btut",
+      "label": "Reduction Overview",
+      "icon": "activity"
+    },
+    {
+      "id": "btut_survivors",
+      "component": "BTUTSurvivors",
+      "route": "/btut/survivors",
+      "label": "Survivor Explorer",
+      "icon": "users"
+    },
+    {
+      "id": "btut_jobs",
+      "component": "BTUTJobs",
+      "route": "/btut/jobs",
+      "label": "Reduction Jobs",
+      "icon": "list"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "survivor",
+      "color": "#10b981",
+      "primary_field": "name",
+      "secondary_field": "composite_score",
+      "icon": "star"
+    },
+    {
+      "name": "entity",
+      "color": "#6366f1",
+      "primary_field": "name",
+      "secondary_field": "source",
+      "icon": "circle"
+    }
+  ],
+  "actions": [
+    {
+      "id": "start_reduction",
+      "label": "Start Reduction",
+      "endpoint": "/api/v1/btut/reduce",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "export_survivors",
+      "label": "Export Survivors",
+      "endpoint": "/api/v1/btut/export",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Reduced {input_count} entities to {survivor_count} survivors ({ratio}:1 ratio) in {wall_time}s.",
+    "cost": "Total cost: ${cost_usd} against ${budget} budget."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "free",
+  "is_core": true
+}

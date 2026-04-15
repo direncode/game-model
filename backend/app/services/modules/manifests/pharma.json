@@ -1,0 +1,84 @@
+{
+  "id": "pharma",
+  "version": "1.0.0",
+  "display_name": "PubMed Pharma Intelligence",
+  "description": "Medical and pharmaceutical intelligence via PubMed and clinical trial databases. Maps research networks, drug pipelines, and institutional relationships.",
+  "icon": "heart-pulse",
+  "adapter_type": "pubmed",
+  "adapter_config": {
+    "base_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+    "rate_limit_rps": 3,
+    "max_results_per_query": 10000
+  },
+  "views": [
+    {
+      "id": "pharma_dashboard",
+      "component": "PharmaDashboard",
+      "route": "/pharma",
+      "label": "Pharma Dashboard",
+      "icon": "heart-pulse"
+    },
+    {
+      "id": "pharma_trials",
+      "component": "PharmaTrials",
+      "route": "/pharma/trials",
+      "label": "Clinical Trials",
+      "icon": "flask-conical"
+    },
+    {
+      "id": "pharma_network",
+      "component": "PharmaNetwork",
+      "route": "/pharma/network",
+      "label": "Research Network",
+      "icon": "share-2"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "publication",
+      "color": "#10b981",
+      "primary_field": "title",
+      "secondary_field": "journal",
+      "icon": "book-open"
+    },
+    {
+      "name": "researcher",
+      "color": "#6366f1",
+      "primary_field": "name",
+      "secondary_field": "affiliation",
+      "icon": "user"
+    },
+    {
+      "name": "compound",
+      "color": "#ec4899",
+      "primary_field": "compound_name",
+      "secondary_field": "phase",
+      "icon": "atom"
+    }
+  ],
+  "actions": [
+    {
+      "id": "ingest_publications",
+      "label": "Ingest Publications",
+      "endpoint": "/api/v1/pharma/ingest",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "scan_trials",
+      "label": "Scan Clinical Trials",
+      "endpoint": "/api/v1/pharma/scan-trials",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Indexed {pub_count} publications and {trial_count} active clinical trials.",
+    "network": "Identified {cluster_count} research clusters across {institution_count} institutions."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}

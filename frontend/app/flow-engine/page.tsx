@@ -3,32 +3,55 @@
 import { useEffect, useState } from "react";
 import { flowEngineApi, GraphState } from "@/lib/flow-engine/api";
 
+const DEMO_GRAPH: GraphState = {
+  wells: [
+    { well_id: "btut", label: "BTUT Engine", state: "active", saturation: 0.42, conversion: 0.81, impulse: 0.55, staleness: 0.08, alert_level: "normal" },
+    { well_id: "tcd_jepa", label: "TCD-JEPA", state: "active", saturation: 0.67, conversion: 0.73, impulse: 0.39, staleness: 0.15, alert_level: "normal" },
+    { well_id: "data_estate", label: "Data Estate", state: "active", saturation: 0.31, conversion: 0.88, impulse: 0.62, staleness: 0.05, alert_level: "normal" },
+    { well_id: "dunc", label: "DUNC Simulator", state: "saturated", saturation: 0.93, conversion: 0.45, impulse: 0.78, staleness: 0.12, alert_level: "critical" },
+  ],
+  wires: [
+    { source: "btut", sink: "tcd_jepa", state: "flowing", liquidity: 90.0, friction: 0.032 },
+    { source: "tcd_jepa", sink: "data_estate", state: "flowing", liquidity: 65.7, friction: 0.078 },
+    { source: "btut", sink: "dunc", state: "throttled", liquidity: 22.4, friction: 0.210 },
+    { source: "data_estate", sink: "dunc", state: "flowing", liquidity: 55.2, friction: 0.045 },
+  ],
+  metrics: { resilience: 2, circulation_rate: 233.3, saturation_pressure: 0.351, friction_index: 0.072 },
+};
+
 export default function FlowEnginePage() {
   const [graph, setGraph] = useState<GraphState | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [demo, setDemo] = useState(false);
 
   useEffect(() => {
     const load = async () => {
       try {
         const data = await flowEngineApi.graphState();
         setGraph(data);
-      } catch (e: any) {
-        setError(e.message);
+      } catch {
+        setGraph(DEMO_GRAPH);
+        setDemo(true);
       }
     };
     load();
-    const interval = setInterval(load, 5000);
+    const interval = setInterval(load, demo ? 60000 : 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [demo]);
 
-  if (error) return <div className="p-6 text-red-400">Error: {error}</div>;
   if (!graph) return <div className="p-6 text-zinc-400">Loading flow graph...</div>;
 
   const m = graph.metrics;
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 p-6">
-      <h1 className="text-2xl font-bold mb-6">Flow Engine</h1>
+      <div className="flex items-center gap-3 mb-6">
+        <h1 className="text-2xl font-bold">Flow Engine</h1>
+        {demo && (
+          <span className="text-xs px-2 py-0.5 rounded bg-amber-900/50 text-amber-300 border border-amber-800">
+            Demo Data
+          </span>
+        )}
+      </div>
 
       {/* System Metrics */}
       <div className="grid grid-cols-4 gap-4 mb-8">

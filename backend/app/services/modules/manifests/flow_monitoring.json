@@ -1,0 +1,51 @@
+{
+  "id": "flow_monitoring",
+  "version": "1.0.0",
+  "display_name": "Flow Engine Monitor",
+  "description": "Real-time graph-state monitoring for the reduction pipeline. Tracks well health, throughput, and system metrics across reduction stages.",
+  "icon": "bar-chart-2",
+  "adapter_type": "generic",
+  "adapter_config": {},
+  "views": [
+    {
+      "id": "flow_dashboard",
+      "component": "FlowEngineOverview",
+      "route": "/flow-engine",
+      "label": "Flow Dashboard",
+      "icon": "bar-chart-2"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "well",
+      "color": "#f59e0b",
+      "primary_field": "well_id",
+      "secondary_field": "throughput",
+      "icon": "droplet"
+    },
+    {
+      "name": "stage",
+      "color": "#8b5cf6",
+      "primary_field": "stage_name",
+      "secondary_field": "status",
+      "icon": "layers"
+    }
+  ],
+  "actions": [
+    {
+      "id": "refresh_metrics",
+      "label": "Refresh Metrics",
+      "endpoint": "/api/v1/flow-engine/metrics",
+      "method": "GET",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "health": "System health: {status}. Active wells: {active_wells}/{total_wells}."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": false,
+  "tier": "free",
+  "is_core": true
+}

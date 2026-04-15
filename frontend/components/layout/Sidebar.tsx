@@ -24,10 +24,13 @@ import {
   Bell,
   Building2,
   Share2,
+  Puzzle,
+  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/auth";
 import { useAppStore } from "@/stores/app";
+import { useModules } from "@/lib/modules/ModuleContext";
 
 interface NavItem {
   label: string;
@@ -46,12 +49,40 @@ interface SidebarProps {
   className?: string;
 }
 
+/** Map icon name strings from module manifests to Lucide icons. */
+const ICON_MAP: Record<string, LucideIcon> = {
+  Cpu,
+  BrainCircuit,
+  LayoutDashboard,
+  Database,
+  Box,
+  GitBranch,
+  Swords,
+  Route,
+  FileBarChart,
+  AlertTriangle,
+  Users,
+  ClipboardList,
+  ShieldCheck,
+  Search,
+  Compass,
+  Bell,
+  Building2,
+  Share2,
+  Puzzle,
+};
+
+function resolveIcon(name: string): LucideIcon {
+  return ICON_MAP[name] ?? Puzzle;
+}
+
 export default function Sidebar({ className }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const { user } = useAuthStore();
   const isAdmin = user?.role === "admin";
   const activeDatasetId = useAppStore((s) => s.activeDatasetId);
+  const { enabledModules, loading: modulesLoading } = useModules();
 
   const sections: NavSection[] = [
     {
@@ -164,6 +195,61 @@ export default function Sidebar({ className }: SidebarProps) {
             </div>
           );
         })}
+
+        {/* Dynamic modules section */}
+        {modulesLoading ? (
+          <div>
+            {!collapsed && (
+              <p className="px-3 mb-2 text-[10px] font-display font-semibold tracking-widest text-li-text-muted uppercase">
+                Modules
+              </p>
+            )}
+            <ul className="space-y-0.5">
+              {[1, 2, 3].map((i) => (
+                <li key={`skeleton-${i}`} className="px-3 py-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 rounded bg-li-surface-hover animate-pulse" />
+                    {!collapsed && (
+                      <div className="h-3 w-24 rounded bg-li-surface-hover animate-pulse" />
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : enabledModules.length > 0 ? (
+          <div>
+            {!collapsed && (
+              <p className="px-3 mb-2 text-[10px] font-display font-semibold tracking-widest text-li-text-muted uppercase">
+                Modules
+              </p>
+            )}
+            <ul className="space-y-0.5">
+              {enabledModules.map((mod) => {
+                const href = `/modules/${mod.id}`;
+                const active = pathname === href || pathname?.startsWith(href + "/");
+                const Icon = resolveIcon(mod.icon);
+                return (
+                  <li key={mod.id}>
+                    <Link
+                      href={href}
+                      title={collapsed ? mod.displayName : undefined}
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
+                        active
+                          ? "bg-li-primary/10 text-li-primary border-l-2 border-li-primary"
+                          : "text-li-text-secondary hover:bg-li-surface-hover hover:text-li-text-primary"
+                      )}
+                    >
+                      <Icon className="w-4 h-4 flex-shrink-0" />
+                      {!collapsed && <span>{mod.displayName}</span>}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
       </nav>
 
       {/* Collapse toggle */}

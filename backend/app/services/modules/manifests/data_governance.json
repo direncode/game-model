@@ -1,0 +1,80 @@
+{
+  "id": "data_governance",
+  "version": "1.0.0",
+  "display_name": "Data Estate Governance",
+  "description": "Data governance and lineage tracking for the Latent Ocean data estate. Monitors data quality, provenance, and compliance across all modules.",
+  "icon": "database",
+  "adapter_type": "generic",
+  "adapter_config": {},
+  "views": [
+    {
+      "id": "data_estate_dashboard",
+      "component": "DataEstateDashboard",
+      "route": "/data-estate",
+      "label": "Data Estate",
+      "icon": "database"
+    },
+    {
+      "id": "data_lineage",
+      "component": "DataLineage",
+      "route": "/data-estate/lineage",
+      "label": "Data Lineage",
+      "icon": "git-branch"
+    },
+    {
+      "id": "data_quality",
+      "component": "DataQuality",
+      "route": "/data-estate/quality",
+      "label": "Data Quality",
+      "icon": "check-circle"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "dataset",
+      "color": "#6366f1",
+      "primary_field": "name",
+      "secondary_field": "source",
+      "icon": "database"
+    },
+    {
+      "name": "pipeline",
+      "color": "#14b8a6",
+      "primary_field": "pipeline_name",
+      "secondary_field": "status",
+      "icon": "workflow"
+    },
+    {
+      "name": "quality_rule",
+      "color": "#f59e0b",
+      "primary_field": "rule_name",
+      "secondary_field": "pass_rate",
+      "icon": "check-square"
+    }
+  ],
+  "actions": [
+    {
+      "id": "run_quality_scan",
+      "label": "Run Quality Scan",
+      "endpoint": "/api/v1/data-estate/quality-scan",
+      "method": "POST",
+      "requires_confirmation": false
+    },
+    {
+      "id": "refresh_lineage",
+      "label": "Refresh Lineage Graph",
+      "endpoint": "/api/v1/data-estate/refresh-lineage",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Managing {dataset_count} datasets across {pipeline_count} active pipelines.",
+    "quality": "Data quality score: {quality_score}%. {violation_count} rule violations detected."
+  },
+  "required_permissions": ["analyst"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}

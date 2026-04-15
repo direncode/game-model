@@ -45,6 +45,7 @@ export function ScenarioControls({ matchId }: { matchId: string }) {
             "px-2 py-1 text-[10px] font-mono uppercase tracking-wider",
             "border border-li-border rounded-sm bg-li-black-surface",
             "hover:border-li-cyan hover:text-li-cyan transition-colors",
+            "focus:outline-none focus:ring-2 focus:ring-li-cyan focus:ring-offset-1 focus:ring-offset-li-black",
             busy === s.key && "border-li-cyan text-li-cyan",
           )}
         >

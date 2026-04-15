@@ -39,7 +39,7 @@ export function ActiveScenarioBanner() {
           className={cn(
             "inline-flex items-center gap-2 px-3 py-1 rounded-sm",
             "bg-li-cyan/15 border border-li-cyan/30",
-            "animate-pulse-glow",
+            "animate-pulse-glow motion-reduce:animate-none",
           )}
         >
           <span className="text-[11px] font-mono font-bold text-li-cyan uppercase tracking-wider">

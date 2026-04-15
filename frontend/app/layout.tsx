@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
-import { GridBackground } from "@/components/effects/GridBackground";
+import { LayoutShell } from "@/components/layout/LayoutShell";
 
 export const metadata: Metadata = {
-  title: "Latent Intelligence",
-  description: "Enterprise Structure Discovery Platform — Discover hidden structural relationships in any entity-relationship dataset.",
+  title: "Latent Ocean",
+  description: "Intelligence discovery engine. Connect your database, reduce to survivors, discover hidden structure.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,12 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-black text-white font-sans antialiased">
-        <GridBackground />
-        <div className="gradient-top" />
         <Providers>
-          <div className="relative z-20">
-            {children}
-          </div>
+          <LayoutShell>{children}</LayoutShell>
         </Providers>
       </body>
     </html>

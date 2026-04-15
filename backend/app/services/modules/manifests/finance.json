@@ -1,0 +1,84 @@
+{
+  "id": "finance",
+  "version": "1.0.0",
+  "display_name": "SEC EDGAR Finance",
+  "description": "Financial intelligence via SEC EDGAR filings. Ingests 10-K/10-Q/8-K filings and extracts structural relationships between companies, executives, and financial metrics.",
+  "icon": "dollar-sign",
+  "adapter_type": "edgar",
+  "adapter_config": {
+    "base_url": "https://efts.sec.gov/LATEST",
+    "filing_types": ["10-K", "10-Q", "8-K", "DEF 14A"],
+    "rate_limit_rps": 10
+  },
+  "views": [
+    {
+      "id": "finance_dashboard",
+      "component": "FinanceDashboard",
+      "route": "/finance",
+      "label": "Finance Dashboard",
+      "icon": "dollar-sign"
+    },
+    {
+      "id": "finance_filings",
+      "component": "FinanceFilings",
+      "route": "/finance/filings",
+      "label": "SEC Filings",
+      "icon": "file-text"
+    },
+    {
+      "id": "finance_network",
+      "component": "FinanceNetwork",
+      "route": "/finance/network",
+      "label": "Entity Network",
+      "icon": "share-2"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "company",
+      "color": "#3b82f6",
+      "primary_field": "company_name",
+      "secondary_field": "cik",
+      "icon": "building"
+    },
+    {
+      "name": "filing",
+      "color": "#8b5cf6",
+      "primary_field": "form_type",
+      "secondary_field": "filed_date",
+      "icon": "file-text"
+    },
+    {
+      "name": "executive",
+      "color": "#f59e0b",
+      "primary_field": "name",
+      "secondary_field": "title",
+      "icon": "user"
+    }
+  ],
+  "actions": [
+    {
+      "id": "ingest_filings",
+      "label": "Ingest Filings",
+      "endpoint": "/api/v1/finance/ingest",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "refresh_prices",
+      "label": "Refresh Market Data",
+      "endpoint": "/api/v1/finance/refresh-prices",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Processed {filing_count} filings across {company_count} companies.",
+    "anomaly": "Detected {anomaly_count} revenue anomalies in the latest quarter."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}

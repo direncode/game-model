@@ -22,7 +22,6 @@ import {
   Zap,
 } from "lucide-react";
 import { duncApi } from "@/lib/dunc/api";
-import { useDuncStore } from "@/lib/dunc/store";
 import { useDuncMatchStream } from "@/lib/dunc/ws";
 import { ScreenSwitcher } from "@/components/dunc/ScreenSwitcher";
 import type { DuncInsight, DuncMatchSummary } from "@/lib/dunc/types";

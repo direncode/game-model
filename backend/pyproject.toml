@@ -62,3 +62,6 @@ strict = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+markers = [
+    "integration: tests that require a live PostgreSQL database",
+]

@@ -1,0 +1,83 @@
+{
+  "id": "patents",
+  "version": "1.0.0",
+  "display_name": "Patent Intelligence",
+  "description": "Patent landscape analysis via USPTO and EPO databases. Maps innovation networks, technology clusters, and competitive patent portfolios.",
+  "icon": "scroll",
+  "adapter_type": "generic",
+  "adapter_config": {
+    "sources": ["uspto", "epo"],
+    "rate_limit_rps": 5
+  },
+  "views": [
+    {
+      "id": "patents_dashboard",
+      "component": "PatentsDashboard",
+      "route": "/patents",
+      "label": "Patent Dashboard",
+      "icon": "scroll"
+    },
+    {
+      "id": "patents_landscape",
+      "component": "PatentsLandscape",
+      "route": "/patents/landscape",
+      "label": "Patent Landscape",
+      "icon": "map"
+    },
+    {
+      "id": "patents_portfolio",
+      "component": "PatentsPortfolio",
+      "route": "/patents/portfolio",
+      "label": "Portfolio Analysis",
+      "icon": "briefcase"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "patent",
+      "color": "#f97316",
+      "primary_field": "title",
+      "secondary_field": "patent_number",
+      "icon": "scroll"
+    },
+    {
+      "name": "inventor",
+      "color": "#06b6d4",
+      "primary_field": "name",
+      "secondary_field": "assignee",
+      "icon": "user"
+    },
+    {
+      "name": "technology_class",
+      "color": "#a855f7",
+      "primary_field": "class_code",
+      "secondary_field": "description",
+      "icon": "tag"
+    }
+  ],
+  "actions": [
+    {
+      "id": "ingest_patents",
+      "label": "Ingest Patents",
+      "endpoint": "/api/v1/patents/ingest",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "analyze_landscape",
+      "label": "Analyze Landscape",
+      "endpoint": "/api/v1/patents/analyze",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Indexed {patent_count} patents across {class_count} technology classes.",
+    "portfolio": "Top assignee: {top_assignee} with {top_count} patents."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}

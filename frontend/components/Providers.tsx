@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { getQueryClient } from "@/lib/query";
 import { useEffect } from "react";
 import { useAppStore } from "@/stores/app";
+import { ModuleProvider } from "@/lib/modules/ModuleContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
@@ -17,7 +18,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <ModuleProvider>
+        {children}
+      </ModuleProvider>
       <Toaster
         position="top-right"
         toastOptions={{

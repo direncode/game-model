@@ -1,0 +1,106 @@
+version: "3.8"
+
+# Docker Compose template for a single Latent Ocean fork instance.
+# Environment variables are injected by the control plane provisioner.
+#
+# Usage:
+#   FORK_ID=xxx SOURCE_DSN=... docker compose -f docker-compose.fork.yml up -d
+
+services:
+  api:
+    image: ${FORK_IMAGE:-latentocean/fork:latest}
+    container_name: lo-fork-${FORK_ID:-dev}-api
+    entrypoint: ["/app/entrypoint.sh"]
+    environment:
+      - FORK_ID=${FORK_ID}
+      - CUSTOMER_ID=${CUSTOMER_ID}
+      - SUBDOMAIN=${SUBDOMAIN}
+      - SOURCE_DSN=${SOURCE_DSN}
+      - OUTPUT_DSN=${OUTPUT_DSN:-${SOURCE_DSN}}
+      - OUTPUT_SCHEMA=${OUTPUT_SCHEMA:-latent_ocean}
+      - ENGINE_BUDGET=${ENGINE_BUDGET:-50.0}
+      - TARGET_SURVIVORS=${TARGET_SURVIVORS:-300}
+      - ENABLED_MODULES=${ENABLED_MODULES:-}
+      - REDUCTION_SCHEDULE=${REDUCTION_SCHEDULE:-0 2 * * *}
+      - REDUCTION_ON_STARTUP=${REDUCTION_ON_STARTUP:-true}
+      - REDIS_URL=redis://redis:6379/0
+      - API_PORT=8000
+      - API_HOST=0.0.0.0
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - LOG_FORMAT=${LOG_FORMAT:-json}
+      - DEVICE=${DEVICE:-auto}
+      - USE_FP16=${USE_FP16:-true}
+      - MAX_PREFILTER_MEMORY_MB=${MAX_PREFILTER_MEMORY_MB:-512}
+      - CHUNK_SIZE=${CHUNK_SIZE:-50000}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "2.0"
+        reservations:
+          memory: 512M
+          cpus: "0.5"
+    volumes:
+      - fork-data:/app/data
+      - fork-checkpoints:/tmp/btut_checkpoints
+
+  dashboard:
+    image: ${DASHBOARD_IMAGE:-latentocean/dashboard:latest}
+    container_name: lo-fork-${FORK_ID:-dev}-dashboard
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+      - NEXT_PUBLIC_FORK_ID=${FORK_ID}
+      - NEXT_PUBLIC_SUBDOMAIN=${SUBDOMAIN}
+    ports:
+      - "${DASHBOARD_PORT:-3000}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+
+  redis:
+    image: redis:7-alpine
+    container_name: lo-fork-${FORK_ID:-dev}-redis
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.25"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  fork-data:
+    driver: local
+  fork-checkpoints:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  default:
+    name: lo-fork-${FORK_ID:-dev}-net

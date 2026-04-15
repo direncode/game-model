@@ -1,0 +1,83 @@
+{
+  "id": "supply_chain",
+  "version": "1.0.0",
+  "display_name": "Supply Chain Intelligence",
+  "description": "Global trade and supply-chain analysis via UN Comtrade data. Tracks commodity flows, trade dependencies, and supply-chain vulnerabilities.",
+  "icon": "truck",
+  "adapter_type": "generic",
+  "adapter_config": {
+    "sources": ["comtrade"],
+    "rate_limit_rps": 5
+  },
+  "views": [
+    {
+      "id": "supply_chain_dashboard",
+      "component": "SupplyChainDashboard",
+      "route": "/supply-chain",
+      "label": "Supply Chain Dashboard",
+      "icon": "truck"
+    },
+    {
+      "id": "supply_chain_flows",
+      "component": "SupplyChainFlows",
+      "route": "/supply-chain/flows",
+      "label": "Trade Flows",
+      "icon": "arrow-right-left"
+    },
+    {
+      "id": "supply_chain_risks",
+      "component": "SupplyChainRisks",
+      "route": "/supply-chain/risks",
+      "label": "Risk Assessment",
+      "icon": "alert-triangle"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "country",
+      "color": "#22c55e",
+      "primary_field": "country_name",
+      "secondary_field": "iso_code",
+      "icon": "globe"
+    },
+    {
+      "name": "commodity",
+      "color": "#eab308",
+      "primary_field": "commodity_name",
+      "secondary_field": "hs_code",
+      "icon": "package"
+    },
+    {
+      "name": "trade_flow",
+      "color": "#64748b",
+      "primary_field": "exporter",
+      "secondary_field": "importer",
+      "icon": "arrow-right"
+    }
+  ],
+  "actions": [
+    {
+      "id": "ingest_trade_data",
+      "label": "Ingest Trade Data",
+      "endpoint": "/api/v1/supply-chain/ingest",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "assess_risks",
+      "label": "Run Risk Assessment",
+      "endpoint": "/api/v1/supply-chain/assess-risks",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "summary": "Tracking {flow_count} trade flows across {country_count} countries.",
+    "risk": "Identified {risk_count} high-risk supply chain dependencies."
+  },
+  "required_permissions": ["viewer"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}

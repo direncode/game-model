@@ -84,7 +84,7 @@ function LatestEvent({ event, matchInfo }: { event: any; matchInfo: any }) {
 
   if (isGoal) {
     return (
-      <div className="bg-[#37003c] text-white px-4 py-1 rounded-sm text-xs font-bold animate-pulse">
+      <div className="bg-[#37003c] text-white px-4 py-1 rounded-sm text-xs font-bold animate-pulse motion-reduce:animate-none">
         ⚽ GOAL! {teamName} #{event.player_number} ({event.minute}&apos;)
       </div>
     );

@@ -1,0 +1,66 @@
+{
+  "id": "structural_discovery",
+  "version": "1.0.0",
+  "display_name": "TCD-JEPA Crystallization",
+  "description": "Topological crystallization and structural discovery via JEPA-based representation learning. Identifies hidden structural patterns in survivor sets.",
+  "icon": "hexagon",
+  "adapter_type": "generic",
+  "adapter_config": {},
+  "views": [
+    {
+      "id": "tcd_overview",
+      "component": "TCDOverview",
+      "route": "/tcd-jepa",
+      "label": "Crystallization",
+      "icon": "hexagon"
+    },
+    {
+      "id": "tcd_structures",
+      "component": "TCDStructures",
+      "route": "/tcd-jepa/structures",
+      "label": "Discovered Structures",
+      "icon": "git-branch"
+    }
+  ],
+  "entity_types": [
+    {
+      "name": "crystal",
+      "color": "#ec4899",
+      "primary_field": "crystal_id",
+      "secondary_field": "stability_score",
+      "icon": "diamond"
+    },
+    {
+      "name": "bond",
+      "color": "#14b8a6",
+      "primary_field": "source",
+      "secondary_field": "target",
+      "icon": "link"
+    }
+  ],
+  "actions": [
+    {
+      "id": "start_crystallization",
+      "label": "Start Crystallization",
+      "endpoint": "/api/v1/tcd/crystallize",
+      "method": "POST",
+      "requires_confirmation": true
+    },
+    {
+      "id": "export_structures",
+      "label": "Export Structures",
+      "endpoint": "/api/v1/tcd/export",
+      "method": "POST",
+      "requires_confirmation": false
+    }
+  ],
+  "narratives": {
+    "discovery": "Discovered {crystal_count} stable structures from {survivor_count} survivors.",
+    "stability": "Average stability score: {avg_stability}. Max cluster size: {max_cluster}."
+  },
+  "required_permissions": ["analyst"],
+  "min_clearance": "unclassified",
+  "billable": true,
+  "tier": "professional",
+  "is_core": false
+}
