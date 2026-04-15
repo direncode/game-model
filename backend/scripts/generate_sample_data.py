@@ -43,15 +43,58 @@ def generate(output_path: Path, limit: int = 500, budget_dollars: float = 50.0) 
     manifold = engine.represent(reduction)
 
     # Shape for frontend consumption
+    def _resolve_display_name(entity: dict) -> str:
+        """Extract human-friendly name from entity attributes."""
+        attrs = entity.get("attributes", {})
+        if isinstance(attrs, str):
+            try:
+                attrs = json.loads(attrs)
+            except (ValueError, TypeError):
+                attrs = {}
+        # Try primary display fields by entity type
+        etype = entity.get("type", "")
+        if etype == "company":
+            for key in ("company_name", "name", "entity_name"):
+                val = attrs.get(key)
+                if val:
+                    # Title-case if all-caps (EDGAR often returns ALL CAPS names)
+                    s = str(val).strip()
+                    if s.isupper() and len(s) > 3:
+                        s = s.title()
+                    return s
+        elif etype == "filing":
+            for key in ("description", "form", "filing_type"):
+                val = attrs.get(key)
+                if val:
+                    return str(val).strip()
+        elif etype == "financial_fact":
+            for key in ("concept", "fact_name", "metric"):
+                val = attrs.get(key)
+                if val:
+                    return str(val).strip()
+        # Generic fallback
+        for key in ("display_name", "title", "name", "label"):
+            val = attrs.get(key)
+            if val:
+                return str(val).strip()
+        return entity.get("name", "")
+
     survivors_out = []
     for i, s in enumerate(reduction.survivors):
         entity = s.get("entity", {})
         scores = s.get("scores", {})
+        raw_attrs = entity.get("attributes", {})
+        if isinstance(raw_attrs, str):
+            try:
+                raw_attrs = json.loads(raw_attrs)
+            except (ValueError, TypeError):
+                raw_attrs = {}
+        display_name = _resolve_display_name(entity)
         survivors_out.append({
             "id": entity.get("name", f"entity_{i}"),
-            "name": entity.get("name", ""),
+            "name": display_name or entity.get("name", ""),
             "type": entity.get("type", ""),
-            "attributes": entity.get("attributes", {}),
+            "attributes": raw_attrs,
             "cluster": s.get("cluster", 0),
             "fingerprint": s.get("fingerprint_48bit", ""),
             "scores": {

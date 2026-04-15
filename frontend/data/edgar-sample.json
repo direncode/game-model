@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source": "SEC EDGAR",
-    "generated_at": "2026-04-15T18:07:23.580805+00:00",
+    "generated_at": "2026-04-15T18:08:49.649620+00:00",
     "n_input": 500,
     "n_survivors": 150,
     "n_clusters": 8,
@@ -12,9 +12,13 @@
   "survivors": [
     {
       "id": "company_1389170",
-      "name": "company_1389170",
+      "name": "Targa Resources Corp.",
       "type": "company",
-      "attributes": "{\"cik\": \"1389170\", \"ticker\": \"TRGP\", \"company_name\": \"Targa Resources Corp.\"}",
+      "attributes": {
+        "cik": "1389170",
+        "ticker": "TRGP",
+        "company_name": "Targa Resources Corp."
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111011011111011111111111111111",
       "scores": {
@@ -41,9 +45,13 @@
     },
     {
       "id": "company_1745201",
-      "name": "company_1745201",
+      "name": "Viking Holdings Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"1745201\", \"ticker\": \"VIK\", \"company_name\": \"Viking Holdings Ltd\"}",
+      "attributes": {
+        "cik": "1745201",
+        "ticker": "VIK",
+        "company_name": "Viking Holdings Ltd"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111011111011111001111111111111111",
       "scores": {
@@ -70,9 +78,13 @@
     },
     {
       "id": "company_2488",
-      "name": "company_2488",
+      "name": "Advanced Micro Devices Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"2488\", \"ticker\": \"AMD\", \"company_name\": \"ADVANCED MICRO DEVICES INC\"}",
+      "attributes": {
+        "cik": "2488",
+        "ticker": "AMD",
+        "company_name": "ADVANCED MICRO DEVICES INC"
+      },
       "cluster": 2,
       "fingerprint": "111111111111001111111111111111111111111111101101",
       "scores": {
@@ -99,9 +111,13 @@
     },
     {
       "id": "company_1300514",
-      "name": "company_1300514",
+      "name": "Las Vegas Sands Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1300514\", \"ticker\": \"LVS\", \"company_name\": \"LAS VEGAS SANDS CORP\"}",
+      "attributes": {
+        "cik": "1300514",
+        "ticker": "LVS",
+        "company_name": "LAS VEGAS SANDS CORP"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111111111110111111111",
       "scores": {
@@ -128,9 +144,13 @@
     },
     {
       "id": "company_1133421",
-      "name": "company_1133421",
+      "name": "Northrop Grumman Corp /De/",
       "type": "company",
-      "attributes": "{\"cik\": \"1133421\", \"ticker\": \"NOC\", \"company_name\": \"NORTHROP GRUMMAN CORP /DE/\"}",
+      "attributes": {
+        "cik": "1133421",
+        "ticker": "NOC",
+        "company_name": "NORTHROP GRUMMAN CORP /DE/"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110111111111111011111111111101111",
       "scores": {
@@ -157,9 +177,13 @@
     },
     {
       "id": "company_915191",
-      "name": "company_915191",
+      "name": "Fairfax Financial Holdings Ltd/ Can",
       "type": "company",
-      "attributes": "{\"cik\": \"915191\", \"ticker\": \"FRFHF\", \"company_name\": \"FAIRFAX FINANCIAL HOLDINGS LTD/ CAN\"}",
+      "attributes": {
+        "cik": "915191",
+        "ticker": "FRFHF",
+        "company_name": "FAIRFAX FINANCIAL HOLDINGS LTD/ CAN"
+      },
       "cluster": 0,
       "fingerprint": "111111011111011110111111111111111111010111011101",
       "scores": {
@@ -186,9 +210,13 @@
     },
     {
       "id": "company_1075124",
-      "name": "company_1075124",
+      "name": "Thomson Reuters Corp /Can/",
       "type": "company",
-      "attributes": "{\"cik\": \"1075124\", \"ticker\": \"TRI\", \"company_name\": \"THOMSON REUTERS CORP /CAN/\"}",
+      "attributes": {
+        "cik": "1075124",
+        "ticker": "TRI",
+        "company_name": "THOMSON REUTERS CORP /CAN/"
+      },
       "cluster": 6,
       "fingerprint": "111111101111111100111111111111101111111111111111",
       "scores": {
@@ -215,9 +243,13 @@
     },
     {
       "id": "company_820318",
-      "name": "company_820318",
+      "name": "Coherent Corp.",
       "type": "company",
-      "attributes": "{\"cik\": \"820318\", \"ticker\": \"COHR\", \"company_name\": \"COHERENT CORP.\"}",
+      "attributes": {
+        "cik": "820318",
+        "ticker": "COHR",
+        "company_name": "COHERENT CORP."
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111110111111111111111",
       "scores": {
@@ -244,9 +276,13 @@
     },
     {
       "id": "company_865752",
-      "name": "company_865752",
+      "name": "Monster Beverage Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"865752\", \"ticker\": \"MNST\", \"company_name\": \"Monster Beverage Corp\"}",
+      "attributes": {
+        "cik": "865752",
+        "ticker": "MNST",
+        "company_name": "Monster Beverage Corp"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110011111111111011111111111101111",
       "scores": {
@@ -273,9 +309,13 @@
     },
     {
       "id": "company_16875",
-      "name": "company_16875",
+      "name": "Canadian Pacific Kansas City Ltd/Cn",
       "type": "company",
-      "attributes": "{\"cik\": \"16875\", \"ticker\": \"CP\", \"company_name\": \"CANADIAN PACIFIC KANSAS CITY LTD/CN\"}",
+      "attributes": {
+        "cik": "16875",
+        "ticker": "CP",
+        "company_name": "CANADIAN PACIFIC KANSAS CITY LTD/CN"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111101111111111111111",
       "scores": {
@@ -302,9 +342,13 @@
     },
     {
       "id": "company_898293",
-      "name": "company_898293",
+      "name": "Jabil Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"898293\", \"ticker\": \"JBL\", \"company_name\": \"JABIL INC\"}",
+      "attributes": {
+        "cik": "898293",
+        "ticker": "JBL",
+        "company_name": "JABIL INC"
+      },
       "cluster": 0,
       "fingerprint": "101111111111111111111111011111111111111111111111",
       "scores": {
@@ -331,9 +375,13 @@
     },
     {
       "id": "company_1013871",
-      "name": "company_1013871",
+      "name": "Nrg Energy, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1013871\", \"ticker\": \"NRG\", \"company_name\": \"NRG ENERGY, INC.\"}",
+      "attributes": {
+        "cik": "1013871",
+        "ticker": "NRG",
+        "company_name": "NRG ENERGY, INC."
+      },
       "cluster": 5,
       "fingerprint": "111111011111111111111111111111111111111111111111",
       "scores": {
@@ -360,9 +408,13 @@
     },
     {
       "id": "company_1701605",
-      "name": "company_1701605",
+      "name": "Baker Hughes Co",
       "type": "company",
-      "attributes": "{\"cik\": \"1701605\", \"ticker\": \"BKR\", \"company_name\": \"Baker Hughes Co\"}",
+      "attributes": {
+        "cik": "1701605",
+        "ticker": "BKR",
+        "company_name": "Baker Hughes Co"
+      },
       "cluster": 6,
       "fingerprint": "011111011111111111111111111111111111111111111111",
       "scores": {
@@ -389,9 +441,13 @@
     },
     {
       "id": "company_1858681",
-      "name": "company_1858681",
+      "name": "Apollo Global Management, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1858681\", \"ticker\": \"APO\", \"company_name\": \"Apollo Global Management, Inc.\"}",
+      "attributes": {
+        "cik": "1858681",
+        "ticker": "APO",
+        "company_name": "Apollo Global Management, Inc."
+      },
       "cluster": 0,
       "fingerprint": "101111111111011101111111111111111101111111111111",
       "scores": {
@@ -418,9 +474,13 @@
     },
     {
       "id": "company_1415404",
-      "name": "company_1415404",
+      "name": "EchoStar CORP",
       "type": "company",
-      "attributes": "{\"cik\": \"1415404\", \"ticker\": \"SATS\", \"company_name\": \"EchoStar CORP\"}",
+      "attributes": {
+        "cik": "1415404",
+        "ticker": "SATS",
+        "company_name": "EchoStar CORP"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111101111111111101111",
       "scores": {
@@ -447,9 +507,13 @@
     },
     {
       "id": "company_1691493",
-      "name": "company_1691493",
+      "name": "Nu Holdings Ltd.",
       "type": "company",
-      "attributes": "{\"cik\": \"1691493\", \"ticker\": \"NU\", \"company_name\": \"Nu Holdings Ltd.\"}",
+      "attributes": {
+        "cik": "1691493",
+        "ticker": "NU",
+        "company_name": "Nu Holdings Ltd."
+      },
       "cluster": 0,
       "fingerprint": "111111111111011011111111111111111111111111111111",
       "scores": {
@@ -476,9 +540,13 @@
     },
     {
       "id": "company_277948",
-      "name": "company_277948",
+      "name": "Csx Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"277948\", \"ticker\": \"CSX\", \"company_name\": \"CSX CORP\"}",
+      "attributes": {
+        "cik": "277948",
+        "ticker": "CSX",
+        "company_name": "CSX CORP"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111011111111111111111",
       "scores": {
@@ -505,9 +573,13 @@
     },
     {
       "id": "company_49938",
-      "name": "company_49938",
+      "name": "Imperial Oil Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"49938\", \"ticker\": \"IMO\", \"company_name\": \"IMPERIAL OIL LTD\"}",
+      "attributes": {
+        "cik": "49938",
+        "ticker": "IMO",
+        "company_name": "IMPERIAL OIL LTD"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111011111011111111111111111111111",
       "scores": {
@@ -534,9 +606,13 @@
     },
     {
       "id": "company_878927",
-      "name": "company_878927",
+      "name": "Old Dominion Freight Line, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"878927\", \"ticker\": \"ODFL\", \"company_name\": \"OLD DOMINION FREIGHT LINE, INC.\"}",
+      "attributes": {
+        "cik": "878927",
+        "ticker": "ODFL",
+        "company_name": "OLD DOMINION FREIGHT LINE, INC."
+      },
       "cluster": 3,
       "fingerprint": "111111111111110111111111111111111111111111111111",
       "scores": {
@@ -563,9 +639,13 @@
     },
     {
       "id": "company_946770",
-      "name": "company_946770",
+      "name": "Deutsche Telekom Ag",
       "type": "company",
-      "attributes": "{\"cik\": \"946770\", \"ticker\": \"DTEGY\", \"company_name\": \"DEUTSCHE TELEKOM AG\"}",
+      "attributes": {
+        "cik": "946770",
+        "ticker": "DTEGY",
+        "company_name": "DEUTSCHE TELEKOM AG"
+      },
       "cluster": 0,
       "fingerprint": "111111111011110111111111011111111111111111111111",
       "scores": {
@@ -592,9 +672,13 @@
     },
     {
       "id": "company_1091667",
-      "name": "company_1091667",
+      "name": "Charter Communications, Inc. /Mo/",
       "type": "company",
-      "attributes": "{\"cik\": \"1091667\", \"ticker\": \"CHTR\", \"company_name\": \"CHARTER COMMUNICATIONS, INC. /MO/\"}",
+      "attributes": {
+        "cik": "1091667",
+        "ticker": "CHTR",
+        "company_name": "CHARTER COMMUNICATIONS, INC. /MO/"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111111111011111111111",
       "scores": {
@@ -621,9 +705,13 @@
     },
     {
       "id": "company_200406",
-      "name": "company_200406",
+      "name": "Johnson & Johnson",
       "type": "company",
-      "attributes": "{\"cik\": \"200406\", \"ticker\": \"JNJ\", \"company_name\": \"JOHNSON & JOHNSON\"}",
+      "attributes": {
+        "cik": "200406",
+        "ticker": "JNJ",
+        "company_name": "JOHNSON & JOHNSON"
+      },
       "cluster": 0,
       "fingerprint": "101111011111111111111111111111111111111111111111",
       "scores": {
@@ -650,9 +738,13 @@
     },
     {
       "id": "company_789019",
-      "name": "company_789019",
+      "name": "Microsoft Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"789019\", \"ticker\": \"MSFT\", \"company_name\": \"MICROSOFT CORP\"}",
+      "attributes": {
+        "cik": "789019",
+        "ticker": "MSFT",
+        "company_name": "MICROSOFT CORP"
+      },
       "cluster": 6,
       "fingerprint": "111111111101111111011111111111111111111111101101",
       "scores": {
@@ -679,9 +771,13 @@
     },
     {
       "id": "company_1944048",
-      "name": "company_1944048",
+      "name": "Kenvue Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1944048\", \"ticker\": \"KVUE\", \"company_name\": \"Kenvue Inc.\"}",
+      "attributes": {
+        "cik": "1944048",
+        "ticker": "KVUE",
+        "company_name": "Kenvue Inc."
+      },
       "cluster": 0,
       "fingerprint": "111111001111010111111111111111101111111111111111",
       "scores": {
@@ -708,9 +804,13 @@
     },
     {
       "id": "company_1027664",
-      "name": "company_1027664",
+      "name": "Elbit Systems Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"1027664\", \"ticker\": \"ESLT\", \"company_name\": \"ELBIT SYSTEMS LTD\"}",
+      "attributes": {
+        "cik": "1027664",
+        "ticker": "ESLT",
+        "company_name": "ELBIT SYSTEMS LTD"
+      },
       "cluster": 3,
       "fingerprint": "110111111111111111111111011111111111101111111111",
       "scores": {
@@ -737,9 +837,13 @@
     },
     {
       "id": "company_70858",
-      "name": "company_70858",
+      "name": "Bank Of America Corp /De/",
       "type": "company",
-      "attributes": "{\"cik\": \"70858\", \"ticker\": \"BAC\", \"company_name\": \"BANK OF AMERICA CORP /DE/\"}",
+      "attributes": {
+        "cik": "70858",
+        "ticker": "BAC",
+        "company_name": "BANK OF AMERICA CORP /DE/"
+      },
       "cluster": 6,
       "fingerprint": "111111111111110111111111111111101111011111111111",
       "scores": {
@@ -766,9 +870,13 @@
     },
     {
       "id": "company_40533",
-      "name": "company_40533",
+      "name": "General Dynamics Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"40533\", \"ticker\": \"GD\", \"company_name\": \"GENERAL DYNAMICS CORP\"}",
+      "attributes": {
+        "cik": "40533",
+        "ticker": "GD",
+        "company_name": "GENERAL DYNAMICS CORP"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111110111011111111111111111101111",
       "scores": {
@@ -795,9 +903,13 @@
     },
     {
       "id": "company_936958",
-      "name": "company_936958",
+      "name": "Spdr S&P Midcap 400 Etf Trust",
       "type": "company",
-      "attributes": "{\"cik\": \"936958\", \"ticker\": \"MDY\", \"company_name\": \"SPDR S&P MIDCAP 400 ETF TRUST\"}",
+      "attributes": {
+        "cik": "936958",
+        "ticker": "MDY",
+        "company_name": "SPDR S&P MIDCAP 400 ETF TRUST"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111111101111111111111111111",
       "scores": {
@@ -824,9 +936,13 @@
     },
     {
       "id": "company_1594805",
-      "name": "company_1594805",
+      "name": "Shopify Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1594805\", \"ticker\": \"SHOP\", \"company_name\": \"SHOPIFY INC.\"}",
+      "attributes": {
+        "cik": "1594805",
+        "ticker": "SHOP",
+        "company_name": "SHOPIFY INC."
+      },
       "cluster": 1,
       "fingerprint": "111111110111111111111111111111111111111111110111",
       "scores": {
@@ -853,9 +969,13 @@
     },
     {
       "id": "company_62709",
-      "name": "company_62709",
+      "name": "Marsh & Mclennan Companies, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"62709\", \"ticker\": \"MRSH\", \"company_name\": \"MARSH & MCLENNAN COMPANIES, INC.\"}",
+      "attributes": {
+        "cik": "62709",
+        "ticker": "MRSH",
+        "company_name": "MARSH & MCLENNAN COMPANIES, INC."
+      },
       "cluster": 3,
       "fingerprint": "011111111111111111111111111111111111111111111111",
       "scores": {
@@ -882,9 +1002,13 @@
     },
     {
       "id": "company_2809",
-      "name": "company_2809",
+      "name": "Agnico Eagle Mines Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"2809\", \"ticker\": \"AEM\", \"company_name\": \"AGNICO EAGLE MINES LTD\"}",
+      "attributes": {
+        "cik": "2809",
+        "ticker": "AEM",
+        "company_name": "AGNICO EAGLE MINES LTD"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111110111111111111111111111111101",
       "scores": {
@@ -911,9 +1035,13 @@
     },
     {
       "id": "company_1002910",
-      "name": "company_1002910",
+      "name": "Ameren Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1002910\", \"ticker\": \"AEE\", \"company_name\": \"AMEREN CORP\"}",
+      "attributes": {
+        "cik": "1002910",
+        "ticker": "AEE",
+        "company_name": "AMEREN CORP"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111110111111111111111111111101111",
       "scores": {
@@ -940,9 +1068,13 @@
     },
     {
       "id": "company_66740",
-      "name": "company_66740",
+      "name": "3M Co",
       "type": "company",
-      "attributes": "{\"cik\": \"66740\", \"ticker\": \"MMM\", \"company_name\": \"3M CO\"}",
+      "attributes": {
+        "cik": "66740",
+        "ticker": "MMM",
+        "company_name": "3M CO"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111011111",
       "scores": {
@@ -969,9 +1101,13 @@
     },
     {
       "id": "company_1535527",
-      "name": "company_1535527",
+      "name": "CrowdStrike Holdings, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1535527\", \"ticker\": \"CRWD\", \"company_name\": \"CrowdStrike Holdings, Inc.\"}",
+      "attributes": {
+        "cik": "1535527",
+        "ticker": "CRWD",
+        "company_name": "CrowdStrike Holdings, Inc."
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110111111111111111111011111111111",
       "scores": {
@@ -998,9 +1134,13 @@
     },
     {
       "id": "company_106040",
-      "name": "company_106040",
+      "name": "Western Digital Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"106040\", \"ticker\": \"WDC\", \"company_name\": \"WESTERN DIGITAL CORP\"}",
+      "attributes": {
+        "cik": "106040",
+        "ticker": "WDC",
+        "company_name": "WESTERN DIGITAL CORP"
+      },
       "cluster": 0,
       "fingerprint": "111111101111110101111111011111111111111111111111",
       "scores": {
@@ -1027,9 +1167,13 @@
     },
     {
       "id": "company_16918",
-      "name": "company_16918",
+      "name": "Constellation Brands, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"16918\", \"ticker\": \"STZ\", \"company_name\": \"CONSTELLATION BRANDS, INC.\"}",
+      "attributes": {
+        "cik": "16918",
+        "ticker": "STZ",
+        "company_name": "CONSTELLATION BRANDS, INC."
+      },
       "cluster": 6,
       "fingerprint": "011111111011111110011111111111101111111111111111",
       "scores": {
@@ -1056,9 +1200,13 @@
     },
     {
       "id": "company_1549802",
-      "name": "company_1549802",
+      "name": "JD.com, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1549802\", \"ticker\": \"JD\", \"company_name\": \"JD.com, Inc.\"}",
+      "attributes": {
+        "cik": "1549802",
+        "ticker": "JD",
+        "company_name": "JD.com, Inc."
+      },
       "cluster": 0,
       "fingerprint": "101111111111111111110111101111101111111111101111",
       "scores": {
@@ -1085,9 +1233,13 @@
     },
     {
       "id": "company_1318220",
-      "name": "company_1318220",
+      "name": "Waste Connections, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1318220\", \"ticker\": \"WCN\", \"company_name\": \"Waste Connections, Inc.\"}",
+      "attributes": {
+        "cik": "1318220",
+        "ticker": "WCN",
+        "company_name": "Waste Connections, Inc."
+      },
       "cluster": 0,
       "fingerprint": "111111111111111101111111111111111111111111111111",
       "scores": {
@@ -1114,9 +1266,13 @@
     },
     {
       "id": "company_35527",
-      "name": "company_35527",
+      "name": "Fifth Third Bancorp",
       "type": "company",
-      "attributes": "{\"cik\": \"35527\", \"ticker\": \"FITB\", \"company_name\": \"FIFTH THIRD BANCORP\"}",
+      "attributes": {
+        "cik": "35527",
+        "ticker": "FITB",
+        "company_name": "FIFTH THIRD BANCORP"
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111101111111111011111111111",
       "scores": {
@@ -1143,9 +1299,13 @@
     },
     {
       "id": "company_1158838",
-      "name": "company_1158838",
+      "name": "Advantest Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1158838\", \"ticker\": \"ATEYY\", \"company_name\": \"ADVANTEST CORP\"}",
+      "attributes": {
+        "cik": "1158838",
+        "ticker": "ATEYY",
+        "company_name": "ADVANTEST CORP"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111111111111111111111111101101",
       "scores": {
@@ -1172,9 +1332,13 @@
     },
     {
       "id": "company_310158",
-      "name": "company_310158",
+      "name": "Merck & Co., Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"310158\", \"ticker\": \"MRK\", \"company_name\": \"Merck & Co., Inc.\"}",
+      "attributes": {
+        "cik": "310158",
+        "ticker": "MRK",
+        "company_name": "Merck & Co., Inc."
+      },
       "cluster": 6,
       "fingerprint": "111111101111111110111111111111111111111111111111",
       "scores": {
@@ -1201,9 +1365,13 @@
     },
     {
       "id": "company_1477333",
-      "name": "company_1477333",
+      "name": "Cloudflare, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1477333\", \"ticker\": \"NET\", \"company_name\": \"Cloudflare, Inc.\"}",
+      "attributes": {
+        "cik": "1477333",
+        "ticker": "NET",
+        "company_name": "Cloudflare, Inc."
+      },
       "cluster": 0,
       "fingerprint": "111101111111110111111111111111111111111111111110",
       "scores": {
@@ -1230,9 +1398,13 @@
     },
     {
       "id": "company_1900304",
-      "name": "company_1900304",
+      "name": "Haleon plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1900304\", \"ticker\": \"HLN\", \"company_name\": \"Haleon plc\"}",
+      "attributes": {
+        "cik": "1900304",
+        "ticker": "HLN",
+        "company_name": "Haleon plc"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111110011111111111111111111111111111",
       "scores": {
@@ -1259,9 +1431,13 @@
     },
     {
       "id": "company_717826",
-      "name": "company_717826",
+      "name": "Ericsson Lm Telephone Co",
       "type": "company",
-      "attributes": "{\"cik\": \"717826\", \"ticker\": \"ERIC\", \"company_name\": \"ERICSSON LM TELEPHONE CO\"}",
+      "attributes": {
+        "cik": "717826",
+        "ticker": "ERIC",
+        "company_name": "ERICSSON LM TELEPHONE CO"
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111110111011111111111111111111111",
       "scores": {
@@ -1288,9 +1464,13 @@
     },
     {
       "id": "company_9631",
-      "name": "company_9631",
+      "name": "Bank Of Nova Scotia",
       "type": "company",
-      "attributes": "{\"cik\": \"9631\", \"ticker\": \"BNS\", \"company_name\": \"BANK OF NOVA SCOTIA\"}",
+      "attributes": {
+        "cik": "9631",
+        "ticker": "BNS",
+        "company_name": "BANK OF NOVA SCOTIA"
+      },
       "cluster": 3,
       "fingerprint": "111111110101111111111111111111111111111111101111",
       "scores": {
@@ -1317,9 +1497,13 @@
     },
     {
       "id": "company_92122",
-      "name": "company_92122",
+      "name": "Southern Co",
       "type": "company",
-      "attributes": "{\"cik\": \"92122\", \"ticker\": \"SO\", \"company_name\": \"SOUTHERN CO\"}",
+      "attributes": {
+        "cik": "92122",
+        "ticker": "SO",
+        "company_name": "SOUTHERN CO"
+      },
       "cluster": 0,
       "fingerprint": "101111101111111001111111111111111111111111111111",
       "scores": {
@@ -1346,9 +1530,13 @@
     },
     {
       "id": "company_2073893",
-      "name": "company_2073893",
+      "name": "Dollarama Inc./ADR",
       "type": "company",
-      "attributes": "{\"cik\": \"2073893\", \"ticker\": \"DLMAY\", \"company_name\": \"Dollarama Inc./ADR\"}",
+      "attributes": {
+        "cik": "2073893",
+        "ticker": "DLMAY",
+        "company_name": "Dollarama Inc./ADR"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111111101",
       "scores": {
@@ -1375,9 +1563,13 @@
     },
     {
       "id": "company_943452",
-      "name": "company_943452",
+      "name": "Westinghouse Air Brake Technologies Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"943452\", \"ticker\": \"WAB\", \"company_name\": \"WESTINGHOUSE AIR BRAKE TECHNOLOGIES CORP\"}",
+      "attributes": {
+        "cik": "943452",
+        "ticker": "WAB",
+        "company_name": "WESTINGHOUSE AIR BRAKE TECHNOLOGIES CORP"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111111111011111101111",
       "scores": {
@@ -1404,9 +1596,13 @@
     },
     {
       "id": "company_29905",
-      "name": "company_29905",
+      "name": "DOVER Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"29905\", \"ticker\": \"DOV\", \"company_name\": \"DOVER Corp\"}",
+      "attributes": {
+        "cik": "29905",
+        "ticker": "DOV",
+        "company_name": "DOVER Corp"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111011111111111111111111111111",
       "scores": {
@@ -1433,9 +1629,13 @@
     },
     {
       "id": "company_1063761",
-      "name": "company_1063761",
+      "name": "Simon Property Group Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1063761\", \"ticker\": \"SPG\", \"company_name\": \"SIMON PROPERTY GROUP INC.\"}",
+      "attributes": {
+        "cik": "1063761",
+        "ticker": "SPG",
+        "company_name": "SIMON PROPERTY GROUP INC."
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111110111111111111111111111111",
       "scores": {
@@ -1462,9 +1662,13 @@
     },
     {
       "id": "company_1109357",
-      "name": "company_1109357",
+      "name": "Exelon Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1109357\", \"ticker\": \"EXC\", \"company_name\": \"EXELON CORP\"}",
+      "attributes": {
+        "cik": "1109357",
+        "ticker": "EXC",
+        "company_name": "EXELON CORP"
+      },
       "cluster": 0,
       "fingerprint": "101111111111111111111111111111111111111111111111",
       "scores": {
@@ -1491,9 +1695,13 @@
     },
     {
       "id": "company_936340",
-      "name": "company_936340",
+      "name": "Dte Energy Co",
       "type": "company",
-      "attributes": "{\"cik\": \"936340\", \"ticker\": \"DTE\", \"company_name\": \"DTE ENERGY CO\"}",
+      "attributes": {
+        "cik": "936340",
+        "ticker": "DTE",
+        "company_name": "DTE ENERGY CO"
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111111011111111111111111111",
       "scores": {
@@ -1520,9 +1728,13 @@
     },
     {
       "id": "company_1539838",
-      "name": "company_1539838",
+      "name": "Diamondback Energy, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1539838\", \"ticker\": \"FANG\", \"company_name\": \"Diamondback Energy, Inc.\"}",
+      "attributes": {
+        "cik": "1539838",
+        "ticker": "FANG",
+        "company_name": "Diamondback Energy, Inc."
+      },
       "cluster": 5,
       "fingerprint": "111111011111111111111111111111111111111011111111",
       "scores": {
@@ -1549,9 +1761,13 @@
     },
     {
       "id": "company_769397",
-      "name": "company_769397",
+      "name": "Autodesk, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"769397\", \"ticker\": \"ADSK\", \"company_name\": \"Autodesk, Inc.\"}",
+      "attributes": {
+        "cik": "769397",
+        "ticker": "ADSK",
+        "company_name": "Autodesk, Inc."
+      },
       "cluster": 1,
       "fingerprint": "111111111011111111111111111111111111111111111111",
       "scores": {
@@ -1578,9 +1794,13 @@
     },
     {
       "id": "company_1467373",
-      "name": "company_1467373",
+      "name": "Accenture plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1467373\", \"ticker\": \"ACN\", \"company_name\": \"Accenture plc\"}",
+      "attributes": {
+        "cik": "1467373",
+        "ticker": "ACN",
+        "company_name": "Accenture plc"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111101111111111111111111111111101111",
       "scores": {
@@ -1607,9 +1827,13 @@
     },
     {
       "id": "company_1445930",
-      "name": "company_1445930",
+      "name": "KB Financial Group Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1445930\", \"ticker\": \"KB\", \"company_name\": \"KB Financial Group Inc.\"}",
+      "attributes": {
+        "cik": "1445930",
+        "ticker": "KB",
+        "company_name": "KB Financial Group Inc."
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111110111111111111111111111111111",
       "scores": {
@@ -1636,9 +1860,13 @@
     },
     {
       "id": "company_887028",
-      "name": "company_887028",
+      "name": "Rio Tinto Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"887028\", \"ticker\": \"RTNTF\", \"company_name\": \"RIO TINTO LTD\"}",
+      "attributes": {
+        "cik": "887028",
+        "ticker": "RTNTF",
+        "company_name": "RIO TINTO LTD"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111111111111011111111",
       "scores": {
@@ -1665,9 +1893,13 @@
     },
     {
       "id": "company_842180",
-      "name": "company_842180",
+      "name": "Banco Bilbao Vizcaya Argentaria, S.A.",
       "type": "company",
-      "attributes": "{\"cik\": \"842180\", \"ticker\": \"BBVA\", \"company_name\": \"BANCO BILBAO VIZCAYA ARGENTARIA, S.A.\"}",
+      "attributes": {
+        "cik": "842180",
+        "ticker": "BBVA",
+        "company_name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A."
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111111111101111101111111111",
       "scores": {
@@ -1694,9 +1926,13 @@
     },
     {
       "id": "company_745732",
-      "name": "company_745732",
+      "name": "Ross Stores, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"745732\", \"ticker\": \"ROST\", \"company_name\": \"ROSS STORES, INC.\"}",
+      "attributes": {
+        "cik": "745732",
+        "ticker": "ROST",
+        "company_name": "ROSS STORES, INC."
+      },
       "cluster": 5,
       "fingerprint": "111101111111111111111111111111111111111111111111",
       "scores": {
@@ -1723,9 +1959,13 @@
     },
     {
       "id": "company_1973239",
-      "name": "company_1973239",
+      "name": "Arm Holdings Plc /Uk",
       "type": "company",
-      "attributes": "{\"cik\": \"1973239\", \"ticker\": \"ARM\", \"company_name\": \"ARM HOLDINGS PLC /UK\"}",
+      "attributes": {
+        "cik": "1973239",
+        "ticker": "ARM",
+        "company_name": "ARM HOLDINGS PLC /UK"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111011111111111111111111111111111",
       "scores": {
@@ -1752,9 +1992,13 @@
     },
     {
       "id": "company_10795",
-      "name": "company_10795",
+      "name": "Becton Dickinson & Co",
       "type": "company",
-      "attributes": "{\"cik\": \"10795\", \"ticker\": \"BDX\", \"company_name\": \"BECTON DICKINSON & CO\"}",
+      "attributes": {
+        "cik": "10795",
+        "ticker": "BDX",
+        "company_name": "BECTON DICKINSON & CO"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111111111111111111111111111011111111",
       "scores": {
@@ -1781,9 +2025,13 @@
     },
     {
       "id": "company_1167379",
-      "name": "company_1167379",
+      "name": "Alcon Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1167379\", \"ticker\": \"ALC\", \"company_name\": \"ALCON INC\"}",
+      "attributes": {
+        "cik": "1167379",
+        "ticker": "ALC",
+        "company_name": "ALCON INC"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111111111111111101111111111",
       "scores": {
@@ -1810,9 +2058,13 @@
     },
     {
       "id": "company_1099219",
-      "name": "company_1099219",
+      "name": "Metlife Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1099219\", \"ticker\": \"MET\", \"company_name\": \"METLIFE INC\"}",
+      "attributes": {
+        "cik": "1099219",
+        "ticker": "MET",
+        "company_name": "METLIFE INC"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111011111111111111111111111111111",
       "scores": {
@@ -1839,9 +2091,13 @@
     },
     {
       "id": "company_947263",
-      "name": "company_947263",
+      "name": "Toronto Dominion Bank",
       "type": "company",
-      "attributes": "{\"cik\": \"947263\", \"ticker\": \"TD\", \"company_name\": \"TORONTO DOMINION BANK\"}",
+      "attributes": {
+        "cik": "947263",
+        "ticker": "TD",
+        "company_name": "TORONTO DOMINION BANK"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111011111111111111111111111111111111",
       "scores": {
@@ -1868,9 +2124,13 @@
     },
     {
       "id": "company_34088",
-      "name": "company_34088",
+      "name": "Exxon Mobil Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"34088\", \"ticker\": \"XOM\", \"company_name\": \"EXXON MOBIL CORP\"}",
+      "attributes": {
+        "cik": "34088",
+        "ticker": "XOM",
+        "company_name": "EXXON MOBIL CORP"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111111111101111101111111111",
       "scores": {
@@ -1897,9 +2157,13 @@
     },
     {
       "id": "company_56873",
-      "name": "company_56873",
+      "name": "Kroger Co",
       "type": "company",
-      "attributes": "{\"cik\": \"56873\", \"ticker\": \"KR\", \"company_name\": \"KROGER CO\"}",
+      "attributes": {
+        "cik": "56873",
+        "ticker": "KR",
+        "company_name": "KROGER CO"
+      },
       "cluster": 5,
       "fingerprint": "111101111111111111111111111111111111111111111111",
       "scores": {
@@ -1926,9 +2190,13 @@
     },
     {
       "id": "company_46619",
-      "name": "company_46619",
+      "name": "Heico Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"46619\", \"ticker\": \"HEI\", \"company_name\": \"HEICO CORP\"}",
+      "attributes": {
+        "cik": "46619",
+        "ticker": "HEI",
+        "company_name": "HEICO CORP"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110111111111111111111111111111111",
       "scores": {
@@ -1955,9 +2223,13 @@
     },
     {
       "id": "company_1524472",
-      "name": "company_1524472",
+      "name": "Xylem Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1524472\", \"ticker\": \"XYL\", \"company_name\": \"Xylem Inc.\"}",
+      "attributes": {
+        "cik": "1524472",
+        "ticker": "XYL",
+        "company_name": "Xylem Inc."
+      },
       "cluster": 0,
       "fingerprint": "111111111111111011111111111111111111111111111111",
       "scores": {
@@ -1984,9 +2256,13 @@
     },
     {
       "id": "company_1413447",
-      "name": "company_1413447",
+      "name": "NXP Semiconductors N.V.",
       "type": "company",
-      "attributes": "{\"cik\": \"1413447\", \"ticker\": \"NXPI\", \"company_name\": \"NXP Semiconductors N.V.\"}",
+      "attributes": {
+        "cik": "1413447",
+        "ticker": "NXPI",
+        "company_name": "NXP Semiconductors N.V."
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111111111111111101111111111",
       "scores": {
@@ -2013,9 +2289,13 @@
     },
     {
       "id": "company_1868275",
-      "name": "company_1868275",
+      "name": "Constellation Energy Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1868275\", \"ticker\": \"CEG\", \"company_name\": \"Constellation Energy Corp\"}",
+      "attributes": {
+        "cik": "1868275",
+        "ticker": "CEG",
+        "company_name": "Constellation Energy Corp"
+      },
       "cluster": 4,
       "fingerprint": "111111101111111111111111111111111111111111111111",
       "scores": {
@@ -2042,9 +2322,13 @@
     },
     {
       "id": "company_1588489",
-      "name": "company_1588489",
+      "name": "Grayscale Bitcoin Trust ETF",
       "type": "company",
-      "attributes": "{\"cik\": \"1588489\", \"ticker\": \"GBTC\", \"company_name\": \"Grayscale Bitcoin Trust ETF\"}",
+      "attributes": {
+        "cik": "1588489",
+        "ticker": "GBTC",
+        "company_name": "Grayscale Bitcoin Trust ETF"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111110111111111111111111111",
       "scores": {
@@ -2071,9 +2355,13 @@
     },
     {
       "id": "company_1121404",
-      "name": "company_1121404",
+      "name": "Sanofi",
       "type": "company",
-      "attributes": "{\"cik\": \"1121404\", \"ticker\": \"SNY\", \"company_name\": \"Sanofi\"}",
+      "attributes": {
+        "cik": "1121404",
+        "ticker": "SNY",
+        "company_name": "Sanofi"
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110111111111111111111111111111111",
       "scores": {
@@ -2100,9 +2388,13 @@
     },
     {
       "id": "company_773840",
-      "name": "company_773840",
+      "name": "Honeywell International Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"773840\", \"ticker\": \"HON\", \"company_name\": \"HONEYWELL INTERNATIONAL INC\"}",
+      "attributes": {
+        "cik": "773840",
+        "ticker": "HON",
+        "company_name": "HONEYWELL INTERNATIONAL INC"
+      },
       "cluster": 4,
       "fingerprint": "111111101111111111111111111111111111111111111111",
       "scores": {
@@ -2129,9 +2421,13 @@
     },
     {
       "id": "company_1613103",
-      "name": "company_1613103",
+      "name": "Medtronic plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1613103\", \"ticker\": \"MDT\", \"company_name\": \"Medtronic plc\"}",
+      "attributes": {
+        "cik": "1613103",
+        "ticker": "MDT",
+        "company_name": "Medtronic plc"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111110111111111111111111111",
       "scores": {
@@ -2158,9 +2454,13 @@
     },
     {
       "id": "company_73309",
-      "name": "company_73309",
+      "name": "Nucor Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"73309\", \"ticker\": \"NUE\", \"company_name\": \"NUCOR CORP\"}",
+      "attributes": {
+        "cik": "73309",
+        "ticker": "NUE",
+        "company_name": "NUCOR CORP"
+      },
       "cluster": 7,
       "fingerprint": "111111111111111111111111110111111111111111111111",
       "scores": {
@@ -2187,9 +2487,13 @@
     },
     {
       "id": "company_1122411",
-      "name": "company_1122411",
+      "name": "ASE Technology Holding Co., Ltd.",
       "type": "company",
-      "attributes": "{\"cik\": \"1122411\", \"ticker\": \"ASX\", \"company_name\": \"ASE Technology Holding Co., Ltd.\"}",
+      "attributes": {
+        "cik": "1122411",
+        "ticker": "ASX",
+        "company_name": "ASE Technology Holding Co., Ltd."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2216,9 +2520,13 @@
     },
     {
       "id": "company_1001085",
-      "name": "company_1001085",
+      "name": "BROOKFIELD Corp /ON/",
       "type": "company",
-      "attributes": "{\"cik\": \"1001085\", \"ticker\": \"BN\", \"company_name\": \"BROOKFIELD Corp /ON/\"}",
+      "attributes": {
+        "cik": "1001085",
+        "ticker": "BN",
+        "company_name": "BROOKFIELD Corp /ON/"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2245,9 +2553,13 @@
     },
     {
       "id": "company_1045810",
-      "name": "company_1045810",
+      "name": "Nvidia Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1045810\", \"ticker\": \"NVDA\", \"company_name\": \"NVIDIA CORP\"}",
+      "attributes": {
+        "cik": "1045810",
+        "ticker": "NVDA",
+        "company_name": "NVIDIA CORP"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111111111111111101111",
       "scores": {
@@ -2274,9 +2586,13 @@
     },
     {
       "id": "company_1551182",
-      "name": "company_1551182",
+      "name": "Eaton Corp plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1551182\", \"ticker\": \"ETN\", \"company_name\": \"Eaton Corp plc\"}",
+      "attributes": {
+        "cik": "1551182",
+        "ticker": "ETN",
+        "company_name": "Eaton Corp plc"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111111111111111101111",
       "scores": {
@@ -2303,9 +2619,13 @@
     },
     {
       "id": "company_813672",
-      "name": "company_813672",
+      "name": "Cadence Design Systems Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"813672\", \"ticker\": \"CDNS\", \"company_name\": \"CADENCE DESIGN SYSTEMS INC\"}",
+      "attributes": {
+        "cik": "813672",
+        "ticker": "CDNS",
+        "company_name": "CADENCE DESIGN SYSTEMS INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2332,9 +2652,13 @@
     },
     {
       "id": "company_1640147",
-      "name": "company_1640147",
+      "name": "Snowflake Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1640147\", \"ticker\": \"SNOW\", \"company_name\": \"Snowflake Inc.\"}",
+      "attributes": {
+        "cik": "1640147",
+        "ticker": "SNOW",
+        "company_name": "Snowflake Inc."
+      },
       "cluster": 6,
       "fingerprint": "111111111111111110111111111111111111111111111111",
       "scores": {
@@ -2361,9 +2685,13 @@
     },
     {
       "id": "company_73124",
-      "name": "company_73124",
+      "name": "Northern Trust Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"73124\", \"ticker\": \"NTRS\", \"company_name\": \"NORTHERN TRUST CORP\"}",
+      "attributes": {
+        "cik": "73124",
+        "ticker": "NTRS",
+        "company_name": "NORTHERN TRUST CORP"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2390,9 +2718,13 @@
     },
     {
       "id": "company_48898",
-      "name": "company_48898",
+      "name": "Hubbell Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"48898\", \"ticker\": \"HUBB\", \"company_name\": \"HUBBELL INC\"}",
+      "attributes": {
+        "cik": "48898",
+        "ticker": "HUBB",
+        "company_name": "HUBBELL INC"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -2419,9 +2751,13 @@
     },
     {
       "id": "company_895728",
-      "name": "company_895728",
+      "name": "Enbridge Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"895728\", \"ticker\": \"ENB\", \"company_name\": \"ENBRIDGE INC\"}",
+      "attributes": {
+        "cik": "895728",
+        "ticker": "ENB",
+        "company_name": "ENBRIDGE INC"
+      },
       "cluster": 0,
       "fingerprint": "111111111111111111111111011111111111111111101111",
       "scores": {
@@ -2448,9 +2784,13 @@
     },
     {
       "id": "company_2057673",
-      "name": "company_2057673",
+      "name": "Brand Meditech Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"2057673\", \"ticker\": \"AED\", \"company_name\": \"Brand Meditech Ltd\"}",
+      "attributes": {
+        "cik": "2057673",
+        "ticker": "AED",
+        "company_name": "Brand Meditech Ltd"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111111111111111111110111111111",
       "scores": {
@@ -2477,9 +2817,13 @@
     },
     {
       "id": "company_1341439",
-      "name": "company_1341439",
+      "name": "Oracle Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1341439\", \"ticker\": \"ORCL\", \"company_name\": \"ORACLE CORP\"}",
+      "attributes": {
+        "cik": "1341439",
+        "ticker": "ORCL",
+        "company_name": "ORACLE CORP"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -2506,9 +2850,13 @@
     },
     {
       "id": "company_21344",
-      "name": "company_21344",
+      "name": "Coca Cola Co",
       "type": "company",
-      "attributes": "{\"cik\": \"21344\", \"ticker\": \"KO\", \"company_name\": \"COCA COLA CO\"}",
+      "attributes": {
+        "cik": "21344",
+        "ticker": "KO",
+        "company_name": "COCA COLA CO"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -2535,9 +2883,13 @@
     },
     {
       "id": "company_4977",
-      "name": "company_4977",
+      "name": "Aflac Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"4977\", \"ticker\": \"AFL\", \"company_name\": \"AFLAC INC\"}",
+      "attributes": {
+        "cik": "4977",
+        "ticker": "AFL",
+        "company_name": "AFLAC INC"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -2564,9 +2916,13 @@
     },
     {
       "id": "company_1045520",
-      "name": "company_1045520",
+      "name": "Canadian Imperial Bank Of Commerce /Can/",
       "type": "company",
-      "attributes": "{\"cik\": \"1045520\", \"ticker\": \"CM\", \"company_name\": \"CANADIAN IMPERIAL BANK OF COMMERCE /CAN/\"}",
+      "attributes": {
+        "cik": "1045520",
+        "ticker": "CM",
+        "company_name": "CANADIAN IMPERIAL BANK OF COMMERCE /CAN/"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111111111111111111110111111111",
       "scores": {
@@ -2593,9 +2949,13 @@
     },
     {
       "id": "company_885725",
-      "name": "company_885725",
+      "name": "Boston Scientific Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"885725\", \"ticker\": \"BSX\", \"company_name\": \"BOSTON SCIENTIFIC CORP\"}",
+      "attributes": {
+        "cik": "885725",
+        "ticker": "BSX",
+        "company_name": "BOSTON SCIENTIFIC CORP"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2622,9 +2982,13 @@
     },
     {
       "id": "company_715153",
-      "name": "company_715153",
+      "name": "Honda Motor Co Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"715153\", \"ticker\": \"HMC\", \"company_name\": \"HONDA MOTOR CO LTD\"}",
+      "attributes": {
+        "cik": "715153",
+        "ticker": "HMC",
+        "company_name": "HONDA MOTOR CO LTD"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2651,9 +3015,13 @@
     },
     {
       "id": "company_32604",
-      "name": "company_32604",
+      "name": "Emerson Electric Co",
       "type": "company",
-      "attributes": "{\"cik\": \"32604\", \"ticker\": \"EMR\", \"company_name\": \"EMERSON ELECTRIC CO\"}",
+      "attributes": {
+        "cik": "32604",
+        "ticker": "EMR",
+        "company_name": "EMERSON ELECTRIC CO"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2680,9 +3048,13 @@
     },
     {
       "id": "company_1381197",
-      "name": "company_1381197",
+      "name": "Interactive Brokers Group, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1381197\", \"ticker\": \"IBKR\", \"company_name\": \"Interactive Brokers Group, Inc.\"}",
+      "attributes": {
+        "cik": "1381197",
+        "ticker": "IBKR",
+        "company_name": "Interactive Brokers Group, Inc."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2709,9 +3081,13 @@
     },
     {
       "id": "company_1116132",
-      "name": "company_1116132",
+      "name": "Tapestry, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1116132\", \"ticker\": \"TPR\", \"company_name\": \"TAPESTRY, INC.\"}",
+      "attributes": {
+        "cik": "1116132",
+        "ticker": "TPR",
+        "company_name": "TAPESTRY, INC."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2738,9 +3114,13 @@
     },
     {
       "id": "company_1783180",
-      "name": "company_1783180",
+      "name": "CARRIER GLOBAL Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1783180\", \"ticker\": \"CARR\", \"company_name\": \"CARRIER GLOBAL Corp\"}",
+      "attributes": {
+        "cik": "1783180",
+        "ticker": "CARR",
+        "company_name": "CARRIER GLOBAL Corp"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -2767,9 +3147,13 @@
     },
     {
       "id": "company_1138118",
-      "name": "company_1138118",
+      "name": "Cbre Group, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1138118\", \"ticker\": \"CBRE\", \"company_name\": \"CBRE GROUP, INC.\"}",
+      "attributes": {
+        "cik": "1138118",
+        "ticker": "CBRE",
+        "company_name": "CBRE GROUP, INC."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2796,9 +3180,13 @@
     },
     {
       "id": "company_316709",
-      "name": "company_316709",
+      "name": "Schwab Charles Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"316709\", \"ticker\": \"SCHW\", \"company_name\": \"SCHWAB CHARLES CORP\"}",
+      "attributes": {
+        "cik": "316709",
+        "ticker": "SCHW",
+        "company_name": "SCHWAB CHARLES CORP"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2825,9 +3213,13 @@
     },
     {
       "id": "company_1937926",
-      "name": "company_1937926",
+      "name": "Brookfield Asset Management Ltd.",
       "type": "company",
-      "attributes": "{\"cik\": \"1937926\", \"ticker\": \"BAM\", \"company_name\": \"Brookfield Asset Management Ltd.\"}",
+      "attributes": {
+        "cik": "1937926",
+        "ticker": "BAM",
+        "company_name": "Brookfield Asset Management Ltd."
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111011111111111111111111111",
       "scores": {
@@ -2854,9 +3246,13 @@
     },
     {
       "id": "company_1437107",
-      "name": "company_1437107",
+      "name": "Warner Bros. Discovery, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1437107\", \"ticker\": \"WBD\", \"company_name\": \"Warner Bros. Discovery, Inc.\"}",
+      "attributes": {
+        "cik": "1437107",
+        "ticker": "WBD",
+        "company_name": "Warner Bros. Discovery, Inc."
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111111111111111111110111111111",
       "scores": {
@@ -2883,9 +3279,13 @@
     },
     {
       "id": "company_937966",
-      "name": "company_937966",
+      "name": "Asml Holding Nv",
       "type": "company",
-      "attributes": "{\"cik\": \"937966\", \"ticker\": \"ASML\", \"company_name\": \"ASML HOLDING NV\"}",
+      "attributes": {
+        "cik": "937966",
+        "ticker": "ASML",
+        "company_name": "ASML HOLDING NV"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2912,9 +3312,13 @@
     },
     {
       "id": "company_1099800",
-      "name": "company_1099800",
+      "name": "Edwards Lifesciences Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1099800\", \"ticker\": \"EW\", \"company_name\": \"Edwards Lifesciences Corp\"}",
+      "attributes": {
+        "cik": "1099800",
+        "ticker": "EW",
+        "company_name": "Edwards Lifesciences Corp"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2941,9 +3345,13 @@
     },
     {
       "id": "company_1000697",
-      "name": "company_1000697",
+      "name": "Waters Corp /De/",
       "type": "company",
-      "attributes": "{\"cik\": \"1000697\", \"ticker\": \"WAT\", \"company_name\": \"WATERS CORP /DE/\"}",
+      "attributes": {
+        "cik": "1000697",
+        "ticker": "WAT",
+        "company_name": "WATERS CORP /DE/"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -2970,9 +3378,13 @@
     },
     {
       "id": "company_353278",
-      "name": "company_353278",
+      "name": "Novo Nordisk A S",
       "type": "company",
-      "attributes": "{\"cik\": \"353278\", \"ticker\": \"NVO\", \"company_name\": \"NOVO NORDISK A S\"}",
+      "attributes": {
+        "cik": "353278",
+        "ticker": "NVO",
+        "company_name": "NOVO NORDISK A S"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -2999,9 +3411,13 @@
     },
     {
       "id": "company_1035267",
-      "name": "company_1035267",
+      "name": "Intuitive Surgical Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1035267\", \"ticker\": \"ISRG\", \"company_name\": \"INTUITIVE SURGICAL INC\"}",
+      "attributes": {
+        "cik": "1035267",
+        "ticker": "ISRG",
+        "company_name": "INTUITIVE SURGICAL INC"
+      },
       "cluster": 5,
       "fingerprint": "111111111111111111111111111111111111110111111111",
       "scores": {
@@ -3028,9 +3444,13 @@
     },
     {
       "id": "company_36104",
-      "name": "company_36104",
+      "name": "Us Bancorp De",
       "type": "company",
-      "attributes": "{\"cik\": \"36104\", \"ticker\": \"USB\", \"company_name\": \"US BANCORP DE\"}",
+      "attributes": {
+        "cik": "36104",
+        "ticker": "USB",
+        "company_name": "US BANCORP DE"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -3057,9 +3477,13 @@
     },
     {
       "id": "company_7084",
-      "name": "company_7084",
+      "name": "Archer-Daniels-Midland Co",
       "type": "company",
-      "attributes": "{\"cik\": \"7084\", \"ticker\": \"ADM\", \"company_name\": \"Archer-Daniels-Midland Co\"}",
+      "attributes": {
+        "cik": "7084",
+        "ticker": "ADM",
+        "company_name": "Archer-Daniels-Midland Co"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3086,9 +3510,13 @@
     },
     {
       "id": "company_1639920",
-      "name": "company_1639920",
+      "name": "Spotify Technology S.A.",
       "type": "company",
-      "attributes": "{\"cik\": \"1639920\", \"ticker\": \"SPOT\", \"company_name\": \"Spotify Technology S.A.\"}",
+      "attributes": {
+        "cik": "1639920",
+        "ticker": "SPOT",
+        "company_name": "Spotify Technology S.A."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3115,9 +3543,13 @@
     },
     {
       "id": "company_726958",
-      "name": "company_726958",
+      "name": "Caseys General Stores Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"726958\", \"ticker\": \"CASY\", \"company_name\": \"CASEYS GENERAL STORES INC\"}",
+      "attributes": {
+        "cik": "726958",
+        "ticker": "CASY",
+        "company_name": "CASEYS GENERAL STORES INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3144,9 +3576,13 @@
     },
     {
       "id": "company_798354",
-      "name": "company_798354",
+      "name": "Fiserv Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"798354\", \"ticker\": \"FISV\", \"company_name\": \"FISERV INC\"}",
+      "attributes": {
+        "cik": "798354",
+        "ticker": "FISV",
+        "company_name": "FISERV INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3173,9 +3609,13 @@
     },
     {
       "id": "company_1692819",
-      "name": "company_1692819",
+      "name": "Vistra Corp.",
       "type": "company",
-      "attributes": "{\"cik\": \"1692819\", \"ticker\": \"VST\", \"company_name\": \"Vistra Corp.\"}",
+      "attributes": {
+        "cik": "1692819",
+        "ticker": "VST",
+        "company_name": "Vistra Corp."
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111011111111111111111111111",
       "scores": {
@@ -3202,9 +3642,13 @@
     },
     {
       "id": "company_1004980",
-      "name": "company_1004980",
+      "name": "PG&E Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1004980\", \"ticker\": \"PCG\", \"company_name\": \"PG&E Corp\"}",
+      "attributes": {
+        "cik": "1004980",
+        "ticker": "PCG",
+        "company_name": "PG&E Corp"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3231,9 +3675,13 @@
     },
     {
       "id": "company_820313",
-      "name": "company_820313",
+      "name": "Amphenol Corp /De/",
       "type": "company",
-      "attributes": "{\"cik\": \"820313\", \"ticker\": \"APH\", \"company_name\": \"AMPHENOL CORP /DE/\"}",
+      "attributes": {
+        "cik": "820313",
+        "ticker": "APH",
+        "company_name": "AMPHENOL CORP /DE/"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3260,9 +3708,13 @@
     },
     {
       "id": "company_1061219",
-      "name": "company_1061219",
+      "name": "Enterprise Products Partners L.P.",
       "type": "company",
-      "attributes": "{\"cik\": \"1061219\", \"ticker\": \"EPD\", \"company_name\": \"ENTERPRISE PRODUCTS PARTNERS L.P.\"}",
+      "attributes": {
+        "cik": "1061219",
+        "ticker": "EPD",
+        "company_name": "ENTERPRISE PRODUCTS PARTNERS L.P."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3289,9 +3741,13 @@
     },
     {
       "id": "company_863064",
-      "name": "company_863064",
+      "name": "Rio Tinto Plc",
       "type": "company",
-      "attributes": "{\"cik\": \"863064\", \"ticker\": \"RIO\", \"company_name\": \"RIO TINTO PLC\"}",
+      "attributes": {
+        "cik": "863064",
+        "ticker": "RIO",
+        "company_name": "RIO TINTO PLC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3318,9 +3774,13 @@
     },
     {
       "id": "company_315189",
-      "name": "company_315189",
+      "name": "Deere & Co",
       "type": "company",
-      "attributes": "{\"cik\": \"315189\", \"ticker\": \"DE\", \"company_name\": \"DEERE & CO\"}",
+      "attributes": {
+        "cik": "315189",
+        "ticker": "DE",
+        "company_name": "DEERE & CO"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3347,9 +3807,13 @@
     },
     {
       "id": "company_319201",
-      "name": "company_319201",
+      "name": "Kla Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"319201\", \"ticker\": \"KLAC\", \"company_name\": \"KLA CORP\"}",
+      "attributes": {
+        "cik": "319201",
+        "ticker": "KLAC",
+        "company_name": "KLA CORP"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -3376,9 +3840,13 @@
     },
     {
       "id": "company_1303523",
-      "name": "company_1303523",
+      "name": "British American Tobacco p.l.c.",
       "type": "company",
-      "attributes": "{\"cik\": \"1303523\", \"ticker\": \"BTI\", \"company_name\": \"British American Tobacco p.l.c.\"}",
+      "attributes": {
+        "cik": "1303523",
+        "ticker": "BTI",
+        "company_name": "British American Tobacco p.l.c."
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -3405,9 +3873,13 @@
     },
     {
       "id": "company_815556",
-      "name": "company_815556",
+      "name": "Fastenal Co",
       "type": "company",
-      "attributes": "{\"cik\": \"815556\", \"ticker\": \"FAST\", \"company_name\": \"FASTENAL CO\"}",
+      "attributes": {
+        "cik": "815556",
+        "ticker": "FAST",
+        "company_name": "FASTENAL CO"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3434,9 +3906,13 @@
     },
     {
       "id": "company_927653",
-      "name": "company_927653",
+      "name": "Mckesson Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"927653\", \"ticker\": \"MCK\", \"company_name\": \"MCKESSON CORP\"}",
+      "attributes": {
+        "cik": "927653",
+        "ticker": "MCK",
+        "company_name": "MCKESSON CORP"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -3463,9 +3939,13 @@
     },
     {
       "id": "company_1041061",
-      "name": "company_1041061",
+      "name": "Yum Brands Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1041061\", \"ticker\": \"YUM\", \"company_name\": \"YUM BRANDS INC\"}",
+      "attributes": {
+        "cik": "1041061",
+        "ticker": "YUM",
+        "company_name": "YUM BRANDS INC"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -3492,9 +3972,13 @@
     },
     {
       "id": "company_277135",
-      "name": "company_277135",
+      "name": "W.W. Grainger, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"277135\", \"ticker\": \"GWW\", \"company_name\": \"W.W. GRAINGER, INC.\"}",
+      "attributes": {
+        "cik": "277135",
+        "ticker": "GWW",
+        "company_name": "W.W. GRAINGER, INC."
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -3521,9 +4005,13 @@
     },
     {
       "id": "company_1534701",
-      "name": "company_1534701",
+      "name": "Phillips 66",
       "type": "company",
-      "attributes": "{\"cik\": \"1534701\", \"ticker\": \"PSX\", \"company_name\": \"Phillips 66\"}",
+      "attributes": {
+        "cik": "1534701",
+        "ticker": "PSX",
+        "company_name": "Phillips 66"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3550,9 +4038,13 @@
     },
     {
       "id": "company_1002242",
-      "name": "company_1002242",
+      "name": "Eni Spa",
       "type": "company",
-      "attributes": "{\"cik\": \"1002242\", \"ticker\": \"E\", \"company_name\": \"ENI SPA\"}",
+      "attributes": {
+        "cik": "1002242",
+        "ticker": "E",
+        "company_name": "ENI SPA"
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111011111111111111111111111",
       "scores": {
@@ -3579,9 +4071,13 @@
     },
     {
       "id": "company_1468522",
-      "name": "company_1468522",
+      "name": "Ferrovial SE",
       "type": "company",
-      "attributes": "{\"cik\": \"1468522\", \"ticker\": \"FER\", \"company_name\": \"Ferrovial SE\"}",
+      "attributes": {
+        "cik": "1468522",
+        "ticker": "FER",
+        "company_name": "Ferrovial SE"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3608,9 +4104,13 @@
     },
     {
       "id": "company_1725964",
-      "name": "company_1725964",
+      "name": "Nutrien Ltd.",
       "type": "company",
-      "attributes": "{\"cik\": \"1725964\", \"ticker\": \"NTR\", \"company_name\": \"Nutrien Ltd.\"}",
+      "attributes": {
+        "cik": "1725964",
+        "ticker": "NTR",
+        "company_name": "Nutrien Ltd."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3637,9 +4137,13 @@
     },
     {
       "id": "company_1163165",
-      "name": "company_1163165",
+      "name": "Conocophillips",
       "type": "company",
-      "attributes": "{\"cik\": \"1163165\", \"ticker\": \"COP\", \"company_name\": \"CONOCOPHILLIPS\"}",
+      "attributes": {
+        "cik": "1163165",
+        "ticker": "COP",
+        "company_name": "CONOCOPHILLIPS"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -3666,9 +4170,13 @@
     },
     {
       "id": "company_1243429",
-      "name": "company_1243429",
+      "name": "ArcelorMittal",
       "type": "company",
-      "attributes": "{\"cik\": \"1243429\", \"ticker\": \"MT\", \"company_name\": \"ArcelorMittal\"}",
+      "attributes": {
+        "cik": "1243429",
+        "ticker": "MT",
+        "company_name": "ArcelorMittal"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3695,9 +4203,13 @@
     },
     {
       "id": "company_831259",
-      "name": "company_831259",
+      "name": "Freeport-Mcmoran Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"831259\", \"ticker\": \"FCX\", \"company_name\": \"FREEPORT-MCMORAN INC\"}",
+      "attributes": {
+        "cik": "831259",
+        "ticker": "FCX",
+        "company_name": "FREEPORT-MCMORAN INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3724,9 +4236,13 @@
     },
     {
       "id": "company_1125259",
-      "name": "company_1125259",
+      "name": "Carnival Plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1125259\", \"ticker\": \"CUK\", \"company_name\": \"CARNIVAL PLC\"}",
+      "attributes": {
+        "cik": "1125259",
+        "ticker": "CUK",
+        "company_name": "CARNIVAL PLC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3753,9 +4269,13 @@
     },
     {
       "id": "company_909832",
-      "name": "company_909832",
+      "name": "Costco Wholesale Corp /New",
       "type": "company",
-      "attributes": "{\"cik\": \"909832\", \"ticker\": \"COST\", \"company_name\": \"COSTCO WHOLESALE CORP /NEW\"}",
+      "attributes": {
+        "cik": "909832",
+        "ticker": "COST",
+        "company_name": "COSTCO WHOLESALE CORP /NEW"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3782,9 +4302,13 @@
     },
     {
       "id": "company_1335730",
-      "name": "company_1335730",
+      "name": "Mizuho Financial Group Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1335730\", \"ticker\": \"MFG\", \"company_name\": \"MIZUHO FINANCIAL GROUP INC\"}",
+      "attributes": {
+        "cik": "1335730",
+        "ticker": "MFG",
+        "company_name": "MIZUHO FINANCIAL GROUP INC"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -3811,9 +4335,13 @@
     },
     {
       "id": "company_1116578",
-      "name": "company_1116578",
+      "name": "Prudential Plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1116578\", \"ticker\": \"PUK\", \"company_name\": \"PRUDENTIAL PLC\"}",
+      "attributes": {
+        "cik": "1116578",
+        "ticker": "PUK",
+        "company_name": "PRUDENTIAL PLC"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -3840,9 +4368,13 @@
     },
     {
       "id": "company_1035983",
-      "name": "company_1035983",
+      "name": "Comfort Systems Usa Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1035983\", \"ticker\": \"FIX\", \"company_name\": \"COMFORT SYSTEMS USA INC\"}",
+      "attributes": {
+        "cik": "1035983",
+        "ticker": "FIX",
+        "company_name": "COMFORT SYSTEMS USA INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3869,9 +4401,13 @@
     },
     {
       "id": "company_315293",
-      "name": "company_315293",
+      "name": "Aon plc",
       "type": "company",
-      "attributes": "{\"cik\": \"315293\", \"ticker\": \"AON\", \"company_name\": \"Aon plc\"}",
+      "attributes": {
+        "cik": "315293",
+        "ticker": "AON",
+        "company_name": "Aon plc"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3898,9 +4434,13 @@
     },
     {
       "id": "company_1690820",
-      "name": "company_1690820",
+      "name": "Carvana Co.",
       "type": "company",
-      "attributes": "{\"cik\": \"1690820\", \"ticker\": \"CVNA\", \"company_name\": \"CARVANA CO.\"}",
+      "attributes": {
+        "cik": "1690820",
+        "ticker": "CVNA",
+        "company_name": "CARVANA CO."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3927,9 +4467,13 @@
     },
     {
       "id": "company_1038683",
-      "name": "company_1038683",
+      "name": "Ryanair Holdings Plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1038683\", \"ticker\": \"RYAAY\", \"company_name\": \"RYANAIR HOLDINGS PLC\"}",
+      "attributes": {
+        "cik": "1038683",
+        "ticker": "RYAAY",
+        "company_name": "RYANAIR HOLDINGS PLC"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -3956,9 +4500,13 @@
     },
     {
       "id": "company_886982",
-      "name": "company_886982",
+      "name": "Goldman Sachs Group Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"886982\", \"ticker\": \"GS\", \"company_name\": \"GOLDMAN SACHS GROUP INC\"}",
+      "attributes": {
+        "cik": "886982",
+        "ticker": "GS",
+        "company_name": "GOLDMAN SACHS GROUP INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -3985,9 +4533,13 @@
     },
     {
       "id": "company_2023554",
-      "name": "company_2023554",
+      "name": "Sandisk Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"2023554\", \"ticker\": \"SNDK\", \"company_name\": \"Sandisk Corp\"}",
+      "attributes": {
+        "cik": "2023554",
+        "ticker": "SNDK",
+        "company_name": "Sandisk Corp"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4014,9 +4566,13 @@
     },
     {
       "id": "company_1274152",
-      "name": "company_1274152",
+      "name": "Csl Ltd",
       "type": "company",
-      "attributes": "{\"cik\": \"1274152\", \"ticker\": \"CSLLY\", \"company_name\": \"CSL LTD\"}",
+      "attributes": {
+        "cik": "1274152",
+        "ticker": "CSLLY",
+        "company_name": "CSL LTD"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4043,9 +4599,13 @@
     },
     {
       "id": "company_1137774",
-      "name": "company_1137774",
+      "name": "Prudential Financial Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"1137774\", \"ticker\": \"PRU\", \"company_name\": \"PRUDENTIAL FINANCIAL INC\"}",
+      "attributes": {
+        "cik": "1137774",
+        "ticker": "PRU",
+        "company_name": "PRUDENTIAL FINANCIAL INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4072,9 +4632,13 @@
     },
     {
       "id": "company_1035002",
-      "name": "company_1035002",
+      "name": "Valero Energy Corp/Tx",
       "type": "company",
-      "attributes": "{\"cik\": \"1035002\", \"ticker\": \"VLO\", \"company_name\": \"VALERO ENERGY CORP/TX\"}",
+      "attributes": {
+        "cik": "1035002",
+        "ticker": "VLO",
+        "company_name": "VALERO ENERGY CORP/TX"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -4101,9 +4665,13 @@
     },
     {
       "id": "company_783325",
-      "name": "company_783325",
+      "name": "Wec Energy Group, Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"783325\", \"ticker\": \"WEC\", \"company_name\": \"WEC ENERGY GROUP, INC.\"}",
+      "attributes": {
+        "cik": "783325",
+        "ticker": "WEC",
+        "company_name": "WEC ENERGY GROUP, INC."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4130,9 +4698,13 @@
     },
     {
       "id": "company_1781335",
-      "name": "company_1781335",
+      "name": "Otis Worldwide Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1781335\", \"ticker\": \"OTIS\", \"company_name\": \"Otis Worldwide Corp\"}",
+      "attributes": {
+        "cik": "1781335",
+        "ticker": "OTIS",
+        "company_name": "Otis Worldwide Corp"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4159,9 +4731,13 @@
     },
     {
       "id": "company_14272",
-      "name": "company_14272",
+      "name": "Bristol Myers Squibb Co",
       "type": "company",
-      "attributes": "{\"cik\": \"14272\", \"ticker\": \"BMY\", \"company_name\": \"BRISTOL MYERS SQUIBB CO\"}",
+      "attributes": {
+        "cik": "14272",
+        "ticker": "BMY",
+        "company_name": "BRISTOL MYERS SQUIBB CO"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4188,9 +4764,13 @@
     },
     {
       "id": "company_1009001",
-      "name": "company_1009001",
+      "name": "Cameco Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1009001\", \"ticker\": \"CCJ\", \"company_name\": \"CAMECO CORP\"}",
+      "attributes": {
+        "cik": "1009001",
+        "ticker": "CCJ",
+        "company_name": "CAMECO CORP"
+      },
       "cluster": 3,
       "fingerprint": "111111111111111111111111011111111111111111111111",
       "scores": {
@@ -4217,9 +4797,13 @@
     },
     {
       "id": "company_1633978",
-      "name": "company_1633978",
+      "name": "Lumentum Holdings Inc.",
       "type": "company",
-      "attributes": "{\"cik\": \"1633978\", \"ticker\": \"LITE\", \"company_name\": \"Lumentum Holdings Inc.\"}",
+      "attributes": {
+        "cik": "1633978",
+        "ticker": "LITE",
+        "company_name": "Lumentum Holdings Inc."
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4246,9 +4830,13 @@
     },
     {
       "id": "company_1058290",
-      "name": "company_1058290",
+      "name": "Cognizant Technology Solutions Corp",
       "type": "company",
-      "attributes": "{\"cik\": \"1058290\", \"ticker\": \"CTSH\", \"company_name\": \"COGNIZANT TECHNOLOGY SOLUTIONS CORP\"}",
+      "attributes": {
+        "cik": "1058290",
+        "ticker": "CTSH",
+        "company_name": "COGNIZANT TECHNOLOGY SOLUTIONS CORP"
+      },
       "cluster": 2,
       "fingerprint": "111111111111111111111111111111111111111111101111",
       "scores": {
@@ -4275,9 +4863,13 @@
     },
     {
       "id": "company_1089113",
-      "name": "company_1089113",
+      "name": "Hsbc Holdings Plc",
       "type": "company",
-      "attributes": "{\"cik\": \"1089113\", \"ticker\": \"HSBC\", \"company_name\": \"HSBC HOLDINGS PLC\"}",
+      "attributes": {
+        "cik": "1089113",
+        "ticker": "HSBC",
+        "company_name": "HSBC HOLDINGS PLC"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -4304,9 +4896,13 @@
     },
     {
       "id": "company_4904",
-      "name": "company_4904",
+      "name": "American Electric Power Co Inc",
       "type": "company",
-      "attributes": "{\"cik\": \"4904\", \"ticker\": \"AEP\", \"company_name\": \"AMERICAN ELECTRIC POWER CO INC\"}",
+      "attributes": {
+        "cik": "4904",
+        "ticker": "AEP",
+        "company_name": "AMERICAN ELECTRIC POWER CO INC"
+      },
       "cluster": 1,
       "fingerprint": "111111111111111111111111111111111111111111111111",
       "scores": {
@@ -4333,9 +4929,13 @@
     },
     {
       "id": "company_1276187",
-      "name": "company_1276187",
+      "name": "Energy Transfer LP",
       "type": "company",
-      "attributes": "{\"cik\": \"1276187\", \"ticker\": \"ET\", \"company_name\": \"Energy Transfer LP\"}",
+      "attributes": {
+        "cik": "1276187",
+        "ticker": "ET",
+        "company_name": "Energy Transfer LP"
+      },
       "cluster": 4,
       "fingerprint": "111111111111111111111111111111101111111111111111",
       "scores": {
@@ -4364,38 +4964,38 @@
   "anomalies": [
     {
       "id": "company_878927",
-      "name": "company_878927",
+      "name": "Old Dominion Freight Line, Inc.",
       "type": "company",
       "score": 0.7171,
-      "narrative": "company_878927 shows unusual structural position: composite 0.68, anomaly 0.72."
+      "narrative": "Old Dominion Freight Line, Inc. shows unusual structural position: composite 0.68, anomaly 0.72."
     },
     {
       "id": "company_813672",
-      "name": "company_813672",
+      "name": "Cadence Design Systems Inc",
       "type": "company",
       "score": 1.0,
-      "narrative": "company_813672 shows unusual structural position: composite 0.40, anomaly 1.00."
+      "narrative": "Cadence Design Systems Inc shows unusual structural position: composite 0.40, anomaly 1.00."
     },
     {
       "id": "company_1381197",
-      "name": "company_1381197",
+      "name": "Interactive Brokers Group, Inc.",
       "type": "company",
       "score": 0.8599,
-      "narrative": "company_1381197 shows unusual structural position: composite 0.37, anomaly 0.86."
+      "narrative": "Interactive Brokers Group, Inc. shows unusual structural position: composite 0.37, anomaly 0.86."
     },
     {
       "id": "company_1099800",
-      "name": "company_1099800",
+      "name": "Edwards Lifesciences Corp",
       "type": "company",
       "score": 0.8073,
-      "narrative": "company_1099800 shows unusual structural position: composite 0.35, anomaly 0.81."
+      "narrative": "Edwards Lifesciences Corp shows unusual structural position: composite 0.35, anomaly 0.81."
     },
     {
       "id": "company_783325",
-      "name": "company_783325",
+      "name": "Wec Energy Group, Inc.",
       "type": "company",
       "score": 0.703,
-      "narrative": "company_783325 shows unusual structural position: composite 0.32, anomaly 0.70."
+      "narrative": "Wec Energy Group, Inc. shows unusual structural position: composite 0.32, anomaly 0.70."
     }
   ],
   "clusters": [
@@ -4404,11 +5004,11 @@
       "member_count": 26,
       "dominant_type": "company",
       "sample_members": [
-        "company_1389170",
-        "company_1300514",
-        "company_915191",
-        "company_820318",
-        "company_16875"
+        "Targa Resources Corp.",
+        "Las Vegas Sands Corp",
+        "Fairfax Financial Holdings Ltd/ Can",
+        "Coherent Corp.",
+        "Canadian Pacific Kansas City Ltd/Cn"
       ]
     },
     {
@@ -4416,11 +5016,11 @@
       "member_count": 45,
       "dominant_type": "company",
       "sample_members": [
-        "company_1594805",
-        "company_769397",
-        "company_1122411",
-        "company_1001085",
-        "company_813672"
+        "Shopify Inc.",
+        "Autodesk, Inc.",
+        "ASE Technology Holding Co., Ltd.",
+        "BROOKFIELD Corp /ON/",
+        "Cadence Design Systems Inc"
       ]
     },
     {
@@ -4428,11 +5028,11 @@
       "member_count": 16,
       "dominant_type": "company",
       "sample_members": [
-        "company_2488",
-        "company_66740",
-        "company_2073893",
-        "company_1445930",
-        "company_1973239"
+        "Advanced Micro Devices Inc",
+        "3M Co",
+        "Dollarama Inc./ADR",
+        "KB Financial Group Inc.",
+        "Arm Holdings Plc /Uk"
       ]
     },
     {
@@ -4440,11 +5040,11 @@
       "member_count": 12,
       "dominant_type": "company",
       "sample_members": [
-        "company_878927",
-        "company_1027664",
-        "company_62709",
-        "company_35527",
-        "company_717826"
+        "Old Dominion Freight Line, Inc.",
+        "Elbit Systems Ltd",
+        "Marsh & Mclennan Companies, Inc.",
+        "Fifth Third Bancorp",
+        "Ericsson Lm Telephone Co"
       ]
     },
     {
@@ -4452,11 +5052,11 @@
       "member_count": 13,
       "dominant_type": "company",
       "sample_members": [
-        "company_1900304",
-        "company_1868275",
-        "company_773840",
-        "company_21344",
-        "company_4977"
+        "Haleon plc",
+        "Constellation Energy Corp",
+        "Honeywell International Inc",
+        "Coca Cola Co",
+        "Aflac Inc"
       ]
     },
     {
@@ -4464,11 +5064,11 @@
       "member_count": 11,
       "dominant_type": "company",
       "sample_members": [
-        "company_1013871",
-        "company_1158838",
-        "company_29905",
-        "company_1539838",
-        "company_1467373"
+        "Nrg Energy, Inc.",
+        "Advantest Corp",
+        "DOVER Corp",
+        "Diamondback Energy, Inc.",
+        "Accenture plc"
       ]
     },
     {
@@ -4476,11 +5076,11 @@
       "member_count": 19,
       "dominant_type": "company",
       "sample_members": [
-        "company_1745201",
-        "company_1133421",
-        "company_1075124",
-        "company_865752",
-        "company_1701605"
+        "Viking Holdings Ltd",
+        "Northrop Grumman Corp /De/",
+        "Thomson Reuters Corp /Can/",
+        "Monster Beverage Corp",
+        "Baker Hughes Co"
       ]
     },
     {
@@ -4488,11 +5088,11 @@
       "member_count": 8,
       "dominant_type": "company",
       "sample_members": [
-        "company_936958",
-        "company_842180",
-        "company_1167379",
-        "company_34088",
-        "company_1413447"
+        "Spdr S&P Midcap 400 Etf Trust",
+        "Banco Bilbao Vizcaya Argentaria, S.A.",
+        "Alcon Inc",
+        "Exxon Mobil Corp",
+        "NXP Semiconductors N.V."
       ]
     }
   ]
