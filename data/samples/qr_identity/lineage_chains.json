@@ -1,0 +1,94 @@
+{
+  "chains": [
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "Y8EB-5E81",
+          "event_type": "derived",
+          "parent": "ZWOO-90UZ",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        },
+        {
+          "child": "GBKO-VURM",
+          "event_type": "promoted",
+          "parent": "Y8EB-5E81",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        }
+      ],
+      "root": "ZWOO-90UZ"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "DQAP-H0P5",
+          "event_type": "derived",
+          "parent": "IJCP-ONIX",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        },
+        {
+          "child": "SL1H-HEZJ",
+          "event_type": "promoted",
+          "parent": "DQAP-H0P5",
+          "ts": "2026-04-18T05:36:28.739526+00:00"
+        }
+      ],
+      "root": "IJCP-ONIX"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "ZZKT-D9V9",
+          "event_type": "derived",
+          "parent": "VZOV-QIBR",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        },
+        {
+          "child": "X6B4-1187",
+          "event_type": "promoted",
+          "parent": "ZZKT-D9V9",
+          "ts": "2026-04-18T05:36:28.739526+00:00"
+        }
+      ],
+      "root": "VZOV-QIBR"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "23HM-ZHAO",
+          "event_type": "derived",
+          "parent": "DGIA-V9LK",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        },
+        {
+          "child": "U4FY-Z4VZ",
+          "event_type": "promoted",
+          "parent": "23HM-ZHAO",
+          "ts": "2026-04-18T05:36:28.739526+00:00"
+        }
+      ],
+      "root": "DGIA-V9LK"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "Q57B-ELOS",
+          "event_type": "derived",
+          "parent": "FBCV-0P1W",
+          "ts": "2026-04-18T05:36:28.738518+00:00"
+        },
+        {
+          "child": "LETR-6A1K",
+          "event_type": "promoted",
+          "parent": "Q57B-ELOS",
+          "ts": "2026-04-18T05:36:28.739526+00:00"
+        }
+      ],
+      "root": "FBCV-0P1W"
+    }
+  ]
+}

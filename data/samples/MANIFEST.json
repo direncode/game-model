@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:35:46Z",
-  "git_sha": "4f80546",
+  "generated_at": "2026-04-18T05:36:28Z",
+  "git_sha": "7ce0a55",
   "seed": 42,
-  "success_count": 3,
+  "success_count": 4,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1476,
+      "elapsed_ms": 1893,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,7 +84,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 11,
+      "elapsed_ms": 8,
       "files": [
         {
           "description": "100-entity 8D semiconductor supply-chain bundle",
@@ -160,7 +160,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 10120,
+      "elapsed_ms": 1112,
       "files": [
         {
           "description": "180-day synthetic (u, P, X) signals with target y",
@@ -274,14 +274,69 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.qr_identity'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 205,
+      "files": [
+        {
+          "description": "20 QR identity records with real codes",
+          "kind": "output",
+          "path": "data/samples/qr_identity/identity_records.json",
+          "size_bytes": 7991
+        },
+        {
+          "description": "5 depth-3 lineage chains over the minted records",
+          "kind": "output",
+          "path": "data/samples/qr_identity/lineage_chains.json",
+          "size_bytes": 2253
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/DGIA-V9LK.png",
+          "size_bytes": 791
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/FBCV-0P1W.png",
+          "size_bytes": 798
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/IJCP-ONIX.png",
+          "size_bytes": 783
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/VZOV-QIBR.png",
+          "size_bytes": 796
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/ZWOO-90UZ.png",
+          "size_bytes": 779
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/qr_identity/identity_records.json",
+          "purpose": "Read identity records",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/qr_identity",
+            "pattern": "\"tier\": \"admin\""
+          },
+          "purpose": "Grep admin tier",
+          "tool": "Grep"
+        }
+      ],
       "mode": "real",
       "name": "qr_identity",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -302,5 +357,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 11656
+  "wall_ms": 3257
 }
