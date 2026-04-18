@@ -1,0 +1,109 @@
+{
+  "requests": [
+    {
+      "input_bytes": 128,
+      "latency_ms": 12,
+      "output_dims": 8,
+      "request_id": "5dce8582-35b2-4579-9577-dd520a7de23e",
+      "ts": "2026-04-18T00:00:00+00:00"
+    },
+    {
+      "input_bytes": 144,
+      "latency_ms": 13,
+      "output_dims": 8,
+      "request_id": "6af69757-d3a1-4f79-b6eb-abd6a69944a6",
+      "ts": "2026-04-17T23:59:30+00:00"
+    },
+    {
+      "input_bytes": 160,
+      "latency_ms": 14,
+      "output_dims": 8,
+      "request_id": "0c57ca8b-4ee0-4042-b79d-d156809ec82e",
+      "ts": "2026-04-17T23:59:00+00:00"
+    },
+    {
+      "input_bytes": 176,
+      "latency_ms": 15,
+      "output_dims": 8,
+      "request_id": "2f66e880-25cb-4bf5-a7dc-c9b6638fa7f3",
+      "ts": "2026-04-17T23:58:30+00:00"
+    },
+    {
+      "input_bytes": 192,
+      "latency_ms": 16,
+      "output_dims": 8,
+      "request_id": "1eaca624-4199-4dc3-863a-769191936c44",
+      "ts": "2026-04-17T23:58:00+00:00"
+    },
+    {
+      "input_bytes": 208,
+      "latency_ms": 17,
+      "output_dims": 8,
+      "request_id": "1fa25f30-cc77-4fc3-9d44-9ce3e4085cbc",
+      "ts": "2026-04-17T23:57:30+00:00"
+    },
+    {
+      "input_bytes": 224,
+      "latency_ms": 18,
+      "output_dims": 8,
+      "request_id": "4fd11262-f654-4ae1-bacd-0d9b3229590a",
+      "ts": "2026-04-17T23:57:00+00:00"
+    },
+    {
+      "input_bytes": 240,
+      "latency_ms": 19,
+      "output_dims": 8,
+      "request_id": "3ffb9de8-7041-4183-9f40-c9b76034ff30",
+      "ts": "2026-04-17T23:56:30+00:00"
+    },
+    {
+      "input_bytes": 256,
+      "latency_ms": 20,
+      "output_dims": 8,
+      "request_id": "55701e77-8c8b-40d9-aae6-1e5a5f461a16",
+      "ts": "2026-04-17T23:56:00+00:00"
+    },
+    {
+      "input_bytes": 272,
+      "latency_ms": 21,
+      "output_dims": 8,
+      "request_id": "85e4dd93-21f4-4af6-8845-5b5aaa1eb388",
+      "ts": "2026-04-17T23:55:30+00:00"
+    },
+    {
+      "input_bytes": 288,
+      "latency_ms": 22,
+      "output_dims": 8,
+      "request_id": "447ca966-e300-47f4-88c3-3be413948444",
+      "ts": "2026-04-17T23:55:00+00:00"
+    },
+    {
+      "input_bytes": 304,
+      "latency_ms": 23,
+      "output_dims": 8,
+      "request_id": "17dc09a5-0c32-43eb-bfda-ab2ad1c5f5aa",
+      "ts": "2026-04-17T23:54:30+00:00"
+    },
+    {
+      "input_bytes": 320,
+      "latency_ms": 24,
+      "output_dims": 8,
+      "request_id": "73d831c6-1b9b-4460-b75c-6c4887cc881c",
+      "ts": "2026-04-17T23:54:00+00:00"
+    },
+    {
+      "input_bytes": 336,
+      "latency_ms": 25,
+      "output_dims": 8,
+      "request_id": "ae79acfb-745f-4548-82ce-008829856b87",
+      "ts": "2026-04-17T23:53:30+00:00"
+    },
+    {
+      "input_bytes": 352,
+      "latency_ms": 26,
+      "output_dims": 8,
+      "request_id": "84ebd18d-b78d-4fd6-aa06-3a6e264c745e",
+      "ts": "2026-04-17T23:53:00+00:00"
+    }
+  ]
+}

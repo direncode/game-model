@@ -18,23 +18,38 @@ from sample_data._common import ManifestEntry, add_file, add_interact, write_jso
 def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="qr_identity", mode="real")
 
-    from app.services.qr_identity.code_generator import generate_code
+    # Deterministic fixture variant: use the real `_ALPHABET` constant but a
+    # seeded RNG, so regenerating the fixture doesn't churn committed PNGs.
+    # Live `generate_code` uses `secrets` (non-seedable) by design.
+    from app.services.qr_identity.code_generator import _ALPHABET
+
+    rng = random.Random(42)
+    uuid_rng = random.Random(42)
+
+    def _det_code() -> str:
+        left = "".join(rng.choice(_ALPHABET) for _ in range(4))
+        right = "".join(rng.choice(_ALPHABET) for _ in range(4))
+        return f"{left}-{right}"
+
+    def _det_uuid() -> str:
+        return str(uuid.UUID(int=uuid_rng.getrandbits(128)))
 
     subject_types = ["dataset", "module", "report", "run", "survivor_bundle"]
     tiers = ["public", "org", "admin"]
+    fixed_ts = "2026-04-18T00:00:00+00:00"
     records: list[dict] = []
     for i in range(20):
         records.append(
             {
-                "id": str(uuid.uuid4()),
-                "code": generate_code(),
+                "id": _det_uuid(),
+                "code": _det_code(),
                 "subject_type": subject_types[i % len(subject_types)],
-                "subject_id": str(uuid.uuid4()),
+                "subject_id": _det_uuid(),
                 "tier": tiers[i % len(tiers)],
-                "org_id": str(uuid.uuid4()) if i % 2 == 0 else None,
+                "org_id": _det_uuid() if i % 2 == 0 else None,
                 "minted_by": f"user_{i % 5}",
                 "metadata": {"seed_index": i},
-                "created_at": datetime.now(timezone.utc).isoformat(),
+                "created_at": fixed_ts,
             }
         )
 

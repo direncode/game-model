@@ -1,0 +1,11 @@
+{
+  "adapter": "json",
+  "errors": 0,
+  "output_edges": 199,
+  "output_entities": 200,
+  "rows_ingested": 200,
+  "started_at": "2026-04-18T00:00:00+00:00",
+  "warnings": [
+    "json: normalized 20 rows with fallback schema"
+  ]
+}

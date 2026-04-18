@@ -1,0 +1,9 @@
+{
+  "adapter": "csv",
+  "errors": 0,
+  "output_edges": 149,
+  "output_entities": 150,
+  "rows_ingested": 150,
+  "started_at": "2026-04-18T00:00:00+00:00",
+  "warnings": []
+}

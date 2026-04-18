@@ -1,0 +1,145 @@
+{
+  "count": 20,
+  "entries": [
+    {
+      "actor": "user_0",
+      "expires_at": "2026-05-18T00:00:00+00:00",
+      "granted_at": "2026-04-18T00:00:00+00:00",
+      "resource": "resource_0",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_1",
+      "expires_at": null,
+      "granted_at": "2026-04-17T00:00:00+00:00",
+      "resource": "resource_1",
+      "role": "editor"
+    },
+    {
+      "actor": "user_2",
+      "expires_at": "2026-05-16T00:00:00+00:00",
+      "granted_at": "2026-04-16T00:00:00+00:00",
+      "resource": "resource_2",
+      "role": "admin"
+    },
+    {
+      "actor": "user_3",
+      "expires_at": null,
+      "granted_at": "2026-04-15T00:00:00+00:00",
+      "resource": "resource_3",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_4",
+      "expires_at": "2026-05-14T00:00:00+00:00",
+      "granted_at": "2026-04-14T00:00:00+00:00",
+      "resource": "resource_4",
+      "role": "editor"
+    },
+    {
+      "actor": "user_5",
+      "expires_at": null,
+      "granted_at": "2026-04-13T00:00:00+00:00",
+      "resource": "resource_5",
+      "role": "admin"
+    },
+    {
+      "actor": "user_0",
+      "expires_at": "2026-05-12T00:00:00+00:00",
+      "granted_at": "2026-04-12T00:00:00+00:00",
+      "resource": "resource_6",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_1",
+      "expires_at": null,
+      "granted_at": "2026-04-11T00:00:00+00:00",
+      "resource": "resource_7",
+      "role": "editor"
+    },
+    {
+      "actor": "user_2",
+      "expires_at": "2026-05-10T00:00:00+00:00",
+      "granted_at": "2026-04-10T00:00:00+00:00",
+      "resource": "resource_0",
+      "role": "admin"
+    },
+    {
+      "actor": "user_3",
+      "expires_at": null,
+      "granted_at": "2026-04-09T00:00:00+00:00",
+      "resource": "resource_1",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_4",
+      "expires_at": "2026-05-08T00:00:00+00:00",
+      "granted_at": "2026-04-08T00:00:00+00:00",
+      "resource": "resource_2",
+      "role": "editor"
+    },
+    {
+      "actor": "user_5",
+      "expires_at": null,
+      "granted_at": "2026-04-07T00:00:00+00:00",
+      "resource": "resource_3",
+      "role": "admin"
+    },
+    {
+      "actor": "user_0",
+      "expires_at": "2026-05-06T00:00:00+00:00",
+      "granted_at": "2026-04-06T00:00:00+00:00",
+      "resource": "resource_4",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_1",
+      "expires_at": null,
+      "granted_at": "2026-04-05T00:00:00+00:00",
+      "resource": "resource_5",
+      "role": "editor"
+    },
+    {
+      "actor": "user_2",
+      "expires_at": "2026-05-04T00:00:00+00:00",
+      "granted_at": "2026-04-04T00:00:00+00:00",
+      "resource": "resource_6",
+      "role": "admin"
+    },
+    {
+      "actor": "user_3",
+      "expires_at": null,
+      "granted_at": "2026-04-03T00:00:00+00:00",
+      "resource": "resource_7",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_4",
+      "expires_at": "2026-05-02T00:00:00+00:00",
+      "granted_at": "2026-04-02T00:00:00+00:00",
+      "resource": "resource_0",
+      "role": "editor"
+    },
+    {
+      "actor": "user_5",
+      "expires_at": null,
+      "granted_at": "2026-04-01T00:00:00+00:00",
+      "resource": "resource_1",
+      "role": "admin"
+    },
+    {
+      "actor": "user_0",
+      "expires_at": "2026-04-30T00:00:00+00:00",
+      "granted_at": "2026-03-31T00:00:00+00:00",
+      "resource": "resource_2",
+      "role": "viewer"
+    },
+    {
+      "actor": "user_1",
+      "expires_at": null,
+      "granted_at": "2026-03-30T00:00:00+00:00",
+      "resource": "resource_3",
+      "role": "editor"
+    }
+  ]
+}

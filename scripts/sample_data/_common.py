@@ -8,6 +8,7 @@ import sys
 import time
 import traceback
 from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
@@ -17,6 +18,11 @@ SEED = 42
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SAMPLES_ROOT = REPO_ROOT / "data" / "samples"
 BACKEND_ROOT = REPO_ROOT / "backend"
+
+# Fixed wall-clock for fixtures. Using `datetime.now()` in populators creates
+# committed-file churn on every re-run; anchoring to a constant keeps re-runs
+# byte-identical except for manifest generated_at + elapsed_ms.
+FIXTURE_NOW = datetime(2026, 4, 18, 0, 0, 0, tzinfo=timezone.utc)
 
 
 def ensure_backend_on_path() -> None:

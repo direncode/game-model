@@ -9,11 +9,11 @@ so `ast.literal_eval` is safe.
 from __future__ import annotations
 
 import ast
-from datetime import datetime, timezone
 from pathlib import Path
 
 from sample_data._common import (
     BACKEND_ROOT,
+    FIXTURE_NOW,
     ManifestEntry,
     add_file,
     add_interact,
@@ -57,7 +57,7 @@ def run(out_dir: Path) -> ManifestEntry:
 
     stub = {
         "dataset_id": "sample/latent-ocean-demo",
-        "imported_at": datetime.now(timezone.utc).isoformat(),
+        "imported_at": FIXTURE_NOW.isoformat(),
         "rows_imported": 1234,
         "columns": ["id", "text", "label"],
         "schema_inferred": True,

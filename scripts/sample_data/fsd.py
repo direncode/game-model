@@ -6,10 +6,9 @@ page and any consumer sees the same structure offline.
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from pathlib import Path
 
-from sample_data._common import ManifestEntry, add_file, add_interact, write_json
+from sample_data._common import FIXTURE_NOW, ManifestEntry, add_file, add_interact, write_json
 
 
 def _synthetic_modules() -> list[dict]:
@@ -40,7 +39,7 @@ def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="fsd", mode="synthetic")
 
     modules = sorted(_synthetic_modules(), key=lambda m: m["entity_count"], reverse=True)
-    ts = datetime.now(timezone.utc).isoformat()
+    ts = FIXTURE_NOW.isoformat()
 
     p_mods = out_dir / "modules.json"
     write_json(

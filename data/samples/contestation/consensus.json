@@ -1,0 +1,47 @@
+{
+  "consensus": [
+    {
+      "challenge_id": "66035162-469b-4d7d-b88c-7327fbf7d15e",
+      "closed_at": "2026-04-17T18:00:00+00:00",
+      "oppose_votes": 1,
+      "resolution": "rejected",
+      "support_votes": 5
+    },
+    {
+      "challenge_id": "f968900c-a769-4532-a9fb-5aa9c7e5883e",
+      "closed_at": "2026-04-17T06:00:00+00:00",
+      "oppose_votes": 1,
+      "resolution": "rejected",
+      "support_votes": 3
+    },
+    {
+      "challenge_id": "82edc1cb-494c-4766-9033-4c7ee4dd9817",
+      "closed_at": "2026-04-16T18:00:00+00:00",
+      "oppose_votes": 3,
+      "resolution": "upheld",
+      "support_votes": 3
+    },
+    {
+      "challenge_id": "14cca7bb-7950-4946-9fc5-85a82467f796",
+      "closed_at": "2026-04-16T06:00:00+00:00",
+      "oppose_votes": 2,
+      "resolution": "upheld",
+      "support_votes": 5
+    },
+    {
+      "challenge_id": "3cf456b6-16c5-4a4d-9dc9-50c99ebfd4e5",
+      "closed_at": "2026-04-15T18:00:00+00:00",
+      "oppose_votes": 1,
+      "resolution": "upheld",
+      "support_votes": 4
+    },
+    {
+      "challenge_id": "3b7807b2-914a-431f-af0f-8099c2d3c171",
+      "closed_at": "2026-04-15T06:00:00+00:00",
+      "oppose_votes": 3,
+      "resolution": "rejected",
+      "support_votes": 3
+    }
+  ],
+  "count": 6
+}

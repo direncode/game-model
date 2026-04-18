@@ -1,0 +1,11 @@
+{
+  "adapter": "fsd",
+  "errors": 0,
+  "output_edges": 179,
+  "output_entities": 180,
+  "rows_ingested": 180,
+  "started_at": "2026-04-18T00:00:00+00:00",
+  "warnings": [
+    "fsd: normalized 18 rows with fallback schema"
+  ]
+}

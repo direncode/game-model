@@ -1,0 +1,255 @@
+{
+  "challenges": [
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #0",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "69578966-222a-40fa-bc6b-a40276876603",
+      "raised_by": "user_0",
+      "status": "open",
+      "target_id": "eb7f6724-4e4a-43d3-abc7-1b23e7e3a4b0",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #1",
+      "created_at": "2026-04-17T21:00:00+00:00",
+      "id": "c593af7b-b012-404a-af0b-83c8b11e3076",
+      "raised_by": "user_1",
+      "status": "under_review",
+      "target_id": "75449db0-a88d-4a2e-b68f-f96fa1a88e38",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #2",
+      "created_at": "2026-04-17T18:00:00+00:00",
+      "id": "66035162-469b-4d7d-b88c-7327fbf7d15e",
+      "raised_by": "user_2",
+      "status": "resolved",
+      "target_id": "f1acf4e4-a462-4bd7-b8dc-cc2df5f1badc",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #3",
+      "created_at": "2026-04-17T15:00:00+00:00",
+      "id": "096caa1d-1874-46cc-a789-40e1be963ff2",
+      "raised_by": "user_3",
+      "status": "withdrawn",
+      "target_id": "323fce7e-60a9-420e-a289-8ecea63e49aa",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #4",
+      "created_at": "2026-04-17T12:00:00+00:00",
+      "id": "e8b44e59-e00f-46c3-bade-02582315fb9b",
+      "raised_by": "user_4",
+      "status": "open",
+      "target_id": "275211ed-0c57-4d2c-bbc9-a7a3b5292ee7",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #5",
+      "created_at": "2026-04-17T09:00:00+00:00",
+      "id": "fb8a5285-939d-4efb-8749-22609d020dc1",
+      "raised_by": "user_0",
+      "status": "under_review",
+      "target_id": "8483fa34-a083-4eed-94c9-c2831c066ea9",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #6",
+      "created_at": "2026-04-17T06:00:00+00:00",
+      "id": "f968900c-a769-4532-a9fb-5aa9c7e5883e",
+      "raised_by": "user_1",
+      "status": "resolved",
+      "target_id": "15ebe360-0232-4c5b-8293-a02c0f9fd96a",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #7",
+      "created_at": "2026-04-17T03:00:00+00:00",
+      "id": "8bfef41d-1028-42ff-930e-b175619db9c6",
+      "raised_by": "user_2",
+      "status": "withdrawn",
+      "target_id": "575c9dbe-ef5c-4e7c-afda-ca3511378726",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #8",
+      "created_at": "2026-04-17T00:00:00+00:00",
+      "id": "7130111e-621c-44e0-9f2c-510de0c0786a",
+      "raised_by": "user_3",
+      "status": "open",
+      "target_id": "73354545-f61d-479f-81ae-d4b8788f969d",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #9",
+      "created_at": "2026-04-16T21:00:00+00:00",
+      "id": "a1517c45-271f-4542-a74b-4556b22b6b57",
+      "raised_by": "user_4",
+      "status": "under_review",
+      "target_id": "9a58d886-ce07-4cfe-875d-a0d091489543",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #10",
+      "created_at": "2026-04-16T18:00:00+00:00",
+      "id": "82edc1cb-494c-4766-9033-4c7ee4dd9817",
+      "raised_by": "user_0",
+      "status": "resolved",
+      "target_id": "7872c2ad-2ae1-4d24-9005-6ae09b1320a3",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #11",
+      "created_at": "2026-04-16T15:00:00+00:00",
+      "id": "a3902032-ad25-4fff-b411-ad450c9d2014",
+      "raised_by": "user_1",
+      "status": "withdrawn",
+      "target_id": "d9936491-783a-40c2-8c55-0635a200daa0",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #12",
+      "created_at": "2026-04-16T12:00:00+00:00",
+      "id": "e344f4f7-e705-4728-b8b0-dfba7bb6d9a2",
+      "raised_by": "user_2",
+      "status": "open",
+      "target_id": "dcdbdd08-3b83-4365-973d-69d1915c4860",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #13",
+      "created_at": "2026-04-16T09:00:00+00:00",
+      "id": "6cde1d7c-b203-4b28-9c24-5c8c61863c07",
+      "raised_by": "user_3",
+      "status": "under_review",
+      "target_id": "afc4b6c0-c3ac-4f6f-b4f6-e2615454ef81",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #14",
+      "created_at": "2026-04-16T06:00:00+00:00",
+      "id": "14cca7bb-7950-4946-9fc5-85a82467f796",
+      "raised_by": "user_4",
+      "status": "resolved",
+      "target_id": "c15b0ad7-2e76-47d3-8f62-277a9e2ac921",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #15",
+      "created_at": "2026-04-16T03:00:00+00:00",
+      "id": "3f664482-70d5-4962-9d8d-db0cfb51e867",
+      "raised_by": "user_0",
+      "status": "withdrawn",
+      "target_id": "f21db4ef-3ded-49d0-80c2-622c127c514a",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #16",
+      "created_at": "2026-04-16T00:00:00+00:00",
+      "id": "51967e09-82d2-47ad-9857-474d048f2b22",
+      "raised_by": "user_1",
+      "status": "open",
+      "target_id": "48f7d201-92e6-4d7d-a4a9-e010b0b16de3",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #17",
+      "created_at": "2026-04-15T21:00:00+00:00",
+      "id": "22d1b632-3c81-404c-9faa-fc464c32d8a1",
+      "raised_by": "user_2",
+      "status": "under_review",
+      "target_id": "bc655129-6b34-4d67-99df-c5bba132bdd1",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #18",
+      "created_at": "2026-04-15T18:00:00+00:00",
+      "id": "3cf456b6-16c5-4a4d-9dc9-50c99ebfd4e5",
+      "raised_by": "user_3",
+      "status": "resolved",
+      "target_id": "49f29cf6-363f-4cd4-b41c-fd04d9001ae7",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #19",
+      "created_at": "2026-04-15T15:00:00+00:00",
+      "id": "64c934d3-0722-4c5c-844f-c8eee84cef81",
+      "raised_by": "user_4",
+      "status": "withdrawn",
+      "target_id": "9ee6a37d-645f-46e6-b007-08f8e282327c",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #20",
+      "created_at": "2026-04-15T12:00:00+00:00",
+      "id": "876b06de-b1f1-4214-88a5-7496ba5dd389",
+      "raised_by": "user_0",
+      "status": "open",
+      "target_id": "a02a819c-8536-4a78-8456-56c16e3ff112",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 2,
+      "claim": "Synthetic dispute claim #21",
+      "created_at": "2026-04-15T09:00:00+00:00",
+      "id": "563c0449-9f6c-4857-a81c-f1593913d99a",
+      "raised_by": "user_1",
+      "status": "under_review",
+      "target_id": "bc507a52-bde9-45df-b59b-8030e3f89293",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 3,
+      "claim": "Synthetic dispute claim #22",
+      "created_at": "2026-04-15T06:00:00+00:00",
+      "id": "3b7807b2-914a-431f-af0f-8099c2d3c171",
+      "raised_by": "user_2",
+      "status": "resolved",
+      "target_id": "63ecaed1-b3ee-4aae-be46-629a5de67098",
+      "target_type": "module"
+    },
+    {
+      "annotator_count": 4,
+      "claim": "Synthetic dispute claim #23",
+      "created_at": "2026-04-15T03:00:00+00:00",
+      "id": "f89f684e-5ebd-42d4-9ab2-2b6cfd5a501e",
+      "raised_by": "user_3",
+      "status": "withdrawn",
+      "target_id": "135c4462-06be-4cb0-9411-0e14673ae079",
+      "target_type": "dataset"
+    },
+    {
+      "annotator_count": 1,
+      "claim": "Synthetic dispute claim #24",
+      "created_at": "2026-04-15T00:00:00+00:00",
+      "id": "91c17727-661c-4411-939a-6ea4ee95aa7e",
+      "raised_by": "user_4",
+      "status": "open",
+      "target_id": "0ac335c9-4495-4919-80f8-801d40190929",
+      "target_type": "module"
+    }
+  ],
+  "count": 25
+}
