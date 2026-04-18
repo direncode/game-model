@@ -1,0 +1,95 @@
+{
+  "connections": [
+    {
+      "connection_type": "shared_cluster",
+      "from_module": "module_00",
+      "strength": 0.4,
+      "to_module": "module_03"
+    },
+    {
+      "connection_type": "temporal_succession",
+      "from_module": "module_01",
+      "strength": 0.44,
+      "to_module": "module_04"
+    },
+    {
+      "connection_type": "co_citation",
+      "from_module": "module_02",
+      "strength": 0.48,
+      "to_module": "module_05"
+    },
+    {
+      "connection_type": "shared_cluster",
+      "from_module": "module_03",
+      "strength": 0.52,
+      "to_module": "module_06"
+    },
+    {
+      "connection_type": "temporal_succession",
+      "from_module": "module_04",
+      "strength": 0.56,
+      "to_module": "module_07"
+    },
+    {
+      "connection_type": "co_citation",
+      "from_module": "module_05",
+      "strength": 0.6,
+      "to_module": "module_08"
+    },
+    {
+      "connection_type": "shared_cluster",
+      "from_module": "module_06",
+      "strength": 0.64,
+      "to_module": "module_09"
+    },
+    {
+      "connection_type": "temporal_succession",
+      "from_module": "module_07",
+      "strength": 0.68,
+      "to_module": "module_00"
+    },
+    {
+      "connection_type": "co_citation",
+      "from_module": "module_08",
+      "strength": 0.72,
+      "to_module": "module_01"
+    },
+    {
+      "connection_type": "shared_cluster",
+      "from_module": "module_09",
+      "strength": 0.76,
+      "to_module": "module_02"
+    },
+    {
+      "connection_type": "temporal_succession",
+      "from_module": "module_00",
+      "strength": 0.8,
+      "to_module": "module_03"
+    },
+    {
+      "connection_type": "co_citation",
+      "from_module": "module_01",
+      "strength": 0.84,
+      "to_module": "module_04"
+    },
+    {
+      "connection_type": "shared_cluster",
+      "from_module": "module_02",
+      "strength": 0.88,
+      "to_module": "module_05"
+    },
+    {
+      "connection_type": "temporal_succession",
+      "from_module": "module_03",
+      "strength": 0.92,
+      "to_module": "module_06"
+    },
+    {
+      "connection_type": "co_citation",
+      "from_module": "module_04",
+      "strength": 0.96,
+      "to_module": "module_07"
+    }
+  ],
+  "count": 15
+}

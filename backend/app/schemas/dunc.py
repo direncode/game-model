@@ -71,3 +71,50 @@ class InsightOut(BaseModel):
 class MatchStateOut(BaseModel):
     summary: MatchSummaryOut
     recent_insights: list[InsightOut]
+
+
+# ── Prediction Engine schemas ─────────────────────────────────────────
+
+
+class ProbabilitySet(BaseModel):
+    home: float = Field(ge=0.0, le=1.0)
+    draw: float = Field(ge=0.0, le=1.0)
+    away: float = Field(ge=0.0, le=1.0)
+
+
+class MatchPredictionOut(BaseModel):
+    match_key: str
+    home_team: str
+    away_team: str
+    league: str
+    date: str
+
+    bookmaker: ProbabilitySet
+    polymarket: ProbabilitySet | None = None
+    ml_model: ProbabilitySet
+
+    kl_divergence_bk_poly: float | None = None
+    max_divergence: float | None = None
+    sources_agree: bool
+    blended: ProbabilitySet
+
+    claude_report: str | None = None
+    confidence: Literal["high", "medium", "low"]
+
+    model_accuracy: float
+    model_last_trained: str
+
+
+class MatchAnalysisRequest(BaseModel):
+    home_team: str
+    away_team: str
+    league: str = Field(default="Premier League")
+
+
+class ModelStatusOut(BaseModel):
+    status: Literal["ready", "training", "cold"]
+    accuracy: float | None = None
+    log_loss: float | None = None
+    last_trained: str | None = None
+    matches_in_dataset: int = 0
+    leagues: list[str] = Field(default_factory=list)

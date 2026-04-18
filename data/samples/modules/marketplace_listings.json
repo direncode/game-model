@@ -1,0 +1,41 @@
+{
+  "count": 9,
+  "listings": [
+    {
+      "display_name": "BTUT Reduction Engine",
+      "id": "core_reduction"
+    },
+    {
+      "display_name": "Data Estate Governance",
+      "id": "data_governance"
+    },
+    {
+      "display_name": "SEC EDGAR Finance",
+      "id": "finance"
+    },
+    {
+      "display_name": "Flow Engine Monitor",
+      "id": "flow_monitoring"
+    },
+    {
+      "display_name": "Patent Intelligence",
+      "id": "patents"
+    },
+    {
+      "display_name": "PubMed Pharma Intelligence",
+      "id": "pharma"
+    },
+    {
+      "display_name": "DUNC Sports Intelligence",
+      "id": "sports_intelligence"
+    },
+    {
+      "display_name": "TCD-JEPA Crystallization",
+      "id": "structural_discovery"
+    },
+    {
+      "display_name": "Supply Chain Intelligence",
+      "id": "supply_chain"
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "classifications": [
+    {
+      "asset_id": "asset_000",
+      "classification": "public",
+      "classified_at": "2026-04-18T00:00:00+00:00",
+      "pii_detected": true
+    },
+    {
+      "asset_id": "asset_001",
+      "classification": "internal",
+      "classified_at": "2026-04-18T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_002",
+      "classification": "confidential",
+      "classified_at": "2026-04-17T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_003",
+      "classification": "restricted",
+      "classified_at": "2026-04-17T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_004",
+      "classification": "public",
+      "classified_at": "2026-04-16T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_005",
+      "classification": "internal",
+      "classified_at": "2026-04-16T00:00:00+00:00",
+      "pii_detected": true
+    },
+    {
+      "asset_id": "asset_006",
+      "classification": "confidential",
+      "classified_at": "2026-04-15T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_007",
+      "classification": "restricted",
+      "classified_at": "2026-04-15T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_008",
+      "classification": "public",
+      "classified_at": "2026-04-14T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_009",
+      "classification": "internal",
+      "classified_at": "2026-04-14T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_010",
+      "classification": "confidential",
+      "classified_at": "2026-04-13T00:00:00+00:00",
+      "pii_detected": true
+    },
+    {
+      "asset_id": "asset_011",
+      "classification": "restricted",
+      "classified_at": "2026-04-13T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_012",
+      "classification": "public",
+      "classified_at": "2026-04-12T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_013",
+      "classification": "internal",
+      "classified_at": "2026-04-12T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_014",
+      "classification": "confidential",
+      "classified_at": "2026-04-11T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_015",
+      "classification": "restricted",
+      "classified_at": "2026-04-11T00:00:00+00:00",
+      "pii_detected": true
+    },
+    {
+      "asset_id": "asset_016",
+      "classification": "public",
+      "classified_at": "2026-04-10T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_017",
+      "classification": "internal",
+      "classified_at": "2026-04-10T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_018",
+      "classification": "confidential",
+      "classified_at": "2026-04-09T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_019",
+      "classification": "restricted",
+      "classified_at": "2026-04-09T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_020",
+      "classification": "public",
+      "classified_at": "2026-04-08T00:00:00+00:00",
+      "pii_detected": true
+    },
+    {
+      "asset_id": "asset_021",
+      "classification": "internal",
+      "classified_at": "2026-04-08T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_022",
+      "classification": "confidential",
+      "classified_at": "2026-04-07T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_023",
+      "classification": "restricted",
+      "classified_at": "2026-04-07T00:00:00+00:00",
+      "pii_detected": false
+    },
+    {
+      "asset_id": "asset_024",
+      "classification": "public",
+      "classified_at": "2026-04-06T00:00:00+00:00",
+      "pii_detected": false
+    }
+  ],
+  "count": 25
+}

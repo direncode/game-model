@@ -1,0 +1,955 @@
+{
+  "count": 50,
+  "scored": [
+    {
+      "asset_id": "asset_000",
+      "factors": [
+        {
+          "detail": "Amount $1000 within typical range ($1000)",
+          "name": "budget_range",
+          "score": 90.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 45.0
+    },
+    {
+      "asset_id": "asset_001",
+      "factors": [
+        {
+          "detail": "Amount $1250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 88.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 44.333333
+    },
+    {
+      "asset_id": "asset_002",
+      "factors": [
+        {
+          "detail": "Amount $1500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 86.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 43.666667
+    },
+    {
+      "asset_id": "asset_003",
+      "factors": [
+        {
+          "detail": "Amount $1750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 85.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 43.0
+    },
+    {
+      "asset_id": "asset_004",
+      "factors": [
+        {
+          "detail": "Amount $2000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 83.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 42.333333
+    },
+    {
+      "asset_id": "asset_005",
+      "factors": [
+        {
+          "detail": "Amount $2250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 81.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 41.666667
+    },
+    {
+      "asset_id": "asset_006",
+      "factors": [
+        {
+          "detail": "Amount $2500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 80.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 41.0
+    },
+    {
+      "asset_id": "asset_007",
+      "factors": [
+        {
+          "detail": "Amount $2750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 78.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 40.333333
+    },
+    {
+      "asset_id": "asset_008",
+      "factors": [
+        {
+          "detail": "Amount $3000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 76.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 39.666667
+    },
+    {
+      "asset_id": "asset_009",
+      "factors": [
+        {
+          "detail": "Amount $3250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 75.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 39.0
+    },
+    {
+      "asset_id": "asset_010",
+      "factors": [
+        {
+          "detail": "Amount $3500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 73.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 38.333333
+    },
+    {
+      "asset_id": "asset_011",
+      "factors": [
+        {
+          "detail": "Amount $3750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 71.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 37.666667
+    },
+    {
+      "asset_id": "asset_012",
+      "factors": [
+        {
+          "detail": "Amount $4000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 70.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 37.0
+    },
+    {
+      "asset_id": "asset_013",
+      "factors": [
+        {
+          "detail": "Amount $4250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 68.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 36.333333
+    },
+    {
+      "asset_id": "asset_014",
+      "factors": [
+        {
+          "detail": "Amount $4500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 66.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 35.666667
+    },
+    {
+      "asset_id": "asset_015",
+      "factors": [
+        {
+          "detail": "Amount $4750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 65.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "review",
+      "total": 35.0
+    },
+    {
+      "asset_id": "asset_016",
+      "factors": [
+        {
+          "detail": "Amount $5000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 63.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 34.333333
+    },
+    {
+      "asset_id": "asset_017",
+      "factors": [
+        {
+          "detail": "Amount $5250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 61.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 33.666667
+    },
+    {
+      "asset_id": "asset_018",
+      "factors": [
+        {
+          "detail": "Amount $5500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 60.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 33.0
+    },
+    {
+      "asset_id": "asset_019",
+      "factors": [
+        {
+          "detail": "Amount $5750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 58.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 32.333333
+    },
+    {
+      "asset_id": "asset_020",
+      "factors": [
+        {
+          "detail": "Amount $6000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 56.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 31.666667
+    },
+    {
+      "asset_id": "asset_021",
+      "factors": [
+        {
+          "detail": "Amount $6250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 55.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 31.0
+    },
+    {
+      "asset_id": "asset_022",
+      "factors": [
+        {
+          "detail": "Amount $6500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 53.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 30.333333
+    },
+    {
+      "asset_id": "asset_023",
+      "factors": [
+        {
+          "detail": "Amount $6750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 51.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 29.666667
+    },
+    {
+      "asset_id": "asset_024",
+      "factors": [
+        {
+          "detail": "Amount $7000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 50.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 29.0
+    },
+    {
+      "asset_id": "asset_025",
+      "factors": [
+        {
+          "detail": "Amount $7250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 48.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 28.333333
+    },
+    {
+      "asset_id": "asset_026",
+      "factors": [
+        {
+          "detail": "Amount $7500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 46.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 27.666667
+    },
+    {
+      "asset_id": "asset_027",
+      "factors": [
+        {
+          "detail": "Amount $7750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 45.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 27.0
+    },
+    {
+      "asset_id": "asset_028",
+      "factors": [
+        {
+          "detail": "Amount $8000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 43.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 26.333333
+    },
+    {
+      "asset_id": "asset_029",
+      "factors": [
+        {
+          "detail": "Amount $8250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 41.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 25.666667
+    },
+    {
+      "asset_id": "asset_030",
+      "factors": [
+        {
+          "detail": "Amount $8500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 40.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 25.0
+    },
+    {
+      "asset_id": "asset_031",
+      "factors": [
+        {
+          "detail": "Amount $8750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 38.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 24.333333
+    },
+    {
+      "asset_id": "asset_032",
+      "factors": [
+        {
+          "detail": "Amount $9000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 36.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 23.666667
+    },
+    {
+      "asset_id": "asset_033",
+      "factors": [
+        {
+          "detail": "Amount $9250 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 35.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 23.0
+    },
+    {
+      "asset_id": "asset_034",
+      "factors": [
+        {
+          "detail": "Amount $9500 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 33.333333,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 22.333333
+    },
+    {
+      "asset_id": "asset_035",
+      "factors": [
+        {
+          "detail": "Amount $9750 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 31.666667,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 21.666667
+    },
+    {
+      "asset_id": "asset_036",
+      "factors": [
+        {
+          "detail": "Amount $10000 above typical but within max ($10000)",
+          "name": "budget_range",
+          "score": 30.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 21.0
+    },
+    {
+      "asset_id": "asset_037",
+      "factors": [
+        {
+          "detail": "Amount $10250 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 19.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 16.8
+    },
+    {
+      "asset_id": "asset_038",
+      "factors": [
+        {
+          "detail": "Amount $10500 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 19.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 16.6
+    },
+    {
+      "asset_id": "asset_039",
+      "factors": [
+        {
+          "detail": "Amount $10750 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 18.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 16.4
+    },
+    {
+      "asset_id": "asset_040",
+      "factors": [
+        {
+          "detail": "Amount $11000 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 18.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 16.2
+    },
+    {
+      "asset_id": "asset_041",
+      "factors": [
+        {
+          "detail": "Amount $11250 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 17.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 16.0
+    },
+    {
+      "asset_id": "asset_042",
+      "factors": [
+        {
+          "detail": "Amount $11500 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 17.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 15.8
+    },
+    {
+      "asset_id": "asset_043",
+      "factors": [
+        {
+          "detail": "Amount $11750 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 16.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 15.6
+    },
+    {
+      "asset_id": "asset_044",
+      "factors": [
+        {
+          "detail": "Amount $12000 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 16.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 15.4
+    },
+    {
+      "asset_id": "asset_045",
+      "factors": [
+        {
+          "detail": "Amount $12250 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 15.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 15.2
+    },
+    {
+      "asset_id": "asset_046",
+      "factors": [
+        {
+          "detail": "Amount $12500 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 15.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 15.0
+    },
+    {
+      "asset_id": "asset_047",
+      "factors": [
+        {
+          "detail": "Amount $12750 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 14.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 14.8
+    },
+    {
+      "asset_id": "asset_048",
+      "factors": [
+        {
+          "detail": "Amount $13000 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 14.0,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 14.6
+    },
+    {
+      "asset_id": "asset_049",
+      "factors": [
+        {
+          "detail": "Amount $13250 exceeds maximum ($10000)",
+          "name": "budget_range",
+          "score": 13.5,
+          "weight": 1.0
+        },
+        {
+          "detail": "Matched: pipeline, budget",
+          "name": "justification_keywords",
+          "score": 15.0,
+          "weight": 1.5
+        }
+      ],
+      "recommendation": "deny",
+      "total": 14.4
+    }
+  ]
+}

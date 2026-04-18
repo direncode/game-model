@@ -1,0 +1,15 @@
+{
+  "runs": [
+    {
+      "entities_normalized": 150,
+      "rules_applied": 12,
+      "source": "csv"
+    },
+    {
+      "entities_normalized": 200,
+      "rules_applied": 18,
+      "source": "json"
+    }
+  ],
+  "total_normalized": 350
+}

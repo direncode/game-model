@@ -1,0 +1,14 @@
+{
+  "aggregate": {
+    "conformal_lower": 0.203351,
+    "conformal_upper": 1.0,
+    "probability": 0.751505
+  },
+  "members": [
+    {
+      "latest_auc": 0.870167,
+      "name": "walkforward_logreg",
+      "weight": 1.0
+    }
+  ]
+}

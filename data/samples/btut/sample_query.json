@@ -1,0 +1,8 @@
+{
+  "expected_top_types": [
+    "Material",
+    "Concept"
+  ],
+  "query": "material innovation from 1980",
+  "run_command": "python -c \"from app.services.btut.pipeline import run_btut_pipeline; ...\""
+}

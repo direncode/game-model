@@ -1,0 +1,455 @@
+{
+  "assets": [
+    {
+      "amount": 1000.0,
+      "asset_id": "asset_000",
+      "category_tag": "table",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for table pipeline #0",
+      "kind": "table",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 1250.0,
+      "asset_id": "asset_001",
+      "category_tag": "model",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for model pipeline #1",
+      "kind": "model",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 1500.0,
+      "asset_id": "asset_002",
+      "category_tag": "dataset",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for dataset pipeline #2",
+      "kind": "dataset",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 1750.0,
+      "asset_id": "asset_003",
+      "category_tag": "dashboard",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #3",
+      "kind": "dashboard",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 2000.0,
+      "asset_id": "asset_004",
+      "category_tag": "notebook",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for notebook pipeline #4",
+      "kind": "notebook",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 2250.0,
+      "asset_id": "asset_005",
+      "category_tag": "table",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for table pipeline #5",
+      "kind": "table",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 2500.0,
+      "asset_id": "asset_006",
+      "category_tag": "model",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for model pipeline #6",
+      "kind": "model",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 2750.0,
+      "asset_id": "asset_007",
+      "category_tag": "dataset",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dataset pipeline #7",
+      "kind": "dataset",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 3000.0,
+      "asset_id": "asset_008",
+      "category_tag": "dashboard",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #8",
+      "kind": "dashboard",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 3250.0,
+      "asset_id": "asset_009",
+      "category_tag": "notebook",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for notebook pipeline #9",
+      "kind": "notebook",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 3500.0,
+      "asset_id": "asset_010",
+      "category_tag": "table",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for table pipeline #10",
+      "kind": "table",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 3750.0,
+      "asset_id": "asset_011",
+      "category_tag": "model",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for model pipeline #11",
+      "kind": "model",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 4000.0,
+      "asset_id": "asset_012",
+      "category_tag": "dataset",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for dataset pipeline #12",
+      "kind": "dataset",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 4250.0,
+      "asset_id": "asset_013",
+      "category_tag": "dashboard",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #13",
+      "kind": "dashboard",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 4500.0,
+      "asset_id": "asset_014",
+      "category_tag": "notebook",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for notebook pipeline #14",
+      "kind": "notebook",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 4750.0,
+      "asset_id": "asset_015",
+      "category_tag": "table",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for table pipeline #15",
+      "kind": "table",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 5000.0,
+      "asset_id": "asset_016",
+      "category_tag": "model",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for model pipeline #16",
+      "kind": "model",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 5250.0,
+      "asset_id": "asset_017",
+      "category_tag": "dataset",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for dataset pipeline #17",
+      "kind": "dataset",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 5500.0,
+      "asset_id": "asset_018",
+      "category_tag": "dashboard",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #18",
+      "kind": "dashboard",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 5750.0,
+      "asset_id": "asset_019",
+      "category_tag": "notebook",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for notebook pipeline #19",
+      "kind": "notebook",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 6000.0,
+      "asset_id": "asset_020",
+      "category_tag": "table",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for table pipeline #20",
+      "kind": "table",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 6250.0,
+      "asset_id": "asset_021",
+      "category_tag": "model",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for model pipeline #21",
+      "kind": "model",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 6500.0,
+      "asset_id": "asset_022",
+      "category_tag": "dataset",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for dataset pipeline #22",
+      "kind": "dataset",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 6750.0,
+      "asset_id": "asset_023",
+      "category_tag": "dashboard",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #23",
+      "kind": "dashboard",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 7000.0,
+      "asset_id": "asset_024",
+      "category_tag": "notebook",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for notebook pipeline #24",
+      "kind": "notebook",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 7250.0,
+      "asset_id": "asset_025",
+      "category_tag": "table",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for table pipeline #25",
+      "kind": "table",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 7500.0,
+      "asset_id": "asset_026",
+      "category_tag": "model",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for model pipeline #26",
+      "kind": "model",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 7750.0,
+      "asset_id": "asset_027",
+      "category_tag": "dataset",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dataset pipeline #27",
+      "kind": "dataset",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 8000.0,
+      "asset_id": "asset_028",
+      "category_tag": "dashboard",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #28",
+      "kind": "dashboard",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 8250.0,
+      "asset_id": "asset_029",
+      "category_tag": "notebook",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for notebook pipeline #29",
+      "kind": "notebook",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 8500.0,
+      "asset_id": "asset_030",
+      "category_tag": "table",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for table pipeline #30",
+      "kind": "table",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 8750.0,
+      "asset_id": "asset_031",
+      "category_tag": "model",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for model pipeline #31",
+      "kind": "model",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 9000.0,
+      "asset_id": "asset_032",
+      "category_tag": "dataset",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for dataset pipeline #32",
+      "kind": "dataset",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 9250.0,
+      "asset_id": "asset_033",
+      "category_tag": "dashboard",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #33",
+      "kind": "dashboard",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 9500.0,
+      "asset_id": "asset_034",
+      "category_tag": "notebook",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for notebook pipeline #34",
+      "kind": "notebook",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 9750.0,
+      "asset_id": "asset_035",
+      "category_tag": "table",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for table pipeline #35",
+      "kind": "table",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 10000.0,
+      "asset_id": "asset_036",
+      "category_tag": "model",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for model pipeline #36",
+      "kind": "model",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 10250.0,
+      "asset_id": "asset_037",
+      "category_tag": "dataset",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for dataset pipeline #37",
+      "kind": "dataset",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 10500.0,
+      "asset_id": "asset_038",
+      "category_tag": "dashboard",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #38",
+      "kind": "dashboard",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 10750.0,
+      "asset_id": "asset_039",
+      "category_tag": "notebook",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for notebook pipeline #39",
+      "kind": "notebook",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 11000.0,
+      "asset_id": "asset_040",
+      "category_tag": "table",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for table pipeline #40",
+      "kind": "table",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 11250.0,
+      "asset_id": "asset_041",
+      "category_tag": "model",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for model pipeline #41",
+      "kind": "model",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 11500.0,
+      "asset_id": "asset_042",
+      "category_tag": "dataset",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for dataset pipeline #42",
+      "kind": "dataset",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 11750.0,
+      "asset_id": "asset_043",
+      "category_tag": "dashboard",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #43",
+      "kind": "dashboard",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 12000.0,
+      "asset_id": "asset_044",
+      "category_tag": "notebook",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for notebook pipeline #44",
+      "kind": "notebook",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 12250.0,
+      "asset_id": "asset_045",
+      "category_tag": "table",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for table pipeline #45",
+      "kind": "table",
+      "owner_team": "team_1"
+    },
+    {
+      "amount": 12500.0,
+      "asset_id": "asset_046",
+      "category_tag": "model",
+      "created_at": "2026-03-15",
+      "justification": "Quarterly budget increase for model pipeline #46",
+      "kind": "model",
+      "owner_team": "team_2"
+    },
+    {
+      "amount": 12750.0,
+      "asset_id": "asset_047",
+      "category_tag": "dataset",
+      "created_at": "2026-04-15",
+      "justification": "Quarterly budget increase for dataset pipeline #47",
+      "kind": "dataset",
+      "owner_team": "team_3"
+    },
+    {
+      "amount": 13000.0,
+      "asset_id": "asset_048",
+      "category_tag": "dashboard",
+      "created_at": "2026-01-15",
+      "justification": "Quarterly budget increase for dashboard pipeline #48",
+      "kind": "dashboard",
+      "owner_team": "team_0"
+    },
+    {
+      "amount": 13250.0,
+      "asset_id": "asset_049",
+      "category_tag": "notebook",
+      "created_at": "2026-02-15",
+      "justification": "Quarterly budget increase for notebook pipeline #49",
+      "kind": "notebook",
+      "owner_team": "team_1"
+    }
+  ],
+  "count": 50
+}

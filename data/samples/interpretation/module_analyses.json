@@ -1,0 +1,94 @@
+{
+  "analyses": [
+    {
+      "cluster_count": 3,
+      "dominant_types": [
+        "Concept"
+      ],
+      "module_id": "module_00",
+      "natural_language_summary": "module_00 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 4,
+      "dominant_types": [
+        "Concept",
+        "Inventor"
+      ],
+      "module_id": "module_01",
+      "natural_language_summary": "module_01 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 5,
+      "dominant_types": [
+        "Concept",
+        "Inventor",
+        "Material"
+      ],
+      "module_id": "module_02",
+      "natural_language_summary": "module_02 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 6,
+      "dominant_types": [
+        "Concept"
+      ],
+      "module_id": "module_03",
+      "natural_language_summary": "module_03 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 3,
+      "dominant_types": [
+        "Concept",
+        "Inventor"
+      ],
+      "module_id": "module_04",
+      "natural_language_summary": "module_04 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 4,
+      "dominant_types": [
+        "Concept",
+        "Inventor",
+        "Material"
+      ],
+      "module_id": "module_05",
+      "natural_language_summary": "module_05 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 5,
+      "dominant_types": [
+        "Concept"
+      ],
+      "module_id": "module_06",
+      "natural_language_summary": "module_06 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 6,
+      "dominant_types": [
+        "Concept",
+        "Inventor"
+      ],
+      "module_id": "module_07",
+      "natural_language_summary": "module_07 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 3,
+      "dominant_types": [
+        "Concept",
+        "Inventor",
+        "Material"
+      ],
+      "module_id": "module_08",
+      "natural_language_summary": "module_08 clusters entities by type and era, with 3 dominant clusters."
+    },
+    {
+      "cluster_count": 4,
+      "dominant_types": [
+        "Concept"
+      ],
+      "module_id": "module_09",
+      "natural_language_summary": "module_09 clusters entities by type and era, with 3 dominant clusters."
+    }
+  ],
+  "count": 10
+}

@@ -1,0 +1,74 @@
+{
+  "exports": [
+    {
+      "bytes": 1024,
+      "export_id": "9132b63e-f162-87e4-e9c3-49e03602f8ac",
+      "format": "csv",
+      "rows": 100,
+      "ts": "2026-04-18T00:00:00+00:00"
+    },
+    {
+      "bytes": 2048,
+      "export_id": "366eb16f-508e-bad7-b7c9-3acfe059a0ee",
+      "format": "parquet",
+      "rows": 200,
+      "ts": "2026-04-17T23:00:00+00:00"
+    },
+    {
+      "bytes": 3072,
+      "export_id": "e27a984d-6548-21d0-7fcd-9eb1a7cad415",
+      "format": "json",
+      "rows": 300,
+      "ts": "2026-04-17T22:00:00+00:00"
+    },
+    {
+      "bytes": 4096,
+      "export_id": "24933b83-7577-50a9-a491-f0b2ea1fca65",
+      "format": "csv",
+      "rows": 400,
+      "ts": "2026-04-17T21:00:00+00:00"
+    },
+    {
+      "bytes": 5120,
+      "export_id": "beb79919-3f22-faf8-23be-d01d43cf2fde",
+      "format": "parquet",
+      "rows": 500,
+      "ts": "2026-04-17T20:00:00+00:00"
+    },
+    {
+      "bytes": 6144,
+      "export_id": "bf3c4c06-4343-08bc-89fa-6a688fb5d27b",
+      "format": "json",
+      "rows": 600,
+      "ts": "2026-04-17T19:00:00+00:00"
+    },
+    {
+      "bytes": 7168,
+      "export_id": "956269f0-e5d7-b875-6dad-d6c795a76d79",
+      "format": "csv",
+      "rows": 700,
+      "ts": "2026-04-17T18:00:00+00:00"
+    },
+    {
+      "bytes": 8192,
+      "export_id": "ff50bde4-3825-67b8-5cab-cc97663f1c97",
+      "format": "parquet",
+      "rows": 800,
+      "ts": "2026-04-17T17:00:00+00:00"
+    },
+    {
+      "bytes": 9216,
+      "export_id": "7e570ddf-8270-50a8-2369-b584ff5e9ff0",
+      "format": "json",
+      "rows": 900,
+      "ts": "2026-04-17T16:00:00+00:00"
+    },
+    {
+      "bytes": 10240,
+      "export_id": "dc713d96-0c0f-d195-c17a-f08a1745d6d8",
+      "format": "csv",
+      "rows": 1000,
+      "ts": "2026-04-17T15:00:00+00:00"
+    }
+  ]
+}

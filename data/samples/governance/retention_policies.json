@@ -1,0 +1,24 @@
+{
+  "policies": [
+    {
+      "class": "public",
+      "policy_id": "bdd640fb-0667-1ad1-1c80-317fa3b1799d",
+      "retention_days": 30
+    },
+    {
+      "class": "internal",
+      "policy_id": "23b8c1e9-3924-56de-3eb1-3b9046685257",
+      "retention_days": 365
+    },
+    {
+      "class": "confidential",
+      "policy_id": "bd9c66b3-ad3c-2d6d-1a3d-1fa7bc8960a9",
+      "retention_days": 1825
+    },
+    {
+      "class": "restricted",
+      "policy_id": "972a8469-1641-9f82-8b9d-2434e465e150",
+      "retention_days": 2555
+    }
+  ]
+}

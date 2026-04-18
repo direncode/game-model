@@ -1,0 +1,14 @@
+{
+  "columns": [
+    "id",
+    "text",
+    "label"
+  ],
+  "dataset_id": "sample/latent-ocean-demo",
+  "graph_edges": 1723,
+  "graph_nodes": 512,
+  "imported_at": "2026-04-18T00:00:00+00:00",
+  "note": "Stubbed import result; no live HuggingFace call.",
+  "rows_imported": 1234,
+  "schema_inferred": true
+}

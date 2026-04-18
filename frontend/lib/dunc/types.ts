@@ -129,3 +129,43 @@ export interface DuncMatchInfo {
 // Pitch constants — mirror backend simulator.
 export const PITCH_X = 105;
 export const PITCH_Y = 68;
+
+// ── Prediction Engine types ─────────────────────────────────────────
+
+export interface ProbabilitySet {
+  home: number;
+  draw: number;
+  away: number;
+}
+
+export interface MatchPrediction {
+  match_key: string;
+  home_team: string;
+  away_team: string;
+  league: string;
+  date: string;
+
+  bookmaker: ProbabilitySet;
+  polymarket: ProbabilitySet | null;
+  ml_model: ProbabilitySet;
+
+  kl_divergence_bk_poly: number | null;
+  max_divergence: number | null;
+  sources_agree: boolean;
+  blended: ProbabilitySet;
+
+  claude_report: string | null;
+  confidence: "high" | "medium" | "low";
+
+  model_accuracy: number;
+  model_last_trained: string;
+}
+
+export interface ModelStatus {
+  status: "ready" | "training" | "cold";
+  accuracy: number | null;
+  log_loss: number | null;
+  last_trained: string | null;
+  matches_in_dataset: number;
+  leagues: string[];
+}

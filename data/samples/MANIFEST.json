@@ -1,0 +1,691 @@
+{
+  "generated_at": "2026-04-18T05:51:54Z",
+  "git_sha": "2e50b32",
+  "seed": 42,
+  "success_count": 16,
+  "total_verticals": 18,
+  "verticals": [
+    {
+      "elapsed_ms": 3,
+      "files": [
+        {
+          "description": "30 synthetic audit events",
+          "kind": "output",
+          "path": "data/samples/audit/audit_events.json",
+          "size_bytes": 9665
+        },
+        {
+          "description": "SIEM export payload (warn+)",
+          "kind": "output",
+          "path": "data/samples/audit/siem_export.json",
+          "size_bytes": 6576
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/audit/audit_events.json",
+          "purpose": "Read audit events",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/audit",
+            "pattern": "\"severity\": \"critical\""
+          },
+          "purpose": "Grep critical events",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "audit",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 1726,
+      "files": [
+        {
+          "description": "20 synthetic cross-era documents + succession edges",
+          "kind": "input",
+          "path": "data/samples/btut/input_documents.json",
+          "size_bytes": 7079
+        },
+        {
+          "description": "BTUT pipeline summary: counts, timings, reduction ratio",
+          "kind": "metadata",
+          "path": "data/samples/btut/pipeline_summary.json",
+          "size_bytes": 526
+        },
+        {
+          "description": "BTUT survivors with 8D embeddings and metadata",
+          "kind": "output",
+          "path": "data/samples/btut/survivor_bundle.json",
+          "size_bytes": 4024
+        },
+        {
+          "description": "BTUT lattice (consumed by LATK populator)",
+          "kind": "output",
+          "path": "data/samples/btut/lattice.json",
+          "size_bytes": 2116
+        },
+        {
+          "description": "Example query users can run against a real lattice",
+          "kind": "query",
+          "path": "data/samples/btut/sample_query.json",
+          "size_bytes": 210
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/btut/pipeline_summary.json",
+          "purpose": "Read pipeline summary",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/btut/survivor_bundle.json",
+          "purpose": "Read survivor bundle",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/btut",
+            "pattern": "\"type\": \"Material\""
+          },
+          "purpose": "Grep for Material entities",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "real",
+      "name": "btut",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 1,
+      "files": [
+        {
+          "description": "25 synthetic challenges",
+          "kind": "output",
+          "path": "data/samples/contestation/challenges.json",
+          "size_bytes": 8647
+        },
+        {
+          "description": "Consensus outcomes for resolved challenges",
+          "kind": "output",
+          "path": "data/samples/contestation/consensus.json",
+          "size_bytes": 1309
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/contestation/challenges.json",
+          "purpose": "Read challenges",
+          "tool": "Read"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "contestation",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 9,
+      "files": [
+        {
+          "description": "100-entity 8D semiconductor supply-chain bundle",
+          "kind": "input",
+          "path": "data/samples/crystallization/bundle_semiconductor.json",
+          "size_bytes": 24558
+        },
+        {
+          "description": "TCD-JEPA demo intelligence insights (real generator)",
+          "kind": "output",
+          "path": "data/samples/crystallization/intelligence_cache.json",
+          "size_bytes": 13888
+        },
+        {
+          "description": "Crystal checkpoint metadata for the bundle",
+          "kind": "output",
+          "path": "data/samples/crystallization/crystal_8d.json",
+          "size_bytes": 320
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/crystallization/bundle_semiconductor.json",
+          "purpose": "Read the semiconductor bundle",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/crystallization",
+            "pattern": "TSMC"
+          },
+          "purpose": "Grep for TSMC",
+          "tool": "Grep"
+        },
+        {
+          "path": "data/samples/crystallization/intelligence_cache.json",
+          "purpose": "Read intelligence sample",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "crystallization",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 11,
+      "files": [
+        {
+          "description": "50-asset synthetic inventory",
+          "kind": "input",
+          "path": "data/samples/data_estate/asset_inventory.json",
+          "size_bytes": 13763
+        },
+        {
+          "description": "Scored assets via real ScoringEngine",
+          "kind": "output",
+          "path": "data/samples/data_estate/scored_assets.json",
+          "size_bytes": 24297
+        },
+        {
+          "description": "Aggregated routing decisions",
+          "kind": "output",
+          "path": "data/samples/data_estate/routing_decisions.json",
+          "size_bytes": 128
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/data_estate/scored_assets.json",
+          "purpose": "Read scored assets",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/data_estate/routing_decisions.json",
+          "purpose": "Read routing decisions",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "data_estate",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 49,
+      "files": [
+        {
+          "description": "Ocean connector catalog (static listing)",
+          "kind": "metadata",
+          "path": "data/samples/data_layer/connector_catalog.json",
+          "size_bytes": 724
+        },
+        {
+          "description": "Names exported from app.services.data_layer.types",
+          "kind": "metadata",
+          "path": "data/samples/data_layer/schema_manifest.json",
+          "size_bytes": 290
+        },
+        {
+          "description": "Ocean orchestrator run summary (offline)",
+          "kind": "output",
+          "path": "data/samples/data_layer/orchestrator_run.json",
+          "size_bytes": 292
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/data_layer/connector_catalog.json",
+          "purpose": "Read connector catalog",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/data_layer/schema_manifest.json",
+          "purpose": "Read schema manifest",
+          "tool": "Read"
+        }
+      ],
+      "mode": "hybrid",
+      "name": "data_layer",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 6,
+      "files": [
+        {
+          "description": "Delivered alerts",
+          "kind": "output",
+          "path": "data/samples/delivery/alerts.json",
+          "size_bytes": 4983
+        },
+        {
+          "description": "Embedding API request log",
+          "kind": "output",
+          "path": "data/samples/delivery/embeddings_api_log.json",
+          "size_bytes": 2935
+        },
+        {
+          "description": "Data export records",
+          "kind": "output",
+          "path": "data/samples/delivery/exports.json",
+          "size_bytes": 1861
+        },
+        {
+          "description": "Webhook delivery log",
+          "kind": "output",
+          "path": "data/samples/delivery/webhooks.json",
+          "size_bytes": 2033
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/delivery/alerts.json",
+          "purpose": "Read alerts",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/delivery",
+            "pattern": "\"level\": \"critical\""
+          },
+          "purpose": "Grep critical alerts",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "delivery",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 1225,
+      "files": [
+        {
+          "description": "180-day synthetic (u, P, X) signals with target y",
+          "kind": "input",
+          "path": "data/samples/flow_engine/time_series.json",
+          "size_bytes": 24878
+        },
+        {
+          "description": "Walk-forward predictions (tail 50) + horizon metrics",
+          "kind": "output",
+          "path": "data/samples/flow_engine/walkforward_predictions.json",
+          "size_bytes": 9599
+        },
+        {
+          "description": "Current alert envelope from latest metric value",
+          "kind": "output",
+          "path": "data/samples/flow_engine/alerts.json",
+          "size_bytes": 220
+        },
+        {
+          "description": "Ensemble aggregate (single-member demo)",
+          "kind": "output",
+          "path": "data/samples/flow_engine/ensemble_output.json",
+          "size_bytes": 244
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/flow_engine/alerts.json",
+          "purpose": "Read latest alert",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/flow_engine/walkforward_predictions.json",
+          "purpose": "Read walk-forward preds",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "flow_engine",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 1,
+      "files": [
+        {
+          "description": "FSD modules sorted by entity_count desc (matches API shape)",
+          "kind": "output",
+          "path": "data/samples/fsd/modules.json",
+          "size_bytes": 2691
+        },
+        {
+          "description": "Redis cache snapshot for fsd:latest",
+          "kind": "metadata",
+          "path": "data/samples/fsd/cache_snapshot.json",
+          "size_bytes": 174
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/fsd/modules.json",
+          "purpose": "Read FSD modules",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/fsd",
+            "pattern": "Restaurant"
+          },
+          "purpose": "Find Restaurant modules",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "fsd",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 2,
+      "files": [
+        {
+          "description": "Access control entries",
+          "kind": "output",
+          "path": "data/samples/governance/access_entries.json",
+          "size_bytes": 3764
+        },
+        {
+          "description": "Data classification results",
+          "kind": "output",
+          "path": "data/samples/governance/classification_results.json",
+          "size_bytes": 4215
+        },
+        {
+          "description": "Retention policies per classification",
+          "kind": "output",
+          "path": "data/samples/governance/retention_policies.json",
+          "size_bytes": 558
+        },
+        {
+          "description": "Governance lineage events",
+          "kind": "output",
+          "path": "data/samples/governance/lineage_events.json",
+          "size_bytes": 2348
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/governance/access_entries.json",
+          "purpose": "Read access entries",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/governance/classification_results.json",
+          "purpose": "Read classifications",
+          "tool": "Read"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "governance",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 10,
+      "files": [
+        {
+          "description": "Featured HF datasets (AST-extracted from hf_importer.py)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_featured.json",
+          "size_bytes": 4043
+        },
+        {
+          "description": "HF categories (AST-extracted from hf_importer.py)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_categories.json",
+          "size_bytes": 1385
+        },
+        {
+          "description": "Stubbed HF import result (offline)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_import_result.json",
+          "size_bytes": 318
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/hub/hf_featured.json",
+          "purpose": "Read featured datasets",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/hub/hf_import_result.json",
+          "purpose": "Read import result",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "hub",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 2,
+      "files": [
+        {
+          "description": "csv adapter run record",
+          "kind": "output",
+          "path": "data/samples/ingestion/csv_run.json",
+          "size_bytes": 181
+        },
+        {
+          "description": "json adapter run record",
+          "kind": "output",
+          "path": "data/samples/ingestion/json_run.json",
+          "size_bytes": 239
+        },
+        {
+          "description": "dunc adapter run record",
+          "kind": "output",
+          "path": "data/samples/ingestion/dunc_run.json",
+          "size_bytes": 235
+        },
+        {
+          "description": "fsd adapter run record",
+          "kind": "output",
+          "path": "data/samples/ingestion/fsd_run.json",
+          "size_bytes": 237
+        },
+        {
+          "description": "Normalizer run log",
+          "kind": "output",
+          "path": "data/samples/ingestion/normalizer_log.json",
+          "size_bytes": 252
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/ingestion/dunc_run.json",
+          "purpose": "Read dunc adapter run",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/ingestion/normalizer_log.json",
+          "purpose": "Read normalizer log",
+          "tool": "Read"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "ingestion",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 2,
+      "files": [
+        {
+          "description": "Per-module natural-language analyses",
+          "kind": "output",
+          "path": "data/samples/interpretation/module_analyses.json",
+          "size_bytes": 2620
+        },
+        {
+          "description": "Hidden cross-module connections",
+          "kind": "output",
+          "path": "data/samples/interpretation/hidden_connections.json",
+          "size_bytes": 2316
+        },
+        {
+          "description": "Module purity scores",
+          "kind": "output",
+          "path": "data/samples/interpretation/purity_scores.json",
+          "size_bytes": 1046
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/interpretation/module_analyses.json",
+          "purpose": "Read module analyses",
+          "tool": "Read"
+        }
+      ],
+      "mode": "synthetic",
+      "name": "interpretation",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 8,
+      "files": [
+        {
+          "description": "Novelty report over BTUT lattice",
+          "kind": "output",
+          "path": "data/samples/latk/novelty_report.json",
+          "size_bytes": 968
+        },
+        {
+          "description": "Top historical ancestors (era < 1980)",
+          "kind": "output",
+          "path": "data/samples/latk/ancestor_routing.json",
+          "size_bytes": 721
+        },
+        {
+          "description": "Registry of lattices consumable by LATK",
+          "kind": "metadata",
+          "path": "data/samples/latk/lattice_registry.json",
+          "size_bytes": 170
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/latk/novelty_report.json",
+          "purpose": "Read novelty report",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/latk/ancestor_routing.json",
+          "purpose": "Read ancestors",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "latk",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 7,
+      "files": [
+        {
+          "description": "Loaded module manifests (real registry)",
+          "kind": "output",
+          "path": "data/samples/modules/registry.json",
+          "size_bytes": 2862
+        },
+        {
+          "description": "Marketplace listing shape",
+          "kind": "output",
+          "path": "data/samples/modules/marketplace_listings.json",
+          "size_bytes": 874
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/modules/registry.json",
+          "purpose": "Read module registry",
+          "tool": "Read"
+        }
+      ],
+      "mode": "real",
+      "name": "modules",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 133,
+      "files": [
+        {
+          "description": "20 QR identity records with real codes",
+          "kind": "output",
+          "path": "data/samples/qr_identity/identity_records.json",
+          "size_bytes": 7851
+        },
+        {
+          "description": "5 depth-3 lineage chains over the minted records",
+          "kind": "output",
+          "path": "data/samples/qr_identity/lineage_chains.json",
+          "size_bytes": 2183
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/AK1V-RJNV.png",
+          "size_bytes": 815
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/B9M8-0O2R.png",
+          "size_bytes": 769
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/F1CB-FNO6.png",
+          "size_bytes": 771
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/GFYG-WWQC.png",
+          "size_bytes": 794
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/HBRP-OIG8.png",
+          "size_bytes": 748
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/qr_identity/identity_records.json",
+          "purpose": "Read identity records",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/qr_identity",
+            "pattern": "\"tier\": \"admin\""
+          },
+          "purpose": "Grep admin tier",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "real",
+      "name": "qr_identity",
+      "status": "success"
+    },
+    {
+      "elapsed_ms": 0,
+      "files": [],
+      "interact_with": [],
+      "mode": "skipped",
+      "name": "niv",
+      "skip_reason": "service not implemented; design in docs/plans/2026-04-11-niv-vertical-design.md",
+      "status": "skipped"
+    },
+    {
+      "elapsed_ms": 0,
+      "files": [],
+      "interact_with": [],
+      "mode": "skipped",
+      "name": "polymath_secret_detection",
+      "skip_reason": "service not implemented; design in docs/plans/2026-04-10-polymath-secret-detection-design.md",
+      "status": "skipped"
+    }
+  ],
+  "wall_ms": 3271
+}

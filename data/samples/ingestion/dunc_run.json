@@ -1,0 +1,11 @@
+{
+  "adapter": "dunc",
+  "errors": 2,
+  "output_edges": 89,
+  "output_entities": 90,
+  "rows_ingested": 90,
+  "started_at": "2026-04-18T00:00:00+00:00",
+  "warnings": [
+    "dunc: normalized 9 rows with fallback schema"
+  ]
+}

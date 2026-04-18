@@ -59,3 +59,6 @@ scripts/cross_era_analysis/output/latk_physics_corpus.json
 scripts/cross_era_analysis/output/latk_physics_arxiv_snapshot.jsonl
 scripts/cross_era_analysis/output/latk_physics_arxiv_test.jsonl
 scripts/cross_era_analysis/output/latk_physics_arxiv_test.jsonl.cursor.json
+
+# Vendored third-party repos
+backend/vendor/

@@ -1,0 +1,16 @@
+{
+  "data_layer_types": [
+    "BTUTRunResult",
+    "CausalLink",
+    "IngestResult",
+    "Literal",
+    "ManifoldCoords",
+    "QualityMetrics",
+    "Survivor",
+    "annotations",
+    "dataclass",
+    "np"
+  ],
+  "module": "app.services.data_layer.types",
+  "type_count": 10
+}

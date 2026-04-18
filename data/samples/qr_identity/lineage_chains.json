@@ -1,0 +1,94 @@
+{
+  "chains": [
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "38HY-F9SX",
+          "event_type": "derived",
+          "parent": "HBRP-OIG8",
+          "ts": "2026-04-18T00:00:00+00:00"
+        },
+        {
+          "child": "ZREN-UN5Z",
+          "event_type": "promoted",
+          "parent": "38HY-F9SX",
+          "ts": "2026-04-18T00:00:00+00:00"
+        }
+      ],
+      "root": "HBRP-OIG8"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "MECO-SFOG",
+          "event_type": "derived",
+          "parent": "F1CB-FNO6",
+          "ts": "2026-04-18T00:00:00+00:00"
+        },
+        {
+          "child": "3JQI-P98Q",
+          "event_type": "promoted",
+          "parent": "MECO-SFOG",
+          "ts": "2026-04-18T00:00:00+00:00"
+        }
+      ],
+      "root": "F1CB-FNO6"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "YR3X-KXWN",
+          "event_type": "derived",
+          "parent": "B9M8-0O2R",
+          "ts": "2026-04-18T00:00:00+00:00"
+        },
+        {
+          "child": "1ZXO-I65F",
+          "event_type": "promoted",
+          "parent": "YR3X-KXWN",
+          "ts": "2026-04-18T00:00:00+00:00"
+        }
+      ],
+      "root": "B9M8-0O2R"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "REK8-PK3Y",
+          "event_type": "derived",
+          "parent": "AK1V-RJNV",
+          "ts": "2026-04-18T00:00:00+00:00"
+        },
+        {
+          "child": "DHJK-1EYY",
+          "event_type": "promoted",
+          "parent": "REK8-PK3Y",
+          "ts": "2026-04-18T00:00:00+00:00"
+        }
+      ],
+      "root": "AK1V-RJNV"
+    },
+    {
+      "depth": 3,
+      "events": [
+        {
+          "child": "R9OU-DOCU",
+          "event_type": "derived",
+          "parent": "GFYG-WWQC",
+          "ts": "2026-04-18T00:00:00+00:00"
+        },
+        {
+          "child": "37Q9-AH8R",
+          "event_type": "promoted",
+          "parent": "R9OU-DOCU",
+          "ts": "2026-04-18T00:00:00+00:00"
+        }
+      ],
+      "root": "GFYG-WWQC"
+    }
+  ]
+}

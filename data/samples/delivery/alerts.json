@@ -1,0 +1,145 @@
+{
+  "alerts": [
+    {
+      "body": "Metric exceeded threshold at sample #0.",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "bdd640fb-0667-1ad1-1c80-317fa3b1799d",
+      "level": "info",
+      "title": "Alert #0: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #1.",
+      "created_at": "2026-04-17T23:55:00+00:00",
+      "id": "23b8c1e9-3924-56de-3eb1-3b9046685257",
+      "level": "warn",
+      "title": "Alert #1: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #2.",
+      "created_at": "2026-04-17T23:50:00+00:00",
+      "id": "bd9c66b3-ad3c-2d6d-1a3d-1fa7bc8960a9",
+      "level": "critical",
+      "title": "Alert #2: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #3.",
+      "created_at": "2026-04-17T23:45:00+00:00",
+      "id": "972a8469-1641-9f82-8b9d-2434e465e150",
+      "level": "info",
+      "title": "Alert #3: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #4.",
+      "created_at": "2026-04-17T23:40:00+00:00",
+      "id": "17fc695a-07a0-ca6e-0822-e8f36c031199",
+      "level": "warn",
+      "title": "Alert #4: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #5.",
+      "created_at": "2026-04-17T23:35:00+00:00",
+      "id": "9a1de644-815e-f6d1-3b8f-aa1837f8a88b",
+      "level": "critical",
+      "title": "Alert #5: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #6.",
+      "created_at": "2026-04-17T23:30:00+00:00",
+      "id": "b74d0fb1-32e7-0629-8fad-c1a606cb0fb3",
+      "level": "info",
+      "title": "Alert #6: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #7.",
+      "created_at": "2026-04-17T23:25:00+00:00",
+      "id": "6b65a6a4-8b81-48f6-b38a-088ca65ed389",
+      "level": "warn",
+      "title": "Alert #7: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #8.",
+      "created_at": "2026-04-17T23:20:00+00:00",
+      "id": "47378190-96da-1dac-72ff-5d2a386ecbe0",
+      "level": "critical",
+      "title": "Alert #8: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #9.",
+      "created_at": "2026-04-17T23:15:00+00:00",
+      "id": "c241330b-01a9-e71f-de8a-774bcf36d58b",
+      "level": "info",
+      "title": "Alert #9: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #10.",
+      "created_at": "2026-04-17T23:10:00+00:00",
+      "id": "6c307511-b2b9-437a-28df-6ec4ce4a2bbd",
+      "level": "warn",
+      "title": "Alert #10: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #11.",
+      "created_at": "2026-04-17T23:05:00+00:00",
+      "id": "371ecd7b-27cd-8130-4722-9389571aa876",
+      "level": "critical",
+      "title": "Alert #11: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #12.",
+      "created_at": "2026-04-17T23:00:00+00:00",
+      "id": "1a2a73ed-562b-0f79-c374-59eef50bea63",
+      "level": "info",
+      "title": "Alert #12: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #13.",
+      "created_at": "2026-04-17T22:55:00+00:00",
+      "id": "5be6128e-18c2-6797-6142-ea7d17be3111",
+      "level": "warn",
+      "title": "Alert #13: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #14.",
+      "created_at": "2026-04-17T22:50:00+00:00",
+      "id": "43b7a3a6-9a8d-ca03-580d-7b71d8f56413",
+      "level": "critical",
+      "title": "Alert #14: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #15.",
+      "created_at": "2026-04-17T22:45:00+00:00",
+      "id": "759cde66-bacf-b3d0-0b1f-9163ce9ff57f",
+      "level": "info",
+      "title": "Alert #15: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #16.",
+      "created_at": "2026-04-17T22:40:00+00:00",
+      "id": "ec1b8ca1-f91e-1d4c-1ff4-9b7889463e85",
+      "level": "warn",
+      "title": "Alert #16: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #17.",
+      "created_at": "2026-04-17T22:35:00+00:00",
+      "id": "4b0dbb41-8d52-88f1-142c-3fe860e7a113",
+      "level": "critical",
+      "title": "Alert #17: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #18.",
+      "created_at": "2026-04-17T22:30:00+00:00",
+      "id": "e2acf72f-9e57-4f7a-a0ee-89aed453dd32",
+      "level": "info",
+      "title": "Alert #18: threshold breach"
+    },
+    {
+      "body": "Metric exceeded threshold at sample #19.",
+      "created_at": "2026-04-17T22:25:00+00:00",
+      "id": "3139d32c-93cd-59bf-5c94-1cf0dc98d2c1",
+      "level": "warn",
+      "title": "Alert #19: threshold breach"
+    }
+  ],
+  "count": 20
+}

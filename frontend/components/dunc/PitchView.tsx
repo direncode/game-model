@@ -25,6 +25,8 @@ import { BlockLines } from "@/components/dunc/overlays/BlockLines";
 import { DangerZones } from "@/components/dunc/overlays/DangerZones";
 import { FatigueOverlay } from "@/components/dunc/overlays/FatigueOverlay";
 import { TerritorialControl } from "@/components/dunc/overlays/TerritorialControl";
+import { VoronoiOverlay } from "@/components/dunc/overlays/VoronoiOverlay";
+import { TrajectoryTrails } from "@/components/dunc/overlays/TrajectoryTrails";
 
 const TEAM_COLORS = {
   home: "#00d4ff", // li-cyan
@@ -137,6 +139,9 @@ export function PitchView({
         {overlays.has("pressing_traps") && <PressingTraps />}
         {overlays.has("cover_shadows") && <CoverShadows />}
         {overlays.has("passing_lanes") && <PassingLanes />}
+        {overlays.has("voronoi") && (
+          <VoronoiOverlay players={players} width={PITCH_X} height={PITCH_Y} team="both" />
+        )}
 
         {/* Ghost overlay — shows previous positions when a scenario is active */}
         {hasActiveScenario && (

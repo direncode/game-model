@@ -298,6 +298,16 @@ export default function DuncHomePage() {
             </ul>
           )}
         </section>
+
+        {/* Subtle predictions link */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/dunc/predictions"
+            className="text-[11px] font-mono text-li-text-muted hover:text-li-cyan transition-colors"
+          >
+            Match predictions &rarr;
+          </Link>
+        </div>
       </main>
     </div>
   );

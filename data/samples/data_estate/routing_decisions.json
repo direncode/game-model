@@ -1,0 +1,8 @@
+{
+  "decisions_by_recommendation": {
+    "deny": 34,
+    "review": 16
+  },
+  "mean_total": 28.476,
+  "total_scored": 50
+}

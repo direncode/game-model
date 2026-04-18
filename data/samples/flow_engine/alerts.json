@@ -1,0 +1,13 @@
+{
+  "alert": {
+    "level": "warning",
+    "severity": 0.69248
+  },
+  "latest_metric": 0.69248,
+  "thresholds": {
+    "critical": 0.7,
+    "elevated": 0.3,
+    "hysteresis_band": 0.1,
+    "warning": 0.5
+  }
+}

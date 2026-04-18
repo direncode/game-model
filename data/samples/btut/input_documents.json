@@ -1,0 +1,306 @@
+{
+  "edges": [
+    {
+      "source": "entity_000",
+      "target": "entity_001",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_001",
+      "target": "entity_002",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_002",
+      "target": "entity_003",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_003",
+      "target": "entity_004",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_004",
+      "target": "entity_005",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_005",
+      "target": "entity_006",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_006",
+      "target": "entity_007",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_007",
+      "target": "entity_008",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_008",
+      "target": "entity_009",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_009",
+      "target": "entity_010",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_010",
+      "target": "entity_011",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_011",
+      "target": "entity_012",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_012",
+      "target": "entity_013",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_013",
+      "target": "entity_014",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_014",
+      "target": "entity_015",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_015",
+      "target": "entity_016",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_016",
+      "target": "entity_017",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_017",
+      "target": "entity_018",
+      "type": "succeeds",
+      "weight": 1.0
+    },
+    {
+      "source": "entity_018",
+      "target": "entity_019",
+      "type": "succeeds",
+      "weight": 1.0
+    }
+  ],
+  "entities": [
+    {
+      "attributes": {
+        "era": 1920,
+        "source": "lab_notebook",
+        "text": "Sample document 0 describing entity_000 in era 1920."
+      },
+      "name": "entity_000",
+      "type": "Concept"
+    },
+    {
+      "attributes": {
+        "era": 1950,
+        "source": "patent",
+        "text": "Sample document 1 describing entity_001 in era 1950."
+      },
+      "name": "entity_001",
+      "type": "Inventor"
+    },
+    {
+      "attributes": {
+        "era": 1980,
+        "source": "paper",
+        "text": "Sample document 2 describing entity_002 in era 1980."
+      },
+      "name": "entity_002",
+      "type": "Material"
+    },
+    {
+      "attributes": {
+        "era": 2010,
+        "source": "press_release",
+        "text": "Sample document 3 describing entity_003 in era 2010."
+      },
+      "name": "entity_003",
+      "type": "Venue"
+    },
+    {
+      "attributes": {
+        "era": 1920,
+        "source": "lab_notebook",
+        "text": "Sample document 4 describing entity_004 in era 1920."
+      },
+      "name": "entity_004",
+      "type": "Concept"
+    },
+    {
+      "attributes": {
+        "era": 1950,
+        "source": "patent",
+        "text": "Sample document 5 describing entity_005 in era 1950."
+      },
+      "name": "entity_005",
+      "type": "Inventor"
+    },
+    {
+      "attributes": {
+        "era": 1980,
+        "source": "paper",
+        "text": "Sample document 6 describing entity_006 in era 1980."
+      },
+      "name": "entity_006",
+      "type": "Material"
+    },
+    {
+      "attributes": {
+        "era": 2010,
+        "source": "press_release",
+        "text": "Sample document 7 describing entity_007 in era 2010."
+      },
+      "name": "entity_007",
+      "type": "Venue"
+    },
+    {
+      "attributes": {
+        "era": 1920,
+        "source": "lab_notebook",
+        "text": "Sample document 8 describing entity_008 in era 1920."
+      },
+      "name": "entity_008",
+      "type": "Concept"
+    },
+    {
+      "attributes": {
+        "era": 1950,
+        "source": "patent",
+        "text": "Sample document 9 describing entity_009 in era 1950."
+      },
+      "name": "entity_009",
+      "type": "Inventor"
+    },
+    {
+      "attributes": {
+        "era": 1980,
+        "source": "paper",
+        "text": "Sample document 10 describing entity_010 in era 1980."
+      },
+      "name": "entity_010",
+      "type": "Material"
+    },
+    {
+      "attributes": {
+        "era": 2010,
+        "source": "press_release",
+        "text": "Sample document 11 describing entity_011 in era 2010."
+      },
+      "name": "entity_011",
+      "type": "Venue"
+    },
+    {
+      "attributes": {
+        "era": 1920,
+        "source": "lab_notebook",
+        "text": "Sample document 12 describing entity_012 in era 1920."
+      },
+      "name": "entity_012",
+      "type": "Concept"
+    },
+    {
+      "attributes": {
+        "era": 1950,
+        "source": "patent",
+        "text": "Sample document 13 describing entity_013 in era 1950."
+      },
+      "name": "entity_013",
+      "type": "Inventor"
+    },
+    {
+      "attributes": {
+        "era": 1980,
+        "source": "paper",
+        "text": "Sample document 14 describing entity_014 in era 1980."
+      },
+      "name": "entity_014",
+      "type": "Material"
+    },
+    {
+      "attributes": {
+        "era": 2010,
+        "source": "press_release",
+        "text": "Sample document 15 describing entity_015 in era 2010."
+      },
+      "name": "entity_015",
+      "type": "Venue"
+    },
+    {
+      "attributes": {
+        "era": 1920,
+        "source": "lab_notebook",
+        "text": "Sample document 16 describing entity_016 in era 1920."
+      },
+      "name": "entity_016",
+      "type": "Concept"
+    },
+    {
+      "attributes": {
+        "era": 1950,
+        "source": "patent",
+        "text": "Sample document 17 describing entity_017 in era 1950."
+      },
+      "name": "entity_017",
+      "type": "Inventor"
+    },
+    {
+      "attributes": {
+        "era": 1980,
+        "source": "paper",
+        "text": "Sample document 18 describing entity_018 in era 1980."
+      },
+      "name": "entity_018",
+      "type": "Material"
+    },
+    {
+      "attributes": {
+        "era": 2010,
+        "source": "press_release",
+        "text": "Sample document 19 describing entity_019 in era 2010."
+      },
+      "name": "entity_019",
+      "type": "Venue"
+    }
+  ],
+  "unique_types": [
+    "Concept",
+    "Inventor",
+    "Material",
+    "Venue"
+  ]
+}

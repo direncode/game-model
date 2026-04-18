@@ -1,0 +1,265 @@
+{
+  "count": 20,
+  "records": [
+    {
+      "code": "HBRP-OIG8",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "bdd640fb-0667-1ad1-1c80-317fa3b1799d",
+      "metadata": {
+        "seed_index": 0
+      },
+      "minted_by": "user_0",
+      "org_id": "bd9c66b3-ad3c-2d6d-1a3d-1fa7bc8960a9",
+      "subject_id": "23b8c1e9-3924-56de-3eb1-3b9046685257",
+      "subject_type": "dataset",
+      "tier": "public"
+    },
+    {
+      "code": "F1CB-FNO6",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "972a8469-1641-9f82-8b9d-2434e465e150",
+      "metadata": {
+        "seed_index": 1
+      },
+      "minted_by": "user_1",
+      "org_id": null,
+      "subject_id": "17fc695a-07a0-ca6e-0822-e8f36c031199",
+      "subject_type": "module",
+      "tier": "org"
+    },
+    {
+      "code": "B9M8-0O2R",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "9a1de644-815e-f6d1-3b8f-aa1837f8a88b",
+      "metadata": {
+        "seed_index": 2
+      },
+      "minted_by": "user_2",
+      "org_id": "6b65a6a4-8b81-48f6-b38a-088ca65ed389",
+      "subject_id": "b74d0fb1-32e7-0629-8fad-c1a606cb0fb3",
+      "subject_type": "report",
+      "tier": "admin"
+    },
+    {
+      "code": "AK1V-RJNV",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "47378190-96da-1dac-72ff-5d2a386ecbe0",
+      "metadata": {
+        "seed_index": 3
+      },
+      "minted_by": "user_3",
+      "org_id": null,
+      "subject_id": "c241330b-01a9-e71f-de8a-774bcf36d58b",
+      "subject_type": "run",
+      "tier": "public"
+    },
+    {
+      "code": "GFYG-WWQC",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "6c307511-b2b9-437a-28df-6ec4ce4a2bbd",
+      "metadata": {
+        "seed_index": 4
+      },
+      "minted_by": "user_4",
+      "org_id": "1a2a73ed-562b-0f79-c374-59eef50bea63",
+      "subject_id": "371ecd7b-27cd-8130-4722-9389571aa876",
+      "subject_type": "survivor_bundle",
+      "tier": "org"
+    },
+    {
+      "code": "38HY-F9SX",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "5be6128e-18c2-6797-6142-ea7d17be3111",
+      "metadata": {
+        "seed_index": 5
+      },
+      "minted_by": "user_0",
+      "org_id": null,
+      "subject_id": "43b7a3a6-9a8d-ca03-580d-7b71d8f56413",
+      "subject_type": "dataset",
+      "tier": "admin"
+    },
+    {
+      "code": "MECO-SFOG",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "759cde66-bacf-b3d0-0b1f-9163ce9ff57f",
+      "metadata": {
+        "seed_index": 6
+      },
+      "minted_by": "user_1",
+      "org_id": "4b0dbb41-8d52-88f1-142c-3fe860e7a113",
+      "subject_id": "ec1b8ca1-f91e-1d4c-1ff4-9b7889463e85",
+      "subject_type": "module",
+      "tier": "public"
+    },
+    {
+      "code": "YR3X-KXWN",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "e2acf72f-9e57-4f7a-a0ee-89aed453dd32",
+      "metadata": {
+        "seed_index": 7
+      },
+      "minted_by": "user_2",
+      "org_id": null,
+      "subject_id": "3139d32c-93cd-59bf-5c94-1cf0dc98d2c1",
+      "subject_type": "report",
+      "tier": "org"
+    },
+    {
+      "code": "REK8-PK3Y",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "a9488d99-0bbb-2599-11ce-5dd2b45ed1f0",
+      "metadata": {
+        "seed_index": 8
+      },
+      "minted_by": "user_3",
+      "org_id": "ddd1dfb2-3b98-2ef8-daf6-1a26146d3f31",
+      "subject_id": "fc377a4c-4a15-544d-c5e7-ce8a3a578a8e",
+      "subject_type": "run",
+      "tier": "admin"
+    },
+    {
+      "code": "R9OU-DOCU",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "7412b293-4729-4739-614f-f3d719db3ad0",
+      "metadata": {
+        "seed_index": 9
+      },
+      "minted_by": "user_4",
+      "org_id": null,
+      "subject_id": "29a3b2e9-5d65-a441-d588-42dea2bc372f",
+      "subject_type": "survivor_bundle",
+      "tier": "public"
+    },
+    {
+      "code": "ZREN-UN5Z",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "ab9099a4-35a2-40ae-5af3-05535ec42e08",
+      "metadata": {
+        "seed_index": 10
+      },
+      "minted_by": "user_0",
+      "org_id": "a28defe3-9bf0-0273-1247-6f57a5e5a5ab",
+      "subject_id": "aefcfad8-efc8-9849-b3aa-7efe4458a885",
+      "subject_type": "dataset",
+      "tier": "org"
+    },
+    {
+      "code": "3JQI-P98Q",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "3eabedcb-baa8-0dd4-88bd-64072bcfbe01",
+      "metadata": {
+        "seed_index": 11
+      },
+      "minted_by": "user_1",
+      "org_id": null,
+      "subject_id": "451b4cf3-6123-fdf7-7656-af7229d4beef",
+      "subject_type": "module",
+      "tier": "admin"
+    },
+    {
+      "code": "1ZXO-I65F",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "b02b61c4-a3d7-0628-ece6-6fa2fd5166e6",
+      "metadata": {
+        "seed_index": 12
+      },
+      "minted_by": "user_2",
+      "org_id": "0e51f30d-c6a7-ee39-c4b0-32ccd7c524a5",
+      "subject_id": "5304317f-af42-e12f-3838-b3268e944239",
+      "subject_type": "report",
+      "tier": "public"
+    },
+    {
+      "code": "DHJK-1EYY",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "ce177b4e-0837-b8a3-d261-a7ab3aa2e4f9",
+      "metadata": {
+        "seed_index": 13
+      },
+      "minted_by": "user_3",
+      "org_id": null,
+      "subject_id": "10f1bc81-448a-aa9e-66b2-bc5b50c187fc",
+      "subject_type": "run",
+      "tier": "org"
+    },
+    {
+      "code": "37Q9-AH8R",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "9132b63e-f162-87e4-e9c3-49e03602f8ac",
+      "metadata": {
+        "seed_index": 14
+      },
+      "minted_by": "user_4",
+      "org_id": "e27a984d-6548-21d0-7fcd-9eb1a7cad415",
+      "subject_id": "366eb16f-508e-bad7-b7c9-3acfe059a0ee",
+      "subject_type": "survivor_bundle",
+      "tier": "admin"
+    },
+    {
+      "code": "VHS1-K3AQ",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "24933b83-7577-50a9-a491-f0b2ea1fca65",
+      "metadata": {
+        "seed_index": 15
+      },
+      "minted_by": "user_0",
+      "org_id": null,
+      "subject_id": "beb79919-3f22-faf8-23be-d01d43cf2fde",
+      "subject_type": "dataset",
+      "tier": "public"
+    },
+    {
+      "code": "6L6G-T6MJ",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "bf3c4c06-4343-08bc-89fa-6a688fb5d27b",
+      "metadata": {
+        "seed_index": 16
+      },
+      "minted_by": "user_1",
+      "org_id": "ff50bde4-3825-67b8-5cab-cc97663f1c97",
+      "subject_id": "956269f0-e5d7-b875-6dad-d6c795a76d79",
+      "subject_type": "module",
+      "tier": "org"
+    },
+    {
+      "code": "XK87-AU5B",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "7e570ddf-8270-50a8-2369-b584ff5e9ff0",
+      "metadata": {
+        "seed_index": 17
+      },
+      "minted_by": "user_2",
+      "org_id": null,
+      "subject_id": "dc713d96-0c0f-d195-c17a-f08a1745d6d8",
+      "subject_type": "report",
+      "tier": "admin"
+    },
+    {
+      "code": "HXTP-DPFF",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "28f49481-a0a0-4dc4-2720-9bdf1c11f735",
+      "metadata": {
+        "seed_index": 18
+      },
+      "minted_by": "user_3",
+      "org_id": "988c24c9-61b1-cd22-6280-1c4510435a10",
+      "subject_id": "98ae4334-6c12-ace8-ae34-0454cac5b68c",
+      "subject_type": "run",
+      "tier": "public"
+    },
+    {
+      "code": "5E8I-I49K",
+      "created_at": "2026-04-18T00:00:00+00:00",
+      "id": "405cacec-8774-09a9-77d2-1e02ff01cf99",
+      "metadata": {
+        "seed_index": 19
+      },
+      "minted_by": "user_4",
+      "org_id": null,
+      "subject_id": "f143262f-dc5c-0eed-8da0-365bf89897b9",
+      "subject_type": "survivor_bundle",
+      "tier": "org"
+    }
+  ]
+}

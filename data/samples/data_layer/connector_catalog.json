@@ -1,0 +1,46 @@
+{
+  "connectors": [
+    {
+      "id": "postgres",
+      "kind": "database",
+      "ready": true
+    },
+    {
+      "id": "s3",
+      "kind": "blob",
+      "ready": true
+    },
+    {
+      "id": "huggingface",
+      "kind": "hub",
+      "ready": true
+    },
+    {
+      "id": "gdrive",
+      "kind": "drive",
+      "ready": false
+    },
+    {
+      "id": "slack",
+      "kind": "chat",
+      "ready": false
+    },
+    {
+      "id": "notion",
+      "kind": "wiki",
+      "ready": false
+    },
+    {
+      "id": "github",
+      "kind": "vcs",
+      "ready": true
+    },
+    {
+      "id": "rest",
+      "kind": "api",
+      "ready": true
+    }
+  ],
+  "count": 8,
+  "ready_count": 5
+}
