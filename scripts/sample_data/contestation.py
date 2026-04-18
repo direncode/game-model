@@ -44,9 +44,9 @@ def run(out_dir: Path) -> ManifestEntry:
             consensus.append(
                 {
                     "challenge_id": ch["id"],
-                    "resolution": "upheld" if hash(ch["id"]) % 2 == 0 else "rejected",
-                    "support_votes": (hash(ch["id"]) % 5) + 3,
-                    "oppose_votes": (hash(ch["id"]) % 3) + 1,
+                    "resolution": "upheld" if int(ch["id"].replace("-", ""), 16) % 2 == 0 else "rejected",
+                    "support_votes": (int(ch["id"].replace("-", ""), 16) % 5) + 3,
+                    "oppose_votes": (int(ch["id"].replace("-", ""), 16) % 3) + 1,
                     "closed_at": ch["created_at"],
                 }
             )
