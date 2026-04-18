@@ -26,7 +26,7 @@ class ModelTrainer:
         self.scaler = StandardScaler()
         self.ensemble = VotingClassifier(
             estimators=[
-                ("lr", LogisticRegression(max_iter=1000, multi_class="multinomial", C=0.5)),
+                ("lr", LogisticRegression(max_iter=1000, C=0.5)),
                 ("rf", RandomForestClassifier(n_estimators=200, max_depth=8, min_samples_leaf=10, random_state=42)),
                 ("xgb", XGBClassifier(
                     n_estimators=200, max_depth=5, learning_rate=0.05,
