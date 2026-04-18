@@ -1,0 +1,13 @@
+{
+  "budget_dollars": 50.0,
+  "note": "Populated offline; no live adapters invoked. See schema_manifest for exported types.",
+  "sources_attempted": [
+    "postgres",
+    "s3",
+    "huggingface",
+    "github",
+    "rest"
+  ],
+  "sources_succeeded": [],
+  "target_survivors": 300
+}
