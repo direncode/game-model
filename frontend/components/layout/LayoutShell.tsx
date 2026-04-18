@@ -7,6 +7,9 @@ import { GridBackground } from '@/components/effects/GridBackground';
 
 // Routes that use the full sidebar + navbar chrome.
 // Everything else gets the minimal layout (no sidebar, no navbar).
+// Routes that use the full sidebar + navbar chrome.
+// Verticals with their own layout (dunc, franklin) are excluded —
+// they render with the minimal shell and handle their own navigation.
 const DEEP_DIVE_PREFIXES = [
   '/datasets',
   '/modules',
@@ -15,11 +18,10 @@ const DEEP_DIVE_PREFIXES = [
   '/search',
   '/alerts',
   '/btut',
-  '/dunc',
-  '/franklin',
   '/tcd',
   '/flow-engine',
   '/data-estate',
+  '/data-layer',
   '/qr',
   '/login',
   '/register',
