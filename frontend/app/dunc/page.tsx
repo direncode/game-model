@@ -246,6 +246,31 @@ export default function DuncHomePage() {
           </div>
         </section>
 
+        {/* ═══ PREDICTIONS ═══ */}
+        <section className="mt-16">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="text-[10px] uppercase tracking-widest text-li-cyan font-mono">
+              Match Intelligence
+            </div>
+            <div className="flex-1 h-px bg-li-cyan/20" />
+          </div>
+          <Link
+            href="/dunc/predictions"
+            className="block border border-li-cyan/30 bg-li-cyan/5 rounded-md p-6 hover:border-li-cyan transition-colors group"
+          >
+            <div className="text-xl font-display text-white mb-2 group-hover:text-li-cyan transition-colors">
+              Triple-Layer Match Predictions
+            </div>
+            <div className="text-sm text-li-text-secondary leading-relaxed">
+              Fuse bookmaker odds, Polymarket crowd intelligence, and ML ensemble predictions.
+              Analyze probability divergences with Claude interpretation.
+            </div>
+            <div className="mt-3 text-[10px] uppercase tracking-widest text-li-cyan font-mono">
+              Open Predictions Engine →
+            </div>
+          </Link>
+        </section>
+
         {/* ═══ ACTIVE MATCHES ═══ */}
         <section id="active" className="mt-16">
           <div className="flex items-center justify-between mb-4">
