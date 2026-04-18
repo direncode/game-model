@@ -28,6 +28,11 @@ const ATTACKING: OverlayDef[] = [
   { key: "fatigue", label: "Fatigue Overlay", hint: "Player load visualization" },
 ];
 
+const SPATIAL: OverlayDef[] = [
+  { key: "voronoi", label: "Voronoi", hint: "Territorial control tessellation" },
+  { key: "trajectories", label: "Trajectories", hint: "Recent movement trails" },
+];
+
 export function OverlayToggles() {
   const role = useDuncStore((s) => s.role);
   const overlays = useDuncStore((s) => s.overlays);
@@ -68,6 +73,7 @@ export function OverlayToggles() {
         <div className="px-3 pb-2 space-y-2">
           <OverlayGroup label="Defensive Analysis" items={DEFENSIVE} overlays={overlays} toggle={toggle} />
           <OverlayGroup label="Attacking Analysis" items={ATTACKING} overlays={overlays} toggle={toggle} />
+          <OverlayGroup label="Spatial Analysis" items={SPATIAL} overlays={overlays} toggle={toggle} />
         </div>
       )}
     </div>
