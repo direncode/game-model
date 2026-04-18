@@ -1,0 +1,188 @@
+{
+  "generated_at": "2026-04-18T05:32:38Z",
+  "git_sha": "4c8a8a6",
+  "seed": 42,
+  "success_count": 0,
+  "total_verticals": 18,
+  "verticals": [
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.audit'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "audit",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.btut'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "btut",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.contestation'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "contestation",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.crystallization'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "crystallization",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.data_estate'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "data_estate",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.data_layer'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "data_layer",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.delivery'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "delivery",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.flow_engine'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "flow_engine",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.fsd'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "fsd",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.governance'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "governance",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.hub'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "hub",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.ingestion'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "ingestion",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.interpretation'",
+      "files": [],
+      "interact_with": [],
+      "mode": "synthetic",
+      "name": "interpretation",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.latk'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "latk",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.modules'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "modules",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "error": "import error: ModuleNotFoundError: No module named 'sample_data.qr_identity'",
+      "files": [],
+      "interact_with": [],
+      "mode": "real",
+      "name": "qr_identity",
+      "status": "failed",
+      "traceback": null
+    },
+    {
+      "elapsed_ms": 0,
+      "files": [],
+      "interact_with": [],
+      "mode": "skipped",
+      "name": "niv",
+      "skip_reason": "service not implemented; design in docs/plans/2026-04-11-niv-vertical-design.md",
+      "status": "skipped"
+    },
+    {
+      "elapsed_ms": 0,
+      "files": [],
+      "interact_with": [],
+      "mode": "skipped",
+      "name": "polymath_secret_detection",
+      "skip_reason": "service not implemented; design in docs/plans/2026-04-10-polymath-secret-detection-design.md",
+      "status": "skipped"
+    }
+  ],
+  "wall_ms": 34
+}
