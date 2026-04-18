@@ -1,0 +1,10 @@
+{
+  "available": [
+    {
+      "embedding_dim": 4,
+      "entity_count": 8,
+      "id": "btut_sample",
+      "path": "data/samples/btut/lattice.json"
+    }
+  ]
+}

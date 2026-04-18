@@ -1,0 +1,34 @@
+{
+  "ancestor_count": 4,
+  "ancestors": [
+    {
+      "era": 1920,
+      "fingerprint": "11011111",
+      "name": "entity_016",
+      "similarity": 0.946846,
+      "type": "Concept"
+    },
+    {
+      "era": 1950,
+      "fingerprint": "11111111",
+      "name": "entity_001",
+      "similarity": 0.715827,
+      "type": "Inventor"
+    },
+    {
+      "era": 1920,
+      "fingerprint": "11111111",
+      "name": "entity_000",
+      "similarity": 0.694222,
+      "type": "Concept"
+    },
+    {
+      "era": 1950,
+      "fingerprint": "11111111",
+      "name": "entity_017",
+      "similarity": 0.609592,
+      "type": "Inventor"
+    }
+  ],
+  "query": "high-diversity, high-composite signal"
+}

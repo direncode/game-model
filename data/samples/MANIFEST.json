@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:37:41Z",
-  "git_sha": "0296b59",
+  "generated_at": "2026-04-18T05:38:19Z",
+  "git_sha": "b4ee87f",
   "seed": 42,
-  "success_count": 6,
+  "success_count": 7,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1601,
+      "elapsed_ms": 1962,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,7 +84,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 10,
+      "elapsed_ms": 14,
       "files": [
         {
           "description": "100-entity 8D semiconductor supply-chain bundle",
@@ -130,7 +130,7 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 13,
+      "elapsed_ms": 12,
       "files": [
         {
           "description": "50-asset synthetic inventory",
@@ -168,7 +168,7 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 58,
+      "elapsed_ms": 49,
       "files": [
         {
           "description": "Ocean connector catalog (static listing)",
@@ -216,7 +216,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1128,
+      "elapsed_ms": 1693,
       "files": [
         {
           "description": "180-day synthetic (u, P, X) signals with target y",
@@ -310,14 +310,42 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.latk'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 22,
+      "files": [
+        {
+          "description": "Novelty report over BTUT lattice",
+          "kind": "output",
+          "path": "data/samples/latk/novelty_report.json",
+          "size_bytes": 968
+        },
+        {
+          "description": "Top historical ancestors (era < 1980)",
+          "kind": "output",
+          "path": "data/samples/latk/ancestor_routing.json",
+          "size_bytes": 721
+        },
+        {
+          "description": "Registry of lattices consumable by LATK",
+          "kind": "metadata",
+          "path": "data/samples/latk/lattice_registry.json",
+          "size_bytes": 170
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/latk/novelty_report.json",
+          "purpose": "Read novelty report",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/latk/ancestor_routing.json",
+          "purpose": "Read ancestors",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "latk",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -330,7 +358,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 208,
+      "elapsed_ms": 169,
       "files": [
         {
           "description": "20 QR identity records with real codes",
@@ -347,32 +375,32 @@
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/75UP-GK65.png",
-          "size_bytes": 784
+          "path": "data/samples/qr_identity/qr_codes/2SJ9-647M.png",
+          "size_bytes": 734
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/C3SB-RKK4.png",
-          "size_bytes": 749
+          "path": "data/samples/qr_identity/qr_codes/F32A-PCG4.png",
+          "size_bytes": 767
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/CVJ4-7PKA.png",
-          "size_bytes": 718
+          "path": "data/samples/qr_identity/qr_codes/IA2H-XD6J.png",
+          "size_bytes": 803
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/G43Y-WGZD.png",
-          "size_bytes": 776
+          "path": "data/samples/qr_identity/qr_codes/UBHP-VINH.png",
+          "size_bytes": 752
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/K9ZF-5F80.png",
-          "size_bytes": 761
+          "path": "data/samples/qr_identity/qr_codes/W1HK-M1JR.png",
+          "size_bytes": 752
         }
       ],
       "interact_with": [
@@ -413,5 +441,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 3065
+  "wall_ms": 3983
 }

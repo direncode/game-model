@@ -1,0 +1,48 @@
+{
+  "match_count": 8,
+  "novelty_score": 0.053154,
+  "query": "high-diversity, high-composite signal",
+  "query_embedding": [
+    0.3,
+    0.9,
+    0.8,
+    0.5
+  ],
+  "top_matches": [
+    {
+      "era": 1920,
+      "fingerprint": "11011111",
+      "name": "entity_016",
+      "similarity": 0.946846,
+      "type": "Concept"
+    },
+    {
+      "era": 1950,
+      "fingerprint": "11111111",
+      "name": "entity_001",
+      "similarity": 0.715827,
+      "type": "Inventor"
+    },
+    {
+      "era": 2010,
+      "fingerprint": "11111111",
+      "name": "entity_019",
+      "similarity": 0.713649,
+      "type": "Venue"
+    },
+    {
+      "era": 1920,
+      "fingerprint": "11111111",
+      "name": "entity_000",
+      "similarity": 0.694222,
+      "type": "Concept"
+    },
+    {
+      "era": 2010,
+      "fingerprint": "11111111",
+      "name": "entity_007",
+      "similarity": 0.685814,
+      "type": "Venue"
+    }
+  ]
+}
