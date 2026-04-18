@@ -1,0 +1,164 @@
+{
+  "survivors": [
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1920,
+          "source": "lab_notebook",
+          "text": "Sample document 16 describing entity_016 in era 1920."
+        },
+        "name": "entity_016",
+        "type": "Concept"
+      },
+      "fingerprint_48bit": "11011111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.8618,
+        "composite": 0.958,
+        "diversity": 1.0,
+        "reconstruction": 0.9814
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1920,
+          "source": "lab_notebook",
+          "text": "Sample document 0 describing entity_000 in era 1920."
+        },
+        "name": "entity_000",
+        "type": "Concept"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.8992,
+        "composite": 0.6187,
+        "diversity": 0.0526,
+        "reconstruction": 0.9387
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1950,
+          "source": "patent",
+          "text": "Sample document 17 describing entity_017 in era 1950."
+        },
+        "name": "entity_017",
+        "type": "Inventor"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.4452,
+        "diversity": 0.0526,
+        "reconstruction": 0.4419
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1950,
+          "source": "patent",
+          "text": "Sample document 1 describing entity_001 in era 1950."
+        },
+        "name": "entity_001",
+        "type": "Inventor"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.5265,
+        "composite": 0.4036,
+        "diversity": 0.0526,
+        "reconstruction": 0.634
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1980,
+          "source": "paper",
+          "text": "Sample document 14 describing entity_014 in era 1980."
+        },
+        "name": "entity_014",
+        "type": "Material"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.4706,
+        "diversity": 0.0526,
+        "reconstruction": 0.5054
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 1980,
+          "source": "paper",
+          "text": "Sample document 6 describing entity_006 in era 1980."
+        },
+        "name": "entity_006",
+        "type": "Material"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.8672,
+        "composite": 0.4593,
+        "diversity": 0.0526,
+        "reconstruction": 0.5602
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 2010,
+          "source": "press_release",
+          "text": "Sample document 7 describing entity_007 in era 2010."
+        },
+        "name": "entity_007",
+        "type": "Venue"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.6444,
+        "diversity": 0.0526,
+        "reconstruction": 0.9401
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": 2010,
+          "source": "press_release",
+          "text": "Sample document 19 describing entity_019 in era 2010."
+        },
+        "name": "entity_019",
+        "type": "Venue"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.5633,
+        "composite": 0.5019,
+        "diversity": 0.0526,
+        "reconstruction": 0.8568
+      }
+    }
+  ]
+}

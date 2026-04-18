@@ -1,0 +1,117 @@
+{
+  "clusters": 0,
+  "embedding_dim": 4,
+  "embedding_fields": [
+    "anomaly",
+    "composite",
+    "diversity",
+    "reconstruction"
+  ],
+  "entities": [
+    {
+      "cluster": 0,
+      "embedding": [
+        0.8618,
+        0.958,
+        1.0,
+        0.9814
+      ],
+      "era": 1920,
+      "fingerprint": "11011111",
+      "name": "entity_016",
+      "type": "Concept"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        0.8992,
+        0.6187,
+        0.0526,
+        0.9387
+      ],
+      "era": 1920,
+      "fingerprint": "11111111",
+      "name": "entity_000",
+      "type": "Concept"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        1.0,
+        0.4452,
+        0.0526,
+        0.4419
+      ],
+      "era": 1950,
+      "fingerprint": "11111111",
+      "name": "entity_017",
+      "type": "Inventor"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        0.5265,
+        0.4036,
+        0.0526,
+        0.634
+      ],
+      "era": 1950,
+      "fingerprint": "11111111",
+      "name": "entity_001",
+      "type": "Inventor"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        1.0,
+        0.4706,
+        0.0526,
+        0.5054
+      ],
+      "era": 1980,
+      "fingerprint": "11111111",
+      "name": "entity_014",
+      "type": "Material"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        0.8672,
+        0.4593,
+        0.0526,
+        0.5602
+      ],
+      "era": 1980,
+      "fingerprint": "11111111",
+      "name": "entity_006",
+      "type": "Material"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        1.0,
+        0.6444,
+        0.0526,
+        0.9401
+      ],
+      "era": 2010,
+      "fingerprint": "11111111",
+      "name": "entity_007",
+      "type": "Venue"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        0.5633,
+        0.5019,
+        0.0526,
+        0.8568
+      ],
+      "era": 2010,
+      "fingerprint": "11111111",
+      "name": "entity_019",
+      "type": "Venue"
+    }
+  ],
+  "seed": 42
+}

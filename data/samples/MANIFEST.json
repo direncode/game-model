@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:32:38Z",
-  "git_sha": "4c8a8a6",
+  "generated_at": "2026-04-18T05:33:59Z",
+  "git_sha": "a2c889c",
   "seed": 42,
-  "success_count": 0,
+  "success_count": 1,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,14 +16,62 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.btut'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 1828,
+      "files": [
+        {
+          "description": "20 synthetic cross-era documents + succession edges",
+          "kind": "input",
+          "path": "data/samples/btut/input_documents.json",
+          "size_bytes": 7079
+        },
+        {
+          "description": "BTUT pipeline summary: counts, timings, reduction ratio",
+          "kind": "metadata",
+          "path": "data/samples/btut/pipeline_summary.json",
+          "size_bytes": 526
+        },
+        {
+          "description": "BTUT survivors with 8D embeddings and metadata",
+          "kind": "output",
+          "path": "data/samples/btut/survivor_bundle.json",
+          "size_bytes": 4024
+        },
+        {
+          "description": "BTUT lattice (consumed by LATK populator)",
+          "kind": "output",
+          "path": "data/samples/btut/lattice.json",
+          "size_bytes": 2116
+        },
+        {
+          "description": "Example query users can run against a real lattice",
+          "kind": "query",
+          "path": "data/samples/btut/sample_query.json",
+          "size_bytes": 210
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/btut/pipeline_summary.json",
+          "purpose": "Read pipeline summary",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/btut/survivor_bundle.json",
+          "purpose": "Read survivor bundle",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/btut",
+            "pattern": "\"type\": \"Material\""
+          },
+          "purpose": "Grep for Material entities",
+          "tool": "Grep"
+        }
+      ],
       "mode": "real",
       "name": "btut",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -184,5 +232,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 34
+  "wall_ms": 1881
 }
