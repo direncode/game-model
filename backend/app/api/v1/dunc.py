@@ -253,3 +253,72 @@ def _summary_to_out(summary) -> MatchSummaryOut:
         subscribers=summary.subscribers,
         created_at=summary.created_at,
     )
+
+
+# ── prediction engine ────────────────────────────────────────────────
+from app.services.dunc.predictions import get_pipeline
+from app.schemas.dunc import MatchPredictionOut, MatchAnalysisRequest, ModelStatusOut, ProbabilitySet
+
+prediction_router = APIRouter(prefix="/predictions", tags=["dunc-predictions"])
+
+
+@prediction_router.get("/health")
+async def predictions_health() -> dict:
+    pipeline = get_pipeline()
+    return {"status": pipeline.status["status"], "vertical": "dunc-predictions"}
+
+
+@prediction_router.get("/model/status", response_model=ModelStatusOut)
+async def model_status() -> ModelStatusOut:
+    pipeline = get_pipeline()
+    s = pipeline.status
+    return ModelStatusOut(
+        status=s["status"],
+        accuracy=s.get("accuracy"),
+        log_loss=s.get("log_loss"),
+        last_trained=s.get("last_trained"),
+        matches_in_dataset=s.get("matches_in_dataset", 0),
+        leagues=s.get("leagues", []),
+    )
+
+
+@prediction_router.post("/model/refresh")
+async def model_refresh() -> dict:
+    pipeline = get_pipeline()
+    pipeline._status = "cold"
+    pipeline.cache.save_json("match_data_meta", {})  # invalidate cache
+    pipeline.initialize()
+    return pipeline.status
+
+
+@prediction_router.post("/analyze", response_model=MatchPredictionOut)
+async def analyze_match(req: MatchAnalysisRequest) -> MatchPredictionOut:
+    pipeline = get_pipeline()
+    result = pipeline.predict_match(
+        home_team=req.home_team,
+        away_team=req.away_team,
+        league=req.league,
+    )
+    if "error" in result:
+        raise HTTPException(status_code=503, detail=result["error"])
+    return MatchPredictionOut(
+        match_key=result["match_key"],
+        home_team=result["home_team"],
+        away_team=result["away_team"],
+        league=result["league"],
+        date=result["date"],
+        bookmaker=ProbabilitySet(**result["bookmaker"]),
+        polymarket=ProbabilitySet(**result["polymarket"]) if result.get("polymarket") else None,
+        ml_model=ProbabilitySet(**result["ml_model"]),
+        kl_divergence_bk_poly=result.get("kl_divergence_bk_poly"),
+        max_divergence=result.get("max_divergence"),
+        sources_agree=result["sources_agree"],
+        blended=ProbabilitySet(**result["blended"]),
+        claude_report=result.get("claude_report"),
+        confidence=result["confidence"],
+        model_accuracy=result["model_accuracy"],
+        model_last_trained=result["model_last_trained"],
+    )
+
+
+router.include_router(prediction_router)
