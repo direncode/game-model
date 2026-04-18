@@ -1,0 +1,83 @@
+{
+  "categories": [
+    {
+      "name": "Finance",
+      "tags": [
+        "finance",
+        "financial",
+        "stock",
+        "trading",
+        "economics"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tags": [
+        "healthcare",
+        "medical",
+        "biomedical",
+        "clinical",
+        "health"
+      ]
+    },
+    {
+      "name": "Social Networks",
+      "tags": [
+        "social",
+        "network",
+        "graph",
+        "twitter",
+        "reddit"
+      ]
+    },
+    {
+      "name": "NLP",
+      "tags": [
+        "text",
+        "nlp",
+        "language",
+        "sentiment",
+        "ner"
+      ]
+    },
+    {
+      "name": "Supply Chain",
+      "tags": [
+        "supply-chain",
+        "logistics",
+        "manufacturing",
+        "procurement"
+      ]
+    },
+    {
+      "name": "Government",
+      "tags": [
+        "government",
+        "policy",
+        "legal",
+        "regulation",
+        "public"
+      ]
+    },
+    {
+      "name": "Scientific",
+      "tags": [
+        "science",
+        "research",
+        "citation",
+        "academic",
+        "biology"
+      ]
+    },
+    {
+      "name": "Computer Vision",
+      "tags": [
+        "image",
+        "vision",
+        "object-detection",
+        "segmentation"
+      ]
+    }
+  ],
+  "count": 8
+}

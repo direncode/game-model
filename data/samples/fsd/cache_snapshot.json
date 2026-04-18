@@ -1,0 +1,9 @@
+{
+  "redis_key": "fsd:latest",
+  "ttl_seconds": 86400,
+  "value": {
+    "module_count": 8,
+    "status": "success",
+    "timestamp": "2026-04-18T05:40:22.119880+00:00"
+  }
+}

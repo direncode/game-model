@@ -1,0 +1,120 @@
+{
+  "dataset_id": "franklin-street-sample",
+  "module_count": 8,
+  "modules": [
+    {
+      "category": "Restaurant",
+      "entity_count": 65,
+      "label": "Restaurant \u00b7 6Pm",
+      "module_id": "fsd_000",
+      "sub_category": "6Pm",
+      "top_entities": [
+        "restaurant_0",
+        "restaurant_1",
+        "restaurant_2",
+        "restaurant_3",
+        "restaurant_4"
+      ]
+    },
+    {
+      "category": "Restaurant",
+      "entity_count": 42,
+      "label": "Restaurant \u00b7 Brunch",
+      "module_id": "fsd_001",
+      "sub_category": "Brunch",
+      "top_entities": [
+        "restaurant_0",
+        "restaurant_1",
+        "restaurant_2",
+        "restaurant_3",
+        "restaurant_4"
+      ]
+    },
+    {
+      "category": "Bar",
+      "entity_count": 38,
+      "label": "Bar \u00b7 Cocktail",
+      "module_id": "fsd_002",
+      "sub_category": "Cocktail",
+      "top_entities": [
+        "bar_0",
+        "bar_1",
+        "bar_2",
+        "bar_3",
+        "bar_4"
+      ]
+    },
+    {
+      "category": "Cafe",
+      "entity_count": 33,
+      "label": "Cafe \u00b7 Espresso",
+      "module_id": "fsd_003",
+      "sub_category": "Espresso",
+      "top_entities": [
+        "cafe_0",
+        "cafe_1",
+        "cafe_2",
+        "cafe_3",
+        "cafe_4"
+      ]
+    },
+    {
+      "category": "Museum",
+      "entity_count": 21,
+      "label": "Museum \u00b7 Art",
+      "module_id": "fsd_004",
+      "sub_category": "Art",
+      "top_entities": [
+        "museum_0",
+        "museum_1",
+        "museum_2",
+        "museum_3",
+        "museum_4"
+      ]
+    },
+    {
+      "category": "Gallery",
+      "entity_count": 17,
+      "label": "Gallery \u00b7 Contemporary",
+      "module_id": "fsd_005",
+      "sub_category": "Contemporary",
+      "top_entities": [
+        "gallery_0",
+        "gallery_1",
+        "gallery_2",
+        "gallery_3",
+        "gallery_4"
+      ]
+    },
+    {
+      "category": "Theater",
+      "entity_count": 12,
+      "label": "Theater \u00b7 Drama",
+      "module_id": "fsd_006",
+      "sub_category": "Drama",
+      "top_entities": [
+        "theater_0",
+        "theater_1",
+        "theater_2",
+        "theater_3",
+        "theater_4"
+      ]
+    },
+    {
+      "category": "Music",
+      "entity_count": 9,
+      "label": "Music \u00b7 Jazz",
+      "module_id": "fsd_007",
+      "sub_category": "Jazz",
+      "top_entities": [
+        "music_0",
+        "music_1",
+        "music_2",
+        "music_3",
+        "music_4"
+      ]
+    }
+  ],
+  "status": "success",
+  "timestamp": "2026-04-18T05:40:22.119880+00:00"
+}

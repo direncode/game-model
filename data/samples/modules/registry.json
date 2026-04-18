@@ -1,0 +1,68 @@
+{
+  "count": 9,
+  "modules": [
+    {
+      "core": false,
+      "description": "Core lattice-threaded data reduction engine. Transforms millions of entities into a compact survivor set using multi-resolution thinning and composite scoring.",
+      "display_name": "BTUT Reduction Engine",
+      "id": "core_reduction",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Data governance and lineage tracking for the Latent Ocean data estate. Monitors data quality, provenance, and compliance across all modules.",
+      "display_name": "Data Estate Governance",
+      "id": "data_governance",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Financial intelligence via SEC EDGAR filings. Ingests 10-K/10-Q/8-K filings and extracts structural relationships between companies, executives, and financial metrics.",
+      "display_name": "SEC EDGAR Finance",
+      "id": "finance",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Real-time graph-state monitoring for the reduction pipeline. Tracks well health, throughput, and system metrics across reduction stages.",
+      "display_name": "Flow Engine Monitor",
+      "id": "flow_monitoring",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Patent landscape analysis via USPTO and EPO databases. Maps innovation networks, technology clusters, and competitive patent portfolios.",
+      "display_name": "Patent Intelligence",
+      "id": "patents",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Medical and pharmaceutical intelligence via PubMed and clinical trial databases. Maps research networks, drug pipelines, and institutional relationships.",
+      "display_name": "PubMed Pharma Intelligence",
+      "id": "pharma",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Football analytics and scouting intelligence. Reduces large player datasets to identify undervalued talent using structural intelligence.",
+      "display_name": "DUNC Sports Intelligence",
+      "id": "sports_intelligence",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Topological crystallization and structural discovery via JEPA-based representation learning. Identifies hidden structural patterns in survivor sets.",
+      "display_name": "TCD-JEPA Crystallization",
+      "id": "structural_discovery",
+      "version": "1.0.0"
+    },
+    {
+      "core": false,
+      "description": "Global trade and supply-chain analysis via UN Comtrade data. Tracks commodity flows, trade dependencies, and supply-chain vulnerabilities.",
+      "display_name": "Supply Chain Intelligence",
+      "id": "supply_chain",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "count": 13,
+  "featured": [
+    {
+      "category": "Finance",
+      "description": "4,840 financial news sentences with sentiment labels. Rich entity extraction for financial graphs.",
+      "id": "financial_phrasebank",
+      "name": "Financial PhraseBank",
+      "tags": [
+        "finance",
+        "sentiment-analysis"
+      ]
+    },
+    {
+      "category": "Finance",
+      "description": "11,932 financial tweets with sentiment. Company mentions, market events, entity relationships.",
+      "id": "zeroshot/twitter-financial-news-sentiment",
+      "name": "Twitter Financial News",
+      "tags": [
+        "finance",
+        "twitter",
+        "sentiment"
+      ]
+    },
+    {
+      "category": "Scientific",
+      "description": "2,708 papers with 5,429 citation links across 7 classes. Classic graph dataset.",
+      "id": "cora",
+      "name": "Cora Citation Network",
+      "tags": [
+        "graph",
+        "citation-network",
+        "node-classification"
+      ]
+    },
+    {
+      "category": "Scientific",
+      "description": "1,969 citation sentences with intent labels. Academic relationship discovery.",
+      "id": "citation_intent",
+      "name": "Citation Intent",
+      "tags": [
+        "text-classification",
+        "citations",
+        "graph"
+      ]
+    },
+    {
+      "category": "Scientific",
+      "description": "13,679 science exam questions with support text. Entity-rich scientific knowledge.",
+      "id": "sciQ",
+      "name": "SciQ Science QA",
+      "tags": [
+        "science",
+        "question-answering"
+      ]
+    },
+    {
+      "category": "Healthcare",
+      "description": "3,048 medical question pairs with similarity labels. Healthcare entity relationships.",
+      "id": "medical_questions_pairs",
+      "name": "Medical Question Pairs",
+      "tags": [
+        "healthcare",
+        "medical",
+        "similarity"
+      ]
+    },
+    {
+      "category": "Healthcare",
+      "description": "12,288 health claims with veracity labels. Medical misinformation entity graphs.",
+      "id": "health_fact",
+      "name": "Health Fact Checking",
+      "tags": [
+        "healthcare",
+        "fact-checking"
+      ]
+    },
+    {
+      "category": "NLP",
+      "description": "120,000 news articles across 4 categories. Massive entity extraction for news graphs.",
+      "id": "ag_news",
+      "name": "AG News",
+      "tags": [
+        "text-classification",
+        "news"
+      ]
+    },
+    {
+      "category": "NLP",
+      "description": "22,137 sentences with named entity annotations (PER, ORG, LOC, MISC). Pre-tagged entities.",
+      "id": "conll2003",
+      "name": "CoNLL-2003 NER",
+      "tags": [
+        "ner",
+        "named-entity-recognition"
+      ]
+    },
+    {
+      "category": "NLP",
+      "description": "18,846 newsgroup posts across 20 topics. Rich for topic-based entity clustering.",
+      "id": "SetFit/20_newsgroups",
+      "name": "20 Newsgroups",
+      "tags": [
+        "text-classification",
+        "topic-modeling"
+      ]
+    },
+    {
+      "category": "Social Networks",
+      "description": "31,962 tweets with hate speech labels. Social network entity patterns.",
+      "id": "tweets_hate_speech_detection",
+      "name": "Hate Speech Detection",
+      "tags": [
+        "social-media",
+        "text-classification"
+      ]
+    },
+    {
+      "category": "Social Networks",
+      "description": "3.6M Amazon reviews with polarity. Product/reviewer entity relationships at scale.",
+      "id": "amazon_polarity",
+      "name": "Amazon Reviews",
+      "tags": [
+        "sentiment",
+        "reviews",
+        "commerce"
+      ]
+    },
+    {
+      "category": "Government",
+      "description": "Legal document classification across multiple courts. Entity-rich legal graphs.",
+      "id": "lex_glue",
+      "name": "LexGLUE Legal",
+      "tags": [
+        "legal",
+        "text-classification"
+      ]
+    }
+  ]
+}

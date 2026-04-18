@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:38:19Z",
-  "git_sha": "b4ee87f",
+  "generated_at": "2026-04-18T05:40:22Z",
+  "git_sha": "bc7839f",
   "seed": 42,
-  "success_count": 7,
+  "success_count": 10,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1962,
+      "elapsed_ms": 2821,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,7 +84,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 14,
+      "elapsed_ms": 31,
       "files": [
         {
           "description": "100-entity 8D semiconductor supply-chain bundle",
@@ -130,7 +130,7 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 12,
+      "elapsed_ms": 16,
       "files": [
         {
           "description": "50-asset synthetic inventory",
@@ -168,7 +168,7 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 49,
+      "elapsed_ms": 109,
       "files": [
         {
           "description": "Ocean connector catalog (static listing)",
@@ -216,7 +216,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1693,
+      "elapsed_ms": 3908,
       "files": [
         {
           "description": "180-day synthetic (u, P, X) signals with target y",
@@ -260,14 +260,39 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.fsd'",
-      "files": [],
-      "interact_with": [],
-      "mode": "real",
+      "elapsed_ms": 2,
+      "files": [
+        {
+          "description": "FSD modules sorted by entity_count desc (matches API shape)",
+          "kind": "output",
+          "path": "data/samples/fsd/modules.json",
+          "size_bytes": 2698
+        },
+        {
+          "description": "Redis cache snapshot for fsd:latest",
+          "kind": "metadata",
+          "path": "data/samples/fsd/cache_snapshot.json",
+          "size_bytes": 181
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/fsd/modules.json",
+          "purpose": "Read FSD modules",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/fsd",
+            "pattern": "Restaurant"
+          },
+          "purpose": "Find Restaurant modules",
+          "tool": "Grep"
+        }
+      ],
+      "mode": "synthetic",
       "name": "fsd",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -280,14 +305,42 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.hub'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 16,
+      "files": [
+        {
+          "description": "Featured HF datasets (AST-extracted from hf_importer.py)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_featured.json",
+          "size_bytes": 4043
+        },
+        {
+          "description": "HF categories (AST-extracted from hf_importer.py)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_categories.json",
+          "size_bytes": 1385
+        },
+        {
+          "description": "Stubbed HF import result (offline)",
+          "kind": "output",
+          "path": "data/samples/hub/hf_import_result.json",
+          "size_bytes": 325
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/hub/hf_featured.json",
+          "purpose": "Read featured datasets",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/hub/hf_import_result.json",
+          "purpose": "Read import result",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "hub",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -310,7 +363,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 22,
+      "elapsed_ms": 58,
       "files": [
         {
           "description": "Novelty report over BTUT lattice",
@@ -348,17 +401,34 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.modules'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 13,
+      "files": [
+        {
+          "description": "Loaded module manifests (real registry)",
+          "kind": "output",
+          "path": "data/samples/modules/registry.json",
+          "size_bytes": 2862
+        },
+        {
+          "description": "Marketplace listing shape",
+          "kind": "output",
+          "path": "data/samples/modules/marketplace_listings.json",
+          "size_bytes": 874
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/modules/registry.json",
+          "purpose": "Read module registry",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "modules",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
-      "elapsed_ms": 169,
+      "elapsed_ms": 223,
       "files": [
         {
           "description": "20 QR identity records with real codes",
@@ -375,32 +445,32 @@
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/2SJ9-647M.png",
-          "size_bytes": 734
+          "path": "data/samples/qr_identity/qr_codes/6C5Q-NRRQ.png",
+          "size_bytes": 753
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/F32A-PCG4.png",
-          "size_bytes": 767
+          "path": "data/samples/qr_identity/qr_codes/6W3T-LJIL.png",
+          "size_bytes": 757
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/IA2H-XD6J.png",
-          "size_bytes": 803
+          "path": "data/samples/qr_identity/qr_codes/APRU-6XUT.png",
+          "size_bytes": 741
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/UBHP-VINH.png",
-          "size_bytes": 752
+          "path": "data/samples/qr_identity/qr_codes/CES5-98MW.png",
+          "size_bytes": 775
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/W1HK-M1JR.png",
-          "size_bytes": 752
+          "path": "data/samples/qr_identity/qr_codes/W65G-BEUC.png",
+          "size_bytes": 800
         }
       ],
       "interact_with": [
@@ -441,5 +511,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 3983
+  "wall_ms": 7287
 }
