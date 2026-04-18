@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:36:28Z",
-  "git_sha": "7ce0a55",
+  "generated_at": "2026-04-18T05:37:07Z",
+  "git_sha": "8fa95ec",
   "seed": 42,
-  "success_count": 4,
+  "success_count": 5,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1893,
+      "elapsed_ms": 1726,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,7 +84,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 8,
+      "elapsed_ms": 9,
       "files": [
         {
           "description": "100-entity 8D semiconductor supply-chain bundle",
@@ -130,14 +130,42 @@
       "status": "success"
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.data_estate'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 10,
+      "files": [
+        {
+          "description": "50-asset synthetic inventory",
+          "kind": "input",
+          "path": "data/samples/data_estate/asset_inventory.json",
+          "size_bytes": 13763
+        },
+        {
+          "description": "Scored assets via real ScoringEngine",
+          "kind": "output",
+          "path": "data/samples/data_estate/scored_assets.json",
+          "size_bytes": 24297
+        },
+        {
+          "description": "Aggregated routing decisions",
+          "kind": "output",
+          "path": "data/samples/data_estate/routing_decisions.json",
+          "size_bytes": 128
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/data_estate/scored_assets.json",
+          "purpose": "Read scored assets",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/data_estate/routing_decisions.json",
+          "purpose": "Read routing decisions",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "data_estate",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -160,7 +188,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1112,
+      "elapsed_ms": 1061,
       "files": [
         {
           "description": "180-day synthetic (u, P, X) signals with target y",
@@ -274,7 +302,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 205,
+      "elapsed_ms": 90,
       "files": [
         {
           "description": "20 QR identity records with real codes",
@@ -291,32 +319,32 @@
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/DGIA-V9LK.png",
-          "size_bytes": 791
+          "path": "data/samples/qr_identity/qr_codes/7NX2-SDUJ.png",
+          "size_bytes": 777
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/FBCV-0P1W.png",
-          "size_bytes": 798
+          "path": "data/samples/qr_identity/qr_codes/L5DB-KSFA.png",
+          "size_bytes": 747
         },
         {
           "description": "QR code PNG rendered via real generate_qr_image()",
           "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/IJCP-ONIX.png",
+          "path": "data/samples/qr_identity/qr_codes/M2R6-1XN2.png",
+          "size_bytes": 777
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/POZX-FLSK.png",
+          "size_bytes": 766
+        },
+        {
+          "description": "QR code PNG rendered via real generate_qr_image()",
+          "kind": "media",
+          "path": "data/samples/qr_identity/qr_codes/VS9O-82TE.png",
           "size_bytes": 783
-        },
-        {
-          "description": "QR code PNG rendered via real generate_qr_image()",
-          "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/VZOV-QIBR.png",
-          "size_bytes": 796
-        },
-        {
-          "description": "QR code PNG rendered via real generate_qr_image()",
-          "kind": "media",
-          "path": "data/samples/qr_identity/qr_codes/ZWOO-90UZ.png",
-          "size_bytes": 779
         }
       ],
       "interact_with": [
@@ -357,5 +385,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 3257
+  "wall_ms": 2932
 }
