@@ -25,6 +25,17 @@ BACKEND_ROOT = REPO_ROOT / "backend"
 FIXTURE_NOW = datetime(2026, 4, 18, 0, 0, 0, tzinfo=timezone.utc)
 
 
+def deterministic_uuid_factory(seed: int = SEED):
+    """Return a callable that produces deterministic UUID strings."""
+    rng = random.Random(seed)
+
+    def _next() -> str:
+        import uuid as _uuid
+        return str(_uuid.UUID(int=rng.getrandbits(128)))
+
+    return _next
+
+
 def ensure_backend_on_path() -> None:
     p = str(BACKEND_ROOT)
     if p not in sys.path:

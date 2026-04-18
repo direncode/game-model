@@ -1,15 +1,22 @@
 """Contestation: synthetic challenges + consensus rounds."""
 from __future__ import annotations
 
-import uuid
 from datetime import timedelta
 from pathlib import Path
 
-from sample_data._common import FIXTURE_NOW, ManifestEntry, add_file, add_interact, write_json
+from sample_data._common import (
+    FIXTURE_NOW,
+    ManifestEntry,
+    add_file,
+    add_interact,
+    deterministic_uuid_factory,
+    write_json,
+)
 
 
 def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="contestation", mode="synthetic")
+    next_uuid = deterministic_uuid_factory()
     base = FIXTURE_NOW
     statuses = ["open", "under_review", "resolved", "withdrawn"]
 
@@ -17,9 +24,9 @@ def run(out_dir: Path) -> ManifestEntry:
     for i in range(25):
         challenges.append(
             {
-                "id": str(uuid.uuid4()),
+                "id": next_uuid(),
                 "target_type": "module" if i % 2 == 0 else "dataset",
-                "target_id": str(uuid.uuid4()),
+                "target_id": next_uuid(),
                 "claim": f"Synthetic dispute claim #{i}",
                 "status": statuses[i % len(statuses)],
                 "raised_by": f"user_{i % 5}",

@@ -9,7 +9,6 @@ from __future__ import annotations
 import base64
 import random
 import uuid
-from datetime import datetime, timezone
 from pathlib import Path
 
 from sample_data._common import ManifestEntry, add_file, add_interact, write_json

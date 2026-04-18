@@ -1,20 +1,27 @@
 """Delivery: synthetic alerts, embedding API log, exports, webhook events."""
 from __future__ import annotations
 
-import uuid
 from datetime import timedelta
 from pathlib import Path
 
-from sample_data._common import FIXTURE_NOW, ManifestEntry, add_file, add_interact, write_json
+from sample_data._common import (
+    FIXTURE_NOW,
+    ManifestEntry,
+    add_file,
+    add_interact,
+    deterministic_uuid_factory,
+    write_json,
+)
 
 
 def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="delivery", mode="synthetic")
+    next_uuid = deterministic_uuid_factory()
     base = FIXTURE_NOW
 
     alerts = [
         {
-            "id": str(uuid.uuid4()),
+            "id": next_uuid(),
             "level": ["info", "warn", "critical"][i % 3],
             "title": f"Alert #{i}: threshold breach",
             "body": f"Metric exceeded threshold at sample #{i}.",
@@ -28,7 +35,7 @@ def run(out_dir: Path) -> ManifestEntry:
 
     embedding_log = [
         {
-            "request_id": str(uuid.uuid4()),
+            "request_id": next_uuid(),
             "input_bytes": 128 + i * 16,
             "output_dims": 8,
             "latency_ms": 12 + (i % 20),
@@ -42,7 +49,7 @@ def run(out_dir: Path) -> ManifestEntry:
 
     exports = [
         {
-            "export_id": str(uuid.uuid4()),
+            "export_id": next_uuid(),
             "format": ["csv", "parquet", "json"][i % 3],
             "rows": 100 * (i + 1),
             "bytes": 1024 * (i + 1),

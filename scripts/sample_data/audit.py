@@ -1,15 +1,22 @@
 """Audit: synthetic audit events + SIEM export."""
 from __future__ import annotations
 
-import uuid
 from datetime import timedelta
 from pathlib import Path
 
-from sample_data._common import FIXTURE_NOW, ManifestEntry, add_file, add_interact, write_json
+from sample_data._common import (
+    FIXTURE_NOW,
+    ManifestEntry,
+    add_file,
+    add_interact,
+    deterministic_uuid_factory,
+    write_json,
+)
 
 
 def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="audit", mode="synthetic")
+    next_uuid = deterministic_uuid_factory()
 
     event_types = ["login", "data_access", "config_change", "export", "delete"]
     severities = ["info", "warn", "critical"]
@@ -18,7 +25,7 @@ def run(out_dir: Path) -> ManifestEntry:
     for i in range(30):
         events.append(
             {
-                "id": str(uuid.uuid4()),
+                "id": next_uuid(),
                 "event_type": event_types[i % len(event_types)],
                 "severity": severities[i % len(severities)],
                 "actor": f"user_{i % 6}",

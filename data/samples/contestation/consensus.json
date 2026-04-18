@@ -1,46 +1,46 @@
 {
   "consensus": [
     {
-      "challenge_id": "66035162-469b-4d7d-b88c-7327fbf7d15e",
+      "challenge_id": "17fc695a-07a0-ca6e-0822-e8f36c031199",
       "closed_at": "2026-04-17T18:00:00+00:00",
-      "oppose_votes": 1,
+      "oppose_votes": 2,
       "resolution": "rejected",
-      "support_votes": 5
+      "support_votes": 3
     },
     {
-      "challenge_id": "f968900c-a769-4532-a9fb-5aa9c7e5883e",
+      "challenge_id": "1a2a73ed-562b-0f79-c374-59eef50bea63",
       "closed_at": "2026-04-17T06:00:00+00:00",
-      "oppose_votes": 1,
+      "oppose_votes": 2,
       "resolution": "rejected",
-      "support_votes": 3
+      "support_votes": 7
     },
     {
-      "challenge_id": "82edc1cb-494c-4766-9033-4c7ee4dd9817",
+      "challenge_id": "a9488d99-0bbb-2599-11ce-5dd2b45ed1f0",
       "closed_at": "2026-04-16T18:00:00+00:00",
-      "oppose_votes": 3,
+      "oppose_votes": 2,
       "resolution": "upheld",
-      "support_votes": 3
+      "support_votes": 7
     },
     {
-      "challenge_id": "14cca7bb-7950-4946-9fc5-85a82467f796",
+      "challenge_id": "3eabedcb-baa8-0dd4-88bd-64072bcfbe01",
       "closed_at": "2026-04-16T06:00:00+00:00",
       "oppose_votes": 2,
       "resolution": "upheld",
+      "support_votes": 7
+    },
+    {
+      "challenge_id": "366eb16f-508e-bad7-b7c9-3acfe059a0ee",
+      "closed_at": "2026-04-15T18:00:00+00:00",
+      "oppose_votes": 1,
+      "resolution": "rejected",
       "support_votes": 5
     },
     {
-      "challenge_id": "3cf456b6-16c5-4a4d-9dc9-50c99ebfd4e5",
-      "closed_at": "2026-04-15T18:00:00+00:00",
-      "oppose_votes": 1,
-      "resolution": "upheld",
-      "support_votes": 4
-    },
-    {
-      "challenge_id": "3b7807b2-914a-431f-af0f-8099c2d3c171",
+      "challenge_id": "dc713d96-0c0f-d195-c17a-f08a1745d6d8",
       "closed_at": "2026-04-15T06:00:00+00:00",
-      "oppose_votes": 3,
+      "oppose_votes": 2,
       "resolution": "rejected",
-      "support_votes": 3
+      "support_votes": 6
     }
   ],
   "count": 6

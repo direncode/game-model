@@ -1,15 +1,22 @@
 """Governance: access entries, data classifications, retention policies, lineage events."""
 from __future__ import annotations
 
-import uuid
 from datetime import timedelta
 from pathlib import Path
 
-from sample_data._common import FIXTURE_NOW, ManifestEntry, add_file, add_interact, write_json
+from sample_data._common import (
+    FIXTURE_NOW,
+    ManifestEntry,
+    add_file,
+    add_interact,
+    deterministic_uuid_factory,
+    write_json,
+)
 
 
 def run(out_dir: Path) -> ManifestEntry:
     entry = ManifestEntry(name="governance", mode="synthetic")
+    next_uuid = deterministic_uuid_factory()
     base = FIXTURE_NOW
 
     access = [
@@ -44,7 +51,7 @@ def run(out_dir: Path) -> ManifestEntry:
         {
             "class": c,
             "retention_days": [30, 365, 1825, 2555][i],
-            "policy_id": str(uuid.uuid4()),
+            "policy_id": next_uuid(),
         }
         for i, c in enumerate(classes)
     ]

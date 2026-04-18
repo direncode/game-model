@@ -2,22 +2,22 @@
   "policies": [
     {
       "class": "public",
-      "policy_id": "2c8baa70-0f91-473a-b904-e08bb18acfa5",
+      "policy_id": "bdd640fb-0667-1ad1-1c80-317fa3b1799d",
       "retention_days": 30
     },
     {
       "class": "internal",
-      "policy_id": "be3423da-9e02-4a0b-8b26-57c0c5164a24",
+      "policy_id": "23b8c1e9-3924-56de-3eb1-3b9046685257",
       "retention_days": 365
     },
     {
       "class": "confidential",
-      "policy_id": "638b5d67-16d5-431f-8b94-eb1a80e4c884",
+      "policy_id": "bd9c66b3-ad3c-2d6d-1a3d-1fa7bc8960a9",
       "retention_days": 1825
     },
     {
       "class": "restricted",
-      "policy_id": "cb0a40d7-37db-4ed4-ad1e-b0106711ff7d",
+      "policy_id": "972a8469-1641-9f82-8b9d-2434e465e150",
       "retention_days": 2555
     }
   ]
