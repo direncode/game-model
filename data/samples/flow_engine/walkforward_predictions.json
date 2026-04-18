@@ -1,0 +1,436 @@
+{
+  "auc_by_horizon": {
+    "3": 0.870167,
+    "6": 0.792804,
+    "12": 0.628709,
+    "18": 0.459814
+  },
+  "brier_by_horizon": {
+    "3": 0.167298,
+    "6": 0.192822,
+    "12": 0.245672,
+    "18": 0.30537
+  },
+  "config": {
+    "conformal_alpha": 0.1,
+    "retrain_every": 5,
+    "warmup_frac": 0.2
+  },
+  "f1_by_horizon": {
+    "3": 0.748092,
+    "6": 0.65625,
+    "12": 0.52459,
+    "18": 0.413793
+  },
+  "horizons": [
+    3,
+    6,
+    12,
+    18
+  ],
+  "n_folds": 144,
+  "n_predictions_total": 144,
+  "n_skipped": 0,
+  "predictions_tail_50": [
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.741497,
+      "index": 130,
+      "probability": 0.209524,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.822555,
+      "index": 131,
+      "probability": 0.291534,
+      "retrained": true
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.7918,
+      "index": 132,
+      "probability": 0.261731,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.857576,
+      "index": 133,
+      "probability": 0.32846,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.828934,
+      "index": 134,
+      "probability": 0.30077,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.871143,
+      "index": 135,
+      "probability": 0.343931,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.813087,
+      "index": 136,
+      "probability": 0.286826,
+      "retrained": true
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.768175,
+      "index": 137,
+      "probability": 0.261428,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.843058,
+      "index": 138,
+      "probability": 0.345612,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.770323,
+      "index": 139,
+      "probability": 0.274337,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.812546,
+      "index": 140,
+      "probability": 0.328271,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.826642,
+      "index": 141,
+      "probability": 0.362969,
+      "retrained": true
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.706248,
+      "index": 142,
+      "probability": 0.242575,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.91712,
+      "index": 143,
+      "probability": 0.453447,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.790433,
+      "index": 144,
+      "probability": 0.306158,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.807879,
+      "index": 145,
+      "probability": 0.323604,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.877835,
+      "index": 146,
+      "probability": 0.39356,
+      "retrained": true
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.882757,
+      "index": 147,
+      "probability": 0.386771,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.941438,
+      "index": 148,
+      "probability": 0.445452,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.958321,
+      "index": 149,
+      "probability": 0.460875,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.932743,
+      "index": 150,
+      "probability": 0.425996,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.942669,
+      "index": 151,
+      "probability": 0.416408,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.978817,
+      "index": 152,
+      "probability": 0.452557,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 0.993079,
+      "index": 153,
+      "probability": 0.45782,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.030243,
+      "conformal_upper": 1.0,
+      "index": 154,
+      "probability": 0.569674,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 1.0,
+      "index": 155,
+      "probability": 0.467098,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 1.0,
+      "index": 156,
+      "probability": 0.537807,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.00171,
+      "conformal_upper": 1.0,
+      "index": 157,
+      "probability": 0.541141,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.0,
+      "conformal_upper": 1.0,
+      "index": 158,
+      "probability": 0.527115,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.000183,
+      "conformal_upper": 1.0,
+      "index": 159,
+      "probability": 0.539614,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.0,
+      "conformal_upper": 1.0,
+      "index": 160,
+      "probability": 0.494536,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.086814,
+      "conformal_upper": 1.0,
+      "index": 161,
+      "probability": 0.626245,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.115685,
+      "conformal_upper": 1.0,
+      "index": 162,
+      "probability": 0.655116,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.002267,
+      "conformal_upper": 1.0,
+      "index": 163,
+      "probability": 0.541698,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.082987,
+      "conformal_upper": 1.0,
+      "index": 164,
+      "probability": 0.624733,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.118328,
+      "conformal_upper": 1.0,
+      "index": 165,
+      "probability": 0.660074,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.053429,
+      "conformal_upper": 1.0,
+      "index": 166,
+      "probability": 0.595175,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.088921,
+      "conformal_upper": 1.0,
+      "index": 167,
+      "probability": 0.630667,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.061869,
+      "conformal_upper": 1.0,
+      "index": 168,
+      "probability": 0.603615,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.088512,
+      "conformal_upper": 1.0,
+      "index": 169,
+      "probability": 0.630929,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.107898,
+      "conformal_upper": 1.0,
+      "index": 170,
+      "probability": 0.652648,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.16002,
+      "conformal_upper": 1.0,
+      "index": 171,
+      "probability": 0.706662,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.146987,
+      "conformal_upper": 1.0,
+      "index": 172,
+      "probability": 0.693629,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.120965,
+      "conformal_upper": 1.0,
+      "index": 173,
+      "probability": 0.667607,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.127049,
+      "conformal_upper": 1.0,
+      "index": 174,
+      "probability": 0.673691,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.092465,
+      "conformal_upper": 1.0,
+      "index": 175,
+      "probability": 0.639108,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.160046,
+      "conformal_upper": 1.0,
+      "index": 176,
+      "probability": 0.706688,
+      "retrained": true
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.189162,
+      "conformal_upper": 1.0,
+      "index": 177,
+      "probability": 0.735805,
+      "retrained": false
+    },
+    {
+      "actual": 0,
+      "conformal_lower": 0.163463,
+      "conformal_upper": 1.0,
+      "index": 178,
+      "probability": 0.710105,
+      "retrained": false
+    },
+    {
+      "actual": 1,
+      "conformal_lower": 0.203351,
+      "conformal_upper": 1.0,
+      "index": 179,
+      "probability": 0.751505,
+      "retrained": false
+    }
+  ]
+}

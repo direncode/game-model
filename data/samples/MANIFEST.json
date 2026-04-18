@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:34:48Z",
-  "git_sha": "a4a3dbd",
+  "generated_at": "2026-04-18T05:35:46Z",
+  "git_sha": "4f80546",
   "seed": 42,
-  "success_count": 2,
+  "success_count": 3,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1814,
+      "elapsed_ms": 1476,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,7 +84,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 17,
+      "elapsed_ms": 11,
       "files": [
         {
           "description": "100-entity 8D semiconductor supply-chain bundle",
@@ -160,14 +160,48 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.flow_engine'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 10120,
+      "files": [
+        {
+          "description": "180-day synthetic (u, P, X) signals with target y",
+          "kind": "input",
+          "path": "data/samples/flow_engine/time_series.json",
+          "size_bytes": 24878
+        },
+        {
+          "description": "Walk-forward predictions (tail 50) + horizon metrics",
+          "kind": "output",
+          "path": "data/samples/flow_engine/walkforward_predictions.json",
+          "size_bytes": 9599
+        },
+        {
+          "description": "Current alert envelope from latest metric value",
+          "kind": "output",
+          "path": "data/samples/flow_engine/alerts.json",
+          "size_bytes": 220
+        },
+        {
+          "description": "Ensemble aggregate (single-member demo)",
+          "kind": "output",
+          "path": "data/samples/flow_engine/ensemble_output.json",
+          "size_bytes": 244
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/flow_engine/alerts.json",
+          "purpose": "Read latest alert",
+          "tool": "Read"
+        },
+        {
+          "path": "data/samples/flow_engine/walkforward_predictions.json",
+          "purpose": "Read walk-forward preds",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "flow_engine",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -268,5 +302,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 1865
+  "wall_ms": 11656
 }
