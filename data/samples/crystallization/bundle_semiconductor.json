@@ -1,0 +1,1348 @@
+{
+  "dim": 8,
+  "edge_count": 477,
+  "edges": [
+    {
+      "from": "TSMC",
+      "to": "GlobalFoundries",
+      "weight": 0.780976
+    },
+    {
+      "from": "TSMC",
+      "to": "SMIC",
+      "weight": 0.670555
+    },
+    {
+      "from": "TSMC",
+      "to": "Texas Instruments",
+      "weight": 0.832235
+    },
+    {
+      "from": "TSMC",
+      "to": "Broadcom",
+      "weight": 0.865415
+    },
+    {
+      "from": "TSMC",
+      "to": "NVIDIA",
+      "weight": 0.984428
+    },
+    {
+      "from": "TSMC",
+      "to": "AMD",
+      "weight": 0.76585
+    },
+    {
+      "from": "TSMC",
+      "to": "MediaTek",
+      "weight": 0.99875
+    },
+    {
+      "from": "TSMC",
+      "to": "STMicro",
+      "weight": 0.899984
+    },
+    {
+      "from": "TSMC",
+      "to": "Renesas",
+      "weight": 0.959222
+    },
+    {
+      "from": "TSMC",
+      "to": "ON Semi",
+      "weight": 0.676275
+    },
+    {
+      "from": "TSMC",
+      "to": "Marvell",
+      "weight": 0.788827
+    },
+    {
+      "from": "TSMC",
+      "to": "Snapdragon 8 Gen 3",
+      "weight": 0.610211
+    },
+    {
+      "from": "TSMC",
+      "to": "EUV Scanner",
+      "weight": 0.146846
+    },
+    {
+      "from": "TSMC",
+      "to": "PVD System",
+      "weight": 0.166592
+    },
+    {
+      "from": "TSMC",
+      "to": "Ion Implanter",
+      "weight": 0.131233
+    },
+    {
+      "from": "TSMC",
+      "to": "EUV Pellicle",
+      "weight": 0.125653
+    },
+    {
+      "from": "TSMC",
+      "to": "Argon Gas",
+      "weight": 0.154431
+    },
+    {
+      "from": "TSMC",
+      "to": "Taiwan",
+      "weight": 0.979381
+    },
+    {
+      "from": "Samsung",
+      "to": "Intel",
+      "weight": 0.707471
+    },
+    {
+      "from": "Samsung",
+      "to": "UMC",
+      "weight": 0.655742
+    },
+    {
+      "from": "Samsung",
+      "to": "Qualcomm",
+      "weight": 0.708923
+    },
+    {
+      "from": "Samsung",
+      "to": "Broadcom",
+      "weight": 0.96572
+    },
+    {
+      "from": "Samsung",
+      "to": "NVIDIA",
+      "weight": 0.830607
+    },
+    {
+      "from": "Samsung",
+      "to": "AMD",
+      "weight": 0.821671
+    },
+    {
+      "from": "Samsung",
+      "to": "NXP",
+      "weight": 0.604398
+    },
+    {
+      "from": "Samsung",
+      "to": "STMicro",
+      "weight": 0.960007
+    },
+    {
+      "from": "Samsung",
+      "to": "Ryzen 9 7950X",
+      "weight": 0.366513
+    },
+    {
+      "from": "Samsung",
+      "to": "H100 GPU",
+      "weight": 0.541261
+    },
+    {
+      "from": "Samsung",
+      "to": "Netherlands",
+      "weight": 0.995067
+    },
+    {
+      "from": "Intel",
+      "to": "UMC",
+      "weight": 0.827178
+    },
+    {
+      "from": "Intel",
+      "to": "SK Hynix",
+      "weight": 0.878968
+    },
+    {
+      "from": "Intel",
+      "to": "Texas Instruments",
+      "weight": 0.969758
+    },
+    {
+      "from": "Intel",
+      "to": "Infineon",
+      "weight": 0.931566
+    },
+    {
+      "from": "Intel",
+      "to": "NXP",
+      "weight": 0.838508
+    },
+    {
+      "from": "Intel",
+      "to": "STMicro",
+      "weight": 0.648227
+    },
+    {
+      "from": "Intel",
+      "to": "Renesas",
+      "weight": 0.878516
+    },
+    {
+      "from": "Intel",
+      "to": "ON Semi",
+      "weight": 0.889907
+    },
+    {
+      "from": "Intel",
+      "to": "Marvell",
+      "weight": 0.726116
+    },
+    {
+      "from": "Intel",
+      "to": "Core i9-14900K",
+      "weight": 0.64804
+    },
+    {
+      "from": "Intel",
+      "to": "H100 GPU",
+      "weight": 0.649881
+    },
+    {
+      "from": "Intel",
+      "to": "Photoresist",
+      "weight": 0.396317
+    },
+    {
+      "from": "Intel",
+      "to": "Taiwan",
+      "weight": 0.688194
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "UMC",
+      "weight": 0.758497
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Texas Instruments",
+      "weight": 0.926333
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Qualcomm",
+      "weight": 0.689527
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "MediaTek",
+      "weight": 0.950984
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Infineon",
+      "weight": 0.651806
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Snapdragon 8 Gen 3",
+      "weight": 0.463381
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Ryzen 9 7950X",
+      "weight": 0.388073
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "H100 GPU",
+      "weight": 0.640483
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Photoresist",
+      "weight": 0.347745
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Hydrogen Fluoride",
+      "weight": 0.186111
+    },
+    {
+      "from": "GlobalFoundries",
+      "to": "Netherlands",
+      "weight": 0.720385
+    },
+    {
+      "from": "SMIC",
+      "to": "Micron",
+      "weight": 0.848366
+    },
+    {
+      "from": "SMIC",
+      "to": "SK Hynix",
+      "weight": 0.948615
+    },
+    {
+      "from": "SMIC",
+      "to": "NVIDIA",
+      "weight": 0.903305
+    },
+    {
+      "from": "SMIC",
+      "to": "AMD",
+      "weight": 0.608849
+    },
+    {
+      "from": "SMIC",
+      "to": "MediaTek",
+      "weight": 0.795457
+    },
+    {
+      "from": "SMIC",
+      "to": "Renesas",
+      "weight": 0.99885
+    },
+    {
+      "from": "SMIC",
+      "to": "Tensor G4",
+      "weight": 0.5722
+    },
+    {
+      "from": "SMIC",
+      "to": "InFO-PoP",
+      "weight": 0.121734
+    },
+    {
+      "from": "SMIC",
+      "to": "Taiwan",
+      "weight": 0.791976
+    },
+    {
+      "from": "SMIC",
+      "to": "Germany",
+      "weight": 0.492203
+    },
+    {
+      "from": "UMC",
+      "to": "Micron",
+      "weight": 0.994665
+    },
+    {
+      "from": "UMC",
+      "to": "SK Hynix",
+      "weight": 0.799555
+    },
+    {
+      "from": "UMC",
+      "to": "NVIDIA",
+      "weight": 0.730585
+    },
+    {
+      "from": "UMC",
+      "to": "MediaTek",
+      "weight": 0.740251
+    },
+    {
+      "from": "UMC",
+      "to": "Infineon",
+      "weight": 0.631431
+    },
+    {
+      "from": "UMC",
+      "to": "NXP",
+      "weight": 0.653086
+    },
+    {
+      "from": "UMC",
+      "to": "Marvell",
+      "weight": 0.666993
+    },
+    {
+      "from": "UMC",
+      "to": "A17 Pro",
+      "weight": 0.554572
+    },
+    {
+      "from": "UMC",
+      "to": "Exynos 2400",
+      "weight": 0.674485
+    },
+    {
+      "from": "UMC",
+      "to": "Dimensity 9300",
+      "weight": 0.516519
+    },
+    {
+      "from": "UMC",
+      "to": "RTX 4090",
+      "weight": 0.657927
+    },
+    {
+      "from": "UMC",
+      "to": "Netherlands",
+      "weight": 0.83694
+    },
+    {
+      "from": "Micron",
+      "to": "Broadcom",
+      "weight": 0.88633
+    },
+    {
+      "from": "Micron",
+      "to": "AMD",
+      "weight": 0.695017
+    },
+    {
+      "from": "Micron",
+      "to": "Infineon",
+      "weight": 0.941754
+    },
+    {
+      "from": "Micron",
+      "to": "STMicro",
+      "weight": 0.9483
+    },
+    {
+      "from": "Micron",
+      "to": "Marvell",
+      "weight": 0.83718
+    },
+    {
+      "from": "Micron",
+      "to": "Core i9-14900K",
+      "weight": 0.687928
+    },
+    {
+      "from": "Micron",
+      "to": "RTX 4090",
+      "weight": 0.367903
+    },
+    {
+      "from": "Micron",
+      "to": "3nm MBCFET",
+      "weight": 0.385544
+    },
+    {
+      "from": "Micron",
+      "to": "Taiwan",
+      "weight": 0.723172
+    },
+    {
+      "from": "Micron",
+      "to": "Netherlands",
+      "weight": 0.869041
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Texas Instruments",
+      "weight": 0.87705
+    },
+    {
+      "from": "SK Hynix",
+      "to": "STMicro",
+      "weight": 0.972379
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Marvell",
+      "weight": 0.863554
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Exynos 2400",
+      "weight": 0.563138
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Tensor G4",
+      "weight": 0.69087
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Ion Implanter",
+      "weight": 0.197376
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Hydrogen Fluoride",
+      "weight": 0.202374
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Chiplet Assembly",
+      "weight": 0.158733
+    },
+    {
+      "from": "SK Hynix",
+      "to": "CoWoS Packaging",
+      "weight": 0.294242
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Taiwan",
+      "weight": 0.970814
+    },
+    {
+      "from": "SK Hynix",
+      "to": "South Korea",
+      "weight": 0.673774
+    },
+    {
+      "from": "SK Hynix",
+      "to": "Netherlands",
+      "weight": 0.713949
+    },
+    {
+      "from": "Texas Instruments",
+      "to": "Broadcom",
+      "weight": 0.844134
+    },
+    {
+      "from": "Texas Instruments",
+      "to": "AMD",
+      "weight": 0.76542
+    },
+    {
+      "from": "Texas Instruments",
+      "to": "MediaTek",
+      "weight": 0.67246
+    }
+  ],
+  "edges_truncated_from": 477,
+  "entities": [
+    {
+      "cluster": 0,
+      "embedding": [
+        3.298028,
+        0.417041,
+        -0.611387,
+        1.113818,
+        1.359508,
+        -0.640482,
+        1.747528,
+        0.160461
+      ],
+      "name": "TSMC",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.718315,
+        0.825536,
+        -1.278051,
+        -0.079438,
+        1.645177,
+        -1.647968,
+        -0.234951,
+        -0.637372
+      ],
+      "name": "Samsung",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.392301,
+        0.688548,
+        -1.544814,
+        -0.647382,
+        2.379389,
+        -0.635466,
+        0.840517,
+        -1.154849
+      ],
+      "name": "Intel",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.67337,
+        0.566554,
+        -1.690596,
+        0.425419,
+        1.139617,
+        -0.675016,
+        0.438976,
+        0.811367
+      ],
+      "name": "GlobalFoundries",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.991902,
+        -0.134627,
+        -0.506473,
+        -0.532506,
+        1.625318,
+        -1.675802,
+        0.003088,
+        -0.181883
+      ],
+      "name": "SMIC",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.44308,
+        0.602821,
+        -1.069389,
+        0.019338,
+        0.612887,
+        -0.931907,
+        0.523617,
+        0.334273
+      ],
+      "name": "UMC",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.206171,
+        -0.557824,
+        -0.80555,
+        -0.031049,
+        1.093847,
+        -0.132994,
+        1.4186,
+        0.258768
+      ],
+      "name": "Micron",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.496469,
+        0.314473,
+        -0.801242,
+        0.785327,
+        1.212495,
+        -0.611395,
+        0.136199,
+        -1.017724
+      ],
+      "name": "SK Hynix",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.487515,
+        1.313744,
+        -1.043206,
+        0.80212,
+        1.716982,
+        -0.887072,
+        1.016837,
+        0.622822
+      ],
+      "name": "Texas Instruments",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.978504,
+        1.438786,
+        -2.571847,
+        0.693142,
+        1.552228,
+        -0.679404,
+        0.855056,
+        -1.492541
+      ],
+      "name": "Qualcomm",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.868197,
+        0.714268,
+        -0.113264,
+        -0.110962,
+        1.014904,
+        -0.801054,
+        1.349241,
+        -0.102749
+      ],
+      "name": "Broadcom",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.682144,
+        0.807961,
+        -0.941753,
+        0.781187,
+        1.078768,
+        -0.696597,
+        0.564735,
+        -1.178109
+      ],
+      "name": "NVIDIA",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.177672,
+        0.656633,
+        -0.996932,
+        0.059248,
+        0.650778,
+        -0.752387,
+        0.594371,
+        -0.781366
+      ],
+      "name": "AMD",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.903229,
+        0.742431,
+        0.131712,
+        0.304747,
+        1.65453,
+        -0.544668,
+        -0.351263,
+        -0.315908
+      ],
+      "name": "MediaTek",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.036138,
+        1.977945,
+        -1.115417,
+        0.380928,
+        1.479173,
+        -1.201207,
+        1.485694,
+        0.15116
+      ],
+      "name": "Infineon",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.474619,
+        -0.045632,
+        -0.158323,
+        -0.641111,
+        1.852114,
+        0.814273,
+        0.205678,
+        -0.639779
+      ],
+      "name": "NXP",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.059791,
+        0.197915,
+        -1.930398,
+        0.241138,
+        0.862618,
+        -0.215845,
+        0.248345,
+        0.629961
+      ],
+      "name": "STMicro",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.530048,
+        0.306763,
+        -0.51189,
+        -0.538519,
+        1.636476,
+        0.284286,
+        -0.16449,
+        -0.18922
+      ],
+      "name": "Renesas",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        3.15593,
+        0.969094,
+        -1.74217,
+        -0.592274,
+        1.813165,
+        -0.321809,
+        0.950296,
+        -0.092131
+      ],
+      "name": "ON Semi",
+      "type": "Company"
+    },
+    {
+      "cluster": 0,
+      "embedding": [
+        2.591985,
+        0.639352,
+        -0.824157,
+        -0.228611,
+        2.619465,
+        -0.2157,
+        0.085218,
+        0.093932
+      ],
+      "name": "Marvell",
+      "type": "Company"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.584809,
+        3.472251,
+        1.195157,
+        -0.792409,
+        0.778026,
+        1.747669,
+        -0.306764,
+        1.638076
+      ],
+      "name": "A17 Pro",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.147233,
+        2.547758,
+        -0.033709,
+        -0.789486,
+        0.153739,
+        1.704691,
+        -0.633986,
+        0.99631
+      ],
+      "name": "Snapdragon 8 Gen 3",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.992199,
+        3.87212,
+        0.341206,
+        1.332102,
+        0.5754,
+        0.985705,
+        -1.442536,
+        0.789483
+      ],
+      "name": "Exynos 2400",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.134078,
+        3.4284,
+        0.783943,
+        -0.343697,
+        -0.308076,
+        0.591092,
+        -1.067909,
+        1.013839
+      ],
+      "name": "Dimensity 9300",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.871544,
+        2.252557,
+        0.603909,
+        -0.06881,
+        -0.330315,
+        1.592235,
+        -0.765075,
+        -0.185782
+      ],
+      "name": "Tensor G4",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.785328,
+        3.336471,
+        1.149831,
+        0.332281,
+        -0.626602,
+        0.937305,
+        -0.490979,
+        0.808272
+      ],
+      "name": "M3 Ultra",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.690971,
+        5.311639,
+        0.842534,
+        0.381339,
+        0.772401,
+        1.890835,
+        -0.989162,
+        0.955382
+      ],
+      "name": "Ryzen 9 7950X",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.463695,
+        2.857909,
+        0.208782,
+        -0.250876,
+        1.588795,
+        0.379641,
+        -0.388244,
+        -0.46763
+      ],
+      "name": "Core i9-14900K",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.283159,
+        3.65337,
+        0.538568,
+        -0.946647,
+        -0.229182,
+        1.907759,
+        -1.23822,
+        0.629875
+      ],
+      "name": "H100 GPU",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.972657,
+        2.60904,
+        1.786366,
+        0.080351,
+        -1.015086,
+        1.611873,
+        -1.197072,
+        1.01146
+      ],
+      "name": "A100 GPU",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.475513,
+        2.931158,
+        0.802992,
+        0.219453,
+        -0.520178,
+        1.299299,
+        -1.084967,
+        0.108002
+      ],
+      "name": "RTX 4090",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        0.059273,
+        3.242989,
+        -0.25653,
+        0.250717,
+        1.473294,
+        2.119479,
+        -1.711622,
+        0.20946
+      ],
+      "name": "MI300X",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.239853,
+        2.575398,
+        0.766292,
+        0.16478,
+        -0.356158,
+        1.464285,
+        -2.744761,
+        -0.114633
+      ],
+      "name": "Kirin 9000S",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -1.151541,
+        2.25133,
+        1.479447,
+        -1.158085,
+        -0.064027,
+        1.578444,
+        0.064764,
+        -0.361517
+      ],
+      "name": "Apple M4",
+      "type": "Chip"
+    },
+    {
+      "cluster": 1,
+      "embedding": [
+        -0.302102,
+        3.00614,
+        -0.088905,
+        -0.022738,
+        0.319436,
+        1.13987,
+        -0.758119,
+        0.268812
+      ],
+      "name": "Graviton 4",
+      "type": "Chip"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.56811,
+        -0.602722,
+        3.95161,
+        0.257311,
+        0.77982,
+        -0.971253,
+        0.208929,
+        1.85299
+      ],
+      "name": "EUV Scanner",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.668595,
+        -1.37362,
+        2.875127,
+        0.704199,
+        -0.853619,
+        0.709761,
+        0.514209,
+        1.084254
+      ],
+      "name": "DUV Scanner",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        1.03976,
+        -0.81562,
+        3.487717,
+        1.377777,
+        -0.997397,
+        -0.136109,
+        0.748376,
+        1.866222
+      ],
+      "name": "CVD Chamber",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.487459,
+        -0.929604,
+        3.766599,
+        0.645057,
+        -0.171742,
+        0.078684,
+        0.169391,
+        2.159266
+      ],
+      "name": "PVD System",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.99525,
+        -0.511894,
+        3.783287,
+        1.012602,
+        -0.090828,
+        0.01384,
+        0.4945,
+        1.421914
+      ],
+      "name": "Etch Tool",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.558198,
+        -0.642906,
+        2.509068,
+        2.255432,
+        -1.10361,
+        -0.528513,
+        0.994867,
+        1.974998
+      ],
+      "name": "CMP System",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.874472,
+        -0.622993,
+        2.992652,
+        0.461647,
+        -0.454517,
+        -0.206297,
+        0.885072,
+        1.411766
+      ],
+      "name": "Ion Implanter",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.004702,
+        -1.192832,
+        3.247759,
+        0.661765,
+        -0.993332,
+        0.346212,
+        0.44698,
+        1.195834
+      ],
+      "name": "Metrology System",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.217377,
+        -0.86077,
+        2.131149,
+        0.155522,
+        -0.931067,
+        0.071932,
+        0.486545,
+        2.385214
+      ],
+      "name": "Wafer Inspection",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        1.014596,
+        -1.095963,
+        2.98859,
+        0.398482,
+        -0.511108,
+        0.026805,
+        0.493631,
+        1.003661
+      ],
+      "name": "Photoresist Coater",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.811608,
+        -0.080357,
+        2.934744,
+        1.241027,
+        -0.085914,
+        -0.040732,
+        0.434456,
+        1.507555
+      ],
+      "name": "Bonding System",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.558606,
+        -1.463806,
+        3.014706,
+        1.298799,
+        0.370686,
+        0.775563,
+        1.59191,
+        1.039591
+      ],
+      "name": "Dicing Saw",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        1.023392,
+        -0.889995,
+        4.313882,
+        0.515021,
+        -1.003833,
+        -0.159636,
+        -0.974337,
+        1.184547
+      ],
+      "name": "Wire Bonder",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        0.04452,
+        -0.909764,
+        3.205054,
+        2.125703,
+        0.070254,
+        -0.146142,
+        -0.239049,
+        1.795151
+      ],
+      "name": "ATE Tester",
+      "type": "Tool"
+    },
+    {
+      "cluster": 2,
+      "embedding": [
+        -0.29214,
+        0.098875,
+        3.707664,
+        0.718495,
+        -1.527881,
+        1.012323,
+        0.231276,
+        2.24269
+      ],
+      "name": "Probe Station",
+      "type": "Tool"
+    }
+  ],
+  "entities_truncated_from": 80,
+  "entity_count": 80,
+  "metadata": {
+    "entity_types": [
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Company",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Chip",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Tool",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Material",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Process",
+      "Country",
+      "Country",
+      "Country",
+      "Country",
+      "Country",
+      "Country",
+      "Country",
+      "Country"
+    ],
+    "provenance_job_id": "demo-semiconductor",
+    "source": "synthetic_demo",
+    "variance_preservation": 0.93
+  }
+}

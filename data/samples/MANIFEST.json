@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T05:33:59Z",
-  "git_sha": "a2c889c",
+  "generated_at": "2026-04-18T05:34:48Z",
+  "git_sha": "a4a3dbd",
   "seed": 42,
-  "success_count": 1,
+  "success_count": 2,
   "total_verticals": 18,
   "verticals": [
     {
@@ -16,7 +16,7 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 1828,
+      "elapsed_ms": 1814,
       "files": [
         {
           "description": "20 synthetic cross-era documents + succession edges",
@@ -84,14 +84,50 @@
       "traceback": null
     },
     {
-      "elapsed_ms": 0,
-      "error": "import error: ModuleNotFoundError: No module named 'sample_data.crystallization'",
-      "files": [],
-      "interact_with": [],
+      "elapsed_ms": 17,
+      "files": [
+        {
+          "description": "100-entity 8D semiconductor supply-chain bundle",
+          "kind": "input",
+          "path": "data/samples/crystallization/bundle_semiconductor.json",
+          "size_bytes": 24558
+        },
+        {
+          "description": "TCD-JEPA demo intelligence insights (real generator)",
+          "kind": "output",
+          "path": "data/samples/crystallization/intelligence_cache.json",
+          "size_bytes": 13888
+        },
+        {
+          "description": "Crystal checkpoint metadata for the bundle",
+          "kind": "output",
+          "path": "data/samples/crystallization/crystal_8d.json",
+          "size_bytes": 320
+        }
+      ],
+      "interact_with": [
+        {
+          "path": "data/samples/crystallization/bundle_semiconductor.json",
+          "purpose": "Read the semiconductor bundle",
+          "tool": "Read"
+        },
+        {
+          "args": {
+            "path": "data/samples/crystallization",
+            "pattern": "TSMC"
+          },
+          "purpose": "Grep for TSMC",
+          "tool": "Grep"
+        },
+        {
+          "path": "data/samples/crystallization/intelligence_cache.json",
+          "purpose": "Read intelligence sample",
+          "tool": "Read"
+        }
+      ],
       "mode": "real",
       "name": "crystallization",
-      "status": "failed",
-      "traceback": null
+      "status": "success"
     },
     {
       "elapsed_ms": 0,
@@ -232,5 +268,5 @@
       "status": "skipped"
     }
   ],
-  "wall_ms": 1881
+  "wall_ms": 1865
 }

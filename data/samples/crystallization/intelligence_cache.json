@@ -1,0 +1,306 @@
+{
+  "categories": [
+    "deep_signals",
+    "causal",
+    "topological",
+    "temporal",
+    "meta",
+    "oracle",
+    "uncertainty"
+  ],
+  "insight_counts": {
+    "causal": 4,
+    "deep_signals": 3,
+    "meta": 3,
+    "oracle": 3,
+    "temporal": 2,
+    "topological": 3,
+    "uncertainty": 2
+  },
+  "insights_sample": {
+    "causal": [
+      {
+        "category": "causal_chain",
+        "confidence": 0.89,
+        "description": "Attention flow analysis reveals a critical 3-hop causal chain: ASML's EUV Scanner technology gates TSMC's advanced process capability, which exclusively enables Apple's A17 Pro chip. Disruption at any node cascades to downstream.",
+        "evidence": [
+          "Chain strength: 0.82 (attention product)",
+          "No alternative path exists at comparable strength"
+        ],
+        "severity": "critical",
+        "title": "3-hop dependency: EUV Scanner -> TSMC -> A17 Pro -> Apple"
+      },
+      {
+        "category": "information_bottleneck",
+        "confidence": 0.92,
+        "description": "Betweenness centrality analysis identifies Taiwan as the most critical information bottleneck (centrality: 0.41). Simulated removal fragments the graph into 3 disconnected components, isolating 67% of chip production from tool suppliers.",
+        "evidence": [
+          "Betweenness: 0.41 (3.2x runner-up)",
+          "Removal fragments: 3 components",
+          "Isolated entities: 67%"
+        ],
+        "severity": "critical",
+        "title": "Taiwan identified as single point of failure"
+      },
+      {
+        "category": "intervention_analysis",
+        "confidence": 0.78,
+        "description": "Simulated removal of Neon Gas entity causes a 34% drop in predictive accuracy for the 5nm GAA and 3nm MBCFET process nodes, revealing a hidden material dependency not captured by direct edges.",
+        "evidence": [
+          "Accuracy drop: 34%",
+          "Affected processes: 5nm GAA, 3nm MBCFET",
+          "No direct edge exists (hidden dependency)"
+        ],
+        "severity": "notable",
+        "title": "Neon gas supply disruption propagates to 5nm processes"
+      },
+      {
+        "category": "causal_pathway",
+        "confidence": 0.88,
+        "description": "The strongest combined attention+adjacency pathway runs from Silicon Wafer through CVD Chamber to 7nm FinFET, with a cumulative strength of 0.91.",
+        "evidence": [
+          "Combined strength: 0.91",
+          "Path: Silicon Wafer -> CVD Chamber -> 7nm FinFET"
+        ],
+        "severity": "info",
+        "title": "Strongest causal link: Silicon Wafer -> 7nm FinFET (strength 0.91)"
+      }
+    ],
+    "deep_signals": [
+      {
+        "category": "energy_landscape",
+        "confidence": 0.91,
+        "description": "The energy landscape shows a sharp gradient between the Company cluster (centroid energy 0.018) and the Chip cluster (0.024), indicating a strong predictive boundary. 20 companies and 15 chips form a tightly coupled supply-demand axis.",
+        "evidence": [
+          "Energy gradient: 0.006 units across 8D boundary",
+          "Fisher trace peaks at cluster interface"
+        ],
+        "severity": "notable",
+        "title": "Energy concentration in Company-Chip interface"
+      },
+      {
+        "category": "blank_space",
+        "confidence": 0.85,
+        "description": "Langevin exploration found a significant blank space (score 0.87) between the Materials and Process clusters, suggesting hidden supply chain dependencies that the current model cannot predict. This region may contain novel manufacturing constraints.",
+        "evidence": [
+          "Blank score: 0.87 (top 5%)",
+          "Hessian trace: flat (no learned structure)",
+          "Affects 22 entities"
+        ],
+        "severity": "critical",
+        "title": "Unexplored region between Materials and Processes"
+      },
+      {
+        "category": "attention_structure",
+        "confidence": 0.94,
+        "description": "Aggregated attention weights reveal TSMC as the highest out-degree node (fan-out: 23 entities), acting as the central information relay in the semiconductor supply chain graph.",
+        "evidence": [
+          "Out-degree: 23 (2.3x mean)",
+          "Betweenness centrality: 0.31"
+        ],
+        "severity": "info",
+        "title": "TSMC identified as primary attention hub (80 entities analyzed)"
+      }
+    ],
+    "meta": [
+      {
+        "category": "representation_quality",
+        "confidence": 0.93,
+        "description": "The learned representations use 4.2 of 8 available dimensions effectively (52.5% utilization). Uniformity score: 0.83 (well-distributed). Neighborhood preservation: 0.91 (local structure intact). These metrics indicate a high-quality embedding suitable for downstream routing.",
+        "evidence": [
+          "Effective rank: 4.2/8",
+          "Uniformity: 0.83",
+          "Neighborhood preservation: 0.91"
+        ],
+        "severity": "info",
+        "title": "Representation effective rank: 4.2 (good for 8D space)"
+      },
+      {
+        "category": "corpus_completeness",
+        "confidence": 0.88,
+        "description": "Of the 80 entities in the semiconductor supply chain, 87% fall within the coverage radius of at least one crystallized module. The remaining 13% (10 entities) are in the Material-Process interface void identified by the topological engine.",
+        "evidence": [
+          "Covered: 69/80",
+          "Uncovered: 10 (mostly Materials)",
+          "Gap location: Material-Process interface"
+        ],
+        "severity": "notable",
+        "title": "Corpus coverage: 87% (80 entities modeled)"
+      },
+      {
+        "category": "model_capacity",
+        "confidence": 0.85,
+        "description": "Current crystallization produced 5 modules against a trading preset maximum of 48. The model has 43 slots available for additional structure discovery. Recommendation: increase Langevin exploration steps to discover the Material-Process boundary modules.",
+        "evidence": [
+          "Active: 5/48",
+          "Available: 43",
+          "Bottleneck: Langevin steps (150)"
+        ],
+        "severity": "info",
+        "title": "Model capacity assessment: 5 modules, 48 max (trading preset)"
+      }
+    ],
+    "oracle": [
+      {
+        "category": "supply_chain_risk",
+        "confidence": 0.91,
+        "description": "The crystallized module structure reveals that all sub-5nm process nodes depend on a single EUV Scanner supply chain through ASML (Netherlands). The attractor module centered on EUV Scanner has purity 0.94 and contains 15 dependent entities. Risk mitigation: diversify lithography sourcing or stockpile critical components.",
+        "evidence": [
+          "Single-source: ASML (Netherlands)",
+          "Dependent entities: 15",
+          "Process nodes affected: 5nm, 3nm, 2nm"
+        ],
+        "severity": "critical",
+        "title": "OPERATIONAL BRIEF: Single-source risk in advanced lithography"
+      },
+      {
+        "category": "investment_signal",
+        "confidence": 0.82,
+        "description": "The Chiplet Assembly process node is positioned at the boundary of 3 modules (boundary module, purity 0.78), indicating it serves as a cross-cutting capability. Its routing score has been increasing across crystallization cycles, suggesting growing structural importance. Early-mover advantage in chiplet-compatible tools and materials.",
+        "evidence": [
+          "Cross-module position: 3 boundaries",
+          "Routing score trend: +0.15 over 10 cycles",
+          "Module type: boundary"
+        ],
+        "severity": "notable",
+        "title": "INVESTMENT BRIEF: Chiplet assembly as emerging structural node"
+      },
+      {
+        "category": "geopolitical_lens",
+        "confidence": 0.79,
+        "description": "The crystallized modules cleanly separate into a Taiwan-Korea-US super-cluster and a China-adjacent cluster, with SMIC as the sole bridge entity. Module purity drops from 0.94 to 0.72 at the boundary, indicating the decoupling is structurally real but not yet complete.",
+        "evidence": [
+          "Super-cluster 1: Taiwan, Korea, US (purity 0.94)",
+          "Cluster 2: China-adjacent (purity 0.72)",
+          "Bridge: SMIC (boundary module)"
+        ],
+        "severity": "notable",
+        "title": "GEOPOLITICAL BRIEF: US-China decoupling visible in module structure"
+      }
+    ],
+    "temporal": [
+      {
+        "category": "phase_transition",
+        "confidence": 0.87,
+        "description": "The representation underwent a phase transition at epoch 28: module count jumped from 4 to 8 in a single crystallization cycle, effective rank dropped from 6.1 to 4.2, and the convergence score spiked before stabilizing. This corresponds to the model discovering the Tool-Material boundary.",
+        "evidence": [
+          "Module count: 4 -> 8 (epoch 28)",
+          "Effective rank: 6.1 -> 4.2",
+          "Convergence spike: 0.31 -> 0.08"
+        ],
+        "severity": "critical",
+        "title": "Structural phase transition at epoch 28"
+      },
+      {
+        "category": "velocity_field",
+        "confidence": 0.74,
+        "description": "Representation velocity analysis shows Country entities drifting toward the Company cluster at 0.12 units/epoch, suggesting the model is learning that country-level factors (trade policy, subsidies) are predictive of company behavior.",
+        "evidence": [
+          "Drift velocity: 0.12 units/epoch",
+          "Direction: toward Company centroid",
+          "Affected entities: 6/8 countries"
+        ],
+        "severity": "notable",
+        "title": "Topic drift: Country entities migrating toward Company cluster"
+      }
+    ],
+    "topological": [
+      {
+        "category": "knowledge_gap",
+        "confidence": 0.86,
+        "description": "Persistent homology (H2) detected a topological void between the Tool cluster (15 entities) and Material cluster (12 entities). This void indicates a structural gap in the supply chain model \u2014 the relationship between manufacturing tools and their required materials is under-represented.",
+        "evidence": [
+          "H2 persistence: 0.73 (birth: 0.21, death: 0.94)",
+          "Void volume: 12.4 units^2"
+        ],
+        "persistence_bars": [
+          {
+            "birth": 0.21,
+            "death": 0.94,
+            "dim": 2
+          }
+        ],
+        "severity": "critical",
+        "title": "H2 void detected between Tool and Material clusters"
+      },
+      {
+        "category": "feedback_loop",
+        "confidence": 0.81,
+        "description": "A persistent 1-cycle (H1) reveals a feedback loop: Companies invest in Processes that require specialized Tools, which in turn are co-developed with the same Companies. This cycle has persistence 0.58, indicating moderate stability.",
+        "evidence": [
+          "H1 persistence: 0.58",
+          "Cycle members: 8 entities across 3 types"
+        ],
+        "persistence_bars": [
+          {
+            "birth": 0.15,
+            "death": 0.73,
+            "dim": 1
+          }
+        ],
+        "severity": "notable",
+        "title": "H1 cycle: Company -> Process -> Tool -> Company"
+      },
+      {
+        "category": "hierarchical_cluster",
+        "confidence": 0.9,
+        "description": "Connected component analysis (H0) at 3 filtration scales reveals 5 stable modules. The Company-Chip super-cluster merges first (scale 0.3), while Country entities remain isolated until scale 0.8, reflecting their role as contextual rather than functional nodes.",
+        "evidence": [
+          "Scale 0.3: 5 components",
+          "Scale 0.5: 3 super-clusters",
+          "Scale 0.8: 1 connected component"
+        ],
+        "persistence_bars": [
+          {
+            "birth": 0.0,
+            "death": 0.3,
+            "dim": 0
+          },
+          {
+            "birth": 0.0,
+            "death": 0.5,
+            "dim": 0
+          },
+          {
+            "birth": 0.0,
+            "death": 0.8,
+            "dim": 0
+          },
+          {
+            "birth": 0.0,
+            "death": 0.95,
+            "dim": 0
+          }
+        ],
+        "severity": "info",
+        "title": "Multi-scale H0 analysis: 5 stable modules at 3 resolution levels"
+      }
+    ],
+    "uncertainty": [
+      {
+        "category": "epistemic_uncertainty",
+        "confidence": 0.86,
+        "description": "Epistemic uncertainty quantification identifies 10 entities in the Material-Process interface as poorly modeled (mean uncertainty: 0.73, vs corpus mean: 0.21). These entities would benefit from additional training data or a targeted Langevin exploration pass.",
+        "evidence": [
+          "High-uncertainty entities: 10",
+          "Mean uncertainty: 0.73 (3.5x corpus mean)",
+          "Location: Material-Process void"
+        ],
+        "severity": "notable",
+        "title": "High uncertainty region: Material-Process interface (13% of entities)"
+      },
+      {
+        "category": "coverage_ratio",
+        "confidence": 0.92,
+        "description": "87% of supply chain entities fall within the coverage radius of at least one crystallized module. This is a strong result for a 100-entity graph with 5 clusters and indicates the module factory has captured the dominant structure.",
+        "evidence": [
+          "Coverage: 0.87",
+          "Module count: 5",
+          "Cluster count: 5"
+        ],
+        "severity": "info",
+        "title": "Overall coverage ratio: 0.87 (87% of entities within module radius)"
+      }
+    ]
+  }
+}

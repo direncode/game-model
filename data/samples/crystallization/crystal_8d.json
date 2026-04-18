@@ -1,0 +1,12 @@
+{
+  "cluster_count": 5,
+  "dim": 8,
+  "entity_count": 80,
+  "mode": "cpu_metadata_only",
+  "notes": "Real demo bundle + real intelligence generator. Full GPU training happens via demo_runner on RunPod.",
+  "parents": {
+    "bundle": "bundle_semiconductor.json"
+  },
+  "training_steps": 0,
+  "version": "1.0"
+}
