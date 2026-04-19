@@ -3,6 +3,20 @@
 import { useState, useCallback, useMemo } from 'react';
 import { SourceDetector, type SourceType } from './SourceDetector';
 import { FileDrop } from './FileDrop';
+import legendsManifest from '@/data/legends/manifest.json';
+
+type LegendManifestEntry = {
+  id: string;
+  display_name: string;
+  description: string;
+  path: string;
+  survivors: number;
+  total_entities: number;
+  clusters: number;
+  size_kb: number;
+};
+
+const LEGENDS: LegendManifestEntry[] = legendsManifest.legends as LegendManifestEntry[];
 
 export interface EngineStep {
   label: string;
@@ -155,8 +169,9 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
   }, []);
 
   const simulateReduction = useCallback(
-    async (isSample: boolean, sourceName?: string) => {
+    async (mode: 'live' | { legendId: string }, sourceName?: string) => {
       setPhase('progress');
+      const isSample = mode !== 'live';
 
       const sourceType = detected.type || 'database';
       const stepLabels: Record<string, string[]> = {
@@ -175,15 +190,37 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
       }));
       setSteps(initialSteps);
 
-      const delays = [400, 600, 800, 1400, 500];
-      const details = [
+      let payload: ConnectResult | null = null;
+      if (isSample) {
+        try {
+          const mod = await import(`@/data/legends/${mode.legendId}.json`);
+          payload = mod.default as ConnectResult;
+        } catch (e) {
+          setPhase('error');
+          setErrorMessage(`Failed to load legend "${mode.legendId}".`);
+          return;
+        }
+      }
+
+      const delays = [400, 500, 700, 1100, 400];
+      const liveDetails = [
         'Established connection',
         sourceType === 'file' ? 'Parsed structure' : '26 tables, 43 relationships',
         '10,482 entities fetched',
         '10,482 \u2192 347 survivors',
         'Intelligence materialized',
       ];
-      const durations = ['0.1s', '0.3s', '1.2s', '2.8s', '0.4s'];
+      const sampleDetails = payload
+        ? [
+            `Loaded ${payload.database_name}`,
+            `${payload.clusters} clusters`,
+            `${payload.total_entities.toLocaleString()} entities`,
+            `\u2192 ${payload.survivors.length} survivors`,
+            `cov=${payload.coverage}`,
+          ]
+        : liveDetails;
+      const details = isSample ? sampleDetails : liveDetails;
+      const durations = ['0.1s', '0.2s', '0.4s', '0.6s', '0.2s'];
 
       try {
         for (let i = 0; i < initialSteps.length; i++) {
@@ -196,21 +233,21 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
           });
         }
 
-        const sampleSurvivors = generateSampleSurvivors();
-        const sampleConnections = generateSampleConnections();
-
-        onComplete({
-          database_name: isSample
-            ? 'sample_data'
-            : (sourceName || extractSourceName(inputValue, detected.type)),
-          survivors: sampleSurvivors,
-          clusters: 12,
-          coverage: 0.94,
-          cost: '$0.12',
-          wall_time: '4.8s',
-          total_entities: 10482,
-          connections: sampleConnections,
-        });
+        if (payload) {
+          onComplete(payload);
+        } else {
+          // Live mode placeholder (no real backend wired here yet)
+          onComplete({
+            database_name: sourceName || extractSourceName(inputValue, detected.type),
+            survivors: [],
+            clusters: 0,
+            coverage: 0,
+            cost: '$0.00',
+            wall_time: '0.0s',
+            total_entities: 0,
+            connections: [],
+          });
+        }
       } catch {
         setPhase('error');
         setErrorMessage('Connection failed. Check your input and try again.');
@@ -221,12 +258,12 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
 
   const handleAnalyze = () => {
     if (!inputValue.trim() && !activeFile) return;
-    simulateReduction(false);
+    simulateReduction('live');
   };
 
-  const handleSampleData = () => {
+  const handleLegendClick = (legendId: string) => {
     onSampleData();
-    simulateReduction(true);
+    simulateReduction({ legendId });
   };
 
   const handleRetry = () => {
@@ -366,12 +403,25 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
       >
         Analyze
       </button>
-      <button
-        onClick={handleSampleData}
-        className="text-xs font-mono text-white/25 hover:text-white/50 transition-colors duration-200 underline underline-offset-4 decoration-white/10"
-      >
-        or try with sample data
-      </button>
+
+      {/* Legend run selector — pre-cached pipeline results */}
+      <div className="w-full mt-2">
+        <p className="text-[10px] font-mono text-white/20 text-center mb-2 tracking-wider uppercase">
+          or try with a legend run
+        </p>
+        <div className="flex flex-wrap gap-2 justify-center">
+          {LEGENDS.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => handleLegendClick(l.id)}
+              title={`${l.description} — ${l.total_entities.toLocaleString()} entities → ${l.survivors} survivors, ${l.clusters} clusters`}
+              className="text-[10px] font-mono text-white/40 hover:text-white hover:border-li-cyan/40 bg-white/[0.02] border border-white/[0.06] rounded-md px-3 py-1.5 transition-all duration-150"
+            >
+              {l.display_name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Inline file drop zone */}
       <FileDrop onFileDrop={handleFileDrop} />
@@ -390,38 +440,3 @@ function extractDbName(connStr: string): string {
   }
 }
 
-function generateSampleSurvivors() {
-  const types = ['company', 'person', 'product', 'location', 'transaction'];
-  const names = [
-    'Acme Corp', 'Globex Industries', 'Initech', 'Umbrella Corp', 'Stark Industries',
-    'Wayne Enterprises', 'Oscorp', 'LexCorp', 'Cyberdyne Systems', 'Weyland-Yutani',
-    'John Smith', 'Jane Doe', 'Alice Johnson', 'Bob Williams', 'Charlie Brown',
-    'Widget Pro', 'DataSync 3000', 'CloudBridge', 'NeuralNet Hub', 'QuantumDB',
-    'New York', 'London', 'Tokyo', 'Singapore', 'Berlin',
-    'TXN-48291', 'TXN-73920', 'TXN-12847', 'TXN-93021', 'TXN-55183',
-  ];
-
-  return names.map((name, i) => ({
-    name,
-    type: types[Math.floor(i / 6)] || types[0],
-    score: parseFloat((0.3 + Math.random() * 0.7).toFixed(3)),
-    anomaly_score: parseFloat((Math.random() * (i < 8 ? 1.0 : 0.6)).toFixed(3)),
-  }));
-}
-
-function generateSampleConnections() {
-  return [
-    { source: 'Acme Corp', target: 'Globex Industries', signal_type: 'ownership', strength: 0.92 },
-    { source: 'John Smith', target: 'Acme Corp', signal_type: 'executive', strength: 0.88 },
-    { source: 'Widget Pro', target: 'DataSync 3000', signal_type: 'dependency', strength: 0.85 },
-    { source: 'Stark Industries', target: 'Cyberdyne Systems', signal_type: 'partnership', strength: 0.81 },
-    { source: 'TXN-48291', target: 'Umbrella Corp', signal_type: 'transaction', strength: 0.79 },
-    { source: 'Jane Doe', target: 'Wayne Enterprises', signal_type: 'board_member', strength: 0.76 },
-    { source: 'London', target: 'Globex Industries', signal_type: 'headquarters', strength: 0.74 },
-    { source: 'Oscorp', target: 'LexCorp', signal_type: 'supplier', strength: 0.71 },
-    { source: 'Alice Johnson', target: 'NeuralNet Hub', signal_type: 'founder', strength: 0.69 },
-    { source: 'QuantumDB', target: 'CloudBridge', signal_type: 'integration', strength: 0.65 },
-    { source: 'Tokyo', target: 'Weyland-Yutani', signal_type: 'operations', strength: 0.62 },
-    { source: 'TXN-73920', target: 'Stark Industries', signal_type: 'transaction', strength: 0.58 },
-  ];
-}

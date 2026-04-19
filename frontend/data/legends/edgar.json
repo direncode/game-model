@@ -1,0 +1,2055 @@
+{
+  "clusters": 724,
+  "connections": [
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000119380518000251",
+      "strength": 0.8,
+      "target": "filing_000139834426000247"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000139834426000247",
+      "strength": 0.8,
+      "target": "filing_000031506625001578"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000031506625001578",
+      "strength": 0.8,
+      "target": "filing_000114036126012942"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000114036126012942",
+      "strength": 0.8,
+      "target": "filing_000212655426000001"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000212655426000001",
+      "strength": 0.8,
+      "target": "filing_000199012726000004"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000199012726000004",
+      "strength": 0.8,
+      "target": "filing_000210927126000001"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000210927126000001",
+      "strength": 0.8,
+      "target": "filing_000031506626000360"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000031506626000360",
+      "strength": 0.8,
+      "target": "filing_000151199826000004"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000151199826000004",
+      "strength": 0.8,
+      "target": "filing_000155728826000004"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000119312526049843",
+      "strength": 0.8,
+      "target": "filing_000185100326000011"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000185100326000011",
+      "strength": 0.8,
+      "target": "filing_000171889226000002"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000171889226000002",
+      "strength": 0.8,
+      "target": "filing_000107693026000039"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000107693026000039",
+      "strength": 0.8,
+      "target": "filing_000149315225024774"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000149315225024774",
+      "strength": 0.8,
+      "target": "filing_000110465926017089"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000110465926017089",
+      "strength": 0.8,
+      "target": "filing_000103297525000076"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000103297525000076",
+      "strength": 0.8,
+      "target": "filing_000119312526045187"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000119312526045187",
+      "strength": 0.8,
+      "target": "filing_000148729226000002"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000195047126000003",
+      "strength": 0.8,
+      "target": "filing_000124008526000009"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000124008526000009",
+      "strength": 0.8,
+      "target": "filing_000197636326000009"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000168316826000891",
+      "strength": 0.8,
+      "target": "filing_000162828026008609"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000162828026008609",
+      "strength": 0.8,
+      "target": "filing_000162828026012666"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000162828026012666",
+      "strength": 0.8,
+      "target": "filing_000148104524000004"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000148104524000004",
+      "strength": 0.8,
+      "target": "filing_000032018725000144"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000180483126000004",
+      "strength": 0.8,
+      "target": "filing_000200101126000029"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000200101126000029",
+      "strength": 0.8,
+      "target": "filing_000119312526140012"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000119312526140012",
+      "strength": 0.8,
+      "target": "filing_000116755726000029"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000085973726000015",
+      "strength": 0.8,
+      "target": "filing_000091538926000047"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000031314325000078",
+      "strength": 0.8,
+      "target": "filing_000090514826000697"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000090514826000697",
+      "strength": 0.8,
+      "target": "filing_000172847226000001"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000205032725000015",
+      "strength": 0.8,
+      "target": "filing_000086575226000010"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000086575226000010",
+      "strength": 0.8,
+      "target": "filing_000094787126000159"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000094787126000159",
+      "strength": 0.8,
+      "target": "filing_000092963825003467"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000092963825003467",
+      "strength": 0.8,
+      "target": "filing_000195917326001384"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000195917326001384",
+      "strength": 0.8,
+      "target": "filing_000095012307008547"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000095012307008547",
+      "strength": 0.8,
+      "target": "filing_000110465926034240"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000110465926034240",
+      "strength": 0.8,
+      "target": "filing_000119312526085802"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000167154125000001",
+      "strength": 0.8,
+      "target": "filing_000119380517003227"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000119380517003227",
+      "strength": 0.8,
+      "target": "filing_000117891325004095"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000117891325004095",
+      "strength": 0.8,
+      "target": "filing_000139834426003083"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "filing_000139834426003083",
+      "strength": 0.8,
+      "target": "filing_000160042926000001"
+    }
+  ],
+  "cost": "$0.00",
+  "coverage": 1.0,
+  "database_name": "SEC EDGAR",
+  "description": "SEC 10-K filings corpus",
+  "legend_id": "edgar",
+  "survivors": [
+    {
+      "anomaly_score": 0.0829,
+      "name": "filing_000119380518000251",
+      "score": 0.6233,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0825,
+      "name": "filing_000139834426000247",
+      "score": 0.6219,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.08,
+      "name": "filing_000031506625001578",
+      "score": 0.6084,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0863,
+      "name": "filing_000114036126012942",
+      "score": 0.6063,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0798,
+      "name": "filing_000119312526049843",
+      "score": 0.6053,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0828,
+      "name": "filing_000185100326000011",
+      "score": 0.5991,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0825,
+      "name": "filing_000195047126000003",
+      "score": 0.5989,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0885,
+      "name": "filing_000168316826000891",
+      "score": 0.5938,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0899,
+      "name": "filing_000180483126000004",
+      "score": 0.5934,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0792,
+      "name": "filing_000212655426000001",
+      "score": 0.5933,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0763,
+      "name": "filing_000199012726000004",
+      "score": 0.5843,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0813,
+      "name": "filing_000200101126000029",
+      "score": 0.5831,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0779,
+      "name": "filing_000085973726000015",
+      "score": 0.5822,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0738,
+      "name": "filing_000031314325000078",
+      "score": 0.5806,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0814,
+      "name": "filing_000205032725000015",
+      "score": 0.579,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.08,
+      "name": "filing_000167154125000001",
+      "score": 0.5781,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0757,
+      "name": "filing_000090514826000697",
+      "score": 0.5779,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0756,
+      "name": "filing_000171889226000002",
+      "score": 0.5754,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0722,
+      "name": "filing_000165495426000939",
+      "score": 0.5746,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0592,
+      "name": "filing_000183174626000009",
+      "score": 0.5745,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0701,
+      "name": "filing_000210927126000001",
+      "score": 0.5726,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0821,
+      "name": "filing_000107693026000039",
+      "score": 0.5724,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0753,
+      "name": "filing_000091607626000038",
+      "score": 0.5692,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0778,
+      "name": "filing_000169082026000019",
+      "score": 0.5691,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0706,
+      "name": "filing_000086575226000010",
+      "score": 0.5687,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0721,
+      "name": "filing_000119380517003227",
+      "score": 0.5682,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0736,
+      "name": "filing_000149315225024774",
+      "score": 0.568,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0681,
+      "name": "filing_000119380525000406",
+      "score": 0.5671,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0715,
+      "name": "filing_000172847226000001",
+      "score": 0.5662,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0728,
+      "name": "filing_999999999526001073",
+      "score": 0.5659,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0722,
+      "name": "filing_000196414226000002",
+      "score": 0.5658,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0761,
+      "name": "filing_000003877726000048",
+      "score": 0.5634,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0741,
+      "name": "filing_000174591626000113",
+      "score": 0.5634,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0695,
+      "name": "filing_000119312526033765",
+      "score": 0.5626,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0682,
+      "name": "filing_000002474126000145",
+      "score": 0.5606,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0866,
+      "name": "filing_000129281426001623",
+      "score": 0.5603,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0694,
+      "name": "filing_000010138226000120",
+      "score": 0.5602,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0722,
+      "name": "filing_000119312526140012",
+      "score": 0.5588,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.155,
+      "name": "filing_000094787126000159",
+      "score": 0.5583,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1202,
+      "name": "filing_000110465926017089",
+      "score": 0.5573,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0717,
+      "name": "filing_000110465926038881",
+      "score": 0.5552,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0697,
+      "name": "filing_000092963825003467",
+      "score": 0.554,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0678,
+      "name": "filing_000119312525335833",
+      "score": 0.553,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0712,
+      "name": "filing_000119312526061540",
+      "score": 0.5516,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0624,
+      "name": "filing_000088634626000028",
+      "score": 0.5508,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0741,
+      "name": "filing_000129281426001690",
+      "score": 0.5506,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0706,
+      "name": "filing_000195917326001384",
+      "score": 0.5496,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0712,
+      "name": "filing_000110465926020888",
+      "score": 0.5475,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0598,
+      "name": "filing_000095010326004034",
+      "score": 0.5463,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0672,
+      "name": "filing_000095012307008547",
+      "score": 0.5458,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0776,
+      "name": "filing_000103297525000076",
+      "score": 0.5437,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0873,
+      "name": "filing_000136447926000039",
+      "score": 0.54,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0645,
+      "name": "filing_000114036126001917",
+      "score": 0.5379,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0731,
+      "name": "filing_000119380515001198",
+      "score": 0.5371,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0601,
+      "name": "filing_000119312525306953",
+      "score": 0.5339,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0587,
+      "name": "filing_000199195826000002",
+      "score": 0.5294,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0905,
+      "name": "filing_000090610726000008",
+      "score": 0.4683,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0911,
+      "name": "filing_000156761919008670",
+      "score": 0.4615,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0863,
+      "name": "filing_000212655826000001",
+      "score": 0.4554,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0779,
+      "name": "filing_000080248126000008",
+      "score": 0.4331,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.077,
+      "name": "filing_000161551525000015",
+      "score": 0.4329,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 1.0,
+      "name": "filing_000195917326000758",
+      "score": 0.429,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.9351,
+      "name": "filing_000121465926004185",
+      "score": 0.4274,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1028,
+      "name": "filing_000035419026000122",
+      "score": 0.4273,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.9706,
+      "name": "filing_000105079726000025",
+      "score": 0.4249,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.081,
+      "name": "filing_000119380524000260",
+      "score": 0.4245,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0819,
+      "name": "filing_000110465926014592",
+      "score": 0.424,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0722,
+      "name": "filing_000160831126000003",
+      "score": 0.4236,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0755,
+      "name": "filing_000110465926034240",
+      "score": 0.4141,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.09,
+      "name": "filing_000009144026000077",
+      "score": 0.402,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.7385,
+      "name": "filing_000165315326000003",
+      "score": 0.4015,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0761,
+      "name": "filing_000119312526047253",
+      "score": 0.4006,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0714,
+      "name": "filing_000157278325000007",
+      "score": 0.3975,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.8624,
+      "name": "filing_000203383426000008",
+      "score": 0.3968,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0799,
+      "name": "filing_000119312525287974",
+      "score": 0.3959,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0789,
+      "name": "filing_000114036125041444",
+      "score": 0.3951,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0871,
+      "name": "filing_000119312525279505",
+      "score": 0.392,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0718,
+      "name": "filing_000147217626000001",
+      "score": 0.389,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.8261,
+      "name": "filing_000010577026000018",
+      "score": 0.3859,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1012,
+      "name": "filing_000119312526140115",
+      "score": 0.3858,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.7753,
+      "name": "filing_000110465925099303",
+      "score": 0.3852,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0746,
+      "name": "filing_000119312526094287",
+      "score": 0.3849,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.076,
+      "name": "filing_000117891325004095",
+      "score": 0.3842,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0712,
+      "name": "filing_000122520826002617",
+      "score": 0.3833,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0639,
+      "name": "filing_000078901926000061",
+      "score": 0.3832,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0967,
+      "name": "filing_000210409426000007",
+      "score": 0.3826,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0749,
+      "name": "filing_000202984225000002",
+      "score": 0.3826,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0702,
+      "name": "filing_000196905526000002",
+      "score": 0.3822,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0713,
+      "name": "filing_000115755726000004",
+      "score": 0.3809,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1077,
+      "name": "filing_000178318026000008",
+      "score": 0.3803,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0943,
+      "name": "filing_000121390025104686",
+      "score": 0.3798,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0698,
+      "name": "filing_000119312526053349",
+      "score": 0.3794,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.7684,
+      "name": "filing_000091957426001185",
+      "score": 0.3792,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0721,
+      "name": "filing_000176650226000003",
+      "score": 0.3787,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0798,
+      "name": "filing_000162828026011727",
+      "score": 0.3787,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0713,
+      "name": "filing_000210403626000001",
+      "score": 0.3785,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1055,
+      "name": "filing_000201424026000002",
+      "score": 0.3783,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1006,
+      "name": "filing_000208966126000016",
+      "score": 0.378,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0699,
+      "name": "filing_000119312526127028",
+      "score": 0.3772,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0933,
+      "name": "filing_000129281426001965",
+      "score": 0.3764,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0831,
+      "name": "filing_000151730226000047",
+      "score": 0.3756,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.4553,
+      "name": "filing_000116755726000029",
+      "score": 0.3745,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0671,
+      "name": "filing_000119312526140007",
+      "score": 0.3737,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0962,
+      "name": "filing_000124264826000014",
+      "score": 0.373,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0605,
+      "name": "filing_000195917326000088",
+      "score": 0.3699,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.062,
+      "name": "filing_000031506626000360",
+      "score": 0.3691,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0788,
+      "name": "filing_000191870426009253",
+      "score": 0.3681,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0654,
+      "name": "filing_000211061926000003",
+      "score": 0.3664,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0744,
+      "name": "filing_000124008526000009",
+      "score": 0.3658,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0638,
+      "name": "filing_000031506626000505",
+      "score": 0.3653,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0841,
+      "name": "filing_000000496226000140",
+      "score": 0.3643,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0596,
+      "name": "filing_000125839426000006",
+      "score": 0.3639,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0946,
+      "name": "filing_000162828026023250",
+      "score": 0.3624,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0621,
+      "name": "filing_000106569626000026",
+      "score": 0.3617,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0777,
+      "name": "filing_000151199826000004",
+      "score": 0.3617,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0598,
+      "name": "filing_000195917326002584",
+      "score": 0.3614,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.06,
+      "name": "filing_000197449426000140",
+      "score": 0.3602,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1017,
+      "name": "filing_000121390025044060",
+      "score": 0.3601,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0936,
+      "name": "filing_000156709425000009",
+      "score": 0.3589,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1056,
+      "name": "filing_000121390025107817",
+      "score": 0.3575,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.101,
+      "name": "filing_000155837025006281",
+      "score": 0.357,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0561,
+      "name": "filing_000119312526085802",
+      "score": 0.3563,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.706,
+      "name": "filing_000090655326000022",
+      "score": 0.3556,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1021,
+      "name": "filing_000114519726000093",
+      "score": 0.3554,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0862,
+      "name": "filing_000141057825000706",
+      "score": 0.3551,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0952,
+      "name": "filing_000157601826000032",
+      "score": 0.3548,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0751,
+      "name": "filing_000117891326001442",
+      "score": 0.3547,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0972,
+      "name": "filing_000110465925117620",
+      "score": 0.354,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.7049,
+      "name": "filing_000162828026008609",
+      "score": 0.3534,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0826,
+      "name": "filing_000162828026022512",
+      "score": 0.3531,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6718,
+      "name": "filing_000195920226000001",
+      "score": 0.3526,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0829,
+      "name": "filing_000003614626000053",
+      "score": 0.3517,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0789,
+      "name": "filing_000119380512001773",
+      "score": 0.3515,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.698,
+      "name": "filing_000110465926013580",
+      "score": 0.3509,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0791,
+      "name": "filing_000119312525315754",
+      "score": 0.3507,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0783,
+      "name": "filing_000155728826000004",
+      "score": 0.3497,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6584,
+      "name": "filing_000187685926000001",
+      "score": 0.3494,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0756,
+      "name": "filing_000195917326002195",
+      "score": 0.3492,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0937,
+      "name": "filing_000121390025056250",
+      "score": 0.3488,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0963,
+      "name": "filing_000004619526000015",
+      "score": 0.3485,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1026,
+      "name": "filing_000129567926000006",
+      "score": 0.3484,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0784,
+      "name": "filing_000174033226000005",
+      "score": 0.3478,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0884,
+      "name": "filing_000110465926019821",
+      "score": 0.3475,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.69,
+      "name": "filing_000106299326001807",
+      "score": 0.3473,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0734,
+      "name": "filing_000005143426000062",
+      "score": 0.3467,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1046,
+      "name": "filing_000121390025109614",
+      "score": 0.3465,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0879,
+      "name": "filing_000210181325000001",
+      "score": 0.3463,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0775,
+      "name": "filing_000087258926000008",
+      "score": 0.3458,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0943,
+      "name": "filing_000101210026000016",
+      "score": 0.3458,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0936,
+      "name": "filing_000121481626000097",
+      "score": 0.3457,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0761,
+      "name": "filing_000203955225000007",
+      "score": 0.3454,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0736,
+      "name": "filing_000195107025000008",
+      "score": 0.344,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0803,
+      "name": "filing_000212654026000001",
+      "score": 0.3438,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0955,
+      "name": "filing_000094787116001120",
+      "score": 0.3434,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0953,
+      "name": "filing_000071253426000022",
+      "score": 0.343,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6789,
+      "name": "filing_000201830126000002",
+      "score": 0.343,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6898,
+      "name": "filing_000110465926031388",
+      "score": 0.3428,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0829,
+      "name": "filing_000121390026040006",
+      "score": 0.3423,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0889,
+      "name": "filing_000121390026014318",
+      "score": 0.3423,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0717,
+      "name": "filing_000035420425001313",
+      "score": 0.3422,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5941,
+      "name": "filing_000071742326000049",
+      "score": 0.3422,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0999,
+      "name": "filing_000138584926000014",
+      "score": 0.3421,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0882,
+      "name": "filing_000119312526117735",
+      "score": 0.342,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0819,
+      "name": "filing_000143774926004568",
+      "score": 0.3418,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0929,
+      "name": "filing_000168722926000016",
+      "score": 0.3413,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0811,
+      "name": "filing_000155837025000885",
+      "score": 0.3404,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5754,
+      "name": "filing_000162828026007781",
+      "score": 0.3403,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1005,
+      "name": "filing_000119312526036389",
+      "score": 0.3401,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0974,
+      "name": "filing_000088026626000010",
+      "score": 0.3399,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.091,
+      "name": "filing_000121390025072290",
+      "score": 0.3396,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6156,
+      "name": "filing_000206697626000002",
+      "score": 0.3395,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6937,
+      "name": "filing_000162828026008561",
+      "score": 0.3391,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0765,
+      "name": "filing_000001154426000005",
+      "score": 0.339,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0937,
+      "name": "filing_000102621426000005",
+      "score": 0.3389,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0907,
+      "name": "filing_000146659326000025",
+      "score": 0.3389,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6189,
+      "name": "filing_000110465924049428",
+      "score": 0.3386,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6301,
+      "name": "filing_000110465926031260",
+      "score": 0.3381,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0868,
+      "name": "filing_000119312526071651",
+      "score": 0.3378,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.095,
+      "name": "filing_000166998026000002",
+      "score": 0.3377,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0835,
+      "name": "filing_000102621426000009",
+      "score": 0.3376,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0716,
+      "name": "filing_000184775726000007",
+      "score": 0.3371,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0931,
+      "name": "filing_000121390025075382",
+      "score": 0.3371,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5872,
+      "name": "filing_000149315225024388",
+      "score": 0.3369,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0885,
+      "name": "filing_000087535726000023",
+      "score": 0.3368,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0732,
+      "name": "filing_000168285226000033",
+      "score": 0.3368,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0815,
+      "name": "filing_000110465924049421",
+      "score": 0.3363,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0729,
+      "name": "filing_000139834426003083",
+      "score": 0.3361,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0848,
+      "name": "filing_000207097926000113",
+      "score": 0.3358,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6791,
+      "name": "filing_000207097926000120",
+      "score": 0.3356,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1001,
+      "name": "filing_000087532026000153",
+      "score": 0.3355,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.082,
+      "name": "filing_000082531326000020",
+      "score": 0.3353,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0873,
+      "name": "filing_000087401526000144",
+      "score": 0.3353,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6442,
+      "name": "filing_000201238325002837",
+      "score": 0.3351,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0848,
+      "name": "filing_000001493026000027",
+      "score": 0.335,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0957,
+      "name": "filing_000032033526000133",
+      "score": 0.3346,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0655,
+      "name": "filing_000091538926000047",
+      "score": 0.3346,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0853,
+      "name": "filing_000117338225000009",
+      "score": 0.3345,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0844,
+      "name": "filing_000004619526000022",
+      "score": 0.3343,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.55,
+      "name": "filing_000091420825000394",
+      "score": 0.334,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6086,
+      "name": "filing_000181487626000008",
+      "score": 0.334,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0887,
+      "name": "filing_000162828026007822",
+      "score": 0.334,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0805,
+      "name": "filing_000146512825000018",
+      "score": 0.334,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0898,
+      "name": "filing_000141057825000806",
+      "score": 0.3339,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5523,
+      "name": "filing_000201238325002999",
+      "score": 0.3339,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.4879,
+      "name": "filing_000121390025106273",
+      "score": 0.3337,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0781,
+      "name": "filing_000119380521000806",
+      "score": 0.3336,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0913,
+      "name": "filing_000102621426000008",
+      "score": 0.3336,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0711,
+      "name": "filing_000103797626000064",
+      "score": 0.3335,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0713,
+      "name": "filing_000119312526045187",
+      "score": 0.3334,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0772,
+      "name": "filing_000169786226000032",
+      "score": 0.3333,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6433,
+      "name": "filing_000117881926000008",
+      "score": 0.3333,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6434,
+      "name": "filing_000143774926007604",
+      "score": 0.333,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.09,
+      "name": "filing_000122520826004226",
+      "score": 0.3329,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0898,
+      "name": "filing_000119312526105117",
+      "score": 0.3328,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0875,
+      "name": "filing_000143774926007417",
+      "score": 0.3326,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0805,
+      "name": "filing_000092052226000003",
+      "score": 0.3326,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0953,
+      "name": "filing_000133403626000006",
+      "score": 0.3325,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0936,
+      "name": "filing_000085698226000008",
+      "score": 0.3323,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0909,
+      "name": "filing_000110465925110741",
+      "score": 0.3322,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.083,
+      "name": "filing_000100291025000112",
+      "score": 0.332,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0739,
+      "name": "filing_000119380515002036",
+      "score": 0.332,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0894,
+      "name": "filing_000110465926039140",
+      "score": 0.3318,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1145,
+      "name": "filing_000110465926038185",
+      "score": 0.3317,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0742,
+      "name": "filing_000195004726001570",
+      "score": 0.3316,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0949,
+      "name": "filing_000162828026012666",
+      "score": 0.3315,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5524,
+      "name": "filing_000114036126007366",
+      "score": 0.3313,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0877,
+      "name": "filing_000106157425000006",
+      "score": 0.3312,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0829,
+      "name": "filing_000162828026008033",
+      "score": 0.3311,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5704,
+      "name": "filing_000131122026000004",
+      "score": 0.331,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6483,
+      "name": "filing_000110465926034681",
+      "score": 0.3309,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0865,
+      "name": "filing_000179186326000004",
+      "score": 0.3308,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0877,
+      "name": "filing_000110784326000008",
+      "score": 0.3308,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6002,
+      "name": "filing_000110465925116419",
+      "score": 0.3306,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6303,
+      "name": "filing_000073070826000077",
+      "score": 0.3305,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0909,
+      "name": "filing_000151292025000014",
+      "score": 0.3304,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0814,
+      "name": "filing_000157104914006193",
+      "score": 0.3304,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0887,
+      "name": "filing_000117120025000251",
+      "score": 0.3303,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0969,
+      "name": "filing_000116737925000012",
+      "score": 0.3303,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0841,
+      "name": "filing_000089968926000009",
+      "score": 0.3302,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.1187,
+      "name": "filing_000146809126000006",
+      "score": 0.3301,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0833,
+      "name": "filing_000205256826000008",
+      "score": 0.3298,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0798,
+      "name": "filing_000195682725000035",
+      "score": 0.3298,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5693,
+      "name": "filing_000127428126000004",
+      "score": 0.3298,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.086,
+      "name": "filing_000162828026011405",
+      "score": 0.3297,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.077,
+      "name": "filing_000081555626000015",
+      "score": 0.3293,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0733,
+      "name": "filing_000106429926000002",
+      "score": 0.3287,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0866,
+      "name": "filing_000197640825000393",
+      "score": 0.3286,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.6047,
+      "name": "filing_000095014226000420",
+      "score": 0.3285,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0728,
+      "name": "filing_000197636326000009",
+      "score": 0.3272,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0862,
+      "name": "filing_000071253426000025",
+      "score": 0.3263,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0844,
+      "name": "filing_000010088526000098",
+      "score": 0.3259,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.078,
+      "name": "filing_000166916226000015",
+      "score": 0.3255,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0969,
+      "name": "filing_000119312525317630",
+      "score": 0.3254,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0803,
+      "name": "filing_000143299126000003",
+      "score": 0.3243,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0804,
+      "name": "filing_000126114625000006",
+      "score": 0.324,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0756,
+      "name": "filing_000193485026000012",
+      "score": 0.3233,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0754,
+      "name": "filing_000110465925015403",
+      "score": 0.3231,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0967,
+      "name": "filing_000133575426000001",
+      "score": 0.3229,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5084,
+      "name": "filing_000119312514038134",
+      "score": 0.3227,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0636,
+      "name": "filing_000082414226000016",
+      "score": 0.3227,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0877,
+      "name": "filing_000149269126000016",
+      "score": 0.3224,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0773,
+      "name": "filing_000160042926000001",
+      "score": 0.3222,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0758,
+      "name": "filing_000003614626000031",
+      "score": 0.3217,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0793,
+      "name": "filing_000165151726000001",
+      "score": 0.3214,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5613,
+      "name": "filing_000119312526112386",
+      "score": 0.3214,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0829,
+      "name": "filing_000119312525196909",
+      "score": 0.321,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0898,
+      "name": "filing_000162828026005842",
+      "score": 0.321,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0845,
+      "name": "filing_000154577226000006",
+      "score": 0.3206,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0643,
+      "name": "filing_000090266426001613",
+      "score": 0.3198,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5059,
+      "name": "filing_000187417826000012",
+      "score": 0.3196,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0649,
+      "name": "filing_000148729226000002",
+      "score": 0.3196,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0797,
+      "name": "filing_000114036126012911",
+      "score": 0.3195,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.087,
+      "name": "filing_000086575225000124",
+      "score": 0.3189,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0803,
+      "name": "filing_000119312525270991",
+      "score": 0.3188,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5887,
+      "name": "filing_000035419026000095",
+      "score": 0.3188,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0741,
+      "name": "filing_000119312526104339",
+      "score": 0.3181,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0984,
+      "name": "filing_000148104524000004",
+      "score": 0.3179,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0929,
+      "name": "filing_000119380524000993",
+      "score": 0.3178,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.536,
+      "name": "filing_000117891326000916",
+      "score": 0.3174,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.5445,
+      "name": "filing_000139180926000008",
+      "score": 0.3172,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0668,
+      "name": "filing_000201130526000001",
+      "score": 0.3164,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0747,
+      "name": "filing_000162828026016651",
+      "score": 0.3156,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0853,
+      "name": "filing_000110465926031323",
+      "score": 0.3145,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0915,
+      "name": "filing_000208984426000001",
+      "score": 0.3141,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0921,
+      "name": "filing_000119312526065945",
+      "score": 0.3141,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0827,
+      "name": "filing_000032018725000144",
+      "score": 0.3133,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0851,
+      "name": "filing_000094584126000077",
+      "score": 0.3133,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0941,
+      "name": "filing_000120497525000017",
+      "score": 0.3123,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.077,
+      "name": "filing_000147676525000080",
+      "score": 0.3121,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0637,
+      "name": "filing_000167201326000071",
+      "score": 0.3118,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.07,
+      "name": "filing_000119312526099056",
+      "score": 0.3118,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.076,
+      "name": "filing_000137536526000010",
+      "score": 0.3116,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0694,
+      "name": "filing_000101582025000049",
+      "score": 0.3115,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0742,
+      "name": "filing_000162828025048975",
+      "score": 0.311,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0908,
+      "name": "filing_000103120326000074",
+      "score": 0.3108,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0824,
+      "name": "filing_000002790426000013",
+      "score": 0.3103,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0892,
+      "name": "filing_000119312526056485",
+      "score": 0.3102,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0863,
+      "name": "filing_000119312526124227",
+      "score": 0.3101,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0763,
+      "name": "filing_000119312526065951",
+      "score": 0.31,
+      "type": "filing"
+    },
+    {
+      "anomaly_score": 0.0646,
+      "name": "filing_000110465926031152",
+      "score": 0.3099,
+      "type": "filing"
+    }
+  ],
+  "survivors_truncated_from": 499,
+  "total_entities": 61041,
+  "wall_time": "64.6s"
+}

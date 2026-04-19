@@ -1,0 +1,2055 @@
+{
+  "clusters": 87,
+  "connections": [
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_alchemy_clavis__c032",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_art_control__c085"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c085",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__corum_US9912031__c036"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_alchemy_clavis__c081",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_alchemy_clavis__c060"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_alchemy_clavis__c060",
+      "strength": 0.8,
+      "target": "latk_polymath__vn_monte_carlo_control__c048"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__vn_monte_carlo_control__c048",
+      "strength": 0.8,
+      "target": "latk_polymath__vn_monte_carlo_control__c071"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__vn_monte_carlo_control__c071",
+      "strength": 0.8,
+      "target": "latk_polymath__vn_mathematical_foundations_qm__c091"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__vn_mathematical_foundations_qm__c091",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_art_control__c047"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c047",
+      "strength": 0.8,
+      "target": "latk_polymath__vn_monte_carlo_control__c076"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__vn_monte_carlo_control__c076",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__witricity_US8686598__c007"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__witricity_US8686598__c007",
+      "strength": 0.8,
+      "target": "latk_polymath__vn_self_reproducing_automata__c097"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_alchemy_clavis__c082",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__info_HEVC2013__c056"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_theology_prophecies__c143",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__stone_US714756__c034"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__stone_US714756__c034",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__marconi_US586193__c047"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__info_HEVC2013__c046",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c068"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c068",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__info_SHANNON1948__c014"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__info_SHANNON1948__c014",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c001"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c001",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__witricity_US7741734__c041"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__witricity_US7741734__c041",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_principia_mechanics__c101"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c101",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_art_control__c113"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c113",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_art_control__c097"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c097",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_theology_prophecies__c161"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_portroyal_grammar__c054",
+      "strength": 0.8,
+      "target": "latk_linguistics__modern_backus_naur_form__c076"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__modern_backus_naur_form__c076",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__corum_US9912031__c074"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__corum_US9912031__c074",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__corum_US9923385__c033"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__corum_US9923385__c033",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__modern_radio_antenna__c007"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_saussure_course__c054",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_opticks_light__c055"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_opticks_light__c055",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__marconi_US586193__c051"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__marconi_US586193__c051",
+      "strength": 0.8,
+      "target": "latk_polymath__modern_rotor_aerodynamics__c048"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__modern_rotor_aerodynamics__c048",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_principia_mechanics__c110"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_principia_mechanics__c110",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_theology_prophecies__c063"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c042",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_principia_mechanics__c053"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_heterogeneous__marconi_US586193__c002",
+      "strength": 0.8,
+      "target": "latk_heterogeneous__stone_US714756__c005"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_principia_mechanics__c047",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c071"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c071",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c027"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c027",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_art_control__c087"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_art_control__c087",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c017"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_linguistics__linguistics_humboldt_language__c017",
+      "strength": 0.8,
+      "target": "latk_linguistics__linguistics_humboldt_language__c014"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_principia_mechanics__c131",
+      "strength": 0.8,
+      "target": "latk_polymath__leonardo_water_motion__c168"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__leonardo_water_motion__c168",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_principia_mechanics__c154"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "latk_polymath__newton_principia_mechanics__c154",
+      "strength": 0.8,
+      "target": "latk_polymath__newton_principia_mechanics__c151"
+    }
+  ],
+  "cost": "$0.00",
+  "coverage": 1.0,
+  "database_name": "LATK Mini",
+  "description": "Mini cross-era corpus",
+  "legend_id": "latk_mini",
+  "survivors": [
+    {
+      "anomaly_score": 0.2453,
+      "name": "latk_polymath__newton_alchemy_clavis__c032",
+      "score": 0.7792,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2562,
+      "name": "latk_polymath__leonardo_art_control__c085",
+      "score": 0.7392,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2455,
+      "name": "latk_polymath__newton_alchemy_clavis__c081",
+      "score": 0.7222,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2399,
+      "name": "latk_polymath__newton_alchemy_clavis__c082",
+      "score": 0.7036,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.212,
+      "name": "latk_polymath__newton_alchemy_clavis__c060",
+      "score": 0.6769,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2297,
+      "name": "latk_polymath__newton_theology_prophecies__c143",
+      "score": 0.6649,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.222,
+      "name": "latk_heterogeneous__info_HEVC2013__c046",
+      "score": 0.6624,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2194,
+      "name": "latk_polymath__leonardo_art_control__c101",
+      "score": 0.6609,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2176,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c054",
+      "score": 0.6575,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2187,
+      "name": "latk_linguistics__linguistics_saussure_course__c054",
+      "score": 0.653,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.208,
+      "name": "latk_linguistics__linguistics_humboldt_language__c042",
+      "score": 0.6506,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2108,
+      "name": "latk_heterogeneous__marconi_US586193__c002",
+      "score": 0.6486,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2283,
+      "name": "latk_polymath__newton_principia_mechanics__c047",
+      "score": 0.6427,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1901,
+      "name": "latk_polymath__newton_principia_mechanics__c131",
+      "score": 0.6393,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1965,
+      "name": "latk_linguistics__modern_backus_naur_form__c076",
+      "score": 0.6393,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2073,
+      "name": "latk_heterogeneous__info_SHANNON1948__c035",
+      "score": 0.6386,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2157,
+      "name": "latk_heterogeneous__corum_US9912031__c034",
+      "score": 0.6356,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2099,
+      "name": "latk_heterogeneous__witricity_US8686598__c017",
+      "score": 0.6353,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2142,
+      "name": "latk_heterogeneous__marconi_US586193__c021",
+      "score": 0.631,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1991,
+      "name": "latk_polymath__vn_self_reproducing_automata__c012",
+      "score": 0.6307,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2206,
+      "name": "latk_polymath__leonardo_art_control__c031",
+      "score": 0.6302,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2005,
+      "name": "latk_heterogeneous__corum_US9912031__c074",
+      "score": 0.6279,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1995,
+      "name": "latk_polymath__leonardo_art_control__c109",
+      "score": 0.6252,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2217,
+      "name": "latk_polymath__newton_opticks_light__c055",
+      "score": 0.6234,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2128,
+      "name": "latk_polymath__leonardo_art_control__c113",
+      "score": 0.616,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.184,
+      "name": "latk_polymath__leonardo_hydraulics_turbulence__c164",
+      "score": 0.6155,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1914,
+      "name": "latk_polymath__newton_alchemy_clavis__c108",
+      "score": 0.6143,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2254,
+      "name": "latk_polymath__leonardo_art_control__c006",
+      "score": 0.614,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2004,
+      "name": "latk_linguistics__linguistics_humboldt_language__c009",
+      "score": 0.6124,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2004,
+      "name": "latk_polymath__newton_principia_mechanics__c098",
+      "score": 0.6123,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.191,
+      "name": "latk_linguistics__linguistics_humboldt_language__c047",
+      "score": 0.6118,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2212,
+      "name": "latk_polymath__leonardo_art_control__c022",
+      "score": 0.6117,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1933,
+      "name": "latk_linguistics__linguistics_saussure_course__c044",
+      "score": 0.6115,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2136,
+      "name": "latk_heterogeneous__deforest_US841387__c018",
+      "score": 0.6102,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.207,
+      "name": "latk_linguistics__linguistics_humboldt_language__c071",
+      "score": 0.6101,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1882,
+      "name": "latk_heterogeneous__info_SHANNON1948__c052",
+      "score": 0.6098,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2012,
+      "name": "latk_linguistics__modern_backus_naur_form__c032",
+      "score": 0.6079,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1874,
+      "name": "latk_heterogeneous__corum_US9912031__c065",
+      "score": 0.6075,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1905,
+      "name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
+      "score": 0.6072,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1957,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c061",
+      "score": 0.6068,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1968,
+      "name": "latk_linguistics__linguistics_humboldt_language__c005",
+      "score": 0.6062,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1899,
+      "name": "latk_polymath__leonardo_anatomy__c082",
+      "score": 0.6059,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2216,
+      "name": "latk_polymath__leonardo_art_control__c060",
+      "score": 0.6059,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2033,
+      "name": "latk_linguistics__linguistics_humboldt_language__c027",
+      "score": 0.6056,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1635,
+      "name": "latk_polymath__leonardo_water_motion__c168",
+      "score": 0.6049,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2174,
+      "name": "latk_polymath__vn_monte_carlo_control__c048",
+      "score": 0.6038,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2084,
+      "name": "latk_heterogeneous__tesla_ac_motor_US382280__c007",
+      "score": 0.603,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2079,
+      "name": "latk_polymath__newton_theology_prophecies__c065",
+      "score": 0.6021,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1848,
+      "name": "latk_polymath__leonardo_flight_of_birds__c194",
+      "score": 0.6018,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1825,
+      "name": "latk_polymath__vn_cellular_automata_transitions__c088",
+      "score": 0.5998,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2073,
+      "name": "latk_polymath__leonardo_optics_perspective__c097",
+      "score": 0.5993,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2078,
+      "name": "latk_polymath__leonardo_art_control__c097",
+      "score": 0.5986,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1987,
+      "name": "latk_heterogeneous__info_HEVC2013__c035",
+      "score": 0.597,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1957,
+      "name": "latk_linguistics__linguistics_saussure_course__c015",
+      "score": 0.5942,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1876,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c012",
+      "score": 0.5928,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1708,
+      "name": "latk_polymath__leonardo_optics_perspective__c148",
+      "score": 0.592,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1955,
+      "name": "latk_heterogeneous__corum_US9912031__c052",
+      "score": 0.5919,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1945,
+      "name": "latk_polymath__vn_cellular_automata_transitions__c039",
+      "score": 0.5917,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1831,
+      "name": "latk_polymath__newton_theology_prophecies__c043",
+      "score": 0.5917,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2048,
+      "name": "latk_heterogeneous__stone_US714756__c013",
+      "score": 0.5916,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2017,
+      "name": "latk_polymath__newton_alchemy_clavis__c087",
+      "score": 0.5909,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1865,
+      "name": "latk_linguistics__linguistics_humboldt_language__c008",
+      "score": 0.5899,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1987,
+      "name": "latk_heterogeneous__corum_US9923385__c047",
+      "score": 0.5875,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1865,
+      "name": "latk_polymath__vn_self_reproducing_automata__c016",
+      "score": 0.5875,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1976,
+      "name": "latk_heterogeneous__info_JPEG1992__c027",
+      "score": 0.5861,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2065,
+      "name": "latk_polymath__leonardo_hydraulics_turbulence__c068",
+      "score": 0.5845,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1961,
+      "name": "latk_polymath__vn_edvac_report__c046",
+      "score": 0.583,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1909,
+      "name": "latk_polymath__leonardo_art_control__c070",
+      "score": 0.5806,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.176,
+      "name": "latk_polymath__vn_monte_carlo_control__c058",
+      "score": 0.5792,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1838,
+      "name": "latk_linguistics__modern_backus_naur_form__c036",
+      "score": 0.5791,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1905,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c033",
+      "score": 0.5788,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1782,
+      "name": "latk_polymath__vn_cellular_automata_transitions__c102",
+      "score": 0.5787,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1886,
+      "name": "latk_polymath__vn_mathematical_foundations_qm__c065",
+      "score": 0.5787,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1907,
+      "name": "latk_polymath__leonardo_art_control__c019",
+      "score": 0.5754,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1906,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c052",
+      "score": 0.575,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1782,
+      "name": "latk_polymath__leonardo_anatomy__c052",
+      "score": 0.5744,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1915,
+      "name": "latk_heterogeneous__corum_US9923385__c017",
+      "score": 0.574,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1764,
+      "name": "latk_polymath__vn_self_reproducing_automata__c109",
+      "score": 0.5738,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1886,
+      "name": "latk_polymath__newton_opticks_light__c029",
+      "score": 0.5737,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1916,
+      "name": "latk_polymath__vn_self_reproducing_automata__c048",
+      "score": 0.5734,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1886,
+      "name": "latk_heterogeneous__crypto_RSA_US4405829__c003",
+      "score": 0.5729,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1856,
+      "name": "latk_polymath__newton_theology_prophecies__c012",
+      "score": 0.5727,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1852,
+      "name": "latk_polymath__newton_theology_prophecies__c072",
+      "score": 0.5722,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1799,
+      "name": "latk_heterogeneous__corum_US9910144__c029",
+      "score": 0.5722,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1965,
+      "name": "latk_polymath__vn_edvac_report__c058",
+      "score": 0.5715,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1786,
+      "name": "latk_heterogeneous__info_JPEG1992__c024",
+      "score": 0.5711,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1811,
+      "name": "latk_polymath__newton_alchemy_clavis__c080",
+      "score": 0.5697,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1862,
+      "name": "latk_polymath__leonardo_art_control__c016",
+      "score": 0.5692,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1733,
+      "name": "latk_linguistics__modern_chomsky_syntactic_structures__c009",
+      "score": 0.569,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1858,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c022",
+      "score": 0.5681,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1791,
+      "name": "latk_heterogeneous__info_JPEG1992__c010",
+      "score": 0.5679,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.173,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c016",
+      "score": 0.5677,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.193,
+      "name": "latk_heterogeneous__info_HEVC2013__c041",
+      "score": 0.5663,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1875,
+      "name": "latk_polymath__leonardo_anatomy__c016",
+      "score": 0.5659,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1851,
+      "name": "latk_polymath__modern_materials_transition_metals__c050",
+      "score": 0.5653,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1813,
+      "name": "latk_heterogeneous__corum_US10084223__c052",
+      "score": 0.5653,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1853,
+      "name": "latk_linguistics__modern_chomsky_syntactic_structures__c010",
+      "score": 0.565,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.187,
+      "name": "latk_heterogeneous__corum_US9910144__c047",
+      "score": 0.5638,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1865,
+      "name": "latk_linguistics__modern_chomsky_hierarchy__c052",
+      "score": 0.5632,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1852,
+      "name": "latk_linguistics__linguistics_saussure_course__c026",
+      "score": 0.5632,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1793,
+      "name": "latk_polymath__vn_self_reproducing_automata__c061",
+      "score": 0.5631,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1745,
+      "name": "latk_linguistics__linguistics_panini_ashtadhyayi__c020",
+      "score": 0.5627,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1789,
+      "name": "latk_heterogeneous__corum_US9912031__c017",
+      "score": 0.5621,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1816,
+      "name": "latk_polymath__leonardo_art_control__c038",
+      "score": 0.5619,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1593,
+      "name": "latk_polymath__leonardo_art_control__c025",
+      "score": 0.5614,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1779,
+      "name": "latk_polymath__vn_self_reproducing_automata__c036",
+      "score": 0.5613,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1758,
+      "name": "latk_polymath__newton_opticks_light__c068",
+      "score": 0.5608,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1724,
+      "name": "latk_linguistics__modern_chomsky_hierarchy__c000",
+      "score": 0.5596,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1885,
+      "name": "latk_polymath__vn_self_reproducing_automata__c017",
+      "score": 0.5584,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1817,
+      "name": "latk_linguistics__linguistics_saussure_course__c074",
+      "score": 0.5578,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1921,
+      "name": "latk_polymath__leonardo_anatomy__c011",
+      "score": 0.5577,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1764,
+      "name": "latk_polymath__newton_theology_prophecies__c025",
+      "score": 0.5572,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1673,
+      "name": "latk_heterogeneous__corum_US10084223__c036",
+      "score": 0.5572,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2688,
+      "name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c010",
+      "score": 0.5568,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1757,
+      "name": "latk_heterogeneous__tesla_US645576__c045",
+      "score": 0.5564,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1817,
+      "name": "latk_polymath__newton_alchemy_clavis__c002",
+      "score": 0.5559,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1707,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c062",
+      "score": 0.5556,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1761,
+      "name": "latk_linguistics__linguistics_panini_ashtadhyayi__c029",
+      "score": 0.5553,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1663,
+      "name": "latk_heterogeneous__corum_US10084223__c021",
+      "score": 0.5552,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2995,
+      "name": "latk_polymath__leonardo_anatomy__c012",
+      "score": 0.555,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1805,
+      "name": "latk_heterogeneous__corum_US9910144__c007",
+      "score": 0.555,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2414,
+      "name": "latk_polymath__leonardo_flight_of_birds__c065",
+      "score": 0.5539,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1822,
+      "name": "latk_polymath__newton_opticks_light__c041",
+      "score": 0.5534,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1833,
+      "name": "latk_heterogeneous__witricity_US7741734__c031",
+      "score": 0.5533,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1727,
+      "name": "latk_polymath__leonardo_optics_perspective__c028",
+      "score": 0.5532,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1724,
+      "name": "latk_heterogeneous__info_LZ1984__c002",
+      "score": 0.5531,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1809,
+      "name": "latk_heterogeneous__corum_US9910144__c022",
+      "score": 0.5522,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1452,
+      "name": "latk_polymath__newton_opticks_light__c010",
+      "score": 0.5521,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1641,
+      "name": "latk_polymath__leonardo_anatomy__c047",
+      "score": 0.5487,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1757,
+      "name": "latk_heterogeneous__witricity_US8686598__c022",
+      "score": 0.5487,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1713,
+      "name": "latk_heterogeneous__witricity_US7741734__c012",
+      "score": 0.5486,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1726,
+      "name": "latk_heterogeneous__witricity_US7741734__c006",
+      "score": 0.548,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1706,
+      "name": "latk_polymath__newton_alchemy_clavis__c024",
+      "score": 0.5473,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1765,
+      "name": "latk_polymath__newton_theology_prophecies__c029",
+      "score": 0.5467,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1576,
+      "name": "latk_heterogeneous__info_LZ1984__c052",
+      "score": 0.5459,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1671,
+      "name": "latk_polymath__vn_self_reproducing_automata__c038",
+      "score": 0.545,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1696,
+      "name": "latk_polymath__leonardo_hydraulics_turbulence__c017",
+      "score": 0.5439,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1772,
+      "name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c004",
+      "score": 0.5438,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1689,
+      "name": "latk_heterogeneous__crypto_AES__c010",
+      "score": 0.5438,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1662,
+      "name": "latk_heterogeneous__corum_US9923385__c029",
+      "score": 0.5434,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1582,
+      "name": "latk_heterogeneous__corum_US9910144__c035",
+      "score": 0.5408,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1764,
+      "name": "latk_polymath__leonardo_water_motion__c076",
+      "score": 0.5408,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1603,
+      "name": "latk_polymath__modern_rotor_aerodynamics__c020",
+      "score": 0.5406,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1502,
+      "name": "latk_polymath__newton_theology_prophecies__c066",
+      "score": 0.5405,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1608,
+      "name": "latk_heterogeneous__crypto_AES__c014",
+      "score": 0.5402,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2247,
+      "name": "latk_heterogeneous__stone_US714756__c047",
+      "score": 0.5392,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1738,
+      "name": "latk_heterogeneous__info_LZ1984__c036",
+      "score": 0.5388,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1701,
+      "name": "latk_heterogeneous__info_LZ1984__c017",
+      "score": 0.538,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1502,
+      "name": "latk_heterogeneous__corum_US9910144__c016",
+      "score": 0.538,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1351,
+      "name": "latk_linguistics__linguistics_saussure_course__c012",
+      "score": 0.5374,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1568,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c011",
+      "score": 0.5369,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1693,
+      "name": "latk_polymath__leonardo_art_control__c030",
+      "score": 0.5368,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1506,
+      "name": "latk_polymath__vn_monte_carlo_control__c009",
+      "score": 0.5366,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1498,
+      "name": "latk_heterogeneous__tesla_US1119732__c020",
+      "score": 0.5365,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.164,
+      "name": "latk_polymath__vn_self_reproducing_automata__c031",
+      "score": 0.5354,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1666,
+      "name": "latk_heterogeneous__crypto_RSA_US4405829__c010",
+      "score": 0.5352,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1326,
+      "name": "latk_polymath__vn_monte_carlo_control__c010",
+      "score": 0.5338,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1405,
+      "name": "latk_heterogeneous__crypto_DH_US4200770__c022",
+      "score": 0.5334,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1512,
+      "name": "latk_heterogeneous__corum_US9923385__c035",
+      "score": 0.5308,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1586,
+      "name": "latk_polymath__modern_conway_life_universal__c002",
+      "score": 0.5299,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1382,
+      "name": "latk_heterogeneous__corum_US10084223__c018",
+      "score": 0.5285,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1937,
+      "name": "latk_polymath__modern_wolfram_class_iv__c002",
+      "score": 0.5272,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2254,
+      "name": "latk_heterogeneous__stone_US714756__c022",
+      "score": 0.5261,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1531,
+      "name": "latk_heterogeneous__info_LZ1984__c009",
+      "score": 0.5248,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.139,
+      "name": "latk_heterogeneous__modern_radio_antenna__c003",
+      "score": 0.5239,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1624,
+      "name": "latk_polymath__newton_theology_prophecies__c008",
+      "score": 0.5235,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1577,
+      "name": "latk_heterogeneous__witricity_US7741734__c045",
+      "score": 0.522,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1383,
+      "name": "latk_heterogeneous__corum_US10084223__c039",
+      "score": 0.522,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1436,
+      "name": "latk_heterogeneous__info_JPEG1992__c004",
+      "score": 0.5212,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1344,
+      "name": "latk_heterogeneous__crypto_AES__c005",
+      "score": 0.52,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1328,
+      "name": "latk_heterogeneous__corum_US9910144__c037",
+      "score": 0.5194,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1251,
+      "name": "latk_heterogeneous__modern_radio_antenna__c021",
+      "score": 0.5161,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2214,
+      "name": "latk_heterogeneous__marconi_US586193__c051",
+      "score": 0.5054,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2396,
+      "name": "latk_heterogeneous__info_HUFFMAN1952__c049",
+      "score": 0.4995,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2185,
+      "name": "latk_polymath__leonardo_art_control__c054",
+      "score": 0.4955,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1835,
+      "name": "latk_heterogeneous__fessenden_US706740__c012",
+      "score": 0.4945,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1647,
+      "name": "latk_polymath__newton_principia_mechanics__c154",
+      "score": 0.49,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2235,
+      "name": "latk_heterogeneous__witricity_US7741734__c047",
+      "score": 0.4851,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2084,
+      "name": "latk_heterogeneous__marconi_US586193__c022",
+      "score": 0.4768,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2051,
+      "name": "latk_polymath__modern_wolfram_class_iv__c007",
+      "score": 0.4763,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2016,
+      "name": "latk_polymath__leonardo_water_motion__c077",
+      "score": 0.4735,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2167,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c060",
+      "score": 0.4712,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1712,
+      "name": "latk_polymath__vn_cellular_automata_transitions__c103",
+      "score": 0.4665,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.209,
+      "name": "latk_polymath__vn_monte_carlo_control__c071",
+      "score": 0.4608,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2161,
+      "name": "latk_polymath__leonardo_art_control__c087",
+      "score": 0.4571,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1984,
+      "name": "latk_polymath__newton_alchemy_praxis__c088",
+      "score": 0.4481,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1917,
+      "name": "latk_linguistics__linguistics_humboldt_language__c068",
+      "score": 0.4403,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1919,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c010",
+      "score": 0.4386,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.191,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c041",
+      "score": 0.4363,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2054,
+      "name": "latk_polymath__modern_rotor_aerodynamics__c048",
+      "score": 0.4362,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2042,
+      "name": "latk_polymath__vn_mathematical_foundations_qm__c091",
+      "score": 0.4322,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1811,
+      "name": "latk_polymath__newton_opticks_light__c166",
+      "score": 0.4297,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2018,
+      "name": "latk_heterogeneous__info_SHANNON1948__c014",
+      "score": 0.4291,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1868,
+      "name": "latk_linguistics__linguistics_humboldt_language__c001",
+      "score": 0.429,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1943,
+      "name": "latk_polymath__vn_self_reproducing_automata__c023",
+      "score": 0.4285,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2105,
+      "name": "latk_polymath__vn_self_reproducing_automata__c066",
+      "score": 0.4209,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1982,
+      "name": "latk_linguistics__linguistics_humboldt_language__c017",
+      "score": 0.4201,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.202,
+      "name": "latk_heterogeneous__marconi_US586193__c005",
+      "score": 0.4182,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1952,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c075",
+      "score": 0.4154,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1876,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c019",
+      "score": 0.4091,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1963,
+      "name": "latk_heterogeneous__witricity_US8686598__c006",
+      "score": 0.4086,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2048,
+      "name": "latk_polymath__leonardo_art_control__c047",
+      "score": 0.4082,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2056,
+      "name": "latk_polymath__newton_theology_prophecies__c135",
+      "score": 0.4057,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2085,
+      "name": "latk_heterogeneous__stone_US714756__c005",
+      "score": 0.4056,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1967,
+      "name": "latk_heterogeneous__corum_US9923385__c033",
+      "score": 0.4044,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2071,
+      "name": "latk_polymath__vn_monte_carlo_control__c076",
+      "score": 0.3998,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1826,
+      "name": "latk_polymath__newton_principia_mechanics__c053",
+      "score": 0.398,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2095,
+      "name": "latk_polymath__leonardo_art_control__c091",
+      "score": 0.3956,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1909,
+      "name": "latk_heterogeneous__witricity_US8686598__c059",
+      "score": 0.3956,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1918,
+      "name": "latk_linguistics__modern_chomsky_hierarchy__c082",
+      "score": 0.3942,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2157,
+      "name": "latk_polymath__newton_principia_mechanics__c109",
+      "score": 0.3939,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1883,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c031",
+      "score": 0.3932,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1814,
+      "name": "latk_polymath__vn_self_reproducing_automata__c007",
+      "score": 0.3927,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.19,
+      "name": "latk_polymath__newton_alchemy_clavis__c007",
+      "score": 0.3918,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1823,
+      "name": "latk_polymath__newton_principia_mechanics__c151",
+      "score": 0.3913,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1895,
+      "name": "latk_heterogeneous__witricity_US8686598__c007",
+      "score": 0.3913,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1825,
+      "name": "latk_polymath__newton_alchemy_praxis__c046",
+      "score": 0.3894,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.222,
+      "name": "latk_linguistics__linguistics_humboldt_language__c014",
+      "score": 0.3888,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2243,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c096",
+      "score": 0.3887,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1709,
+      "name": "latk_heterogeneous__fessenden_US706737__c014",
+      "score": 0.3873,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2917,
+      "name": "latk_polymath__vn_edvac_report__c024",
+      "score": 0.3826,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2104,
+      "name": "latk_heterogeneous__marconi_US586193__c035",
+      "score": 0.3825,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2176,
+      "name": "latk_linguistics__linguistics_humboldt_language__c041",
+      "score": 0.3819,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1765,
+      "name": "latk_polymath__newton_alchemy_clavis__c054",
+      "score": 0.3818,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1691,
+      "name": "latk_polymath__leonardo_water_motion__c033",
+      "score": 0.381,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1803,
+      "name": "latk_heterogeneous__info_HEVC2013__c043",
+      "score": 0.3801,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1952,
+      "name": "latk_polymath__newton_alchemy_clavis__c012",
+      "score": 0.38,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2056,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c099",
+      "score": 0.3784,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2116,
+      "name": "latk_linguistics__linguistics_humboldt_language__c066",
+      "score": 0.3783,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1812,
+      "name": "latk_polymath__leonardo_water_motion__c187",
+      "score": 0.3767,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2163,
+      "name": "latk_polymath__newton_theology_prophecies__c133",
+      "score": 0.3756,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1548,
+      "name": "latk_polymath__leonardo_water_motion__c051",
+      "score": 0.3755,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 1.0,
+      "name": "latk_polymath__vn_mathematical_foundations_qm__c047",
+      "score": 0.375,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1315,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c001",
+      "score": 0.3746,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1857,
+      "name": "latk_polymath__vn_cellular_automata_transitions__c104",
+      "score": 0.3734,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1827,
+      "name": "latk_polymath__newton_theology_prophecies__c166",
+      "score": 0.3731,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2272,
+      "name": "latk_polymath__leonardo_art_control__c142",
+      "score": 0.3722,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2127,
+      "name": "latk_heterogeneous__stone_US714756__c034",
+      "score": 0.372,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.169,
+      "name": "latk_heterogeneous__info_HEVC2013__c052",
+      "score": 0.3717,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1851,
+      "name": "latk_polymath__leonardo_art_control__c164",
+      "score": 0.3715,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.201,
+      "name": "latk_polymath__newton_principia_mechanics__c039",
+      "score": 0.3713,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1466,
+      "name": "latk_heterogeneous__modern_radio_antenna__c007",
+      "score": 0.3706,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1517,
+      "name": "latk_polymath__newton_alchemy_clavis__c019",
+      "score": 0.3704,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2037,
+      "name": "latk_heterogeneous__info_HEVC2013__c056",
+      "score": 0.3702,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1901,
+      "name": "latk_heterogeneous__corum_US10084223__c057",
+      "score": 0.3695,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.172,
+      "name": "latk_heterogeneous__witricity_US7741734__c004",
+      "score": 0.3692,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2193,
+      "name": "latk_polymath__leonardo_art_control__c072",
+      "score": 0.3681,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1563,
+      "name": "latk_polymath__modern_materials_transition_metals__c004",
+      "score": 0.3674,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2238,
+      "name": "latk_polymath__leonardo_flight_of_birds__c018",
+      "score": 0.3669,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1609,
+      "name": "latk_heterogeneous__witricity_US7741734__c041",
+      "score": 0.366,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1932,
+      "name": "latk_polymath__leonardo_water_motion__c007",
+      "score": 0.3654,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1719,
+      "name": "latk_heterogeneous__tesla_US649621__c063",
+      "score": 0.3648,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1299,
+      "name": "latk_heterogeneous__tesla_ac_motor_US382280__c024",
+      "score": 0.3646,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.165,
+      "name": "latk_heterogeneous__info_JPEG1992__c013",
+      "score": 0.3635,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1794,
+      "name": "latk_polymath__newton_alchemy_praxis__c067",
+      "score": 0.3634,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2243,
+      "name": "latk_heterogeneous__marconi_US586193__c006",
+      "score": 0.3633,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1909,
+      "name": "latk_polymath__leonardo_art_control__c128",
+      "score": 0.3621,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1933,
+      "name": "latk_linguistics__linguistics_panini_ashtadhyayi__c077",
+      "score": 0.362,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2238,
+      "name": "latk_polymath__vn_self_reproducing_automata__c065",
+      "score": 0.3618,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2019,
+      "name": "latk_heterogeneous__marconi_US586193__c028",
+      "score": 0.3616,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1521,
+      "name": "latk_heterogeneous__crypto_NTRU_US6298137__c036",
+      "score": 0.3593,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2039,
+      "name": "latk_polymath__newton_principia_mechanics__c096",
+      "score": 0.3591,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.235,
+      "name": "latk_heterogeneous__deforest_US841387__c019",
+      "score": 0.3588,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2016,
+      "name": "latk_linguistics__linguistics_panini_ashtadhyayi__c074",
+      "score": 0.3577,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2049,
+      "name": "latk_heterogeneous__marconi_US586193__c047",
+      "score": 0.3576,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1894,
+      "name": "latk_polymath__newton_theology_prophecies__c047",
+      "score": 0.3576,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2035,
+      "name": "latk_polymath__newton_principia_mechanics__c110",
+      "score": 0.357,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2021,
+      "name": "latk_polymath__vn_self_reproducing_automata__c082",
+      "score": 0.357,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.21,
+      "name": "latk_polymath__newton_principia_mechanics__c135",
+      "score": 0.3564,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2039,
+      "name": "latk_heterogeneous__stone_US714756__c036",
+      "score": 0.3556,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1789,
+      "name": "latk_polymath__leonardo_flight_of_birds__c064",
+      "score": 0.3548,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1449,
+      "name": "latk_polymath__vn_mathematical_foundations_qm__c066",
+      "score": 0.3546,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2016,
+      "name": "latk_polymath__newton_opticks_light__c087",
+      "score": 0.3545,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1886,
+      "name": "latk_polymath__newton_alchemy_clavis__c066",
+      "score": 0.3545,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2227,
+      "name": "latk_polymath__newton_theology_prophecies__c063",
+      "score": 0.3543,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1501,
+      "name": "latk_heterogeneous__crypto_DH_US4200770__c009",
+      "score": 0.3537,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2116,
+      "name": "latk_polymath__vn_self_reproducing_automata__c035",
+      "score": 0.3536,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.161,
+      "name": "latk_heterogeneous__corum_US9910144__c005",
+      "score": 0.3535,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1553,
+      "name": "latk_heterogeneous__crypto_RSA_US4405829__c045",
+      "score": 0.3531,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1436,
+      "name": "latk_heterogeneous__witricity_US8686598__c020",
+      "score": 0.3531,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2189,
+      "name": "latk_polymath__newton_principia_mechanics__c147",
+      "score": 0.3531,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2014,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c094",
+      "score": 0.353,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1843,
+      "name": "latk_linguistics__linguistics_portroyal_grammar__c002",
+      "score": 0.3526,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1998,
+      "name": "latk_polymath__newton_theology_prophecies__c161",
+      "score": 0.352,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2064,
+      "name": "latk_polymath__vn_self_reproducing_automata__c108",
+      "score": 0.352,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2461,
+      "name": "latk_polymath__newton_alchemy_praxis__c081",
+      "score": 0.3519,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.185,
+      "name": "latk_polymath__newton_principia_mechanics__c101",
+      "score": 0.3516,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.157,
+      "name": "latk_polymath__leonardo_hydraulics_turbulence__c159",
+      "score": 0.3505,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2157,
+      "name": "latk_polymath__newton_principia_mechanics__c112",
+      "score": 0.3494,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2137,
+      "name": "latk_polymath__leonardo_art_control__c108",
+      "score": 0.3491,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2239,
+      "name": "latk_polymath__newton_alchemy_clavis__c059",
+      "score": 0.349,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1753,
+      "name": "latk_polymath__newton_principia_mechanics__c102",
+      "score": 0.3489,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2006,
+      "name": "latk_heterogeneous__corum_US10084223__c047",
+      "score": 0.3487,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1997,
+      "name": "latk_polymath__newton_principia_mechanics__c097",
+      "score": 0.348,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1973,
+      "name": "latk_heterogeneous__crypto_AES__c045",
+      "score": 0.3478,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.205,
+      "name": "latk_polymath__vn_self_reproducing_automata__c097",
+      "score": 0.3475,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.2058,
+      "name": "latk_heterogeneous__stone_US714756__c033",
+      "score": 0.3475,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1616,
+      "name": "latk_polymath__newton_alchemy_index_chemicus__c009",
+      "score": 0.3474,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1975,
+      "name": "latk_heterogeneous__corum_US9912031__c036",
+      "score": 0.347,
+      "type": "chunk"
+    },
+    {
+      "anomaly_score": 0.1965,
+      "name": "latk_polymath__vn_theory_of_games__c039",
+      "score": 0.3465,
+      "type": "chunk"
+    }
+  ],
+  "survivors_truncated_from": 1498,
+  "total_entities": 6459,
+  "wall_time": "7.6s"
+}

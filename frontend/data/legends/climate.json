@@ -1,0 +1,2055 @@
+{
+  "clusters": 119,
+  "connections": [
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_BBES",
+      "strength": 0.8,
+      "target": "station_A4402"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AW259",
+      "strength": 0.8,
+      "target": "station_AV135"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AZ337",
+      "strength": 0.8,
+      "target": "station_CI229"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPEPHN5",
+      "strength": 0.8,
+      "target": "station_BMTN5"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_BMTN5",
+      "strength": 0.8,
+      "target": "station_CMP06"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AACC2",
+      "strength": 0.8,
+      "target": "station_AP304"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AP086",
+      "strength": 0.8,
+      "target": "station_AN007"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AN007",
+      "strength": 0.8,
+      "target": "station_AW508"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AW508",
+      "strength": 0.8,
+      "target": "station_CATL1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AX160",
+      "strength": 0.8,
+      "target": "station_1753W"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_CF140",
+      "strength": 0.8,
+      "target": "station_AR229"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPWSDN5",
+      "strength": 0.8,
+      "target": "station_AX415"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AX415",
+      "strength": 0.8,
+      "target": "station_AZ131"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AZ131",
+      "strength": 0.8,
+      "target": "station_AN468"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AN468",
+      "strength": 0.8,
+      "target": "station_AZ179"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AZ179",
+      "strength": 0.8,
+      "target": "station_AZM35"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AZM35",
+      "strength": 0.8,
+      "target": "station_COOPLTCA3"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COWN7",
+      "strength": 0.8,
+      "target": "station_COOPMONG1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPMONG1",
+      "strength": 0.8,
+      "target": "station_AN336"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_BOYN7",
+      "strength": 0.8,
+      "target": "station_BCRN7"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_BCRN7",
+      "strength": 0.8,
+      "target": "station_COOPLLLN7"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPLLLN7",
+      "strength": 0.8,
+      "target": "station_AX130"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPMTCK2",
+      "strength": 0.8,
+      "target": "station_AX410"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AX410",
+      "strength": 0.8,
+      "target": "station_BMRL1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_BMRL1",
+      "strength": 0.8,
+      "target": "station_COOPPIRN1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPPIRN1",
+      "strength": 0.8,
+      "target": "station_COOPMARI3"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPMARI3",
+      "strength": 0.8,
+      "target": "station_COOPRHON7"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPRHON7",
+      "strength": 0.8,
+      "target": "station_COOPMULW2"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPMULW2",
+      "strength": 0.8,
+      "target": "station_COOPMTGM7"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPMTGM7",
+      "strength": 0.8,
+      "target": "station_1318W"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_1318W",
+      "strength": 0.8,
+      "target": "station_COOPPIPP1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPPIPP1",
+      "strength": 0.8,
+      "target": "station_AMVO1"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AMVO1",
+      "strength": 0.8,
+      "target": "station_CHTK2"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_CHTK2",
+      "strength": 0.8,
+      "target": "station_A4126"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_A4126",
+      "strength": 0.8,
+      "target": "station_A4631"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_A4631",
+      "strength": 0.8,
+      "target": "station_AX060"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AX060",
+      "strength": 0.8,
+      "target": "station_COOPWTPV2"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPWTPV2",
+      "strength": 0.8,
+      "target": "station_AY056"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_AY056",
+      "strength": 0.8,
+      "target": "station_COOPNTON6"
+    },
+    {
+      "signal_type": "cluster_co_membership",
+      "source": "station_COOPNTON6",
+      "strength": 0.8,
+      "target": "station_CHEO1"
+    }
+  ],
+  "cost": "$0.00",
+  "coverage": 1.0,
+  "database_name": "Climate Superpower",
+  "description": "Climate science corpus",
+  "legend_id": "climate",
+  "survivors": [
+    {
+      "anomaly_score": 0.1137,
+      "name": "station_BBES",
+      "score": 0.7242,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1306,
+      "name": "station_AW259",
+      "score": 0.7165,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1077,
+      "name": "station_AZ337",
+      "score": 0.6956,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1094,
+      "name": "station_COOPEPHN5",
+      "score": 0.6857,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1094,
+      "name": "station_AACC2",
+      "score": 0.6843,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1107,
+      "name": "station_A4733",
+      "score": 0.6811,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0966,
+      "name": "station_130SE",
+      "score": 0.677,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0786,
+      "name": "station_AV606",
+      "score": 0.6653,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1056,
+      "name": "station_AP086",
+      "score": 0.6645,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0952,
+      "name": "station_CNPW2",
+      "score": 0.6584,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0979,
+      "name": "station_AZ081",
+      "score": 0.6528,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1003,
+      "name": "station_A4402",
+      "score": 0.6507,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1021,
+      "name": "station_AX160",
+      "score": 0.6503,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0794,
+      "name": "station_CF140",
+      "score": 0.6451,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1115,
+      "name": "station_COOPWSDN5",
+      "score": 0.6438,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1136,
+      "name": "station_COWN7",
+      "score": 0.6433,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1095,
+      "name": "station_AX415",
+      "score": 0.6374,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1088,
+      "name": "station_BOYN7",
+      "score": 0.6362,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1269,
+      "name": "station_COOPMTCK2",
+      "score": 0.6361,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1044,
+      "name": "station_COOPRCLV2",
+      "score": 0.6359,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1065,
+      "name": "station_1209W",
+      "score": 0.6357,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1044,
+      "name": "station_1753W",
+      "score": 0.6345,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.107,
+      "name": "station_AV459",
+      "score": 0.6343,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1038,
+      "name": "station_AR043",
+      "score": 0.6326,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1066,
+      "name": "station_AW560",
+      "score": 0.6323,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1169,
+      "name": "station_1923W",
+      "score": 0.6293,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1004,
+      "name": "station_AR428",
+      "score": 0.6285,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1015,
+      "name": "station_0480W",
+      "score": 0.6267,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0836,
+      "name": "station_COOPWODU1",
+      "score": 0.6229,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1047,
+      "name": "station_AZ131",
+      "score": 0.622,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1156,
+      "name": "station_COOPCRDM8",
+      "score": 0.6208,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1082,
+      "name": "station_COOPBLVT2",
+      "score": 0.6204,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1046,
+      "name": "station_2045W",
+      "score": 0.6198,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0945,
+      "name": "station_AP304",
+      "score": 0.6195,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0896,
+      "name": "station_AV947",
+      "score": 0.6184,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0989,
+      "name": "station_AX030",
+      "score": 0.6178,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0887,
+      "name": "station_A3679",
+      "score": 0.6168,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1001,
+      "name": "station_AW600",
+      "score": 0.6167,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1072,
+      "name": "station_AS701",
+      "score": 0.6156,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0941,
+      "name": "station_CI229",
+      "score": 0.6149,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0905,
+      "name": "station_COOPHAPF1",
+      "score": 0.6142,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0951,
+      "name": "station_COOPFNTW4",
+      "score": 0.6135,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1093,
+      "name": "station_COOPRACS2",
+      "score": 0.6131,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0923,
+      "name": "station_AU921",
+      "score": 0.6119,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0799,
+      "name": "station_045HE",
+      "score": 0.6113,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.099,
+      "name": "station_0394W",
+      "score": 0.6104,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0944,
+      "name": "station_AN575",
+      "score": 0.6097,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0961,
+      "name": "station_COOPCHIF1",
+      "score": 0.6093,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1137,
+      "name": "station_AX410",
+      "score": 0.6093,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1058,
+      "name": "station_AN007",
+      "score": 0.6081,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0732,
+      "name": "station_BMTN5",
+      "score": 0.6076,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1011,
+      "name": "station_BCRN7",
+      "score": 0.607,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0993,
+      "name": "station_AN468",
+      "score": 0.606,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0906,
+      "name": "station_AZ179",
+      "score": 0.6056,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0952,
+      "name": "station_BKDT2",
+      "score": 0.6049,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1037,
+      "name": "station_AV639",
+      "score": 0.6047,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0939,
+      "name": "station_AZM35",
+      "score": 0.6042,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1051,
+      "name": "station_COOPLLLN7",
+      "score": 0.6035,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1114,
+      "name": "station_BMRL1",
+      "score": 0.6034,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0945,
+      "name": "station_BEFM8",
+      "score": 0.6033,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0919,
+      "name": "station_AW717",
+      "score": 0.6029,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0978,
+      "name": "station_COOPPBGF1",
+      "score": 0.6027,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1075,
+      "name": "station_COOPCOAT1",
+      "score": 0.6019,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1087,
+      "name": "station_COOPPIRN1",
+      "score": 0.6011,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0962,
+      "name": "station_COOPLTCA3",
+      "score": 0.6001,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1064,
+      "name": "station_COOPRCVW2",
+      "score": 0.5996,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0822,
+      "name": "station_42NMC",
+      "score": 0.5994,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0842,
+      "name": "station_BPYW4",
+      "score": 0.5991,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0694,
+      "name": "station_AR229",
+      "score": 0.599,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0998,
+      "name": "station_BKBF1",
+      "score": 0.5984,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0976,
+      "name": "station_AW997",
+      "score": 0.5981,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0887,
+      "name": "station_A2868",
+      "score": 0.5976,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.083,
+      "name": "station_AW508",
+      "score": 0.5973,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0937,
+      "name": "station_COOPBAEL1",
+      "score": 0.5972,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0929,
+      "name": "station_368PG",
+      "score": 0.597,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0958,
+      "name": "station_1642W",
+      "score": 0.5962,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0975,
+      "name": "station_AX130",
+      "score": 0.5956,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0867,
+      "name": "station_CO101",
+      "score": 0.5947,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1086,
+      "name": "station_COOPCOSM8",
+      "score": 0.5934,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0718,
+      "name": "station_C8427",
+      "score": 0.5928,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1034,
+      "name": "station_CATL1",
+      "score": 0.5928,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1076,
+      "name": "station_A4317",
+      "score": 0.5928,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0765,
+      "name": "station_COOPDUG",
+      "score": 0.5927,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1026,
+      "name": "station_AX169",
+      "score": 0.5927,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.083,
+      "name": "station_CLRU1",
+      "score": 0.5914,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0874,
+      "name": "station_APBA3",
+      "score": 0.5896,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0918,
+      "name": "station_AV747",
+      "score": 0.5888,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1028,
+      "name": "station_COOPFKLI3",
+      "score": 0.5884,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1083,
+      "name": "station_AV789",
+      "score": 0.5883,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0905,
+      "name": "station_1508W",
+      "score": 0.5881,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0865,
+      "name": "station_AX064",
+      "score": 0.5877,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0743,
+      "name": "station_CMP06",
+      "score": 0.5876,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0788,
+      "name": "station_AW924",
+      "score": 0.5871,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0827,
+      "name": "station_A4144",
+      "score": 0.5861,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0854,
+      "name": "station_COOPFGZ",
+      "score": 0.5857,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0892,
+      "name": "station_2205W",
+      "score": 0.5848,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1109,
+      "name": "station_COOPMARI3",
+      "score": 0.5844,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1018,
+      "name": "station_AX339",
+      "score": 0.5832,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1052,
+      "name": "station_COOPRHON7",
+      "score": 0.5829,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0908,
+      "name": "station_C5286",
+      "score": 0.5816,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0766,
+      "name": "station_CO157",
+      "score": 0.5814,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0943,
+      "name": "station_COOPSMAM6",
+      "score": 0.5807,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0922,
+      "name": "station_AV969",
+      "score": 0.5806,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0977,
+      "name": "station_AX447",
+      "score": 0.5801,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1011,
+      "name": "station_014MD",
+      "score": 0.5795,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1027,
+      "name": "station_COOPBMOA4",
+      "score": 0.5794,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0942,
+      "name": "station_AN241",
+      "score": 0.5787,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0769,
+      "name": "station_CO192",
+      "score": 0.5786,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0835,
+      "name": "station_2135W",
+      "score": 0.5786,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1029,
+      "name": "station_BFTN7",
+      "score": 0.5779,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1043,
+      "name": "station_COOPMYLI1",
+      "score": 0.5778,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0804,
+      "name": "station_COOPELNW2",
+      "score": 0.5775,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0966,
+      "name": "station_AS618",
+      "score": 0.5772,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1032,
+      "name": "station_C0238",
+      "score": 0.5769,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1029,
+      "name": "station_COOPPETW2",
+      "score": 0.5768,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0857,
+      "name": "station_2069W",
+      "score": 0.5765,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1035,
+      "name": "station_COOPMULW2",
+      "score": 0.5761,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1001,
+      "name": "station_COOPBFOS2",
+      "score": 0.5754,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1039,
+      "name": "station_AN430",
+      "score": 0.5749,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1027,
+      "name": "station_AW773",
+      "score": 0.5739,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0958,
+      "name": "station_257AX",
+      "score": 0.5736,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0926,
+      "name": "station_COOPDANG1",
+      "score": 0.5735,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0978,
+      "name": "station_A3737",
+      "score": 0.5721,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1051,
+      "name": "station_COOPLUKP8",
+      "score": 0.572,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1077,
+      "name": "station_COOPGILP8",
+      "score": 0.572,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0906,
+      "name": "station_AW096",
+      "score": 0.5715,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0905,
+      "name": "station_AV135",
+      "score": 0.5713,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0899,
+      "name": "station_A4882",
+      "score": 0.5709,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.101,
+      "name": "station_AX165",
+      "score": 0.5708,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0973,
+      "name": "station_COOPMTGM7",
+      "score": 0.5701,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0926,
+      "name": "station_AV304",
+      "score": 0.5701,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1084,
+      "name": "station_BNYN7",
+      "score": 0.57,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0982,
+      "name": "station_AX066",
+      "score": 0.57,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0894,
+      "name": "station_BLBL1",
+      "score": 0.57,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1046,
+      "name": "station_COOPNEKP8",
+      "score": 0.5699,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0864,
+      "name": "station_2265W",
+      "score": 0.5689,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0871,
+      "name": "station_COOPLCHM5",
+      "score": 0.5688,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0887,
+      "name": "station_ANDM8",
+      "score": 0.5688,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0877,
+      "name": "station_AU583",
+      "score": 0.5679,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1011,
+      "name": "station_COOPPELP8",
+      "score": 0.567,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0953,
+      "name": "station_1318W",
+      "score": 0.5663,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0948,
+      "name": "station_AX267",
+      "score": 0.5663,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0911,
+      "name": "station_BENS1",
+      "score": 0.5663,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1033,
+      "name": "station_COOPPIPP1",
+      "score": 0.5663,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1039,
+      "name": "station_COOPNOSV1",
+      "score": 0.5661,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1089,
+      "name": "station_AMVO1",
+      "score": 0.5661,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1017,
+      "name": "station_AT448",
+      "score": 0.5659,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1002,
+      "name": "station_C4647",
+      "score": 0.5658,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0945,
+      "name": "station_BBVK2",
+      "score": 0.5658,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0744,
+      "name": "station_COOPMCIF1",
+      "score": 0.5654,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0813,
+      "name": "station_CO047",
+      "score": 0.5653,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0947,
+      "name": "station_AX128",
+      "score": 0.5653,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0988,
+      "name": "station_C9769",
+      "score": 0.5651,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0783,
+      "name": "station_BRCK2",
+      "score": 0.5649,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1003,
+      "name": "station_COOPORBS1",
+      "score": 0.5649,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0964,
+      "name": "station_AX349",
+      "score": 0.5643,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.074,
+      "name": "station_COOPDESC1",
+      "score": 0.5635,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.094,
+      "name": "station_COOPPALN1",
+      "score": 0.5632,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1125,
+      "name": "station_COOPHAZK2",
+      "score": 0.5632,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1023,
+      "name": "station_COOPMILP5",
+      "score": 0.5632,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1042,
+      "name": "station_AP346",
+      "score": 0.563,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0922,
+      "name": "station_CBCL1",
+      "score": 0.5627,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.099,
+      "name": "station_COOPPCHA4",
+      "score": 0.5615,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.088,
+      "name": "station_COOPLENN7",
+      "score": 0.5614,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1011,
+      "name": "station_COOPWOLP8",
+      "score": 0.5613,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1027,
+      "name": "station_CHTK2",
+      "score": 0.5613,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0931,
+      "name": "station_CEYO1",
+      "score": 0.5604,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0941,
+      "name": "station_COOPRCHK2",
+      "score": 0.5597,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1026,
+      "name": "station_COOPMONG1",
+      "score": 0.5595,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.086,
+      "name": "station_COOPMIZM8",
+      "score": 0.5593,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1055,
+      "name": "station_AV950",
+      "score": 0.5592,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0963,
+      "name": "station_AV786",
+      "score": 0.5589,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1002,
+      "name": "station_COOPNEVO1",
+      "score": 0.5587,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1013,
+      "name": "station_COOPCAPP7",
+      "score": 0.5582,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.095,
+      "name": "station_A4887",
+      "score": 0.5574,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0768,
+      "name": "station_COOPRELM8",
+      "score": 0.5571,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0926,
+      "name": "station_1539W",
+      "score": 0.5567,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1008,
+      "name": "station_AV491",
+      "score": 0.5566,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0995,
+      "name": "station_COOPBEVO1",
+      "score": 0.556,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0844,
+      "name": "station_ALCG1",
+      "score": 0.5555,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0915,
+      "name": "station_ABRS1",
+      "score": 0.5554,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0785,
+      "name": "station_AP837",
+      "score": 0.5553,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0995,
+      "name": "station_CLRM3",
+      "score": 0.5552,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0748,
+      "name": "station_AW559",
+      "score": 0.5552,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0783,
+      "name": "station_AW910",
+      "score": 0.5551,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1029,
+      "name": "station_BATN6",
+      "score": 0.555,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1025,
+      "name": "station_COOPBRLN3",
+      "score": 0.5542,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0943,
+      "name": "station_A4126",
+      "score": 0.554,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0911,
+      "name": "station_AY232",
+      "score": 0.5537,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0793,
+      "name": "station_AU713",
+      "score": 0.5532,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0917,
+      "name": "station_AV648",
+      "score": 0.5523,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0958,
+      "name": "station_A4631",
+      "score": 0.5523,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0875,
+      "name": "station_AU137",
+      "score": 0.5522,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1019,
+      "name": "station_AR506",
+      "score": 0.5519,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0864,
+      "name": "station_C2195",
+      "score": 0.5506,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0983,
+      "name": "station_AW335",
+      "score": 0.5499,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0804,
+      "name": "station_COOPRUSA1",
+      "score": 0.5498,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0841,
+      "name": "station_BWPO1",
+      "score": 0.5496,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0799,
+      "name": "station_COOPELTK2",
+      "score": 0.5488,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0691,
+      "name": "station_CLBT1",
+      "score": 0.5487,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0867,
+      "name": "station_C8046",
+      "score": 0.5486,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0949,
+      "name": "station_AX060",
+      "score": 0.5485,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1035,
+      "name": "station_1305W",
+      "score": 0.5482,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1036,
+      "name": "station_A3104",
+      "score": 0.5478,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1007,
+      "name": "station_COOPWTPV2",
+      "score": 0.5476,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0919,
+      "name": "station_AT451",
+      "score": 0.5476,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0797,
+      "name": "station_AN281",
+      "score": 0.5471,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0904,
+      "name": "station_COOPDIXK2",
+      "score": 0.5466,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0893,
+      "name": "station_A4169",
+      "score": 0.5464,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0851,
+      "name": "station_AY146",
+      "score": 0.5459,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0931,
+      "name": "station_AN917",
+      "score": 0.5457,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0783,
+      "name": "station_COOPMEDN1",
+      "score": 0.5445,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0859,
+      "name": "station_COOPACYS2",
+      "score": 0.5444,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0971,
+      "name": "station_A4165",
+      "score": 0.5442,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0859,
+      "name": "station_COOPGGWM8",
+      "score": 0.544,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0961,
+      "name": "station_AY056",
+      "score": 0.5437,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0842,
+      "name": "station_AS869",
+      "score": 0.5435,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0921,
+      "name": "station_AV381",
+      "score": 0.5434,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0968,
+      "name": "station_A4693",
+      "score": 0.5433,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0884,
+      "name": "station_AN336",
+      "score": 0.5427,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0999,
+      "name": "station_A4801",
+      "score": 0.5426,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0866,
+      "name": "station_AY178",
+      "score": 0.5426,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0918,
+      "name": "station_COOPPLFV1",
+      "score": 0.5425,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1051,
+      "name": "station_COOPABNM3",
+      "score": 0.5424,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0851,
+      "name": "station_COOPPMRP1",
+      "score": 0.5421,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0983,
+      "name": "station_BETP1",
+      "score": 0.5419,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0946,
+      "name": "station_COOPNTON6",
+      "score": 0.5419,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1004,
+      "name": "station_ABPV2",
+      "score": 0.5411,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0909,
+      "name": "station_CHEO1",
+      "score": 0.541,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0884,
+      "name": "station_COOPFMBI3",
+      "score": 0.5409,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0849,
+      "name": "station_COOPMANS1",
+      "score": 0.5408,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0975,
+      "name": "station_AV067",
+      "score": 0.5406,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0906,
+      "name": "station_A3625",
+      "score": 0.5405,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0998,
+      "name": "station_1857W",
+      "score": 0.5404,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0677,
+      "name": "station_ALDN6",
+      "score": 0.5402,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0912,
+      "name": "station_AU978",
+      "score": 0.5393,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0782,
+      "name": "station_AP538",
+      "score": 0.5393,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0982,
+      "name": "station_COOPNOHV1",
+      "score": 0.5389,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0877,
+      "name": "station_APBN6",
+      "score": 0.5388,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0951,
+      "name": "station_COOPBTVN6",
+      "score": 0.5376,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0923,
+      "name": "station_AU209",
+      "score": 0.5373,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0815,
+      "name": "station_C4120",
+      "score": 0.5366,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0789,
+      "name": "station_AW236",
+      "score": 0.5365,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0864,
+      "name": "station_AV269",
+      "score": 0.5364,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0822,
+      "name": "station_COOPCPLN7",
+      "score": 0.5358,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0874,
+      "name": "station_AN445",
+      "score": 0.5354,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0923,
+      "name": "station_AW435",
+      "score": 0.5343,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0781,
+      "name": "station_A4477",
+      "score": 0.5337,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0938,
+      "name": "station_C3232",
+      "score": 0.5333,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1009,
+      "name": "station_2NDLM",
+      "score": 0.5331,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0728,
+      "name": "station_CAPN4",
+      "score": 0.5326,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0861,
+      "name": "station_AV638",
+      "score": 0.5325,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0663,
+      "name": "station_COOPMOUW2",
+      "score": 0.532,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0909,
+      "name": "station_AW314",
+      "score": 0.5319,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.084,
+      "name": "station_COOPALLM1",
+      "score": 0.5311,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0915,
+      "name": "station_BRKI3",
+      "score": 0.5302,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0776,
+      "name": "station_COOPBLFO1",
+      "score": 0.5297,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0896,
+      "name": "station_AX399",
+      "score": 0.5295,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0813,
+      "name": "station_AT914",
+      "score": 0.5292,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0803,
+      "name": "station_BOON4",
+      "score": 0.5288,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0901,
+      "name": "station_ARVW2",
+      "score": 0.5285,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.078,
+      "name": "station_COOPNFKC3",
+      "score": 0.528,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0841,
+      "name": "station_A3522",
+      "score": 0.5276,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0885,
+      "name": "station_COOPMADM1",
+      "score": 0.5276,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0816,
+      "name": "station_AX375",
+      "score": 0.5273,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0771,
+      "name": "station_COOPPIES2",
+      "score": 0.5272,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0874,
+      "name": "station_COOPBUVV2",
+      "score": 0.5266,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0814,
+      "name": "station_COOPWMGP1",
+      "score": 0.5262,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0841,
+      "name": "station_AP033",
+      "score": 0.5252,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0879,
+      "name": "station_AY125",
+      "score": 0.5241,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0797,
+      "name": "station_CANM7",
+      "score": 0.524,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0803,
+      "name": "station_C6301",
+      "score": 0.5236,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0904,
+      "name": "station_028NH",
+      "score": 0.5226,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0905,
+      "name": "station_COOPEAHV1",
+      "score": 0.5225,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0681,
+      "name": "station_A4146",
+      "score": 0.5215,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0866,
+      "name": "station_AW410",
+      "score": 0.5214,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0796,
+      "name": "station_AS119",
+      "score": 0.5211,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0703,
+      "name": "station_A4138",
+      "score": 0.5211,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0835,
+      "name": "station_AU244",
+      "score": 0.5211,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.082,
+      "name": "station_COOPWLNI2",
+      "score": 0.521,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0702,
+      "name": "station_A4461",
+      "score": 0.5204,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0791,
+      "name": "station_A4031",
+      "score": 0.5202,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0705,
+      "name": "station_COOPFFDI2",
+      "score": 0.519,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0862,
+      "name": "station_COOPRSDW2",
+      "score": 0.5179,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0644,
+      "name": "station_COOPPHLI2",
+      "score": 0.5176,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0788,
+      "name": "station_COOPRUTV1",
+      "score": 0.5169,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0632,
+      "name": "station_COOPFORI2",
+      "score": 0.5166,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0818,
+      "name": "station_A3962",
+      "score": 0.5156,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0819,
+      "name": "station_COOPPHXP1",
+      "score": 0.5153,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0776,
+      "name": "station_BLII2",
+      "score": 0.5134,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0708,
+      "name": "station_AN665",
+      "score": 0.5126,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.085,
+      "name": "station_COOPBRGM3",
+      "score": 0.5126,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0786,
+      "name": "station_AW687",
+      "score": 0.5124,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0804,
+      "name": "station_COOPWBSN6",
+      "score": 0.5118,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0747,
+      "name": "station_A3818",
+      "score": 0.5104,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0751,
+      "name": "station_AX459",
+      "score": 0.5089,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.1148,
+      "name": "station_A4865",
+      "score": 0.5088,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0745,
+      "name": "station_AV972",
+      "score": 0.5075,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0736,
+      "name": "station_CCRO1",
+      "score": 0.5063,
+      "type": "station"
+    },
+    {
+      "anomaly_score": 0.0721,
+      "name": "station_BINM1",
+      "score": 0.503,
+      "type": "station"
+    }
+  ],
+  "survivors_truncated_from": 999,
+  "total_entities": 14657,
+  "wall_time": "15.4s"
+}

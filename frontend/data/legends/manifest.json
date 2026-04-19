@@ -1,0 +1,115 @@
+{
+  "count": 11,
+  "legends": [
+    {
+      "clusters": 724,
+      "description": "SEC 10-K filings corpus",
+      "display_name": "SEC EDGAR",
+      "id": "edgar",
+      "path": "legends/edgar.json",
+      "size_kb": 47,
+      "survivors": 300,
+      "total_entities": 61041
+    },
+    {
+      "clusters": 36,
+      "description": "1,851-entity cross-era corpus (25/25 canonical markers)",
+      "display_name": "Cross-Era Heterogeneous",
+      "id": "heterogeneous",
+      "path": "legends/heterogeneous.json",
+      "size_kb": 49,
+      "survivors": 300,
+      "total_entities": 1851
+    },
+    {
+      "clusters": 66,
+      "description": "Historical polymath archives - BTUT anomaly detection layer",
+      "display_name": "Polymath (Newton / VN / Leonardo)",
+      "id": "polymath",
+      "path": "legends/polymath.json",
+      "size_kb": 52,
+      "survivors": 300,
+      "total_entities": 3714
+    },
+    {
+      "clusters": 1871,
+      "description": "Physics arXiv corpus for LATK novelty queries",
+      "display_name": "LATK Physics arXiv",
+      "id": "latk_physics",
+      "path": "legends/latk_physics.json",
+      "size_kb": 62,
+      "survivors": 300,
+      "total_entities": 246464
+    },
+    {
+      "clusters": 87,
+      "description": "Mini cross-era corpus",
+      "display_name": "LATK Mini",
+      "id": "latk_mini",
+      "path": "legends/latk_mini.json",
+      "size_kb": 55,
+      "survivors": 300,
+      "total_entities": 6459
+    },
+    {
+      "clusters": 23,
+      "description": "Linguistics corpus",
+      "display_name": "Linguistics",
+      "id": "linguistics",
+      "path": "legends/linguistics.json",
+      "size_kb": 54,
+      "survivors": 289,
+      "total_entities": 894
+    },
+    {
+      "clusters": 70,
+      "description": "Patent corpus",
+      "display_name": "Patents Superpower",
+      "id": "patents",
+      "path": "legends/patents.json",
+      "size_kb": 44,
+      "survivors": 300,
+      "total_entities": 6034
+    },
+    {
+      "clusters": 22,
+      "description": "Nikola Tesla patent corpus (Wardenclyffe anomaly)",
+      "display_name": "Tesla Superpower",
+      "id": "tesla",
+      "path": "legends/tesla.json",
+      "size_kb": 48,
+      "survivors": 300,
+      "total_entities": 1165
+    },
+    {
+      "clusters": 642,
+      "description": "Biomedical abstracts corpus",
+      "display_name": "PubMed Superpower",
+      "id": "pubmed",
+      "path": "legends/pubmed.json",
+      "size_kb": 44,
+      "survivors": 300,
+      "total_entities": 70113
+    },
+    {
+      "clusters": 119,
+      "description": "Climate science corpus",
+      "display_name": "Climate Superpower",
+      "id": "climate",
+      "path": "legends/climate.json",
+      "size_kb": 44,
+      "survivors": 300,
+      "total_entities": 14657
+    },
+    {
+      "clusters": 103,
+      "description": "UN Comtrade trade data corpus",
+      "display_name": "Comtrade Superpower",
+      "id": "comtrade",
+      "path": "legends/comtrade.json",
+      "size_kb": 45,
+      "survivors": 300,
+      "total_entities": 7556
+    }
+  ]
+}
