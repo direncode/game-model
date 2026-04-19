@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lo-core"
+version = "0.1.0"
+description = "Latent Ocean core — deterministic structural discovery engine. No external GenAI on the critical path."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Diren Kumaratilleke" }]
+keywords = ["structural-discovery", "anomaly-detection", "cross-era", "btut", "lattice"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: Other/Proprietary License",
+]
+dependencies = [
+    # Intentionally stdlib-only for the core analyzers and validation.
+    # BTUT pipeline (engine/) lives in the main repo; the product of
+    # lo_core is per-corpus analysis + falsification, not reduction.
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+lo = "lo_core.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lo_core*"]
+exclude = ["tests*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
