@@ -1,0 +1,656 @@
+{
+  "concept_group_alignment": {
+    "clusters_dominant_80pct": 0,
+    "clusters_pure_99pct": 0,
+    "mean_homogeneity": 0.3463,
+    "n_clusters_tested": 138,
+    "random_baseline_mean": 0.2988,
+    "random_baseline_p95": 0.5,
+    "ratio_real_to_random": 1.16,
+    "significant_vs_random_p95": false,
+    "top_10_clusters": [
+      {
+        "cluster": 324,
+        "dominant_concept": "AccruedLiabilitiesCurrent",
+        "share": 0.714,
+        "with_concept": 7
+      },
+      {
+        "cluster": 140,
+        "dominant_concept": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 122,
+        "dominant_concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 192,
+        "dominant_concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 180,
+        "dominant_concept": "AccruedLiabilitiesCurrent",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 238,
+        "dominant_concept": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 306,
+        "dominant_concept": "AdditionalPaidInCapital",
+        "share": 0.667,
+        "with_concept": 3
+      },
+      {
+        "cluster": 263,
+        "dominant_concept": "CapitalExpendituresIncurredButNotYetPaid",
+        "share": 0.5,
+        "with_concept": 4
+      },
+      {
+        "cluster": 111,
+        "dominant_concept": "CapitalLeasesFutureMinimumPaymentsDue",
+        "share": 0.5,
+        "with_concept": 2
+      },
+      {
+        "cluster": 86,
+        "dominant_concept": "AccountsPayableAndOtherAccruedLiabilitiesCurrent",
+        "share": 0.5,
+        "with_concept": 2
+      }
+    ],
+    "total_survivors_with_concept": 722
+  },
+  "cross_legend_bridges": {
+    "edgar_bridge_count": 0,
+    "edgar_bridges": [],
+    "stats": {
+      "dense_fingerprints_dropped": 46,
+      "density_threshold_legend_count": 2,
+      "density_threshold_pct": 5.0,
+      "total_survivors": 4988,
+      "total_unique_fingerprints": 2626
+    },
+    "top_5_overall": [
+      {
+        "a": "heterogeneous",
+        "b": "latk_mini",
+        "samples": [
+          {
+            "a_name": "tesla_US1119732__c065",
+            "b_name": "latk_linguistics__linguistics_portroyal_grammar__c031",
+            "fp": "111111111111111111011111111111111111111111110111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "info_JPEG1992__c008",
+            "b_name": "latk_polymath__newton_principia_mechanics__c109",
+            "fp": "111111110111111111111111111111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "corum_US9912031__c061",
+            "b_name": "latk_polymath__newton_alchemy_clavis__c108",
+            "fp": "111111111111111111011111111110111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "witricity_US7741734__c033",
+            "b_name": "latk_heterogeneous__marconi_US586193__c005",
+            "fp": "111111111111111111111111111110111111111111011111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "marconi_US586193__c023",
+            "b_name": "latk_heterogeneous__corum_US10084223__c036",
+            "fp": "111111111111111111011111111101111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "witricity_US7741734__c047",
+            "b_name": "latk_heterogeneous__info_HEVC2013__c041",
+            "fp": "111111111110111111111111111111101111111111011111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "info_HUFFMAN1952__c011",
+            "b_name": "latk_linguistics__modern_chomsky_hierarchy__c082",
+            "fp": "111111111111111111111111111111111111111111011111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "fessenden_US706737__c018",
+            "b_name": "latk_polymath__vn_self_reproducing_automata__c065",
+            "fp": "111111111111111111111111111111111111111111111101",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "tesla_US1119732__c056",
+            "b_name": "latk_linguistics__modern_chomsky_hierarchy__c052",
+            "fp": "111111111111111101111111111110111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "deforest_US841387__c024",
+            "b_name": "latk_heterogeneous__stone_US714756__c047",
+            "fp": "111111111111111111111111111101111111111111101111",
+            "global_count": 2,
+            "weight": 0.7213
+          }
+        ],
+        "shared_count": 10,
+        "weighted_score": 7.2135
+      },
+      {
+        "a": "climate",
+        "b": "heterogeneous",
+        "samples": [
+          {
+            "a_name": "station_COOPFORI2",
+            "b_name": "tesla_US645576__c154",
+            "fp": "111111111111111111111111111110111111111111111110",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AW096",
+            "b_name": "witricity_US7741734__c034",
+            "fp": "111111111111111111111111111110111111101111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPCAPP7",
+            "b_name": "info_dictionary_based__location__technion_israel_institute_of_technology",
+            "fp": "101111111111111011111111111111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_ANDM8",
+            "b_name": "deforest_US841387__c037",
+            "fp": "111111011111111111111111111101111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AN241",
+            "b_name": "tesla_US645576__c157",
+            "fp": "111111111011111111111111111111111111111111111110",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AX459",
+            "b_name": "stone_US714756__c011",
+            "fp": "111111111111111111111111011111111110111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          }
+        ],
+        "shared_count": 6,
+        "weighted_score": 4.3281
+      },
+      {
+        "a": "climate",
+        "b": "comtrade",
+        "samples": [
+          {
+            "a_name": "station_BENS1",
+            "b_name": "flow_528_266_02",
+            "fp": "111111111110111111111111011111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPCHIF1",
+            "b_name": "flow_528_52_10",
+            "fp": "111111111111110111110111111110111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AV067",
+            "b_name": "flow_699_554_10",
+            "fp": "111111111111111111110111111111111110111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPLUKP8",
+            "b_name": "flow_381_894_02",
+            "fp": "101111111111111111111111100111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_CNPW2",
+            "b_name": "flow_392_528_02",
+            "fp": "111111111111111111111111110111111101111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          }
+        ],
+        "shared_count": 5,
+        "weighted_score": 3.6067
+      },
+      {
+        "a": "climate",
+        "b": "latk_mini",
+        "samples": [
+          {
+            "a_name": "station_COOPWBSN6",
+            "b_name": "latk_polymath__modern_wolfram_class_iv__c007",
+            "fp": "111111111101111111111111111110111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AV381",
+            "b_name": "latk_polymath__vn_monte_carlo_control__c058",
+            "fp": "111101111110111111111111111111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AU713",
+            "b_name": "latk_heterogeneous__corum_US9910144__c029",
+            "fp": "111110111111111111111111111111101111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPWSDN5",
+            "b_name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
+            "fp": "111111111111111101111111111111111110111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AT914",
+            "b_name": "latk_heterogeneous__marconi_US586193__c028",
+            "fp": "111111111110111111111111111111111111111111110111",
+            "global_count": 2,
+            "weight": 0.7213
+          }
+        ],
+        "shared_count": 5,
+        "weighted_score": 3.6067
+      },
+      {
+        "a": "climate",
+        "b": "linguistics",
+        "samples": [
+          {
+            "a_name": "station_CO192",
+            "b_name": "modern_chomsky_syntactic_structures__c042",
+            "fp": "111111111111111111111111111111111111011111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPMIZM8",
+            "b_name": "linguistics_panini_ashtadhyayi__c052",
+            "fp": "111111111111111111111111111111111111111111101111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_AU244",
+            "b_name": "linguistics_portroyal_grammar__c047",
+            "fp": "101111111111111111111110111111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_CATL1",
+            "b_name": "linguistics_portroyal_grammar__c021",
+            "fp": "111111111011111101111111111111111111111111111111",
+            "global_count": 2,
+            "weight": 0.7213
+          },
+          {
+            "a_name": "station_COOPRSDW2",
+            "b_name": "historical_saussure_structuralism__concept__paradigmatic",
+            "fp": "101111111111111111111111111111111111111111111110",
+            "global_count": 2,
+            "weight": 0.7213
+          }
+        ],
+        "shared_count": 5,
+        "weighted_score": 3.6067
+      }
+    ],
+    "total_pairwise_bridges": 36,
+    "triple_bridge_count": 0
+  },
+  "edgar_clusters": 724,
+  "edgar_survivors_in_cache": 499,
+  "edgar_total_entities": 61041,
+  "form_type_alignment": {
+    "clusters_dominant_80pct": 0,
+    "clusters_pure_99pct": 0,
+    "mean_homogeneity": 0.4332,
+    "n_clusters_tested": 30,
+    "random_baseline_mean": 0.5854,
+    "random_baseline_p95": 1.0,
+    "ratio_real_to_random": 0.74,
+    "significant_vs_random_p95": false,
+    "top_10_clusters": [
+      {
+        "cluster": 269,
+        "dominant_form": "4",
+        "share": 0.667,
+        "with_form": 3
+      },
+      {
+        "cluster": 77,
+        "dominant_form": "4",
+        "share": 0.667,
+        "with_form": 3
+      },
+      {
+        "cluster": 23,
+        "dominant_form": "4",
+        "share": 0.571,
+        "with_form": 7
+      },
+      {
+        "cluster": 13,
+        "dominant_form": "4",
+        "share": 0.5,
+        "with_form": 16
+      },
+      {
+        "cluster": 7,
+        "dominant_form": "4",
+        "share": 0.5,
+        "with_form": 22
+      },
+      {
+        "cluster": 4,
+        "dominant_form": "4",
+        "share": 0.5,
+        "with_form": 14
+      },
+      {
+        "cluster": 161,
+        "dominant_form": "CORRESP",
+        "share": 0.5,
+        "with_form": 2
+      },
+      {
+        "cluster": 56,
+        "dominant_form": "8-K",
+        "share": 0.5,
+        "with_form": 2
+      },
+      {
+        "cluster": 86,
+        "dominant_form": "144",
+        "share": 0.5,
+        "with_form": 2
+      },
+      {
+        "cluster": 40,
+        "dominant_form": "ARS",
+        "share": 0.5,
+        "with_form": 2
+      }
+    ],
+    "total_survivors_with_form": 1277
+  },
+  "generated_at": "2026-04-19T07:39:22Z",
+  "high_iteration_validation": {
+    "corpora_count": 11,
+    "edgar_survivors": 1999,
+    "n_iterations": 100,
+    "null_tests": [
+      {
+        "metric": "pairwise_bridges",
+        "null_mean": 38.88,
+        "null_p05": 34.0,
+        "null_p95": 44.0,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 36.0
+      },
+      {
+        "metric": "triple_bridges",
+        "null_mean": 0,
+        "null_p05": 0.0,
+        "null_p95": 0.0,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 0.0
+      },
+      {
+        "metric": "top_bridge_weighted",
+        "null_mean": 8.9231,
+        "null_p05": 7.2135,
+        "null_p95": 11.5416,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 7.2135
+      },
+      {
+        "metric": "frac_legend_pairs_with_bridge",
+        "null_mean": 0.7069,
+        "null_p05": 0.6182,
+        "null_p95": 0.8,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 0.6545
+      },
+      {
+        "metric": "focus_hypothesis_newton",
+        "null_mean": null,
+        "null_p05": null,
+        "null_p95": null,
+        "null_proportion_true": 0.0,
+        "significant_at_0_05": false,
+        "true_value": false
+      },
+      {
+        "metric": "focus_hypothesis_leonardo",
+        "null_mean": null,
+        "null_p05": null,
+        "null_p95": null,
+        "null_proportion_true": 0.0,
+        "significant_at_0_05": false,
+        "true_value": false
+      },
+      {
+        "metric": "focus_hypothesis_vn",
+        "null_mean": null,
+        "null_p05": null,
+        "null_p95": null,
+        "null_proportion_true": 0.0,
+        "significant_at_0_05": false,
+        "true_value": false
+      },
+      {
+        "metric": "focus_top_convergent_cluster_hot_count",
+        "null_mean": 4,
+        "null_p05": 4.0,
+        "null_p95": 4.0,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 4.0
+      },
+      {
+        "metric": "focus_n_cross_era_anchors",
+        "null_mean": 0,
+        "null_p05": 0.0,
+        "null_p95": 0.0,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 0.0
+      },
+      {
+        "metric": "dense_fingerprints_dropped",
+        "null_mean": 78.45,
+        "null_p05": 73.95,
+        "null_p95": 83.1,
+        "null_proportion_true": null,
+        "significant_at_0_05": true,
+        "true_value": 46.0
+      },
+      {
+        "metric": "unique_fingerprints_total",
+        "null_mean": 2626,
+        "null_p05": 2626.0,
+        "null_p95": 2626.0,
+        "null_proportion_true": null,
+        "significant_at_0_05": false,
+        "true_value": 2626.0
+      }
+    ],
+    "significant_count": 1,
+    "total_metrics": 11
+  },
+  "scale_study": {
+    "frac_010pct": {
+      "n_edgar_survivors": 199,
+      "significant_count": 2,
+      "top_bridge_null_p95": 5.4462,
+      "top_bridge_true": 7.2135,
+      "total_metrics": 11
+    },
+    "frac_025pct": {
+      "n_edgar_survivors": 499,
+      "significant_count": 2,
+      "top_bridge_null_p95": 6.4921,
+      "top_bridge_true": 7.2135,
+      "total_metrics": 11
+    },
+    "frac_050pct": {
+      "n_edgar_survivors": 999,
+      "significant_count": 1,
+      "top_bridge_null_p95": 8.3316,
+      "top_bridge_true": 7.2135,
+      "total_metrics": 11
+    },
+    "frac_100pct": {
+      "n_edgar_survivors": 1999,
+      "significant_count": 1,
+      "top_bridge_null_p95": 11.5416,
+      "top_bridge_true": 7.2135,
+      "total_metrics": 11
+    }
+  },
+  "sic_ground_truth": {
+    "clusters_with_dominant_industry_80pct": 0,
+    "clusters_with_majority_industry_50pct": 48,
+    "clusters_with_pure_industry_99pct": 0,
+    "mean_homogeneity": 0.2979,
+    "n_testable_clusters": 168,
+    "p95_homogeneity": 0.5,
+    "random_baseline_mean": 0.3031,
+    "random_baseline_p95": 0.5,
+    "ratio_real_to_random": 0.98,
+    "significant_vs_random_p95": false,
+    "top_10_clusters": [
+      {
+        "cluster": 229,
+        "dominant_share": 0.667,
+        "dominant_sic": "6798",
+        "size": 3,
+        "with_sic": 3
+      },
+      {
+        "cluster": 187,
+        "dominant_share": 0.6,
+        "dominant_sic": "6798",
+        "size": 5,
+        "with_sic": 5
+      },
+      {
+        "cluster": 77,
+        "dominant_share": 0.5,
+        "dominant_sic": "6798",
+        "size": 3,
+        "with_sic": 2
+      },
+      {
+        "cluster": 161,
+        "dominant_share": 0.5,
+        "dominant_sic": "7374",
+        "size": 2,
+        "with_sic": 2
+      },
+      {
+        "cluster": 56,
+        "dominant_share": 0.5,
+        "dominant_sic": "8200",
+        "size": 2,
+        "with_sic": 2
+      },
+      {
+        "cluster": 40,
+        "dominant_share": 0.5,
+        "dominant_sic": "1623",
+        "size": 2,
+        "with_sic": 2
+      },
+      {
+        "cluster": 25,
+        "dominant_share": 0.5,
+        "dominant_sic": "3841",
+        "size": 2,
+        "with_sic": 2
+      },
+      {
+        "cluster": 143,
+        "dominant_share": 0.5,
+        "dominant_sic": "3561",
+        "size": 2,
+        "with_sic": 2
+      },
+      {
+        "cluster": 57,
+        "dominant_share": 0.5,
+        "dominant_sic": "7372",
+        "size": 4,
+        "with_sic": 4
+      },
+      {
+        "cluster": 196,
+        "dominant_share": 0.5,
+        "dominant_sic": "3562",
+        "size": 2,
+        "with_sic": 2
+      }
+    ],
+    "total_survivors_with_sic": 1947
+  },
+  "temporal_coherence": {
+    "interpretation": "lower real spread = temporally coherent clusters",
+    "mean_cluster_date_spread_days": 217.1,
+    "n_clusters_tested": 21,
+    "random_baseline_mean_days": 298.3,
+    "random_baseline_p05_days": 13.5,
+    "ratio_real_to_random": 0.73,
+    "significant_vs_random_p05": false
+  }
+}
