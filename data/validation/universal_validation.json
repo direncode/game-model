@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-19T18:53:42Z",
-  "wall_seconds": 1.0647607000137214,
+  "generated_at": "2026-04-19T18:57:31Z",
+  "wall_seconds": 1.4316596999997273,
   "n_iterations": 200,
   "seed": 42,
   "corpora": [
@@ -8,7 +8,7 @@
       "corpus_id": "edgar_5000",
       "path": "scripts\\edgar_btut_result_5000.json",
       "survivor_count": 4999,
-      "load_seconds": 0.05015120000462048,
+      "load_seconds": 0.05396610000752844,
       "entity_types": [
         "filing"
       ],
@@ -208,7 +208,7 @@
       "corpus_id": "edgar",
       "path": "scripts\\cross_era_analysis\\output\\edgar_btut_result_v2.json",
       "survivor_count": 499,
-      "load_seconds": 0.004508999991230667,
+      "load_seconds": 0.00436920000356622,
       "entity_types": [
         "filing"
       ],
@@ -408,7 +408,7 @@
       "corpus_id": "heterogeneous",
       "path": "scripts\\cross_era_analysis\\output\\heterogeneous_btut_result_v2.json",
       "survivor_count": 595,
-      "load_seconds": 0.004995199997210875,
+      "load_seconds": 0.00672800000756979,
       "entity_types": [
         "concept",
         "event",
@@ -611,7 +611,7 @@
       "corpus_id": "latk_mini",
       "path": "scripts\\cross_era_analysis\\output\\latk_mini_btut_result_v2.json",
       "survivor_count": 1498,
-      "load_seconds": 0.011574100004509091,
+      "load_seconds": 0.014311100007034838,
       "entity_types": [
         "chunk"
       ],
@@ -811,7 +811,7 @@
       "corpus_id": "latk_physics",
       "path": "scripts\\cross_era_analysis\\output\\latk_physics_btut_result_v2.json",
       "survivor_count": 4999,
-      "load_seconds": 0.04806049997569062,
+      "load_seconds": 0.04594330000691116,
       "entity_types": [
         "chunk"
       ],
@@ -1011,7 +1011,7 @@
       "corpus_id": "linguistics",
       "path": "scripts\\cross_era_analysis\\output\\linguistics_btut_result_v2.json",
       "survivor_count": 289,
-      "load_seconds": 0.002770899998722598,
+      "load_seconds": 0.002490999992005527,
       "entity_types": [
         "concept",
         "document_chunk"
@@ -1212,7 +1212,7 @@
       "corpus_id": "polymath",
       "path": "scripts\\cross_era_analysis\\output\\polymath_btut_result_v2.json",
       "survivor_count": 1195,
-      "load_seconds": 0.009035299997776747,
+      "load_seconds": 0.009738099994137883,
       "entity_types": [
         "concept",
         "event",
@@ -1415,7 +1415,7 @@
       "corpus_id": "standalone",
       "path": "scripts\\cross_era_analysis\\output\\standalone_btut_result.json",
       "survivor_count": 0,
-      "load_seconds": 0.03237140001147054,
+      "load_seconds": 0.003616000001784414,
       "entity_types": [],
       "score_dims_present": [],
       "top_composite": 0.0,
@@ -1443,7 +1443,7 @@
       "corpus_id": "tesla_crossera",
       "path": "scripts\\cross_era_analysis\\output\\tesla_crossera_btut_result_v2.json",
       "survivor_count": 500,
-      "load_seconds": 0.013909800007240847,
+      "load_seconds": 0.003950399986933917,
       "entity_types": [
         "patent_chunk"
       ],
@@ -1640,10 +1640,813 @@
       "readiness_score": 85
     },
     {
+      "corpus_id": "climate",
+      "path": "scripts\\cross_era_analysis\\output\\phase0_commercial\\climate_btut_result.json",
+      "survivor_count": 999,
+      "load_seconds": 0.00799470001948066,
+      "entity_types": [
+        "station"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9633,
+      "top_entity_name": "region_AZ",
+      "null_test": {
+        "n_survivors": 999,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 27.768297006950213,
+        "median_z_score": 13.995489507309548,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.86969,
+            "null_mean": 0.39852765000000007,
+            "null_p95": 0.4682535,
+            "z_score": 11.380675459949076,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.7484519999999999,
+            "null_mean": 0.3990076000000001,
+            "null_p95": 0.4385991999999999,
+            "z_score": 13.091508357959865,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.6870119999999998,
+            "null_mean": 0.39852165999999994,
+            "null_p95": 0.43080699999999994,
+            "z_score": 14.899470656659231,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.6435479999999998,
+            "null_mean": 0.39906572999999995,
+            "null_p95": 0.41772865000000003,
+            "z_score": 20.03289451768418,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.83794,
+            "null_mean": 0.1056736,
+            "null_p95": 0.1667914999999999,
+            "z_score": 23.745301990010294,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.7169959999999999,
+            "null_mean": 0.10722477999999999,
+            "null_p95": 0.15534899999999996,
+            "z_score": 27.768297006950213,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.4314500000000001,
+            "null_mean": 0.10483163,
+            "null_p95": 0.12660409999999997,
+            "z_score": 25.699362736700074,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.26931600000000006,
+            "null_mean": 0.1065333,
+            "null_p95": 0.12650879999999998,
+            "z_score": 14.926004881915532,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8771699999999999,
+            "null_mean": 0.56769265,
+            "null_p95": 0.6267175,
+            "z_score": 8.612068911787201,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.8231839999999999,
+            "null_mean": 0.5677067,
+            "null_p95": 0.608245,
+            "z_score": 10.98808781814355,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.7828999999999999,
+            "null_mean": 0.5663505000000001,
+            "null_p95": 0.5954086999999999,
+            "z_score": 12.889440067928035,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.748062,
+            "null_mean": 0.5672561450000001,
+            "null_p95": 0.58425585,
+            "z_score": 16.218595299167898,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.42390065,
+            "null_p95": 0.6336539999999998,
+            "z_score": 4.610321972643704,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.41369118,
+            "null_p95": 0.5692002,
+            "z_score": 6.971848363572706,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.41546900999999997,
+            "null_p95": 0.508044,
+            "z_score": 9.812961033270424,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.418136555,
+            "null_p95": 0.47881194999999993,
+            "z_score": 15.682491285804804,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "5af1cad33caafd7f64e1d4e6181444f7ff791155ba4e8bef045c689ed1f720e3",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "comtrade",
+      "path": "scripts\\cross_era_analysis\\output\\phase0_commercial\\comtrade_btut_result.json",
+      "survivor_count": 998,
+      "load_seconds": 0.006933800003025681,
+      "entity_types": [
+        "commodity",
+        "country",
+        "trade_flow"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9403,
+      "top_entity_name": "commodity_02",
+      "null_test": {
+        "n_survivors": 998,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 25.94548872400024,
+        "median_z_score": 14.797108272775478,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8830199999999999,
+            "null_mean": 0.45952615,
+            "null_p95": 0.5301299999999999,
+            "z_score": 9.458478792477147,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.810124,
+            "null_mean": 0.46239684000000003,
+            "null_p95": 0.5133108000000001,
+            "z_score": 12.072312354304554,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.7238099999999998,
+            "null_mean": 0.46089876,
+            "null_p95": 0.4920717,
+            "z_score": 12.63964478044845,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.6637449999999998,
+            "null_mean": 0.460626615,
+            "null_p95": 0.48043735,
+            "z_score": 16.201600975852667,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.9039000000000001,
+            "null_mean": 0.2232278,
+            "null_p95": 0.28480599999999995,
+            "z_score": 21.846300525422677,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.824508,
+            "null_mean": 0.22484156,
+            "null_p95": 0.27060659999999986,
+            "z_score": 25.94548872400024,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.6387,
+            "null_mean": 0.22404104,
+            "null_p95": 0.2548893,
+            "z_score": 25.190593066271813,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.448217,
+            "null_mean": 0.22560121,
+            "null_p95": 0.2458029,
+            "z_score": 19.463824423849285,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8332599999999999,
+            "null_mean": 0.422541,
+            "null_p95": 0.47210849999999976,
+            "z_score": 13.392615569698291,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.7771039999999999,
+            "null_mean": 0.42372370000000004,
+            "null_p95": 0.46072499999999994,
+            "z_score": 16.9063325286407,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.707138,
+            "null_mean": 0.42207269,
+            "null_p95": 0.44923310000000005,
+            "z_score": 18.27546282707971,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.6428860000000001,
+            "null_mean": 0.424528065,
+            "null_p95": 0.4410135,
+            "z_score": 21.831255901768223,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.6840895,
+            "null_p95": 0.8668365,
+            "z_score": 2.742840079391367,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.67248996,
+            "null_p95": 0.8061914,
+            "z_score": 4.056908567346894,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.6724270699999999,
+            "null_p95": 0.7583078999999999,
+            "z_score": 6.220067054946884,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.6734339500000001,
+            "null_p95": 0.7254836000000001,
+            "z_score": 9.446243594283409,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "7e92a1f26224d5fa1efef5f56ff75ea7bbb10aa6cfb0373fe1ad6d377fcff218",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "patents",
+      "path": "scripts\\cross_era_analysis\\output\\phase0_commercial\\patents_btut_result.json",
+      "survivor_count": 937,
+      "load_seconds": 0.006371600000420585,
+      "entity_types": [
+        "patent"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.806,
+      "top_entity_name": "assignee_siemens_ag",
+      "null_test": {
+        "n_survivors": 937,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 20.986617011679346,
+        "median_z_score": 13.032485016796777,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.77215,
+            "null_mean": 0.43287215,
+            "null_p95": 0.5053315,
+            "z_score": 8.388063623834432,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.7402960000000001,
+            "null_mean": 0.43660142,
+            "null_p95": 0.48209599999999997,
+            "z_score": 11.256971045395495,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.7119960000000002,
+            "null_mean": 0.43507694,
+            "null_p95": 0.4629362999999999,
+            "z_score": 15.835821037971616,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.6818979999999999,
+            "null_mean": 0.43533619,
+            "null_p95": 0.4534334999999998,
+            "z_score": 20.986617011679346,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.96289,
+            "null_mean": 0.5073603999999999,
+            "null_p95": 0.5843965,
+            "z_score": 9.885642994247375,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.91492,
+            "null_mean": 0.5047046199999999,
+            "null_p95": 0.567327,
+            "z_score": 12.06312861599383,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.87092,
+            "null_mean": 0.5043792300000001,
+            "null_p95": 0.5392054000000001,
+            "z_score": 18.694339871191385,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.8092569999999999,
+            "null_mean": 0.50285397,
+            "null_p95": 0.5253082499999999,
+            "z_score": 20.637131530352512,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8212900000000001,
+            "null_mean": 0.5076241,
+            "null_p95": 0.5572345000000001,
+            "z_score": 10.478175803743726,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.769296,
+            "null_mean": 0.50900028,
+            "null_p95": 0.5419778000000001,
+            "z_score": 14.001841417599726,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.7369559999999999,
+            "null_mean": 0.50818227,
+            "null_p95": 0.5311032,
+            "z_score": 16.549786178798048,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.7025399999999999,
+            "null_mean": 0.50913724,
+            "null_p95": 0.5251454999999999,
+            "z_score": 20.10949914241641,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.3119564,
+            "null_p95": 0.5557445,
+            "z_score": 5.191786467006317,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.30152982,
+            "null_p95": 0.43592699999999995,
+            "z_score": 8.662090354851173,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.30255385999999995,
+            "null_p95": 0.4078869999999999,
+            "z_score": 11.97690499802808,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.29944414,
+            "null_p95": 0.36487065,
+            "z_score": 19.228557329049824,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "0812ebd3a1ed60931d3517b73fa8f110bf646064e919ab68d069fb389707c8ab",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "pubmed",
+      "path": "scripts\\cross_era_analysis\\output\\phase0_commercial\\pubmed_btut_result.json",
+      "survivor_count": 989,
+      "load_seconds": 0.004887399991275743,
+      "entity_types": [
+        "author",
+        "paper"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9259,
+      "top_entity_name": "mesh_D000081082",
+      "null_test": {
+        "n_survivors": 989,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 15,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 21.29698264487619,
+        "median_z_score": 10.026697214584004,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8515600000000001,
+            "null_mean": 0.5481766,
+            "null_p95": 0.630935,
+            "z_score": 6.070764575490279,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.8311439999999999,
+            "null_mean": 0.5437724199999999,
+            "null_p95": 0.5947787999999999,
+            "z_score": 8.754783811192185,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.8106699999999999,
+            "null_mean": 0.5445108900000001,
+            "null_p95": 0.5852859,
+            "z_score": 11.298610617975822,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.7894929999999998,
+            "null_mean": 0.545805055,
+            "null_p95": 0.5700806,
+            "z_score": 16.243468389978467,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.9334999999999999,
+            "null_mean": 0.21554865,
+            "null_p95": 0.3508749999999992,
+            "z_score": 8.454417965560989,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.87854,
+            "null_mean": 0.21816554,
+            "null_p95": 0.31413639999999987,
+            "z_score": 12.414776447454665,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.8170919999999998,
+            "null_mean": 0.20475290999999998,
+            "null_p95": 0.25796119999999995,
+            "z_score": 18.457158762780804,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.751324,
+            "null_mean": 0.210428395,
+            "null_p95": 0.2563667499999999,
+            "z_score": 20.436132252434017,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.9135200000000001,
+            "null_mean": 0.6082744999999999,
+            "null_p95": 0.670464,
+            "z_score": 8.679344255885084,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.8847360000000002,
+            "null_mean": 0.60637376,
+            "null_p95": 0.645821,
+            "z_score": 12.724421812965199,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.8603380000000002,
+            "null_mean": 0.6057544300000001,
+            "null_p95": 0.6321178,
+            "z_score": 17.302797532560337,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.8322670000000001,
+            "null_mean": 0.60698407,
+            "null_p95": 0.6262920999999999,
+            "z_score": 21.29698264487619,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.7310548,
+            "null_p95": 0.9,
+            "z_score": 2.3494320161198647,
+            "sig_05": true,
+            "sig_001": false
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.7143664799999999,
+            "null_p95": 0.8415985999999999,
+            "z_score": 3.8330732497532294,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.7115690199999999,
+            "null_p95": 0.7935555,
+            "z_score": 5.4342939504229,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.717235425,
+            "null_p95": 0.7740604999999998,
+            "z_score": 8.448270729831945,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "718f8da992e2a8d51471bc273488636d6c85734511fa16f1175e57e44eaab497",
+      "readiness_score": 85
+    },
+    {
       "corpus_id": "einstein",
       "path": "scripts\\results\\einstein_btut_result.json",
       "survivor_count": 9,
-      "load_seconds": 0.0004721999866887927,
+      "load_seconds": 0.001039199996739626,
       "entity_types": [
         "concept",
         "event",
@@ -1671,7 +2474,7 @@
       "corpus_id": "turing",
       "path": "scripts\\results\\turing_btut_result.json",
       "survivor_count": 18,
-      "load_seconds": 0.0003865000035148114,
+      "load_seconds": 0.0005428000004030764,
       "entity_types": [
         "concept",
         "event",
@@ -1748,10 +2551,10 @@
     }
   ],
   "aggregate": {
-    "corpora_tested": 11,
-    "mean_readiness": 73.18181818181819,
-    "corpora_with_universal_significance": 9,
-    "total_survivors_processed": 14601,
+    "corpora_tested": 15,
+    "mean_readiness": 76.33333333333333,
+    "corpora_with_universal_significance": 13,
+    "total_survivors_processed": 18524,
     "max_z_score_across_corpora": 30.367053922081805
   }
 }

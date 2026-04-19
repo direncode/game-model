@@ -36,6 +36,7 @@ from lo_core.analyze import analyze_corpus  # noqa: E402
 CANDIDATE_PATTERNS = (
     "scripts/edgar_btut_result_5000.json",
     "scripts/cross_era_analysis/output/*_btut_result*.json",
+    "scripts/cross_era_analysis/output/phase0_commercial/*_btut_result*.json",
     "scripts/results/*_btut_result.json",
 )
 

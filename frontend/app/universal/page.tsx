@@ -73,6 +73,10 @@ const DOMAIN_LABEL: Record<string, string> = {
   einstein: "Einstein biographical events",
   turing: "Turing biographical events",
   standalone: "Standalone smoke dataset",
+  pubmed: "PubMed biomedical literature",
+  comtrade: "UN Comtrade · international trade flows",
+  climate: "NOAA weather-station climate series",
+  patents: "USPTO patent abstracts",
 };
 
 export default function UniversalPage() {
