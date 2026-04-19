@@ -278,7 +278,14 @@ function CorpusCard({ c }: { c: CorpusReport }) {
           <div className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-1">
             Top-ranked entity
           </div>
-          <div className="font-mono text-sm text-white/90 truncate">{c.top_entity_name}</div>
+          <div className="text-sm text-white/90 truncate">
+            {(c as any).top_entity_resolved?.display ?? c.top_entity_name}
+          </div>
+          {(c as any).top_entity_resolved?.subtitle && (
+            <div className="text-[10px] font-mono text-white/40 mt-0.5">
+              {(c as any).top_entity_resolved.subtitle} · <span className="text-white/30">raw: {c.top_entity_name}</span>
+            </div>
+          )}
         </div>
       )}
 

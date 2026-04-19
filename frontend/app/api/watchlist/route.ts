@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { resolveEntity } from "@/lib/entityResolver";
 
 // Universal watchlist endpoint: reads the raw BTUT survivor set and returns
 // the top-50 findings by composite score. No hand-curated ticker list — the
@@ -104,7 +105,16 @@ export async function GET(req: Request) {
     const ranked = [...byCik.values()]
       .sort((a, b) => b.composite - a.composite)
       .slice(0, k)
-      .map((f, i) => ({ ...f, rank: i + 1 }));
+      .map((f, i) => {
+        const resolved = resolveEntity(`fact_${f.cik}_${f.concept}`, cikToName);
+        return {
+          ...f,
+          rank: i + 1,
+          concept_display: resolved.display.split(" · ").slice(-1)[0],
+          entity_display: resolved.display,
+          external_url: resolved.externalUrl,
+        };
+      });
 
     return NextResponse.json({
       universe_size: (btut.survivors ?? []).length,

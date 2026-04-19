@@ -1,0 +1,277 @@
+{
+  "generated_at": "2026-04-19T21:45:08Z",
+  "wall_seconds": 0.5665686000138521,
+  "ground_truth": {
+    "source": "SEC distress forms (10-K/A, 10-Q/A, NT 10-K, NT 10-Q) from scripts/edgar_cache.json",
+    "positive_total": 26,
+    "positive_in_btut": 6,
+    "negative_total": 726,
+    "negative_in_btut": 225,
+    "random_base_rate": 0.025974025974025976
+  },
+  "K_values": [
+    10,
+    25,
+    50,
+    100,
+    250,
+    500
+  ],
+  "rankers": [
+    {
+      "name": "btut_composite",
+      "description": "BTUT composite \u2014 engine's composite score on each CIK's highest-ranked fact",
+      "per_k": [
+        {
+          "K": 10,
+          "top_k_size": 10,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 25,
+          "top_k_size": 25,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 50,
+          "top_k_size": 50,
+          "distress_captured": 1,
+          "precision": 0.02,
+          "recall": 0.1667,
+          "lift_vs_random": 0.77
+        },
+        {
+          "K": 100,
+          "top_k_size": 100,
+          "distress_captured": 3,
+          "precision": 0.03,
+          "recall": 0.5,
+          "lift_vs_random": 1.15
+        },
+        {
+          "K": 250,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        },
+        {
+          "K": 500,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        }
+      ],
+      "auc_hits_k500": 2.9567099567099566,
+      "seconds": 0.0
+    },
+    {
+      "name": "mean_composite",
+      "description": "Naive stat \u2014 mean of composite scores across each CIK's facts",
+      "per_k": [
+        {
+          "K": 10,
+          "top_k_size": 10,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 25,
+          "top_k_size": 25,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 50,
+          "top_k_size": 50,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 100,
+          "top_k_size": 100,
+          "distress_captured": 2,
+          "precision": 0.02,
+          "recall": 0.3333,
+          "lift_vs_random": 0.77
+        },
+        {
+          "K": 250,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        },
+        {
+          "K": 500,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        }
+      ],
+      "auc_hits_k500": 2.857142857142857,
+      "seconds": 0.0
+    },
+    {
+      "name": "fact_count",
+      "description": "Size confound \u2014 rank by how many survivor facts each CIK contributes",
+      "per_k": [
+        {
+          "K": 10,
+          "top_k_size": 10,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 25,
+          "top_k_size": 25,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 50,
+          "top_k_size": 50,
+          "distress_captured": 1,
+          "precision": 0.02,
+          "recall": 0.1667,
+          "lift_vs_random": 0.77
+        },
+        {
+          "K": 100,
+          "top_k_size": 100,
+          "distress_captured": 3,
+          "precision": 0.03,
+          "recall": 0.5,
+          "lift_vs_random": 1.15
+        },
+        {
+          "K": 250,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        },
+        {
+          "K": 500,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        }
+      ],
+      "auc_hits_k500": 3.3333333333333335,
+      "seconds": 0.0
+    },
+    {
+      "name": "random_seed_42",
+      "description": "Null baseline \u2014 uniformly random ordering (seed=42)",
+      "per_k": [
+        {
+          "K": 10,
+          "top_k_size": 10,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 25,
+          "top_k_size": 25,
+          "distress_captured": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "lift_vs_random": 0.0
+        },
+        {
+          "K": 50,
+          "top_k_size": 50,
+          "distress_captured": 1,
+          "precision": 0.02,
+          "recall": 0.1667,
+          "lift_vs_random": 0.77
+        },
+        {
+          "K": 100,
+          "top_k_size": 100,
+          "distress_captured": 3,
+          "precision": 0.03,
+          "recall": 0.5,
+          "lift_vs_random": 1.15
+        },
+        {
+          "K": 250,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        },
+        {
+          "K": 500,
+          "top_k_size": 231,
+          "distress_captured": 6,
+          "precision": 0.026,
+          "recall": 1.0,
+          "lift_vs_random": 1.0
+        }
+      ],
+      "auc_hits_k500": 2.9913419913419914,
+      "seconds": 0.0
+    }
+  ],
+  "random_null_auc": {
+    "n_draws": 30,
+    "mean": 2.81010101010101,
+    "std": 0.6905919676878777
+  },
+  "methodology_gap": {
+    "bloomberg_terminal": {
+      "endpoint": "BDP()/BDS() over LO_* fields we define, plus BBG Alternative Data Insight consensus outputs",
+      "universe": "Same CIK set; aligned by BBG TICKER mapping",
+      "outcome_metric": "days_before_10ka(filing_date) at alert time; compare BTUT pre-filing flag against BBG Consensus downgrade / Analyst Alert trigger",
+      "status": "requires BBG API access + customer pilot with terminal entitlement"
+    },
+    "alphasense": {
+      "endpoint": "AlphaSense Semantic Search API: 'restatement risk' / 'going concern' sentiment on 10-Ks",
+      "universe": "Same set",
+      "outcome_metric": "AlphaSense confidence score \u00d7 day_of_first_hit vs BTUT's pre-filing flag date",
+      "status": "requires AlphaSense API access"
+    },
+    "ravenpack": {
+      "endpoint": "RavenPack PRISM News Analytics sentiment on ticker \u00d7 event type (accounting)",
+      "universe": "Same set",
+      "outcome_metric": "RavenPack event-relevance \u00d7 polarity on accounting-news events vs BTUT's structural flag",
+      "status": "requires RavenPack subscription"
+    },
+    "audit_analytics": {
+      "endpoint": "Audit Analytics Disclosure Research (historical restatement database)",
+      "universe": "Same set",
+      "outcome_metric": "Audit Analytics publishes restatements AFTER they file; BTUT flags BEFORE. The comparison is lead-time, not same-time.",
+      "status": "available via subscription; methodology ready"
+    }
+  }
+}

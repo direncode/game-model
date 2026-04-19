@@ -10,6 +10,7 @@ type CorpusStub = {
   survivor_count: number;
   null_test: { max_z_score?: number; significant_05?: number; total_metrics?: number };
   top_entity_name: string | null;
+  top_entity_resolved?: { display: string; subtitle?: string; kind?: string };
   readiness_score: number;
 };
 
@@ -275,8 +276,8 @@ function CorpusChip({ c }: { c: CorpusStub }) {
         </div>
       </div>
       {c.top_entity_name && (
-        <div className="mt-2 text-[11px] font-mono text-white/50 truncate">
-          top: {c.top_entity_name}
+        <div className="mt-2 text-[11px] text-white/50 truncate">
+          top: {(c as any).top_entity_resolved?.display ?? c.top_entity_name}
         </div>
       )}
     </div>
