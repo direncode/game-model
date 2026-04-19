@@ -51,7 +51,14 @@ export interface ParadigmBreakdown {
 export interface LegendBridge {
   other_legend: string;
   shared_count: number;
-  samples: Array<{ fp: string; a_name: string; b_name: string }>;
+  weighted_score: number;
+  samples: Array<{
+    fp: string;
+    a_name: string;
+    b_name: string;
+    global_count?: number;
+    weight?: number;
+  }>;
 }
 
 export interface ConnectResult {
@@ -233,15 +240,29 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
           // Attach per-legend cross-legend bridges
           try {
             const bridgesMod = await import('@/data/legends/bridges.json');
-            const all = (bridgesMod.default as { bridges: Array<{ a: string; b: string; shared_count: number; samples: Array<{ fp: string; a_name: string; b_name: string }> }> }).bridges;
+            type RawBridge = {
+              a: string;
+              b: string;
+              shared_count: number;
+              weighted_score: number;
+              samples: Array<{
+                fp: string;
+                a_name: string;
+                b_name: string;
+                global_count?: number;
+                weight?: number;
+              }>;
+            };
+            const all = (bridgesMod.default as { bridges: RawBridge[] }).bridges;
             payload.bridges = all
               .filter((br) => br.a === mode.legendId || br.b === mode.legendId)
               .map((br) => ({
                 other_legend: br.a === mode.legendId ? br.b : br.a,
                 shared_count: br.shared_count,
+                weighted_score: br.weighted_score,
                 samples: br.samples,
               }))
-              .sort((x, y) => y.shared_count - x.shared_count);
+              .sort((x, y) => y.weighted_score - x.weighted_score);
           } catch {
             /* bridges optional */
           }

@@ -223,22 +223,32 @@ export default function HomePage() {
                   Cross-Legend Bridges
                 </h3>
                 <span className="text-[10px] font-mono text-white/30">
-                  {result.bridges.length} legends share fingerprints with this one
+                  {result.bridges.length} legends with rare-fingerprint overlap (density-filtered)
                 </span>
               </div>
               <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <p className="text-[10px] font-mono text-white/25 mb-3">
+                  Ranked by weighted score (matches on rare lattice fingerprints count more).
+                  Global count = how many legends hold this fingerprint.
+                </p>
                 <div className="space-y-3">
-                  {result.bridges.slice(0, 8).map((br, i) => (
+                  {result.bridges.slice(0, 10).map((br, i) => (
                     <details key={i} className="group">
                       <summary className="flex items-center gap-3 text-[11px] font-mono cursor-pointer hover:bg-white/[0.02] rounded px-2 py-1 -mx-2 transition-colors">
                         <span className="text-white/40 w-4">&#9656;</span>
                         <span className="text-white/70 flex-1">{br.other_legend}</span>
-                        <span className="text-li-cyan/80">{br.shared_count} shared fingerprint{br.shared_count === 1 ? '' : 's'}</span>
+                        <span className="text-li-cyan/80 w-28 text-right">w {br.weighted_score.toFixed(2)}</span>
+                        <span className="text-white/30 w-20 text-right">
+                          {br.shared_count} match{br.shared_count === 1 ? '' : 'es'}
+                        </span>
                       </summary>
                       <div className="pl-6 pt-2 space-y-1 text-[10px] font-mono text-white/40">
-                        {br.samples.slice(0, 4).map((s, j) => (
+                        {br.samples.slice(0, 5).map((s, j) => (
                           <div key={j} className="truncate">
                             <span className="text-li-yellow/50">{s.fp.slice(0, 12)}</span>
+                            {s.global_count !== undefined && (
+                              <span className="text-white/25"> gc={s.global_count}</span>
+                            )}
                             {' '}
                             <span className="text-white/60">{s.a_name}</span>
                             {' \u2194 '}

@@ -1,1713 +1,513 @@
 {
   "bridges": [
     {
-      "a": "climate",
-      "b": "edgar",
-      "samples": [
-        {
-          "a_name": "station_CATL1",
-          "b_name": "filing_000196905526000002",
-          "fp": "111111111011111101111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000121390025104686",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_BBVK2",
-          "b_name": "filing_000210403626000001",
-          "fp": "111111111111110111111111111111111101111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000114519726000093",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000157601826000032",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000121390026014318",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000001154426000005",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "filing_000102621426000005",
-          "fp": "111110111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "climate",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "station_COOPRSDW2",
-          "b_name": "historical_saussure_structuralism__concept__paradigmatic",
-          "fp": "101111111111111111111111111111111111111111111110"
-        },
-        {
-          "a_name": "station_AU244",
-          "b_name": "linguistics_portroyal_grammar__c047",
-          "fp": "101111111111111111111110111111111111111111111111"
-        },
-        {
-          "a_name": "station_CATL1",
-          "b_name": "linguistics_portroyal_grammar__c021",
-          "fp": "111111111011111101111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "linguistics_humboldt_language__c048",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_CO192",
-          "b_name": "modern_chomsky_syntactic_structures__c042",
-          "fp": "111111111111111111111111111111111111011111111111"
-        },
-        {
-          "a_name": "station_COOPMIZM8",
-          "b_name": "linguistics_panini_ashtadhyayi__c052",
-          "fp": "111111111111111111111111111111111111111111101111"
-        },
-        {
-          "a_name": "station_COOPMIZM8",
-          "b_name": "linguistics_panini_ashtadhyayi__c036",
-          "fp": "111111111111111111111111111111111111111111101111"
-        },
-        {
-          "a_name": "station_CO192",
-          "b_name": "linguistics_portroyal_grammar__c063",
-          "fp": "111111111111111111111111111111111111011111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "heterogeneous",
-      "samples": [
-        {
-          "a_name": "filing_000139834426003083",
-          "b_name": "corum_US9912031__c069",
-          "fp": "111111111111111111111111111010111111111111111111"
-        },
-        {
-          "a_name": "filing_000202984225000002",
-          "b_name": "crypto_RSA_US4405829__c013",
-          "fp": "111111111111110111111111111011111111111111111111"
-        },
-        {
-          "a_name": "filing_000119312526045187",
-          "b_name": "corum_US9923385__c049",
-          "fp": "110111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000121390025107817",
-          "b_name": "stone_US714756__c046",
-          "fp": "111101111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000106569626000026",
-          "b_name": "info_HUFFMAN1952__c049",
-          "fp": "111111111111111111111111111110111111111111101111"
-        },
-        {
-          "a_name": "filing_000087401526000144",
-          "b_name": "tesla_ac_motor_US382280__c022",
-          "fp": "111111111111111111111111111111111111111110111111"
-        },
-        {
-          "a_name": "filing_000103797626000064",
-          "b_name": "tesla_US1119732__c079",
-          "fp": "111111111111111011111111111111111111110111111111"
-        },
-        {
-          "a_name": "filing_000210403626000001",
-          "b_name": "tesla_ac_motor_US382280__c011",
-          "fp": "111111111111110111111111111111111101111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "latk_mini",
-      "samples": [
-        {
-          "a_name": "filing_000087401526000144",
-          "b_name": "latk_linguistics__modern_backus_naur_form__c036",
-          "fp": "111111111111111111111111111111111111111110111111"
-        },
-        {
-          "a_name": "filing_000110465926031323",
-          "b_name": "latk_heterogeneous__corum_US9910144__c029",
-          "fp": "111110111111111111111111111111101111111111111111"
-        },
-        {
-          "a_name": "filing_000210409426000007",
-          "b_name": "latk_heterogeneous__tesla_US1119732__c020",
-          "fp": "111111111111111101111111111111111111111111101111"
-        },
-        {
-          "a_name": "filing_000121465926004185",
-          "b_name": "latk_heterogeneous__corum_US9923385__c035",
-          "fp": "111111111111111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "filing_000035419026000122",
-          "b_name": "latk_polymath__newton_alchemy_praxis__c088",
-          "fp": "111111111111111111111111111101101111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_polymath__leonardo_art_control__c091",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000162828026008561",
-          "b_name": "latk_heterogeneous__witricity_US8686598__c059",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000035419026000122",
-          "b_name": "latk_heterogeneous__fessenden_US706737__c014",
-          "fp": "111111111111111111111111111101101111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "latk_physics",
-      "samples": [
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2302_12673v5__c001",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2011_12144v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2401_16949v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000160831126000003",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2512_24198v1__c000",
-          "fp": "111111111111110111101111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1111_6272v1__c001",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_astro_ph_ga__writing__arxiv_2008_12309v2__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "latk_physics__arxiv_physics_chem_ph__writing__arxiv_2208_05585v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "filing_000121465926004185",
-          "b_name": "linguistics_saussure_course__c051",
-          "fp": "111111111111111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "filing_000121390025107817",
-          "b_name": "modern_backus_naur_form__c020",
-          "fp": "111101111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000196905526000002",
-          "b_name": "linguistics_portroyal_grammar__c021",
-          "fp": "111111111011111101111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000124008526000009",
-          "b_name": "modern_chomsky_syntactic_structures__c000",
-          "fp": "111111111101111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "modern_transformer_attention__c009",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "linguistics_saussure_course__c065",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000119312526104339",
-          "b_name": "linguistics_saussure_course__c034",
-          "fp": "111111111111111111111111111111011111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "linguistics_saussure_course__c059",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "patents",
-      "samples": [
-        {
-          "a_name": "filing_000187417826000012",
-          "b_name": "patent_US11001134",
-          "fp": "111111111011111111111111111111101111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11001295",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11001795",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11000635",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11000446",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11001690",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11000137",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "patent_US11000821",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "edgar",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "event_event_lab_fire",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000195917326000758",
-          "b_name": "event_event_westinghouse_deal",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
       "a": "heterogeneous",
       "b": "latk_mini",
       "samples": [
         {
+          "a_name": "info_JPEG1992__c008",
+          "b_name": "latk_polymath__newton_principia_mechanics__c109",
+          "fp": "111111110111111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "fessenden_US706737__c018",
+          "b_name": "latk_polymath__vn_self_reproducing_automata__c065",
+          "fp": "111111111111111111111111111111111111111111111101",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "tesla_US1119732__c065",
+          "b_name": "latk_linguistics__linguistics_portroyal_grammar__c031",
+          "fp": "111111111111111111011111111111111111111111110111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
           "a_name": "corum_US9912031__c061",
           "b_name": "latk_polymath__newton_alchemy_clavis__c108",
-          "fp": "111111111111111111011111111110111111111111111111"
+          "fp": "111111111111111111011111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "info_JPEG1992__c031",
-          "b_name": "latk_linguistics__linguistics_saussure_course__c044",
-          "fp": "111111111111111111011111111011111111111111111111"
-        },
-        {
-          "a_name": "deforest_US841387__c005",
-          "b_name": "latk_heterogeneous__tesla_ac_motor_US382280__c007",
-          "fp": "111111111111110111111111111111111111111111111111"
-        },
-        {
-          "a_name": "tesla_ac_motor_US382280__c022",
-          "b_name": "latk_linguistics__modern_backus_naur_form__c036",
-          "fp": "111111111111111111111111111111111111111110111111"
-        },
-        {
-          "a_name": "witricity_US7741734__c047",
-          "b_name": "latk_heterogeneous__info_HEVC2013__c041",
-          "fp": "111111111110111111111111111111101111111111011111"
+          "a_name": "witricity_US7741734__c033",
+          "b_name": "latk_heterogeneous__marconi_US586193__c005",
+          "fp": "111111111111111111111111111110111111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "tesla_US1119732__c056",
           "b_name": "latk_linguistics__modern_chomsky_hierarchy__c052",
-          "fp": "111111111111111101111111111110111111111111111111"
+          "fp": "111111111111111101111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "marconi_US586193__c023",
           "b_name": "latk_heterogeneous__corum_US10084223__c036",
-          "fp": "111111111111111111011111111101111111111111111111"
+          "fp": "111111111111111111011111111101111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "stone_US714756__c027",
-          "b_name": "latk_polymath__newton_opticks_light__c010",
-          "fp": "111111111111111111111101111111111111111111111111"
+          "a_name": "deforest_US841387__c024",
+          "b_name": "latk_heterogeneous__stone_US714756__c047",
+          "fp": "111111111111111111111111111101111111111111101111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "witricity_US7741734__c047",
+          "b_name": "latk_heterogeneous__info_HEVC2013__c041",
+          "fp": "111111111110111111111111111111101111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "info_HUFFMAN1952__c011",
+          "b_name": "latk_linguistics__modern_chomsky_hierarchy__c082",
+          "fp": "111111111111111111111111111111111111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 15
-    },
-    {
-      "a": "heterogeneous",
-      "b": "latk_physics",
-      "samples": [
-        {
-          "a_name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
-          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_0909_5421v2__c000",
-          "fp": "111011111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "marconi_US586193__c041",
-          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1902_10358v2__c000",
-          "fp": "111111111111111111111111111110111111111111011110"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2302_12673v5__c001",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2011_12144v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2401_16949v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1111_6272v1__c001",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "latk_physics__arxiv_astro_ph_ga__writing__arxiv_2008_12309v2__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "heterogeneous",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "tesla_US1119732__c004",
-          "b_name": "linguistics_saussure_course__c051",
-          "fp": "111111111111111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "tesla_US649621__c026",
-          "b_name": "linguistics_humboldt_language__c046",
-          "fp": "111111111111111111111111111111111110111111110111"
-        },
-        {
-          "a_name": "stone_US714756__c046",
-          "b_name": "modern_backus_naur_form__c020",
-          "fp": "111101111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "corum_US9910144__c027",
-          "b_name": "linguistics_portroyal_grammar__c027",
-          "fp": "111111111111111111011111111111111111111111101111"
-        },
-        {
-          "a_name": "stone_US714756__c027",
-          "b_name": "modern_chomsky_syntactic_structures__c001",
-          "fp": "111111111111111111111101111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "modern_transformer_attention__c009",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "linguistics_saussure_course__c065",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_LZ1984__c003",
-          "b_name": "linguistics_portroyal_grammar__c057",
-          "fp": "111111111111111101111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "heterogeneous",
-      "b": "patents",
-      "samples": [
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11001295",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11001795",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11000635",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11000446",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11001690",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11000137",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "patent_US11000821",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "marconi_US586193__c008",
-          "b_name": "patent_US11002742",
-          "fp": "111111111111111111111111111111111111111011111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "heterogeneous",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "deforest_US841387__c014",
-          "b_name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "crypto_DH_US4200770__c003",
-          "b_name": "modern_complexity__location__santa_fe_institute",
-          "fp": "111111111111111111111111111011111111111111111111"
-        },
-        {
-          "a_name": "deforest_US841387__c014",
-          "b_name": "leonardo_flight__location__milan",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "crypto_number_theoretic__location__mit_mathematics_department",
-          "b_name": "vn_cellular_automata_transitions__c087",
-          "fp": "111111111111110111111101111111111111111111111111"
-        },
-        {
-          "a_name": "stone_US714756__c027",
-          "b_name": "leonardo_art_control__c063",
-          "fp": "111111111111111111111101111111111111111111111111"
-        },
-        {
-          "a_name": "stone_US714756__c005",
-          "b_name": "leonardo_anatomy__c158",
-          "fp": "111111111111111011111111111011111111111111111111"
-        },
-        {
-          "a_name": "corum_US9912031__c074",
-          "b_name": "newton_alchemy_index_chemicus__c074",
-          "fp": "111101111111111011111111111111111111111111111111"
-        },
-        {
-          "a_name": "tesla_US649621__c036",
-          "b_name": "newton_alchemy_clavis__c073",
-          "fp": "111111111111110111111111111111111111111111111110"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "heterogeneous",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "corum_US9910144__c007",
-          "b_name": "concept_radiant_energy",
-          "fp": "111111111111111111111111111111111111111111110111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "deforest_US841387__c005",
-          "b_name": "document_trump_examination",
-          "fp": "111111111111110111111111111111111111111111111111"
-        },
-        {
-          "a_name": "info_JPEG1992__c047",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_mini",
-      "b": "latk_physics",
-      "samples": [
-        {
-          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c022",
-          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_2212_06408v4__c000",
-          "fp": "111111111111111111111111111100111111111111011111"
-        },
-        {
-          "a_name": "latk_heterogeneous__info_HUFFMAN1952__c049",
-          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1201_2153v1__c000",
-          "fp": "111111111110111111111111110111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c009",
-          "b_name": "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2106_03204v2__c000",
-          "fp": "111111111110111111111011111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_alchemy_clavis__c024",
-          "b_name": "latk_physics__arxiv_physics_comp_ph__writing__arxiv_2107_09411v1__c000",
-          "fp": "111111111100111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2302_12673v5__c001",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2011_12144v1__c000",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c075",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_1901_06093v1__c000",
-          "fp": "111111111111111110111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_mini",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "latk_heterogeneous__corum_US9923385__c035",
-          "b_name": "linguistics_saussure_course__c051",
-          "fp": "111111111111111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__corum_US10084223__c018",
-          "b_name": "linguistics_humboldt_language__c046",
-          "fp": "111111111111111111111111111111111110111111110111"
-        },
-        {
-          "a_name": "latk_linguistics__linguistics_portroyal_grammar__c002",
-          "b_name": "modern_backus_naur_form__c020",
-          "fp": "111101111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_principia_mechanics__c151",
-          "b_name": "linguistics_saussure_course__c013",
-          "fp": "111111011111111111111110111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c004",
-          "b_name": "linguistics_portroyal_grammar__c027",
-          "fp": "111111111111111111011111111111111111111111101111"
-        },
-        {
-          "a_name": "latk_linguistics__linguistics_humboldt_language__c047",
-          "b_name": "linguistics_portroyal_grammar__c012",
-          "fp": "111110111111111111111111111111111111111111110111"
-        },
-        {
-          "a_name": "latk_polymath__newton_opticks_light__c010",
-          "b_name": "modern_chomsky_syntactic_structures__c001",
-          "fp": "111111111111111111111101111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "modern_transformer_attention__c009",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_mini",
-      "b": "patents",
-      "samples": [
-        {
-          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c001",
-          "b_name": "patent_US11001095",
-          "fp": "111111111111111111011111111111101111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__corum_US10084223__c047",
-          "b_name": "patent_US11002680",
-          "fp": "111110111111111111011111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11001295",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11001795",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11000635",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11000446",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11001690",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "patent_US11000137",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_mini",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "latk_heterogeneous__witricity_US8686598__c059",
-          "b_name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__stone_US714756__c034",
-          "b_name": "modern_complexity__location__santa_fe_institute",
-          "fp": "111111111111111111111111111011111111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__witricity_US8686598__c059",
-          "b_name": "leonardo_flight__location__milan",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_opticks_light__c010",
-          "b_name": "leonardo_art_control__c063",
-          "fp": "111111111111111111111101111111111111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__marconi_US586193__c006",
-          "b_name": "leonardo_water_motion__c144",
-          "fp": "111111111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c096",
-          "b_name": "vn_cellular_automata_transitions__c046",
-          "fp": "111111111110111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__vn_monte_carlo_control__c010",
-          "b_name": "modern_materials_alchemy_chemistry_bridge__c010",
-          "fp": "111101111111111101111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__newton_alchemy_clavis__c019",
-          "b_name": "modern_navier_stokes__c050",
-          "fp": "111111111111111111111111111111011111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_mini",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_heterogeneous__tesla_ac_motor_US382280__c007",
-          "b_name": "document_trump_examination",
-          "fp": "111111111111110111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_polymath__leonardo_art_control__c091",
-          "b_name": "event_event_lab_fire",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_physics",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "modern_transformer_attention__c009",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "linguistics_saussure_course__c065",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "linguistics_saussure_course__c059",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_2406_02593v1__c001",
-          "b_name": "linguistics_saussure_course__c045",
-          "fp": "111111011111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_2109_04691v1__c000",
-          "b_name": "linguistics_portroyal_grammar__c056",
-          "fp": "111111101111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "modern_backus_naur_form__c075",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "linguistics_saussure_course__c074",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_0610172v1__c000",
-          "b_name": "modern_chomsky_hierarchy__c010",
-          "fp": "111111111111111111101111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_physics",
-      "b": "patents",
-      "samples": [
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11001295",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11001795",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11000635",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11000446",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11001690",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11000137",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11000821",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "patent_US11001025",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "latk_physics",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "event_event_lab_fire",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1708_01660v1__c000",
-          "b_name": "event_event_westinghouse_deal",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "linguistics",
-      "b": "patents",
-      "samples": [
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11001295",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11001795",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11000635",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11000446",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11001690",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11000137",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11000821",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "patent_US11001025",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "linguistics",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "linguistics_humboldt_language__c011",
-          "b_name": "concept_radiant_energy",
-          "fp": "111111111111111111111111111111111111111111110111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "linguistics_panini_ashtadhyayi__c033",
-          "b_name": "event_event_death",
-          "fp": "111111111111111111111111011111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "patents",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "event_event_lab_fire",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "event_event_westinghouse_deal",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
-    },
-    {
-      "a": "polymath",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "newton_alchemy_index_chemicus__c035",
-          "b_name": "concept_world_wireless_system",
-          "fp": "110111111111111111111111101111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "concept_earth_resonance",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "concept_alternating_current",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "concept_wireless_transmission",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "document_oap_seizure",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "document_belgrade_shipment",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "document_kosanovic_file",
-          "fp": "111111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "newton_opticks_light__c138",
-          "b_name": "event_event_lab_fire",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 15
+      "shared_count": 10,
+      "weighted_score": 7.2135
     },
     {
       "a": "climate",
       "b": "heterogeneous",
       "samples": [
         {
-          "a_name": "station_COOPCAPP7",
-          "b_name": "info_dictionary_based__location__technion_israel_institute_of_technology",
-          "fp": "101111111111111011111111111111111111111111111111"
-        },
-        {
           "a_name": "station_ANDM8",
           "b_name": "deforest_US841387__c037",
-          "fp": "111111011111111111111111111101111111111111111111"
-        },
-        {
-          "a_name": "station_AX459",
-          "b_name": "stone_US714756__c011",
-          "fp": "111111111111111111111111011111111110111111111111"
-        },
-        {
-          "a_name": "station_COOPFGZ",
-          "b_name": "info_JPEG1992__c049",
-          "fp": "111111111111111111111111111111111111111111111100"
+          "fp": "111111011111111111111111111101111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_COOPFORI2",
           "b_name": "tesla_US645576__c154",
-          "fp": "111111111111111111111111111110111111111111111110"
+          "fp": "111111111111111111111111111110111111111111111110",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "station_BBVK2",
-          "b_name": "tesla_ac_motor_US382280__c011",
-          "fp": "111111111111110111111111111111111101111111111111"
-        },
-        {
-          "a_name": "station_COOPCAPP7",
-          "b_name": "deforest_US841387__c044",
-          "fp": "101111111111111011111111111111111111111111111111"
+          "a_name": "station_AX459",
+          "b_name": "stone_US714756__c011",
+          "fp": "111111111111111111111111011111111110111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_AN241",
           "b_name": "tesla_US645576__c157",
-          "fp": "111111111011111111111111111111111111111111111110"
+          "fp": "111111111011111111111111111111111111111111111110",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_AW096",
+          "b_name": "witricity_US7741734__c034",
+          "fp": "111111111111111111111111111110111111101111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPCAPP7",
+          "b_name": "info_dictionary_based__location__technion_israel_institute_of_technology",
+          "fp": "101111111111111011111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 14
+      "shared_count": 6,
+      "weighted_score": 4.3281
     },
     {
       "a": "edgar",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "filing_000162828026008561",
-          "b_name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000162828026008561",
-          "b_name": "leonardo_flight__location__milan",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000110784326000008",
-          "b_name": "leonardo_water_motion__c144",
-          "fp": "111111111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "filing_000210403626000001",
-          "b_name": "leonardo_art_control__c038",
-          "fp": "111111111111110111111111111111111101111111111111"
-        },
-        {
-          "a_name": "filing_000168722926000016",
-          "b_name": "newton_principia_mechanics__c014",
-          "fp": "111111111101111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000187417826000012",
-          "b_name": "vn_mathematical_foundations_qm__c073",
-          "fp": "111111111011111111111111111111101111111111111111"
-        },
-        {
-          "a_name": "filing_000071742326000049",
-          "b_name": "vn_edvac_report__c021",
-          "fp": "111111111111111111111011111111111111111111111111"
-        },
-        {
-          "a_name": "filing_000119312526104339",
-          "b_name": "modern_navier_stokes__c050",
-          "fp": "111111111111111111111111111111011111111111111111"
-        }
-      ],
-      "shared_count": 13
-    },
-    {
-      "a": "linguistics",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "linguistics_portroyal_grammar__c011",
-          "b_name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "linguistics_portroyal_grammar__c051",
-          "b_name": "modern_complexity__location__santa_fe_institute",
-          "fp": "111111111111111111111111111011111111111111111111"
-        },
-        {
-          "a_name": "linguistics_portroyal_grammar__c011",
-          "b_name": "leonardo_flight__location__milan",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_chomsky_syntactic_structures__c001",
-          "b_name": "leonardo_art_control__c063",
-          "fp": "111111111111111111111101111111111111111111111111"
-        },
-        {
-          "a_name": "linguistics_saussure_course__c031",
-          "b_name": "vn_self_reproducing_automata__c017",
-          "fp": "111110111111111101111111111111111111111111111111"
-        },
-        {
-          "a_name": "modern_chomsky_hierarchy__c014",
-          "b_name": "leonardo_anatomy__c006",
-          "fp": "111111111111111111111111111111111111101111111111"
-        },
-        {
-          "a_name": "linguistics_saussure_course__c034",
-          "b_name": "modern_navier_stokes__c050",
-          "fp": "111111111111111111111111111111011111111111111111"
-        },
-        {
-          "a_name": "modern_transformer_attention__c009",
-          "b_name": "newton_opticks_light__c138",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 12
-    },
-    {
-      "a": "latk_physics",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1204_1952v1__c000",
-          "b_name": "leonardo_water_motion__c144",
-          "fp": "111111111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_math_qa__writing__arxiv_2310_18067v1__c000",
-          "b_name": "leonardo_art_control__c001",
-          "fp": "111111111101111111111111101111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_cond_mat_soft__writing__arxiv_1206_6261v2__c000",
-          "b_name": "newton_principia_mechanics__c014",
-          "fp": "111111111101111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2303_14761v2__c000",
-          "b_name": "newton_alchemy_clavis__c008",
-          "fp": "110111111111110111111111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1205_1087v1__c000",
-          "b_name": "leonardo_anatomy__c006",
-          "fp": "111111111111111111111111111111111111101111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2312_17328v1__c003",
-          "b_name": "vn_cellular_automata_transitions__c002",
-          "fp": "111111101111111111111111101111111111111110111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_physics_optics__writing__arxiv_1907_08604v3__c000",
-          "b_name": "modern_self_assembly_nanotech__c002",
-          "fp": "111111101111110111101111111111111111111111111111"
-        },
-        {
-          "a_name": "latk_physics__arxiv_cond_mat_str_el__writing__arxiv_2206_05756v2__c000",
-          "b_name": "newton_theology_prophecies__c152",
-          "fp": "111111101111111111101111111111111111111111111111"
-        }
-      ],
-      "shared_count": 11
-    },
-    {
-      "a": "patents",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "patent_US11002273",
-          "b_name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11002273",
-          "b_name": "leonardo_flight__location__milan",
-          "fp": "111111111011111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001630",
-          "b_name": "leonardo_water_motion__c144",
-          "fp": "111111111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001134",
-          "b_name": "vn_mathematical_foundations_qm__c073",
-          "fp": "111111111011111111111111111111101111111111111111"
-        },
-        {
-          "a_name": "patent_US11002118",
-          "b_name": "vn_cellular_automata_transitions__c046",
-          "fp": "111111111110111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11000992",
-          "b_name": "vn_edvac_report__c021",
-          "fp": "111111111111111111111011111111111111111111111111"
-        },
-        {
-          "a_name": "patent_US11001783",
-          "b_name": "leonardo_anatomy__c006",
-          "fp": "111111111111111111111111111111111111101111111111"
-        },
-        {
-          "a_name": "patent_US11001295",
-          "b_name": "newton_opticks_light__c138",
-          "fp": "111111111111111111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 11
-    },
-    {
-      "a": "climate",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "station_A3962",
-          "b_name": "location_world_columbian_expo",
-          "fp": "111111111111011111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A3962",
-          "b_name": "location_niagara_falls",
-          "fp": "111111111111011111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_368PG",
-          "b_name": "patent_US685957",
-          "fp": "111111111111111110111111101111111111111111111111"
-        },
-        {
-          "a_name": "station_COOPRCLV2",
-          "b_name": "patent_chunk_US514168_4",
-          "fp": "111111111111111111111111111111101111110111111111"
-        },
-        {
-          "a_name": "station_COOPPHXP1",
-          "b_name": "patent_chunk_US433703_4",
-          "fp": "111111111111100111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A3962",
-          "b_name": "patent_chunk_US1655113_0",
-          "fp": "111111111111011111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A3962",
-          "b_name": "patent_chunk_US685956_4",
-          "fp": "111111111111011111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A3962",
-          "b_name": "patent_chunk_US1655113_1",
-          "fp": "111111111111011111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 10
-    },
-    {
-      "a": "comtrade",
-      "b": "latk_mini",
-      "samples": [
-        {
-          "a_name": "flow_392_702_29",
-          "b_name": "latk_linguistics__linguistics_humboldt_language__c047",
-          "fp": "111110111111111111111111111111111111111111110111"
-        },
-        {
-          "a_name": "flow_842_586_26",
-          "b_name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c010",
-          "fp": "111111111111111101111110111111111111111111111111"
-        },
-        {
-          "a_name": "flow_076_499_02",
-          "b_name": "latk_polymath__newton_alchemy_clavis__c024",
-          "fp": "111111111100111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_156_56_10",
-          "b_name": "latk_polymath__modern_conway_life_universal__c002",
-          "fp": "111111111111111011111111111111111110111111111111"
-        },
-        {
-          "a_name": "flow_392_156_02",
-          "b_name": "latk_heterogeneous__marconi_US586193__c022",
-          "fp": "111111111110111111111111111111111111111110111111"
-        },
-        {
-          "a_name": "flow_699_270_10",
-          "b_name": "latk_heterogeneous__info_SHANNON1948__c014",
-          "fp": "111111111111111111111111111110101111111111111111"
-        },
-        {
-          "a_name": "flow_699_270_10",
-          "b_name": "latk_linguistics__linguistics_humboldt_language__c001",
-          "fp": "111111111111111111111111111110101111111111111111"
-        },
-        {
-          "a_name": "flow_392_156_02",
-          "b_name": "latk_polymath__vn_edvac_report__c024",
-          "fp": "111111111110111111111111111111111111111110111111"
-        }
-      ],
-      "shared_count": 9
-    },
-    {
-      "a": "climate",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "station_BBVK2",
-          "b_name": "leonardo_art_control__c038",
-          "fp": "111111111111110111111111111111111101111111111111"
-        },
-        {
-          "a_name": "station_A4801",
-          "b_name": "vn_cellular_automata_transitions__c047",
-          "fp": "111111111111110011111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_AY146",
-          "b_name": "vn_mathematical_foundations_qm__c024",
-          "fp": "111111101111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "station_COOPRUTV1",
-          "b_name": "leonardo_optics_perspective__c009",
-          "fp": "100111111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_COOPFGZ",
-          "b_name": "modern_materials_phase_transitions__c033",
-          "fp": "111111111111111111111111111111111111111111111100"
-        },
-        {
-          "a_name": "station_AW314",
-          "b_name": "newton_opticks_light__c000",
-          "fp": "111101111111111111111111111111111101111111111111"
-        },
-        {
-          "a_name": "station_CLBT1",
-          "b_name": "newton_theology_prophecies__c152",
-          "fp": "111111101111111111101111111111111111111111111111"
-        }
-      ],
-      "shared_count": 7
-    },
-    {
-      "a": "comtrade",
       "b": "heterogeneous",
       "samples": [
         {
-          "a_name": "flow_076_562_02",
-          "b_name": "corum_US9912031__c074",
-          "fp": "111101111111111011111111111111111111111111111111"
+          "a_name": "filing_000162828026011727",
+          "b_name": "stone_US714756__c024",
+          "fp": "111111111111110111111111111111111111111011111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_702_52_10",
-          "b_name": "corum_US9910144__c016",
-          "fp": "111111111101111111111111111111111111111111110111"
+          "a_name": "filing_000202984225000002",
+          "b_name": "crypto_RSA_US4405829__c013",
+          "fp": "111111111111110111111111111011111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_702_52_10",
-          "b_name": "corum_US10084223__c007",
-          "fp": "111111111101111111111111111111111111111111110111"
+          "a_name": "filing_000106569626000026",
+          "b_name": "info_HUFFMAN1952__c049",
+          "fp": "111111111111111111111111111110111111111111101111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_702_784_10",
-          "b_name": "corum_US9912031__c068",
-          "fp": "111111111111110011111111111111111111111111111111"
+          "a_name": "filing_000139834426003083",
+          "b_name": "corum_US9912031__c069",
+          "fp": "111111111111111111111111111010111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_410_24_29",
-          "b_name": "deforest_US841387__c009",
-          "fp": "111111111111111111111111111101111111111111111111"
+          "a_name": "filing_000119312526045187",
+          "b_name": "corum_US9923385__c049",
+          "fp": "110111111011111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_702_784_10",
-          "b_name": "info_JPEG1992__c000",
-          "fp": "111111111111110011111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_702_784_10",
-          "b_name": "fessenden_US706737__c013",
-          "fp": "111111111111110011111111111111111111111111111111"
+          "a_name": "filing_000103797626000064",
+          "b_name": "tesla_US1119732__c079",
+          "fp": "111111111111111011111111111111111111110111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 7
+      "shared_count": 6,
+      "weighted_score": 4.3281
     },
     {
       "a": "climate",
       "b": "comtrade",
       "samples": [
         {
-          "a_name": "station_BENS1",
-          "b_name": "flow_528_266_02",
-          "fp": "111111111110111111111111011111111111111111111111"
-        },
-        {
           "a_name": "station_AV067",
           "b_name": "flow_699_554_10",
-          "fp": "111111111111111111110111111111111110111111111111"
+          "fp": "111111111111111111110111111111111110111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_CNPW2",
           "b_name": "flow_392_528_02",
-          "fp": "111111111111111111111111110111111101111111111111"
+          "fp": "111111111111111111111111110111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_COOPLUKP8",
           "b_name": "flow_381_894_02",
-          "fp": "101111111111111111111111100111111111111111111111"
+          "fp": "101111111111111111111111100111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_COOPCHIF1",
           "b_name": "flow_528_52_10",
-          "fp": "111111111111110111110111111110111111111111111111"
+          "fp": "111111111111110111110111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "station_A4801",
-          "b_name": "flow_702_784_10",
-          "fp": "111111111111110011111111111111111111111111111111"
+          "a_name": "station_BENS1",
+          "b_name": "flow_528_266_02",
+          "fp": "111111111110111111111111011111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 6
+      "shared_count": 5,
+      "weighted_score": 3.6067
+    },
+    {
+      "a": "climate",
+      "b": "edgar",
+      "samples": [
+        {
+          "a_name": "station_AX447",
+          "b_name": "filing_000147676525000080",
+          "fp": "111011111111111101111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_C3232",
+          "b_name": "filing_000119312526065951",
+          "fp": "111101111111111111111111111111111111110111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_A4169",
+          "b_name": "filing_000002790426000013",
+          "fp": "111111111101110111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_CANM7",
+          "b_name": "filing_000091538926000047",
+          "fp": "011111111101111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
     },
     {
       "a": "climate",
       "b": "latk_mini",
       "samples": [
         {
-          "a_name": "station_COOPWSDN5",
-          "b_name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
-          "fp": "111111111111111101111111111111111110111111111111"
-        },
-        {
-          "a_name": "station_AV381",
-          "b_name": "latk_polymath__vn_monte_carlo_control__c058",
-          "fp": "111101111110111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_AU713",
-          "b_name": "latk_heterogeneous__corum_US9910144__c029",
-          "fp": "111110111111111111111111111111101111111111111111"
-        },
-        {
           "a_name": "station_COOPWBSN6",
           "b_name": "latk_polymath__modern_wolfram_class_iv__c007",
-          "fp": "111111111101111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "station_COOPWBSN6",
-          "b_name": "latk_polymath__newton_alchemy_clavis__c007",
-          "fp": "111111111101111111111111111110111111111111111111"
+          "fp": "111111111101111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_AT914",
           "b_name": "latk_heterogeneous__marconi_US586193__c028",
-          "fp": "111111111110111111111111111111111111111111110111"
+          "fp": "111111111110111111111111111111111111111111110111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_AV381",
+          "b_name": "latk_polymath__vn_monte_carlo_control__c058",
+          "fp": "111101111110111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPWSDN5",
+          "b_name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
+          "fp": "111111111111111101111111111111111110111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 6
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "climate",
+      "b": "linguistics",
+      "samples": [
+        {
+          "a_name": "station_AU244",
+          "b_name": "linguistics_portroyal_grammar__c047",
+          "fp": "101111111111111111111110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_CO192",
+          "b_name": "modern_chomsky_syntactic_structures__c042",
+          "fp": "111111111111111111111111111111111111011111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPRSDW2",
+          "b_name": "historical_saussure_structuralism__concept__paradigmatic",
+          "fp": "101111111111111111111111111111111111111111111110",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPMIZM8",
+          "b_name": "linguistics_panini_ashtadhyayi__c052",
+          "fp": "111111111111111111111111111111111111111111101111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "comtrade",
+      "b": "latk_mini",
+      "samples": [
+        {
+          "a_name": "flow_156_56_10",
+          "b_name": "latk_polymath__modern_conway_life_universal__c002",
+          "fp": "111111111111111011111111111111111110111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_699_364_02",
+          "b_name": "latk_polymath__newton_principia_mechanics__c101",
+          "fp": "111111111110111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_842_586_26",
+          "b_name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c010",
+          "fp": "111111111111111101111110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_392_156_02",
+          "b_name": "latk_heterogeneous__marconi_US586193__c022",
+          "fp": "111111111110111111111111111111111111111110111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "comtrade",
+      "b": "latk_physics",
+      "samples": [
+        {
+          "a_name": "flow_276_784_10",
+          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2109_01794v1__c000",
+          "fp": "111111111111111110101111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_699_418_02",
+          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_1805_12122v1__c003",
+          "fp": "111111111111111111111111111110111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_381_512_10",
+          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_2211_12027v3__c000",
+          "fp": "110111111110111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_410_434_29",
+          "b_name": "latk_physics__arxiv_physics_ins_det__writing__arxiv_1310_1413v1__c000",
+          "fp": "111111111111111111111110111101111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "comtrade",
+      "b": "linguistics",
+      "samples": [
+        {
+          "a_name": "flow_076_51_02",
+          "b_name": "linguistics_humboldt_language__c006",
+          "fp": "111111111111111101111111111111111111111111110111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_842_174_02",
+          "b_name": "modern_chomsky_hierarchy__concept__regular_language",
+          "fp": "111111111111111111110111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_381_764_02",
+          "b_name": "historical_panini_grammar__concept__anubandha",
+          "fp": "111111111111101111111111111111111111111110111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_392_92_29",
+          "b_name": "historical_saussure_structuralism__concept__signified",
+          "fp": "111111111111111111111110111111111111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "heterogeneous",
+      "b": "polymath",
+      "samples": [
+        {
+          "a_name": "tesla_US649621__c036",
+          "b_name": "newton_alchemy_clavis__c073",
+          "fp": "111111111111110111111111111111111111111111111110",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "corum_US9910144__c046",
+          "b_name": "newton_principia_mechanics__c029",
+          "fp": "111111101111111011111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "crypto_number_theoretic__location__mit_mathematics_department",
+          "b_name": "vn_cellular_automata_transitions__c087",
+          "fp": "111111111111110111111101111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "stone_US714756__c005",
+          "b_name": "leonardo_anatomy__c158",
+          "fp": "111111111111111011111111111011111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
+    },
+    {
+      "a": "polymath",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "newton_opticks_light__c003",
+          "b_name": "patent_chunk_US424036_5",
+          "fp": "110111111111111111111111111111111111111110111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "leonardo_art_control__c058",
+          "b_name": "patent_chunk_US609251_5",
+          "fp": "110111110111111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "newton_principia_mechanics__c004",
+          "b_name": "patent_chunk_US514170_1",
+          "fp": "111111111111111111111111111111111101111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "newton_alchemy_index_chemicus__c035",
+          "b_name": "concept_world_wireless_system",
+          "fp": "110111111111111111111111101111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 4,
+      "weighted_score": 2.8854
     },
     {
       "a": "climate",
@@ -1716,217 +516,85 @@
         {
           "a_name": "station_COOPBEVO1",
           "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2209_05159v2__c000",
-          "fp": "111111111111111101110111111111111101111111111111"
+          "fp": "111111111111111101110111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_A4146",
           "b_name": "latk_physics__arxiv_astro_ph_ga__writing__arxiv_2207_10682v1__c000",
-          "fp": "111111101111111110111111111111111111111111111111"
+          "fp": "111111101111111110111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "station_COOPBRGM3",
           "b_name": "latk_physics__arxiv_astro_ph_im__writing__arxiv_1302_2429v1__c001",
-          "fp": "101111111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "station_CLBT1",
-          "b_name": "latk_physics__arxiv_cond_mat_str_el__writing__arxiv_2206_05756v2__c000",
-          "fp": "111111101111111111101111111111111111111111111111"
-        },
-        {
-          "a_name": "station_CLBT1",
-          "b_name": "latk_physics__arxiv_astro_ph_co__writing__arxiv_2210_02973v2__c000",
-          "fp": "111111101111111111101111111111111111111111111111"
+          "fp": "101111111111111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 5
-    },
-    {
-      "a": "comtrade",
-      "b": "latk_physics",
-      "samples": [
-        {
-          "a_name": "flow_410_434_29",
-          "b_name": "latk_physics__arxiv_physics_ins_det__writing__arxiv_1310_1413v1__c000",
-          "fp": "111111111111111111111110111101111111111111111111"
-        },
-        {
-          "a_name": "flow_699_418_02",
-          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_1805_12122v1__c003",
-          "fp": "111111111111111111111111111110111101111111111111"
-        },
-        {
-          "a_name": "flow_076_499_02",
-          "b_name": "latk_physics__arxiv_physics_comp_ph__writing__arxiv_2107_09411v1__c000",
-          "fp": "111111111100111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_381_512_10",
-          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_2211_12027v3__c000",
-          "fp": "110111111110111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_276_784_10",
-          "b_name": "latk_physics__arxiv_gr_qc__writing__arxiv_2109_01794v1__c000",
-          "fp": "111111111111111110101111111111111111111111111111"
-        }
-      ],
-      "shared_count": 5
-    },
-    {
-      "a": "comtrade",
-      "b": "linguistics",
-      "samples": [
-        {
-          "a_name": "flow_392_92_29",
-          "b_name": "historical_saussure_structuralism__concept__signified",
-          "fp": "111111111111111111111110111111111111111101111111"
-        },
-        {
-          "a_name": "flow_381_764_02",
-          "b_name": "historical_panini_grammar__concept__anubandha",
-          "fp": "111111111111101111111111111111111111111110111111"
-        },
-        {
-          "a_name": "flow_842_174_02",
-          "b_name": "modern_chomsky_hierarchy__concept__regular_language",
-          "fp": "111111111111111111110111111110111111111111111111"
-        },
-        {
-          "a_name": "flow_076_51_02",
-          "b_name": "linguistics_humboldt_language__c006",
-          "fp": "111111111111111101111111111111111111111111110111"
-        },
-        {
-          "a_name": "flow_392_702_29",
-          "b_name": "linguistics_portroyal_grammar__c012",
-          "fp": "111110111111111111111111111111111111111111110111"
-        }
-      ],
-      "shared_count": 5
-    },
-    {
-      "a": "comtrade",
-      "b": "polymath",
-      "samples": [
-        {
-          "a_name": "flow_076_562_02",
-          "b_name": "newton_alchemy_index_chemicus__c074",
-          "fp": "111101111111111011111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_702_784_10",
-          "b_name": "vn_cellular_automata_transitions__c047",
-          "fp": "111111111111110011111111111111111111111111111111"
-        },
-        {
-          "a_name": "flow_381_0_02",
-          "b_name": "vn_cellular_automata_transitions__c068",
-          "fp": "111111111111111111111111111111111111111110111101"
-        },
-        {
-          "a_name": "flow_842_862_02",
-          "b_name": "vn_monte_carlo_control__c013",
-          "fp": "111111111111111111111111001111111111111111111111"
-        },
-        {
-          "a_name": "flow_381_348_10",
-          "b_name": "vn_theory_of_games__c044",
-          "fp": "111111101111110111111111101111111111111111111111"
-        }
-      ],
-      "shared_count": 5
-    },
-    {
-      "a": "comtrade",
-      "b": "tesla",
-      "samples": [
-        {
-          "a_name": "flow_410_316_10",
-          "b_name": "document_fbi_part1",
-          "fp": "111111111111111111111111111111111101111111111011"
-        },
-        {
-          "a_name": "flow_528_340_02",
-          "b_name": "patent_chunk_US511916_0",
-          "fp": "111111111111111111111111111111011111111101111111"
-        },
-        {
-          "a_name": "flow_842_308_02",
-          "b_name": "patent_chunk_US613809_16",
-          "fp": "111111111111101111111111111111111101111111111111"
-        },
-        {
-          "a_name": "flow_410_24_29",
-          "b_name": "patent_chunk_US455069_0",
-          "fp": "111111111111111111111111111101111111111111111111"
-        },
-        {
-          "a_name": "flow_410_24_29",
-          "b_name": "patent_chunk_US787412_6",
-          "fp": "111111111111111111111111111101111111111111111111"
-        }
-      ],
-      "shared_count": 5
-    },
-    {
-      "a": "polymath",
-      "b": "pubmed",
-      "samples": [
-        {
-          "a_name": "vn_self_reproducing_automata__c006",
-          "b_name": "author_zhuang,_xuehan",
-          "fp": "111111111111110111111111111101111111111111111111"
-        },
-        {
-          "a_name": "newton_alchemy_clavis__c067",
-          "b_name": "author_lodeyro,_anabella_f",
-          "fp": "110111111111111111111111011111111111111111111111"
-        },
-        {
-          "a_name": "newton_alchemy_clavis__c008",
-          "b_name": "author_zhao,_qingfang",
-          "fp": "110111111111110111111111111111111111111111111111"
-        },
-        {
-          "a_name": "vn_self_reproducing_automata__c096",
-          "b_name": "author_yee,_shi_mun",
-          "fp": "111111111111111101111111111111111111111100111111"
-        },
-        {
-          "a_name": "leonardo_flight__concept__lift_from_pressure_difference",
-          "b_name": "author_hill,_ciaran_s",
-          "fp": "111111111111110111111111111111101111111111111111"
-        }
-      ],
-      "shared_count": 5
+      "shared_count": 3,
+      "weighted_score": 2.164
     },
     {
       "a": "climate",
-      "b": "patents",
+      "b": "polymath",
       "samples": [
         {
-          "a_name": "station_BKDT2",
-          "b_name": "patent_US11002398",
-          "fp": "111111111011111110111111111111111111111111111111"
+          "a_name": "station_AY146",
+          "b_name": "vn_mathematical_foundations_qm__c024",
+          "fp": "111111101111111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "station_A4477",
-          "b_name": "patent_US11000089",
-          "fp": "111110111111111111111111111111111111111111111111"
+          "a_name": "station_AW314",
+          "b_name": "newton_opticks_light__c000",
+          "fp": "111101111111111111111111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "station_A4477",
-          "b_name": "patent_US11002720",
-          "fp": "111110111111111111111111111111111111111111111111"
-        },
-        {
-          "a_name": "station_A4477",
-          "b_name": "patent_US11002080",
-          "fp": "111110111111111111111111111111111111111111111111"
+          "a_name": "station_COOPRUTV1",
+          "b_name": "leonardo_optics_perspective__c009",
+          "fp": "100111111111111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 4
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "climate",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "station_COOPPHXP1",
+          "b_name": "patent_chunk_US433703_4",
+          "fp": "111111111111100111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_368PG",
+          "b_name": "patent_US685957",
+          "fp": "111111111111111110111111101111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPRCLV2",
+          "b_name": "patent_chunk_US514168_4",
+          "fp": "111111111111111111111111111111101111110111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
     },
     {
       "a": "comtrade",
@@ -1935,81 +603,399 @@
         {
           "a_name": "flow_392_462_10",
           "b_name": "filing_000031314325000078",
-          "fp": "111111111011111011111111111111111101111111111111"
-        },
-        {
-          "a_name": "country_SAU",
-          "b_name": "filing_000151199826000004",
-          "fp": "111010111111111111111111111110111111111111111111"
-        },
-        {
-          "a_name": "country_SAU",
-          "b_name": "filing_000155728826000004",
-          "fp": "111010111111111111111111111110111111111111111111"
+          "fp": "111111111011111011111111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "flow_381_899_02",
           "b_name": "filing_000197640825000393",
-          "fp": "111101111111111111111111111111111111111110111111"
+          "fp": "111101111111111111111111111111111111111110111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "country_SAU",
+          "b_name": "filing_000151199826000004",
+          "fp": "111010111111111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 4
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "comtrade",
+      "b": "polymath",
+      "samples": [
+        {
+          "a_name": "flow_381_0_02",
+          "b_name": "vn_cellular_automata_transitions__c068",
+          "fp": "111111111111111111111111111111111111111110111101",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_381_348_10",
+          "b_name": "vn_theory_of_games__c044",
+          "fp": "111111101111110111111111101111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_842_862_02",
+          "b_name": "vn_monte_carlo_control__c013",
+          "fp": "111111111111111111111111001111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "comtrade",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "flow_410_316_10",
+          "b_name": "document_fbi_part1",
+          "fp": "111111111111111111111111111111111101111111111011",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_842_308_02",
+          "b_name": "patent_chunk_US613809_16",
+          "fp": "111111111111101111111111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_528_340_02",
+          "b_name": "patent_chunk_US511916_0",
+          "fp": "111111111111111111111111111111011111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "latk_mini",
+      "b": "latk_physics",
+      "samples": [
+        {
+          "a_name": "latk_heterogeneous__info_HUFFMAN1952__c049",
+          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_1201_2153v1__c000",
+          "fp": "111111111110111111111111110111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c022",
+          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_2212_06408v4__c000",
+          "fp": "111111111111111111111111111100111111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c009",
+          "b_name": "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2106_03204v2__c000",
+          "fp": "111111111110111111111011111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "latk_mini",
+      "b": "polymath",
+      "samples": [
+        {
+          "a_name": "latk_heterogeneous__info_JPEG1992__c013",
+          "b_name": "vn_self_reproducing_automata__c007",
+          "fp": "101111111011111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_polymath__vn_monte_carlo_control__c010",
+          "b_name": "modern_materials_alchemy_chemistry_bridge__c010",
+          "fp": "111101111111111101111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_heterogeneous__fessenden_US706740__c012",
+          "b_name": "leonardo_art_control__c133",
+          "fp": "111111110111111111111111111111101111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "latk_physics",
+      "b": "polymath",
+      "samples": [
+        {
+          "a_name": "latk_physics__arxiv_physics_optics__writing__arxiv_1907_08604v3__c000",
+          "b_name": "modern_self_assembly_nanotech__c002",
+          "fp": "111111101111110111101111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2312_17328v1__c003",
+          "b_name": "vn_cellular_automata_transitions__c002",
+          "fp": "111111101111111111111111101111111111111110111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_physics__arxiv_math_qa__writing__arxiv_2310_18067v1__c000",
+          "b_name": "leonardo_art_control__c001",
+          "fp": "111111111101111111111111101111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "polymath",
+      "b": "pubmed",
+      "samples": [
+        {
+          "a_name": "leonardo_flight__concept__lift_from_pressure_difference",
+          "b_name": "author_hill,_ciaran_s",
+          "fp": "111111111111110111111111111111101111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "newton_alchemy_clavis__c067",
+          "b_name": "author_lodeyro,_anabella_f",
+          "fp": "110111111111111111111111011111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "vn_self_reproducing_automata__c096",
+          "b_name": "author_yee,_shi_mun",
+          "fp": "111111111111111101111111111111111111111100111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 3,
+      "weighted_score": 2.164
+    },
+    {
+      "a": "comtrade",
+      "b": "pubmed",
+      "samples": [
+        {
+          "a_name": "flow_156_598_02",
+          "b_name": "paper_34009393",
+          "fp": "110111111111101111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_528_174_02",
+          "b_name": "paper_25171331",
+          "fp": "111111111110111111111111111111111111111111111011",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "edgar",
+      "b": "latk_mini",
+      "samples": [
+        {
+          "a_name": "filing_000210409426000007",
+          "b_name": "latk_heterogeneous__tesla_US1119732__c020",
+          "fp": "111111111111111101111111111111111111111111101111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "filing_000035419026000122",
+          "b_name": "latk_polymath__newton_alchemy_praxis__c088",
+          "fp": "111111111111111111111111111101101111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "edgar",
+      "b": "latk_physics",
+      "samples": [
+        {
+          "a_name": "filing_000031506626000505",
+          "b_name": "latk_physics__arxiv_physics_plasm_ph__writing__arxiv_2112_14892v1__c000",
+          "fp": "110111111111111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "filing_000160831126000003",
+          "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2512_24198v1__c000",
+          "fp": "111111111111110111101111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "edgar",
+      "b": "polymath",
+      "samples": [
+        {
+          "a_name": "filing_000095010326004034",
+          "b_name": "vn_cellular_automata_transitions__c093",
+          "fp": "111111111111111101111111111111111111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "filing_000119312514038134",
+          "b_name": "newton_principia_mechanics__c039",
+          "fp": "111111111011111111111111111111111111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "edgar",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "filing_000210927126000001",
+          "b_name": "patent_chunk_US1402025_0",
+          "fp": "110111111111111111111111111111111111111111111011",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "filing_000122520826002617",
+          "b_name": "patent_chunk_US413353_3",
+          "fp": "111111111111101111111111111111111111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "heterogeneous",
+      "b": "latk_physics",
+      "samples": [
+        {
+          "a_name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
+          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_0909_5421v2__c000",
+          "fp": "111011111111111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "marconi_US586193__c041",
+          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1902_10358v2__c000",
+          "fp": "111111111111111111111111111110111111111111011110",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
     },
     {
       "a": "heterogeneous",
       "b": "pubmed",
       "samples": [
         {
-          "a_name": "info_LZ1984__c051",
-          "b_name": "paper_33779622",
-          "fp": "111111111111111111111111111111111111101111111110"
-        },
-        {
-          "a_name": "deforest_US841387__c032",
-          "b_name": "author_zhuang,_xuehan",
-          "fp": "111111111111110111111111111101111111111111111111"
-        },
-        {
           "a_name": "tesla_ac_motor_US382280__c064",
           "b_name": "author_wang,_zhenyu",
-          "fp": "111111111111111111111111111111111101111111101111"
+          "fp": "111111111111111111111111111111111101111111101111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "info_LZ1984__c051",
+          "b_name": "paper_33779622",
+          "fp": "111111111111111111111111111111111111101111111110",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 3
+      "shared_count": 2,
+      "weighted_score": 1.4427
     },
     {
-      "a": "comtrade",
+      "a": "latk_mini",
+      "b": "linguistics",
+      "samples": [
+        {
+          "a_name": "latk_heterogeneous__witricity_US7741734__c047",
+          "b_name": "modern_transformer_nlp__person__ashish_vaswani",
+          "fp": "111111111111111111011110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "latk_polymath__newton_principia_mechanics__c151",
+          "b_name": "linguistics_saussure_course__c013",
+          "fp": "111111011111111111111110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "latk_mini",
       "b": "patents",
       "samples": [
         {
-          "a_name": "flow_699_270_10",
-          "b_name": "patent_US11002357",
-          "fp": "111111111111111111111111111110101111111111111111"
+          "a_name": "latk_heterogeneous__corum_US10084223__c047",
+          "b_name": "patent_US11002680",
+          "fp": "111110111111111111011111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "flow_699_270_10",
-          "b_name": "patent_US11002761",
-          "fp": "111111111111111111111111111110101111111111111111"
+          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c001",
+          "b_name": "patent_US11001095",
+          "fp": "111111111111111111011111111111101111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 2
-    },
-    {
-      "a": "comtrade",
-      "b": "pubmed",
-      "samples": [
-        {
-          "a_name": "flow_528_174_02",
-          "b_name": "paper_25171331",
-          "fp": "111111111110111111111111111111111111111111111011"
-        },
-        {
-          "a_name": "flow_156_598_02",
-          "b_name": "paper_34009393",
-          "fp": "110111111111101111111111111111111111111111111111"
-        }
-      ],
-      "shared_count": 2
+      "shared_count": 2,
+      "weighted_score": 1.4427
     },
     {
       "a": "latk_mini",
@@ -2018,32 +1004,109 @@
         {
           "a_name": "latk_polymath__newton_theology_prophecies__c072",
           "b_name": "author_xu,_yong-hu",
-          "fp": "111111111111111111111111111011111110111111111111"
+          "fp": "111111111111111111111111111011111110111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
           "a_name": "latk_heterogeneous__marconi_US586193__c021",
           "b_name": "author_guo,_xiaoge",
-          "fp": "111111111100111111111111111110111111111111111111"
+          "fp": "111111111100111111111111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 2
+      "shared_count": 2,
+      "weighted_score": 1.4427
     },
     {
-      "a": "latk_physics",
-      "b": "pubmed",
+      "a": "linguistics",
+      "b": "polymath",
       "samples": [
         {
-          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2303_14761v2__c000",
-          "b_name": "author_zhao,_qingfang",
-          "fp": "110111111111110111111111111111111111111111111111"
+          "a_name": "linguistics_saussure_course__c031",
+          "b_name": "vn_self_reproducing_automata__c017",
+          "fp": "111110111111111101111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         },
         {
-          "a_name": "latk_physics__arxiv_physics_optics__writing__arxiv_2008_08181v1__c000",
-          "b_name": "author_adams,_clare_m",
-          "fp": "111111111111111111111111101111111111111010111111"
+          "a_name": "linguistics_saussure_course__c009",
+          "b_name": "leonardo_art_control__c092",
+          "fp": "111111111011111111101111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 2
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "linguistics",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "linguistics_portroyal_grammar__c013",
+          "b_name": "patent_chunk_US685958_4",
+          "fp": "111111111111111111111111111111111111110111110111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "linguistics_saussure_course__c066",
+          "b_name": "patent_chunk_US381968_8",
+          "fp": "111111111111111111111110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 2,
+      "weighted_score": 1.4427
+    },
+    {
+      "a": "climate",
+      "b": "patents",
+      "samples": [
+        {
+          "a_name": "station_BKDT2",
+          "b_name": "patent_US11002398",
+          "fp": "111111111011111110111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "comtrade",
+      "b": "heterogeneous",
+      "samples": [
+        {
+          "a_name": "flow_702_52_10",
+          "b_name": "corum_US9910144__c016",
+          "fp": "111111111101111111111111111111111111111111110111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "edgar",
+      "b": "linguistics",
+      "samples": [
+        {
+          "a_name": "filing_000124008526000009",
+          "b_name": "modern_chomsky_syntactic_structures__c000",
+          "fp": "111111111101111111111111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
     },
     {
       "a": "edgar",
@@ -2052,10 +1115,73 @@
         {
           "a_name": "filing_000090610726000008",
           "b_name": "author_karp,_hannah_q",
-          "fp": "111101111011011111111111111111111111111111111111"
+          "fp": "111101111011011111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 1
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "heterogeneous",
+      "b": "patents",
+      "samples": [
+        {
+          "a_name": "marconi_US586193__c001",
+          "b_name": "patent_US11000043",
+          "fp": "111111111111111111111111110111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "heterogeneous",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "crypto_number_theoretic__concept__modular_exponentiation",
+          "b_name": "patent_chunk_US583953_1",
+          "fp": "011111111111111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "latk_mini",
+      "b": "tesla",
+      "samples": [
+        {
+          "a_name": "latk_polymath__leonardo_flight_of_birds__c018",
+          "b_name": "patent_chunk_US424036_1",
+          "fp": "111111111111111111111111111111111011111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
+    },
+    {
+      "a": "latk_physics",
+      "b": "pubmed",
+      "samples": [
+        {
+          "a_name": "latk_physics__arxiv_physics_optics__writing__arxiv_2008_08181v1__c000",
+          "b_name": "author_adams,_clare_m",
+          "fp": "111111111111111111111111101111111111111010111111",
+          "global_count": 2,
+          "weight": 0.7213
+        }
+      ],
+      "shared_count": 1,
+      "weighted_score": 0.7213
     },
     {
       "a": "pubmed",
@@ -2064,11 +1190,21 @@
         {
           "a_name": "paper_28427715",
           "b_name": "patent_US1655114",
-          "fp": "110111111111110111111111111111111111111101111111"
+          "fp": "110111111111110111111111111111111111111101111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
-      "shared_count": 1
+      "shared_count": 1,
+      "weighted_score": 0.7213
     }
   ],
-  "count": 52
+  "count": 43,
+  "stats": {
+    "dense_fingerprints_dropped": 51,
+    "density_threshold_legend_count": 2,
+    "density_threshold_pct": 5.0,
+    "total_survivors": 3289,
+    "total_unique_fingerprints": 1953
+  }
 }

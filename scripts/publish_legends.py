@@ -227,34 +227,85 @@ def _transform(legend: Legend, src: dict, disc_by_id: dict[str, dict]) -> dict:
     return out
 
 
-def _compute_bridges(legend_fingerprints: dict[str, dict[str, str]]) -> list[dict]:
+def _compute_bridges(
+    legend_fingerprints: dict[str, dict[str, str]],
+    density_threshold_pct: float = 5.0,
+) -> tuple[list[dict], dict]:
     """Pairwise 48-bit-fingerprint intersections across legends.
 
-    `legend_fingerprints[legend_id][name] = fingerprint`.
-    Returns a list of {a, b, shared_count, samples}.
+    Signal-rich definition of a bridge:
+      - Exclude high-density "dense zone" fingerprints (present in >N% of total corpus).
+      - Don't cap per-pair counts.
+      - Weight matches by rarity: w = 1 / log(2 + global_count(fp)).
+      - Rank bridges by total weighted_score, not raw_count.
+
+    Returns (bridges, stats) where stats carries the density summary.
     """
-    legend_ids = sorted(legend_fingerprints.keys())
+    import math
+
+    # 1. Global fingerprint frequency across all legends (dedup within legend).
+    global_fp_count: dict[str, int] = {}
+    total_survivors = 0
+    for legend_id, fps in legend_fingerprints.items():
+        unique_in_legend = set(fps.values())
+        for fp in unique_in_legend:
+            global_fp_count[fp] = global_fp_count.get(fp, 0) + 1
+        total_survivors += len(fps)
+
+    # 2. Density filter threshold.
+    density_cutoff = max(2, int(len(legend_fingerprints) * density_threshold_pct / 100.0))
+    dense_fps = {fp for fp, c in global_fp_count.items() if c > density_cutoff}
+
+    # 3. Build per-legend deduplicated fingerprint -> representative name.
+    legend_unique_fps: dict[str, dict[str, str]] = {}
+    for legend_id, fps in legend_fingerprints.items():
+        unique: dict[str, str] = {}
+        for name, fp in fps.items():
+            if fp in dense_fps:
+                continue
+            unique.setdefault(fp, name)
+        legend_unique_fps[legend_id] = unique
+
+    # 4. Pairwise compare.
+    legend_ids = sorted(legend_unique_fps.keys())
     bridges: list[dict] = []
     for i, a in enumerate(legend_ids):
-        fp_a = legend_fingerprints[a]
-        fp_a_set: dict[str, str] = {}
-        for name, fp in fp_a.items():
-            fp_a_set.setdefault(fp, name)
+        fp_a = legend_unique_fps[a]
         for b in legend_ids[i + 1:]:
-            shared: list[dict] = []
-            for name_b, fp_b in legend_fingerprints[b].items():
-                if fp_b in fp_a_set:
-                    shared.append({"fp": fp_b, "a_name": fp_a_set[fp_b], "b_name": name_b})
-                if len(shared) >= 15:
-                    break
-            if shared:
-                bridges.append({
-                    "a": a, "b": b,
-                    "shared_count": len(shared),
-                    "samples": shared[:8],
+            fp_b = legend_unique_fps[b]
+            shared_fps = set(fp_a.keys()) & set(fp_b.keys())
+            if not shared_fps:
+                continue
+            samples: list[dict] = []
+            weighted_score = 0.0
+            for fp in sorted(shared_fps, key=lambda f: global_fp_count[f]):
+                gc = global_fp_count[fp]
+                weight = 1.0 / math.log(2 + gc)
+                weighted_score += weight
+                samples.append({
+                    "fp": fp,
+                    "a_name": fp_a[fp],
+                    "b_name": fp_b[fp],
+                    "global_count": gc,
+                    "weight": round(weight, 4),
                 })
-    bridges.sort(key=lambda br: br["shared_count"], reverse=True)
-    return bridges
+            bridges.append({
+                "a": a,
+                "b": b,
+                "shared_count": len(shared_fps),
+                "weighted_score": round(weighted_score, 4),
+                "samples": samples[:10],  # keep 10 rarest for display
+            })
+    bridges.sort(key=lambda br: br["weighted_score"], reverse=True)
+
+    stats = {
+        "total_unique_fingerprints": len(global_fp_count),
+        "total_survivors": total_survivors,
+        "dense_fingerprints_dropped": len(dense_fps),
+        "density_threshold_legend_count": density_cutoff,
+        "density_threshold_pct": density_threshold_pct,
+    }
+    return bridges, stats
 
 
 def main() -> int:
@@ -314,12 +365,20 @@ def main() -> int:
             size_kb,
         )
 
-    bridges = _compute_bridges(legend_fingerprints)
+    bridges, bridge_stats = _compute_bridges(legend_fingerprints)
     (OUT_DIR / "bridges.json").write_text(
-        json.dumps({"bridges": bridges, "count": len(bridges)}, indent=2, sort_keys=True, default=str),
+        json.dumps(
+            {"bridges": bridges, "count": len(bridges), "stats": bridge_stats},
+            indent=2, sort_keys=True, default=str,
+        ),
         encoding="utf-8",
     )
-    log.info("Computed %d cross-legend bridges", len(bridges))
+    log.info(
+        "Computed %d cross-legend bridges (dropped %d dense fingerprints across %d total)",
+        len(bridges),
+        bridge_stats["dense_fingerprints_dropped"],
+        bridge_stats["total_unique_fingerprints"],
+    )
 
     manifest = {"legends": entries, "count": len(entries), "bridges_count": len(bridges)}
     (OUT_DIR / "manifest.json").write_text(
