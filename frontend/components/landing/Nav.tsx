@@ -3,9 +3,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Engine", href: "#architecture" },
-  { label: "Verticals", href: "#verticals" },
-  { label: "Enterprise", href: "#enterprise" },
+  { label: "Proof", href: "#proof" },
+  { label: "Watchlist", href: "/watchlist" },
+  { label: "Validation", href: "/validation" },
+  { label: "Universal", href: "/universal" },
   { label: "Pricing", href: "#pricing" },
 ];
 

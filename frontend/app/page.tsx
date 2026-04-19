@@ -4,6 +4,7 @@ import { ReductionCinematic } from "@/components/landing/ReductionCinematic";
 import { LiveDemo } from "@/components/landing/LiveDemo";
 import { Architecture } from "@/components/landing/Architecture";
 import { UniversalConnect } from "@/components/landing/UniversalConnect";
+import { UniversalProof } from "@/components/landing/UniversalProof";
 import { Materialized } from "@/components/landing/Materialized";
 import { Verticals } from "@/components/landing/Verticals";
 import { Enterprise } from "@/components/landing/Enterprise";
@@ -18,6 +19,7 @@ export default function LandingPage() {
       <main>
         <Hero />
         <ReductionCinematic />
+        <UniversalProof />
         <LiveDemo />
         <Architecture />
         <UniversalConnect />
