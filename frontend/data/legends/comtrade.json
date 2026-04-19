@@ -247,6 +247,72 @@
   "database_name": "Comtrade Superpower",
   "description": "UN Comtrade trade data corpus",
   "legend_id": "comtrade",
+  "novelty": {
+    "novelty_score": 0.0111,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 1.0,
+        "name": "commodity_39",
+        "similarity": 0.9889,
+        "type": "commodity"
+      },
+      {
+        "anomaly": 0.8825,
+        "name": "country_KOR",
+        "similarity": 0.9884,
+        "type": "country"
+      },
+      {
+        "anomaly": 0.842,
+        "name": "country_DNK",
+        "similarity": 0.9879,
+        "type": "country"
+      },
+      {
+        "anomaly": 0.8238,
+        "name": "commodity_84",
+        "similarity": 0.9878,
+        "type": "commodity"
+      },
+      {
+        "anomaly": 0.9217,
+        "name": "country_BGD",
+        "similarity": 0.9844,
+        "type": "country"
+      },
+      {
+        "anomaly": 0.8619,
+        "name": "country_BRA",
+        "similarity": 0.9843,
+        "type": "country"
+      },
+      {
+        "anomaly": 0.6848,
+        "name": "commodity_85",
+        "similarity": 0.9829,
+        "type": "commodity"
+      },
+      {
+        "anomaly": 0.7022,
+        "name": "commodity_88",
+        "similarity": 0.9808,
+        "type": "commodity"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.9217,

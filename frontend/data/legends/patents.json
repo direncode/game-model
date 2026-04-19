@@ -247,6 +247,72 @@
   "database_name": "Patents Superpower",
   "description": "Patent corpus",
   "legend_id": "patents",
+  "novelty": {
+    "novelty_score": 0.0245,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.4082,
+        "name": "patent_US11000941",
+        "similarity": 0.9755,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.4208,
+        "name": "patent_US11002118",
+        "similarity": 0.9751,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.3806,
+        "name": "patent_US11002761",
+        "similarity": 0.9751,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.3989,
+        "name": "patent_US11002357",
+        "similarity": 0.971,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.5072,
+        "name": "patent_US11001223",
+        "similarity": 0.9708,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.3863,
+        "name": "patent_US11001900",
+        "similarity": 0.9688,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.4376,
+        "name": "patent_US11002716",
+        "similarity": 0.959,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.4367,
+        "name": "patent_US11001134",
+        "similarity": 0.9588,
+        "type": "patent"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.5072,

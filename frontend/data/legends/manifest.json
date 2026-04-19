@@ -1,4 +1,5 @@
 {
+  "bridges_count": 52,
   "count": 11,
   "legends": [
     {
@@ -6,8 +7,10 @@
       "description": "SEC 10-K filings corpus",
       "display_name": "SEC EDGAR",
       "id": "edgar",
+      "novelty_score": 0.1039,
+      "paradigm_matched": 0,
       "path": "legends/edgar.json",
-      "size_kb": 47,
+      "size_kb": 49,
       "survivors": 300,
       "total_entities": 61041
     },
@@ -16,8 +19,10 @@
       "description": "1,851-entity cross-era corpus (25/25 canonical markers)",
       "display_name": "Cross-Era Heterogeneous",
       "id": "heterogeneous",
+      "novelty_score": 0.0065,
+      "paradigm_matched": 0,
       "path": "legends/heterogeneous.json",
-      "size_kb": 49,
+      "size_kb": 51,
       "survivors": 300,
       "total_entities": 1851
     },
@@ -26,8 +31,10 @@
       "description": "Historical polymath archives - BTUT anomaly detection layer",
       "display_name": "Polymath (Newton / VN / Leonardo)",
       "id": "polymath",
+      "novelty_score": 0.0049,
+      "paradigm_matched": 0,
       "path": "legends/polymath.json",
-      "size_kb": 52,
+      "size_kb": 54,
       "survivors": 300,
       "total_entities": 3714
     },
@@ -36,8 +43,10 @@
       "description": "Physics arXiv corpus for LATK novelty queries",
       "display_name": "LATK Physics arXiv",
       "id": "latk_physics",
+      "novelty_score": 0.0103,
+      "paradigm_matched": 0,
       "path": "legends/latk_physics.json",
-      "size_kb": 62,
+      "size_kb": 64,
       "survivors": 300,
       "total_entities": 246464
     },
@@ -46,8 +55,10 @@
       "description": "Mini cross-era corpus",
       "display_name": "LATK Mini",
       "id": "latk_mini",
+      "novelty_score": 0.0283,
+      "paradigm_matched": 0,
       "path": "legends/latk_mini.json",
-      "size_kb": 55,
+      "size_kb": 56,
       "survivors": 300,
       "total_entities": 6459
     },
@@ -56,8 +67,10 @@
       "description": "Linguistics corpus",
       "display_name": "Linguistics",
       "id": "linguistics",
+      "novelty_score": 0.0044,
+      "paradigm_matched": 0,
       "path": "legends/linguistics.json",
-      "size_kb": 54,
+      "size_kb": 55,
       "survivors": 289,
       "total_entities": 894
     },
@@ -66,8 +79,10 @@
       "description": "Patent corpus",
       "display_name": "Patents Superpower",
       "id": "patents",
+      "novelty_score": 0.0245,
+      "paradigm_matched": 0,
       "path": "legends/patents.json",
-      "size_kb": 44,
+      "size_kb": 46,
       "survivors": 300,
       "total_entities": 6034
     },
@@ -76,8 +91,10 @@
       "description": "Nikola Tesla patent corpus (Wardenclyffe anomaly)",
       "display_name": "Tesla Superpower",
       "id": "tesla",
+      "novelty_score": 0.0021,
+      "paradigm_matched": 0,
       "path": "legends/tesla.json",
-      "size_kb": 48,
+      "size_kb": 49,
       "survivors": 300,
       "total_entities": 1165
     },
@@ -86,8 +103,10 @@
       "description": "Biomedical abstracts corpus",
       "display_name": "PubMed Superpower",
       "id": "pubmed",
+      "novelty_score": 0.0035,
+      "paradigm_matched": 0,
       "path": "legends/pubmed.json",
-      "size_kb": 44,
+      "size_kb": 46,
       "survivors": 300,
       "total_entities": 70113
     },
@@ -96,8 +115,10 @@
       "description": "Climate science corpus",
       "display_name": "Climate Superpower",
       "id": "climate",
+      "novelty_score": 0.1362,
+      "paradigm_matched": 0,
       "path": "legends/climate.json",
-      "size_kb": 44,
+      "size_kb": 45,
       "survivors": 300,
       "total_entities": 14657
     },
@@ -106,8 +127,10 @@
       "description": "UN Comtrade trade data corpus",
       "display_name": "Comtrade Superpower",
       "id": "comtrade",
+      "novelty_score": 0.0111,
+      "paradigm_matched": 0,
       "path": "legends/comtrade.json",
-      "size_kb": 45,
+      "size_kb": 46,
       "survivors": 300,
       "total_entities": 7556
     }

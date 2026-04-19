@@ -247,6 +247,72 @@
   "database_name": "Tesla Superpower",
   "description": "Nikola Tesla patent corpus (Wardenclyffe anomaly)",
   "legend_id": "tesla",
+  "novelty": {
+    "novelty_score": 0.0021,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.9175,
+        "name": "patent_US609251",
+        "similarity": 0.9979,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.9219,
+        "name": "document_fbi_part3",
+        "similarity": 0.9971,
+        "type": "document"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "patent_US611719",
+        "similarity": 0.9971,
+        "type": "patent"
+      },
+      {
+        "anomaly": 0.8862,
+        "name": "patent_US1655113",
+        "similarity": 0.9969,
+        "type": "patent"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "event_event_ac_patents",
+        "similarity": 0.9946,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7866,
+        "name": "location_edison_machine_works",
+        "similarity": 0.9878,
+        "type": "location"
+      },
+      {
+        "anomaly": 0.6661,
+        "name": "event_event_fbi_declassified",
+        "similarity": 0.987,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.6737,
+        "name": "location_new_yorker_hotel",
+        "similarity": 0.987,
+        "type": "location"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.9356,

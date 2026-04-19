@@ -247,6 +247,72 @@
   "database_name": "SEC EDGAR",
   "description": "SEC 10-K filings corpus",
   "legend_id": "edgar",
+  "novelty": {
+    "novelty_score": 0.1039,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.4553,
+        "name": "filing_000116755726000029",
+        "similarity": 0.8961,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.155,
+        "name": "filing_000094787126000159",
+        "similarity": 0.8778,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.1055,
+        "name": "filing_000201424026000002",
+        "similarity": 0.8705,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.7385,
+        "name": "filing_000165315326000003",
+        "similarity": 0.8678,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.1202,
+        "name": "filing_000110465926017089",
+        "similarity": 0.8645,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.0967,
+        "name": "filing_000210409426000007",
+        "similarity": 0.8617,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.0899,
+        "name": "filing_000180483126000004",
+        "similarity": 0.8523,
+        "type": "filing"
+      },
+      {
+        "anomaly": 0.0885,
+        "name": "filing_000168316826000891",
+        "similarity": 0.8517,
+        "type": "filing"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.0829,

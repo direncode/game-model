@@ -247,6 +247,72 @@
   "database_name": "Polymath (Newton / VN / Leonardo)",
   "description": "Historical polymath archives - BTUT anomaly detection layer",
   "legend_id": "polymath",
+  "novelty": {
+    "novelty_score": 0.0049,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.5003,
+        "name": "vn_theory_of_games__c048",
+        "similarity": 0.9951,
+        "type": "patent_chunk"
+      },
+      {
+        "anomaly": 0.9512,
+        "name": "leonardo_flight__event__leonardo_s_parachute_tested",
+        "similarity": 0.9929,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7563,
+        "name": "newton_alchemy__location__indiana_university_chymistry_project",
+        "similarity": 0.9926,
+        "type": "location"
+      },
+      {
+        "anomaly": 0.8214,
+        "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
+        "similarity": 0.99,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.8679,
+        "name": "newton_alchemy__location__the_royal_mint",
+        "similarity": 0.9888,
+        "type": "location"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "leonardo_flight__concept__ornithopter",
+        "similarity": 0.9864,
+        "type": "concept"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+        "similarity": 0.9847,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7223,
+        "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
+        "similarity": 0.9839,
+        "type": "event"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,

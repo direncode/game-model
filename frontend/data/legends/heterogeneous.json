@@ -247,6 +247,72 @@
   "database_name": "Cross-Era Heterogeneous",
   "description": "1,851-entity cross-era corpus (25/25 canonical markers)",
   "legend_id": "heterogeneous",
+  "novelty": {
+    "novelty_score": 0.0065,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 1.0,
+        "name": "crypto_symmetric__concept__s_box",
+        "similarity": 0.9935,
+        "type": "concept"
+      },
+      {
+        "anomaly": 0.8376,
+        "name": "crypto_lattice__event__shor_algorithm_published",
+        "similarity": 0.9907,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.8209,
+        "name": "tesla_surface_wave__concept__quarter_wave_resonator",
+        "similarity": 0.9889,
+        "type": "concept"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "radiative_radio__event__audion_patented",
+        "similarity": 0.9887,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7415,
+        "name": "inductive_non_radiative__location__witricity_corporation",
+        "similarity": 0.9839,
+        "type": "location"
+      },
+      {
+        "anomaly": 0.7089,
+        "name": "crypto_symmetric__event__des_standardized",
+        "similarity": 0.9836,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7142,
+        "name": "tesla_surface_wave__event__tesla_papers_seized_by_fbi",
+        "similarity": 0.9829,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.7769,
+        "name": "radiative_radio__concept__hertzian_wave",
+        "similarity": 0.9825,
+        "type": "concept"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,

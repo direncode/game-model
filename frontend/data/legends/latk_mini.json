@@ -247,6 +247,72 @@
   "database_name": "LATK Mini",
   "description": "Mini cross-era corpus",
   "legend_id": "latk_mini",
+  "novelty": {
+    "novelty_score": 0.0283,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.2917,
+        "name": "latk_polymath__vn_edvac_report__c024",
+        "similarity": 0.9717,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.2238,
+        "name": "latk_polymath__leonardo_flight_of_birds__c018",
+        "similarity": 0.9497,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.1932,
+        "name": "latk_polymath__leonardo_water_motion__c007",
+        "similarity": 0.9344,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.2995,
+        "name": "latk_polymath__leonardo_anatomy__c012",
+        "similarity": 0.9221,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.161,
+        "name": "latk_heterogeneous__corum_US9910144__c005",
+        "similarity": 0.9208,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.172,
+        "name": "latk_heterogeneous__witricity_US7741734__c004",
+        "similarity": 0.9202,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.1803,
+        "name": "latk_heterogeneous__info_HEVC2013__c043",
+        "similarity": 0.9196,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.1895,
+        "name": "latk_heterogeneous__witricity_US8686598__c007",
+        "similarity": 0.9189,
+        "type": "chunk"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.2453,

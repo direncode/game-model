@@ -247,6 +247,72 @@
   "database_name": "LATK Physics arXiv",
   "description": "Physics arXiv corpus for LATK novelty queries",
   "legend_id": "latk_physics",
+  "novelty": {
+    "novelty_score": 0.0103,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.7254,
+        "name": "latk_physics__arxiv_quant_ph__writing__arxiv_0810_2110v1__c000",
+        "similarity": 0.9897,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.6966,
+        "name": "latk_physics__arxiv_physics_gen_ph__writing__arxiv_1509_07517v1__c000",
+        "similarity": 0.9843,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.5891,
+        "name": "latk_physics__arxiv_physics_soc_ph__writing__arxiv_1805_11812v2__c000",
+        "similarity": 0.9783,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.6594,
+        "name": "latk_physics__arxiv_physics_acc_ph__writing__arxiv_2209_14192v1__c000",
+        "similarity": 0.9777,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.5933,
+        "name": "latk_physics__arxiv_hep_th__writing__arxiv_2212_12099v1__c000",
+        "similarity": 0.9763,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.5497,
+        "name": "latk_physics__arxiv_quant_ph__writing__arxiv_1007_4566v1__c000",
+        "similarity": 0.9735,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.5709,
+        "name": "latk_physics__arxiv_physics_optics__writing__arxiv_1812_02218v1__c000",
+        "similarity": 0.9725,
+        "type": "chunk"
+      },
+      {
+        "anomaly": 0.5312,
+        "name": "latk_physics__arxiv_astro_ph_co__writing__arxiv_1009_3776v1__c000",
+        "similarity": 0.9722,
+        "type": "chunk"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.497,

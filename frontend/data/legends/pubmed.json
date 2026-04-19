@@ -247,6 +247,72 @@
   "database_name": "PubMed Superpower",
   "description": "Biomedical abstracts corpus",
   "legend_id": "pubmed",
+  "novelty": {
+    "novelty_score": 0.0035,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.9152,
+        "name": "paper_30326842",
+        "similarity": 0.9965,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.9284,
+        "name": "paper_24352276",
+        "similarity": 0.9956,
+        "type": "paper"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "paper_31558838",
+        "similarity": 0.9953,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.8561,
+        "name": "paper_33311465",
+        "similarity": 0.9948,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.8788,
+        "name": "paper_33079956",
+        "similarity": 0.9947,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.824,
+        "name": "paper_36736507",
+        "similarity": 0.993,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.7378,
+        "name": "paper_31350357",
+        "similarity": 0.9914,
+        "type": "paper"
+      },
+      {
+        "anomaly": 0.7518,
+        "name": "paper_28720440",
+        "similarity": 0.9908,
+        "type": "paper"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,

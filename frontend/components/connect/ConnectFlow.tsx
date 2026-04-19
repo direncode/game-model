@@ -25,8 +25,39 @@ export interface EngineStep {
   duration?: string;
 }
 
+export interface NoveltyProbe {
+  query: string;
+  query_vector: number[];
+  probed: number;
+  novelty_score: number;
+  top: Array<{
+    name: string;
+    type: string;
+    similarity: number;
+    anomaly: number;
+  }>;
+}
+
+export interface ParadigmBreakdown {
+  regime_counts: Record<string, number>;
+  total_matched: number;
+  examples: Array<{
+    name: string;
+    regime: string;
+    scores: Record<string, number | string>;
+  }>;
+}
+
+export interface LegendBridge {
+  other_legend: string;
+  shared_count: number;
+  samples: Array<{ fp: string; a_name: string; b_name: string }>;
+}
+
 export interface ConnectResult {
   database_name: string;
+  legend_id?: string;
+  description?: string;
   survivors: Array<{
     name: string;
     type: string;
@@ -44,6 +75,9 @@ export interface ConnectResult {
     signal_type: string;
     strength: number;
   }>;
+  novelty?: NoveltyProbe;
+  paradigm?: ParadigmBreakdown;
+  bridges?: LegendBridge[];
 }
 
 export type SourceConfig = {
@@ -195,6 +229,22 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
         try {
           const mod = await import(`@/data/legends/${mode.legendId}.json`);
           payload = mod.default as ConnectResult;
+
+          // Attach per-legend cross-legend bridges
+          try {
+            const bridgesMod = await import('@/data/legends/bridges.json');
+            const all = (bridgesMod.default as { bridges: Array<{ a: string; b: string; shared_count: number; samples: Array<{ fp: string; a_name: string; b_name: string }> }> }).bridges;
+            payload.bridges = all
+              .filter((br) => br.a === mode.legendId || br.b === mode.legendId)
+              .map((br) => ({
+                other_legend: br.a === mode.legendId ? br.b : br.a,
+                shared_count: br.shared_count,
+                samples: br.samples,
+              }))
+              .sort((x, y) => y.shared_count - x.shared_count);
+          } catch {
+            /* bridges optional */
+          }
         } catch (e) {
           setPhase('error');
           setErrorMessage(`Failed to load legend "${mode.legendId}".`);

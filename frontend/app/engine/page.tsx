@@ -185,6 +185,74 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Novelty Probe section */}
+          {result.novelty && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Novelty Probe
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  score {result.novelty.novelty_score.toFixed(3)} &middot; {result.novelty.probed} probed
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <p className="text-[11px] font-mono text-white/40 mb-3">
+                  query: &quot;{result.novelty.query}&quot;
+                </p>
+                <div className="space-y-1.5">
+                  {result.novelty.top.map((m, i) => (
+                    <div key={i} className="flex items-center gap-3 text-[11px] font-mono">
+                      <span className="w-6 text-white/20">#{i + 1}</span>
+                      <span className="flex-1 text-white/70 truncate">{m.name}</span>
+                      <span className="text-white/30 w-24">{m.type}</span>
+                      <span className="text-li-cyan/80 w-14 text-right">{m.similarity.toFixed(3)}</span>
+                      <span className="text-white/20 w-12 text-right">anom {m.anomaly.toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Cross-Legend Bridges section */}
+          {result.bridges && result.bridges.length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Cross-Legend Bridges
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  {result.bridges.length} legends share fingerprints with this one
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <div className="space-y-3">
+                  {result.bridges.slice(0, 8).map((br, i) => (
+                    <details key={i} className="group">
+                      <summary className="flex items-center gap-3 text-[11px] font-mono cursor-pointer hover:bg-white/[0.02] rounded px-2 py-1 -mx-2 transition-colors">
+                        <span className="text-white/40 w-4">&#9656;</span>
+                        <span className="text-white/70 flex-1">{br.other_legend}</span>
+                        <span className="text-li-cyan/80">{br.shared_count} shared fingerprint{br.shared_count === 1 ? '' : 's'}</span>
+                      </summary>
+                      <div className="pl-6 pt-2 space-y-1 text-[10px] font-mono text-white/40">
+                        {br.samples.slice(0, 4).map((s, j) => (
+                          <div key={j} className="truncate">
+                            <span className="text-li-yellow/50">{s.fp.slice(0, 12)}</span>
+                            {' '}
+                            <span className="text-white/60">{s.a_name}</span>
+                            {' \u2194 '}
+                            <span className="text-white/60">{s.b_name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Footer */}
           <div className="pt-8 border-t border-white/[0.03] flex items-center justify-between">
             <span className="text-[10px] font-mono text-white/10">

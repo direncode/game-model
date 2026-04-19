@@ -247,6 +247,72 @@
   "database_name": "Climate Superpower",
   "description": "Climate science corpus",
   "legend_id": "climate",
+  "novelty": {
+    "novelty_score": 0.1362,
+    "probed": 300,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 0.1269,
+        "name": "station_COOPMTCK2",
+        "similarity": 0.8638,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1125,
+        "name": "station_COOPHAZK2",
+        "similarity": 0.8617,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1109,
+        "name": "station_COOPMARI3",
+        "similarity": 0.8613,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1137,
+        "name": "station_AX410",
+        "similarity": 0.8612,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1156,
+        "name": "station_COOPCRDM8",
+        "similarity": 0.861,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1114,
+        "name": "station_BMRL1",
+        "similarity": 0.8607,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1169,
+        "name": "station_1923W",
+        "similarity": 0.8605,
+        "type": "station"
+      },
+      {
+        "anomaly": 0.1089,
+        "name": "station_AMVO1",
+        "similarity": 0.8604,
+        "type": "station"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 0.1137,

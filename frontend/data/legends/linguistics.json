@@ -247,6 +247,72 @@
   "database_name": "Linguistics",
   "description": "Linguistics corpus",
   "legend_id": "linguistics",
+  "novelty": {
+    "novelty_score": 0.0044,
+    "probed": 289,
+    "query": "high anomaly + high diversity probe",
+    "query_vector": [
+      0.9,
+      0.7,
+      0.95,
+      0.5
+    ],
+    "top": [
+      {
+        "anomaly": 1.0,
+        "name": "historical_saussure_structuralism__writing__course_in_general_linguistics",
+        "similarity": 0.9956,
+        "type": "writing"
+      },
+      {
+        "anomaly": 0.9872,
+        "name": "historical_portroyal_grammar__event__port_royal_grammar_published",
+        "similarity": 0.9955,
+        "type": "event"
+      },
+      {
+        "anomaly": 0.9363,
+        "name": "modern_chomsky_generative__concept__surface_structure",
+        "similarity": 0.9917,
+        "type": "concept"
+      },
+      {
+        "anomaly": 0.8692,
+        "name": "historical_saussure_structuralism__location__prague_linguistic_circle",
+        "similarity": 0.9904,
+        "type": "location"
+      },
+      {
+        "anomaly": 0.9021,
+        "name": "historical_portroyal_grammar__person__claude_lancelot",
+        "similarity": 0.9895,
+        "type": "person"
+      },
+      {
+        "anomaly": 0.821,
+        "name": "historical_portroyal_grammar__person__antoine_arnauld",
+        "similarity": 0.9894,
+        "type": "person"
+      },
+      {
+        "anomaly": 1.0,
+        "name": "modern_chomsky_hierarchy__concept__context_sensitive_language",
+        "similarity": 0.9892,
+        "type": "concept"
+      },
+      {
+        "anomaly": 0.8297,
+        "name": "modern_chomsky_hierarchy__concept__linear_bounded_automaton",
+        "similarity": 0.989,
+        "type": "concept"
+      }
+    ]
+  },
+  "paradigm": {
+    "examples": [],
+    "regime_counts": {},
+    "total_matched": 0
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,
