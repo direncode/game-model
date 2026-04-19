@@ -159,17 +159,30 @@ export default function HomePage() {
             </h3>
             <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
               <AnomalyFeed
-                anomalies={result.survivors.map((s) => ({
-                  name: s.name,
-                  type: s.type,
-                  anomaly_score: s.anomaly_score,
-                  narrative:
-                    s.anomaly_score >= 0.8
-                      ? `${s.name} exhibits anomalous structural patterns diverging significantly from its ${s.type} cluster centroid.`
-                      : s.anomaly_score >= 0.7
-                        ? `${s.name} shows moderate deviation from expected ${s.type} behavior patterns.`
-                        : undefined,
-                }))}
+                anomalies={result.survivors.map((s) => {
+                  const compPct = Math.round((s.score ?? 0) * 100);
+                  const anomPct = Math.round(s.anomaly_score * 100);
+                  const rankTxt =
+                    s.cluster_rank && s.cluster_total
+                      ? `rank ${s.cluster_rank}/${s.cluster_total} in cluster`
+                      : '';
+                  let narrative: string | undefined;
+                  if (s.anomaly_score >= 0.7 || (s.cluster_rank && s.cluster_rank <= 3)) {
+                    narrative = [
+                      `anomaly ${anomPct}%`,
+                      `composite ${compPct}%`,
+                      rankTxt,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ');
+                  }
+                  return {
+                    name: s.name,
+                    type: s.type,
+                    anomaly_score: s.anomaly_score,
+                    narrative,
+                  };
+                })}
                 threshold={0.7}
               />
             </div>
@@ -185,30 +198,210 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Novelty Probe section */}
-          {result.novelty && (
+          {/* Convergence Index — entities passing multiple independent signal tests */}
+          {result.convergence_index && result.convergence_index.length > 0 && (
             <div className="mb-10">
               <div className="flex items-baseline justify-between mb-4">
                 <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
-                  Novelty Probe
+                  Convergence Index
                 </h3>
                 <span className="text-[10px] font-mono text-white/30">
-                  score {result.novelty.novelty_score.toFixed(3)} &middot; {result.novelty.probed} probed
+                  entities scoring across {result.convergence_index.length > 0 ? '4' : '0'} independent dimensions: anomaly &middot; cluster-rank &middot; cross-era &middot; rare-fingerprint
                 </span>
               </div>
               <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
-                <p className="text-[11px] font-mono text-white/40 mb-3">
-                  query: &quot;{result.novelty.query}&quot;
+                <p className="text-[10px] font-mono text-white/25 mb-3">
+                  Higher convergence = entity is a top hit on multiple independent tests simultaneously.
+                  Single-dimension hits are usually noise; convergent hits are signal.
                 </p>
                 <div className="space-y-1.5">
-                  {result.novelty.top.map((m, i) => (
-                    <div key={i} className="flex items-center gap-3 text-[11px] font-mono">
-                      <span className="w-6 text-white/20">#{i + 1}</span>
-                      <span className="flex-1 text-white/70 truncate">{m.name}</span>
-                      <span className="text-white/30 w-24">{m.type}</span>
-                      <span className="text-li-cyan/80 w-14 text-right">{m.similarity.toFixed(3)}</span>
-                      <span className="text-white/20 w-12 text-right">anom {m.anomaly.toFixed(2)}</span>
+                  <div className="grid grid-cols-[2rem_1fr_5rem_3rem_3rem_3rem_3rem] gap-2 text-[9px] font-mono text-white/20 uppercase tracking-wider pb-1 border-b border-white/[0.04]">
+                    <span>#</span>
+                    <span>Entity</span>
+                    <span className="text-right">Conv.</span>
+                    <span className="text-right">Anom</span>
+                    <span className="text-right">Clus%</span>
+                    <span className="text-right">Era</span>
+                    <span className="text-right">FP</span>
+                  </div>
+                  {result.convergence_index.slice(0, 15).map((m, i) => (
+                    <div key={i} className="grid grid-cols-[2rem_1fr_5rem_3rem_3rem_3rem_3rem] gap-2 text-[11px] font-mono items-center">
+                      <span className="text-white/20">#{i + 1}</span>
+                      <span className="text-white/70 truncate">{m.name}</span>
+                      <span className="text-li-cyan/80 text-right font-semibold">{m.convergence.toFixed(3)}</span>
+                      <span className="text-white/40 text-right">{m.dimensions.anomaly.toFixed(2)}</span>
+                      <span className="text-white/40 text-right">{(m.dimensions.cluster_percentile * 100).toFixed(0)}</span>
+                      <span className={m.dimensions.cross_era > 0 ? 'text-li-yellow/70 text-right' : 'text-white/15 text-right'}>
+                        {m.dimensions.cross_era > 0 ? '\u2713' : '\u00b7'}
+                      </span>
+                      <span className={m.dimensions.rare_fingerprint > 0.3 ? 'text-li-yellow/70 text-right' : 'text-white/15 text-right'}>
+                        {m.dimensions.rare_fingerprint > 0 ? m.dimensions.rare_fingerprint.toFixed(2) : '\u00b7'}
+                      </span>
                     </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Paradigm Dominance — forgotten vs mainstream vs control hypothesis test */}
+          {result.paradigm_distribution && Object.keys(result.paradigm_distribution.hypothesis_by_corpus).length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Paradigm Dominance
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  hypothesis: forgotten paradigm should exceed mainstream + control
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <div className="space-y-3">
+                  {Object.entries(result.paradigm_distribution.hypothesis_by_corpus).map(([corpus, h]) => {
+                    const total = h.forgotten + h.mainstream + h.control;
+                    const pct = (n: number) => (total > 0 ? (n / total) * 100 : 0);
+                    return (
+                      <div key={corpus} className="space-y-1">
+                        <div className="flex items-center justify-between text-[11px] font-mono">
+                          <span className="text-white/70 w-16 capitalize">{corpus}</span>
+                          <span className={h.confirmed ? 'text-li-green/80' : 'text-li-red/60'}>
+                            {h.confirmed ? '\u2713 confirmed' : '\u2717 not confirmed'}
+                          </span>
+                          <span className="text-white/40">
+                            ratio {h.ratio_forgotten_to_competitors.toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex h-4 rounded overflow-hidden border border-white/[0.04]">
+                          {h.forgotten > 0 && (
+                            <div
+                              className="bg-li-cyan/40 flex items-center justify-center text-[9px] font-mono text-black"
+                              style={{ width: `${pct(h.forgotten)}%` }}
+                              title={`forgotten: ${h.forgotten}`}
+                            >
+                              {h.forgotten > 4 ? h.forgotten : ''}
+                            </div>
+                          )}
+                          {h.mainstream > 0 && (
+                            <div
+                              className="bg-white/20 flex items-center justify-center text-[9px] font-mono text-white/70"
+                              style={{ width: `${pct(h.mainstream)}%` }}
+                              title={`mainstream: ${h.mainstream}`}
+                            >
+                              {h.mainstream > 4 ? h.mainstream : ''}
+                            </div>
+                          )}
+                          {h.control > 0 && (
+                            <div
+                              className="bg-li-yellow/30 flex items-center justify-center text-[9px] font-mono text-black/70"
+                              style={{ width: `${pct(h.control)}%` }}
+                              title={`control: ${h.control}`}
+                            >
+                              {h.control > 4 ? h.control : ''}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex gap-4 mt-3 text-[9px] font-mono text-white/30">
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 bg-li-cyan/40" /> forgotten</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 bg-white/20" /> mainstream</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 bg-li-yellow/30" /> control</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Convergent Anomaly Clusters */}
+          {result.convergent_clusters && result.convergent_clusters.length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Convergent Anomaly Clusters
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  clusters where multiple entities independently score anomaly ≥ 0.85
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <div className="space-y-2">
+                  {result.convergent_clusters.slice(0, 10).map((c, i) => (
+                    <div key={i} className="flex items-center gap-3 text-[11px] font-mono">
+                      <span className="text-white/30 w-16">cluster {c.cluster}</span>
+                      <span className="flex-1 text-white/60 truncate">{c.dominant_paradigm || 'mixed'}</span>
+                      <span className="text-li-cyan/80 w-16 text-right">
+                        {c.hot_count} / {c.total} hot
+                      </span>
+                      <span className="text-white/30 w-16 text-right">
+                        {(c.hot_fraction * 100).toFixed(0)}% density
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Cross-Era Anchors */}
+          {result.cross_era_anchors && result.cross_era_anchors.length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Cross-Era Anchors
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  entities whose era disagrees with their cluster&apos;s majority era (anachronism signal)
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <div className="space-y-1.5">
+                  {result.cross_era_anchors.slice(0, 10).map((a, i) => (
+                    <div key={i} className="flex items-center gap-3 text-[11px] font-mono">
+                      <span className="text-white/70 flex-1 truncate">{a.name}</span>
+                      <span className="text-li-yellow/70 w-16 text-right capitalize">{a.era_class}</span>
+                      <span className="text-white/30 w-12 text-right">vs</span>
+                      <span className="text-white/40 w-16 text-right capitalize">{a.cluster_majority_era}</span>
+                      <span className="text-li-cyan/80 w-12 text-right">{a.anomaly.toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Triple-Bridges — rarest structural signal */}
+          {result.triple_bridges && result.triple_bridges.length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-white/25">
+                  Triple-Bridges (≥3 corpora)
+                </h3>
+                <span className="text-[10px] font-mono text-white/30">
+                  fingerprints appearing in 3+ independent legends — strongest cross-corpus structural signal
+                </span>
+              </div>
+              <div className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                <div className="space-y-2">
+                  {result.triple_bridges.slice(0, 10).map((t, i) => (
+                    <details key={i} className="group">
+                      <summary className="flex items-center gap-3 text-[11px] font-mono cursor-pointer hover:bg-white/[0.02] rounded px-2 py-1 -mx-2 transition-colors">
+                        <span className="text-white/40 w-4">&#9656;</span>
+                        <span className="text-li-yellow/50 font-mono">{t.fingerprint.slice(0, 16)}</span>
+                        <span className="flex-1 text-white/60 truncate">
+                          {t.legends.join(' \u2194 ')}
+                        </span>
+                        <span className="text-li-cyan/80">{t.legend_count} corpora</span>
+                      </summary>
+                      <div className="pl-6 pt-2 space-y-1 text-[10px] font-mono text-white/40">
+                        {t.entities.slice(0, 6).map((e, j) => (
+                          <div key={j} className="truncate">
+                            <span className="text-white/30 w-20 inline-block">{e.legend}</span>
+                            <span className="text-white/60">{e.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </details>
                   ))}
                 </div>
               </div>

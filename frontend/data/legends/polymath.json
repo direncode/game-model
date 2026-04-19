@@ -2,2114 +2,3325 @@
   "clusters": 66,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_flight__concept__ornithopter",
-      "strength": 0.8,
-      "target": "leonardo_art_control__concept__paragone"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__concept__paragone",
-      "strength": 0.8,
-      "target": "leonardo_fluids__concept__laminar_flow"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_fluids__concept__laminar_flow",
-      "strength": 0.8,
-      "target": "newton_optics__concept__prism_experiment"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_optics__concept__prism_experiment",
-      "strength": 0.8,
-      "target": "vn_computing__concept__control_unit"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "vn_computing__concept__control_unit",
-      "strength": 0.8,
-      "target": "newton_alchemy__concept__projection"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_alchemy__concept__projection",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "leonardo_art_control__c132"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__c132",
-      "strength": 0.8,
-      "target": "newton_alchemy_clavis__c108"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_alchemy_clavis__c108",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "leonardo_art_control__c100"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_art_control__c100",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_opticks_light__c147"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_opticks_light__c147",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_theology_prophecies__c162"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "vn_game_theory__concept__expected_utility",
-      "strength": 0.8,
-      "target": "newton_optics__concept__chromatic_aberration"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_optics__concept__chromatic_aberration",
-      "strength": 0.8,
-      "target": "newton_mechanics__event__principia_published"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_mechanics__event__principia_published",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_mechanics__event__newton_s_annus_mirabilis"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_mechanics__event__newton_s_annus_mirabilis",
-      "strength": 0.8,
-      "target": "newton_mechanics__location__woolsthorpe_manor"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_mechanics__location__woolsthorpe_manor",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_mechanics__location__royal_society"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_mechanics__location__royal_society",
-      "strength": 0.8,
-      "target": "vn_self_reproducing_automata__c007"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_alchemy__concept__net",
-      "strength": 0.8,
-      "target": "leonardo_art_control__concept__sfumato"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__concept__sfumato",
-      "strength": 0.8,
-      "target": "newton_optics__concept__newton_s_rings"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_optics__concept__newton_s_rings",
-      "strength": 0.8,
-      "target": "newton_alchemy_praxis__c100"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_alchemy_praxis__c100",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_principia_mechanics__c099"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "newton_principia_mechanics__c099",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_alchemy_praxis__c105"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_alchemy__concept__philosopher_s_stone",
-      "strength": 0.8,
-      "target": "vn_game_theory__concept__nash_equilibrium"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "vn_game_theory__concept__nash_equilibrium",
-      "strength": 0.8,
-      "target": "leonardo_flight__concept__center_of_gravity_in_flight"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_flight__concept__center_of_gravity_in_flight",
-      "strength": 0.8,
-      "target": "leonardo_optics_perspective__c036"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_optics_perspective__c036",
-      "strength": 0.8,
-      "target": "vn_edvac_report__c063"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "vn_edvac_report__c063",
-      "strength": 0.8,
-      "target": "vn_monte_carlo_control__c071"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "vn_monte_carlo_control__c071",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_opticks_light__c061"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_opticks_light__c061",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "vn_game_theory__concept__nash_equilibrium",
+      "strength": 1.0,
+      "target": "vn_monte_carlo_control__c071"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "vn_monte_carlo_control__c071",
+      "strength": 1.0,
       "target": "leonardo_art_control__c054"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_art_control__c054",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "leonardo_art_control__c022"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__c022",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "vn_edvac_report__c063",
+      "strength": 1.0,
       "target": "leonardo_art_control__c034"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_art_control__c034",
-      "strength": 0.8,
-      "target": "newton_theology_prophecies__c065"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_theology_prophecies__c065",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "leonardo_art_control__c037"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_art_control__c037",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "vn_self_reproducing_automata__c025"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "vn_self_reproducing_automata__c025",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "leonardo_art_control__c025"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__c025",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "newton_theology_prophecies__c065",
+      "strength": 1.0,
       "target": "leonardo_art_control__c058"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "newton_alchemy__concept__sophic_sulphur",
-      "strength": 0.8,
-      "target": "leonardo_art_control__c085"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__c085",
-      "strength": 0.8,
-      "target": "leonardo_art_control__c117"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "leonardo_art_control__c117",
-      "strength": 0.8,
-      "target": "leonardo_art_control__c080"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "leonardo_art_control__c080",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "newton_opticks_light__c126"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "leonardo_art_control__c085",
+      "strength": 1.0,
+      "target": "leonardo_art_control__c093"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "leonardo_art_control__c068",
+      "strength": 1.0,
+      "target": "leonardo_art_control__c079"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "leonardo_art_control__c079",
+      "strength": 1.0,
+      "target": "vn_monte_carlo_control__c036"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "strength": 1.0,
+      "target": "newton_alchemy__location__portsmouth_papers"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_complexity__concept__universal_turing_machine",
+      "strength": 1.0,
+      "target": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+      "strength": 1.0,
+      "target": "vn_quantum__event__mathematical_foundations_published"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "newton_principia_mechanics__c101",
+      "strength": 1.0,
+      "target": "vn_cellular_automata_transitions__c087"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "vn_cellular_automata_transitions__c087",
+      "strength": 1.0,
+      "target": "leonardo_art_control__c133"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "leonardo_art_control__c133",
+      "strength": 1.0,
+      "target": "newton_theology_prophecies__c110"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_aerodynamics__concept__karman_vortex_street",
+      "strength": 1.0,
+      "target": "leonardo_fluids__concept__vortex"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "vn_mathematical_foundations_qm__c024",
+      "strength": 1.0,
+      "target": "vn_cellular_automata_transitions__c092"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.7547,
+      "dimensions": {
+        "anomaly": 0.7563,
+        "cluster_percentile": 1.0,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__location__indiana_university_chymistry_project",
+      "type": "location"
+    },
+    {
+      "convergence": 0.6728,
+      "dimensions": {
+        "anomaly": 0.9795,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "modern_complexity__location__santa_fe_institute",
+      "type": "location"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "leonardo_flight__concept__ornithopter",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+      "type": "event"
+    },
+    {
+      "convergence": 0.6229,
+      "dimensions": {
+        "anomaly": 0.9512,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "leonardo_flight__event__leonardo_s_parachute_tested",
+      "type": "event"
+    },
+    {
+      "convergence": 0.62,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
+      "type": "location"
+    },
+    {
+      "convergence": 0.6011,
+      "dimensions": {
+        "anomaly": 0.8888,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_mechanics__event__principia_published",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5938,
+      "dimensions": {
+        "anomaly": 0.8679,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__location__the_royal_mint",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5719,
+      "dimensions": {
+        "anomaly": 0.8054,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__location__trinity_college_cambridge",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5642,
+      "dimensions": {
+        "anomaly": 0.9264,
+        "cluster_percentile": 0.8,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5428,
+      "dimensions": {
+        "anomaly": 0.7223,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5418,
+      "dimensions": {
+        "anomaly": 0.8214,
+        "cluster_percentile": 0.8571,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5302,
+      "dimensions": {
+        "anomaly": 0.229,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "vn_monte_carlo_control__c013",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.525,
+      "dimensions": {
+        "anomaly": 0.2143,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "leonardo_art_control__c092",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.5215,
+      "dimensions": {
+        "anomaly": 0.2042,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "newton_alchemy_clavis__c073",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.5179,
+      "dimensions": {
+        "anomaly": 0.651,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__concept__philosopher_s_stone",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.4979,
+      "dimensions": {
+        "anomaly": 0.798,
+        "cluster_percentile": 0.7143,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_mechanics__location__woolsthorpe_manor",
+      "type": "location"
+    },
+    {
+      "convergence": 0.4917,
+      "dimensions": {
+        "anomaly": 0.8619,
+        "cluster_percentile": 0.6,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__location__portsmouth_papers",
+      "type": "location"
+    },
+    {
+      "convergence": 0.4887,
+      "dimensions": {
+        "anomaly": 0.5677,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "newton_alchemy__concept__sophic_sulphur",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.4875,
+      "dimensions": {
+        "anomaly": 0.2092,
+        "cluster_percentile": 0.8571,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "vn_self_reproducing_automata__c096",
+      "type": "patent_chunk"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 18,
+      "dominant_paradigm": "newton_alchemy",
+      "dominant_paradigm_share": 3,
+      "hot_count": 3,
+      "hot_fraction": 0.5,
+      "total": 6
+    },
+    {
+      "cluster": 47,
+      "dominant_paradigm": "leonardo_flight",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.091,
+      "total": 11
+    },
+    {
+      "cluster": 19,
+      "dominant_paradigm": "newton_mechanics",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.125,
+      "total": 8
+    },
+    {
+      "cluster": 11,
+      "dominant_paradigm": "leonardo_flight",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.25,
+      "total": 4
+    },
+    {
+      "cluster": 42,
+      "dominant_paradigm": "newton_alchemy",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.5,
+      "total": 2
+    },
+    {
+      "cluster": 15,
+      "dominant_paradigm": "vn_cellular_automata",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.5,
+      "total": 2
+    },
+    {
+      "cluster": 30,
+      "dominant_paradigm": "modern_complexity",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.25,
+      "total": 4
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [
+    {
+      "anomaly": 0.7563,
+      "cluster": 39,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 3,
+      "corpus": "newton",
+      "era_class": "modern",
+      "name": "newton_alchemy__location__indiana_university_chymistry_project",
+      "subcorpus": "alchemy"
+    },
+    {
+      "anomaly": 0.4362,
+      "cluster": 18,
+      "cluster_majority_count": 5,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 6,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_complexity__concept__universal_turing_machine",
+      "subcorpus": "complexity"
+    },
+    {
+      "anomaly": 0.3248,
+      "cluster": 43,
+      "cluster_majority_count": 1,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 2,
+      "corpus": "leonardo",
+      "era_class": "historical",
+      "name": "leonardo_fluids__concept__vortex",
+      "subcorpus": "fluids"
+    }
+  ],
   "database_name": "Polymath (Newton / VN / Leonardo)",
   "description": "Historical polymath archives - BTUT anomaly detection layer",
   "legend_id": "polymath",
-  "novelty": {
-    "novelty_score": 0.0049,
-    "probed": 300,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 0.5003,
-        "name": "vn_theory_of_games__c048",
-        "similarity": 0.9951,
-        "type": "patent_chunk"
-      },
-      {
-        "anomaly": 0.9512,
-        "name": "leonardo_flight__event__leonardo_s_parachute_tested",
-        "similarity": 0.9929,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.7563,
-        "name": "newton_alchemy__location__indiana_university_chymistry_project",
-        "similarity": 0.9926,
-        "type": "location"
-      },
-      {
-        "anomaly": 0.8214,
-        "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
-        "similarity": 0.99,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.8679,
-        "name": "newton_alchemy__location__the_royal_mint",
-        "similarity": 0.9888,
-        "type": "location"
-      },
-      {
-        "anomaly": 1.0,
-        "name": "leonardo_flight__concept__ornithopter",
-        "similarity": 0.9864,
-        "type": "concept"
-      },
-      {
-        "anomaly": 1.0,
-        "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
-        "similarity": 0.9847,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.7223,
-        "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
-        "similarity": 0.9839,
-        "type": "event"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "chunk",
+        "count": 260,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "newton",
+        "count": 11,
+        "role": "forgotten",
+        "subcorpus": "alchemy"
+      },
+      {
+        "corpus": "leonardo",
+        "count": 7,
+        "role": "forgotten",
+        "subcorpus": "flight"
+      },
+      {
+        "corpus": "newton",
+        "count": 5,
+        "role": "mainstream",
+        "subcorpus": "mechanics"
+      },
+      {
+        "corpus": "newton",
+        "count": 3,
+        "role": "mainstream",
+        "subcorpus": "optics"
+      },
+      {
+        "corpus": "vn",
+        "count": 3,
+        "role": "forgotten",
+        "subcorpus": "cellular_automata"
+      },
+      {
+        "corpus": "vn",
+        "count": 2,
+        "role": "mainstream",
+        "subcorpus": "game_theory"
+      },
+      {
+        "corpus": "leonardo",
+        "count": 2,
+        "role": "control",
+        "subcorpus": "art_control"
+      },
+      {
+        "corpus": "leonardo",
+        "count": 2,
+        "role": "forgotten",
+        "subcorpus": "fluids"
+      },
+      {
+        "corpus": "modern",
+        "count": 2,
+        "role": "other",
+        "subcorpus": "complexity"
+      },
+      {
+        "corpus": "vn",
+        "count": 1,
+        "role": "forgotten",
+        "subcorpus": "computing"
+      },
+      {
+        "corpus": "modern",
+        "count": 1,
+        "role": "other",
+        "subcorpus": "aerodynamics"
+      },
+      {
+        "corpus": "vn",
+        "count": 1,
+        "role": "mainstream",
+        "subcorpus": "quantum"
+      }
+    ],
+    "hypothesis_by_corpus": {
+      "leonardo": {
+        "confirmed": true,
+        "control": 2,
+        "forgotten": 9,
+        "mainstream": 0,
+        "ratio_forgotten_to_competitors": 4.5,
+        "sample_size": 11,
+        "sample_size_warning": false
+      },
+      "newton": {
+        "confirmed": true,
+        "control": 0,
+        "forgotten": 11,
+        "mainstream": 8,
+        "ratio_forgotten_to_competitors": 1.375,
+        "sample_size": 19,
+        "sample_size_warning": false
+      },
+      "vn": {
+        "confirmed": false,
+        "control": 0,
+        "forgotten": 4,
+        "mainstream": 3,
+        "ratio_forgotten_to_competitors": 1.333,
+        "sample_size": 7,
+        "sample_size_warning": true
+      }
+    },
+    "role_counts": {
+      "control": 2,
+      "forgotten": 24,
+      "mainstream": 11,
+      "other": 263
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 11,
       "name": "leonardo_flight__concept__ornithopter",
       "score": 0.939,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6623,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "vn_game_theory__concept__expected_utility",
       "score": 0.8471,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5377,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "newton_alchemy__concept__net",
       "score": 0.8368,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5612,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 2,
+      "cluster_total": 11,
       "name": "leonardo_art_control__concept__paragone",
       "score": 0.8361,
       "type": "concept"
     },
     {
       "anomaly_score": 0.651,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 15,
       "name": "newton_alchemy__concept__philosopher_s_stone",
       "score": 0.8191,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3923,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 5,
+      "cluster_total": 11,
       "name": "leonardo_fluids__concept__laminar_flow",
       "score": 0.8082,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4016,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 4,
+      "cluster_total": 11,
       "name": "newton_optics__concept__prism_experiment",
       "score": 0.8023,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5227,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "newton_optics__concept__chromatic_aberration",
       "score": 0.7981,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5677,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "newton_alchemy__concept__sophic_sulphur",
       "score": 0.7977,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4382,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 3,
+      "cluster_total": 11,
       "name": "vn_computing__concept__control_unit",
       "score": 0.7949,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3546,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 6,
+      "cluster_total": 11,
       "name": "newton_alchemy__concept__projection",
       "score": 0.787,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3471,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "leonardo_art_control__concept__sfumato",
       "score": 0.7804,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3153,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "leonardo_flight__concept__lift_from_pressure_difference",
       "score": 0.7777,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4668,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "vn_cellular_automata__concept__self_reproduction",
       "score": 0.7775,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4972,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "modern_aerodynamics__concept__karman_vortex_street",
       "score": 0.7747,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3248,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_fluids__concept__vortex",
       "score": 0.7742,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4651,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "newton_mechanics__concept__laws_of_motion",
       "score": 0.765,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3654,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "leonardo_flight__concept__parachute_design",
       "score": 0.7635,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3281,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 3,
+      "cluster_total": 15,
       "name": "vn_game_theory__concept__nash_equilibrium",
       "score": 0.7614,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4362,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "modern_complexity__concept__universal_turing_machine",
       "score": 0.7535,
       "type": "concept"
     },
     {
       "anomaly_score": 0.3383,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "newton_optics__concept__newton_s_rings",
       "score": 0.7519,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4087,
+      "cluster_percentile": 0.9286,
+      "cluster_rank": 2,
+      "cluster_total": 15,
       "name": "leonardo_flight__concept__center_of_gravity_in_flight",
       "score": 0.75,
       "type": "concept"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
       "score": 0.9481,
       "type": "event"
     },
     {
       "anomaly_score": 0.9264,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "newton_alchemy__event__newton_leaves_cambridge_for_the_mint",
       "score": 0.9328,
       "type": "event"
     },
     {
       "anomaly_score": 0.8888,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "newton_mechanics__event__principia_published",
       "score": 0.9064,
       "type": "event"
     },
     {
       "anomaly_score": 0.9512,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "leonardo_flight__event__leonardo_s_parachute_tested",
       "score": 0.8809,
       "type": "event"
     },
     {
       "anomaly_score": 0.6888,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "vn_quantum__event__mathematical_foundations_published",
       "score": 0.8409,
       "type": "event"
     },
     {
       "anomaly_score": 0.8214,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "newton_alchemy__event__chymistry_of_isaac_newton_project_launches",
       "score": 0.8375,
       "type": "event"
     },
     {
       "anomaly_score": 0.7223,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 22,
       "name": "vn_cellular_automata__event__wolfram_classifies_cellular_automata",
       "score": 0.8113,
       "type": "event"
     },
     {
       "anomaly_score": 0.6754,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "leonardo_flight__event__codex_on_the_flight_of_birds_written",
       "score": 0.7866,
       "type": "event"
     },
     {
       "anomaly_score": 0.5996,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "newton_mechanics__event__newton_s_annus_mirabilis",
       "score": 0.6363,
       "type": "event"
     },
     {
       "anomaly_score": 0.8619,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "newton_alchemy__location__portsmouth_papers",
       "score": 0.9053,
       "type": "location"
     },
     {
       "anomaly_score": 0.8054,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "newton_alchemy__location__trinity_college_cambridge",
       "score": 0.8811,
       "type": "location"
     },
     {
       "anomaly_score": 0.798,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "newton_mechanics__location__woolsthorpe_manor",
       "score": 0.8751,
       "type": "location"
     },
     {
       "anomaly_score": 0.8679,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "newton_alchemy__location__the_royal_mint",
       "score": 0.8689,
       "type": "location"
     },
     {
       "anomaly_score": 0.7563,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "newton_alchemy__location__indiana_university_chymistry_project",
       "score": 0.7761,
       "type": "location"
     },
     {
       "anomaly_score": 0.692,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "newton_mechanics__location__royal_society",
       "score": 0.6054,
       "type": "location"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "vn_cellular_automata__location__institute_for_advanced_study_princeton",
       "score": 0.5826,
       "type": "location"
     },
     {
       "anomaly_score": 0.9795,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "modern_complexity__location__santa_fe_institute",
       "score": 0.5391,
       "type": "location"
     },
     {
       "anomaly_score": 0.7539,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_flight__location__milan",
       "score": 0.4994,
       "type": "location"
     },
     {
       "anomaly_score": 0.2443,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 7,
+      "cluster_total": 11,
       "name": "leonardo_art_control__c132",
       "score": 0.7421,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2358,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "newton_principia_mechanics__c131",
       "score": 0.7309,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2925,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c060",
       "score": 0.7229,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2452,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 11,
       "name": "vn_mathematical_foundations_qm__c101",
       "score": 0.7223,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2374,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "newton_principia_mechanics__c101",
       "score": 0.7176,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2377,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "vn_cellular_automata_transitions__c087",
       "score": 0.7156,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2666,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c085",
       "score": 0.7153,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2313,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "newton_alchemy_praxis__c100",
       "score": 0.709,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2433,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c117",
       "score": 0.7049,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2432,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c063",
       "score": 0.7044,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2348,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "leonardo_art_control__c094",
       "score": 0.6958,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2682,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c080",
       "score": 0.6954,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.238,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "newton_opticks_light__c111",
       "score": 0.6929,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2343,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 3,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c066",
       "score": 0.6895,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2466,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "leonardo_art_control__c114",
       "score": 0.6871,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2397,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "vn_monte_carlo_control__c028",
       "score": 0.6849,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2801,
+      "cluster_percentile": 0.9524,
+      "cluster_rank": 2,
+      "cluster_total": 22,
       "name": "leonardo_art_control__c006",
       "score": 0.683,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2416,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "newton_opticks_light__c126",
       "score": 0.6829,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2396,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 2,
+      "cluster_total": 11,
       "name": "leonardo_water_motion__c098",
       "score": 0.6746,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2059,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "leonardo_anatomy__c158",
       "score": 0.6726,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.231,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "leonardo_anatomy__c026",
       "score": 0.6704,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2192,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "vn_self_reproducing_automata__c098",
       "score": 0.6685,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2308,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c068",
       "score": 0.6626,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2126,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "leonardo_anatomy__c181",
       "score": 0.6588,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2378,
+      "cluster_percentile": 0.8095,
+      "cluster_rank": 5,
+      "cluster_total": 22,
       "name": "newton_alchemy_clavis__c045",
       "score": 0.6583,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2504,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "newton_alchemy_praxis__c012",
       "score": 0.654,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2203,
+      "cluster_percentile": 0.6429,
+      "cluster_rank": 6,
+      "cluster_total": 15,
       "name": "leonardo_optics_perspective__c036",
       "score": 0.6535,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2227,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c079",
       "score": 0.6515,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2294,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "leonardo_water_motion__c125",
       "score": 0.6468,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1996,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "modern_dna_computing__c088",
       "score": 0.6458,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2087,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "newton_alchemy_praxis__c079",
       "score": 0.6431,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2139,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 6,
+      "cluster_total": 11,
       "name": "newton_alchemy_clavis__c100",
       "score": 0.6364,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2088,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "newton_theology_prophecies__c102",
       "score": 0.6327,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2312,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "newton_alchemy_clavis__c086",
       "score": 0.6304,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2192,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 11,
+      "cluster_total": 11,
       "name": "newton_alchemy_clavis__c108",
       "score": 0.6298,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2153,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "vn_cellular_automata_transitions__c029",
       "score": 0.6286,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2107,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 7,
+      "cluster_total": 11,
       "name": "leonardo_water_motion__c099",
       "score": 0.6265,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2399,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 4,
+      "cluster_total": 22,
       "name": "vn_cellular_automata_transitions__c049",
       "score": 0.6257,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1984,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "modern_dna_computing__c029",
       "score": 0.6256,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2229,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "leonardo_art_control__c093",
       "score": 0.6246,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2118,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "modern_reynolds_turbulence__c098",
       "score": 0.6233,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2216,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c010",
       "score": 0.6223,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2036,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "vn_self_reproducing_automata__c086",
       "score": 0.617,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2194,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 7,
+      "cluster_total": 15,
       "name": "vn_edvac_report__c063",
       "score": 0.6155,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2275,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "newton_alchemy_index_chemicus__c003",
       "score": 0.6155,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2006,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "vn_cellular_automata_transitions__c027",
       "score": 0.6154,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2086,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 8,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c108",
       "score": 0.6146,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2314,
+      "cluster_percentile": 0.7857,
+      "cluster_rank": 4,
+      "cluster_total": 15,
       "name": "vn_monte_carlo_control__c071",
       "score": 0.6146,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2096,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 13,
+      "cluster_total": 22,
       "name": "vn_self_reproducing_automata__c045",
       "score": 0.6144,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.21,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "leonardo_anatomy__c142",
       "score": 0.6144,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2051,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "newton_alchemy_index_chemicus__c036",
       "score": 0.6122,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2206,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 5,
+      "cluster_total": 15,
       "name": "newton_opticks_light__c061",
       "score": 0.6113,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.241,
+      "cluster_percentile": 0.9048,
+      "cluster_rank": 3,
+      "cluster_total": 22,
       "name": "leonardo_art_control__c004",
       "score": 0.6104,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2174,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "leonardo_optics_perspective__c121",
       "score": 0.6103,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1998,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "newton_alchemy_clavis__c035",
       "score": 0.6103,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2254,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "newton_alchemy_index_chemicus__c037",
       "score": 0.6097,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2244,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c047",
       "score": 0.6096,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2075,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "leonardo_art_control__c051",
       "score": 0.6088,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2211,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "vn_self_reproducing_automata__c065",
       "score": 0.6085,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2189,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "leonardo_art_control__c015",
       "score": 0.6073,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.212,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "newton_theology_prophecies__c015",
       "score": 0.6067,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2207,
+      "cluster_percentile": 0.619,
+      "cluster_rank": 9,
+      "cluster_total": 22,
       "name": "newton_theology_prophecies__c041",
       "score": 0.6066,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1929,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 7,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c080",
       "score": 0.6059,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2099,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c040",
       "score": 0.6047,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.213,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "vn_self_reproducing_automata__c078",
       "score": 0.6038,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2203,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "newton_alchemy_index_chemicus__c074",
       "score": 0.6036,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.193,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "leonardo_optics_perspective__c111",
       "score": 0.6026,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1923,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "leonardo_water_motion__c063",
       "score": 0.6024,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2167,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 8,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c054",
       "score": 0.6014,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2072,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c064",
       "score": 0.6012,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2067,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "newton_alchemy_praxis__c018",
       "score": 0.6005,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2072,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 9,
+      "cluster_total": 11,
       "name": "leonardo_anatomy__c095",
       "score": 0.6004,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2159,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 5,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c017",
       "score": 0.5999,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.217,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 10,
+      "cluster_total": 22,
       "name": "vn_monte_carlo_control__c039",
       "score": 0.5998,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2042,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "newton_alchemy_clavis__c073",
       "score": 0.5996,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2192,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "newton_alchemy_praxis__c014",
       "score": 0.5992,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2158,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "newton_alchemy_praxis__c004",
       "score": 0.5985,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2092,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c096",
       "score": 0.5971,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2206,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c044",
       "score": 0.5964,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1984,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "leonardo_water_motion__c144",
       "score": 0.595,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2084,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 9,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c022",
       "score": 0.5947,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1945,
+      "cluster_percentile": 0.0952,
+      "cluster_rank": 20,
+      "cluster_total": 22,
       "name": "newton_theology_prophecies__c060",
       "score": 0.5944,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2146,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "newton_alchemy_clavis__c006",
       "score": 0.5943,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.217,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "newton_alchemy_clavis__c017",
       "score": 0.5943,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.189,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "vn_cellular_automata_transitions__c040",
       "score": 0.5934,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2207,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 2,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c037",
       "score": 0.5931,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2126,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "vn_monte_carlo_control__c033",
       "score": 0.5928,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1987,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 10,
+      "cluster_total": 11,
       "name": "leonardo_art_control__c038",
       "score": 0.5926,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2082,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 15,
+      "cluster_total": 22,
       "name": "vn_cellular_automata_transitions__c018",
       "score": 0.5923,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2242,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "newton_alchemy_index_chemicus__c035",
       "score": 0.5922,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2008,
+      "cluster_percentile": 0.1905,
+      "cluster_rank": 18,
+      "cluster_total": 22,
       "name": "vn_monte_carlo_control__c045",
       "score": 0.5913,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2157,
+      "cluster_percentile": 0.5238,
+      "cluster_rank": 11,
+      "cluster_total": 22,
       "name": "leonardo_art_control__c018",
       "score": 0.5909,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2086,
+      "cluster_percentile": 0.381,
+      "cluster_rank": 14,
+      "cluster_total": 22,
       "name": "vn_cellular_automata_transitions__c047",
       "score": 0.5901,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.207,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "leonardo_anatomy__c010",
       "score": 0.589,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1964,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "vn_mathematical_foundations_qm__c024",
       "score": 0.5884,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1982,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 11,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c034",
       "score": 0.588,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2016,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "newton_principia_mechanics__c004",
       "score": 0.5856,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.209,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "newton_alchemy_index_chemicus__c044",
       "score": 0.585,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2186,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c007",
       "score": 0.5849,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1959,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c012",
       "score": 0.5846,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2163,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 3,
+      "cluster_total": 11,
       "name": "leonardo_art_control__c001",
       "score": 0.5845,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.214,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 4,
+      "cluster_total": 11,
       "name": "leonardo_art_control__c017",
       "score": 0.5842,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1978,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 13,
+      "cluster_total": 15,
       "name": "newton_theology_prophecies__c065",
       "score": 0.5839,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2067,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c005",
       "score": 0.5837,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1979,
+      "cluster_percentile": 0.2143,
+      "cluster_rank": 12,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c037",
       "score": 0.5831,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2012,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "leonardo_art_control__c012",
       "score": 0.5828,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2021,
+      "cluster_percentile": 0.2381,
+      "cluster_rank": 17,
+      "cluster_total": 22,
       "name": "vn_edvac_report__c003",
       "score": 0.5827,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1975,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c024",
       "score": 0.5826,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1858,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "newton_alchemy_clavis__c033",
       "score": 0.5824,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1905,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "vn_cellular_automata_transitions__c092",
       "score": 0.582,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2066,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 16,
+      "cluster_total": 22,
       "name": "vn_monte_carlo_control__c068",
       "score": 0.5815,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2028,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c064",
       "score": 0.5814,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2052,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "modern_self_assembly_nanotech__c032",
       "score": 0.5811,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.4315,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "modern_materials_phase_transitions__c012",
       "score": 0.581,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1931,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "vn_monte_carlo_control__c036",
       "score": 0.5778,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.197,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "newton_alchemy_index_chemicus__c020",
       "score": 0.5777,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1936,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "leonardo_optics_perspective__c047",
       "score": 0.5772,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2139,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "newton_alchemy_clavis__c043",
       "score": 0.5761,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1973,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "leonardo_art_control__c046",
       "score": 0.5757,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1948,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "newton_opticks_light__c002",
       "score": 0.5753,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2122,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "newton_alchemy_index_chemicus__c022",
       "score": 0.5749,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1925,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "newton_alchemy_clavis__c016",
       "score": 0.5742,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1826,
+      "cluster_percentile": 0.0714,
+      "cluster_rank": 14,
+      "cluster_total": 15,
       "name": "vn_self_reproducing_automata__c025",
       "score": 0.5737,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2403,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "newton_alchemy_praxis__c076",
       "score": 0.5722,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1977,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "leonardo_art_control__c053",
       "score": 0.5722,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1773,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "vn_self_reproducing_automata__c046",
       "score": 0.5722,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1787,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "vn_cellular_automata_transitions__c068",
       "score": 0.5715,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1906,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "newton_theology_prophecies__c085",
       "score": 0.5709,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.198,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c014",
       "score": 0.5702,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1887,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "newton_theology_prophecies__c017",
       "score": 0.5698,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.195,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 19,
+      "cluster_total": 22,
       "name": "vn_theory_of_games__c023",
       "score": 0.5692,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 5,
+      "cluster_total": 11,
       "name": "newton_alchemy_clavis__c000",
       "score": 0.5688,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1852,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "vn_self_reproducing_automata__c006",
       "score": 0.5684,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1799,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 15,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c025",
       "score": 0.5683,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.171,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "modern_materials_phase_transitions__c096",
       "score": 0.5676,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1879,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "leonardo_anatomy__c039",
       "score": 0.5675,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1504,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "modern_materials_alchemy_chemistry_bridge__c048",
       "score": 0.5671,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1845,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 22,
+      "cluster_total": 22,
       "name": "newton_principia_mechanics__c007",
       "score": 0.5669,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2034,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "leonardo_optics_perspective__c008",
       "score": 0.5667,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1863,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "newton_alchemy_clavis__c047",
       "score": 0.5666,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1588,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_anatomy__c049",
       "score": 0.5664,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1808,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "leonardo_art_control__c084",
       "score": 0.5663,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1732,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "leonardo_art_control__c064",
       "score": 0.5651,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1786,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_anatomy__c034",
       "score": 0.565,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1964,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 6,
+      "cluster_total": 11,
       "name": "newton_theology_prophecies__c012",
       "score": 0.565,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1934,
+      "cluster_percentile": 0.0476,
+      "cluster_rank": 21,
+      "cluster_total": 22,
       "name": "newton_theology_prophecies__c035",
       "score": 0.5649,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1541,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "vn_mathematical_foundations_qm__c073",
       "score": 0.5647,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1799,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c016",
       "score": 0.5645,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1785,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "leonardo_flight_of_birds__c083",
       "score": 0.5645,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1857,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "vn_monte_carlo_control__c005",
       "score": 0.564,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1824,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "modern_rotor_aerodynamics__c012",
       "score": 0.5637,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1979,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "newton_alchemy_clavis__c008",
       "score": 0.5637,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1669,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "newton_opticks_light__c057",
       "score": 0.5627,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1884,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "newton_alchemy_clavis__c067",
       "score": 0.5626,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1853,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c055",
       "score": 0.5622,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1793,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "leonardo_art_control__c033",
       "score": 0.5618,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1936,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "modern_materials_alchemy_chemistry_bridge__c020",
       "score": 0.5614,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1925,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "leonardo_flight_of_birds__c047",
       "score": 0.5614,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1933,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "leonardo_optics_perspective__c009",
       "score": 0.5614,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.189,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "leonardo_flight_of_birds__c019",
       "score": 0.5613,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1613,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "leonardo_hydraulics_turbulence__c078",
       "score": 0.5599,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1794,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "newton_alchemy_index_chemicus__c026",
       "score": 0.5598,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1788,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c036",
       "score": 0.5577,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1621,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "modern_wolfram_class_iv__c039",
       "score": 0.5571,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.203,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "newton_alchemy_praxis__c059",
       "score": 0.5563,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1859,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c011",
       "score": 0.5563,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.189,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "vn_monte_carlo_control__c053",
       "score": 0.5557,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1649,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "leonardo_hydraulics_turbulence__c033",
       "score": 0.5555,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2314,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "modern_materials_phase_transitions__c033",
       "score": 0.5554,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1813,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "vn_theory_of_games__c043",
       "score": 0.5552,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1814,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "vn_monte_carlo_control__c032",
       "score": 0.5552,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1681,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "leonardo_water_motion__c077",
       "score": 0.5551,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1725,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "leonardo_flight_of_birds__c046",
       "score": 0.5549,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1962,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "leonardo_flight_of_birds__c004",
       "score": 0.5541,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1681,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "newton_theology_prophecies__c036",
       "score": 0.5535,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1795,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "newton_alchemy_index_chemicus__c001",
       "score": 0.553,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1907,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "leonardo_water_motion__c004",
       "score": 0.5526,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1624,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "leonardo_art_control__c005",
       "score": 0.5526,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1385,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "modern_materials_phase_transitions__c010",
       "score": 0.5525,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1884,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "newton_principia_mechanics__c025",
       "score": 0.5521,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1883,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "vn_cellular_automata_transitions__c004",
       "score": 0.5516,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1612,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "vn_cellular_automata_transitions__c046",
       "score": 0.5513,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1815,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "newton_theology_prophecies__c033",
       "score": 0.5512,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1849,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 9,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c000",
       "score": 0.5501,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1745,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "vn_edvac_report__c021",
       "score": 0.5499,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2346,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 8,
+      "cluster_total": 11,
       "name": "leonardo_art_control__c100",
       "score": 0.5497,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1885,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 8,
+      "cluster_total": 11,
       "name": "modern_materials_transition_metals__c001",
       "score": 0.5491,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1595,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "leonardo_anatomy__c073",
       "score": 0.5491,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1424,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "modern_materials_alchemy_chemistry_bridge__c033",
       "score": 0.5487,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.175,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "newton_alchemy_clavis__c003",
       "score": 0.5485,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1978,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "modern_rotor_aerodynamics__c020",
       "score": 0.5484,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1855,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "newton_theology_prophecies__c011",
       "score": 0.5475,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1752,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "vn_monte_carlo_control__c000",
       "score": 0.5471,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.229,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "vn_monte_carlo_control__c013",
       "score": 0.5469,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1529,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "modern_materials_alchemy_chemistry_bridge__c002",
       "score": 0.546,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1727,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "modern_materials_alchemy_chemistry_bridge__c010",
       "score": 0.546,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1825,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_anatomy__c019",
       "score": 0.5459,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1661,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "newton_opticks_light__c054",
       "score": 0.5443,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1928,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "modern_self_assembly_nanotech__c083",
       "score": 0.5439,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2366,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "leonardo_anatomy__c003",
       "score": 0.5431,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1925,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "leonardo_anatomy__c006",
       "score": 0.543,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2158,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "modern_conway_life_universal__c047",
       "score": 0.543,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.16,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "vn_cellular_automata_transitions__c024",
       "score": 0.5426,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1745,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 10,
+      "cluster_total": 11,
       "name": "leonardo_flight_of_birds__c001",
       "score": 0.5418,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "vn_cellular_automata_transitions__c002",
       "score": 0.5412,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1532,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 11,
+      "cluster_total": 11,
       "name": "newton_theology_prophecies__c040",
       "score": 0.5403,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1481,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "newton_principia_mechanics__c029",
       "score": 0.5378,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1743,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "leonardo_optics_perspective__c018",
       "score": 0.5375,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1638,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "newton_opticks_light__c003",
       "score": 0.5361,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1811,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "vn_theory_of_games__c044",
       "score": 0.5358,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1767,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "newton_opticks_light__c000",
       "score": 0.5353,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1979,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "vn_monte_carlo_control__c030",
       "score": 0.5352,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1619,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "vn_monte_carlo_control__c027",
       "score": 0.5351,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2178,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "newton_opticks_light__c005",
       "score": 0.5351,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.196,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "modern_navier_stokes__c050",
       "score": 0.5347,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1681,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "leonardo_optics_perspective__c027",
       "score": 0.5347,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1715,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "leonardo_anatomy__c013",
       "score": 0.5341,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.16,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "leonardo_optics_perspective__c000",
       "score": 0.5332,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1566,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "modern_self_assembly_nanotech__c002",
       "score": 0.5315,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1617,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "modern_self_assembly_nanotech__c006",
       "score": 0.5315,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1652,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "modern_reynolds_turbulence__c047",
       "score": 0.5304,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1439,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "modern_conway_life_universal__c000",
       "score": 0.5304,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1623,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "modern_navier_stokes__c037",
       "score": 0.5298,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1503,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "newton_alchemy_index_chemicus__c045",
       "score": 0.5266,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2326,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 9,
+      "cluster_total": 11,
       "name": "newton_opticks_light__c147",
       "score": 0.5213,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2196,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 4,
+      "cluster_total": 11,
       "name": "newton_theology_prophecies__c133",
       "score": 0.4971,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2415,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "leonardo_art_control__c133",
       "score": 0.4964,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2047,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "newton_alchemy_clavis__c059",
       "score": 0.4939,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2126,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "leonardo_anatomy__c124",
       "score": 0.4852,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.234,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "leonardo_art_control__c134",
       "score": 0.4811,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2353,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "newton_theology_prophecies__c152",
       "score": 0.4808,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2373,
+      "cluster_percentile": 0.7619,
+      "cluster_rank": 6,
+      "cluster_total": 22,
       "name": "vn_cellular_automata_transitions__c093",
       "score": 0.4749,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2148,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "newton_principia_mechanics__c087",
       "score": 0.4735,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2176,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "newton_alchemy_clavis__c050",
       "score": 0.4705,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2078,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "newton_alchemy_praxis__c084",
       "score": 0.4587,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2248,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "newton_principia_mechanics__c099",
       "score": 0.4586,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.223,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 8,
+      "cluster_total": 22,
       "name": "vn_cellular_automata_transitions__c052",
       "score": 0.4542,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2278,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 7,
+      "cluster_total": 22,
       "name": "newton_opticks_light__c110",
       "score": 0.4528,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2132,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "leonardo_optics_perspective__c149",
       "score": 0.4481,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2082,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c039",
       "score": 0.4472,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2368,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "vn_cellular_automata_transitions__c067",
       "score": 0.4436,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2183,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "newton_theology_prophecies__c110",
       "score": 0.4419,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.5003,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "vn_theory_of_games__c048",
       "score": 0.4405,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1985,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 11,
+      "cluster_total": 11,
       "name": "vn_self_reproducing_automata__c084",
       "score": 0.4384,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.208,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "leonardo_optics_perspective__c076",
       "score": 0.4371,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.225,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 10,
+      "cluster_total": 11,
       "name": "newton_theology_prophecies__c162",
       "score": 0.4361,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2197,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "vn_self_reproducing_automata__c007",
       "score": 0.4339,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2302,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "newton_opticks_light__c138",
       "score": 0.4339,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1907,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "leonardo_anatomy__c007",
       "score": 0.4331,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.228,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "leonardo_art_control__c049",
       "score": 0.4324,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1933,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "newton_principia_mechanics__c126",
       "score": 0.4323,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2559,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "leonardo_art_control__c087",
       "score": 0.4299,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2013,
+      "cluster_percentile": 0.3571,
+      "cluster_rank": 10,
+      "cluster_total": 15,
       "name": "leonardo_art_control__c058",
       "score": 0.4286,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2106,
+      "cluster_percentile": 0.4762,
+      "cluster_rank": 12,
+      "cluster_total": 22,
       "name": "newton_principia_mechanics__c047",
       "score": 0.4279,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2143,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "leonardo_art_control__c092",
       "score": 0.4276,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2008,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "newton_principia_mechanics__c013",
       "score": 0.4221,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2202,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "newton_alchemy_praxis__c105",
       "score": 0.4203,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2263,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "modern_self_assembly_nanotech__c082",
       "score": 0.4179,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2256,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "newton_opticks_light__c097",
       "score": 0.4174,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2067,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "newton_alchemy_index_chemicus__c078",
       "score": 0.4159,
       "type": "patent_chunk"

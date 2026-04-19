@@ -2,2114 +2,3241 @@
   "clusters": 36,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_symmetric__concept__s_box",
-      "strength": 0.8,
-      "target": "tesla_surface_wave__concept__quarter_wave_resonator"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "tesla_surface_wave__concept__quarter_wave_resonator",
-      "strength": 0.8,
-      "target": "crypto_symmetric__concept__substitution_permutation_network"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_symmetric__concept__substitution_permutation_network",
-      "strength": 0.8,
-      "target": "info_transform_based__concept__discrete_cosine_transform"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_transform_based__concept__discrete_cosine_transform",
-      "strength": 0.8,
-      "target": "fessenden_US706737__c002"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "fessenden_US706737__c002",
-      "strength": 0.8,
-      "target": "fessenden_US706740__c002"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "fessenden_US706740__c002",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "marconi_US586193__c026"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "marconi_US586193__c026",
-      "strength": 0.8,
-      "target": "marconi_US586193__c002"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c002",
-      "strength": 0.8,
-      "target": "corum_US9923385__c047"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "corum_US9923385__c047",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "marconi_US586193__c007"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "radiative_radio__concept__hertzian_wave",
-      "strength": 0.8,
-      "target": "inductive_non_radiative__concept__coupled_mode_theory"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "inductive_non_radiative__concept__coupled_mode_theory",
-      "strength": 0.8,
-      "target": "crypto_symmetric__concept__key_schedule"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_symmetric__concept__key_schedule",
-      "strength": 0.8,
-      "target": "crypto_lattice__concept__ring_lwe"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_lattice__concept__ring_lwe",
-      "strength": 0.8,
-      "target": "radiative_radio__event__audion_patented"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "radiative_radio__event__audion_patented",
-      "strength": 0.8,
-      "target": "crypto_lattice__event__ntru_cryptosystem_published"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "crypto_lattice__event__ntru_cryptosystem_published",
-      "strength": 0.8,
-      "target": "modern_surface_wave__event__fcc_issues_viziv_experimental_license"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_surface_wave__event__fcc_issues_viziv_experimental_license",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "crypto_number_theoretic__location__mit_mathematics_department"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_number_theoretic__location__mit_mathematics_department",
-      "strength": 0.8,
-      "target": "marconi_US586193__c015"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "tesla_surface_wave__concept__earth_resonance",
-      "strength": 0.8,
-      "target": "deforest_US841387__c004"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "deforest_US841387__c004",
-      "strength": 0.8,
-      "target": "crypto_DH_US4200770__c003"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "crypto_DH_US4200770__c003",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "marconi_US586193__c004"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "marconi_US586193__c004",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "info_JPEG1992__c001"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_JPEG1992__c001",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "info_HUFFMAN1952__c034"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "radiative_radio__concept__coherer",
-      "strength": 0.8,
-      "target": "crypto_symmetric__concept__block_cipher"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "crypto_symmetric__concept__block_cipher",
-      "strength": 0.8,
-      "target": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
-      "strength": 0.8,
-      "target": "marconi_US586193__c018"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c018",
-      "strength": 0.8,
-      "target": "info_SHANNON1948__c035"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_SHANNON1948__c035",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "deforest_US841387__c028"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "deforest_US841387__c028",
-      "strength": 0.8,
-      "target": "marconi_US586193__c011"
+      "signal_type": "flip_proximity",
+      "source": "radiative_radio__concept__coherer",
+      "strength": 1.0,
+      "target": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c011",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
+      "strength": 1.0,
+      "target": "marconi_US586193__c018"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "marconi_US586193__c018",
+      "strength": 1.0,
       "target": "stone_US714756__c023"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "stone_US714756__c023",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "corum_US9912031__c052"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "info_transform_based__concept__energy_compaction",
-      "strength": 0.8,
-      "target": "marconi_US586193__c022"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c022",
-      "strength": 0.8,
-      "target": "corum_US9912031__c069"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "corum_US9912031__c069",
-      "strength": 0.8,
-      "target": "marconi_US586193__c005"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c005",
-      "strength": 0.8,
-      "target": "info_SHANNON1948__c034"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_SHANNON1948__c034",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "info_SHANNON1948__c046"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_SHANNON1948__c046",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "marconi_US586193__c009"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "marconi_US586193__c009",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "corum_US9912031__c069",
+      "strength": 1.0,
+      "target": "marconi_US586193__c005"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "marconi_US586193__c005",
+      "strength": 1.0,
       "target": "info_JPEG1992__c031"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "info_JPEG1992__c031",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "stone_US714756__c005"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "stone_US714756__c005",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "corum_US9912031__c074"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "corum_US9912031__c074",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "stone_US714756__c033"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "stone_US714756__c033",
+      "strength": 1.0,
+      "target": "info_SHANNON1948__c051"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "info_SHANNON1948__c051",
+      "strength": 1.0,
+      "target": "crypto_DH_US4200770__c030"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "crypto_symmetric__event__des_standardized",
+      "strength": 1.0,
+      "target": "tesla_surface_wave__location__colorado_springs_laboratory"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "tesla_surface_wave__location__colorado_springs_laboratory",
+      "strength": 1.0,
+      "target": "witricity_US8686598__c007"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "info_LZ1984__c033",
+      "strength": 1.0,
+      "target": "tesla_US645576__c009"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "tesla_US645576__c009",
+      "strength": 1.0,
+      "target": "modern_radio_antenna__c011"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_radio_antenna__c011",
+      "strength": 1.0,
+      "target": "witricity_US7741734__c010"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "crypto_number_theoretic__concept__modular_exponentiation",
+      "strength": 1.0,
+      "target": "marconi_US586193__c001"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "inductive_non_radiative__concept__strong_coupling_regime",
+      "strength": 1.0,
+      "target": "stone_US714756__c019"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "stone_US714756__c019",
+      "strength": 1.0,
+      "target": "deforest_US841387__c006"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "tesla_surface_wave__location__niagara_falls_power_plant",
+      "strength": 1.0,
+      "target": "deforest_US841387__c003"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "deforest_US841387__c003",
+      "strength": 1.0,
+      "target": "stone_US714756__c003"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.8705,
+      "dimensions": {
+        "anomaly": 0.6299,
+        "cluster_percentile": 1.0,
+        "cross_era": 1.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
+      "type": "event"
+    },
+    {
+      "convergence": 0.7988,
+      "dimensions": {
+        "anomaly": 0.9966,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "info_HUFFMAN1952__c011",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.7136,
+      "dimensions": {
+        "anomaly": 0.7531,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "fessenden_US706737__c018",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.6758,
+      "dimensions": {
+        "anomaly": 0.6451,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "info_dictionary_based__location__technion_israel_institute_of_technology",
+      "type": "location"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "crypto_symmetric__concept__s_box",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "radiative_radio__event__audion_patented",
+      "type": "event"
+    },
+    {
+      "convergence": 0.62,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "info_JPEG1992__c047",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.6028,
+      "dimensions": {
+        "anomaly": 0.9653,
+        "cluster_percentile": 0.9796,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "crypto_RSA_US4405829__c044",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.5962,
+      "dimensions": {
+        "anomaly": 0.9611,
+        "cluster_percentile": 0.9592,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "crypto_NTRU_US6298137__c044",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.5832,
+      "dimensions": {
+        "anomaly": 0.8376,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "crypto_lattice__event__shor_algorithm_published",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5822,
+      "dimensions": {
+        "anomaly": 0.9357,
+        "cluster_percentile": 0.9388,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "tesla_US645576__c026",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.57,
+      "dimensions": {
+        "anomaly": 0.5017,
+        "cluster_percentile": 0.7778,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "crypto_number_theoretic__concept__modular_exponentiation",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.5538,
+      "dimensions": {
+        "anomaly": 0.6288,
+        "cluster_percentile": 0.375,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "modern_surface_wave__event__fcc_issues_viziv_experimental_license",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5495,
+      "dimensions": {
+        "anomaly": 0.8209,
+        "cluster_percentile": 0.8889,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "tesla_surface_wave__concept__quarter_wave_resonator",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.5495,
+      "dimensions": {
+        "anomaly": 0.7415,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "inductive_non_radiative__location__witricity_corporation",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5446,
+      "dimensions": {
+        "anomaly": 0.7273,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "info_transform_based__event__jpeg_standardized",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5381,
+      "dimensions": {
+        "anomaly": 0.7089,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "crypto_symmetric__event__des_standardized",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5307,
+      "dimensions": {
+        "anomaly": 0.7769,
+        "cluster_percentile": 0.875,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "radiative_radio__concept__hertzian_wave",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.5146,
+      "dimensions": {
+        "anomaly": 0.1847,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "witricity_US7741734__c047",
+      "type": "patent_chunk"
+    },
+    {
+      "convergence": 0.512,
+      "dimensions": {
+        "anomaly": 0.7498,
+        "cluster_percentile": 0.9184,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "info_SHANNON1948__c025",
+      "type": "patent_chunk"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 0,
+      "dominant_paradigm": "chunk_",
+      "dominant_paradigm_share": 4,
+      "hot_count": 4,
+      "hot_fraction": 0.08,
+      "total": 50
+    },
+    {
+      "cluster": 32,
+      "dominant_paradigm": "crypto_symmetric",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.1,
+      "total": 10
+    },
+    {
+      "cluster": 33,
+      "dominant_paradigm": "radiative_radio",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.111,
+      "total": 9
+    },
+    {
+      "cluster": 1,
+      "dominant_paradigm": "chunk_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.2,
+      "total": 5
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [
+    {
+      "anomaly": 0.6299,
+      "cluster": 24,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 3,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
+      "subcorpus": "surface_wave"
+    },
+    {
+      "anomaly": 0.6288,
+      "cluster": 33,
+      "cluster_majority_count": 7,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 8,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_surface_wave__event__fcc_issues_viziv_experimental_license",
+      "subcorpus": "surface_wave"
+    }
+  ],
   "database_name": "Cross-Era Heterogeneous",
   "description": "1,851-entity cross-era corpus (25/25 canonical markers)",
   "legend_id": "heterogeneous",
-  "novelty": {
-    "novelty_score": 0.0065,
-    "probed": 300,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 1.0,
-        "name": "crypto_symmetric__concept__s_box",
-        "similarity": 0.9935,
-        "type": "concept"
-      },
-      {
-        "anomaly": 0.8376,
-        "name": "crypto_lattice__event__shor_algorithm_published",
-        "similarity": 0.9907,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.8209,
-        "name": "tesla_surface_wave__concept__quarter_wave_resonator",
-        "similarity": 0.9889,
-        "type": "concept"
-      },
-      {
-        "anomaly": 1.0,
-        "name": "radiative_radio__event__audion_patented",
-        "similarity": 0.9887,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.7415,
-        "name": "inductive_non_radiative__location__witricity_corporation",
-        "similarity": 0.9839,
-        "type": "location"
-      },
-      {
-        "anomaly": 0.7089,
-        "name": "crypto_symmetric__event__des_standardized",
-        "similarity": 0.9836,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.7142,
-        "name": "tesla_surface_wave__event__tesla_papers_seized_by_fbi",
-        "similarity": 0.9829,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.7769,
-        "name": "radiative_radio__concept__hertzian_wave",
-        "similarity": 0.9825,
-        "type": "concept"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "chunk",
+        "count": 268,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "crypto",
+        "count": 7,
+        "role": "other",
+        "subcorpus": "symmetric"
+      },
+      {
+        "corpus": "tesla",
+        "count": 5,
+        "role": "other",
+        "subcorpus": "surface_wave"
+      },
+      {
+        "corpus": "radiative",
+        "count": 4,
+        "role": "other",
+        "subcorpus": "radio"
+      },
+      {
+        "corpus": "inductive",
+        "count": 4,
+        "role": "other",
+        "subcorpus": "non_radiative"
+      },
+      {
+        "corpus": "crypto",
+        "count": 4,
+        "role": "other",
+        "subcorpus": "lattice"
+      },
+      {
+        "corpus": "info",
+        "count": 3,
+        "role": "other",
+        "subcorpus": "transform_based"
+      },
+      {
+        "corpus": "crypto",
+        "count": 2,
+        "role": "other",
+        "subcorpus": "number_theoretic"
+      },
+      {
+        "corpus": "modern",
+        "count": 2,
+        "role": "other",
+        "subcorpus": "surface_wave"
+      },
+      {
+        "corpus": "info",
+        "count": 1,
+        "role": "other",
+        "subcorpus": "dictionary_based"
+      }
+    ],
+    "hypothesis_by_corpus": {},
+    "role_counts": {
+      "other": 300
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "crypto_symmetric__concept__s_box",
       "score": 0.894,
       "type": "concept"
     },
     {
       "anomaly_score": 0.7769,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "radiative_radio__concept__hertzian_wave",
       "score": 0.8529,
       "type": "concept"
     },
     {
       "anomaly_score": 0.8209,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "tesla_surface_wave__concept__quarter_wave_resonator",
       "score": 0.8438,
       "type": "concept"
     },
     {
       "anomaly_score": 0.759,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "inductive_non_radiative__concept__coupled_mode_theory",
       "score": 0.8428,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6338,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "crypto_symmetric__concept__key_schedule",
       "score": 0.8083,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5955,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "crypto_symmetric__concept__substitution_permutation_network",
       "score": 0.8053,
       "type": "concept"
     },
     {
       "anomaly_score": 0.473,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "tesla_surface_wave__concept__earth_resonance",
       "score": 0.7971,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5288,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "radiative_radio__concept__coherer",
       "score": 0.7967,
       "type": "concept"
     },
     {
       "anomaly_score": 0.486,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "crypto_symmetric__concept__block_cipher",
       "score": 0.7874,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4575,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 13,
       "name": "info_transform_based__concept__energy_compaction",
       "score": 0.7804,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4548,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "crypto_lattice__concept__ring_lwe",
       "score": 0.7725,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5266,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "info_transform_based__concept__discrete_cosine_transform",
       "score": 0.7696,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5017,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "crypto_number_theoretic__concept__modular_exponentiation",
       "score": 0.7457,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4872,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 5,
+      "cluster_total": 13,
       "name": "inductive_non_radiative__concept__strong_coupling_regime",
       "score": 0.7425,
       "type": "concept"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "radiative_radio__event__audion_patented",
       "score": 0.9263,
       "type": "event"
     },
     {
       "anomaly_score": 0.8376,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 13,
       "name": "crypto_lattice__event__shor_algorithm_published",
       "score": 0.8421,
       "type": "event"
     },
     {
       "anomaly_score": 0.7273,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "info_transform_based__event__jpeg_standardized",
       "score": 0.8402,
       "type": "event"
     },
     {
       "anomaly_score": 0.6552,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "crypto_lattice__event__ntru_cryptosystem_published",
       "score": 0.8281,
       "type": "event"
     },
     {
       "anomaly_score": 0.6288,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "modern_surface_wave__event__fcc_issues_viziv_experimental_license",
       "score": 0.8244,
       "type": "event"
     },
     {
       "anomaly_score": 0.6299,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
       "score": 0.8137,
       "type": "event"
     },
     {
       "anomaly_score": 0.7142,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "tesla_surface_wave__event__tesla_papers_seized_by_fbi",
       "score": 0.8114,
       "type": "event"
     },
     {
       "anomaly_score": 0.7089,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "crypto_symmetric__event__des_standardized",
       "score": 0.8036,
       "type": "event"
     },
     {
       "anomaly_score": 0.6618,
+      "cluster_percentile": 0.9167,
+      "cluster_rank": 2,
+      "cluster_total": 13,
       "name": "crypto_symmetric__event__aes_selected",
       "score": 0.7814,
       "type": "event"
     },
     {
       "anomaly_score": 0.7415,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 12,
       "name": "inductive_non_radiative__location__witricity_corporation",
       "score": 0.824,
       "type": "location"
     },
     {
       "anomaly_score": 0.5433,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "crypto_number_theoretic__location__mit_mathematics_department",
       "score": 0.813,
       "type": "location"
     },
     {
       "anomaly_score": 0.6349,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 3,
+      "cluster_total": 13,
       "name": "crypto_lattice__location__tel_aviv_university",
       "score": 0.7667,
       "type": "location"
     },
     {
       "anomaly_score": 0.5141,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 4,
+      "cluster_total": 13,
       "name": "inductive_non_radiative__location__mit",
       "score": 0.7404,
       "type": "location"
     },
     {
       "anomaly_score": 0.4977,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "radiative_radio__location__marconi_wireless_station",
       "score": 0.7338,
       "type": "location"
     },
     {
       "anomaly_score": 0.4829,
+      "cluster_percentile": 0.5833,
+      "cluster_rank": 6,
+      "cluster_total": 13,
       "name": "tesla_surface_wave__location__niagara_falls_power_plant",
       "score": 0.7214,
       "type": "location"
     },
     {
       "anomaly_score": 0.4665,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 15,
       "name": "crypto_symmetric__location__katholieke_universiteit_leuven",
       "score": 0.6928,
       "type": "location"
     },
     {
       "anomaly_score": 0.6451,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "info_dictionary_based__location__technion_israel_institute_of_technology",
       "score": 0.6432,
       "type": "location"
     },
     {
       "anomaly_score": 0.6618,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "tesla_surface_wave__location__colorado_springs_laboratory",
       "score": 0.6419,
       "type": "location"
     },
     {
       "anomaly_score": 0.2169,
+      "cluster_percentile": 0.9167,
+      "cluster_rank": 2,
+      "cluster_total": 13,
       "name": "marconi_US586193__c022",
       "score": 0.723,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1688,
+      "cluster_percentile": 0.4167,
+      "cluster_rank": 8,
+      "cluster_total": 13,
       "name": "corum_US9912031__c069",
       "score": 0.7218,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.321,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "fessenden_US706737__c002",
       "score": 0.7169,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.165,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 10,
+      "cluster_total": 13,
       "name": "marconi_US586193__c005",
       "score": 0.7096,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1863,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "fessenden_US706740__c002",
       "score": 0.7052,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.186,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "marconi_US586193__c026",
       "score": 0.6952,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.184,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "marconi_US586193__c002",
       "score": 0.694,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2074,
+      "cluster_percentile": 0.4167,
+      "cluster_rank": 8,
+      "cluster_total": 13,
       "name": "stone_US714756__c019",
       "score": 0.691,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1691,
+      "cluster_percentile": 0.5833,
+      "cluster_rank": 6,
+      "cluster_total": 13,
       "name": "info_SHANNON1948__c034",
       "score": 0.6894,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1809,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "deforest_US841387__c004",
       "score": 0.6861,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1951,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "marconi_US586193__c018",
       "score": 0.6857,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1691,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 7,
+      "cluster_total": 13,
       "name": "info_SHANNON1948__c046",
       "score": 0.6851,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2312,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "corum_US9923385__c047",
       "score": 0.6794,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1853,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 10,
+      "cluster_total": 13,
       "name": "deforest_US841387__c003",
       "score": 0.6791,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1847,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "witricity_US7741734__c047",
       "score": 0.6781,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1574,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "crypto_RSA_US4405829__c013",
       "score": 0.6777,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1776,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "info_HUFFMAN1952__c014",
       "score": 0.6746,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1629,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "info_SHANNON1948__c035",
       "score": 0.6734,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1577,
+      "cluster_percentile": 0.0833,
+      "cluster_rank": 12,
+      "cluster_total": 13,
       "name": "marconi_US586193__c009",
       "score": 0.6703,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1613,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "stone_US714756__c008",
       "score": 0.6703,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1827,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "deforest_US841387__c028",
       "score": 0.6682,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1622,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "info_HUFFMAN1952__c003",
       "score": 0.668,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1607,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "corum_US9910144__c046",
       "score": 0.6665,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1737,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "corum_US9912031__c012",
       "score": 0.6639,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2076,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 16,
       "name": "marconi_US586193__c006",
       "score": 0.6638,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1607,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "crypto_NTRU_US6298137__c049",
       "score": 0.6637,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1564,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "witricity_US8686598__c007",
       "score": 0.6582,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1648,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "marconi_US586193__c051",
       "score": 0.6577,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1663,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "corum_US9910144__c027",
       "score": 0.6502,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1693,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "marconi_US586193__c011",
       "score": 0.6461,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1696,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "info_SHANNON1948__c014",
       "score": 0.6455,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1526,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "info_LZ1984__c033",
       "score": 0.6442,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1863,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 9,
+      "cluster_total": 13,
       "name": "stone_US714756__c003",
       "score": 0.6393,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1697,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "marconi_US586193__c024",
       "score": 0.6369,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1778,
+      "cluster_percentile": 0.9333,
+      "cluster_rank": 2,
+      "cluster_total": 16,
       "name": "marconi_US586193__c019",
       "score": 0.6365,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1498,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 4,
+      "cluster_total": 16,
       "name": "deforest_US841387__c043",
       "score": 0.6345,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1556,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "tesla_US645576__c009",
       "score": 0.6343,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1618,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "modern_radio_antenna__c011",
       "score": 0.6342,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.169,
+      "cluster_percentile": 0.7273,
+      "cluster_rank": 4,
+      "cluster_total": 12,
       "name": "info_HUFFMAN1952__c022",
       "score": 0.6331,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1857,
+      "cluster_percentile": 0.9091,
+      "cluster_rank": 2,
+      "cluster_total": 12,
       "name": "marconi_US586193__c029",
       "score": 0.6316,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1518,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 13,
+      "cluster_total": 13,
       "name": "stone_US714756__c028",
       "score": 0.6275,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1578,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "modern_radio_antenna__c021",
       "score": 0.6271,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1695,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "tesla_US1119732__c006",
       "score": 0.6266,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1475,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 6,
+      "cluster_total": 16,
       "name": "marconi_US586193__c023",
       "score": 0.626,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1416,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "tesla_ac_motor_US382280__c039",
       "score": 0.6258,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1627,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "info_HUFFMAN1952__c039",
       "score": 0.624,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1722,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 11,
+      "cluster_total": 13,
       "name": "stone_US714756__c006",
       "score": 0.6226,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1483,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "corum_US9923385__c049",
       "score": 0.6208,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1518,
+      "cluster_percentile": 0.2727,
+      "cluster_rank": 9,
+      "cluster_total": 12,
       "name": "deforest_US841387__c041",
       "score": 0.6204,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1673,
+      "cluster_percentile": 0.6364,
+      "cluster_rank": 5,
+      "cluster_total": 12,
       "name": "info_SHANNON1948__c007",
       "score": 0.6185,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1393,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "witricity_US7741734__c010",
       "score": 0.6183,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1474,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "info_LZ1984__c025",
       "score": 0.6165,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1617,
+      "cluster_percentile": 0.4545,
+      "cluster_rank": 7,
+      "cluster_total": 12,
       "name": "stone_US714756__c031",
       "score": 0.6145,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1504,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "stone_US714756__c020",
       "score": 0.6134,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1632,
+      "cluster_percentile": 0.0833,
+      "cluster_rank": 12,
+      "cluster_total": 13,
       "name": "deforest_US841387__c006",
       "score": 0.6116,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1589,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "info_SHANNON1948__c018",
       "score": 0.6115,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.147,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "deforest_US841387__c037",
       "score": 0.6104,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1607,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "marconi_US586193__c045",
       "score": 0.6102,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1575,
+      "cluster_percentile": 0.3636,
+      "cluster_rank": 8,
+      "cluster_total": 12,
       "name": "info_SHANNON1948__c026",
       "score": 0.6084,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1489,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 3,
+      "cluster_total": 11,
       "name": "fessenden_US706737__c003",
       "score": 0.6077,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1436,
+      "cluster_percentile": 0.5333,
+      "cluster_rank": 8,
+      "cluster_total": 16,
       "name": "stone_US714756__c046",
       "score": 0.6055,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1426,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 6,
+      "cluster_total": 11,
       "name": "tesla_US1119732__c007",
       "score": 0.6038,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1621,
+      "cluster_percentile": 0.5455,
+      "cluster_rank": 6,
+      "cluster_total": 12,
       "name": "deforest_US841387__c007",
       "score": 0.6015,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1298,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "tesla_US649621__c026",
       "score": 0.5947,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1423,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 7,
+      "cluster_total": 11,
       "name": "deforest_US841387__c020",
       "score": 0.5935,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1559,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "deforest_US841387__c017",
       "score": 0.5923,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1521,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 2,
+      "cluster_total": 11,
       "name": "tesla_US649621__c019",
       "score": 0.5913,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1471,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 7,
+      "cluster_total": 16,
       "name": "marconi_US586193__c048",
       "score": 0.5912,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1411,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "stone_US714756__c011",
       "score": 0.5892,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1439,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "tesla_US1119732__c047",
       "score": 0.589,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1682,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "info_JPEG1992__c049",
       "score": 0.5874,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1548,
+      "cluster_percentile": 0.8667,
+      "cluster_rank": 3,
+      "cluster_total": 16,
       "name": "marconi_US586193__c033",
       "score": 0.5867,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1215,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "corum_US9923385__c045",
       "score": 0.5866,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1376,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "info_HUFFMAN1952__c049",
       "score": 0.5863,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1646,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "stone_US714756__c012",
       "score": 0.5841,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1998,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "tesla_US645576__c044",
       "score": 0.5829,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1419,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "marconi_US586193__c013",
       "score": 0.5819,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1401,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 10,
+      "cluster_total": 11,
       "name": "tesla_ac_motor_US382280__c028",
       "score": 0.5773,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1187,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "info_JPEG1992__c029",
       "score": 0.5761,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1243,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 9,
+      "cluster_total": 15,
       "name": "tesla_US645576__c007",
       "score": 0.5758,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1351,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "marconi_US586193__c034",
       "score": 0.5752,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1347,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "marconi_US586193__c041",
       "score": 0.5733,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1406,
+      "cluster_percentile": 0.1818,
+      "cluster_rank": 10,
+      "cluster_total": 12,
       "name": "tesla_US649621__c039",
       "score": 0.5708,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1867,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 4,
+      "cluster_total": 13,
       "name": "info_JPEG1992__c031",
       "score": 0.5705,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1289,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "tesla_ac_motor_US382280__c022",
       "score": 0.5697,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1197,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "info_SHANNON1948__c029",
       "score": 0.568,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1263,
+      "cluster_percentile": 0.6429,
+      "cluster_rank": 6,
+      "cluster_total": 15,
       "name": "tesla_US1119732__c024",
       "score": 0.5651,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1183,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "tesla_US645576__c052",
       "score": 0.565,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.136,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 10,
+      "cluster_total": 16,
       "name": "tesla_US1119732__c056",
       "score": 0.562,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1341,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 13,
+      "cluster_total": 16,
       "name": "tesla_US1119732__c065",
       "score": 0.5608,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1327,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "tesla_US1119732__c099",
       "score": 0.5598,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1177,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "tesla_US649621__c011",
       "score": 0.5592,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.131,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 12,
+      "cluster_total": 12,
       "name": "tesla_US645576__c086",
       "score": 0.5592,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1991,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "tesla_US649621__c070",
       "score": 0.5585,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1256,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 8,
+      "cluster_total": 15,
       "name": "tesla_ac_motor_US382280__c032",
       "score": 0.5579,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1405,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "tesla_US1119732__c079",
       "score": 0.5576,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1129,
+      "cluster_percentile": 0.0714,
+      "cluster_rank": 14,
+      "cluster_total": 15,
       "name": "tesla_ac_motor_US382280__c009",
       "score": 0.5576,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1038,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "stone_US714756__c026",
       "score": 0.556,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1313,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "tesla_ac_motor_US382280__c020",
       "score": 0.5537,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1447,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 5,
+      "cluster_total": 11,
       "name": "tesla_US649621__c061",
       "score": 0.5508,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1218,
+      "cluster_percentile": 0.2143,
+      "cluster_rank": 12,
+      "cluster_total": 15,
       "name": "stone_US714756__c032",
       "score": 0.5476,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1153,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "tesla_ac_motor_US382280__c058",
       "score": 0.5474,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1181,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "tesla_US645576__c132",
       "score": 0.5468,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1329,
+      "cluster_percentile": 0.7857,
+      "cluster_rank": 4,
+      "cluster_total": 15,
       "name": "tesla_US1119732__c077",
       "score": 0.5433,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1109,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 15,
+      "cluster_total": 15,
       "name": "tesla_US1119732__c052",
       "score": 0.5424,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1188,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "tesla_US1119732__c112",
       "score": 0.5414,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1319,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "tesla_US1119732__c058",
       "score": 0.5413,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1315,
+      "cluster_percentile": 0.1333,
+      "cluster_rank": 14,
+      "cluster_total": 16,
       "name": "tesla_ac_motor_US382280__c064",
       "score": 0.5405,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1068,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "tesla_US645576__c154",
       "score": 0.5402,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1006,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "tesla_US1119732__c111",
       "score": 0.5399,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1362,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 3,
+      "cluster_total": 15,
       "name": "tesla_ac_motor_US382280__c011",
       "score": 0.5395,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1353,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "tesla_US645576__c164",
       "score": 0.539,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1357,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 11,
+      "cluster_total": 16,
       "name": "tesla_US649621__c102",
       "score": 0.538,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1239,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "tesla_US645576__c147",
       "score": 0.5366,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1138,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "tesla_US645576__c096",
       "score": 0.535,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1237,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "tesla_ac_motor_US382280__c049",
       "score": 0.5349,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1159,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "tesla_US649621__c096",
       "score": 0.5313,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1212,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "tesla_US645576__c041",
       "score": 0.5309,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1724,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "deforest_US841387__c044",
       "score": 0.5284,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1096,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "tesla_US645576__c134",
       "score": 0.5283,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1212,
+      "cluster_percentile": 0.0667,
+      "cluster_rank": 15,
+      "cluster_total": 16,
       "name": "tesla_US649621__c130",
       "score": 0.5275,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.11,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "tesla_US645576__c103",
       "score": 0.5262,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1706,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "stone_US714756__c023",
       "score": 0.5248,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1074,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "tesla_US645576__c157",
       "score": 0.5232,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1689,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "witricity_US7741734__c033",
       "score": 0.4984,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2057,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 3,
+      "cluster_total": 13,
       "name": "stone_US714756__c005",
       "score": 0.4881,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1601,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "info_JPEG1992__c008",
       "score": 0.4828,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1501,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "deforest_US841387__c035",
       "score": 0.4818,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1471,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "deforest_US841387__c032",
       "score": 0.4776,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.168,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 9,
+      "cluster_total": 13,
       "name": "corum_US9912031__c074",
       "score": 0.4724,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1692,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 5,
+      "cluster_total": 13,
       "name": "stone_US714756__c033",
       "score": 0.4721,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1586,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "info_LZ1984__c000",
       "score": 0.4679,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1592,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 11,
+      "cluster_total": 13,
       "name": "info_SHANNON1948__c051",
       "score": 0.4651,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1666,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "corum_US9910144__c016",
       "score": 0.4611,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.9966,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "info_HUFFMAN1952__c011",
       "score": 0.4525,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.171,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "marconi_US586193__c015",
       "score": 0.4487,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1607,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "corum_US10084223__c007",
       "score": 0.445,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.177,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "stone_US714756__c014",
       "score": 0.4427,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 50,
       "name": "info_JPEG1992__c047",
       "score": 0.4419,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1811,
+      "cluster_percentile": 0.8182,
+      "cluster_rank": 3,
+      "cluster_total": 12,
       "name": "info_LZ1984__c003",
       "score": 0.4355,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1557,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 11,
       "name": "tesla_US1119732__c004",
       "score": 0.4353,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1593,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "corum_US9912031__c052",
       "score": 0.4326,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1397,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "marconi_US586193__c003",
       "score": 0.4326,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1587,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "crypto_AES__c014",
       "score": 0.4284,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.17,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "marconi_US586193__c012",
       "score": 0.4276,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1586,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "corum_US9912031__c061",
       "score": 0.4259,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.7531,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "fessenden_US706737__c018",
       "score": 0.4257,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1246,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "info_LZ1984__c051",
       "score": 0.4238,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.9653,
+      "cluster_percentile": 0.9796,
+      "cluster_rank": 2,
+      "cluster_total": 50,
       "name": "crypto_RSA_US4405829__c044",
       "score": 0.4212,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.152,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "crypto_DH_US4200770__c003",
       "score": 0.4211,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1402,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 9,
+      "cluster_total": 11,
       "name": "tesla_US1119732__c050",
       "score": 0.4207,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1622,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "marconi_US586193__c004",
       "score": 0.4192,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1684,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "fessenden_US706737__c004",
       "score": 0.4191,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1592,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "crypto_AES__c039",
       "score": 0.4191,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1494,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "witricity_US7741734__c034",
       "score": 0.4177,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1593,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "info_LZ1984__c014",
       "score": 0.4161,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1421,
+      "cluster_percentile": 0.9286,
+      "cluster_rank": 2,
+      "cluster_total": 15,
       "name": "tesla_US649621__c015",
       "score": 0.4159,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1487,
+      "cluster_percentile": 0.7333,
+      "cluster_rank": 5,
+      "cluster_total": 16,
       "name": "stone_US714756__c024",
       "score": 0.4156,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.9611,
+      "cluster_percentile": 0.9592,
+      "cluster_rank": 3,
+      "cluster_total": 50,
       "name": "crypto_NTRU_US6298137__c044",
       "score": 0.4152,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1576,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "marconi_US586193__c049",
       "score": 0.4055,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1782,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "deforest_US841387__c018",
       "score": 0.4051,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1592,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "info_JPEG1992__c001",
       "score": 0.4049,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1352,
+      "cluster_percentile": 0.0909,
+      "cluster_rank": 11,
+      "cluster_total": 12,
       "name": "tesla_US645576__c008",
       "score": 0.4023,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1263,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 7,
+      "cluster_total": 15,
       "name": "deforest_US841387__c024",
       "score": 0.4017,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1667,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "corum_US9912031__c026",
       "score": 0.3994,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1195,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "tesla_US1119732__c003",
       "score": 0.3987,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1477,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 13,
+      "cluster_total": 13,
       "name": "crypto_DH_US4200770__c030",
       "score": 0.3987,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.9357,
+      "cluster_percentile": 0.9388,
+      "cluster_rank": 4,
+      "cluster_total": 50,
       "name": "tesla_US645576__c026",
       "score": 0.3953,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1553,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "corum_US10084223__c045",
       "score": 0.3912,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1404,
+      "cluster_percentile": 0.4667,
+      "cluster_rank": 9,
+      "cluster_total": 16,
       "name": "tesla_US645576__c118",
       "score": 0.3904,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1627,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "marconi_US586193__c001",
       "score": 0.39,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.132,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 5,
+      "cluster_total": 15,
       "name": "tesla_US649621__c003",
       "score": 0.3878,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1346,
+      "cluster_percentile": 0.2667,
+      "cluster_rank": 12,
+      "cluster_total": 16,
       "name": "marconi_US586193__c031",
       "score": 0.3877,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1697,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "info_LZ1984__c030",
       "score": 0.3877,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1196,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "tesla_US645576__c130",
       "score": 0.3845,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.7386,
+      "cluster_percentile": 0.898,
+      "cluster_rank": 6,
+      "cluster_total": 50,
       "name": "crypto_RSA_US4405829__c039",
       "score": 0.3814,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1254,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 11,
+      "cluster_total": 11,
       "name": "tesla_US645576__c062",
       "score": 0.3802,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1699,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "stone_US714756__c027",
       "score": 0.3785,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1647,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "deforest_US841387__c005",
       "score": 0.3765,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1226,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 11,
+      "cluster_total": 15,
       "name": "tesla_US645576__c060",
       "score": 0.3751,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1586,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "info_SHANNON1948__c009",
       "score": 0.3745,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.7498,
+      "cluster_percentile": 0.9184,
+      "cluster_rank": 5,
+      "cluster_total": 50,
       "name": "info_SHANNON1948__c025",
       "score": 0.3729,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1683,
+      "cluster_percentile": 0.3265,
+      "cluster_rank": 34,
+      "cluster_total": 50,
       "name": "corum_US9912031__c023",
       "score": 0.3727,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2108,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "info_HUFFMAN1952__c035",
       "score": 0.3725,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1448,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 4,
+      "cluster_total": 11,
       "name": "tesla_US1119732__c020",
       "score": 0.3724,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.123,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "tesla_US649621__c121",
       "score": 0.3719,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1741,
+      "cluster_percentile": 0.4694,
+      "cluster_rank": 27,
+      "cluster_total": 50,
       "name": "corum_US10084223__c053",
       "score": 0.3719,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.17,
+      "cluster_percentile": 0.3673,
+      "cluster_rank": 32,
+      "cluster_total": 50,
       "name": "corum_US9923385__c013",
       "score": 0.3704,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1268,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "tesla_US1119732__c098",
       "score": 0.3692,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1749,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "info_SHANNON1948__c041",
       "score": 0.3685,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1655,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "corum_US9912031__c005",
       "score": 0.3681,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1774,
+      "cluster_percentile": 0.551,
+      "cluster_rank": 23,
+      "cluster_total": 50,
       "name": "corum_US9912031__c022",
       "score": 0.3659,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.3415,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 15,
+      "cluster_total": 50,
       "name": "witricity_US7741734__c052",
       "score": 0.3656,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1496,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "corum_US9912031__c049",
       "score": 0.3653,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1852,
+      "cluster_percentile": 0.5918,
+      "cluster_rank": 21,
+      "cluster_total": 50,
       "name": "stone_US714756__c007",
       "score": 0.365,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1159,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 16,
+      "cluster_total": 16,
       "name": "tesla_US645576__c203",
       "score": 0.3641,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1797,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 22,
+      "cluster_total": 50,
       "name": "corum_US9912031__c011",
       "score": 0.3639,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1201,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "tesla_US649621__c129",
       "score": 0.3637,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1459,
+      "cluster_percentile": 0.0408,
+      "cluster_rank": 48,
+      "cluster_total": 50,
       "name": "info_SHANNON1948__c005",
       "score": 0.362,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1175,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 13,
+      "cluster_total": 15,
       "name": "tesla_US645576__c036",
       "score": 0.3619,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1618,
+      "cluster_percentile": 0.2041,
+      "cluster_rank": 40,
+      "cluster_total": 50,
       "name": "corum_US9912031__c002",
       "score": 0.3617,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.4521,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 7,
+      "cluster_total": 13,
       "name": "tesla_US649621__c036",
       "score": 0.3601,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.658,
+      "cluster_percentile": 0.8367,
+      "cluster_rank": 9,
+      "cluster_total": 50,
       "name": "witricity_US7741734__c044",
       "score": 0.3593,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1754,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "deforest_US841387__c000",
       "score": 0.3592,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1742,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "fessenden_US706737__c024",
       "score": 0.3588,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1491,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "corum_US9910144__c003",
       "score": 0.3588,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1539,
+      "cluster_percentile": 0.0816,
+      "cluster_rank": 46,
+      "cluster_total": 50,
       "name": "corum_US9912031__c033",
       "score": 0.3582,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1773,
+      "cluster_percentile": 0.5306,
+      "cluster_rank": 24,
+      "cluster_total": 50,
       "name": "info_SHANNON1948__c016",
       "score": 0.358,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1228,
+      "cluster_percentile": 0.3571,
+      "cluster_rank": 10,
+      "cluster_total": 15,
       "name": "tesla_US649621__c067",
       "score": 0.3578,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1475,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "corum_US9912031__c068",
       "score": 0.3578,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1605,
+      "cluster_percentile": 0.1837,
+      "cluster_rank": 41,
+      "cluster_total": 50,
       "name": "corum_US9912031__c021",
       "score": 0.3571,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.132,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "corum_US9910144__c043",
       "score": 0.3565,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1621,
+      "cluster_percentile": 0.2245,
+      "cluster_rank": 39,
+      "cluster_total": 50,
       "name": "witricity_US7741734__c048",
       "score": 0.3565,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1685,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "marconi_US586193__c008",
       "score": 0.3552,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1719,
+      "cluster_percentile": 0.449,
+      "cluster_rank": 28,
+      "cluster_total": 50,
       "name": "info_LZ1984__c052",
       "score": 0.3552,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1138,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "tesla_US645576__c122",
       "score": 0.3546,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1412,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 8,
+      "cluster_total": 11,
       "name": "info_LZ1984__c032",
       "score": 0.3545,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1605,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "deforest_US841387__c009",
       "score": 0.3543,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1631,
+      "cluster_percentile": 0.2449,
+      "cluster_rank": 38,
+      "cluster_total": 50,
       "name": "corum_US9923385__c010",
       "score": 0.3541,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1704,
+      "cluster_percentile": 0.3878,
+      "cluster_rank": 31,
+      "cluster_total": 50,
       "name": "marconi_US586193__c000",
       "score": 0.3533,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.6007,
+      "cluster_percentile": 0.7347,
+      "cluster_rank": 14,
+      "cluster_total": 50,
       "name": "crypto_DH_US4200770__c027",
       "score": 0.3531,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.7035,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 8,
+      "cluster_total": 50,
       "name": "tesla_US649621__c018",
       "score": 0.3531,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1544,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "marconi_US586193__c007",
       "score": 0.3525,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2098,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "modern_radio_antenna__c040",
       "score": 0.3525,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1092,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "tesla_US1119732__c084",
       "score": 0.3525,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1518,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "info_SHANNON1948__c020",
       "score": 0.3521,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1715,
+      "cluster_percentile": 0.4082,
+      "cluster_rank": 30,
+      "cluster_total": 50,
       "name": "corum_US10084223__c008",
       "score": 0.3517,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1603,
+      "cluster_percentile": 0.1633,
+      "cluster_rank": 42,
+      "cluster_total": 50,
       "name": "corum_US9912031__c006",
       "score": 0.3517,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1492,
+      "cluster_percentile": 0.0612,
+      "cluster_rank": 47,
+      "cluster_total": 50,
       "name": "corum_US9912031__c056",
       "score": 0.3514,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1574,
+      "cluster_percentile": 0.102,
+      "cluster_rank": 45,
+      "cluster_total": 50,
       "name": "corum_US9910144__c035",
       "score": 0.3512,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.159,
+      "cluster_percentile": 0.1224,
+      "cluster_rank": 44,
+      "cluster_total": 50,
       "name": "fessenden_US706740__c005",
       "score": 0.3511,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1697,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "info_SHANNON1948__c013",
       "score": 0.351,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1395,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 50,
+      "cluster_total": 50,
       "name": "corum_US9912031__c014",
       "score": 0.3505,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1433,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "stone_US714756__c047",
       "score": 0.35,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1994,
+      "cluster_percentile": 0.6531,
+      "cluster_rank": 18,
+      "cluster_total": 50,
       "name": "corum_US9912031__c050",
       "score": 0.3492,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1922,
+      "cluster_percentile": 0.6122,
+      "cluster_rank": 20,
+      "cluster_total": 50,
       "name": "corum_US10084223__c047",
       "score": 0.349,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1519,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "corum_US9912031__c067",
       "score": 0.3485,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1585,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "deforest_US841387__c014",
       "score": 0.3485,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.6369,
+      "cluster_percentile": 0.7959,
+      "cluster_rank": 11,
+      "cluster_total": 50,
       "name": "tesla_US645576__c021",
       "score": 0.3482,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1436,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "corum_US9912031__c018",
       "score": 0.348,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1624,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "corum_US9912031__c010",
       "score": 0.3477,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1663,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 36,
+      "cluster_total": 50,
       "name": "corum_US9923385__c007",
       "score": 0.3472,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.16,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 43,
+      "cluster_total": 50,
       "name": "corum_US10084223__c022",
       "score": 0.3464,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1522,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "info_HUFFMAN1952__c034",
       "score": 0.3463,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1654,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "corum_US9910144__c007",
       "score": 0.3455,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2888,
+      "cluster_percentile": 0.6939,
+      "cluster_rank": 16,
+      "cluster_total": 50,
       "name": "info_HEVC2013__c037",
       "score": 0.3453,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1331,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "info_JPEG1992__c000",
       "score": 0.3449,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1424,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "fessenden_US706737__c013",
       "score": 0.3448,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.6125,
+      "cluster_percentile": 0.7551,
+      "cluster_rank": 13,
+      "cluster_total": 50,
       "name": "deforest_US841387__c010",
       "score": 0.3448,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1444,
+      "cluster_percentile": 0.0204,
+      "cluster_rank": 49,
+      "cluster_total": 50,
       "name": "corum_US9912031__c016",
       "score": 0.3446,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1718,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 29,
+      "cluster_total": 50,
       "name": "deforest_US841387__c008",
       "score": 0.3444,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1746,
+      "cluster_percentile": 0.4898,
+      "cluster_rank": 26,
+      "cluster_total": 50,
       "name": "info_JPEG1992__c002",
       "score": 0.3439,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.64,
+      "cluster_percentile": 0.8163,
+      "cluster_rank": 10,
+      "cluster_total": 50,
       "name": "tesla_US1119732__c000",
       "score": 0.3438,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1667,
+      "cluster_percentile": 0.3061,
+      "cluster_rank": 35,
+      "cluster_total": 50,
       "name": "corum_US9912031__c013",
       "score": 0.3423,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1603,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "corum_US10084223__c054",
       "score": 0.3422,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1758,
+      "cluster_percentile": 0.5102,
+      "cluster_rank": 25,
+      "cluster_total": 50,
       "name": "crypto_DH_US4200770__c032",
       "score": 0.3419,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.165,
+      "cluster_percentile": 0.2653,
+      "cluster_rank": 37,
+      "cluster_total": 50,
       "name": "corum_US9912031__c017",
       "score": 0.3419,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1853,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "crypto_modern_PQ_US10097351__c041",
       "score": 0.3419,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1478,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "corum_US9912031__c024",
       "score": 0.3418,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1572,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "corum_US9923385__c033",
       "score": 0.3415,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1982,
+      "cluster_percentile": 0.6327,
+      "cluster_rank": 19,
+      "cluster_total": 50,
       "name": "stone_US714756__c010",
       "score": 0.3408,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.6132,
+      "cluster_percentile": 0.7755,
+      "cluster_rank": 12,
+      "cluster_total": 50,
       "name": "crypto_AES__c051",
       "score": 0.3407,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.2623,
+      "cluster_percentile": 0.6735,
+      "cluster_rank": 17,
+      "cluster_total": 50,
       "name": "info_SHANNON1948__c011",
       "score": 0.3405,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.7081,
+      "cluster_percentile": 0.8776,
+      "cluster_rank": 7,
+      "cluster_total": 50,
       "name": "tesla_US645576__c037",
       "score": 0.3405,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1696,
+      "cluster_percentile": 0.3469,
+      "cluster_rank": 33,
+      "cluster_total": 50,
       "name": "corum_US9910144__c039",
       "score": 0.3404,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1341,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "fessenden_US706737__c011",
       "score": 0.3401,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1833,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "marconi_US586193__c035",
       "score": 0.3394,
       "type": "patent_chunk"
     },
     {
       "anomaly_score": 0.1712,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "corum_US10084223__c041",
       "score": 0.3393,
       "type": "patent_chunk"

@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import json
 import logging
+import re
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -93,6 +95,471 @@ def _score_vector(s: dict) -> list[float]:
         float(sc.get("diversity", 0.0)),
         float(sc.get("reconstruction", 0.0)),
     ]
+
+
+# ─── Structured-name parsing & paradigm analysis ──────────────────────────────
+
+_MODERN_PREFIXES = ("modern_", "arxiv_", "witricity_", "conway_", "wolfram_", "chomsky_")
+_MODERN_MARKERS = ("_usrpto_", "_nsf_", "_indiana_university_", "_santa_fe_", "ias_", "_arxiv_")
+_CHUNK_RE = re.compile(r"__c\d{2,4}$")
+
+
+def _parse_entity_name(name: str) -> dict:
+    """Parse a structured BTUT entity name into {corpus, subcorpus, kind, slug, era_class}.
+
+    Examples:
+      newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts
+        -> corpus=newton, subcorpus=alchemy, kind=event, slug=keynes_auctions..., era_class=historical
+      modern_complexity__location__santa_fe_institute
+        -> corpus=modern, subcorpus=complexity, kind=location, era_class=modern
+      patent_chunk_US424036_5
+        -> corpus=patent, subcorpus=chunk, kind=chunk, era_class=unknown
+    """
+    if not isinstance(name, str) or not name:
+        return {"corpus": "unknown", "subcorpus": "unknown", "kind": "unknown", "slug": name or "", "era_class": "unknown"}
+
+    lower = name.lower()
+    era_class = "historical"
+    if lower.startswith(_MODERN_PREFIXES):
+        era_class = "modern"
+    elif any(m in lower for m in _MODERN_MARKERS):
+        era_class = "modern"
+    elif _CHUNK_RE.search(name):
+        era_class = "chunk"
+
+    # Structured names use `__` between corpus/kind/slug
+    parts = name.split("__")
+    if len(parts) >= 3:
+        corpus_sub = parts[0]
+        kind = parts[1]
+        slug = "__".join(parts[2:])
+        # corpus_sub like "newton_alchemy" or "leonardo_flight" or "vn_cellular_automata"
+        bits = corpus_sub.split("_", 1)
+        corpus = bits[0]
+        subcorpus = bits[1] if len(bits) > 1 else ""
+        return {"corpus": corpus, "subcorpus": subcorpus, "kind": kind, "slug": slug, "era_class": era_class}
+
+    # Fallback: simple patent/concept/chunk names
+    if _CHUNK_RE.search(name):
+        return {"corpus": "chunk", "subcorpus": "", "kind": "chunk", "slug": name, "era_class": "chunk"}
+    return {"corpus": name.split("_", 1)[0] if "_" in name else name, "subcorpus": "", "kind": "unknown", "slug": name, "era_class": era_class}
+
+
+# Per-corpus classification of subcorpora into {forgotten, control, other}.
+# Based on docs/plans/2026-04-11-niv-vertical-design.md + polymath-secret-detection design.
+_PARADIGM_ROLES: dict[str, dict[str, str]] = {
+    "newton": {
+        "alchemy": "forgotten",
+        "alchemy_clavis": "forgotten",
+        "alchemy_index": "forgotten",
+        "alchemy_praxis": "forgotten",
+        "mechanics": "mainstream",
+        "principia": "mainstream",
+        "optics": "mainstream",
+        "opticks": "mainstream",
+        "theology": "control",
+        "theology_prophecies": "control",
+    },
+    "leonardo": {
+        "flight": "forgotten",
+        "flight_of_birds": "forgotten",
+        "fluids": "forgotten",
+        "hydraulics": "forgotten",
+        "water_motion": "forgotten",
+        "art_control": "control",
+        "optics_perspective": "mainstream",
+        "anatomy": "mainstream",
+    },
+    "vn": {
+        "cellular_automata": "forgotten",
+        "cellular_automata_transitions": "forgotten",
+        "self_reproducing_automata": "forgotten",
+        "computing": "forgotten",
+        "edvac_report": "forgotten",
+        "game_theory": "mainstream",
+        "theory_of_games": "mainstream",
+        "mathematical_foundations_qm": "mainstream",
+        "quantum": "mainstream",
+        "monte_carlo": "mainstream",
+        "monte_carlo_control": "control",
+    },
+}
+
+
+def _role_for(corpus: str, subcorpus: str) -> str:
+    """Classify a (corpus, subcorpus) into forgotten/mainstream/control/other."""
+    roles = _PARADIGM_ROLES.get(corpus) or {}
+    # Try exact match, then prefix match
+    if subcorpus in roles:
+        return roles[subcorpus]
+    for key, role in roles.items():
+        if subcorpus.startswith(key) or key.startswith(subcorpus):
+            return role
+    return "other"
+
+
+def _paradigm_distribution(survivors_src: list[dict]) -> dict:
+    """Count entities by (corpus, subcorpus, role). Hypothesis-test forgotten > control.
+
+    Only emit hypotheses for corpora that have explicit role definitions in
+    _PARADIGM_ROLES (newton, leonardo, vn). Name-pattern artifacts like
+    'chunk' and 'modern' get counted for display but not tested.
+    """
+    counts: Counter[tuple[str, str, str]] = Counter()
+    role_counts: Counter[str] = Counter()
+    by_corpus: dict[str, Counter[str]] = defaultdict(Counter)
+
+    for s in survivors_src:
+        name = ((s.get("entity") or {}).get("name")) or ""
+        parsed = _parse_entity_name(name)
+        corpus = parsed["corpus"]
+        sub = parsed["subcorpus"]
+        role = _role_for(corpus, sub)
+        counts[(corpus, sub, role)] += 1
+        role_counts[role] += 1
+        by_corpus[corpus][role] += 1
+
+    hypothesis: dict[str, dict] = {}
+    for corpus, rc in by_corpus.items():
+        if corpus not in _PARADIGM_ROLES:
+            continue  # skip declared-role corpora only
+        forgotten = rc.get("forgotten", 0)
+        control = rc.get("control", 0)
+        mainstream = rc.get("mainstream", 0)
+        competitors = control + mainstream
+        sample_size = forgotten + mainstream + control
+        hypothesis[corpus] = {
+            "forgotten": forgotten,
+            "mainstream": mainstream,
+            "control": control,
+            "sample_size": sample_size,
+            "ratio_forgotten_to_competitors": (
+                round(forgotten / competitors, 3) if competitors else (forgotten and 999.0 or 0.0)
+            ),
+            "confirmed": forgotten > competitors and sample_size >= 10,
+            "sample_size_warning": sample_size < 10,
+        }
+
+    return {
+        "by_corpus_subcorpus_role": [
+            {"corpus": c, "subcorpus": s, "role": r, "count": n}
+            for (c, s, r), n in sorted(counts.items(), key=lambda kv: -kv[1])
+        ],
+        "role_counts": dict(role_counts),
+        "hypothesis_by_corpus": hypothesis,
+    }
+
+
+def _within_cluster_rank(survivors_src: list[dict]) -> dict:
+    """Rank each survivor within its cluster by anomaly score.
+
+    Returns {name -> {rank, total_in_cluster, percentile}}.
+    """
+    by_cluster: dict[int, list[dict]] = defaultdict(list)
+    for s in survivors_src:
+        cluster = int(s.get("cluster", 0))
+        by_cluster[cluster].append(s)
+
+    rank_map: dict[str, dict] = {}
+    for cluster, members in by_cluster.items():
+        members_sorted = sorted(
+            members, key=lambda m: float(((m.get("scores") or {}).get("anomaly")) or 0.0), reverse=True
+        )
+        total = len(members_sorted)
+        for i, m in enumerate(members_sorted):
+            name = ((m.get("entity") or {}).get("name")) or ""
+            if not name:
+                continue
+            rank_map[name] = {
+                "cluster": cluster,
+                "rank": i + 1,
+                "total_in_cluster": total,
+                "percentile": round(1.0 - i / max(1, total - 1), 4) if total > 1 else 1.0,
+            }
+    return rank_map
+
+
+def _convergent_clusters(survivors_src: list[dict], anomaly_threshold: float = 0.85) -> list[dict]:
+    """Find clusters where many entities score >= threshold on anomaly.
+
+    Returns sorted list of {cluster, hot_count, total, paradigm_dominant}.
+    """
+    by_cluster: dict[int, list[dict]] = defaultdict(list)
+    for s in survivors_src:
+        by_cluster[int(s.get("cluster", 0))].append(s)
+
+    out: list[dict] = []
+    for cluster, members in by_cluster.items():
+        hot = [
+            m for m in members
+            if float(((m.get("scores") or {}).get("anomaly")) or 0.0) >= anomaly_threshold
+        ]
+        if not hot:
+            continue
+        # Dominant paradigm label in hot set
+        paradigm_counts: Counter[str] = Counter()
+        for m in hot:
+            name = ((m.get("entity") or {}).get("name")) or ""
+            p = _parse_entity_name(name)
+            paradigm_counts[f"{p['corpus']}_{p['subcorpus']}"] += 1
+        dominant, dominant_n = paradigm_counts.most_common(1)[0] if paradigm_counts else ("", 0)
+        out.append({
+            "cluster": cluster,
+            "hot_count": len(hot),
+            "total": len(members),
+            "hot_fraction": round(len(hot) / max(1, len(members)), 3),
+            "dominant_paradigm": dominant,
+            "dominant_paradigm_share": dominant_n,
+        })
+    out.sort(key=lambda x: x["hot_count"], reverse=True)
+    return out
+
+
+def _real_connections(survivors_src: list[dict], survivors_fe: list[dict], max_out: int = 30) -> list[dict]:
+    """Replace fake 80% strength with real co-flip proximity.
+
+    Uses BTUT `flips` field: survivors with similar flip counts AND same cluster
+    are genuinely structurally adjacent. Strength = 1 - |flips_a - flips_b| / max_flips.
+    """
+    if not survivors_src:
+        return []
+
+    pairs: list[tuple[int, int, float]] = []
+    max_flips = max((int(s.get("flips", 0)) for s in survivors_src), default=0) or 1
+    by_cluster: dict[int, list[int]] = defaultdict(list)
+    for idx, s in enumerate(survivors_src):
+        by_cluster[int(s.get("cluster", 0))].append(idx)
+
+    for cluster_members in by_cluster.values():
+        # sort by flip count so adjacent survivors are structural neighbors
+        sorted_idx = sorted(
+            cluster_members,
+            key=lambda i: int(survivors_src[i].get("flips", 0)),
+        )
+        for i in range(len(sorted_idx) - 1):
+            a, b = sorted_idx[i], sorted_idx[i + 1]
+            fa = int(survivors_src[a].get("flips", 0))
+            fb = int(survivors_src[b].get("flips", 0))
+            strength = round(1.0 - abs(fa - fb) / max_flips, 4)
+            pairs.append((a, b, strength))
+
+    pairs.sort(key=lambda p: p[2], reverse=True)
+    out: list[dict] = []
+    for a, b, strength in pairs[:max_out]:
+        out.append({
+            "source": survivors_fe[a]["name"] if a < len(survivors_fe) else "?",
+            "target": survivors_fe[b]["name"] if b < len(survivors_fe) else "?",
+            "signal_type": "flip_proximity",
+            "strength": strength,
+        })
+    return out
+
+
+def _cross_era_anchors(survivors_src: list[dict], top_k: int = 15) -> list[dict]:
+    """Find entities where era_class != majority of their cluster, excluding
+    the trivial case where the cluster is dominated by chunk-fragments.
+
+    Real signal: a `modern_*` entity appearing in a cluster where the
+    non-chunk majority is `historical`, or vice versa. We exclude `chunk`
+    from the majority computation because chunk fragments dominate clusters
+    by mass and make every named entity trivially "disagree."
+    """
+    survivors_meta: list[dict] = []
+    for s in survivors_src:
+        name = ((s.get("entity") or {}).get("name")) or ""
+        parsed = _parse_entity_name(name)
+        survivors_meta.append({
+            "name": name,
+            "cluster": int(s.get("cluster", 0)),
+            "era_class": parsed["era_class"],
+            "corpus": parsed["corpus"],
+            "subcorpus": parsed["subcorpus"],
+            "anomaly": float(((s.get("scores") or {}).get("anomaly")) or 0.0),
+        })
+
+    # Cluster majority era — excluding `chunk` and `unknown`.
+    by_cluster: dict[int, Counter[str]] = defaultdict(Counter)
+    for m in survivors_meta:
+        if m["era_class"] in ("chunk", "unknown"):
+            continue
+        by_cluster[m["cluster"]][m["era_class"]] += 1
+
+    anchors: list[dict] = []
+    for m in survivors_meta:
+        if m["era_class"] in ("chunk", "unknown"):
+            continue
+        cluster_eras = by_cluster.get(m["cluster"])
+        if not cluster_eras or len(cluster_eras) < 2:
+            # Cluster has only one named era — no disagreement possible
+            continue
+        majority, majority_n = cluster_eras.most_common(1)[0]
+        if m["era_class"] == majority:
+            continue
+        # True anachronism: named era disagrees with a mixed-era cluster's majority
+        anchors.append({
+            "name": m["name"],
+            "era_class": m["era_class"],
+            "cluster_majority_era": majority,
+            "cluster_majority_count": majority_n,
+            "cluster_size_named": sum(cluster_eras.values()),
+            "cluster": m["cluster"],
+            "corpus": m["corpus"],
+            "subcorpus": m["subcorpus"],
+            "anomaly": round(m["anomaly"], 4),
+        })
+    anchors.sort(key=lambda a: a["anomaly"], reverse=True)
+    return anchors[:top_k]
+
+
+def _convergence_index(
+    survivors_fe: list[dict],
+    survivors_src: list[dict],
+    within_rank: dict[str, dict],
+    cross_era: list[dict],
+    this_legend_fingerprints: dict[str, str],
+    global_fp_count: dict[str, int],
+    top_k: int = 20,
+) -> list[dict]:
+    """Per-entity score across 4 dimensions: anomaly, cluster-top, cross-era, rare-fingerprint.
+
+    Entities that score high across multiple dimensions are the most
+    "convergent" — structurally significant from every angle.
+    """
+    era_names = {a["name"] for a in cross_era}
+    # Reverse-lookup: name -> fingerprint
+    name_to_fp = dict(this_legend_fingerprints.items())
+
+    scored: list[dict] = []
+    for i, fe in enumerate(survivors_fe):
+        name = fe["name"]
+        anom = float(fe["anomaly_score"])
+        comp = float(fe["score"])
+
+        # Dimension 1: raw anomaly
+        d_anom = anom
+
+        # Dimension 2: within-cluster percentile
+        rk = within_rank.get(name)
+        d_cluster = rk["percentile"] if rk else 0.0
+
+        # Dimension 3: cross-era anchor
+        d_cross_era = 1.0 if name in era_names else 0.0
+
+        # Dimension 4: rare-fingerprint membership.
+        # Inverted from first pass: legend-unique (gc=1) is the default state,
+        # not signal. Real signal is gc=2 (shared with exactly one other legend),
+        # tapering off as the fingerprint goes denser.
+        fp = name_to_fp.get(name, "")
+        gc = global_fp_count.get(fp, 0) if fp else 0
+        if gc == 2:
+            d_rare_fp = 1.0
+        elif gc == 3:
+            d_rare_fp = 0.7
+        elif gc == 4:
+            d_rare_fp = 0.4
+        elif gc >= 5:
+            d_rare_fp = 0.1
+        elif gc == 1:
+            d_rare_fp = 0.2  # baseline — unique to this legend
+        else:
+            d_rare_fp = 0.0
+
+        convergence = round(0.35 * d_anom + 0.25 * d_cluster + 0.2 * d_cross_era + 0.2 * d_rare_fp, 4)
+
+        scored.append({
+            "name": name,
+            "type": fe["type"],
+            "dimensions": {
+                "anomaly": round(d_anom, 4),
+                "cluster_percentile": round(d_cluster, 4),
+                "cross_era": d_cross_era,
+                "rare_fingerprint": round(d_rare_fp, 4),
+            },
+            "convergence": convergence,
+        })
+
+    scored.sort(key=lambda r: r["convergence"], reverse=True)
+    return scored[:top_k]
+
+
+def _triple_bridges(
+    legend_fingerprints: dict[str, dict[str, str]],
+    global_fp_count: dict[str, int],
+    density_threshold_pct: float = 5.0,
+) -> list[dict]:
+    """Fingerprints appearing in ≥3 distinct legends, after density filtering.
+
+    Reuses the same density logic as _compute_bridges so we don't surface
+    matches on the all-1s generic zone. A fingerprint that's in >5% of
+    legends is dense; drop it.
+    """
+    density_cutoff = max(2, int(len(legend_fingerprints) * density_threshold_pct / 100.0))
+
+    fp_presence: dict[str, dict[str, str]] = defaultdict(dict)
+    for legend_id, fps in legend_fingerprints.items():
+        for name, fp in fps.items():
+            fp_presence[fp].setdefault(legend_id, name)
+
+    triples: list[dict] = []
+    for fp, legend_names in fp_presence.items():
+        n = len(legend_names)
+        if n < 3:
+            continue
+        if global_fp_count.get(fp, 0) > density_cutoff:
+            continue  # dense zone
+        triples.append({
+            "fingerprint": fp,
+            "legend_count": n,
+            "legends": sorted(legend_names.keys()),
+            "entities": [{"legend": lg, "name": nm} for lg, nm in sorted(legend_names.items())],
+        })
+    triples.sort(key=lambda t: t["legend_count"])
+    return triples
+
+
+def _paradigm_convergence_matrix(
+    legend_fingerprints: dict[str, dict[str, str]],
+    survivors_by_legend: dict[str, list[dict]],
+    global_fp_count: dict[str, int],
+    dense_threshold: int = 2,
+) -> list[dict]:
+    """For each rare fingerprint shared cross-legend, map the sub-paradigms it links."""
+    # name -> (legend, parsed)
+    parsed_cache: dict[tuple[str, str], dict] = {}
+    for legend_id, survivors in survivors_by_legend.items():
+        for s in survivors:
+            name = ((s.get("entity") or {}).get("name")) or ""
+            if name:
+                parsed_cache[(legend_id, name)] = _parse_entity_name(name)
+
+    fp_presence: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for legend_id, fps in legend_fingerprints.items():
+        seen_names: set[str] = set()
+        for name, fp in fps.items():
+            if name in seen_names:
+                continue
+            seen_names.add(name)
+            fp_presence[fp].append((legend_id, name))
+
+    # Aggregate subcorpus links from rare fingerprints (present in exactly 2 or 3 legends)
+    subcorpus_pair_counts: Counter[tuple[str, str]] = Counter()
+    for fp, presence in fp_presence.items():
+        if not (2 <= len(presence) <= 3):
+            continue
+        if global_fp_count.get(fp, 99) > dense_threshold + 1:
+            continue
+        parsed_list = [
+            parsed_cache.get((lg, nm), {"corpus": "?", "subcorpus": ""}) for lg, nm in presence
+        ]
+        tags = sorted({f"{p['corpus']}.{p['subcorpus']}" if p['subcorpus'] else p['corpus'] for p in parsed_list})
+        for i in range(len(tags)):
+            for j in range(i + 1, len(tags)):
+                subcorpus_pair_counts[(tags[i], tags[j])] += 1
+
+    rows: list[dict] = []
+    for (a, b), n in subcorpus_pair_counts.most_common(50):
+        rows.append({"a": a, "b": b, "shared_fingerprints": n})
+    return rows
 
 
 def _cosine(a: list[float], b: list[float]) -> float:
@@ -208,6 +675,20 @@ def _transform(legend: Legend, src: dict, disc_by_id: dict[str, dict]) -> dict:
     coverages = reconstruction.get("coverages") or {}
     coverage = float(coverages.get("1.0") or coverages.get("1", 0.0) or 0.0)
 
+    # New cross-dimensional analyzers
+    within_rank = _within_cluster_rank(survivors_src)
+    paradigm = _paradigm_distribution(survivors_src)
+    convergent_clusters = _convergent_clusters(survivors_src)
+    cross_era = _cross_era_anchors(survivors_src)
+
+    # Attach within-cluster rank onto each survivor
+    for fe in survivors_fe:
+        rk = within_rank.get(fe["name"])
+        if rk:
+            fe["cluster_rank"] = rk["rank"]
+            fe["cluster_total"] = rk["total_in_cluster"]
+            fe["cluster_percentile"] = rk["percentile"]
+
     out = {
         "legend_id": legend.id,
         "database_name": legend.display_name,
@@ -218,13 +699,38 @@ def _transform(legend: Legend, src: dict, disc_by_id: dict[str, dict]) -> dict:
         "cost": "$0.00",
         "wall_time": f"{float(summary.get('wall_seconds', 0.0)):.1f}s",
         "total_entities": int(summary.get("total_entities", 0)),
-        "connections": _derive_connections(survivors_src, survivors_fe),
-        "novelty": _novelty(survivors_src),
+        "connections": _real_connections(survivors_src, survivors_fe),
+        "paradigm_distribution": paradigm,
         "paradigm": _apply_discriminator(survivors_src, disc_by_id),
+        "convergent_clusters": convergent_clusters,
+        "cross_era_anchors": cross_era,
     }
+    # Stash reference material used later by _enrich_post_global
+    out["_within_rank"] = within_rank
+    out["_cross_era"] = cross_era
+
     if truncated_from is not None:
         out["survivors_truncated_from"] = truncated_from
     return out
+
+
+def _enrich_post_global(
+    transformed: dict,
+    legend_fingerprints: dict[str, dict[str, str]],
+    global_fp_count: dict[str, int],
+) -> None:
+    """Attach convergence_index — needs global fingerprint counts."""
+    legend_id = transformed["legend_id"]
+    this_fps = legend_fingerprints.get(legend_id, {})
+    convergence = _convergence_index(
+        transformed["survivors"],
+        survivors_src=[],  # not needed here, use FE
+        within_rank=transformed.pop("_within_rank", {}),
+        cross_era=transformed.pop("_cross_era", []),
+        this_legend_fingerprints=this_fps,
+        global_fp_count=global_fp_count,
+    )
+    transformed["convergence_index"] = convergence
 
 
 def _compute_bridges(
@@ -315,6 +821,8 @@ def main() -> int:
 
     entries: list[dict] = []
     legend_fingerprints: dict[str, dict[str, str]] = {}
+    transformed_by_id: dict[str, dict] = {}
+    survivors_by_legend: dict[str, list[dict]] = {}
 
     for legend in LEGENDS:
         if not legend.source.exists():
@@ -335,52 +843,98 @@ def main() -> int:
             if name and fp:
                 fps[name] = fp
         legend_fingerprints[legend.id] = fps
+        survivors_by_legend[legend.id] = (src.get("survivors") or [])[:300]
+        transformed_by_id[legend.id] = transformed
 
+    # Global fingerprint counts (dedup within legend)
+    global_fp_count: dict[str, int] = {}
+    for legend_id, fps in legend_fingerprints.items():
+        for fp in set(fps.values()):
+            global_fp_count[fp] = global_fp_count.get(fp, 0) + 1
+
+    # Enrich each legend with convergence_index now that we know global counts
+    for legend_id, transformed in transformed_by_id.items():
+        _enrich_post_global(transformed, legend_fingerprints, global_fp_count)
+
+    # Write per-legend JSONs
+    for legend in LEGENDS:
+        transformed = transformed_by_id.get(legend.id)
+        if not transformed:
+            continue
         dst = OUT_DIR / f"{legend.id}.json"
         dst.write_text(
             json.dumps(transformed, indent=2, sort_keys=True, default=str),
             encoding="utf-8",
         )
         size_kb = dst.stat().st_size // 1024
-        entries.append(
-            {
-                "id": legend.id,
-                "display_name": legend.display_name,
-                "description": legend.description,
-                "path": f"legends/{legend.id}.json",
-                "survivors": len(transformed["survivors"]),
-                "total_entities": transformed["total_entities"],
-                "clusters": transformed["clusters"],
-                "paradigm_matched": transformed["paradigm"]["total_matched"],
-                "novelty_score": transformed["novelty"]["novelty_score"],
-                "size_kb": size_kb,
-            }
-        )
+        paradigm = transformed.get("paradigm", {})
+        dist = transformed.get("paradigm_distribution", {})
+        top_hypothesis = dist.get("hypothesis_by_corpus", {}) if isinstance(dist, dict) else {}
+        confirmed_count = sum(1 for h in top_hypothesis.values() if h.get("confirmed"))
+        entries.append({
+            "id": legend.id,
+            "display_name": legend.display_name,
+            "description": legend.description,
+            "path": f"legends/{legend.id}.json",
+            "survivors": len(transformed["survivors"]),
+            "total_entities": transformed["total_entities"],
+            "clusters": transformed["clusters"],
+            "paradigm_matched": paradigm.get("total_matched", 0),
+            "convergent_cluster_count": len(transformed.get("convergent_clusters") or []),
+            "cross_era_anchor_count": len(transformed.get("cross_era_anchors") or []),
+            "hypothesis_corpora_confirmed": confirmed_count,
+            "top_convergence": (
+                transformed.get("convergence_index", [{}])[0].get("convergence", 0.0)
+                if transformed.get("convergence_index") else 0.0
+            ),
+            "size_kb": size_kb,
+        })
         log.info(
-            "%s (%d survivors, paradigm=%d, novelty=%.2f, %d KB)",
+            "%s (%d surv, convergent_clusters=%d, cross_era=%d, top_conv=%.2f, %d KB)",
             legend.id,
             len(transformed["survivors"]),
-            transformed["paradigm"]["total_matched"],
-            transformed["novelty"]["novelty_score"],
+            len(transformed.get("convergent_clusters") or []),
+            len(transformed.get("cross_era_anchors") or []),
+            entries[-1]["top_convergence"],
             size_kb,
         )
 
+    # Global cross-legend analytics
     bridges, bridge_stats = _compute_bridges(legend_fingerprints)
+    triples = _triple_bridges(legend_fingerprints, global_fp_count)
+    paradigm_matrix = _paradigm_convergence_matrix(
+        legend_fingerprints, survivors_by_legend, global_fp_count
+    )
+
     (OUT_DIR / "bridges.json").write_text(
         json.dumps(
-            {"bridges": bridges, "count": len(bridges), "stats": bridge_stats},
+            {
+                "bridges": bridges,
+                "count": len(bridges),
+                "stats": bridge_stats,
+                "triple_bridges": triples,
+                "triple_bridges_count": len(triples),
+                "paradigm_convergence_matrix": paradigm_matrix,
+            },
             indent=2, sort_keys=True, default=str,
         ),
         encoding="utf-8",
     )
     log.info(
-        "Computed %d cross-legend bridges (dropped %d dense fingerprints across %d total)",
+        "Bridges: %d pairwise, %d triple+, %d paradigm-pair rows (dropped %d dense / %d unique)",
         len(bridges),
+        len(triples),
+        len(paradigm_matrix),
         bridge_stats["dense_fingerprints_dropped"],
         bridge_stats["total_unique_fingerprints"],
     )
 
-    manifest = {"legends": entries, "count": len(entries), "bridges_count": len(bridges)}
+    manifest = {
+        "legends": entries,
+        "count": len(entries),
+        "bridges_count": len(bridges),
+        "triple_bridges_count": len(triples),
+    }
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True, default=str), encoding="utf-8"
     )

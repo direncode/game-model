@@ -2,2048 +2,3357 @@
   "clusters": 23,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__concept__context_sensitive_language",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__concept__syntagmatic"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__concept__syntagmatic",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__concept__signified"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "historical_saussure_structuralism__concept__signified",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "historical_saussure_structuralism__person__ferdinand_de_saussure"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "historical_saussure_structuralism__person__ferdinand_de_saussure",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_chomsky_generative__person__noam_chomsky"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_chomsky_generative__person__noam_chomsky",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_distributional_semantics__person__j_r_firth"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_panini_grammar__concept__samjna",
-      "strength": 0.8,
-      "target": "historical_panini_grammar__concept__antaranga"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_panini_grammar__concept__antaranga",
-      "strength": 0.8,
-      "target": "modern_transformer_nlp__concept__attention_is_all_you_need"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_nlp__concept__attention_is_all_you_need",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__c014"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_chomsky_hierarchy__c014",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_backus_naur_form__c021"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_backus_naur_form__c021",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "historical_humboldt_language__writing__on_language_english"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_generative__concept__surface_structure",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__concept__linear_bounded_automaton"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_chomsky_hierarchy__concept__linear_bounded_automaton",
-      "strength": 0.8,
-      "target": "modern_transformer_nlp__concept__self_attention"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_nlp__concept__self_attention",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_chomsky_generative__concept__principles_and_parameters"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_chomsky_generative__concept__principles_and_parameters",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_distributional_semantics__concept__latent_semantic_analysis"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_distributional_semantics__concept__latent_semantic_analysis",
-      "strength": 0.8,
-      "target": "linguistics_panini_ashtadhyayi__c054"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "linguistics_panini_ashtadhyayi__c054",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__c071"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__c071",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__c065"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__c065",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__c010"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__c010",
-      "strength": 0.8,
-      "target": "modern_transformer_attention__c068"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_attention__c068",
-      "strength": 0.8,
-      "target": "modern_transformer_attention__c052"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_attention__c052",
-      "strength": 0.8,
-      "target": "modern_distributional_semantics__c052"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_distributional_semantics__c052",
-      "strength": 0.8,
-      "target": "linguistics_portroyal_grammar__c018"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "linguistics_portroyal_grammar__c018",
-      "strength": 0.8,
-      "target": "modern_transformer_attention__c060"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_attention__c060",
-      "strength": 0.8,
-      "target": "linguistics_saussure_course__c021"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "linguistics_saussure_course__c021",
-      "strength": 0.8,
-      "target": "historical_panini_grammar__location__indian_grammatical_tradition"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_panini_grammar__location__indian_grammatical_tradition",
-      "strength": 0.8,
-      "target": "modern_chomsky_generative__location__mit_department_of_linguistics"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "modern_chomsky_generative__location__mit_department_of_linguistics",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "modern_chomsky_hierarchy__person__stephen_kleene"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__person__stephen_kleene",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "modern_chomsky_hierarchy__c071",
+      "strength": 1.0,
+      "target": "historical_panini_grammar__location__indian_grammatical_tradition"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "historical_panini_grammar__location__indian_grammatical_tradition",
+      "strength": 1.0,
       "target": "modern_transformer_nlp__person__noam_shazeer"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_nlp__person__noam_shazeer",
-      "strength": 0.8,
-      "target": "modern_chomsky_hierarchy__person__dana_scott"
+      "signal_type": "flip_proximity",
+      "source": "modern_transformer_nlp__concept__self_attention",
+      "strength": 1.0,
+      "target": "linguistics_panini_ashtadhyayi__c054"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_hierarchy__person__dana_scott",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "linguistics_panini_ashtadhyayi__c054",
+      "strength": 1.0,
+      "target": "modern_chomsky_hierarchy__c065"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_chomsky_hierarchy__c010",
+      "strength": 1.0,
+      "target": "modern_transformer_attention__c068"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_transformer_attention__c068",
+      "strength": 1.0,
+      "target": "modern_transformer_attention__c052"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_transformer_attention__c052",
+      "strength": 1.0,
+      "target": "modern_distributional_semantics__c052"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_distributional_semantics__c052",
+      "strength": 1.0,
+      "target": "linguistics_portroyal_grammar__c018"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_portroyal_grammar__c018",
+      "strength": 1.0,
+      "target": "modern_transformer_attention__c060"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_transformer_attention__c060",
+      "strength": 1.0,
+      "target": "linguistics_saussure_course__c021"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_saussure_course__c021",
+      "strength": 1.0,
       "target": "historical_humboldt_language__writing__ueber_die_verschiedenheit_des_menschlichen_sprachb"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "historical_saussure_structuralism__concept__sign",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__concept__system_of_differences"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__concept__system_of_differences",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__concept__paradigmatic"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__concept__paradigmatic",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__concept__synchrony"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__concept__synchrony",
-      "strength": 0.8,
-      "target": "linguistics_saussure_course__c010"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "linguistics_saussure_course__c010",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__location__prague_linguistic_circle"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__location__prague_linguistic_circle",
-      "strength": 0.8,
-      "target": "modern_transformer_nlp__person__ashish_vaswani"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_transformer_nlp__person__ashish_vaswani",
-      "strength": 0.8,
-      "target": "historical_saussure_structuralism__person__j_r_firth"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_saussure_structuralism__person__j_r_firth",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "historical_portroyal_grammar__person__rene_descartes"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "historical_humboldt_language__concept__infinite_use_of_finite_means",
-      "strength": 0.8,
-      "target": "modern_chomsky_generative__concept__universal_grammar"
+      "signal_type": "flip_proximity",
+      "source": "historical_saussure_structuralism__concept__paradigmatic",
+      "strength": 1.0,
+      "target": "historical_saussure_structuralism__location__prague_linguistic_circle"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "modern_chomsky_generative__concept__universal_grammar",
-      "strength": 0.8,
-      "target": "historical_humboldt_language__concept__energeia"
+      "signal_type": "flip_proximity",
+      "source": "historical_saussure_structuralism__location__prague_linguistic_circle",
+      "strength": 1.0,
+      "target": "modern_transformer_nlp__person__ashish_vaswani"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_transformer_nlp__person__ashish_vaswani",
+      "strength": 1.0,
+      "target": "historical_saussure_structuralism__person__j_r_firth"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "historical_humboldt_language__concept__energeia",
+      "strength": 1.0,
+      "target": "historical_portroyal_grammar__person__antoine_arnauld"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "historical_humboldt_language__concept__infinite_use_of_finite_means",
+      "strength": 1.0,
+      "target": "modern_chomsky_hierarchy__concept__regular_language"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_saussure_course__c044",
+      "strength": 1.0,
+      "target": "linguistics_saussure_course__c036"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_saussure_course__c036",
+      "strength": 1.0,
+      "target": "linguistics_portroyal_grammar__c000"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_portroyal_grammar__c000",
+      "strength": 1.0,
+      "target": "linguistics_saussure_course__c000"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "linguistics_saussure_course__c000",
+      "strength": 1.0,
+      "target": "historical_saussure_structuralism__location__geneva"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "modern_chomsky_hierarchy__concept__context_free_language",
+      "strength": 1.0,
+      "target": "modern_transformer_attention__c000"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.8785,
+      "dimensions": {
+        "anomaly": 0.7125,
+        "cluster_percentile": 0.9167,
+        "cross_era": 1.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "historical_saussure_structuralism__writing__cours_de_linguistique_generale",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.84,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_saussure_structuralism__writing__course_in_general_linguistics",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.8355,
+      "dimensions": {
+        "anomaly": 0.9872,
+        "cluster_percentile": 1.0,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_portroyal_grammar__event__port_royal_grammar_published",
+      "type": "event"
+    },
+    {
+      "convergence": 0.8348,
+      "dimensions": {
+        "anomaly": 0.7066,
+        "cluster_percentile": 0.75,
+        "cross_era": 1.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "modern_transformer_nlp__person__ashish_vaswani",
+      "type": "person"
+    },
+    {
+      "convergence": 0.8166,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 0.9863,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "modern_transformer_nlp__location__openai_san_francisco",
+      "type": "location"
+    },
+    {
+      "convergence": 0.7852,
+      "dimensions": {
+        "anomaly": 0.9578,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "modern_formal_grammar_bnf__writing__algol_60_report",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.767,
+      "dimensions": {
+        "anomaly": 0.9343,
+        "cluster_percentile": 0.8,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_saussure_structuralism__person__ferdinand_de_saussure",
+      "type": "person"
+    },
+    {
+      "convergence": 0.7309,
+      "dimensions": {
+        "anomaly": 0.8026,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "modern_chomsky_generative__writing__aspects_of_the_theory_of_syntax",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.7284,
+      "dimensions": {
+        "anomaly": 0.6454,
+        "cluster_percentile": 0.65,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.7
+      },
+      "name": "historical_humboldt_language__writing__ueber_die_verschiedenheit_des_menschlichen_sprachb",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.7215,
+      "dimensions": {
+        "anomaly": 0.6328,
+        "cluster_percentile": 0.4,
+        "cross_era": 1.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "historical_saussure_structuralism__concept__signified",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.7207,
+      "dimensions": {
+        "anomaly": 0.9448,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.7
+      },
+      "name": "modern_formal_grammar_bnf__event__algol_60_report_published_with_bnf",
+      "type": "event"
+    },
+    {
+      "convergence": 0.7106,
+      "dimensions": {
+        "anomaly": 0.7267,
+        "cluster_percentile": 0.9452,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "modern_chomsky_hierarchy__writing__three_models_for_the_description_of_language",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.7066,
+      "dimensions": {
+        "anomaly": 0.8229,
+        "cluster_percentile": 0.7143,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_portroyal_grammar__writing__cartesian_linguistics",
+      "type": "writing"
+    },
+    {
+      "convergence": 0.6846,
+      "dimensions": {
+        "anomaly": 0.6988,
+        "cluster_percentile": 0.8,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_panini_grammar__location__indian_grammatical_tradition",
+      "type": "location"
+    },
+    {
+      "convergence": 0.68,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "modern_distributional_semantics__event__lsa_introduced",
+      "type": "event"
+    },
+    {
+      "convergence": 0.6653,
+      "dimensions": {
+        "anomaly": 0.8887,
+        "cluster_percentile": 0.8571,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.7
+      },
+      "name": "modern_distributional_semantics__event__word2vec_released",
+      "type": "event"
+    },
+    {
+      "convergence": 0.648,
+      "dimensions": {
+        "anomaly": 0.7372,
+        "cluster_percentile": 0.6,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_saussure_structuralism__concept__syntagmatic",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "modern_chomsky_hierarchy__concept__context_sensitive_language",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.6216,
+      "dimensions": {
+        "anomaly": 0.6141,
+        "cluster_percentile": 0.6667,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "historical_panini_grammar__event__ashtadhyayi_composed",
+      "type": "event"
+    },
+    {
+      "convergence": 0.62,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "modern_transformer_attention__c009",
+      "type": "document_chunk"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 1,
+      "dominant_paradigm": "chunk_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 4,
+      "hot_fraction": 0.054,
+      "total": 74
+    },
+    {
+      "cluster": 22,
+      "dominant_paradigm": "modern_chomsky_hierarchy",
+      "dominant_paradigm_share": 1,
+      "hot_count": 2,
+      "hot_fraction": 0.333,
+      "total": 6
+    },
+    {
+      "cluster": 8,
+      "dominant_paradigm": "modern_formal_grammar_bnf",
+      "dominant_paradigm_share": 1,
+      "hot_count": 2,
+      "hot_fraction": 0.25,
+      "total": 8
+    },
+    {
+      "cluster": 20,
+      "dominant_paradigm": "historical_humboldt_language",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.167,
+      "total": 6
+    },
+    {
+      "cluster": 14,
+      "dominant_paradigm": "modern_chomsky_generative",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.048,
+      "total": 21
+    },
+    {
+      "cluster": 19,
+      "dominant_paradigm": "historical_saussure_structuralism",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.111,
+      "total": 9
+    },
+    {
+      "cluster": 21,
+      "dominant_paradigm": "historical_portroyal_grammar",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.167,
+      "total": 6
+    },
+    {
+      "cluster": 12,
+      "dominant_paradigm": "historical_saussure_structuralism",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.167,
+      "total": 6
+    },
+    {
+      "cluster": 9,
+      "dominant_paradigm": "historical_portroyal_grammar",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.1,
+      "total": 10
+    },
+    {
+      "cluster": 16,
+      "dominant_paradigm": "modern_distributional_semantics",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.143,
+      "total": 7
+    },
+    {
+      "cluster": 10,
+      "dominant_paradigm": "historical_panini_grammar",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.071,
+      "total": 14
+    },
+    {
+      "cluster": 0,
+      "dominant_paradigm": "modern_formal_grammar_bnf",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.048,
+      "total": 21
+    },
+    {
+      "cluster": 18,
+      "dominant_paradigm": "historical_saussure_structuralism",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.333,
+      "total": 3
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [
+    {
+      "anomaly": 1.0,
+      "cluster": 1,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 4,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_transformer_nlp__location__openai_san_francisco",
+      "subcorpus": "transformer_nlp"
+    },
+    {
+      "anomaly": 1.0,
+      "cluster": 18,
+      "cluster_majority_count": 1,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 2,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_saussure_structuralism__writing__course_in_general_linguistics",
+      "subcorpus": "saussure_structuralism"
+    },
+    {
+      "anomaly": 0.9872,
+      "cluster": 9,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 3,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_portroyal_grammar__event__port_royal_grammar_published",
+      "subcorpus": "portroyal_grammar"
+    },
+    {
+      "anomaly": 0.9343,
+      "cluster": 22,
+      "cluster_majority_count": 3,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 6,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_saussure_structuralism__person__ferdinand_de_saussure",
+      "subcorpus": "saussure_structuralism"
+    },
+    {
+      "anomaly": 0.8229,
+      "cluster": 8,
+      "cluster_majority_count": 3,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 4,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_portroyal_grammar__writing__cartesian_linguistics",
+      "subcorpus": "portroyal_grammar"
+    },
+    {
+      "anomaly": 0.7372,
+      "cluster": 22,
+      "cluster_majority_count": 3,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 6,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_saussure_structuralism__concept__syntagmatic",
+      "subcorpus": "saussure_structuralism"
+    },
+    {
+      "anomaly": 0.7267,
+      "cluster": 1,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 4,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_chomsky_hierarchy__writing__three_models_for_the_description_of_language",
+      "subcorpus": "chomsky_hierarchy"
+    },
+    {
+      "anomaly": 0.7125,
+      "cluster": 6,
+      "cluster_majority_count": 1,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 2,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_saussure_structuralism__writing__cours_de_linguistique_generale",
+      "subcorpus": "saussure_structuralism"
+    },
+    {
+      "anomaly": 0.7066,
+      "cluster": 19,
+      "cluster_majority_count": 7,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 8,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_transformer_nlp__person__ashish_vaswani",
+      "subcorpus": "transformer_nlp"
+    },
+    {
+      "anomaly": 0.6988,
+      "cluster": 14,
+      "cluster_majority_count": 9,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 11,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_panini_grammar__location__indian_grammatical_tradition",
+      "subcorpus": "panini_grammar"
+    },
+    {
+      "anomaly": 0.6538,
+      "cluster": 21,
+      "cluster_majority_count": 4,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 6,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_chomsky_generative__concept__universal_grammar",
+      "subcorpus": "chomsky_generative"
+    },
+    {
+      "anomaly": 0.6454,
+      "cluster": 14,
+      "cluster_majority_count": 9,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 11,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_humboldt_language__writing__ueber_die_verschiedenheit_des_menschlichen_sprachb",
+      "subcorpus": "humboldt_language"
+    },
+    {
+      "anomaly": 0.6328,
+      "cluster": 22,
+      "cluster_majority_count": 3,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 6,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_saussure_structuralism__concept__signified",
+      "subcorpus": "saussure_structuralism"
+    },
+    {
+      "anomaly": 0.6262,
+      "cluster": 20,
+      "cluster_majority_count": 3,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 4,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_transformer_nlp__concept__attention_is_all_you_need",
+      "subcorpus": "transformer_nlp"
+    },
+    {
+      "anomaly": 0.6141,
+      "cluster": 16,
+      "cluster_majority_count": 2,
+      "cluster_majority_era": "modern",
+      "cluster_size_named": 3,
+      "corpus": "historical",
+      "era_class": "historical",
+      "name": "historical_panini_grammar__event__ashtadhyayi_composed",
+      "subcorpus": "panini_grammar"
+    }
+  ],
   "database_name": "Linguistics",
   "description": "Linguistics corpus",
   "legend_id": "linguistics",
-  "novelty": {
-    "novelty_score": 0.0044,
-    "probed": 289,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 1.0,
-        "name": "historical_saussure_structuralism__writing__course_in_general_linguistics",
-        "similarity": 0.9956,
-        "type": "writing"
-      },
-      {
-        "anomaly": 0.9872,
-        "name": "historical_portroyal_grammar__event__port_royal_grammar_published",
-        "similarity": 0.9955,
-        "type": "event"
-      },
-      {
-        "anomaly": 0.9363,
-        "name": "modern_chomsky_generative__concept__surface_structure",
-        "similarity": 0.9917,
-        "type": "concept"
-      },
-      {
-        "anomaly": 0.8692,
-        "name": "historical_saussure_structuralism__location__prague_linguistic_circle",
-        "similarity": 0.9904,
-        "type": "location"
-      },
-      {
-        "anomaly": 0.9021,
-        "name": "historical_portroyal_grammar__person__claude_lancelot",
-        "similarity": 0.9895,
-        "type": "person"
-      },
-      {
-        "anomaly": 0.821,
-        "name": "historical_portroyal_grammar__person__antoine_arnauld",
-        "similarity": 0.9894,
-        "type": "person"
-      },
-      {
-        "anomaly": 1.0,
-        "name": "modern_chomsky_hierarchy__concept__context_sensitive_language",
-        "similarity": 0.9892,
-        "type": "concept"
-      },
-      {
-        "anomaly": 0.8297,
-        "name": "modern_chomsky_hierarchy__concept__linear_bounded_automaton",
-        "similarity": 0.989,
-        "type": "concept"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "chunk",
+        "count": 228,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "historical",
+        "count": 13,
+        "role": "other",
+        "subcorpus": "saussure_structuralism"
+      },
+      {
+        "corpus": "historical",
+        "count": 8,
+        "role": "other",
+        "subcorpus": "panini_grammar"
+      },
+      {
+        "corpus": "modern",
+        "count": 8,
+        "role": "other",
+        "subcorpus": "chomsky_generative"
+      },
+      {
+        "corpus": "modern",
+        "count": 7,
+        "role": "other",
+        "subcorpus": "chomsky_hierarchy"
+      },
+      {
+        "corpus": "modern",
+        "count": 6,
+        "role": "other",
+        "subcorpus": "transformer_nlp"
+      },
+      {
+        "corpus": "historical",
+        "count": 6,
+        "role": "other",
+        "subcorpus": "portroyal_grammar"
+      },
+      {
+        "corpus": "historical",
+        "count": 5,
+        "role": "other",
+        "subcorpus": "humboldt_language"
+      },
+      {
+        "corpus": "modern",
+        "count": 5,
+        "role": "other",
+        "subcorpus": "distributional_semantics"
+      },
+      {
+        "corpus": "modern",
+        "count": 3,
+        "role": "other",
+        "subcorpus": "formal_grammar_bnf"
+      }
+    ],
+    "hypothesis_by_corpus": {},
+    "role_counts": {
+      "other": 289
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "modern_chomsky_hierarchy__concept__context_sensitive_language",
       "score": 0.9232,
       "type": "concept"
     },
     {
       "anomaly_score": 0.7313,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "historical_panini_grammar__concept__samjna",
       "score": 0.9028,
       "type": "concept"
     },
     {
       "anomaly_score": 0.9363,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 21,
       "name": "modern_chomsky_generative__concept__surface_structure",
       "score": 0.8829,
       "type": "concept"
     },
     {
       "anomaly_score": 0.7652,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__concept__sign",
       "score": 0.8728,
       "type": "concept"
     },
     {
       "anomaly_score": 0.7372,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "historical_saussure_structuralism__concept__syntagmatic",
       "score": 0.8615,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5716,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "historical_humboldt_language__concept__infinite_use_of_finite_means",
       "score": 0.8549,
       "type": "concept"
     },
     {
       "anomaly_score": 0.8297,
+      "cluster_percentile": 0.95,
+      "cluster_rank": 2,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__concept__linear_bounded_automaton",
       "score": 0.8481,
       "type": "concept"
     },
     {
       "anomaly_score": 0.8047,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "historical_panini_grammar__concept__antaranga",
       "score": 0.8463,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6328,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "historical_saussure_structuralism__concept__signified",
       "score": 0.8422,
       "type": "concept"
     },
     {
       "anomaly_score": 0.584,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "historical_panini_grammar__concept__anubandha",
       "score": 0.8326,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6538,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "modern_chomsky_generative__concept__universal_grammar",
       "score": 0.8232,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5553,
+      "cluster_percentile": 0.55,
+      "cluster_rank": 10,
+      "cluster_total": 21,
       "name": "modern_transformer_nlp__concept__self_attention",
       "score": 0.8078,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5596,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "historical_humboldt_language__concept__energeia",
       "score": 0.8045,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6262,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "modern_transformer_nlp__concept__attention_is_all_you_need",
       "score": 0.8039,
       "type": "concept"
     },
     {
       "anomaly_score": 0.6331,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 9,
+      "cluster_total": 21,
       "name": "modern_chomsky_generative__concept__principles_and_parameters",
       "score": 0.8,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5619,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "modern_chomsky_hierarchy__concept__context_free_language",
       "score": 0.7982,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4944,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "modern_chomsky_hierarchy__concept__regular_language",
       "score": 0.7981,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5488,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__concept__system_of_differences",
       "score": 0.7956,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5011,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 11,
+      "cluster_total": 21,
       "name": "modern_distributional_semantics__concept__latent_semantic_analysis",
       "score": 0.79,
       "type": "concept"
     },
     {
       "anomaly_score": 0.4656,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__concept__paradigmatic",
       "score": 0.7823,
       "type": "concept"
     },
     {
       "anomaly_score": 0.585,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__concept__synchrony",
       "score": 0.7819,
       "type": "concept"
     },
     {
       "anomaly_score": 0.5307,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "modern_transformer_nlp__concept__query_key_value",
       "score": 0.7815,
       "type": "concept"
     },
     {
       "anomaly_score": 0.116,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "linguistics_portroyal_grammar__c045",
       "score": 0.7097,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1045,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "linguistics_portroyal_grammar__c047",
       "score": 0.6761,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1115,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 15,
       "name": "linguistics_saussure_course__c051",
       "score": 0.6693,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0996,
+      "cluster_percentile": 0.35,
+      "cluster_rank": 14,
+      "cluster_total": 21,
       "name": "linguistics_panini_ashtadhyayi__c054",
       "score": 0.6673,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1006,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 13,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__c071",
       "score": 0.6607,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1004,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "linguistics_humboldt_language__c046",
       "score": 0.6583,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1025,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "linguistics_portroyal_grammar__c037",
       "score": 0.6582,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1114,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "linguistics_portroyal_grammar__c033",
       "score": 0.6361,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0857,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 5,
+      "cluster_total": 15,
       "name": "linguistics_humboldt_language__c059",
       "score": 0.6275,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0994,
+      "cluster_percentile": 0.8462,
+      "cluster_rank": 3,
+      "cluster_total": 14,
       "name": "linguistics_saussure_course__c041",
       "score": 0.6229,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0954,
+      "cluster_percentile": 0.85,
+      "cluster_rank": 4,
+      "cluster_total": 21,
       "name": "linguistics_saussure_course__c009",
       "score": 0.6183,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0859,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "linguistics_humboldt_language__c000",
       "score": 0.6071,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0926,
+      "cluster_percentile": 0.6471,
+      "cluster_rank": 7,
+      "cluster_total": 18,
       "name": "modern_distributional_semantics__c018",
       "score": 0.6064,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.088,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 12,
       "name": "linguistics_portroyal_grammar__c028",
       "score": 0.6053,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0873,
+      "cluster_percentile": 0.65,
+      "cluster_rank": 8,
+      "cluster_total": 21,
       "name": "linguistics_humboldt_language__c006",
       "score": 0.6049,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0922,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "linguistics_portroyal_grammar__c049",
       "score": 0.5998,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0948,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "linguistics_portroyal_grammar__c030",
       "score": 0.5977,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0866,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "linguistics_saussure_course__c031",
       "score": 0.5976,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0884,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 7,
+      "cluster_total": 21,
       "name": "modern_backus_naur_form__c020",
       "score": 0.5958,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0911,
+      "cluster_percentile": 0.6923,
+      "cluster_rank": 5,
+      "cluster_total": 14,
       "name": "linguistics_portroyal_grammar__c014",
       "score": 0.5928,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.079,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "linguistics_saussure_course__c013",
       "score": 0.5925,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.089,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "linguistics_portroyal_grammar__c016",
       "score": 0.5925,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.094,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "linguistics_portroyal_grammar__c021",
       "score": 0.5873,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.08,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "modern_distributional_semantics__c031",
       "score": 0.5854,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.091,
+      "cluster_percentile": 0.5882,
+      "cluster_rank": 8,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c013",
       "score": 0.5845,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0755,
+      "cluster_percentile": 0.2143,
+      "cluster_rank": 12,
+      "cluster_total": 15,
       "name": "linguistics_humboldt_language__c002",
       "score": 0.5834,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.084,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "linguistics_portroyal_grammar__c027",
       "score": 0.5815,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.076,
+      "cluster_percentile": 0.2353,
+      "cluster_rank": 14,
+      "cluster_total": 18,
       "name": "linguistics_panini_ashtadhyayi__c007",
       "score": 0.574,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0893,
+      "cluster_percentile": 0.6154,
+      "cluster_rank": 6,
+      "cluster_total": 14,
       "name": "modern_distributional_semantics__c001",
       "score": 0.5725,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.092,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "modern_chomsky_syntactic_structures__c000",
       "score": 0.5709,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0872,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "modern_transformer_attention__c028",
       "score": 0.5701,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0794,
+      "cluster_percentile": 0.3077,
+      "cluster_rank": 10,
+      "cluster_total": 14,
       "name": "linguistics_saussure_course__c038",
       "score": 0.5665,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.086,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "linguistics_humboldt_language__c012",
       "score": 0.5648,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0843,
+      "cluster_percentile": 0.4615,
+      "cluster_rank": 8,
+      "cluster_total": 14,
       "name": "linguistics_portroyal_grammar__c004",
       "score": 0.5644,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0756,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 11,
+      "cluster_total": 15,
       "name": "modern_chomsky_syntactic_structures__c003",
       "score": 0.5502,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0714,
+      "cluster_percentile": 0.1176,
+      "cluster_rank": 16,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c012",
       "score": 0.5477,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0692,
+      "cluster_percentile": 0.0714,
+      "cluster_rank": 14,
+      "cluster_total": 15,
       "name": "linguistics_saussure_course__c005",
       "score": 0.5389,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0717,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "modern_chomsky_syntactic_structures__c001",
       "score": 0.5351,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0647,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "modern_transformer_attention__c000",
       "score": 0.5299,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1017,
+      "cluster_percentile": 0.45,
+      "cluster_rank": 12,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__c065",
       "score": 0.4698,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c009",
       "score": 0.4227,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1144,
+      "cluster_percentile": 0.8767,
+      "cluster_rank": 10,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c065",
       "score": 0.4023,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1018,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "linguistics_panini_ashtadhyayi__c046",
       "score": 0.3938,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0932,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "linguistics_portroyal_grammar__c057",
       "score": 0.3936,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0962,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "linguistics_portroyal_grammar__c051",
       "score": 0.3917,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0748,
+      "cluster_percentile": 0.2308,
+      "cluster_rank": 11,
+      "cluster_total": 14,
       "name": "linguistics_saussure_course__c034",
       "score": 0.3854,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0936,
+      "cluster_percentile": 0.6164,
+      "cluster_rank": 29,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c059",
       "score": 0.3819,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0943,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "linguistics_humboldt_language__c048",
       "score": 0.3803,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.073,
+      "cluster_percentile": 0.1538,
+      "cluster_rank": 12,
+      "cluster_total": 14,
       "name": "modern_transformer_attention__c032",
       "score": 0.3734,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0842,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "linguistics_saussure_course__c063",
       "score": 0.3697,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0931,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "linguistics_saussure_course__c045",
       "score": 0.3666,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0845,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "linguistics_portroyal_grammar__c056",
       "score": 0.3611,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0886,
+      "cluster_percentile": 0.3562,
+      "cluster_rank": 48,
+      "cluster_total": 74,
       "name": "modern_backus_naur_form__c075",
       "score": 0.361,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0935,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "linguistics_humboldt_language__c080",
       "score": 0.3587,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0894,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "linguistics_portroyal_grammar__c038",
       "score": 0.3578,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1071,
+      "cluster_percentile": 0.8493,
+      "cluster_rank": 12,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c074",
       "score": 0.3556,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0603,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 21,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__c010",
       "score": 0.3545,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0797,
+      "cluster_percentile": 0.0137,
+      "cluster_rank": 73,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c048",
       "score": 0.3525,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0952,
+      "cluster_percentile": 0.6849,
+      "cluster_rank": 24,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c089",
       "score": 0.3519,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0899,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "linguistics_panini_ashtadhyayi__c035",
       "score": 0.3511,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0963,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 3,
+      "cluster_total": 21,
       "name": "modern_chomsky_syntactic_structures__c042",
       "score": 0.3502,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0887,
+      "cluster_percentile": 0.3699,
+      "cluster_rank": 47,
+      "cluster_total": 74,
       "name": "linguistics_portroyal_grammar__c061",
       "score": 0.3499,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0977,
+      "cluster_percentile": 0.7534,
+      "cluster_rank": 19,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c067",
       "score": 0.3495,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0969,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "linguistics_saussure_course__c010",
       "score": 0.3464,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0828,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "modern_distributional_semantics__c040",
       "score": 0.3432,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0935,
+      "cluster_percentile": 0.589,
+      "cluster_rank": 31,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c052",
       "score": 0.3427,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.6378,
+      "cluster_percentile": 0.9315,
+      "cluster_rank": 6,
+      "cluster_total": 74,
       "name": "modern_distributional_semantics__c014",
       "score": 0.3427,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0915,
+      "cluster_percentile": 0.4658,
+      "cluster_rank": 40,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c075",
       "score": 0.3373,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.092,
+      "cluster_percentile": 0.5068,
+      "cluster_rank": 37,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c054",
       "score": 0.3368,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0893,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 5,
+      "cluster_total": 13,
       "name": "linguistics_saussure_course__c066",
       "score": 0.3357,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0904,
+      "cluster_percentile": 0.4384,
+      "cluster_rank": 42,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c071",
       "score": 0.3355,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1057,
+      "cluster_percentile": 0.8219,
+      "cluster_rank": 14,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c060",
       "score": 0.333,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0941,
+      "cluster_percentile": 0.6575,
+      "cluster_rank": 26,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c073",
       "score": 0.3294,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0977,
+      "cluster_percentile": 0.9412,
+      "cluster_rank": 2,
+      "cluster_total": 18,
       "name": "linguistics_humboldt_language__c070",
       "score": 0.3294,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0899,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "linguistics_panini_ashtadhyayi__c033",
       "score": 0.328,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1028,
+      "cluster_percentile": 0.9231,
+      "cluster_rank": 2,
+      "cluster_total": 14,
       "name": "linguistics_panini_ashtadhyayi__c052",
       "score": 0.3275,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0886,
+      "cluster_percentile": 0.3425,
+      "cluster_rank": 49,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c073",
       "score": 0.3275,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.085,
+      "cluster_percentile": 0.1644,
+      "cluster_rank": 62,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c070",
       "score": 0.327,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0985,
+      "cluster_percentile": 0.7808,
+      "cluster_rank": 17,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c058",
       "score": 0.3264,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0807,
+      "cluster_percentile": 0.0548,
+      "cluster_rank": 70,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c077",
       "score": 0.325,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0957,
+      "cluster_percentile": 0.7692,
+      "cluster_rank": 4,
+      "cluster_total": 14,
       "name": "linguistics_panini_ashtadhyayi__c036",
       "score": 0.3248,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0836,
+      "cluster_percentile": 0.137,
+      "cluster_rank": 64,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c074",
       "score": 0.3247,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0983,
+      "cluster_percentile": 0.7671,
+      "cluster_rank": 18,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c063",
       "score": 0.3233,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0902,
+      "cluster_percentile": 0.4247,
+      "cluster_rank": 43,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c070",
       "score": 0.3229,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.099,
+      "cluster_percentile": 0.95,
+      "cluster_rank": 2,
+      "cluster_total": 21,
       "name": "linguistics_portroyal_grammar__c063",
       "score": 0.3223,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0977,
+      "cluster_percentile": 0.7397,
+      "cluster_rank": 20,
+      "cluster_total": 74,
       "name": "modern_distributional_semantics__c075",
       "score": 0.3203,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0966,
+      "cluster_percentile": 0.7123,
+      "cluster_rank": 22,
+      "cluster_total": 74,
       "name": "modern_backus_naur_form__c055",
       "score": 0.32,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0953,
+      "cluster_percentile": 0.8824,
+      "cluster_rank": 3,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c054",
       "score": 0.3197,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0951,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 5,
+      "cluster_total": 21,
       "name": "modern_transformer_attention__c072",
       "score": 0.3196,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0853,
+      "cluster_percentile": 0.1781,
+      "cluster_rank": 61,
+      "cluster_total": 74,
       "name": "modern_distributional_semantics__c084",
       "score": 0.3194,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0884,
+      "cluster_percentile": 0.3288,
+      "cluster_rank": 50,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c067",
       "score": 0.3188,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1024,
+      "cluster_percentile": 0.7945,
+      "cluster_rank": 16,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c074",
       "score": 0.3177,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.081,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "linguistics_panini_ashtadhyayi__c039",
       "score": 0.3171,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1103,
+      "cluster_percentile": 0.863,
+      "cluster_rank": 11,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c070",
       "score": 0.316,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0855,
+      "cluster_percentile": 0.2055,
+      "cluster_rank": 59,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c055",
       "score": 0.316,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0854,
+      "cluster_percentile": 0.1918,
+      "cluster_rank": 60,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c065",
       "score": 0.316,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0875,
+      "cluster_percentile": 0.2603,
+      "cluster_rank": 55,
+      "cluster_total": 74,
       "name": "modern_distributional_semantics__c062",
       "score": 0.3158,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0866,
+      "cluster_percentile": 0.9091,
+      "cluster_rank": 2,
+      "cluster_total": 12,
       "name": "linguistics_portroyal_grammar__c059",
       "score": 0.314,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0884,
+      "cluster_percentile": 0.3151,
+      "cluster_rank": 51,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c055",
       "score": 0.3137,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0926,
+      "cluster_percentile": 0.5753,
+      "cluster_rank": 32,
+      "cluster_total": 74,
       "name": "modern_backus_naur_form__c062",
       "score": 0.3133,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0924,
+      "cluster_percentile": 0.5479,
+      "cluster_rank": 34,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c058",
       "score": 0.313,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0798,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "modern_backus_naur_form__c003",
       "score": 0.313,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0897,
+      "cluster_percentile": 0.411,
+      "cluster_rank": 44,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c061",
       "score": 0.3126,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0939,
+      "cluster_percentile": 0.6438,
+      "cluster_rank": 27,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c075",
       "score": 0.3125,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0747,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "linguistics_panini_ashtadhyayi__c028",
       "score": 0.3119,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0881,
+      "cluster_percentile": 0.2877,
+      "cluster_rank": 53,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c057",
       "score": 0.3117,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0645,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "modern_chomsky_syntactic_structures__c015",
       "score": 0.3114,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0844,
+      "cluster_percentile": 0.5385,
+      "cluster_rank": 7,
+      "cluster_total": 14,
       "name": "linguistics_portroyal_grammar__c046",
       "score": 0.3114,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0834,
+      "cluster_percentile": 0.1233,
+      "cluster_rank": 65,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c069",
       "score": 0.3108,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0913,
+      "cluster_percentile": 0.4521,
+      "cluster_rank": 41,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c080",
       "score": 0.3096,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0936,
+      "cluster_percentile": 0.6027,
+      "cluster_rank": 30,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c052",
       "score": 0.3082,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0831,
+      "cluster_percentile": 0.1096,
+      "cluster_rank": 66,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c068",
       "score": 0.3069,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0812,
+      "cluster_percentile": 0.0685,
+      "cluster_rank": 69,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c082",
       "score": 0.3067,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0877,
+      "cluster_percentile": 0.274,
+      "cluster_rank": 54,
+      "cluster_total": 74,
       "name": "linguistics_portroyal_grammar__c065",
       "score": 0.306,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1232,
+      "cluster_percentile": 0.9041,
+      "cluster_rank": 8,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c072",
       "score": 0.3057,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0776,
+      "cluster_percentile": 0.2941,
+      "cluster_rank": 13,
+      "cluster_total": 18,
       "name": "linguistics_humboldt_language__c072",
       "score": 0.3054,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0937,
+      "cluster_percentile": 0.6301,
+      "cluster_rank": 28,
+      "cluster_total": 74,
       "name": "linguistics_portroyal_grammar__c055",
       "score": 0.3054,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0931,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "linguistics_saussure_course__c044",
       "score": 0.3053,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0864,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 7,
+      "cluster_total": 13,
       "name": "linguistics_panini_ashtadhyayi__c058",
       "score": 0.3052,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0854,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 17,
+      "cluster_total": 21,
       "name": "modern_transformer_attention__c068",
       "score": 0.3051,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1028,
+      "cluster_percentile": 0.8082,
+      "cluster_rank": 15,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c074",
       "score": 0.3045,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0797,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 74,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c060",
       "score": 0.3043,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0923,
+      "cluster_percentile": 0.5205,
+      "cluster_rank": 36,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c085",
       "score": 0.3039,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0917,
+      "cluster_percentile": 0.4932,
+      "cluster_rank": 38,
+      "cluster_total": 74,
       "name": "modern_distributional_semantics__c042",
       "score": 0.3036,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.1182,
+      "cluster_percentile": 0.8904,
+      "cluster_rank": 9,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c061",
       "score": 0.303,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.2372,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "modern_chomsky_syntactic_structures__c044",
       "score": 0.3023,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0917,
+      "cluster_percentile": 0.4795,
+      "cluster_rank": 39,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c061",
       "score": 0.3023,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0839,
+      "cluster_percentile": 0.1507,
+      "cluster_rank": 63,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c077",
       "score": 0.3013,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0883,
+      "cluster_percentile": 0.3014,
+      "cluster_rank": 52,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c050",
       "score": 0.3011,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0804,
+      "cluster_percentile": 0.0274,
+      "cluster_rank": 72,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c081",
       "score": 0.3009,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0889,
+      "cluster_percentile": 0.3836,
+      "cluster_rank": 46,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c075",
       "score": 0.3006,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0869,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "linguistics_panini_ashtadhyayi__c042",
       "score": 0.2999,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.087,
+      "cluster_percentile": 0.2329,
+      "cluster_rank": 57,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c081",
       "score": 0.2999,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.082,
+      "cluster_percentile": 0.0959,
+      "cluster_rank": 67,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c079",
       "score": 0.2999,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0722,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "linguistics_saussure_course__c036",
       "score": 0.2997,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.087,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "linguistics_portroyal_grammar__c011",
       "score": 0.2996,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0819,
+      "cluster_percentile": 0.0822,
+      "cluster_rank": 68,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c062",
       "score": 0.2989,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0932,
+      "cluster_percentile": 0.7857,
+      "cluster_rank": 4,
+      "cluster_total": 15,
       "name": "linguistics_humboldt_language__c011",
       "score": 0.2988,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0969,
+      "cluster_percentile": 0.726,
+      "cluster_rank": 21,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c078",
       "score": 0.2987,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0873,
+      "cluster_percentile": 0.2466,
+      "cluster_rank": 56,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c054",
       "score": 0.298,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0806,
+      "cluster_percentile": 0.0411,
+      "cluster_rank": 71,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__c084",
       "score": 0.2979,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0864,
+      "cluster_percentile": 0.2192,
+      "cluster_rank": 58,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c053",
       "score": 0.2978,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0951,
+      "cluster_percentile": 0.6712,
+      "cluster_rank": 25,
+      "cluster_total": 74,
       "name": "linguistics_saussure_course__c061",
       "score": 0.2975,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0926,
+      "cluster_percentile": 0.5616,
+      "cluster_rank": 33,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c076",
       "score": 0.2966,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0869,
+      "cluster_percentile": 0.5833,
+      "cluster_rank": 6,
+      "cluster_total": 13,
       "name": "linguistics_portroyal_grammar__c034",
       "score": 0.2961,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0924,
+      "cluster_percentile": 0.5342,
+      "cluster_rank": 35,
+      "cluster_total": 74,
       "name": "linguistics_humboldt_language__c071",
       "score": 0.2959,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0897,
+      "cluster_percentile": 0.3973,
+      "cluster_rank": 45,
+      "cluster_total": 74,
       "name": "modern_chomsky_syntactic_structures__c065",
       "score": 0.2957,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0954,
+      "cluster_percentile": 0.6986,
+      "cluster_rank": 23,
+      "cluster_total": 74,
       "name": "linguistics_panini_ashtadhyayi__c065",
       "score": 0.2956,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.131,
+      "cluster_percentile": 0.9178,
+      "cluster_rank": 7,
+      "cluster_total": 74,
       "name": "modern_transformer_attention__c058",
       "score": 0.2954,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.078,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 9,
+      "cluster_total": 13,
       "name": "modern_distributional_semantics__c080",
       "score": 0.2953,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0864,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "modern_chomsky_hierarchy__c014",
       "score": 0.295,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.106,
+      "cluster_percentile": 0.8356,
+      "cluster_rank": 13,
+      "cluster_total": 74,
       "name": "modern_backus_naur_form__c073",
       "score": 0.2943,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0944,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 3,
+      "cluster_total": 15,
       "name": "linguistics_humboldt_language__c045",
       "score": 0.2941,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.078,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "modern_distributional_semantics__c000",
       "score": 0.2925,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0946,
+      "cluster_percentile": 0.8235,
+      "cluster_rank": 4,
+      "cluster_total": 18,
       "name": "linguistics_humboldt_language__c033",
       "score": 0.2891,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0914,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 3,
+      "cluster_total": 13,
       "name": "modern_chomsky_hierarchy__c035",
       "score": 0.2885,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0727,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "modern_chomsky_hierarchy__c053",
       "score": 0.288,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0865,
+      "cluster_percentile": 0.55,
+      "cluster_rank": 10,
+      "cluster_total": 21,
       "name": "linguistics_panini_ashtadhyayi__c020",
       "score": 0.2874,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0718,
+      "cluster_percentile": 0.1818,
+      "cluster_rank": 10,
+      "cluster_total": 12,
       "name": "modern_transformer_attention__c077",
       "score": 0.2869,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0583,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "modern_backus_naur_form__c021",
       "score": 0.2853,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0883,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "linguistics_panini_ashtadhyayi__c032",
       "score": 0.2845,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0775,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 10,
+      "cluster_total": 13,
       "name": "modern_chomsky_hierarchy__c083",
       "score": 0.2823,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0759,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "modern_transformer_attention__c014",
       "score": 0.282,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0778,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "modern_distributional_semantics__c010",
       "score": 0.2816,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0979,
+      "cluster_percentile": 0.9286,
+      "cluster_rank": 2,
+      "cluster_total": 15,
       "name": "modern_chomsky_hierarchy__c004",
       "score": 0.2815,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0646,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 15,
+      "cluster_total": 15,
       "name": "linguistics_panini_ashtadhyayi__c056",
       "score": 0.2785,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0911,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 4,
+      "cluster_total": 13,
       "name": "linguistics_panini_ashtadhyayi__c002",
       "score": 0.2764,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.083,
+      "cluster_percentile": 0.7273,
+      "cluster_rank": 4,
+      "cluster_total": 12,
       "name": "modern_distributional_semantics__c032",
       "score": 0.2764,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0732,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 19,
+      "cluster_total": 21,
       "name": "modern_transformer_attention__c052",
       "score": 0.2761,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0795,
+      "cluster_percentile": 0.15,
+      "cluster_rank": 18,
+      "cluster_total": 21,
       "name": "modern_distributional_semantics__c052",
       "score": 0.2749,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0902,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 16,
+      "cluster_total": 21,
       "name": "linguistics_portroyal_grammar__c018",
       "score": 0.2746,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0823,
+      "cluster_percentile": 0.4167,
+      "cluster_rank": 8,
+      "cluster_total": 13,
       "name": "modern_distributional_semantics__c056",
       "score": 0.2744,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0784,
+      "cluster_percentile": 0.3529,
+      "cluster_rank": 12,
+      "cluster_total": 18,
       "name": "linguistics_humboldt_language__c035",
       "score": 0.2741,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0912,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 6,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__c032",
       "score": 0.274,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0813,
+      "cluster_percentile": 0.6429,
+      "cluster_rank": 6,
+      "cluster_total": 15,
       "name": "linguistics_portroyal_grammar__c044",
       "score": 0.2732,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0699,
+      "cluster_percentile": 0.05,
+      "cluster_rank": 20,
+      "cluster_total": 21,
       "name": "modern_transformer_attention__c060",
       "score": 0.272,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0677,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "modern_transformer_attention__c026",
       "score": 0.2717,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0847,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "linguistics_saussure_course__c029",
       "score": 0.2715,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0703,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 12,
+      "cluster_total": 12,
       "name": "modern_chomsky_hierarchy__c059",
       "score": 0.2713,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0905,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 15,
+      "cluster_total": 21,
       "name": "linguistics_saussure_course__c021",
       "score": 0.2713,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0927,
+      "cluster_percentile": 0.7059,
+      "cluster_rank": 6,
+      "cluster_total": 18,
       "name": "linguistics_humboldt_language__c018",
       "score": 0.2711,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0928,
+      "cluster_percentile": 0.7647,
+      "cluster_rank": 5,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c006",
       "score": 0.2702,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0761,
+      "cluster_percentile": 0.35,
+      "cluster_rank": 14,
+      "cluster_total": 21,
       "name": "modern_distributional_semantics__c039",
       "score": 0.2699,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0802,
+      "cluster_percentile": 0.5455,
+      "cluster_rank": 6,
+      "cluster_total": 12,
       "name": "modern_chomsky_hierarchy__c023",
       "score": 0.2692,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0666,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "linguistics_portroyal_grammar__c026",
       "score": 0.2658,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.082,
+      "cluster_percentile": 0.3846,
+      "cluster_rank": 9,
+      "cluster_total": 14,
       "name": "linguistics_saussure_course__c006",
       "score": 0.2654,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0809,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "linguistics_humboldt_language__c007",
       "score": 0.2654,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0773,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 11,
+      "cluster_total": 13,
       "name": "modern_transformer_attention__c034",
       "score": 0.263,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0729,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "modern_transformer_attention__c030",
       "score": 0.2628,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0872,
+      "cluster_percentile": 0.5294,
+      "cluster_rank": 9,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c025",
       "score": 0.2591,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0734,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 13,
+      "cluster_total": 13,
       "name": "modern_transformer_attention__c043",
       "score": 0.2589,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0782,
+      "cluster_percentile": 0.4545,
+      "cluster_rank": 7,
+      "cluster_total": 12,
       "name": "modern_distributional_semantics__c037",
       "score": 0.2586,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0748,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "modern_backus_naur_form__c007",
       "score": 0.2569,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0767,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "linguistics_portroyal_grammar__c000",
       "score": 0.2564,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0779,
+      "cluster_percentile": 0.3636,
+      "cluster_rank": 8,
+      "cluster_total": 12,
       "name": "modern_chomsky_hierarchy__c048",
       "score": 0.2521,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0706,
+      "cluster_percentile": 0.0909,
+      "cluster_rank": 11,
+      "cluster_total": 12,
       "name": "linguistics_saussure_course__c067",
       "score": 0.2514,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0777,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "modern_backus_naur_form__c011",
       "score": 0.2489,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0848,
+      "cluster_percentile": 0.8182,
+      "cluster_rank": 3,
+      "cluster_total": 12,
       "name": "linguistics_portroyal_grammar__c022",
       "score": 0.2487,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0813,
+      "cluster_percentile": 0.6364,
+      "cluster_rank": 5,
+      "cluster_total": 12,
       "name": "modern_transformer_attention__c053",
       "score": 0.2481,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0807,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 8,
+      "cluster_total": 15,
       "name": "linguistics_humboldt_language__c029",
       "score": 0.247,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0681,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "linguistics_humboldt_language__c017",
       "score": 0.2464,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0615,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 14,
+      "cluster_total": 14,
       "name": "modern_backus_naur_form__c005",
       "score": 0.2464,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0682,
+      "cluster_percentile": 0.0769,
+      "cluster_rank": 13,
+      "cluster_total": 14,
       "name": "modern_distributional_semantics__c003",
       "score": 0.2455,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0772,
+      "cluster_percentile": 0.0833,
+      "cluster_rank": 12,
+      "cluster_total": 13,
       "name": "modern_transformer_attention__c021",
       "score": 0.2445,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0766,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "linguistics_saussure_course__c000",
       "score": 0.2442,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0782,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 9,
+      "cluster_total": 15,
       "name": "modern_backus_naur_form__c004",
       "score": 0.2438,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0847,
+      "cluster_percentile": 0.4706,
+      "cluster_rank": 10,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c003",
       "score": 0.241,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.2218,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 18,
       "name": "modern_distributional_semantics__c017",
       "score": 0.2404,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0792,
+      "cluster_percentile": 0.4118,
+      "cluster_rank": 11,
+      "cluster_total": 18,
       "name": "linguistics_portroyal_grammar__c002",
       "score": 0.2399,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.087,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 9,
+      "cluster_total": 21,
       "name": "modern_chomsky_syntactic_structures__c014",
       "score": 0.2394,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0661,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 19,
+      "cluster_total": 21,
       "name": "linguistics_panini_ashtadhyayi__c013",
       "score": 0.2367,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0811,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 7,
+      "cluster_total": 15,
       "name": "modern_chomsky_hierarchy__c034",
       "score": 0.2361,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0779,
+      "cluster_percentile": 0.3571,
+      "cluster_rank": 10,
+      "cluster_total": 15,
       "name": "modern_chomsky_syntactic_structures__c023",
       "score": 0.234,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0721,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 13,
+      "cluster_total": 15,
       "name": "modern_chomsky_hierarchy__c016",
       "score": 0.2328,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0752,
+      "cluster_percentile": 0.2727,
+      "cluster_rank": 9,
+      "cluster_total": 12,
       "name": "modern_chomsky_syntactic_structures__c016",
       "score": 0.2323,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0769,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "modern_transformer_attention__c006",
       "score": 0.2318,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0707,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 16,
+      "cluster_total": 21,
       "name": "linguistics_panini_ashtadhyayi__c027",
       "score": 0.2314,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0812,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 13,
+      "cluster_total": 21,
       "name": "modern_chomsky_syntactic_structures__c019",
       "score": 0.2289,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0761,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 15,
+      "cluster_total": 21,
       "name": "modern_chomsky_syntactic_structures__c007",
       "score": 0.2265,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0697,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 17,
+      "cluster_total": 21,
       "name": "modern_backus_naur_form__c008",
       "score": 0.2263,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0824,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 11,
+      "cluster_total": 21,
       "name": "modern_transformer_attention__c007",
       "score": 0.2262,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0741,
+      "cluster_percentile": 0.1765,
+      "cluster_rank": 15,
+      "cluster_total": 18,
       "name": "linguistics_saussure_course__c011",
       "score": 0.2255,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0617,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 18,
+      "cluster_total": 18,
       "name": "modern_transformer_attention__c019",
       "score": 0.2154,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0697,
+      "cluster_percentile": 0.15,
+      "cluster_rank": 18,
+      "cluster_total": 21,
       "name": "linguistics_saussure_course__c004",
       "score": 0.2143,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.069,
+      "cluster_percentile": 0.0588,
+      "cluster_rank": 17,
+      "cluster_total": 18,
       "name": "modern_transformer_attention__c018",
       "score": 0.2141,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0824,
+      "cluster_percentile": 0.45,
+      "cluster_rank": 12,
+      "cluster_total": 21,
       "name": "linguistics_saussure_course__c012",
       "score": 0.2109,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.0618,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 21,
+      "cluster_total": 21,
       "name": "modern_chomsky_syntactic_structures__c012",
       "score": 0.2088,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.064,
+      "cluster_percentile": 0.05,
+      "cluster_rank": 20,
+      "cluster_total": 21,
       "name": "linguistics_humboldt_language__c001",
       "score": 0.2048,
       "type": "document_chunk"
     },
     {
       "anomaly_score": 0.8529,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 14,
       "name": "historical_panini_grammar__event__panini_linked_to_formal_language_theory",
       "score": 0.8873,
       "type": "event"
     },
     {
       "anomaly_score": 0.9872,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "historical_portroyal_grammar__event__port_royal_grammar_published",
       "score": 0.8735,
       "type": "event"
     },
     {
       "anomaly_score": 0.8442,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "historical_panini_grammar__event__panini_rediscovered_by_western_scholars",
       "score": 0.8725,
       "type": "event"
     },
     {
       "anomaly_score": 0.6141,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "historical_panini_grammar__event__ashtadhyayi_composed",
       "score": 0.7892,
       "type": "event"
     },
     {
       "anomaly_score": 0.9448,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "modern_formal_grammar_bnf__event__algol_60_report_published_with_bnf",
       "score": 0.6157,
       "type": "event"
     },
     {
       "anomaly_score": 0.7843,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "modern_chomsky_generative__event__aspects_of_the_theory_of_syntax_published",
       "score": 0.6025,
       "type": "event"
     },
     {
       "anomaly_score": 0.8887,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "modern_distributional_semantics__event__word2vec_released",
       "score": 0.5522,
       "type": "event"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "modern_distributional_semantics__event__lsa_introduced",
       "score": 0.542,
       "type": "event"
     },
     {
       "anomaly_score": 0.902,
+      "cluster_percentile": 0.9589,
+      "cluster_rank": 4,
+      "cluster_total": 74,
       "name": "historical_saussure_structuralism__event__structuralism_spreads_to_humanities",
       "score": 0.5285,
       "type": "event"
     },
     {
       "anomaly_score": 0.8692,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__location__prague_linguistic_circle",
       "score": 0.8599,
       "type": "location"
     },
     {
       "anomaly_score": 0.6988,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 5,
+      "cluster_total": 21,
       "name": "historical_panini_grammar__location__indian_grammatical_tradition",
       "score": 0.8138,
       "type": "location"
     },
     {
       "anomaly_score": 0.6455,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 7,
+      "cluster_total": 21,
       "name": "modern_chomsky_generative__location__mit_department_of_linguistics",
       "score": 0.7885,
       "type": "location"
     },
     {
       "anomaly_score": 0.6589,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "historical_portroyal_grammar__location__port_royal_abbey",
       "score": 0.7673,
       "type": "location"
     },
     {
       "anomaly_score": 0.9309,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "historical_saussure_structuralism__location__geneva",
       "score": 0.5866,
       "type": "location"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 0.9863,
+      "cluster_rank": 2,
+      "cluster_total": 74,
       "name": "modern_transformer_nlp__location__openai_san_francisco",
       "score": 0.5582,
       "type": "location"
     },
     {
       "anomaly_score": 0.929,
+      "cluster_percentile": 0.9726,
+      "cluster_rank": 3,
+      "cluster_total": 74,
       "name": "historical_humboldt_language__location__prussian_academy",
       "score": 0.5417,
       "type": "location"
     },
     {
       "anomaly_score": 0.7314,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "historical_panini_grammar__location__gandhara",
       "score": 0.5405,
       "type": "location"
     },
     {
       "anomaly_score": 0.797,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "modern_distributional_semantics__location__google_brain",
       "score": 0.5287,
       "type": "location"
     },
     {
       "anomaly_score": 0.9343,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "historical_saussure_structuralism__person__ferdinand_de_saussure",
       "score": 0.963,
       "type": "person"
     },
     {
       "anomaly_score": 0.7066,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "modern_transformer_nlp__person__ashish_vaswani",
       "score": 0.9039,
       "type": "person"
     },
     {
       "anomaly_score": 0.9021,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "historical_portroyal_grammar__person__claude_lancelot",
       "score": 0.8811,
       "type": "person"
     },
     {
       "anomaly_score": 0.7739,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 3,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__person__stephen_kleene",
       "score": 0.8654,
       "type": "person"
     },
     {
       "anomaly_score": 0.6153,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "historical_saussure_structuralism__person__j_r_firth",
       "score": 0.864,
       "type": "person"
     },
     {
       "anomaly_score": 0.7108,
+      "cluster_percentile": 0.85,
+      "cluster_rank": 4,
+      "cluster_total": 21,
       "name": "modern_transformer_nlp__person__noam_shazeer",
       "score": 0.8526,
       "type": "person"
     },
     {
       "anomaly_score": 0.6813,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 6,
+      "cluster_total": 21,
       "name": "modern_chomsky_hierarchy__person__dana_scott",
       "score": 0.8438,
       "type": "person"
     },
     {
       "anomaly_score": 0.821,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "historical_portroyal_grammar__person__antoine_arnauld",
       "score": 0.8407,
       "type": "person"
     },
     {
       "anomaly_score": 0.5948,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "historical_portroyal_grammar__person__rene_descartes",
       "score": 0.8399,
       "type": "person"
     },
     {
       "anomaly_score": 0.5447,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "modern_chomsky_generative__person__noam_chomsky",
       "score": 0.6698,
       "type": "person"
     },
     {
       "anomaly_score": 0.5567,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "modern_distributional_semantics__person__j_r_firth",
       "score": 0.6325,
       "type": "person"
     },
     {
       "anomaly_score": 0.7082,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "modern_formal_grammar_bnf__person__john_backus",
       "score": 0.6007,
       "type": "person"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "historical_saussure_structuralism__writing__course_in_general_linguistics",
       "score": 0.8769,
       "type": "writing"
     },
     {
       "anomaly_score": 0.8229,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "historical_portroyal_grammar__writing__cartesian_linguistics",
       "score": 0.8465,
       "type": "writing"
     },
     {
       "anomaly_score": 0.7157,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "modern_chomsky_generative__writing__syntactic_structures",
       "score": 0.8344,
       "type": "writing"
     },
     {
       "anomaly_score": 0.8955,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "historical_humboldt_language__writing__on_language_english",
       "score": 0.6319,
       "type": "writing"
     },
     {
       "anomaly_score": 0.9578,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 21,
       "name": "modern_formal_grammar_bnf__writing__algol_60_report",
       "score": 0.5381,
       "type": "writing"
     },
     {
       "anomaly_score": 0.6454,
+      "cluster_percentile": 0.65,
+      "cluster_rank": 8,
+      "cluster_total": 21,
       "name": "historical_humboldt_language__writing__ueber_die_verschiedenheit_des_menschlichen_sprachb",
       "score": 0.5131,
       "type": "writing"
     },
     {
       "anomaly_score": 0.8026,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 13,
       "name": "modern_chomsky_generative__writing__aspects_of_the_theory_of_syntax",
       "score": 0.5012,
       "type": "writing"
     },
     {
       "anomaly_score": 0.7267,
+      "cluster_percentile": 0.9452,
+      "cluster_rank": 5,
+      "cluster_total": 74,
       "name": "modern_chomsky_hierarchy__writing__three_models_for_the_description_of_language",
       "score": 0.4938,
       "type": "writing"
     },
     {
       "anomaly_score": 0.7125,
+      "cluster_percentile": 0.9167,
+      "cluster_rank": 2,
+      "cluster_total": 13,
       "name": "historical_saussure_structuralism__writing__cours_de_linguistique_generale",
       "score": 0.4927,
       "type": "writing"

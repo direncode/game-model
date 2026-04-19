@@ -2,2114 +2,3168 @@
   "clusters": 103,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "country_BGD",
-      "strength": 0.8,
-      "target": "country_SAU"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "country_SAU",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_381_180_02"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "country_BRA",
-      "strength": 0.8,
-      "target": "country_KOR"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "country_KOR",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "commodity_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "commodity_02",
-      "strength": 0.8,
-      "target": "commodity_30"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "commodity_30",
-      "strength": 0.8,
-      "target": "flow_076_764_02"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_076_764_02",
-      "strength": 0.8,
-      "target": "flow_410_458_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_410_458_10",
-      "strength": 0.8,
-      "target": "flow_410_784_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_410_784_10",
-      "strength": 0.8,
-      "target": "flow_484_348_73"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_484_348_73",
-      "strength": 0.8,
-      "target": "flow_076_484_02"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_076_484_02",
-      "strength": 0.8,
-      "target": "flow_410_800_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_410_800_10",
-      "strength": 0.8,
-      "target": "flow_381_24_02"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_381_24_02",
-      "strength": 0.8,
-      "target": "flow_410_316_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_410_316_10",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "country_KOR",
+      "strength": 1.0,
       "target": "flow_381_634_02"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_381_634_02",
-      "strength": 0.8,
-      "target": "flow_036_705_02"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_036_705_02",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_528_24_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_528_24_02",
-      "strength": 0.8,
-      "target": "flow_251_418_10"
+      "signal_type": "flip_proximity",
+      "source": "flow_410_784_10",
+      "strength": 1.0,
+      "target": "flow_410_800_10"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_251_418_10",
-      "strength": 0.8,
-      "target": "flow_076_96_02"
+      "signal_type": "flip_proximity",
+      "source": "flow_410_800_10",
+      "strength": 1.0,
+      "target": "flow_381_24_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_076_96_02",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "flow_381_24_02",
+      "strength": 1.0,
       "target": "flow_702_686_02"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_702_686_02",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_381_268_02"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_381_268_02",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_702_144_10"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_702_144_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_842_800_10"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_842_800_10",
-      "strength": 0.8,
-      "target": "flow_699_288_02"
+      "signal_type": "flip_proximity",
+      "source": "commodity_30",
+      "strength": 1.0,
+      "target": "flow_410_458_10"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "country_DNK",
-      "strength": 0.8,
-      "target": "commodity_10"
+      "signal_type": "flip_proximity",
+      "source": "flow_410_458_10",
+      "strength": 1.0,
+      "target": "flow_484_348_73"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
+      "source": "flow_484_348_73",
+      "strength": 1.0,
+      "target": "flow_076_484_02"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_076_484_02",
+      "strength": 1.0,
+      "target": "flow_036_705_02"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_036_705_02",
+      "strength": 1.0,
+      "target": "flow_251_418_10"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_251_418_10",
+      "strength": 1.0,
+      "target": "flow_076_96_02"
+    },
+    {
+      "signal_type": "flip_proximity",
       "source": "commodity_10",
-      "strength": 0.8,
-      "target": "commodity_88"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "commodity_88",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "commodity_85"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "commodity_85",
-      "strength": 0.8,
-      "target": "flow_076_430_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_076_430_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_528_266_02"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "country_ARE",
-      "strength": 0.8,
-      "target": "flow_528_348_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_528_348_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_842_498_10"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_842_498_10",
-      "strength": 0.8,
-      "target": "flow_699_270_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_699_270_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_410_180_30"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_410_180_30",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "flow_699_270_10",
+      "strength": 1.0,
       "target": "flow_699_418_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "country_EGY",
-      "strength": 0.8,
-      "target": "flow_381_784_02"
+      "signal_type": "flip_proximity",
+      "source": "flow_381_376_02",
+      "strength": 1.0,
+      "target": "flow_124_804_10"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_381_784_02",
-      "strength": 0.8,
-      "target": "flow_381_196_10"
+      "signal_type": "flip_proximity",
+      "source": "flow_251_208_02",
+      "strength": 1.0,
+      "target": "flow_381_368_10"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_381_196_10",
-      "strength": 0.8,
-      "target": "flow_699_554_10"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_699_554_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_528_380_10"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "flow_528_380_10",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "flow_381_270_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_381_270_02",
-      "strength": 0.8,
-      "target": "flow_381_376_02"
+      "signal_type": "flip_proximity",
+      "source": "flow_076_56_10",
+      "strength": 1.0,
+      "target": "flow_392_584_02"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "flow_381_376_02",
-      "strength": 0.8,
-      "target": "flow_124_804_10"
+      "signal_type": "flip_proximity",
+      "source": "flow_392_584_02",
+      "strength": 1.0,
+      "target": "flow_251_724_02"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_410_458_02",
+      "strength": 1.0,
+      "target": "flow_156_584_10"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_156_584_10",
+      "strength": 1.0,
+      "target": "flow_076_380_02"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "flow_076_380_02",
+      "strength": 1.0,
+      "target": "flow_276_348_02"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "commodity_39",
+      "type": "commodity"
+    },
+    {
+      "convergence": 0.6139,
+      "dimensions": {
+        "anomaly": 0.9255,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "commodity_02",
+      "type": "commodity"
+    },
+    {
+      "convergence": 0.6126,
+      "dimensions": {
+        "anomaly": 0.9217,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_BGD",
+      "type": "country"
+    },
+    {
+      "convergence": 0.587,
+      "dimensions": {
+        "anomaly": 0.8825,
+        "cluster_percentile": 0.9524,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_KOR",
+      "type": "country"
+    },
+    {
+      "convergence": 0.5847,
+      "dimensions": {
+        "anomaly": 0.842,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_DNK",
+      "type": "country"
+    },
+    {
+      "convergence": 0.5783,
+      "dimensions": {
+        "anomaly": 0.8238,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "commodity_84",
+      "type": "commodity"
+    },
+    {
+      "convergence": 0.5679,
+      "dimensions": {
+        "anomaly": 0.8619,
+        "cluster_percentile": 0.9048,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_BRA",
+      "type": "country"
+    },
+    {
+      "convergence": 0.56,
+      "dimensions": {
+        "anomaly": 0.6714,
+        "cluster_percentile": 0.5,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "country_SAU",
+      "type": "country"
+    },
+    {
+      "convergence": 0.5429,
+      "dimensions": {
+        "anomaly": 0.7225,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_ARE",
+      "type": "country"
+    },
+    {
+      "convergence": 0.5412,
+      "dimensions": {
+        "anomaly": 0.2605,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_381_348_10",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5374,
+      "dimensions": {
+        "anomaly": 0.2498,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_381_894_02",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5315,
+      "dimensions": {
+        "anomaly": 0.69,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_AUS",
+      "type": "country"
+    },
+    {
+      "convergence": 0.5303,
+      "dimensions": {
+        "anomaly": 0.2295,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_842_174_02",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5285,
+      "dimensions": {
+        "anomaly": 0.2242,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_276_784_10",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5271,
+      "dimensions": {
+        "anomaly": 0.2203,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_381_899_02",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5268,
+      "dimensions": {
+        "anomaly": 0.2193,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_528_174_02",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5232,
+      "dimensions": {
+        "anomaly": 0.6662,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "commodity_76",
+      "type": "commodity"
+    },
+    {
+      "convergence": 0.5217,
+      "dimensions": {
+        "anomaly": 0.205,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_528_52_10",
+      "type": "trade_flow"
+    },
+    {
+      "convergence": 0.5208,
+      "dimensions": {
+        "anomaly": 0.6594,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "country_EGY",
+      "type": "country"
+    },
+    {
+      "convergence": 0.519,
+      "dimensions": {
+        "anomaly": 0.197,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "flow_392_462_10",
+      "type": "trade_flow"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 32,
+      "dominant_paradigm": "country_",
+      "dominant_paradigm_share": 2,
+      "hot_count": 3,
+      "hot_fraction": 0.136,
+      "total": 22
+    },
+    {
+      "cluster": 94,
+      "dominant_paradigm": "country_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.333,
+      "total": 3
+    },
+    {
+      "cluster": 39,
+      "dominant_paradigm": "commodity_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.1,
+      "total": 10
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [],
   "database_name": "Comtrade Superpower",
   "description": "UN Comtrade trade data corpus",
   "legend_id": "comtrade",
-  "novelty": {
-    "novelty_score": 0.0111,
-    "probed": 300,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 1.0,
-        "name": "commodity_39",
-        "similarity": 0.9889,
-        "type": "commodity"
-      },
-      {
-        "anomaly": 0.8825,
-        "name": "country_KOR",
-        "similarity": 0.9884,
-        "type": "country"
-      },
-      {
-        "anomaly": 0.842,
-        "name": "country_DNK",
-        "similarity": 0.9879,
-        "type": "country"
-      },
-      {
-        "anomaly": 0.8238,
-        "name": "commodity_84",
-        "similarity": 0.9878,
-        "type": "commodity"
-      },
-      {
-        "anomaly": 0.9217,
-        "name": "country_BGD",
-        "similarity": 0.9844,
-        "type": "country"
-      },
-      {
-        "anomaly": 0.8619,
-        "name": "country_BRA",
-        "similarity": 0.9843,
-        "type": "country"
-      },
-      {
-        "anomaly": 0.6848,
-        "name": "commodity_85",
-        "similarity": 0.9829,
-        "type": "commodity"
-      },
-      {
-        "anomaly": 0.7022,
-        "name": "commodity_88",
-        "similarity": 0.9808,
-        "type": "commodity"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "flow",
+        "count": 282,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "country",
+        "count": 9,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "commodity",
+        "count": 9,
+        "role": "other",
+        "subcorpus": ""
+      }
+    ],
+    "hypothesis_by_corpus": {},
+    "role_counts": {
+      "other": 300
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 0.9217,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "country_BGD",
       "score": 0.9173,
       "type": "country"
     },
     {
       "anomaly_score": 0.8619,
+      "cluster_percentile": 0.9048,
+      "cluster_rank": 3,
+      "cluster_total": 22,
       "name": "country_BRA",
       "score": 0.8899,
       "type": "country"
     },
     {
       "anomaly_score": 0.8825,
+      "cluster_percentile": 0.9524,
+      "cluster_rank": 2,
+      "cluster_total": 22,
       "name": "country_KOR",
       "score": 0.8783,
       "type": "country"
     },
     {
       "anomaly_score": 0.842,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "country_DNK",
       "score": 0.8607,
       "type": "country"
     },
     {
       "anomaly_score": 0.7225,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "country_ARE",
       "score": 0.8595,
       "type": "country"
     },
     {
       "anomaly_score": 0.69,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "country_AUS",
       "score": 0.8496,
       "type": "country"
     },
     {
       "anomaly_score": 0.6714,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "country_SAU",
       "score": 0.8488,
       "type": "country"
     },
     {
       "anomaly_score": 0.6594,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "country_EGY",
       "score": 0.8478,
       "type": "country"
     },
     {
       "anomaly_score": 0.6351,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 34,
       "name": "country_PER",
       "score": 0.8342,
       "type": "country"
     },
     {
       "anomaly_score": 0.9255,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 22,
       "name": "commodity_02",
       "score": 0.9403,
       "type": "commodity"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "commodity_39",
       "score": 0.9251,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.6979,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 4,
+      "cluster_total": 22,
       "name": "commodity_30",
       "score": 0.8576,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.8238,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "commodity_84",
       "score": 0.8519,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.6183,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "commodity_10",
       "score": 0.8383,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.7022,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "commodity_88",
       "score": 0.8136,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.6662,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "commodity_76",
       "score": 0.8022,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.6848,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "commodity_85",
       "score": 0.7898,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.5685,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "commodity_72",
       "score": 0.7661,
       "type": "commodity"
     },
     {
       "anomaly_score": 0.2772,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_699_348_10",
       "score": 0.7413,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.271,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "flow_381_784_02",
       "score": 0.7376,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2734,
+      "cluster_percentile": 0.9474,
+      "cluster_rank": 2,
+      "cluster_total": 20,
       "name": "flow_251_686_10",
       "score": 0.7094,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2609,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "flow_528_348_10",
       "score": 0.6864,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2641,
+      "cluster_percentile": 0.8095,
+      "cluster_rank": 5,
+      "cluster_total": 22,
       "name": "flow_076_764_02",
       "score": 0.6737,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2582,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "flow_392_144_30",
       "score": 0.6693,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2858,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_381_562_10",
       "score": 0.6644,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2498,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "flow_381_196_10",
       "score": 0.6614,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2342,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "flow_076_768_02",
       "score": 0.6605,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2566,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "flow_156_24_02",
       "score": 0.6603,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.268,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "flow_410_784_02",
       "score": 0.6538,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1974,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "flow_392_470_29",
       "score": 0.6535,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2417,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 12,
+      "cluster_total": 34,
       "name": "flow_410_458_02",
       "score": 0.652,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2257,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "flow_528_466_10",
       "score": 0.6507,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1869,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_381_422_10",
       "score": 0.6506,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2463,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_076_729_10",
       "score": 0.6504,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.212,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "flow_076_430_10",
       "score": 0.6497,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.253,
+      "cluster_percentile": 0.4762,
+      "cluster_rank": 12,
+      "cluster_total": 22,
       "name": "flow_410_458_10",
       "score": 0.6415,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2811,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 20,
       "name": "flow_381_348_02",
       "score": 0.6403,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2526,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "flow_076_670_02",
       "score": 0.6335,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.279,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_076_300_02",
       "score": 0.6288,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2157,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "flow_076_694_02",
       "score": 0.6281,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2573,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 8,
+      "cluster_total": 22,
       "name": "flow_410_784_10",
       "score": 0.6272,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2964,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "flow_276_516_02",
       "score": 0.6257,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2248,
+      "cluster_percentile": 0.2727,
+      "cluster_rank": 25,
+      "cluster_total": 34,
       "name": "flow_076_562_02",
       "score": 0.6242,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2084,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_381_180_02",
       "score": 0.6237,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2624,
+      "cluster_percentile": 0.7619,
+      "cluster_rank": 6,
+      "cluster_total": 22,
       "name": "flow_484_348_73",
       "score": 0.6221,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2049,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_076_442_10",
       "score": 0.6206,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2308,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "flow_410_392_29",
       "score": 0.6202,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2308,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_276_24_10",
       "score": 0.6201,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2714,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_276_462_10",
       "score": 0.6198,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2605,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_381_348_10",
       "score": 0.6187,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1714,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_410_724_10",
       "score": 0.6184,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2411,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "flow_528_470_10",
       "score": 0.6169,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2174,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "flow_842_862_02",
       "score": 0.6168,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1944,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "flow_528_266_02",
       "score": 0.6161,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2675,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "flow_276_705_10",
       "score": 0.6156,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2519,
+      "cluster_percentile": 0.8182,
+      "cluster_rank": 7,
+      "cluster_total": 34,
       "name": "flow_076_56_10",
       "score": 0.6154,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.229,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_124_729_10",
       "score": 0.6154,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.228,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_826_178_02",
       "score": 0.6141,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2226,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "flow_699_512_10",
       "score": 0.6121,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2433,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "flow_381_512_02",
       "score": 0.6113,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2257,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "flow_036_90_02",
       "score": 0.6086,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2055,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "flow_842_498_10",
       "score": 0.6086,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2415,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_528_384_02",
       "score": 0.6081,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2671,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "flow_076_434_02",
       "score": 0.607,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2322,
+      "cluster_percentile": 0.1905,
+      "cluster_rank": 18,
+      "cluster_total": 22,
       "name": "flow_076_484_02",
       "score": 0.6065,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2496,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "flow_392_490_02",
       "score": 0.606,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2154,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "flow_699_554_10",
       "score": 0.6055,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2491,
+      "cluster_percentile": 0.8421,
+      "cluster_rank": 4,
+      "cluster_total": 20,
       "name": "flow_699_686_10",
       "score": 0.6048,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.246,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_276_800_10",
       "score": 0.6047,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2715,
+      "cluster_percentile": 0.9697,
+      "cluster_rank": 2,
+      "cluster_total": 34,
       "name": "flow_076_12_10",
       "score": 0.6043,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2317,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "flow_699_174_10",
       "score": 0.6034,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1737,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_381_512_10",
       "score": 0.6028,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.193,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "flow_699_270_10",
       "score": 0.6025,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2059,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "flow_410_180_30",
       "score": 0.6023,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1827,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_381_76_02",
       "score": 0.6022,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.255,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 10,
+      "cluster_total": 22,
       "name": "flow_410_800_10",
       "score": 0.6022,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2192,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "flow_410_24_29",
       "score": 0.6015,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2295,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_842_174_02",
       "score": 0.6015,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2491,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 13,
+      "cluster_total": 22,
       "name": "flow_381_24_02",
       "score": 0.6013,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1843,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_251_270_02",
       "score": 0.6012,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2525,
+      "cluster_percentile": 0.8485,
+      "cluster_rank": 6,
+      "cluster_total": 34,
       "name": "flow_381_32_10",
       "score": 0.6011,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2423,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_528_729_10",
       "score": 0.6009,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2601,
+      "cluster_percentile": 0.9091,
+      "cluster_rank": 4,
+      "cluster_total": 34,
       "name": "flow_156_584_10",
       "score": 0.6007,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2216,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "flow_381_12_10",
       "score": 0.6001,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2104,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "flow_276_616_02",
       "score": 0.599,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2465,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 15,
+      "cluster_total": 22,
       "name": "flow_410_316_10",
       "score": 0.599,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2502,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "flow_124_104_10",
       "score": 0.5988,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2462,
+      "cluster_percentile": 0.7895,
+      "cluster_rank": 5,
+      "cluster_total": 20,
       "name": "flow_484_458_30",
       "score": 0.5988,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2193,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_528_174_02",
       "score": 0.5986,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2083,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "flow_392_528_02",
       "score": 0.5982,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2212,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "flow_528_804_02",
       "score": 0.5979,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2412,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "flow_484_50_29",
       "score": 0.5971,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1863,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_381_203_10",
       "score": 0.5963,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2164,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "flow_699_364_02",
       "score": 0.5958,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2228,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "flow_036_800_29",
       "score": 0.5955,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2355,
+      "cluster_percentile": 0.3158,
+      "cluster_rank": 14,
+      "cluster_total": 20,
       "name": "flow_842_372_10",
       "score": 0.5953,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2107,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_392_524_29",
       "score": 0.5944,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2242,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_276_784_10",
       "score": 0.5934,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2444,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "flow_381_430_02",
       "score": 0.5933,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2537,
+      "cluster_percentile": 0.8947,
+      "cluster_rank": 3,
+      "cluster_total": 20,
       "name": "flow_381_842_02",
       "score": 0.5927,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2216,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "flow_484_490_39",
       "score": 0.5925,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2488,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "flow_392_524_10",
       "score": 0.5922,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1722,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_156_108_29",
       "score": 0.592,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2318,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_076_442_02",
       "score": 0.5918,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1882,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_076_499_02",
       "score": 0.5915,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2101,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "flow_484_388_29",
       "score": 0.5914,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.197,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_392_462_10",
       "score": 0.5914,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2433,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "flow_036_296_02",
       "score": 0.5914,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2564,
+      "cluster_percentile": 0.619,
+      "cluster_rank": 9,
+      "cluster_total": 22,
       "name": "flow_381_634_02",
       "score": 0.5908,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2449,
+      "cluster_percentile": 0.7273,
+      "cluster_rank": 10,
+      "cluster_total": 34,
       "name": "flow_076_670_10",
       "score": 0.5895,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2316,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_410_784_29",
       "score": 0.5895,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2308,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "flow_699_729_10",
       "score": 0.5893,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.254,
+      "cluster_percentile": 0.5238,
+      "cluster_rank": 11,
+      "cluster_total": 22,
       "name": "flow_036_705_02",
       "score": 0.5892,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1565,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "flow_484_320_10",
       "score": 0.5887,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2197,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "flow_392_108_30",
       "score": 0.5883,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2413,
+      "cluster_percentile": 0.6316,
+      "cluster_rank": 8,
+      "cluster_total": 20,
       "name": "flow_381_837_02",
       "score": 0.5881,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2264,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 23,
+      "cluster_total": 34,
       "name": "flow_076_380_02",
       "score": 0.588,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2089,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "flow_251_214_10",
       "score": 0.5879,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1708,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_484_784_73",
       "score": 0.5868,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2325,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "flow_381_682_02",
       "score": 0.5866,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2361,
+      "cluster_percentile": 0.4211,
+      "cluster_rank": 12,
+      "cluster_total": 20,
       "name": "flow_842_296_02",
       "score": 0.5866,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2047,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_251_534_10",
       "score": 0.5865,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2198,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "flow_699_116_10",
       "score": 0.5862,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2078,
+      "cluster_percentile": 0.0526,
+      "cluster_rank": 19,
+      "cluster_total": 20,
       "name": "flow_842_512_02",
       "score": 0.5861,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2604,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 7,
+      "cluster_total": 22,
       "name": "flow_528_24_02",
       "score": 0.5861,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2324,
+      "cluster_percentile": 0.4242,
+      "cluster_rank": 20,
+      "cluster_total": 34,
       "name": "flow_156_214_10",
       "score": 0.586,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2365,
+      "cluster_percentile": 0.4737,
+      "cluster_rank": 11,
+      "cluster_total": 20,
       "name": "flow_842_218_10",
       "score": 0.5858,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2582,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "flow_381_372_02",
       "score": 0.5857,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2498,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "flow_381_894_02",
       "score": 0.5856,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.247,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "flow_076_51_02",
       "score": 0.5856,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2407,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "flow_076_612_02",
       "score": 0.5856,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1907,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "flow_484_76_76",
       "score": 0.5851,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2341,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "flow_076_384_02",
       "score": 0.5846,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2524,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "flow_842_534_10",
       "score": 0.5842,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2049,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "flow_842_586_26",
       "score": 0.5842,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2305,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "flow_156_36_02",
       "score": 0.5842,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2303,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "flow_699_368_02",
       "score": 0.5841,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1833,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_826_20_29",
       "score": 0.584,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2337,
+      "cluster_percentile": 0.4545,
+      "cluster_rank": 19,
+      "cluster_total": 34,
       "name": "flow_156_634_02",
       "score": 0.584,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2381,
+      "cluster_percentile": 0.5455,
+      "cluster_rank": 16,
+      "cluster_total": 34,
       "name": "flow_381_417_10",
       "score": 0.5837,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2096,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_702_643_29",
       "score": 0.5837,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2341,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "flow_484_780_76",
       "score": 0.5836,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1937,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "flow_528_380_10",
       "score": 0.5836,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2337,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "flow_381_180_10",
       "score": 0.5835,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2275,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_381_266_02",
       "score": 0.5833,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1625,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_842_534_02",
       "score": 0.5832,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2112,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 22,
+      "cluster_total": 22,
       "name": "flow_251_418_10",
       "score": 0.5829,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2583,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_381_562_02",
       "score": 0.5827,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1806,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "flow_392_92_29",
       "score": 0.5823,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2433,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "flow_276_894_02",
       "score": 0.5822,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2543,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "flow_842_862_10",
       "score": 0.582,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2376,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_484_784_76",
       "score": 0.5816,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2417,
+      "cluster_percentile": 0.6842,
+      "cluster_rank": 7,
+      "cluster_total": 20,
       "name": "flow_528_516_02",
       "score": 0.5813,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2428,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "flow_381_270_02",
       "score": 0.5811,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2033,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "flow_381_136_10",
       "score": 0.581,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2624,
+      "cluster_percentile": 0.9394,
+      "cluster_rank": 3,
+      "cluster_total": 34,
       "name": "flow_276_348_02",
       "score": 0.5805,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2227,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "flow_842_882_02",
       "score": 0.5803,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2635,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "flow_251_705_02",
       "score": 0.5801,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2414,
+      "cluster_percentile": 0.6364,
+      "cluster_rank": 13,
+      "cluster_total": 34,
       "name": "flow_276_458_10",
       "score": 0.58,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2306,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "flow_410_380_10",
       "score": 0.5797,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1647,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "flow_276_70_02",
       "score": 0.5797,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2283,
+      "cluster_percentile": 0.3939,
+      "cluster_rank": 21,
+      "cluster_total": 34,
       "name": "flow_484_40_39",
       "score": 0.5793,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2321,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "flow_036_384_02",
       "score": 0.5793,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2354,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_076_585_10",
       "score": 0.579,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2638,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "flow_528_705_02",
       "score": 0.5788,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2389,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_410_108_30",
       "score": 0.5782,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2516,
+      "cluster_percentile": 0.7879,
+      "cluster_rank": 8,
+      "cluster_total": 34,
       "name": "flow_381_92_02",
       "score": 0.5782,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1893,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_156_56_10",
       "score": 0.5781,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2006,
+      "cluster_percentile": 0.0303,
+      "cluster_rank": 33,
+      "cluster_total": 34,
       "name": "flow_124_686_02",
       "score": 0.5777,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2123,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_251_180_02",
       "score": 0.5774,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2203,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_381_899_02",
       "score": 0.5772,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.205,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_528_52_10",
       "score": 0.5772,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2259,
+      "cluster_percentile": 0.303,
+      "cluster_rank": 24,
+      "cluster_total": 34,
       "name": "flow_251_634_10",
       "score": 0.577,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2496,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "flow_251_233_02",
       "score": 0.5769,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2474,
+      "cluster_percentile": 0.7576,
+      "cluster_rank": 9,
+      "cluster_total": 34,
       "name": "flow_251_690_10",
       "score": 0.5766,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1639,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_381_0_02",
       "score": 0.5765,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2627,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "flow_392_348_02",
       "score": 0.5763,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2661,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "flow_076_716_02",
       "score": 0.5763,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2136,
+      "cluster_percentile": 0.0606,
+      "cluster_rank": 32,
+      "cluster_total": 34,
       "name": "flow_076_548_02",
       "score": 0.5759,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2033,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "flow_156_417_02",
       "score": 0.5758,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2295,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "flow_842_212_02",
       "score": 0.5758,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2269,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "flow_156_384_10",
       "score": 0.5754,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2463,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "flow_076_860_02",
       "score": 0.575,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2367,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "flow_699_804_10",
       "score": 0.575,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.236,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 16,
+      "cluster_total": 22,
       "name": "flow_076_96_02",
       "score": 0.5747,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.235,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "flow_156_76_10",
       "score": 0.5747,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2482,
+      "cluster_percentile": 0.381,
+      "cluster_rank": 14,
+      "cluster_total": 22,
       "name": "flow_702_686_02",
       "score": 0.5745,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1824,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_076_372_10",
       "score": 0.5742,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2362,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "flow_702_430_30",
       "score": 0.5741,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2219,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "flow_276_233_10",
       "score": 0.574,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1514,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_826_512_02",
       "score": 0.5739,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2318,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "flow_036_729_10",
       "score": 0.5739,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1928,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "flow_842_376_10",
       "score": 0.5736,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2403,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_076_268_02",
       "score": 0.5729,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2416,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_276_705_02",
       "score": 0.5728,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2354,
+      "cluster_percentile": 0.2381,
+      "cluster_rank": 17,
+      "cluster_total": 22,
       "name": "flow_381_268_02",
       "score": 0.5722,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2263,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "flow_124_430_02",
       "score": 0.5721,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2445,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "flow_699_784_02",
       "score": 0.5717,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2242,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "flow_036_690_02",
       "score": 0.5717,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2293,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "flow_381_724_10",
       "score": 0.5715,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2151,
+      "cluster_percentile": 0.1053,
+      "cluster_rank": 18,
+      "cluster_total": 20,
       "name": "flow_842_798_02",
       "score": 0.5709,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2344,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "flow_381_376_02",
       "score": 0.5708,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2527,
+      "cluster_percentile": 0.8788,
+      "cluster_rank": 5,
+      "cluster_total": 34,
       "name": "flow_392_584_02",
       "score": 0.5707,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2476,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_124_562_02",
       "score": 0.5706,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2278,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "flow_392_702_29",
       "score": 0.5706,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2484,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_392_784_02",
       "score": 0.5705,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2175,
+      "cluster_percentile": 0.1515,
+      "cluster_rank": 29,
+      "cluster_total": 34,
       "name": "flow_392_634_02",
       "score": 0.5702,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2323,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "flow_410_104_10",
       "score": 0.5701,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2398,
+      "cluster_percentile": 0.5789,
+      "cluster_rank": 9,
+      "cluster_total": 20,
       "name": "flow_076_116_02",
       "score": 0.57,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2238,
+      "cluster_percentile": 0.2121,
+      "cluster_rank": 27,
+      "cluster_total": 34,
       "name": "flow_076_882_02",
       "score": 0.5698,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.218,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_842_108_10",
       "score": 0.5696,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2379,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "flow_036_768_02",
       "score": 0.5696,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2449,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "flow_381_682_10",
       "score": 0.5696,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2111,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_124_490_02",
       "score": 0.5694,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2374,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "flow_251_862_02",
       "score": 0.5692,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2203,
+      "cluster_percentile": 0.0476,
+      "cluster_rank": 21,
+      "cluster_total": 22,
       "name": "flow_702_144_10",
       "score": 0.5691,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2428,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "flow_392_764_02",
       "score": 0.569,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2319,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_076_768_10",
       "score": 0.569,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2513,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "flow_076_470_02",
       "score": 0.569,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2272,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_036_678_02",
       "score": 0.569,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1531,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_410_434_29",
       "score": 0.5689,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2235,
+      "cluster_percentile": 0.2105,
+      "cluster_rank": 16,
+      "cluster_total": 20,
       "name": "flow_842_191_02",
       "score": 0.5688,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2171,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "flow_276_807_10",
       "score": 0.5685,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2346,
+      "cluster_percentile": 0.2632,
+      "cluster_rank": 15,
+      "cluster_total": 20,
       "name": "flow_528_616_10",
       "score": 0.5685,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2403,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "flow_076_584_02",
       "score": 0.5684,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1937,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_251_180_10",
       "score": 0.5684,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2377,
+      "cluster_percentile": 0.5263,
+      "cluster_rank": 10,
+      "cluster_total": 20,
       "name": "flow_076_732_02",
       "score": 0.5683,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2358,
+      "cluster_percentile": 0.4848,
+      "cluster_rank": 18,
+      "cluster_total": 34,
       "name": "flow_381_800_10",
       "score": 0.5683,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2281,
+      "cluster_percentile": 0.3636,
+      "cluster_rank": 22,
+      "cluster_total": 34,
       "name": "flow_124_300_10",
       "score": 0.5679,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1977,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "flow_842_858_10",
       "score": 0.5678,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.224,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "flow_381_56_02",
       "score": 0.5678,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2443,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "flow_076_31_02",
       "score": 0.5676,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2204,
+      "cluster_percentile": 0.1818,
+      "cluster_rank": 28,
+      "cluster_total": 34,
       "name": "flow_842_144_02",
       "score": 0.5674,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2333,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "flow_381_300_02",
       "score": 0.5672,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2265,
+      "cluster_percentile": 0.0952,
+      "cluster_rank": 20,
+      "cluster_total": 22,
       "name": "flow_842_800_10",
       "score": 0.5671,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2552,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "flow_036_24_02",
       "score": 0.5668,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2318,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "flow_528_534_10",
       "score": 0.5663,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2231,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "flow_251_300_02",
       "score": 0.5663,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.243,
+      "cluster_percentile": 0.697,
+      "cluster_rank": 11,
+      "cluster_total": 34,
       "name": "flow_276_562_02",
       "score": 0.5659,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2478,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "flow_276_56_02",
       "score": 0.5658,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2159,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_484_764_76",
       "score": 0.5658,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2309,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 19,
+      "cluster_total": 22,
       "name": "flow_699_288_02",
       "score": 0.5654,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2425,
+      "cluster_percentile": 0.7368,
+      "cluster_rank": 6,
+      "cluster_total": 20,
       "name": "flow_276_528_02",
       "score": 0.5654,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1623,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 20,
+      "cluster_total": 20,
       "name": "flow_381_764_02",
       "score": 0.5654,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2357,
+      "cluster_percentile": 0.3684,
+      "cluster_rank": 13,
+      "cluster_total": 20,
       "name": "flow_076_204_02",
       "score": 0.5653,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1766,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_484_348_10",
       "score": 0.5651,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2115,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_702_196_30",
       "score": 0.565,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2463,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "flow_381_32_02",
       "score": 0.5648,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2398,
+      "cluster_percentile": 0.5758,
+      "cluster_rank": 15,
+      "cluster_total": 34,
       "name": "flow_251_724_02",
       "score": 0.5647,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2252,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "flow_076_862_02",
       "score": 0.5644,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2395,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "flow_276_792_02",
       "score": 0.564,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2464,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "flow_276_854_02",
       "score": 0.5638,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2313,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "flow_076_136_02",
       "score": 0.5635,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2247,
+      "cluster_percentile": 0.2424,
+      "cluster_rank": 26,
+      "cluster_total": 34,
       "name": "flow_381_600_10",
       "score": 0.5635,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.156,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "flow_156_136_29",
       "score": 0.5634,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2372,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "flow_076_214_02",
       "score": 0.5633,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.229,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_381_757_02",
       "score": 0.5631,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1836,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "flow_842_320_02",
       "score": 0.563,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2354,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "flow_528_716_02",
       "score": 0.5629,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2048,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_392_620_10",
       "score": 0.5628,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.233,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "flow_124_804_10",
       "score": 0.5624,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2375,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "flow_702_50_10",
       "score": 0.5624,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2369,
+      "cluster_percentile": 0.5152,
+      "cluster_rank": 17,
+      "cluster_total": 34,
       "name": "flow_076_212_02",
       "score": 0.5624,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1695,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "flow_842_308_02",
       "score": 0.5623,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2411,
+      "cluster_percentile": 0.6061,
+      "cluster_rank": 14,
+      "cluster_total": 34,
       "name": "flow_702_458_02",
       "score": 0.5623,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1914,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "flow_702_52_10",
       "score": 0.5622,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1716,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_076_894_10",
       "score": 0.5621,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1547,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "flow_699_418_02",
       "score": 0.5621,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2181,
+      "cluster_percentile": 0.1579,
+      "cluster_rank": 17,
+      "cluster_total": 20,
       "name": "flow_842_152_02",
       "score": 0.562,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2141,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_276_768_10",
       "score": 0.5614,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2332,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "flow_076_12_02",
       "score": 0.5613,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1898,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_699_51_10",
       "score": 0.5612,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1969,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_528_340_02",
       "score": 0.561,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1777,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "flow_410_296_29",
       "score": 0.561,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.222,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "flow_251_208_02",
       "score": 0.5608,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2399,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "flow_381_858_02",
       "score": 0.5607,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1715,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "flow_124_60_02",
       "score": 0.5604,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1941,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_484_757_76",
       "score": 0.5602,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1891,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "flow_702_414_30",
       "score": 0.56,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1466,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "flow_156_598_02",
       "score": 0.5599,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2184,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "flow_251_348_02",
       "score": 0.5598,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2311,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "flow_381_368_10",
       "score": 0.5597,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1944,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 34,
+      "cluster_total": 34,
       "name": "flow_124_212_02",
       "score": 0.5597,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1723,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_156_242_10",
       "score": 0.5596,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2147,
+      "cluster_percentile": 0.0909,
+      "cluster_rank": 31,
+      "cluster_total": 34,
       "name": "flow_381_662_10",
       "score": 0.5596,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2268,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "flow_392_156_02",
       "score": 0.5596,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2101,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "flow_076_124_02",
       "score": 0.5594,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2191,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "flow_156_384_02",
       "score": 0.5592,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2311,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "flow_276_214_02",
       "score": 0.5586,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1913,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "flow_410_144_30",
       "score": 0.5584,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2168,
+      "cluster_percentile": 0.1212,
+      "cluster_rank": 30,
+      "cluster_total": 34,
       "name": "flow_036_818_02",
       "score": 0.5584,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.243,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_124_300_02",
       "score": 0.5583,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2291,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_036_242_02",
       "score": 0.5582,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2126,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "flow_076_28_10",
       "score": 0.5581,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.177,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "flow_076_52_02",
       "score": 0.5581,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2312,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "flow_702_784_10",
       "score": 0.5579,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.2107,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_076_52_10",
       "score": 0.5579,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.204,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "flow_076_384_10",
       "score": 0.5577,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1855,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "flow_036_554_29",
       "score": 0.5577,
       "type": "trade_flow"
     },
     {
       "anomaly_score": 0.1927,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "flow_528_462_02",
       "score": 0.5575,
       "type": "trade_flow"

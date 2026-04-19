@@ -2,2114 +2,3170 @@
   "clusters": 642,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_31558838",
-      "strength": 0.8,
-      "target": "paper_25135198"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_25135198",
-      "strength": 0.8,
-      "target": "paper_30958259"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_30958259",
-      "strength": 0.8,
-      "target": "paper_31491085"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_31491085",
-      "strength": 0.8,
-      "target": "paper_31388127"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_31388127",
-      "strength": 0.8,
-      "target": "paper_25058643"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_25058643",
-      "strength": 0.8,
-      "target": "paper_30996586"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_30996586",
-      "strength": 0.8,
-      "target": "paper_26657727"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_26657727",
-      "strength": 0.8,
-      "target": "paper_34378333"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_34378333",
-      "strength": 0.8,
-      "target": "paper_18385729"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_18385729",
-      "strength": 0.8,
-      "target": "paper_30514834"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_30514834",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_29072279"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_24352276",
-      "strength": 0.8,
-      "target": "paper_25921071"
+      "signal_type": "flip_proximity",
+      "source": "paper_30958259",
+      "strength": 1.0,
+      "target": "paper_34378333"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
+      "source": "paper_25135198",
+      "strength": 1.0,
+      "target": "paper_26657727"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_31558838",
+      "strength": 1.0,
+      "target": "paper_31491085"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_31491085",
+      "strength": 1.0,
+      "target": "paper_30514834"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_25058643",
+      "strength": 1.0,
+      "target": "paper_18385729"
+    },
+    {
+      "signal_type": "flip_proximity",
       "source": "paper_25921071",
-      "strength": 0.8,
-      "target": "paper_35500049"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_35500049",
-      "strength": 0.8,
-      "target": "paper_31318319"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_31318319",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_41453552"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_41453552",
-      "strength": 0.8,
-      "target": "paper_30691652"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_30691652",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_39264185"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_39264185",
-      "strength": 0.8,
-      "target": "paper_26039254"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_26039254",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "paper_24352276",
+      "strength": 1.0,
       "target": "paper_39126615"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_39126615",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_32184217"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_32184217",
-      "strength": 0.8,
-      "target": "paper_28628097"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_28628097",
-      "strength": 0.8,
-      "target": "paper_31280424"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_31280424",
-      "strength": 0.8,
-      "target": "paper_39591761"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_39591761",
-      "strength": 0.8,
-      "target": "paper_28919449"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_28919449",
-      "strength": 0.8,
-      "target": "paper_38976714"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_38976714",
-      "strength": 0.8,
-      "target": "paper_28985510"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_28985510",
-      "strength": 0.8,
-      "target": "paper_25797072"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_25797072",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_32421996"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_32421996",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "paper_31318319",
+      "strength": 1.0,
+      "target": "paper_26039254"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_26039254",
+      "strength": 1.0,
       "target": "paper_27539336"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_27539336",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "paper_30691652",
+      "strength": 1.0,
+      "target": "paper_39591761"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_39591761",
+      "strength": 1.0,
+      "target": "paper_38976714"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_38976714",
+      "strength": 1.0,
+      "target": "paper_28985510"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_28985510",
+      "strength": 1.0,
+      "target": "paper_25797072"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_25797072",
+      "strength": 1.0,
       "target": "paper_35500053"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_30326842",
-      "strength": 0.8,
-      "target": "paper_33311465"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_33311465",
-      "strength": 0.8,
-      "target": "paper_35670735"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_35670735",
-      "strength": 0.8,
-      "target": "paper_37703922"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_37703922",
-      "strength": 0.8,
-      "target": "paper_31568336"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_31568336",
-      "strength": 0.8,
-      "target": "paper_29975607"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_29975607",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_26374309"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_26374309",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "paper_33311465",
+      "strength": 1.0,
+      "target": "paper_35670735"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_35670735",
+      "strength": 1.0,
+      "target": "paper_29975607"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_37703922",
+      "strength": 1.0,
       "target": "paper_24419920"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "paper_24419920",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "paper_31792413"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_33079956",
-      "strength": 0.8,
-      "target": "paper_40513660"
+      "signal_type": "flip_proximity",
+      "source": "paper_31562478",
+      "strength": 1.0,
+      "target": "paper_19441078"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "paper_31383973",
-      "strength": 0.8,
-      "target": "paper_35258825"
+      "signal_type": "flip_proximity",
+      "source": "paper_35258825",
+      "strength": 1.0,
+      "target": "paper_32561716"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_32561716",
+      "strength": 1.0,
+      "target": "paper_30739386"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_30739386",
+      "strength": 1.0,
+      "target": "paper_38069633"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_40619274",
+      "strength": 1.0,
+      "target": "paper_25839984"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_31811138",
+      "strength": 1.0,
+      "target": "paper_31537943"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "paper_31537943",
+      "strength": 1.0,
+      "target": "paper_40763823"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_31558838",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.626,
+      "dimensions": {
+        "anomaly": 0.5029,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "paper_34009393",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.6171,
+      "dimensions": {
+        "anomaly": 0.4773,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "paper_25171331",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.6149,
+      "dimensions": {
+        "anomaly": 0.9284,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_24352276",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.6103,
+      "dimensions": {
+        "anomaly": 0.9152,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_30326842",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5985,
+      "dimensions": {
+        "anomaly": 0.4244,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "paper_28427715",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5976,
+      "dimensions": {
+        "anomaly": 0.8788,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_33079956",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5784,
+      "dimensions": {
+        "anomaly": 0.824,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_36736507",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5584,
+      "dimensions": {
+        "anomaly": 0.8561,
+        "cluster_percentile": 0.875,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_33311465",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5531,
+      "dimensions": {
+        "anomaly": 0.7518,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_28720440",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5482,
+      "dimensions": {
+        "anomaly": 0.7378,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_31350357",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5481,
+      "dimensions": {
+        "anomaly": 0.7373,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_35258825",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5446,
+      "dimensions": {
+        "anomaly": 0.7273,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_31225753",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5342,
+      "dimensions": {
+        "anomaly": 0.6976,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_35242245",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5323,
+      "dimensions": {
+        "anomaly": 0.73,
+        "cluster_percentile": 0.9474,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_25921071",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5296,
+      "dimensions": {
+        "anomaly": 0.6846,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_30692669",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5231,
+      "dimensions": {
+        "anomaly": 0.7035,
+        "cluster_percentile": 0.9474,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_31383973",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5226,
+      "dimensions": {
+        "anomaly": 0.6646,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_30261168",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5223,
+      "dimensions": {
+        "anomaly": 0.6637,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_30691647",
+      "type": "paper"
+    },
+    {
+      "convergence": 0.5212,
+      "dimensions": {
+        "anomaly": 0.6606,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "paper_32063585",
+      "type": "paper"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 294,
+      "dominant_paradigm": "paper_",
+      "dominant_paradigm_share": 2,
+      "hot_count": 2,
+      "hot_fraction": 0.222,
+      "total": 9
+    },
+    {
+      "cluster": 31,
+      "dominant_paradigm": "paper_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.083,
+      "total": 12
+    },
+    {
+      "cluster": 363,
+      "dominant_paradigm": "paper_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.05,
+      "total": 20
+    },
+    {
+      "cluster": 42,
+      "dominant_paradigm": "paper_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.5,
+      "total": 2
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [],
   "database_name": "PubMed Superpower",
   "description": "Biomedical abstracts corpus",
   "legend_id": "pubmed",
-  "novelty": {
-    "novelty_score": 0.0035,
-    "probed": 300,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 0.9152,
-        "name": "paper_30326842",
-        "similarity": 0.9965,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.9284,
-        "name": "paper_24352276",
-        "similarity": 0.9956,
-        "type": "paper"
-      },
-      {
-        "anomaly": 1.0,
-        "name": "paper_31558838",
-        "similarity": 0.9953,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.8561,
-        "name": "paper_33311465",
-        "similarity": 0.9948,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.8788,
-        "name": "paper_33079956",
-        "similarity": 0.9947,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.824,
-        "name": "paper_36736507",
-        "similarity": 0.993,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.7378,
-        "name": "paper_31350357",
-        "similarity": 0.9914,
-        "type": "paper"
-      },
-      {
-        "anomaly": 0.7518,
-        "name": "paper_28720440",
-        "similarity": 0.9908,
-        "type": "paper"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "author",
+        "count": 160,
+        "role": "other",
+        "subcorpus": ""
+      },
+      {
+        "corpus": "paper",
+        "count": 140,
+        "role": "other",
+        "subcorpus": ""
+      }
+    ],
+    "hypothesis_by_corpus": {},
+    "role_counts": {
+      "other": 300
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 12,
       "name": "paper_31558838",
       "score": 0.8794,
       "type": "paper"
     },
     {
       "anomaly_score": 0.9284,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 20,
       "name": "paper_24352276",
       "score": 0.8501,
       "type": "paper"
     },
     {
       "anomaly_score": 0.9152,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "paper_30326842",
       "score": 0.8361,
       "type": "paper"
     },
     {
       "anomaly_score": 0.8788,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_33079956",
       "score": 0.8347,
       "type": "paper"
     },
     {
       "anomaly_score": 0.8561,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "paper_33311465",
       "score": 0.8224,
       "type": "paper"
     },
     {
       "anomaly_score": 0.824,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_36736507",
       "score": 0.8189,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5624,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_23959171",
       "score": 0.8141,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7035,
+      "cluster_percentile": 0.9474,
+      "cluster_rank": 2,
+      "cluster_total": 20,
       "name": "paper_31383973",
       "score": 0.8065,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7492,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_40513660",
       "score": 0.8026,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7273,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "paper_31225753",
       "score": 0.796,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7373,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 20,
       "name": "paper_35258825",
       "score": 0.7941,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6846,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "paper_30692669",
       "score": 0.7894,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6477,
+      "cluster_percentile": 0.6316,
+      "cluster_rank": 8,
+      "cluster_total": 20,
       "name": "paper_26334116",
       "score": 0.7886,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4512,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_33779622",
       "score": 0.7879,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7518,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_28720440",
       "score": 0.7878,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7183,
+      "cluster_percentile": 0.8182,
+      "cluster_rank": 3,
+      "cluster_total": 12,
       "name": "paper_25135198",
       "score": 0.7869,
       "type": "paper"
     },
     {
       "anomaly_score": 0.73,
+      "cluster_percentile": 0.9474,
+      "cluster_rank": 2,
+      "cluster_total": 20,
       "name": "paper_25921071",
       "score": 0.7861,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6469,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "paper_35618721",
       "score": 0.7847,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6896,
+      "cluster_percentile": 0.7895,
+      "cluster_rank": 5,
+      "cluster_total": 20,
       "name": "paper_40619274",
       "score": 0.784,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6976,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_35242245",
       "score": 0.7801,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6423,
+      "cluster_percentile": 0.7895,
+      "cluster_rank": 5,
+      "cluster_total": 20,
       "name": "paper_35500049",
       "score": 0.7781,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6895,
+      "cluster_percentile": 0.8421,
+      "cluster_rank": 4,
+      "cluster_total": 20,
       "name": "paper_31318319",
       "score": 0.7773,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6379,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_30683865",
       "score": 0.7759,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7103,
+      "cluster_percentile": 0.8947,
+      "cluster_rank": 3,
+      "cluster_total": 20,
       "name": "paper_41453552",
       "score": 0.7738,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7197,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "paper_35670735",
       "score": 0.7736,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7378,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_31350357",
       "score": 0.7722,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5818,
+      "cluster_percentile": 0.3158,
+      "cluster_rank": 14,
+      "cluster_total": 20,
       "name": "paper_30691652",
       "score": 0.7721,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6584,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_33252243",
       "score": 0.7721,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6136,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_23956122",
       "score": 0.7706,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5247,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "paper_31649173",
       "score": 0.7688,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6552,
+      "cluster_percentile": 0.6842,
+      "cluster_rank": 7,
+      "cluster_total": 20,
       "name": "paper_31811138",
       "score": 0.7688,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5779,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_24319001",
       "score": 0.7681,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7129,
+      "cluster_percentile": 0.7273,
+      "cluster_rank": 4,
+      "cluster_total": 12,
       "name": "paper_30958259",
       "score": 0.7674,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5192,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_30373513",
       "score": 0.7667,
       "type": "paper"
     },
     {
       "anomaly_score": 0.701,
+      "cluster_percentile": 0.8947,
+      "cluster_rank": 3,
+      "cluster_total": 20,
       "name": "paper_32561716",
       "score": 0.7653,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4731,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_30723290",
       "score": 0.765,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6646,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_30261168",
       "score": 0.7636,
       "type": "paper"
     },
     {
       "anomaly_score": 0.721,
+      "cluster_percentile": 0.9091,
+      "cluster_rank": 2,
+      "cluster_total": 12,
       "name": "paper_31491085",
       "score": 0.763,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6712,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "paper_37703922",
       "score": 0.7626,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5767,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "paper_30886355",
       "score": 0.7621,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4773,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_25171331",
       "score": 0.7618,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6567,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_38896653",
       "score": 0.7612,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7021,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "paper_33144218",
       "score": 0.7611,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 20,
+      "cluster_total": 20,
       "name": "paper_31856197",
       "score": 0.761,
       "type": "paper"
     },
     {
       "anomaly_score": 0.7097,
+      "cluster_percentile": 0.6364,
+      "cluster_rank": 5,
+      "cluster_total": 12,
       "name": "paper_31388127",
       "score": 0.7606,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5239,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "paper_30639098",
       "score": 0.7605,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6177,
+      "cluster_percentile": 0.4737,
+      "cluster_rank": 11,
+      "cluster_total": 20,
       "name": "paper_31562478",
       "score": 0.7601,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5854,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "paper_41064001",
       "score": 0.759,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6131,
+      "cluster_percentile": 0.4737,
+      "cluster_rank": 11,
+      "cluster_total": 20,
       "name": "paper_39264185",
       "score": 0.7587,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4772,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_23979432",
       "score": 0.7585,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5746,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "paper_31687863",
       "score": 0.7585,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6637,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_30691647",
       "score": 0.7578,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6809,
+      "cluster_percentile": 0.5455,
+      "cluster_rank": 6,
+      "cluster_total": 12,
       "name": "paper_25058643",
       "score": 0.7576,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6187,
+      "cluster_percentile": 0.5789,
+      "cluster_rank": 9,
+      "cluster_total": 20,
       "name": "paper_26039254",
       "score": 0.7574,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6548,
+      "cluster_percentile": 0.3636,
+      "cluster_rank": 8,
+      "cluster_total": 12,
       "name": "paper_30996586",
       "score": 0.7568,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6353,
+      "cluster_percentile": 0.7368,
+      "cluster_rank": 6,
+      "cluster_total": 20,
       "name": "paper_39126615",
       "score": 0.7567,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4593,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "paper_32764425",
       "score": 0.7565,
       "type": "paper"
     },
     {
       "anomaly_score": 0.553,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_23111104",
       "score": 0.7564,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6483,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_35439318",
       "score": 0.7554,
       "type": "paper"
     },
     {
       "anomaly_score": 0.649,
+      "cluster_percentile": 0.2727,
+      "cluster_rank": 9,
+      "cluster_total": 12,
       "name": "paper_26657727",
       "score": 0.7552,
       "type": "paper"
     },
     {
       "anomaly_score": 0.655,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "paper_32047025",
       "score": 0.7547,
       "type": "paper"
     },
     {
       "anomaly_score": 0.632,
+      "cluster_percentile": 0.6842,
+      "cluster_rank": 7,
+      "cluster_total": 20,
       "name": "paper_32184217",
       "score": 0.7543,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6653,
+      "cluster_percentile": 0.4545,
+      "cluster_rank": 7,
+      "cluster_total": 12,
       "name": "paper_34378333",
       "score": 0.754,
       "type": "paper"
     },
     {
       "anomaly_score": 0.643,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_41290079",
       "score": 0.7534,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5858,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "paper_36104507",
       "score": 0.753,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6919,
+      "cluster_percentile": 0.8421,
+      "cluster_rank": 4,
+      "cluster_total": 20,
       "name": "paper_29255239",
       "score": 0.7527,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6247,
+      "cluster_percentile": 0.5263,
+      "cluster_rank": 10,
+      "cluster_total": 20,
       "name": "paper_31537943",
       "score": 0.7525,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6426,
+      "cluster_percentile": 0.1818,
+      "cluster_rank": 10,
+      "cluster_total": 12,
       "name": "paper_18385729",
       "score": 0.7513,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5521,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "paper_27846907",
       "score": 0.751,
       "type": "paper"
     },
     {
       "anomaly_score": 0.568,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_32848096",
       "score": 0.75,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5867,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "paper_31238873",
       "score": 0.7496,
       "type": "paper"
     },
     {
       "anomaly_score": 0.635,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "paper_31568336",
       "score": 0.7481,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5838,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "paper_22163003",
       "score": 0.7479,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4928,
+      "cluster_percentile": 0.0526,
+      "cluster_rank": 19,
+      "cluster_total": 20,
       "name": "paper_41276924",
       "score": 0.7478,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6529,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "paper_40855431",
       "score": 0.7468,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5751,
+      "cluster_percentile": 0.2105,
+      "cluster_rank": 16,
+      "cluster_total": 20,
       "name": "paper_28628097",
       "score": 0.7465,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4584,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "paper_35748708",
       "score": 0.7465,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6016,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "paper_29975607",
       "score": 0.7451,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6212,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_40573432",
       "score": 0.745,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5581,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "paper_27582008",
       "score": 0.7449,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5235,
+      "cluster_percentile": 0.1053,
+      "cluster_rank": 18,
+      "cluster_total": 20,
       "name": "paper_40763823",
       "score": 0.7433,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4482,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_30033370",
       "score": 0.743,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6159,
+      "cluster_percentile": 0.5263,
+      "cluster_rank": 10,
+      "cluster_total": 20,
       "name": "paper_31280424",
       "score": 0.7428,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4653,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "paper_31614870",
       "score": 0.7426,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6413,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "paper_38994004",
       "score": 0.7425,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5843,
+      "cluster_percentile": 0.3684,
+      "cluster_rank": 13,
+      "cluster_total": 20,
       "name": "paper_39591761",
       "score": 0.7424,
       "type": "paper"
     },
     {
       "anomaly_score": 0.652,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "paper_41601654",
       "score": 0.7424,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5558,
+      "cluster_percentile": 0.1579,
+      "cluster_rank": 17,
+      "cluster_total": 20,
       "name": "paper_30835493",
       "score": 0.7421,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6806,
+      "cluster_percentile": 0.7368,
+      "cluster_rank": 6,
+      "cluster_total": 20,
       "name": "paper_19441078",
       "score": 0.7418,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4522,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_29182606",
       "score": 0.7414,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5931,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_31986218",
       "score": 0.7409,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6368,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_24781324",
       "score": 0.7398,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5597,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_31331684",
       "score": 0.7397,
       "type": "paper"
     },
     {
       "anomaly_score": 0.592,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_27810075",
       "score": 0.7395,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5426,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "paper_24531487",
       "score": 0.7388,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5827,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "paper_34108610",
       "score": 0.7386,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6391,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "paper_26374309",
       "score": 0.7384,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6195,
+      "cluster_percentile": 0.6316,
+      "cluster_rank": 8,
+      "cluster_total": 20,
       "name": "paper_28919449",
       "score": 0.7382,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5928,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "paper_27436122",
       "score": 0.7381,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5062,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_31391371",
       "score": 0.7379,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6018,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_35110534",
       "score": 0.7367,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6031,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "paper_36598558",
       "score": 0.7366,
       "type": "paper"
     },
     {
       "anomaly_score": 0.559,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_24987097",
       "score": 0.7365,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6606,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_32063585",
       "score": 0.7359,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5303,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_35681111",
       "score": 0.7353,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5826,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "paper_24419920",
       "score": 0.7352,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4244,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_28427715",
       "score": 0.7351,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6413,
+      "cluster_percentile": 0.5789,
+      "cluster_rank": 9,
+      "cluster_total": 20,
       "name": "paper_36898352",
       "score": 0.7349,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4924,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_30838976",
       "score": 0.7346,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5334,
+      "cluster_percentile": 0.1579,
+      "cluster_rank": 17,
+      "cluster_total": 20,
       "name": "paper_38976714",
       "score": 0.7343,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6415,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_35713228",
       "score": 0.734,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5537,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_32039045",
       "score": 0.7338,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5748,
+      "cluster_percentile": 0.2105,
+      "cluster_rank": 16,
+      "cluster_total": 20,
       "name": "paper_32072755",
       "score": 0.7328,
       "type": "paper"
     },
     {
       "anomaly_score": 0.515,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "paper_31796082",
       "score": 0.7325,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6438,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_25040500",
       "score": 0.7323,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5921,
+      "cluster_percentile": 0.3158,
+      "cluster_rank": 14,
+      "cluster_total": 20,
       "name": "paper_23266571",
       "score": 0.7321,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5656,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "paper_30814697",
       "score": 0.7321,
       "type": "paper"
     },
     {
       "anomaly_score": 0.47,
+      "cluster_percentile": 0.1053,
+      "cluster_rank": 18,
+      "cluster_total": 20,
       "name": "paper_28985510",
       "score": 0.7319,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5799,
+      "cluster_percentile": 0.2632,
+      "cluster_rank": 15,
+      "cluster_total": 20,
       "name": "paper_25797072",
       "score": 0.7309,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5172,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_27246338",
       "score": 0.7307,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5184,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_39586398",
       "score": 0.7306,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5402,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "paper_31792413",
       "score": 0.7304,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5767,
+      "cluster_percentile": 0.2632,
+      "cluster_rank": 15,
+      "cluster_total": 20,
       "name": "paper_25839984",
       "score": 0.7304,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6105,
+      "cluster_percentile": 0.4211,
+      "cluster_rank": 12,
+      "cluster_total": 20,
       "name": "paper_30739386",
       "score": 0.7302,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4772,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "paper_39831306",
       "score": 0.7302,
       "type": "paper"
     },
     {
       "anomaly_score": 0.596,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_32645235",
       "score": 0.7301,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4391,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_20888900",
       "score": 0.73,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5029,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_34009393",
       "score": 0.73,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5957,
+      "cluster_percentile": 0.4211,
+      "cluster_rank": 12,
+      "cluster_total": 20,
       "name": "paper_32421996",
       "score": 0.7299,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4684,
+      "cluster_percentile": 0.0526,
+      "cluster_rank": 19,
+      "cluster_total": 20,
       "name": "paper_27539336",
       "score": 0.7298,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5926,
+      "cluster_percentile": 0.3684,
+      "cluster_rank": 13,
+      "cluster_total": 20,
       "name": "paper_38069633",
       "score": 0.7295,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6036,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "paper_32556168",
       "score": 0.7293,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5997,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 12,
+      "cluster_total": 12,
       "name": "paper_30514834",
       "score": 0.7288,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4288,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "paper_26947813",
       "score": 0.7288,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5437,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "paper_21399628",
       "score": 0.7279,
       "type": "paper"
     },
     {
       "anomaly_score": 0.6064,
+      "cluster_percentile": 0.0909,
+      "cluster_rank": 11,
+      "cluster_total": 12,
       "name": "paper_29072279",
       "score": 0.7276,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4251,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 20,
+      "cluster_total": 20,
       "name": "paper_35500053",
       "score": 0.7275,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5938,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "paper_22930729",
       "score": 0.7274,
       "type": "paper"
     },
     {
       "anomaly_score": 0.5488,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "paper_40521034",
       "score": 0.7273,
       "type": "paper"
     },
     {
       "anomaly_score": 0.4796,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "paper_31669147",
       "score": 0.7273,
       "type": "paper"
     },
     {
       "anomaly_score": 0.0667,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_uppaluri,_ravindra",
       "score": 0.7125,
       "type": "author"
     },
     {
       "anomaly_score": 0.0846,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "author_fu,_cong",
       "score": 0.7007,
       "type": "author"
     },
     {
       "anomaly_score": 0.0603,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "author_zhuang,_xuehan",
       "score": 0.6991,
       "type": "author"
     },
     {
       "anomaly_score": 0.0558,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_namula,_zhao",
       "score": 0.6988,
       "type": "author"
     },
     {
       "anomaly_score": 0.0649,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "author_compagno,_mara",
       "score": 0.6953,
       "type": "author"
     },
     {
       "anomaly_score": 0.0739,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "author_rinne,_mik",
       "score": 0.6922,
       "type": "author"
     },
     {
       "anomaly_score": 0.0765,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "author_yamashita,_riu",
       "score": 0.6792,
       "type": "author"
     },
     {
       "anomaly_score": 0.0613,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "author_spinasse,_lizania",
       "score": 0.6769,
       "type": "author"
     },
     {
       "anomaly_score": 0.0646,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_tian,_sibo",
       "score": 0.6736,
       "type": "author"
     },
     {
       "anomaly_score": 0.0684,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_salem,_karma_z",
       "score": 0.6735,
       "type": "author"
     },
     {
       "anomaly_score": 0.0637,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_zon,_leonard_i",
       "score": 0.6728,
       "type": "author"
     },
     {
       "anomaly_score": 0.0857,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "author_nguyen,_thao_h",
       "score": 0.6713,
       "type": "author"
     },
     {
       "anomaly_score": 0.061,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_su,_shirley_y",
       "score": 0.662,
       "type": "author"
     },
     {
       "anomaly_score": 0.0695,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "author_fulda,_simone",
       "score": 0.6566,
       "type": "author"
     },
     {
       "anomaly_score": 0.0616,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_gutkind,_j_s",
       "score": 0.656,
       "type": "author"
     },
     {
       "anomaly_score": 0.0673,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_singh,_gyanendra",
       "score": 0.6557,
       "type": "author"
     },
     {
       "anomaly_score": 0.0626,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_qi,_fuming",
       "score": 0.6526,
       "type": "author"
     },
     {
       "anomaly_score": 0.0624,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_karp,_hannah_q",
       "score": 0.6517,
       "type": "author"
     },
     {
       "anomaly_score": 0.0586,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "author_shi,_linyu",
       "score": 0.6516,
       "type": "author"
     },
     {
       "anomaly_score": 0.0588,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "author_lawler,_mark",
       "score": 0.6509,
       "type": "author"
     },
     {
       "anomaly_score": 0.0522,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_xu,_yong-hu",
       "score": 0.6496,
       "type": "author"
     },
     {
       "anomaly_score": 0.0545,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_geng,_li_zhao",
       "score": 0.6496,
       "type": "author"
     },
     {
       "anomaly_score": 0.0516,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_lavery,_jessica_a",
       "score": 0.6495,
       "type": "author"
     },
     {
       "anomaly_score": 0.0658,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_hasson,_katie",
       "score": 0.6486,
       "type": "author"
     },
     {
       "anomaly_score": 0.0644,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "author_sihota,_tianna_s",
       "score": 0.6471,
       "type": "author"
     },
     {
       "anomaly_score": 0.0556,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "author_b\u00f6rno,_stefan",
       "score": 0.6461,
       "type": "author"
     },
     {
       "anomaly_score": 0.0647,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "author_haruta,_h",
       "score": 0.6452,
       "type": "author"
     },
     {
       "anomaly_score": 0.0641,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "author_su,_min",
       "score": 0.6452,
       "type": "author"
     },
     {
       "anomaly_score": 0.0648,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_balboa,_diego",
       "score": 0.6452,
       "type": "author"
     },
     {
       "anomaly_score": 0.056,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "author_manning,_sara_l",
       "score": 0.6448,
       "type": "author"
     },
     {
       "anomaly_score": 0.0622,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_afshar-saber,_wardiya",
       "score": 0.6443,
       "type": "author"
     },
     {
       "anomaly_score": 0.0644,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "author_reiner,_anne_s",
       "score": 0.6434,
       "type": "author"
     },
     {
       "anomaly_score": 0.0685,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "author_clouet-d'orval,_b\u00e9atrice",
       "score": 0.6432,
       "type": "author"
     },
     {
       "anomaly_score": 0.0655,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_malone,_clare_f",
       "score": 0.643,
       "type": "author"
     },
     {
       "anomaly_score": 0.0715,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "author_malkin,_hayley",
       "score": 0.6428,
       "type": "author"
     },
     {
       "anomaly_score": 0.0605,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_jan\u00e9-valbuena,_judit",
       "score": 0.642,
       "type": "author"
     },
     {
       "anomaly_score": 0.0622,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_wagner,_sebastian",
       "score": 0.6411,
       "type": "author"
     },
     {
       "anomaly_score": 0.0667,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_shi,_jiantao",
       "score": 0.6405,
       "type": "author"
     },
     {
       "anomaly_score": 0.0665,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "author_shapiro,_ilja_e",
       "score": 0.6394,
       "type": "author"
     },
     {
       "anomaly_score": 0.0668,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_siena,_salvatore",
       "score": 0.6385,
       "type": "author"
     },
     {
       "anomaly_score": 0.0539,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_wong,_connie",
       "score": 0.6373,
       "type": "author"
     },
     {
       "anomaly_score": 0.0652,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "author_hu,_yiguo",
       "score": 0.6347,
       "type": "author"
     },
     {
       "anomaly_score": 0.0746,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_bao,_yijuan",
       "score": 0.6336,
       "type": "author"
     },
     {
       "anomaly_score": 0.0586,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_gillis,_jacob_e",
       "score": 0.6329,
       "type": "author"
     },
     {
       "anomaly_score": 0.0662,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "author_nguyen,_peter_q",
       "score": 0.6324,
       "type": "author"
     },
     {
       "anomaly_score": 0.0606,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_carre\u00f1o-tarragona,_gonzalo",
       "score": 0.6323,
       "type": "author"
     },
     {
       "anomaly_score": 0.0634,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "author_lees,_jacqueline",
       "score": 0.6316,
       "type": "author"
     },
     {
       "anomaly_score": 0.0649,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_schuler,_martin",
       "score": 0.6308,
       "type": "author"
     },
     {
       "anomaly_score": 0.0616,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "author_zhang,_xu-chao",
       "score": 0.6284,
       "type": "author"
     },
     {
       "anomaly_score": 0.0575,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_lodeyro,_anabella_f",
       "score": 0.6284,
       "type": "author"
     },
     {
       "anomaly_score": 0.0569,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "author_hakenberg,_j\u00f6rg",
       "score": 0.6275,
       "type": "author"
     },
     {
       "anomaly_score": 0.0539,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_bower,_lawrence",
       "score": 0.6263,
       "type": "author"
     },
     {
       "anomaly_score": 0.0788,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_bertagnolli,_monica",
       "score": 0.626,
       "type": "author"
     },
     {
       "anomaly_score": 0.0589,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "author_guo,_haoyue",
       "score": 0.6258,
       "type": "author"
     },
     {
       "anomaly_score": 0.0666,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_zugazagoitia,_j",
       "score": 0.6254,
       "type": "author"
     },
     {
       "anomaly_score": 0.0633,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_zhao,_qingfang",
       "score": 0.6247,
       "type": "author"
     },
     {
       "anomaly_score": 0.0595,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_zhao,_amy_h",
       "score": 0.6246,
       "type": "author"
     },
     {
       "anomaly_score": 0.0743,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_takahashi,_masamichi",
       "score": 0.6239,
       "type": "author"
     },
     {
       "anomaly_score": 0.0633,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "author_merlo,_anna",
       "score": 0.6238,
       "type": "author"
     },
     {
       "anomaly_score": 0.0548,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_taotao,_sheng",
       "score": 0.6235,
       "type": "author"
     },
     {
       "anomaly_score": 0.06,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_guo,_xiaoge",
       "score": 0.6229,
       "type": "author"
     },
     {
       "anomaly_score": 0.0571,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_zagnoli-vieira,_guido",
       "score": 0.6228,
       "type": "author"
     },
     {
       "anomaly_score": 0.0629,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_chapuy,_bjoern",
       "score": 0.6215,
       "type": "author"
     },
     {
       "anomaly_score": 0.0594,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_taylor,_benjamin_j",
       "score": 0.6215,
       "type": "author"
     },
     {
       "anomaly_score": 0.0601,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "author_toyoshima,_yujiro",
       "score": 0.6209,
       "type": "author"
     },
     {
       "anomaly_score": 0.0615,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "author_kumar,_vikrant",
       "score": 0.6201,
       "type": "author"
     },
     {
       "anomaly_score": 0.057,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_nichols,_kim_e",
       "score": 0.6201,
       "type": "author"
     },
     {
       "anomaly_score": 0.0744,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_skotheim,_rolf_i",
       "score": 0.6201,
       "type": "author"
     },
     {
       "anomaly_score": 0.0564,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "author_gonzalez-avila,_luis_uriel",
       "score": 0.6195,
       "type": "author"
     },
     {
       "anomaly_score": 0.0577,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_wesseling,_pieter",
       "score": 0.6189,
       "type": "author"
     },
     {
       "anomaly_score": 0.057,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "author_guo,_weihua",
       "score": 0.6186,
       "type": "author"
     },
     {
       "anomaly_score": 0.0594,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_gotoh,_kunihito",
       "score": 0.6185,
       "type": "author"
     },
     {
       "anomaly_score": 0.0596,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_yee,_shi_mun",
       "score": 0.6181,
       "type": "author"
     },
     {
       "anomaly_score": 0.0637,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_e,_xiaofei",
       "score": 0.617,
       "type": "author"
     },
     {
       "anomaly_score": 0.0546,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "author_li,_qiyuan",
       "score": 0.617,
       "type": "author"
     },
     {
       "anomaly_score": 0.0578,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_welkie,_david",
       "score": 0.617,
       "type": "author"
     },
     {
       "anomaly_score": 0.0545,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "author_sharpe,_james",
       "score": 0.6167,
       "type": "author"
     },
     {
       "anomaly_score": 0.0569,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_tan,_p",
       "score": 0.6166,
       "type": "author"
     },
     {
       "anomaly_score": 0.059,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_plant,_ashley",
       "score": 0.6165,
       "type": "author"
     },
     {
       "anomaly_score": 0.0561,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_wu,_catherine_j",
       "score": 0.6161,
       "type": "author"
     },
     {
       "anomaly_score": 0.0561,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "author_yang,_ziqin",
       "score": 0.616,
       "type": "author"
     },
     {
       "anomaly_score": 0.0641,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "author_gschaedler-mathis,_anne_christine",
       "score": 0.6155,
       "type": "author"
     },
     {
       "anomaly_score": 0.0539,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_khasraw,_mustafa",
       "score": 0.6151,
       "type": "author"
     },
     {
       "anomaly_score": 0.0614,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_zhao,_lili",
       "score": 0.6149,
       "type": "author"
     },
     {
       "anomaly_score": 0.0621,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "author_kim,_edward_s",
       "score": 0.6132,
       "type": "author"
     },
     {
       "anomaly_score": 0.0647,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "author_djajawi,_tirta_m",
       "score": 0.6131,
       "type": "author"
     },
     {
       "anomaly_score": 0.0642,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "author_chen,_bolin",
       "score": 0.6128,
       "type": "author"
     },
     {
       "anomaly_score": 0.0587,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_yan,_wen-xin",
       "score": 0.6126,
       "type": "author"
     },
     {
       "anomaly_score": 0.0625,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "author_akkad,_adam",
       "score": 0.6124,
       "type": "author"
     },
     {
       "anomaly_score": 0.0577,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_herbst,_brian",
       "score": 0.612,
       "type": "author"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_tipping,_cindy",
       "score": 0.6119,
       "type": "author"
     },
     {
       "anomaly_score": 0.0579,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_zhao,_yuting",
       "score": 0.6117,
       "type": "author"
     },
     {
       "anomaly_score": 0.0561,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 4,
+      "cluster_total": 7,
       "name": "author_arends,_mark_j",
       "score": 0.6116,
       "type": "author"
     },
     {
       "anomaly_score": 0.0553,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_zamora,_anthony_e",
       "score": 0.6108,
       "type": "author"
     },
     {
       "anomaly_score": 0.0628,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_liu,_jingfeng",
       "score": 0.6107,
       "type": "author"
     },
     {
       "anomaly_score": 0.0541,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_binah,_ofer",
       "score": 0.6099,
       "type": "author"
     },
     {
       "anomaly_score": 0.0566,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_bakke,_jesse",
       "score": 0.6095,
       "type": "author"
     },
     {
       "anomaly_score": 0.0572,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_reid,_mary_e",
       "score": 0.6093,
       "type": "author"
     },
     {
       "anomaly_score": 0.0647,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "author_lin,_jeffrey_h",
       "score": 0.6093,
       "type": "author"
     },
     {
       "anomaly_score": 0.0555,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_schapira,_anthony_h_v",
       "score": 0.6091,
       "type": "author"
     },
     {
       "anomaly_score": 0.0586,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_takahashi,_yusuke",
       "score": 0.6091,
       "type": "author"
     },
     {
       "anomaly_score": 0.0587,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 3,
+      "cluster_total": 7,
       "name": "author_wang,_yipeng",
       "score": 0.6088,
       "type": "author"
     },
     {
       "anomaly_score": 0.0575,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "author_oxnard,_geoffrey_r",
       "score": 0.6081,
       "type": "author"
     },
     {
       "anomaly_score": 0.053,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_adams,_clare_m",
       "score": 0.6079,
       "type": "author"
     },
     {
       "anomaly_score": 0.057,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_burghel,_george_j",
       "score": 0.6077,
       "type": "author"
     },
     {
       "anomaly_score": 0.058,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_csabai,_istv\u00e1n",
       "score": 0.6066,
       "type": "author"
     },
     {
       "anomaly_score": 0.0596,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_trenkmann,_michelle",
       "score": 0.6062,
       "type": "author"
     },
     {
       "anomaly_score": 0.0533,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_uchida,_kazuyuki",
       "score": 0.6056,
       "type": "author"
     },
     {
       "anomaly_score": 0.0586,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "author_liu,_yuhan",
       "score": 0.6054,
       "type": "author"
     },
     {
       "anomaly_score": 0.0604,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_singh,_ravi",
       "score": 0.6052,
       "type": "author"
     },
     {
       "anomaly_score": 0.0609,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_heesch,_sebastiaan_van",
       "score": 0.605,
       "type": "author"
     },
     {
       "anomaly_score": 0.0545,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "author_hill,_ciaran_s",
       "score": 0.6048,
       "type": "author"
     },
     {
       "anomaly_score": 0.0528,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "author_waldman,_benjamin_s",
       "score": 0.6046,
       "type": "author"
     },
     {
       "anomaly_score": 0.0604,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_fatima,_mahpara",
       "score": 0.6041,
       "type": "author"
     },
     {
       "anomaly_score": 0.061,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_dal_peraro,_matteo",
       "score": 0.6041,
       "type": "author"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_weninger,_annette",
       "score": 0.604,
       "type": "author"
     },
     {
       "anomaly_score": 0.0537,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_ohde,_yasuhisa",
       "score": 0.6038,
       "type": "author"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_azimi,_roxana",
       "score": 0.6036,
       "type": "author"
     },
     {
       "anomaly_score": 0.0555,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_lim,_klothilda",
       "score": 0.6034,
       "type": "author"
     },
     {
       "anomaly_score": 0.0558,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_svitashev,_sergei",
       "score": 0.6025,
       "type": "author"
     },
     {
       "anomaly_score": 0.0559,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "author_otsuka,_motoyuki",
       "score": 0.6025,
       "type": "author"
     },
     {
       "anomaly_score": 0.0525,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_adair,_jennifer_e",
       "score": 0.6024,
       "type": "author"
     },
     {
       "anomaly_score": 0.0616,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_liu,_wangrui",
       "score": 0.602,
       "type": "author"
     },
     {
       "anomaly_score": 0.0608,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_salas-benito,_diego",
       "score": 0.6018,
       "type": "author"
     },
     {
       "anomaly_score": 0.0542,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_west,_mike",
       "score": 0.6017,
       "type": "author"
     },
     {
       "anomaly_score": 0.0604,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "author_luo,_dongdong",
       "score": 0.5997,
       "type": "author"
     },
     {
       "anomaly_score": 0.0604,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_walbot,_virginia",
       "score": 0.5991,
       "type": "author"
     },
     {
       "anomaly_score": 0.058,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_liu,_shiyang",
       "score": 0.599,
       "type": "author"
     },
     {
       "anomaly_score": 0.0528,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_jones,_carter",
       "score": 0.5988,
       "type": "author"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_zhao,_an-qi",
       "score": 0.5987,
       "type": "author"
     },
     {
       "anomaly_score": 0.0592,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_ha,_dae-in",
       "score": 0.5985,
       "type": "author"
     },
     {
       "anomaly_score": 0.0599,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "author_arnold,_paula",
       "score": 0.5984,
       "type": "author"
     },
     {
       "anomaly_score": 0.0574,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_de_paoli,_lorenzo",
       "score": 0.5983,
       "type": "author"
     },
     {
       "anomaly_score": 0.0602,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "author_chi,_ching-shiang",
       "score": 0.597,
       "type": "author"
     },
     {
       "anomaly_score": 0.0572,
+      "cluster_percentile": 0.8333,
+      "cluster_rank": 2,
+      "cluster_total": 7,
       "name": "author_kaderbhai,_cour\u00e8che",
       "score": 0.5969,
       "type": "author"
     },
     {
       "anomaly_score": 0.0594,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "author_sun,_xiao",
       "score": 0.5962,
       "type": "author"
     },
     {
       "anomaly_score": 0.0599,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "author_mohler,_peter_j",
       "score": 0.5953,
       "type": "author"
     },
     {
       "anomaly_score": 0.0609,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_panageas,_katherine_s",
       "score": 0.5952,
       "type": "author"
     },
     {
       "anomaly_score": 0.059,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "author_shah,_parin",
       "score": 0.5951,
       "type": "author"
     },
     {
       "anomaly_score": 0.0497,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "author_xie,_hua",
       "score": 0.595,
       "type": "author"
     },
     {
       "anomaly_score": 0.0592,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_zhao,_j_h",
       "score": 0.5948,
       "type": "author"
     },
     {
       "anomaly_score": 0.056,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_oliver,_rachel",
       "score": 0.5943,
       "type": "author"
     },
     {
       "anomaly_score": 0.0556,
+      "cluster_percentile": 0.1667,
+      "cluster_rank": 6,
+      "cluster_total": 7,
       "name": "author_alvarez,_james",
       "score": 0.5942,
       "type": "author"
     },
     {
       "anomaly_score": 0.0563,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "author_cho,_hwan_sung",
       "score": 0.5941,
       "type": "author"
     },
     {
       "anomaly_score": 0.0551,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_nguyen,_francis",
       "score": 0.594,
       "type": "author"
     },
     {
       "anomaly_score": 0.056,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 5,
+      "cluster_total": 7,
       "name": "author_lou,_hannah_e",
       "score": 0.594,
       "type": "author"
     },
     {
       "anomaly_score": 0.0549,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_yarchoan,_mark",
       "score": 0.5938,
       "type": "author"
     },
     {
       "anomaly_score": 0.0597,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "author_mcpherson,_andrew",
       "score": 0.5938,
       "type": "author"
     },
     {
       "anomaly_score": 0.0572,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "author_tarannum,_mubin",
       "score": 0.5934,
       "type": "author"
     },
     {
       "anomaly_score": 0.0542,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "author_nag,_anwesha",
       "score": 0.5934,
       "type": "author"
     },
     {
       "anomaly_score": 0.0567,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_hastie,_alex",
       "score": 0.5931,
       "type": "author"
     },
     {
       "anomaly_score": 0.0612,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 7,
       "name": "author_gao,_huirong",
       "score": 0.5928,
       "type": "author"
     },
     {
       "anomaly_score": 0.06,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_barbie,_david_a",
       "score": 0.5928,
       "type": "author"
     },
     {
       "anomaly_score": 0.0555,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 7,
+      "cluster_total": 7,
       "name": "author_wang,_zhenyu",
       "score": 0.5927,
       "type": "author"
     },
     {
       "anomaly_score": 0.0605,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_zhu,_shuifang",
       "score": 0.5922,
       "type": "author"
     },
     {
       "anomaly_score": 0.0555,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "author_mareschal,_sylvain",
       "score": 0.5918,
       "type": "author"
     },
     {
       "anomaly_score": 0.0561,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_barwick,_benjamin_g",
       "score": 0.5912,
       "type": "author"
     },
     {
       "anomaly_score": 0.0554,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_kieran,_mark_w",
       "score": 0.5909,
       "type": "author"
     },
     {
       "anomaly_score": 0.0557,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "author_bai,_baoyan",
       "score": 0.5901,
       "type": "author"
     },
     {
       "anomaly_score": 0.058,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "author_ono,_tamao",
       "score": 0.59,
       "type": "author"

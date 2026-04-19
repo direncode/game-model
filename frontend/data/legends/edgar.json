@@ -2,2114 +2,3148 @@
   "clusters": 724,
   "connections": [
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000119380518000251",
-      "strength": 0.8,
-      "target": "filing_000139834426000247"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000139834426000247",
-      "strength": 0.8,
-      "target": "filing_000031506625001578"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000031506625001578",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000114036126012942"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000114036126012942",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000212655426000001"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000212655426000001",
-      "strength": 0.8,
-      "target": "filing_000199012726000004"
+      "signal_type": "flip_proximity",
+      "source": "filing_000119380518000251",
+      "strength": 1.0,
+      "target": "filing_000139834426000247"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000199012726000004",
-      "strength": 0.8,
-      "target": "filing_000210927126000001"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000210927126000001",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "filing_000139834426000247",
+      "strength": 1.0,
       "target": "filing_000031506626000360"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000031506626000360",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000151199826000004"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000151199826000004",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000155728826000004"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000119312526049843",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000185100326000011"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000185100326000011",
-      "strength": 0.8,
-      "target": "filing_000171889226000002"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000171889226000002",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000107693026000039"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000107693026000039",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000149315225024774"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000149315225024774",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000110465926017089"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000110465926017089",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000103297525000076"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000103297525000076",
-      "strength": 0.8,
-      "target": "filing_000119312526045187"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000119312526045187",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000148729226000002"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000195047126000003",
-      "strength": 0.8,
-      "target": "filing_000124008526000009"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000124008526000009",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000197636326000009"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000168316826000891",
-      "strength": 0.8,
-      "target": "filing_000162828026008609"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000162828026008609",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000162828026012666"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000162828026012666",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000148104524000004"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000148104524000004",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000032018725000144"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000180483126000004",
-      "strength": 0.8,
-      "target": "filing_000200101126000029"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000200101126000029",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000119312526140012"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000119312526140012",
-      "strength": 0.8,
+      "signal_type": "flip_proximity",
+      "source": "filing_000180483126000004",
+      "strength": 1.0,
       "target": "filing_000116755726000029"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000085973726000015",
-      "strength": 0.8,
-      "target": "filing_000091538926000047"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000031314325000078",
-      "strength": 0.8,
-      "target": "filing_000090514826000697"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000090514826000697",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000172847226000001"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000205032725000015",
-      "strength": 0.8,
-      "target": "filing_000086575226000010"
-    },
-    {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000086575226000010",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000094787126000159"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000094787126000159",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000092963825003467"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000092963825003467",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000195917326001384"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000195917326001384",
-      "strength": 0.8,
-      "target": "filing_000095012307008547"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000095012307008547",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000110465926034240"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000110465926034240",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000119312526085802"
     },
     {
-      "signal_type": "cluster_co_membership",
+      "signal_type": "flip_proximity",
       "source": "filing_000167154125000001",
-      "strength": 0.8,
-      "target": "filing_000119380517003227"
-    },
-    {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000119380517003227",
-      "strength": 0.8,
+      "strength": 1.0,
       "target": "filing_000117891325004095"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000117891325004095",
-      "strength": 0.8,
-      "target": "filing_000139834426003083"
+      "signal_type": "flip_proximity",
+      "source": "filing_000139834426003083",
+      "strength": 1.0,
+      "target": "filing_000160042926000001"
     },
     {
-      "signal_type": "cluster_co_membership",
-      "source": "filing_000139834426003083",
-      "strength": 0.8,
-      "target": "filing_000160042926000001"
+      "signal_type": "flip_proximity",
+      "source": "filing_999999999526001073",
+      "strength": 1.0,
+      "target": "filing_000003877726000048"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "filing_000003877726000048",
+      "strength": 1.0,
+      "target": "filing_000110465926020888"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "filing_000169082026000019",
+      "strength": 1.0,
+      "target": "filing_000119380525000406"
+    },
+    {
+      "signal_type": "flip_proximity",
+      "source": "filing_000119380525000406",
+      "strength": 1.0,
+      "target": "filing_000119312526061540"
+    }
+  ],
+  "convergence_index": [
+    {
+      "convergence": 0.6367,
+      "dimensions": {
+        "anomaly": 0.7049,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.7
+      },
+      "name": "filing_000162828026008609",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.6279,
+      "dimensions": {
+        "anomaly": 0.5084,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 1.0
+      },
+      "name": "filing_000119312514038134",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.62,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000195917326000758",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.6071,
+      "dimensions": {
+        "anomaly": 0.9706,
+        "cluster_percentile": 0.9894,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000105079726000025",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5973,
+      "dimensions": {
+        "anomaly": 0.9351,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000121465926004185",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5671,
+      "dimensions": {
+        "anomaly": 0.5059,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.7
+      },
+      "name": "filing_000187417826000012",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5665,
+      "dimensions": {
+        "anomaly": 0.8624,
+        "cluster_percentile": 0.9787,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000203383426000008",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5512,
+      "dimensions": {
+        "anomaly": 0.8261,
+        "cluster_percentile": 0.9681,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000010577026000018",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5505,
+      "dimensions": {
+        "anomaly": 0.6301,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "filing_000110465926031260",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5485,
+      "dimensions": {
+        "anomaly": 0.7385,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "filing_000165315326000003",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5401,
+      "dimensions": {
+        "anomaly": 0.6002,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "filing_000110465925116419",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5379,
+      "dimensions": {
+        "anomaly": 0.5941,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "filing_000071742326000049",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5307,
+      "dimensions": {
+        "anomaly": 0.7753,
+        "cluster_percentile": 0.9574,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000110465925099303",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5256,
+      "dimensions": {
+        "anomaly": 0.7684,
+        "cluster_percentile": 0.9468,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000091957426001185",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5128,
+      "dimensions": {
+        "anomaly": 0.6937,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000162828026008561",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5108,
+      "dimensions": {
+        "anomaly": 0.5523,
+        "cluster_percentile": 0.95,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.4
+      },
+      "name": "filing_000201238325002999",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.5011,
+      "dimensions": {
+        "anomaly": 0.706,
+        "cluster_percentile": 0.9362,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000090655326000022",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.4957,
+      "dimensions": {
+        "anomaly": 0.698,
+        "cluster_percentile": 0.9255,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000110465926013580",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.4902,
+      "dimensions": {
+        "anomaly": 0.69,
+        "cluster_percentile": 0.9149,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000106299326001807",
+      "type": "filing"
+    },
+    {
+      "convergence": 0.4875,
+      "dimensions": {
+        "anomaly": 0.6898,
+        "cluster_percentile": 0.9043,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.1
+      },
+      "name": "filing_000110465926031388",
+      "type": "filing"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 0,
+      "dominant_paradigm": "filing_",
+      "dominant_paradigm_share": 3,
+      "hot_count": 3,
+      "hot_fraction": 0.032,
+      "total": 95
+    },
+    {
+      "cluster": 105,
+      "dominant_paradigm": "filing_",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.5,
+      "total": 2
     }
   ],
   "cost": "$0.00",
   "coverage": 1.0,
+  "cross_era_anchors": [],
   "database_name": "SEC EDGAR",
   "description": "SEC 10-K filings corpus",
   "legend_id": "edgar",
-  "novelty": {
-    "novelty_score": 0.1039,
-    "probed": 300,
-    "query": "high anomaly + high diversity probe",
-    "query_vector": [
-      0.9,
-      0.7,
-      0.95,
-      0.5
-    ],
-    "top": [
-      {
-        "anomaly": 0.4553,
-        "name": "filing_000116755726000029",
-        "similarity": 0.8961,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.155,
-        "name": "filing_000094787126000159",
-        "similarity": 0.8778,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.1055,
-        "name": "filing_000201424026000002",
-        "similarity": 0.8705,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.7385,
-        "name": "filing_000165315326000003",
-        "similarity": 0.8678,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.1202,
-        "name": "filing_000110465926017089",
-        "similarity": 0.8645,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.0967,
-        "name": "filing_000210409426000007",
-        "similarity": 0.8617,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.0899,
-        "name": "filing_000180483126000004",
-        "similarity": 0.8523,
-        "type": "filing"
-      },
-      {
-        "anomaly": 0.0885,
-        "name": "filing_000168316826000891",
-        "similarity": 0.8517,
-        "type": "filing"
-      }
-    ]
-  },
   "paradigm": {
     "examples": [],
     "regime_counts": {},
     "total_matched": 0
   },
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "filing",
+        "count": 300,
+        "role": "other",
+        "subcorpus": ""
+      }
+    ],
+    "hypothesis_by_corpus": {},
+    "role_counts": {
+      "other": 300
+    }
+  },
   "survivors": [
     {
       "anomaly_score": 0.0829,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "filing_000119380518000251",
       "score": 0.6233,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0825,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "filing_000139834426000247",
       "score": 0.6219,
       "type": "filing"
     },
     {
       "anomaly_score": 0.08,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "filing_000031506625001578",
       "score": 0.6084,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0863,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "filing_000114036126012942",
       "score": 0.6063,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0798,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "filing_000119312526049843",
       "score": 0.6053,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0828,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "filing_000185100326000011",
       "score": 0.5991,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0825,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "filing_000195047126000003",
       "score": 0.5989,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0885,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "filing_000168316826000891",
       "score": 0.5938,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0899,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "filing_000180483126000004",
       "score": 0.5934,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0792,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "filing_000212655426000001",
       "score": 0.5933,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0763,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "filing_000199012726000004",
       "score": 0.5843,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0813,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "filing_000200101126000029",
       "score": 0.5831,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0779,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000085973726000015",
       "score": 0.5822,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0738,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "filing_000031314325000078",
       "score": 0.5806,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0814,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "filing_000205032725000015",
       "score": 0.579,
       "type": "filing"
     },
     {
       "anomaly_score": 0.08,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "filing_000167154125000001",
       "score": 0.5781,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0757,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "filing_000090514826000697",
       "score": 0.5779,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0756,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "filing_000171889226000002",
       "score": 0.5754,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0722,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000165495426000939",
       "score": 0.5746,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0592,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000183174626000009",
       "score": 0.5745,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0701,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "filing_000210927126000001",
       "score": 0.5726,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0821,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "filing_000107693026000039",
       "score": 0.5724,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0753,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "filing_000091607626000038",
       "score": 0.5692,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0778,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "filing_000169082026000019",
       "score": 0.5691,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0706,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "filing_000086575226000010",
       "score": 0.5687,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0721,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "filing_000119380517003227",
       "score": 0.5682,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0736,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "filing_000149315225024774",
       "score": 0.568,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0681,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "filing_000119380525000406",
       "score": 0.5671,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0715,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "filing_000172847226000001",
       "score": 0.5662,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0728,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "filing_999999999526001073",
       "score": 0.5659,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0722,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "filing_000196414226000002",
       "score": 0.5658,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0761,
+      "cluster_percentile": 0.8571,
+      "cluster_rank": 2,
+      "cluster_total": 8,
       "name": "filing_000003877726000048",
       "score": 0.5634,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0741,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "filing_000174591626000113",
       "score": 0.5634,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0695,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "filing_000119312526033765",
       "score": 0.5626,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0682,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "filing_000002474126000145",
       "score": 0.5606,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0866,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "filing_000129281426001623",
       "score": 0.5603,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0694,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "filing_000010138226000120",
       "score": 0.5602,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0722,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "filing_000119312526140012",
       "score": 0.5588,
       "type": "filing"
     },
     {
       "anomaly_score": 0.155,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 8,
       "name": "filing_000094787126000159",
       "score": 0.5583,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1202,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "filing_000110465926017089",
       "score": 0.5573,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0717,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000110465926038881",
       "score": 0.5552,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0697,
+      "cluster_percentile": 0.2857,
+      "cluster_rank": 6,
+      "cluster_total": 8,
       "name": "filing_000092963825003467",
       "score": 0.554,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0678,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "filing_000119312525335833",
       "score": 0.553,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0712,
+      "cluster_percentile": 0.5714,
+      "cluster_rank": 4,
+      "cluster_total": 8,
       "name": "filing_000119312526061540",
       "score": 0.5516,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0624,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "filing_000088634626000028",
       "score": 0.5508,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0741,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "filing_000129281426001690",
       "score": 0.5506,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0706,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "filing_000195917326001384",
       "score": 0.5496,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0712,
+      "cluster_percentile": 0.4286,
+      "cluster_rank": 5,
+      "cluster_total": 8,
       "name": "filing_000110465926020888",
       "score": 0.5475,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "filing_000095010326004034",
       "score": 0.5463,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0672,
+      "cluster_percentile": 0.1429,
+      "cluster_rank": 7,
+      "cluster_total": 8,
       "name": "filing_000095012307008547",
       "score": 0.5458,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0776,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "filing_000103297525000076",
       "score": 0.5437,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0873,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "filing_000136447926000039",
       "score": 0.54,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0645,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "filing_000114036126001917",
       "score": 0.5379,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0731,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000119380515001198",
       "score": 0.5371,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0601,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "filing_000119312525306953",
       "score": 0.5339,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0587,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "filing_000199195826000002",
       "score": 0.5294,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0905,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000090610726000008",
       "score": 0.4683,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0911,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000156761919008670",
       "score": 0.4615,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0863,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000212655826000001",
       "score": 0.4554,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0779,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000080248126000008",
       "score": 0.4331,
       "type": "filing"
     },
     {
       "anomaly_score": 0.077,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000161551525000015",
       "score": 0.4329,
       "type": "filing"
     },
     {
       "anomaly_score": 1.0,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 95,
       "name": "filing_000195917326000758",
       "score": 0.429,
       "type": "filing"
     },
     {
       "anomaly_score": 0.9351,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000121465926004185",
       "score": 0.4274,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1028,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000035419026000122",
       "score": 0.4273,
       "type": "filing"
     },
     {
       "anomaly_score": 0.9706,
+      "cluster_percentile": 0.9894,
+      "cluster_rank": 2,
+      "cluster_total": 95,
       "name": "filing_000105079726000025",
       "score": 0.4249,
       "type": "filing"
     },
     {
       "anomaly_score": 0.081,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000119380524000260",
       "score": 0.4245,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0819,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000110465926014592",
       "score": 0.424,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0722,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000160831126000003",
       "score": 0.4236,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0755,
+      "cluster_percentile": 0.7143,
+      "cluster_rank": 3,
+      "cluster_total": 8,
       "name": "filing_000110465926034240",
       "score": 0.4141,
       "type": "filing"
     },
     {
       "anomaly_score": 0.09,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "filing_000009144026000077",
       "score": 0.402,
       "type": "filing"
     },
     {
       "anomaly_score": 0.7385,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000165315326000003",
       "score": 0.4015,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0761,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "filing_000119312526047253",
       "score": 0.4006,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0714,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000157278325000007",
       "score": 0.3975,
       "type": "filing"
     },
     {
       "anomaly_score": 0.8624,
+      "cluster_percentile": 0.9787,
+      "cluster_rank": 3,
+      "cluster_total": 95,
       "name": "filing_000203383426000008",
       "score": 0.3968,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0799,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "filing_000119312525287974",
       "score": 0.3959,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0789,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000114036125041444",
       "score": 0.3951,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0871,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119312525279505",
       "score": 0.392,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0718,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "filing_000147217626000001",
       "score": 0.389,
       "type": "filing"
     },
     {
       "anomaly_score": 0.8261,
+      "cluster_percentile": 0.9681,
+      "cluster_rank": 4,
+      "cluster_total": 95,
       "name": "filing_000010577026000018",
       "score": 0.3859,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1012,
+      "cluster_percentile": 0.6489,
+      "cluster_rank": 34,
+      "cluster_total": 95,
       "name": "filing_000119312526140115",
       "score": 0.3858,
       "type": "filing"
     },
     {
       "anomaly_score": 0.7753,
+      "cluster_percentile": 0.9574,
+      "cluster_rank": 5,
+      "cluster_total": 95,
       "name": "filing_000110465925099303",
       "score": 0.3852,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0746,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000119312526094287",
       "score": 0.3849,
       "type": "filing"
     },
     {
       "anomaly_score": 0.076,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "filing_000117891325004095",
       "score": 0.3842,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0712,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000122520826002617",
       "score": 0.3833,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0639,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000078901926000061",
       "score": 0.3832,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0967,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "filing_000210409426000007",
       "score": 0.3826,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0749,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000202984225000002",
       "score": 0.3826,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0702,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000196905526000002",
       "score": 0.3822,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0713,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 2,
+      "cluster_total": 4,
       "name": "filing_000115755726000004",
       "score": 0.3809,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1077,
+      "cluster_percentile": 0.6809,
+      "cluster_rank": 31,
+      "cluster_total": 95,
       "name": "filing_000178318026000008",
       "score": 0.3803,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0943,
+      "cluster_percentile": 0.65,
+      "cluster_rank": 8,
+      "cluster_total": 21,
       "name": "filing_000121390025104686",
       "score": 0.3798,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0698,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000119312526053349",
       "score": 0.3794,
       "type": "filing"
     },
     {
       "anomaly_score": 0.7684,
+      "cluster_percentile": 0.9468,
+      "cluster_rank": 6,
+      "cluster_total": 95,
       "name": "filing_000091957426001185",
       "score": 0.3792,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0721,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000176650226000003",
       "score": 0.3787,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0798,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000162828026011727",
       "score": 0.3787,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0713,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "filing_000210403626000001",
       "score": 0.3785,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1055,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "filing_000201424026000002",
       "score": 0.3783,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1006,
+      "cluster_percentile": 0.6277,
+      "cluster_rank": 36,
+      "cluster_total": 95,
       "name": "filing_000208966126000016",
       "score": 0.378,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0699,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "filing_000119312526127028",
       "score": 0.3772,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0933,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000129281426001965",
       "score": 0.3764,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0831,
+      "cluster_percentile": 0.1915,
+      "cluster_rank": 77,
+      "cluster_total": 95,
       "name": "filing_000151730226000047",
       "score": 0.3756,
       "type": "filing"
     },
     {
       "anomaly_score": 0.4553,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "filing_000116755726000029",
       "score": 0.3745,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0671,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119312526140007",
       "score": 0.3737,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0962,
+      "cluster_percentile": 0.5532,
+      "cluster_rank": 43,
+      "cluster_total": 95,
       "name": "filing_000124264826000014",
       "score": 0.373,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0605,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "filing_000195917326000088",
       "score": 0.3699,
       "type": "filing"
     },
     {
       "anomaly_score": 0.062,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 10,
+      "cluster_total": 10,
       "name": "filing_000031506626000360",
       "score": 0.3691,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0788,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000191870426009253",
       "score": 0.3681,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0654,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 3,
+      "cluster_total": 4,
       "name": "filing_000211061926000003",
       "score": 0.3664,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0744,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "filing_000124008526000009",
       "score": 0.3658,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0638,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "filing_000031506626000505",
       "score": 0.3653,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0841,
+      "cluster_percentile": 0.234,
+      "cluster_rank": 73,
+      "cluster_total": 95,
       "name": "filing_000000496226000140",
       "score": 0.3643,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0596,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000125839426000006",
       "score": 0.3639,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0946,
+      "cluster_percentile": 0.5106,
+      "cluster_rank": 47,
+      "cluster_total": 95,
       "name": "filing_000162828026023250",
       "score": 0.3624,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0621,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "filing_000106569626000026",
       "score": 0.3617,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0777,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "filing_000151199826000004",
       "score": 0.3617,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0598,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "filing_000195917326002584",
       "score": 0.3614,
       "type": "filing"
     },
     {
       "anomaly_score": 0.06,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 4,
+      "cluster_total": 4,
       "name": "filing_000197449426000140",
       "score": 0.3602,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1017,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000121390025044060",
       "score": 0.3601,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0936,
+      "cluster_percentile": 0.4787,
+      "cluster_rank": 50,
+      "cluster_total": 95,
       "name": "filing_000156709425000009",
       "score": 0.3589,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1056,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 6,
       "name": "filing_000121390025107817",
       "score": 0.3575,
       "type": "filing"
     },
     {
       "anomaly_score": 0.101,
+      "cluster_percentile": 0.6383,
+      "cluster_rank": 35,
+      "cluster_total": 95,
       "name": "filing_000155837025006281",
       "score": 0.357,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0561,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 8,
+      "cluster_total": 8,
       "name": "filing_000119312526085802",
       "score": 0.3563,
       "type": "filing"
     },
     {
       "anomaly_score": 0.706,
+      "cluster_percentile": 0.9362,
+      "cluster_rank": 7,
+      "cluster_total": 95,
       "name": "filing_000090655326000022",
       "score": 0.3556,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1021,
+      "cluster_percentile": 0.9,
+      "cluster_rank": 3,
+      "cluster_total": 21,
       "name": "filing_000114519726000093",
       "score": 0.3554,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0862,
+      "cluster_percentile": 0.2872,
+      "cluster_rank": 68,
+      "cluster_total": 95,
       "name": "filing_000141057825000706",
       "score": 0.3551,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0952,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 6,
+      "cluster_total": 21,
       "name": "filing_000157601826000032",
       "score": 0.3548,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0751,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000117891326001442",
       "score": 0.3547,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0972,
+      "cluster_percentile": 0.5851,
+      "cluster_rank": 40,
+      "cluster_total": 95,
       "name": "filing_000110465925117620",
       "score": 0.354,
       "type": "filing"
     },
     {
       "anomaly_score": 0.7049,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "filing_000162828026008609",
       "score": 0.3534,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0826,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 6,
+      "cluster_total": 6,
       "name": "filing_000162828026022512",
       "score": 0.3531,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6718,
+      "cluster_percentile": 0.8723,
+      "cluster_rank": 13,
+      "cluster_total": 95,
       "name": "filing_000195920226000001",
       "score": 0.3526,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0829,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000003614626000053",
       "score": 0.3517,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0789,
+      "cluster_percentile": 0.0957,
+      "cluster_rank": 86,
+      "cluster_total": 95,
       "name": "filing_000119380512001773",
       "score": 0.3515,
       "type": "filing"
     },
     {
       "anomaly_score": 0.698,
+      "cluster_percentile": 0.9255,
+      "cluster_rank": 8,
+      "cluster_total": 95,
       "name": "filing_000110465926013580",
       "score": 0.3509,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0791,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "filing_000119312525315754",
       "score": 0.3507,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0783,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "filing_000155728826000004",
       "score": 0.3497,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6584,
+      "cluster_percentile": 0.8617,
+      "cluster_rank": 14,
+      "cluster_total": 95,
       "name": "filing_000187685926000001",
       "score": 0.3494,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0756,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000195917326002195",
       "score": 0.3492,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0937,
+      "cluster_percentile": 0.4894,
+      "cluster_rank": 49,
+      "cluster_total": 95,
       "name": "filing_000121390025056250",
       "score": 0.3488,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0963,
+      "cluster_percentile": 0.5638,
+      "cluster_rank": 42,
+      "cluster_total": 95,
       "name": "filing_000004619526000015",
       "score": 0.3485,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1026,
+      "cluster_percentile": 0.6596,
+      "cluster_rank": 33,
+      "cluster_total": 95,
       "name": "filing_000129567926000006",
       "score": 0.3484,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0784,
+      "cluster_percentile": 0.0851,
+      "cluster_rank": 87,
+      "cluster_total": 95,
       "name": "filing_000174033226000005",
       "score": 0.3478,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0884,
+      "cluster_percentile": 0.3617,
+      "cluster_rank": 61,
+      "cluster_total": 95,
       "name": "filing_000110465926019821",
       "score": 0.3475,
       "type": "filing"
     },
     {
       "anomaly_score": 0.69,
+      "cluster_percentile": 0.9149,
+      "cluster_rank": 9,
+      "cluster_total": 95,
       "name": "filing_000106299326001807",
       "score": 0.3473,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0734,
+      "cluster_percentile": 0.0213,
+      "cluster_rank": 93,
+      "cluster_total": 95,
       "name": "filing_000005143426000062",
       "score": 0.3467,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1046,
+      "cluster_percentile": 0.6702,
+      "cluster_rank": 32,
+      "cluster_total": 95,
       "name": "filing_000121390025109614",
       "score": 0.3465,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0879,
+      "cluster_percentile": 0.3404,
+      "cluster_rank": 63,
+      "cluster_total": 95,
       "name": "filing_000210181325000001",
       "score": 0.3463,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0775,
+      "cluster_percentile": 0.0638,
+      "cluster_rank": 89,
+      "cluster_total": 95,
       "name": "filing_000087258926000008",
       "score": 0.3458,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0943,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 48,
+      "cluster_total": 95,
       "name": "filing_000101210026000016",
       "score": 0.3458,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0936,
+      "cluster_percentile": 0.4681,
+      "cluster_rank": 51,
+      "cluster_total": 95,
       "name": "filing_000121481626000097",
       "score": 0.3457,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0761,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000203955225000007",
       "score": 0.3454,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0736,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000195107025000008",
       "score": 0.344,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0803,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000212654026000001",
       "score": 0.3438,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0955,
+      "cluster_percentile": 0.5426,
+      "cluster_rank": 44,
+      "cluster_total": 95,
       "name": "filing_000094787116001120",
       "score": 0.3434,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0953,
+      "cluster_percentile": 0.5319,
+      "cluster_rank": 45,
+      "cluster_total": 95,
       "name": "filing_000071253426000022",
       "score": 0.343,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6789,
+      "cluster_percentile": 0.883,
+      "cluster_rank": 12,
+      "cluster_total": 95,
       "name": "filing_000201830126000002",
       "score": 0.343,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6898,
+      "cluster_percentile": 0.9043,
+      "cluster_rank": 10,
+      "cluster_total": 95,
       "name": "filing_000110465926031388",
       "score": 0.3428,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0829,
+      "cluster_percentile": 0.1702,
+      "cluster_rank": 79,
+      "cluster_total": 95,
       "name": "filing_000121390026040006",
       "score": 0.3423,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0889,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 13,
+      "cluster_total": 21,
       "name": "filing_000121390026014318",
       "score": 0.3423,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0717,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000035420425001313",
       "score": 0.3422,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5941,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000071742326000049",
       "score": 0.3422,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0999,
+      "cluster_percentile": 0.5957,
+      "cluster_rank": 39,
+      "cluster_total": 95,
       "name": "filing_000138584926000014",
       "score": 0.3421,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0882,
+      "cluster_percentile": 0.3511,
+      "cluster_rank": 62,
+      "cluster_total": 95,
       "name": "filing_000119312526117735",
       "score": 0.342,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0819,
+      "cluster_percentile": 0.1489,
+      "cluster_rank": 81,
+      "cluster_total": 95,
       "name": "filing_000143774926004568",
       "score": 0.3418,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0929,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 2,
+      "cluster_total": 3,
       "name": "filing_000168722926000016",
       "score": 0.3413,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0811,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000155837025000885",
       "score": 0.3404,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5754,
+      "cluster_percentile": 0.7553,
+      "cluster_rank": 24,
+      "cluster_total": 95,
       "name": "filing_000162828026007781",
       "score": 0.3403,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1005,
+      "cluster_percentile": 0.617,
+      "cluster_rank": 37,
+      "cluster_total": 95,
       "name": "filing_000119312526036389",
       "score": 0.3401,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0974,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 2,
+      "cluster_total": 6,
       "name": "filing_000088026626000010",
       "score": 0.3399,
       "type": "filing"
     },
     {
       "anomaly_score": 0.091,
+      "cluster_percentile": 0.4362,
+      "cluster_rank": 54,
+      "cluster_total": 95,
       "name": "filing_000121390025072290",
       "score": 0.3396,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6156,
+      "cluster_percentile": 0.7872,
+      "cluster_rank": 21,
+      "cluster_total": 95,
       "name": "filing_000206697626000002",
       "score": 0.3395,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6937,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 10,
       "name": "filing_000162828026008561",
       "score": 0.3391,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0765,
+      "cluster_percentile": 0.05,
+      "cluster_rank": 20,
+      "cluster_total": 21,
       "name": "filing_000001154426000005",
       "score": 0.339,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0937,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 9,
+      "cluster_total": 21,
       "name": "filing_000102621426000005",
       "score": 0.3389,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0907,
+      "cluster_percentile": 0.4149,
+      "cluster_rank": 56,
+      "cluster_total": 95,
       "name": "filing_000146659326000025",
       "score": 0.3389,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6189,
+      "cluster_percentile": 0.7979,
+      "cluster_rank": 20,
+      "cluster_total": 95,
       "name": "filing_000110465924049428",
       "score": 0.3386,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6301,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000110465926031260",
       "score": 0.3381,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0868,
+      "cluster_percentile": 0.3085,
+      "cluster_rank": 66,
+      "cluster_total": 95,
       "name": "filing_000119312526071651",
       "score": 0.3378,
       "type": "filing"
     },
     {
       "anomaly_score": 0.095,
+      "cluster_percentile": 0.7,
+      "cluster_rank": 7,
+      "cluster_total": 21,
       "name": "filing_000166998026000002",
       "score": 0.3377,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0835,
+      "cluster_percentile": 0.2128,
+      "cluster_rank": 75,
+      "cluster_total": 95,
       "name": "filing_000102621426000009",
       "score": 0.3376,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0716,
+      "cluster_percentile": 0.1111,
+      "cluster_rank": 9,
+      "cluster_total": 10,
       "name": "filing_000184775726000007",
       "score": 0.3371,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0931,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000121390025075382",
       "score": 0.3371,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5872,
+      "cluster_percentile": 0.766,
+      "cluster_rank": 23,
+      "cluster_total": 95,
       "name": "filing_000149315225024388",
       "score": 0.3369,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0885,
+      "cluster_percentile": 0.3723,
+      "cluster_rank": 60,
+      "cluster_total": 95,
       "name": "filing_000087535726000023",
       "score": 0.3368,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0732,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 95,
+      "cluster_total": 95,
       "name": "filing_000168285226000033",
       "score": 0.3368,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0815,
+      "cluster_percentile": 0.1383,
+      "cluster_rank": 82,
+      "cluster_total": 95,
       "name": "filing_000110465924049421",
       "score": 0.3363,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0729,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 4,
+      "cluster_total": 5,
       "name": "filing_000139834426003083",
       "score": 0.3361,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0848,
+      "cluster_percentile": 0.2553,
+      "cluster_rank": 71,
+      "cluster_total": 95,
       "name": "filing_000207097926000113",
       "score": 0.3358,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6791,
+      "cluster_percentile": 0.8936,
+      "cluster_rank": 11,
+      "cluster_total": 95,
       "name": "filing_000207097926000120",
       "score": 0.3356,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1001,
+      "cluster_percentile": 0.6064,
+      "cluster_rank": 38,
+      "cluster_total": 95,
       "name": "filing_000087532026000153",
       "score": 0.3355,
       "type": "filing"
     },
     {
       "anomaly_score": 0.082,
+      "cluster_percentile": 0.1596,
+      "cluster_rank": 80,
+      "cluster_total": 95,
       "name": "filing_000082531326000020",
       "score": 0.3353,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0873,
+      "cluster_percentile": 0.625,
+      "cluster_rank": 4,
+      "cluster_total": 9,
       "name": "filing_000087401526000144",
       "score": 0.3353,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6442,
+      "cluster_percentile": 0.8404,
+      "cluster_rank": 16,
+      "cluster_total": 95,
       "name": "filing_000201238325002837",
       "score": 0.3351,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0848,
+      "cluster_percentile": 0.2447,
+      "cluster_rank": 72,
+      "cluster_total": 95,
       "name": "filing_000001493026000027",
       "score": 0.335,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0957,
+      "cluster_percentile": 0.8,
+      "cluster_rank": 5,
+      "cluster_total": 21,
       "name": "filing_000032033526000133",
       "score": 0.3346,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0655,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000091538926000047",
       "score": 0.3346,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0853,
+      "cluster_percentile": 0.266,
+      "cluster_rank": 70,
+      "cluster_total": 95,
       "name": "filing_000117338225000009",
       "score": 0.3345,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0844,
+      "cluster_percentile": 0.4,
+      "cluster_rank": 4,
+      "cluster_total": 6,
       "name": "filing_000004619526000022",
       "score": 0.3343,
       "type": "filing"
     },
     {
       "anomaly_score": 0.55,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000091420825000394",
       "score": 0.334,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6086,
+      "cluster_percentile": 0.7766,
+      "cluster_rank": 22,
+      "cluster_total": 95,
       "name": "filing_000181487626000008",
       "score": 0.334,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0887,
+      "cluster_percentile": 0.35,
+      "cluster_rank": 14,
+      "cluster_total": 21,
       "name": "filing_000162828026007822",
       "score": 0.334,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0805,
+      "cluster_percentile": 0.117,
+      "cluster_rank": 84,
+      "cluster_total": 95,
       "name": "filing_000146512825000018",
       "score": 0.334,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0898,
+      "cluster_percentile": 0.4043,
+      "cluster_rank": 57,
+      "cluster_total": 95,
       "name": "filing_000141057825000806",
       "score": 0.3339,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5523,
+      "cluster_percentile": 0.95,
+      "cluster_rank": 2,
+      "cluster_total": 21,
       "name": "filing_000201238325002999",
       "score": 0.3339,
       "type": "filing"
     },
     {
       "anomaly_score": 0.4879,
+      "cluster_percentile": 0.7128,
+      "cluster_rank": 28,
+      "cluster_total": 95,
       "name": "filing_000121390025106273",
       "score": 0.3337,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0781,
+      "cluster_percentile": 0.0745,
+      "cluster_rank": 88,
+      "cluster_total": 95,
       "name": "filing_000119380521000806",
       "score": 0.3336,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0913,
+      "cluster_percentile": 0.4468,
+      "cluster_rank": 53,
+      "cluster_total": 95,
       "name": "filing_000102621426000008",
       "score": 0.3336,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0711,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000103797626000064",
       "score": 0.3335,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0713,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "filing_000119312526045187",
       "score": 0.3334,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0772,
+      "cluster_percentile": 0.0532,
+      "cluster_rank": 90,
+      "cluster_total": 95,
       "name": "filing_000169786226000032",
       "score": 0.3333,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6433,
+      "cluster_percentile": 0.8191,
+      "cluster_rank": 18,
+      "cluster_total": 95,
       "name": "filing_000117881926000008",
       "score": 0.3333,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6434,
+      "cluster_percentile": 0.8298,
+      "cluster_rank": 17,
+      "cluster_total": 95,
       "name": "filing_000143774926007604",
       "score": 0.333,
       "type": "filing"
     },
     {
       "anomaly_score": 0.09,
+      "cluster_percentile": 0.875,
+      "cluster_rank": 2,
+      "cluster_total": 9,
       "name": "filing_000122520826004226",
       "score": 0.3329,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0898,
+      "cluster_percentile": 0.3936,
+      "cluster_rank": 58,
+      "cluster_total": 95,
       "name": "filing_000119312526105117",
       "score": 0.3328,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0875,
+      "cluster_percentile": 0.3191,
+      "cluster_rank": 65,
+      "cluster_total": 95,
       "name": "filing_000143774926007417",
       "score": 0.3326,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0805,
+      "cluster_percentile": 0.1064,
+      "cluster_rank": 85,
+      "cluster_total": 95,
       "name": "filing_000092052226000003",
       "score": 0.3326,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0953,
+      "cluster_percentile": 0.5213,
+      "cluster_rank": 46,
+      "cluster_total": 95,
       "name": "filing_000133403626000006",
       "score": 0.3325,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0936,
+      "cluster_percentile": 0.4574,
+      "cluster_rank": 52,
+      "cluster_total": 95,
       "name": "filing_000085698226000008",
       "score": 0.3323,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0909,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000110465925110741",
       "score": 0.3322,
       "type": "filing"
     },
     {
       "anomaly_score": 0.083,
+      "cluster_percentile": 0.1809,
+      "cluster_rank": 78,
+      "cluster_total": 95,
       "name": "filing_000100291025000112",
       "score": 0.332,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0739,
+      "cluster_percentile": 0.0319,
+      "cluster_rank": 92,
+      "cluster_total": 95,
       "name": "filing_000119380515002036",
       "score": 0.332,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0894,
+      "cluster_percentile": 0.383,
+      "cluster_rank": 59,
+      "cluster_total": 95,
       "name": "filing_000110465926039140",
       "score": 0.3318,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1145,
+      "cluster_percentile": 0.6915,
+      "cluster_rank": 30,
+      "cluster_total": 95,
       "name": "filing_000110465926038185",
       "score": 0.3317,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0742,
+      "cluster_percentile": 0.0426,
+      "cluster_rank": 91,
+      "cluster_total": 95,
       "name": "filing_000195004726001570",
       "score": 0.3316,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0949,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 3,
+      "cluster_total": 5,
       "name": "filing_000162828026012666",
       "score": 0.3315,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5524,
+      "cluster_percentile": 0.7234,
+      "cluster_rank": 27,
+      "cluster_total": 95,
       "name": "filing_000114036126007366",
       "score": 0.3313,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0877,
+      "cluster_percentile": 0.3298,
+      "cluster_rank": 64,
+      "cluster_total": 95,
       "name": "filing_000106157425000006",
       "score": 0.3312,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0829,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 17,
+      "cluster_total": 21,
       "name": "filing_000162828026008033",
       "score": 0.3311,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5704,
+      "cluster_percentile": 0.7447,
+      "cluster_rank": 25,
+      "cluster_total": 95,
       "name": "filing_000131122026000004",
       "score": 0.331,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6483,
+      "cluster_percentile": 0.8511,
+      "cluster_rank": 15,
+      "cluster_total": 95,
       "name": "filing_000110465926034681",
       "score": 0.3309,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0865,
+      "cluster_percentile": 0.2979,
+      "cluster_rank": 67,
+      "cluster_total": 95,
       "name": "filing_000179186326000004",
       "score": 0.3308,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0877,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 4,
       "name": "filing_000110784326000008",
       "score": 0.3308,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6002,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 21,
       "name": "filing_000110465925116419",
       "score": 0.3306,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6303,
+      "cluster_percentile": 0.8085,
+      "cluster_rank": 19,
+      "cluster_total": 95,
       "name": "filing_000073070826000077",
       "score": 0.3305,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0909,
+      "cluster_percentile": 0.4255,
+      "cluster_rank": 55,
+      "cluster_total": 95,
       "name": "filing_000151292025000014",
       "score": 0.3304,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0814,
+      "cluster_percentile": 0.1277,
+      "cluster_rank": 83,
+      "cluster_total": 95,
       "name": "filing_000157104914006193",
       "score": 0.3304,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0887,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000117120025000251",
       "score": 0.3303,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0969,
+      "cluster_percentile": 0.5745,
+      "cluster_rank": 41,
+      "cluster_total": 95,
       "name": "filing_000116737925000012",
       "score": 0.3303,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0841,
+      "cluster_percentile": 0.2234,
+      "cluster_rank": 74,
+      "cluster_total": 95,
       "name": "filing_000089968926000009",
       "score": 0.3302,
       "type": "filing"
     },
     {
       "anomaly_score": 0.1187,
+      "cluster_percentile": 0.7021,
+      "cluster_rank": 29,
+      "cluster_total": 95,
       "name": "filing_000146809126000006",
       "score": 0.3301,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0833,
+      "cluster_percentile": 0.2021,
+      "cluster_rank": 76,
+      "cluster_total": 95,
       "name": "filing_000205256826000008",
       "score": 0.3298,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0798,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 7,
+      "cluster_total": 9,
       "name": "filing_000195682725000035",
       "score": 0.3298,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5693,
+      "cluster_percentile": 0.734,
+      "cluster_rank": 26,
+      "cluster_total": 95,
       "name": "filing_000127428126000004",
       "score": 0.3298,
       "type": "filing"
     },
     {
       "anomaly_score": 0.086,
+      "cluster_percentile": 0.2766,
+      "cluster_rank": 69,
+      "cluster_total": 95,
       "name": "filing_000162828026011405",
       "score": 0.3297,
       "type": "filing"
     },
     {
       "anomaly_score": 0.077,
+      "cluster_percentile": 0.1,
+      "cluster_rank": 19,
+      "cluster_total": 21,
       "name": "filing_000081555626000015",
       "score": 0.3293,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0733,
+      "cluster_percentile": 0.0106,
+      "cluster_rank": 94,
+      "cluster_total": 95,
       "name": "filing_000106429926000002",
       "score": 0.3287,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0866,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000197640825000393",
       "score": 0.3286,
       "type": "filing"
     },
     {
       "anomaly_score": 0.6047,
+      "cluster_percentile": 0.8889,
+      "cluster_rank": 2,
+      "cluster_total": 10,
       "name": "filing_000095014226000420",
       "score": 0.3285,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0728,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 3,
+      "cluster_total": 3,
       "name": "filing_000197636326000009",
       "score": 0.3272,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0862,
+      "cluster_percentile": 0.3,
+      "cluster_rank": 15,
+      "cluster_total": 21,
       "name": "filing_000071253426000025",
       "score": 0.3263,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0844,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000010088526000098",
       "score": 0.3259,
       "type": "filing"
     },
     {
       "anomaly_score": 0.078,
+      "cluster_percentile": 0.15,
+      "cluster_rank": 18,
+      "cluster_total": 21,
       "name": "filing_000166916226000015",
       "score": 0.3255,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0969,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000119312525317630",
       "score": 0.3254,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0803,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000143299126000003",
       "score": 0.3243,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0804,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 3,
       "name": "filing_000126114625000006",
       "score": 0.324,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0756,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000193485026000012",
       "score": 0.3233,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0754,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000110465925015403",
       "score": 0.3231,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0967,
+      "cluster_percentile": 0.85,
+      "cluster_rank": 4,
+      "cluster_total": 21,
       "name": "filing_000133575426000001",
       "score": 0.3229,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5084,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 5,
       "name": "filing_000119312514038134",
       "score": 0.3227,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0636,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000082414226000016",
       "score": 0.3227,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0877,
+      "cluster_percentile": 0.6,
+      "cluster_rank": 3,
+      "cluster_total": 6,
       "name": "filing_000149269126000016",
       "score": 0.3224,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0773,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "filing_000160042926000001",
       "score": 0.3222,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0758,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000003614626000031",
       "score": 0.3217,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0793,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000165151726000001",
       "score": 0.3214,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5613,
+      "cluster_percentile": 0.6667,
+      "cluster_rank": 4,
+      "cluster_total": 10,
       "name": "filing_000119312526112386",
       "score": 0.3214,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0829,
+      "cluster_percentile": 0.2,
+      "cluster_rank": 5,
+      "cluster_total": 6,
       "name": "filing_000119312525196909",
       "score": 0.321,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0898,
+      "cluster_percentile": 0.45,
+      "cluster_rank": 12,
+      "cluster_total": 21,
       "name": "filing_000162828026005842",
       "score": 0.321,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0845,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 5,
+      "cluster_total": 9,
       "name": "filing_000154577226000006",
       "score": 0.3206,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0643,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000090266426001613",
       "score": 0.3198,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5059,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000187417826000012",
       "score": 0.3196,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0649,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 9,
+      "cluster_total": 9,
       "name": "filing_000148729226000002",
       "score": 0.3196,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0797,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000114036126012911",
       "score": 0.3195,
       "type": "filing"
     },
     {
       "anomaly_score": 0.087,
+      "cluster_percentile": 0.3333,
+      "cluster_rank": 7,
+      "cluster_total": 10,
       "name": "filing_000086575225000124",
       "score": 0.3189,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0803,
+      "cluster_percentile": 0.375,
+      "cluster_rank": 6,
+      "cluster_total": 9,
       "name": "filing_000119312525270991",
       "score": 0.3188,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5887,
+      "cluster_percentile": 0.7778,
+      "cluster_rank": 3,
+      "cluster_total": 10,
       "name": "filing_000035419026000095",
       "score": 0.3188,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0741,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119312526104339",
       "score": 0.3181,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0984,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 2,
+      "cluster_total": 5,
       "name": "filing_000148104524000004",
       "score": 0.3179,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0929,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119380524000993",
       "score": 0.3178,
       "type": "filing"
     },
     {
       "anomaly_score": 0.536,
+      "cluster_percentile": 0.4444,
+      "cluster_rank": 6,
+      "cluster_total": 10,
       "name": "filing_000117891326000916",
       "score": 0.3174,
       "type": "filing"
     },
     {
       "anomaly_score": 0.5445,
+      "cluster_percentile": 0.5556,
+      "cluster_rank": 5,
+      "cluster_total": 10,
       "name": "filing_000139180926000008",
       "score": 0.3172,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0668,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000201130526000001",
       "score": 0.3164,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0747,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 2,
+      "cluster_total": 2,
       "name": "filing_000162828026016651",
       "score": 0.3156,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0853,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000110465926031323",
       "score": 0.3145,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0915,
+      "cluster_percentile": 0.55,
+      "cluster_rank": 10,
+      "cluster_total": 21,
       "name": "filing_000208984426000001",
       "score": 0.3141,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0921,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 9,
       "name": "filing_000119312526065945",
       "score": 0.3141,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0827,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "filing_000032018725000144",
       "score": 0.3133,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0851,
+      "cluster_percentile": 0.25,
+      "cluster_rank": 16,
+      "cluster_total": 21,
       "name": "filing_000094584126000077",
       "score": 0.3133,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0941,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 2,
       "name": "filing_000120497525000017",
       "score": 0.3123,
       "type": "filing"
     },
     {
       "anomaly_score": 0.077,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000147676525000080",
       "score": 0.3121,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0637,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000167201326000071",
       "score": 0.3118,
       "type": "filing"
     },
     {
       "anomaly_score": 0.07,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119312526099056",
       "score": 0.3118,
       "type": "filing"
     },
     {
       "anomaly_score": 0.076,
+      "cluster_percentile": 0.125,
+      "cluster_rank": 8,
+      "cluster_total": 9,
       "name": "filing_000137536526000010",
       "score": 0.3116,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0694,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 21,
+      "cluster_total": 21,
       "name": "filing_000101582025000049",
       "score": 0.3115,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0742,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000162828025048975",
       "score": 0.311,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0908,
+      "cluster_percentile": 0.5,
+      "cluster_rank": 11,
+      "cluster_total": 21,
       "name": "filing_000103120326000074",
       "score": 0.3108,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0824,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000002790426000013",
       "score": 0.3103,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0892,
+      "cluster_percentile": 0.75,
+      "cluster_rank": 3,
+      "cluster_total": 9,
       "name": "filing_000119312526056485",
       "score": 0.3102,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0863,
+      "cluster_percentile": 0.2222,
+      "cluster_rank": 8,
+      "cluster_total": 10,
       "name": "filing_000119312526124227",
       "score": 0.3101,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0763,
+      "cluster_percentile": 1.0,
+      "cluster_rank": 1,
+      "cluster_total": 1,
       "name": "filing_000119312526065951",
       "score": 0.31,
       "type": "filing"
     },
     {
       "anomaly_score": 0.0646,
+      "cluster_percentile": 0.0,
+      "cluster_rank": 5,
+      "cluster_total": 5,
       "name": "filing_000110465926031152",
       "score": 0.3099,
       "type": "filing"

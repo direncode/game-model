@@ -61,6 +61,63 @@ export interface LegendBridge {
   }>;
 }
 
+export interface ConvergenceEntry {
+  name: string;
+  type: string;
+  convergence: number;
+  dimensions: {
+    anomaly: number;
+    cluster_percentile: number;
+    cross_era: number;
+    rare_fingerprint: number;
+  };
+}
+
+export interface ParadigmHypothesis {
+  forgotten: number;
+  mainstream: number;
+  control: number;
+  ratio_forgotten_to_competitors: number;
+  confirmed: boolean;
+}
+
+export interface ParadigmDistribution {
+  by_corpus_subcorpus_role: Array<{
+    corpus: string;
+    subcorpus: string;
+    role: string;
+    count: number;
+  }>;
+  role_counts: Record<string, number>;
+  hypothesis_by_corpus: Record<string, ParadigmHypothesis>;
+}
+
+export interface ConvergentCluster {
+  cluster: number;
+  hot_count: number;
+  total: number;
+  hot_fraction: number;
+  dominant_paradigm: string;
+  dominant_paradigm_share: number;
+}
+
+export interface CrossEraAnchor {
+  name: string;
+  era_class: string;
+  cluster_majority_era: string;
+  cluster: number;
+  corpus: string;
+  subcorpus: string;
+  anomaly: number;
+}
+
+export interface TripleBridge {
+  fingerprint: string;
+  legend_count: number;
+  legends: string[];
+  entities: Array<{ legend: string; name: string }>;
+}
+
 export interface ConnectResult {
   database_name: string;
   legend_id?: string;
@@ -70,6 +127,9 @@ export interface ConnectResult {
     type: string;
     score: number;
     anomaly_score: number;
+    cluster_rank?: number;
+    cluster_total?: number;
+    cluster_percentile?: number;
   }>;
   clusters: number;
   coverage: number;
@@ -82,9 +142,13 @@ export interface ConnectResult {
     signal_type: string;
     strength: number;
   }>;
-  novelty?: NoveltyProbe;
   paradigm?: ParadigmBreakdown;
+  paradigm_distribution?: ParadigmDistribution;
+  convergent_clusters?: ConvergentCluster[];
+  cross_era_anchors?: CrossEraAnchor[];
+  convergence_index?: ConvergenceEntry[];
   bridges?: LegendBridge[];
+  triple_bridges?: TripleBridge[];
 }
 
 export type SourceConfig = {
@@ -253,8 +317,17 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
                 weight?: number;
               }>;
             };
-            const all = (bridgesMod.default as { bridges: RawBridge[] }).bridges;
-            payload.bridges = all
+            type RawTriple = {
+              fingerprint: string;
+              legend_count: number;
+              legends: string[];
+              entities: Array<{ legend: string; name: string }>;
+            };
+            const raw = bridgesMod.default as {
+              bridges: RawBridge[];
+              triple_bridges?: RawTriple[];
+            };
+            payload.bridges = raw.bridges
               .filter((br) => br.a === mode.legendId || br.b === mode.legendId)
               .map((br) => ({
                 other_legend: br.a === mode.legendId ? br.b : br.a,
@@ -263,6 +336,10 @@ export function ConnectFlow({ onComplete, onSampleData, droppedFile, onFileConsu
                 samples: br.samples,
               }))
               .sort((x, y) => y.weighted_score - x.weighted_score);
+
+            payload.triple_bridges = (raw.triple_bridges || [])
+              .filter((t) => t.legends.includes(mode.legendId))
+              .sort((x, y) => x.legend_count - y.legend_count);
           } catch {
             /* bridges optional */
           }
