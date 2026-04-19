@@ -1,0 +1,505 @@
+{
+  "generated_at": "2026-04-19T18:32:15Z",
+  "wall_seconds": 16.533798400021624,
+  "tests_run": 7,
+  "tests_passed": 7,
+  "commercial_readiness_score": 100,
+  "tests": [
+    {
+      "name": "watchlist_hit_rate",
+      "description": "Named WATCHLIST_TOP50 tickers land at or above p90 composite at a multiple of the random baseline.",
+      "passed": true,
+      "headline": "25/46 named tickers land above p90 composite (54.3% hit-rate, 5.4\u00d7 random)  |  coverage 83%  |  p90 = 0.759",
+      "detail": {
+        "tickers_checked": 46,
+        "covered": 38,
+        "above_p90": 25,
+        "pct_above_p90": 54.34782608695652,
+        "pct_covered": 82.6086956521739,
+        "p90_composite": 0.7593,
+        "hits": [
+          {
+            "ticker": "AEP",
+            "company": "AMERICAN ELECTRIC POWER CO INC",
+            "top_line": "AssetRetirementObligation",
+            "composite": 0.8588,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "SN",
+            "company": "Samsara Inc.",
+            "top_line": "AdditionalPaidInCapital",
+            "composite": 0.8285,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "CRCL",
+            "company": "Circle Internet Group, Inc.",
+            "top_line": "Assets",
+            "composite": 0.8276,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "GS",
+            "company": "GOLDMAN SACHS GROUP INC",
+            "top_line": "AdditionalPaidInCapital",
+            "composite": 0.8261,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "IESC",
+            "company": "IES Holdings, Inc.",
+            "top_line": "AccruedLiabilitiesForCommissionsExpenseAndTaxes",
+            "composite": 0.8233,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "ERIE",
+            "company": "ERIE INDEMNITY CO",
+            "top_line": "AccretionAmortizationOfDiscountsAndPremiumsInvestments",
+            "composite": 0.8222,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "OTIS",
+            "company": "Otis Worldwide Corp",
+            "top_line": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+            "composite": 0.8185,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "EXC",
+            "company": "EXELON CORP",
+            "top_line": "AccrualForEnvironmentalLossContingencies",
+            "composite": 0.751,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "LYB",
+            "company": "LyondellBasell Industries N.V.",
+            "top_line": "AccrualForEnvironmentalLossContingenciesChargesToExpenseForNewLosses",
+            "composite": 0.7373,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "DOW",
+            "company": "DOW INC.",
+            "top_line": "AssetRetirementObligation",
+            "composite": 0.7406,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "IBM",
+            "company": "INTERNATIONAL BUSINESS MACHINES CORP",
+            "top_line": "AccruedEnvironmentalLossContingenciesNoncurrent",
+            "composite": 0.7119,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "NVR",
+            "company": "NVR INC",
+            "top_line": "BusinessAcquisitionPurchasePriceAllocationAssetsAcquired",
+            "composite": 0.7842,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "SPGI",
+            "company": "S&P Global Inc.",
+            "top_line": "AssetsHeldForSaleCurrent",
+            "composite": 0.7753,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "HPQ",
+            "company": "HP INC",
+            "top_line": "AmortizationOfAcquiredIntangibleAssets",
+            "composite": 0.7694,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "CAT",
+            "company": "CATERPILLAR INC",
+            "top_line": "AssetsHeldForSaleCurrent",
+            "composite": 0.7474,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "BXP",
+            "company": "BXP, Inc.",
+            "top_line": "AssetImpairmentCharges",
+            "composite": 0.7776,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "CMCSA",
+            "company": "COMCAST CORP",
+            "top_line": "Assets",
+            "composite": 0.7905,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "RBC",
+            "company": "RBC Bearings INC",
+            "top_line": "AssetImpairmentCharges",
+            "composite": 0.7776,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "JD",
+            "company": "JD.com, Inc.",
+            "top_line": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+            "composite": 0.7724,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "PAA",
+            "company": "PLAINS ALL AMERICAN PIPELINE LP",
+            "top_line": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+            "composite": 0.7793,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "EXE",
+            "company": "EXPAND ENERGY Corp",
+            "top_line": "AccretionExpense",
+            "composite": 0.8025,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "ZS",
+            "company": "Zscaler, Inc.",
+            "top_line": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+            "composite": 0.7767,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "AMD",
+            "company": "ADVANCED MICRO DEVICES INC",
+            "top_line": "AccountsPayableRelatedPartiesCurrent",
+            "composite": 0.7415,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "RPRX",
+            "company": "Royalty Pharma plc",
+            "top_line": "Assets",
+            "composite": 0.7753,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "TTD",
+            "company": "Trade Desk, Inc.",
+            "top_line": "AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+            "composite": 0.7959,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "TW",
+            "company": "Tradeweb Markets Inc.",
+            "top_line": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+            "composite": 0.7555,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "JBHT",
+            "company": "HUNT J B TRANSPORT SERVICES INC",
+            "top_line": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+            "composite": 0.7459,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "CCL",
+            "company": "CARNIVAL CORP",
+            "top_line": "AccruedLiabilitiesCurrent",
+            "composite": 0.7647,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "ACM",
+            "company": "AECOM",
+            "top_line": "AccruedIncomeTaxesCurrent",
+            "composite": 0.7675,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "FTI",
+            "company": "TechnipFMC plc",
+            "top_line": "AccruedIncomeTaxesCurrent",
+            "composite": 0.7484,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "OKTA",
+            "company": "Okta, Inc.",
+            "top_line": "AdditionalPaidInCapital",
+            "composite": 0.8105,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "APO",
+            "company": "Apollo Global Management, Inc.",
+            "top_line": "AdditionalPaidInCapital",
+            "composite": 0.7897,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "WELL",
+            "company": "WELLTOWER INC.",
+            "top_line": "AdditionalPaidInCapital",
+            "composite": 0.7651,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          },
+          {
+            "ticker": "WYNN",
+            "company": "WYNN RESORTS LTD",
+            "top_line": "AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax",
+            "composite": 0.7487,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "ADP",
+            "company": "AUTOMATIC DATA PROCESSING INC",
+            "top_line": "Assets",
+            "composite": 0.7127,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "SHW",
+            "company": "SHERWIN WILLIAMS CO",
+            "top_line": "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+            "composite": 0.7054,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "EXEL",
+            "company": "EXELIXIS, INC.",
+            "top_line": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+            "composite": 0.7282,
+            "p90_threshold": 0.7593,
+            "above_p90": false
+          },
+          {
+            "ticker": "MDB",
+            "company": "MongoDB, Inc.",
+            "top_line": "AdvertisingExpense",
+            "composite": 0.764,
+            "p90_threshold": 0.7593,
+            "above_p90": true
+          }
+        ],
+        "misses": [
+          "TRU",
+          "SHARK",
+          "MLI",
+          "FMCC",
+          "BXSL",
+          "BOH",
+          "SSB",
+          "CBRE"
+        ]
+      }
+    },
+    {
+      "name": "null_test_falsifiability",
+      "description": "In-harness null permutation on score magnitude across dims and K values, cross-referenced against the N=500 extreme-validation artifact.",
+      "passed": true,
+      "headline": "12/16 metrics survive p<0.05 (75%), 12/16 survive p<0.001  |  max z-score 29.20 sigma on 500 permutations  |  archived run: 28/28 at p<0.05 (N=500, max z=54.68)",
+      "detail": {
+        "n_iterations": 500,
+        "total_metrics": 16,
+        "significant_at_0_05": 12,
+        "significant_at_0_001": 12,
+        "fraction_significant_0_05": 0.75,
+        "max_z_score": 29.19919408373728,
+        "top_z_scores": [
+          {
+            "dim": "composite",
+            "K": 100,
+            "z": 29.19919408373728
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "z": 24.911307844430173
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "z": 24.407170139771463
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "z": 24.354602308560075
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "z": 20.121840259340555
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "z": 20.10577489682887
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "z": 18.71217894251428
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "z": 16.30478470894408
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "z": 15.980404706971429
+          },
+          {
+            "dim": "composite",
+            "K": 10,
+            "z": 13.347197519772319
+          }
+        ],
+        "extreme_validation_crossref": {
+          "n_null_iterations": 500,
+          "rank1_tests": 28,
+          "rank1_sig_0_05": 28,
+          "rank1_sig_0_001": 26,
+          "max_z_score_magnitude": 54.68
+        }
+      }
+    },
+    {
+      "name": "sdk_throughput",
+      "description": "Single-process SDK throughput: cold load, then score() per ticker.",
+      "passed": true,
+      "headline": "1,806 findings indexed in 0.82s (2,215 findings/sec)  |  score() at 38,135 queries/sec over 920 queries",
+      "detail": {
+        "universe_size": 1806,
+        "company_count": 642,
+        "cold_load_seconds": 0.8155279000056908,
+        "findings_per_second_load": 2214.5165113142025,
+        "score_qps": 38135.34733252438,
+        "queries_issued": 920,
+        "queries_resolved": 920,
+        "query_wall_seconds": 0.024124599993228912
+      }
+    },
+    {
+      "name": "reproducibility",
+      "description": "Independent LocalClient loads produce bit-identical top-500 rankings.",
+      "passed": true,
+      "headline": "5/5 independent loads produce identical top-500 SHA-256 digest 78a54094d6f2c460\u2026",
+      "detail": {
+        "n_runs": 5,
+        "all_identical": true,
+        "distinct_digests": 1,
+        "digest_sample": "78a54094d6f2c4608252a23461fe62d41dd55cd2d4df1066d0deb6ccefc70fb9"
+      }
+    },
+    {
+      "name": "cost_per_finding",
+      "description": "Full-universe BTUT analysis cost at AWS c6i.4xlarge on-demand pricing vs equivalent analyst-hour cost.",
+      "passed": true,
+      "headline": "$0.0164\u00a2 to analyze 1,806 findings  |  $0.09 per million findings  |  1,689,284\u00d7 cost advantage vs one $72k/year analyst",
+      "detail": {
+        "aws_price_per_second_usd": 0.0001888888888888889,
+        "cold_load_seconds": 0.8678608000045642,
+        "cost_per_full_analysis_usd": 0.00016392926222308436,
+        "cost_per_finding_usd": 9.07692481855395e-08,
+        "cost_per_10k_tickers_usd": 0.0009076924818553951,
+        "analyst_annual_usd_baseline": 72000.0,
+        "lo_annual_usd_equivalent": 0.04262160817800193,
+        "cost_advantage_ratio": 1689283.9824181243
+      }
+    },
+    {
+      "name": "multi_tenant_concurrency",
+      "description": "Long-lived tenants serving concurrent queries \u2014 the dedicated-tenant deployment shape.",
+      "passed": true,
+      "headline": "10 warm tenants served 1,000 concurrent queries in 47ms (21,313 qps)  |  per-query p50=15\u00b5s, p99=264\u00b5s",
+      "detail": {
+        "n_tenants": 10,
+        "queries_per_tenant": 100,
+        "total_queries": 1000,
+        "provision_wall_seconds": 8.345027000003029,
+        "query_wall_seconds": 0.04691930001717992,
+        "aggregate_qps": 21313.190939204997,
+        "per_query_p50_seconds": 1.514999894425273e-05,
+        "per_query_p95_seconds": 0.00013349999790079892,
+        "per_query_p99_seconds": 0.0002644999767653644,
+        "tenant_wall_seconds": [
+          0.003173099976265803,
+          0.0033780000230763108,
+          0.002299200015841052,
+          0.0031451999966520816,
+          0.002850899996701628,
+          0.003590799984522164,
+          0.003823699982604012,
+          0.002856199978850782,
+          0.0036887000023853034,
+          0.0036813000042457134
+        ]
+      }
+    },
+    {
+      "name": "air_gap",
+      "description": "Entire commercial surface (score, top, watchlist, alerts) functions with all outbound network blocked.",
+      "passed": true,
+      "headline": "full SDK surface answered with 0 outbound socket attempt(s) \u2014 air-gap demo succeeds",
+      "detail": {
+        "attempted_outbound_connections": 0,
+        "score_returned": true,
+        "top_size": 10,
+        "watchlist_created": 2,
+        "alerts_generated": 2
+      }
+    }
+  ],
+  "meta": {
+    "sdk_version": "0.2.0",
+    "python": "3.11.9",
+    "seed": 42,
+    "btut_path": "scripts\\edgar_btut_result_5000.json",
+    "iterations_requested": 500
+  }
+}
