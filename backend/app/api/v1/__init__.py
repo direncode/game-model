@@ -28,6 +28,7 @@ from app.api.v1.sso import router as sso_router
 from app.api.v1.api_keys import router as api_keys_router
 from app.api.v1.module_marketplace import router as module_marketplace_router
 from app.api.v1.engine import router as engine_router
+from app.api.v1.lo_analyze import router as lo_analyze_router
 
 router = APIRouter()
 
@@ -57,6 +58,7 @@ router.include_router(sso_router)
 router.include_router(api_keys_router)
 router.include_router(module_marketplace_router)
 router.include_router(engine_router)
+router.include_router(lo_analyze_router)
 
 # Also export as api_router for alternate import style
 api_router = router

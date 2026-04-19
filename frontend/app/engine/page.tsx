@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { MinimalNav } from '@/components/layout/MinimalNav';
 import { ConnectFlow, type ConnectResult } from '@/components/connect/ConnectFlow';
 import { PageFileDrop } from '@/components/connect/FileDrop';
@@ -9,6 +9,23 @@ import { SummaryCards } from '@/components/intelligence/SummaryCards';
 import { AnomalyFeed } from '@/components/intelligence/AnomalyFeed';
 import { ConnectionGraph } from '@/components/intelligence/ConnectionGraph';
 
+type NullTest = {
+  metric: string;
+  true_value: number | boolean;
+  null_mean?: number | null;
+  null_p05?: number | null;
+  null_p95?: number | null;
+  null_proportion_true?: number | null;
+  significant_at_0_05: boolean;
+};
+
+type ValidationReport = {
+  n_iterations: number;
+  seed: number;
+  null_tests: NullTest[];
+  notes?: string[];
+};
+
 type AppPhase = 'connect' | 'reducing' | 'intelligence';
 
 export default function HomePage() {
@@ -16,6 +33,19 @@ export default function HomePage() {
   const [result, setResult] = useState<ConnectResult | null>(null);
   const [isSample, setIsSample] = useState(false);
   const [droppedFile, setDroppedFile] = useState<File | null>(null);
+  const [validation, setValidation] = useState<ValidationReport | null>(null);
+  const [proofOpen, setProofOpen] = useState(false);
+
+  useEffect(() => {
+    if (isSample && !validation) {
+      import('@/data/legends/validation.json')
+        .then((mod) => {
+          const data = (mod.default ?? mod) as unknown as ValidationReport;
+          setValidation(data);
+        })
+        .catch(() => {/* validation optional */});
+    }
+  }, [isSample, validation]);
 
   const navStatus =
     phase === 'connect'
@@ -100,6 +130,67 @@ export default function HomePage() {
               </button>
             </div>
           </div>
+
+          {/* Prove-it block — null-test falsification badges */}
+          {isSample && validation && (
+            <div className="mb-6">
+              <button
+                onClick={() => setProofOpen(v => !v)}
+                className="w-full flex items-center justify-between gap-3 bg-white/[0.02] border border-li-cyan/20 rounded-xl px-5 py-3 hover:bg-white/[0.04] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-li-cyan/80">Prove it</span>
+                  <span className="text-[11px] font-mono text-white/50">
+                    {validation.null_tests.filter(t => t.significant_at_0_05).length} / {validation.null_tests.length} metrics survive null permutation (N={validation.n_iterations}, &alpha;=0.05)
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-white/40">{proofOpen ? '\u25bc' : '\u25b8'}</span>
+              </button>
+
+              {proofOpen && (
+                <div className="mt-2 bg-white/[0.01] border border-white/[0.04] rounded-xl p-5">
+                  <p className="text-[10px] font-mono text-white/30 mb-4">
+                    Every metric is tested against a strong null: cross-corpus fingerprint shuffle + role-label shuffle + within-corpus entity shuffle.
+                    A metric passes only if the true value lies outside the null distribution&apos;s 95th percentile.
+                  </p>
+                  <div className="space-y-1">
+                    <div className="grid grid-cols-[1fr_6rem_6rem_6rem_6rem] gap-3 text-[9px] font-mono uppercase tracking-wider text-white/25 pb-2 border-b border-white/[0.04]">
+                      <span>Metric</span>
+                      <span className="text-right">True</span>
+                      <span className="text-right">Null mean</span>
+                      <span className="text-right">Null p95</span>
+                      <span className="text-right">Verdict</span>
+                    </div>
+                    {validation.null_tests.map((t, i) => {
+                      const fmt = (v: number | null | undefined) =>
+                        v === undefined || v === null ? '\u2014' : Number.isInteger(v) ? String(v) : v.toFixed(3);
+                      const trueStr = typeof t.true_value === 'boolean'
+                        ? (t.true_value ? 'true' : 'false')
+                        : fmt(t.true_value);
+                      const hasNullMean = t.null_mean !== null && t.null_mean !== undefined;
+                      const nullDisplay = hasNullMean
+                        ? { mean: fmt(t.null_mean), p95: fmt(t.null_p95) }
+                        : { mean: `p=${(t.null_proportion_true ?? 0).toFixed(2)}`, p95: '\u2014' };
+                      return (
+                        <div key={i} className="grid grid-cols-[1fr_6rem_6rem_6rem_6rem] gap-3 text-[11px] font-mono items-center py-1">
+                          <span className="text-white/60 truncate">{t.metric}</span>
+                          <span className="text-white/70 text-right">{trueStr}</span>
+                          <span className="text-white/40 text-right">{nullDisplay.mean}</span>
+                          <span className="text-white/40 text-right">{nullDisplay.p95}</span>
+                          <span className={`text-right text-[10px] ${t.significant_at_0_05 ? 'text-li-green' : 'text-white/25'}`}>
+                            {t.significant_at_0_05 ? 'SIGNIFICANT' : 'not signif'}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[9px] font-mono text-white/20 mt-4">
+                    Seed {validation.seed}. Regenerate with <span className="text-white/40">lo validate</span> from the <span className="text-white/40">lo-core</span> CLI.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Main grid: table + summary cards */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 mb-10">

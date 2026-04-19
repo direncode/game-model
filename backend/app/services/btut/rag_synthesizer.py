@@ -1,8 +1,9 @@
-"""RAG Synthesizer — Claude-powered analysis from BTUT signal + source documents.
+"""RAG Synthesizer — deterministic analysis from BTUT signal + source documents.
 
 Combines BTUT structural signal (scores, fingerprint, anomaly tags) with
-primary source excerpts (SEC filings, PubMed abstracts) and uses Claude
-to produce grounded, citation-backed analysis.
+primary source excerpts (SEC filings, PubMed abstracts) to produce
+grounded, citation-backed analysis. Pure deterministic templates; no
+external GenAI. Customer fine-tuning plugs in via the generator seam.
 """
 
 from __future__ import annotations
@@ -16,7 +17,7 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "lo_core.template"
 
 
 @dataclass
@@ -87,10 +88,21 @@ class RAGSynthesis:
 
 
 class RAGSynthesizer:
-    """Synthesize BTUT structural signal + source documents via Claude."""
+    """Synthesize BTUT structural signal + source documents via the internal
+    deterministic template. Customer-supplied fine-tuned generators can
+    be injected via the `generator` argument.
+    """
 
-    def __init__(self, api_key: str | None = None):
-        self._api_key = api_key or settings.ANTHROPIC_API_KEY
+    def __init__(self, generator: object | None = None, api_key: str | None = None):
+        """
+        Args:
+            generator: Optional callable with `.narrate_rag(btut_context, chunks)`
+                returning a `RAGSynthesis`. Use for customer fine-tunes.
+            api_key: Unused; retained only for backward-compat signature.
+        """
+        self._generator = generator
+        # `api_key` kept as argument for call-site backward-compat; never used.
+        _ = api_key
 
     async def synthesize(
         self,
@@ -98,37 +110,28 @@ class RAGSynthesizer:
         chunks: list,
         focus: str = "general",
     ) -> RAGSynthesis:
-        """Generate Claude-powered analysis from BTUT signal + source chunks."""
-        if not self._api_key:
-            logger.warning("No Anthropic API key — returning template-based synthesis")
-            return self._template_synthesis(btut_context, chunks)
+        """Deterministic synthesis from BTUT signal + chunks.
 
-        try:
-            import anthropic
-            client = anthropic.AsyncAnthropic(api_key=self._api_key)
+        If a fine-tuned generator is provided, it produces the synthesis;
+        otherwise, the built-in template does. Either path is fully
+        offline — no external GenAI calls.
+        """
+        if self._generator is not None and hasattr(self._generator, "narrate_rag"):
+            try:
+                out = self._generator.narrate_rag(btut_context, chunks, focus)
+                if isinstance(out, RAGSynthesis):
+                    out.generated_at = datetime.utcnow().isoformat()
+                    out.chunk_count_used = len(chunks)
+                    return out
+            except Exception as e:
+                logger.warning("fine-tuned RAG generator failed (%s); using template", e)
 
-            prompt = self._build_prompt(btut_context, chunks, focus)
-
-            response = await client.messages.create(
-                model=MODEL,
-                max_tokens=2500,
-                messages=[{"role": "user", "content": prompt}],
-            )
-
-            text = response.content[0].text if response.content else ""
-            synthesis = self._parse_response(text, btut_context, chunks)
-            synthesis.generated_at = datetime.utcnow().isoformat()
-            synthesis.chunk_count_used = len(chunks)
-
-            logger.info(
-                "RAG synthesis complete for %s: %d chunks, %d citations",
-                btut_context.entity_key, len(chunks), len(synthesis.source_evidence),
-            )
-            return synthesis
-
-        except Exception as e:
-            logger.error("Claude synthesis failed: %s", e)
-            return self._template_synthesis(btut_context, chunks)
+        synthesis = self._template_synthesis(btut_context, chunks)
+        logger.info(
+            "RAG synthesis (template) complete for %s: %d chunks, %d citations",
+            btut_context.entity_key, len(chunks), len(synthesis.source_evidence),
+        )
+        return synthesis
 
     async def synthesize_cached(
         self,
@@ -365,8 +368,15 @@ Do the primary sources corroborate the BTUT structural signal? Rate your confide
                 f"Lattice fingerprint shows {ctx.flips}/48 dimensional flips."
             ),
             anomaly_explanation=ctx.anomaly_story,
-            risk_assessment="Requires Claude API key for source-grounded risk assessment.",
-            opportunity_assessment="Requires Claude API key for source-grounded opportunity assessment.",
+            risk_assessment=(
+                f"Based on structural signal: anomaly={scores.get('anomaly', 0):.2f} "
+                f"within cluster #{ctx.cluster_id}. Source-grounded risk analysis "
+                f"requires a fine-tuned generator."
+            ),
+            opportunity_assessment=(
+                f"Based on structural signal: diversity={scores.get('diversity', 0):.2f}. "
+                f"Source-grounded opportunity analysis requires a fine-tuned generator."
+            ),
             confidence_note=f"Template-based analysis. {chunk_summary}.",
             generated_at=datetime.utcnow().isoformat(),
             model="template",

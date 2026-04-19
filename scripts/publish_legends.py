@@ -20,6 +20,8 @@ from dataclasses import asdict, dataclass, is_dataclass
 from pathlib import Path
 from typing import Any
 
+from dataclasses import asdict as _asdict, is_dataclass as _is_dataclass
+
 from lo_core.analyze import (
     DEFAULT_PARADIGM_ROLES,
     analyze_corpus,
@@ -29,6 +31,17 @@ from lo_core.analyze import (
     parse_entity_name,
     triple_bridges,
 )
+from lo_core.validate import validate_corpora
+
+
+def _to_jsonable(obj):
+    if _is_dataclass(obj):
+        return _to_jsonable(_asdict(obj))
+    if isinstance(obj, dict):
+        return {k: _to_jsonable(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_to_jsonable(v) for v in obj]
+    return obj
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "frontend" / "data" / "legends"
@@ -299,6 +312,28 @@ def main() -> int:
     # Cross-legend analyses
     bridges, bridge_stats = compute_bridges(legend_fingerprints)
     triples = triple_bridges(legend_fingerprints, global_fp)
+
+    # Pre-compute the null-test validation report so the UI can surface it
+    # without running python at view time (the "Prove It" badge).
+    log.info("Running null-test validation (N=30) for prove-it surfacing...")
+    validation_report = validate_corpora(
+        survivors_by_id,
+        focus_corpus="polymath",
+        n_iterations=30,
+        held_out=("polymath", "tesla", "heterogeneous"),
+    )
+    validation_jsonable = _to_jsonable(validation_report)
+    (OUT_DIR / "validation.json").write_text(
+        json.dumps(validation_jsonable, indent=2, sort_keys=True, default=str),
+        encoding="utf-8",
+    )
+    significant_count = sum(
+        1 for t in validation_report.null_tests if t.significant_at_0_05
+    )
+    log.info(
+        "Validation: %d/%d metrics SIGNIFICANT under null permutation (alpha=0.05)",
+        significant_count, len(validation_report.null_tests),
+    )
 
     (OUT_DIR / "bridges.json").write_text(
         json.dumps({

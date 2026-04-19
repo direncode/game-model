@@ -1,17 +1,20 @@
-"""LLM-powered natural language description generation for modules.
+"""Natural-language description generation for modules.
 
-Uses the Anthropic Claude API to generate human-readable names and
-descriptions for crystallized modules. Falls back to template-based
-descriptions when the API is unavailable.
+Deterministic, offline, no external GenAI. All description generation flows
+through the lo_core `Generator` ABC. The default is `TemplateGenerator`
+(pure stdlib, reproducible). Customers install their own fine-tuned
+`Generator` implementation — the interface is stable, the caller
+is unchanged.
+
+History: this module previously proxied Anthropic Claude via an
+`ANTHROPIC_API_KEY`. That path has been removed — `lo_core` is the
+engine, fine-tuning is additive, no external GenAI on the critical path.
 """
-
 from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import Any
 
-from app.config import settings
 from app.services.interpretation.module_analyzer import ModuleAnalysis
 
 logger = logging.getLogger(__name__)
@@ -19,132 +22,56 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ModuleDescription:
-    """LLM-generated or template-based module description."""
+    """Module description produced by the internal generator."""
 
     module_id: str
     name: str
     description: str
     confidence: str  # "high", "medium", "low"
-    source: str  # "llm" or "template"
+    source: str  # "template" (default) or "fine_tuned" (customer-supplied)
 
 
 class NaturalLanguageDescriber:
-    """Generate human-readable module descriptions using LLM or templates."""
+    """Generate deterministic module descriptions via the internal generator."""
 
-    def __init__(self, anthropic_client: Any | None = None) -> None:
-        self._client = anthropic_client
-        self._api_key = settings.ANTHROPIC_API_KEY
+    def __init__(self, generator: object | None = None) -> None:
+        """Initialize with an optional custom generator.
+
+        Args:
+            generator: An object exposing `.narrate_module(analysis, purity)`.
+                If None, uses the deterministic template describer.
+        """
+        self._generator = generator
 
     async def describe(
         self, analysis: ModuleAnalysis, purity_score: float
     ) -> ModuleDescription:
-        """Generate a description for a module.
-
-        Attempts to use Claude API first, then falls back to template.
-
-        Args:
-            analysis: Statistical analysis of the module.
-            purity_score: Type purity score (0-1).
-
-        Returns:
-            ModuleDescription with name, description, and confidence.
-        """
-        if self._api_key:
+        """Produce a ModuleDescription."""
+        if self._generator is not None and hasattr(self._generator, "narrate_module"):
             try:
-                return await self._describe_with_llm(analysis, purity_score)
-            except Exception:
-                logger.warning(
-                    "LLM description failed for module %d, using template",
-                    analysis.module_index,
+                out = self._generator.narrate_module(analysis, purity_score)
+                if isinstance(out, ModuleDescription):
+                    return out
+                # Duck-typed dict return
+                return ModuleDescription(
+                    module_id=getattr(analysis, "module_id", "?"),
+                    name=out.get("name", "Unnamed Module"),
+                    description=out.get("description", ""),
+                    confidence=out.get("confidence", "low"),
+                    source="fine_tuned",
                 )
-
+            except Exception as e:
+                logger.warning(
+                    "fine-tuned generator failed for module %s: %s; falling back to template",
+                    getattr(analysis, "module_index", "?"), e,
+                )
         return self._describe_with_template(analysis, purity_score)
-
-    async def _describe_with_llm(
-        self, analysis: ModuleAnalysis, purity_score: float
-    ) -> ModuleDescription:
-        """Generate description using Claude API."""
-        import anthropic
-
-        client = self._client or anthropic.AsyncAnthropic(api_key=self._api_key)
-
-        # Build context prompt
-        anchor_names = [a.name for a in analysis.anchor_entities]
-        composition_str = ", ".join(
-            f"{t}: {c}" for t, c in analysis.entity_composition.items()
-        )
-        external_str = ", ".join(
-            f"{ec['entity']} ({ec['connection_count']} connections)"
-            for ec in analysis.external_connected_modules[:5]
-        )
-
-        prompt = (
-            f"Analyze this data module from a knowledge graph crystallization:\n\n"
-            f"Module Index: {analysis.module_index}\n"
-            f"Entity Count: {analysis.entity_count}\n"
-            f"Entity Types: {composition_str}\n"
-            f"Type Purity: {purity_score:.2f}\n"
-            f"Internal Density: {analysis.internal_density:.4f}\n"
-            f"Anchor Entities (most connected): {', '.join(anchor_names)}\n"
-            f"External Connections: {external_str or 'None'}\n\n"
-            f"Provide:\n"
-            f"1. A concise name for this module (3-6 words)\n"
-            f"2. A description (2-3 sentences) explaining what this module represents\n"
-            f"3. Confidence level: high, medium, or low\n\n"
-            f"Format your response as:\n"
-            f"NAME: <name>\n"
-            f"DESCRIPTION: <description>\n"
-            f"CONFIDENCE: <high|medium|low>"
-        )
-
-        response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=300,
-            messages=[{"role": "user", "content": prompt}],
-        )
-
-        text = response.content[0].text
-        return self._parse_llm_response(analysis.module_id, text)
-
-    def _parse_llm_response(
-        self, module_id: str, text: str
-    ) -> ModuleDescription:
-        """Parse structured LLM response into ModuleDescription."""
-        name = "Unnamed Module"
-        description = ""
-        confidence = "medium"
-
-        for line in text.strip().split("\n"):
-            line = line.strip()
-            if line.upper().startswith("NAME:"):
-                name = line[5:].strip()
-            elif line.upper().startswith("DESCRIPTION:"):
-                description = line[12:].strip()
-            elif line.upper().startswith("CONFIDENCE:"):
-                conf = line[11:].strip().lower()
-                if conf in ("high", "medium", "low"):
-                    confidence = conf
-
-        # If description spans multiple lines, capture continuation
-        if not description:
-            lines = text.strip().split("\n")
-            if len(lines) >= 2:
-                description = lines[1].strip()
-
-        return ModuleDescription(
-            module_id=module_id,
-            name=name,
-            description=description or "No description generated.",
-            confidence=confidence,
-            source="llm",
-        )
 
     @staticmethod
     def _describe_with_template(
         analysis: ModuleAnalysis, purity_score: float
     ) -> ModuleDescription:
-        """Generate template-based description as LLM fallback."""
-        # Determine dominant type
+        """Deterministic template-based description. Zero external deps."""
         dominant_type = "mixed"
         dominant_count = 0
         for t, c in analysis.entity_composition.items():
@@ -152,7 +79,6 @@ class NaturalLanguageDescriber:
                 dominant_type = t
                 dominant_count = c
 
-        # Build name
         if purity_score > 0.8:
             name = f"{dominant_type.title()} Cluster"
         elif purity_score > 0.5:
@@ -161,7 +87,6 @@ class NaturalLanguageDescriber:
         else:
             name = f"Mixed Module {analysis.module_index}"
 
-        # Build description
         anchor_names = [a.name for a in analysis.anchor_entities[:3]]
         anchors_str = ", ".join(anchor_names) if anchor_names else "no clear anchors"
 
@@ -184,11 +109,8 @@ class NaturalLanguageDescriber:
                 f"Most connected entities: {anchors_str}."
             )
 
-        # Confidence based on data quality
         if analysis.entity_count >= 10 and purity_score > 0.6:
             confidence = "medium"
-        elif analysis.entity_count >= 5:
-            confidence = "low"
         else:
             confidence = "low"
 
@@ -204,23 +126,13 @@ class NaturalLanguageDescriber:
         self,
         analyses: list[tuple[ModuleAnalysis, float]],
     ) -> list[ModuleDescription]:
-        """Generate descriptions for multiple modules.
-
-        Args:
-            analyses: List of (ModuleAnalysis, purity_score) tuples.
-
-        Returns:
-            List of ModuleDescription instances.
-        """
         descriptions = []
         for analysis, purity in analyses:
-            desc = await self.describe(analysis, purity)
-            descriptions.append(desc)
-
+            descriptions.append(await self.describe(analysis, purity))
         logger.info(
-            "Generated %d module descriptions (llm=%d, template=%d)",
+            "Generated %d module descriptions (template=%d, fine_tuned=%d)",
             len(descriptions),
-            sum(1 for d in descriptions if d.source == "llm"),
             sum(1 for d in descriptions if d.source == "template"),
+            sum(1 for d in descriptions if d.source == "fine_tuned"),
         )
         return descriptions

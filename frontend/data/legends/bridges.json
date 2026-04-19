@@ -12,44 +12,9 @@
           "weight": 0.7213
         },
         {
-          "a_name": "fessenden_US706737__c018",
-          "b_name": "latk_polymath__vn_self_reproducing_automata__c065",
-          "fp": "111111111111111111111111111111111111111111111101",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "info_HUFFMAN1952__c011",
-          "b_name": "latk_linguistics__modern_chomsky_hierarchy__c082",
-          "fp": "111111111111111111111111111111111111111111011111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "witricity_US7741734__c047",
-          "b_name": "latk_heterogeneous__info_HEVC2013__c041",
-          "fp": "111111111110111111111111111111101111111111011111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "witricity_US7741734__c033",
-          "b_name": "latk_heterogeneous__marconi_US586193__c005",
-          "fp": "111111111111111111111111111110111111111111011111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "marconi_US586193__c023",
-          "b_name": "latk_heterogeneous__corum_US10084223__c036",
-          "fp": "111111111111111111011111111101111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "corum_US9912031__c061",
-          "b_name": "latk_polymath__newton_alchemy_clavis__c108",
-          "fp": "111111111111111111011111111110111111111111111111",
+          "a_name": "tesla_US1119732__c056",
+          "b_name": "latk_linguistics__modern_chomsky_hierarchy__c052",
+          "fp": "111111111111111101111111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -61,16 +26,51 @@
           "weight": 0.7213
         },
         {
-          "a_name": "tesla_US1119732__c056",
-          "b_name": "latk_linguistics__modern_chomsky_hierarchy__c052",
-          "fp": "111111111111111101111111111110111111111111111111",
+          "a_name": "info_JPEG1992__c008",
+          "b_name": "latk_polymath__newton_principia_mechanics__c109",
+          "fp": "111111110111111111111111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "info_JPEG1992__c008",
-          "b_name": "latk_polymath__newton_principia_mechanics__c109",
-          "fp": "111111110111111111111111111111111111111111111111",
+          "a_name": "marconi_US586193__c023",
+          "b_name": "latk_heterogeneous__corum_US10084223__c036",
+          "fp": "111111111111111111011111111101111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "info_HUFFMAN1952__c011",
+          "b_name": "latk_linguistics__modern_chomsky_hierarchy__c082",
+          "fp": "111111111111111111111111111111111111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "corum_US9912031__c061",
+          "b_name": "latk_polymath__newton_alchemy_clavis__c108",
+          "fp": "111111111111111111011111111110111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "witricity_US7741734__c033",
+          "b_name": "latk_heterogeneous__marconi_US586193__c005",
+          "fp": "111111111111111111111111111110111111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "witricity_US7741734__c047",
+          "b_name": "latk_heterogeneous__info_HEVC2013__c041",
+          "fp": "111111111110111111111111111111101111111111011111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "fessenden_US706737__c018",
+          "b_name": "latk_polymath__vn_self_reproducing_automata__c065",
+          "fp": "111111111111111111111111111111111111111111111101",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -82,13 +82,6 @@
       "a": "climate",
       "b": "heterogeneous",
       "samples": [
-        {
-          "a_name": "station_ANDM8",
-          "b_name": "deforest_US841387__c037",
-          "fp": "111111011111111111111111111101111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
         {
           "a_name": "station_COOPFORI2",
           "b_name": "tesla_US645576__c154",
@@ -123,6 +116,13 @@
           "fp": "111111111111111111111111111110111111101111111111",
           "global_count": 2,
           "weight": 0.7213
+        },
+        {
+          "a_name": "station_ANDM8",
+          "b_name": "deforest_US841387__c037",
+          "fp": "111111011111111111111111111101111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
       "shared_count": 6,
@@ -132,6 +132,20 @@
       "a": "edgar",
       "b": "heterogeneous",
       "samples": [
+        {
+          "a_name": "filing_000106569626000026",
+          "b_name": "info_HUFFMAN1952__c049",
+          "fp": "111111111111111111111111111110111111111111101111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "filing_000202984225000002",
+          "b_name": "crypto_RSA_US4405829__c013",
+          "fp": "111111111111110111111111111011111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
         {
           "a_name": "filing_000139834426003083",
           "b_name": "corum_US9912031__c069",
@@ -147,13 +161,6 @@
           "weight": 0.7213
         },
         {
-          "a_name": "filing_000103797626000064",
-          "b_name": "tesla_US1119732__c079",
-          "fp": "111111111111111011111111111111111111110111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
           "a_name": "filing_000119312526045187",
           "b_name": "corum_US9923385__c049",
           "fp": "110111111011111111111111111111111111111111111111",
@@ -161,16 +168,9 @@
           "weight": 0.7213
         },
         {
-          "a_name": "filing_000106569626000026",
-          "b_name": "info_HUFFMAN1952__c049",
-          "fp": "111111111111111111111111111110111111111111101111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "filing_000202984225000002",
-          "b_name": "crypto_RSA_US4405829__c013",
-          "fp": "111111111111110111111111111011111111111111111111",
+          "a_name": "filing_000103797626000064",
+          "b_name": "tesla_US1119732__c079",
+          "fp": "111111111111111011111111111111111111110111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -183,23 +183,9 @@
       "b": "comtrade",
       "samples": [
         {
-          "a_name": "station_COOPCHIF1",
-          "b_name": "flow_528_52_10",
-          "fp": "111111111111110111110111111110111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "station_COOPLUKP8",
-          "b_name": "flow_381_894_02",
-          "fp": "101111111111111111111111100111111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "station_BENS1",
-          "b_name": "flow_528_266_02",
-          "fp": "111111111110111111111111011111111111111111111111",
+          "a_name": "station_CNPW2",
+          "b_name": "flow_392_528_02",
+          "fp": "111111111111111111111111110111111101111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -211,9 +197,23 @@
           "weight": 0.7213
         },
         {
-          "a_name": "station_CNPW2",
-          "b_name": "flow_392_528_02",
-          "fp": "111111111111111111111111110111111101111111111111",
+          "a_name": "station_BENS1",
+          "b_name": "flow_528_266_02",
+          "fp": "111111111110111111111111011111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPLUKP8",
+          "b_name": "flow_381_894_02",
+          "fp": "101111111111111111111111100111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_COOPCHIF1",
+          "b_name": "flow_528_52_10",
+          "fp": "111111111111110111110111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -225,20 +225,6 @@
       "a": "climate",
       "b": "edgar",
       "samples": [
-        {
-          "a_name": "station_CANM7",
-          "b_name": "filing_000091538926000047",
-          "fp": "011111111101111111111111111111111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "station_A4169",
-          "b_name": "filing_000002790426000013",
-          "fp": "111111111101110111111111111111111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
         {
           "a_name": "station_C3232",
           "b_name": "filing_000119312526065951",
@@ -252,6 +238,20 @@
           "fp": "111011111111111101111111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
+        },
+        {
+          "a_name": "station_A4169",
+          "b_name": "filing_000002790426000013",
+          "fp": "111111111101110111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_CANM7",
+          "b_name": "filing_000091538926000047",
+          "fp": "011111111101111111111111111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
         }
       ],
       "shared_count": 4,
@@ -262,9 +262,9 @@
       "b": "latk_mini",
       "samples": [
         {
-          "a_name": "station_COOPWBSN6",
-          "b_name": "latk_polymath__modern_wolfram_class_iv__c007",
-          "fp": "111111111101111111111111111110111111111111111111",
+          "a_name": "station_AV381",
+          "b_name": "latk_polymath__vn_monte_carlo_control__c058",
+          "fp": "111101111110111111111111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -276,16 +276,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "station_AV381",
-          "b_name": "latk_polymath__vn_monte_carlo_control__c058",
-          "fp": "111101111110111111111111111111111111111111111111",
+          "a_name": "station_COOPWSDN5",
+          "b_name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
+          "fp": "111111111111111101111111111111111110111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "station_COOPWSDN5",
-          "b_name": "latk_polymath__leonardo_hydraulics_turbulence__c081",
-          "fp": "111111111111111101111111111111111110111111111111",
+          "a_name": "station_COOPWBSN6",
+          "b_name": "latk_polymath__modern_wolfram_class_iv__c007",
+          "fp": "111111111101111111111111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -334,16 +334,9 @@
       "b": "latk_mini",
       "samples": [
         {
-          "a_name": "flow_156_56_10",
-          "b_name": "latk_polymath__modern_conway_life_universal__c002",
-          "fp": "111111111111111011111111111111111110111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "flow_842_586_26",
-          "b_name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c010",
-          "fp": "111111111111111101111110111111111111111111111111",
+          "a_name": "flow_392_156_02",
+          "b_name": "latk_heterogeneous__marconi_US586193__c022",
+          "fp": "111111111110111111111111111111111111111110111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -355,9 +348,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "flow_392_156_02",
-          "b_name": "latk_heterogeneous__marconi_US586193__c022",
-          "fp": "111111111110111111111111111111111111111110111111",
+          "a_name": "flow_842_586_26",
+          "b_name": "latk_polymath__modern_materials_alchemy_chemistry_bridge__c010",
+          "fp": "111111111111111101111110111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "flow_156_56_10",
+          "b_name": "latk_polymath__modern_conway_life_universal__c002",
+          "fp": "111111111111111011111111111111111110111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -413,16 +413,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "flow_842_174_02",
-          "b_name": "modern_chomsky_hierarchy__concept__regular_language",
-          "fp": "111111111111111111110111111110111111111111111111",
+          "a_name": "flow_076_51_02",
+          "b_name": "linguistics_humboldt_language__c006",
+          "fp": "111111111111111101111111111111111111111111110111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "flow_076_51_02",
-          "b_name": "linguistics_humboldt_language__c006",
-          "fp": "111111111111111101111111111111111111111111110111",
+          "a_name": "flow_842_174_02",
+          "b_name": "modern_chomsky_hierarchy__concept__regular_language",
+          "fp": "111111111111111111110111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -442,6 +442,20 @@
       "b": "polymath",
       "samples": [
         {
+          "a_name": "tesla_US649621__c036",
+          "b_name": "newton_alchemy_clavis__c073",
+          "fp": "111111111111110111111111111111111111111111111110",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "crypto_number_theoretic__location__mit_mathematics_department",
+          "b_name": "vn_cellular_automata_transitions__c087",
+          "fp": "111111111111110111111101111111111111111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
           "a_name": "corum_US9910144__c046",
           "b_name": "newton_principia_mechanics__c029",
           "fp": "111111101111111011111111111111111111111111111111",
@@ -454,20 +468,6 @@
           "fp": "111111111111111011111111111011111111111111111111",
           "global_count": 2,
           "weight": 0.7213
-        },
-        {
-          "a_name": "crypto_number_theoretic__location__mit_mathematics_department",
-          "b_name": "vn_cellular_automata_transitions__c087",
-          "fp": "111111111111110111111101111111111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
-          "a_name": "tesla_US649621__c036",
-          "b_name": "newton_alchemy_clavis__c073",
-          "fp": "111111111111110111111111111111111111111111111110",
-          "global_count": 2,
-          "weight": 0.7213
         }
       ],
       "shared_count": 4,
@@ -478,16 +478,16 @@
       "b": "tesla",
       "samples": [
         {
-          "a_name": "newton_opticks_light__c003",
-          "b_name": "patent_chunk_US424036_5",
-          "fp": "110111111111111111111111111111111111111110111111",
+          "a_name": "newton_alchemy_index_chemicus__c035",
+          "b_name": "concept_world_wireless_system",
+          "fp": "110111111111111111111111101111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "newton_alchemy_index_chemicus__c035",
-          "b_name": "concept_world_wireless_system",
-          "fp": "110111111111111111111111101111111111111111111111",
+          "a_name": "newton_opticks_light__c003",
+          "b_name": "patent_chunk_US424036_5",
+          "fp": "110111111111111111111111111111111111111110111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -514,13 +514,6 @@
       "b": "latk_physics",
       "samples": [
         {
-          "a_name": "station_A4146",
-          "b_name": "latk_physics__arxiv_astro_ph_ga__writing__arxiv_2207_10682v1__c000",
-          "fp": "111111101111111110111111111111111111111111111111",
-          "global_count": 2,
-          "weight": 0.7213
-        },
-        {
           "a_name": "station_COOPBRGM3",
           "b_name": "latk_physics__arxiv_astro_ph_im__writing__arxiv_1302_2429v1__c001",
           "fp": "101111111111111111111111111110111111111111111111",
@@ -531,6 +524,13 @@
           "a_name": "station_COOPBEVO1",
           "b_name": "latk_physics__arxiv_quant_ph__writing__arxiv_2209_05159v2__c000",
           "fp": "111111111111111101110111111111111101111111111111",
+          "global_count": 2,
+          "weight": 0.7213
+        },
+        {
+          "a_name": "station_A4146",
+          "b_name": "latk_physics__arxiv_astro_ph_ga__writing__arxiv_2207_10682v1__c000",
+          "fp": "111111101111111110111111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -550,16 +550,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "station_AW314",
-          "b_name": "newton_opticks_light__c000",
-          "fp": "111101111111111111111111111111111101111111111111",
+          "a_name": "station_COOPRUTV1",
+          "b_name": "leonardo_optics_perspective__c009",
+          "fp": "100111111111111111111111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "station_COOPRUTV1",
-          "b_name": "leonardo_optics_perspective__c009",
-          "fp": "100111111111111111111111111111111111111111111111",
+          "a_name": "station_AW314",
+          "b_name": "newton_opticks_light__c000",
+          "fp": "111101111111111111111111111111111101111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -601,16 +601,16 @@
       "b": "edgar",
       "samples": [
         {
-          "a_name": "country_SAU",
-          "b_name": "filing_000151199826000004",
-          "fp": "111010111111111111111111111110111111111111111111",
+          "a_name": "flow_381_899_02",
+          "b_name": "filing_000197640825000393",
+          "fp": "111101111111111111111111111111111111111110111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "flow_381_899_02",
-          "b_name": "filing_000197640825000393",
-          "fp": "111101111111111111111111111111111111111110111111",
+          "a_name": "country_SAU",
+          "b_name": "filing_000151199826000004",
+          "fp": "111010111111111111111111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -637,16 +637,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "flow_381_348_10",
-          "b_name": "vn_theory_of_games__c044",
-          "fp": "111111101111110111111111101111111111111111111111",
+          "a_name": "flow_842_862_02",
+          "b_name": "vn_monte_carlo_control__c013",
+          "fp": "111111111111111111111111001111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "flow_842_862_02",
-          "b_name": "vn_monte_carlo_control__c013",
-          "fp": "111111111111111111111111001111111111111111111111",
+          "a_name": "flow_381_348_10",
+          "b_name": "vn_theory_of_games__c044",
+          "fp": "111111101111110111111111101111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -659,9 +659,9 @@
       "b": "tesla",
       "samples": [
         {
-          "a_name": "flow_410_316_10",
-          "b_name": "document_fbi_part1",
-          "fp": "111111111111111111111111111111111101111111111011",
+          "a_name": "flow_528_340_02",
+          "b_name": "patent_chunk_US511916_0",
+          "fp": "111111111111111111111111111111011111111101111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -673,9 +673,9 @@
           "weight": 0.7213
         },
         {
-          "a_name": "flow_528_340_02",
-          "b_name": "patent_chunk_US511916_0",
-          "fp": "111111111111111111111111111111011111111101111111",
+          "a_name": "flow_410_316_10",
+          "b_name": "document_fbi_part1",
+          "fp": "111111111111111111111111111111111101111111111011",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -688,9 +688,9 @@
       "b": "latk_physics",
       "samples": [
         {
-          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c022",
-          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_2212_06408v4__c000",
-          "fp": "111111111111111111111111111100111111111111011111",
+          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c009",
+          "b_name": "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2106_03204v2__c000",
+          "fp": "111111111110111111111011111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -702,9 +702,9 @@
           "weight": 0.7213
         },
         {
-          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c009",
-          "b_name": "latk_physics__arxiv_physics_hist_ph__writing__arxiv_2106_03204v2__c000",
-          "fp": "111111111110111111111011111111111111111111111111",
+          "a_name": "latk_heterogeneous__crypto_DH_US4200770__c022",
+          "b_name": "latk_physics__arxiv_cond_mat_stat_mech__writing__arxiv_2212_06408v4__c000",
+          "fp": "111111111111111111111111111100111111111111011111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -746,16 +746,16 @@
       "b": "polymath",
       "samples": [
         {
-          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2312_17328v1__c003",
-          "b_name": "vn_cellular_automata_transitions__c002",
-          "fp": "111111101111111111111111101111111111111110111111",
+          "a_name": "latk_physics__arxiv_math_qa__writing__arxiv_2310_18067v1__c000",
+          "b_name": "leonardo_art_control__c001",
+          "fp": "111111111101111111111111101111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "latk_physics__arxiv_math_qa__writing__arxiv_2310_18067v1__c000",
-          "b_name": "leonardo_art_control__c001",
-          "fp": "111111111101111111111111101111111111111111111111",
+          "a_name": "latk_physics__arxiv_hep_th__writing__arxiv_2312_17328v1__c003",
+          "b_name": "vn_cellular_automata_transitions__c002",
+          "fp": "111111101111111111111111101111111111111110111111",
           "global_count": 2,
           "weight": 0.7213
         },
@@ -782,16 +782,16 @@
           "weight": 0.7213
         },
         {
-          "a_name": "leonardo_flight__concept__lift_from_pressure_difference",
-          "b_name": "author_hill,_ciaran_s",
-          "fp": "111111111111110111111111111111101111111111111111",
+          "a_name": "vn_self_reproducing_automata__c096",
+          "b_name": "author_yee,_shi_mun",
+          "fp": "111111111111111101111111111111111111111100111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "vn_self_reproducing_automata__c096",
-          "b_name": "author_yee,_shi_mun",
-          "fp": "111111111111111101111111111111111111111100111111",
+          "a_name": "leonardo_flight__concept__lift_from_pressure_difference",
+          "b_name": "author_hill,_ciaran_s",
+          "fp": "111111111111110111111111111111101111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -826,16 +826,16 @@
       "b": "latk_mini",
       "samples": [
         {
-          "a_name": "filing_000035419026000122",
-          "b_name": "latk_polymath__newton_alchemy_praxis__c088",
-          "fp": "111111111111111111111111111101101111111111111111",
+          "a_name": "filing_000210409426000007",
+          "b_name": "latk_heterogeneous__tesla_US1119732__c020",
+          "fp": "111111111111111101111111111111111111111111101111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "filing_000210409426000007",
-          "b_name": "latk_heterogeneous__tesla_US1119732__c020",
-          "fp": "111111111111111101111111111111111111111111101111",
+          "a_name": "filing_000035419026000122",
+          "b_name": "latk_polymath__newton_alchemy_praxis__c088",
+          "fp": "111111111111111111111111111101101111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -870,16 +870,16 @@
       "b": "polymath",
       "samples": [
         {
-          "a_name": "filing_000095010326004034",
-          "b_name": "vn_cellular_automata_transitions__c093",
-          "fp": "111111111111111101111111111111111111111101111111",
+          "a_name": "filing_000119312514038134",
+          "b_name": "newton_principia_mechanics__c039",
+          "fp": "111111111011111111111111111111111111111101111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "filing_000119312514038134",
-          "b_name": "newton_principia_mechanics__c039",
-          "fp": "111111111011111111111111111111111111111101111111",
+          "a_name": "filing_000095010326004034",
+          "b_name": "vn_cellular_automata_transitions__c093",
+          "fp": "111111111111111101111111111111111111111101111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -892,16 +892,16 @@
       "b": "tesla",
       "samples": [
         {
-          "a_name": "filing_000210927126000001",
-          "b_name": "patent_chunk_US1402025_0",
-          "fp": "110111111111111111111111111111111111111111111011",
+          "a_name": "filing_000122520826002617",
+          "b_name": "patent_chunk_US413353_3",
+          "fp": "111111111111101111111111111111111111111101111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "filing_000122520826002617",
-          "b_name": "patent_chunk_US413353_3",
-          "fp": "111111111111101111111111111111111111111101111111",
+          "a_name": "filing_000210927126000001",
+          "b_name": "patent_chunk_US1402025_0",
+          "fp": "110111111111111111111111111111111111111111111011",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -914,16 +914,16 @@
       "b": "latk_physics",
       "samples": [
         {
-          "a_name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
-          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_0909_5421v2__c000",
-          "fp": "111011111111111111111111111110111111111111111111",
+          "a_name": "marconi_US586193__c041",
+          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1902_10358v2__c000",
+          "fp": "111111111111111111111111111110111111111111011110",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "marconi_US586193__c041",
-          "b_name": "latk_physics__arxiv_physics_class_ph__writing__arxiv_1902_10358v2__c000",
-          "fp": "111111111111111111111111111110111111111111011110",
+          "a_name": "modern_surface_wave__event__viziv_technologies_announces_partnership_with_bayl",
+          "b_name": "latk_physics__arxiv_hep_th__writing__arxiv_0909_5421v2__c000",
+          "fp": "111011111111111111111111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -958,16 +958,16 @@
       "b": "linguistics",
       "samples": [
         {
-          "a_name": "latk_polymath__newton_principia_mechanics__c151",
-          "b_name": "linguistics_saussure_course__c013",
-          "fp": "111111011111111111111110111111111111111111111111",
+          "a_name": "latk_heterogeneous__witricity_US7741734__c047",
+          "b_name": "modern_transformer_nlp__person__ashish_vaswani",
+          "fp": "111111111111111111011110111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "latk_heterogeneous__witricity_US7741734__c047",
-          "b_name": "modern_transformer_nlp__person__ashish_vaswani",
-          "fp": "111111111111111111011110111111111111111111111111",
+          "a_name": "latk_polymath__newton_principia_mechanics__c151",
+          "b_name": "linguistics_saussure_course__c013",
+          "fp": "111111011111111111111110111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -980,16 +980,16 @@
       "b": "patents",
       "samples": [
         {
-          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c001",
-          "b_name": "patent_US11001095",
-          "fp": "111111111111111111011111111111101111111111111111",
+          "a_name": "latk_heterogeneous__corum_US10084223__c047",
+          "b_name": "patent_US11002680",
+          "fp": "111110111111111111011111111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "latk_heterogeneous__corum_US10084223__c047",
-          "b_name": "patent_US11002680",
-          "fp": "111110111111111111011111111111111111111111111111",
+          "a_name": "latk_polymath__newton_alchemy_index_chemicus__c001",
+          "b_name": "patent_US11001095",
+          "fp": "111111111111111111011111111111101111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -1002,16 +1002,16 @@
       "b": "pubmed",
       "samples": [
         {
-          "a_name": "latk_polymath__newton_theology_prophecies__c072",
-          "b_name": "author_xu,_yong-hu",
-          "fp": "111111111111111111111111111011111110111111111111",
+          "a_name": "latk_heterogeneous__marconi_US586193__c021",
+          "b_name": "author_guo,_xiaoge",
+          "fp": "111111111100111111111111111110111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "latk_heterogeneous__marconi_US586193__c021",
-          "b_name": "author_guo,_xiaoge",
-          "fp": "111111111100111111111111111110111111111111111111",
+          "a_name": "latk_polymath__newton_theology_prophecies__c072",
+          "b_name": "author_xu,_yong-hu",
+          "fp": "111111111111111111111111111011111110111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -1046,16 +1046,16 @@
       "b": "tesla",
       "samples": [
         {
-          "a_name": "linguistics_saussure_course__c066",
-          "b_name": "patent_chunk_US381968_8",
-          "fp": "111111111111111111111110111111111111111111111111",
+          "a_name": "linguistics_portroyal_grammar__c013",
+          "b_name": "patent_chunk_US685958_4",
+          "fp": "111111111111111111111111111111111111110111110111",
           "global_count": 2,
           "weight": 0.7213
         },
         {
-          "a_name": "linguistics_portroyal_grammar__c013",
-          "b_name": "patent_chunk_US685958_4",
-          "fp": "111111111111111111111111111111111111110111110111",
+          "a_name": "linguistics_saussure_course__c066",
+          "b_name": "patent_chunk_US381968_8",
+          "fp": "111111111111111111111110111111111111111111111111",
           "global_count": 2,
           "weight": 0.7213
         }
@@ -1200,258 +1200,6 @@
     }
   ],
   "count": 43,
-  "paradigm_convergence_matrix": [
-    {
-      "a": "chunk",
-      "b": "station",
-      "shared_fingerprints": 12
-    },
-    {
-      "a": "chunk",
-      "b": "filing",
-      "shared_fingerprints": 11
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "latk.polymath",
-      "shared_fingerprints": 8
-    },
-    {
-      "a": "chunk",
-      "b": "flow",
-      "shared_fingerprints": 7
-    },
-    {
-      "a": "filing",
-      "b": "station",
-      "shared_fingerprints": 6
-    },
-    {
-      "a": "chunk",
-      "b": "patent",
-      "shared_fingerprints": 6
-    },
-    {
-      "a": "chunk",
-      "b": "latk.polymath",
-      "shared_fingerprints": 6
-    },
-    {
-      "a": "chunk",
-      "b": "latk.physics",
-      "shared_fingerprints": 5
-    },
-    {
-      "a": "author",
-      "b": "chunk",
-      "shared_fingerprints": 5
-    },
-    {
-      "a": "flow",
-      "b": "latk.physics",
-      "shared_fingerprints": 5
-    },
-    {
-      "a": "flow",
-      "b": "latk.polymath",
-      "shared_fingerprints": 5
-    },
-    {
-      "a": "flow",
-      "b": "station",
-      "shared_fingerprints": 5
-    },
-    {
-      "a": "chunk",
-      "b": "latk.heterogeneous",
-      "shared_fingerprints": 4
-    },
-    {
-      "a": "latk.linguistics",
-      "b": "latk.polymath",
-      "shared_fingerprints": 4
-    },
-    {
-      "a": "patent",
-      "b": "station",
-      "shared_fingerprints": 4
-    },
-    {
-      "a": "filing",
-      "b": "latk.heterogeneous",
-      "shared_fingerprints": 3
-    },
-    {
-      "a": "chunk",
-      "b": "latk.linguistics",
-      "shared_fingerprints": 3
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "latk.physics",
-      "shared_fingerprints": 3
-    },
-    {
-      "a": "latk.physics",
-      "b": "station",
-      "shared_fingerprints": 3
-    },
-    {
-      "a": "latk.polymath",
-      "b": "station",
-      "shared_fingerprints": 3
-    },
-    {
-      "a": "filing",
-      "b": "flow",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "filing",
-      "b": "latk.physics",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "filing",
-      "b": "patent",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "station",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "author",
-      "b": "latk.physics",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "latk.polymath",
-      "b": "patent",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "flow",
-      "b": "patent",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "flow",
-      "b": "paper",
-      "shared_fingerprints": 2
-    },
-    {
-      "a": "author",
-      "b": "filing",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "filing",
-      "b": "latk.polymath",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "country",
-      "b": "filing",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "crypto.number_theoretic",
-      "b": "patent",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.physics",
-      "b": "modern.surface_wave",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "chunk",
-      "b": "crypto.number_theoretic",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "chunk",
-      "b": "info.dictionary_based",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "info.dictionary_based",
-      "b": "station",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "chunk",
-      "b": "paper",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "author",
-      "b": "leonardo.flight",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "chunk",
-      "b": "concept",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.physics",
-      "b": "latk.polymath",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "author",
-      "b": "latk.heterogeneous",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "flow",
-      "b": "latk.linguistics",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "author",
-      "b": "latk.polymath",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "modern.transformer_nlp",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.polymath",
-      "b": "modern.transformer_nlp",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "flow",
-      "b": "latk.heterogeneous",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "latk.linguistics",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "latk.heterogeneous",
-      "b": "patent",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "flow",
-      "b": "historical.saussure_structuralism",
-      "shared_fingerprints": 1
-    },
-    {
-      "a": "flow",
-      "b": "historical.panini_grammar",
-      "shared_fingerprints": 1
-    }
-  ],
   "stats": {
     "dense_fingerprints_dropped": 51,
     "density_threshold_legend_count": 2,
