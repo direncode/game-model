@@ -1,0 +1,222 @@
+{
+  "companies_in_multiple_probes": [
+    {
+      "company": "COMCAST CORP",
+      "hits": [
+        {
+          "anomaly": 0.6973,
+          "concept": "AmortizationOfIntangibleAssets",
+          "industry": null,
+          "probe": "accounting_discrepancies",
+          "score": 0.7311
+        },
+        {
+          "anomaly": 0.7051,
+          "concept": "AssetImpairmentCharges",
+          "industry": null,
+          "probe": "distress_going_concern",
+          "score": 0.7655
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "accounting_discrepancies",
+        "distress_going_concern"
+      ]
+    },
+    {
+      "company": "Circle Internet Group, Inc.",
+      "hits": [
+        {
+          "anomaly": 0.6063,
+          "concept": "CashAndCashEquivalentsAtCarryingValue",
+          "industry": "Finance Services",
+          "probe": "cash_quality",
+          "score": 0.7621
+        },
+        {
+          "anomaly": 0.5351,
+          "concept": "AccruedIncomeTaxesCurrent",
+          "industry": "Finance Services",
+          "probe": "tax_complexity",
+          "score": 0.7567
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "cash_quality",
+        "tax_complexity"
+      ]
+    },
+    {
+      "company": "Energy Transfer LP",
+      "hits": [
+        {
+          "anomaly": 0.4129,
+          "concept": "AccruedEnvironmentalLossContingenciesNoncurrent",
+          "industry": null,
+          "probe": "emerging_liabilities",
+          "score": 0.6628
+        },
+        {
+          "anomaly": 0.3727,
+          "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+          "industry": null,
+          "probe": "resilient_balance_sheet",
+          "score": 0.4497
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "emerging_liabilities",
+        "resilient_balance_sheet"
+      ]
+    },
+    {
+      "company": "MUELLER INDUSTRIES INC",
+      "hits": [
+        {
+          "anomaly": 0.5392,
+          "concept": "AccrualForEnvironmentalLossContingenciesUndiscountedDueInThirdYear",
+          "industry": null,
+          "probe": "emerging_liabilities",
+          "score": 0.7075
+        },
+        {
+          "anomaly": 0.3431,
+          "concept": "AccumulatedOtherComprehensiveIncomeLossDefinedBenefitPensionAndOtherPostretirementPlansNetOfTax",
+          "industry": null,
+          "probe": "resilient_balance_sheet",
+          "score": 0.4953
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "emerging_liabilities",
+        "resilient_balance_sheet"
+      ]
+    },
+    {
+      "company": "PLAINS ALL AMERICAN PIPELINE LP",
+      "hits": [
+        {
+          "anomaly": 0.6835,
+          "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+          "industry": null,
+          "probe": "distress_going_concern",
+          "score": 0.7551
+        },
+        {
+          "anomaly": 0.3874,
+          "concept": "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+          "industry": null,
+          "probe": "resilient_balance_sheet",
+          "score": 0.4473
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "distress_going_concern",
+        "resilient_balance_sheet"
+      ]
+    },
+    {
+      "company": "Paramount Skydance Corp",
+      "hits": [
+        {
+          "anomaly": 0.3793,
+          "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+          "industry": null,
+          "probe": "cash_quality",
+          "score": 0.7549
+        },
+        {
+          "anomaly": 0.4414,
+          "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+          "industry": null,
+          "probe": "resilient_balance_sheet",
+          "score": 0.447
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "cash_quality",
+        "resilient_balance_sheet"
+      ]
+    },
+    {
+      "company": "Samsara Inc.",
+      "hits": [
+        {
+          "anomaly": 0.5159,
+          "concept": "AdditionalPaidInCapital",
+          "industry": null,
+          "probe": "dilution_stock_comp",
+          "score": 0.7801
+        },
+        {
+          "anomaly": 0.4805,
+          "concept": "ContractWithCustomerLiabilityCurrent",
+          "industry": null,
+          "probe": "strong_revenue_signal",
+          "score": 0.7376
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "dilution_stock_comp",
+        "strong_revenue_signal"
+      ]
+    },
+    {
+      "company": "Trade Desk, Inc.",
+      "hits": [
+        {
+          "anomaly": 0.6603,
+          "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+          "industry": "Computer Services",
+          "probe": "cash_quality",
+          "score": 0.7946
+        },
+        {
+          "anomaly": 0.6603,
+          "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+          "industry": "Computer Services",
+          "probe": "distress_going_concern",
+          "score": 0.7444
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "cash_quality",
+        "distress_going_concern"
+      ]
+    },
+    {
+      "company": "WELLTOWER INC.",
+      "hits": [
+        {
+          "anomaly": 0.7038,
+          "concept": "AdditionalPaidInCapital",
+          "industry": "REITs",
+          "probe": "dilution_stock_comp",
+          "score": 0.7354
+        },
+        {
+          "anomaly": 0.6773,
+          "concept": "AssetImpairmentCharges",
+          "industry": "REITs",
+          "probe": "distress_going_concern",
+          "score": 0.7433
+        }
+      ],
+      "probe_count": 2,
+      "probes": [
+        "dilution_stock_comp",
+        "distress_going_concern"
+      ]
+    }
+  ],
+  "multi_probe_company_count": 9,
+  "total_companies_flagged": 80
+}

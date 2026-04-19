@@ -1,0 +1,2014 @@
+{
+  "accounting_discrepancies": {
+    "description": "Soft-estimate accounts prone to management discretion: ARO, goodwill, impairment, valuation allowance, intangibles amortization.",
+    "direction": "high",
+    "probe": "accounting_discrepancies",
+    "top_companies": [
+      [
+        "Ovintiv Inc.",
+        4
+      ],
+      [
+        "DOW INC.",
+        4
+      ],
+      [
+        "AMERICAN ELECTRIC POWER CO INC",
+        3
+      ],
+      [
+        "Targa Resources Corp.",
+        3
+      ],
+      [
+        "XPO, Inc.",
+        3
+      ],
+      [
+        "ALLIANT ENERGY CORP",
+        3
+      ],
+      [
+        "Murphy USA Inc.",
+        3
+      ],
+      [
+        "Nextpower Inc.",
+        2
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AmortizationOfIntangibleAssets",
+        62
+      ],
+      [
+        "AssetRetirementObligationAccretionExpense",
+        22
+      ],
+      [
+        "AssetRetirementObligation",
+        16
+      ],
+      [
+        "AcquiredFiniteLivedIntangibleAssetAmount",
+        7
+      ],
+      [
+        "AmortizationOfAcquiredIntangibleAssets",
+        5
+      ],
+      [
+        "AssetRetirementObligationLiabilitiesSettled",
+        5
+      ],
+      [
+        "AssetRetirementObligationLiabilitiesIncurred",
+        5
+      ],
+      [
+        "AssetRetirementObligationCurrent",
+        4
+      ]
+    ],
+    "top_industries": [
+      [
+        "Electric Services",
+        15
+      ],
+      [
+        "Prepackaged Software",
+        10
+      ],
+      [
+        "Crude Petroleum & Natural Gas",
+        9
+      ],
+      [
+        "4922",
+        8
+      ],
+      [
+        "Electric & Other Services",
+        8
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 1.0,
+        "cik": "4904",
+        "company": "AMERICAN ELECTRIC POWER CO INC",
+        "composite": 0.8588,
+        "concept": "AssetRetirementObligation",
+        "diversity": 1.0,
+        "industry": "Electric Services",
+        "reconstruction": 0.6471,
+        "sic": "4911",
+        "weighted_score": 0.8941
+      },
+      {
+        "anomaly": 0.6561,
+        "cik": "883241",
+        "company": "SYNOPSYS INC",
+        "composite": 0.7913,
+        "concept": "AmortizationOfIntangibleAssets",
+        "diversity": 1.0,
+        "industry": "Prepackaged Software",
+        "reconstruction": 0.6932,
+        "sic": "7372",
+        "weighted_score": 0.736
+      },
+      {
+        "anomaly": 0.7214,
+        "cik": "1389170",
+        "company": "Targa Resources Corp.",
+        "composite": 0.764,
+        "concept": "AssetRetirementObligationAccretionExpense",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.584,
+        "sic": "4922",
+        "weighted_score": 0.7359
+      },
+      {
+        "anomaly": 0.6973,
+        "cik": "1166691",
+        "company": "COMCAST CORP",
+        "composite": 0.7676,
+        "concept": "AmortizationOfIntangibleAssets",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6081,
+        "sic": "4841",
+        "weighted_score": 0.7311
+      },
+      {
+        "anomaly": 0.6765,
+        "cik": "107263",
+        "company": "WILLIAMS COMPANIES, INC.",
+        "composite": 0.7729,
+        "concept": "AssetRetirementObligationAccretionExpense",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6344,
+        "sic": "4922",
+        "weighted_score": 0.7286
+      },
+      {
+        "anomaly": 0.6879,
+        "cik": "1037646",
+        "company": "METTLER TOLEDO INTERNATIONAL INC/",
+        "composite": 0.7668,
+        "concept": "AmortizationOfIntangibleAssets",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.612,
+        "sic": "3826",
+        "weighted_score": 0.7275
+      },
+      {
+        "anomaly": 0.7058,
+        "cik": "79282",
+        "company": "BROWN & BROWN, INC.",
+        "composite": 0.7578,
+        "concept": "AssetRetirementObligationAccretionExpense",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5784,
+        "sic": "6411",
+        "weighted_score": 0.7264
+      },
+      {
+        "anomaly": 0.6824,
+        "cik": "740260",
+        "company": "Ventas, Inc.",
+        "composite": 0.7656,
+        "concept": "AcquiredIndefiniteLivedIntangibleAssetAmount",
+        "diversity": 1.0,
+        "industry": "REITs",
+        "reconstruction": 0.6124,
+        "sic": "6798",
+        "weighted_score": 0.7249
+      },
+      {
+        "anomaly": 0.6312,
+        "cik": "1852131",
+        "company": "Nextpower Inc.",
+        "composite": 0.7662,
+        "concept": "FiniteLivedIntangibleAssetsAmortizationExpenseYearFour",
+        "diversity": 1.0,
+        "industry": "Semiconductors",
+        "reconstruction": 0.6459,
+        "sic": "3674",
+        "weighted_score": 0.7094
+      },
+      {
+        "anomaly": 0.6079,
+        "cik": "811156",
+        "company": "CMS ENERGY CORP",
+        "composite": 0.7709,
+        "concept": "AmortizationOfIntangibleAssets",
+        "diversity": 1.0,
+        "industry": "Electric & Other Services",
+        "reconstruction": 0.6722,
+        "sic": "4931",
+        "weighted_score": 0.7056
+      }
+    ],
+    "total_hits": 142
+  },
+  "cash_quality": {
+    "description": "Cash, equivalents, and short-term-investment accounts with unusual structure \u2014 could indicate treasury-strategy outliers or unusual reserve composition.",
+    "direction": "high",
+    "probe": "cash_quality",
+    "top_companies": [
+      [
+        "OLD DOMINION FREIGHT LINE, INC.",
+        3
+      ],
+      [
+        "Solventum Corp",
+        2
+      ],
+      [
+        "IonQ, Inc.",
+        2
+      ],
+      [
+        "Maplebear Inc.",
+        2
+      ],
+      [
+        "Trade Desk, Inc.",
+        1
+      ],
+      [
+        "Tradeweb Markets Inc.",
+        1
+      ],
+      [
+        "HUNT J B TRANSPORT SERVICES INC",
+        1
+      ],
+      [
+        "CARNIVAL PLC",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "CashAndCashEquivalentsAtCarryingValue",
+        16
+      ],
+      [
+        "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        13
+      ],
+      [
+        "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        3
+      ],
+      [
+        "CashAndCashEquivalentsPeriodIncreaseDecrease",
+        3
+      ],
+      [
+        "CashAndCashEquivalentsFairValueDisclosure",
+        2
+      ],
+      [
+        "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+        2
+      ],
+      [
+        "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        1
+      ],
+      [
+        "InvestmentOwnedAtCost",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "4213",
+        4
+      ],
+      [
+        "6221",
+        3
+      ],
+      [
+        "5331",
+        2
+      ],
+      [
+        "Surgical & Medical Instruments",
+        2
+      ],
+      [
+        "4833",
+        2
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.6603,
+        "cik": "1671933",
+        "company": "Trade Desk, Inc.",
+        "composite": 0.7776,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        "diversity": 1.0,
+        "industry": "Computer Services",
+        "reconstruction": 0.6563,
+        "sic": "7370",
+        "weighted_score": 0.7946
+      },
+      {
+        "anomaly": 0.606,
+        "cik": "1758730",
+        "company": "Tradeweb Markets Inc.",
+        "composite": 0.7555,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6349,
+        "sic": "6200",
+        "weighted_score": 0.7752
+      },
+      {
+        "anomaly": 0.6187,
+        "cik": "728535",
+        "company": "HUNT J B TRANSPORT SERVICES INC",
+        "composite": 0.7459,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6031,
+        "sic": "4213",
+        "weighted_score": 0.765
+      },
+      {
+        "anomaly": 0.6101,
+        "cik": "1125259",
+        "company": "CARNIVAL PLC",
+        "composite": 0.7453,
+        "concept": "CashAndCashEquivalentsAtCarryingValue",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.607,
+        "sic": "4400",
+        "weighted_score": 0.7648
+      },
+      {
+        "anomaly": 0.6063,
+        "cik": "1876042",
+        "company": "Circle Internet Group, Inc.",
+        "composite": 0.7424,
+        "concept": "CashAndCashEquivalentsAtCarryingValue",
+        "diversity": 1.0,
+        "industry": "Finance Services",
+        "reconstruction": 0.602,
+        "sic": "6199",
+        "weighted_score": 0.7621
+      },
+      {
+        "anomaly": 0.4676,
+        "cik": "29534",
+        "company": "DOLLAR GENERAL CORP",
+        "composite": 0.7308,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6598,
+        "sic": "5331",
+        "weighted_score": 0.7574
+      },
+      {
+        "anomaly": 0.5268,
+        "cik": "1964738",
+        "company": "Solventum Corp",
+        "composite": 0.7337,
+        "concept": "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        "diversity": 1.0,
+        "industry": "Surgical & Medical Instruments",
+        "reconstruction": 0.6299,
+        "sic": "3841",
+        "weighted_score": 0.7573
+      },
+      {
+        "anomaly": 0.3793,
+        "cik": "2041610",
+        "company": "Paramount Skydance Corp",
+        "composite": 0.7239,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6976,
+        "sic": "4833",
+        "weighted_score": 0.7549
+      },
+      {
+        "anomaly": 0.3867,
+        "cik": "1588489",
+        "company": "Grayscale Bitcoin Trust ETF",
+        "composite": 0.7234,
+        "concept": "InvestmentOwnedAtCost",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6918,
+        "sic": "6221",
+        "weighted_score": 0.7541
+      },
+      {
+        "anomaly": 0.5398,
+        "cik": "1781335",
+        "company": "Otis Worldwide Corp",
+        "composite": 0.7296,
+        "concept": "CashAndCashEquivalentsAtCarryingValue",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6116,
+        "sic": "3600",
+        "weighted_score": 0.7526
+      }
+    ],
+    "total_hits": 43
+  },
+  "debt_stress": {
+    "description": "Leverage and debt-service line items showing structural deviation \u2014 candidates for elevated refinancing risk or covenant pressure.",
+    "direction": "high",
+    "probe": "debt_stress",
+    "top_companies": [
+      [
+        "EXPAND ENERGY Corp",
+        2
+      ],
+      [
+        "ADVANCED MICRO DEVICES INC",
+        2
+      ],
+      [
+        "DEXCOM INC",
+        2
+      ],
+      [
+        "UNITED THERAPEUTICS Corp",
+        2
+      ],
+      [
+        "Zscaler, Inc.",
+        1
+      ],
+      [
+        "Royalty Pharma plc",
+        1
+      ],
+      [
+        "O REILLY AUTOMOTIVE INC",
+        1
+      ],
+      [
+        "Salesforce, Inc.",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        20
+      ],
+      [
+        "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments",
+        7
+      ],
+      [
+        "AdjustmentsToAdditionalPaidInCapitalConvertibleDebtWithConversionFeature",
+        4
+      ],
+      [
+        "DebtInstrumentUnamortizedDiscount",
+        3
+      ],
+      [
+        "ConvertibleNotesPayableCurrent",
+        1
+      ],
+      [
+        "LineOfCreditFacilityMaximumBorrowingCapacity",
+        1
+      ],
+      [
+        "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "Prepackaged Software",
+        7
+      ],
+      [
+        "Crude Petroleum & Natural Gas",
+        4
+      ],
+      [
+        "Pharmaceutical Preparations",
+        4
+      ],
+      [
+        "Semiconductors",
+        3
+      ],
+      [
+        "Surgical & Medical Instruments",
+        2
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.7873,
+        "cik": "895126",
+        "company": "EXPAND ENERGY Corp",
+        "composite": 0.7778,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": "Crude Petroleum & Natural Gas",
+        "reconstruction": 0.5776,
+        "sic": "1311",
+        "weighted_score": 0.7669
+      },
+      {
+        "anomaly": 0.6587,
+        "cik": "895126",
+        "company": "EXPAND ENERGY Corp",
+        "composite": 0.769,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments",
+        "diversity": 1.0,
+        "industry": "Crude Petroleum & Natural Gas",
+        "reconstruction": 0.6359,
+        "sic": "1311",
+        "weighted_score": 0.7201
+      },
+      {
+        "anomaly": 0.5521,
+        "cik": "1713683",
+        "company": "Zscaler, Inc.",
+        "composite": 0.7767,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7218,
+        "sic": "7371",
+        "weighted_score": 0.6926
+      },
+      {
+        "anomaly": 0.5936,
+        "cik": "2488",
+        "company": "ADVANCED MICRO DEVICES INC",
+        "composite": 0.725,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebtSubsequentAdjustments",
+        "diversity": 1.0,
+        "industry": "Semiconductors",
+        "reconstruction": 0.5665,
+        "sic": "3674",
+        "weighted_score": 0.6667
+      },
+      {
+        "anomaly": 0.5763,
+        "cik": "1802768",
+        "company": "Royalty Pharma plc",
+        "composite": 0.7316,
+        "concept": "DebtInstrumentUnamortizedDiscount",
+        "diversity": 1.0,
+        "industry": "Pharmaceutical Preparations",
+        "reconstruction": 0.5938,
+        "sic": "2834",
+        "weighted_score": 0.6663
+      },
+      {
+        "anomaly": 0.5858,
+        "cik": "898173",
+        "company": "O REILLY AUTOMOTIVE INC",
+        "composite": 0.7272,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5767,
+        "sic": "5531",
+        "weighted_score": 0.6659
+      },
+      {
+        "anomaly": 0.5655,
+        "cik": "1093557",
+        "company": "DEXCOM INC",
+        "composite": 0.7292,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalConvertibleDebtWithConversionFeature",
+        "diversity": 1.0,
+        "industry": "Surgical & Medical Instruments",
+        "reconstruction": 0.5946,
+        "sic": "3841",
+        "weighted_score": 0.6611
+      },
+      {
+        "anomaly": 0.4972,
+        "cik": "1108524",
+        "company": "Salesforce, Inc.",
+        "composite": 0.7568,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": "Prepackaged Software",
+        "reconstruction": 0.7062,
+        "sic": "7372",
+        "weighted_score": 0.6605
+      },
+      {
+        "anomaly": 0.5215,
+        "cik": "1335258",
+        "company": "Live Nation Entertainment, Inc.",
+        "composite": 0.7392,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6472,
+        "sic": "7900",
+        "weighted_score": 0.6549
+      },
+      {
+        "anomaly": 0.5445,
+        "cik": "1093557",
+        "company": "DEXCOM INC",
+        "composite": 0.7252,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+        "diversity": 1.0,
+        "industry": "Surgical & Medical Instruments",
+        "reconstruction": 0.5977,
+        "sic": "3841",
+        "weighted_score": 0.6516
+      }
+    ],
+    "total_hits": 37
+  },
+  "dilution_stock_comp": {
+    "description": "Share-based-compensation, APIC, and dilutive-security accounts \u2014 dilution-risk signal for existing shareholders.",
+    "direction": "high",
+    "probe": "dilution_stock_comp",
+    "top_companies": [
+      [
+        "GOLDMAN SACHS GROUP INC",
+        1
+      ],
+      [
+        "Samsara Inc.",
+        1
+      ],
+      [
+        "Okta, Inc.",
+        1
+      ],
+      [
+        "Apollo Global Management, Inc.",
+        1
+      ],
+      [
+        "WELLTOWER INC.",
+        1
+      ],
+      [
+        "FIFTH THIRD BANCORP",
+        1
+      ],
+      [
+        "GLOBE LIFE INC.",
+        1
+      ],
+      [
+        "CARNIVAL CORP",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AdditionalPaidInCapital",
+        38
+      ],
+      [
+        "AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationAndExerciseOfStockOptions",
+        4
+      ],
+      [
+        "AdditionalPaidInCapitalCommonStock",
+        4
+      ],
+      [
+        "AmountOfDilutiveSecuritiesStockOptionsAndRestrictiveStockUnits",
+        2
+      ],
+      [
+        "AdjustmentsToAdditionalPaidInCapitalShareBasedCompensationRestrictedStockUnitsRequisiteServicePeriodRecognition",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "6211",
+        3
+      ],
+      [
+        "7373",
+        3
+      ],
+      [
+        "Prepackaged Software",
+        2
+      ],
+      [
+        "6282",
+        2
+      ],
+      [
+        "REITs",
+        2
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.7057,
+        "cik": "886982",
+        "company": "GOLDMAN SACHS GROUP INC",
+        "composite": 0.8261,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7491,
+        "sic": "6211",
+        "weighted_score": 0.7966
+      },
+      {
+        "anomaly": 0.5159,
+        "cik": "1642896",
+        "company": "Samsara Inc.",
+        "composite": 0.8285,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.8739,
+        "sic": "7373",
+        "weighted_score": 0.7801
+      },
+      {
+        "anomaly": 0.5775,
+        "cik": "1660134",
+        "company": "Okta, Inc.",
+        "composite": 0.8105,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": "Prepackaged Software",
+        "reconstruction": 0.7904,
+        "sic": "7372",
+        "weighted_score": 0.7683
+      },
+      {
+        "anomaly": 0.765,
+        "cik": "1858681",
+        "company": "Apollo Global Management, Inc.",
+        "composite": 0.7897,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.621,
+        "sic": "6282",
+        "weighted_score": 0.7661
+      },
+      {
+        "anomaly": 0.7038,
+        "cik": "766704",
+        "company": "WELLTOWER INC.",
+        "composite": 0.7651,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": "REITs",
+        "reconstruction": 0.5978,
+        "sic": "6798",
+        "weighted_score": 0.7354
+      },
+      {
+        "anomaly": 0.6786,
+        "cik": "35527",
+        "company": "FIFTH THIRD BANCORP",
+        "composite": 0.7672,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": "State Commercial Banks (National)",
+        "reconstruction": 0.6188,
+        "sic": "6022",
+        "weighted_score": 0.735
+      },
+      {
+        "anomaly": 0.6945,
+        "cik": "320335",
+        "company": "GLOBE LIFE INC.",
+        "composite": 0.7603,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": "Life Insurance",
+        "reconstruction": 0.5916,
+        "sic": "6311",
+        "weighted_score": 0.7297
+      },
+      {
+        "anomaly": 0.5445,
+        "cik": "815097",
+        "company": "CARNIVAL CORP",
+        "composite": 0.76,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6846,
+        "sic": "4400",
+        "weighted_score": 0.7144
+      },
+      {
+        "anomaly": 0.6014,
+        "cik": "1957132",
+        "company": "SharkNinja, Inc.",
+        "composite": 0.7485,
+        "concept": "AdditionalPaidInCapital",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6203,
+        "sic": "3630",
+        "weighted_score": 0.7086
+      },
+      {
+        "anomaly": 0.6717,
+        "cik": "1418135",
+        "company": "Keurig Dr Pepper Inc.",
+        "composite": 0.7375,
+        "concept": "AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationAndExerciseOfStockOptions",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5489,
+        "sic": "2080",
+        "weighted_score": 0.7047
+      }
+    ],
+    "total_hits": 49
+  },
+  "distress_going_concern": {
+    "description": "Going-concern, discontinued operations, restructuring, and impairment concentrations \u2014 distress candidates.",
+    "direction": "high",
+    "probe": "distress_going_concern",
+    "top_companies": [
+      [
+        "DuPont de Nemours, Inc.",
+        2
+      ],
+      [
+        "CENTENE CORP",
+        2
+      ],
+      [
+        "KRATOS DEFENSE & SECURITY SOLUTIONS, INC.",
+        2
+      ],
+      [
+        "REALTY INCOME CORP",
+        2
+      ],
+      [
+        "EDISON INTERNATIONAL",
+        2
+      ],
+      [
+        "INTUIT INC.",
+        2
+      ],
+      [
+        "RENAISSANCERE HOLDINGS LTD",
+        2
+      ],
+      [
+        "JABIL INC",
+        2
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        54
+      ],
+      [
+        "AssetsOfDisposalGroupIncludingDiscontinuedOperation",
+        39
+      ],
+      [
+        "AssetImpairmentCharges",
+        31
+      ],
+      [
+        "AssetsOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+        7
+      ],
+      [
+        "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        3
+      ],
+      [
+        "EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        1
+      ],
+      [
+        "GoodwillImpairmentLoss",
+        1
+      ],
+      [
+        "CashProvidedByUsedInOperatingActivitiesDiscontinuedOperations",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "REITs",
+        15
+      ],
+      [
+        "Pharmaceutical Preparations",
+        5
+      ],
+      [
+        "Electric Services",
+        5
+      ],
+      [
+        "2821",
+        4
+      ],
+      [
+        "1731",
+        3
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.7259,
+        "cik": "1037540",
+        "company": "BXP, Inc.",
+        "composite": 0.7776,
+        "concept": "AssetImpairmentCharges",
+        "diversity": 1.0,
+        "industry": "REITs",
+        "reconstruction": 0.6154,
+        "sic": "6798",
+        "weighted_score": 0.7723
+      },
+      {
+        "anomaly": 0.7051,
+        "cik": "1166691",
+        "company": "COMCAST CORP",
+        "composite": 0.7817,
+        "concept": "AssetImpairmentCharges",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6385,
+        "sic": "4841",
+        "weighted_score": 0.7655
+      },
+      {
+        "anomaly": 0.7003,
+        "cik": "1324948",
+        "company": "RBC Bearings INC",
+        "composite": 0.7776,
+        "concept": "AssetImpairmentCharges",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6314,
+        "sic": "3562",
+        "weighted_score": 0.7614
+      },
+      {
+        "anomaly": 0.7044,
+        "cik": "1549802",
+        "company": "JD.com, Inc.",
+        "composite": 0.7724,
+        "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6157,
+        "sic": "5990",
+        "weighted_score": 0.7606
+      },
+      {
+        "anomaly": 0.6835,
+        "cik": "1070423",
+        "company": "PLAINS ALL AMERICAN PIPELINE LP",
+        "composite": 0.7793,
+        "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.646,
+        "sic": "4610",
+        "weighted_score": 0.7551
+      },
+      {
+        "anomaly": 0.6983,
+        "cik": "105634",
+        "company": "EMCOR Group, Inc.",
+        "composite": 0.7611,
+        "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationNoncurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5912,
+        "sic": "1731",
+        "weighted_score": 0.7523
+      },
+      {
+        "anomaly": 0.6603,
+        "cik": "1671933",
+        "company": "Trade Desk, Inc.",
+        "composite": 0.7776,
+        "concept": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations",
+        "diversity": 1.0,
+        "industry": "Computer Services",
+        "reconstruction": 0.6563,
+        "sic": "7370",
+        "weighted_score": 0.7444
+      },
+      {
+        "anomaly": 0.6773,
+        "cik": "766704",
+        "company": "WELLTOWER INC.",
+        "composite": 0.7608,
+        "concept": "AssetImpairmentCharges",
+        "diversity": 1.0,
+        "industry": "REITs",
+        "reconstruction": 0.6037,
+        "sic": "6798",
+        "weighted_score": 0.7433
+      },
+      {
+        "anomaly": 0.6719,
+        "cik": "1666700",
+        "company": "DuPont de Nemours, Inc.",
+        "composite": 0.7635,
+        "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6139,
+        "sic": "2821",
+        "weighted_score": 0.7423
+      },
+      {
+        "anomaly": 0.6577,
+        "cik": "1659166",
+        "company": "Fortive Corp",
+        "composite": 0.771,
+        "concept": "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6413,
+        "sic": "3823",
+        "weighted_score": 0.74
+      }
+    ],
+    "total_hits": 138
+  },
+  "emerging_liabilities": {
+    "description": "Contingent, legal, environmental, restructuring, and warranty obligations \u2014 liabilities growing outside the normal operating cycle.",
+    "direction": "high",
+    "probe": "emerging_liabilities",
+    "top_companies": [
+      [
+        "Tesla, Inc.",
+        2
+      ],
+      [
+        "NORTHROP GRUMMAN CORP /DE/",
+        2
+      ],
+      [
+        "EXELON CORP",
+        1
+      ],
+      [
+        "LyondellBasell Industries N.V.",
+        1
+      ],
+      [
+        "MUELLER INDUSTRIES INC",
+        1
+      ],
+      [
+        "DOW INC.",
+        1
+      ],
+      [
+        "INTERNATIONAL BUSINESS MACHINES CORP",
+        1
+      ],
+      [
+        "FREEPORT-MCMORAN INC",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AccruedEnvironmentalLossContingenciesNoncurrent",
+        4
+      ],
+      [
+        "AccrualForEnvironmentalLossContingenciesPayments",
+        4
+      ],
+      [
+        "AccrualForEnvironmentalLossContingencies",
+        3
+      ],
+      [
+        "AccrualForEnvironmentalLossContingenciesUndiscountedDueInThirdYear",
+        2
+      ],
+      [
+        "AccrualForEnvironmentalLossContingenciesChargesToExpenseForNewLosses",
+        1
+      ],
+      [
+        "AccrualForEnvironmentalLossContingenciesIncreaseDecreaseForRevisionInEstimates",
+        1
+      ],
+      [
+        "AccruedEnvironmentalLossContingenciesCurrent",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "3350",
+        2
+      ],
+      [
+        "2821",
+        2
+      ],
+      [
+        "Motor Vehicles",
+        2
+      ],
+      [
+        "3812",
+        2
+      ],
+      [
+        "Electric & Other Services",
+        1
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.5543,
+        "cik": "1109357",
+        "company": "EXELON CORP",
+        "composite": 0.751,
+        "concept": "AccrualForEnvironmentalLossContingencies",
+        "diversity": 1.0,
+        "industry": "Electric & Other Services",
+        "reconstruction": 0.656,
+        "sic": "4931",
+        "weighted_score": 0.7306
+      },
+      {
+        "anomaly": 0.5164,
+        "cik": "1489393",
+        "company": "LyondellBasell Industries N.V.",
+        "composite": 0.7373,
+        "concept": "AccrualForEnvironmentalLossContingenciesChargesToExpenseForNewLosses",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6455,
+        "sic": "2860",
+        "weighted_score": 0.7115
+      },
+      {
+        "anomaly": 0.5392,
+        "cik": "89439",
+        "company": "MUELLER INDUSTRIES INC",
+        "composite": 0.7146,
+        "concept": "AccrualForEnvironmentalLossContingenciesUndiscountedDueInThirdYear",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5744,
+        "sic": "3350",
+        "weighted_score": 0.7075
+      },
+      {
+        "anomaly": 0.5241,
+        "cik": "1751788",
+        "company": "DOW INC.",
+        "composite": 0.7173,
+        "concept": "AccrualForEnvironmentalLossContingenciesIncreaseDecreaseForRevisionInEstimates",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5908,
+        "sic": "2821",
+        "weighted_score": 0.704
+      },
+      {
+        "anomaly": 0.5262,
+        "cik": "51143",
+        "company": "INTERNATIONAL BUSINESS MACHINES CORP",
+        "composite": 0.7119,
+        "concept": "AccruedEnvironmentalLossContingenciesNoncurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5758,
+        "sic": "3570",
+        "weighted_score": 0.7019
+      },
+      {
+        "anomaly": 0.5183,
+        "cik": "1318605",
+        "company": "Tesla, Inc.",
+        "composite": 0.7034,
+        "concept": "AccruedEnvironmentalLossContingenciesNoncurrent",
+        "diversity": 1.0,
+        "industry": "Motor Vehicles",
+        "reconstruction": 0.5595,
+        "sic": "3711",
+        "weighted_score": 0.6951
+      },
+      {
+        "anomaly": 0.4859,
+        "cik": "1133421",
+        "company": "NORTHROP GRUMMAN CORP /DE/",
+        "composite": 0.7111,
+        "concept": "AccruedEnvironmentalLossContingenciesNoncurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5991,
+        "sic": "3812",
+        "weighted_score": 0.6885
+      },
+      {
+        "anomaly": 0.4597,
+        "cik": "831259",
+        "company": "FREEPORT-MCMORAN INC",
+        "composite": 0.7128,
+        "concept": "AccrualForEnvironmentalLossContingenciesPayments",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6196,
+        "sic": "1000",
+        "weighted_score": 0.6808
+      },
+      {
+        "anomaly": 0.427,
+        "cik": "1318605",
+        "company": "Tesla, Inc.",
+        "composite": 0.7108,
+        "concept": "AccrualForEnvironmentalLossContingenciesPayments",
+        "diversity": 1.0,
+        "industry": "Motor Vehicles",
+        "reconstruction": 0.6351,
+        "sic": "3711",
+        "weighted_score": 0.6692
+      },
+      {
+        "anomaly": 0.4129,
+        "cik": "1276187",
+        "company": "Energy Transfer LP",
+        "composite": 0.7072,
+        "concept": "AccruedEnvironmentalLossContingenciesNoncurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6351,
+        "sic": "4922",
+        "weighted_score": 0.6628
+      }
+    ],
+    "total_hits": 16
+  },
+  "ma_activity": {
+    "description": "Business-combination, goodwill, and intangible-asset anomalies \u2014 companies with recent or complex M&A activity.",
+    "direction": "high",
+    "probe": "ma_activity",
+    "top_companies": [
+      [
+        "NVR INC",
+        3
+      ],
+      [
+        "Carlyle Group Inc.",
+        3
+      ],
+      [
+        "JACK HENRY & ASSOCIATES INC",
+        3
+      ],
+      [
+        "ENSIGN GROUP, INC",
+        2
+      ],
+      [
+        "ESSEX PROPERTY TRUST, INC.",
+        2
+      ],
+      [
+        "Arthur J. Gallagher & Co.",
+        2
+      ],
+      [
+        "S&P Global Inc.",
+        1
+      ],
+      [
+        "HP INC",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AssetsHeldForSaleNotPartOfDisposalGroupCurrent",
+        6
+      ],
+      [
+        "AssetsHeldForSaleCurrent",
+        5
+      ],
+      [
+        "AmortizationOfAcquiredIntangibleAssets",
+        5
+      ],
+      [
+        "BusinessCombinationAcquisitionRelatedCosts",
+        3
+      ],
+      [
+        "BusinessAcquisitionPurchasePriceAllocationAmortizableIntangibleAssets",
+        3
+      ],
+      [
+        "BusinessAcquisitionCostOfAcquiredEntityPurchasePrice",
+        3
+      ],
+      [
+        "BusinessAcquisitionPurchasePriceAllocationAssetsAcquired",
+        2
+      ],
+      [
+        "BusinessCombinationConsiderationTransferredEquityInterestsIssuedAndIssuable",
+        2
+      ]
+    ],
+    "top_industries": [
+      [
+        "7373",
+        4
+      ],
+      [
+        "1531",
+        3
+      ],
+      [
+        "REITs",
+        3
+      ],
+      [
+        "Semiconductors",
+        3
+      ],
+      [
+        "6282",
+        3
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.7524,
+        "cik": "906163",
+        "company": "NVR INC",
+        "composite": 0.776,
+        "concept": "BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedLiabilities",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5948,
+        "sic": "1531",
+        "weighted_score": 0.7591
+      },
+      {
+        "anomaly": 0.6987,
+        "cik": "906163",
+        "company": "NVR INC",
+        "composite": 0.7842,
+        "concept": "BusinessAcquisitionPurchasePriceAllocationAssetsAcquired",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.649,
+        "sic": "1531",
+        "weighted_score": 0.7566
+      },
+      {
+        "anomaly": 0.6068,
+        "cik": "64040",
+        "company": "S&P Global Inc.",
+        "composite": 0.7753,
+        "concept": "AssetsHeldForSaleCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.684,
+        "sic": "7320",
+        "weighted_score": 0.7321
+      },
+      {
+        "anomaly": 0.5916,
+        "cik": "47217",
+        "company": "HP INC",
+        "composite": 0.7694,
+        "concept": "AmortizationOfAcquiredIntangibleAssets",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6787,
+        "sic": "3570",
+        "weighted_score": 0.7242
+      },
+      {
+        "anomaly": 0.51,
+        "cik": "18230",
+        "company": "CATERPILLAR INC",
+        "composite": 0.7474,
+        "concept": "AssetsHeldForSaleCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6746,
+        "sic": "3531",
+        "weighted_score": 0.6901
+      },
+      {
+        "anomaly": 0.4661,
+        "cik": "912595",
+        "company": "MID AMERICA APARTMENT COMMUNITIES INC.",
+        "composite": 0.7489,
+        "concept": "BusinessCombinationAcquisitionRelatedCosts",
+        "diversity": 1.0,
+        "industry": "REITs",
+        "reconstruction": 0.706,
+        "sic": "6798",
+        "weighted_score": 0.6835
+      },
+      {
+        "anomaly": 0.5336,
+        "cik": "1045810",
+        "company": "NVIDIA CORP",
+        "composite": 0.733,
+        "concept": "AmortizationOfAcquiredIntangibleAssets",
+        "diversity": 1.0,
+        "industry": "Semiconductors",
+        "reconstruction": 0.6241,
+        "sic": "3674",
+        "weighted_score": 0.6819
+      },
+      {
+        "anomaly": 0.5227,
+        "cik": "1125376",
+        "company": "ENSIGN GROUP, INC",
+        "composite": 0.7319,
+        "concept": "AssetsHeldForSaleNotPartOfDisposalGroupCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.628,
+        "sic": "8051",
+        "weighted_score": 0.6789
+      },
+      {
+        "anomaly": 0.4776,
+        "cik": "917273",
+        "company": "RAMBUS INC",
+        "composite": 0.7398,
+        "concept": "AssetsHeldForSaleNotPartOfDisposalGroupCurrent",
+        "diversity": 1.0,
+        "industry": "Semiconductors",
+        "reconstruction": 0.676,
+        "sic": "3674",
+        "weighted_score": 0.6776
+      },
+      {
+        "anomaly": 0.4303,
+        "cik": "1341766",
+        "company": "Celsius Holdings, Inc.",
+        "composite": 0.7472,
+        "concept": "BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCashAndEquivalents",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.724,
+        "sic": "2086",
+        "weighted_score": 0.6755
+      }
+    ],
+    "total_hits": 51
+  },
+  "resilient_balance_sheet": {
+    "description": "Equity-side accounts that are structurally coherent with peers \u2014 strong retained earnings + stable equity = balance-sheet resilience.",
+    "direction": "high",
+    "probe": "resilient_balance_sheet",
+    "top_companies": [
+      [
+        "Autodesk, Inc.",
+        3
+      ],
+      [
+        "MUELLER INDUSTRIES INC",
+        2
+      ],
+      [
+        "MODINE MANUFACTURING CO",
+        2
+      ],
+      [
+        "BORGWARNER INC",
+        2
+      ],
+      [
+        "EBAY INC",
+        2
+      ],
+      [
+        "COMCAST CORP",
+        2
+      ],
+      [
+        "Ally Financial Inc.",
+        2
+      ],
+      [
+        "Rivian Automotive, Inc. / DE",
+        2
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        105
+      ],
+      [
+        "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        33
+      ],
+      [
+        "AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax",
+        7
+      ],
+      [
+        "CommonStockValue",
+        4
+      ],
+      [
+        "AccumulatedOtherComprehensiveIncomeLossDefinedBenefitPensionAndOtherPostretirementPlansNetOfTax",
+        3
+      ],
+      [
+        "AccumulatedOtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax",
+        3
+      ],
+      [
+        "AccumulatedOtherComprehensiveIncomeLossBeforeTax1",
+        1
+      ],
+      [
+        "StockholdersEquity",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "Business Services NEC",
+        9
+      ],
+      [
+        "REITs",
+        8
+      ],
+      [
+        "Prepackaged Software",
+        6
+      ],
+      [
+        "Motor Vehicles",
+        5
+      ],
+      [
+        "Pharmaceutical Preparations",
+        5
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.3431,
+        "cik": "89439",
+        "company": "MUELLER INDUSTRIES INC",
+        "composite": 0.7241,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossDefinedBenefitPensionAndOtherPostretirementPlansNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7209,
+        "sic": "3350",
+        "weighted_score": 0.4953
+      },
+      {
+        "anomaly": 0.4064,
+        "cik": "1174922",
+        "company": "WYNN RESORTS LTD",
+        "composite": 0.7487,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7427,
+        "sic": "7011",
+        "weighted_score": 0.4831
+      },
+      {
+        "anomaly": 0.3311,
+        "cik": "8670",
+        "company": "AUTOMATIC DATA PROCESSING INC",
+        "composite": 0.7088,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.69,
+        "sic": "7374",
+        "weighted_score": 0.4816
+      },
+      {
+        "anomaly": 0.334,
+        "cik": "89800",
+        "company": "SHERWIN WILLIAMS CO",
+        "composite": 0.7054,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6797,
+        "sic": "5200",
+        "weighted_score": 0.4742
+      },
+      {
+        "anomaly": 0.335,
+        "cik": "939767",
+        "company": "EXELIXIS, INC.",
+        "composite": 0.7032,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "diversity": 1.0,
+        "industry": "Biological Products",
+        "reconstruction": 0.6736,
+        "sic": "2836",
+        "weighted_score": 0.4702
+      },
+      {
+        "anomaly": 0.3419,
+        "cik": "109563",
+        "company": "APPLIED INDUSTRIAL TECHNOLOGIES INC",
+        "composite": 0.7066,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossDefinedBenefitPensionAndOtherPostretirementPlansNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6778,
+        "sic": "5080",
+        "weighted_score": 0.4699
+      },
+      {
+        "anomaly": 0.3426,
+        "cik": "67347",
+        "company": "MODINE MANUFACTURING CO",
+        "composite": 0.7038,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6703,
+        "sic": "3714",
+        "weighted_score": 0.4651
+      },
+      {
+        "anomaly": 0.3727,
+        "cik": "1276187",
+        "company": "Energy Transfer LP",
+        "composite": 0.7091,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6647,
+        "sic": "4922",
+        "weighted_score": 0.4497
+      },
+      {
+        "anomaly": 0.3874,
+        "cik": "1070423",
+        "company": "PLAINS ALL AMERICAN PIPELINE LP",
+        "composite": 0.715,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6705,
+        "sic": "4610",
+        "weighted_score": 0.4473
+      },
+      {
+        "anomaly": 0.4414,
+        "cik": "2041610",
+        "company": "Paramount Skydance Corp",
+        "composite": 0.7428,
+        "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.706,
+        "sic": "4833",
+        "weighted_score": 0.447
+      }
+    ],
+    "total_hits": 157
+  },
+  "strong_revenue_signal": {
+    "description": "Revenue and sales line items with unusually high structural uniqueness \u2014 candidates for breakout revenue growth or unique business-model revenue patterns.",
+    "direction": "high",
+    "probe": "strong_revenue_signal",
+    "top_companies": [
+      [
+        "Samsara Inc.",
+        1
+      ],
+      [
+        "Crane Co",
+        1
+      ],
+      [
+        "Karman Holdings Inc.",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "ContractWithCustomerLiabilityCurrent",
+        2
+      ],
+      [
+        "ContractWithCustomerAssetReclassifiedToReceivable",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "7373",
+        1
+      ],
+      [
+        "3490",
+        1
+      ],
+      [
+        "3728",
+        1
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.4805,
+        "cik": "1642896",
+        "company": "Samsara Inc.",
+        "composite": 0.7433,
+        "concept": "ContractWithCustomerLiabilityCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.683,
+        "sic": "7373",
+        "weighted_score": 0.7376
+      },
+      {
+        "anomaly": 0.4916,
+        "cik": "1944013",
+        "company": "Crane Co",
+        "composite": 0.7167,
+        "concept": "ContractWithCustomerLiabilityCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6095,
+        "sic": "3490",
+        "weighted_score": 0.7031
+      },
+      {
+        "anomaly": 0.3919,
+        "cik": "2040127",
+        "company": "Karman Holdings Inc.",
+        "composite": 0.7065,
+        "concept": "ContractWithCustomerAssetReclassifiedToReceivable",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6464,
+        "sic": "3728",
+        "weighted_score": 0.7016
+      }
+    ],
+    "total_hits": 3
+  },
+  "tax_complexity": {
+    "description": "Deferred-tax, uncertain-tax-position, and tax-benefit items showing structural complexity \u2014 candidates for tax-audit exposure.",
+    "direction": "high",
+    "probe": "tax_complexity",
+    "top_companies": [
+      [
+        "MASIMO CORP",
+        2
+      ],
+      [
+        "Circle Internet Group, Inc.",
+        1
+      ],
+      [
+        "SouthState Bank Corp",
+        1
+      ],
+      [
+        "CBRE GROUP, INC.",
+        1
+      ],
+      [
+        "AECOM",
+        1
+      ],
+      [
+        "TechnipFMC plc",
+        1
+      ],
+      [
+        "BANK OF AMERICA CORP /DE/",
+        1
+      ],
+      [
+        "ASSURANT, INC.",
+        1
+      ]
+    ],
+    "top_concepts": [
+      [
+        "AccruedIncomeTaxesCurrent",
+        49
+      ],
+      [
+        "AccruedIncomeTaxesNoncurrent",
+        7
+      ],
+      [
+        "AffordableHousingTaxCreditsAndOtherTaxBenefitsAmount",
+        6
+      ],
+      [
+        "AccruedIncomeTaxesPayable",
+        2
+      ],
+      [
+        "AccruedIncomeTaxes",
+        1
+      ]
+    ],
+    "top_industries": [
+      [
+        "State Commercial Banks (National)",
+        3
+      ],
+      [
+        "Prepackaged Software",
+        3
+      ],
+      [
+        "Finance Services",
+        2
+      ],
+      [
+        "Electromedical Apparatus",
+        2
+      ],
+      [
+        "Semiconductors",
+        2
+      ]
+    ],
+    "top_k": [
+      {
+        "anomaly": 0.5351,
+        "cik": "1876042",
+        "company": "Circle Internet Group, Inc.",
+        "composite": 0.8183,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": "Finance Services",
+        "reconstruction": 0.8363,
+        "sic": "6199",
+        "weighted_score": 0.7567
+      },
+      {
+        "anomaly": 0.6992,
+        "cik": "764038",
+        "company": "SouthState Bank Corp",
+        "composite": 0.7808,
+        "concept": "AffordableHousingTaxCreditsAndOtherTaxBenefitsAmount",
+        "diversity": 1.0,
+        "industry": "State Commercial Banks (National)",
+        "reconstruction": 0.64,
+        "sic": "6022",
+        "weighted_score": 0.7537
+      },
+      {
+        "anomaly": 0.7341,
+        "cik": "1138118",
+        "company": "CBRE GROUP, INC.",
+        "composite": 0.7666,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5827,
+        "sic": "6500",
+        "weighted_score": 0.7476
+      },
+      {
+        "anomaly": 0.6145,
+        "cik": "868857",
+        "company": "AECOM",
+        "composite": 0.7675,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.6597,
+        "sic": "8711",
+        "weighted_score": 0.7267
+      },
+      {
+        "anomaly": 0.6728,
+        "cik": "1681459",
+        "company": "TechnipFMC plc",
+        "composite": 0.7484,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5754,
+        "sic": "3533",
+        "weighted_score": 0.7205
+      },
+      {
+        "anomaly": 0.5724,
+        "cik": "937556",
+        "company": "MASIMO CORP",
+        "composite": 0.7684,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": "Electromedical Apparatus",
+        "reconstruction": 0.6884,
+        "sic": "3845",
+        "weighted_score": 0.7199
+      },
+      {
+        "anomaly": 0.5062,
+        "cik": "70858",
+        "company": "BANK OF AMERICA CORP /DE/",
+        "composite": 0.7813,
+        "concept": "AffordableHousingTaxCreditsAndOtherTaxBenefitsAmount",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7618,
+        "sic": "6021",
+        "weighted_score": 0.7191
+      },
+      {
+        "anomaly": 0.4895,
+        "cik": "1267238",
+        "company": "ASSURANT, INC.",
+        "composite": 0.7706,
+        "concept": "AccruedIncomeTaxesPayable",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.7456,
+        "sic": "6399",
+        "weighted_score": 0.7068
+      },
+      {
+        "anomaly": 0.6239,
+        "cik": "85535",
+        "company": "ROYAL GOLD INC",
+        "composite": 0.739,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": null,
+        "reconstruction": 0.5825,
+        "sic": "6795",
+        "weighted_score": 0.7034
+      },
+      {
+        "anomaly": 0.5404,
+        "cik": "1097864",
+        "company": "ON SEMICONDUCTOR CORP",
+        "composite": 0.7553,
+        "concept": "AccruedIncomeTaxesCurrent",
+        "diversity": 1.0,
+        "industry": "Semiconductors",
+        "reconstruction": 0.6756,
+        "sic": "3674",
+        "weighted_score": 0.7026
+      }
+    ],
+    "total_hits": 65
+  }
+}
