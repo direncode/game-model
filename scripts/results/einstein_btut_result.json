@@ -1,0 +1,291 @@
+{
+  "embed_context": {
+    "embedder_seed": 42,
+    "embedding_dim": 32,
+    "numeric_keys": [],
+    "numeric_means": [
+      0.0
+    ],
+    "numeric_stds": [
+      9.99999993922529e-09
+    ],
+    "projection_seed": 42,
+    "type_vocab": {
+      "concept": 0,
+      "event": 1,
+      "location": 2
+    }
+  },
+  "embeddings_8d": [
+    -0.06091983616352081,
+    -0.19129391014575958,
+    0.6558641195297241,
+    0.27030879259109497,
+    -0.31315547227859497,
+    -0.23116005957126617,
+    0.4528367519378662,
+    0.31608277559280396,
+    0.22701038420200348,
+    0.12829384207725525,
+    -0.35280436277389526,
+    0.20176246762275696,
+    0.2599771320819855,
+    0.08474108576774597,
+    0.7757555246353149,
+    0.3004366457462311,
+    0.24429574608802795,
+    0.24091315269470215,
+    -0.3541047275066376,
+    0.5275406837463379,
+    0.04233723133802414,
+    0.1926073580980301,
+    0.6291482448577881,
+    0.20945991575717926,
+    -0.4765970706939697,
+    0.0789497122168541,
+    -0.059889085590839386,
+    -0.2959873378276825,
+    -0.4763624370098114,
+    -0.45811235904693604,
+    -0.38595059514045715,
+    -0.2994678020477295,
+    -0.23880307376384735,
+    0.4349258542060852,
+    -0.3752579092979431,
+    -0.13535115122795105,
+    -0.13684476912021637,
+    -0.33721923828125,
+    -0.5932444930076599,
+    -0.33210211992263794,
+    0.11483269929885864,
+    0.3104977309703827,
+    0.12656621634960175,
+    0.15460820496082306,
+    0.06572239845991135,
+    -0.4372963607311249,
+    -0.8044970631599426,
+    0.08785755187273026,
+    -0.7407916784286499,
+    0.09895483404397964,
+    0.12612083554267883,
+    -0.036407917737960815,
+    -0.22869546711444855,
+    0.004086690489202738,
+    -0.01182281132787466,
+    -0.6097093224525452,
+    -0.1742570549249649,
+    0.17693404853343964,
+    0.19122526049613953,
+    -0.7478271126747131,
+    0.019716894254088402,
+    0.2246609777212143,
+    0.3376310169696808,
+    0.4214976727962494,
+    0.10388872772455215,
+    0.20536230504512787,
+    -0.5137080550193787,
+    -0.3062664270401001,
+    0.606665849685669,
+    0.15011027455329895,
+    -0.24957987666130066,
+    -0.36942073702812195
+  ],
+  "summary": {
+    "clusters": 1,
+    "reconstruction": {
+      "coverages": {
+        "0.5": 0.2642,
+        "1.0": 0.9623,
+        "1.5": 1.0,
+        "2.0": 1.0
+      },
+      "mean_nn": 0.5522,
+      "median_nn": 0.6268,
+      "p95_nn": 0.8795,
+      "variance_preservation": 1.2668
+    },
+    "reduction": 5,
+    "survivor_types": {
+      "concept": 3,
+      "event": 3,
+      "location": 3
+    },
+    "survivors": 9,
+    "total_entities": 53,
+    "unique_48bit_fingerprints": 4,
+    "wall_seconds": 0.0
+  },
+  "survivors": [
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "quantum_statistical"
+        },
+        "name": "einstein_quantum_statistical__concept__light_quanta",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111011",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.555,
+        "composite": 0.7424,
+        "diversity": 1.0,
+        "reconstruction": 0.6342
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "relativity"
+        },
+        "name": "einstein_relativity__concept__gravitational_time_dilation",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.407,
+        "diversity": 0.02,
+        "reconstruction": 0.3751
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "unified_field"
+        },
+        "name": "einstein_unified_field__concept__unified_field_theory",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.9181,
+        "composite": 0.405,
+        "diversity": 0.02,
+        "reconstruction": 0.4212
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "unified_field"
+        },
+        "name": "einstein_unified_field__event__last_manuscripts_princeton_1955",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11110011",
+      "flips": 6,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.9981,
+        "diversity": 1.0,
+        "reconstruction": 0.9953
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "unified_field"
+        },
+        "name": "einstein_unified_field__event__bianchi_identity_obsession",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11110111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.4121,
+        "composite": 0.8189,
+        "diversity": 1.0,
+        "reconstruction": 0.9147
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "quantum_statistical"
+        },
+        "name": "einstein_quantum_statistical__event__nobel_prize_1921_photoelectric",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.6246,
+        "composite": 0.5437,
+        "diversity": 0.02,
+        "reconstruction": 0.9515
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "relativity"
+        },
+        "name": "einstein_relativity__location__bern_patent_office",
+        "type": "location"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.6445,
+        "diversity": 0.02,
+        "reconstruction": 0.9688
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "modern",
+          "subcorpus": "modern_cosmology"
+        },
+        "name": "modern_cosmology__location__ligo_hanford",
+        "type": "location"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.6559,
+        "composite": 0.5096,
+        "diversity": 0.02,
+        "reconstruction": 0.8466
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "unified_field"
+        },
+        "name": "einstein_unified_field__location__princeton_institute_late_office",
+        "type": "location"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.6573,
+        "composite": 0.4891,
+        "diversity": 0.02,
+        "reconstruction": 0.7943
+      }
+    }
+  ]
+}

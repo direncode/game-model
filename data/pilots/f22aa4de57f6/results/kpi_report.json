@@ -1,0 +1,17 @@
+{
+  "analyze_wall_seconds": 0.118,
+  "confirmed_paradigms": [],
+  "cost_per_1000_survivors_usd": 0.0,
+  "estimated_cost_usd": 0.0,
+  "org_name": "Acme Hedge Fund LP",
+  "survivors_processed": 4999,
+  "tenant_id": "f22aa4de57f6",
+  "throughput_survivors_per_second": 42364.4,
+  "top_convergence_findings": 20,
+  "validation": {
+    "elapsed_seconds": 0.147,
+    "n_iterations": 30,
+    "significant_metrics": 0,
+    "total_metrics": 11
+  }
+}

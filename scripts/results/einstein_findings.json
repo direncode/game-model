@@ -1,0 +1,229 @@
+{
+  "cluster_count": 1,
+  "convergence_index": [
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_relativity__concept__gravitational_time_dilation",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.6088,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 0.875,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_unified_field__event__last_manuscripts_princeton_1955",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5775,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 0.75,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_relativity__location__bern_patent_office",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5633,
+      "dimensions": {
+        "anomaly": 0.6559,
+        "cluster_percentile": 0.375,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "modern_cosmology__location__ligo_hanford",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5176,
+      "dimensions": {
+        "anomaly": 0.9181,
+        "cluster_percentile": 0.625,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_unified_field__concept__unified_field_theory",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.3951,
+      "dimensions": {
+        "anomaly": 0.6573,
+        "cluster_percentile": 0.5,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_unified_field__location__princeton_institute_late_office",
+      "type": "location"
+    },
+    {
+      "convergence": 0.3211,
+      "dimensions": {
+        "anomaly": 0.6246,
+        "cluster_percentile": 0.25,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_quantum_statistical__event__nobel_prize_1921_photoelectric",
+      "type": "event"
+    },
+    {
+      "convergence": 0.2655,
+      "dimensions": {
+        "anomaly": 0.555,
+        "cluster_percentile": 0.125,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_quantum_statistical__concept__light_quanta",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.1842,
+      "dimensions": {
+        "anomaly": 0.4121,
+        "cluster_percentile": 0.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "einstein_unified_field__event__bianchi_identity_obsession",
+      "type": "event"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 0,
+      "dominant_paradigm": "einstein_relativity",
+      "dominant_paradigm_share": 2,
+      "hot_count": 4,
+      "hot_fraction": 0.444,
+      "total": 9
+    }
+  ],
+  "corpus_id": "einstein",
+  "cross_era_anchors": [
+    {
+      "anomaly": 0.6559,
+      "cluster": 0,
+      "cluster_majority_count": 8,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 9,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_cosmology__location__ligo_hanford",
+      "subcorpus": "cosmology"
+    }
+  ],
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "einstein",
+        "count": 4,
+        "role": "forgotten",
+        "subcorpus": "unified_field"
+      },
+      {
+        "corpus": "einstein",
+        "count": 2,
+        "role": "mainstream",
+        "subcorpus": "quantum_statistical"
+      },
+      {
+        "corpus": "einstein",
+        "count": 2,
+        "role": "mainstream",
+        "subcorpus": "relativity"
+      },
+      {
+        "corpus": "modern",
+        "count": 1,
+        "role": "other",
+        "subcorpus": "cosmology"
+      }
+    ],
+    "hypothesis_by_corpus": {
+      "einstein": {
+        "confirmed": false,
+        "control": 0,
+        "forgotten": 4,
+        "mainstream": 4,
+        "ratio_forgotten_to_competitors": 1.0,
+        "sample_size": 8,
+        "sample_size_warning": true
+      }
+    },
+    "role_counts": {
+      "forgotten": 4,
+      "mainstream": 4,
+      "other": 1
+    }
+  },
+  "survivor_count": 9,
+  "within_cluster_rank": {
+    "einstein_quantum_statistical__concept__light_quanta": {
+      "cluster": 0,
+      "percentile": 0.125,
+      "rank": 8,
+      "total_in_cluster": 9
+    },
+    "einstein_quantum_statistical__event__nobel_prize_1921_photoelectric": {
+      "cluster": 0,
+      "percentile": 0.25,
+      "rank": 7,
+      "total_in_cluster": 9
+    },
+    "einstein_relativity__concept__gravitational_time_dilation": {
+      "cluster": 0,
+      "percentile": 1.0,
+      "rank": 1,
+      "total_in_cluster": 9
+    },
+    "einstein_relativity__location__bern_patent_office": {
+      "cluster": 0,
+      "percentile": 0.75,
+      "rank": 3,
+      "total_in_cluster": 9
+    },
+    "einstein_unified_field__concept__unified_field_theory": {
+      "cluster": 0,
+      "percentile": 0.625,
+      "rank": 4,
+      "total_in_cluster": 9
+    },
+    "einstein_unified_field__event__bianchi_identity_obsession": {
+      "cluster": 0,
+      "percentile": 0.0,
+      "rank": 9,
+      "total_in_cluster": 9
+    },
+    "einstein_unified_field__event__last_manuscripts_princeton_1955": {
+      "cluster": 0,
+      "percentile": 0.875,
+      "rank": 2,
+      "total_in_cluster": 9
+    },
+    "einstein_unified_field__location__princeton_institute_late_office": {
+      "cluster": 0,
+      "percentile": 0.5,
+      "rank": 5,
+      "total_in_cluster": 9
+    },
+    "modern_cosmology__location__ligo_hanford": {
+      "cluster": 0,
+      "percentile": 0.375,
+      "rank": 6,
+      "total_in_cluster": 9
+    }
+  }
+}

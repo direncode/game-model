@@ -1,0 +1,159 @@
+{
+  "cv_mean_ap": 0.0944,
+  "cv_mean_auc": 0.5867,
+  "cv_prec_at_10": 0.04,
+  "cv_rec_at_10": 0.3,
+  "cv_std_auc": 0.2528,
+  "ground_truth_source": "SEC form filings (10-K/A, 10-Q/A, NT 10-K, NT 10-Q)",
+  "negative_in_btut": 225,
+  "null_auc_mean": 0.5212,
+  "null_auc_p95": 0.7383,
+  "null_auc_p99": 0.8047,
+  "positive_class_count": 26,
+  "positive_in_btut": 6,
+  "significant_at_0_01": false,
+  "significant_at_0_05": false,
+  "top_20_predictions": [
+    {
+      "actual_label": 0,
+      "cik": "1097149",
+      "company": "ALIGN TECHNOLOGY INC",
+      "distress_forms": [],
+      "probability": 0.7933
+    },
+    {
+      "actual_label": 0,
+      "cik": "352541",
+      "company": "ALLIANT ENERGY CORP",
+      "distress_forms": [],
+      "probability": 0.7456
+    },
+    {
+      "actual_label": 0,
+      "cik": "35527",
+      "company": "FIFTH THIRD BANCORP",
+      "distress_forms": [],
+      "probability": 0.7456
+    },
+    {
+      "actual_label": 0,
+      "cik": "310158",
+      "company": "Merck & Co., Inc.",
+      "distress_forms": [],
+      "probability": 0.7284
+    },
+    {
+      "actual_label": 0,
+      "cik": "56873",
+      "company": "KROGER CO",
+      "distress_forms": [],
+      "probability": 0.726
+    },
+    {
+      "actual_label": 0,
+      "cik": "34903",
+      "company": "FEDERAL REALTY INVESTMENT TRUST",
+      "distress_forms": [],
+      "probability": 0.7218
+    },
+    {
+      "actual_label": 0,
+      "cik": "1071739",
+      "company": "CENTENE CORP",
+      "distress_forms": [],
+      "probability": 0.7213
+    },
+    {
+      "actual_label": 0,
+      "cik": "1441816",
+      "company": "MongoDB, Inc.",
+      "distress_forms": [],
+      "probability": 0.6849
+    },
+    {
+      "actual_label": 0,
+      "cik": "766704",
+      "company": "WELLTOWER INC.",
+      "distress_forms": [],
+      "probability": 0.6739
+    },
+    {
+      "actual_label": 0,
+      "cik": "1527166",
+      "company": "Carlyle Group Inc.",
+      "distress_forms": [],
+      "probability": 0.6721
+    },
+    {
+      "actual_label": 0,
+      "cik": "874716",
+      "company": "IDEXX LABORATORIES INC /DE",
+      "distress_forms": [],
+      "probability": 0.665
+    },
+    {
+      "actual_label": 0,
+      "cik": "1474432",
+      "company": "Everpure, Inc.",
+      "distress_forms": [],
+      "probability": 0.662
+    },
+    {
+      "actual_label": 0,
+      "cik": "1588489",
+      "company": "Grayscale Bitcoin Trust ETF",
+      "distress_forms": [],
+      "probability": 0.6581
+    },
+    {
+      "actual_label": 0,
+      "cik": "1383650",
+      "company": "Cheniere Energy Partners, L.P.",
+      "distress_forms": [],
+      "probability": 0.6514
+    },
+    {
+      "actual_label": 0,
+      "cik": "1067983",
+      "company": "BERKSHIRE HATHAWAY INC",
+      "distress_forms": [],
+      "probability": 0.6256
+    },
+    {
+      "actual_label": 0,
+      "cik": "1823945",
+      "company": "BLUE OWL CAPITAL INC.",
+      "distress_forms": [],
+      "probability": 0.6127
+    },
+    {
+      "actual_label": 0,
+      "cik": "1043219",
+      "company": "ANNALY CAPITAL MANAGEMENT INC",
+      "distress_forms": [],
+      "probability": 0.6116
+    },
+    {
+      "actual_label": 0,
+      "cik": "1049502",
+      "company": "MKS INC",
+      "distress_forms": [],
+      "probability": 0.6084
+    },
+    {
+      "actual_label": 0,
+      "cik": "898173",
+      "company": "O REILLY AUTOMOTIVE INC",
+      "distress_forms": [],
+      "probability": 0.6081
+    },
+    {
+      "actual_label": 0,
+      "cik": "1034054",
+      "company": "SBA COMMUNICATIONS CORP",
+      "distress_forms": [],
+      "probability": 0.6072
+    }
+  ],
+  "total_labeled": 231
+}

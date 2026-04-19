@@ -1,0 +1,121 @@
+{
+  "holdout": null,
+  "n_iterations": 30,
+  "notes": [
+    "Null N=30 iterations. Strong null: cross-legend fp shuffle + within-legend survivor shuffle + role-label shuffle.",
+    "Significance: true metric outside null's 95th percentile (one-sided, alpha=0.05)."
+  ],
+  "null_tests": [
+    {
+      "metric": "pairwise_bridges",
+      "null_mean": 1,
+      "null_p05": 1.0,
+      "null_p95": 1.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "triple_bridges",
+      "null_mean": 0,
+      "null_p05": 0.0,
+      "null_p95": 0.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "top_bridge_weighted",
+      "null_mean": 11.1569,
+      "null_p05": 8.6562,
+      "null_p95": 14.427,
+      "null_proportion_true": null,
+      "null_std": 1.6315,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "frac_legend_pairs_with_bridge",
+      "null_mean": 1.0,
+      "null_p05": 1.0,
+      "null_p95": 1.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "focus_hypothesis_newton",
+      "null_mean": null,
+      "null_p05": null,
+      "null_p95": null,
+      "null_proportion_true": 0.0,
+      "null_std": null,
+      "significant_at_0_05": false,
+      "true_value": false
+    },
+    {
+      "metric": "focus_hypothesis_leonardo",
+      "null_mean": null,
+      "null_p05": null,
+      "null_p95": null,
+      "null_proportion_true": 0.0,
+      "null_std": null,
+      "significant_at_0_05": false,
+      "true_value": false
+    },
+    {
+      "metric": "focus_hypothesis_vn",
+      "null_mean": null,
+      "null_p05": null,
+      "null_p95": null,
+      "null_proportion_true": 0.0,
+      "null_std": null,
+      "significant_at_0_05": false,
+      "true_value": false
+    },
+    {
+      "metric": "focus_top_convergent_cluster_hot_count",
+      "null_mean": 4,
+      "null_p05": 4.0,
+      "null_p95": 4.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 4.0
+    },
+    {
+      "metric": "focus_n_cross_era_anchors",
+      "null_mean": 0,
+      "null_p05": 0.0,
+      "null_p95": 0.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "dense_fingerprints_dropped",
+      "null_mean": 0,
+      "null_p05": 0.0,
+      "null_p95": 0.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 0.0
+    },
+    {
+      "metric": "unique_fingerprints_total",
+      "null_mean": 525,
+      "null_p05": 525.0,
+      "null_p95": 525.0,
+      "null_proportion_true": null,
+      "null_std": 0.0,
+      "significant_at_0_05": false,
+      "true_value": 525.0
+    }
+  ],
+  "seed": 42
+}
