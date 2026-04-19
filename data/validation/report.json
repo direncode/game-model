@@ -1,0 +1,154 @@
+{
+  "holdout_split": {
+    "bridges_involving_heldout": 23,
+    "full_dense_dropped": 51,
+    "full_pairwise_bridges": 43,
+    "held_out_legends": [
+      "polymath",
+      "tesla",
+      "heterogeneous"
+    ],
+    "top_heldout_bridge": {
+      "a": "heterogeneous",
+      "b": "latk_mini",
+      "weighted_score": 7.2135
+    },
+    "train_dense_dropped": 21,
+    "train_legend_count": 8,
+    "train_pairwise_bridges": 23
+  },
+  "notes": [
+    "Null permutation shuffles (name -> fingerprint) within each legend and randomizes which name gets which cluster + anomaly scores. Preserves distributions; destroys entity-level assignment.",
+    "Significance threshold: true metric outside null's 95th percentile (one-sided test at alpha=0.05).",
+    "Hold-out split derives density threshold from 8 legends and applies to the full 11 to test generalization."
+  ],
+  "null_permutation": {
+    "n_iterations": 30,
+    "null_comparison": {
+      "dense_fingerprints_dropped": {
+        "null_max": 80,
+        "null_mean": 75.9,
+        "null_min": 72,
+        "null_p05": 73.0,
+        "null_p95": 79.55,
+        "null_std": 2.1502,
+        "significant_at_0_05": true,
+        "true": 51.0
+      },
+      "frac_legend_pairs_with_bridge": {
+        "null_max": 0.9636,
+        "null_mean": 0.917,
+        "null_min": 0.8545,
+        "null_p05": 0.8627,
+        "null_p95": 0.9636,
+        "null_std": 0.0314,
+        "significant_at_0_05": false,
+        "true": 0.7818
+      },
+      "pairwise_bridges": {
+        "null_max": 53,
+        "null_mean": 50.4333,
+        "null_min": 47,
+        "null_p05": 47.45,
+        "null_p95": 53.0,
+        "null_std": 1.7259,
+        "significant_at_0_05": false,
+        "true": 43.0
+      },
+      "polymath_hypothesis_leonardo": {
+        "null_max": 1,
+        "null_mean": 0.6333,
+        "null_min": 0,
+        "null_p05": 0.0,
+        "null_p95": 1.0,
+        "null_std": 0.4819,
+        "significant_at_0_05": false,
+        "true": 1.0
+      },
+      "polymath_hypothesis_newton": {
+        "null_max": 1,
+        "null_mean": 0.5,
+        "null_min": 0,
+        "null_p05": 0.0,
+        "null_p95": 1.0,
+        "null_std": 0.5,
+        "significant_at_0_05": false,
+        "true": 1.0
+      },
+      "polymath_hypothesis_vn": {
+        "null_max": 0,
+        "null_mean": 0,
+        "null_min": 0,
+        "null_p05": 0.0,
+        "null_p95": 0.0,
+        "null_std": 0.0,
+        "significant_at_0_05": false,
+        "true": 0.0
+      },
+      "polymath_n_cross_era_anchors": {
+        "null_max": 4,
+        "null_mean": 2.0333,
+        "null_min": 0,
+        "null_p05": 1.0,
+        "null_p95": 4.0,
+        "null_std": 1.016,
+        "significant_at_0_05": false,
+        "true": 3.0
+      },
+      "polymath_top_convergent_cluster_hot_count": {
+        "null_max": 3,
+        "null_mean": 3,
+        "null_min": 3,
+        "null_p05": 3.0,
+        "null_p95": 3.0,
+        "null_std": 0.0,
+        "significant_at_0_05": false,
+        "true": 3.0
+      },
+      "top_bridge_weighted": {
+        "null_max": 6.4921,
+        "null_mean": 4.809,
+        "null_min": 3.6067,
+        "null_p05": 4.3281,
+        "null_p95": 5.7708,
+        "null_std": 0.627,
+        "significant_at_0_05": true,
+        "true": 7.2135
+      },
+      "triple_bridges": {
+        "null_max": 0,
+        "null_mean": 0,
+        "null_min": 0,
+        "null_p05": 0.0,
+        "null_p95": 0.0,
+        "null_std": 0.0,
+        "significant_at_0_05": false,
+        "true": 0.0
+      },
+      "unique_fingerprints_total": {
+        "null_max": 1953,
+        "null_mean": 1953,
+        "null_min": 1953,
+        "null_p05": 1953.0,
+        "null_p95": 1953.0,
+        "null_std": 0.0,
+        "significant_at_0_05": false,
+        "true": 1953.0
+      }
+    },
+    "seed": 42,
+    "true_metrics": {
+      "dense_fingerprints_dropped": 51,
+      "frac_legend_pairs_with_bridge": 0.7818,
+      "pairwise_bridges": 43,
+      "polymath_hypothesis_leonardo": true,
+      "polymath_hypothesis_newton": true,
+      "polymath_hypothesis_vn": false,
+      "polymath_n_cross_era_anchors": 3,
+      "polymath_top_convergent_cluster_hot_count": 3,
+      "top_bridge_weighted": 7.2135,
+      "triple_bridges": 0,
+      "unique_fingerprints_total": 1953
+    }
+  }
+}
