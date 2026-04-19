@@ -1,0 +1,422 @@
+{
+  "cluster_count": 3,
+  "convergence_index": [
+    {
+      "convergence": 0.8075,
+      "dimensions": {
+        "anomaly": 0.9072,
+        "cluster_percentile": 1.0,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "modern_complexity__location__clay_mathematics_institute",
+      "type": "location"
+    },
+    {
+      "convergence": 0.64,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_cryptanalysis__concept__banburismus",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.6355,
+      "dimensions": {
+        "anomaly": 0.987,
+        "cluster_percentile": 1.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__location__manchester_chemistry_department",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5983,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 0.8333,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__event__turing_studies_fibonacci_plants",
+      "type": "event"
+    },
+    {
+      "convergence": 0.5567,
+      "dimensions": {
+        "anomaly": 1.0,
+        "cluster_percentile": 0.6667,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_computability__location__kings_college_cambridge",
+      "type": "location"
+    },
+    {
+      "convergence": 0.5393,
+      "dimensions": {
+        "anomaly": 0.8314,
+        "cluster_percentile": 0.8333,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__location__cambridge_plant_lab",
+      "type": "location"
+    },
+    {
+      "convergence": 0.4568,
+      "dimensions": {
+        "anomaly": 0.7147,
+        "cluster_percentile": 0.6667,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_computability__location__princeton_university",
+      "type": "location"
+    },
+    {
+      "convergence": 0.4529,
+      "dimensions": {
+        "anomaly": 0.8227,
+        "cluster_percentile": 0.5,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__event__morphogenesis_paper_published",
+      "type": "event"
+    },
+    {
+      "convergence": 0.4417,
+      "dimensions": {
+        "anomaly": 0.6715,
+        "cluster_percentile": 0.6667,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_computability__event__on_computable_numbers_published_1936",
+      "type": "event"
+    },
+    {
+      "convergence": 0.3996,
+      "dimensions": {
+        "anomaly": 0.6702,
+        "cluster_percentile": 0.5,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_cryptanalysis__event__battle_of_atlantic_signals_decoded",
+      "type": "event"
+    },
+    {
+      "convergence": 0.3967,
+      "dimensions": {
+        "anomaly": 0.3285,
+        "cluster_percentile": 0.1667,
+        "cross_era": 1.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "modern_morphogenesis__concept__gene_regulatory_network",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.353,
+      "dimensions": {
+        "anomaly": 0.6561,
+        "cluster_percentile": 0.3333,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_cryptanalysis__event__enigma_cracked_1940",
+      "type": "event"
+    },
+    {
+      "convergence": 0.2907,
+      "dimensions": {
+        "anomaly": 0.4782,
+        "cluster_percentile": 0.3333,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_cryptanalysis__location__hut_8",
+      "type": "location"
+    },
+    {
+      "convergence": 0.241,
+      "dimensions": {
+        "anomaly": 0.3363,
+        "cluster_percentile": 0.3333,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__concept__chemical_basis_of_morphogenesis_1952",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.2176,
+      "dimensions": {
+        "anomaly": 0.3884,
+        "cluster_percentile": 0.1667,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_computability__concept__entscheidungsproblem_solved_1936",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.1528,
+      "dimensions": {
+        "anomaly": 0.3223,
+        "cluster_percentile": 0.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_morphogenesis__concept__biological_instability",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.1487,
+      "dimensions": {
+        "anomaly": 0.3105,
+        "cluster_percentile": 0.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_ai__concept__imitation_game",
+      "type": "concept"
+    },
+    {
+      "convergence": 0.1336,
+      "dimensions": {
+        "anomaly": 0.2673,
+        "cluster_percentile": 0.0,
+        "cross_era": 0.0,
+        "rare_fingerprint": 0.2
+      },
+      "name": "turing_cryptanalysis__concept__bombe_device",
+      "type": "concept"
+    }
+  ],
+  "convergent_clusters": [
+    {
+      "cluster": 0,
+      "dominant_paradigm": "turing_cryptanalysis",
+      "dominant_paradigm_share": 1,
+      "hot_count": 3,
+      "hot_fraction": 0.429,
+      "total": 7
+    },
+    {
+      "cluster": 2,
+      "dominant_paradigm": "turing_morphogenesis",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.25,
+      "total": 4
+    },
+    {
+      "cluster": 1,
+      "dominant_paradigm": "modern_complexity",
+      "dominant_paradigm_share": 1,
+      "hot_count": 1,
+      "hot_fraction": 0.143,
+      "total": 7
+    }
+  ],
+  "corpus_id": "turing",
+  "cross_era_anchors": [
+    {
+      "anomaly": 0.9072,
+      "cluster": 1,
+      "cluster_majority_count": 5,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 7,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_complexity__location__clay_mathematics_institute",
+      "subcorpus": "complexity"
+    },
+    {
+      "anomaly": 0.3285,
+      "cluster": 1,
+      "cluster_majority_count": 5,
+      "cluster_majority_era": "historical",
+      "cluster_size_named": 7,
+      "corpus": "modern",
+      "era_class": "modern",
+      "name": "modern_morphogenesis__concept__gene_regulatory_network",
+      "subcorpus": "morphogenesis"
+    }
+  ],
+  "paradigm_distribution": {
+    "by_corpus_subcorpus_role": [
+      {
+        "corpus": "turing",
+        "count": 6,
+        "role": "forgotten",
+        "subcorpus": "morphogenesis"
+      },
+      {
+        "corpus": "turing",
+        "count": 5,
+        "role": "control",
+        "subcorpus": "cryptanalysis"
+      },
+      {
+        "corpus": "turing",
+        "count": 4,
+        "role": "mainstream",
+        "subcorpus": "computability"
+      },
+      {
+        "corpus": "turing",
+        "count": 1,
+        "role": "mainstream",
+        "subcorpus": "ai"
+      },
+      {
+        "corpus": "modern",
+        "count": 1,
+        "role": "other",
+        "subcorpus": "morphogenesis"
+      },
+      {
+        "corpus": "modern",
+        "count": 1,
+        "role": "other",
+        "subcorpus": "complexity"
+      }
+    ],
+    "hypothesis_by_corpus": {
+      "turing": {
+        "confirmed": false,
+        "control": 5,
+        "forgotten": 6,
+        "mainstream": 5,
+        "ratio_forgotten_to_competitors": 0.6,
+        "sample_size": 16,
+        "sample_size_warning": false
+      }
+    },
+    "role_counts": {
+      "control": 5,
+      "forgotten": 6,
+      "mainstream": 5,
+      "other": 2
+    }
+  },
+  "survivor_count": 18,
+  "within_cluster_rank": {
+    "modern_complexity__location__clay_mathematics_institute": {
+      "cluster": 1,
+      "percentile": 1.0,
+      "rank": 1,
+      "total_in_cluster": 7
+    },
+    "modern_morphogenesis__concept__gene_regulatory_network": {
+      "cluster": 1,
+      "percentile": 0.1667,
+      "rank": 6,
+      "total_in_cluster": 7
+    },
+    "turing_ai__concept__imitation_game": {
+      "cluster": 0,
+      "percentile": 0.0,
+      "rank": 7,
+      "total_in_cluster": 7
+    },
+    "turing_computability__concept__entscheidungsproblem_solved_1936": {
+      "cluster": 0,
+      "percentile": 0.1667,
+      "rank": 6,
+      "total_in_cluster": 7
+    },
+    "turing_computability__event__on_computable_numbers_published_1936": {
+      "cluster": 2,
+      "percentile": 0.6667,
+      "rank": 2,
+      "total_in_cluster": 4
+    },
+    "turing_computability__location__kings_college_cambridge": {
+      "cluster": 0,
+      "percentile": 0.6667,
+      "rank": 3,
+      "total_in_cluster": 7
+    },
+    "turing_computability__location__princeton_university": {
+      "cluster": 1,
+      "percentile": 0.6667,
+      "rank": 3,
+      "total_in_cluster": 7
+    },
+    "turing_cryptanalysis__concept__banburismus": {
+      "cluster": 0,
+      "percentile": 1.0,
+      "rank": 1,
+      "total_in_cluster": 7
+    },
+    "turing_cryptanalysis__concept__bombe_device": {
+      "cluster": 2,
+      "percentile": 0.0,
+      "rank": 4,
+      "total_in_cluster": 4
+    },
+    "turing_cryptanalysis__event__battle_of_atlantic_signals_decoded": {
+      "cluster": 1,
+      "percentile": 0.5,
+      "rank": 4,
+      "total_in_cluster": 7
+    },
+    "turing_cryptanalysis__event__enigma_cracked_1940": {
+      "cluster": 0,
+      "percentile": 0.3333,
+      "rank": 5,
+      "total_in_cluster": 7
+    },
+    "turing_cryptanalysis__location__hut_8": {
+      "cluster": 2,
+      "percentile": 0.3333,
+      "rank": 3,
+      "total_in_cluster": 4
+    },
+    "turing_morphogenesis__concept__biological_instability": {
+      "cluster": 1,
+      "percentile": 0.0,
+      "rank": 7,
+      "total_in_cluster": 7
+    },
+    "turing_morphogenesis__concept__chemical_basis_of_morphogenesis_1952": {
+      "cluster": 1,
+      "percentile": 0.3333,
+      "rank": 5,
+      "total_in_cluster": 7
+    },
+    "turing_morphogenesis__event__morphogenesis_paper_published": {
+      "cluster": 0,
+      "percentile": 0.5,
+      "rank": 4,
+      "total_in_cluster": 7
+    },
+    "turing_morphogenesis__event__turing_studies_fibonacci_plants": {
+      "cluster": 0,
+      "percentile": 0.8333,
+      "rank": 2,
+      "total_in_cluster": 7
+    },
+    "turing_morphogenesis__location__cambridge_plant_lab": {
+      "cluster": 1,
+      "percentile": 0.8333,
+      "rank": 2,
+      "total_in_cluster": 7
+    },
+    "turing_morphogenesis__location__manchester_chemistry_department": {
+      "cluster": 2,
+      "percentile": 1.0,
+      "rank": 1,
+      "total_in_cluster": 4
+    }
+  }
+}

@@ -1,0 +1,534 @@
+{
+  "embed_context": {
+    "embedder_seed": 42,
+    "embedding_dim": 32,
+    "numeric_keys": [],
+    "numeric_means": [
+      0.0
+    ],
+    "numeric_stds": [
+      9.99999993922529e-09
+    ],
+    "projection_seed": 42,
+    "type_vocab": {
+      "concept": 0,
+      "event": 2,
+      "location": 1
+    }
+  },
+  "embeddings_8d": [
+    0.10389352589845657,
+    -0.4293624758720398,
+    0.27006080746650696,
+    0.6532511711120605,
+    -0.23273125290870667,
+    0.0634177103638649,
+    0.4290205240249634,
+    0.25087809562683105,
+    0.2069200724363327,
+    0.0320887491106987,
+    -0.34671446681022644,
+    0.6715471148490906,
+    0.15856851637363434,
+    0.1926395297050476,
+    0.5407829284667969,
+    0.17397649586200714,
+    0.11594803631305695,
+    0.29837653040885925,
+    -0.6206215620040894,
+    0.355467826128006,
+    0.4140982925891876,
+    0.2939040958881378,
+    0.3495436906814575,
+    -0.07720810174942017,
+    0.0638376846909523,
+    -0.13720262050628662,
+    0.41446036100387573,
+    0.43539997935295105,
+    -0.5585829019546509,
+    0.2712452709674835,
+    0.06734396517276764,
+    0.4750005304813385,
+    -0.01772756688296795,
+    -0.27995169162750244,
+    0.4165566861629486,
+    0.22888976335525513,
+    -0.44514909386634827,
+    -0.13285401463508606,
+    0.42395859956741333,
+    0.5475891828536987,
+    0.4219200909137726,
+    -0.10407902300357819,
+    0.2967585623264313,
+    0.44547247886657715,
+    -0.272074431180954,
+    0.2518347203731537,
+    -0.005030336789786816,
+    0.6222292184829712,
+    -0.19632869958877563,
+    -0.06477030366659164,
+    -0.3432236313819885,
+    0.22927901148796082,
+    0.06444229185581207,
+    0.04122025519609451,
+    0.853705883026123,
+    -0.2285231351852417,
+    -0.10907229036092758,
+    -0.2793969213962555,
+    0.19075708091259003,
+    -0.5314930081367493,
+    -0.2514549791812897,
+    0.22470572590827942,
+    0.01627269946038723,
+    0.6907824873924255,
+    0.20582589507102966,
+    -0.1531982570886612,
+    -0.18462377786636353,
+    -0.07596633583307266,
+    0.8195109367370605,
+    0.3269197344779968,
+    0.05358264967799187,
+    0.33610010147094727,
+    -0.11496181041002274,
+    0.16791608929634094,
+    -0.6682656407356262,
+    -0.1273297369480133,
+    0.49531474709510803,
+    -0.019969452172517776,
+    0.1370858997106552,
+    -0.48090359568595886,
+    -0.29768112301826477,
+    0.6147751212120056,
+    -0.19723539054393768,
+    -0.005169956479221582,
+    0.14738376438617706,
+    0.13251212239265442,
+    -0.5599533319473267,
+    -0.3764036297798157,
+    -0.1976136714220047,
+    0.2781250476837158,
+    -0.46887412667274475,
+    0.36872023344039917,
+    0.1823902279138565,
+    0.07700219005346298,
+    -0.27635902166366577,
+    -0.6420497894287109,
+    -0.08250191807746887,
+    -0.005368688143789768,
+    0.17329208552837372,
+    0.017609016969799995,
+    -0.4341620206832886,
+    -0.39757245779037476,
+    -0.7027884721755981,
+    0.3497888147830963,
+    -0.18321293592453003,
+    0.4255771338939667,
+    -0.540595531463623,
+    -0.08944593369960785,
+    0.3680245578289032,
+    -0.2193313091993332,
+    -0.31341537833213806,
+    -0.4508829712867737,
+    0.10830514132976532,
+    -0.07149039208889008,
+    -0.22752584517002106,
+    -0.44027453660964966,
+    0.1689710021018982,
+    -0.2952902913093567,
+    -0.495111882686615,
+    0.6137312054634094,
+    -0.1930881291627884,
+    0.6520337462425232,
+    -0.5101749897003174,
+    -0.3400394022464752,
+    -0.022391248494386673,
+    -0.3977583050727844,
+    0.028773954138159752,
+    0.046072427183389664,
+    -0.3676546812057495,
+    0.20573776960372925,
+    -0.20809276401996613,
+    -0.1328941434621811,
+    0.21156741678714752,
+    -0.5866815447807312,
+    -0.2773754596710205,
+    -0.5437328219413757,
+    -0.19939103722572327,
+    0.08703262358903885,
+    -0.3369315266609192,
+    -0.5606504082679749,
+    0.3395698070526123,
+    -0.5310905575752258,
+    -0.011288710869848728,
+    -0.3568255305290222
+  ],
+  "summary": {
+    "clusters": 3,
+    "reconstruction": {
+      "coverages": {
+        "0.5": 0.6471,
+        "1.0": 1.0,
+        "1.5": 1.0,
+        "2.0": 1.0
+      },
+      "mean_nn": 0.3389,
+      "median_nn": 0.4229,
+      "p95_nn": 0.7302,
+      "variance_preservation": 1.1971
+    },
+    "reduction": 2,
+    "survivor_types": {
+      "concept": 7,
+      "event": 5,
+      "location": 6
+    },
+    "survivors": 18,
+    "total_entities": 51,
+    "unique_48bit_fingerprints": 6,
+    "wall_seconds": 0.0
+  },
+  "survivors": [
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "ai"
+        },
+        "name": "turing_ai__concept__imitation_game",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11101111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.3105,
+        "composite": 0.6559,
+        "diversity": 1.0,
+        "reconstruction": 0.5708
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "cryptanalysis"
+        },
+        "name": "turing_cryptanalysis__concept__banburismus",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.4248,
+        "diversity": 0.027,
+        "reconstruction": 0.4133
+      }
+    },
+    {
+      "cluster": 2,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "cryptanalysis"
+        },
+        "name": "turing_cryptanalysis__concept__bombe_device",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111110",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.2673,
+        "composite": 0.3878,
+        "diversity": 0.3333,
+        "reconstruction": 0.5108
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__concept__biological_instability",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.3223,
+        "composite": 0.3867,
+        "diversity": 0.125,
+        "reconstruction": 0.6559
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "modern",
+          "subcorpus": "modern_morphogenesis"
+        },
+        "name": "modern_morphogenesis__concept__gene_regulatory_network",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.3285,
+        "composite": 0.3814,
+        "diversity": 0.125,
+        "reconstruction": 0.6388
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__concept__chemical_basis_of_morphogenesis_1952",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.3363,
+        "composite": 0.359,
+        "diversity": 0.125,
+        "reconstruction": 0.578
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "computability"
+        },
+        "name": "turing_computability__concept__entscheidungsproblem_solved_1936",
+        "type": "concept"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.3884,
+        "composite": 0.3577,
+        "diversity": 0.027,
+        "reconstruction": 0.6278
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__event__morphogenesis_paper_published",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.8227,
+        "composite": 0.5655,
+        "diversity": 0.027,
+        "reconstruction": 0.8759
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__event__turing_studies_fibonacci_plants",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.5641,
+        "diversity": 0.027,
+        "reconstruction": 0.7617
+      }
+    },
+    {
+      "cluster": 2,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "computability"
+        },
+        "name": "turing_computability__event__on_computable_numbers_published_1936",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11111110",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.6715,
+        "composite": 0.561,
+        "diversity": 0.3333,
+        "reconstruction": 0.6912
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "cryptanalysis"
+        },
+        "name": "turing_cryptanalysis__event__battle_of_atlantic_signals_decoded",
+        "type": "event"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.6702,
+        "composite": 0.551,
+        "diversity": 0.125,
+        "reconstruction": 0.8493
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "cryptanalysis"
+        },
+        "name": "turing_cryptanalysis__event__enigma_cracked_1940",
+        "type": "event"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 0.6561,
+        "composite": 0.4715,
+        "diversity": 0.027,
+        "reconstruction": 0.745
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__location__cambridge_plant_lab",
+        "type": "location"
+      },
+      "fingerprint_48bit": "10110111",
+      "flips": 6,
+      "scores": {
+        "anomaly": 0.8314,
+        "composite": 0.9562,
+        "diversity": 1.0,
+        "reconstruction": 0.9958
+      }
+    },
+    {
+      "cluster": 2,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "cryptanalysis"
+        },
+        "name": "turing_cryptanalysis__location__hut_8",
+        "type": "location"
+      },
+      "fingerprint_48bit": "10111110",
+      "flips": 6,
+      "scores": {
+        "anomaly": 0.4782,
+        "composite": 0.7586,
+        "diversity": 1.0,
+        "reconstruction": 0.7225
+      }
+    },
+    {
+      "cluster": 2,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "morphogenesis"
+        },
+        "name": "turing_morphogenesis__location__manchester_chemistry_department",
+        "type": "location"
+      },
+      "fingerprint_48bit": "11111110",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.987,
+        "composite": 0.744,
+        "diversity": 0.3333,
+        "reconstruction": 0.9513
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "modern",
+          "subcorpus": "modern_complexity"
+        },
+        "name": "modern_complexity__location__clay_mathematics_institute",
+        "type": "location"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.9072,
+        "composite": 0.6168,
+        "diversity": 0.125,
+        "reconstruction": 0.8657
+      }
+    },
+    {
+      "cluster": 0,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "computability"
+        },
+        "name": "turing_computability__location__kings_college_cambridge",
+        "type": "location"
+      },
+      "fingerprint_48bit": "11111111",
+      "flips": 8,
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.599,
+        "diversity": 0.027,
+        "reconstruction": 0.8489
+      }
+    },
+    {
+      "cluster": 1,
+      "entity": {
+        "attributes": {
+          "era": "historical",
+          "subcorpus": "computability"
+        },
+        "name": "turing_computability__location__princeton_university",
+        "type": "location"
+      },
+      "fingerprint_48bit": "10111111",
+      "flips": 7,
+      "scores": {
+        "anomaly": 0.7147,
+        "composite": 0.5729,
+        "diversity": 0.125,
+        "reconstruction": 0.8763
+      }
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+# High-availability deployment topology.
+# Postgres primary + streaming replica, Redis Sentinel (3 nodes),
+# Neo4j causal cluster, N backend replicas behind nginx LB.
+#
+# Not a customer-facing docker-compose — a reference topology.
+# Production deploys this via Kubernetes (k8s_orchestrator.py) and
+# cloud-managed DB services (RDS + ElastiCache + Aura).
+
+version: "3.9"
+
+networks:
+  data:   { driver: bridge }
+  app:    { driver: bridge }
+  edge:   { driver: bridge }
+
+volumes:
+  pg_primary_data:
+  pg_replica_data:
+  redis_data_1:
+  redis_data_2:
+  redis_data_3:
+  neo4j_1_data:
+  neo4j_2_data:
+  neo4j_3_data:
+  minio_data:
+
+services:
+  # ── Postgres primary + streaming replica ───────────────────────────
+  postgres-primary:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: latent_intelligence
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?postgres password required}
+      POSTGRES_REPLICATION_USER: replicator
+      POSTGRES_REPLICATION_PASSWORD: ${POSTGRES_REPLICATION_PASSWORD:?}
+    command: >
+      postgres
+      -c wal_level=replica
+      -c max_wal_senders=3
+      -c max_replication_slots=3
+      -c hot_standby=on
+      -c synchronous_commit=on
+    volumes:
+      - pg_primary_data:/var/lib/postgresql/data
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d latent_intelligence"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  postgres-replica:
+    image: postgres:16-alpine
+    depends_on: [postgres-primary]
+    environment:
+      POSTGRES_REPLICATION_USER: replicator
+      POSTGRES_REPLICATION_PASSWORD: ${POSTGRES_REPLICATION_PASSWORD:?}
+      PRIMARY_HOST: postgres-primary
+    entrypoint: /bin/sh -c "until pg_isready -h postgres-primary -U postgres; do sleep 2; done; pg_basebackup -h postgres-primary -U replicator -D /var/lib/postgresql/data -Fp -Xs -P -R || true; exec docker-entrypoint.sh postgres"
+    volumes:
+      - pg_replica_data:/var/lib/postgresql/data
+    networks: [data]
+
+  # ── Redis Sentinel (3 nodes for quorum) ────────────────────────────
+  redis-1:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    volumes: [redis_data_1:/data]
+    networks: [data]
+  redis-2:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru --slaveof redis-1 6379
+    volumes: [redis_data_2:/data]
+    networks: [data]
+    depends_on: [redis-1]
+  redis-3:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru --slaveof redis-1 6379
+    volumes: [redis_data_3:/data]
+    networks: [data]
+    depends_on: [redis-1]
+
+  redis-sentinel-1: &sentinel
+    image: redis:7-alpine
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    configs: [{ source: sentinel_conf, target: /usr/local/etc/redis/sentinel.conf }]
+    networks: [data]
+    depends_on: [redis-1, redis-2, redis-3]
+  redis-sentinel-2: *sentinel
+  redis-sentinel-3: *sentinel
+
+  # ── Neo4j causal cluster (3-core) ──────────────────────────────────
+  neo4j-core-1: &neo4j_core
+    image: neo4j:5-enterprise
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_dbms_mode: CORE
+      NEO4J_causal__clustering_minimum__core__cluster__size__at__formation: "3"
+      NEO4J_causal__clustering_initial__discovery__members: neo4j-core-1:5000,neo4j-core-2:5000,neo4j-core-3:5000
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:?}
+    volumes: [neo4j_1_data:/data]
+    networks: [data]
+  neo4j-core-2:
+    <<: *neo4j_core
+    volumes: [neo4j_2_data:/data]
+  neo4j-core-3:
+    <<: *neo4j_core
+    volumes: [neo4j_3_data:/data]
+
+  # ── Object storage: MinIO distributed mode (4 drives, 1 node demo) ─
+  minio:
+    image: quay.io/minio/minio
+    command: server --console-address ":9001" /data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?}
+    volumes: [minio_data:/data]
+    networks: [data]
+
+  # ── Backend replicas (6 is the reference fleet) ────────────────────
+  backend-1: &backend
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:?}@postgres-primary:5432/latent_intelligence
+      DATABASE_REPLICA_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:?}@postgres-replica:5432/latent_intelligence
+      REDIS_URL: redis-sentinel://redis-sentinel-1:26379,redis-sentinel-2:26379,redis-sentinel-3:26379/mymaster
+      NEO4J_URI: neo4j+s://neo4j-core-1:7687,neo4j-core-2:7687,neo4j-core-3:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:?}
+      MINIO_ENDPOINT: minio:9000
+      ENV: production
+    depends_on: [postgres-primary, redis-1, redis-sentinel-1, neo4j-core-1, minio]
+    networks: [data, app]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  backend-2: *backend
+  backend-3: *backend
+  backend-4: *backend
+  backend-5: *backend
+  backend-6: *backend
+
+  # ── Load balancer ──────────────────────────────────────────────────
+  nginx-lb:
+    image: nginx:1.25-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    configs:
+      - { source: nginx_lb_conf, target: /etc/nginx/nginx.conf }
+    networks: [app, edge]
+    depends_on: [backend-1, backend-2, backend-3, backend-4, backend-5, backend-6]
+
+  # ── Celery worker pool (2 replicas per queue) ──────────────────────
+  celery-crystallization: &celery
+    build: ./backend
+    command: celery -A app.celery_app worker -Q crystallization -l info -c 4
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:?}@postgres-primary:5432/latent_intelligence
+      REDIS_URL: redis-sentinel://redis-sentinel-1:26379/mymaster
+    depends_on: [postgres-primary, redis-1]
+    networks: [data]
+  celery-interpretation:
+    <<: *celery
+    command: celery -A app.celery_app worker -Q interpretation -l info -c 4
+
+  # ── Observability ──────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    configs: [{ source: prom_conf, target: /etc/prometheus/prometheus.yml }]
+    networks: [app]
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+    networks: [app]
+    depends_on: [prometheus]
+
+configs:
+  sentinel_conf:
+    content: |
+      port 26379
+      sentinel monitor mymaster redis-1 6379 2
+      sentinel down-after-milliseconds mymaster 5000
+      sentinel failover-timeout mymaster 10000
+      sentinel parallel-syncs mymaster 1
+  nginx_lb_conf:
+    content: |
+      events { worker_connections 4096; }
+      http {
+        upstream backend_pool {
+          least_conn;
+          server backend-1:8000 max_fails=3 fail_timeout=30s;
+          server backend-2:8000 max_fails=3 fail_timeout=30s;
+          server backend-3:8000 max_fails=3 fail_timeout=30s;
+          server backend-4:8000 max_fails=3 fail_timeout=30s;
+          server backend-5:8000 max_fails=3 fail_timeout=30s;
+          server backend-6:8000 max_fails=3 fail_timeout=30s;
+          keepalive 32;
+        }
+        server {
+          listen 80;
+          location /api/ {
+            proxy_pass http://backend_pool;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_set_header Host $$host;
+            proxy_set_header X-Real-IP $$remote_addr;
+            proxy_set_header X-Forwarded-For $$proxy_add_x_forwarded_for;
+            proxy_read_timeout 30s;
+          }
+          location /metrics { proxy_pass http://backend_pool; }
+          location /health  { proxy_pass http://backend_pool; }
+        }
+      }
+  prom_conf:
+    content: |
+      global:
+        scrape_interval: 15s
+      scrape_configs:
+        - job_name: backend
+          static_configs:
+            - targets: [backend-1:8000, backend-2:8000, backend-3:8000,
+                        backend-4:8000, backend-5:8000, backend-6:8000]

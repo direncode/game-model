@@ -13,7 +13,11 @@ logger = logging.getLogger(__name__)
 class Settings(BaseSettings):
     """Central configuration for the Latent Intelligence platform."""
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",  # Tolerate unknown env keys — forbid-mode crashes the app on leftover env entries from retired features (e.g. NIV).
+    )
 
     # ── Database ────────────────────────────────────────────────────────
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/latent_intelligence"
