@@ -1,0 +1,282 @@
+{
+  "K": 25,
+  "btut_source": "C:\\Users\\diren\\Desktop\\lsx-latentocean\\scripts\\edgar_btut_result_2000.json",
+  "form_concentration": {
+    "null_p95": 0.0,
+    "significant": false,
+    "top": 0.0
+  },
+  "generated_at": "2026-04-19",
+  "n_survivors": 1999,
+  "rank_1_fraction": {
+    "null_p95": 0.24,
+    "significant": true,
+    "top": 0.72
+  },
+  "significant_property_count": 1,
+  "temporal_spread_years": {
+    "null_p05": 0.0,
+    "significant": false,
+    "top": 0.0
+  },
+  "top_k_preview": [
+    {
+      "cik": "4904",
+      "cluster": 322,
+      "company_name": null,
+      "composite": 0.8588,
+      "form": null,
+      "name": "fact_4904_AssetRetirementObligation",
+      "rank": 1,
+      "year": null
+    },
+    {
+      "cik": "1552033",
+      "cluster": 311,
+      "company_name": null,
+      "composite": 0.8161,
+      "form": null,
+      "name": "fact_1552033_AdvertisingExpense",
+      "rank": 2,
+      "year": null
+    },
+    {
+      "cik": "1642896",
+      "cluster": 25,
+      "company_name": null,
+      "composite": 0.8091,
+      "form": null,
+      "name": "fact_1642896_AdditionalPaidInCapital",
+      "rank": 3,
+      "year": null
+    },
+    {
+      "cik": "1748790",
+      "cluster": 294,
+      "company_name": null,
+      "composite": 0.8038,
+      "form": null,
+      "name": "fact_1748790_BankOverdrafts",
+      "rank": 4,
+      "year": null
+    },
+    {
+      "cik": "895126",
+      "cluster": 226,
+      "company_name": null,
+      "composite": 0.7981,
+      "form": null,
+      "name": "fact_895126_AccretionExpense",
+      "rank": 5,
+      "year": null
+    },
+    {
+      "cik": "1069183",
+      "cluster": 309,
+      "company_name": null,
+      "composite": 0.7979,
+      "form": null,
+      "name": "fact_1069183_AccruedLiabilitiesCurrentAndNoncurrent",
+      "rank": 6,
+      "year": null
+    },
+    {
+      "cik": "1736297",
+      "cluster": 322,
+      "company_name": null,
+      "composite": 0.7977,
+      "form": null,
+      "name": "fact_1736297_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+      "rank": 7,
+      "year": null
+    },
+    {
+      "cik": "1701605",
+      "cluster": 319,
+      "company_name": null,
+      "composite": 0.7971,
+      "form": null,
+      "name": "fact_1701605_Assets",
+      "rank": 8,
+      "year": null
+    },
+    {
+      "cik": "1103982",
+      "cluster": 229,
+      "company_name": null,
+      "composite": 0.7944,
+      "form": null,
+      "name": "fact_1103982_AssetsNoncurrent",
+      "rank": 9,
+      "year": null
+    },
+    {
+      "cik": "1579878",
+      "cluster": 319,
+      "company_name": null,
+      "composite": 0.7921,
+      "form": null,
+      "name": "fact_1579878_Assets",
+      "rank": 10,
+      "year": null
+    },
+    {
+      "cik": "1321655",
+      "cluster": 46,
+      "company_name": null,
+      "composite": 0.782,
+      "form": null,
+      "name": "fact_1321655_Assets",
+      "rank": 11,
+      "year": null
+    },
+    {
+      "cik": "1280452",
+      "cluster": 220,
+      "company_name": null,
+      "composite": 0.7805,
+      "form": null,
+      "name": "fact_1280452_AccretionAmortizationOfDiscountsAndPremiumsInvestments",
+      "rank": 12,
+      "year": null
+    },
+    {
+      "cik": "912595",
+      "cluster": 211,
+      "company_name": null,
+      "composite": 0.78,
+      "form": null,
+      "name": "fact_912595_Assets",
+      "rank": 13,
+      "year": null
+    },
+    {
+      "cik": "906163",
+      "cluster": 319,
+      "company_name": null,
+      "composite": 0.7794,
+      "form": null,
+      "name": "fact_906163_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedLiabilities",
+      "rank": 14,
+      "year": null
+    },
+    {
+      "cik": "354950",
+      "cluster": 168,
+      "company_name": null,
+      "composite": 0.7774,
+      "form": null,
+      "name": "fact_354950_CapitalLeasesFutureMinimumPaymentsDue",
+      "rank": 15,
+      "year": null
+    },
+    {
+      "cik": "1166691",
+      "cluster": 322,
+      "company_name": null,
+      "composite": 0.7765,
+      "form": null,
+      "name": "fact_1166691_AmortizationOfIntangibleAssets",
+      "rank": 16,
+      "year": null
+    },
+    {
+      "cik": "866787",
+      "cluster": 237,
+      "company_name": null,
+      "composite": 0.7758,
+      "form": null,
+      "name": "fact_866787_AssetsHeldInTrust",
+      "rank": 17,
+      "year": null
+    },
+    {
+      "cik": "811156",
+      "cluster": 220,
+      "company_name": null,
+      "composite": 0.7745,
+      "form": null,
+      "name": "fact_811156_AmortizationOfIntangibleAssets",
+      "rank": 18,
+      "year": null
+    },
+    {
+      "cik": "1783180",
+      "cluster": 323,
+      "company_name": null,
+      "composite": 0.774,
+      "form": null,
+      "name": "fact_1783180_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "rank": 19,
+      "year": null
+    },
+    {
+      "cik": "107263",
+      "cluster": 283,
+      "company_name": null,
+      "composite": 0.7732,
+      "form": null,
+      "name": "fact_107263_AssetRetirementObligationAccretionExpense",
+      "rank": 20,
+      "year": null
+    },
+    {
+      "cik": "1037646",
+      "cluster": 224,
+      "company_name": null,
+      "composite": 0.7722,
+      "form": null,
+      "name": "fact_1037646_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+      "rank": 21,
+      "year": null
+    },
+    {
+      "cik": "1659166",
+      "cluster": 277,
+      "company_name": null,
+      "composite": 0.7715,
+      "form": null,
+      "name": "fact_1659166_AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+      "rank": 22,
+      "year": null
+    },
+    {
+      "cik": "759944",
+      "cluster": 294,
+      "company_name": null,
+      "composite": 0.7711,
+      "form": null,
+      "name": "fact_759944_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "rank": 23,
+      "year": null
+    },
+    {
+      "cik": "26324",
+      "cluster": 136,
+      "company_name": null,
+      "composite": 0.7704,
+      "form": null,
+      "name": "fact_26324_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "rank": 24,
+      "year": null
+    },
+    {
+      "cik": "766704",
+      "cluster": 229,
+      "company_name": null,
+      "composite": 0.7692,
+      "form": null,
+      "name": "fact_766704_AdditionalPaidInCapital",
+      "rank": 25,
+      "year": null
+    }
+  ],
+  "unique_ciks": {
+    "direction": "like-random",
+    "null_mean": 24.758,
+    "null_p05": 24.0,
+    "null_p95": 25.0,
+    "significant": false,
+    "top": 25
+  }
+}
