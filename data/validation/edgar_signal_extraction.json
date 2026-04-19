@@ -1,0 +1,2322 @@
+{
+  "aggregations": {
+    "top_companies_in_stable_set": [
+      [
+        "FEDERAL HOME LOAN MORTGAGE CORP",
+        3
+      ],
+      [
+        "Blackstone Secured Lending Fund",
+        2
+      ],
+      [
+        "BANK OF HAWAII CORP",
+        2
+      ],
+      [
+        "REPLIGEN CORP",
+        1
+      ],
+      [
+        "Regencell Bioscience Holdings Ltd",
+        1
+      ],
+      [
+        "Artisan Partners Asset Management Inc.",
+        1
+      ],
+      [
+        "CARRIER GLOBAL Corp",
+        1
+      ],
+      [
+        "SunocoCorp LLC",
+        1
+      ],
+      [
+        "Samsara Inc.",
+        1
+      ],
+      [
+        "Sandisk Corp",
+        1
+      ],
+      [
+        "AMERICAN EXPRESS CO",
+        1
+      ],
+      [
+        "Navan, Inc.",
+        1
+      ],
+      [
+        "CNH Industrial N.V.",
+        1
+      ],
+      [
+        "Futu Holdings Ltd",
+        1
+      ],
+      [
+        "Allied Gold Corp",
+        1
+      ]
+    ],
+    "top_concepts_in_stable_set": [
+      [
+        "AdditionalPaidInCapital",
+        1
+      ]
+    ],
+    "top_industries_in_stable_set": [
+      [
+        "Pharmaceutical Preparations",
+        5
+      ],
+      [
+        "Biological Products (no diagnostics)",
+        3
+      ],
+      [
+        "Prepackaged Software",
+        3
+      ],
+      [
+        "State Commercial Banks (national)",
+        3
+      ],
+      [
+        "Surgical & Medical Instruments",
+        3
+      ],
+      [
+        "Electric Services",
+        3
+      ],
+      [
+        "Real Estate Investment Trusts",
+        3
+      ],
+      [
+        "Petroleum Refining",
+        2
+      ],
+      [
+        "Finance Services",
+        2
+      ],
+      [
+        "Services-Business Services NEC",
+        2
+      ]
+    ]
+  },
+  "btut_runs_compared": [
+    "target=2000 (v2 1,999 survivors)",
+    "target=5000 (4,999 survivors)"
+  ],
+  "config_stability": {
+    "K": 100,
+    "stable_count": 90,
+    "stable_fraction": 0.9
+  },
+  "corpus": "EDGAR 61,041 entities",
+  "flagship_composite_top10": [
+    {
+      "cik": "4904",
+      "cluster": 230,
+      "company_name": "AMERICAN ELECTRIC POWER CO INC",
+      "concept": "AssetRetirementObligation",
+      "industry": "Electric Services",
+      "kind": "fact",
+      "name": "fact_4904_AssetRetirementObligation",
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.8588,
+        "diversity": 1.0,
+        "reconstruction": 0.6471
+      },
+      "sic": "4911"
+    },
+    {
+      "cik": "1642896",
+      "cluster": 465,
+      "company_name": "Samsara Inc.",
+      "concept": "AdditionalPaidInCapital",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1642896_AdditionalPaidInCapital",
+      "scores": {
+        "anomaly": 0.5159,
+        "composite": 0.8285,
+        "diversity": 1.0,
+        "reconstruction": 0.8739
+      },
+      "sic": "7373"
+    },
+    {
+      "cik": "1876042",
+      "cluster": 608,
+      "company_name": "Circle Internet Group, Inc.",
+      "concept": "Assets",
+      "industry": "Finance Services",
+      "kind": "fact",
+      "name": "fact_1876042_Assets",
+      "scores": {
+        "anomaly": 0.7931,
+        "composite": 0.8276,
+        "diversity": 1.0,
+        "reconstruction": 0.6984
+      },
+      "sic": "6199"
+    },
+    {
+      "cik": "886982",
+      "cluster": 512,
+      "company_name": "GOLDMAN SACHS GROUP INC",
+      "concept": "AdditionalPaidInCapital",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_886982_AdditionalPaidInCapital",
+      "scores": {
+        "anomaly": 0.7057,
+        "composite": 0.8261,
+        "diversity": 1.0,
+        "reconstruction": 0.7491
+      },
+      "sic": "6211"
+    },
+    {
+      "cik": "1048268",
+      "cluster": 697,
+      "company_name": "IES Holdings, Inc.",
+      "concept": "AccruedLiabilitiesForCommissionsExpenseAndTaxes",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1048268_AccruedLiabilitiesForCommissionsExpenseAndTaxes",
+      "scores": {
+        "anomaly": 0.739,
+        "composite": 0.8233,
+        "diversity": 1.0,
+        "reconstruction": 0.7215
+      },
+      "sic": "1731"
+    },
+    {
+      "cik": "922621",
+      "cluster": 361,
+      "company_name": "ERIE INDEMNITY CO",
+      "concept": "AccretionAmortizationOfDiscountsAndPremiumsInvestments",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_922621_AccretionAmortizationOfDiscountsAndPremiumsInvestments",
+      "scores": {
+        "anomaly": 0.7072,
+        "composite": 0.8222,
+        "diversity": 1.0,
+        "reconstruction": 0.7384
+      },
+      "sic": "6411"
+    },
+    {
+      "cik": "1552033",
+      "cluster": 648,
+      "company_name": "TransUnion",
+      "concept": "AdvertisingExpense",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1552033_AdvertisingExpense",
+      "scores": {
+        "anomaly": 0.7946,
+        "composite": 0.82,
+        "diversity": 1.0,
+        "reconstruction": 0.6784
+      },
+      "sic": "7320"
+    },
+    {
+      "cik": "1957132",
+      "cluster": 248,
+      "company_name": "SharkNinja, Inc.",
+      "concept": "CapitalExpendituresIncurredButNotYetPaid",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1957132_CapitalExpendituresIncurredButNotYetPaid",
+      "scores": {
+        "anomaly": 0.8151,
+        "composite": 0.8191,
+        "diversity": 1.0,
+        "reconstruction": 0.6633
+      },
+      "sic": "3630"
+    },
+    {
+      "cik": "1781335",
+      "cluster": 697,
+      "company_name": "Otis Worldwide Corp",
+      "concept": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1781335_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "scores": {
+        "anomaly": 0.8167,
+        "composite": 0.8185,
+        "diversity": 1.0,
+        "reconstruction": 0.6609
+      },
+      "sic": "3600"
+    },
+    {
+      "cik": "1876042",
+      "cluster": 646,
+      "company_name": "Circle Internet Group, Inc.",
+      "concept": "AccruedIncomeTaxesCurrent",
+      "industry": "Finance Services",
+      "kind": "fact",
+      "name": "fact_1876042_AccruedIncomeTaxesCurrent",
+      "scores": {
+        "anomaly": 0.5351,
+        "composite": 0.8183,
+        "diversity": 1.0,
+        "reconstruction": 0.8363
+      },
+      "sic": "6199"
+    }
+  ],
+  "pure_anomaly_top25": [
+    {
+      "cik": "885550",
+      "cluster": 0,
+      "company_name": "CREDIT ACCEPTANCE CORP",
+      "date": "2026-02-09",
+      "description": "",
+      "form": "144",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000195917326000758",
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.429,
+        "diversity": 0.0,
+        "reconstruction": 0.4476
+      },
+      "sic": "6141"
+    },
+    {
+      "cik": "4904",
+      "cluster": 230,
+      "company_name": "AMERICAN ELECTRIC POWER CO INC",
+      "concept": "AssetRetirementObligation",
+      "industry": "Electric Services",
+      "kind": "fact",
+      "name": "fact_4904_AssetRetirementObligation",
+      "scores": {
+        "anomaly": 1.0,
+        "composite": 0.8588,
+        "diversity": 1.0,
+        "reconstruction": 0.6471
+      },
+      "sic": "4911"
+    },
+    {
+      "cik": "1050797",
+      "cluster": 0,
+      "company_name": "COLUMBIA SPORTSWEAR CO",
+      "date": "2026-02-13",
+      "description": "",
+      "form": "SCHEDULE 13G/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000105079726000025",
+      "scores": {
+        "anomaly": 0.9675,
+        "composite": 0.4241,
+        "diversity": 0.0,
+        "reconstruction": 0.4556
+      },
+      "sic": "2300"
+    },
+    {
+      "cik": "1280452",
+      "cluster": 0,
+      "company_name": "MONOLITHIC POWER SYSTEMS INC",
+      "date": "2026-04-01",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Semiconductors & Related Devices",
+      "kind": "filing",
+      "name": "filing_000121465926004185",
+      "scores": {
+        "anomaly": 0.9329,
+        "composite": 0.4206,
+        "diversity": 0.0,
+        "reconstruction": 0.4684
+      },
+      "sic": "3674"
+    },
+    {
+      "cik": "104169",
+      "cluster": 0,
+      "company_name": "Walmart Inc.",
+      "date": "2026-04-02",
+      "description": "FORM 4",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000203383426000008",
+      "scores": {
+        "anomaly": 0.8627,
+        "composite": 0.3968,
+        "diversity": 0.0,
+        "reconstruction": 0.4529
+      },
+      "sic": "5331"
+    },
+    {
+      "cik": "105770",
+      "cluster": 0,
+      "company_name": "WEST PHARMACEUTICAL SERVICES INC",
+      "date": "2026-02-19",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Surgical & Medical Instruments",
+      "kind": "filing",
+      "name": "filing_000010577026000018",
+      "scores": {
+        "anomaly": 0.8238,
+        "composite": 0.3853,
+        "diversity": 0.0,
+        "reconstruction": 0.4484
+      },
+      "sic": "3841"
+    },
+    {
+      "cik": "1780312",
+      "cluster": 230,
+      "company_name": "AST SpaceMobile, Inc.",
+      "concept": "AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1780312_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+      "scores": {
+        "anomaly": 0.8233,
+        "composite": 0.8071,
+        "diversity": 1.0,
+        "reconstruction": 0.6283
+      },
+      "sic": "4899"
+    },
+    {
+      "cik": "1781335",
+      "cluster": 697,
+      "company_name": "Otis Worldwide Corp",
+      "concept": "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1781335_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+      "scores": {
+        "anomaly": 0.8167,
+        "composite": 0.8185,
+        "diversity": 1.0,
+        "reconstruction": 0.6609
+      },
+      "sic": "3600"
+    },
+    {
+      "cik": "1957132",
+      "cluster": 248,
+      "company_name": "SharkNinja, Inc.",
+      "concept": "CapitalExpendituresIncurredButNotYetPaid",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1957132_CapitalExpendituresIncurredButNotYetPaid",
+      "scores": {
+        "anomaly": 0.8151,
+        "composite": 0.8191,
+        "diversity": 1.0,
+        "reconstruction": 0.6633
+      },
+      "sic": "3630"
+    },
+    {
+      "cik": "1552033",
+      "cluster": 230,
+      "company_name": "TransUnion",
+      "concept": "AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1552033_AccumulatedOtherComprehensiveIncomeLossNetOfTax",
+      "scores": {
+        "anomaly": 0.8112,
+        "composite": 0.7966,
+        "diversity": 1.0,
+        "reconstruction": 0.6096
+      },
+      "sic": "7320"
+    },
+    {
+      "cik": "1736297",
+      "cluster": 230,
+      "company_name": "Astera Labs, Inc.",
+      "concept": "AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+      "industry": "Semiconductors & Related Devices",
+      "kind": "fact",
+      "name": "fact_1736297_AdjustmentsToAdditionalPaidInCapitalWarrantIssued",
+      "scores": {
+        "anomaly": 0.8101,
+        "composite": 0.7965,
+        "diversity": 1.0,
+        "reconstruction": 0.61
+      },
+      "sic": "3674"
+    },
+    {
+      "cik": "879169",
+      "cluster": 650,
+      "company_name": "INCYTE CORP",
+      "concept": "Assets",
+      "industry": "Commercial Physical & Biological Research",
+      "kind": "fact",
+      "name": "fact_879169_Assets",
+      "scores": {
+        "anomaly": 0.8001,
+        "composite": 0.7947,
+        "diversity": 1.0,
+        "reconstruction": 0.6117
+      },
+      "sic": "8731"
+    },
+    {
+      "cik": "1552033",
+      "cluster": 648,
+      "company_name": "TransUnion",
+      "concept": "AdvertisingExpense",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1552033_AdvertisingExpense",
+      "scores": {
+        "anomaly": 0.7946,
+        "composite": 0.82,
+        "diversity": 1.0,
+        "reconstruction": 0.6784
+      },
+      "sic": "7320"
+    },
+    {
+      "cik": "277135",
+      "cluster": 500,
+      "company_name": "W.W. GRAINGER, INC.",
+      "concept": "AccruedLiabilitiesCurrentAndNoncurrent",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_277135_AccruedLiabilitiesCurrentAndNoncurrent",
+      "scores": {
+        "anomaly": 0.7944,
+        "composite": 0.7925,
+        "diversity": 1.0,
+        "reconstruction": 0.6098
+      },
+      "sic": "5000"
+    },
+    {
+      "cik": "1876042",
+      "cluster": 608,
+      "company_name": "Circle Internet Group, Inc.",
+      "concept": "Assets",
+      "industry": "Finance Services",
+      "kind": "fact",
+      "name": "fact_1876042_Assets",
+      "scores": {
+        "anomaly": 0.7931,
+        "composite": 0.8276,
+        "diversity": 1.0,
+        "reconstruction": 0.6984
+      },
+      "sic": "6199"
+    },
+    {
+      "cik": "1701605",
+      "cluster": 230,
+      "company_name": "Baker Hughes Co",
+      "concept": "Assets",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1701605_Assets",
+      "scores": {
+        "anomaly": 0.7917,
+        "composite": 0.7951,
+        "diversity": 1.0,
+        "reconstruction": 0.6181
+      },
+      "sic": "3533"
+    },
+    {
+      "cik": "1579878",
+      "cluster": 683,
+      "company_name": "Figma, Inc.",
+      "concept": "Assets",
+      "industry": "Prepackaged Software",
+      "kind": "fact",
+      "name": "fact_1579878_Assets",
+      "scores": {
+        "anomaly": 0.7885,
+        "composite": 0.7902,
+        "diversity": 1.0,
+        "reconstruction": 0.6076
+      },
+      "sic": "7372"
+    },
+    {
+      "cik": "895126",
+      "cluster": 419,
+      "company_name": "EXPAND ENERGY Corp",
+      "concept": "AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+      "industry": "Crude Petroleum & Natural Gas",
+      "kind": "fact",
+      "name": "fact_895126_AdjustmentsToAdditionalPaidInCapitalEquityComponentOfConvertibleDebt",
+      "scores": {
+        "anomaly": 0.7873,
+        "composite": 0.7778,
+        "diversity": 1.0,
+        "reconstruction": 0.5776
+      },
+      "sic": "1311"
+    },
+    {
+      "cik": "1465128",
+      "cluster": 0,
+      "company_name": "STARWOOD PROPERTY TRUST, INC.",
+      "date": "2025-10-14",
+      "description": "FORM 8-K",
+      "form": "8-K",
+      "industry": "Real Estate Investment Trusts",
+      "kind": "filing",
+      "name": "filing_000110465925099303",
+      "scores": {
+        "anomaly": 0.7766,
+        "composite": 0.3856,
+        "diversity": 0.0,
+        "reconstruction": 0.4785
+      },
+      "sic": "6798"
+    },
+    {
+      "cik": "1166691",
+      "cluster": 248,
+      "company_name": "COMCAST CORP",
+      "concept": "Assets",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1166691_Assets",
+      "scores": {
+        "anomaly": 0.7725,
+        "composite": 0.7905,
+        "diversity": 1.0,
+        "reconstruction": 0.6184
+      },
+      "sic": "4841"
+    },
+    {
+      "cik": "1781335",
+      "cluster": 500,
+      "company_name": "Otis Worldwide Corp",
+      "concept": "AociLossCashFlowHedgeCumulativeGainLossAfterTax",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1781335_AociLossCashFlowHedgeCumulativeGainLossAfterTax",
+      "scores": {
+        "anomaly": 0.7707,
+        "composite": 0.8102,
+        "diversity": 1.0,
+        "reconstruction": 0.6687
+      },
+      "sic": "3600"
+    },
+    {
+      "cik": "1045450",
+      "cluster": 137,
+      "company_name": "EPR PROPERTIES",
+      "date": "2026-02-17",
+      "description": "",
+      "form": "SCHEDULE 13G/A",
+      "industry": "Real Estate Investment Trusts",
+      "kind": "filing",
+      "name": "filing_000091957426001185",
+      "scores": {
+        "anomaly": 0.768,
+        "composite": 0.3814,
+        "diversity": 0.0065,
+        "reconstruction": 0.4677
+      },
+      "sic": "6798"
+    },
+    {
+      "cik": "1103982",
+      "cluster": 237,
+      "company_name": "Mondelez International, Inc.",
+      "concept": "AssetsNoncurrent",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1103982_AssetsNoncurrent",
+      "scores": {
+        "anomaly": 0.7676,
+        "composite": 0.79,
+        "diversity": 1.0,
+        "reconstruction": 0.6202
+      },
+      "sic": "2000"
+    },
+    {
+      "cik": "40729",
+      "cluster": 500,
+      "company_name": "Ally Financial Inc.",
+      "concept": "AmortizationMethodQualifiedAffordableHousingProjectInvestmentsAmortization",
+      "industry": "State Commercial Banks (national)",
+      "kind": "fact",
+      "name": "fact_40729_AmortizationMethodQualifiedAffordableHousingProjectInvestmentsAmortization",
+      "scores": {
+        "anomaly": 0.7667,
+        "composite": 0.7938,
+        "diversity": 1.0,
+        "reconstruction": 0.6303
+      },
+      "sic": "6022"
+    },
+    {
+      "cik": "1858681",
+      "cluster": 407,
+      "company_name": "Apollo Global Management, Inc.",
+      "concept": "AdditionalPaidInCapital",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1858681_AdditionalPaidInCapital",
+      "scores": {
+        "anomaly": 0.765,
+        "composite": 0.7897,
+        "diversity": 1.0,
+        "reconstruction": 0.621
+      },
+      "sic": "6282"
+    }
+  ],
+  "stable_reconstruction_anomalies": [
+    {
+      "cik": "730272",
+      "cluster": 0,
+      "company_name": "REPLIGEN CORP",
+      "date": "2026-04-02",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "Biological Products (no diagnostics)",
+      "kind": "filing",
+      "name": "filing_000119312526140115",
+      "scores": {
+        "anomaly": 0.0978,
+        "composite": 0.385,
+        "diversity": 0.0,
+        "reconstruction": 0.9013
+      },
+      "sic": "2836"
+    },
+    {
+      "cik": "1829667",
+      "cluster": 16,
+      "company_name": "Regencell Bioscience Holdings Ltd",
+      "date": "2025-10-31",
+      "description": "ANNUAL REPORT",
+      "form": "20-F",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025104686",
+      "scores": {
+        "anomaly": 0.0942,
+        "composite": 0.3799,
+        "diversity": 0.0005,
+        "reconstruction": 0.8903
+      },
+      "sic": "2833"
+    },
+    {
+      "cik": "1517302",
+      "cluster": 0,
+      "company_name": "Artisan Partners Asset Management Inc.",
+      "date": "2026-02-20",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000151730226000047",
+      "scores": {
+        "anomaly": 0.0874,
+        "composite": 0.3766,
+        "diversity": 0.0,
+        "reconstruction": 0.887
+      },
+      "sic": "6282"
+    },
+    {
+      "cik": "1783180",
+      "cluster": 0,
+      "company_name": "CARRIER GLOBAL Corp",
+      "date": "2026-02-05",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000178318026000008",
+      "scores": {
+        "anomaly": 0.1077,
+        "composite": 0.3803,
+        "diversity": 0.0,
+        "reconstruction": 0.8834
+      },
+      "sic": "3585"
+    },
+    {
+      "cik": "2089661",
+      "cluster": 0,
+      "company_name": "SunocoCorp LLC",
+      "date": "2026-02-19",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Petroleum Refining",
+      "kind": "filing",
+      "name": "filing_000208966126000016",
+      "scores": {
+        "anomaly": 0.1003,
+        "composite": 0.3779,
+        "diversity": 0.0,
+        "reconstruction": 0.8821
+      },
+      "sic": "2911"
+    },
+    {
+      "cik": "1642896",
+      "cluster": 465,
+      "company_name": "Samsara Inc.",
+      "concept": "AdditionalPaidInCapital",
+      "industry": null,
+      "kind": "fact",
+      "name": "fact_1642896_AdditionalPaidInCapital",
+      "scores": {
+        "anomaly": 0.5159,
+        "composite": 0.8285,
+        "diversity": 1.0,
+        "reconstruction": 0.8739
+      },
+      "sic": "7373"
+    },
+    {
+      "cik": "2023554",
+      "cluster": 52,
+      "company_name": "Sandisk Corp",
+      "date": "2026-02-27",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000124264826000014",
+      "scores": {
+        "anomaly": 0.0963,
+        "composite": 0.3735,
+        "diversity": 0.0012,
+        "reconstruction": 0.8725
+      },
+      "sic": "3572"
+    },
+    {
+      "cik": "4962",
+      "cluster": 222,
+      "company_name": "AMERICAN EXPRESS CO",
+      "date": "2026-04-02",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Finance Services",
+      "kind": "filing",
+      "name": "filing_000000496226000140",
+      "scores": {
+        "anomaly": 0.0872,
+        "composite": 0.3736,
+        "diversity": 0.0244,
+        "reconstruction": 0.8582
+      },
+      "sic": "6199"
+    },
+    {
+      "cik": "1639723",
+      "cluster": 0,
+      "company_name": "Navan, Inc.",
+      "date": "2026-04-02",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Prepackaged Software",
+      "kind": "filing",
+      "name": "filing_000162828026023250",
+      "scores": {
+        "anomaly": 0.095,
+        "composite": 0.3625,
+        "diversity": 0.0,
+        "reconstruction": 0.8469
+      },
+      "sic": "7372"
+    },
+    {
+      "cik": "1567094",
+      "cluster": 0,
+      "company_name": "CNH Industrial N.V.",
+      "date": "2025-11-07",
+      "description": "8-K",
+      "form": "8-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000156709425000009",
+      "scores": {
+        "anomaly": 0.0951,
+        "composite": 0.3593,
+        "diversity": 0.0,
+        "reconstruction": 0.8389
+      },
+      "sic": "3531"
+    },
+    {
+      "cik": "1754581",
+      "cluster": 0,
+      "company_name": "Futu Holdings Ltd",
+      "date": "2025-04-14",
+      "description": "20-F",
+      "form": "20-F",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000141057825000706",
+      "scores": {
+        "anomaly": 0.0893,
+        "composite": 0.3559,
+        "diversity": 0.0,
+        "reconstruction": 0.8339
+      },
+      "sic": "6211"
+    },
+    {
+      "cik": "1993344",
+      "cluster": 0,
+      "company_name": "Allied Gold Corp",
+      "date": "2026-04-01",
+      "description": "40-F",
+      "form": "40-F",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000162828026022512",
+      "scores": {
+        "anomaly": 0.0879,
+        "composite": 0.3541,
+        "diversity": 0.0,
+        "reconstruction": 0.8302
+      },
+      "sic": null
+    },
+    {
+      "cik": "1560968",
+      "cluster": 0,
+      "company_name": "Samsonite International SA/ADR",
+      "date": "2012-11-08",
+      "description": "",
+      "form": "F-6EF",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119380512001773",
+      "scores": {
+        "anomaly": 0.079,
+        "composite": 0.3516,
+        "diversity": 0.0,
+        "reconstruction": 0.8295
+      },
+      "sic": "8880"
+    },
+    {
+      "cik": "315709",
+      "cluster": 0,
+      "company_name": "INTERNATIONAL BANCSHARES CORP",
+      "date": "2025-05-05",
+      "description": "10-Q",
+      "form": "10-Q",
+      "industry": "State Commercial Banks (national)",
+      "kind": "filing",
+      "name": "filing_000155837025006281",
+      "scores": {
+        "anomaly": 0.1007,
+        "composite": 0.3569,
+        "diversity": 0.0,
+        "reconstruction": 0.8292
+      },
+      "sic": "6022"
+    },
+    {
+      "cik": "1576018",
+      "cluster": 0,
+      "company_name": "SiriusPoint Ltd",
+      "date": "2026-02-24",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000157601826000032",
+      "scores": {
+        "anomaly": 0.0932,
+        "composite": 0.3542,
+        "diversity": 0.0,
+        "reconstruction": 0.8272
+      },
+      "sic": "6331"
+    },
+    {
+      "cik": "1736035",
+      "cluster": 0,
+      "company_name": "Blackstone Secured Lending Fund",
+      "date": "2025-11-10",
+      "description": "8-K",
+      "form": "8-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025107817",
+      "scores": {
+        "anomaly": 0.1053,
+        "composite": 0.3571,
+        "diversity": 0.0,
+        "reconstruction": 0.8268
+      },
+      "sic": null
+    },
+    {
+      "cik": "1145197",
+      "cluster": 473,
+      "company_name": "INSULET CORP",
+      "date": "2026-04-02",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Surgical & Medical Instruments",
+      "kind": "filing",
+      "name": "filing_000114519726000093",
+      "scores": {
+        "anomaly": 0.1032,
+        "composite": 0.3993,
+        "diversity": 0.125,
+        "reconstruction": 0.8243
+      },
+      "sic": "3841"
+    },
+    {
+      "cik": "936958",
+      "cluster": 16,
+      "company_name": "SPDR S&P MIDCAP 400 ETF TRUST",
+      "date": "2025-12-02",
+      "description": "N-30D",
+      "form": "N-30D",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000110465925117620",
+      "scores": {
+        "anomaly": 0.0978,
+        "composite": 0.3543,
+        "diversity": 0.0005,
+        "reconstruction": 0.8241
+      },
+      "sic": null
+    },
+    {
+      "cik": "51434",
+      "cluster": 0,
+      "company_name": "INTERNATIONAL PAPER CO /NEW/",
+      "date": "2026-04-02",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000005143426000062",
+      "scores": {
+        "anomaly": 0.0761,
+        "composite": 0.3474,
+        "diversity": 0.0,
+        "reconstruction": 0.8209
+      },
+      "sic": "2621"
+    },
+    {
+      "cik": "1740332",
+      "cluster": 16,
+      "company_name": "RESIDEO TECHNOLOGIES, INC.",
+      "date": "2026-02-24",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000174033226000005",
+      "scores": {
+        "anomaly": 0.0791,
+        "composite": 0.3482,
+        "diversity": 0.0005,
+        "reconstruction": 0.8205
+      },
+      "sic": "5072"
+    },
+    {
+      "cik": "872589",
+      "cluster": 16,
+      "company_name": "REGENERON PHARMACEUTICALS, INC.",
+      "date": "2026-02-04",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Pharmaceutical Preparations",
+      "kind": "filing",
+      "name": "filing_000087258926000008",
+      "scores": {
+        "anomaly": 0.0792,
+        "composite": 0.3465,
+        "diversity": 0.0005,
+        "reconstruction": 0.8162
+      },
+      "sic": "2834"
+    },
+    {
+      "cik": "813762",
+      "cluster": 16,
+      "company_name": "ICAHN ENTERPRISES L.P.",
+      "date": "2026-02-26",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Petroleum Refining",
+      "kind": "filing",
+      "name": "filing_000110465926019821",
+      "scores": {
+        "anomaly": 0.0867,
+        "composite": 0.3472,
+        "diversity": 0.0005,
+        "reconstruction": 0.8135
+      },
+      "sic": "2911"
+    },
+    {
+      "cik": "2057673",
+      "cluster": 0,
+      "company_name": "Brand Meditech Ltd",
+      "date": "2025-06-20",
+      "description": "",
+      "form": "DRS/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025056250",
+      "scores": {
+        "anomaly": 0.0954,
+        "composite": 0.3492,
+        "diversity": 0.0,
+        "reconstruction": 0.8134
+      },
+      "sic": "5047"
+    },
+    {
+      "cik": "46195",
+      "cluster": 0,
+      "company_name": "BANK OF HAWAII CORP",
+      "date": "2026-02-24",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "State Commercial Banks (national)",
+      "kind": "filing",
+      "name": "filing_000004619526000015",
+      "scores": {
+        "anomaly": 0.0955,
+        "composite": 0.3483,
+        "diversity": 0.0,
+        "reconstruction": 0.8109
+      },
+      "sic": "6022"
+    },
+    {
+      "cik": "1801169",
+      "cluster": 8,
+      "company_name": "Opendoor Technologies Inc.",
+      "date": "2025-12-23",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000210181325000001",
+      "scores": {
+        "anomaly": 0.089,
+        "composite": 0.3498,
+        "diversity": 0.0093,
+        "reconstruction": 0.8108
+      },
+      "sic": "6531"
+    },
+    {
+      "cik": "887153",
+      "cluster": 0,
+      "company_name": "GRUPO SIMEC, S.A.B. de C.V.",
+      "date": "2025-05-15",
+      "description": "ANNUAL REPORT",
+      "form": "20-F",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025044060",
+      "scores": {
+        "anomaly": 0.1,
+        "composite": 0.3487,
+        "diversity": 0.0,
+        "reconstruction": 0.8093
+      },
+      "sic": "3312"
+    },
+    {
+      "cik": "1869198",
+      "cluster": 44,
+      "company_name": "Life Time Group Holdings, Inc.",
+      "date": "2026-02-24",
+      "description": "",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000129567926000006",
+      "scores": {
+        "anomaly": 0.1007,
+        "composite": 0.3486,
+        "diversity": 0.0019,
+        "reconstruction": 0.8069
+      },
+      "sic": "7997"
+    },
+    {
+      "cik": "1214816",
+      "cluster": 0,
+      "company_name": "AXIS CAPITAL HOLDINGS LTD",
+      "date": "2026-02-27",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121481626000097",
+      "scores": {
+        "anomaly": 0.0946,
+        "composite": 0.346,
+        "diversity": 0.0,
+        "reconstruction": 0.8058
+      },
+      "sic": "6331"
+    },
+    {
+      "cik": "1012100",
+      "cluster": 0,
+      "company_name": "SEALED AIR CORP/DE",
+      "date": "2026-03-02",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000101210026000016",
+      "scores": {
+        "anomaly": 0.094,
+        "composite": 0.3457,
+        "diversity": 0.0,
+        "reconstruction": 0.8054
+      },
+      "sic": "2820"
+    },
+    {
+      "cik": "1639300",
+      "cluster": 0,
+      "company_name": "Ollie's Bargain Outlet Holdings, Inc.",
+      "date": "2026-04-03",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390026040006",
+      "scores": {
+        "anomaly": 0.0858,
+        "composite": 0.3431,
+        "diversity": 0.0,
+        "reconstruction": 0.804
+      },
+      "sic": "5331"
+    },
+    {
+      "cik": "1474735",
+      "cluster": 0,
+      "company_name": "GENERAC HOLDINGS INC.",
+      "date": "2026-02-18",
+      "description": "FORM 10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000143774926004568",
+      "scores": {
+        "anomaly": 0.0838,
+        "composite": 0.3423,
+        "diversity": 0.0,
+        "reconstruction": 0.8033
+      },
+      "sic": "3621"
+    },
+    {
+      "cik": "1324948",
+      "cluster": 0,
+      "company_name": "RBC Bearings INC",
+      "date": "2025-11-13",
+      "description": "OWNERSHIP DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025109614",
+      "scores": {
+        "anomaly": 0.1045,
+        "composite": 0.3465,
+        "diversity": 0.0,
+        "reconstruction": 0.8009
+      },
+      "sic": "3562"
+    },
+    {
+      "cik": "1571949",
+      "cluster": 0,
+      "company_name": "Intercontinental Exchange, Inc.",
+      "date": "2026-03-20",
+      "description": "PRE 14A",
+      "form": "PRE 14A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119312526117735",
+      "scores": {
+        "anomaly": 0.0884,
+        "composite": 0.3421,
+        "diversity": 0.0,
+        "reconstruction": 0.7999
+      },
+      "sic": "6200"
+    },
+    {
+      "cik": "2062440",
+      "cluster": 35,
+      "company_name": "Kyivstar Group Ltd.",
+      "date": "2026-02-10",
+      "description": "REPORT OF FOREIGN PRIVATE ISSUER",
+      "form": "6-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390026014318",
+      "scores": {
+        "anomaly": 0.0907,
+        "composite": 0.3551,
+        "diversity": 0.0357,
+        "reconstruction": 0.7998
+      },
+      "sic": "4812"
+    },
+    {
+      "cik": "11544",
+      "cluster": 0,
+      "company_name": "BERKLEY W R CORP",
+      "date": "2026-02-27",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000001154426000005",
+      "scores": {
+        "anomaly": 0.076,
+        "composite": 0.3387,
+        "diversity": 0.0,
+        "reconstruction": 0.7992
+      },
+      "sic": "6331"
+    },
+    {
+      "cik": "1158838",
+      "cluster": 0,
+      "company_name": "ADVANTEST CORP",
+      "date": "2016-04-22",
+      "description": "POST-EFFECTIVE AMENDMENT NO. 1",
+      "form": "S-8 POS",
+      "industry": "Semiconductors & Related Devices",
+      "kind": "filing",
+      "name": "filing_000094787116001120",
+      "scores": {
+        "anomaly": 0.0935,
+        "composite": 0.3429,
+        "diversity": 0.0,
+        "reconstruction": 0.7988
+      },
+      "sic": "3674"
+    },
+    {
+      "cik": "712534",
+      "cluster": 0,
+      "company_name": "FIRST MERCHANTS CORP",
+      "date": "2026-02-25",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000071253426000022",
+      "scores": {
+        "anomaly": 0.0932,
+        "composite": 0.3425,
+        "diversity": 0.0,
+        "reconstruction": 0.798
+      },
+      "sic": "6021"
+    },
+    {
+      "cik": "1751008",
+      "cluster": 4,
+      "company_name": "AppLovin Corp",
+      "date": "2026-03-12",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Services-Computer Services",
+      "kind": "filing",
+      "name": "filing_000184775726000007",
+      "scores": {
+        "anomaly": 0.0751,
+        "composite": 0.3381,
+        "diversity": 0.0004,
+        "reconstruction": 0.7978
+      },
+      "sic": "7370"
+    },
+    {
+      "cik": "1682852",
+      "cluster": 0,
+      "company_name": "Moderna, Inc.",
+      "date": "2026-02-20",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Biological Products (no diagnostics)",
+      "kind": "filing",
+      "name": "filing_000168285226000033",
+      "scores": {
+        "anomaly": 0.0753,
+        "composite": 0.3373,
+        "diversity": 0.0,
+        "reconstruction": 0.7961
+      },
+      "sic": "2836"
+    },
+    {
+      "cik": "1385849",
+      "cluster": 0,
+      "company_name": "ENERGY FUELS INC",
+      "date": "2026-04-02",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000138584926000014",
+      "scores": {
+        "anomaly": 0.1013,
+        "composite": 0.3425,
+        "diversity": 0.0,
+        "reconstruction": 0.7928
+      },
+      "sic": "1400"
+    },
+    {
+      "cik": "1736035",
+      "cluster": 0,
+      "company_name": "Blackstone Secured Lending Fund",
+      "date": "2025-08-06",
+      "description": "8-K",
+      "form": "8-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025072290",
+      "scores": {
+        "anomaly": 0.0947,
+        "composite": 0.3405,
+        "diversity": 0.0,
+        "reconstruction": 0.792
+      },
+      "sic": null
+    },
+    {
+      "cik": "1026214",
+      "cluster": 0,
+      "company_name": "FEDERAL HOME LOAN MORTGAGE CORP",
+      "date": "2026-02-06",
+      "description": "FILE 7 OF 10",
+      "form": "ABS-15G/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000102621426000009",
+      "scores": {
+        "anomaly": 0.0837,
+        "composite": 0.3376,
+        "diversity": 0.0,
+        "reconstruction": 0.7918
+      },
+      "sic": "6111"
+    },
+    {
+      "cik": "1466593",
+      "cluster": 0,
+      "company_name": "Otter Tail Corp",
+      "date": "2026-03-02",
+      "description": "ARS",
+      "form": "ARS",
+      "industry": "Electric Services",
+      "kind": "filing",
+      "name": "filing_000146659326000025",
+      "scores": {
+        "anomaly": 0.0901,
+        "composite": 0.3387,
+        "diversity": 0.0,
+        "reconstruction": 0.7905
+      },
+      "sic": "4911"
+    },
+    {
+      "cik": "1687229",
+      "cluster": 0,
+      "company_name": "Invitation Homes Inc.",
+      "date": "2026-02-19",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000168722926000016",
+      "scores": {
+        "anomaly": 0.0919,
+        "composite": 0.3391,
+        "diversity": 0.0,
+        "reconstruction": 0.7904
+      },
+      "sic": "6510"
+    },
+    {
+      "cik": "1973266",
+      "cluster": 0,
+      "company_name": "TKO Group Holdings, Inc.",
+      "date": "2026-02-25",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119312526071651",
+      "scores": {
+        "anomaly": 0.0869,
+        "composite": 0.3378,
+        "diversity": 0.0,
+        "reconstruction": 0.7902
+      },
+      "sic": "7900"
+    },
+    {
+      "cik": "1828365",
+      "cluster": 0,
+      "company_name": "RLX Technology Inc.",
+      "date": "2024-04-19",
+      "description": "FORM 20-F",
+      "form": "20-F",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000110465924049421",
+      "scores": {
+        "anomaly": 0.0839,
+        "composite": 0.3369,
+        "diversity": 0.0,
+        "reconstruction": 0.7897
+      },
+      "sic": "2111"
+    },
+    {
+      "cik": "1026214",
+      "cluster": 16,
+      "company_name": "FEDERAL HOME LOAN MORTGAGE CORP",
+      "date": "2026-02-06",
+      "description": "FILE 3 OF 10",
+      "form": "ABS-15G/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000102621426000005",
+      "scores": {
+        "anomaly": 0.0936,
+        "composite": 0.3389,
+        "diversity": 0.0005,
+        "reconstruction": 0.7884
+      },
+      "sic": "6111"
+    },
+    {
+      "cik": "880266",
+      "cluster": 19,
+      "company_name": "AGCO CORP /DE",
+      "date": "2026-02-13",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000088026626000010",
+      "scores": {
+        "anomaly": 0.0954,
+        "composite": 0.3399,
+        "diversity": 0.0022,
+        "reconstruction": 0.7881
+      },
+      "sic": "3523"
+    },
+    {
+      "cik": "2086587",
+      "cluster": 0,
+      "company_name": "York Space Systems Inc.",
+      "date": "2026-02-03",
+      "description": "3",
+      "form": "3",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119312526036389",
+      "scores": {
+        "anomaly": 0.099,
+        "composite": 0.3398,
+        "diversity": 0.0,
+        "reconstruction": 0.7875
+      },
+      "sic": "3760"
+    },
+    {
+      "cik": "825313",
+      "cluster": 0,
+      "company_name": "ALLIANCEBERNSTEIN HOLDING L.P.",
+      "date": "2026-02-12",
+      "description": "10-K ALLIANCEBERNSTEIN HOLDING L.P.",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000082531326000020",
+      "scores": {
+        "anomaly": 0.0848,
+        "composite": 0.336,
+        "diversity": 0.0,
+        "reconstruction": 0.7871
+      },
+      "sic": "6282"
+    },
+    {
+      "cik": "875357",
+      "cluster": 0,
+      "company_name": "BOK FINANCIAL CORP",
+      "date": "2026-03-19",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000087535726000023",
+      "scores": {
+        "anomaly": 0.0897,
+        "composite": 0.337,
+        "diversity": 0.0,
+        "reconstruction": 0.7865
+      },
+      "sic": "6021"
+    },
+    {
+      "cik": "1846832",
+      "cluster": 0,
+      "company_name": "dLocal Ltd",
+      "date": "2026-03-18",
+      "description": "20-F",
+      "form": "20-F",
+      "industry": "Services-Business Services NEC",
+      "kind": "filing",
+      "name": "filing_000207097926000113",
+      "scores": {
+        "anomaly": 0.0889,
+        "composite": 0.3368,
+        "diversity": 0.0,
+        "reconstruction": 0.7865
+      },
+      "sic": "7389"
+    },
+    {
+      "cik": "1801729",
+      "cluster": 0,
+      "company_name": "Nitori Holdings Co., Ltd.",
+      "date": "2021-06-04",
+      "description": "",
+      "form": "F-6EF",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119380521000806",
+      "scores": {
+        "anomaly": 0.0816,
+        "composite": 0.3345,
+        "diversity": 0.0,
+        "reconstruction": 0.7852
+      },
+      "sic": null
+    },
+    {
+      "cik": "1697862",
+      "cluster": 0,
+      "company_name": "ARGENX SE",
+      "date": "2026-03-19",
+      "description": "20-F",
+      "form": "20-F",
+      "industry": "Biological Products (no diagnostics)",
+      "kind": "filing",
+      "name": "filing_000169786226000032",
+      "scores": {
+        "anomaly": 0.0825,
+        "composite": 0.3347,
+        "diversity": 0.0,
+        "reconstruction": 0.7851
+      },
+      "sic": "2836"
+    },
+    {
+      "cik": "14930",
+      "cluster": 52,
+      "company_name": "BRUNSWICK CORP",
+      "date": "2026-02-13",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000001493026000027",
+      "scores": {
+        "anomaly": 0.0868,
+        "composite": 0.336,
+        "diversity": 0.0012,
+        "reconstruction": 0.7846
+      },
+      "sic": "3510"
+    },
+    {
+      "cik": "1704715",
+      "cluster": 375,
+      "company_name": "Alpha Metallurgical Resources, Inc.",
+      "date": "2026-01-27",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000166998026000002",
+      "scores": {
+        "anomaly": 0.0937,
+        "composite": 0.6872,
+        "diversity": 1.0,
+        "reconstruction": 0.7845
+      },
+      "sic": "1221"
+    },
+    {
+      "cik": "1465128",
+      "cluster": 0,
+      "company_name": "STARWOOD PROPERTY TRUST, INC.",
+      "date": "2025-11-10",
+      "description": "10-Q",
+      "form": "10-Q",
+      "industry": "Real Estate Investment Trusts",
+      "kind": "filing",
+      "name": "filing_000146512825000018",
+      "scores": {
+        "anomaly": 0.0831,
+        "composite": 0.3346,
+        "diversity": 0.0,
+        "reconstruction": 0.7845
+      },
+      "sic": "6798"
+    },
+    {
+      "cik": "1516324",
+      "cluster": 0,
+      "company_name": "Barratt Developments PLC/ADR",
+      "date": "2015-12-09",
+      "description": "",
+      "form": "F-6EF",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119380515002036",
+      "scores": {
+        "anomaly": 0.078,
+        "composite": 0.333,
+        "diversity": 0.0,
+        "reconstruction": 0.7837
+      },
+      "sic": null
+    },
+    {
+      "cik": "1173382",
+      "cluster": 0,
+      "company_name": "CAE INC",
+      "date": "2025-05-13",
+      "description": "6-K",
+      "form": "6-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000117338225000009",
+      "scores": {
+        "anomaly": 0.0881,
+        "composite": 0.3352,
+        "diversity": 0.0,
+        "reconstruction": 0.7828
+      },
+      "sic": "3690"
+    },
+    {
+      "cik": "10795",
+      "cluster": 0,
+      "company_name": "BECTON DICKINSON & CO",
+      "date": "2026-02-20",
+      "description": "",
+      "form": "144",
+      "industry": "Surgical & Medical Instruments",
+      "kind": "filing",
+      "name": "filing_000195004726001570",
+      "scores": {
+        "anomaly": 0.0753,
+        "composite": 0.3319,
+        "diversity": 0.0,
+        "reconstruction": 0.7825
+      },
+      "sic": "3841"
+    },
+    {
+      "cik": "46195",
+      "cluster": 0,
+      "company_name": "BANK OF HAWAII CORP",
+      "date": "2026-03-13",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "State Commercial Banks (national)",
+      "kind": "filing",
+      "name": "filing_000004619526000022",
+      "scores": {
+        "anomaly": 0.0831,
+        "composite": 0.3336,
+        "diversity": 0.0,
+        "reconstruction": 0.782
+      },
+      "sic": "6022"
+    },
+    {
+      "cik": "874015",
+      "cluster": 0,
+      "company_name": "IONIS PHARMACEUTICALS INC",
+      "date": "2026-03-11",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "Pharmaceutical Preparations",
+      "kind": "filing",
+      "name": "filing_000087401526000144",
+      "scores": {
+        "anomaly": 0.0886,
+        "composite": 0.3348,
+        "diversity": 0.0,
+        "reconstruction": 0.7816
+      },
+      "sic": "2834"
+    },
+    {
+      "cik": "920522",
+      "cluster": 0,
+      "company_name": "ESSEX PROPERTY TRUST, INC.",
+      "date": "2026-02-20",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Real Estate Investment Trusts",
+      "kind": "filing",
+      "name": "filing_000092052226000003",
+      "scores": {
+        "anomaly": 0.0808,
+        "composite": 0.3327,
+        "diversity": 0.0,
+        "reconstruction": 0.7811
+      },
+      "sic": "6798"
+    },
+    {
+      "cik": "1770787",
+      "cluster": 0,
+      "company_name": "10x Genomics, Inc.",
+      "date": "2026-02-13",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000162828026007822",
+      "scores": {
+        "anomaly": 0.0908,
+        "composite": 0.3344,
+        "diversity": 0.0,
+        "reconstruction": 0.7792
+      },
+      "sic": "3826"
+    },
+    {
+      "cik": "1764757",
+      "cluster": 0,
+      "company_name": "DiDi Global Inc.",
+      "date": "2025-04-18",
+      "description": "20-F",
+      "form": "20-F",
+      "industry": "Services-Business Services NEC",
+      "kind": "filing",
+      "name": "filing_000141057825000806",
+      "scores": {
+        "anomaly": 0.0923,
+        "composite": 0.3345,
+        "diversity": 0.0,
+        "reconstruction": 0.7786
+      },
+      "sic": "7389"
+    },
+    {
+      "cik": "100826",
+      "cluster": 0,
+      "company_name": "UNION ELECTRIC CO",
+      "date": "2025-08-04",
+      "description": "10-Q",
+      "form": "10-Q",
+      "industry": "Electric Services",
+      "kind": "filing",
+      "name": "filing_000100291025000112",
+      "scores": {
+        "anomaly": 0.0838,
+        "composite": 0.3322,
+        "diversity": 0.0,
+        "reconstruction": 0.7782
+      },
+      "sic": "4911"
+    },
+    {
+      "cik": "1026214",
+      "cluster": 0,
+      "company_name": "FEDERAL HOME LOAN MORTGAGE CORP",
+      "date": "2026-02-06",
+      "description": "FILE 6 OF 10",
+      "form": "ABS-15G/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000102621426000008",
+      "scores": {
+        "anomaly": 0.0919,
+        "composite": 0.3338,
+        "diversity": 0.0,
+        "reconstruction": 0.7769
+      },
+      "sic": "6111"
+    },
+    {
+      "cik": "1872195",
+      "cluster": 0,
+      "company_name": "Bullish",
+      "date": "2026-03-10",
+      "description": "FORM 20-F",
+      "form": "20-F",
+      "industry": "Finance Services",
+      "kind": "filing",
+      "name": "filing_000143774926007417",
+      "scores": {
+        "anomaly": 0.0873,
+        "composite": 0.3326,
+        "diversity": 0.0,
+        "reconstruction": 0.7769
+      },
+      "sic": "6199"
+    },
+    {
+      "cik": "320335",
+      "cluster": 0,
+      "company_name": "GLOBE LIFE INC.",
+      "date": "2026-03-19",
+      "description": "ARS (2025 ANNUAL REPORT)",
+      "form": "ARS",
+      "industry": "Life Insurance",
+      "kind": "filing",
+      "name": "filing_000032033526000133",
+      "scores": {
+        "anomaly": 0.0942,
+        "composite": 0.3341,
+        "diversity": 0.0,
+        "reconstruction": 0.7764
+      },
+      "sic": "6311"
+    },
+    {
+      "cik": "875320",
+      "cluster": 52,
+      "company_name": "VERTEX PHARMACEUTICALS INC / MA",
+      "date": "2026-04-02",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "Pharmaceutical Preparations",
+      "kind": "filing",
+      "name": "filing_000087532026000153",
+      "scores": {
+        "anomaly": 0.0969,
+        "composite": 0.3351,
+        "diversity": 0.0012,
+        "reconstruction": 0.7761
+      },
+      "sic": "2834"
+    },
+    {
+      "cik": "1496919",
+      "cluster": 0,
+      "company_name": "MARFRIG GLOBAL FOODS S.A.",
+      "date": "2025-08-13",
+      "description": "AMENDMENT NO. 13 TO FORM CB",
+      "form": "CB/A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000121390025075382",
+      "scores": {
+        "anomaly": 0.0893,
+        "composite": 0.3327,
+        "diversity": 0.0,
+        "reconstruction": 0.776
+      },
+      "sic": null
+    },
+    {
+      "cik": "1551182",
+      "cluster": 0,
+      "company_name": "Eaton Corp plc",
+      "date": "2026-03-13",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000119312526105117",
+      "scores": {
+        "anomaly": 0.0907,
+        "composite": 0.333,
+        "diversity": 0.0,
+        "reconstruction": 0.7758
+      },
+      "sic": "3590"
+    },
+    {
+      "cik": "1318220",
+      "cluster": 0,
+      "company_name": "Waste Connections, Inc.",
+      "date": "2026-02-20",
+      "description": "PRIMARY DOCUMENT",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000106429926000002",
+      "scores": {
+        "anomaly": 0.078,
+        "composite": 0.3298,
+        "diversity": 0.0,
+        "reconstruction": 0.7758
+      },
+      "sic": "4953"
+    },
+    {
+      "cik": "931015",
+      "cluster": 0,
+      "company_name": "Polaris Inc.",
+      "date": "2026-02-13",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000162828026008033",
+      "scores": {
+        "anomaly": 0.083,
+        "composite": 0.331,
+        "diversity": 0.0,
+        "reconstruction": 0.7755
+      },
+      "sic": "3790"
+    },
+    {
+      "cik": "1505880",
+      "cluster": 0,
+      "company_name": "Pandora A/S / ADR",
+      "date": "2014-11-12",
+      "description": "FORM F-6EF",
+      "form": "F-6EF",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000157104914006193",
+      "scores": {
+        "anomaly": 0.0799,
+        "composite": 0.33,
+        "diversity": 0.0,
+        "reconstruction": 0.775
+      },
+      "sic": "8880"
+    },
+    {
+      "cik": "815556",
+      "cluster": 52,
+      "company_name": "FASTENAL CO",
+      "date": "2026-02-05",
+      "description": "ARS",
+      "form": "ARS",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000081555626000015",
+      "scores": {
+        "anomaly": 0.0832,
+        "composite": 0.3311,
+        "diversity": 0.0012,
+        "reconstruction": 0.7748
+      },
+      "sic": "5200"
+    },
+    {
+      "cik": "7084",
+      "cluster": 0,
+      "company_name": "Archer-Daniels-Midland Co",
+      "date": "2026-04-02",
+      "description": "",
+      "form": "4",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000122520826004226",
+      "scores": {
+        "anomaly": 0.0889,
+        "composite": 0.3318,
+        "diversity": 0.0,
+        "reconstruction": 0.7739
+      },
+      "sic": "2070"
+    },
+    {
+      "cik": "861884",
+      "cluster": 0,
+      "company_name": "RELIANCE, INC.",
+      "date": "2026-04-02",
+      "description": "DEF 14A",
+      "form": "DEF 14A",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000110465926039140",
+      "scores": {
+        "anomaly": 0.0861,
+        "composite": 0.3309,
+        "diversity": 0.0,
+        "reconstruction": 0.7735
+      },
+      "sic": "5051"
+    },
+    {
+      "cik": "1636282",
+      "cluster": 44,
+      "company_name": "Spyre Therapeutics, Inc.",
+      "date": "2026-02-19",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Pharmaceutical Preparations",
+      "kind": "filing",
+      "name": "filing_000163628226000020",
+      "scores": {
+        "anomaly": 0.0752,
+        "composite": 0.3288,
+        "diversity": 0.0019,
+        "reconstruction": 0.7733
+      },
+      "sic": "2834"
+    },
+    {
+      "cik": "1061574",
+      "cluster": 0,
+      "company_name": "CGI INC",
+      "date": "2025-11-05",
+      "description": "6-K",
+      "form": "6-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000106157425000006",
+      "scores": {
+        "anomaly": 0.0891,
+        "composite": 0.3315,
+        "diversity": 0.0,
+        "reconstruction": 0.7731
+      },
+      "sic": "8742"
+    },
+    {
+      "cik": "1791863",
+      "cluster": 0,
+      "company_name": "Brookfield Renewable Corp",
+      "date": "2026-02-27",
+      "description": "20-F",
+      "form": "20-F",
+      "industry": "Electric Services",
+      "kind": "filing",
+      "name": "filing_000179186326000004",
+      "scores": {
+        "anomaly": 0.0869,
+        "composite": 0.3309,
+        "diversity": 0.0,
+        "reconstruction": 0.7729
+      },
+      "sic": "4911"
+    },
+    {
+      "cik": "1489079",
+      "cluster": 0,
+      "company_name": "Adaro Energy PT/ADR/",
+      "date": "2022-03-14",
+      "description": "F-6 POS",
+      "form": "F-6 POS",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000101915522000051",
+      "scores": {
+        "anomaly": 0.0764,
+        "composite": 0.3283,
+        "diversity": 0.0,
+        "reconstruction": 0.7729
+      },
+      "sic": "8880"
+    },
+    {
+      "cik": "899689",
+      "cluster": 0,
+      "company_name": "VORNADO REALTY TRUST",
+      "date": "2026-02-09",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Real Estate Investment Trusts",
+      "kind": "filing",
+      "name": "filing_000089968926000009",
+      "scores": {
+        "anomaly": 0.0859,
+        "composite": 0.3306,
+        "diversity": 0.0,
+        "reconstruction": 0.7728
+      },
+      "sic": "6798"
+    },
+    {
+      "cik": "1956827",
+      "cluster": 0,
+      "company_name": "Abivax S.A.",
+      "date": "2025-12-15",
+      "description": "6-K",
+      "form": "6-K",
+      "industry": "Pharmaceutical Preparations",
+      "kind": "filing",
+      "name": "filing_000195682725000035",
+      "scores": {
+        "anomaly": 0.0842,
+        "composite": 0.3301,
+        "diversity": 0.0,
+        "reconstruction": 0.7726
+      },
+      "sic": "2834"
+    },
+    {
+      "cik": "2052568",
+      "cluster": 0,
+      "company_name": "Legence Corp.",
+      "date": "2026-03-30",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000205256826000008",
+      "scores": {
+        "anomaly": 0.0852,
+        "composite": 0.3303,
+        "diversity": 0.0,
+        "reconstruction": 0.7725
+      },
+      "sic": "1700"
+    },
+    {
+      "cik": "856982",
+      "cluster": 0,
+      "company_name": "MERIT MEDICAL SYSTEMS INC",
+      "date": "2026-02-24",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Surgical & Medical Instruments",
+      "kind": "filing",
+      "name": "filing_000085698226000008",
+      "scores": {
+        "anomaly": 0.0958,
+        "composite": 0.3329,
+        "diversity": 0.0,
+        "reconstruction": 0.7723
+      },
+      "sic": "3841"
+    },
+    {
+      "cik": "1334036",
+      "cluster": 16,
+      "company_name": "Crocs, Inc.",
+      "date": "2026-02-12",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000133403626000006",
+      "scores": {
+        "anomaly": 0.0934,
+        "composite": 0.3322,
+        "diversity": 0.0005,
+        "reconstruction": 0.7717
+      },
+      "sic": "3021"
+    },
+    {
+      "cik": "1107843",
+      "cluster": 44,
+      "company_name": "QUALYS, INC.",
+      "date": "2026-02-20",
+      "description": "10-K",
+      "form": "10-K",
+      "industry": "Prepackaged Software",
+      "kind": "filing",
+      "name": "filing_000110784326000008",
+      "scores": {
+        "anomaly": 0.0921,
+        "composite": 0.332,
+        "diversity": 0.0019,
+        "reconstruction": 0.7708
+      },
+      "sic": "7372"
+    },
+    {
+      "cik": "1618732",
+      "cluster": 0,
+      "company_name": "Nutanix, Inc.",
+      "date": "2026-03-02",
+      "description": "10-Q",
+      "form": "10-Q",
+      "industry": "Prepackaged Software",
+      "kind": "filing",
+      "name": "filing_000119312526085397",
+      "scores": {
+        "anomaly": 0.0815,
+        "composite": 0.3287,
+        "diversity": 0.0,
+        "reconstruction": 0.7707
+      },
+      "sic": "7372"
+    },
+    {
+      "cik": "104889",
+      "cluster": 16,
+      "company_name": "Graham Holdings Co",
+      "date": "2026-02-25",
+      "description": "FORM 10-K",
+      "form": "10-K",
+      "industry": "",
+      "kind": "filing",
+      "name": "filing_000162828026011405",
+      "scores": {
+        "anomaly": 0.0872,
+        "composite": 0.3302,
+        "diversity": 0.0005,
+        "reconstruction": 0.7704
+      },
+      "sic": "8200"
+    }
+  ]
+}
