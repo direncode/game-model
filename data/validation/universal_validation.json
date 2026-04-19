@@ -1,0 +1,1757 @@
+{
+  "generated_at": "2026-04-19T18:53:42Z",
+  "wall_seconds": 1.0647607000137214,
+  "n_iterations": 200,
+  "seed": 42,
+  "corpora": [
+    {
+      "corpus_id": "edgar_5000",
+      "path": "scripts\\edgar_btut_result_5000.json",
+      "survivor_count": 4999,
+      "load_seconds": 0.05015120000462048,
+      "entity_types": [
+        "filing"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.8588,
+      "top_entity_name": "fact_4904_AssetRetirementObligation",
+      "null_test": {
+        "n_survivors": 4999,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 23.04241093378394,
+        "median_z_score": 11.60914376905519,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8262400000000001,
+            "null_mean": 0.44531614999999997,
+            "null_p95": 0.5541010000000001,
+            "z_score": 5.18122199514564,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.8130319999999999,
+            "null_mean": 0.44570386,
+            "null_p95": 0.5198482,
+            "z_score": 8.234752688629776,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.801096,
+            "null_mean": 0.45008489000000007,
+            "null_p95": 0.5135433999999999,
+            "z_score": 10.598274015520001,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.788357,
+            "null_mean": 0.44971418999999996,
+            "null_p95": 0.48342284999999996,
+            "z_score": 15.765865553171047,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.8853199999999999,
+            "null_mean": 0.25538510000000003,
+            "null_p95": 0.3802924999999999,
+            "z_score": 8.58792501297229,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.824004,
+            "null_mean": 0.25405311999999997,
+            "null_p95": 0.31740919999999995,
+            "z_score": 13.61631809854302,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.77914,
+            "null_mean": 0.25147213,
+            "null_p95": 0.3007060999999999,
+            "z_score": 16.22876244511815,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.7361710000000001,
+            "null_mean": 0.2502263,
+            "null_p95": 0.28542684999999995,
+            "z_score": 23.04241093378394,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8734500000000001,
+            "null_mean": 0.60431725,
+            "null_p95": 0.650541,
+            "z_score": 9.936352463216325,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.8436720000000001,
+            "null_mean": 0.6085983399999999,
+            "null_p95": 0.639037,
+            "z_score": 13.098592813445245,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.8214299999999999,
+            "null_mean": 0.60776719,
+            "null_p95": 0.6272841,
+            "z_score": 18.59788103995764,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.799781,
+            "null_mean": 0.60891267,
+            "null_p95": 0.62155995,
+            "z_score": 22.695919017665297,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.39330789999999993,
+            "null_p95": 0.625197,
+            "z_score": 4.364908405024552,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.40939387999999993,
+            "null_p95": 0.5663879999999999,
+            "z_score": 6.215198061107691,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.41355715000000004,
+            "null_p95": 0.5123182000000001,
+            "z_score": 9.190419231112067,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.408338545,
+            "null_p95": 0.48166685,
+            "z_score": 12.62001352259038,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "da0407e5ce7b8b98dd33b07c46a593357199d81b11fd9725dc2a5a360438f80f",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "edgar",
+      "path": "scripts\\cross_era_analysis\\output\\edgar_btut_result_v2.json",
+      "survivor_count": 499,
+      "load_seconds": 0.004508999991230667,
+      "entity_types": [
+        "filing"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.8588,
+      "top_entity_name": "fact_4904_AssetRetirementObligation",
+      "null_test": {
+        "n_survivors": 499,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 16.189430777641135,
+        "median_z_score": 8.242828175827157,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8230299999999999,
+            "null_mean": 0.52250665,
+            "null_p95": 0.6368594999999999,
+            "z_score": 4.486432282617838,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.810576,
+            "null_mean": 0.52117392,
+            "null_p95": 0.5911736000000001,
+            "z_score": 7.187787756354359,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.7990479999999998,
+            "null_mean": 0.5251169099999999,
+            "null_p95": 0.5734904000000001,
+            "z_score": 9.691850991601248,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.7853480000000002,
+            "null_mean": 0.525915375,
+            "null_p95": 0.5556998999999999,
+            "z_score": 13.558202025172935,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.8854200000000001,
+            "null_mean": 0.32876105,
+            "null_p95": 0.4865465,
+            "z_score": 5.88293621840345,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.8231400000000001,
+            "null_mean": 0.34140797999999994,
+            "null_p95": 0.44671239999999995,
+            "z_score": 8.01600148822337,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.777124,
+            "null_mean": 0.33598521000000003,
+            "null_p95": 0.39445059999999993,
+            "z_score": 11.48632385833475,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.730401,
+            "null_mean": 0.33778601499999994,
+            "null_p95": 0.37900435,
+            "z_score": 16.189430777641135,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8734500000000001,
+            "null_mean": 0.62827935,
+            "null_p95": 0.6979590000000001,
+            "z_score": 6.087925343120654,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.843436,
+            "null_mean": 0.6284255000000001,
+            "null_p95": 0.672519,
+            "z_score": 8.469654863430943,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.8214400000000001,
+            "null_mean": 0.63113623,
+            "null_p95": 0.6594852,
+            "z_score": 11.290064750371963,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.7995579999999998,
+            "null_mean": 0.63143999,
+            "null_p95": 0.6497231,
+            "z_score": 15.162260653487628,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.52884465,
+            "null_p95": 0.7501,
+            "z_score": 3.4807394593000196,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.5462328399999999,
+            "null_p95": 0.7035115999999998,
+            "z_score": 4.955766017309282,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.54656286,
+            "null_p95": 0.6416213000000001,
+            "z_score": 7.647194977758739,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.5376429399999999,
+            "null_p95": 0.6148847,
+            "z_score": 10.644877689254086,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "2b61c73c930443d6befbb3d17f93dc84fdf5a78d5f25b29fcfac9f69f0656f4d",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "heterogeneous",
+      "path": "scripts\\cross_era_analysis\\output\\heterogeneous_btut_result_v2.json",
+      "survivor_count": 595,
+      "load_seconds": 0.004995199997210875,
+      "entity_types": [
+        "concept",
+        "event",
+        "location",
+        "patent_chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9263,
+      "top_entity_name": "radiative_radio__event__audion_patented",
+      "null_test": {
+        "n_survivors": 595,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 23.59754964160723,
+        "median_z_score": 12.61437592869385,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8681699999999999,
+            "null_mean": 0.43017315000000006,
+            "null_p95": 0.5200084999999999,
+            "z_score": 8.423634606175279,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.8415600000000001,
+            "null_mean": 0.43154048,
+            "null_p95": 0.48712200000000005,
+            "z_score": 11.985994000871413,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.808908,
+            "null_mean": 0.43052193000000005,
+            "null_p95": 0.47149509999999994,
+            "z_score": 16.44266274496428,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.7361449999999999,
+            "null_mean": 0.4309772049999999,
+            "null_p95": 0.45756800000000003,
+            "z_score": 20.16025858076034,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.98145,
+            "null_mean": 0.218827,
+            "null_p95": 0.3211929999999999,
+            "z_score": 13.835939541753485,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.8737400000000001,
+            "null_mean": 0.223819,
+            "null_p95": 0.28507379999999993,
+            "z_score": 18.673111528788088,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.768346,
+            "null_mean": 0.22232058999999998,
+            "null_p95": 0.2608252,
+            "z_score": 23.59754964160723,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.587211,
+            "null_mean": 0.22440920499999997,
+            "null_p95": 0.25230354999999993,
+            "z_score": 21.72584750351356,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.83294,
+            "null_mean": 0.6215711,
+            "null_p95": 0.677002,
+            "z_score": 6.053187762281473,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.816028,
+            "null_mean": 0.61866326,
+            "null_p95": 0.658579,
+            "z_score": 8.239519651680336,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.7995019999999999,
+            "null_mean": 0.62184557,
+            "null_p95": 0.6461908999999999,
+            "z_score": 11.537780050435778,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.776028,
+            "null_mean": 0.6176893450000001,
+            "null_p95": 0.6372862,
+            "z_score": 13.242757856516286,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.37497745000000005,
+            "null_p95": 0.5872599999999997,
+            "z_score": 5.0256155109751575,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.363018,
+            "null_p95": 0.5113774,
+            "z_score": 7.306365575286978,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.36515234,
+            "null_p95": 0.4617435,
+            "z_score": 10.411771459708559,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.36689296,
+            "null_p95": 0.4366030499999999,
+            "z_score": 16.071127809007933,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "1c0ce49ab89053e4b7647a3eaf78a3dac2fdfacc80477cbae3323e2a4052d65b",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "latk_mini",
+      "path": "scripts\\cross_era_analysis\\output\\latk_mini_btut_result_v2.json",
+      "survivor_count": 1498,
+      "load_seconds": 0.011574100004509091,
+      "entity_types": [
+        "chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.8871,
+      "top_entity_name": "latk_polymath__newton_optics__concept__newton_s_rings",
+      "null_test": {
+        "n_survivors": 1498,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 29.72244137279645,
+        "median_z_score": 15.191266632504707,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8708500000000001,
+            "null_mean": 0.3682161,
+            "null_p95": 0.46755300000000005,
+            "z_score": 10.15700300329243,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.852328,
+            "null_mean": 0.36298344,
+            "null_p95": 0.4181091999999999,
+            "z_score": 15.547017440548602,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.830304,
+            "null_mean": 0.36628501,
+            "null_p95": 0.40408809999999995,
+            "z_score": 20.174276551251562,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.802414,
+            "null_mean": 0.36801389,
+            "null_p95": 0.3963537,
+            "z_score": 26.958097309016807,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.9758000000000001,
+            "null_mean": 0.24780715,
+            "null_p95": 0.3429425,
+            "z_score": 13.684921301467034,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.902004,
+            "null_mean": 0.25076292,
+            "null_p95": 0.31436299999999995,
+            "z_score": 19.170402010793904,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.845024,
+            "null_mean": 0.25115859999999995,
+            "null_p95": 0.2922875999999999,
+            "z_score": 25.149373735993077,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.7723160000000001,
+            "null_mean": 0.251094105,
+            "null_p95": 0.28186215,
+            "z_score": 29.72244137279645,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8456699999999999,
+            "null_mean": 0.5507640500000001,
+            "null_p95": 0.6024465000000001,
+            "z_score": 8.332145878627275,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.814304,
+            "null_mean": 0.5498193600000001,
+            "null_p95": 0.5837739999999999,
+            "z_score": 11.929055150759245,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.7931579999999999,
+            "null_mean": 0.55093548,
+            "null_p95": 0.5776033,
+            "z_score": 14.835515824460812,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.766226,
+            "null_mean": 0.5513864599999999,
+            "null_p95": 0.5696298000000001,
+            "z_score": 19.296173076893435,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.2466092,
+            "null_p95": 0.40370300000000003,
+            "z_score": 7.106168629682014,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.2499785,
+            "null_p95": 0.39117339999999995,
+            "z_score": 9.377238476154256,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.24533555999999998,
+            "null_p95": 0.3411782,
+            "z_score": 13.280469858226255,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.23837256499999995,
+            "null_p95": 0.31088119999999997,
+            "z_score": 19.360912790266532,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "950ba868ffeb79b65f5402e86204a65783a75cb5bcb04e973082897cbec8a4dd",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "latk_physics",
+      "path": "scripts\\cross_era_analysis\\output\\latk_physics_btut_result_v2.json",
+      "survivor_count": 4999,
+      "load_seconds": 0.04806049997569062,
+      "entity_types": [
+        "chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.8959,
+      "top_entity_name": "latk_physics__arxiv__person__en_hui_wang",
+      "null_test": {
+        "n_survivors": 4999,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 30.367053922081805,
+        "median_z_score": 11.849526071139927,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.8761000000000001,
+            "null_mean": 0.59612595,
+            "null_p95": 0.6759805,
+            "z_score": 5.454901022238403,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.8577800000000001,
+            "null_mean": 0.5973436599999999,
+            "null_p95": 0.6591186,
+            "z_score": 7.646907586849597,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.8439659999999999,
+            "null_mean": 0.59948505,
+            "null_p95": 0.6361053,
+            "z_score": 10.421093585644055,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.828022,
+            "null_mean": 0.59903641,
+            "null_p95": 0.6229061,
+            "z_score": 14.791069593902474,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.98142,
+            "null_mean": 0.53500275,
+            "null_p95": 0.5873939999999999,
+            "z_score": 13.277958556635797,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.9463320000000001,
+            "null_mean": 0.53525538,
+            "null_p95": 0.5745878000000001,
+            "z_score": 17.511812269402963,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.909552,
+            "null_mean": 0.53565455,
+            "null_p95": 0.5620523999999999,
+            "z_score": 24.056101273578637,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.8727779999999997,
+            "null_mean": 0.53575969,
+            "null_p95": 0.55317255,
+            "z_score": 30.367053922081805,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.9497900000000001,
+            "null_mean": 0.6672043999999999,
+            "null_p95": 0.7127209999999999,
+            "z_score": 10.343311873077905,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.9343079999999999,
+            "null_mean": 0.6671856199999999,
+            "null_p95": 0.696756,
+            "z_score": 16.257806158565245,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.9195720000000001,
+            "null_mean": 0.6680688800000002,
+            "null_p95": 0.6885070999999999,
+            "z_score": 20.205231317334576,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.9006619999999999,
+            "null_mean": 0.6677791000000001,
+            "null_p95": 0.6807921499999999,
+            "z_score": 27.747392497527876,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.5584984,
+            "null_p95": 0.8001925,
+            "z_score": 2.957031197011942,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.56902358,
+            "null_p95": 0.7268724,
+            "z_score": 4.580506054149542,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.56807035,
+            "null_p95": 0.6725375,
+            "z_score": 6.232728646241084,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.562915995,
+            "null_p95": 0.63107875,
+            "z_score": 10.131860065064625,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "8fbf66709e1d155d7f54150b0abead59719663eff915da0ed09df90c4be1c9c7",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "linguistics",
+      "path": "scripts\\cross_era_analysis\\output\\linguistics_btut_result_v2.json",
+      "survivor_count": 289,
+      "load_seconds": 0.002770899998722598,
+      "entity_types": [
+        "concept",
+        "document_chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.963,
+      "top_entity_name": "historical_saussure_structuralism__person__ferdinand_de_saussure",
+      "null_test": {
+        "n_survivors": 289,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 17.56118999422848,
+        "median_z_score": 11.811657697181387,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.89674,
+            "null_mean": 0.4311328,
+            "null_p95": 0.5460754999999999,
+            "z_score": 7.38173245026086,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.869604,
+            "null_mean": 0.43164500000000006,
+            "null_p95": 0.49207340000000005,
+            "z_score": 11.527960591097033,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.8133579999999999,
+            "null_mean": 0.43571923999999995,
+            "null_p95": 0.4775189999999999,
+            "z_score": 14.121766214316898,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.6937279999999998,
+            "null_mean": 0.4349643449999999,
+            "null_p95": 0.46396729999999997,
+            "z_score": 15.638749442946525,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.97604,
+            "null_mean": 0.2241012,
+            "null_p95": 0.3748499999999999,
+            "z_score": 7.884486019877739,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.9061120000000001,
+            "null_mean": 0.22374663999999997,
+            "null_p95": 0.3203376,
+            "z_score": 12.213722798831302,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.795888,
+            "null_mean": 0.22550521,
+            "null_p95": 0.28268709999999997,
+            "z_score": 16.037159309791207,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.509515,
+            "null_mean": 0.229550445,
+            "null_p95": 0.2667669,
+            "z_score": 13.186635954864606,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.9045400000000001,
+            "null_mean": 0.6405238999999999,
+            "null_p95": 0.6969544999999999,
+            "z_score": 7.457464005606684,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.8537600000000001,
+            "null_mean": 0.63954074,
+            "null_p95": 0.6864038,
+            "z_score": 8.692168380599961,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.817744,
+            "null_mean": 0.63977955,
+            "null_p95": 0.6649699,
+            "z_score": 11.099681032981213,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.7760889999999999,
+            "null_mean": 0.6380590600000001,
+            "null_p95": 0.6545157500000001,
+            "z_score": 12.73305656000477,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.35950835,
+            "null_p95": 0.5725395000000001,
+            "z_score": 5.2654665905860165,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.35744866000000003,
+            "null_p95": 0.5184918,
+            "z_score": 7.415596213886384,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.35000202999999996,
+            "null_p95": 0.4317891999999999,
+            "z_score": 12.09535480326574,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 0.879164,
+            "null_mean": 0.351067685,
+            "null_p95": 0.39952194999999996,
+            "z_score": 17.56118999422848,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "3b451c104d1964364b33acd2c83a10bfdbb627c30bacdca883ea85d0687d6d5d",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "polymath",
+      "path": "scripts\\cross_era_analysis\\output\\polymath_btut_result_v2.json",
+      "survivor_count": 1195,
+      "load_seconds": 0.009035299997776747,
+      "entity_types": [
+        "concept",
+        "event",
+        "location",
+        "patent_chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9481,
+      "top_entity_name": "newton_alchemy__event__keynes_auctions_newton_alchemical_manuscripts",
+      "null_test": {
+        "n_survivors": 1195,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 29.94314452088781,
+        "median_z_score": 15.648996644517412,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.9127000000000001,
+            "null_mean": 0.39212094999999997,
+            "null_p95": 0.47470799999999985,
+            "z_score": 11.006688164889868,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.8811359999999999,
+            "null_mean": 0.39730730000000003,
+            "null_p95": 0.448496,
+            "z_score": 15.809045643053015,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.832888,
+            "null_mean": 0.39521363,
+            "null_p95": 0.4316808,
+            "z_score": 21.914448351183683,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.749912,
+            "null_mean": 0.395675735,
+            "null_p95": 0.42070755,
+            "z_score": 25.363444458803958,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.97714,
+            "null_mean": 0.24888445,
+            "null_p95": 0.3391725,
+            "z_score": 15.48894764598181,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.9080039999999999,
+            "null_mean": 0.24573138,
+            "null_p95": 0.29366479999999995,
+            "z_score": 23.839791199738237,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.8317840000000001,
+            "null_mean": 0.24769624,
+            "null_p95": 0.28164339999999993,
+            "z_score": 29.266195725505536,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.6646880000000001,
+            "null_mean": 0.2457353,
+            "null_p95": 0.26832985,
+            "z_score": 29.94314452088781,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.8989,
+            "null_mean": 0.5709322499999999,
+            "null_p95": 0.6315055,
+            "z_score": 8.227315133231839,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.878176,
+            "null_mean": 0.56981982,
+            "null_p95": 0.611047,
+            "z_score": 11.997069279183243,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.84736,
+            "null_mean": 0.57034632,
+            "null_p95": 0.6005749999999999,
+            "z_score": 13.699419212940587,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.8077919999999998,
+            "null_mean": 0.570085255,
+            "null_p95": 0.5885811999999999,
+            "z_score": 19.352773289426402,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.3083806,
+            "null_p95": 0.4928009999999999,
+            "z_score": 6.076585246574831,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.30412442,
+            "null_p95": 0.4425383999999999,
+            "z_score": 8.098236304124242,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.30446111000000003,
+            "null_p95": 0.38574689999999995,
+            "z_score": 12.951811966881394,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 1.0,
+            "null_mean": 0.30022166499999997,
+            "null_p95": 0.36242170000000007,
+            "z_score": 19.12742597741587,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "b8e3c981d5a97b8e6607479427a58bad4d8517468d35178bd53996926c717e48",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "standalone",
+      "path": "scripts\\cross_era_analysis\\output\\standalone_btut_result.json",
+      "survivor_count": 0,
+      "load_seconds": 0.03237140001147054,
+      "entity_types": [],
+      "score_dims_present": [],
+      "top_composite": 0.0,
+      "top_entity_name": null,
+      "null_test": {
+        "skipped": "too few survivors (<10)",
+        "n": 0
+      },
+      "analyze": {
+        "cluster_count": 0,
+        "paradigm_distribution": {
+          "by_corpus_subcorpus_role": [],
+          "role_counts": {},
+          "hypothesis_by_corpus": {}
+        },
+        "convergent_clusters": 0,
+        "cross_era_anchors": 0,
+        "convergence_index_entries": 0,
+        "top_rank1_example": null
+      },
+      "reproducibility_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "readiness_score": 25
+    },
+    {
+      "corpus_id": "tesla_crossera",
+      "path": "scripts\\cross_era_analysis\\output\\tesla_crossera_btut_result_v2.json",
+      "survivor_count": 500,
+      "load_seconds": 0.013909800007240847,
+      "entity_types": [
+        "patent_chunk"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.7569,
+      "top_entity_name": "info_HEVC2013__c046",
+      "null_test": {
+        "n_survivors": 500,
+        "n_iterations": 200,
+        "K_values": [
+          10,
+          25,
+          50,
+          100
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 21.454685235869725,
+        "median_z_score": 11.701821786557899,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true_mean": 0.7168599999999999,
+            "null_mean": 0.37274795,
+            "null_p95": 0.4312744999999999,
+            "z_score": 8.402503542622602,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true_mean": 0.6887880000000002,
+            "null_mean": 0.37596329999999994,
+            "null_p95": 0.4178436,
+            "z_score": 12.26712119582118,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true_mean": 0.662684,
+            "null_mean": 0.37523973999999993,
+            "null_p95": 0.4052578,
+            "z_score": 16.44575600016993,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true_mean": 0.6096299999999999,
+            "null_mean": 0.375904825,
+            "null_p95": 0.39433794999999994,
+            "z_score": 21.2240246788826,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true_mean": 0.44869000000000003,
+            "null_mean": 0.09049109999999999,
+            "null_p95": 0.13782499999999995,
+            "z_score": 19.807447185008463,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true_mean": 0.255168,
+            "null_mean": 0.09265356000000001,
+            "null_p95": 0.11997359999999999,
+            "z_score": 12.748257923717853,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true_mean": 0.178996,
+            "null_mean": 0.09273859999999999,
+            "null_p95": 0.1103555,
+            "z_score": 9.766013313726063,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true_mean": 0.13735700000000003,
+            "null_mean": 0.09286087500000001,
+            "null_p95": 0.10306910000000001,
+            "z_score": 7.727644039260111,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true_mean": 0.91557,
+            "null_mean": 0.6645658,
+            "null_p95": 0.724123,
+            "z_score": 6.591993257142232,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true_mean": 0.8832800000000001,
+            "null_mean": 0.66122072,
+            "null_p95": 0.7040474,
+            "z_score": 9.041416613583992,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true_mean": 0.8508239999999999,
+            "null_mean": 0.6631136699999999,
+            "null_p95": 0.6892233,
+            "z_score": 11.136522377294618,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true_mean": 0.815795,
+            "null_mean": 0.6631179349999999,
+            "null_p95": 0.6835986500000001,
+            "z_score": 13.412273690764291,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true_mean": 1.0,
+            "null_mean": 0.26303144999999994,
+            "null_p95": 0.46680349999999987,
+            "z_score": 6.4123698163281775,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true_mean": 1.0,
+            "null_mean": 0.25581176,
+            "null_p95": 0.42477859999999995,
+            "z_score": 8.920974754474862,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true_mean": 1.0,
+            "null_mean": 0.2527768,
+            "null_p95": 0.3386306999999999,
+            "z_score": 14.120886032968656,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true_mean": 0.975,
+            "null_mean": 0.25244422499999997,
+            "null_p95": 0.30639344999999996,
+            "z_score": 21.454685235869725,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "9310a2e33804d7aa44b0712ba464d5a9057ff4b2dbf61cd55829389c2faeb2ec",
+      "readiness_score": 85
+    },
+    {
+      "corpus_id": "einstein",
+      "path": "scripts\\results\\einstein_btut_result.json",
+      "survivor_count": 9,
+      "load_seconds": 0.0004721999866887927,
+      "entity_types": [
+        "concept",
+        "event",
+        "location"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9981,
+      "top_entity_name": "einstein_unified_field__event__last_manuscripts_princeton_1955",
+      "null_test": {
+        "skipped": "too few survivors (<10)",
+        "n": 9
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "1bcd7ec23c5a57e2d2114503fe747cd84ab7e592752dc101f7d28cc62cda3af9",
+      "readiness_score": 25
+    },
+    {
+      "corpus_id": "turing",
+      "path": "scripts\\results\\turing_btut_result.json",
+      "survivor_count": 18,
+      "load_seconds": 0.0003865000035148114,
+      "entity_types": [
+        "concept",
+        "event",
+        "location"
+      ],
+      "score_dims_present": [
+        "anomaly",
+        "composite",
+        "diversity",
+        "reconstruction"
+      ],
+      "top_composite": 0.9562,
+      "top_entity_name": "turing_morphogenesis__location__cambridge_plant_lab",
+      "null_test": {
+        "n_survivors": 18,
+        "n_iterations": 200,
+        "K_values": [
+          4
+        ],
+        "total_metrics": 4,
+        "significant_05": 4,
+        "significant_001": 4,
+        "fraction_significant_05": 1.0,
+        "max_z_score": 3.5792925944369145,
+        "median_z_score": 2.931141293491934,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 4,
+            "true_mean": 0.778675,
+            "null_mean": 0.55664725,
+            "null_p95": 0.6939837499999999,
+            "z_score": 3.0381249744046044,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 4,
+            "true_mean": 0.99675,
+            "null_mean": 0.635945,
+            "null_p95": 0.8329212499999997,
+            "z_score": 2.824157612579264,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 4,
+            "true_mean": 0.924825,
+            "null_mean": 0.7268036250000001,
+            "null_p95": 0.84076125,
+            "z_score": 2.733104722595145,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 4,
+            "true_mean": 0.833325,
+            "null_mean": 0.27270725,
+            "null_p95": 0.5625,
+            "z_score": 3.5792925944369145,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ]
+      },
+      "analyze": {
+        "error": "AttributeError: 'ConvergenceEntry' object has no attribute 'entity_name'"
+      },
+      "reproducibility_digest": "0c4140252a8d3fc26b4a1b2a63398da43f13b824f2c0b1dda8f2f574702229fe",
+      "readiness_score": 75
+    }
+  ],
+  "aggregate": {
+    "corpora_tested": 11,
+    "mean_readiness": 73.18181818181819,
+    "corpora_with_universal_significance": 9,
+    "total_survivors_processed": 14601,
+    "max_z_score_across_corpora": 30.367053922081805
+  }
+}
