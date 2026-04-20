@@ -1,0 +1,38 @@
+{
+  "corpus": "titan_combined",
+  "target_records": 100000000,
+  "mode": "cg",
+  "projected_wall_seconds": 3.125,
+  "stages": [
+    {
+      "name": "ingest",
+      "description": "Stream records from customer data source to Cerebras Cloud ingest endpoint. Batched at 1M records.",
+      "throughput_rps": 1000000
+    },
+    {
+      "name": "fingerprint",
+      "description": "On-wafer 48-bit structural fingerprint per record. 1-to-1 map onto independent SHA-256 invocations.",
+      "wafer_utilization": 0.9,
+      "throughput_rps_per_wafer": 1000000
+    },
+    {
+      "name": "lsh_bucket",
+      "description": "Bucket by leading 16-bit prefix (~65,536 buckets). Distribute intra-bucket Hamming across cores.",
+      "scaling": "O(N * mean_bucket_size), near-constant per-record cost"
+    },
+    {
+      "name": "score",
+      "description": "Reconstruction + diversity + composite. Linear in N, wafer memory-bandwidth bound."
+    },
+    {
+      "name": "null_test",
+      "description": "Seeded bit-shuffle + top-K mean across 1000 iterations, parallelized per-iteration.",
+      "iterations": 1000
+    },
+    {
+      "name": "egress",
+      "description": "Write scored corpus + top-K ranking + SHA-256 reproducibility digest back to customer storage."
+    }
+  ],
+  "reproducibility_note": "Cerebras compiles to static weight-mapped schedule. Same seed + same records \u2192 bit-identical output across wafer invocations. The SHA-256 digest of the top-K ranking is the audit-trail ID."
+}

@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-04-20T09:42:01Z",
+  "seed": 42,
+  "hardware": "single-core Python, no multiprocess",
+  "prefix_bits": 16,
+  "stages": [
+    {
+      "n": 10000,
+      "fp_s": 2.54,
+      "anom_s": 0.03,
+      "total_s": 2.57,
+      "records_per_sec": 3892.0,
+      "buckets": 9325,
+      "avg_bucket": 1.1
+    },
+    {
+      "n": 50000,
+      "fp_s": 11.23,
+      "anom_s": 0.38,
+      "total_s": 11.61,
+      "records_per_sec": 4308.0,
+      "buckets": 35024,
+      "avg_bucket": 1.4
+    },
+    {
+      "n": 100000,
+      "fp_s": 23.74,
+      "anom_s": 1.67,
+      "total_s": 25.41,
+      "records_per_sec": 3936.0,
+      "buckets": 51108,
+      "avg_bucket": 2.0
+    },
+    {
+      "n": 250000,
+      "fp_s": 70.46,
+      "anom_s": 13.04,
+      "total_s": 83.5,
+      "records_per_sec": 2994.0,
+      "buckets": 64052,
+      "avg_bucket": 3.9
+    }
+  ],
+  "projection": {
+    "best_rate_records_per_second": 4308.0,
+    "projection_100M_same_hardware_seconds": 23212.62766945218,
+    "projection_100M_cerebras_cg_seconds": 725.3946146703806
+  }
+}
