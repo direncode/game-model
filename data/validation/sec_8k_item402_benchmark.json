@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-04-20T08:30:21Z",
+  "wall_seconds": 9.96,
+  "source": "SEC EDGAR full-text search (public, no auth)",
+  "comparable_vendor_product": "Audit Analytics Disclosure Research (~$50k/yr)",
+  "total_8k_item_402_filings_pulled": 1000,
+  "total_distinct_filers": 733,
+  "filers_in_btut_survivor_set": 10,
+  "filers_not_in_btut_survivor_set": 723,
+  "btut_coverage_rate": 0.0136,
+  "preflagged_median_lead_days": null,
+  "preflagged_count": 0,
+  "sample_filers_in_btut": [
+    {
+      "cik": "1837240",
+      "name": "Symbotic Inc.",
+      "n_filings": 2
+    },
+    {
+      "cik": "895417",
+      "name": "EQUITY LIFESTYLE PROPERTIES INC",
+      "n_filings": 1
+    },
+    {
+      "cik": "1175454",
+      "name": "CORPAY, INC.",
+      "n_filings": 1
+    },
+    {
+      "cik": "7084",
+      "name": "Archer-Daniels-Midland Co",
+      "n_filings": 1
+    },
+    {
+      "cik": "1552033",
+      "name": "TransUnion",
+      "n_filings": 1
+    },
+    {
+      "cik": "1324948",
+      "name": "RBC Bearings INC",
+      "n_filings": 1
+    },
+    {
+      "cik": "1069183",
+      "name": "AXON ENTERPRISE, INC.",
+      "n_filings": 1
+    },
+    {
+      "cik": "912593",
+      "name": "SUN COMMUNITIES INC",
+      "n_filings": 1
+    },
+    {
+      "cik": "1341766",
+      "name": "Celsius Holdings, Inc.",
+      "n_filings": 1
+    },
+    {
+      "cik": "93556",
+      "name": "STANLEY BLACK & DECKER, INC.",
+      "n_filings": 1
+    }
+  ],
+  "commercial_framing": {
+    "free_source": true,
+    "what_vendor_charges": "Audit Analytics ~$50k/yr for historical database",
+    "what_we_prove": "Given public SEC data, we can show which Item-4.02 filers were already in our structural-outlier set \u2014 a lead-time proof-of-concept that a pilot customer would then extend with their vendor's dated-consensus data."
+  }
+}
