@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Platform", href: "/platform" },
-  { label: "Proof", href: "#proof" },
+  { label: "Titan", href: "/titan" },
   { label: "Live", href: "/live" },
   { label: "Demos", href: "/universal" },
   { label: "Pricing", href: "#pricing" },

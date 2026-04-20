@@ -1,0 +1,1058 @@
+{
+  "generated_at": "2026-04-20T07:31:33Z",
+  "wall_seconds": 33.72591549999197,
+  "seed": 42,
+  "null_iterations_per_corpus": 300,
+  "sources": [
+    {
+      "name": "arxiv",
+      "display": "arXiv abstracts (live)",
+      "origin": "live",
+      "record_count": 0,
+      "scored_count": 0,
+      "null_test": {
+        "skipped": "empty"
+      },
+      "topology": {
+        "skipped": "empty"
+      },
+      "top_composite": 0.0,
+      "digest_top100": "",
+      "wall_seconds": 0.35642039999947883
+    },
+    {
+      "name": "usgs_week",
+      "display": "USGS all-week seismicity (live)",
+      "origin": "live",
+      "record_count": 2404,
+      "scored_count": 2404,
+      "null_test": {
+        "iterations": 300,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8228,
+            "null_mean": 0.7661439999999999,
+            "null_p95": 0.783556,
+            "null_p999": 0.79153596,
+            "z_score": 5.153313199998596,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8228,
+            "null_mean": 0.7663321066666666,
+            "null_p95": 0.7773224,
+            "null_p999": 0.781599496,
+            "z_score": 7.981553999481923,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8207219999999998,
+            "null_mean": 0.76718436,
+            "null_p95": 0.7754445000000002,
+            "null_p999": 0.779278782,
+            "z_score": 10.368311810802492,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.819161,
+            "null_mean": 0.7669774833333333,
+            "null_p95": 0.7728082500000001,
+            "null_p999": 0.775853164,
+            "z_score": 14.876474202715498,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.29794,
+            "null_mean": 0.2547664333333333,
+            "null_p95": 0.26666,
+            "null_p999": 0.27292,
+            "z_score": 6.067560012030408,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.294196,
+            "null_mean": 0.25475664000000003,
+            "null_p95": 0.2616646,
+            "null_p999": 0.265575232,
+            "z_score": 8.8486202714023,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.29294800000000004,
+            "null_mean": 0.25468026,
+            "null_p95": 0.2599942,
+            "null_p999": 0.26311867800000005,
+            "z_score": 12.03232942046834,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.292324,
+            "null_mean": 0.2546499033333333,
+            "null_p95": 0.2583383,
+            "null_p999": 0.260494616,
+            "z_score": 16.102236625524302,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8855665333333333,
+            "null_p95": 0.925,
+            "null_p999": 0.9458370100000001,
+            "z_score": 4.0844888129740635,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.8830978933333333,
+            "null_p95": 0.9116642000000001,
+            "null_p999": 0.9360069280000004,
+            "z_score": 6.644195904648506,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 1.0,
+            "null_mean": 0.88327778,
+            "null_p95": 0.900826,
+            "null_p999": 0.9055770260000001,
+            "z_score": 10.121070694336737,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 1.0,
+            "null_mean": 0.8829011566666668,
+            "null_p95": 0.8954406,
+            "null_p999": 0.9140842320000001,
+            "z_score": 13.387172570014684,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9999,
+            "null_mean": 0.9997067000000001,
+            "null_p95": 0.9997400000000001,
+            "null_p999": 0.9997670100000001,
+            "z_score": 8.755274499815908,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.999888,
+            "null_mean": 0.9997047866666666,
+            "null_p95": 0.9997320000000001,
+            "null_p999": 0.9997400000000001,
+            "z_score": 12.460863243344425,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9998440000000001,
+            "null_mean": 0.9997063933333333,
+            "null_p95": 0.9997221,
+            "null_p999": 0.999740804,
+            "z_score": 12.850974884309645,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9998220000000001,
+            "null_mean": 0.9997061300000003,
+            "null_p95": 0.9997180000000001,
+            "null_p999": 0.9997247009999999,
+            "z_score": 16.11798229845035,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 16.11798229845035
+      },
+      "topology": {
+        "mode": "exhaustive",
+        "epsilon_bits": 8,
+        "nodes": 2404,
+        "edges": 5,
+        "H0_components": 2399,
+        "H1_cycles_approx": 0
+      },
+      "top_composite": 0.8228,
+      "digest_top100": "9f0029955efee63bfc9d6045483f5a14593081dfc8da9fee920485671f1141f0",
+      "wall_seconds": 29.866697899997234
+    },
+    {
+      "name": "coingecko",
+      "display": "CoinGecko top-250 (live)",
+      "origin": "live",
+      "record_count": 250,
+      "scored_count": 250,
+      "null_test": {
+        "iterations": 300,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8311,
+            "null_mean": 0.7760520000000001,
+            "null_p95": 0.7933670000000002,
+            "null_p999": 0.80339339,
+            "z_score": 4.493984628834148,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.827072,
+            "null_mean": 0.7770985866666666,
+            "null_p95": 0.788372,
+            "null_p999": 0.7979662760000001,
+            "z_score": 6.959970494734158,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8201879999999998,
+            "null_mean": 0.7769714333333333,
+            "null_p95": 0.7860102999999999,
+            "null_p999": 0.791205562,
+            "z_score": 7.95297870642385,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8114530000000002,
+            "null_mean": 0.7771151133333334,
+            "null_p95": 0.7817446999999998,
+            "null_p999": 0.784981848,
+            "z_score": 11.885053592133062,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.34375,
+            "null_mean": 0.29985213333333327,
+            "null_p95": 0.3125,
+            "null_p999": 0.3245893300000002,
+            "z_score": 5.276503380634784,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.33748,
+            "null_mean": 0.29872898666666664,
+            "null_p95": 0.3066642,
+            "null_p999": 0.31116926800000005,
+            "z_score": 7.895266858671419,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.33330999999999994,
+            "null_mean": 0.2990857533333333,
+            "null_p95": 0.3058282,
+            "null_p999": 0.308204812,
+            "z_score": 8.983725217093399,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.32290499999999994,
+            "null_mean": 0.29928175,
+            "null_p95": 0.30249899999999996,
+            "null_p999": 0.30501892900000005,
+            "z_score": 11.73905099338253,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8811628666666664,
+            "null_p95": 0.9293680000000001,
+            "null_p999": 0.9541600000000001,
+            "z_score": 3.7944260354890713,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.8820233200000002,
+            "null_p95": 0.9100823999999998,
+            "null_p999": 0.9286756080000002,
+            "z_score": 6.333458472176062,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9824860000000001,
+            "null_mean": 0.8828208533333333,
+            "null_p95": 0.902498,
+            "null_p999": 0.913998536,
+            "z_score": 8.588657699477732,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9654010000000003,
+            "null_mean": 0.8822971900000001,
+            "null_p95": 0.8949962000000001,
+            "null_p999": 0.9008654460000002,
+            "z_score": 11.161223815614218,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9985800000000001,
+            "null_mean": 0.9978174333333334,
+            "null_p95": 0.9980100000000001,
+            "null_p999": 0.99815907,
+            "z_score": 6.512413965347384,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.998464,
+            "null_mean": 0.9978060133333332,
+            "null_p95": 0.997928,
+            "null_p999": 0.99805208,
+            "z_score": 8.992111605675623,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9983420000000001,
+            "null_mean": 0.99781202,
+            "null_p95": 0.997888,
+            "null_p999": 0.9979840200000001,
+            "z_score": 10.406980780935788,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9981729999999999,
+            "null_mean": 0.9978078100000001,
+            "null_p95": 0.99786,
+            "null_p999": 0.9978984219999999,
+            "z_score": 12.270871292463388,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 12.270871292463388
+      },
+      "topology": {
+        "mode": "exhaustive",
+        "epsilon_bits": 8,
+        "nodes": 250,
+        "edges": 0,
+        "H0_components": 250,
+        "H1_cycles_approx": 0
+      },
+      "top_composite": 0.8378,
+      "digest_top100": "93e6fdf816bc058443edc97091199a06ef4e583102efba001ac19d430adceedb",
+      "wall_seconds": 0.8238339000090491
+    },
+    {
+      "name": "worldbank",
+      "display": "World Bank GDP/capita (live)",
+      "origin": "live",
+      "record_count": 227,
+      "scored_count": 227,
+      "null_test": {
+        "iterations": 300,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.83217,
+            "null_mean": 0.7740976,
+            "null_p95": 0.7914435,
+            "null_p999": 0.79910711,
+            "z_score": 5.122351100978882,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8247599999999999,
+            "null_mean": 0.7748178533333333,
+            "null_p95": 0.7882897999999999,
+            "null_p999": 0.7948575120000001,
+            "z_score": 6.921036365245691,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.818274,
+            "null_mean": 0.7747971266666667,
+            "null_p95": 0.7826639000000001,
+            "null_p999": 0.7879397760000002,
+            "z_score": 9.053320807003832,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8077660000000003,
+            "null_mean": 0.7747092366666667,
+            "null_p95": 0.7789126000000001,
+            "null_p999": 0.7812340249999999,
+            "z_score": 12.41321358860905,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.35211000000000003,
+            "null_mean": 0.3045781,
+            "null_p95": 0.31876000000000004,
+            "null_p999": 0.32708103,
+            "z_score": 5.241873971149107,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.340824,
+            "null_mean": 0.30389128,
+            "null_p95": 0.3125,
+            "null_p999": 0.31782926800000005,
+            "z_score": 6.786601084831451,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.33706200000000003,
+            "null_mean": 0.30412152000000003,
+            "null_p95": 0.3095822,
+            "null_p999": 0.312372812,
+            "z_score": 10.079637677202077,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.32561299999999993,
+            "null_mean": 0.3043439133333333,
+            "null_p95": 0.3079322,
+            "null_p999": 0.309874812,
+            "z_score": 10.176860078134215,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8763838,
+            "null_p95": 0.9208299999999999,
+            "null_p999": 0.9375,
+            "z_score": 4.563156122546413,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.9866560000000001,
+            "null_mean": 0.8754785866666667,
+            "null_p95": 0.90166,
+            "null_p999": 0.9161584640000001,
+            "z_score": 6.424487326723302,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9724780000000002,
+            "null_mean": 0.8746590599999998,
+            "null_p95": 0.895028,
+            "null_p999": 0.9091621340000002,
+            "z_score": 8.407835873385476,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9524930000000005,
+            "null_mean": 0.8745173133333333,
+            "null_p95": 0.8858260499999999,
+            "null_p999": 0.892956652,
+            "z_score": 12.03763456922943,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9980399999999999,
+            "null_mean": 0.9964710333333333,
+            "null_p95": 0.9968899999999999,
+            "null_p999": 0.99712917,
+            "z_score": 6.3551689652872705,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.9977759999999999,
+            "null_mean": 0.9964866400000002,
+            "null_p95": 0.996724,
+            "null_p999": 0.9968724119999999,
+            "z_score": 8.988525784164878,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9975340000000003,
+            "null_mean": 0.9964936933333335,
+            "null_p95": 0.99666,
+            "null_p999": 0.9967432359999999,
+            "z_score": 10.817178693810444,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9971850000000001,
+            "null_mean": 0.9964816733333334,
+            "null_p95": 0.9965889999999998,
+            "null_p999": 0.996643103,
+            "z_score": 11.862648110480132,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 12.41321358860905
+      },
+      "topology": {
+        "mode": "exhaustive",
+        "epsilon_bits": 8,
+        "nodes": 227,
+        "edges": 0,
+        "H0_components": 227,
+        "H1_cycles_approx": 0
+      },
+      "top_composite": 0.8374,
+      "digest_top100": "a6e0f992ad14085e95ca0542b3082d4d131e84b4050bb1c3988e19a7508e3620",
+      "wall_seconds": 1.6206302999926265
+    },
+    {
+      "name": "github",
+      "display": "GitHub public events (live)",
+      "origin": "live",
+      "record_count": 99,
+      "scored_count": 99,
+      "null_test": {
+        "iterations": 300,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8293900000000001,
+            "null_mean": 0.7739939333333333,
+            "null_p95": 0.791613,
+            "null_p999": 0.8066734400000001,
+            "z_score": 4.612767311410716,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8175880000000001,
+            "null_mean": 0.77424952,
+            "null_p95": 0.785508,
+            "null_p999": 0.7934577840000001,
+            "z_score": 6.336834211664319,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.36252000000000006,
+            "null_mean": 0.32032429999999995,
+            "null_p95": 0.33333,
+            "null_p999": 0.3404161600000001,
+            "z_score": 5.440236127933463,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.351676,
+            "null_mean": 0.3208401866666667,
+            "null_p95": 0.32833199999999996,
+            "null_p999": 0.332249624,
+            "z_score": 6.422022951423976,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8670564666666667,
+            "null_p95": 0.9083400000000001,
+            "null_p999": 0.9466850000000006,
+            "z_score": 4.716845291302929,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.971652,
+            "null_mean": 0.86807292,
+            "null_p95": 0.8950002,
+            "null_p999": 0.905003216,
+            "z_score": 6.612859132524442,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9951399999999999,
+            "null_mean": 0.9909094333333334,
+            "null_p95": 0.9921619999999999,
+            "null_p999": 0.99329618,
+            "z_score": 5.507909095542492,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.994104,
+            "null_mean": 0.9909019066666667,
+            "null_p95": 0.9916684000000001,
+            "null_p999": 0.9922910439999999,
+            "z_score": 6.53170634132237,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 8,
+        "significant_05": 8,
+        "significant_001": 8,
+        "max_z_score": 6.612859132524442
+      },
+      "topology": {
+        "mode": "exhaustive",
+        "epsilon_bits": 8,
+        "nodes": 99,
+        "edges": 1,
+        "H0_components": 98,
+        "H1_cycles_approx": 0
+      },
+      "top_composite": 0.8407,
+      "digest_top100": "cc27ff337830283848b1f35c3cf3af12c48bd68bdfdbf30e69795de90abac3ce",
+      "wall_seconds": 1.0278302000078838
+    },
+    {
+      "name": "edgar_5000",
+      "display": "edgar_5000 (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 4999,
+      "scored_count": 4999,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 23.04241093378394
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.8588,
+      "digest_top100": "da0407e5ce7b8b98dd33b07c46a593357199d81b11fd9725dc2a5a360438f80f",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "edgar",
+      "display": "edgar (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 499,
+      "scored_count": 499,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 16.189430777641135
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.8588,
+      "digest_top100": "2b61c73c930443d6befbb3d17f93dc84fdf5a78d5f25b29fcfac9f69f0656f4d",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "heterogeneous",
+      "display": "heterogeneous (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 595,
+      "scored_count": 595,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 23.59754964160723
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9263,
+      "digest_top100": "1c0ce49ab89053e4b7647a3eaf78a3dac2fdfacc80477cbae3323e2a4052d65b",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "latk_mini",
+      "display": "latk_mini (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 1498,
+      "scored_count": 1498,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 29.72244137279645
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.8871,
+      "digest_top100": "950ba868ffeb79b65f5402e86204a65783a75cb5bcb04e973082897cbec8a4dd",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "latk_physics",
+      "display": "latk_physics (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 4999,
+      "scored_count": 4999,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 30.367053922081805
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.8959,
+      "digest_top100": "8fbf66709e1d155d7f54150b0abead59719663eff915da0ed09df90c4be1c9c7",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "linguistics",
+      "display": "linguistics (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 289,
+      "scored_count": 289,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 17.56118999422848
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.963,
+      "digest_top100": "3b451c104d1964364b33acd2c83a10bfdbb627c30bacdca883ea85d0687d6d5d",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "polymath",
+      "display": "polymath (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 1195,
+      "scored_count": 1195,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 29.94314452088781
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9481,
+      "digest_top100": "b8e3c981d5a97b8e6607479427a58bad4d8517468d35178bd53996926c717e48",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "standalone",
+      "display": "standalone (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 0,
+      "scored_count": 0,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 0,
+        "significant_05": 0,
+        "significant_001": 0,
+        "max_z_score": 0
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.0,
+      "digest_top100": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "tesla_crossera",
+      "display": "tesla_crossera (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 500,
+      "scored_count": 500,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 21.454685235869725
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.7569,
+      "digest_top100": "9310a2e33804d7aa44b0712ba464d5a9057ff4b2dbf61cd55829389c2faeb2ec",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "climate",
+      "display": "climate (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 999,
+      "scored_count": 999,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 27.768297006950213
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9633,
+      "digest_top100": "5af1cad33caafd7f64e1d4e6181444f7ff791155ba4e8bef045c689ed1f720e3",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "comtrade",
+      "display": "comtrade (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 998,
+      "scored_count": 998,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 25.94548872400024
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9403,
+      "digest_top100": "7e92a1f26224d5fa1efef5f56ff75ea7bbb10aa6cfb0373fe1ad6d377fcff218",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "patents",
+      "display": "patents (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 937,
+      "scored_count": 937,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 20.986617011679346
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.806,
+      "digest_top100": "0812ebd3a1ed60931d3517b73fa8f110bf646064e919ab68d069fb389707c8ab",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "pubmed",
+      "display": "pubmed (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 989,
+      "scored_count": 989,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 15,
+        "max_z_score": 21.29698264487619
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9259,
+      "digest_top100": "718f8da992e2a8d51471bc273488636d6c85734511fa16f1175e57e44eaab497",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "einstein",
+      "display": "einstein (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 9,
+      "scored_count": 9,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 0,
+        "significant_05": 0,
+        "significant_001": 0,
+        "max_z_score": 0
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9981,
+      "digest_top100": "1bcd7ec23c5a57e2d2114503fe747cd84ab7e592752dc101f7d28cc62cda3af9",
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "turing",
+      "display": "turing (cached BTUT run)",
+      "origin": "disk",
+      "record_count": 18,
+      "scored_count": 18,
+      "null_test": {
+        "iterations": 200,
+        "total_metrics": 4,
+        "significant_05": 4,
+        "significant_001": 4,
+        "max_z_score": 3.5792925944369145
+      },
+      "topology": {
+        "note": "not recomputed from cache; see universal_validation.json"
+      },
+      "top_composite": 0.9562,
+      "digest_top100": "0c4140252a8d3fc26b4a1b2a63398da43f13b824f2c0b1dda8f2f574702229fe",
+      "wall_seconds": 0.0
+    }
+  ],
+  "aggregate": {
+    "sources_total": 20,
+    "sources_live": 5,
+    "sources_cached": 15,
+    "total_records_processed": 21504,
+    "max_z_score_across_all_sources": 30.367053922081805,
+    "sources_significant_05": 17,
+    "live_topology_total_H0": 2974,
+    "live_topology_total_H1": 0
+  }
+}

@@ -69,6 +69,21 @@ export function Hero() {
           outlierness one — deterministic, reproducible, air-gap capable.
         </motion.p>
 
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp}
+          transition={{ delay: 0.25 }}
+          className="mt-4 text-sm text-white/50 max-w-3xl mx-auto"
+        >
+          Two engines, one stack: <span className="text-li-cyan">BTUT</span>{" "}
+          for the fingerprint substrate;{" "}
+          <span className="text-li-cyan">TCD-JEPA</span>{" "}
+          for persistent-homology module crystallization on top.
+          Substrate plus deep discovery — in the same deterministic pipeline.
+        </motion.p>
+
         <motion.div
           initial="hidden"
           whileInView="visible"

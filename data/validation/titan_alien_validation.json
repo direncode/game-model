@@ -1,0 +1,2012 @@
+{
+  "generated_at": "2026-04-20T07:47:52Z",
+  "wall_seconds": 116.056570500019,
+  "upstream_parallel_fetch_seconds": 14.69227050000336,
+  "seed": 42,
+  "sources": [
+    {
+      "name": "usgs_month",
+      "display": "USGS all-month seismicity",
+      "record_count": 2500,
+      "scored_count": 2500,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.82437,
+            "null_mean": 0.76687367,
+            "null_p95": 0.7850905,
+            "null_p999": 0.7970708400000002,
+            "z_score": 5.037935807426812,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.823012,
+            "null_mean": 0.767404724,
+            "null_p95": 0.7791762000000001,
+            "null_p999": 0.7860962920000003,
+            "z_score": 7.686658706223539,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.820306,
+            "null_mean": 0.7675084919999999,
+            "null_p95": 0.7752154999999998,
+            "null_p999": 0.7809514780000003,
+            "z_score": 10.598346708516958,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8189479999999998,
+            "null_mean": 0.7676334609999999,
+            "null_p95": 0.7733720499999999,
+            "null_p999": 0.7796983600000004,
+            "z_score": 14.102176528215232,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 250,
+            "true": 0.8141308000000002,
+            "null_mean": 0.767509932,
+            "null_p95": 0.77101838,
+            "null_p999": 0.7736996736,
+            "z_score": 21.911657471585283,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.30834,
+            "null_mean": 0.25215384999999996,
+            "null_p95": 0.26249,
+            "null_p999": 0.27083,
+            "z_score": 8.19018490509901,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.298356,
+            "null_mean": 0.25221530400000003,
+            "null_p95": 0.25916,
+            "null_p999": 0.2649936800000002,
+            "z_score": 10.379695550877683,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.29502800000000007,
+            "null_mean": 0.252249784,
+            "null_p95": 0.2570801,
+            "null_p999": 0.26165800199999995,
+            "z_score": 14.196782816212652,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.293364,
+            "null_mean": 0.252311888,
+            "null_p95": 0.25582805,
+            "null_p999": 0.25833070600000024,
+            "z_score": 18.746780018869732,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 250,
+            "true": 0.2840892,
+            "null_mean": 0.2523011652,
+            "null_p95": 0.25449563999999997,
+            "null_p999": 0.25616008479999997,
+            "z_score": 23.384862238641027,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.88610497,
+            "null_p95": 0.9291600000000001,
+            "null_p999": 0.9583283400000007,
+            "z_score": 4.065297454643759,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.88649334,
+            "null_p95": 0.9133359999999999,
+            "null_p999": 0.9316756600000011,
+            "z_score": 6.54584467594683,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 1.0,
+            "null_mean": 0.885881798,
+            "null_p95": 0.9058322000000001,
+            "null_p999": 0.9200004900000003,
+            "z_score": 8.926384611684918,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 1.0,
+            "null_mean": 0.8865368079999999,
+            "null_p95": 0.8995801499999999,
+            "null_p999": 0.909582247,
+            "z_score": 13.446495017869983,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 250,
+            "true": 1.0,
+            "null_mean": 0.8862476548,
+            "null_p95": 0.89466282,
+            "null_p999": 0.9003324972000003,
+            "z_score": 21.418989499183716,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9999,
+            "null_mean": 0.9996673700000002,
+            "null_p95": 0.9997100000000001,
+            "null_p999": 0.9997400000000001,
+            "z_score": 8.829349047259873,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.9998400000000001,
+            "null_mean": 0.999667796,
+            "null_p95": 0.9996920000000001,
+            "null_p999": 0.9997120040000002,
+            "z_score": 10.93623468143233,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9998200000000002,
+            "null_mean": 0.9996683599999999,
+            "null_p95": 0.999686,
+            "null_p999": 0.9997019999999999,
+            "z_score": 13.583624934145764,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.99981,
+            "null_mean": 0.9996679870000003,
+            "null_p95": 0.9996800000000003,
+            "null_p999": 0.999692,
+            "z_score": 18.431306113505833,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 250,
+            "true": 0.9998040000000002,
+            "null_mean": 0.9996682436000001,
+            "null_p95": 0.9996764,
+            "null_p999": 0.9996868012000002,
+            "z_score": 27.66654309745347,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 20,
+        "significant_05": 20,
+        "significant_001": 20,
+        "max_z_score": 27.66654309745347
+      },
+      "topology": {
+        "nodes": 2500,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 2500,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 2500,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 4,
+            "H0": 2496,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 1178,
+            "H0": 1332,
+            "H1": 10
+          }
+        ]
+      },
+      "top_composite": 0.8281,
+      "digest_top100": "6f3e20c037a864d4824c20c68e55ca0166d81ca6155807d60442b56f130a0df3",
+      "wall_seconds": 78.55691039998783
+    },
+    {
+      "name": "coingecko",
+      "display": "CoinGecko top-250",
+      "record_count": 250,
+      "scored_count": 250,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8302600000000002,
+            "null_mean": 0.7789749999999999,
+            "null_p95": 0.7943515,
+            "null_p999": 0.8058415300000003,
+            "z_score": 4.9999492332428765,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.824308,
+            "null_mean": 0.77851926,
+            "null_p95": 0.7880771999999999,
+            "null_p999": 0.794792728,
+            "z_score": 7.521033977396149,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8174199999999999,
+            "null_mean": 0.778463698,
+            "null_p95": 0.7855619999999999,
+            "null_p999": 0.7897909860000004,
+            "z_score": 9.042652557688418,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8080510000000001,
+            "null_mean": 0.7786210250000001,
+            "null_p95": 0.78270035,
+            "null_p999": 0.7859861020000002,
+            "z_score": 11.81199322089466,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.34375,
+            "null_mean": 0.29955011000000004,
+            "null_p95": 0.3125,
+            "null_p999": 0.32290208000000015,
+            "z_score": 5.078659157806476,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.33748,
+            "null_mean": 0.299258548,
+            "null_p95": 0.3075,
+            "null_p999": 0.3125016640000001,
+            "z_score": 7.448091094700619,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.332478,
+            "null_mean": 0.299586586,
+            "null_p95": 0.304998,
+            "null_p999": 0.308336002,
+            "z_score": 9.945364904681673,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.32248899999999997,
+            "null_mean": 0.299703245,
+            "null_p95": 0.30312504999999995,
+            "null_p999": 0.305829214,
+            "z_score": 11.237937810067612,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8879203600000001,
+            "null_p95": 0.92501,
+            "null_p999": 0.9541600100000002,
+            "z_score": 4.5714319010413345,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.994996,
+            "null_mean": 0.8867448920000001,
+            "null_p95": 0.9100002,
+            "null_p999": 0.9283290160000005,
+            "z_score": 7.175774257897328,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9766480000000002,
+            "null_mean": 0.88700373,
+            "null_p95": 0.9033302000000001,
+            "null_p999": 0.9158280040000001,
+            "z_score": 8.804712930963548,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9570740000000003,
+            "null_mean": 0.8869592629999999,
+            "null_p95": 0.89708215,
+            "null_p999": 0.9041688290000001,
+            "z_score": 11.189628246517874,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9981199999999999,
+            "null_mean": 0.9966106600000001,
+            "null_p95": 0.9969699999999999,
+            "null_p999": 0.9972200200000001,
+            "z_score": 6.734303354692142,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.997872,
+            "null_mean": 0.9966263320000001,
+            "null_p95": 0.99686,
+            "null_p999": 0.9971120039999999,
+            "z_score": 8.853953926831943,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.997638,
+            "null_mean": 0.99663313,
+            "null_p95": 0.9967821,
+            "null_p999": 0.9969500159999999,
+            "z_score": 10.992854400590145,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9973409999999998,
+            "null_mean": 0.996625532,
+            "null_p95": 0.9967179999999999,
+            "null_p999": 0.9967950480000001,
+            "z_score": 12.570754300855196,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 12.570754300855196
+      },
+      "topology": {
+        "nodes": 250,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 11,
+            "H0": 239,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.837,
+      "digest_top100": "a532b1789b0e77ba05b762bec37fd607ac00ca64199ba4f2f5da3fa7980203ac",
+      "wall_seconds": 1.9347360999963712
+    },
+    {
+      "name": "worldbank",
+      "display": "World Bank GDP/capita",
+      "record_count": 240,
+      "scored_count": 240,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8316600000000001,
+            "null_mean": 0.7750692699999999,
+            "null_p95": 0.7925510000000001,
+            "null_p999": 0.80357003,
+            "z_score": 4.922480233452796,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.824808,
+            "null_mean": 0.7746377640000001,
+            "null_p95": 0.7852564,
+            "null_p999": 0.7943385160000002,
+            "z_score": 7.21569586985261,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.818442,
+            "null_mean": 0.77471947,
+            "null_p95": 0.7827181000000001,
+            "null_p999": 0.7878669440000002,
+            "z_score": 8.955211464966968,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8086990000000001,
+            "null_mean": 0.7747399260000001,
+            "null_p95": 0.7795394499999999,
+            "null_p999": 0.7848452960000002,
+            "z_score": 11.527188475632169,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.34793,
+            "null_mean": 0.30235173,
+            "null_p95": 0.31459000000000004,
+            "null_p999": 0.32291208000000016,
+            "z_score": 5.449923322273393,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.3391519999999999,
+            "null_mean": 0.30218866000000005,
+            "null_p95": 0.3108362,
+            "null_p999": 0.316656004,
+            "z_score": 6.959978196032876,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.33622599999999997,
+            "null_mean": 0.302426722,
+            "null_p95": 0.30791810000000003,
+            "null_p999": 0.3129168320000001,
+            "z_score": 9.866120166432482,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.32457099999999994,
+            "null_mean": 0.302493906,
+            "null_p95": 0.30583505,
+            "null_p999": 0.30833483400000006,
+            "z_score": 10.570867909642185,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8754032300000001,
+            "null_p95": 0.92082,
+            "null_p999": 0.95415003,
+            "z_score": 4.3785276972055795,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.989992,
+            "null_mean": 0.875721584,
+            "null_p95": 0.9016679999999999,
+            "null_p999": 0.9183280039999999,
+            "z_score": 6.808843226908793,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9741460000000001,
+            "null_mean": 0.875918662,
+            "null_p95": 0.894162,
+            "null_p999": 0.9091628320000001,
+            "z_score": 8.824174379739453,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9554070000000005,
+            "null_mean": 0.875973023,
+            "null_p95": 0.8874970500000001,
+            "null_p999": 0.8983374980000006,
+            "z_score": 11.402476900517314,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.99807,
+            "null_mean": 0.99655748,
+            "null_p95": 0.9969505,
+            "null_p999": 0.99725018,
+            "z_score": 6.220315700820783,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.997808,
+            "null_mean": 0.996563136,
+            "null_p95": 0.9967959999999998,
+            "null_p999": 0.9969520400000002,
+            "z_score": 8.789836628228874,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.997604,
+            "null_mean": 0.996563794,
+            "null_p95": 0.9967259999999999,
+            "null_p999": 0.9968280100000001,
+            "z_score": 10.848269114997043,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9972869999999999,
+            "null_mean": 0.9965615729999999,
+            "null_p95": 0.9966530500000002,
+            "null_p999": 0.996717004,
+            "z_score": 13.210686029074624,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 13.210686029074624
+      },
+      "topology": {
+        "nodes": 240,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 240,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 240,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 240,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 6,
+            "H0": 234,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8373,
+      "digest_top100": "5602af1f6a2af60bd0e7be22b27da1a6c72a73a97a433b71e011330fc641384c",
+      "wall_seconds": 1.9740038000163622
+    },
+    {
+      "name": "github",
+      "display": "GitHub public events",
+      "record_count": 100,
+      "scored_count": 100,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.83393,
+            "null_mean": 0.78414226,
+            "null_p95": 0.80163,
+            "null_p999": 0.8111229400000003,
+            "z_score": 4.55092110928404,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.824492,
+            "null_mean": 0.7841412640000001,
+            "null_p95": 0.7944014,
+            "null_p999": 0.8025242680000005,
+            "z_score": 6.212183588538246,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8122599999999999,
+            "null_mean": 0.78444805,
+            "null_p95": 0.7908774,
+            "null_p999": 0.7947517460000001,
+            "z_score": 7.539535459344312,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.36460000000000004,
+            "null_mean": 0.32297243000000003,
+            "null_p95": 0.3375,
+            "null_p999": 0.35210043000000096,
+            "z_score": 4.79171783147021,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.35836000000000007,
+            "null_mean": 0.322527988,
+            "null_p95": 0.330828,
+            "null_p999": 0.3366776560000001,
+            "z_score": 7.233210729880319,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.34624800000000006,
+            "null_mean": 0.3228458900000001,
+            "null_p95": 0.327502,
+            "null_p999": 0.33124841800000004,
+            "z_score": 8.162022739677564,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8906234199999999,
+            "null_p95": 0.9333204999999999,
+            "null_p999": 0.9666741600000004,
+            "z_score": 3.9255530714543423,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.9799840000000001,
+            "null_mean": 0.890194352,
+            "null_p95": 0.916656,
+            "null_p999": 0.9283273400000004,
+            "z_score": 5.742233361381948,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.959158,
+            "null_mean": 0.890907688,
+            "null_p95": 0.9049961,
+            "null_p999": 0.9174981680000004,
+            "z_score": 7.887189777032494,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.99522,
+            "null_mean": 0.99301324,
+            "null_p95": 0.9937199999999999,
+            "null_p999": 0.9941700100000002,
+            "z_score": 5.2191862975171395,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.9946759999999999,
+            "null_mean": 0.99298952,
+            "null_p95": 0.9933919999999999,
+            "null_p999": 0.9937120320000001,
+            "z_score": 7.295706757786961,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9940739999999999,
+            "null_mean": 0.9929887740000001,
+            "null_p95": 0.9932119999999999,
+            "null_p999": 0.9933900140000002,
+            "z_score": 7.948381859275831,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 12,
+        "significant_05": 12,
+        "significant_001": 12,
+        "max_z_score": 8.162022739677564
+      },
+      "topology": {
+        "nodes": 100,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8411,
+      "digest_top100": "552a0a490dddafb9aebf5526f424621be4ea09e83352eba35fd8e87460b0e750",
+      "wall_seconds": 0.4769062999985181
+    },
+    {
+      "name": "openalex",
+      "display": "OpenAlex scholarly works (2024-25)",
+      "record_count": 400,
+      "scored_count": 400,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8289300000000001,
+            "null_mean": 0.77809222,
+            "null_p95": 0.7947235,
+            "null_p999": 0.8047212200000001,
+            "z_score": 4.97550350729031,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8270839999999999,
+            "null_mean": 0.7789160919999999,
+            "null_p95": 0.789157,
+            "null_p999": 0.79872424,
+            "z_score": 7.403546149956833,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.82307,
+            "null_mean": 0.77862527,
+            "null_p95": 0.7856170000000001,
+            "null_p999": 0.7905427660000004,
+            "z_score": 10.22306632788175,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8157140000000002,
+            "null_mean": 0.7787759879999999,
+            "null_p95": 0.7833499499999997,
+            "null_p999": 0.786468054,
+            "z_score": 12.767455144597793,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.33747999999999995,
+            "null_mean": 0.28930871,
+            "null_p95": 0.30209,
+            "null_p999": 0.3125020900000002,
+            "z_score": 5.892995163050628,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.334972,
+            "null_mean": 0.28933233999999997,
+            "null_p95": 0.297504,
+            "null_p999": 0.3025096600000001,
+            "z_score": 9.22875619055597,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.32498399999999994,
+            "null_mean": 0.289518298,
+            "null_p95": 0.295414,
+            "null_p999": 0.2987604100000001,
+            "z_score": 9.750364780985095,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.318742,
+            "null_mean": 0.289362591,
+            "null_p95": 0.293129,
+            "null_p999": 0.29604928700000016,
+            "z_score": 12.640052030753484,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8931528800000001,
+            "null_p95": 0.9333305,
+            "null_p999": 0.9583341600000003,
+            "z_score": 4.11074120117875,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.8914683999999999,
+            "null_p95": 0.9183242,
+            "null_p999": 0.9333393240000003,
+            "z_score": 6.589637051315289,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 1.0,
+            "null_mean": 0.8924523899999999,
+            "null_p95": 0.9100001,
+            "null_p999": 0.9208348240000003,
+            "z_score": 10.173838395485529,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9812349999999997,
+            "null_mean": 0.892900006,
+            "null_p95": 0.9045819999999999,
+            "null_p999": 0.9095861640000004,
+            "z_score": 12.484362522473011,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9985200000000001,
+            "null_mean": 0.99763016,
+            "null_p95": 0.9978205000000001,
+            "null_p999": 0.9979800400000001,
+            "z_score": 7.385346457348838,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.998364,
+            "null_mean": 0.997627848,
+            "null_p95": 0.9977519999999999,
+            "null_p999": 0.9978720280000001,
+            "z_score": 9.396391269063246,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9982639999999999,
+            "null_mean": 0.997625452,
+            "null_p95": 0.997718,
+            "null_p999": 0.9977820119999999,
+            "z_score": 11.895575495316722,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9981379999999999,
+            "null_mean": 0.997628749,
+            "null_p95": 0.997685,
+            "null_p999": 0.9977360230000002,
+            "z_score": 14.577065429722374,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 14.577065429722374
+      },
+      "topology": {
+        "nodes": 400,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 400,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 400,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 400,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 32,
+            "H0": 368,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8327,
+      "digest_top100": "5040a52ab292682f36ef2aa95174323b90d8bb0f87cbc4b88923310933877e5f",
+      "wall_seconds": 4.076550599973416
+    },
+    {
+      "name": "hackernews",
+      "display": "Hacker News top-250 stories",
+      "record_count": 250,
+      "scored_count": 250,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8320500000000001,
+            "null_mean": 0.78149189,
+            "null_p95": 0.7993144999999999,
+            "null_p999": 0.81533034,
+            "z_score": 4.450421767254655,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8275319999999999,
+            "null_mean": 0.78216718,
+            "null_p95": 0.7932558000000001,
+            "null_p999": 0.8021620680000002,
+            "z_score": 6.633940573354369,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8201080000000001,
+            "null_mean": 0.782000774,
+            "null_p95": 0.7894165999999999,
+            "null_p999": 0.7940633440000006,
+            "z_score": 8.370569168112736,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8131720000000001,
+            "null_mean": 0.782171769,
+            "null_p95": 0.7865340000000001,
+            "null_p999": 0.79043002,
+            "z_score": 11.075264848371752,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.34165,
+            "null_mean": 0.30209162000000006,
+            "null_p95": 0.31251,
+            "null_p999": 0.32291208000000016,
+            "z_score": 5.711318548722518,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.33663999999999994,
+            "null_mean": 0.30244406399999996,
+            "null_p95": 0.309168,
+            "null_p999": 0.31499683200000006,
+            "z_score": 7.789986624277073,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.33289,
+            "null_mean": 0.30217362400000003,
+            "null_p95": 0.306664,
+            "null_p999": 0.30916883200000006,
+            "z_score": 10.68110140894437,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.322695,
+            "null_mean": 0.302194984,
+            "null_p95": 0.304792,
+            "null_p999": 0.307291627,
+            "z_score": 11.834186051506999,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8927122200000001,
+            "null_p95": 0.9333400000000001,
+            "null_p999": 0.9624983300000008,
+            "z_score": 4.052888858725411,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.8931351959999999,
+            "null_p95": 0.919992,
+            "null_p999": 0.9366706560000007,
+            "z_score": 6.388162939630783,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9833200000000002,
+            "null_mean": 0.8926943639999999,
+            "null_p95": 0.9108281,
+            "null_p999": 0.9224973280000002,
+            "z_score": 8.094988981761581,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9695620000000001,
+            "null_mean": 0.8927789239999999,
+            "null_p95": 0.9033281000000002,
+            "null_p999": 0.9112462489999997,
+            "z_score": 11.920614851043776,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9986200000000001,
+            "null_mean": 0.9978702700000001,
+            "null_p95": 0.9980500000000001,
+            "null_p999": 0.9981900700000002,
+            "z_score": 7.116434053757126,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.998464,
+            "null_mean": 0.997867344,
+            "null_p95": 0.99798,
+            "null_p999": 0.9980560079999999,
+            "z_score": 9.000704472587602,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9983399999999998,
+            "null_mean": 0.99786997,
+            "null_p95": 0.9979439999999998,
+            "null_p999": 0.998002004,
+            "z_score": 10.619422811074196,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.998195,
+            "null_mean": 0.997866587,
+            "null_p95": 0.99791005,
+            "null_p999": 0.997947001,
+            "z_score": 12.438151077365712,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 12.438151077365712
+      },
+      "topology": {
+        "nodes": 250,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 250,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 6,
+            "H0": 244,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8328,
+      "digest_top100": "9cc9595e6c3c316556905111307c1a83948ddd0ad2f1a9918a7a1e1d95c1c00b",
+      "wall_seconds": 1.7989067999878898
+    },
+    {
+      "name": "gbif",
+      "display": "GBIF biodiversity occurrences",
+      "record_count": 300,
+      "scored_count": 300,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.83209,
+            "null_mean": 0.78077935,
+            "null_p95": 0.798495,
+            "null_p999": 0.8052841400000004,
+            "z_score": 4.5556302414838745,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.827924,
+            "null_mean": 0.7814060119999999,
+            "null_p95": 0.7922127999999999,
+            "null_p999": 0.7997974200000002,
+            "z_score": 6.894172535984165,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8214939999999998,
+            "null_mean": 0.7809093260000001,
+            "null_p95": 0.7881430000000001,
+            "null_p999": 0.7927610600000002,
+            "z_score": 9.131033603452009,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8145819999999999,
+            "null_mean": 0.78107265,
+            "null_p95": 0.7858404999999999,
+            "null_p999": 0.7886704849999999,
+            "z_score": 11.481213136587064,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.34584000000000004,
+            "null_mean": 0.29717789000000006,
+            "null_p95": 0.30835,
+            "null_p999": 0.31666001,
+            "z_score": 6.273404426581587,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.33831599999999995,
+            "null_mean": 0.297550784,
+            "null_p95": 0.30500000000000005,
+            "null_p999": 0.31249683200000006,
+            "z_score": 8.457536495935909,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.33248,
+            "null_mean": 0.297391666,
+            "null_p95": 0.302502,
+            "null_p999": 0.30666641600000005,
+            "z_score": 10.41697566015477,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.32248999999999994,
+            "null_mean": 0.297419355,
+            "null_p95": 0.3010381,
+            "null_p999": 0.304378411,
+            "z_score": 11.334738239817051,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.89366913,
+            "null_p95": 0.9333300000000001,
+            "null_p999": 0.9624800099999999,
+            "z_score": 3.8394345578800424,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.893937308,
+            "null_p95": 0.919988,
+            "null_p999": 0.9383296680000001,
+            "z_score": 6.4845586167877585,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9866560000000001,
+            "null_mean": 0.8935340720000001,
+            "null_p95": 0.912492,
+            "null_p999": 0.9249920020000002,
+            "z_score": 8.09323040426766,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9724779999999997,
+            "null_mean": 0.893760347,
+            "null_p95": 0.904994,
+            "null_p999": 0.9141667490000005,
+            "z_score": 11.17865413060467,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9988199999999999,
+            "null_mean": 0.99777478,
+            "null_p95": 0.99803,
+            "null_p999": 0.99824002,
+            "z_score": 7.044606381649538,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.998652,
+            "null_mean": 0.997780156,
+            "null_p95": 0.997928,
+            "null_p999": 0.9980760200000001,
+            "z_score": 9.373392339309909,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9985040000000001,
+            "null_mean": 0.9977768499999999,
+            "null_p95": 0.9978800999999999,
+            "null_p999": 0.9979640060000001,
+            "z_score": 11.21526431601841,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9983170000000001,
+            "null_mean": 0.997777943,
+            "null_p95": 0.9978420000000001,
+            "null_p999": 0.9978830150000002,
+            "z_score": 13.664803899866628,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 13.664803899866628
+      },
+      "topology": {
+        "nodes": 300,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 300,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 300,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 300,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 15,
+            "H0": 285,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8379,
+      "digest_top100": "cb6233fe8ca21fc6dea9c0f1f0d84020fb2ec628a008b0f85557f84297492900",
+      "wall_seconds": 1.8371439999900758
+    },
+    {
+      "name": "openlibrary",
+      "display": "Open Library new books",
+      "record_count": 0,
+      "scored_count": 0,
+      "null_test": {
+        "skipped": "n<10"
+      },
+      "topology": {
+        "skipped": "n<2"
+      },
+      "top_composite": 0.0,
+      "digest_top100": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 5.0000089686363935e-06
+    },
+    {
+      "name": "nasa_exoplanets",
+      "display": "NASA Exoplanet Archive",
+      "record_count": 0,
+      "scored_count": 0,
+      "null_test": {
+        "skipped": "n<10"
+      },
+      "topology": {
+        "skipped": "n<2"
+      },
+      "top_composite": 0.0,
+      "digest_top100": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 1.400010660290718e-06
+    },
+    {
+      "name": "wikipedia",
+      "display": "Wikipedia featured + most-read 30d",
+      "record_count": 310,
+      "scored_count": 310,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8282800000000001,
+            "null_mean": 0.7726447499999999,
+            "null_p95": 0.791273,
+            "null_p999": 0.8019515100000002,
+            "z_score": 4.827364388498072,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.825124,
+            "null_mean": 0.77258226,
+            "null_p95": 0.7841461999999999,
+            "null_p999": 0.7917710640000001,
+            "z_score": 7.466523640830599,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.8192499999999998,
+            "null_mean": 0.772596544,
+            "null_p95": 0.7803521999999999,
+            "null_p999": 0.785925034,
+            "z_score": 9.866614755397464,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 100,
+            "true": 0.8103219999999998,
+            "null_mean": 0.77223623,
+            "null_p95": 0.7771132999999999,
+            "null_p999": 0.781675232,
+            "z_score": 12.548475668774351,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.33538999999999997,
+            "null_mean": 0.29396315000000006,
+            "null_p95": 0.30626000000000003,
+            "null_p999": 0.3166620800000002,
+            "z_score": 4.895887836350024,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.33413599999999993,
+            "null_mean": 0.29400222000000004,
+            "null_p95": 0.302496,
+            "null_p999": 0.306668,
+            "z_score": 7.888911797632427,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.326646,
+            "null_mean": 0.29385202400000004,
+            "null_p95": 0.29919239999999997,
+            "null_p999": 0.30333642000000005,
+            "z_score": 9.180562707175648,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 100,
+            "true": 0.31957299999999994,
+            "null_mean": 0.293834489,
+            "null_p95": 0.297295,
+            "null_p999": 0.30042312100000024,
+            "z_score": 11.65167003997937,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.87378124,
+            "null_p95": 0.9208299999999999,
+            "null_p999": 0.9458441500000005,
+            "z_score": 4.290335106381953,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 1.0,
+            "null_mean": 0.874142816,
+            "null_p95": 0.9016679999999999,
+            "null_p999": 0.9216689920000004,
+            "z_score": 7.206172795994884,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9858220000000002,
+            "null_mean": 0.87427334,
+            "null_p95": 0.8941621999999999,
+            "null_p999": 0.9066616660000002,
+            "z_score": 9.332480968452597,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 100,
+            "true": 0.9674850000000004,
+            "null_mean": 0.8743546710000001,
+            "null_p95": 0.8866630500000002,
+            "null_p999": 0.893747001,
+            "z_score": 12.328666315071564,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9981499999999999,
+            "null_mean": 0.99738612,
+            "null_p95": 0.99759,
+            "null_p999": 0.99774002,
+            "z_score": 6.394474310825914,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.998048,
+            "null_mean": 0.9973846000000001,
+            "null_p95": 0.9974962000000002,
+            "null_p999": 0.9975880599999999,
+            "z_score": 9.367283576133559,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.9979419999999999,
+            "null_mean": 0.997386802,
+            "null_p95": 0.9974700999999999,
+            "null_p999": 0.9975400139999999,
+            "z_score": 10.752140784616355,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 100,
+            "true": 0.9978110000000002,
+            "null_mean": 0.9973846530000001,
+            "null_p95": 0.997439,
+            "null_p999": 0.9974970079999999,
+            "z_score": 13.106953896906617,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 16,
+        "significant_05": 16,
+        "significant_001": 16,
+        "max_z_score": 13.106953896906617
+      },
+      "topology": {
+        "nodes": 310,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 310,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 310,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 310,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 20,
+            "H0": 290,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8325,
+      "digest_top100": "bc5119d6f1f9e8a969daba7a0c9c34d655c3a8b3689e6a4122de4b162b6ac882",
+      "wall_seconds": 1.381250700011151
+    },
+    {
+      "name": "sec_fts",
+      "display": "SEC 10-K 'material weakness' FTS",
+      "record_count": 100,
+      "scored_count": 100,
+      "null_test": {
+        "iterations": 1000,
+        "per_metric": [
+          {
+            "dim": "composite",
+            "K": 10,
+            "true": 0.8326,
+            "null_mean": 0.78058898,
+            "null_p95": 0.7986455,
+            "null_p999": 0.81023065,
+            "z_score": 4.614239815711983,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 25,
+            "true": 0.8254480000000001,
+            "null_mean": 0.781112012,
+            "null_p95": 0.7920520000000001,
+            "null_p999": 0.8000746080000002,
+            "z_score": 6.710099325487049,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "composite",
+            "K": 50,
+            "true": 0.812948,
+            "null_mean": 0.780864176,
+            "null_p95": 0.7866919999999998,
+            "null_p999": 0.7915238640000004,
+            "z_score": 8.76946041750929,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 10,
+            "true": 0.36668,
+            "null_mean": 0.32293642,
+            "null_p95": 0.3375,
+            "null_p999": 0.35000001,
+            "z_score": 4.500793366715952,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 25,
+            "true": 0.35752,
+            "null_mean": 0.322653336,
+            "null_p95": 0.33165619999999996,
+            "null_p999": 0.3399928320000001,
+            "z_score": 6.4000527493800945,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "anomaly",
+            "K": 50,
+            "true": 0.34541000000000005,
+            "null_mean": 0.32267943000000004,
+            "null_p95": 0.327914,
+            "null_p999": 0.3324988260000001,
+            "z_score": 7.288555033880322,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 10,
+            "true": 1.0,
+            "null_mean": 0.8836833300000001,
+            "null_p95": 0.9291599999999999,
+            "null_p999": 0.9625,
+            "z_score": 4.2173801722914,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 25,
+            "true": 0.9883240000000001,
+            "null_mean": 0.8834782760000001,
+            "null_p95": 0.9100903999999999,
+            "null_p999": 0.9250026720000007,
+            "z_score": 6.482480324046458,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "reconstruction",
+            "K": 50,
+            "true": 0.9608299999999999,
+            "null_mean": 0.8834500560000002,
+            "null_p95": 0.8992015999999999,
+            "null_p999": 0.9066641700000005,
+            "z_score": 8.510062463062086,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 10,
+            "true": 0.9937399999999998,
+            "null_mean": 0.99109793,
+            "null_p95": 0.99185,
+            "null_p999": 0.99245013,
+            "z_score": 5.778952632980791,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 25,
+            "true": 0.993096,
+            "null_mean": 0.991097896,
+            "null_p95": 0.9915644000000002,
+            "null_p999": 0.99196802,
+            "z_score": 7.120970884717586,
+            "sig_05": true,
+            "sig_001": true
+          },
+          {
+            "dim": "diversity",
+            "K": 50,
+            "true": 0.992356,
+            "null_mean": 0.9910900240000001,
+            "null_p95": 0.991342,
+            "null_p999": 0.9915480700000001,
+            "z_score": 8.10757061881214,
+            "sig_05": true,
+            "sig_001": true
+          }
+        ],
+        "total_metrics": 12,
+        "significant_05": 12,
+        "significant_001": 12,
+        "max_z_score": 8.76946041750929
+      },
+      "topology": {
+        "nodes": 100,
+        "multi_epsilon": [
+          {
+            "epsilon": 4,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 6,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 8,
+            "edges": 0,
+            "H0": 100,
+            "H1": 0
+          },
+          {
+            "epsilon": 12,
+            "edges": 2,
+            "H0": 98,
+            "H1": 0
+          }
+        ]
+      },
+      "top_composite": 0.8407,
+      "digest_top100": "bb9a386b8695448b2e49008b3da6784a61f5defac0619f939e2c01b4d5519f58",
+      "wall_seconds": 0.2781052000063937
+    }
+  ],
+  "bridges_sample": [],
+  "bridges_full_count": 0,
+  "aggregate": {
+    "sources_total": 11,
+    "sources_with_data": 9,
+    "total_records_processed": 4450,
+    "max_z_score_across_all_sources": 27.66654309745347,
+    "sources_significant_05_majority": 9,
+    "cross_source_bridges": 0,
+    "null_iterations": 1000
+  }
+}

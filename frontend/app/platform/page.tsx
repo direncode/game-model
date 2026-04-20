@@ -164,6 +164,101 @@ lo_fp: bit(48) = &apos;111011100110110011010101000111011101011010011101&apos;</p
             </div>
           </section>
 
+          {/* Full-spectrum engine */}
+          <section className="mb-20">
+            <h2 className="font-display text-3xl md:text-4xl tracking-tight text-white mb-6">
+              The full-spectrum engine
+            </h2>
+            <p className="text-white/70 leading-relaxed mb-8">
+              The primitive is the tip. The full system is two engines
+              operating on the same deterministic pipeline: the fingerprint
+              substrate below, the research layer above. Both ship. Both are
+              air-gap capable. Both are seed-42 reproducible.
+            </p>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-li-cyan/25 bg-li-cyan/[0.03] p-6">
+                <div className="flex items-baseline justify-between mb-2">
+                  <div className="font-display text-2xl text-white">BTUT</div>
+                  <div className="font-mono text-[11px] uppercase tracking-widest text-li-cyan">
+                    Substrate layer · the primitive
+                  </div>
+                </div>
+                <div className="text-sm text-white/80 leading-relaxed mb-3">
+                  Bit-True Unit Tuner. Rotation-ensemble lattice fingerprinting
+                  with stratified survivor selection and cluster-cap
+                  enforcement. 48-bit fingerprint + 4-dim score vector per row.
+                  Deterministic. Reproducible at SHA-256 bit level. Offline.
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-[11px] font-mono">
+                  <Chip label="Input" value="any row-shape" />
+                  <Chip label="Output" value="bit(48) + ScoreVec" />
+                  <Chip label="Determinism" value="seed=42" />
+                  <Chip label="Ops / entity" value="~0.15 ms on c6i.4xlarge" />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-li-green/25 bg-li-green/[0.03] p-6">
+                <div className="flex items-baseline justify-between mb-2">
+                  <div className="font-display text-2xl text-white">lo_core</div>
+                  <div className="font-mono text-[11px] uppercase tracking-widest text-li-green">
+                    Query layer · analyzers
+                  </div>
+                </div>
+                <div className="text-sm text-white/80 leading-relaxed mb-3">
+                  The deterministic query surface that sits on top of BTUT:
+                  cross-dimensional convergence, cross-era bridges, null-test
+                  orchestration, paradigm distribution, narrative templates.
+                  Shipped as `pip install lo-core` and as SQL UDFs per database.
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-[11px] font-mono">
+                  <Chip label="CLI" value="lo analyze / validate / narrate" />
+                  <Chip label="API" value="/api/v1/lo/*" />
+                  <Chip label="Null test" value="N=500+ permutations" />
+                  <Chip label="Narratives" value="deterministic templates" />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-white/25 bg-white/[0.03] p-6">
+                <div className="flex items-baseline justify-between mb-2">
+                  <div className="font-display text-2xl text-white">TCD-JEPA</div>
+                  <div className="font-mono text-[11px] uppercase tracking-widest text-white/70">
+                    Research layer · module crystallization
+                  </div>
+                </div>
+                <div className="text-sm text-white/80 leading-relaxed mb-3">
+                  Three-system architecture on top of the BTUT survivor space:
+                  Stream Encoder instruments information flow, Energy Explorer
+                  runs Langevin dynamics over the energy landscape, Module
+                  Crystallizer applies <em>persistent homology</em> to
+                  exploration trajectories — identifying stable topological
+                  features and instantiating them as reusable predictor
+                  modules. This is where new predictive capabilities
+                  <em> emerge</em> from the system exploring what it does not
+                  yet know.
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-[11px] font-mono">
+                  <Chip label="System 1" value="Stream Encoder (ViT + EMA)" />
+                  <Chip label="System 2" value="Energy Explorer (Langevin)" />
+                  <Chip label="System 3" value="Crystallizer (H₀, H₁, H₂)" />
+                  <Chip label="Loop" value="recursive capability growth" />
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 rounded-lg border border-white/10 bg-[#0a0a10] p-5">
+              <div className="font-mono text-[11px] uppercase tracking-widest text-white/50 mb-2">
+                What the three tiers do together
+              </div>
+              <div className="text-sm text-white/70 leading-relaxed">
+                BTUT compresses any corpus into a fingerprint lattice.
+                lo_core asks the first-class questions (rank, filter, null,
+                bridge, drift). TCD-JEPA asks what lo_core hasn't learned to
+                ask yet — and when its topology stabilizes, that new question
+                becomes a new lo_core operator. The pipeline grows its own
+                query surface. That's the full spectrum.
+              </div>
+            </div>
+          </section>
+
           {/* Where it runs */}
           <section className="mb-20">
             <h2 className="font-display text-3xl md:text-4xl tracking-tight text-white mb-6">
@@ -265,6 +360,15 @@ function Op({ title, code, explain }: { title: string; code: string; explain: st
 {code}
       </pre>
       <div className="text-xs text-white/60">{explain}</div>
+    </div>
+  );
+}
+
+function Chip({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-white/40">{label}</div>
+      <div className="text-white/90 truncate">{value}</div>
     </div>
   );
 }
