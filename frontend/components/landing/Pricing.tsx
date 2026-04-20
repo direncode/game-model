@@ -62,14 +62,16 @@ export function Pricing() {
       <div className="max-w-[1280px] mx-auto px-6">
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={fadeUp} className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
-            Pricing
+            Pricing · infrastructure · priced per data volume
           </p>
           <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white mb-6">
-            Pay for depth.<br />
-            <span className="text-white/40">Scale with your data.</span>
+            Pay per row scored.<br />
+            <span className="text-white/40">Not per vertical, not per seat.</span>
           </h2>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Dashboard seats are always free. You only pay for intelligence, not for eyeballs.
+            Latent Ocean is infrastructure. Pricing scales with ingest volume
+            and sources — the same way a database scales with storage. Dashboard
+            seats and the SDK are always free.
           </p>
         </motion.div>
 

@@ -7,12 +7,9 @@ import { ReductionCanvas } from "./canvas/ReductionCanvas";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-14">
-      {/* Background canvas animation */}
       <div className="absolute inset-0 pointer-events-none opacity-60">
         <ReductionCanvas />
       </div>
-
-      {/* Radial gradient depth */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -31,7 +28,7 @@ export function Hero() {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-li-green animate-pulse" />
           <span className="text-xs font-mono text-white/70 tracking-wide">
-            ENGINE v0.1.0 · 11 CONNECTORS · LIVE
+            A NEW DATA PRIMITIVE · 48-BIT · DETERMINISTIC · FALSIFIABLE
           </span>
         </motion.div>
 
@@ -40,9 +37,10 @@ export function Hero() {
           whileInView="visible"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="font-display text-[10vw] md:text-[120px] leading-[0.9] tracking-[-0.04em] text-white"
+          className="font-display text-[8vw] md:text-[100px] leading-[0.9] tracking-[-0.04em] text-white"
         >
-          Latent Ocean
+          Every row,<br />
+          <span className="text-white/50">structurally aware.</span>
         </motion.h1>
 
         <motion.p
@@ -51,9 +49,12 @@ export function Hero() {
           viewport={viewportOnce}
           variants={fadeUp}
           transition={{ delay: 0.1 }}
-          className="mt-8 text-2xl md:text-3xl text-white/80 max-w-3xl mx-auto font-light leading-tight"
+          className="mt-8 text-xl md:text-2xl text-white/80 max-w-3xl mx-auto font-light leading-tight"
         >
-          Structural intelligence infrastructure for any database.
+          Latent Ocean turns any row of any database into a
+          <span className="text-li-cyan"> 48-bit structural fingerprint</span> plus
+          a 4-dimensional score vector. Outliers surface. Peer-rank becomes a
+          column. Null tests run on demand.
         </motion.p>
 
         <motion.p
@@ -62,9 +63,10 @@ export function Hero() {
           viewport={viewportOnce}
           variants={fadeUp}
           transition={{ delay: 0.2 }}
-          className="mt-4 text-base text-white/50 max-w-2xl mx-auto"
+          className="mt-6 text-base text-white/60 max-w-2xl mx-auto font-mono tabular-nums"
         >
-          Connect anything. See what matters. Your tables, now with intelligence built in.
+          Embeddings made vectors a data type. Structural fingerprints make
+          outlierness one — deterministic, reproducible, air-gap capable.
         </motion.p>
 
         <motion.div
@@ -76,26 +78,39 @@ export function Hero() {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <Link
-            href="/watchlist"
+            href="/platform"
             className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-black text-base font-medium hover:bg-white/90 transition-colors"
           >
-            Try it live — 30 seconds
+            See the primitive
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3.5 7h7m0 0L7 3.5m3.5 3.5L7 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </Link>
-          <Link
-            href="/engine"
-            className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full border border-white/15 text-white/80 hover:text-white hover:border-white/30 text-base transition-colors"
-          >
-            Launch full engine
-          </Link>
           <a
             href="#proof"
-            className="inline-flex items-center justify-center h-12 px-6 text-base text-white/70 hover:text-white transition-colors"
+            className="inline-flex items-center justify-center h-12 px-6 rounded-full border border-white/15 text-white/80 hover:text-white hover:border-white/30 text-base transition-colors"
           >
-            See proof ↓
+            Same engine across 15 unrelated data types →
           </a>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp}
+          transition={{ delay: 0.4 }}
+          className="mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-mono text-white/40"
+        >
+          <span>SEED=42 DETERMINISTIC</span>
+          <span>·</span>
+          <span>SHA-256 REPRODUCIBLE</span>
+          <span>·</span>
+          <span>NULL-TEST ON DEMAND</span>
+          <span>·</span>
+          <span>FedRAMP IL6 READY</span>
+          <span>·</span>
+          <span>OFFLINE / AIR-GAP</span>
         </motion.div>
       </div>
     </section>

@@ -19,48 +19,50 @@ export function FinalCTA() {
         whileInView="visible"
         viewport={viewportOnce}
         variants={fadeUp}
-        className="relative max-w-[1000px] mx-auto px-6 text-center"
+        className="relative max-w-[1100px] mx-auto px-6 text-center"
       >
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-6">
-          48-hour pilot · no card · no meeting · just a named finding
+          Install the primitive · one connection · every row scored
         </p>
         <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95] mb-8">
-          Send 10 tickers.<br />
-          <span className="text-white/40">Or 10 MeSH terms. Or 10 HS codes.</span>
+          Connect your database.<br />
+          <span className="text-white/40">Every row acquires a signature.</span>
         </h2>
         <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10">
-          The same engine works on any corpus — SEC filings, PubMed, UN Comtrade,
-          NOAA climate, USPTO patents, polymath biographies. We return a
-          structural-anomaly report on whatever you upload, within 48 hours.
-          If nothing is actionable, we buy you a coffee.
+          Postgres, Snowflake, MongoDB Atlas, BigQuery, Kafka / Kinesis / Pulsar,
+          S3 / GCS / Parquet. The primitive ingests any row-shape and emits a
+          48-bit fingerprint plus a 4-dimensional score column. Reproducible at
+          bit level. Falsifiable on demand.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
           <a
-            href="mailto:sales@latentocean.com?subject=48h%20pilot%20request&body=10%20entities%3A%20%0A%0ACorpus%20type%3A%20"
+            href="mailto:sales@latentocean.com?subject=Platform%20installation&body=Data%20source%3A%20%0AApprox%20row%20volume%3A%20%0AAir-gap%20required%3F%20"
             className="inline-flex items-center justify-center gap-2 h-14 px-10 rounded-full bg-white text-black text-base font-medium hover:bg-white/90 transition-colors"
           >
-            Request 48h pilot
+            Install on your database
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3.5 7h7m0 0L7 3.5m3.5 3.5L7 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </a>
           <Link
-            href="/watchlist"
+            href="/platform"
             className="inline-flex items-center justify-center h-14 px-8 rounded-full border border-white/20 text-white/90 text-base hover:bg-white/5 transition-colors"
           >
-            Try live on EDGAR
+            Read the primitive spec
           </Link>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-white/40">
+          <span>48-bit fingerprint</span>
+          <span>·</span>
+          <span>4-dim score vector</span>
+          <span>·</span>
+          <span>Null-test endpoint</span>
+          <span>·</span>
           <span>Seed 42 deterministic</span>
           <span>·</span>
-          <span>Null test on demand</span>
-          <span>·</span>
-          <span>Air-gap capable (FedRAMP IL6)</span>
-          <span>·</span>
-          <span>15 corpora validated at z ≥ 16 σ</span>
+          <span>Air-gap / FedRAMP IL6</span>
         </div>
       </motion.div>
     </section>

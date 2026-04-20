@@ -100,24 +100,27 @@ export function UniversalProof() {
           className="text-center mb-12"
         >
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
-            Proof · the same engine · any corpus · zero hand-tuning
+            Primitive validation · identical substrate across {agg?.corpora_tested ?? 15} unrelated data shapes
           </p>
           <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95]">
             {agg ? (
               <>
-                {agg.corpora_tested} corpora.{" "}
-                <span className="text-white/40">One engine.</span>
+                One primitive.{" "}
+                <span className="text-white/40">{agg.corpora_tested} data shapes.</span>
               </>
             ) : (
               <>
-                Universality. <span className="text-white/40">Loading…</span>
+                One primitive. <span className="text-white/40">Loading…</span>
               </>
             )}
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-3xl mx-auto">
-            We run the identical null-permutation + lo_core analyzers across every cached BTUT
-            corpus in the repo. If any finding only worked because of a tuned constant, it would
-            fail here. Every number below is re-derived on page load.
+            The chips below are <em>not product demos</em>. They are the same 48-bit fingerprint
+            primitive applied to radically different data types — SEC XBRL filings, NOAA weather
+            stations, UN Comtrade flows, PubMed biomedical literature, USPTO patents, biographies,
+            physics patents, linguistic evolution. If the primitive only worked because of a tuned
+            constant for any one of them, it would fail on the rest. Every number below is
+            re-derived on page load from the repo's cached runs.
           </p>
         </motion.div>
 

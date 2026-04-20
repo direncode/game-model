@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
+  { label: "Platform", href: "/platform" },
+  { label: "Proof", href: "#proof" },
   { label: "Live", href: "/live" },
-  { label: "Universal", href: "/universal" },
-  { label: "Watchlist", href: "/watchlist" },
-  { label: "Validation", href: "/validation" },
+  { label: "Demos", href: "/universal" },
   { label: "Pricing", href: "#pricing" },
 ];
 
@@ -52,15 +52,15 @@ export function Nav() {
           >
             Legacy App
           </Link>
-          <Link
-            href="/engine"
+          <a
+            href="mailto:sales@latentocean.com?subject=Install%20Latent%20Ocean"
             className="inline-flex items-center gap-1.5 h-9 px-4 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
           >
-            Launch Engine
+            Install
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M3 6h6m0 0L6 3m3 3L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
