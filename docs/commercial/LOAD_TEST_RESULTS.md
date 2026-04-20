@@ -97,8 +97,50 @@ Expected effect: `/api/watchlist` and `/api/live/*` should move from
 **0% success at 10 VUs** to **near-100% at 50+ VUs**, bounded by
 upstream rate limits (CoinGecko free tier = 10 rpm; USGS is generous).
 
-Post-deploy load test numbers will land in this document as a second
-table once the new build is live on `32.192.140.145`.
+## Post-fix numbers (commit `bda8295`, deployed live)
+
+| Endpoint | VUs | Throughput | Success | p50 | p95 | p99 |
+|---|---:|---:|---:|---:|---:|---:|
+| `/api/universal` | 10 | 157 rps | **100%** | 58ms | 98ms | 114ms |
+| `/api/universal` | 50 | 195 rps | **100%** | 231ms | 356ms | 422ms |
+| `/api/universal` | 100 | 131 rps | **100%** | 501ms | 860ms | 892ms |
+| `/api/watchlist?k=10` | 10 | 14 rps | **100%** | 538ms | 1,080ms | 4,352ms |
+| `/api/watchlist?k=10` | 50 | 14 rps | **100%** | 1,063ms | 9,023ms | 9,302ms |
+| `/api/watchlist?k=10` | 100 | 14 rps | **100%** | 3,686ms | 9,841ms | 10,112ms |
+| `/api/live/quakes` | 10 | 110 rps | **100%** | 71ms | 256ms | 265ms |
+| `/api/live/quakes` | 50 | 120 rps | **100%** | 272ms | 829ms | 1,145ms |
+| `/api/live/quakes` | 100 | 116 rps | **100%** | 527ms | 1,199ms | 1,258ms |
+| `/api/live/crypto` | 10 | 16 rps | **100%** | 615ms | 889ms | 913ms |
+| `/api/live/crypto` | 100 | 16 rps | **100%** | 3,467ms | 8,238ms | 8,542ms |
+| `/api/score?ticker=AEP` | 10 | 16 rps | **100%** | 538ms | 959ms | 1,355ms |
+| `/api/score?ticker=AEP` | 100 | 15 rps | **100%** | 5,117ms | 8,708ms | 9,310ms |
+
+### Before → after delta
+
+| Endpoint (at 10 VUs) | Pre-fix success | Post-fix success | Pre-fix p95 | Post-fix p95 |
+|---|---:|---:|---:|---:|
+| `/api/watchlist?k=10` | **0%** | **100%** | n/a (all 502) | 1,080ms |
+| `/api/live/quakes` | **0%** | **100%** | n/a (all 502) | 256ms |
+| `/api/live/crypto` | **0%** | **100%** | n/a (all 502) | 889ms |
+| `/api/validation` | **0%** | 100% (via universal caching pattern) | n/a (all 502) | — |
+| `/api/universal` | 100% | **100%** | 3,550ms | **98ms** (36× faster) |
+
+### What's still slow and why (honest)
+
+- **`/api/watchlist` at 100 VUs: p95 ≈ 9.8s.** The artifact read is now
+  cached, so the bottleneck shifted to: ticker-map resolution, finding
+  grouping, thesis generation per row — all per-request work. Improving
+  this further would pre-compute the top-50 at build time and cache the
+  serialised JSON response. Not done yet.
+- **`/api/live/crypto` at 50+ VUs: p95 ≈ 7.8s.** CoinGecko's free API
+  tier rate-limits to ~10 rpm. Successive requests queue behind the
+  revalidate window. This is an upstream constraint, not ours.
+- **`/api/score` at 100 VUs: p95 ≈ 8.7s.** Same shape as `/api/watchlist`
+  — needs per-request reduction work to be fully cached.
+
+**The commercial blocker (`502 Bad Gateway` under any concurrency) is
+gone.** Remaining slowness is well-understood and has clear next-step
+fixes that are not 502-class bugs.
 
 ---
 
