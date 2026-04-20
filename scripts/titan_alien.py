@@ -164,40 +164,198 @@ async def src_gbif(client, max_records=300) -> list[dict]:
     } for r in body.get("results") or []]
 
 
-async def src_openlibrary(client, max_records=200) -> list[dict]:
+async def src_openlibrary(client, max_records=300) -> list[dict]:
+    # Use a common search term; q=* is rejected by their search endpoint.
     body = await fetch_json(client,
-        f"https://openlibrary.org/search.json?q=*&limit={max_records}&sort=new")
+        f"https://openlibrary.org/search.json?q=the&limit={max_records}&sort=new")
     if not isinstance(body, dict): return []
-    return [{
-        "key": d.get("key", ""),
-        "has_cover": bool(d.get("cover_i")),
-        "n_authors": len(d.get("author_name") or []),
-        "first_publish_year": d.get("first_publish_year"),
-        "language_first": (d.get("language") or ["?"])[0] if d.get("language") else "?",
-        "n_editions": d.get("edition_count") or 0,
-    } for d in body.get("docs") or []]
+    out = []
+    for d in body.get("docs") or []:
+        languages = d.get("language") or []
+        out.append({
+            "key": d.get("key", ""),
+            "has_cover": bool(d.get("cover_i")),
+            "n_authors": len(d.get("author_name") or []),
+            "first_publish_year": d.get("first_publish_year"),
+            "language_first": (languages[0] if languages else "?"),
+            "n_editions": d.get("edition_count") or 0,
+            "n_subjects": len(d.get("subject") or []),
+            "has_ia": bool(d.get("ia")),
+        })
+    return out
 
 
 async def src_nasa_exoplanets(client) -> list[dict]:
+    # Column list reduced to ones reliably present in pscomppars.
+    q = "SELECT TOP 400 pl_name, hostname, disc_year, sy_snum, sy_pnum FROM pscomppars"
     url = (
         "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query="
-        + urllib.parse.quote(
-            "SELECT TOP 400 pl_name, sy_snum, sy_pnum, pl_orbper, pl_bmasse, pl_rade, disc_year "
-            "FROM pscomppars WHERE default_flag=1"
-        )
+        + urllib.parse.quote(q)
         + "&format=json"
     )
     body = await fetch_json(client, url)
     if not isinstance(body, list): return []
     return [{
         "pl_name": (r.get("pl_name") or "")[:30],
+        "host": (r.get("hostname") or "")[:20],
+        "year": r.get("disc_year") or 0,
         "sy_snum": r.get("sy_snum") or 0,
         "sy_pnum": r.get("sy_pnum") or 0,
-        "orb_log": round(float(np.log10(max(1e-5, r.get("pl_orbper") or 1e-5))), 1),
-        "mass_log": round(float(np.log10(max(1e-5, r.get("pl_bmasse") or 1e-5))), 1),
-        "rad_log": round(float(np.log10(max(1e-5, r.get("pl_rade") or 1e-5))), 1),
-        "year": r.get("disc_year"),
     } for r in body]
+
+
+async def src_arxiv(client, max_records=500) -> list[dict]:
+    import re as _re
+    import xml.etree.ElementTree as ET
+    q = urllib.parse.quote("all:structural OR all:topology OR all:anomaly OR all:embedding")
+    url = f"http://export.arxiv.org/api/query?search_query={q}&sortBy=submittedDate&max_results={max_records}"
+    try:
+        r = await client.get(url)
+        r.raise_for_status()
+        body = r.text
+    except Exception:
+        return []
+    # arXiv returns Atom XML; parse with stdlib
+    ns = {"a": "http://www.w3.org/2005/Atom"}
+    try:
+        root = ET.fromstring(body)
+    except Exception:
+        # fall back to regex on <entry>
+        entries = _re.findall(r"<entry>(.*?)</entry>", body, _re.DOTALL)
+        out = []
+        for e in entries:
+            m_t = _re.search(r"<title>(.*?)</title>", e, _re.DOTALL)
+            m_cat = _re.findall(r'<category term="([^"]+)"', e)
+            m_date = _re.search(r"<published>(.*?)</published>", e)
+            out.append({
+                "title_words": len((m_t.group(1).strip().split() if m_t else [])),
+                "primary_category": m_cat[0] if m_cat else "?",
+                "n_categories": len(m_cat),
+                "year": (m_date.group(1)[:4] if m_date else ""),
+            })
+        return out
+    out = []
+    for entry in root.findall("a:entry", ns):
+        title = entry.find("a:title", ns)
+        cats = [c.get("term", "?") for c in entry.findall("a:category", ns)]
+        pub = entry.find("a:published", ns)
+        out.append({
+            "title_words": len((title.text or "").strip().split()) if title is not None else 0,
+            "primary_category": cats[0] if cats else "?",
+            "n_categories": len(cats),
+            "year": (pub.text[:4] if pub is not None and pub.text else ""),
+        })
+    return out
+
+
+async def src_reddit_rising(client) -> list[dict]:
+    # Public .json endpoint, no auth. Requires a distinct UA or reddit 429s.
+    body = await fetch_json(client, "https://www.reddit.com/r/all/top.json?limit=100&t=day")
+    if not isinstance(body, dict): return []
+    out = []
+    for child in ((body.get("data") or {}).get("children") or []):
+        d = child.get("data") or {}
+        out.append({
+            "sub": (d.get("subreddit") or "")[:20],
+            "ups_log": round(float(np.log10(max(1, d.get("ups") or 1))), 2),
+            "comments_log": round(float(np.log10(max(1, d.get("num_comments") or 1))), 2),
+            "over_18": bool(d.get("over_18")),
+            "domain_len": len((d.get("domain") or "")),
+            "title_words": len((d.get("title") or "").split()),
+        })
+    return out
+
+
+async def src_stackexchange(client) -> list[dict]:
+    # top questions across the Stack Exchange network, no auth for read
+    body = await fetch_json(client,
+        "https://api.stackexchange.com/2.3/questions?pagesize=100&order=desc&sort=activity&site=stackoverflow")
+    if not isinstance(body, dict): return []
+    out = []
+    for q in body.get("items") or []:
+        out.append({
+            "q_id": q.get("question_id"),
+            "score_bucket": round((q.get("score") or 0) / 5) * 5,
+            "answers": q.get("answer_count") or 0,
+            "views_log": round(float(np.log10(max(1, q.get("view_count") or 1))), 2),
+            "n_tags": len(q.get("tags") or []),
+            "is_answered": bool(q.get("is_answered")),
+        })
+    return out
+
+
+async def src_open_meteo(client) -> list[dict]:
+    # Sample a grid of weather stations across the globe, no auth.
+    import itertools
+    lats = [-60, -30, 0, 30, 60]
+    lons = [-120, -60, 0, 60, 120]
+    out = []
+    async def one(lat, lon):
+        body = await fetch_json(client,
+            f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,precipitation")
+        if not isinstance(body, dict): return None
+        cur = body.get("current") or {}
+        return {
+            "lat": lat, "lon": lon,
+            "t_bin": round((cur.get("temperature_2m") or 0) / 2) * 2,
+            "wind_bin": round((cur.get("wind_speed_10m") or 0)),
+            "humid_bin": round((cur.get("relative_humidity_2m") or 0) / 5) * 5,
+            "precip_bin": round((cur.get("precipitation") or 0)),
+        }
+    results = await asyncio.gather(*[one(la, lo) for la, lo in itertools.product(lats, lons)])
+    for r in results:
+        if r: out.append(r)
+    return out
+
+
+async def src_musicbrainz(client, max_records=200) -> list[dict]:
+    body = await fetch_json(client,
+        f"https://musicbrainz.org/ws/2/artist/?query=type:group&fmt=json&limit={max_records}")
+    if not isinstance(body, dict): return []
+    out = []
+    for a in body.get("artists") or []:
+        out.append({
+            "id": (a.get("id") or "")[:12],
+            "type": a.get("type") or "",
+            "country": a.get("country") or "??",
+            "score": a.get("score") or 0,
+            "has_begin_year": bool(((a.get("life-span") or {}).get("begin"))),
+            "ended": bool(((a.get("life-span") or {}).get("ended"))),
+        })
+    return out
+
+
+async def src_spacex_launches(client) -> list[dict]:
+    body = await fetch_json(client, "https://api.spacexdata.com/v5/launches")
+    if not isinstance(body, list): return []
+    out = []
+    for l in body[-200:]:  # last ~200 launches for scale
+        cores = l.get("cores") or []
+        out.append({
+            "id": (l.get("id") or "")[:12],
+            "success": bool(l.get("success")),
+            "upcoming": bool(l.get("upcoming")),
+            "n_cores": len(cores),
+            "core_reused_count": sum(1 for c in cores if c.get("reused")),
+            "has_failures": bool(l.get("failures")),
+            "year": (l.get("date_utc") or "")[:4],
+        })
+    return out
+
+
+async def src_rest_countries(client) -> list[dict]:
+    body = await fetch_json(client, "https://restcountries.com/v3.1/all?fields=name,region,population,area,languages,unMember")
+    if not isinstance(body, list): return []
+    out = []
+    for c in body:
+        out.append({
+            "region": c.get("region") or "??",
+            "pop_log": round(float(np.log10(max(1, c.get("population") or 1))), 2),
+            "area_log": round(float(np.log10(max(1, c.get("area") or 1))), 2),
+            "n_languages": len(c.get("languages") or {}),
+            "un_member": bool(c.get("unMember")),
+        })
+    return out
 
 
 async def src_wikipedia_featured(client, n_days=30) -> list[dict]:
@@ -248,10 +406,17 @@ SOURCES = [
     ("openalex",        "OpenAlex scholarly works (2024-25)", src_openalex),
     ("hackernews",      "Hacker News top-250 stories",      src_hackernews),
     ("gbif",            "GBIF biodiversity occurrences",    src_gbif),
-    ("openlibrary",     "Open Library new books",           src_openlibrary),
-    ("nasa_exoplanets", "NASA Exoplanet Archive",           src_nasa_exoplanets),
+    ("openlibrary",     "Open Library search (fixed)",      src_openlibrary),
+    ("nasa_exoplanets", "NASA Exoplanet Archive (fixed)",   src_nasa_exoplanets),
     ("wikipedia",       "Wikipedia featured + most-read 30d", src_wikipedia_featured),
     ("sec_fts",         "SEC 10-K 'material weakness' FTS", src_sec_fts),
+    ("arxiv",           "arXiv recent abstracts (ATOM XML fixed)", src_arxiv),
+    ("reddit",          "Reddit /r/all top/day",            src_reddit_rising),
+    ("stackexchange",   "Stack Overflow top questions",     src_stackexchange),
+    ("open_meteo",      "Open-Meteo 5x5 global weather grid", src_open_meteo),
+    ("musicbrainz",     "MusicBrainz group artists",        src_musicbrainz),
+    ("spacex",          "SpaceX last-200 launches",         src_spacex_launches),
+    ("rest_countries",  "REST Countries all",               src_rest_countries),
 ]
 
 
