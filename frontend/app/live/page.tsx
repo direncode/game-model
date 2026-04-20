@@ -46,11 +46,27 @@ type StreamEnvelope<T> = {
   determinism: { seed: number };
 };
 
+type NullTestResult = {
+  stream: string;
+  history_size: number;
+  K?: number;
+  n_iterations?: number;
+  true_top_k_isolation?: number;
+  null?: { mean: number; std: number; p95: number; p99: number; p999: number };
+  z_score?: number;
+  significant_0_05?: boolean;
+  significant_0_01?: boolean;
+  significant_0_001?: boolean;
+  status?: string;
+  min_required?: number;
+};
+
 const POLL_MS = 20_000;
 
 export default function LivePage() {
   const [quakes, setQuakes] = useState<StreamEnvelope<QuakeRow> | null>(null);
   const [crypto, setCrypto] = useState<StreamEnvelope<CryptoRow> | null>(null);
+  const [nullTests, setNullTests] = useState<Record<string, NullTestResult | null>>({});
   const [err, setErr] = useState<{ q?: string; c?: string }>({});
   const [tick, setTick] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -71,6 +87,18 @@ export default function LivePage() {
       else setErr((e) => ({ ...e, c: j?.error ?? `HTTP ${r.status}` }));
     } catch (e) {
       setErr((s) => ({ ...s, c: String(e) }));
+    }
+    // Kick the null-test on each stream after the stream itself is updated.
+    // The test needs at least 20 history records; the endpoint returns a
+    // status marker if we poll too early.
+    for (const s of ["quakes", "crypto"]) {
+      try {
+        const r = await fetch(`/api/live/null-test/${s}?n=200&k=10`, { cache: "no-store" });
+        const j = await r.json();
+        setNullTests((prev) => ({ ...prev, [s]: j }));
+      } catch (e) {
+        setNullTests((prev) => ({ ...prev, [s]: null }));
+      }
     }
     setTick((t) => t + 1);
   };
@@ -162,6 +190,11 @@ export default function LivePage() {
                 <div className="p-8 text-center text-sm text-white/40">Fetching…</div>
               )}
             </div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <NullTestCard label="USGS seismicity" result={nullTests["quakes"]} />
+            <NullTestCard label="CoinGecko markets" result={nullTests["crypto"]} />
           </div>
 
           <div className="mt-12 rounded-xl border border-white/10 bg-white/[0.02] p-6">
@@ -283,6 +316,91 @@ function QuakeItem({ q, rank }: { q: QuakeRow; rank: number }) {
       <div className="text-right font-mono text-sm text-li-cyan tabular-nums">
         {q.composite.toFixed(3)}
       </div>
+    </div>
+  );
+}
+
+function NullTestCard({
+  label,
+  result,
+}: {
+  label: string;
+  result: NullTestResult | null | undefined;
+}) {
+  if (!result) {
+    return (
+      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
+        <div className="font-mono text-[11px] uppercase tracking-widest text-white/40 mb-2">
+          Null-permutation test · {label}
+        </div>
+        <div className="text-sm text-white/50">Awaiting first poll…</div>
+      </div>
+    );
+  }
+  if (result.status === "insufficient_history") {
+    return (
+      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
+        <div className="flex items-start justify-between mb-2">
+          <div className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+            Null-permutation test · {label}
+          </div>
+          <div className="text-[10px] font-mono text-white/30">
+            history {result.history_size}/{result.min_required ?? 20}
+          </div>
+        </div>
+        <div className="text-sm text-white/60">
+          Accumulating stream history. The falsifiability test activates once
+          the rolling window has ≥ {result.min_required ?? 20} records.
+        </div>
+      </div>
+    );
+  }
+  const z = result.z_score ?? 0;
+  const tone =
+    result.significant_0_001
+      ? "text-li-green border-li-green/30 bg-li-green/[0.04]"
+      : result.significant_0_05
+      ? "text-li-cyan border-li-cyan/30 bg-li-cyan/[0.04]"
+      : "text-white/70 border-white/10 bg-white/[0.02]";
+  return (
+    <div className={`rounded-xl border p-5 ${tone}`}>
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <div className="font-mono text-[11px] uppercase tracking-widest text-white/50 mb-1">
+            Null-permutation test · {label}
+          </div>
+          <div className="text-sm text-white/80">
+            Fisher-Yates bit-shuffle preserving bit count · N={result.n_iterations} · seed 42
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="font-display text-3xl tabular-nums">{z.toFixed(2)} σ</div>
+          <div className="text-[10px] font-mono opacity-70">
+            {result.significant_0_001
+              ? "p < 0.001"
+              : result.significant_0_01
+              ? "p < 0.01"
+              : result.significant_0_05
+              ? "p < 0.05"
+              : "not sig."}
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-4 gap-3 text-xs font-mono tabular-nums">
+        <MiniNullStat label="True top-K" value={(result.true_top_k_isolation ?? 0).toFixed(3)} />
+        <MiniNullStat label="Null mean" value={(result.null?.mean ?? 0).toFixed(3)} />
+        <MiniNullStat label="Null p95" value={(result.null?.p95 ?? 0).toFixed(3)} />
+        <MiniNullStat label="History" value={String(result.history_size)} />
+      </div>
+    </div>
+  );
+}
+
+function MiniNullStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-white/40">{label}</div>
+      <div className="text-white/90">{value}</div>
     </div>
   );
 }

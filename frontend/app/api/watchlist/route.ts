@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
 import path from "path";
 import { resolveEntity } from "@/lib/entityResolver";
+import { generateThesis } from "@/lib/thesisGenerator";
+import { readCachedJson } from "@/lib/artifactCache";
 
 // Universal watchlist endpoint: reads the raw BTUT survivor set and returns
 // the top-50 findings by composite score. No hand-curated ticker list — the
@@ -55,12 +56,10 @@ export async function GET(req: Request) {
   const cachePath = path.join(repoRoot, "scripts", "edgar_cache.json");
 
   try {
-    const [btutRaw, cacheRaw] = await Promise.all([
-      fs.readFile(btutPath, "utf-8"),
-      fs.readFile(cachePath, "utf-8"),
+    const [btut, cache] = await Promise.all([
+      readCachedJson<{ survivors?: Survivor[] }>(btutPath, 120_000),
+      readCachedJson<{ entities?: Array<{ type?: string; attributes?: any }> }>(cachePath, 120_000),
     ]);
-    const btut = JSON.parse(btutRaw) as { survivors?: Survivor[] };
-    const cache = JSON.parse(cacheRaw) as { entities?: Array<{ type?: string; attributes?: any }> };
 
     const cikToName = new Map<string, string>();
     for (const e of cache.entities ?? []) {
@@ -107,12 +106,23 @@ export async function GET(req: Request) {
       .slice(0, k)
       .map((f, i) => {
         const resolved = resolveEntity(`fact_${f.cik}_${f.concept}`, cikToName);
+        const thesis = generateThesis({
+          resolved,
+          composite: f.composite,
+          anomaly: f.anomaly,
+          reconstruction: f.reconstruction,
+          diversity: f.diversity,
+          peerRank: i + 1,
+          universeSize: byCik.size,
+          corpusDomain: "SEC EDGAR",
+        });
         return {
           ...f,
           rank: i + 1,
           concept_display: resolved.display.split(" · ").slice(-1)[0],
           entity_display: resolved.display,
           external_url: resolved.externalUrl,
+          thesis,
         };
       });
 

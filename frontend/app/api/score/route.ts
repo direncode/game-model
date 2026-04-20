@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
 import path from "path";
+import { readCachedJson } from "@/lib/artifactCache";
 
 // Single-ticker score: the Excel `=LO.SCORE("AAPL")` surface as a web call.
 // Routes query through the universal ticker map + BTUT output. No hardcoded
@@ -54,12 +54,10 @@ export async function GET(req: Request) {
   const cachePath = path.join(repoRoot, "scripts", "edgar_cache.json");
 
   try {
-    const [btutRaw, cacheRaw] = await Promise.all([
-      fs.readFile(btutPath, "utf-8"),
-      fs.readFile(cachePath, "utf-8"),
+    const [btut, cache] = await Promise.all([
+      readCachedJson<any>(btutPath, 120_000),
+      readCachedJson<any>(cachePath, 120_000),
     ]);
-    const btut = JSON.parse(btutRaw);
-    const cache = JSON.parse(cacheRaw);
 
     const cikToName = new Map<string, string>();
     for (const e of cache.entities ?? []) {

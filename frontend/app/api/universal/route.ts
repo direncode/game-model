@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
 import path from "path";
 import { resolveEntity } from "@/lib/entityResolver";
+import { generateThesis } from "@/lib/thesisGenerator";
+import { readCachedJson } from "@/lib/artifactCache";
 
 // Universality endpoint: reads data/validation/universal_validation.json
 // emitted by scripts/universal_validation.py. Every corpus is processed
@@ -13,15 +14,13 @@ export async function GET() {
   const repoRoot = path.resolve(process.cwd(), "..");
   const target = path.join(repoRoot, "data", "validation", "universal_validation.json");
   try {
-    const raw = await fs.readFile(target, "utf-8");
-    const data = JSON.parse(raw);
+    const data = await readCachedJson<any>(target, 120_000);
 
     // Try to load edgar_cache for CIK→name coverage beyond the embedded registry.
     const cikMap = new Map<string, string>();
     const cachePath = path.join(repoRoot, "scripts", "edgar_cache.json");
     try {
-      const cacheRaw = await fs.readFile(cachePath, "utf-8");
-      const cache = JSON.parse(cacheRaw);
+      const cache = await readCachedJson<{ entities?: Array<{ type?: string; attributes?: any }> }>(cachePath, 120_000);
       for (const e of cache.entities ?? []) {
         if (e.type !== "filing") continue;
         const a = typeof e.attributes === "string"
@@ -35,12 +34,23 @@ export async function GET() {
       // cache missing is fine; resolver falls back to registry
     }
 
-    // Decorate each corpus's top_entity with a resolved display name.
+    // Decorate each corpus's top_entity with a resolved display name + thesis.
     if (Array.isArray(data.corpora)) {
       data.corpora = data.corpora.map((c: any) => {
         if (c.top_entity_name) {
           const r = resolveEntity(c.top_entity_name, cikMap);
           c.top_entity_resolved = r;
+          const topMetric = (c.null_test?.per_metric || []).find(
+            (m: any) => m.dim === "composite",
+          );
+          c.top_entity_thesis = generateThesis({
+            resolved: r,
+            composite: c.top_composite ?? topMetric?.true_mean ?? 0,
+            anomaly: topMetric?.true_mean ?? 0,
+            reconstruction: 0,
+            diversity: 0,
+            corpusDomain: c.corpus_id,
+          });
         }
         return c;
       });

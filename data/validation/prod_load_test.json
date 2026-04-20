@@ -1,0 +1,462 @@
+{
+  "host": "https://latentocean.com",
+  "generated_at": "2026-04-20T04:03:51Z",
+  "rounds": 300,
+  "concurrency_levels": [
+    10,
+    50,
+    150
+  ],
+  "measurements": [
+    {
+      "endpoint": "https://latentocean.com/",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 2.466,
+      "throughput_rps": 121.6,
+      "success_rate": 1.0,
+      "p50_ms": 72.1,
+      "p90_ms": 88.4,
+      "p95_ms": 93.6,
+      "p99_ms": 441.2,
+      "max_ms": 479.3,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 3.495,
+      "throughput_rps": 85.8,
+      "success_rate": 1.0,
+      "p50_ms": 402.9,
+      "p90_ms": 1075.4,
+      "p95_ms": 1392.4,
+      "p99_ms": 2189.7,
+      "max_ms": 2806.1,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 7.463,
+      "throughput_rps": 40.2,
+      "success_rate": 1.0,
+      "p50_ms": 2312.2,
+      "p90_ms": 5638.6,
+      "p95_ms": 6066.9,
+      "p99_ms": 6485.0,
+      "max_ms": 6559.4,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/universal",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 1.388,
+      "throughput_rps": 216.2,
+      "success_rate": 1.0,
+      "p50_ms": 39.7,
+      "p90_ms": 61.6,
+      "p95_ms": 73.1,
+      "p99_ms": 139.3,
+      "max_ms": 145.1,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/universal",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 3.657,
+      "throughput_rps": 82.0,
+      "success_rate": 1.0,
+      "p50_ms": 394.1,
+      "p90_ms": 1267.4,
+      "p95_ms": 1607.0,
+      "p99_ms": 2185.0,
+      "max_ms": 2788.1,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/universal",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 6.931,
+      "throughput_rps": 43.3,
+      "success_rate": 1.0,
+      "p50_ms": 1869.9,
+      "p90_ms": 4946.9,
+      "p95_ms": 5719.3,
+      "p99_ms": 5961.3,
+      "max_ms": 6148.9,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/validation",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 1.41,
+      "throughput_rps": 212.8,
+      "success_rate": 1.0,
+      "p50_ms": 42.2,
+      "p90_ms": 63.0,
+      "p95_ms": 68.7,
+      "p99_ms": 119.1,
+      "max_ms": 135.2,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/validation",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 3.004,
+      "throughput_rps": 99.9,
+      "success_rate": 1.0,
+      "p50_ms": 326.4,
+      "p90_ms": 925.2,
+      "p95_ms": 1331.0,
+      "p99_ms": 1763.0,
+      "max_ms": 2523.2,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/validation",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 6.635,
+      "throughput_rps": 45.2,
+      "success_rate": 1.0,
+      "p50_ms": 1512.3,
+      "p90_ms": 5184.4,
+      "p95_ms": 5573.9,
+      "p99_ms": 5860.3,
+      "max_ms": 5978.0,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/watchlist",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 1.432,
+      "throughput_rps": 209.6,
+      "success_rate": 1.0,
+      "p50_ms": 43.2,
+      "p90_ms": 59.5,
+      "p95_ms": 76.0,
+      "p99_ms": 126.2,
+      "max_ms": 129.0,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/watchlist",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 2.925,
+      "throughput_rps": 102.6,
+      "success_rate": 1.0,
+      "p50_ms": 330.2,
+      "p90_ms": 945.4,
+      "p95_ms": 1296.6,
+      "p99_ms": 1545.9,
+      "max_ms": 1924.3,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/watchlist",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 6.56,
+      "throughput_rps": 45.7,
+      "success_rate": 1.0,
+      "p50_ms": 1453.5,
+      "p90_ms": 5179.0,
+      "p95_ms": 5515.1,
+      "p99_ms": 5764.7,
+      "max_ms": 5878.5,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/live",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 1.341,
+      "throughput_rps": 223.8,
+      "success_rate": 1.0,
+      "p50_ms": 39.9,
+      "p90_ms": 57.0,
+      "p95_ms": 63.9,
+      "p99_ms": 111.8,
+      "max_ms": 116.8,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/live",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 2.194,
+      "throughput_rps": 136.7,
+      "success_rate": 1.0,
+      "p50_ms": 254.3,
+      "p90_ms": 711.5,
+      "p95_ms": 942.5,
+      "p99_ms": 1321.2,
+      "max_ms": 1508.5,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/live",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 6.436,
+      "throughput_rps": 46.6,
+      "success_rate": 1.0,
+      "p50_ms": 1518.8,
+      "p90_ms": 5033.2,
+      "p95_ms": 5467.0,
+      "p99_ms": 5745.3,
+      "max_ms": 5844.7,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/api/universal",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 95.691,
+      "throughput_rps": 3.1,
+      "success_rate": 1.0,
+      "p50_ms": 3115.8,
+      "p90_ms": 3435.6,
+      "p95_ms": 3549.9,
+      "p99_ms": 3694.9,
+      "max_ms": 4094.1,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/api/universal",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 94.663,
+      "throughput_rps": 3.2,
+      "success_rate": 1.0,
+      "p50_ms": 15645.2,
+      "p90_ms": 16011.1,
+      "p95_ms": 16260.5,
+      "p99_ms": 16845.9,
+      "max_ms": 17849.8,
+      "error_counts": {}
+    },
+    {
+      "endpoint": "https://latentocean.com/api/universal",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 40.839,
+      "throughput_rps": 7.3,
+      "success_rate": 0.1867,
+      "p50_ms": 11134.1,
+      "p90_ms": 18397.8,
+      "p95_ms": 19228.4,
+      "p99_ms": 19918.8,
+      "max_ms": 20232.1,
+      "error_counts": {
+        "ReadTimeout": 244
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/validation",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 69.027,
+      "throughput_rps": 4.3,
+      "success_rate": 0.0,
+      "p50_ms": 25.8,
+      "p90_ms": 3128.2,
+      "p95_ms": 3145.8,
+      "p99_ms": 14334.2,
+      "max_ms": 14353.2,
+      "error_counts": {
+        "502": 280,
+        "ReadTimeout": 20
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/validation",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 26.089,
+      "throughput_rps": 11.5,
+      "success_rate": 0.0,
+      "p50_ms": 3254.0,
+      "p90_ms": 6101.2,
+      "p95_ms": 7920.3,
+      "p99_ms": 9011.6,
+      "max_ms": 9425.5,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/validation",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 49.082,
+      "throughput_rps": 6.1,
+      "success_rate": 0.0,
+      "p50_ms": 20185.0,
+      "p90_ms": 25630.9,
+      "p95_ms": 26897.3,
+      "p99_ms": 31345.8,
+      "max_ms": 32485.4,
+      "error_counts": {
+        "502": 294,
+        "ConnectTimeout": 6
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/watchlist?k=10",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 98.549,
+      "throughput_rps": 3.0,
+      "success_rate": 0.0,
+      "p50_ms": 3255.4,
+      "p90_ms": 3343.1,
+      "p95_ms": 3377.4,
+      "p99_ms": 3626.8,
+      "max_ms": 3646.3,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/watchlist?k=10",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 21.884,
+      "throughput_rps": 13.7,
+      "success_rate": 0.0,
+      "p50_ms": 3110.0,
+      "p90_ms": 3218.1,
+      "p95_ms": 6108.6,
+      "p99_ms": 6227.0,
+      "max_ms": 6268.6,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/watchlist?k=10",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 26.739,
+      "throughput_rps": 11.2,
+      "success_rate": 0.0,
+      "p50_ms": 5892.1,
+      "p90_ms": 11941.5,
+      "p95_ms": 14921.6,
+      "p99_ms": 15119.8,
+      "max_ms": 17934.0,
+      "error_counts": {
+        "502": 279,
+        "ReadTimeout": 21
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/quakes",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 95.035,
+      "throughput_rps": 3.2,
+      "success_rate": 0.0,
+      "p50_ms": 3136.3,
+      "p90_ms": 3269.6,
+      "p95_ms": 3305.2,
+      "p99_ms": 3386.0,
+      "max_ms": 3419.7,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/quakes",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 39.284,
+      "throughput_rps": 7.6,
+      "success_rate": 0.0,
+      "p50_ms": 5385.4,
+      "p90_ms": 9766.4,
+      "p95_ms": 11067.3,
+      "p99_ms": 12410.0,
+      "max_ms": 12822.7,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/quakes",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 44.248,
+      "throughput_rps": 6.8,
+      "success_rate": 0.0,
+      "p50_ms": 15668.4,
+      "p90_ms": 22540.6,
+      "p95_ms": 24041.5,
+      "p99_ms": 26529.9,
+      "max_ms": 31020.8,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/crypto",
+      "concurrency": 10,
+      "total_requests": 300,
+      "wall_seconds": 94.772,
+      "throughput_rps": 3.2,
+      "success_rate": 0.0,
+      "p50_ms": 3134.0,
+      "p90_ms": 3148.9,
+      "p95_ms": 3265.1,
+      "p99_ms": 3797.6,
+      "max_ms": 3805.2,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/crypto",
+      "concurrency": 50,
+      "total_requests": 300,
+      "wall_seconds": 22.017,
+      "throughput_rps": 13.6,
+      "success_rate": 0.0,
+      "p50_ms": 3149.0,
+      "p90_ms": 3232.4,
+      "p95_ms": 3253.0,
+      "p99_ms": 6226.6,
+      "max_ms": 6422.5,
+      "error_counts": {
+        "502": 300
+      }
+    },
+    {
+      "endpoint": "https://latentocean.com/api/live/crypto",
+      "concurrency": 150,
+      "total_requests": 300,
+      "wall_seconds": 27.324,
+      "throughput_rps": 11.0,
+      "success_rate": 0.0,
+      "p50_ms": 6420.2,
+      "p90_ms": 15486.3,
+      "p95_ms": 15721.3,
+      "p99_ms": 15816.9,
+      "max_ms": 15925.2,
+      "error_counts": {
+        "502": 245,
+        "ReadTimeout": 55
+      }
+    }
+  ]
+}

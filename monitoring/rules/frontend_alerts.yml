@@ -1,0 +1,54 @@
+groups:
+  - name: latentocean-frontend
+    interval: 30s
+    rules:
+      - alert: FrontendHealthCheckFailing
+        # blackbox_exporter emits probe_success=0 when the health endpoint
+        # returns non-200 or times out. Alert fires after 2 minutes.
+        expr: probe_success{component="frontend"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: latentocean-frontend
+        annotations:
+          summary: "Frontend /api/health returning non-200 for >2m"
+          description: |
+            The Latent Ocean frontend container at {{ $labels.instance }} is
+            not serving /api/health successfully. This typically means:
+              - next start crashed or is restarting
+              - data volume mounts missing (universal_validation.json unreadable)
+              - BTUT cache missing
+
+      - alert: FrontendHealthCheckSlow
+        expr: probe_duration_seconds{component="frontend"} > 2.5
+        for: 5m
+        labels:
+          severity: warning
+          service: latentocean-frontend
+        annotations:
+          summary: "/api/health latency > 2.5s p-avg over 5m"
+          description: |
+            Health endpoint is slower than SLO target (2.5s). The cold start
+            of /api/universal reads a 76KB JSON artifact; if p95 is chronically
+            above target, investigate disk I/O or increase the container CPU
+            reservation.
+
+  - name: latentocean-backend
+    interval: 30s
+    rules:
+      - alert: BackendScrapeDown
+        expr: up{component="backend"} == 0
+        for: 2m
+        labels: { severity: critical, service: latentocean-api }
+        annotations:
+          summary: "Backend FastAPI /metrics scrape failing"
+
+      - alert: BackendHighErrorRate
+        # 5% 5xx rate over 5 minutes at the /api/v1/* surface.
+        expr: |
+          sum(rate(http_requests_total{status=~"5..",component="backend"}[5m]))
+            / sum(rate(http_requests_total{component="backend"}[5m])) > 0.05
+        for: 5m
+        labels: { severity: warning, service: latentocean-api }
+        annotations:
+          summary: "Backend 5xx rate > 5% over 5m"
