@@ -73,9 +73,14 @@ services:
     env_file: .env
     volumes:
       - ./frontend:/app
+      - ./data:/data:ro
+      - ./scripts:/scripts:ro
       - /app/node_modules
       - /app/.next
-    command: npm run dev
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    command: sh -c "npm run build && npm run start"
 
   postgres:
     image: postgres:16-alpine
