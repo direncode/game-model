@@ -102,7 +102,7 @@ export async function GET(req: Request) {
       }
     }
 
-    const ranked = [...byCik.values()]
+    const ranked = Array.from(byCik.values())
       .sort((a, b) => b.composite - a.composite)
       .slice(0, k)
       .map((f, i) => {
