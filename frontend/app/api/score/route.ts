@@ -30,7 +30,8 @@ function resolveCik(q: string, cikToName: Map<string, string>): string | null {
   const u = q.trim().toUpperCase();
   if (TICKER_MAP[u]) return TICKER_MAP[u];
   if (/^\d+$/.test(u)) return String(parseInt(u, 10));
-  for (const [cik, name] of cikToName.entries()) {
+  const entries = Array.from(cikToName.entries());
+  for (const [cik, name] of entries) {
     const n = name.toUpperCase();
     if (n.includes(u) || n.startsWith(u)) return cik;
   }
