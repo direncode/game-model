@@ -77,6 +77,105 @@ const XBRL_GLOSS: Record<string, string> = {
     "cash composition line — restricted vs unrestricted breakout",
   AcceleratedShareRepurchaseProgramAdjustment:
     "ASR settlement adjustment — forward-contract reconciliation",
+  // ─── Added in v2 (richer glossary) ───────────────────────────────
+  Revenues:
+    "top-line revenue — outlier vs sector-normalized size suggests channel concentration",
+  CostOfRevenue:
+    "COGS line — outlier shape implies unusual input-mix or gross-margin regime",
+  OperatingIncomeLoss:
+    "operating leverage — divergence from peer distribution often a capex-cycle marker",
+  NetIncomeLoss:
+    "bottom-line net income — divergence from operating-income shape flags tax/one-time items",
+  EarningsPerShareBasic:
+    "EPS line — shape distance from peers flags buyback or dilution intensity",
+  CommonStockSharesAuthorized:
+    "authorized-shares capacity — outlier signals pending recap or dual-class redesign",
+  PropertyPlantAndEquipmentNet:
+    "PP&E net — outlier vs sector centroid marks unusual asset intensity",
+  Goodwill:
+    "carrying goodwill — material outlier is a leading indicator for impairment review",
+  IntangibleAssetsNetExcludingGoodwill:
+    "identifiable intangibles — acquisition-footprint signal",
+  Liabilities:
+    "aggregate liabilities — unusual composition vs sector norms",
+  LongTermDebt:
+    "LT-debt balance — covenant-risk adjacency when outlier vs interest-coverage band",
+  ShareBasedCompensation:
+    "SBC expense — outlier shape marks equity-comp-heavy compensation regime",
+  StockholdersEquity:
+    "book equity — buyback-intensity and retained-earnings shape marker",
+  RetainedEarningsAccumulatedDeficit:
+    "retained earnings — long-run profitability trace",
+  NetCashProvidedByUsedInOperatingActivities:
+    "operating cash flow — divergence from NI shape flags accrual-quality concern",
+  NetCashProvidedByUsedInInvestingActivities:
+    "investing CF — outlier ties to capex / M&A cadence",
+  NetCashProvidedByUsedInFinancingActivities:
+    "financing CF — debt/buyback/dividend regime indicator",
+  DepreciationDepletionAndAmortization:
+    "DD&A line — asset-base consumption rate",
+  Depreciation:
+    "depreciation schedule — useful-life assumption marker",
+  AccountsReceivableNetCurrent:
+    "AR net — DSO-adjacent signal when outlier vs sector",
+  InventoryNet:
+    "inventory net — turnover/obsolescence-risk signal",
+  AccountsPayableCurrent:
+    "AP current — DPO / working-capital-financing signal",
+  DeferredRevenue:
+    "deferred revenue — subscription / long-contract booking pattern",
+  ContractWithCustomerLiability:
+    "contract liability — ASC-606 deferred-performance-obligation shape",
+  ResearchAndDevelopmentExpense:
+    "R&D expense — intensity outlier is innovation-cycle marker",
+  SellingGeneralAndAdministrativeExpense:
+    "SG&A line — scale-economics signal when outlier vs revenue shape",
+  IncomeTaxesPaidNet:
+    "cash taxes paid — effective-tax cash conversion",
+  ProceedsFromIssuanceOfLongTermDebt:
+    "LT-debt issuance — leverage-regime change signal",
+  RepaymentsOfLongTermDebt:
+    "LT-debt repayment — deleveraging cadence",
+  PaymentsForRepurchaseOfCommonStock:
+    "buyback cash — capital-return regime marker",
+  PaymentsOfDividends:
+    "dividend cash — capital-return regime marker",
+  Cash:
+    "cash balance — treasury-posture line",
+  CashAndCashEquivalents:
+    "cash & equivalents — cross-period liquidity baseline",
+  MarketableSecurities:
+    "marketable securities — non-operating capital-allocation signal",
+  OperatingLeaseRightOfUseAsset:
+    "ASC-842 RoU asset — lease-intensity marker",
+  OperatingLeaseLiability:
+    "ASC-842 lease liability — lease-intensity on the liability side",
+  FairValueInputsLevel3:
+    "Level-3 fair-value inputs — unobservable-input intensity (audit-sensitive)",
+  AllowanceForDoubtfulAccountsReceivable:
+    "AR allowance — credit-quality management-estimate line",
+  ValuationAllowance:
+    "deferred-tax valuation allowance — recoverability judgement line (audit-sensitive)",
+  UnrecognizedTaxBenefits:
+    "uncertain-tax-position reserve — FIN-48 exposure marker",
+  PensionAndOtherPostretirementBenefitContributionsByEmployer:
+    "pension + OPEB contribution cadence — legacy-obligation marker",
+  DefinedBenefitPlanAssets:
+    "DB plan assets — pension-funding-status marker",
+  DefinedBenefitPlanBenefitObligation:
+    "DB plan obligation — pension-liability marker",
+  StockRepurchasedAndRetiredDuringPeriodValue:
+    "shares retired — buyback-aggressiveness marker",
+  PreferredStockValue:
+    "preferred equity outstanding — capital-structure seniority signal",
+  RestructuringCharges:
+    "restructuring line — transformation-cycle cost marker",
+  LitigationSettlement:
+    "litigation-settlement expense — legal-exposure crystallization",
+  RegulatoryAssets:
+    "regulated-utility recoverables — rate-case-pending marker",
+  DerivativeLiabilities:
+    "derivative liabilities — hedge-ineffectiveness / counterparty signal",
 };
 
 // MeSH top-level cluster heuristics (by prefix)
@@ -165,17 +264,20 @@ function scoreTier(composite: number): string {
   return "mild structural divergence";
 }
 
-function dominantDim(s: ScoreSet): { key: keyof ScoreSet; note: string } {
-  const entries: [keyof ScoreSet, number, string][] = [
+function dominantDim(s: ScoreSet): { key: keyof ScoreSet; note: string; followUp: string } {
+  const entries: [keyof ScoreSet, number, string, string][] = [
     ["anomaly", s.anomaly,
-      "driven by isolation from peer fingerprint space (sparse neighborhood)"],
+      "driven by isolation from peer fingerprint space (sparse neighborhood)",
+      "check whether the entity's peer set is correctly defined or whether it's cross-class"],
     ["reconstruction", s.reconstruction,
-      "driven by information density (informative bit-pattern)"],
+      "driven by information density (informative bit-pattern)",
+      "likely to reflect unusual attribute combinations not present in the typical row"],
     ["diversity", s.diversity,
-      "driven by per-bit entropy across recent history (unusual combination)"],
+      "driven by per-bit entropy across recent history (unusual combination)",
+      "worth examining how many other entities exhibit this specific combination; small clusters of high-diversity rows often mark an emerging regime"],
   ];
   entries.sort((a, b) => b[1] - a[1]);
-  return { key: entries[0][0], note: entries[0][2] };
+  return { key: entries[0][0], note: entries[0][2], followUp: entries[0][3] };
 }
 
 function conceptNote(concept: string, kind: ResolvedEntity["kind"]): string {
@@ -252,8 +354,22 @@ export function generateThesis(input: ThesisInput): string {
 
   const head = resolved?.display ?? "Entity";
   const comp = scores.composite.toFixed(3);
+
+  // Build a secondary reasoning sentence: which dimensions co-confirm the
+  // primary driver, or which diverge from it (worth flagging).
+  const secondary: string[] = [];
+  const maxVal = Math.max(scores.anomaly, scores.reconstruction, scores.diversity);
+  if (scores.anomaly > 0.7 && dom.key !== "anomaly") secondary.push("also highly isolated");
+  if (scores.reconstruction > 0.7 && dom.key !== "reconstruction") secondary.push("information-dense fingerprint");
+  if (scores.diversity > 0.5 && dom.key !== "diversity") secondary.push("unusual bit-entropy profile");
+  // If a dimension is very low despite high composite, that's a signal too.
+  if (maxVal > 0.7 && scores.anomaly < 0.3 && dom.key !== "anomaly") secondary.push("NOT isolated — clustered with peers despite rank");
+  const secondarySentence = secondary.length ? ` Co-signal: ${secondary.join("; ")}.` : "";
+
+  const followUp = ` Next check: ${dom.followUp}.`;
+
   return (
-    `${head} — ${tier} at composite ${comp}, ${dom.note}.${domainSentence}${rankSentence}`.trim()
+    `${head} — ${tier} at composite ${comp}, ${dom.note}.${domainSentence}${rankSentence}${secondarySentence}${followUp}`.trim()
   );
 }
 
