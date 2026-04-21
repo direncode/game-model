@@ -1,6 +1,5 @@
 import { Nav } from "@/components/landing/Nav";
 import { Hero } from "@/components/landing/Hero";
-import { ReductionCinematic } from "@/components/landing/ReductionCinematic";
 import { LiveDemo } from "@/components/landing/LiveDemo";
 import { Architecture } from "@/components/landing/Architecture";
 import { UniversalConnect } from "@/components/landing/UniversalConnect";
@@ -21,7 +20,6 @@ export default function LandingPage() {
         <Hero />
         <PrimitiveInStack />
         <UniversalProof />
-        <ReductionCinematic />
         <LiveDemo />
         <Architecture />
         <UniversalConnect />
