@@ -8,17 +8,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies first (cached layer)
-COPY pyproject.toml ./
+# ─── lo_core: sibling package at repo root, installed first so the
+# backend image can `from lo_core import ...`. Build context must be
+# the repo root (docker-compose.prod.yml sets context: .) for this
+# COPY to resolve.
+COPY lo_core/ /opt/lo_core/
+RUN pip install --no-cache-dir -e /opt/lo_core
+
+# ─── Backend dependencies (cached layer) ─────────────────────────
+COPY backend/pyproject.toml ./
 RUN pip install --no-cache-dir -e .
 RUN pip install --no-cache-dir gunicorn email-validator bcrypt==4.0.1 user-agents
 
-# Copy application code
-COPY . .
+# ─── Application code ────────────────────────────────────────────
+COPY backend/ /app/
 
 # Create non-root user
 RUN useradd --create-home appuser
-RUN mkdir -p /app/checkpoints && chown -R appuser:appuser /app
+RUN mkdir -p /app/checkpoints && chown -R appuser:appuser /app /opt/lo_core
 USER appuser
 
 EXPOSE 8000
