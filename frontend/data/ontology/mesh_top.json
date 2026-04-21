@@ -1,52 +1,1160 @@
 [
-  {"code": "D000081082", "name": "SARS-CoV-2 Infection", "parent": "D014780", "aliases": ["COVID-19", "coronavirus disease", "novel coronavirus"]},
-  {"code": "D000086382", "name": "Post-Acute COVID-19 Syndrome", "parent": "D000081082", "aliases": ["long COVID", "PASC", "post-acute sequelae"]},
-  {"code": "D003924", "name": "Diabetes Mellitus", "parent": "D008659", "aliases": ["diabetes", "DM", "T2D", "T1D"]},
-  {"code": "D006973", "name": "Hypertension", "parent": "D014652", "aliases": ["high blood pressure", "HTN"]},
-  {"code": "D009369", "name": "Neoplasms", "parent": "D013568", "aliases": ["cancer", "tumor", "malignancy"]},
-  {"code": "D001943", "name": "Breast Neoplasms", "parent": "D009369", "aliases": ["breast cancer"]},
-  {"code": "D015179", "name": "Colorectal Neoplasms", "parent": "D009369", "aliases": ["colorectal cancer", "colon cancer"]},
-  {"code": "D008113", "name": "Liver Diseases", "parent": "D013568", "aliases": ["hepatic disease"]},
-  {"code": "D002318", "name": "Cardiovascular Diseases", "parent": "D013568", "aliases": ["heart disease", "CVD"]},
-  {"code": "D015212", "name": "Inflammatory Bowel Diseases", "parent": "D007410", "aliases": ["IBD", "Crohn disease", "ulcerative colitis"]},
-  {"code": "D003141", "name": "Communicable Diseases", "parent": "D013568", "aliases": ["infectious diseases"]},
-  {"code": "D012140", "name": "Respiratory Tract Diseases", "parent": "D013568", "aliases": ["respiratory disease"]},
-  {"code": "D008175", "name": "Lung Neoplasms", "parent": "D009369", "aliases": ["lung cancer"]},
-  {"code": "D011471", "name": "Prostatic Neoplasms", "parent": "D009369", "aliases": ["prostate cancer"]},
-  {"code": "D013274", "name": "Stomach Neoplasms", "parent": "D009369", "aliases": ["gastric cancer", "stomach cancer"]},
-  {"code": "D006528", "name": "Carcinoma, Hepatocellular", "parent": "D009369", "aliases": ["liver cancer", "HCC"]},
-  {"code": "D008103", "name": "Lymphoma", "parent": "D009369", "aliases": ["lymphoma", "Hodgkin", "non-Hodgkin"]},
-  {"code": "D007938", "name": "Leukemia", "parent": "D009369", "aliases": ["leukemia", "AML", "ALL", "CML", "CLL"]},
-  {"code": "D020521", "name": "Stroke", "parent": "D002318", "aliases": ["stroke", "CVA", "cerebrovascular accident"]},
-  {"code": "D009202", "name": "Cardiomyopathies", "parent": "D002318", "aliases": ["cardiomyopathy", "heart muscle disease"]},
-  {"code": "D003327", "name": "Coronary Artery Disease", "parent": "D002318", "aliases": ["CAD", "coronary heart disease"]},
-  {"code": "D010300", "name": "Parkinson Disease", "parent": "D009422", "aliases": ["Parkinson's", "PD"]},
-  {"code": "D000544", "name": "Alzheimer Disease", "parent": "D003704", "aliases": ["Alzheimer's", "AD", "dementia"]},
-  {"code": "D000066553", "name": "Neurocognitive Disorders", "parent": "D009422", "aliases": ["dementia spectrum"]},
-  {"code": "D009422", "name": "Nervous System Diseases", "parent": "D013568", "aliases": ["neurological disease"]},
-  {"code": "D006470", "name": "Hemorrhage", "parent": "D013568", "aliases": ["bleeding"]},
-  {"code": "D020141", "name": "Hemolysis", "parent": "D006470", "aliases": ["red cell breakdown"]},
-  {"code": "D003967", "name": "Diarrhea", "parent": "D004298", "aliases": ["diarrhea", "loose stools"]},
-  {"code": "D001249", "name": "Asthma", "parent": "D001982", "aliases": ["bronchial asthma"]},
-  {"code": "D029424", "name": "Pulmonary Disease, Chronic Obstructive", "parent": "D012140", "aliases": ["COPD", "chronic obstructive pulmonary disease"]},
-  {"code": "D008881", "name": "Migraine Disorders", "parent": "D006261", "aliases": ["migraine", "headache"]},
-  {"code": "D003866", "name": "Depressive Disorder", "parent": "D019964", "aliases": ["depression", "MDD", "major depression"]},
-  {"code": "D001008", "name": "Anxiety Disorders", "parent": "D019964", "aliases": ["anxiety", "GAD", "panic"]},
-  {"code": "D012559", "name": "Schizophrenia", "parent": "D019964", "aliases": ["psychotic disorder"]},
-  {"code": "D001714", "name": "Bipolar Disorder", "parent": "D019964", "aliases": ["manic depression", "bipolar"]},
-  {"code": "D001327", "name": "Autoimmune Diseases", "parent": "D007154", "aliases": ["autoimmune"]},
-  {"code": "D012595", "name": "Scleroderma, Systemic", "parent": "D001327", "aliases": ["systemic sclerosis", "SSc"]},
-  {"code": "D008180", "name": "Lupus Erythematosus, Systemic", "parent": "D001327", "aliases": ["SLE", "lupus"]},
-  {"code": "D001172", "name": "Arthritis, Rheumatoid", "parent": "D001171", "aliases": ["rheumatoid arthritis", "RA"]},
-  {"code": "D015535", "name": "Arthritis, Psoriatic", "parent": "D001171", "aliases": ["psoriatic arthritis", "PsA"]},
-  {"code": "D016732", "name": "Wound Healing", "parent": "D011216", "aliases": ["wound healing"]},
-  {"code": "D000082623", "name": "Artificial Intelligence", "parent": "D003198", "aliases": ["AI", "machine learning", "ML"]},
-  {"code": "D015796", "name": "Meta-Analysis as Topic", "parent": "D016011", "aliases": ["meta-analysis", "systematic review"]},
-  {"code": "D016453", "name": "Sensitivity and Specificity", "parent": "D015196", "aliases": ["diagnostic accuracy"]},
-  {"code": "D016015", "name": "Logistic Models", "parent": "D015194", "aliases": ["logistic regression"]},
-  {"code": "D019943", "name": "Numerical Analysis, Computer-Assisted", "parent": "D003198", "aliases": ["numerical analysis", "computational methods"]},
-  {"code": "D004305", "name": "Dose-Response Relationship, Drug", "parent": "D015194", "aliases": ["dose-response"]},
-  {"code": "D013997", "name": "Time Factors", "parent": "D006235", "aliases": ["time-dependent", "temporal factors"]},
-  {"code": "D059013", "name": "Cell Line, Tumor", "parent": "D002477", "aliases": ["tumor cell line", "cancer cell line"]},
-  {"code": "D040641", "name": "Nanoparticles", "parent": "D009820", "aliases": ["nanoparticle", "nanotechnology"]}
+  {
+    "code": "D000081082",
+    "name": "SARS-CoV-2 Infection",
+    "parent": "D014780",
+    "aliases": [
+      "COVID-19",
+      "coronavirus disease",
+      "novel coronavirus"
+    ]
+  },
+  {
+    "code": "D000086382",
+    "name": "Post-Acute COVID-19 Syndrome",
+    "parent": "D000081082",
+    "aliases": [
+      "long COVID",
+      "PASC",
+      "post-acute sequelae"
+    ]
+  },
+  {
+    "code": "D003924",
+    "name": "Diabetes Mellitus",
+    "parent": "D008659",
+    "aliases": [
+      "diabetes",
+      "DM",
+      "T2D",
+      "T1D"
+    ]
+  },
+  {
+    "code": "D006973",
+    "name": "Hypertension",
+    "parent": "D014652",
+    "aliases": [
+      "high blood pressure",
+      "HTN"
+    ]
+  },
+  {
+    "code": "D009369",
+    "name": "Neoplasms",
+    "parent": "D013568",
+    "aliases": [
+      "cancer",
+      "tumor",
+      "malignancy"
+    ]
+  },
+  {
+    "code": "D001943",
+    "name": "Breast Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "breast cancer"
+    ]
+  },
+  {
+    "code": "D015179",
+    "name": "Colorectal Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "colorectal cancer",
+      "colon cancer"
+    ]
+  },
+  {
+    "code": "D008113",
+    "name": "Liver Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "hepatic disease"
+    ]
+  },
+  {
+    "code": "D002318",
+    "name": "Cardiovascular Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "heart disease",
+      "CVD"
+    ]
+  },
+  {
+    "code": "D015212",
+    "name": "Inflammatory Bowel Diseases",
+    "parent": "D007410",
+    "aliases": [
+      "IBD",
+      "Crohn disease",
+      "ulcerative colitis"
+    ]
+  },
+  {
+    "code": "D003141",
+    "name": "Communicable Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "infectious diseases"
+    ]
+  },
+  {
+    "code": "D012140",
+    "name": "Respiratory Tract Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "respiratory disease"
+    ]
+  },
+  {
+    "code": "D008175",
+    "name": "Lung Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "lung cancer"
+    ]
+  },
+  {
+    "code": "D011471",
+    "name": "Prostatic Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "prostate cancer"
+    ]
+  },
+  {
+    "code": "D013274",
+    "name": "Stomach Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "gastric cancer",
+      "stomach cancer"
+    ]
+  },
+  {
+    "code": "D006528",
+    "name": "Carcinoma, Hepatocellular",
+    "parent": "D009369",
+    "aliases": [
+      "liver cancer",
+      "HCC"
+    ]
+  },
+  {
+    "code": "D008103",
+    "name": "Lymphoma",
+    "parent": "D009369",
+    "aliases": [
+      "lymphoma",
+      "Hodgkin",
+      "non-Hodgkin"
+    ]
+  },
+  {
+    "code": "D007938",
+    "name": "Leukemia",
+    "parent": "D009369",
+    "aliases": [
+      "leukemia",
+      "AML",
+      "ALL",
+      "CML",
+      "CLL"
+    ]
+  },
+  {
+    "code": "D020521",
+    "name": "Stroke",
+    "parent": "D002318",
+    "aliases": [
+      "stroke",
+      "CVA",
+      "cerebrovascular accident"
+    ]
+  },
+  {
+    "code": "D009202",
+    "name": "Cardiomyopathies",
+    "parent": "D002318",
+    "aliases": [
+      "cardiomyopathy",
+      "heart muscle disease"
+    ]
+  },
+  {
+    "code": "D003327",
+    "name": "Coronary Artery Disease",
+    "parent": "D002318",
+    "aliases": [
+      "CAD",
+      "coronary heart disease"
+    ]
+  },
+  {
+    "code": "D010300",
+    "name": "Parkinson Disease",
+    "parent": "D009422",
+    "aliases": [
+      "Parkinson's",
+      "PD"
+    ]
+  },
+  {
+    "code": "D000544",
+    "name": "Alzheimer Disease",
+    "parent": "D003704",
+    "aliases": [
+      "Alzheimer's",
+      "AD",
+      "dementia"
+    ]
+  },
+  {
+    "code": "D000066553",
+    "name": "Neurocognitive Disorders",
+    "parent": "D009422",
+    "aliases": [
+      "dementia spectrum"
+    ]
+  },
+  {
+    "code": "D009422",
+    "name": "Nervous System Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "neurological disease"
+    ]
+  },
+  {
+    "code": "D006470",
+    "name": "Hemorrhage",
+    "parent": "D013568",
+    "aliases": [
+      "bleeding"
+    ]
+  },
+  {
+    "code": "D020141",
+    "name": "Hemolysis",
+    "parent": "D006470",
+    "aliases": [
+      "red cell breakdown"
+    ]
+  },
+  {
+    "code": "D003967",
+    "name": "Diarrhea",
+    "parent": "D004298",
+    "aliases": [
+      "diarrhea",
+      "loose stools"
+    ]
+  },
+  {
+    "code": "D001249",
+    "name": "Asthma",
+    "parent": "D001982",
+    "aliases": [
+      "bronchial asthma"
+    ]
+  },
+  {
+    "code": "D029424",
+    "name": "Pulmonary Disease, Chronic Obstructive",
+    "parent": "D012140",
+    "aliases": [
+      "COPD",
+      "chronic obstructive pulmonary disease"
+    ]
+  },
+  {
+    "code": "D008881",
+    "name": "Migraine Disorders",
+    "parent": "D006261",
+    "aliases": [
+      "migraine",
+      "headache"
+    ]
+  },
+  {
+    "code": "D003866",
+    "name": "Depressive Disorder",
+    "parent": "D019964",
+    "aliases": [
+      "depression",
+      "MDD",
+      "major depression"
+    ]
+  },
+  {
+    "code": "D001008",
+    "name": "Anxiety Disorders",
+    "parent": "D019964",
+    "aliases": [
+      "anxiety",
+      "GAD",
+      "panic"
+    ]
+  },
+  {
+    "code": "D012559",
+    "name": "Schizophrenia",
+    "parent": "D019964",
+    "aliases": [
+      "psychotic disorder"
+    ]
+  },
+  {
+    "code": "D001714",
+    "name": "Bipolar Disorder",
+    "parent": "D019964",
+    "aliases": [
+      "manic depression",
+      "bipolar"
+    ]
+  },
+  {
+    "code": "D001327",
+    "name": "Autoimmune Diseases",
+    "parent": "D007154",
+    "aliases": [
+      "autoimmune"
+    ]
+  },
+  {
+    "code": "D012595",
+    "name": "Scleroderma, Systemic",
+    "parent": "D001327",
+    "aliases": [
+      "systemic sclerosis",
+      "SSc"
+    ]
+  },
+  {
+    "code": "D008180",
+    "name": "Lupus Erythematosus, Systemic",
+    "parent": "D001327",
+    "aliases": [
+      "SLE",
+      "lupus"
+    ]
+  },
+  {
+    "code": "D001172",
+    "name": "Arthritis, Rheumatoid",
+    "parent": "D001171",
+    "aliases": [
+      "rheumatoid arthritis",
+      "RA"
+    ]
+  },
+  {
+    "code": "D015535",
+    "name": "Arthritis, Psoriatic",
+    "parent": "D001171",
+    "aliases": [
+      "psoriatic arthritis",
+      "PsA"
+    ]
+  },
+  {
+    "code": "D016732",
+    "name": "Wound Healing",
+    "parent": "D011216",
+    "aliases": [
+      "wound healing"
+    ]
+  },
+  {
+    "code": "D000082623",
+    "name": "Artificial Intelligence",
+    "parent": "D003198",
+    "aliases": [
+      "AI",
+      "machine learning",
+      "ML"
+    ]
+  },
+  {
+    "code": "D015796",
+    "name": "Meta-Analysis as Topic",
+    "parent": "D016011",
+    "aliases": [
+      "meta-analysis",
+      "systematic review"
+    ]
+  },
+  {
+    "code": "D016453",
+    "name": "Sensitivity and Specificity",
+    "parent": "D015196",
+    "aliases": [
+      "diagnostic accuracy"
+    ]
+  },
+  {
+    "code": "D016015",
+    "name": "Logistic Models",
+    "parent": "D015194",
+    "aliases": [
+      "logistic regression"
+    ]
+  },
+  {
+    "code": "D019943",
+    "name": "Numerical Analysis, Computer-Assisted",
+    "parent": "D003198",
+    "aliases": [
+      "numerical analysis",
+      "computational methods"
+    ]
+  },
+  {
+    "code": "D004305",
+    "name": "Dose-Response Relationship, Drug",
+    "parent": "D015194",
+    "aliases": [
+      "dose-response"
+    ]
+  },
+  {
+    "code": "D013997",
+    "name": "Time Factors",
+    "parent": "D006235",
+    "aliases": [
+      "time-dependent",
+      "temporal factors"
+    ]
+  },
+  {
+    "code": "D059013",
+    "name": "Cell Line, Tumor",
+    "parent": "D002477",
+    "aliases": [
+      "tumor cell line",
+      "cancer cell line"
+    ]
+  },
+  {
+    "code": "D040641",
+    "name": "Nanoparticles",
+    "parent": "D009820",
+    "aliases": [
+      "nanoparticle",
+      "nanotechnology"
+    ]
+  },
+  {
+    "code": "D006333",
+    "name": "Heart Failure",
+    "parent": "D002318",
+    "aliases": [
+      "HF",
+      "CHF",
+      "congestive heart failure"
+    ]
+  },
+  {
+    "code": "D007676",
+    "name": "Kidney Failure, Chronic",
+    "parent": "D007674",
+    "aliases": [
+      "CKD",
+      "chronic kidney disease",
+      "renal failure"
+    ]
+  },
+  {
+    "code": "D011014",
+    "name": "Pneumonia",
+    "parent": "D012140",
+    "aliases": [
+      "pneumonia",
+      "lung infection"
+    ]
+  },
+  {
+    "code": "D018805",
+    "name": "Sepsis",
+    "parent": "D003141",
+    "aliases": [
+      "sepsis",
+      "septicaemia",
+      "septic shock"
+    ]
+  },
+  {
+    "code": "D015658",
+    "name": "HIV Infections",
+    "parent": "D001327",
+    "aliases": [
+      "HIV",
+      "human immunodeficiency virus"
+    ]
+  },
+  {
+    "code": "D000163",
+    "name": "Acquired Immunodeficiency Syndrome",
+    "parent": "D015658",
+    "aliases": [
+      "AIDS"
+    ]
+  },
+  {
+    "code": "D010024",
+    "name": "Osteoporosis",
+    "parent": "D001851",
+    "aliases": [
+      "osteoporosis",
+      "brittle bones"
+    ]
+  },
+  {
+    "code": "D009765",
+    "name": "Obesity",
+    "parent": "D044343",
+    "aliases": [
+      "obesity",
+      "overweight"
+    ]
+  },
+  {
+    "code": "D013636",
+    "name": "Tuberculosis",
+    "parent": "D001424",
+    "aliases": [
+      "TB",
+      "tuberculosis"
+    ]
+  },
+  {
+    "code": "D006331",
+    "name": "Heart Diseases",
+    "parent": "D002318",
+    "aliases": [
+      "heart condition",
+      "cardiac disease"
+    ]
+  },
+  {
+    "code": "D019337",
+    "name": "Hematologic Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "blood cancer",
+      "hematologic malignancy"
+    ]
+  },
+  {
+    "code": "D002289",
+    "name": "Carcinoma, Non-Small-Cell Lung",
+    "parent": "D008175",
+    "aliases": [
+      "NSCLC",
+      "non-small cell lung cancer"
+    ]
+  },
+  {
+    "code": "D055752",
+    "name": "Small Cell Lung Carcinoma",
+    "parent": "D008175",
+    "aliases": [
+      "SCLC",
+      "small cell lung cancer"
+    ]
+  },
+  {
+    "code": "D002277",
+    "name": "Carcinoma",
+    "parent": "D009369",
+    "aliases": [
+      "carcinoma"
+    ]
+  },
+  {
+    "code": "D009164",
+    "name": "Musculoskeletal Diseases",
+    "parent": "D013568",
+    "aliases": [
+      "musculoskeletal disease"
+    ]
+  },
+  {
+    "code": "D004941",
+    "name": "Esophageal Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "esophageal cancer"
+    ]
+  },
+  {
+    "code": "D010190",
+    "name": "Pancreatic Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "pancreatic cancer"
+    ]
+  },
+  {
+    "code": "D010051",
+    "name": "Ovarian Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "ovarian cancer"
+    ]
+  },
+  {
+    "code": "D016889",
+    "name": "Endometrial Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "endometrial cancer",
+      "uterine cancer"
+    ]
+  },
+  {
+    "code": "D014565",
+    "name": "Urogenital Neoplasms",
+    "parent": "D009369",
+    "aliases": [
+      "urogenital cancer"
+    ]
+  },
+  {
+    "code": "D018570",
+    "name": "Risk Assessment",
+    "parent": "D012307",
+    "aliases": [
+      "risk assessment"
+    ]
+  },
+  {
+    "code": "D055815",
+    "name": "Young Adult",
+    "parent": "D000328",
+    "aliases": [
+      "young adult"
+    ]
+  },
+  {
+    "code": "D000328",
+    "name": "Adult",
+    "parent": "D006801",
+    "aliases": [
+      "adult"
+    ]
+  },
+  {
+    "code": "D008875",
+    "name": "Middle Aged",
+    "parent": "D000328",
+    "aliases": [
+      "middle aged",
+      "middle-aged"
+    ]
+  },
+  {
+    "code": "D000368",
+    "name": "Aged",
+    "parent": "D006801",
+    "aliases": [
+      "aged",
+      "elderly"
+    ]
+  },
+  {
+    "code": "D002648",
+    "name": "Child",
+    "parent": "D006801",
+    "aliases": [
+      "child",
+      "pediatric"
+    ]
+  },
+  {
+    "code": "D007223",
+    "name": "Infant",
+    "parent": "D006801",
+    "aliases": [
+      "infant",
+      "baby"
+    ]
+  },
+  {
+    "code": "D005260",
+    "name": "Female",
+    "parent": "D012727",
+    "aliases": [
+      "female",
+      "women"
+    ]
+  },
+  {
+    "code": "D008297",
+    "name": "Male",
+    "parent": "D012727",
+    "aliases": [
+      "male",
+      "men"
+    ]
+  },
+  {
+    "code": "D017203",
+    "name": "Intensive Care Units",
+    "parent": "D006704",
+    "aliases": [
+      "ICU",
+      "intensive care unit"
+    ]
+  },
+  {
+    "code": "D064427",
+    "name": "Drug-Related Side Effects",
+    "parent": "D000074243",
+    "aliases": [
+      "adverse drug reaction",
+      "ADR"
+    ]
+  },
+  {
+    "code": "D004195",
+    "name": "Disease Susceptibility",
+    "parent": "D004194",
+    "aliases": [
+      "disease susceptibility"
+    ]
+  },
+  {
+    "code": "D011379",
+    "name": "Prognosis",
+    "parent": "D004194",
+    "aliases": [
+      "prognosis",
+      "outcome prediction"
+    ]
+  },
+  {
+    "code": "D017060",
+    "name": "Outcome Assessment, Health Care",
+    "parent": "D011361",
+    "aliases": [
+      "outcome assessment"
+    ]
+  },
+  {
+    "code": "D058888",
+    "name": "Single-Cell Analysis",
+    "parent": "D005823",
+    "aliases": [
+      "single-cell",
+      "scRNA-seq"
+    ]
+  },
+  {
+    "code": "D057566",
+    "name": "Self-Renewal of Stem Cells",
+    "parent": "D013234",
+    "aliases": [
+      "stem cell self-renewal"
+    ]
+  },
+  {
+    "code": "D002477",
+    "name": "Cells, Cultured",
+    "parent": "D002460",
+    "aliases": [
+      "cell culture"
+    ]
+  },
+  {
+    "code": "D048708",
+    "name": "Proof of Concept Study",
+    "parent": "D003196",
+    "aliases": [
+      "proof of concept"
+    ]
+  },
+  {
+    "code": "D008661",
+    "name": "Metabolic Diseases",
+    "aliases": [
+      "metabolic disease"
+    ]
+  },
+  {
+    "code": "D011565",
+    "name": "Psoriasis",
+    "aliases": [
+      "psoriasis"
+    ]
+  },
+  {
+    "code": "D012008",
+    "name": "Recurrence",
+    "aliases": [
+      "recurrence",
+      "relapse"
+    ]
+  },
+  {
+    "code": "D016638",
+    "name": "Critical Illness",
+    "aliases": [
+      "critical illness",
+      "ICU patient"
+    ]
+  },
+  {
+    "code": "D020969",
+    "name": "Disease Progression",
+    "aliases": [
+      "disease progression"
+    ]
+  },
+  {
+    "code": "D009103",
+    "name": "Multiple Sclerosis",
+    "aliases": [
+      "MS",
+      "multiple sclerosis"
+    ]
+  },
+  {
+    "code": "D056486",
+    "name": "Chemical and Drug Induced Liver Injury",
+    "aliases": [
+      "drug-induced liver injury",
+      "DILI"
+    ]
+  },
+  {
+    "code": "D005483",
+    "name": "Follow-Up Studies",
+    "aliases": [
+      "follow-up study"
+    ]
+  },
+  {
+    "code": "D010146",
+    "name": "Pain",
+    "aliases": [
+      "pain"
+    ]
+  },
+  {
+    "code": "D001847",
+    "name": "Bone Diseases",
+    "aliases": [
+      "bone disease"
+    ]
+  },
+  {
+    "code": "D020022",
+    "name": "Genetic Predisposition to Disease",
+    "aliases": [
+      "genetic predisposition"
+    ]
+  },
+  {
+    "code": "D018449",
+    "name": "Patient Selection",
+    "aliases": [
+      "patient selection"
+    ]
+  },
+  {
+    "code": "D053208",
+    "name": "Kidney Failure, Acute",
+    "aliases": [
+      "AKI",
+      "acute kidney injury"
+    ]
+  },
+  {
+    "code": "D065102",
+    "name": "Diabetes, Type 2",
+    "aliases": [
+      "T2DM",
+      "type 2 diabetes"
+    ]
+  },
+  {
+    "code": "D003920",
+    "name": "Diabetes Mellitus, Type 1",
+    "aliases": [
+      "T1DM",
+      "type 1 diabetes"
+    ]
+  },
+  {
+    "code": "D013577",
+    "name": "Syndrome",
+    "aliases": [
+      "syndrome"
+    ]
+  },
+  {
+    "code": "D003430",
+    "name": "Cross-Over Studies",
+    "aliases": [
+      "cross-over trial"
+    ]
+  },
+  {
+    "code": "D016014",
+    "name": "Linear Models",
+    "aliases": [
+      "linear regression",
+      "linear model"
+    ]
+  },
+  {
+    "code": "D016022",
+    "name": "Case-Control Studies",
+    "aliases": [
+      "case-control",
+      "case control study"
+    ]
+  },
+  {
+    "code": "D016696",
+    "name": "Quality-Adjusted Life Years",
+    "aliases": [
+      "QALY"
+    ]
+  },
+  {
+    "code": "D018507",
+    "name": "Practice Guidelines as Topic",
+    "aliases": [
+      "practice guideline"
+    ]
+  },
+  {
+    "code": "D002170",
+    "name": "Canada",
+    "aliases": [
+      "canadian population"
+    ]
+  },
+  {
+    "code": "D065906",
+    "name": "Non-alcoholic Fatty Liver Disease",
+    "aliases": [
+      "NAFLD",
+      "NASH"
+    ]
+  },
+  {
+    "code": "D017116",
+    "name": "Low Back Pain",
+    "aliases": [
+      "low back pain",
+      "LBP"
+    ]
+  },
+  {
+    "code": "D006261",
+    "name": "Headache",
+    "aliases": [
+      "headache"
+    ]
+  },
+  {
+    "code": "D056128",
+    "name": "Pandemics",
+    "aliases": [
+      "pandemic"
+    ]
+  },
+  {
+    "code": "D019055",
+    "name": "Biosensing Techniques",
+    "aliases": [
+      "biosensor"
+    ]
+  },
+  {
+    "code": "D002319",
+    "name": "Cerebrovascular Disorders",
+    "aliases": [
+      "cerebrovascular"
+    ]
+  },
+  {
+    "code": "D015398",
+    "name": "Signal Transduction",
+    "aliases": [
+      "signal transduction",
+      "signaling"
+    ]
+  },
+  {
+    "code": "D009272",
+    "name": "Natriuresis",
+    "aliases": [
+      "natriuresis"
+    ]
+  },
+  {
+    "code": "D008244",
+    "name": "Macrophages",
+    "aliases": [
+      "macrophage"
+    ]
+  },
+  {
+    "code": "D053402",
+    "name": "T-Lymphocytes, Regulatory",
+    "aliases": [
+      "Treg",
+      "regulatory T cell"
+    ]
+  },
+  {
+    "code": "D000073887",
+    "name": "Checkpoint Kinase 2",
+    "aliases": [
+      "CHK2"
+    ]
+  },
+  {
+    "code": "D050918",
+    "name": "Induced Pluripotent Stem Cells",
+    "aliases": [
+      "iPSC",
+      "induced pluripotent stem cell"
+    ]
+  },
+  {
+    "code": "D055088",
+    "name": "Mesenchymal Stem Cells",
+    "aliases": [
+      "MSC",
+      "mesenchymal stem cell"
+    ]
+  },
+  {
+    "code": "D053563",
+    "name": "Embryonic Stem Cells",
+    "aliases": [
+      "ESC",
+      "embryonic stem cell"
+    ]
+  },
+  {
+    "code": "D000086928",
+    "name": "Machine Learning",
+    "aliases": [
+      "machine learning",
+      "ML"
+    ]
+  },
+  {
+    "code": "D000085350",
+    "name": "Deep Learning",
+    "aliases": [
+      "deep learning",
+      "DL"
+    ]
+  },
+  {
+    "code": "D000074145",
+    "name": "CRISPR-Cas Systems",
+    "aliases": [
+      "CRISPR",
+      "Cas9"
+    ]
+  },
+  {
+    "code": "D057138",
+    "name": "Gene Editing",
+    "aliases": [
+      "gene editing"
+    ]
+  },
+  {
+    "code": "D040582",
+    "name": "Drug Discovery",
+    "aliases": [
+      "drug discovery"
+    ]
+  },
+  {
+    "code": "D058489",
+    "name": "Microbiota",
+    "aliases": [
+      "microbiome",
+      "microbiota"
+    ]
+  },
+  {
+    "code": "D054307",
+    "name": "Gastrointestinal Microbiome",
+    "aliases": [
+      "gut microbiome"
+    ]
+  },
+  {
+    "code": "D018581",
+    "name": "Homocysteine",
+    "aliases": [
+      "homocysteine"
+    ]
+  },
+  {
+    "code": "D055370",
+    "name": "Lung Injury",
+    "aliases": [
+      "lung injury"
+    ]
+  },
+  {
+    "code": "D016888",
+    "name": "Pulmonary Embolism",
+    "aliases": [
+      "PE",
+      "pulmonary embolism"
+    ]
+  },
+  {
+    "code": "D018455",
+    "name": "Venous Thrombosis",
+    "aliases": [
+      "DVT",
+      "deep vein thrombosis"
+    ]
+  },
+  {
+    "code": "D017115",
+    "name": "Chronic Pain",
+    "aliases": [
+      "chronic pain"
+    ]
+  },
+  {
+    "code": "D014009",
+    "name": "Tissue Donors",
+    "aliases": [
+      "organ donor",
+      "tissue donor"
+    ]
+  },
+  {
+    "code": "D018741",
+    "name": "Transplantation, Homologous",
+    "aliases": [
+      "allograft"
+    ]
+  },
+  {
+    "code": "D015996",
+    "name": "Survival Rate",
+    "aliases": [
+      "survival rate"
+    ]
+  }
 ]

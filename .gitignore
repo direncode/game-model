@@ -15,6 +15,14 @@ build/
 .mypy_cache/
 .pytest_cache/
 
+# lo_nlp stage-4 embedding cache (regenerated on demand from ontology)
+lo_nlp/data/.embed_cache_*.npz
+
+# lo_nlp eval + round-trip output files (regenerated per run)
+narrative_roundtrip_out.json
+eval_large_out.json
+eval_narrative_out.json
+
 # Node
 node_modules/
 .next/

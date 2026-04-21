@@ -30,6 +30,14 @@ type OntologyEntry = {
 };
 
 // ── stage 2 — bundled ontology, loaded once per worker ──────────────
+// Keep FAMILY_PRIORITY in lock-step with lo_nlp/resolve.py.
+// Cross-validated by scripts/parity_check.py.
+const FAMILY_PRIORITY = ["country", "us_state", "mesh", "sic", "cpc", "hs"];
+function familyRank(family: string | undefined): number {
+  const idx = FAMILY_PRIORITY.indexOf(family ?? "");
+  return idx >= 0 ? idx : 99;
+}
+
 let _cache: OntologyEntry[] | null = null;
 let _codeIndex: Map<string, OntologyEntry> | null = null;
 let _aliasIndex: Map<string, OntologyEntry> | null = null;
@@ -55,10 +63,12 @@ async function loadOntology(): Promise<OntologyEntry[]> {
     }
   }
   try {
-    const files = await fs.readdir(dataDir);
+    // Sort so iteration order is identical across OSes. Skip fixture files.
+    const files = (await fs.readdir(dataDir))
+      .filter((f) => f.endsWith(".json") && !f.startsWith("eval_"))
+      .sort();
     const rows: OntologyEntry[] = [];
     for (const f of files) {
-      if (!f.endsWith(".json")) continue;
       const p = path.join(dataDir, f);
       const family = f
         .replace(".json", "")
@@ -85,7 +95,13 @@ async function loadOntology(): Promise<OntologyEntry[]> {
     for (const e of rows) {
       if (e.code) _codeIndex.set(e.code.toLowerCase(), e);
       for (const a of e.aliases ?? []) {
-        if (!_aliasIndex.has(a.toLowerCase())) _aliasIndex.set(a.toLowerCase(), e);
+        const key = a.toLowerCase();
+        const existing = _aliasIndex.get(key);
+        if (existing === undefined) {
+          _aliasIndex.set(key, e);
+        } else if (familyRank(e.family) < familyRank(existing.family)) {
+          _aliasIndex.set(key, e);
+        }
       }
     }
     return rows;
@@ -119,9 +135,32 @@ function charSim(a: string, b: string): number {
   return inter / (na.size + nb.size - inter);
 }
 
+function levenshtein(s: string, t: string): number {
+  s = s.toLowerCase();
+  t = t.toLowerCase();
+  if (s === t) return 0;
+  if (!s) return t.length;
+  if (!t) return s.length;
+  let prev: number[] = Array.from({ length: t.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= s.length; i++) {
+    const cur: number[] = [i];
+    for (let j = 1; j <= t.length; j++) {
+      const cost = s[i - 1] === t[j - 1] ? 0 : 1;
+      cur.push(Math.min(cur[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost));
+    }
+    prev = cur;
+  }
+  return prev[t.length];
+}
+function levSim(a: string, b: string): number {
+  if (!a || !b) return 0;
+  const m = Math.max(a.length, b.length);
+  return 1.0 - levenshtein(a, b) / m;
+}
+
 function stripPrefix(q: string): string {
   return q.replace(
-    /^(mesh|commodity|region|assignee|country|cpc|sic|noaa|station|hs|iso)[_\-]/i,
+    /^(mesh|commodity|region|state|assignee|country|cpc|sic|noaa|station|hs|iso)[_\-]/i,
     "",
   );
 }
@@ -148,18 +187,30 @@ async function ontologyResolve(query: string, topK = 3) {
   const hit3 = _aliasIndex?.get(stripped.toLowerCase());
   if (hit3) return { resolved: true, source: "codebook", confidence: 0.9, ...hit3 };
 
-  // lexical
+  // lexical — score query against canonical name AND each alias, take
+  // the best per entry. Rescues typos of aliases where canonical-name
+  // comparison alone would miss (e.g. "phaarma" vs SIC 2834's "pharma").
   const qTok = tokens(stripped);
   const scored: [number, OntologyEntry][] = [];
   for (const e of rows) {
-    const j = jaccard(qTok, tokens(e.name));
-    const c = charSim(stripped, e.name);
-    const s = 0.7 * j + 0.3 * c;
-    if (s > 0.15) scored.push([s, e]);
+    const targets = [e.name, ...(e.aliases ?? [])].filter(Boolean);
+    let best = 0;
+    for (const target of targets) {
+      const j = jaccard(qTok, tokens(target));
+      const c = charSim(stripped, target);
+      const lev = levSim(stripped, target);
+      // Sum of weights = 1.0. Keep in sync with lo_nlp/resolve.py.
+      const s = 0.4 * j + 0.2 * c + 0.4 * lev;
+      if (s > best) best = s;
+    }
+    if (best > 0.10) scored.push([best, e]);
   }
-  scored.sort((a, b) => b[0] - a[0]);
+  // Descending score; break ties on family priority so lexical collisions
+  // resolve deterministically to the preferred family.
+  scored.sort((a, b) => (b[0] - a[0]) || (familyRank(a[1].family) - familyRank(b[1].family)));
   const top = scored.slice(0, topK);
-  if (top.length && top[0][0] > 0.4) {
+  // Threshold 0.35 (was 0.4) rescues near-miss typos.
+  if (top.length && top[0][0] > 0.35) {
     const [bestScore, best] = top[0];
     return {
       resolved: true,

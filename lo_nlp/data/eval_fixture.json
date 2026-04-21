@@ -1,0 +1,41 @@
+[
+  { "query": "D000081082", "expect_code": "D000081082", "expect_family": "mesh",    "stage_hint": "exact_code",     "notes": "SARS-CoV-2 Infection canonical code" },
+  { "query": "mesh_D003924", "expect_code": "D003924", "expect_family": "mesh",    "stage_hint": "prefix_stripped", "notes": "Diabetes Mellitus via mesh_ prefix" },
+  { "query": "COVID-19",       "expect_code": "D000081082", "expect_family": "mesh",    "stage_hint": "alias",          "notes": "alias → SARS-CoV-2 Infection" },
+  { "query": "long COVID",     "expect_code": "D000086382", "expect_family": "mesh",    "stage_hint": "alias",          "notes": "alias → Post-Acute COVID-19 Syndrome" },
+  { "query": "lung cancer",    "expect_code": "D008175",    "expect_family": "mesh",    "stage_hint": "alias",          "notes": "alias → Lung Neoplasms" },
+  { "query": "Rheumatoid Arthritis", "expect_code": "D001172", "expect_family": "mesh", "stage_hint": "lexical",       "notes": "case/word-order variant of 'Arthritis, Rheumatoid'" },
+
+  { "query": "02",             "expect_code": "02",         "expect_family": "hs",      "stage_hint": "exact_code",     "notes": "HS chapter 02 Meat" },
+  { "query": "HS-04",          "expect_code": "04",         "expect_family": "hs",      "stage_hint": "prefix_stripped", "notes": "HS-prefix form" },
+  { "query": "livestock",      "expect_code": "01",         "expect_family": "hs",      "stage_hint": "alias",          "notes": "alias → Live animals" },
+  { "query": "seafood",        "expect_code": "03",         "expect_family": "hs",      "stage_hint": "alias",          "notes": "alias → Fish and crustaceans" },
+  { "query": "commodity_02",   "expect_code": "02",         "expect_family": "hs",      "stage_hint": "prefix_stripped", "notes": "commodity_ prefix convention" },
+
+  { "query": "A61K",           "expect_code": "A61K",       "expect_family": "cpc",     "stage_hint": "exact_code",     "notes": "Pharma composition CPC subclass" },
+  { "query": "cpc_B60L",       "expect_code": "B60L",       "expect_family": "cpc",     "stage_hint": "prefix_stripped", "notes": "Electric vehicle propulsion via cpc_ prefix" },
+  { "query": "electric vehicles EV", "expect_code": "B60L", "expect_family": "cpc",     "stage_hint": "alias",          "notes": "alias of B60L" },
+  { "query": "organic chemistry", "expect_code": "C07",     "expect_family": "cpc",     "stage_hint": "alias",          "notes": "alias → Organic Chemistry CPC class" },
+  { "query": "combustion engines", "expect_code": "F02",    "expect_family": "cpc",     "stage_hint": "alias",          "notes": "alias of F02" },
+
+  { "query": "2834",           "expect_code": "2834",       "expect_family": "sic",     "stage_hint": "exact_code",     "notes": "SIC Pharmaceutical Preparations" },
+  { "query": "sic_1311",       "expect_code": "1311",       "expect_family": "sic",     "stage_hint": "prefix_stripped", "notes": "Crude petroleum via sic_ prefix" },
+  { "query": "pharma",         "expect_code": "2834",       "expect_family": "sic",     "stage_hint": "alias",          "notes": "alias → 2834 (also matches mesh alias; first alias-index hit wins)" },
+  { "query": "biotech",        "expect_code": "2836",       "expect_family": "sic",     "stage_hint": "alias",          "notes": "alias → SIC biologics" },
+
+  { "query": "USA",            "expect_code": "USA",        "expect_family": "country", "stage_hint": "exact_code",     "notes": "ISO-3166 alpha-3 United States" },
+  { "query": "country_JPN",    "expect_code": "JPN",        "expect_family": "country", "stage_hint": "prefix_stripped", "notes": "country_ prefix convention" },
+  { "query": "England",        "expect_code": "GBR",        "expect_family": "country", "stage_hint": "alias",          "notes": "alias → United Kingdom" },
+  { "query": "Deutschland",    "expect_code": "DEU",        "expect_family": "country", "stage_hint": "alias",          "notes": "alias → Germany" },
+  { "query": "Holland",        "expect_code": "NLD",        "expect_family": "country", "stage_hint": "alias",          "notes": "alias → Netherlands" },
+
+  { "query": "AZ",             "expect_code": "AZ",         "expect_family": "us_state", "stage_hint": "exact_code",    "notes": "Arizona" },
+  { "query": "region_CA",      "expect_code": "CA",         "expect_family": "us_state", "stage_hint": "prefix_stripped", "notes": "California via region_ prefix" },
+  { "query": "Texas",          "expect_code": "TX",         "expect_family": "us_state", "stage_hint": "lexical",       "notes": "canonical state name → code" },
+
+  { "query": "phaarma",        "expect_code": "2834",       "expect_family": "sic",     "stage_hint": "fuzzy",          "notes": "typo should still approximate pharma alias" },
+  { "query": "Germnay",        "expect_code": "DEU",        "expect_family": "country", "stage_hint": "fuzzy",          "notes": "typo of Germany — should char-ngram hit" },
+
+  { "query": "xjklqwerty",     "expect_code": null,         "expect_family": null,       "stage_hint": "unknown",       "notes": "pure gibberish — resolver SHOULD return unresolved" },
+  { "query": "12345678",       "expect_code": null,         "expect_family": null,       "stage_hint": "unknown",       "notes": "numeric gibberish not in any ontology" }
+]

@@ -1,100 +1,1211 @@
 [
-  {"code": "01", "name": "Live animals", "aliases": ["livestock", "live animal", "HS01"]},
-  {"code": "02", "name": "Meat and edible meat offal", "aliases": ["meat", "beef pork lamb", "edible offal", "HS02"]},
-  {"code": "03", "name": "Fish and crustaceans, molluscs and other aquatic invertebrates", "aliases": ["fish", "seafood", "crustacean", "mollusc", "HS03"]},
-  {"code": "04", "name": "Dairy produce; birds' eggs; natural honey; edible animal products", "aliases": ["dairy", "milk", "eggs", "cheese", "honey", "HS04"]},
-  {"code": "05", "name": "Products of animal origin, not elsewhere specified", "aliases": ["animal products", "animal by-products", "HS05"]},
-  {"code": "06", "name": "Live trees and other plants; bulbs, roots; cut flowers and ornamental foliage", "aliases": ["plants", "flowers", "bulbs", "HS06"]},
-  {"code": "07", "name": "Edible vegetables and certain roots and tubers", "aliases": ["vegetables", "produce", "HS07"]},
-  {"code": "08", "name": "Edible fruit and nuts; peel of citrus fruits or melons", "aliases": ["fruit", "nuts", "HS08"]},
-  {"code": "09", "name": "Coffee, tea, mate and spices", "aliases": ["coffee", "tea", "spices", "HS09"]},
-  {"code": "10", "name": "Cereals", "aliases": ["wheat", "rice", "corn", "maize", "grain", "HS10"]},
-  {"code": "11", "name": "Products of the milling industry; malt; starches; inulin; wheat gluten", "aliases": ["flour", "starch", "milling", "HS11"]},
-  {"code": "12", "name": "Oilseeds and oleaginous fruits; miscellaneous grains, seeds and fruit", "aliases": ["oilseeds", "soybeans", "seeds", "HS12"]},
-  {"code": "13", "name": "Lac; gums, resins and other vegetable saps and extracts", "aliases": ["gums", "resins", "lac", "HS13"]},
-  {"code": "14", "name": "Vegetable plaiting materials; vegetable products not elsewhere specified", "aliases": ["vegetable materials", "HS14"]},
-  {"code": "15", "name": "Animal or vegetable fats and oils and their cleavage products; waxes", "aliases": ["fats", "oils", "vegetable oil", "animal fat", "HS15"]},
-  {"code": "16", "name": "Preparations of meat, fish or crustaceans, molluscs or other aquatic invertebrates", "aliases": ["processed meat", "processed fish", "HS16"]},
-  {"code": "17", "name": "Sugars and sugar confectionery", "aliases": ["sugar", "confectionery", "HS17"]},
-  {"code": "18", "name": "Cocoa and cocoa preparations", "aliases": ["cocoa", "chocolate", "HS18"]},
-  {"code": "19", "name": "Preparations of cereals, flour, starch or milk; pastrycooks' products", "aliases": ["bakery", "pastry", "HS19"]},
-  {"code": "20", "name": "Preparations of vegetables, fruit, nuts or other parts of plants", "aliases": ["processed vegetables", "preserves", "HS20"]},
-  {"code": "21", "name": "Miscellaneous edible preparations", "aliases": ["edible prep", "HS21"]},
-  {"code": "22", "name": "Beverages, spirits and vinegar", "aliases": ["beverages", "alcohol", "spirits", "wine", "vinegar", "HS22"]},
-  {"code": "23", "name": "Residues and waste from the food industries; prepared animal fodder", "aliases": ["animal feed", "fodder", "HS23"]},
-  {"code": "24", "name": "Tobacco and manufactured tobacco substitutes", "aliases": ["tobacco", "cigarettes", "HS24"]},
-  {"code": "25", "name": "Salt; sulphur; earths and stone; plastering materials, lime and cement", "aliases": ["salt", "stone", "cement", "lime", "sulphur", "HS25"]},
-  {"code": "26", "name": "Ores, slag and ash", "aliases": ["ores", "slag", "ash", "HS26"]},
-  {"code": "27", "name": "Mineral fuels, mineral oils and products of their distillation", "aliases": ["oil", "petroleum", "coal", "natural gas", "crude oil", "HS27"]},
-  {"code": "28", "name": "Inorganic chemicals; organic or inorganic compounds of precious metals", "aliases": ["inorganic chemicals", "HS28"]},
-  {"code": "29", "name": "Organic chemicals", "aliases": ["organic chemistry", "HS29"]},
-  {"code": "30", "name": "Pharmaceutical products", "aliases": ["pharma", "drugs", "medicine", "pharmaceuticals", "HS30"]},
-  {"code": "31", "name": "Fertilisers", "aliases": ["fertilizer", "nitrogen fertilizer", "HS31"]},
-  {"code": "32", "name": "Tanning or dyeing extracts; tannins and their derivatives; dyes, pigments", "aliases": ["dyes", "pigments", "HS32"]},
-  {"code": "33", "name": "Essential oils and resinoids; perfumery, cosmetic or toilet preparations", "aliases": ["perfume", "cosmetics", "essential oils", "HS33"]},
-  {"code": "34", "name": "Soap, organic surface-active agents, washing preparations, candles", "aliases": ["soap", "detergent", "candles", "HS34"]},
-  {"code": "35", "name": "Albuminoidal substances; modified starches; glues; enzymes", "aliases": ["enzymes", "glues", "HS35"]},
-  {"code": "36", "name": "Explosives; pyrotechnic products; matches; pyrophoric alloys", "aliases": ["explosives", "pyrotechnics", "HS36"]},
-  {"code": "37", "name": "Photographic or cinematographic goods", "aliases": ["photography", "film", "HS37"]},
-  {"code": "38", "name": "Miscellaneous chemical products", "aliases": ["chemical products", "HS38"]},
-  {"code": "39", "name": "Plastics and articles thereof", "aliases": ["plastic", "polymer", "HS39"]},
-  {"code": "40", "name": "Rubber and articles thereof", "aliases": ["rubber", "HS40"]},
-  {"code": "41", "name": "Raw hides and skins (other than furskins) and leather", "aliases": ["hides", "leather", "HS41"]},
-  {"code": "42", "name": "Articles of leather; saddlery; travel goods, handbags", "aliases": ["leather goods", "handbags", "HS42"]},
-  {"code": "43", "name": "Furskins and artificial fur; manufactures thereof", "aliases": ["fur", "HS43"]},
-  {"code": "44", "name": "Wood and articles of wood; wood charcoal", "aliases": ["wood", "lumber", "timber", "HS44"]},
-  {"code": "45", "name": "Cork and articles of cork", "aliases": ["cork", "HS45"]},
-  {"code": "46", "name": "Manufactures of straw, of esparto or of other plaiting materials", "aliases": ["straw", "HS46"]},
-  {"code": "47", "name": "Pulp of wood or of other fibrous cellulosic material", "aliases": ["pulp", "wood pulp", "HS47"]},
-  {"code": "48", "name": "Paper and paperboard; articles of paper pulp, of paper or of paperboard", "aliases": ["paper", "paperboard", "HS48"]},
-  {"code": "49", "name": "Printed books, newspapers, pictures and other products of the printing industry", "aliases": ["books", "newspapers", "printing", "HS49"]},
-  {"code": "50", "name": "Silk", "aliases": ["silk", "HS50"]},
-  {"code": "51", "name": "Wool, fine or coarse animal hair; horsehair yarn and woven fabric", "aliases": ["wool", "HS51"]},
-  {"code": "52", "name": "Cotton", "aliases": ["cotton", "HS52"]},
-  {"code": "53", "name": "Other vegetable textile fibres; paper yarn and woven fabrics of paper yarn", "aliases": ["vegetable textiles", "HS53"]},
-  {"code": "54", "name": "Man-made filaments", "aliases": ["synthetic filaments", "HS54"]},
-  {"code": "55", "name": "Man-made staple fibres", "aliases": ["synthetic fibers", "HS55"]},
-  {"code": "56", "name": "Wadding, felt and nonwovens; special yarns; twine, cordage, ropes", "aliases": ["rope", "twine", "HS56"]},
-  {"code": "57", "name": "Carpets and other textile floor coverings", "aliases": ["carpets", "rugs", "HS57"]},
-  {"code": "58", "name": "Special woven fabrics; tufted textile fabrics; lace; tapestries", "aliases": ["lace", "tapestry", "HS58"]},
-  {"code": "59", "name": "Impregnated, coated, covered or laminated textile fabrics", "aliases": ["coated textiles", "HS59"]},
-  {"code": "60", "name": "Knitted or crocheted fabrics", "aliases": ["knitted", "crocheted", "HS60"]},
-  {"code": "61", "name": "Articles of apparel and clothing accessories, knitted or crocheted", "aliases": ["apparel knitted", "clothing knitted", "HS61"]},
-  {"code": "62", "name": "Articles of apparel and clothing accessories, not knitted or crocheted", "aliases": ["apparel woven", "clothing woven", "HS62"]},
-  {"code": "63", "name": "Other made up textile articles; sets; worn clothing and worn textile articles", "aliases": ["used clothing", "HS63"]},
-  {"code": "64", "name": "Footwear, gaiters and the like; parts of such articles", "aliases": ["footwear", "shoes", "HS64"]},
-  {"code": "65", "name": "Headgear and parts thereof", "aliases": ["headwear", "hats", "HS65"]},
-  {"code": "66", "name": "Umbrellas, sun umbrellas, walking sticks, whips and parts", "aliases": ["umbrellas", "HS66"]},
-  {"code": "67", "name": "Prepared feathers and down; articles made of feathers or of down", "aliases": ["feathers", "HS67"]},
-  {"code": "68", "name": "Articles of stone, plaster, cement, asbestos, mica or similar materials", "aliases": ["stone articles", "HS68"]},
-  {"code": "69", "name": "Ceramic products", "aliases": ["ceramics", "HS69"]},
-  {"code": "70", "name": "Glass and glassware", "aliases": ["glass", "HS70"]},
-  {"code": "71", "name": "Natural or cultured pearls, precious stones, precious metals; imitation jewellery", "aliases": ["gold", "silver", "diamonds", "jewelry", "pearls", "HS71"]},
-  {"code": "72", "name": "Iron and steel", "aliases": ["iron", "steel", "HS72"]},
-  {"code": "73", "name": "Articles of iron or steel", "aliases": ["steel articles", "HS73"]},
-  {"code": "74", "name": "Copper and articles thereof", "aliases": ["copper", "HS74"]},
-  {"code": "75", "name": "Nickel and articles thereof", "aliases": ["nickel", "HS75"]},
-  {"code": "76", "name": "Aluminium and articles thereof", "aliases": ["aluminum", "aluminium", "HS76"]},
-  {"code": "78", "name": "Lead and articles thereof", "aliases": ["lead", "HS78"]},
-  {"code": "79", "name": "Zinc and articles thereof", "aliases": ["zinc", "HS79"]},
-  {"code": "80", "name": "Tin and articles thereof", "aliases": ["tin", "HS80"]},
-  {"code": "81", "name": "Other base metals; cermets; articles thereof", "aliases": ["other metals", "HS81"]},
-  {"code": "82", "name": "Tools, implements, cutlery, spoons and forks, of base metal", "aliases": ["tools", "cutlery", "HS82"]},
-  {"code": "83", "name": "Miscellaneous articles of base metal", "aliases": ["metal articles", "HS83"]},
-  {"code": "84", "name": "Nuclear reactors, boilers, machinery and mechanical appliances", "aliases": ["machinery", "industrial equipment", "nuclear reactors", "boilers", "HS84"]},
-  {"code": "85", "name": "Electrical machinery and equipment and parts thereof", "aliases": ["electrical machinery", "electronics", "semiconductors", "HS85"]},
-  {"code": "86", "name": "Railway or tramway locomotives, rolling stock, signalling equipment", "aliases": ["rail", "locomotives", "trains", "HS86"]},
-  {"code": "87", "name": "Vehicles other than railway or tramway rolling stock", "aliases": ["vehicles", "automobiles", "cars", "trucks", "HS87"]},
-  {"code": "88", "name": "Aircraft, spacecraft and parts thereof", "aliases": ["aircraft", "aviation", "spacecraft", "airplanes", "HS88"]},
-  {"code": "89", "name": "Ships, boats and floating structures", "aliases": ["ships", "maritime", "boats", "HS89"]},
-  {"code": "90", "name": "Optical, photographic, cinematographic, measuring, checking, precision, medical or surgical instruments", "aliases": ["optical", "medical instruments", "surgical instruments", "precision instruments", "HS90"]},
-  {"code": "91", "name": "Clocks and watches and parts thereof", "aliases": ["watches", "clocks", "HS91"]},
-  {"code": "92", "name": "Musical instruments; parts and accessories of such articles", "aliases": ["musical instruments", "HS92"]},
-  {"code": "93", "name": "Arms and ammunition; parts and accessories thereof", "aliases": ["weapons", "firearms", "ammunition", "HS93"]},
-  {"code": "94", "name": "Furniture; bedding, mattresses, mattress supports, cushions; lamps", "aliases": ["furniture", "bedding", "lamps", "HS94"]},
-  {"code": "95", "name": "Toys, games and sports requisites; parts and accessories thereof", "aliases": ["toys", "games", "sports equipment", "HS95"]},
-  {"code": "96", "name": "Miscellaneous manufactured articles", "aliases": ["misc manufactured", "HS96"]},
-  {"code": "97", "name": "Works of art, collectors' pieces and antiques", "aliases": ["art", "antiques", "HS97"]},
-  {"code": "98", "name": "Special provisions", "aliases": ["special provisions", "HS98"]},
-  {"code": "99", "name": "Commodities not elsewhere specified", "aliases": ["commodities nes", "HS99"]}
+  {
+    "code": "01",
+    "name": "Live animals",
+    "aliases": [
+      "livestock",
+      "live animal",
+      "HS01"
+    ]
+  },
+  {
+    "code": "02",
+    "name": "Meat and edible meat offal",
+    "aliases": [
+      "meat",
+      "beef pork lamb",
+      "edible offal",
+      "HS02"
+    ]
+  },
+  {
+    "code": "03",
+    "name": "Fish and crustaceans, molluscs and other aquatic invertebrates",
+    "aliases": [
+      "fish",
+      "seafood",
+      "crustacean",
+      "mollusc",
+      "HS03"
+    ]
+  },
+  {
+    "code": "04",
+    "name": "Dairy produce; birds' eggs; natural honey; edible animal products",
+    "aliases": [
+      "dairy",
+      "milk",
+      "eggs",
+      "cheese",
+      "honey",
+      "HS04"
+    ]
+  },
+  {
+    "code": "05",
+    "name": "Products of animal origin, not elsewhere specified",
+    "aliases": [
+      "animal products",
+      "animal by-products",
+      "HS05"
+    ]
+  },
+  {
+    "code": "06",
+    "name": "Live trees and other plants; bulbs, roots; cut flowers and ornamental foliage",
+    "aliases": [
+      "plants",
+      "flowers",
+      "bulbs",
+      "HS06"
+    ]
+  },
+  {
+    "code": "07",
+    "name": "Edible vegetables and certain roots and tubers",
+    "aliases": [
+      "vegetables",
+      "produce",
+      "HS07"
+    ]
+  },
+  {
+    "code": "08",
+    "name": "Edible fruit and nuts; peel of citrus fruits or melons",
+    "aliases": [
+      "fruit",
+      "nuts",
+      "HS08"
+    ]
+  },
+  {
+    "code": "09",
+    "name": "Coffee, tea, mate and spices",
+    "aliases": [
+      "coffee",
+      "tea",
+      "spices",
+      "HS09"
+    ]
+  },
+  {
+    "code": "10",
+    "name": "Cereals",
+    "aliases": [
+      "wheat",
+      "rice",
+      "corn",
+      "maize",
+      "grain",
+      "HS10"
+    ]
+  },
+  {
+    "code": "11",
+    "name": "Products of the milling industry; malt; starches; inulin; wheat gluten",
+    "aliases": [
+      "flour",
+      "starch",
+      "milling",
+      "HS11"
+    ]
+  },
+  {
+    "code": "12",
+    "name": "Oilseeds and oleaginous fruits; miscellaneous grains, seeds and fruit",
+    "aliases": [
+      "oilseeds",
+      "soybeans",
+      "seeds",
+      "HS12"
+    ]
+  },
+  {
+    "code": "13",
+    "name": "Lac; gums, resins and other vegetable saps and extracts",
+    "aliases": [
+      "gums",
+      "resins",
+      "lac",
+      "HS13"
+    ]
+  },
+  {
+    "code": "14",
+    "name": "Vegetable plaiting materials; vegetable products not elsewhere specified",
+    "aliases": [
+      "vegetable materials",
+      "HS14"
+    ]
+  },
+  {
+    "code": "15",
+    "name": "Animal or vegetable fats and oils and their cleavage products; waxes",
+    "aliases": [
+      "fats",
+      "oils",
+      "vegetable oil",
+      "animal fat",
+      "HS15"
+    ]
+  },
+  {
+    "code": "16",
+    "name": "Preparations of meat, fish or crustaceans, molluscs or other aquatic invertebrates",
+    "aliases": [
+      "processed meat",
+      "processed fish",
+      "HS16"
+    ]
+  },
+  {
+    "code": "17",
+    "name": "Sugars and sugar confectionery",
+    "aliases": [
+      "sugar",
+      "confectionery",
+      "HS17"
+    ]
+  },
+  {
+    "code": "18",
+    "name": "Cocoa and cocoa preparations",
+    "aliases": [
+      "cocoa",
+      "chocolate",
+      "HS18"
+    ]
+  },
+  {
+    "code": "19",
+    "name": "Preparations of cereals, flour, starch or milk; pastrycooks' products",
+    "aliases": [
+      "bakery",
+      "pastry",
+      "HS19"
+    ]
+  },
+  {
+    "code": "20",
+    "name": "Preparations of vegetables, fruit, nuts or other parts of plants",
+    "aliases": [
+      "processed vegetables",
+      "preserves",
+      "HS20"
+    ]
+  },
+  {
+    "code": "21",
+    "name": "Miscellaneous edible preparations",
+    "aliases": [
+      "edible prep",
+      "HS21"
+    ]
+  },
+  {
+    "code": "22",
+    "name": "Beverages, spirits and vinegar",
+    "aliases": [
+      "beverages",
+      "alcohol",
+      "spirits",
+      "wine",
+      "vinegar",
+      "HS22"
+    ]
+  },
+  {
+    "code": "23",
+    "name": "Residues and waste from the food industries; prepared animal fodder",
+    "aliases": [
+      "animal feed",
+      "fodder",
+      "HS23"
+    ]
+  },
+  {
+    "code": "24",
+    "name": "Tobacco and manufactured tobacco substitutes",
+    "aliases": [
+      "tobacco",
+      "cigarettes",
+      "HS24"
+    ]
+  },
+  {
+    "code": "25",
+    "name": "Salt; sulphur; earths and stone; plastering materials, lime and cement",
+    "aliases": [
+      "salt",
+      "stone",
+      "cement",
+      "lime",
+      "sulphur",
+      "HS25"
+    ]
+  },
+  {
+    "code": "26",
+    "name": "Ores, slag and ash",
+    "aliases": [
+      "ores",
+      "slag",
+      "ash",
+      "HS26"
+    ]
+  },
+  {
+    "code": "27",
+    "name": "Mineral fuels, mineral oils and products of their distillation",
+    "aliases": [
+      "oil",
+      "petroleum",
+      "coal",
+      "natural gas",
+      "crude oil",
+      "HS27"
+    ]
+  },
+  {
+    "code": "28",
+    "name": "Inorganic chemicals; organic or inorganic compounds of precious metals",
+    "aliases": [
+      "inorganic chemicals",
+      "HS28"
+    ]
+  },
+  {
+    "code": "29",
+    "name": "Organic chemicals",
+    "aliases": [
+      "organic chemistry",
+      "HS29"
+    ]
+  },
+  {
+    "code": "30",
+    "name": "Pharmaceutical products",
+    "aliases": [
+      "pharma",
+      "drugs",
+      "medicine",
+      "pharmaceuticals",
+      "HS30"
+    ]
+  },
+  {
+    "code": "31",
+    "name": "Fertilisers",
+    "aliases": [
+      "fertilizer",
+      "nitrogen fertilizer",
+      "HS31"
+    ]
+  },
+  {
+    "code": "32",
+    "name": "Tanning or dyeing extracts; tannins and their derivatives; dyes, pigments",
+    "aliases": [
+      "dyes",
+      "pigments",
+      "HS32"
+    ]
+  },
+  {
+    "code": "33",
+    "name": "Essential oils and resinoids; perfumery, cosmetic or toilet preparations",
+    "aliases": [
+      "perfume",
+      "cosmetics",
+      "essential oils",
+      "HS33"
+    ]
+  },
+  {
+    "code": "34",
+    "name": "Soap, organic surface-active agents, washing preparations, candles",
+    "aliases": [
+      "soap",
+      "detergent",
+      "candles",
+      "HS34"
+    ]
+  },
+  {
+    "code": "35",
+    "name": "Albuminoidal substances; modified starches; glues; enzymes",
+    "aliases": [
+      "enzymes",
+      "glues",
+      "HS35"
+    ]
+  },
+  {
+    "code": "36",
+    "name": "Explosives; pyrotechnic products; matches; pyrophoric alloys",
+    "aliases": [
+      "explosives",
+      "pyrotechnics",
+      "HS36"
+    ]
+  },
+  {
+    "code": "37",
+    "name": "Photographic or cinematographic goods",
+    "aliases": [
+      "photography",
+      "film",
+      "HS37"
+    ]
+  },
+  {
+    "code": "38",
+    "name": "Miscellaneous chemical products",
+    "aliases": [
+      "chemical products",
+      "HS38"
+    ]
+  },
+  {
+    "code": "39",
+    "name": "Plastics and articles thereof",
+    "aliases": [
+      "plastic",
+      "polymer",
+      "HS39"
+    ]
+  },
+  {
+    "code": "40",
+    "name": "Rubber and articles thereof",
+    "aliases": [
+      "rubber",
+      "HS40"
+    ]
+  },
+  {
+    "code": "41",
+    "name": "Raw hides and skins (other than furskins) and leather",
+    "aliases": [
+      "hides",
+      "leather",
+      "HS41"
+    ]
+  },
+  {
+    "code": "42",
+    "name": "Articles of leather; saddlery; travel goods, handbags",
+    "aliases": [
+      "leather goods",
+      "handbags",
+      "HS42"
+    ]
+  },
+  {
+    "code": "43",
+    "name": "Furskins and artificial fur; manufactures thereof",
+    "aliases": [
+      "fur",
+      "HS43"
+    ]
+  },
+  {
+    "code": "44",
+    "name": "Wood and articles of wood; wood charcoal",
+    "aliases": [
+      "wood",
+      "lumber",
+      "timber",
+      "HS44"
+    ]
+  },
+  {
+    "code": "45",
+    "name": "Cork and articles of cork",
+    "aliases": [
+      "cork",
+      "HS45"
+    ]
+  },
+  {
+    "code": "46",
+    "name": "Manufactures of straw, of esparto or of other plaiting materials",
+    "aliases": [
+      "straw",
+      "HS46"
+    ]
+  },
+  {
+    "code": "47",
+    "name": "Pulp of wood or of other fibrous cellulosic material",
+    "aliases": [
+      "pulp",
+      "wood pulp",
+      "HS47"
+    ]
+  },
+  {
+    "code": "48",
+    "name": "Paper and paperboard; articles of paper pulp, of paper or of paperboard",
+    "aliases": [
+      "paper",
+      "paperboard",
+      "HS48"
+    ]
+  },
+  {
+    "code": "49",
+    "name": "Printed books, newspapers, pictures and other products of the printing industry",
+    "aliases": [
+      "books",
+      "newspapers",
+      "printing",
+      "HS49"
+    ]
+  },
+  {
+    "code": "50",
+    "name": "Silk",
+    "aliases": [
+      "silk",
+      "HS50"
+    ]
+  },
+  {
+    "code": "51",
+    "name": "Wool, fine or coarse animal hair; horsehair yarn and woven fabric",
+    "aliases": [
+      "wool",
+      "HS51"
+    ]
+  },
+  {
+    "code": "52",
+    "name": "Cotton",
+    "aliases": [
+      "cotton",
+      "HS52"
+    ]
+  },
+  {
+    "code": "53",
+    "name": "Other vegetable textile fibres; paper yarn and woven fabrics of paper yarn",
+    "aliases": [
+      "vegetable textiles",
+      "HS53"
+    ]
+  },
+  {
+    "code": "54",
+    "name": "Man-made filaments",
+    "aliases": [
+      "synthetic filaments",
+      "HS54"
+    ]
+  },
+  {
+    "code": "55",
+    "name": "Man-made staple fibres",
+    "aliases": [
+      "synthetic fibers",
+      "HS55"
+    ]
+  },
+  {
+    "code": "56",
+    "name": "Wadding, felt and nonwovens; special yarns; twine, cordage, ropes",
+    "aliases": [
+      "rope",
+      "twine",
+      "HS56"
+    ]
+  },
+  {
+    "code": "57",
+    "name": "Carpets and other textile floor coverings",
+    "aliases": [
+      "carpets",
+      "rugs",
+      "HS57"
+    ]
+  },
+  {
+    "code": "58",
+    "name": "Special woven fabrics; tufted textile fabrics; lace; tapestries",
+    "aliases": [
+      "lace",
+      "tapestry",
+      "HS58"
+    ]
+  },
+  {
+    "code": "59",
+    "name": "Impregnated, coated, covered or laminated textile fabrics",
+    "aliases": [
+      "coated textiles",
+      "HS59"
+    ]
+  },
+  {
+    "code": "60",
+    "name": "Knitted or crocheted fabrics",
+    "aliases": [
+      "knitted",
+      "crocheted",
+      "HS60"
+    ]
+  },
+  {
+    "code": "61",
+    "name": "Articles of apparel and clothing accessories, knitted or crocheted",
+    "aliases": [
+      "apparel knitted",
+      "clothing knitted",
+      "HS61"
+    ]
+  },
+  {
+    "code": "62",
+    "name": "Articles of apparel and clothing accessories, not knitted or crocheted",
+    "aliases": [
+      "apparel woven",
+      "clothing woven",
+      "HS62"
+    ]
+  },
+  {
+    "code": "63",
+    "name": "Other made up textile articles; sets; worn clothing and worn textile articles",
+    "aliases": [
+      "used clothing",
+      "HS63"
+    ]
+  },
+  {
+    "code": "64",
+    "name": "Footwear, gaiters and the like; parts of such articles",
+    "aliases": [
+      "footwear",
+      "shoes",
+      "HS64"
+    ]
+  },
+  {
+    "code": "65",
+    "name": "Headgear and parts thereof",
+    "aliases": [
+      "headwear",
+      "hats",
+      "HS65"
+    ]
+  },
+  {
+    "code": "66",
+    "name": "Umbrellas, sun umbrellas, walking sticks, whips and parts",
+    "aliases": [
+      "umbrellas",
+      "HS66"
+    ]
+  },
+  {
+    "code": "67",
+    "name": "Prepared feathers and down; articles made of feathers or of down",
+    "aliases": [
+      "feathers",
+      "HS67"
+    ]
+  },
+  {
+    "code": "68",
+    "name": "Articles of stone, plaster, cement, asbestos, mica or similar materials",
+    "aliases": [
+      "stone articles",
+      "HS68"
+    ]
+  },
+  {
+    "code": "69",
+    "name": "Ceramic products",
+    "aliases": [
+      "ceramics",
+      "HS69"
+    ]
+  },
+  {
+    "code": "70",
+    "name": "Glass and glassware",
+    "aliases": [
+      "glass",
+      "HS70"
+    ]
+  },
+  {
+    "code": "71",
+    "name": "Natural or cultured pearls, precious stones, precious metals; imitation jewellery",
+    "aliases": [
+      "gold",
+      "silver",
+      "diamonds",
+      "jewelry",
+      "pearls",
+      "HS71"
+    ]
+  },
+  {
+    "code": "72",
+    "name": "Iron and steel",
+    "aliases": [
+      "iron",
+      "steel",
+      "HS72"
+    ]
+  },
+  {
+    "code": "73",
+    "name": "Articles of iron or steel",
+    "aliases": [
+      "steel articles",
+      "HS73"
+    ]
+  },
+  {
+    "code": "74",
+    "name": "Copper and articles thereof",
+    "aliases": [
+      "copper",
+      "HS74"
+    ]
+  },
+  {
+    "code": "75",
+    "name": "Nickel and articles thereof",
+    "aliases": [
+      "nickel",
+      "HS75"
+    ]
+  },
+  {
+    "code": "76",
+    "name": "Aluminium and articles thereof",
+    "aliases": [
+      "aluminum",
+      "aluminium",
+      "HS76"
+    ]
+  },
+  {
+    "code": "78",
+    "name": "Lead and articles thereof",
+    "aliases": [
+      "lead",
+      "HS78"
+    ]
+  },
+  {
+    "code": "79",
+    "name": "Zinc and articles thereof",
+    "aliases": [
+      "zinc",
+      "HS79"
+    ]
+  },
+  {
+    "code": "80",
+    "name": "Tin and articles thereof",
+    "aliases": [
+      "tin",
+      "HS80"
+    ]
+  },
+  {
+    "code": "81",
+    "name": "Other base metals; cermets; articles thereof",
+    "aliases": [
+      "other metals",
+      "HS81"
+    ]
+  },
+  {
+    "code": "82",
+    "name": "Tools, implements, cutlery, spoons and forks, of base metal",
+    "aliases": [
+      "tools",
+      "cutlery",
+      "HS82"
+    ]
+  },
+  {
+    "code": "83",
+    "name": "Miscellaneous articles of base metal",
+    "aliases": [
+      "metal articles",
+      "HS83"
+    ]
+  },
+  {
+    "code": "84",
+    "name": "Nuclear reactors, boilers, machinery and mechanical appliances",
+    "aliases": [
+      "machinery",
+      "industrial equipment",
+      "nuclear reactors",
+      "boilers",
+      "HS84"
+    ]
+  },
+  {
+    "code": "85",
+    "name": "Electrical machinery and equipment and parts thereof",
+    "aliases": [
+      "electrical machinery",
+      "electronics",
+      "semiconductors",
+      "HS85"
+    ]
+  },
+  {
+    "code": "86",
+    "name": "Railway or tramway locomotives, rolling stock, signalling equipment",
+    "aliases": [
+      "rail",
+      "locomotives",
+      "trains",
+      "HS86"
+    ]
+  },
+  {
+    "code": "87",
+    "name": "Vehicles other than railway or tramway rolling stock",
+    "aliases": [
+      "vehicles",
+      "automobiles",
+      "cars",
+      "trucks",
+      "HS87"
+    ]
+  },
+  {
+    "code": "88",
+    "name": "Aircraft, spacecraft and parts thereof",
+    "aliases": [
+      "aircraft",
+      "aviation",
+      "spacecraft",
+      "airplanes",
+      "HS88"
+    ]
+  },
+  {
+    "code": "89",
+    "name": "Ships, boats and floating structures",
+    "aliases": [
+      "ships",
+      "maritime",
+      "boats",
+      "HS89"
+    ]
+  },
+  {
+    "code": "90",
+    "name": "Optical, photographic, cinematographic, measuring, checking, precision, medical or surgical instruments",
+    "aliases": [
+      "optical",
+      "medical instruments",
+      "surgical instruments",
+      "precision instruments",
+      "HS90"
+    ]
+  },
+  {
+    "code": "91",
+    "name": "Clocks and watches and parts thereof",
+    "aliases": [
+      "watches",
+      "clocks",
+      "HS91"
+    ]
+  },
+  {
+    "code": "92",
+    "name": "Musical instruments; parts and accessories of such articles",
+    "aliases": [
+      "musical instruments",
+      "HS92"
+    ]
+  },
+  {
+    "code": "93",
+    "name": "Arms and ammunition; parts and accessories thereof",
+    "aliases": [
+      "weapons",
+      "firearms",
+      "ammunition",
+      "HS93"
+    ]
+  },
+  {
+    "code": "94",
+    "name": "Furniture; bedding, mattresses, mattress supports, cushions; lamps",
+    "aliases": [
+      "furniture",
+      "bedding",
+      "lamps",
+      "HS94"
+    ]
+  },
+  {
+    "code": "95",
+    "name": "Toys, games and sports requisites; parts and accessories thereof",
+    "aliases": [
+      "toys",
+      "games",
+      "sports equipment",
+      "HS95"
+    ]
+  },
+  {
+    "code": "96",
+    "name": "Miscellaneous manufactured articles",
+    "aliases": [
+      "misc manufactured",
+      "HS96"
+    ]
+  },
+  {
+    "code": "97",
+    "name": "Works of art, collectors' pieces and antiques",
+    "aliases": [
+      "art",
+      "antiques",
+      "HS97"
+    ]
+  },
+  {
+    "code": "98",
+    "name": "Special provisions",
+    "aliases": [
+      "special provisions",
+      "HS98"
+    ]
+  },
+  {
+    "code": "99",
+    "name": "Commodities not elsewhere specified",
+    "aliases": [
+      "commodities nes",
+      "HS99"
+    ]
+  },
+  {
+    "code": "1001",
+    "name": "Wheat and meslin",
+    "family": "hs",
+    "aliases": [
+      "wheat",
+      "grain wheat"
+    ]
+  },
+  {
+    "code": "1006",
+    "name": "Rice",
+    "family": "hs",
+    "aliases": [
+      "rice"
+    ]
+  },
+  {
+    "code": "1701",
+    "name": "Cane or beet sugar",
+    "family": "hs",
+    "aliases": [
+      "sugar",
+      "cane sugar",
+      "beet sugar"
+    ]
+  },
+  {
+    "code": "2709",
+    "name": "Petroleum oils, crude",
+    "family": "hs",
+    "aliases": [
+      "crude oil",
+      "crude petroleum"
+    ]
+  },
+  {
+    "code": "2710",
+    "name": "Petroleum oils, refined",
+    "family": "hs",
+    "aliases": [
+      "refined petroleum",
+      "gasoline",
+      "diesel"
+    ]
+  },
+  {
+    "code": "2711",
+    "name": "Petroleum gases, natural gas",
+    "family": "hs",
+    "aliases": [
+      "natural gas",
+      "LNG"
+    ]
+  },
+  {
+    "code": "2716",
+    "name": "Electrical energy",
+    "family": "hs",
+    "aliases": [
+      "electricity export"
+    ]
+  },
+  {
+    "code": "3004",
+    "name": "Medicaments in dosage form",
+    "family": "hs",
+    "aliases": [
+      "packaged drugs",
+      "medications"
+    ]
+  },
+  {
+    "code": "3102",
+    "name": "Mineral or chemical fertilizers, nitrogenous",
+    "family": "hs",
+    "aliases": [
+      "nitrogen fertilizer"
+    ]
+  },
+  {
+    "code": "4011",
+    "name": "New pneumatic tires",
+    "family": "hs",
+    "aliases": [
+      "tires",
+      "tyres"
+    ]
+  },
+  {
+    "code": "4401",
+    "name": "Fuel wood; wood in chips",
+    "family": "hs",
+    "aliases": [
+      "fuel wood",
+      "wood chips"
+    ]
+  },
+  {
+    "code": "5201",
+    "name": "Cotton, not carded",
+    "family": "hs",
+    "aliases": [
+      "raw cotton"
+    ]
+  },
+  {
+    "code": "7108",
+    "name": "Gold, unwrought or semi-manufactured",
+    "family": "hs",
+    "aliases": [
+      "gold bullion"
+    ]
+  },
+  {
+    "code": "7207",
+    "name": "Semi-finished products of iron or non-alloy steel",
+    "family": "hs",
+    "aliases": [
+      "semi-finished steel"
+    ]
+  },
+  {
+    "code": "7606",
+    "name": "Aluminium plates, sheets and strip",
+    "family": "hs",
+    "aliases": [
+      "aluminium sheet"
+    ]
+  },
+  {
+    "code": "8471",
+    "name": "Automatic data processing machines",
+    "family": "hs",
+    "aliases": [
+      "computers",
+      "laptops",
+      "PCs"
+    ]
+  },
+  {
+    "code": "8473",
+    "name": "Parts and accessories for data-processing machines",
+    "family": "hs",
+    "aliases": [
+      "computer parts"
+    ]
+  },
+  {
+    "code": "8517",
+    "name": "Telephone sets, smartphones, routers",
+    "family": "hs",
+    "aliases": [
+      "smartphones",
+      "phones",
+      "routers"
+    ]
+  },
+  {
+    "code": "8528",
+    "name": "Monitors, projectors, TV reception apparatus",
+    "family": "hs",
+    "aliases": [
+      "TVs",
+      "monitors",
+      "displays"
+    ]
+  },
+  {
+    "code": "8541",
+    "name": "Semiconductor devices",
+    "family": "hs",
+    "aliases": [
+      "semiconductor devices",
+      "diodes",
+      "transistors"
+    ]
+  },
+  {
+    "code": "8542",
+    "name": "Electronic integrated circuits",
+    "family": "hs",
+    "aliases": [
+      "integrated circuits",
+      "ICs",
+      "chips"
+    ]
+  },
+  {
+    "code": "8703",
+    "name": "Motor cars and passenger vehicles",
+    "family": "hs",
+    "aliases": [
+      "cars",
+      "passenger vehicles",
+      "automobiles"
+    ]
+  },
+  {
+    "code": "8704",
+    "name": "Motor vehicles for transport of goods",
+    "family": "hs",
+    "aliases": [
+      "trucks",
+      "freight vehicles"
+    ]
+  },
+  {
+    "code": "8708",
+    "name": "Parts and accessories of motor vehicles",
+    "family": "hs",
+    "aliases": [
+      "auto parts"
+    ]
+  },
+  {
+    "code": "8802",
+    "name": "Aircraft and spacecraft",
+    "family": "hs",
+    "aliases": [
+      "aircraft",
+      "airplanes",
+      "spacecraft"
+    ]
+  },
+  {
+    "code": "8806",
+    "name": "Unmanned aircraft (drones)",
+    "family": "hs",
+    "aliases": [
+      "drones",
+      "UAVs"
+    ]
+  },
+  {
+    "code": "8901",
+    "name": "Cruise ships, cargo ships",
+    "family": "hs",
+    "aliases": [
+      "cargo ships",
+      "cruise ships"
+    ]
+  },
+  {
+    "code": "9001",
+    "name": "Optical fibres, lenses, prisms",
+    "family": "hs",
+    "aliases": [
+      "optical fibres",
+      "lenses"
+    ]
+  },
+  {
+    "code": "9018",
+    "name": "Medical instruments and appliances",
+    "family": "hs",
+    "aliases": [
+      "medical devices",
+      "medical instruments"
+    ]
+  },
+  {
+    "code": "9021",
+    "name": "Orthopaedic appliances",
+    "family": "hs",
+    "aliases": [
+      "orthopaedic",
+      "prosthetics"
+    ]
+  },
+  {
+    "code": "9504",
+    "name": "Video game consoles",
+    "family": "hs",
+    "aliases": [
+      "game consoles",
+      "video games"
+    ]
+  },
+  {
+    "code": "3303",
+    "name": "Perfumes and toilet waters",
+    "family": "hs",
+    "aliases": [
+      "perfume",
+      "fragrance"
+    ]
+  },
+  {
+    "code": "0901",
+    "name": "Coffee",
+    "family": "hs",
+    "aliases": [
+      "coffee"
+    ]
+  },
+  {
+    "code": "1801",
+    "name": "Cocoa beans",
+    "family": "hs",
+    "aliases": [
+      "cocoa beans"
+    ]
+  },
+  {
+    "code": "1806",
+    "name": "Chocolate",
+    "family": "hs",
+    "aliases": [
+      "chocolate"
+    ]
+  }
 ]

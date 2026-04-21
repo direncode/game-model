@@ -1,0 +1,2312 @@
+[
+  {
+    "query": "BE",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "BG",
+    "expect_code": "BGR",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "BH",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "BO",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "HS29",
+    "expect_code": "29",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "HS40",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "HS51",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "IT leasing",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "LB",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "Mass",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by us_state, resolver winner us_state"
+  },
+  {
+    "query": "RS",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "TH",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "VN",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by country, resolver winner country"
+  },
+  {
+    "query": "Washington DC",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by us_state, resolver winner us_state"
+  },
+  {
+    "query": "agriculture patents",
+    "expect_code": "A01",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "apparel",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "apparel knitted",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "biochemistry",
+    "expect_code": "C12",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "carcinoma",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "cardiac disease",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "cardiomyopathy",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "clothing knitted",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "combustion engines",
+    "expect_code": "F02",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "commercial banking",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "communications patents",
+    "expect_code": "H04",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "control systems",
+    "expect_code": "G05",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "defense electronics",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "dose-response",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "endometrial cancer",
+    "expect_code": "D016889",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "fish",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "footwear",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "furniture",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "headache",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "health insurance",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "heart condition",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "heart muscle disease",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "hides",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "leather",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "migraine",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "networking patents",
+    "expect_code": "H04L",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "optics patents",
+    "expect_code": "G02",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "organic chemistry",
+    "expect_code": "C07",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner cpc"
+  },
+  {
+    "query": "packaging",
+    "expect_code": "B65",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "psychotic disorder",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "red cell breakdown",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "road vehicles",
+    "expect_code": "B62",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "rubber",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "seafood",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "section C",
+    "expect_code": "C",
+    "expect_family": "cpc",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by cpc, resolver winner cpc"
+  },
+  {
+    "query": "shoes",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "textiles",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "uterine cancer",
+    "expect_code": "D016889",
+    "expect_family": "mesh",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by mesh, resolver winner mesh"
+  },
+  {
+    "query": "wholesale durables",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by sic, resolver winner sic"
+  },
+  {
+    "query": "wool",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "alias",
+    "notes": "synth: alias; contributed by hs, resolver winner hs"
+  },
+  {
+    "query": "03",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "1040",
+    "expect_code": "1040",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "2200",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "2300",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "2510",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "29",
+    "expect_code": "29",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "3812",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "40",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "41",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "42",
+    "expect_code": "42",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "5000",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "51",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "6020",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "61",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "6321",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "64",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "7379",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "A01",
+    "expect_code": "A01",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "B62",
+    "expect_code": "B62",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "B65",
+    "expect_code": "B65",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "BEL",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "BGR",
+    "expect_code": "BGR",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "BHR",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "BOL",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "C",
+    "expect_code": "C",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "C12",
+    "expect_code": "C12",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D002277",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D004305",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D006331",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D008881",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D009202",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D012559",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D016889",
+    "expect_code": "D016889",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "D020141",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "DC",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "EST",
+    "expect_code": "EST",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "F02",
+    "expect_code": "F02",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "FL",
+    "expect_code": "FL",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "G02",
+    "expect_code": "G02",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "G05",
+    "expect_code": "G05",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "GA",
+    "expect_code": "GA",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "H04",
+    "expect_code": "H04",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "H04L",
+    "expect_code": "H04L",
+    "expect_family": "cpc",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "ID",
+    "expect_code": "ID",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "KS",
+    "expect_code": "KS",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "LBN",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "MA",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "NC",
+    "expect_code": "NC",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "ND",
+    "expect_code": "ND",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "NH",
+    "expect_code": "NH",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "SRB",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "THA",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "UT",
+    "expect_code": "UT",
+    "expect_family": "us_state",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "VNM",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "exact_code",
+    "notes": "synth: exact code"
+  },
+  {
+    "query": "Belgius",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Belgium'"
+  },
+  {
+    "query": "Blivia",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Bolivia'"
+  },
+  {
+    "query": "Florid",
+    "expect_code": "FL",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Florida'"
+  },
+  {
+    "query": "Geowgia",
+    "expect_code": "GEO",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Georgia'"
+  },
+  {
+    "query": "IT ldeasing",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'IT leasing'"
+  },
+  {
+    "query": "Iadho",
+    "expect_code": "ID",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Idaho'"
+  },
+  {
+    "query": "Knsas",
+    "expect_code": "KS",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Kansas'"
+  },
+  {
+    "query": "Mss",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'Mass'"
+  },
+  {
+    "query": "New ampshire",
+    "expect_code": "NH",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'New Hampshire'"
+  },
+  {
+    "query": "North Cwarolina",
+    "expect_code": "NC",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'North Carolina'"
+  },
+  {
+    "query": "Serwbia",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Serbia'"
+  },
+  {
+    "query": "Thaikland",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Thailand'"
+  },
+  {
+    "query": "Uth",
+    "expect_code": "UT",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Utah'"
+  },
+  {
+    "query": "Vetnam",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Vietnam'"
+  },
+  {
+    "query": "Wasehington DC",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'Washington DC'"
+  },
+  {
+    "query": "appaerl",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'apparel'"
+  },
+  {
+    "query": "carccnoma",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'carcinoma'"
+  },
+  {
+    "query": "cardiomyoparthy",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'cardiomyopathy'"
+  },
+  {
+    "query": "combustion nengines",
+    "expect_code": "F02",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'combustion engines'"
+  },
+  {
+    "query": "commercial jbanking",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'commercial banking'"
+  },
+  {
+    "query": "communicatixns patents",
+    "expect_code": "H04",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'communications patents'"
+  },
+  {
+    "query": "control sytsems",
+    "expect_code": "G05",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'control systems'"
+  },
+  {
+    "query": "defense jelectronics",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'defense electronics'"
+  },
+  {
+    "query": "dos-eresponse",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'dose-response'"
+  },
+  {
+    "query": "esction C",
+    "expect_code": "C",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'section C'"
+  },
+  {
+    "query": "fdootwear",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'footwear'"
+  },
+  {
+    "query": "funriture",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'furniture'"
+  },
+  {
+    "query": "fzsh",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'fish'"
+  },
+  {
+    "query": "hdes",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'hides'"
+  },
+  {
+    "query": "health insyrance",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'health insurance'"
+  },
+  {
+    "query": "heart conditibon",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'heart condition'"
+  },
+  {
+    "query": "ibochemistry",
+    "expect_code": "C12",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'biochemistry'"
+  },
+  {
+    "query": "miiraine",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'migraine'"
+  },
+  {
+    "query": "nLebanon",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Lebanon'"
+  },
+  {
+    "query": "networkin gpatents",
+    "expect_code": "H04L",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'networking patents'"
+  },
+  {
+    "query": "oganic chemistry",
+    "expect_code": "C07",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'organic chemistry'"
+  },
+  {
+    "query": "optici patents",
+    "expect_code": "G02",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'optics patents'"
+  },
+  {
+    "query": "packagng",
+    "expect_code": "B65",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'packaging'"
+  },
+  {
+    "query": "psychoitc disorder",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'psychotic disorder'"
+  },
+  {
+    "query": "red cell breadkown",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'red cell breakdown'"
+  },
+  {
+    "query": "road vehiicles",
+    "expect_code": "B62",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'road vehicles'"
+  },
+  {
+    "query": "ruboer",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'rubber'"
+  },
+  {
+    "query": "textles",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'textiles'"
+  },
+  {
+    "query": "vagriculture patents",
+    "expect_code": "A01",
+    "expect_family": "cpc",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'agriculture patents'"
+  },
+  {
+    "query": "wahrain",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of name 'Bahrain'"
+  },
+  {
+    "query": "whocesale durables",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'wholesale durables'"
+  },
+  {
+    "query": "wrol",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "fuzzy",
+    "notes": "synth: typo of alias 'wool'"
+  },
+  {
+    "query": "Bahrain",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Belgium",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Bolivia",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Bulgaria",
+    "expect_code": "BGR",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "COLUMBIA OF DISTRICT",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "COMBUSTION ENGINES; HOT-GAS OR COMBUSTION-PRODUCT ENGINE PLANTS",
+    "expect_code": "F02",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "CROCHETED OR KNITTED ACCESSORIES CLOTHING AND APPAREL OF ARTICLES",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Carcinoma",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Chemistry; Metallurgy",
+    "expect_code": "C",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Controlling; Regulating",
+    "expect_code": "G05",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Conveying; Packing; Storing; Handling Thin or Filamentary Material",
+    "expect_code": "B65",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Dose-Response Relationship, Drug",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Footwear, gaiters and the like; parts of such articles",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Georgia",
+    "expect_code": "GEO",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant; name-collision resolver winner country"
+  },
+  {
+    "query": "HEART DISEASES",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Hemolysis",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Household Furniture",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Idaho",
+    "expect_code": "ID",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Information Digital of Transmission",
+    "expect_code": "H04L",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Insurance Health And Accident",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "KANSAS",
+    "expect_code": "KS",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Massachusetts",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Migraine Disorders",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "NEW HAMPSHIRE",
+    "expect_code": "NH",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "NORTH CAROLINA",
+    "expect_code": "NC",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "ORGANIC CHEMICALS",
+    "expect_code": "29",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Products Finished Other and Apparel",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Rails On Than Otherwise Travelling For Vehicles Land",
+    "expect_code": "B62",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Raw Hides And Skins (Other Than Furskins) And Leather",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Rubber And Articles Thereof",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "SERVICES-COMPUTER RENTAL AND LEASING",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "STATE COMMERCIAL BANKS",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Search, Detection, Navigation, Guidance, Aeronautical Systems",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Technique Communication Electric",
+    "expect_code": "H04",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Textile Mill Products",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Thailand",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Utah",
+    "expect_code": "UT",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Vietnam",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "WHOLESALE-DURABLE GOODS",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "Wool, Fine Or Coarse Animal Hair; Horsehair Yarn And Woven Fabric",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "agriculture; forestry; animal husbandry; hunting; trapping; fishing",
+    "expect_code": "A01",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "biochemistry; beer; spirits; wine; vinegar; microbiology; enzymology",
+    "expect_code": "C12",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "cardiomyopathies",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "florida",
+    "expect_code": "FL",
+    "expect_family": "us_state",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "invertebrates aquatic other and molluscs crustaceans and Fish",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "lebanon",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "optics",
+    "expect_code": "G02",
+    "expect_family": "cpc",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "schizophrenia",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "serbia",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "lexical",
+    "notes": "synth: name variant"
+  },
+  {
+    "query": "HS-03",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-29",
+    "expect_code": "29",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-40",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-41",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-42",
+    "expect_code": "42",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-51",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-61",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "HS-64",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=HS-"
+  },
+  {
+    "query": "commodity_03",
+    "expect_code": "03",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_29",
+    "expect_code": "29",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_40",
+    "expect_code": "40",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_41",
+    "expect_code": "41",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_51",
+    "expect_code": "51",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_61",
+    "expect_code": "61",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "commodity_64",
+    "expect_code": "64",
+    "expect_family": "hs",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=commodity_"
+  },
+  {
+    "query": "country_BEL",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_BGR",
+    "expect_code": "BGR",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_BHR",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_BOL",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_EST",
+    "expect_code": "EST",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_LBN",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_SRB",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_THA",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "country_VNM",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=country_"
+  },
+  {
+    "query": "cpc_A01",
+    "expect_code": "A01",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_B62",
+    "expect_code": "B62",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_B65",
+    "expect_code": "B65",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_C",
+    "expect_code": "C",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_C12",
+    "expect_code": "C12",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_F02",
+    "expect_code": "F02",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_G02",
+    "expect_code": "G02",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_G05",
+    "expect_code": "G05",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_H04",
+    "expect_code": "H04",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "cpc_H04L",
+    "expect_code": "H04L",
+    "expect_family": "cpc",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=cpc_"
+  },
+  {
+    "query": "iso_BEL",
+    "expect_code": "BEL",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_BGR",
+    "expect_code": "BGR",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_BHR",
+    "expect_code": "BHR",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_BOL",
+    "expect_code": "BOL",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_EST",
+    "expect_code": "EST",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_LBN",
+    "expect_code": "LBN",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_SRB",
+    "expect_code": "SRB",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_THA",
+    "expect_code": "THA",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "iso_VNM",
+    "expect_code": "VNM",
+    "expect_family": "country",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=iso_"
+  },
+  {
+    "query": "mesh-D002277",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D004305",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D006331",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D008881",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D009202",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D012559",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D016889",
+    "expect_code": "D016889",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh-D020141",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh-"
+  },
+  {
+    "query": "mesh_D002277",
+    "expect_code": "D002277",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D004305",
+    "expect_code": "D004305",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D006331",
+    "expect_code": "D006331",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D008881",
+    "expect_code": "D008881",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D009202",
+    "expect_code": "D009202",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D012559",
+    "expect_code": "D012559",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D016889",
+    "expect_code": "D016889",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "mesh_D020141",
+    "expect_code": "D020141",
+    "expect_family": "mesh",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=mesh_"
+  },
+  {
+    "query": "region_DC",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_FL",
+    "expect_code": "FL",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_GA",
+    "expect_code": "GA",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_ID",
+    "expect_code": "ID",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_KS",
+    "expect_code": "KS",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_MA",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_NC",
+    "expect_code": "NC",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_ND",
+    "expect_code": "ND",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_NH",
+    "expect_code": "NH",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "region_UT",
+    "expect_code": "UT",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=region_"
+  },
+  {
+    "query": "sic-2200",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-2300",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-2510",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-3812",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-5000",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-6020",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-6321",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic-7379",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic-"
+  },
+  {
+    "query": "sic_1040",
+    "expect_code": "1040",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_2200",
+    "expect_code": "2200",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_2300",
+    "expect_code": "2300",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_2510",
+    "expect_code": "2510",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_3812",
+    "expect_code": "3812",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_5000",
+    "expect_code": "5000",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_6020",
+    "expect_code": "6020",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_6321",
+    "expect_code": "6321",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "sic_7379",
+    "expect_code": "7379",
+    "expect_family": "sic",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=sic_"
+  },
+  {
+    "query": "state_DC",
+    "expect_code": "DC",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_FL",
+    "expect_code": "FL",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_GA",
+    "expect_code": "GA",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_ID",
+    "expect_code": "ID",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_KS",
+    "expect_code": "KS",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_MA",
+    "expect_code": "MA",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_NC",
+    "expect_code": "NC",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_ND",
+    "expect_code": "ND",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_NH",
+    "expect_code": "NH",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "state_UT",
+    "expect_code": "UT",
+    "expect_family": "us_state",
+    "stage_hint": "prefix_stripped",
+    "notes": "synth: prefix=state_"
+  },
+  {
+    "query": "!!!",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "...",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "12345678",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "HS-99999",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "asdfghjkl",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "cjhmw",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "country_XYZ",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "cpc_ZZ999",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "eibbrjweuypda",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "foo_bar_baz",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "jvslprql",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "kdxrywfg",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "lorem ipsum dolor",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "none of these",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "nvlcqukanpdnl",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "owenfxquitzrypo",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "pryhwpuwpoz",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "randomword",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "region_ZZ",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "sic_99999",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "test_test_test",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "tvmkapkfpglzik",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "twiraqgch",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "undefined",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "vtzdzszbl",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "xjklqwerty",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "xpixsyqt",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "xrklwoijihd",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "xsikhciohyo",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  },
+  {
+    "query": "zzz999zzz",
+    "expect_code": null,
+    "expect_family": null,
+    "stage_hint": "unknown",
+    "notes": "synth: adversarial unknown"
+  }
+]

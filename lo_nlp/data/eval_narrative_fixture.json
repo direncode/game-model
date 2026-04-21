@@ -1,0 +1,268 @@
+[
+  {
+    "id": "apple_rev_good",
+    "bundle": {
+      "entity_raw": "fact_320193_Revenue",
+      "entity_resolved": "Apple Inc. \u00b7 Revenue",
+      "composite": 0.892, "anomaly": 0.95, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 3, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings", "top_line_concept": "Revenue"
+    },
+    "narrative": "Apple Inc.'s Revenue fact scores 0.892 composite in the SEC EDGAR corpus, ranking 3 of 500. The anomaly dimension (0.95) and reconstruction (0.88) both sit in the top decile, suggesting a filing pattern that materially differs from peer entities in the universe.",
+    "gold_label": "good",
+    "gold_reason": "All numbers traceable, entity grounded, analyst tone, 2 sentences"
+  },
+  {
+    "id": "nvda_rd_good",
+    "bundle": {
+      "entity_raw": "fact_1045810_ResearchAndDevelopmentExpense",
+      "entity_resolved": "NVIDIA CORP \u00b7 Research and Development Expense",
+      "composite": 0.814, "anomaly": 0.72, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 12, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "NVIDIA CORP's Research and Development Expense posts a composite of 0.814, ranking 12 of 642 in the EDGAR universe. Diversity (0.85) and reconstruction (0.88) dominate the signal while anomaly (0.72) is moderate, consistent with a high-R&D filing that is unusual in shape but not outlying in magnitude.",
+    "gold_label": "good",
+    "gold_reason": "Correct citation of all scores and rank; interpretation is defensible"
+  },
+  {
+    "id": "aep_aro_good",
+    "bundle": {
+      "entity_raw": "fact_4904_AssetRetirementObligation",
+      "entity_resolved": "AMERICAN ELECTRIC POWER CO INC \u00b7 Asset Retirement Obligation",
+      "composite": 0.859, "anomaly": 1.0, "reconstruction": 0.804, "diversity": 0.815,
+      "peer_rank": 1, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings",
+      "top_line_concept": "AssetRetirementObligation",
+      "concept_gloss": "decommissioning-estimate line \u2014 audit-sensitive and prone to material revision",
+      "null_test": {"z_score": 30.37, "p_value": "< 0.001", "iterations": 500}
+    },
+    "narrative": "AMERICAN ELECTRIC POWER CO INC's Asset Retirement Obligation posts a composite of 0.859 and ranks 1 of 642 in the EDGAR corpus, with anomaly saturating at 1.0. Given that this is a decommissioning-estimate line, audit-sensitive and prone to material revision, the z=30.37 null-test rejection makes the result defensible as a genuine outlier rather than noise.",
+    "gold_label": "good",
+    "gold_reason": "Weaves in the concept gloss correctly; cites the null test; no fabrication"
+  },
+  {
+    "id": "tesla_cap_good",
+    "bundle": {
+      "entity_raw": "fact_1318605_CapitalExpenditures",
+      "entity_resolved": "Tesla Inc. \u00b7 Capital Expenditures",
+      "composite": 0.773, "anomaly": 0.85, "reconstruction": 0.71, "diversity": 0.76,
+      "peer_rank": 28, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Tesla Inc.'s Capital Expenditures fact scores 0.773 composite in the EDGAR corpus, ranking 28 of 500. Anomaly leads at 0.85 while reconstruction trails at 0.71, a profile consistent with an entity whose capex pattern is unusual but structurally similar to known peers.",
+    "gold_label": "good",
+    "gold_reason": "Numbers correct; rank stated; interpretation reasonable"
+  },
+  {
+    "id": "msft_goodwill_good",
+    "bundle": {
+      "entity_raw": "fact_789019_Goodwill",
+      "entity_resolved": "MICROSOFT CORP \u00b7 Goodwill",
+      "composite": 0.681, "anomaly": 0.62, "reconstruction": 0.75, "diversity": 0.68,
+      "peer_rank": 94, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "MICROSOFT CORP's Goodwill registers a composite of 0.681 at rank 94 of 500. The dimensions cluster tightly between 0.62 and 0.75, indicating a finding that is moderately elevated but not exceptional within the EDGAR universe.",
+    "gold_label": "good",
+    "gold_reason": "Accurately characterises a middle-of-the-pack signal without overclaiming"
+  },
+
+  {
+    "id": "apple_rev_acceptable",
+    "bundle": {
+      "entity_raw": "fact_320193_Revenue",
+      "entity_resolved": "Apple Inc. \u00b7 Revenue",
+      "composite": 0.892, "anomaly": 0.95, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 3, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Apple Inc.'s Revenue shows a composite of 0.892, a notable result in the EDGAR corpus. The rank of 3 out of 500 is high.",
+    "gold_label": "acceptable",
+    "gold_reason": "Correct numbers but thin/generic; no interpretation"
+  },
+  {
+    "id": "nvda_rd_acceptable",
+    "bundle": {
+      "entity_raw": "fact_1045810_ResearchAndDevelopmentExpense",
+      "entity_resolved": "NVIDIA CORP \u00b7 Research and Development Expense",
+      "composite": 0.814, "anomaly": 0.72, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 12, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "NVIDIA CORP's Research and Development Expense scored 0.814 composite. Reconstruction was 0.88 and diversity 0.85.",
+    "gold_label": "acceptable",
+    "gold_reason": "Only 2 sentences, numbers correct, but no universe context or peer rank"
+  },
+  {
+    "id": "aep_aro_acceptable",
+    "bundle": {
+      "entity_raw": "fact_4904_AssetRetirementObligation",
+      "entity_resolved": "AMERICAN ELECTRIC POWER CO INC \u00b7 Asset Retirement Obligation",
+      "composite": 0.859, "anomaly": 1.0, "reconstruction": 0.804, "diversity": 0.815,
+      "peer_rank": 1, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "AMERICAN ELECTRIC POWER CO INC's Asset Retirement Obligation ranks 1 of 642 with composite 0.859. Anomaly is at 1.0 which is the maximum possible.",
+    "gold_label": "acceptable",
+    "gold_reason": "Correct but fails to use concept gloss or null-test data that was available"
+  },
+  {
+    "id": "tesla_cap_acceptable",
+    "bundle": {
+      "entity_raw": "fact_1318605_CapitalExpenditures",
+      "entity_resolved": "Tesla Inc. \u00b7 Capital Expenditures",
+      "composite": 0.773, "anomaly": 0.85, "reconstruction": 0.71, "diversity": 0.76,
+      "peer_rank": 28, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Tesla Inc. Capital Expenditures composite is 0.773, rank 28 of 500.",
+    "gold_label": "acceptable",
+    "gold_reason": "One sentence only, cites correctly but too terse"
+  },
+  {
+    "id": "msft_goodwill_acceptable",
+    "bundle": {
+      "entity_raw": "fact_789019_Goodwill",
+      "entity_resolved": "MICROSOFT CORP \u00b7 Goodwill",
+      "composite": 0.681, "anomaly": 0.62, "reconstruction": 0.75, "diversity": 0.68,
+      "peer_rank": 94, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Microsoft's Goodwill scored 0.681 composite at rank 94 of 500. Diversity was 0.68, reconstruction 0.75, and anomaly 0.62.",
+    "gold_label": "acceptable",
+    "gold_reason": "Correct but lists numbers without interpretation"
+  },
+
+  {
+    "id": "apple_rev_hallucinated_number",
+    "bundle": {
+      "entity_raw": "fact_320193_Revenue",
+      "entity_resolved": "Apple Inc. \u00b7 Revenue",
+      "composite": 0.892, "anomaly": 0.95, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 3, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Apple Inc.'s Revenue fact scores 0.892 composite in the EDGAR corpus, ranking 3 of 500. With a confidence interval of 95.3% and a year-over-year delta of 14.7%, the finding represents a statistically robust anomaly.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Fabricates 95.3% confidence interval and 14.7% YoY delta not in bundle"
+  },
+  {
+    "id": "nvda_rd_hallucinated_entity",
+    "bundle": {
+      "entity_raw": "fact_1045810_ResearchAndDevelopmentExpense",
+      "entity_resolved": "NVIDIA CORP \u00b7 Research and Development Expense",
+      "composite": 0.814, "anomaly": 0.72, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 12, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "NVIDIA CORP's R&D spend at 0.814 composite echoes the post-GPT-4 AI inference boom, ranking the chipmaker 12 of 642 against legacy semiconductor peers including Intel and AMD. The 0.85 diversity score reflects their expansion into data-center accelerators.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Introduces Intel, AMD, GPT-4, and causal story not in bundle"
+  },
+  {
+    "id": "aep_aro_hallucinated_causation",
+    "bundle": {
+      "entity_raw": "fact_4904_AssetRetirementObligation",
+      "entity_resolved": "AMERICAN ELECTRIC POWER CO INC \u00b7 Asset Retirement Obligation",
+      "composite": 0.859, "anomaly": 1.0, "reconstruction": 0.804, "diversity": 0.815,
+      "peer_rank": 1, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "AEP's ARO extreme ranking at 0.859 composite stems from the 2024 EPA coal-ash rule update that forced utilities to revise decommissioning estimates. Anomaly saturated at 1.0 reflects this one-time regulatory reclassification rather than a structural pattern.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Invents 2024 EPA coal-ash rule causation not in bundle"
+  },
+  {
+    "id": "tesla_cap_hallucinated_dates",
+    "bundle": {
+      "entity_raw": "fact_1318605_CapitalExpenditures",
+      "entity_resolved": "Tesla Inc. \u00b7 Capital Expenditures",
+      "composite": 0.773, "anomaly": 0.85, "reconstruction": 0.71, "diversity": 0.76,
+      "peer_rank": 28, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Tesla Inc.'s Capital Expenditures fact scored 0.773 composite over the Q2 2024 filing window, ranking 28 of 500. The anomaly dimension of 0.85 corresponds to the Austin Gigafactory ramp documented in the 10-K.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Fabricates Q2 2024 window and Austin Gigafactory causation"
+  },
+  {
+    "id": "msft_goodwill_hallucinated_all",
+    "bundle": {
+      "entity_raw": "fact_789019_Goodwill",
+      "entity_resolved": "MICROSOFT CORP \u00b7 Goodwill",
+      "composite": 0.681, "anomaly": 0.62, "reconstruction": 0.75, "diversity": 0.68,
+      "peer_rank": 94, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "MSFT's Goodwill line jumped 18.2% this quarter on the Activision acquisition, pushing the composite score to 0.681. At rank 94, the filing suggests a peer group of roughly 23 comparable tech conglomerates with similar M&A-driven goodwill patterns.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Invents 18.2% growth, Activision acquisition context, and 23-peer subgroup"
+  },
+
+  {
+    "id": "apple_rev_marketing",
+    "bundle": {
+      "entity_raw": "fact_320193_Revenue",
+      "entity_resolved": "Apple Inc. \u00b7 Revenue",
+      "composite": 0.892, "anomaly": 0.95, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 3, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Apple Inc.'s Revenue fact delivers an unprecedented composite score of 0.892, a groundbreaking result that places the filing at a remarkable rank 3 of 500. The anomaly dimension of 0.95 is truly exceptional.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Marketing language (unprecedented, groundbreaking, remarkable, exceptional) violates tone"
+  },
+  {
+    "id": "nvda_rd_marketing",
+    "bundle": {
+      "entity_raw": "fact_1045810_ResearchAndDevelopmentExpense",
+      "entity_resolved": "NVIDIA CORP \u00b7 Research and Development Expense",
+      "composite": 0.814, "anomaly": 0.72, "reconstruction": 0.88, "diversity": 0.85,
+      "peer_rank": 12, "universe_size": 642, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "NVIDIA's R&D spend shows a revolutionary composite of 0.814 with stunning diversity at 0.85. Rank 12 of 642 is world-class.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Revolutionary / stunning / world-class are all hype terms"
+  },
+
+  {
+    "id": "empty_bundle_template",
+    "bundle": {
+      "entity_raw": "fact_1876042_Cash",
+      "entity_resolved": "Circle Internet Group, Inc. \u00b7 Cash",
+      "composite": 0.5, "anomaly": 0.5, "reconstruction": 0.5, "diversity": 0.5,
+      "corpus_id": "edgar_5000", "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "Circle Internet Group, Inc.'s Cash fact has a composite of 0.5 in the EDGAR corpus, with anomaly, reconstruction, and diversity all at 0.5. The finding sits at the midpoint of the distribution.",
+    "gold_label": "good",
+    "gold_reason": "Baseline case: no rank info available; narrative correctly stays grounded in just what the bundle has"
+  },
+  {
+    "id": "ibm_rev_generic_placeholder",
+    "bundle": {
+      "entity_raw": "fact_51143_Revenue",
+      "entity_resolved": "INTERNATIONAL BUSINESS MACHINES CORP \u00b7 Revenue",
+      "composite": 0.72, "anomaly": 0.8, "reconstruction": 0.65, "diversity": 0.7,
+      "peer_rank": 45, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "IBM's Revenue scores 0.72 composite at rank 45 of 500 in the EDGAR corpus. The anomaly-forward profile (0.80 anomaly versus 0.65 reconstruction) points to an unusual filing shape rather than a structural outlier.",
+    "gold_label": "good",
+    "gold_reason": "Clean analyst narrative, all numbers traced, reasonable interpretation"
+  },
+  {
+    "id": "jpm_goodwill_wrong_concept",
+    "bundle": {
+      "entity_raw": "fact_19617_Goodwill",
+      "entity_resolved": "JPMORGAN CHASE & CO \u00b7 Goodwill",
+      "composite": 0.81, "anomaly": 0.75, "reconstruction": 0.88, "diversity": 0.82,
+      "peer_rank": 15, "universe_size": 500, "corpus_id": "edgar_5000",
+      "corpus_domain": "SEC EDGAR financial filings"
+    },
+    "narrative": "JPMORGAN CHASE & CO's Revenue line posts composite 0.81 at rank 15 of 500, with reconstruction leading at 0.88. The filing pattern is structurally typical but numerically elevated.",
+    "gold_label": "hallucinated",
+    "gold_reason": "Calls the line 'Revenue' but the bundle entity is Goodwill \u2014 wrong concept"
+  }
+]
