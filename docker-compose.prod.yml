@@ -32,6 +32,12 @@ services:
     environment:
       - NODE_ENV=production
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+    volumes:
+      # Next.js /api/health + data-layer routes read validation artefacts
+      # and BTUT caches at /data and /scripts. Read-only bind mounts
+      # from the repo keep them fresh without re-building the image.
+      - ./data:/data:ro
+      - ./scripts:/scripts:ro
     restart: always
 
   # ─── API Server ───
