@@ -113,10 +113,16 @@ export default function TitanPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [attempts]);
 
-  const live = (t?.sources ?? []).filter((s) => s.origin === "live");
+  // Titan-alien (the latest artifact) emits sources without an `origin` field
+  // because every source in that run is a live pull. Treat missing origin as
+  // "live" so the primary table populates. v1 Titan runs set origin="live" or
+  // "disk" explicitly and both tables populate naturally.
+  const live = (t?.sources ?? [])
+    .filter((s) => s.origin === "live" || s.origin === undefined)
+    .sort((a, b) => (b.null_test?.max_z_score ?? 0) - (a.null_test?.max_z_score ?? 0));
   const cached = (t?.sources ?? [])
     .filter((s) => s.origin === "disk")
-    .sort((a, b) => (b.null_test.max_z_score ?? 0) - (a.null_test.max_z_score ?? 0));
+    .sort((a, b) => (b.null_test?.max_z_score ?? 0) - (a.null_test?.max_z_score ?? 0));
 
   return (
     <div className="min-h-screen bg-black text-white antialiased">
@@ -234,6 +240,11 @@ export default function TitanPage() {
                   <div className="text-right">Top comp.</div>
                 </div>
                 {live.map((s) => <SourceRow key={s.name} s={s} />)}
+                {live.length === 0 && (
+                  <div className="px-5 py-8 text-center text-sm text-white/40 font-mono">
+                    No live sources in this run.
+                  </div>
+                )}
               </div>
 
               <h2 className="font-display text-3xl text-white mb-4 tracking-tight">
@@ -249,6 +260,18 @@ export default function TitanPage() {
                   <div className="text-right">Top comp.</div>
                 </div>
                 {cached.map((s) => <SourceRow key={s.name} s={s} />)}
+                {cached.length === 0 && (
+                  <div className="px-5 py-8 text-center text-sm text-white/40 font-mono">
+                    This run pulled live sources only.{" "}
+                    <a
+                      href="/api/titan"
+                      className="text-li-cyan hover:text-white underline underline-offset-2"
+                    >
+                      See Titan v1 aggregate
+                    </a>{" "}
+                    for the combined live-plus-cached run (15 cached corpora).
+                  </div>
+                )}
               </div>
 
               <div className="rounded-xl border border-li-cyan/20 bg-li-cyan/[0.03] p-8 mb-10">

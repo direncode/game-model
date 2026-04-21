@@ -580,7 +580,7 @@ async def run_titan_alien(iterations=1000):
         if isinstance(records, Exception):
             print(f"  {name:16s}  ERROR: {type(records).__name__}: {str(records)[:60]}")
             sources_out.append({
-                "name": name, "display": display,
+                "name": name, "display": display, "origin": "live",
                 "record_count": 0, "scored_count": 0, "error": str(records),
             })
             continue
@@ -593,7 +593,7 @@ async def run_titan_alien(iterations=1000):
         print(f"  {name:16s}  n={len(scored):5d}  z_max={nt.get('max_z_score',0):6.2f}  "
               f"sig={nt.get('significant_05',0):>2}/{nt.get('total_metrics',0):<2}  wall={wall:.2f}s")
         sources_out.append({
-            "name": name, "display": display,
+            "name": name, "display": display, "origin": "live",
             "record_count": len(records), "scored_count": len(scored),
             "null_test": nt, "topology": topo,
             "top_composite": max((s["composite"] for s in scored), default=0.0),

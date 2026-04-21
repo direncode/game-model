@@ -269,7 +269,8 @@
       },
       "top_composite": 0.8281,
       "digest_top100": "8d0eb363807a87882ba8dcd217ec19b9884d02683ab2e520de7d52448299b1d2",
-      "wall_seconds": 58.28254320000997
+      "wall_seconds": 58.28254320000997,
+      "origin": "live"
     },
     {
       "name": "coingecko",
@@ -492,7 +493,8 @@
       },
       "top_composite": 0.8379,
       "digest_top100": "998c0e90782c44a12c10219a7a93a7b89748577fb070ccffe8eaf09f83e7f289",
-      "wall_seconds": 0.6932906000001822
+      "wall_seconds": 0.6932906000001822,
+      "origin": "live"
     },
     {
       "name": "worldbank",
@@ -715,7 +717,8 @@
       },
       "top_composite": 0.8373,
       "digest_top100": "5602af1f6a2af60bd0e7be22b27da1a6c72a73a97a433b71e011330fc641384c",
-      "wall_seconds": 0.662240900011966
+      "wall_seconds": 0.662240900011966,
+      "origin": "live"
     },
     {
       "name": "github",
@@ -894,7 +897,8 @@
       },
       "top_composite": 0.8411,
       "digest_top100": "bfffe71dda056620b46bdac211110b45c3927c1afec0172550c889567029e04a",
-      "wall_seconds": 0.19495619999361224
+      "wall_seconds": 0.19495619999361224,
+      "origin": "live"
     },
     {
       "name": "openalex",
@@ -1117,7 +1121,8 @@
       },
       "top_composite": 0.8327,
       "digest_top100": "5040a52ab292682f36ef2aa95174323b90d8bb0f87cbc4b88923310933877e5f",
-      "wall_seconds": 1.6712095999973826
+      "wall_seconds": 1.6712095999973826,
+      "origin": "live"
     },
     {
       "name": "hackernews",
@@ -1340,7 +1345,8 @@
       },
       "top_composite": 0.8327,
       "digest_top100": "187722bb592a5626a3cf2365575614301f9f73db4cd835552e127694bad3f8bf",
-      "wall_seconds": 0.7754921999876387
+      "wall_seconds": 0.7754921999876387,
+      "origin": "live"
     },
     {
       "name": "gbif",
@@ -1563,7 +1569,8 @@
       },
       "top_composite": 0.8379,
       "digest_top100": "cb6233fe8ca21fc6dea9c0f1f0d84020fb2ec628a008b0f85557f84297492900",
-      "wall_seconds": 1.0393252999929246
+      "wall_seconds": 1.0393252999929246,
+      "origin": "live"
     },
     {
       "name": "openlibrary",
@@ -1578,7 +1585,8 @@
       },
       "top_composite": 0.0,
       "digest_top100": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "wall_seconds": 4.799978341907263e-06
+      "wall_seconds": 4.799978341907263e-06,
+      "origin": "live"
     },
     {
       "name": "nasa_exoplanets",
@@ -1801,7 +1809,8 @@
       },
       "top_composite": 0.8329,
       "digest_top100": "df43224b3db5f6ac476ec941cdf482351afca5bab6d53c4dba422f977b5a0923",
-      "wall_seconds": 1.8073433000245132
+      "wall_seconds": 1.8073433000245132,
+      "origin": "live"
     },
     {
       "name": "wikipedia",
@@ -2024,7 +2033,8 @@
       },
       "top_composite": 0.8325,
       "digest_top100": "bc5119d6f1f9e8a969daba7a0c9c34d655c3a8b3689e6a4122de4b162b6ac882",
-      "wall_seconds": 1.0986960000009276
+      "wall_seconds": 1.0986960000009276,
+      "origin": "live"
     },
     {
       "name": "sec_fts",
@@ -2203,7 +2213,8 @@
       },
       "top_composite": 0.8407,
       "digest_top100": "bb9a386b8695448b2e49008b3da6784a61f5defac0619f939e2c01b4d5519f58",
-      "wall_seconds": 0.20658149998052977
+      "wall_seconds": 0.20658149998052977,
+      "origin": "live"
     },
     {
       "name": "arxiv",
@@ -2218,7 +2229,8 @@
       },
       "top_composite": 0.0,
       "digest_top100": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "wall_seconds": 3.7999998312443495e-06
+      "wall_seconds": 3.7999998312443495e-06,
+      "origin": "live"
     },
     {
       "name": "reddit",
@@ -2397,7 +2409,8 @@
       },
       "top_composite": 0.8407,
       "digest_top100": "90e9dcfb6fee6cc1957458dd3521cda1b0ce3309ab8d9ad1b5c5f98905d54db1",
-      "wall_seconds": 0.2110232000122778
+      "wall_seconds": 0.2110232000122778,
+      "origin": "live"
     },
     {
       "name": "stackexchange",
@@ -2576,7 +2589,8 @@
       },
       "top_composite": 0.8416,
       "digest_top100": "25ea3962668a0a4eff681d946e4adcdcdfd60c43d9ab0eacd8474f6684f6ecd5",
-      "wall_seconds": 0.20889830001397058
+      "wall_seconds": 0.20889830001397058,
+      "origin": "live"
     },
     {
       "name": "open_meteo",
@@ -2667,7 +2681,8 @@
       },
       "top_composite": 0.8423,
       "digest_top100": "0239eddfb9d04a53ce44e9855011e5bd4274193a223a05dd731bbd91d53e66c9",
-      "wall_seconds": 0.039992300007725134
+      "wall_seconds": 0.039992300007725134,
+      "origin": "live"
     },
     {
       "name": "musicbrainz",
@@ -2758,7 +2773,8 @@
       },
       "top_composite": 0.8401,
       "digest_top100": "e0de70296ac9cf62fc426bcc6ee9075066d7565f103cf7f1078ba8f646fc214a",
-      "wall_seconds": 0.042362799984402955
+      "wall_seconds": 0.042362799984402955,
+      "origin": "live"
     },
     {
       "name": "spacex",
@@ -2981,7 +2997,8 @@
       },
       "top_composite": 0.837,
       "digest_top100": "157e08aca86ba98f985732a98ad9d73e2a6e6d63142f1543997d91fcd527b5c5",
-      "wall_seconds": 0.5315958000137471
+      "wall_seconds": 0.5315958000137471,
+      "origin": "live"
     },
     {
       "name": "rest_countries",
@@ -3204,7 +3221,8 @@
       },
       "top_composite": 0.8318,
       "digest_top100": "8184af009ba59718e157aa199102c05c07880376e5f71a13a24bcc739273252f",
-      "wall_seconds": 0.7183046999853104
+      "wall_seconds": 0.7183046999853104,
+      "origin": "live"
     }
   ],
   "bridges_sample": [],
