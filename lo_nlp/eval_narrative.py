@@ -39,14 +39,20 @@ MARKETING_WORDS = [
 # Causation phrases that the prompt explicitly forbids ("do NOT speculate
 # about causation, motive, or external events"). An LLM that satisfies
 # the numeric-fidelity check can still invent causal stories; this
-# catches the pattern. Conservative list — phrases almost always lead
-# into fabricated context about dated events or external actors.
+# catches the pattern.
+#
+# "driven by" was deliberately DROPPED from this list after the prod
+# round-trip revealed the deterministic template uses it analytically
+# ("driven by isolation from peer fingerprint space" — attributes cause
+# to an intrinsic bundle property, not an external event). The list
+# below targets phrases that almost always lead into dated events or
+# external actors.
 CAUSATION_PHRASES = [
-    "stems from", "driven by", "in response to", "following the",
+    "stems from", "in response to", "following the",
     "caused by", "due to the", "because of the",
     "reflects the post-", "echoes the post-", "as a result of",
     "in the wake of", "attributable to", "on the back of",
-    "in response to", "owing to the",
+    "owing to the",
 ]
 _CAUSATION_RE = re.compile(
     r"\b(" + "|".join(re.escape(p) for p in CAUSATION_PHRASES) + r")\b",
@@ -87,6 +93,25 @@ def _bundle_number_set(bundle: dict) -> set[str]:
         v = bundle.get(key)
         if v is not None:
             nums.add(str(v))
+    # Derived statistics the template is allowed to compute and cite:
+    #   "top N%" = round(peer_rank / universe_size * 100)
+    # Prod round-trip revealed the deterministic template uses this
+    # phrasing; it's a legitimate derivation, not fabrication.
+    pr = bundle.get("peer_rank")
+    us = bundle.get("universe_size")
+    if pr and us and us > 0:
+        pct = pr / us * 100
+        nums.add(str(int(round(pct))))
+        nums.add(f"{pct:.1f}")
+        # Analyst-rounded "top 1%" when actual is < 1
+        if pct < 1:
+            nums.add("1")
+    cr = bundle.get("cluster_rank")
+    cs = bundle.get("cluster_size")
+    if cr and cs and cs > 0:
+        pct = cr / cs * 100
+        nums.add(str(int(round(pct))))
+        nums.add(f"{pct:.1f}")
     nt = bundle.get("null_test") or {}
     if nt.get("z_score") is not None:
         add(float(nt["z_score"]))
