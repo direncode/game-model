@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 import sampleData from "@/data/edgar-sample.json";
 
@@ -32,6 +32,37 @@ export function LiveDemo() {
 
   const topSurvivors = [...survivors].sort((a, b) => b.scores.composite - a.scores.composite).slice(0, 20);
 
+  // Auto-scroll the survivors list slowly so mobile visitors see the
+  // breadth without having to poke at a small scroll area. Pauses
+  // automatically while the user is hovering, touching, or has focus
+  // inside the list; resumes when the user leaves. Wraps to the top
+  // at the bottom.
+  const listRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    // Respect users who ask reduced motion — skip auto-scroll entirely.
+    if (typeof window !== "undefined" &&
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    if (paused) return;
+    const id = window.setInterval(() => {
+      if (!el) return;
+      const max = el.scrollHeight - el.clientHeight;
+      if (max <= 0) return;
+      // Wrap when we reach the bottom, with a short pause at the edges.
+      if (el.scrollTop >= max - 1) {
+        el.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        el.scrollTop = el.scrollTop + 1;
+      }
+    }, 40);
+    return () => window.clearInterval(id);
+  }, [paused]);
+
   return (
     <section id="live-demo" className="relative py-32 border-t border-white/5">
       <div className="max-w-[1280px] mx-auto px-6">
@@ -62,32 +93,41 @@ export function LiveDemo() {
               <h3 className="font-mono text-sm uppercase tracking-widest text-white/60">Top Survivors</h3>
               <span className="text-xs font-mono text-white/40">Ranked by composite score</span>
             </div>
-            <div className="divide-y divide-white/5 max-h-[600px] overflow-y-auto">
+            <div
+              ref={listRef}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onTouchStart={() => setPaused(true)}
+              onTouchEnd={() => setPaused(false)}
+              onFocus={() => setPaused(true)}
+              onBlur={() => setPaused(false)}
+              className="divide-y divide-white/5 max-h-[360px] sm:max-h-[480px] lg:max-h-[600px] overflow-y-auto overscroll-contain"
+            >
               {topSurvivors.map((s) => (
                 <button
                   key={s.id}
                   onClick={() => setSelected(s)}
-                  className={`w-full text-left px-6 py-4 hover:bg-white/5 transition-colors ${
+                  className={`w-full text-left px-4 sm:px-6 py-3 sm:py-4 hover:bg-white/5 transition-colors ${
                     selected?.id === s.id ? "bg-white/5" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <div
-                      className="w-1.5 h-12 rounded-full"
+                      className="w-1.5 h-10 sm:h-12 rounded-full flex-shrink-0"
                       style={{ backgroundColor: TYPE_COLORS[s.type] || "#ffffff40" }}
                     />
                     <div className="flex-1 min-w-0">
-                      <div className="text-base text-white truncate">{s.name}</div>
-                      <div className="text-xs font-mono text-white/40 mt-1">
+                      <div className="text-sm sm:text-base text-white truncate">{s.name}</div>
+                      <div className="text-[11px] sm:text-xs font-mono text-white/40 mt-0.5 sm:mt-1 truncate">
                         {s.type} · cluster {s.cluster}
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="font-mono text-lg text-white tabular-nums">
+                    <div className="text-right flex-shrink-0">
+                      <div className="font-mono text-base sm:text-lg text-white tabular-nums">
                         {s.scores.composite.toFixed(3)}
                       </div>
                       {s.scores.anomaly > 0.7 && (
-                        <div className="text-xs font-mono text-li-red mt-0.5">
+                        <div className="text-[10px] sm:text-xs font-mono text-li-red mt-0.5">
                           anomaly {s.scores.anomaly.toFixed(2)}
                         </div>
                       )}
