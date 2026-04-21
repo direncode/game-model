@@ -36,8 +36,24 @@ let _aliasIndex: Map<string, OntologyEntry> | null = null;
 
 async function loadOntology(): Promise<OntologyEntry[]> {
   if (_cache) return _cache;
-  const repoRoot = path.resolve(process.cwd(), "..");
-  const dataDir = path.join(repoRoot, "lo_nlp", "data");
+  // Ontology data is bundled inside the frontend image at
+  // frontend/data/ontology/*.json (copied from lo_nlp/data/ at build).
+  // Fallback path covers local dev where frontend runs from the repo
+  // root with the lo_nlp/ sibling tree available.
+  const candidates = [
+    path.join(process.cwd(), "data", "ontology"),
+    path.resolve(process.cwd(), "..", "lo_nlp", "data"),
+  ];
+  let dataDir = candidates[0];
+  for (const c of candidates) {
+    try {
+      await fs.access(c);
+      dataDir = c;
+      break;
+    } catch {
+      // try next
+    }
+  }
   try {
     const files = await fs.readdir(dataDir);
     const rows: OntologyEntry[] = [];
