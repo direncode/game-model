@@ -52,22 +52,66 @@ type Titan = {
   };
 };
 
+const FETCH_TIMEOUT_MS = 15_000;
+
+async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { cache: "no-store", signal: ctrl.signal });
+  } finally {
+    clearTimeout(id);
+  }
+}
+
 export default function TitanPage() {
   const [t, setT] = useState<Titan | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [status, setStatus] = useState<string>("Initializing…");
+  const [attempts, setAttempts] = useState(0);
+
+  const load = async () => {
+    setErr(null);
+    setT(null);
+    setStatus("Fetching latest Titan run from /api/titan-alien…");
+    try {
+      const r = await fetchWithTimeout("/api/titan-alien", FETCH_TIMEOUT_MS);
+      if (r.ok) {
+        setStatus("Parsing response…");
+        setT(await r.json());
+        return;
+      }
+      setStatus(
+        `Alien-mode endpoint returned ${r.status}; falling back to /api/titan…`,
+      );
+    } catch (e: any) {
+      setStatus(
+        e?.name === "AbortError"
+          ? "Alien-mode endpoint timed out; falling back to /api/titan…"
+          : `Alien-mode endpoint error (${String(e).slice(0, 60)}); falling back to /api/titan…`,
+      );
+    }
+    try {
+      const r = await fetchWithTimeout("/api/titan", FETCH_TIMEOUT_MS);
+      if (!r.ok) {
+        setErr(`Both endpoints failed. /api/titan returned HTTP ${r.status}.`);
+        return;
+      }
+      setStatus("Parsing fallback response…");
+      setT(await r.json());
+    } catch (e: any) {
+      setErr(
+        e?.name === "AbortError"
+          ? `Both Titan endpoints timed out after ${FETCH_TIMEOUT_MS / 1000}s each. The upstream proxy may be blocking /api/titan* paths — try again, or reach out to sales@latentocean.com.`
+          : `Titan endpoints unreachable: ${String(e)}`,
+      );
+    }
+  };
 
   useEffect(() => {
-    // Prefer the Alien-mode run if the artifact is present; fall back to v1.
-    fetch("/api/titan-alien", { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : Promise.reject(`HTTP ${r.status}`)))
-      .then(setT)
-      .catch(() =>
-        fetch("/api/titan", { cache: "no-store" })
-          .then((r) => (r.ok ? r.json() : Promise.reject(`HTTP ${r.status}`)))
-          .then(setT)
-          .catch((e) => setErr(String(e))),
-      );
-  }, []);
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attempts]);
 
   const live = (t?.sources ?? []).filter((s) => s.origin === "live");
   const cached = (t?.sources ?? [])
@@ -97,15 +141,70 @@ export default function TitanPage() {
           </div>
 
           {err && (
-            <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-6 text-sm text-red-300">
-              {err}. Generate with{" "}
-              <code className="font-mono">python scripts/titan_orchestrator.py</code>.
+            <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="font-mono text-[11px] uppercase tracking-widest text-red-300 mb-2">
+                    Could not load Titan run
+                  </div>
+                  <div className="text-sm text-red-200/90 leading-relaxed">
+                    {err}
+                  </div>
+                  <div className="mt-3 text-xs font-mono text-white/40">
+                    To regenerate locally:{" "}
+                    <code className="text-white/70">
+                      python scripts/titan_alien.py --iterations 500
+                    </code>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setAttempts((a) => a + 1)}
+                  className="shrink-0 h-9 px-4 rounded-full border border-red-400/30 text-red-200 text-xs font-mono hover:bg-red-500/10 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
             </div>
           )}
 
           {!t && !err && (
-            <div className="rounded-lg border border-white/10 bg-white/[0.02] p-12 text-center text-white/50">
-              Loading Titan run…
+            <div className="rounded-xl border border-li-cyan/25 bg-li-cyan/[0.03] p-10">
+              <div className="flex items-start gap-5">
+                {/* animated spinner */}
+                <div className="relative w-12 h-12 shrink-0">
+                  <div className="absolute inset-0 rounded-full border-2 border-white/10" />
+                  <div
+                    className="absolute inset-0 rounded-full border-2 border-transparent border-t-li-cyan animate-spin"
+                    style={{ animationDuration: "1.1s" }}
+                  />
+                  <div className="absolute inset-[10px] rounded-full bg-li-cyan/40 animate-pulse" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-li-green animate-pulse" />
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-li-cyan">
+                      Loading Titan run
+                    </span>
+                  </div>
+                  <div className="text-sm text-white/80 font-mono break-words">
+                    {status}
+                  </div>
+                  <div className="mt-3 text-[11px] font-mono text-white/40">
+                    Timeout: {FETCH_TIMEOUT_MS / 1000}s per endpoint · attempt {attempts + 1}
+                  </div>
+                  {/* Indeterminate progress track */}
+                  <div className="mt-4 h-1 rounded-full bg-white/5 overflow-hidden">
+                    <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-li-cyan to-transparent animate-[slide_1.6s_ease-in-out_infinite]" />
+                  </div>
+                </div>
+              </div>
+              <style>{`
+                @keyframes slide {
+                  0%   { transform: translateX(-100%); }
+                  50%  { transform: translateX(200%); }
+                  100% { transform: translateX(200%); }
+                }
+              `}</style>
             </div>
           )}
 
