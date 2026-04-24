@@ -17,14 +17,14 @@ independently verifiable by any third party.
 
 ---
 
-## Recorded SHA-256 hashes (as of 2026-04-24)
+## Recorded SHA-256 hashes (as of 2026-04-24, post-inventor-signature)
 
 | Document | SHA-256 hash | Size (bytes) |
 |---|---|---|
-| `conception_log.md` | `635794a2c972c2f2d52244d33123c30f35c04ba0bbd8d0f258509a3ac558bf66` | 15,366 |
-| `provisional_01_latent_ocean_universal_adapter.md` | `7d2f18d3f497fde9fad0e602e0c3179a3c9e79f71e64e0a8bf562c3809ec6c20` | 25,104 |
-| `provisional_02_operational_primitives_handback.md` | `39f0109336c64e84f6f90aa7c0e1f7d423a6d6350541159faf39427ba7eaba97` | 29,424 |
-| `provisional_03_crystara.md` | `c2f7cb0c5b56a5228b10da28b6560b3cdbd89a49192d3a29348c12dede88366d` | 26,032 |
+| `conception_log.md` | `a1cc55657eba148bcd70a2ceaeecffbeec318ab59cefa67adb2a83ea688440bc` | 15,358 |
+| `provisional_01_latent_ocean_universal_adapter.md` | `74054eb5cdd55b5cd998811be0fbbfd8b27cf3451ee85443752fbb3ed7cb044e` | 25,103 |
+| `provisional_02_operational_primitives_handback.md` | `0e7e60b5bfefb75b174e7d187618976a75ef5b13508d278a96f7971f1ce64d34` | 29,423 |
+| `provisional_03_crystara.md` | `24b465716c753eab7e42271a62306ce8596ccdb86283768f27f58528be2fa725` | 26,031 |
 
 > **Note:** these hashes are computed over the byte content of
 > the files at the time of this writing. If you edit any of

@@ -1,6 +1,6 @@
 # Inventor Conception Log
 
-**Inventor:** [to be supplied — sole human inventor across all three inventions]
+**Inventor:** Diren Navishka Kumaratilleke (sole human inventor across all three inventions)
 **Date of this log:** 2026-04-24
 **Purpose:** To establish, for each of the three crown-jewel
 inventions of the Latent Ocean stack, (a) the earliest written or
@@ -302,11 +302,11 @@ declaration as of the date of timestamping.
 
 ---
 
-**Signed:** _______________________
+**Signed:** DIREN
 
-**Printed name:** [inventor name]
+**Printed name:** Diren Navishka Kumaratilleke
 
-**Date:** _______________________
+**Date:** 24/04/2026
 
 **Place:** _______________________
 
