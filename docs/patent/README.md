@@ -1,32 +1,57 @@
 # Latent Ocean — Provisional Patent Portfolio
 
-This folder contains four DIY-drafted US provisional patent
-applications covering the inventive concepts in the Latent Ocean
-platform.
+This folder contains three DIY-drafted US provisional patent
+applications covering the crown-jewel inventive concepts of the
+Latent Ocean stack: the **Universal Structural Adapter**, the
+**Five Operational Primitives + Convergence Hand-Back Loop**,
+and **Crystara** (the post-transformer training paradigm,
+publicly known under the working designation TCD-JEPA).
 
-> **Not legal advice.** These documents were drafted by the applicant
-> with assistance from a coding assistant. They have **not been
-> reviewed by a registered patent attorney or agent**. Before filing,
-> have an attorney spot-check at least the claims and the abstract
-> for each application. The single most important question to answer
-> first is **disclosure timing** — see the section "Disclosure clock
-> audit" below.
+> **Not legal advice.** These documents were drafted by the
+> applicant with assistance from a coding assistant. They have
+> **not been reviewed by registered patent counsel.** Before
+> filing, have an attorney spot-check the claims and abstract
+> for each application — a single one-hour consult ($300–500)
+> is cheap insurance.
 
 ---
 
-## The four provisionals
+## Strategic context
 
-| # | File | Subject |
+These three provisionals are filed in support of the broader
+**UAE Sovereign Structural Intelligence Stack** strategy, in
+which Latent Ocean serves as the universal structural substrate
+mountable on any sovereign data source, Crystara serves as the
+differentiated training paradigm running on sovereign compute
+(Cerebras WSE on Stargate UAE), and the convergence hand-back
+loop establishes a self-improving national capability that
+strengthens as more national data flows through it.
+
+The three filings are strategically chosen so each maps directly
+to one element of the Stack:
+
+| Provisional | Stack role |
+|---|---|
+| **#01 Universal Structural Adapter** | The mountable substrate — installed on any data source (relational, document, streaming, edge, MCP-agent) including in fully air-gapped sovereign deployments |
+| **#02 Five Operational Primitives + Hand-Back Loop** | The platform-level interface (MOUNT, SCORE, FALSIFY, DIGEST, HAND-BACK) and the architectural feedback loop by which the substrate continuously enriches itself from sovereign-corpus operation |
+| **#03 Crystara** | The differentiated training paradigm consuming hand-back artifacts to grow topology-aware modules — the sovereign-AI capability that competitors offering pure scaling cannot match |
+
+Together these three patents establish a coherent IP wedge that
+maps the entire Stack onto defensible inventive priority.
+
+The **BTUT data-reduction engine** is intentionally not patented
+and will be released as open-source under a permissive license,
+serving the community-adoption layer of the open-core strategy.
+
+---
+
+## The three provisionals
+
+| # | File | Working title |
 |---|------|---------|
-| 01 | [provisional_01_btut_primitive.md](provisional_01_btut_primitive.md) | The 48-bit deterministic structural fingerprint, 4-D score vector, null-test falsifiability operation, cross-data-type universality, reproducibility digest |
-| 02 | [provisional_02_tcd_jepa.md](provisional_02_tcd_jepa.md) | Self-organizing predictor modules in JEPA via persistent-homology crystallization of latent-space exploration trajectories — TCD-JEPA |
-| 03 | [provisional_03_two_engine_composition.md](provisional_03_two_engine_composition.md) | Composition of #1 and #2 into a single deterministic-by-construction pipeline with byte-identity guarantees across SaaS / on-premises / air-gap deployments, exposed as Postgres / Snowflake / MongoDB embodiments |
-| 04 | [provisional_04_llm_safety_entity_resolution.md](provisional_04_llm_safety_entity_resolution.md) | Bundle-grounded LLM output validation with deterministic-template fallback, plus layered entity-resolution cascade with deterministic family-priority tie-breaking |
-
-Each file contains: title, cross-references, field, background,
-summary, drawings (textual), detailed description, illustrative
-claims, and abstract. All are written in standard US-provisional
-format and may be filed substantially as-is, modulo attorney review.
+| 01 | [provisional_01_latent_ocean_universal_adapter.md](provisional_01_latent_ocean_universal_adapter.md) | Universal Structural Adapter for Heterogeneous Data Sources, with PostgreSQL extension, Snowflake external function, MongoDB aggregation stage, edge-installable binary, and Model Context Protocol embodiments |
+| 02 | [provisional_02_operational_primitives_handback.md](provisional_02_operational_primitives_handback.md) | Five Operational Primitives (MOUNT, SCORE, FALSIFY, DIGEST, HAND-BACK) and a Convergence Hand-Back Loop for a Self-Improving Structural Substrate, with Cryptographic Cross-Deployment Equivalence Verification across SaaS / on-premises / air-gapped / edge environments |
+| 03 | [provisional_03_crystara.md](provisional_03_crystara.md) | Crystara: A Post-Transformer Training Paradigm for Self-Organizing, Topology-Aware Predictor Module Discovery via Persistent-Homology Crystallization of Fisher-Information-Preconditioned Langevin Trajectories in JEPA |
 
 ---
 
@@ -36,110 +61,125 @@ Per-provisional filing fee at time of writing:
 
 | Entity status | USPTO fee |
 |---|---|
-| Micro entity (gross income < ~$220k, ≤ 4 prior US apps) | **$75** |
-| Small entity (most early-stage solo or small-team applicants) | **$150** |
-| Large entity | **$300** |
+| **Micro entity** (gross income < ~$220k, ≤ 4 prior US apps) | **$75** |
+| **Small entity** (most early-stage solo or small-team applicants) | **$150** |
+| Large entity | $300 |
 
-Total for all four at micro-entity status: **~$300**.
+**Total for all three at micro-entity status: ~$225.**
 
 ### Per-application checklist
 
-For each of the four provisionals, you will file:
+For each of the three provisionals:
 
-1. **The specification** — copy the corresponding `.md` file's
-   content into a `.docx` or `.pdf`. Strip the trailing italic
-   "not legal advice" disclaimer.
-2. **Drawings** — the drawings are described textually in
-   Section V of each application. For provisional filing, formal
-   drawings are not strictly required, but informal sketches
-   (hand-drawn or mermaid → PNG) substantially strengthen the
-   priority claim. At minimum: render Figure 1 of each application.
-3. **Cover sheet** — USPTO Form **SB/16** (Provisional Application
-   for Patent Cover Sheet). Fill in inventor name(s), residence,
-   correspondence address, title (copy from the `.md`).
-4. **Entity-status form** —
-   - Micro entity: USPTO Form **SB/15A** (certification) or
-     **SB/15B** (gross-income basis), as appropriate.
-   - Small entity: no separate form — assertion is on Form SB/16.
-5. **Application Data Sheet** — USPTO Form **AIA/14**
-   (Application Data Sheet). Strongly recommended; lists each
-   inventor and the title.
-6. **Fee** — pay $75 / $150 / $300 via USPTO EFS-Web or
-   Patent Center at filing time.
+1. **Specification PDF** — convert the corresponding `.md` to PDF
+   (Pandoc: `pandoc provisional_NN.md -o provisional_NN.pdf`).
+   Strip the trailing italic "not legal advice" disclaimer.
+2. **Drawings PDF** — render at minimum Figure 1 of each
+   application as an actual diagram. Mermaid → PNG via
+   mermaid.live works fine; informal drawings are acceptable for
+   provisional filings under MPEP § 601.05.
+3. **USPTO Form SB/16** (Provisional Application for Patent
+   Cover Sheet) — inventor name, residence, correspondence
+   address, title (copy from the `.md`).
+4. **USPTO Form AIA/14** (Application Data Sheet) — strongly
+   recommended; lists each inventor and the title.
+5. **USPTO Form SB/15A** (Micro Entity Status Certification —
+   gross income basis) OR **SB/15B** (institution of higher
+   education basis), as appropriate.
+6. **Fee** — $75 / $150 / $300 via USPTO Patent Center at
+   filing time.
 
-### Filing electronically (recommended)
+### Filing electronically
 
-The USPTO Patent Center (https://patentcenter.uspto.gov/) accepts
-provisional filings. Account creation requires verification; allow
-1–2 days for first-time setup. Once registered, a single submission
-takes 15–30 minutes per application.
+USPTO Patent Center (https://patentcenter.uspto.gov/) accepts
+provisional filings. Account creation requires ID.me
+verification; allow 1–2 business days for first-time setup.
+Each submission takes 15–30 minutes once the account is active.
 
 ### What you receive on filing
 
-- An **application number** (typically `63/XXX,XXX` for
-  provisionals).
-- A **filing receipt** (typically within 24–72 hours).
-- A **priority date** equal to the date of receipt.
+- An **application number** in the form `63/XXX,XXX`.
+- A **filing receipt** within 24–72 hours.
+- A **priority date** equal to the timestamp of submission.
 
 ### The 12-month conversion deadline
 
-Each provisional has a **12-month** lifespan. Within that
-window, you must file a non-provisional application claiming
-priority to the provisional, or the provisional expires with no
-recoverable priority. Non-provisional drafting properly costs
-$5,000–$15,000 with attorney involvement; budget for it now if
-you plan to convert any of the four.
+Each provisional has a 12-month lifespan. Within that window,
+you must file a non-provisional application claiming priority,
+or the provisional expires with no recoverable priority.
+Non-provisional drafting properly costs $5,000–$15,000 with
+attorney involvement; budget for it now if you plan to convert.
 
-You are not obliged to convert all four. After 12 months you can
+You are not obliged to convert all three. After 12 months you can
 let the weakest provisional(s) lapse and only convert the ones
-that have shown commercial pull.
+that have shown commercial pull or strategic deal-flow value.
+
+### USPTO Track One (recommended for #02 specifically)
+
+When converting #02 to non-provisional, file under USPTO **Track
+One Prioritized Examination** ($2,200 small entity / $4,400 large
+entity). Track One commits the USPTO to a final disposition
+within 12 months of the non-provisional filing — vs. 3–5 years
+for ordinary examination. Materially improves the diligence
+story and shortens the path to an issued patent that can be
+cited in the UAE strategic conversation.
 
 ---
 
-## Disclosure clock audit — DO THIS FIRST
+## Disclosure status — what's preserved vs. what's lost
 
-A US patent application must be filed within **12 months** of any
-public disclosure of the invention; otherwise the invention enters
-the public domain in the US (and most other countries do not have
-even a 12-month grace period — public disclosure may already have
-killed foreign patentability).
-
-Before filing any of the four provisionals, audit:
-
-| Disclosure surface | Question to answer | Where to look |
+| Provisional | US (1-yr grace) | Foreign (absolute novelty) |
 |---|---|---|
-| **arXiv preprint** | When was the TCD-JEPA preprint first posted? | `tcd-jepa/paper/` directory; `git -C tcd-jepa log --reverse --format="%ai %s" -- paper/` for first-commit dates |
-| **GitHub repo (this one)** | Has this repository ever been public? If so, since when? | GitHub repo settings; `git log --reverse --format="%ai" \| head -1` for repo-age lower bound |
-| **GitHub repo (tcd-jepa)** | Has the tcd-jepa repo ever been public? Since when? | Submodule remote `https://github.com/...`; ask GitHub repo settings |
-| **Live website (latentocean.com)** | Since when has the public been able to read the sales one-pager, primitive spec, and the verticals docs? | EC2 deploy logs; nginx access-log retention; `git log` for the relevant docs |
-| **Sales conversations** | Has any of this been pitched to a prospective customer or investor under non-NDA? | Personal recall + sent emails |
-| **Academic conference / talk** | Has any of this been presented in a public talk? | Personal recall |
+| #01 Universal Adapter | ✅ Preserved (within grace from latentocean.com first publication) | ⚠️ Some core concepts (48-bit fingerprint + 4-D vector framing) shown publicly on the live site; specific embodiments (parity-XOR construction, edge binary, MCP tool) less disclosed and still foreign-patentable |
+| #02 Operational Primitives + Hand-Back Loop | ✅ Preserved | ✅ **Foreign rights preserved** — the five-primitive interface and the hand-back loop architecture are not on the live site or in any public source repo |
+| #03 Crystara | ✅ Preserved | ❌ Foreign rights largely lost — public GitHub repo (github.com/direncode/tcd-jepa) and paper directory have established prior public disclosure; US grace period applies for the inventor's own disclosure |
 
-If any of the above is **older than 12 months from today**, US
-patentability is already lost for that disclosed material.
-**File ASAP.** If between 6 and 12 months, file this week. If less
-than 6 months, you have time but should still file soon.
+### Suggested filing order
+
+1. **#03 Crystara first** — most disclosed, US clock running fastest
+2. **#01 Universal Adapter second** — partly disclosed via website
+3. **#02 Operational Primitives + Hand-Back Loop third** — least
+   disclosed (foreign rights still fully alive); but there is no
+   downside to filing all three in a single Patent Center session
+   on the same day
+
+### PCT (international) filing decision
+
+Within 12 months of the US provisional filing, you may file a
+PCT (Patent Cooperation Treaty) application to preserve the
+filing-date claim across 150+ countries. Cost: ~$3–5k for the
+PCT itself, then $3–15k per country at national-phase entry.
+
+| Provisional | PCT recommendation |
+|---|---|
+| #01 | **Optional** — partial foreign coverage (specific embodiments still novel internationally; core concept is widely disclosed) |
+| #02 | **Strongly recommended** — full foreign rights intact; the hand-back loop is the most internationally-defensible inventive concept and the one most aligned with sovereign-procurement framing |
+| #03 | **Skip** — foreign rights largely foreclosed by public preprint and source repo; pursue UAE-only national filing within the 12-month window if needed |
+
+For the UAE Stack strategy, **filing a UAE national-phase application on #02 within 12 months** is the highest-leverage international patent move. UAE patent (issued via Ministry of Economy / GCC Patent Office) on the operational primitives + hand-back loop directly underwrites the national-capability framing.
 
 ---
 
-## Suggested filing order
+## Coordinated IP defense (beyond patents)
 
-1. **Provisional #02 (TCD-JEPA)** — file first if a preprint is
-   already public. The TCD-JEPA preprint is the most disclosed of
-   the four inventions and the clock is most likely already running.
-2. **Provisional #01 (BTUT primitive)** — file second. Most of the
-   public disclosure is in the live sales material; the formal
-   primitive spec is in the repo as `docs/PRIMITIVE_SPEC.md`.
-3. **Provisional #03 (composition)** — file third. The composition
-   claim is partially disclosed by the live website's two-engine
-   description but the deterministic-boundary specifics are
-   substantially undisclosed.
-4. **Provisional #04 (LLM safety + entity resolver)** — file
-   fourth. Lowest disclosure surface; the validator chain
-   internals and family-priority mechanism are largely
-   implementation-internal.
+The three provisionals are 1 of 8 IP-defense layers for Latent
+Ocean. Maximum defensibility in the strategic-deal-flow sense
+requires all of:
 
-You can file all four in a single Patent Center session.
+| Layer | Action this quarter | Cost |
+|---|---|---|
+| **Patents** | File 3 provisionals (this folder) | $225 |
+| **Trademark** | File "Latent Ocean" + "Crystara" via USPTO TEAS Plus, Class 9 + Class 42 | $500–$1,000 |
+| **Copyright registration** | Register LSX core source code via copyright.gov | $65 |
+| **Trade-secret discipline** | Keep LSX repo private; NDA template for any architecture disclosure outside payroll; access controls | $0 (operational) |
+| **MSA / customer contract perimeter** | Lawyer-drafted master services agreement template with reverse-engineering prohibition + IP perimeter | $1,500–$3,000 |
+| **Compliance certifications** | SOC 2 Type II via Vanta or Drata; FedRAMP planning for sovereign-customer roadmap | $10,000–$20,000 (annual) |
+| **Source-available license** | When BTUT is open-sourced, use BSL (Business Source License) not Apache — blocks AWS/Azure-style cloning | $0 (template) |
+| **Defensive publication** | arXiv / engineering-blog publication of secondary inventions you don't want competitors to patent (resolver tuning, evaluation methodology, etc.) | $0–$200 each |
+
+Spend ~$15k over 6 months and you have maximum defensibility
+across all eight layers. Patents are 1 of 8 — important for
+priority and evidence, but not the dominant moat.
 
 ---
 
@@ -147,45 +187,93 @@ You can file all four in a single Patent Center session.
 
 | Source material | Where it landed |
 |---|---|
-| `docs/PRIMITIVE_SPEC.md` (formal primitive spec) | Provisional #01 — Detailed Description |
-| `tcd-jepa/README.md` (architecture abstract + diagram) | Provisional #02 — Summary + Sections A–C |
-| `tcd-jepa/docs/architecture.md`, `mathematical_foundations.md` | Provisional #02 — Detailed Description (referenced but not pulled in verbatim; review and augment if filing) |
-| `frontend/components/landing/PrimitiveInStack.tsx` (in-database SQL examples) | Provisional #03 — Detailed Description (Postgres / Snowflake / MongoDB embodiments) |
-| `frontend/lib/narrativeClient.ts` (validator + provider dispatcher) | Provisional #04 — Detailed Description (Bundle-Grounded Narrative Generator) |
-| `lo_nlp/resolve.py` (resolver cascade) | Provisional #04 — Detailed Description (Family-Priority Cascade Resolver) |
-| `lo_nlp/eval_narrative.py` (validator dimensions) | Provisional #04 — Detailed Description (validator chain) |
+| `docs/PRIMITIVE_SPEC.md` (formal primitive spec) | Provisional #01 — Detailed Description sections A–C |
+| `frontend/components/landing/PrimitiveInStack.tsx` (in-database SQL examples) | Provisional #01 — Detailed Description sections D–F (PostgreSQL / Snowflake / MongoDB embodiments) |
+| `tcd-jepa/README.md` (architecture abstract + tripartite system diagram) | Provisional #03 — Summary + Sections A–C |
+| `tcd-jepa/docs/architecture.md`, `mathematical_foundations.md` | Provisional #03 — Detailed Description (referenced; review and augment if filing) |
+| `tcd-jepa/paper/` (preprint material) | Provisional #03 — supplemental support for novelty |
+
+Provisional #02 (operational primitives + hand-back loop) is
+substantially original work and is not derived from any single
+source file in the repository; the convergence hand-back loop
+architecture is novel to this provisional.
 
 If a non-provisional is later filed, the corresponding source
-files in this repository are the authoritative reference
-implementations and can be cited as "Exhibit A" embodiments in
-the non-provisional spec.
+files are the authoritative reference implementations and can
+be cited as "Exhibit A" embodiments in the non-provisional
+specification.
 
 ---
 
-## What is NOT covered by these four provisionals
+## What is NOT covered by these three provisionals
 
 For completeness, the following Latent Ocean components are
-either not patentable, or are deferred to a future filing:
+either not patentable, not part of the crown-jewels strategy,
+or are deferred to future filings:
 
-- The frontend UI / visualizations — generally not patentable
-  subject matter
-- The 15 vertical playbooks — content / business documents, not
-  technical inventions
-- The eval framework (lo_nlp/eval*.py, parity test) — engineering
-  scaffolding, not invention
-- The Cerebras WSE adapter — file separately if and only if the
-  parallelization scheme itself is novel; otherwise it is an
-  application of provisional #01
-- The QR digital-identity lineage system — file separately if it
-  is bound to the fingerprint primitive as the lineage anchor;
-  otherwise it is a standard QR-tracking system
+- **The frontend UI / visualizations** — generally not patentable
+- **The 15 vertical playbooks** — content / business documents,
+  not technical inventions
+- **The eval framework** (`lo_nlp/eval*.py`, parity test) —
+  engineering scaffolding, not invention
+- **The narrative validator + family-priority entity resolver** —
+  AI-co-inventorship gray area; defer to defensive-publication
+- **The Cerebras WSE adapter** — file separately if and only if
+  the parallelization scheme itself is novel
+- **The QR digital-identity lineage system** — file separately
+  if it is bound to the structural fingerprint as the lineage
+  anchor
+
+---
+
+## Pre-filing checklist
+
+```
+WEEK -1 (right now):
+  ✓ Confirm "Crystara" is the official public name for #03
+  ✓ Confirm 5 operational primitive names: MOUNT, SCORE, FALSIFY,
+    DIGEST, HAND-BACK
+  ✓ Document first-public-disclosure dates for each invention
+
+WEEK 0 — file:
+  ✓ Render Figure 1 of each application as a PNG diagram
+  ✓ Convert each .md to PDF via Pandoc
+  ✓ Fill USPTO Form SB/16, AIA/14, SB/15A
+  ✓ File all three in one Patent Center session — ~$225 total
+  ✓ Save filing receipts; record the three 63/XXX,XXX numbers
+
+WEEK 0 + 1:
+  ✓ File trademark "Latent Ocean" + "Crystara" via TEAS Plus
+  ✓ Register copyright on LSX source code via copyright.gov
+  ✓ Sign Vanta or Drata for SOC 2 Type II — start the 6-month clock
+
+WEEK 0 + 2:
+  ✓ Send Khaldoon Al Mubarak outreach email (with priority dates +
+    application numbers in hand — strengthens the "we have IP" frame)
+
+MONTH 6:
+  ✓ Send draft non-provisional to attorney for review on #02
+    (Track One eligible — 12 month grant timeline)
+
+MONTH 11:
+  ✓ Convert #02 to non-provisional via Track One ($2,200 small entity)
+  ✓ File PCT on #02 to preserve foreign rights ($3–4k)
+  ✓ File UAE national-phase application on #02 ($variable)
+  ✓ Decision: convert #01 + #03 or let them lapse
+```
 
 ---
 
 ## One-line summary
 
-You hold four-quadrant IP coverage for ~$300 of USPTO fees:
-**(1) the substrate**, **(2) the discovery layer**, **(3) the
-composition**, and **(4) the safety harness**. Get an attorney to
-spot-check before filing, run the disclosure-clock audit,
-and file in the order suggested above.
+You hold three-quadrant crown-jewel IP coverage for ~$225 of
+USPTO fees: **the substrate (Universal Adapter), the platform
+(Five Primitives + Hand-Back Loop), and the differentiated training
+paradigm (Crystara)**. Combined with trademark + trade-secret
+discipline + SOC 2 + an open-source BTUT under BSL, this is the
+defensibility stack for the UAE Sovereign Structural Intelligence
+Stack play.
+
+Get an attorney to spot-check before filing, then file all three
+in one Patent Center session. The $225 spent this week is the
+single most strategically-leveraged dollar in the entire UAE play.

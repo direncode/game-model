@@ -1,6 +1,6 @@
 # Provisional Patent Application
 
-**Title:** Systems and Methods for Self-Organizing Predictor Module Discovery in Joint Embedding Predictive Architectures via Persistent-Homology Crystallization of Latent-Space Exploration Trajectories
+**Title:** Crystara: A Post-Transformer Training Paradigm for Self-Organizing, Topology-Aware Predictor Module Discovery via Persistent-Homology Crystallization of Fisher-Information-Preconditioned Langevin Trajectories in Joint Embedding Predictive Architectures
 
 **Filing type:** Provisional Application for Patent (35 U.S.C. § 111(b))
 
@@ -14,22 +14,46 @@
 
 ## I. Cross-References to Related Applications
 
-This application is related in subject matter to commonly-owned
-provisional application titled "Systems and Methods for Deterministic
-Structural Fingerprinting of Arbitrary Data Records with Integrated
-Falsifiability Testing and Modality-Agnostic Outlier Detection"
-(provisional_01_btut_primitive). The two inventions may be practiced
-independently or in composition; their composition is the subject of
-a separately-filed provisional.
+This application is related in subject matter to two commonly-owned,
+separately-filed provisional applications:
+
+(a) "Universal Structural Adapter for Heterogeneous Data Sources"
+(provisional_01_latent_ocean_universal_adapter), describing a
+deterministic per-record fingerprint and four-dimensional score
+vector that, in a preferred embodiment, may serve as the
+structurally-grounded training context for the present invention; and
+
+(b) "Five Operational Primitives and Convergence Hand-Back Loop for a
+Self-Improving Structural Substrate"
+(provisional_02_operational_primitives_handback), describing a
+substrate platform whose hand-back primitive, in a preferred
+embodiment, emits structurally-enriched corpora consumable as
+training inputs to the present invention.
+
+The present invention is independent of either of (a) or (b) and
+may be practiced standalone, but is described in preferred
+embodiment as composing with both upstream applications to form
+a complete substrate-and-training pipeline.
+
+The present invention has been publicly described under the
+informal working designation "TCD-JEPA" (Tripartite Conditional
+Dynamics for Joint Embedding Predictive Architectures); the
+formal product name "Crystara" is adopted herein and throughout
+applicant's commercial materials.
 
 ## II. Field of the Invention
 
-The present invention relates to machine learning systems, and more
-particularly to systems and methods for joint-embedding predictive
+The present invention relates to machine learning systems, and
+more particularly to a post-transformer training paradigm —
+designated "Crystara" — for joint-embedding predictive
 architectures (JEPA), and most particularly to apparatus, methods,
-and computer-program products that automatically discover, instantiate,
-and manage internal predictor modules of a JEPA-class network as a
-function of the network's own latent-space exploration dynamics.
+and computer-program products that automatically discover,
+instantiate, and manage interpretable, topology-aware predictor
+modules of a JEPA-class network at runtime, as a function of the
+network's own latent-space exploration dynamics under
+Fisher-information-preconditioned Langevin sampling, in a
+training paradigm that emphasizes growth of persistent
+structures over pure parameter scaling.
 
 ## III. Background
 
@@ -262,14 +286,26 @@ The Energy Explorer comprises:
    minima. The trajectory `{z_0, z_1, ..., z_T}` for `T` of order
    100 to 10,000 is recorded for consumption by System 3.
 
-3. **Fisher metric correction (optional embodiment).** In an
-   alternative embodiment, the gradient term is preconditioned
-   by the inverse Fisher information matrix `F(z)⁻¹` to respect
-   the Riemannian geometry of the latent space, yielding
+3. **Fisher-information preconditioning (preferred embodiment).**
+   In the preferred embodiment of the present invention, the
+   gradient term is preconditioned by the inverse Fisher
+   information matrix `F(z)⁻¹` to respect the Riemannian geometry
+   of the latent space, yielding
 
    ```
    z_{t+1} = z_t − η · F(z_t)⁻¹ · ∇ E(z_t) + √(2η/β(z_t)) · F(z_t)^(−1/2) · ξ_t.
    ```
+
+   The Fisher-preconditioning is material to the inventive
+   contribution: it ensures that the explored trajectories are
+   intrinsic to the latent manifold (invariant under
+   reparameterization), so that the topological features
+   crystallized by System 3 are properties of the model's
+   information geometry rather than artifacts of the latent
+   coordinate chart. In an alternative embodiment, vanilla
+   Euclidean Langevin dynamics (without Fisher preconditioning)
+   may be employed, at the cost of coordinate-chart sensitivity
+   in the resulting modules.
 
 ### C. Module Crystallizer (System 3; Figure 4)
 
@@ -453,7 +489,12 @@ will set forth the full claim set.
 7. The system of any preceding claim wherein the exploration
    subsystem preconditions the gradient term of said Langevin
    dynamics by an inverse Fisher information matrix computed
-   over the latent space.
+   over the latent space, such that the explored trajectories
+   are intrinsic to the latent manifold under reparameterization
+   and the topological features crystallized by the
+   crystallization subsystem are properties of the model's
+   information geometry rather than artifacts of the latent
+   coordinate chart.
 
 8. The system of any preceding claim wherein each instantiated
    sub-module is registered in a module registry, participates
@@ -476,29 +517,55 @@ will set forth the full claim set.
     points sampled from a Riemannian manifold.
 
 12. The system of any preceding claim wherein the encoder consumes
-    structural-fingerprint outputs of an upstream deterministic
-    fingerprinting subsystem, whereby reproducibility properties
-    of said fingerprinting subsystem propagate to deterministic-
-    on-replay crystallization given fixed random seeds.
+    structural-fingerprint outputs of the universal structural
+    adapter disclosed in commonly-owned provisional application
+    provisional_01_latent_ocean_universal_adapter, whereby
+    reproducibility properties of said adapter propagate to
+    deterministic-on-replay crystallization given fixed random
+    seeds.
+
+13. The system of any preceding claim wherein the encoder consumes
+    structurally-enriched corpora emitted by the hand-back
+    primitive of the substrate disclosed in commonly-owned
+    provisional application
+    provisional_02_operational_primitives_handback, said
+    consumption establishing a closed loop in which substrate
+    enrichment and predictor-module discovery mutually
+    reinforce across iterations.
+
+14. The system of any preceding claim characterised in that
+    capability growth is achieved primarily by the crystallization
+    of new predictor sub-modules from topological features of the
+    network's own latent-space exploration, rather than by
+    proportional scaling of a fixed predictor architecture.
 
 ## VIII. Abstract
 
-A self-organizing extension to joint-embedding predictive
-architectures is disclosed in which predictor sub-modules are
-discovered automatically from the dynamics of the network's own
-latent-space exploration, rather than being designed by a
-practitioner. An instrumented encoder exposes an energy surface;
-an exploration subsystem executes temperature-biased Langevin
-dynamics on that surface, preferentially probing regions of low
-local curvature and high sensitivity; and a crystallization
-subsystem applies persistent-homology computation to the resulting
+A post-transformer training paradigm — designated Crystara —
+for joint-embedding predictive architectures is disclosed in
+which predictor sub-modules are discovered automatically from
+the dynamics of the network's own latent-space exploration,
+rather than being designed by a practitioner and held fixed at
+training time. An instrumented encoder exposes an energy
+surface; an exploration subsystem executes
+temperature-biased Langevin dynamics preconditioned by the
+inverse Fisher information matrix of the latent space, so that
+exploration trajectories are intrinsic to the model's
+information geometry; and a crystallization subsystem applies
+Vietoris–Rips persistent-homology computation to the resulting
 trajectories, instantiating attractor-type, cycle-type, or
 boundary-type learnable sub-modules from persistent topological
 features of homology dimensions zero, one, and two respectively.
 The three subsystems operate in a recursive feedback loop with a
 measurable convergence criterion, yielding emergent predictor
-architectures that static designed-once-and-frozen JEPA predictors
-cannot represent.
+architectures whose capability growth proceeds via topology-
+aware module crystallization rather than proportional
+parameter scaling of a fixed predictor — a "persistent-structures-
+over-scaling" training paradigm. In a preferred embodiment, the
+system composes upstream with a universal structural adapter
+and a self-improving substrate platform whose hand-back outputs
+become Crystara training inputs, forming a closed loop across
+substrate enrichment and predictor-module discovery.
 
 ---
 
