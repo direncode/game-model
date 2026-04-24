@@ -17,6 +17,27 @@ independently verifiable by any third party.
 
 ---
 
+## Bitcoin attestation: CONFIRMED
+
+All four `.ots` files have been upgraded to fully Bitcoin-anchored
+self-contained proofs:
+
+| Anchor | Value |
+|---|---|
+| **Bitcoin block** | **946409** |
+| **Date** | **2026-04-24 EDT** |
+| **Calendar attestations** | Alice + Bob (Bitcoin-confirmed); Finney (still pending, irrelevant — two anchors are double-redundant) |
+| **Verification** | `node ots-cli.js verify -f <document> <document>.ots` returns `Success! Bitcoin block 946409 attests existence as of 2026-04-24 EDT` |
+
+The four `.ots` files in `docs/patent/timestamps/` are now
+court-admissible cryptographic evidence that the corresponding
+documents existed in their present form as of Bitcoin block 946409.
+Verification requires only the original document + the `.ots`
+file; no calendar server or third party is needed. The proofs
+remain valid forever.
+
+---
+
 ## Recorded SHA-256 hashes (as of 2026-04-24, post-inventor-signature)
 
 | Document | SHA-256 hash | Size (bytes) |
