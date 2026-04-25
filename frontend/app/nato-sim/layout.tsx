@@ -2,23 +2,28 @@ import type { Metadata } from "next";
 import { ClassificationBanner } from "./_components/ClassificationBanner";
 import { TrafficColumn } from "./_components/TrafficColumn";
 import { LiveQueryDock } from "./_components/LiveQueryDock";
-import { PinnedRail } from "./_components/PinnedRail";
 import { ApprovalsTray } from "./_components/ApprovalsTray";
+import { ProductNav } from "./_components/ProductNav";
 
 export const metadata: Metadata = {
-  title: "NATO Simulation — INR Station | Latent Ocean",
+  title: "INR / NATO Sim · State Department",
   description:
-    "All-source warning intelligence workstation for the AWIS simulation (24–25 April 2026).",
+    "All-source warning intelligence workstation, AWIS 24-25 April 2026.",
 };
 
 /**
- * /nato-sim layout — wraps every page in this vertical with:
- *   - classification banners (top + bottom)
- *   - live Traffic column (left edge)
- *   - main canvas (children + Live Query dock + Approvals tray docked below)
- *   - Pinned rail (right edge)
+ * /nato-sim layout — JWICS-terminal flavor.
  *
- * The LO sidebar/navbar come from the parent ``app/layout.tsx``.
+ *   ┌─ classification ────────────────────────────────────────┐
+ *   │ Traffic │ Active product canvas                         │
+ *   │  (live) │ + Live Query dock                             │
+ *   │         │ + Approvals tray (only when items pending)    │
+ *   │         │ + Product nav strip                           │
+ *   └─ classification ────────────────────────────────────────┘
+ *
+ * No PinnedRail in the chrome — pinned items live inside the active
+ * product when relevant. No big seal. The page is information-dense
+ * by design.
  */
 export default function NatoSimLayout({
   children,
@@ -28,19 +33,15 @@ export default function NatoSimLayout({
   return (
     <div className="min-h-screen flex flex-col bg-li-bg text-li-text-primary">
       <ClassificationBanner position="top" />
-
       <div className="flex flex-1 min-h-0">
         <TrafficColumn />
-
         <div className="flex-1 min-w-0 flex flex-col">
-          {children}
+          <div className="flex-1 overflow-auto">{children}</div>
           <ApprovalsTray />
+          <ProductNav />
           <LiveQueryDock />
         </div>
-
-        <PinnedRail />
       </div>
-
       <ClassificationBanner position="bottom" />
     </div>
   );

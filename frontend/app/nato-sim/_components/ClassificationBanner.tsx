@@ -2,25 +2,26 @@
 
 /**
  * Classification banner for the NATO Simulation workstation.
- * Rendered at the top and bottom of the /nato-sim layout.
  *
- * Styling uses LO's li-* tokens + a red accent to signal classification
- * context. The text is always "UNCLASSIFIED // FOR SIMULATION USE ONLY"
- * because the briefing materials are student-produced, non-classified,
- * educational simulation artifacts. The look is tradecraft-authentic.
+ * Tradecraft-authentic: the real INR/JWICS terminals carry a thin
+ * classification strip top and bottom of every page. Color encodes the
+ * level (TS = orange, S = red, C = blue, U = green). For the AWIS sim
+ * the banner is unclassified-with-handling-caveat.
+ *
+ * Restrained: 22px tall, mono type, no icons, single neutral accent.
  */
 export function ClassificationBanner({ position }: { position: "top" | "bottom" }) {
   return (
     <div
       className={
-        "w-full bg-li-red/15 text-li-red text-center py-1 text-[10px] tracking-[0.3em] font-mono uppercase " +
+        "w-full bg-li-red text-white text-center py-1 text-[10px] tracking-[0.32em] font-mono uppercase select-none " +
         (position === "top"
-          ? "border-b border-li-red/30"
-          : "border-t border-li-red/30")
+          ? "border-b border-li-red"
+          : "border-t border-li-red")
       }
       role="presentation"
     >
-      Unclassified // For Simulation Use Only
+      Unclassified // For Simulation Use Only // AWIS 2026
     </div>
   );
 }

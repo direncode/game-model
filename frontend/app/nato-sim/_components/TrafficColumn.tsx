@@ -1,17 +1,13 @@
 "use client";
 
 /**
- * Live message firehose — displayed as a narrow left-edge column inside
- * the /nato-sim vertical. Subscribes to the backend SSE stream and does
- * an initial REST fetch on mount.
+ * Live message firehose — narrow left column, terminal-flavored,
+ * dense by design. Every message line is two rows of mono text:
+ *   row 1: priority dot · source · channel · author · outlier flag
+ *   row 2: content (clamped to 2 lines)
  *
- * Each message gets two visual cues:
- *   - Priority dot (FLASH=red, IMMEDIATE=orange, PRIORITY=amber,
- *     ROUTINE=gray) — analyst tradecraft.
- *   - Outlier flag (✦) — when the BTUT-style outlier scorer flags the
- *     message as anomalous against the rolling baseline. Hover for
- *     the human-readable explanation. This is the "find the unusual
- *     signal in the noise" surface the warning intel mission needs.
+ * No badges, no rounded boxes, no colorful borders. Hover reveals the
+ * outlier explanation. Click pins to right-side rail (TBD).
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -28,29 +24,21 @@ interface Message {
   outlier_signals?: string | null;
 }
 
-function priorityColor(p: string | null | undefined): string {
+function priorityMark(p: string | null | undefined): { color: string; label: string } {
   switch (p) {
     case "FLASH":
-      return "bg-li-red";
+      return { color: "bg-li-red", label: "F" };
     case "IMMEDIATE":
-      return "bg-orange-500";
+      return { color: "bg-orange-500", label: "I" };
     case "PRIORITY":
-      return "bg-li-yellow";
+      return { color: "bg-li-yellow", label: "P" };
     default:
-      return "bg-li-gray-700";
+      return { color: "bg-li-gray-700", label: "R" };
   }
 }
 
-function OutlierFlag({ score, signals }: { score: number; signals: string }) {
-  if (score < 0.25) return null;
-  const tier = score >= 0.6 ? "high" : score >= 0.4 ? "med" : "low";
-  const color =
-    tier === "high"
-      ? "text-li-purple"
-      : tier === "med"
-        ? "text-li-cyan"
-        : "text-li-text-secondary";
-  const friendlyLabel = signals
+function outlierTitle(score: number, signals: string): string {
+  const friendly = signals
     .split(",")
     .map((s) =>
       ({
@@ -64,14 +52,7 @@ function OutlierFlag({ score, signals }: { score: number; signals: string }) {
     )
     .filter(Boolean)
     .join(" · ");
-  return (
-    <span
-      className={`text-[11px] font-mono ${color}`}
-      title={`outlier score ${(score * 100).toFixed(0)} · ${friendlyLabel}`}
-    >
-      ✦
-    </span>
-  );
+  return `outlier ${(score * 100).toFixed(0)} — ${friendly || "baseline"}`;
 }
 
 export function TrafficColumn() {
@@ -80,7 +61,7 @@ export function TrafficColumn() {
 
   async function refresh() {
     try {
-      const res = await fetch("/api/v1/nato_sim/messages?limit=30");
+      const res = await fetch("/api/v1/nato_sim/messages?limit=40");
       if (!res.ok) return;
       const j = (await res.json()) as { items: Message[] };
       setMessages(j.items ?? []);
@@ -94,12 +75,10 @@ export function TrafficColumn() {
     try {
       const es = new EventSource("/api/v1/nato_sim/stream");
       esRef.current = es;
-      es.addEventListener("message.ingested", () => {
-        refresh();
-      });
+      es.addEventListener("message.ingested", () => refresh());
       es.onerror = () => {};
     } catch {
-      // SSE unsupported; rely on initial fetch + manual refresh.
+      /* SSE unsupported */
     }
     return () => {
       esRef.current?.close();
@@ -107,79 +86,79 @@ export function TrafficColumn() {
   }, []);
 
   return (
-    <aside className="w-72 border-r border-li-border bg-li-black-surface/70 text-xs font-mono overflow-auto flex-shrink-0">
-      <div className="sticky top-0 bg-li-black-surface/90 backdrop-blur px-3 py-2 border-b border-li-border flex items-center justify-between">
-        <div className="text-[10px] tracking-[0.3em] text-li-text-muted uppercase">
-          Traffic · {messages.length}
-        </div>
-        <button
-          onClick={refresh}
-          className="text-[10px] text-li-text-muted hover:text-li-cyan font-mono"
-          title="Refresh"
-        >
-          ↻
-        </button>
+    <aside className="w-64 border-r border-li-border bg-li-bg flex-shrink-0 flex flex-col font-mono">
+      <div className="px-3 py-2 border-b border-li-border flex items-center justify-between">
+        <span className="text-[10px] tracking-[0.32em] uppercase text-li-text-muted">
+          Cable Traffic
+        </span>
+        <span className="text-[10px] text-li-text-muted">
+          {messages.length}
+        </span>
       </div>
-      {messages.length === 0 ? (
-        <div className="p-3 text-li-text-muted leading-relaxed">
-          — no messages yet —
-          <div className="mt-2 text-[10px] opacity-70">
-            Paste a cable into the box at the top of the canvas to ingest
-            manually.
+      <div className="flex-1 overflow-auto">
+        {messages.length === 0 ? (
+          <div className="p-3 text-[11px] text-li-text-muted leading-relaxed">
+            no traffic.
+            <br />
+            paste a cable in the top of the canvas to ingest.
           </div>
-        </div>
-      ) : (
-        <ul className="divide-y divide-li-border/60">
-          {messages.map((m) => {
-            const score = m.outlier_score ?? 0;
-            const signals = m.outlier_signals ?? "";
-            const isOutlier = score >= 0.4;
-            return (
-              <li
-                key={m.id}
-                className={
-                  "p-3 hover:bg-li-surface-hover " +
-                  (isOutlier ? "bg-li-purple/5" : "")
-                }
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span
-                    className={`w-2 h-2 rounded-full flex-shrink-0 ${priorityColor(m.priority)}`}
-                    aria-hidden
-                  />
-                  <span className="uppercase text-[9px] text-li-text-muted tracking-widest">
-                    {m.source}
-                  </span>
-                  {m.channel && (
-                    <span className="text-li-text-muted text-[10px] truncate">
-                      #{m.channel}
-                    </span>
-                  )}
-                  <span className="ml-auto flex items-center gap-1.5">
-                    <OutlierFlag score={score} signals={signals} />
+        ) : (
+          <ul>
+            {messages.map((m) => {
+              const score = m.outlier_score ?? 0;
+              const sig = m.outlier_signals ?? "";
+              const isOutlier = score >= 0.4;
+              const pri = priorityMark(m.priority);
+              return (
+                <li
+                  key={m.id}
+                  className={
+                    "px-3 py-2 border-b border-li-border/50 hover:bg-li-surface-hover " +
+                    (isOutlier ? "bg-li-purple/[0.04]" : "")
+                  }
+                >
+                  <div className="flex items-center gap-1.5 text-[10px] text-li-text-muted">
+                    <span
+                      className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${pri.color}`}
+                      aria-hidden
+                    />
+                    <span className="uppercase tracking-wider">{m.source}</span>
+                    {m.channel && (
+                      <span className="truncate text-li-text-muted">
+                        ·{m.channel}
+                      </span>
+                    )}
                     {m.author && (
-                      <span className="text-li-cyan text-[10px] truncate">
+                      <span className="truncate text-li-text-secondary ml-auto">
                         {m.author}
                       </span>
                     )}
-                  </span>
-                </div>
-                <div className="text-li-text-secondary line-clamp-3 leading-relaxed">
-                  {m.content}
-                </div>
-                <div className="text-[9px] text-li-text-muted mt-1 flex items-center gap-2">
-                  <span>{new Date(m.ts).toLocaleTimeString()}</span>
-                  {isOutlier && (
-                    <span className="text-li-purple/80">
-                      anomaly {(score * 100).toFixed(0)}
-                    </span>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+                    {isOutlier && (
+                      <span
+                        className="text-li-purple"
+                        title={outlierTitle(score, sig)}
+                      >
+                        ✦
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-[11.5px] text-li-text-secondary mt-1 leading-snug line-clamp-2">
+                    {m.content}
+                  </div>
+                  <div className="text-[9.5px] text-li-text-muted mt-1 tracking-wider">
+                    {new Date(m.ts).toUTCString().match(/\d{2}:\d{2}/)?.[0]}Z
+                    {isOutlier && (
+                      <span className="text-li-purple/70 ml-2">
+                        anom {Math.round(score * 100)}
+                      </span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </aside>
   );
 }

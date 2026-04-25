@@ -1,16 +1,13 @@
 /**
- * NATO Simulation — Daily Read (landing page of the /nato-sim vertical).
+ * Daily Read — the landing page of the /nato-sim vertical.
  *
- * Renders the most recent "daily-read" finding through the InrProse
- * structured parser (BLUF block, numbered Key Judgments, portion-marker
- * pills, citation chips, alt-view aside, confidence band).
- *
- * IP boundary: this component is deliberately thin. It fetches structured
- * findings from the backend and renders them. No prompts, no scoring logic,
- * no judgment heuristics live in the client.
+ * Real-cable-look: letterhead, double-rule beneath, BLUF block, numbered
+ * paragraphs, alt-view aside, confidence strip, classification footer
+ * already in the layout chrome. Restrained palette, serif body, mono
+ * metadata.
  */
+import { Letterhead } from "./_components/Letterhead";
 import { InrProse } from "./_components/inr/InrProse";
-import { StateDeptSeal } from "./_components/StateDeptSeal";
 import { PasteIngest } from "./_components/PasteIngest";
 
 export const dynamic = "force-dynamic";
@@ -20,7 +17,7 @@ interface Finding {
   topic: string;
   kind: string;
   text: string;
-  confidence: "HIGH" | "MEDIUM" | "LOW";
+  confidence: "HIGH" | "MEDIUM" | "LOW" | null;
   generated_at: string;
 }
 
@@ -28,7 +25,9 @@ async function getDailyRead(): Promise<Finding | null> {
   try {
     const base =
       process.env.NEXT_PUBLIC_API_BASE_URL ??
-      (typeof window === "undefined" ? "http://localhost:8000" : "");
+      (typeof window === "undefined"
+        ? process.env.NATO_SIM_BACKEND_URL ?? "http://localhost:8000"
+        : "");
     const res = await fetch(
       `${base}/api/v1/nato_sim/findings?kind=daily-read&limit=1`,
       { cache: "no-store" },
@@ -45,80 +44,41 @@ export default async function NatoSimDailyReadPage() {
   const daily = await getDailyRead();
 
   return (
-    <main className="flex-1 overflow-auto">
-      <div className="max-w-4xl mx-auto px-6 py-10">
-        <header className="border-b border-li-border pb-6 mb-10">
-          <div className="flex items-start gap-5">
-            <StateDeptSeal size={68} className="text-li-cyan flex-shrink-0 mt-1" />
-            <div className="flex-1 min-w-0">
-              <div className="text-[10px] tracking-[0.3em] text-li-text-muted font-mono uppercase">
-                U.S. Department of State · Bureau of Intelligence and Research
-              </div>
-              <h1 className="font-display text-4xl text-li-text-primary mt-1">
-                Daily Read
-              </h1>
-              <p className="text-sm text-li-text-secondary mt-2 max-w-2xl">
-                NATO Eastern Flank · 1 April 2030 posture · All-source warning
-                intelligence synthesis · Audience: DNI / POTUS via DNI.
-                Generated{" "}
-                {daily?.generated_at
-                  ? new Date(daily.generated_at).toLocaleString()
-                  : "—"}
-                .
-              </p>
-            </div>
-            {daily?.confidence && (
-              <span
-                className={
-                  "flex-shrink-0 inline-block px-3 py-1 text-[10px] tracking-[0.2em] font-mono uppercase rounded border " +
-                  (daily.confidence === "HIGH"
-                    ? "bg-li-green/15 text-li-green border-li-green/30"
-                    : daily.confidence === "MEDIUM"
-                      ? "bg-li-yellow/15 text-li-yellow border-li-yellow/30"
-                      : "bg-li-red/15 text-li-red border-li-red/30")
-                }
-              >
-                Confidence · {daily.confidence}
-              </span>
-            )}
-          </div>
-        </header>
+    <main>
+      <div className="max-w-3xl mx-auto px-10 py-10">
+        <Letterhead
+          cableNumber="INR-NATO-001"
+          generatedAt={daily?.generated_at}
+        />
+
+        <div className="font-mono text-[10px] tracking-[0.28em] uppercase text-li-text-muted mb-1">
+          Information Memo · Daily Read
+        </div>
+        <h1 className="font-display text-[34px] leading-tight text-li-text-primary tracking-tight">
+          NATO Eastern Flank — Posture as of 1 April 2030
+        </h1>
+        <div className="mt-2 text-[12px] text-li-text-secondary leading-relaxed">
+          Audience: <span className="text-li-text-primary">DNI</span> · Drafted by State/INR Office of Analysis for Europe ·
+          Distribution: ODNI, NSC, Sec State staff
+        </div>
+
+        <div className="my-8 h-px bg-li-border" />
 
         <PasteIngest />
 
         {daily ? (
           <InrProse text={daily.text} />
         ) : (
-          <div className="border border-dashed border-li-border rounded p-8 text-center">
-            <div className="text-li-text-secondary text-sm font-mono">
-              No Daily Read generated yet.
-            </div>
-            <div className="text-li-text-muted text-xs mt-2 font-mono">
-              Corpus prep populates this on first run.
-            </div>
+          <div className="border-l-2 border-li-text-muted pl-4 py-2 text-[13px] text-li-text-secondary leading-relaxed">
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-li-text-muted">
+              draft pending
+            </span>
+            <p className="mt-1">
+              The Daily Read is regenerated when corpus prep completes its first
+              pass over the briefing book and starter sources.
+            </p>
           </div>
         )}
-
-        <nav className="mt-12 pt-6 border-t border-li-border">
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-            {[
-              { href: "/nato-sim/actors", label: "Country / Actor Cards" },
-              { href: "/nato-sim/watchboard", label: "Watchboard (I&W)" },
-              { href: "/nato-sim/network", label: "Network Map" },
-              { href: "/nato-sim/dissents", label: "Alternative Views" },
-              { href: "/nato-sim/sources", label: "Sources" },
-            ].map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="block px-4 py-3 border border-li-border rounded hover:border-li-cyan/40 hover:bg-li-surface-hover transition-colors text-li-text-primary font-mono text-xs tracking-wider uppercase"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
     </main>
   );
