@@ -13,7 +13,7 @@ calibrated read of what each agency at AWIS will be most useful for.
 
 from __future__ import annotations
 
-from typing import Final
+from typing import Any, Final
 
 
 IC_AGENCIES: Final[dict[str, dict[str, Any]]] = {
