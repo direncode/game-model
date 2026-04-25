@@ -16,12 +16,28 @@ interface QueryEntry {
   id: string;
   q: string;
   answer: string;
-  sources: { title: string | null; origin: string | null; url: string | null }[];
+  sources: { title: string | null; origin: string | null; url: string | null }[] | string | null;
   pinned?: number | boolean | null;
   note?: string | null;
   ts: string;
   loading?: boolean;
   error?: string;
+}
+
+function safeSources(
+  v: QueryEntry["sources"],
+): { title: string | null; origin: string | null; url: string | null }[] {
+  if (!v) return [];
+  if (Array.isArray(v)) return v;
+  if (typeof v === "string") {
+    try {
+      const parsed = JSON.parse(v);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
 }
 
 const QUICK_PROMPTS = [
@@ -310,16 +326,20 @@ export function QueryClient() {
                 ) : (
                   <div className="mt-4">
                     <InrProse text={entry.answer} />
-                    {entry.sources && entry.sources.length > 0 && (
-                      <div className="mt-3 pt-3 border-t border-li-border/60 flex flex-wrap gap-x-4 gap-y-1 text-[10px] font-mono text-li-text-muted">
-                        <span className="tracking-[0.32em] uppercase">retrieved</span>
-                        {entry.sources.map((s, i) => (
-                          <span key={i} className="text-li-cyan/85">
-                            {s.title ?? s.origin}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    {(() => {
+                      const srcs = safeSources(entry.sources);
+                      if (srcs.length === 0) return null;
+                      return (
+                        <div className="mt-3 pt-3 border-t border-li-border/60 flex flex-wrap gap-x-4 gap-y-1 text-[10px] font-mono text-li-text-muted">
+                          <span className="tracking-[0.32em] uppercase">retrieved</span>
+                          {srcs.map((s, i) => (
+                            <span key={i} className="text-li-cyan/85">
+                              {s.title ?? s.origin ?? "source"}
+                            </span>
+                          ))}
+                        </div>
+                      );
+                    })()}
                   </div>
                 )}
               </article>

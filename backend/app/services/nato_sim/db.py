@@ -329,7 +329,16 @@ def row_to_dict(row: sqlite3.Row | None) -> dict[str, Any] | None:
     if row is None:
         return None
     d = dict(row)
-    JSON_KEYS = {"metadata", "citations", "evidence", "payload", "raw_json", "embedding"}
+    JSON_KEYS = {
+        "metadata",
+        "citations",
+        "evidence",
+        "payload",
+        "raw_json",
+        "embedding",
+        "sources",
+        "recommended_agencies",
+    }
     for k in list(d.keys()):
         if (k in JSON_KEYS or k.endswith("_json")) and isinstance(d[k], str) and d[k]:
             try:

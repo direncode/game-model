@@ -40,7 +40,8 @@ function priorityClasses(p: string | null | undefined) {
 }
 
 function parseAgencies(v: Gap["recommended_agencies"]): string[] {
-  if (Array.isArray(v)) return v;
+  if (!v) return [];
+  if (Array.isArray(v)) return v as string[];
   if (typeof v === "string") {
     try {
       const parsed = JSON.parse(v);
