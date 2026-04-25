@@ -520,6 +520,101 @@ async def _dispatch_slash(name: str, options: dict[str, Any]) -> str:
             lines.append(f"• **{d.get('topic')}** — {(d.get('text') or '')[:120]}")
         return "\n".join(lines)
 
+    if name == "tasking":
+        agency = options.get("agency", "CIA")
+        target = options.get("target", "")
+        body = await synthesize(
+            SynthesizeInput(
+                kind="assessment",
+                topic=f"Collection Tasking: {agency} → {target}",
+                evidence=[EvidenceItem(text=f"State/INR tasking request to {agency}", source="operator")],
+                confidence="MEDIUM",
+                extra_instructions=(
+                    "Produce a formal collection tasking in this exact shape:\n"
+                    "TASKING AGENCY: " + agency + "\n"
+                    "ORIGINATOR: State/INR\n"
+                    "TARGET: " + target + "\n"
+                    "PRIORITY: [FLASH|IMMEDIATE|PRIORITY|ROUTINE]\n"
+                    "DISCIPLINE: [HUMINT|SIGINT|GEOINT|MASINT|OSINT]\n"
+                    "REQUIREMENT: ...\n"
+                    "DEADLINE: ...\n"
+                    "JUSTIFICATION: ...\n"
+                ),
+            )
+        )
+        return f"```\n{body[:1800]}\n```"
+
+    if name == "assessment":
+        topic = options.get("topic", "")
+        # Pull recent corpus context relevant to the topic.
+        hits = _keyword_search_corpus(topic, limit=4)
+        evidence = [
+            EvidenceItem(text=(h.get("text") or "")[:1200], source=h.get("title") or h.get("origin") or "corpus")
+            for h in hits
+        ] or [EvidenceItem(text="(no corpus hit — synthesizing from graph state)", source="graph")]
+        body = await synthesize(
+            SynthesizeInput(
+                kind="assessment",
+                topic=topic,
+                evidence=evidence,
+                confidence="MEDIUM",
+                use_deep_model=True,
+            )
+        )
+        return f"```\n{body[:1800]}\n```"
+
+    if name == "sources":
+        entity = options.get("entity", "")
+        # Find briefing paragraphs that mention this entity by simple LIKE.
+        rows = db.query(
+            "SELECT id, title, text FROM corpus_docs WHERE text LIKE ? AND origin = 'briefing' LIMIT 1",
+            f"%{entity}%",
+        )
+        if not rows:
+            return f"_no briefing paragraphs found mentioning '{entity}'_"
+        full = (rows[0]["text"] or "")
+        lower = full.lower()
+        needle = entity.lower()
+        # Pull up to 5 windows of ±200 chars around each mention.
+        excerpts: list[str] = []
+        cursor = 0
+        for _ in range(5):
+            i = lower.find(needle, cursor)
+            if i < 0:
+                break
+            start = max(0, i - 200)
+            end = min(len(full), i + len(needle) + 200)
+            excerpts.append(f"…{full[start:end].strip()}…")
+            cursor = end
+        if not excerpts:
+            return f"_no excerpts produced for '{entity}'_"
+        return f"**Briefing excerpts mentioning {entity}:**\n\n" + "\n\n---\n\n".join(excerpts)[:1800]
+
+    if name == "ingest":
+        url = options.get("url", "")
+        if not url.startswith("http"):
+            return f"_invalid URL: {url}_"
+        # Inline fetch + ingest via the harvest adapter.
+        from app.services.nato_sim.ingest.harvest import fetch_html  # type: ignore[attr-defined]
+        try:
+            from app.services.nato_sim.corpora_runtime import _ingest_url  # noqa: F401
+        except Exception:
+            pass
+        # Fallback to a direct ingest_message of the fetched text.
+        from app.services.nato_sim.ingest.pipeline import ingest_message
+        from app.services.nato_sim.ingest.harvest import _extract_readable_text  # type: ignore[attr-defined]
+        import httpx  # type: ignore[import-not-found]
+        try:
+            async with httpx.AsyncClient(headers={"User-Agent": "LatentOcean-NatoSim/0.1"}, timeout=15.0) as client:
+                resp = await client.get(url, follow_redirects=True)
+            if resp.status_code != 200:
+                return f"_fetch failed: HTTP {resp.status_code}_"
+            title, text = _extract_readable_text(resp.text)
+            await ingest_message(source="webhook", content=(text or "")[:8000], channel=url, author=title or "ingested")
+            return f"✓ ingested {title or url}\n_{len(text)} chars; resolver running async_"
+        except Exception as exc:  # noqa: BLE001
+            return f"_ingest error: {exc}_"
+
     return f"unknown command: /{name}"
 
 
