@@ -34,14 +34,26 @@ _AGENCY_KEYS = list(IC_AGENCIES.keys())
 
 
 def _gap_candidates() -> list[dict[str, str]]:
-    """Identify findings that look like analytical gaps.
+    """Identify gap candidates from BOTH findings and outlier messages.
+
+    The outlier system is the primary driver — anomalous traffic IS the
+    operationally-actionable signal that something is happening we can't
+    yet explain. Findings-based candidates supplement it with the
+    analyst's own confidence calibration.
 
     Heuristics:
-      - confidence = LOW on any finding (always a gap)
-      - confidence = MEDIUM on watchboard items (those need promote/demote signals)
-      - dissents (always indicate competing reads worth resolving)
-      - findings whose citations field has fewer than 2 distinct entries
+      A) FINDING-DRIVEN
+         - confidence = LOW on any finding (always a gap)
+         - confidence = MEDIUM on watchboard items (need promote/demote signals)
+         - dissents (always indicate competing reads worth resolving)
+      B) OUTLIER-DRIVEN
+         - messages with outlier_score >= 0.5 AND signal in
+           {novel_entity, contradicts_kj, rare_co_occurrence, sparse_topic}
+         - duplicates collapsed by topic key derived from message content
     """
+    out: list[dict[str, str]] = []
+
+    # A) Finding-driven candidates ─────────────────────────────────────
     rows = db.query(
         """
         SELECT id, topic, kind, text, confidence, citations
@@ -53,10 +65,9 @@ def _gap_candidates() -> list[dict[str, str]]:
             OR kind = 'dissent'
         )
         ORDER BY generated_at DESC
-        LIMIT 30
+        LIMIT 20
         """
     )
-    out: list[dict[str, str]] = []
     for r in rows:
         d = db.row_to_dict(r) or {}
         out.append(
@@ -67,8 +78,61 @@ def _gap_candidates() -> list[dict[str, str]]:
                 "text": d["text"] or "",
                 "confidence": d.get("confidence") or "LOW",
                 "citations": d.get("citations") or [],
+                "driver": "finding",
             }
         )
+
+    # B) Outlier-driven candidates ─────────────────────────────────────
+    # The outlier_signals column is comma-separated; we want messages
+    # whose signals indicate the message itself can't yet be explained
+    # by the standing assessment.
+    outlier_rows = db.query(
+        """
+        SELECT id, content, source, channel, author, ts,
+               outlier_score, outlier_signals
+        FROM messages
+        WHERE outlier_score >= 0.5
+        AND (
+            outlier_signals LIKE '%novel_entity%'
+            OR outlier_signals LIKE '%contradicts_kj%'
+            OR outlier_signals LIKE '%rare_co_occurrence%'
+            OR outlier_signals LIKE '%sparse_topic%'
+        )
+        ORDER BY outlier_score DESC, ts DESC
+        LIMIT 15
+        """
+    )
+    seen_topics: set[str] = set()
+    for r in outlier_rows:
+        d = db.row_to_dict(r) or {}
+        # Dedupe by first ~60 chars of content as a coarse topic key.
+        content = d.get("content") or ""
+        topic_key = content[:60].strip().lower()
+        if topic_key in seen_topics:
+            continue
+        seen_topics.add(topic_key)
+
+        title = (content[:80].split("\n")[0]).strip() or "anomalous traffic"
+        signals = d.get("outlier_signals") or ""
+        score_pct = int((d.get("outlier_score") or 0) * 100)
+        out.append(
+            {
+                "finding_id": d["id"],  # we link gap → message id here
+                "topic": f"Outlier: {title}",
+                "kind": "outlier-message",
+                "text": (
+                    f"OUTLIER MESSAGE (score {score_pct}, signals: {signals})\n"
+                    f"Source: {d.get('source')}"
+                    f"{' / ' + d['channel'] if d.get('channel') else ''}"
+                    f"{' / ' + d['author'] if d.get('author') else ''}\n\n"
+                    f"{content[:1800]}"
+                ),
+                "confidence": "LOW",
+                "citations": [],
+                "driver": "outlier",
+            }
+        )
+
     return out
 
 
