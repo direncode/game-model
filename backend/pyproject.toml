@@ -40,6 +40,12 @@ dependencies = [
     "xgboost>=2.0.0",
     "networkx>=3.0",
     "qrcode[pil]>=7.4",
+    # NATO Simulation vertical (services/nato_sim)
+    "openai>=1.40.0",
+    "pynacl>=1.5.0",
+    "beautifulsoup4>=4.12.0",
+    "python-pptx>=0.6.21",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
