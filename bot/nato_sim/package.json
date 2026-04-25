@@ -2,14 +2,13 @@
   "name": "nato-sim-bot",
   "version": "0.1.0",
   "private": true,
-  "description": "Discord Gateway bot for the NATO Simulation vertical. Runs on the operator's laptop during the sim; forwards every channel message to the /api/v1/nato_sim/ingest/discord endpoint.",
+  "description": "NATO Simulation message-traffic ingester. Connects to Discord as the operator (selfbot via discord.js-selfbot-v13) and forwards every channel message to the /api/v1/nato_sim/ingest/discord endpoint. Single-day educational use.",
   "type": "module",
   "scripts": {
-    "start": "tsx index.ts",
-    "register": "tsx register_commands.ts"
+    "start": "tsx index.ts"
   },
   "dependencies": {
-    "discord.js": "^14.15.3",
+    "discord.js-selfbot-v13": "^3.4.0",
     "tsx": "^4.17.0"
   },
   "devDependencies": {
