@@ -132,6 +132,9 @@ const config: Config = {
         "reveal-line": "reveal-line 0.8s ease forwards",
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
       },
+      transitionDuration: {
+        "0": "0ms",
+      },
     },
   },
   plugins: [],

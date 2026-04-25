@@ -76,6 +76,7 @@ export function NetworkTable() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [filter, setFilter] = useState<string>("all");
   const [sort, setSort] = useState<"degree" | "name" | "last_seen">("degree");
+  const [loaded, setLoaded] = useState(false);
 
   async function refresh() {
     try {
@@ -93,6 +94,8 @@ export function NetworkTable() {
       }
     } catch {
       /* ignore */
+    } finally {
+      setLoaded(true);
     }
   }
 
@@ -186,7 +189,17 @@ export function NetworkTable() {
               </tr>
             </thead>
             <tbody>
-              {filteredEntities.length === 0 ? (
+              {!loaded ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <tr key={`skel-${i}`} className="border-t border-li-border/40">
+                    <td colSpan={7} className="px-3 py-2.5">
+                      <div
+                        className="h-3 rounded-sm bg-gradient-to-r from-li-gray-900 via-li-gray-800 to-li-gray-900 bg-[length:400%_100%] animate-[gradient-shift_2s_ease_infinite]"
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : filteredEntities.length === 0 ? (
                 <tr>
                   <td
                     colSpan={7}

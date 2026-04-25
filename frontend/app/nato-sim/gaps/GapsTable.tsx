@@ -58,6 +58,7 @@ export function GapsTable() {
   const [scanning, setScanning] = useState(false);
   const [showResolved, setShowResolved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   async function load() {
     try {
@@ -69,6 +70,8 @@ export function GapsTable() {
       setGaps(j.items ?? []);
     } catch {
       /* ignore */
+    } finally {
+      setLoaded(true);
     }
   }
 
@@ -181,7 +184,15 @@ export function GapsTable() {
             </tr>
           </thead>
           <tbody>
-            {sortedGaps.length === 0 ? (
+            {!loaded ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <tr key={`skel-${i}`} className="border-t border-li-border/40">
+                  <td colSpan={6} className="px-3 py-3">
+                    <div className="h-3 rounded-sm bg-gradient-to-r from-li-gray-900 via-li-gray-800 to-li-gray-900 bg-[length:400%_100%] animate-[gradient-shift_2s_ease_infinite]" />
+                  </td>
+                </tr>
+              ))
+            ) : sortedGaps.length === 0 ? (
               <tr>
                 <td
                   colSpan={6}
