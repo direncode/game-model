@@ -1,47 +1,42 @@
 /**
- * Inbound Message Traffic — dedicated paste interface.
+ * Inbound Message Traffic — specialized intel-inject workstation.
  *
- * Full-canvas page for the operator to drop incoming traffic during
- * the sim: Discord messages, cables, news snippets, sim injects from
- * Control. Every paste runs through the same pipeline as live Discord
- * ingest would: resolver → entity graph diff → priority + outlier
- * scoring → Traffic column update.
- *
- * Components:
- *   - Source-tag input + quick-chip presets
- *   - Big resizable textarea
- *   - Cmd/Ctrl+Enter to submit
- *   - Recent-ingests list with priority dot + outlier flag + scored time
+ * Designed for the AWIS #comms Discord channel format: structured
+ * cables with FROM / TO / SUBJECT / DTG / classification / body. Bulk
+ * paste, auto-parse each inject, ingest through the resolver + outlier
+ * pipeline, render per-message cards with action controls.
  */
 import { Letterhead } from "../_components/Letterhead";
-import { InboundTrafficClient } from "./InboundTrafficClient";
+import { TrafficWorkstation } from "./TrafficWorkstation";
 
 export const dynamic = "force-dynamic";
 
 export default function InboundPage() {
   return (
     <main>
-      <div className="max-w-4xl mx-auto px-10 py-10">
-        <Letterhead cableNumber="INR-NATO-INBOUND-001" />
+      <div className="max-w-6xl mx-auto px-10 py-10">
+        <Letterhead cableNumber="INR-NATO-COMMS-001" />
 
         <div className="font-mono text-[10px] tracking-[0.28em] uppercase text-li-text-muted mb-1">
-          Inbound Message Traffic · Manual Ingest
+          Message Traffic · Inbound from #comms
         </div>
         <h1 className="font-display text-[34px] leading-tight text-li-text-primary tracking-tight">
-          Paste &amp; Score
+          Cable Traffic Workstation
         </h1>
         <div className="mt-2 text-[13px] text-li-text-secondary leading-relaxed max-w-3xl">
-          Drop Discord messages, foreign-press snippets, FSO cable
-          excerpts, sim injects, or any free-text traffic. Each paste is
-          run through the resolver (entities + claims), scored for
-          priority and outlierness against the rolling baseline, and
-          appended to the Traffic column. Apply a source tag so the
-          citations downstream are traceable.
+          Paste any block of #comms channel history — the parser splits
+          on each INTEL INJECT marker, extracts FROM / TO / SUBJECT / DTG /
+          classification / body, dedupes, and runs every inject through
+          the entity resolver and outlier scorer. Each card below carries
+          a classification banner, source-kind tag (HUMINT / SIGINT /
+          OSINT / OFFICIAL / SOCIAL), priority dot, outlier flag, and a
+          per-message Operationalize button to push it through the
+          tasking pipeline.
         </div>
 
         <div className="my-8 h-px bg-li-border" />
 
-        <InboundTrafficClient />
+        <TrafficWorkstation />
       </div>
     </main>
   );

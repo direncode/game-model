@@ -272,6 +272,63 @@ async def ingest_paste_route(body: PasteIn) -> dict[str, Any]:
     return {"id": msg_id}
 
 
+class BatchIngestIn(BaseModel):
+    content: str = Field(..., min_length=20)
+
+
+@router.post("/ingest/batch")
+async def ingest_batch_route(body: BatchIngestIn) -> dict[str, Any]:
+    """Parse a multi-INTEL-INJECT paste, ingest each block, return parsed metadata.
+
+    The Quiver bot in #comms emits structured cables (FROM / TO / SUBJECT /
+    DTG / classification / body). The operator pastes a chunk of channel
+    history; this endpoint splits it on the INTEL INJECT marker, dedupes,
+    parses each, ingests them through the normal pipeline (entity
+    resolution, priority + outlier scoring, edges), and returns the
+    structured metadata for UI rendering.
+    """
+    from app.services.nato_sim.ingest.intel_inject_parser import (
+        classify_level,
+        parse_paste,
+        source_kind,
+    )
+
+    parsed = parse_paste(body.content)
+    items: list[dict[str, Any]] = []
+    for p in parsed:
+        # Compose the message content the resolver sees: subject + body.
+        msg_text = f"SUBJECT: {p.subject}\n\n{p.body}".strip() or p.raw
+        msg_id = await ingest_message(
+            source="intel-inject",
+            channel=p.subject[:120] if p.subject else None,
+            author=p.source_from[:200] if p.source_from else None,
+            content=msg_text,
+            raw_json={
+                "classification": p.classification,
+                "level": classify_level(p.classification),
+                "kind": source_kind(p.classification, p.source_from),
+                "from": p.source_from,
+                "recipients": p.recipients,
+                "subject": p.subject,
+                "dtg": p.dtg,
+            },
+        )
+        items.append(
+            {
+                "id": msg_id,
+                "classification": p.classification,
+                "level": classify_level(p.classification),
+                "kind": source_kind(p.classification, p.source_from),
+                "from": p.source_from,
+                "recipients": p.recipients,
+                "subject": p.subject,
+                "dtg": p.dtg,
+                "body": p.body,
+            }
+        )
+    return {"count": len(items), "items": items}
+
+
 # ─────────────────────────────────────────────────────────────────
 # Live query (RAG over the corpus)
 # ─────────────────────────────────────────────────────────────────
