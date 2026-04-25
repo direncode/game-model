@@ -6,8 +6,8 @@ import { notFound } from "next/navigation";
 import { getActorCard } from "../../_lib/api";
 import {
   ProductChrome,
-  ProductBody,
 } from "../../_components/inr/ProductChrome";
+import { InrProse } from "../../_components/inr/InrProse";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +30,7 @@ export default async function ActorCardPage({
           confidence={card.confidence}
           generatedAt={card.generated_at}
         />
-        <ProductBody text={card.text} />
+        <InrProse text={card.text} />
         {card.citations && card.citations.length > 0 && (
           <footer className="mt-8 pt-4 border-t border-li-border">
             <div className="text-[10px] text-li-text-muted tracking-widest uppercase font-mono mb-2">

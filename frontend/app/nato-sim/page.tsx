@@ -1,14 +1,18 @@
 /**
  * NATO Simulation — Daily Read (landing page of the /nato-sim vertical).
  *
- * Renders the most recent "daily-read" finding as a BLUF-led analytical
- * product. Falls back to a placeholder when the backend hasn't yet been
- * populated (i.e. before `prep_nato_corpus.py` has run).
+ * Renders the most recent "daily-read" finding through the InrProse
+ * structured parser (BLUF block, numbered Key Judgments, portion-marker
+ * pills, citation chips, alt-view aside, confidence band).
  *
  * IP boundary: this component is deliberately thin. It fetches structured
  * findings from the backend and renders them. No prompts, no scoring logic,
  * no judgment heuristics live in the client.
  */
+import { InrProse } from "./_components/inr/InrProse";
+import { StateDeptSeal } from "./_components/StateDeptSeal";
+import { PasteIngest } from "./_components/PasteIngest";
+
 export const dynamic = "force-dynamic";
 
 interface Finding {
@@ -43,18 +47,20 @@ export default async function NatoSimDailyReadPage() {
   return (
     <main className="flex-1 overflow-auto">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <header className="border-b border-li-border pb-4 mb-8">
-          <div className="flex items-baseline justify-between">
-            <div>
+        <header className="border-b border-li-border pb-6 mb-10">
+          <div className="flex items-start gap-5">
+            <StateDeptSeal size={68} className="text-li-cyan flex-shrink-0 mt-1" />
+            <div className="flex-1 min-w-0">
               <div className="text-[10px] tracking-[0.3em] text-li-text-muted font-mono uppercase">
-                State Department · Bureau of Intelligence and Research
+                U.S. Department of State · Bureau of Intelligence and Research
               </div>
               <h1 className="font-display text-4xl text-li-text-primary mt-1">
                 Daily Read
               </h1>
               <p className="text-sm text-li-text-secondary mt-2 max-w-2xl">
                 NATO Eastern Flank · 1 April 2030 posture · All-source warning
-                intelligence synthesis. Generated{" "}
+                intelligence synthesis · Audience: DNI / POTUS via DNI.
+                Generated{" "}
                 {daily?.generated_at
                   ? new Date(daily.generated_at).toLocaleString()
                   : "—"}
@@ -64,12 +70,12 @@ export default async function NatoSimDailyReadPage() {
             {daily?.confidence && (
               <span
                 className={
-                  "inline-block px-3 py-1 text-[10px] tracking-[0.2em] font-mono uppercase rounded " +
+                  "flex-shrink-0 inline-block px-3 py-1 text-[10px] tracking-[0.2em] font-mono uppercase rounded border " +
                   (daily.confidence === "HIGH"
-                    ? "bg-li-green/15 text-li-green"
+                    ? "bg-li-green/15 text-li-green border-li-green/30"
                     : daily.confidence === "MEDIUM"
-                      ? "bg-li-yellow/15 text-li-yellow"
-                      : "bg-li-red/15 text-li-red")
+                      ? "bg-li-yellow/15 text-li-yellow border-li-yellow/30"
+                      : "bg-li-red/15 text-li-red border-li-red/30")
                 }
               >
                 Confidence · {daily.confidence}
@@ -78,20 +84,17 @@ export default async function NatoSimDailyReadPage() {
           </div>
         </header>
 
+        <PasteIngest />
+
         {daily ? (
-          <article className="prose prose-invert max-w-none font-sans">
-            <pre className="whitespace-pre-wrap text-[15px] leading-relaxed text-li-text-primary font-sans bg-transparent p-0 border-0">
-              {daily.text}
-            </pre>
-          </article>
+          <InrProse text={daily.text} />
         ) : (
           <div className="border border-dashed border-li-border rounded p-8 text-center">
             <div className="text-li-text-secondary text-sm font-mono">
               No Daily Read generated yet.
             </div>
             <div className="text-li-text-muted text-xs mt-2 font-mono">
-              Run <code className="text-li-cyan">python backend/scripts/prep_nato_corpus.py</code>{" "}
-              to populate the corpus and generate canonical analyses.
+              Corpus prep populates this on first run.
             </div>
           </div>
         )}

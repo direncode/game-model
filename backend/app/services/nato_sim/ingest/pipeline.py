@@ -26,6 +26,7 @@ from typing import Any
 from app.services.nato_sim import db
 from app.services.nato_sim.graph import add_edge, upsert_entity
 from app.services.nato_sim.judgment import score_priority
+from app.services.nato_sim.outlier_scorer import score_outlier
 from app.services.nato_sim.resolver import resolve
 
 logger = logging.getLogger(__name__)
@@ -90,16 +91,33 @@ async def ingest_message(
             except Exception as exc:  # noqa: BLE001
                 logger.debug("ingest: edge add failed: %s", exc)
 
-    # 5. Score priority and update message row.
+    # 5. Score priority + outlier and update message row.
     try:
         priority = score_priority(content=content, mentioned_entities=canonical_names)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("ingest: priority scoring failed for msg=%s: %s", message_id, exc)
+        priority = "ROUTINE"
+
+    try:
+        outlier = score_outlier(
+            content=content,
+            canonical_names=canonical_names,
+            channel=channel,
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("ingest: outlier scoring failed for msg=%s: %s", message_id, exc)
+        outlier = None
+
+    try:
         db.execute(
-            "UPDATE messages SET priority = ?, processed_at = datetime('now') WHERE id = ?",
+            "UPDATE messages SET priority = ?, outlier_score = ?, outlier_signals = ?, processed_at = datetime('now') WHERE id = ?",
             priority,
+            outlier.score if outlier else 0.0,
+            ",".join(outlier.signals) if outlier else "",
             message_id,
         )
     except Exception as exc:  # noqa: BLE001
-        logger.warning("ingest: priority scoring failed for msg=%s: %s", message_id, exc)
+        logger.warning("ingest: msg metadata update failed for %s: %s", message_id, exc)
 
     # 6. Emit a structured event for downstream SSE consumers.
     db.insert(

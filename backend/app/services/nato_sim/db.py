@@ -71,7 +71,9 @@ CREATE TABLE IF NOT EXISTS messages (
     ts TEXT NOT NULL DEFAULT (datetime('now')),
     priority TEXT,
     raw_json TEXT,
-    processed_at TEXT
+    processed_at TEXT,
+    outlier_score REAL DEFAULT 0.0,
+    outlier_signals TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_messages_ts ON messages(ts DESC);
 CREATE INDEX IF NOT EXISTS idx_messages_source ON messages(source);
@@ -174,11 +176,36 @@ CREATE TABLE IF NOT EXISTS pinned (
 """
 
 
+_MIGRATIONS = [
+    # Add outlier_score / outlier_signals columns to messages if upgrading
+    # an existing DB. Safe to run repeatedly because we check column
+    # existence first.
+    """
+    SELECT CASE WHEN NOT EXISTS (
+        SELECT 1 FROM pragma_table_info('messages') WHERE name = 'outlier_score'
+    ) THEN RAISE(IGNORE) END
+    """,
+]
+
+
 def init_db() -> None:
     """Create the schema idempotently. Safe to call multiple times."""
     conn = _conn or get_db()
     with _lock:
         conn.executescript(_SCHEMA)
+        # Add outlier columns to existing messages table if missing.
+        cur = conn.execute("PRAGMA table_info(messages)")
+        cols = {row[1] for row in cur.fetchall()}
+        if "outlier_score" not in cols:
+            try:
+                conn.execute("ALTER TABLE messages ADD COLUMN outlier_score REAL DEFAULT 0.0")
+            except Exception as exc:
+                logger.debug("outlier_score migration: %s", exc)
+        if "outlier_signals" not in cols:
+            try:
+                conn.execute("ALTER TABLE messages ADD COLUMN outlier_signals TEXT")
+            except Exception as exc:
+                logger.debug("outlier_signals migration: %s", exc)
 
 
 def new_id() -> str:

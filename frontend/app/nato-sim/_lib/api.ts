@@ -25,6 +25,8 @@ export interface Message {
   content: string;
   ts: string;
   priority: "FLASH" | "IMMEDIATE" | "PRIORITY" | "ROUTINE" | null;
+  outlier_score?: number | null;
+  outlier_signals?: string | null;
 }
 
 export interface NetworkSnapshot {
