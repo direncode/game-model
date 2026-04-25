@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 
 const PRODUCTS = [
   { href: "/nato-sim", label: "Daily Read" },
+  { href: "/nato-sim/inbound", label: "Inbound" },
   { href: "/nato-sim/actors", label: "Country Files" },
   { href: "/nato-sim/watchboard", label: "Watchboard" },
   { href: "/nato-sim/network", label: "Network" },

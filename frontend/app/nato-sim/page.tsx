@@ -6,9 +6,9 @@
  * already in the layout chrome. Restrained palette, serif body, mono
  * metadata.
  */
+import Link from "next/link";
 import { Letterhead } from "./_components/Letterhead";
 import { InrProse } from "./_components/inr/InrProse";
-import { PasteIngest } from "./_components/PasteIngest";
 
 export const dynamic = "force-dynamic";
 
@@ -64,7 +64,9 @@ export default async function NatoSimDailyReadPage() {
 
         <div className="my-8 h-px bg-li-border" />
 
-        <PasteIngest />
+        <div className="mb-6 text-[11px] font-mono text-li-text-muted">
+          Inbound traffic: <Link href="/nato-sim/inbound" className="text-li-cyan hover:text-li-text-primary">paste &amp; score →</Link>
+        </div>
 
         {daily ? (
           <InrProse text={daily.text} />
