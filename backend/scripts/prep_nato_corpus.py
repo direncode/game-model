@@ -91,6 +91,14 @@ async def main(args: argparse.Namespace) -> None:
     # Imports are deferred so the script can print its help without loading
     # the whole LO backend.
     from app.services.nato_sim import db
+    from app.services.nato_sim.connection_finder import (
+        find_hidden_connections,
+        summarize_path,
+    )
+    from app.services.nato_sim.graph import (
+        get_entity_by_name,
+        top_entities_by_degree,
+    )
     from app.services.nato_sim.ingest.docx_adapter import extract_docx_paragraphs
     from app.services.nato_sim.ingest.pptx_adapter import extract_pptx_slides
     from app.services.nato_sim.ingest.harvest import harvest_starter_corpus
@@ -229,6 +237,131 @@ async def main(args: argparse.Namespace) -> None:
             )
             logger.info("  ✓ %s", actor)
 
+    # ── 6. Watchboard items (10 indicators) ───────────────────────────
+    if paragraphs and not args.skip_watchboard:
+        logger.info("generating Watchboard items")
+        watchboard_topics = [
+            ("Russian armor near Suwałki corridor", "russia"),
+            ("Belarus succession + Russian forward presence", "belarus"),
+            ("Turkish position on Article 5 / Black Sea", "turkey"),
+            ("Latgale / Daugavpils unrest", "daugavpils"),
+            ("Riga blackout + GPS jamming northeastern Latvia", "riga"),
+            ("Neptun Deep platform sabotage status", "neptun"),
+            ("Oreshnik IRBM + tactical nuke posture in Belarus", "oreshnik"),
+            ("Ukrainian armistice durability", "armistice"),
+            ("Hungarian government stance post-Magyar", "hungary"),
+            ("NATO Baltic Defense Line readiness", "baltic"),
+        ]
+        for topic, key in watchboard_topics:
+            try:
+                evidence = [
+                    EvidenceItem(text=p, source=f"briefing ¶{i + 1}")
+                    for i, p in enumerate(paragraphs)
+                    if key.lower() in p.lower()
+                ][:6]
+                if not evidence:
+                    evidence = [
+                        EvidenceItem(text=p, source=f"briefing ¶{i + 1}")
+                        for i, p in enumerate(paragraphs[:30])
+                    ][:3]
+                item = await synthesize(
+                    SynthesizeInput(
+                        kind="watchboard-item",
+                        topic=topic,
+                        evidence=evidence,
+                        confidence="MEDIUM",
+                    )
+                )
+                db.insert(
+                    "findings",
+                    topic=topic,
+                    kind="watchboard-item",
+                    text=item,
+                    confidence="MEDIUM",
+                    citations=[e.source for e in evidence],
+                )
+                logger.info("  ✓ watchboard: %s", topic)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("  fail watchboard %s: %s", topic, exc)
+
+    # ── 7. Dissent / Alternative View blocks ──────────────────────────
+    if paragraphs and not args.skip_dissents:
+        logger.info("generating Alternative View dissent blocks")
+        dissent_topics = [
+            "Russia is not committed to invading Latvia — military movements are coercive signaling",
+            "The Belarus succession crisis is a Russian opportunity, not a Russian operation",
+            "Turkey's hedging is principled neutrality, not Russian alignment",
+            "Latgale unrest reflects domestic Latvian failure, not Russian active measures",
+            "The Article 5 invocation will be operationally hollow without Turkish concurrence on the Black Sea",
+        ]
+        for topic in dissent_topics:
+            try:
+                evidence = [
+                    EvidenceItem(text=p, source=f"briefing ¶{i + 1}")
+                    for i, p in enumerate(paragraphs[:20])
+                ][:6]
+                d = await synthesize(
+                    SynthesizeInput(
+                        kind="dissent",
+                        topic=topic,
+                        evidence=evidence,
+                        confidence="LOW",
+                    )
+                )
+                db.insert(
+                    "findings",
+                    topic=topic,
+                    kind="dissent",
+                    text=d,
+                    confidence="LOW",
+                    citations=[e.source for e in evidence],
+                )
+                logger.info("  ✓ dissent: %s", topic[:60])
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("  fail dissent %s: %s", topic[:50], exc)
+
+    # ── 8. Hidden Connections (BFS through the resolved graph) ────────
+    if not args.skip_hidden_connections:
+        logger.info("scanning for Hidden Connections")
+        # Pick the top-5 most-connected actors as roots.
+        try:
+            top = top_entities_by_degree(limit=5)
+            for entity, deg in top:
+                if entity.type != "actor":
+                    continue
+                paths = find_hidden_connections(
+                    start_id=entity.id, max_hops=3, limit=3
+                )
+                if not paths:
+                    continue
+                # Build a finding describing each non-obvious chain.
+                evidence = [
+                    EvidenceItem(
+                        text=f"{entity.canonical_name} {summarize_path(p)}",
+                        source=f"graph:{entity.canonical_name}",
+                    )
+                    for p in paths[:3]
+                ]
+                hc = await synthesize(
+                    SynthesizeInput(
+                        kind="hidden-connection",
+                        topic=f"Indirect linkages from {entity.canonical_name}",
+                        evidence=evidence,
+                        confidence="LOW",
+                    )
+                )
+                db.insert(
+                    "findings",
+                    topic=entity.canonical_name,
+                    kind="hidden-connection",
+                    text=hc,
+                    confidence="LOW",
+                    citations=[e.source for e in evidence],
+                )
+                logger.info("  ✓ hidden-connection: %s (%d paths)", entity.canonical_name, len(paths))
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("  fail hidden-connection scan: %s", exc)
+
     logger.info("prep complete.")
 
 
@@ -283,6 +416,26 @@ def _parse_args() -> argparse.Namespace:
         "--resolve-starter",
         action="store_true",
         help="run the resolver over starter-doc text too (slow; adds ~5 minutes)",
+    )
+    parser.add_argument(
+        "--skip-watchboard",
+        action="store_true",
+        help="skip generating the 10 Watchboard items (saves ~2 minutes)",
+    )
+    parser.add_argument(
+        "--skip-dissents",
+        action="store_true",
+        help="skip generating Alternative View dissent blocks (saves ~1 minute)",
+    )
+    parser.add_argument(
+        "--skip-hidden-connections",
+        action="store_true",
+        help="skip Hidden Connections scan (saves ~1 minute)",
+    )
+    parser.add_argument(
+        "--findings-only",
+        action="store_true",
+        help="skip ingest+resolve; only regenerate findings against existing graph + corpus",
     )
     return parser.parse_args()
 
