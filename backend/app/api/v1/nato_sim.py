@@ -305,7 +305,12 @@ def _keyword_search_corpus(q: str, limit: int = 6) -> list[dict[str, Any]]:
 
 @router.post("/query")
 async def live_query(body: QueryIn) -> dict[str, Any]:
-    """Live analytical query — retrieves corpus context, synthesizes an INR-voice answer."""
+    """Live analytical query — retrieves corpus context, synthesizes an INR-voice answer.
+
+    Every successful query is appended to ``query_history`` so the
+    operator's session survives reloads, container restarts, and
+    multiple-tab use.
+    """
     hits = _keyword_search_corpus(body.q, limit=6)
     if hits:
         evidence = [
@@ -316,7 +321,6 @@ async def live_query(body: QueryIn) -> dict[str, Any]:
             for h in hits
         ]
     else:
-        # Fall back to the most recent briefing paragraphs so the LLM has something.
         row = db.query_one(
             "SELECT text FROM corpus_docs WHERE origin = 'briefing' LIMIT 1"
         )
@@ -337,13 +341,80 @@ async def live_query(body: QueryIn) -> dict[str, Any]:
             ),
         )
     )
-    return {
-        "answer": answer,
-        "sources": [
-            {"title": h.get("title"), "origin": h.get("origin"), "url": h.get("url")}
-            for h in hits
-        ],
-    }
+    sources = [
+        {"title": h.get("title"), "origin": h.get("origin"), "url": h.get("url")}
+        for h in hits
+    ]
+    # Persist to query_history so the session survives.
+    qid = db.insert(
+        "query_history",
+        q=body.q,
+        answer=answer,
+        sources=sources,
+    )
+    return {"id": qid, "answer": answer, "sources": sources}
+
+
+@router.get("/queries")
+async def list_queries(limit: int = Query(50, ge=1, le=200)) -> dict[str, Any]:
+    """Server-side query history. Newest first."""
+    rows = db.query(
+        "SELECT * FROM query_history ORDER BY ts DESC LIMIT ?",
+        limit,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
+
+
+@router.post("/queries/{query_id}/pin")
+async def pin_query(query_id: str, body: dict[str, Any] = Body(default_factory=dict)) -> dict[str, Any]:
+    """Pin or unpin a query. Optional ``note`` text."""
+    pinned = 1 if body.get("pinned", True) else 0
+    note = body.get("note") or None
+    db.execute(
+        "UPDATE query_history SET pinned = ?, note = COALESCE(?, note) WHERE id = ?",
+        pinned, note, query_id,
+    )
+    row = db.query_one("SELECT * FROM query_history WHERE id = ?", query_id)
+    if not row:
+        raise HTTPException(status_code=404, detail="not found")
+    return {"item": db.row_to_dict(row)}
+
+
+@router.delete("/queries/{query_id}")
+async def delete_query(query_id: str) -> dict[str, Any]:
+    db.execute("DELETE FROM query_history WHERE id = ?", query_id)
+    return {"ok": True}
+
+
+@router.get("/entities")
+async def list_entities(
+    limit: int = Query(200, ge=1, le=500),
+    type: str | None = Query(None),
+) -> dict[str, Any]:
+    """Sorted entity list with degree + first/last seen — backs the
+    Network tab's CSV-style table view.
+    """
+    where = ""
+    params: list[Any] = []
+    if type:
+        where = "WHERE e.type = ?"
+        params.append(type)
+    rows = db.query(
+        f"""
+        SELECT e.id, e.type, e.canonical_name,
+               e.first_seen_at, e.last_seen_at,
+               (SELECT COUNT(*) FROM edges
+                WHERE from_entity = e.id OR to_entity = e.id) AS degree,
+               (SELECT COUNT(*) FROM edges WHERE from_entity = e.id) AS out_degree,
+               (SELECT COUNT(*) FROM claims WHERE about_entity = e.id) AS claim_count
+        FROM entities e
+        {where}
+        ORDER BY degree DESC, e.canonical_name ASC
+        LIMIT ?
+        """,
+        *params, limit,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
 
 
 # ─────────────────────────────────────────────────────────────────

@@ -176,6 +176,17 @@ CREATE TABLE IF NOT EXISTS pinned (
     pinned_at TEXT DEFAULT (datetime('now')),
     FOREIGN KEY(finding_id) REFERENCES findings(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS query_history (
+    id TEXT PRIMARY KEY,
+    q TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    sources TEXT,
+    pinned INTEGER DEFAULT 0,
+    note TEXT,
+    ts TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_query_history_ts ON query_history(ts DESC);
 """
 
 

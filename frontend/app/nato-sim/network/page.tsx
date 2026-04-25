@@ -1,41 +1,44 @@
 /**
- * /nato-sim/network — d3 force-directed entity graph.
+ * Network — entity + outlier table view.
  *
- * Shows the top-N entities by degree and every edge between them.
- * Node color by entity type; edge thickness by edge weight. Interactive
- * drag-to-rearrange.
+ * Replaces the d3 force-directed graph. Real INR analysts work in
+ * tables, not animations. Two stacked panels:
+ *   1. Entities sorted by degree (most-connected first), with type,
+ *      first/last seen, claim count. Clickable to drill into Country
+ *      File when the entity is a major actor.
+ *   2. Outlier Messages — every message whose outlier_score >= 0.4,
+ *      with priority, signal explanations, source, time.
+ *
+ * No animation. Sortable columns. CSV-table flavor.
  */
-
-import NetworkGraphClient from "./NetworkGraphClient";
 import { Letterhead } from "../_components/Letterhead";
-import { getNetworkSnapshot } from "../_lib/api";
+import { NetworkTable } from "./NetworkTable";
 
 export const dynamic = "force-dynamic";
 
-export default async function NetworkPage() {
-  const snapshot = await getNetworkSnapshot(60);
+export default function NetworkPage() {
   return (
-    <main className="flex-1 overflow-hidden flex flex-col">
-      <div className="max-w-6xl w-full mx-auto px-10 py-6 flex flex-col flex-1 min-h-0">
+    <main>
+      <div className="max-w-5xl mx-auto px-10 py-10">
         <Letterhead cableNumber="INR-NATO-NETWORK-001" />
+
         <div className="font-mono text-[10px] tracking-[0.28em] uppercase text-li-text-muted mb-1">
-          Entity Network
+          Entity Network · Outlier Surface
         </div>
-        <h1 className="font-display text-[28px] leading-tight text-li-text-primary tracking-tight">
-          Resolved Knowledge Graph — Top Entities
+        <h1 className="font-display text-[34px] leading-tight text-li-text-primary tracking-tight">
+          Resolved Knowledge Graph
         </h1>
-        <div className="mt-2 mb-5 text-[12px] text-li-text-secondary leading-relaxed">
-          {snapshot.nodes.length} entities · {snapshot.edges.length} edges. Drag
-          to rearrange. Color by type:
-          <span className="text-li-cyan ml-2">actor</span>
-          <span className="text-li-green ml-2">place</span>
-          <span className="text-li-yellow ml-2">event</span>
-          <span className="text-li-purple ml-2">system</span>
-          <span className="text-li-blue ml-2">region</span>
+        <div className="mt-2 text-[13px] text-li-text-secondary leading-relaxed max-w-3xl">
+          Every entity the resolver has extracted from the corpus and
+          live traffic. Sortable by degree (incoming + outgoing edges),
+          first/last seen, type. Below: every message whose outlier
+          score crossed the 0.40 threshold, with the fired signals
+          explained.
         </div>
-        <div className="flex-1 min-h-0 border border-li-border bg-li-black-surface/40">
-          <NetworkGraphClient nodes={snapshot.nodes} edges={snapshot.edges} />
-        </div>
+
+        <div className="my-8 h-px bg-li-border" />
+
+        <NetworkTable />
       </div>
     </main>
   );
