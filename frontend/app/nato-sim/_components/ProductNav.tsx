@@ -16,6 +16,7 @@ const PRODUCTS = [
   { href: "/nato-sim/actors", label: "Country Files" },
   { href: "/nato-sim/watchboard", label: "Watchboard" },
   { href: "/nato-sim/gaps", label: "Gaps" },
+  { href: "/nato-sim/agencies", label: "Agencies" },
   { href: "/nato-sim/network", label: "Network" },
   { href: "/nato-sim/dissents", label: "Alt Views" },
   { href: "/nato-sim/sources", label: "Sources" },

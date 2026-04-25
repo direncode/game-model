@@ -16,9 +16,80 @@ from __future__ import annotations
 from typing import Final
 
 
-IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
+IC_AGENCIES: Final[dict[str, dict[str, Any]]] = {
+    "POTUS": {
+        "long_name": "Office of the President of the United States",
+        "sim_team": {
+            "room": "4003",
+            "director": "Admiral Dennis C. Blair (USN, ret.)",
+            "members": ["Mark Thomas-Patterson — National Security Advisor"],
+        },
+        "strengths": [
+            "ultimate consumer of finished intelligence",
+            "decision authority on national-level response",
+        ],
+        "best_for_gaps_about": [
+            "consumer needs — what the President is asking",
+            "POTUS-tier decision tempo",
+        ],
+    },
+    "ODNI": {
+        "long_name": "Office of the Director of National Intelligence",
+        "sim_team": {
+            "room": "1001 (Atrium)",
+            "director": "Jack Barr — DNI",
+            "members": ["Toni Winkler — Deputy"],
+        },
+        "strengths": [
+            "IC-wide tasking and integration",
+            "PDB content authority",
+            "convenes the National Intelligence Council",
+        ],
+        "best_for_gaps_about": [
+            "cross-agency tasking decisions",
+            "integrated assessments routed to POTUS",
+            "IC-wide collection prioritization",
+        ],
+    },
+    "INR-internal": {
+        "long_name": "State INR — Bureau of Intelligence and Research",
+        "sim_team": {
+            "room": "2010",
+            "director": "Luke Garner",
+            "members": [
+                "Daniel Sielicki",
+                "Diren Kumaratilleke",
+                "Daniel Zeng",
+                "Connor Lamb",
+            ],
+        },
+        "strengths": [
+            "diplomatic reporting from posts (FSO cables)",
+            "long-form regional analysis",
+            "all-source synthesis with Sec State as primary customer",
+            "willingness to dissent from IC consensus",
+        ],
+        "best_for_gaps_about": [
+            "what foreign governments are saying through diplomatic channels",
+            "FSO-observed actions on the ground",
+            "long-running political-economic context for an actor",
+            "alliance-partner posture inferred from diplomatic signals",
+        ],
+    },
     "CIA": {
         "long_name": "Central Intelligence Agency",
+        "sim_team": {
+            "room": "1005",
+            "director": "Nathan Garrett",
+            "members": [
+                "John Barrett (US Army)",
+                "Maddie Beaupre",
+                "Ray Taft",
+                "Sophie Shepherd",
+                "Ryan Clark",
+                "Barrett Massand",
+            ],
+        },
         "strengths": [
             "all-source HUMINT against foreign governments",
             "covert HUMINT — especially political-elite penetration",
@@ -34,6 +105,18 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
     },
     "DIA": {
         "long_name": "Defense Intelligence Agency",
+        "sim_team": {
+            "room": "1009",
+            "director": "William Phillips",
+            "members": [
+                "Alexander P. Vamvakias",
+                "Elinor Storey",
+                "Page Smith",
+                "Paul Lewis",
+                "Anton Leng",
+                "Dirsta Ioan",
+            ],
+        },
         "strengths": [
             "military order of battle",
             "foreign military doctrine and capabilities",
@@ -49,6 +132,18 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
     },
     "NSA": {
         "long_name": "National Security Agency",
+        "sim_team": {
+            "room": "3009",
+            "director": "Rhishit Tiwari",
+            "members": [
+                "Sarah Terlizzi",
+                "Maddie Beaupre",
+                "Nicole Juzaitis",
+                "Brem Sholar",
+                "Mpieri Ezinne",
+                "Ted Teague",
+            ],
+        },
         "strengths": [
             "SIGINT — communications intercept",
             "cryptanalysis",
@@ -64,6 +159,18 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
     },
     "NGA": {
         "long_name": "National Geospatial-Intelligence Agency",
+        "sim_team": {
+            "room": "3024",
+            "director": "Kent Wiggs",
+            "members": [
+                "Hayden Wallace",
+                "John Britt",
+                "Drake Betts",
+                "Grace Fuller",
+                "Alexia Zambito",
+                "Ian Bordes",
+            ],
+        },
         "strengths": [
             "imagery intelligence (satellite + airborne)",
             "geospatial analysis",
@@ -77,19 +184,17 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
             "cross-border movements",
         ],
     },
-    "NRO": {
-        "long_name": "National Reconnaissance Office",
-        "strengths": [
-            "overhead collection asset tasking",
-            "high-cadence satellite reconnaissance",
-        ],
-        "best_for_gaps_about": [
-            "anything requiring tasked overhead collection",
-            "high-cadence imaging revisit on contested sites",
-        ],
-    },
     "FBI": {
         "long_name": "Federal Bureau of Investigation",
+        "sim_team": {
+            "room": "2008",
+            "director": "Eli Davis",
+            "members": [
+                "Nicole Starvojohn",
+                "Nolan Bates",
+                "Bennett Booker",
+            ],
+        },
         "strengths": [
             "domestic counterintelligence",
             "foreign-influence operations on US soil",
@@ -101,8 +206,87 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
             "domestic implications of foreign intelligence operations",
         ],
     },
+    "EUCOM-J2": {
+        "long_name": "U.S. European Command, J2 (Intelligence Directorate)",
+        "sim_team": {
+            "room": "1001 (Atrium)",
+            "director": "Lt. Col. Lisa Klekowski (US Army)",
+            "members": ["Captain Oren Rosen (US Army)"],
+        },
+        "strengths": [
+            "theater-level military intelligence on Europe",
+            "force-protection intelligence for US-EUR forces",
+            "liaison with NATO intelligence partners",
+        ],
+        "best_for_gaps_about": [
+            "tactical/operational European-theater questions",
+            "alliance-partner intelligence sharing",
+            "force-protection-relevant threats in theater",
+        ],
+    },
+    "NATO-NIFC": {
+        "long_name": "NATO Intelligence Fusion Centre / JISD",
+        "sim_team": {
+            "room": "3033",
+            "director": "Lucas Wicki",
+            "members": ["Skye Law"],
+        },
+        "strengths": [
+            "alliance-partner intelligence integration",
+            "multi-national fusion of theater reporting",
+            "REL TO NATO sharing channel",
+        ],
+        "best_for_gaps_about": [
+            "alliance cohesion indicators",
+            "NATO-partner-specific reporting State cannot independently verify",
+            "what other 31 allies are seeing in their own collection",
+        ],
+    },
+    "Control": {
+        "long_name": "Collection Control · Faculty Game-Master",
+        "sim_team": {
+            "room": "1203",
+            "director": "Riley Seiple",
+            "members": [
+                "Prof. Bill Boettcher",
+                "Prof. Bob Jenkins",
+                "Col. Jay Bateman",
+                "Prof. Carolyn Pumphrey",
+            ],
+        },
+        "strengths": [
+            "scenario authoritative source",
+            "all collection-tasking responses",
+            "inject delivery + tempo control",
+        ],
+        "best_for_gaps_about": [
+            "any collection request requires Control approval",
+            "ground-truth on what is happening in the scenario",
+        ],
+    },
+    "NRO": {
+        "long_name": "National Reconnaissance Office",
+        "sim_team": {
+            "room": "(not on the AWIS sim floor)",
+            "director": "—",
+            "members": [],
+        },
+        "strengths": [
+            "overhead collection asset tasking",
+            "high-cadence satellite reconnaissance",
+        ],
+        "best_for_gaps_about": [
+            "anything requiring tasked overhead collection",
+            "high-cadence imaging revisit on contested sites",
+        ],
+    },
     "Treasury": {
         "long_name": "Treasury Office of Intelligence and Analysis (FinCEN/OFAC nexus)",
+        "sim_team": {
+            "room": "(not on the AWIS sim floor)",
+            "director": "—",
+            "members": [],
+        },
         "strengths": [
             "financial intelligence",
             "sanctions enforcement and tracking",
@@ -117,6 +301,11 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
     },
     "Energy": {
         "long_name": "Department of Energy / Office of Intelligence and Counterintelligence",
+        "sim_team": {
+            "room": "(not on the AWIS sim floor)",
+            "director": "—",
+            "members": [],
+        },
         "strengths": [
             "nuclear weapons intelligence",
             "foreign nuclear-energy programs",
@@ -126,43 +315,6 @@ IC_AGENCIES: Final[dict[str, dict[str, list[str] | str]]] = {
             "nuclear posture changes",
             "radiological signatures and incidents",
             "civilian-nuclear-program dual-use questions",
-        ],
-    },
-    "EUCOM-J2": {
-        "long_name": "U.S. European Command, J2 (Intelligence Directorate)",
-        "strengths": [
-            "theater-level military intelligence on Europe",
-            "force-protection intelligence for US-EUR forces",
-            "liaison with NATO intelligence partners",
-        ],
-        "best_for_gaps_about": [
-            "tactical/operational European-theater questions",
-            "alliance-partner intelligence sharing",
-            "force-protection-relevant threats in theater",
-        ],
-    },
-    "NATO-NIFC": {
-        "long_name": "NATO Intelligence Fusion Centre",
-        "strengths": [
-            "alliance-partner intelligence integration",
-            "multi-national fusion of theater reporting",
-        ],
-        "best_for_gaps_about": [
-            "alliance cohesion indicators",
-            "NATO-partner-specific reporting State cannot independently verify",
-        ],
-    },
-    "INR-internal": {
-        "long_name": "State INR — Bureau of Intelligence and Research",
-        "strengths": [
-            "diplomatic reporting from posts (FSO cables)",
-            "long-form regional analysis",
-            "all-source synthesis",
-        ],
-        "best_for_gaps_about": [
-            "what foreign governments are saying through diplomatic channels",
-            "FSO-observed actions on the ground",
-            "long-running political-economic context for an actor",
         ],
     },
 }
