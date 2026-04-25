@@ -15,3 +15,7 @@ from app.services.nato_sim.judgment.priority import score_priority, Priority  # 
 from app.services.nato_sim.judgment.confidence import calibrate, Confidence  # noqa: F401
 from app.services.nato_sim.judgment.dissent import needs_dissent, DissentCheck  # noqa: F401
 from app.services.nato_sim.judgment.inr_voice import get_inr_voice  # noqa: F401
+from app.services.nato_sim.judgment.agency_capabilities import (  # noqa: F401
+    IC_AGENCIES,
+    render_agency_directory,
+)

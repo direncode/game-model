@@ -37,6 +37,11 @@ from app.services.nato_sim.graph import (
     top_entities_by_degree,
 )
 from app.services.nato_sim.ingest.pipeline import ingest_message
+from app.services.nato_sim.gap_scanner import (
+    list_gaps,
+    mark_resolved,
+    scan_gaps,
+)
 from app.services.nato_sim.synthesizer import (
     EvidenceItem,
     SynthesizeInput,
@@ -384,6 +389,42 @@ async def pin_query(query_id: str, body: dict[str, Any] = Body(default_factory=d
 async def delete_query(query_id: str) -> dict[str, Any]:
     db.execute("DELETE FROM query_history WHERE id = ?", query_id)
     return {"ok": True}
+
+
+@router.get("/gaps")
+async def gaps_list(
+    only_unresolved: bool = Query(True),
+    limit: int = Query(100, ge=1, le=500),
+) -> dict[str, Any]:
+    """List current intelligence gaps + their agency tasking recommendations."""
+    return {"items": list_gaps(only_unresolved=only_unresolved, limit=limit)}
+
+
+@router.post("/gaps/scan")
+async def gaps_scan(limit: int = Query(12, ge=1, le=30)) -> dict[str, Any]:
+    """Run a gap scan over current findings.
+
+    Iterates over LOW-confidence + dissent + watchboard findings, asks
+    Grok-deep for the gap + recommended agencies + specific collection,
+    persists to gap_analyses. Returns the new/updated entries.
+    """
+    items = await scan_gaps(limit=limit)
+    return {"generated": len(items), "items": items}
+
+
+@router.post("/gaps/{gap_id}/resolve")
+async def gaps_resolve(gap_id: str, body: dict[str, Any] = Body(default_factory=dict)) -> dict[str, Any]:
+    """Mark a gap as resolved (or reopen)."""
+    resolved = bool(body.get("resolved", True))
+    mark_resolved(gap_id, resolved=resolved)
+    return {"ok": True, "id": gap_id, "resolved": resolved}
+
+
+@router.get("/agencies")
+async def agencies_directory() -> dict[str, Any]:
+    """Return the IC agency capability map. Used by the Gaps page UI."""
+    from app.services.nato_sim.judgment import IC_AGENCIES
+    return {"agencies": IC_AGENCIES}
 
 
 @router.get("/entities")

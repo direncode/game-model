@@ -187,6 +187,20 @@ CREATE TABLE IF NOT EXISTS query_history (
     ts TEXT NOT NULL DEFAULT (datetime('now'))
 );
 CREATE INDEX IF NOT EXISTS idx_query_history_ts ON query_history(ts DESC);
+
+CREATE TABLE IF NOT EXISTS gap_analyses (
+    id TEXT PRIMARY KEY,
+    topic TEXT NOT NULL,
+    why_a_gap TEXT NOT NULL,
+    recommended_agencies TEXT,         -- JSON array of agency keys
+    specific_collection TEXT,
+    priority TEXT,                     -- HIGH / MEDIUM / LOW
+    related_finding_id TEXT,
+    generated_at TEXT DEFAULT (datetime('now')),
+    resolved INTEGER DEFAULT 0,
+    FOREIGN KEY(related_finding_id) REFERENCES findings(id) ON DELETE SET NULL
+);
+CREATE INDEX IF NOT EXISTS idx_gaps_priority ON gap_analyses(priority, generated_at DESC);
 """
 
 
