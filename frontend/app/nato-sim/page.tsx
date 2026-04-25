@@ -9,6 +9,7 @@
 import Link from "next/link";
 import { Letterhead } from "./_components/Letterhead";
 import { InrProse } from "./_components/inr/InrProse";
+import { StatusStrip } from "./_components/StatusStrip";
 
 export const dynamic = "force-dynamic";
 
@@ -64,8 +65,15 @@ export default async function NatoSimDailyReadPage() {
 
         <div className="my-8 h-px bg-li-border" />
 
-        <div className="mb-6 text-[11px] font-mono text-li-text-muted">
-          Inbound traffic: <Link href="/nato-sim/inbound" className="text-li-cyan hover:text-li-text-primary">paste &amp; score →</Link>
+        <StatusStrip />
+
+        <div className="mb-6 flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-mono text-li-text-muted">
+          <Link href="/nato-sim/inbound" className="text-li-cyan hover:text-li-text-primary">
+            inbound: paste &amp; score →
+          </Link>
+          <Link href="/nato-sim/query" className="text-li-cyan hover:text-li-text-primary">
+            query: ask the corpus →
+          </Link>
         </div>
 
         {daily ? (

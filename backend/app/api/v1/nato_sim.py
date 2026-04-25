@@ -135,6 +135,59 @@ async def get_finding(finding_id: str) -> dict[str, Any]:
     return {"finding": db.row_to_dict(row)}
 
 
+@router.get("/prep-status")
+async def prep_status() -> dict[str, Any]:
+    """System-pulse counters — used to show prep progress in the UI.
+
+    Returns counts from the live DB so the operator can see resolution +
+    synthesis progressing without reading the sidecar log directly.
+    Cheap (a handful of COUNT queries) so safe to poll every few seconds.
+    """
+    def n(sql: str, *params: Any) -> int:
+        row = db.query_one(sql, *params)
+        return int(row["c"]) if row else 0
+
+    findings_by_kind: dict[str, int] = {}
+    rows = db.query(
+        "SELECT kind, COUNT(*) AS c FROM findings WHERE superseded_by IS NULL GROUP BY kind"
+    )
+    for r in rows:
+        findings_by_kind[r["kind"]] = int(r["c"])
+
+    last_event = db.query_one(
+        "SELECT kind, ts, payload FROM events_log ORDER BY ts DESC LIMIT 1"
+    )
+    recent_events = db.query(
+        "SELECT kind, ts FROM events_log ORDER BY ts DESC LIMIT 10"
+    )
+
+    return {
+        "corpus": {
+            "docs": n("SELECT COUNT(*) AS c FROM corpus_docs"),
+            "briefing_chars": n(
+                "SELECT COALESCE(SUM(length(text)),0) AS c FROM corpus_docs WHERE origin = 'briefing'"
+            ),
+            "friday_chars": n(
+                "SELECT COALESCE(SUM(length(text)),0) AS c FROM corpus_docs WHERE origin = 'friday-deck'"
+            ),
+        },
+        "graph": {
+            "entities": n("SELECT COUNT(*) AS c FROM entities"),
+            "claims": n("SELECT COUNT(*) AS c FROM claims"),
+            "edges": n("SELECT COUNT(*) AS c FROM edges"),
+        },
+        "findings": findings_by_kind,
+        "messages": {
+            "total": n("SELECT COUNT(*) AS c FROM messages"),
+            "outliers": n(
+                "SELECT COUNT(*) AS c FROM messages WHERE outlier_score >= 0.4"
+            ),
+        },
+        "last_event": db.row_to_dict(last_event) if last_event else None,
+        "recent_events": [db.row_to_dict(r) for r in recent_events],
+    }
+
+
 @router.get("/corpus")
 async def list_corpus(limit: int = Query(200, ge=1, le=500)) -> dict[str, Any]:
     """List every ingested corpus document, newest first."""
