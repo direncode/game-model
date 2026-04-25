@@ -346,7 +346,6 @@ def _keyword_search_corpus(q: str, limit: int = 6) -> list[dict[str, Any]]:
     tokens = [t for t in q.lower().split() if len(t) > 2]
     if not tokens:
         return []
-    # Build a SQL expression that ranks rows by keyword density.
     like_clauses = " + ".join(
         "(CASE WHEN lower(text) LIKE ? THEN 1 ELSE 0 END)" for _ in tokens
     )
@@ -365,24 +364,95 @@ def _keyword_search_corpus(q: str, limit: int = 6) -> list[dict[str, Any]]:
     return [dict(r) for r in rows if dict(r).get("score", 0) > 0]
 
 
+def _keyword_search_messages(q: str, limit: int = 8) -> list[dict[str, Any]]:
+    """Lexical retrieval over ingested cable traffic.
+
+    Searches ``messages`` for keyword-density matches against ``content``
+    AND the cable subject embedded in ``raw_json``. Restricted to
+    operator-curated traffic (intel-inject + paste + webhook + discord
+    sources — not the corpus chunks loaded during prep).
+    """
+    tokens = [t for t in q.lower().split() if len(t) > 2]
+    if not tokens:
+        return []
+    like_clauses = " + ".join(
+        "((CASE WHEN lower(content) LIKE ? THEN 1 ELSE 0 END) "
+        "+ (CASE WHEN lower(COALESCE(raw_json,'')) LIKE ? THEN 1 ELSE 0 END))"
+        for _ in tokens
+    )
+    params: list[Any] = []
+    for t in tokens:
+        params.append(f"%{t}%")
+        params.append(f"%{t}%")
+    rows = db.query(
+        f"""
+        SELECT id, source, channel, author, content, ts, raw_json,
+               outlier_score, outlier_signals, priority,
+               ({like_clauses}) AS score
+        FROM messages
+        WHERE source IN ('intel-inject','paste','webhook','discord')
+          AND content IS NOT NULL
+        ORDER BY score DESC, ts DESC
+        LIMIT ?
+        """,
+        *params,
+        limit,
+    )
+    return [dict(r) for r in rows if int(dict(r).get("score", 0) or 0) > 0]
+
+
 @router.post("/query")
 async def live_query(body: QueryIn) -> dict[str, Any]:
-    """Live analytical query — retrieves corpus context, synthesizes an INR-voice answer.
+    """Live analytical query — retrieves evidence from BOTH the briefing
+    corpus AND the live cable traffic, then synthesizes an INR-voice
+    answer.
 
-    Every successful query is appended to ``query_history`` so the
-    operator's session survives reloads, container restarts, and
-    multiple-tab use.
+    Cable traffic gets priority weight in the evidence stack: cables are
+    operationally fresher than the briefing book, and queries from the
+    operator are usually about *current* posture.
+
+    Every successful query is appended to ``query_history``.
     """
-    hits = _keyword_search_corpus(body.q, limit=6)
-    if hits:
-        evidence = [
+    import json as _json
+
+    cable_hits = _keyword_search_messages(body.q, limit=8)
+    corpus_hits = _keyword_search_corpus(body.q, limit=4)
+
+    evidence: list[EvidenceItem] = []
+
+    # Cable traffic first — cables are fresh and operationally relevant.
+    for h in cable_hits:
+        raw = h.get("raw_json") or "{}"
+        try:
+            meta = _json.loads(raw) if isinstance(raw, str) else (raw or {})
+        except Exception:
+            meta = {}
+        subject = meta.get("subject") or h.get("channel") or "cable"
+        dtg = meta.get("dtg") or ""
+        src_from = meta.get("from") or h.get("author") or ""
+        label = f"cable·{subject}"
+        if dtg:
+            label += f"·{dtg}"
+        elif src_from:
+            label += f"·{src_from}"
+        evidence.append(
             EvidenceItem(
-                text=(h["text"] or "")[:1200],
+                text=(h.get("content") or "")[:1400],
+                source=label[:120],
+            )
+        )
+
+    # Then briefing corpus chunks for deep context.
+    for h in corpus_hits:
+        evidence.append(
+            EvidenceItem(
+                text=(h.get("text") or "")[:1200],
                 source=h.get("title") or h.get("origin") or "corpus",
             )
-            for h in hits
-        ]
-    else:
+        )
+
+    if not evidence:
+        # Fallback: pull a slice of the briefing so we always have something.
         row = db.query_one(
             "SELECT text FROM corpus_docs WHERE origin = 'briefing' LIMIT 1"
         )
@@ -397,24 +467,67 @@ async def live_query(body: QueryIn) -> dict[str, Any]:
             confidence="MEDIUM",
             use_deep_model=True,
             extra_instructions=(
-                "Answer the operator's specific question. Do not re-dump general "
-                "background unless it is directly relevant. If the evidence is "
-                "insufficient, say so explicitly in the BLUF."
+                "Answer the operator's specific question. Use cable traffic "
+                "evidence (sources prefixed 'cable·…') as the primary basis "
+                "when current cables address the question; use briefing-corpus "
+                "evidence for historical/baseline context. Cite each substantive "
+                "claim back to a specific source label. If evidence is "
+                "insufficient, say so explicitly in the BLUF and name the "
+                "specific gap."
             ),
         )
     )
-    sources = [
-        {"title": h.get("title"), "origin": h.get("origin"), "url": h.get("url")}
-        for h in hits
+
+    cable_sources = [
+        {
+            "id": h.get("id"),
+            "subject": (
+                _json.loads(h.get("raw_json") or "{}").get("subject")
+                if isinstance(h.get("raw_json"), str)
+                else None
+            ),
+            "from": (
+                _json.loads(h.get("raw_json") or "{}").get("from")
+                if isinstance(h.get("raw_json"), str)
+                else h.get("author")
+            ),
+            "dtg": (
+                _json.loads(h.get("raw_json") or "{}").get("dtg")
+                if isinstance(h.get("raw_json"), str)
+                else None
+            ),
+            "ts": h.get("ts"),
+            "outlier_score": h.get("outlier_score"),
+        }
+        for h in cable_hits
     ]
-    # Persist to query_history so the session survives.
+    corpus_sources = [
+        {"title": h.get("title"), "origin": h.get("origin"), "url": h.get("url")}
+        for h in corpus_hits
+    ]
+
+    sources = corpus_sources + [
+        {"title": s.get("subject"), "origin": "cable", "url": None}
+        for s in cable_sources
+    ]
+
     qid = db.insert(
         "query_history",
         q=body.q,
         answer=answer,
         sources=sources,
     )
-    return {"id": qid, "answer": answer, "sources": sources}
+    return {
+        "id": qid,
+        "answer": answer,
+        "sources": sources,
+        "cable_sources": cable_sources,
+        "corpus_sources": corpus_sources,
+        "evidence_counts": {
+            "cables": len(cable_hits),
+            "corpus": len(corpus_hits),
+        },
+    }
 
 
 @router.get("/queries")
