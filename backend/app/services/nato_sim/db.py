@@ -28,7 +28,10 @@ from typing import Any, Iterable
 logger = logging.getLogger(__name__)
 
 _DB_PATH = Path("data/nato-sim.db")
-_lock = threading.Lock()
+# RLock — reentrant. ``init_db`` is called from inside ``get_db``'s
+# critical section on first connection; with a plain ``Lock`` that
+# nested call deadlocks. RLock allows the same thread to re-acquire.
+_lock = threading.RLock()
 _conn: sqlite3.Connection | None = None
 
 
