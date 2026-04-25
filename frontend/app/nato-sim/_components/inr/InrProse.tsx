@@ -26,11 +26,47 @@ const PARA_RE = /^\s*(\d+)\.\s+/;
 const PORTION_RE = /\((U|C|S)\)\s*/g;
 const CITE_RE = /\[([^\]\n]{1,160})\]/g;
 
+/**
+ * Strip common markdown formatting markers from LLM output. INR
+ * products are plain prose; the synthesizer occasionally emits
+ * **bold**, *italic*, `code`, # headings, or [link](url) — those are
+ * removed before structural parsing so the rendered page reads as
+ * clean cable-prose.
+ *
+ * Note: ``[bracketed citations]`` are NOT stripped because they
+ * have no following ``(url)`` parens — only true markdown links match.
+ * Portion markers ``(U)/(C)/(S)`` are also untouched (no markdown semantics).
+ */
+function stripMarkdown(text: string): string {
+  if (!text) return text;
+  return text
+    // [link](url) → link  (must run BEFORE bracket-citation logic in parser)
+    .replace(/\[([^\]\n]+)\]\(([^)\s]+)\)/g, "$1")
+    // **bold** → bold
+    .replace(/\*\*([^*\n]+)\*\*/g, "$1")
+    // __bold__ → bold
+    .replace(/__([^_\n]+)__/g, "$1")
+    // *italic* (not preceded/followed by another star) → italic
+    .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1$2")
+    // _italic_ (word-boundary friendly) → italic
+    .replace(/(^|\s)_([^_\n]+)_(?=\s|[.,;:!?)]|$)/g, "$1$2")
+    // `inline code` → code
+    .replace(/`([^`\n]+)`/g, "$1")
+    // ATX headings: leading #'s on their own
+    .replace(/^#{1,6}\s+/gm, "")
+    // Strikethrough ~~text~~ → text
+    .replace(/~~([^~\n]+)~~/g, "$1")
+    // Stray standalone ** or __ markers left behind
+    .replace(/\*\*/g, "")
+    .replace(/__/g, "");
+}
+
 function parse(text: string): ParsedFinding {
   if (!text || !text.trim()) {
     return { bluf: null, paragraphs: [], altView: null, confidenceLine: null };
   }
-  const blocks = text
+  const cleaned = stripMarkdown(text);
+  const blocks = cleaned
     .split(/\n\s*\n/)
     .map((b) => b.trim())
     .filter(Boolean);
@@ -178,7 +214,7 @@ export function InrProse({ text }: { text: string }) {
   if (!bluf && paragraphs.length === 0) {
     return (
       <pre className="whitespace-pre-wrap text-[13.5px] leading-[1.7] text-li-text-primary font-display bg-transparent p-0 border-0">
-        {text}
+        {stripMarkdown(text)}
       </pre>
     );
   }
