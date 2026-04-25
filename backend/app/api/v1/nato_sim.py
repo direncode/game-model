@@ -391,6 +391,183 @@ async def delete_query(query_id: str) -> dict[str, Any]:
     return {"ok": True}
 
 
+class OperationalizeIn(BaseModel):
+    content: str = Field(..., min_length=10)
+    source: str | None = "tasking-memo"
+
+
+@router.post("/operationalize")
+async def operationalize(body: OperationalizeIn) -> dict[str, Any]:
+    """Process a tasking memo — extract discrete tasks, RAG-answer each,
+    surface gaps with IC tasking recommendations.
+
+    For each tasking line in the input:
+      1. Synthesize an INR-voice answer using current corpus + findings.
+      2. Identify the residual evidence gap.
+      3. Recommend agencies + specific collection ask to fill it.
+
+    Persists each result as a finding (kind='task-response') and a
+    gap_analyses row. Returns the structured response for inline render.
+
+    Cost: ~8 LLM calls per typical 5-task memo (1 extract + ~7 combined
+    synthesis+gap calls). Roughly $2-4 in xAI credits per memo.
+    """
+    import json as _json
+    import re as _re
+
+    from app.services.nato_sim.judgment import (
+        get_inr_voice,
+        render_agency_directory,
+    )
+    from app.services.nato_sim.llm import llm_call
+
+    # ── 1. Extract discrete tasking lines via grok-3 ──────────────────
+    extract_system = """You are parsing a U.S. intelligence tasking memo. Extract each discrete tasking question, action, or order as a separate JSON string in an array. Preserve specificity — do NOT summarize or merge. Each array element should be a single action item or question.
+
+Output STRICT JSON: an array of strings. Example:
+["Identify the positions of NATO government decision makers on commitment to Article 5 responses.", "Ensure NATO NIFC is apprised of cleared intelligence in light of the Riga cyberattack."]
+
+Output ONLY the JSON array. No prose."""
+    extract_res = await llm_call(
+        body.content,
+        system=extract_system,
+        model="routine",
+        temperature=0.0,
+        max_tokens=1200,
+    )
+    try:
+        m = _re.search(r"\[[\s\S]*\]", extract_res.text)
+        if not m:
+            raise ValueError("no JSON array")
+        tasks: list[str] = _json.loads(m.group(0))
+        tasks = [t.strip() for t in tasks if isinstance(t, str) and t.strip()][:8]
+    except Exception as exc:
+        return {"error": f"could not parse tasking: {exc}", "raw": extract_res.text[:500]}
+
+    if not tasks:
+        return {"error": "no tasks extracted from memo", "raw": extract_res.text[:500]}
+
+    # ── 2. Combined synthesis+gap per task — single LLM call each ─────
+    combined_system = (
+        get_inr_voice()
+        + "\n\n"
+        + render_agency_directory()
+        + "\n\n"
+        + """# Tasking Response
+
+You are responding to a single intelligence tasking question. Output STRICT JSON (no prose, no markdown fences) matching this schema:
+
+{
+  "what_we_know": "INR-voice answer in plain prose: BLUF first sentence, then 1-3 short paragraphs with [citations] and (U)(C)(S) portion markers. ~120-200 words.",
+  "what_we_dont_know": "one or two sentences naming the residual gap.",
+  "recommended_agencies": ["CIA", "DIA", ...],   # 1-3 keys from the IC directory above
+  "specific_collection": "concrete collection ask — name place, actor, indicator.",
+  "priority": "HIGH" | "MEDIUM" | "LOW"
+}
+
+Output ONLY the JSON object."""
+    )
+
+    sb = db.get_db()
+    persisted_findings: list[str] = []
+    persisted_gaps: list[str] = []
+    out_tasks: list[dict[str, Any]] = []
+
+    for task in tasks:
+        # Pull a few corpus hits to ground the answer (lexical, no embed cost)
+        hits = _keyword_search_corpus(task, limit=4)
+        evidence_block = (
+            "\n\n".join(
+                f"[Ref {i+1}] {h.get('title') or h.get('origin') or 'corpus'}\n"
+                f"{(h.get('text') or '')[:1000]}"
+                for i, h in enumerate(hits)
+            )
+            if hits
+            else "(no corpus hits — answer from graph state alone)"
+        )
+        user = f"Tasking: {task}\n\nCorpus context:\n{evidence_block}\n\nProduce the JSON response."
+        try:
+            res = await llm_call(
+                user,
+                system=combined_system,
+                model="deep",
+                temperature=0.2,
+                max_tokens=900,
+            )
+            m2 = _re.search(r"\{[\s\S]*\}", res.text)
+            if not m2:
+                raise ValueError("no JSON object")
+            parsed = _json.loads(m2.group(0))
+        except Exception as exc:
+            out_tasks.append({"task": task, "error": str(exc)})
+            continue
+
+        agencies = parsed.get("recommended_agencies") or []
+        if isinstance(agencies, list):
+            agencies = [a for a in agencies if isinstance(a, str)][:3]
+        else:
+            agencies = []
+
+        what_we_know = str(parsed.get("what_we_know") or "")[:3000]
+        what_we_dont_know = str(parsed.get("what_we_dont_know") or "")[:600]
+        spec = str(parsed.get("specific_collection") or "")[:800]
+        prio = str(parsed.get("priority") or "MEDIUM").upper()
+
+        # Persist as a finding (task-response kind)
+        finding_id = db.insert(
+            "findings",
+            topic=task[:160],
+            kind="task-response",
+            text=what_we_know,
+            confidence="MEDIUM",
+            citations=[h.get("title") or h.get("origin") for h in hits],
+        )
+        persisted_findings.append(finding_id)
+
+        # Persist gap if there's a real one
+        gap_id = None
+        if what_we_dont_know and agencies:
+            gap_id = db.insert(
+                "gap_analyses",
+                topic=task[:160],
+                why_a_gap=what_we_dont_know,
+                recommended_agencies=agencies,
+                specific_collection=spec,
+                priority=prio,
+                related_finding_id=finding_id,
+            )
+            persisted_gaps.append(gap_id)
+
+        out_tasks.append(
+            {
+                "task": task,
+                "what_we_know": what_we_know,
+                "what_we_dont_know": what_we_dont_know,
+                "recommended_agencies": agencies,
+                "specific_collection": spec,
+                "priority": prio,
+                "finding_id": finding_id,
+                "gap_id": gap_id,
+                "sources": [
+                    {
+                        "title": h.get("title"),
+                        "origin": h.get("origin"),
+                        "url": h.get("url"),
+                    }
+                    for h in hits
+                ],
+            }
+        )
+
+    return {
+        "memo_source": body.source,
+        "extracted_count": len(tasks),
+        "tasks": out_tasks,
+        "persisted_findings": persisted_findings,
+        "persisted_gaps": persisted_gaps,
+    }
+
+
 @router.get("/gaps")
 async def gaps_list(
     only_unresolved: bool = Query(True),
