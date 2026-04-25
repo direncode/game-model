@@ -432,14 +432,31 @@ async def list_entities(
     limit: int = Query(200, ge=1, le=500),
     type: str | None = Query(None),
 ) -> dict[str, Any]:
-    """Sorted entity list with degree + first/last seen — backs the
-    Network tab's CSV-style table view.
+    """Sorted entity list with degree, first/last seen, and a 4D
+    structural score vector — backs the Network tab's CSV-style table.
+
+    Score axes (each in [0, 1] except where noted):
+
+      novelty            How recently the entity first appeared,
+                         relative to the oldest entity in the DB. New
+                         entities trend high.
+      centrality         Degree normalized to the most-connected entity.
+      peer_rank_anomaly  abs(z-score) of this entity's degree within
+                         its own type cohort. Capped at 5 sigma. High =
+                         unusually-connected vs same-type peers.
+      outlier_assoc      Fraction of this entity's evidence-messages
+                         whose outlier_score >= 0.4. High = the entity
+                         is riding anomalous traffic.
+
+    Composite ``structural_score`` averages the four axes (equal weight)
+    so the table can default to a sensible blended sort.
     """
     where = ""
     params: list[Any] = []
     if type:
         where = "WHERE e.type = ?"
         params.append(type)
+
     rows = db.query(
         f"""
         SELECT e.id, e.type, e.canonical_name,
@@ -455,7 +472,122 @@ async def list_entities(
         """,
         *params, limit,
     )
-    return {"items": [db.row_to_dict(r) for r in rows]}
+    items = [db.row_to_dict(r) for r in rows]
+    if not items:
+        return {"items": []}
+
+    # ── 1. Centrality: degree / max_degree
+    max_degree = max((it.get("degree") or 0) for it in items) or 1
+    for it in items:
+        it["centrality"] = round((it.get("degree") or 0) / max_degree, 4)
+
+    # ── 2. Novelty: (max_age_seconds - this_age_seconds) / max_age_seconds
+    # Use julianday() in SQL to get unix-ish ages.
+    age_row = db.query_one(
+        """
+        SELECT
+          MAX(julianday('now') - julianday(first_seen_at)) AS max_age,
+          MIN(julianday('now') - julianday(first_seen_at)) AS min_age
+        FROM entities
+        WHERE first_seen_at IS NOT NULL
+        """
+    )
+    max_age = float((age_row["max_age"] if age_row else 0) or 0) or 1.0
+    for it in items:
+        ts = it.get("first_seen_at")
+        if not ts:
+            it["novelty"] = 0.0
+            continue
+        age_row2 = db.query_one(
+            "SELECT julianday('now') - julianday(?) AS age", ts
+        )
+        age = float((age_row2["age"] if age_row2 else 0) or 0)
+        # Newer = higher. Bounded [0, 1].
+        it["novelty"] = round(max(0.0, min(1.0, 1.0 - (age / max_age))), 4)
+
+    # ── 3. Peer-rank anomaly: abs(z-score) within same-type, cap 5σ.
+    # Compute mean + stdev of degree per type from the full entity table.
+    type_stats: dict[str, tuple[float, float]] = {}
+    type_rows = db.query(
+        """
+        SELECT type, COUNT(*) AS n,
+               AVG(d) AS mean_d,
+               -- SQLite has no STDEV; emulate as sqrt(E[X^2] - E[X]^2)
+               AVG(d * d) AS mean_d2
+        FROM (
+            SELECT e.type AS type,
+                   (SELECT COUNT(*) FROM edges
+                    WHERE from_entity = e.id OR to_entity = e.id) AS d
+            FROM entities e
+        )
+        GROUP BY type
+        """
+    )
+    for r in type_rows:
+        t = r["type"]
+        n = int(r["n"] or 0)
+        mean_d = float(r["mean_d"] or 0)
+        mean_d2 = float(r["mean_d2"] or 0)
+        var = max(0.0, mean_d2 - mean_d * mean_d)
+        std = (var ** 0.5) if n >= 2 else 0.0
+        type_stats[t] = (mean_d, std)
+
+    for it in items:
+        t = it.get("type")
+        deg = float(it.get("degree") or 0)
+        mean_d, std = type_stats.get(t, (0.0, 0.0))
+        if std <= 0:
+            z = 0.0
+        else:
+            z = abs((deg - mean_d) / std)
+            z = min(z, 5.0)
+        it["peer_rank_anomaly"] = round(z / 5.0, 4)  # normalize to [0,1]
+
+    # ── 4. Outlier association: fraction of evidence-messages on edges
+    # touching the entity that are outlier-flagged.
+    # One pass over edges + messages, JSON-LIKE join.
+    # Cheap because outliers are a small minority of messages.
+    out_rows = db.query(
+        """
+        SELECT
+          eid AS entity_id,
+          COUNT(*) AS total_msgs,
+          SUM(CASE WHEN m.outlier_score >= 0.4 THEN 1 ELSE 0 END) AS outlier_msgs
+        FROM (
+          SELECT e.id AS eid FROM entities e
+        ) eids
+        LEFT JOIN edges ed
+          ON (ed.from_entity = eids.eid OR ed.to_entity = eids.eid)
+        LEFT JOIN messages m
+          ON ed.evidence IS NOT NULL
+          AND ed.evidence LIKE '%' || m.id || '%'
+        GROUP BY eids.eid
+        """
+    )
+    outlier_assoc: dict[str, float] = {}
+    for r in out_rows:
+        eid = r["entity_id"]
+        total = int(r["total_msgs"] or 0)
+        out = int(r["outlier_msgs"] or 0)
+        outlier_assoc[eid] = (out / total) if total > 0 else 0.0
+
+    for it in items:
+        it["outlier_assoc"] = round(outlier_assoc.get(it["id"], 0.0), 4)
+
+    # ── Composite structural score: equal-weight mean of the 4 axes.
+    for it in items:
+        it["structural_score"] = round(
+            (
+                it["centrality"]
+                + it["novelty"]
+                + it["peer_rank_anomaly"]
+                + it["outlier_assoc"]
+            )
+            / 4.0,
+            4,
+        )
+
+    return {"items": items}
 
 
 # ─────────────────────────────────────────────────────────────────
