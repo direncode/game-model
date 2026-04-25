@@ -135,6 +135,22 @@ async def get_finding(finding_id: str) -> dict[str, Any]:
     return {"finding": db.row_to_dict(row)}
 
 
+@router.get("/corpus")
+async def list_corpus(limit: int = Query(200, ge=1, le=500)) -> dict[str, Any]:
+    """List every ingested corpus document, newest first."""
+    rows = db.query(
+        """
+        SELECT id, url, origin, fetched_at, title,
+               substr(text, 1, 800) AS text, source_tier
+        FROM corpus_docs
+        ORDER BY source_tier ASC NULLS LAST, fetched_at DESC
+        LIMIT ?
+        """,
+        limit,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
+
+
 @router.get("/messages")
 async def list_messages(
     limit: int = Query(30, ge=1, le=200),

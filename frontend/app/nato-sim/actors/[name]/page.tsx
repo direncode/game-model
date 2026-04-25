@@ -1,12 +1,11 @@
 /**
- * /nato-sim/actors/[name] — single actor card.
+ * Single Country File. Letterhead + Inr prose body.
  */
 
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getActorCard } from "../../_lib/api";
-import {
-  ProductChrome,
-} from "../../_components/inr/ProductChrome";
+import { Letterhead } from "../../_components/Letterhead";
 import { InrProse } from "../../_components/inr/InrProse";
 
 export const dynamic = "force-dynamic";
@@ -21,22 +20,41 @@ export default async function ActorCardPage({
   if (!card) {
     notFound();
   }
+
   return (
-    <main className="flex-1 overflow-auto">
-      <div className="max-w-3xl mx-auto px-6 py-10">
-        <ProductChrome
-          eyebrow="State/INR · Country Card"
-          title={card.topic}
-          confidence={card.confidence}
+    <main>
+      <div className="max-w-3xl mx-auto px-10 py-10">
+        <Letterhead
+          cableNumber={`INR-NATO-${actor.toUpperCase().slice(0, 3)}-001`}
           generatedAt={card.generated_at}
         />
+
+        <div className="font-mono text-[10px] tracking-[0.28em] uppercase text-li-text-muted mb-1">
+          Country File · INR Office of Analysis for Europe
+        </div>
+        <h1 className="font-display text-[34px] leading-tight text-li-text-primary tracking-tight">
+          {card.topic}
+        </h1>
+        <div className="mt-2 text-[12px] text-li-text-secondary leading-relaxed">
+          Audience: DNI · Distribution: ODNI, NSC, Sec State staff ·
+          <Link
+            href="/nato-sim/actors"
+            className="ml-2 text-li-cyan hover:text-li-text-primary"
+          >
+            ← all files
+          </Link>
+        </div>
+
+        <div className="my-8 h-px bg-li-border" />
+
         <InrProse text={card.text} />
+
         {card.citations && card.citations.length > 0 && (
-          <footer className="mt-8 pt-4 border-t border-li-border">
-            <div className="text-[10px] text-li-text-muted tracking-widest uppercase font-mono mb-2">
-              Citations
+          <footer className="mt-10 pt-4 border-t border-li-border">
+            <div className="font-mono text-[10px] tracking-[0.32em] uppercase text-li-text-muted mb-2">
+              Sourcing
             </div>
-            <ul className="text-xs text-li-text-secondary font-mono space-y-1">
+            <ul className="text-[11px] text-li-text-secondary font-mono space-y-0.5">
               {card.citations.map((c, i) => (
                 <li key={i}>[{c}]</li>
               ))}
