@@ -1,0 +1,19 @@
+{
+  "name": "nato-sim-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Discord Gateway bot for the NATO Simulation vertical. Runs on the operator's laptop during the sim; forwards every channel message to the /api/v1/nato_sim/ingest/discord endpoint.",
+  "type": "module",
+  "scripts": {
+    "start": "tsx index.ts",
+    "register": "tsx register_commands.ts"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "tsx": "^4.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.15",
+    "typescript": "^5.5.4"
+  }
+}

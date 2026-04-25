@@ -70,3 +70,15 @@ scripts/cross_era_analysis/output/latk_physics_arxiv_test.jsonl.cursor.json
 
 # Vendored third-party repos
 backend/vendor/
+
+# NATO Simulation vertical — runtime artifacts
+data/nato-sim.db
+data/nato-sim.db-wal
+data/nato-sim.db-shm
+data/corpus-source/
+bot/nato_sim/node_modules/
+bot/nato_sim/.env.local
+
+# Local debug extracts (regenerable)
+briefing-book-extract.txt
+friday-intro-extract.txt

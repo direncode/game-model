@@ -1,0 +1,559 @@
+"""NATO Simulation API router — mounted at ``/api/v1/nato_sim``.
+
+All endpoints for the /nato-sim vertical. Route protection:
+
+    - ``/nato_sim/ingest`` and ``/nato_sim/ingest/discord`` require a bearer
+      token matching ``NATO_SIM_INGEST_SECRET``.
+    - ``/nato_sim/discord/interactions`` requires a valid ed25519 signature
+      from Discord (verified against ``DISCORD_PUBLIC_KEY``).
+    - Everything else is open to the backend; the frontend middleware gates
+      browser access to the whole vertical with the access code cookie.
+
+Subprocess IP: specific analytical craft (prompts, heuristics) lives in
+``app.services.nato_sim``. This file is plumbing only.
+"""
+
+from __future__ import annotations
+
+import asyncio
+import json
+import logging
+import os
+import time
+from typing import Any, AsyncIterator, Literal
+
+from fastapi import APIRouter, Body, HTTPException, Query, Request, status
+from fastapi.responses import JSONResponse, StreamingResponse
+from pydantic import BaseModel, Field
+
+from app.services.nato_sim import db
+from app.services.nato_sim.connection_finder import (
+    find_hidden_connections,
+    summarize_path,
+)
+from app.services.nato_sim.graph import (
+    edges_among,
+    get_entity_by_name,
+    top_entities_by_degree,
+)
+from app.services.nato_sim.ingest.pipeline import ingest_message
+from app.services.nato_sim.synthesizer import (
+    EvidenceItem,
+    SynthesizeInput,
+    synthesize,
+)
+
+logger = logging.getLogger(__name__)
+
+router = APIRouter(prefix="/nato_sim", tags=["nato_sim"])
+
+
+# ─────────────────────────────────────────────────────────────────
+# Models
+# ─────────────────────────────────────────────────────────────────
+
+
+class IngestIn(BaseModel):
+    content: str = Field(..., min_length=1)
+    source: str = "webhook"
+    channel: str | None = None
+    author: str | None = None
+    raw: dict[str, Any] | None = None
+
+
+class DiscordIngestIn(BaseModel):
+    channel: str | None = None
+    author: str | None = None
+    content: str = Field(..., min_length=1)
+    raw: dict[str, Any] | None = None
+
+
+class PasteIn(BaseModel):
+    content: str = Field(..., min_length=1)
+
+
+class QueryIn(BaseModel):
+    q: str = Field(..., min_length=1)
+
+
+class ApprovalResolveIn(BaseModel):
+    status: Literal["approved", "rejected", "deferred"]
+
+
+# ─────────────────────────────────────────────────────────────────
+# Auth helpers
+# ─────────────────────────────────────────────────────────────────
+
+
+def _require_ingest_bearer(request: Request) -> None:
+    secret = os.environ.get("NATO_SIM_INGEST_SECRET")
+    if not secret:
+        raise HTTPException(status_code=503, detail="NATO_SIM_INGEST_SECRET not configured")
+    auth = request.headers.get("authorization") or ""
+    if auth != f"Bearer {secret}":
+        raise HTTPException(status_code=401, detail="bad bearer")
+
+
+# ─────────────────────────────────────────────────────────────────
+# Health + findings (read paths)
+# ─────────────────────────────────────────────────────────────────
+
+
+@router.get("/health")
+async def health() -> dict[str, Any]:
+    db.get_db()
+    return {"status": "ok", "vertical": "nato_sim"}
+
+
+@router.get("/findings")
+async def list_findings(
+    kind: str | None = Query(None),
+    topic: str | None = Query(None),
+    limit: int = Query(20, ge=1, le=100),
+) -> dict[str, Any]:
+    where = ["superseded_by IS NULL"]
+    params: list[Any] = []
+    if kind:
+        where.append("kind = ?")
+        params.append(kind)
+    if topic:
+        where.append("topic = ?")
+        params.append(topic)
+    rows = db.query(
+        f"SELECT * FROM findings WHERE {' AND '.join(where)} ORDER BY generated_at DESC LIMIT ?",
+        *params,
+        limit,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
+
+
+@router.get("/findings/{finding_id}")
+async def get_finding(finding_id: str) -> dict[str, Any]:
+    row = db.query_one("SELECT * FROM findings WHERE id = ?", finding_id)
+    if not row:
+        raise HTTPException(status_code=404, detail="not found")
+    return {"finding": db.row_to_dict(row)}
+
+
+@router.get("/messages")
+async def list_messages(
+    limit: int = Query(30, ge=1, le=200),
+    source: str | None = Query(None),
+) -> dict[str, Any]:
+    where = ["1=1"]
+    params: list[Any] = []
+    if source:
+        where.append("source = ?")
+        params.append(source)
+    rows = db.query(
+        f"SELECT * FROM messages WHERE {' AND '.join(where)} ORDER BY ts DESC LIMIT ?",
+        *params,
+        limit,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
+
+
+# ─────────────────────────────────────────────────────────────────
+# Ingest (write paths)
+# ─────────────────────────────────────────────────────────────────
+
+
+@router.post("/ingest")
+async def ingest_generic(request: Request, body: IngestIn) -> dict[str, Any]:
+    _require_ingest_bearer(request)
+    msg_id = await ingest_message(
+        source=body.source,
+        content=body.content,
+        channel=body.channel,
+        author=body.author,
+        raw_json=body.raw,
+    )
+    return {"id": msg_id}
+
+
+@router.post("/ingest/discord")
+async def ingest_discord_route(request: Request, body: DiscordIngestIn) -> dict[str, Any]:
+    _require_ingest_bearer(request)
+    msg_id = await ingest_message(
+        source="discord",
+        content=body.content,
+        channel=body.channel,
+        author=body.author,
+        raw_json=body.raw,
+    )
+    return {"id": msg_id}
+
+
+@router.post("/ingest/paste")
+async def ingest_paste_route(body: PasteIn) -> dict[str, Any]:
+    """Paste-box ingest — gated by the frontend access-code cookie, not bearer.
+
+    The frontend middleware ensures only authenticated browsers can hit this.
+    """
+    msg_id = await ingest_message(
+        source="paste",
+        content=body.content,
+        author="operator",
+    )
+    return {"id": msg_id}
+
+
+# ─────────────────────────────────────────────────────────────────
+# Live query (RAG over the corpus)
+# ─────────────────────────────────────────────────────────────────
+
+
+def _keyword_search_corpus(q: str, limit: int = 6) -> list[dict[str, Any]]:
+    """Lexical retrieval over ``corpus_docs`` for RAG context.
+
+    Uses LIKE-based scoring — fast, no embedding dependency. Token-level
+    match count is approximated by counting distinct query word hits.
+
+    TODO(post-sim): swap to pgvector cosine retrieval once we migrate the
+    vertical off SQLite.
+    """
+    tokens = [t for t in q.lower().split() if len(t) > 2]
+    if not tokens:
+        return []
+    # Build a SQL expression that ranks rows by keyword density.
+    like_clauses = " + ".join(
+        "(CASE WHEN lower(text) LIKE ? THEN 1 ELSE 0 END)" for _ in tokens
+    )
+    params = [f"%{t}%" for t in tokens]
+    rows = db.query(
+        f"""
+        SELECT id, title, origin, url, text, ({like_clauses}) AS score
+        FROM corpus_docs
+        WHERE text IS NOT NULL
+        ORDER BY score DESC, fetched_at DESC
+        LIMIT ?
+        """,
+        *params,
+        limit,
+    )
+    return [dict(r) for r in rows if dict(r).get("score", 0) > 0]
+
+
+@router.post("/query")
+async def live_query(body: QueryIn) -> dict[str, Any]:
+    """Live analytical query — retrieves corpus context, synthesizes an INR-voice answer."""
+    hits = _keyword_search_corpus(body.q, limit=6)
+    if hits:
+        evidence = [
+            EvidenceItem(
+                text=(h["text"] or "")[:1200],
+                source=h.get("title") or h.get("origin") or "corpus",
+            )
+            for h in hits
+        ]
+    else:
+        # Fall back to the most recent briefing paragraphs so the LLM has something.
+        row = db.query_one(
+            "SELECT text FROM corpus_docs WHERE origin = 'briefing' LIMIT 1"
+        )
+        text = (row["text"] if row else "") or ""
+        evidence = [EvidenceItem(text=text[:3000], source="briefing")]
+
+    answer = await synthesize(
+        SynthesizeInput(
+            kind="assessment",
+            topic=body.q,
+            evidence=evidence,
+            confidence="MEDIUM",
+            use_deep_model=True,
+            extra_instructions=(
+                "Answer the operator's specific question. Do not re-dump general "
+                "background unless it is directly relevant. If the evidence is "
+                "insufficient, say so explicitly in the BLUF."
+            ),
+        )
+    )
+    return {
+        "answer": answer,
+        "sources": [
+            {"title": h.get("title"), "origin": h.get("origin"), "url": h.get("url")}
+            for h in hits
+        ],
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
+# Network (graph snapshot for d3)
+# ─────────────────────────────────────────────────────────────────
+
+
+@router.get("/network")
+async def network_snapshot(limit: int = Query(50, ge=5, le=200)) -> dict[str, Any]:
+    top = top_entities_by_degree(limit=limit)
+    nodes = [
+        {
+            "id": ent.id,
+            "name": ent.canonical_name,
+            "type": ent.type,
+            "degree": deg,
+        }
+        for ent, deg in top
+    ]
+    ids = [n["id"] for n in nodes]
+    edges = edges_among(ids)
+    return {"nodes": nodes, "edges": edges}
+
+
+@router.get("/hidden-connections/{entity_name}")
+async def hidden_connections(
+    entity_name: str, type: str = Query("actor"), limit: int = Query(20, ge=1, le=50)
+) -> dict[str, Any]:
+    ent = get_entity_by_name(type=type, canonical_name=entity_name)  # type: ignore[arg-type]
+    if not ent:
+        raise HTTPException(status_code=404, detail="entity not found")
+    paths = find_hidden_connections(start_id=ent.id, max_hops=3, limit=limit)
+    return {
+        "start": {"id": ent.id, "name": ent.canonical_name, "type": ent.type},
+        "paths": [
+            {
+                "length": len(p),
+                "summary": summarize_path(p),
+                "endpoint": p[-1].entity.canonical_name if p else None,
+            }
+            for p in paths
+        ],
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
+# Approvals queue
+# ─────────────────────────────────────────────────────────────────
+
+
+@router.get("/approvals")
+async def list_approvals(
+    status_filter: str = Query("pending", alias="status"),
+) -> dict[str, Any]:
+    rows = db.query(
+        "SELECT * FROM approvals WHERE status = ? ORDER BY created_at DESC LIMIT 50",
+        status_filter,
+    )
+    return {"items": [db.row_to_dict(r) for r in rows]}
+
+
+@router.post("/approvals/{approval_id}")
+async def resolve_approval(approval_id: str, body: ApprovalResolveIn) -> dict[str, Any]:
+    db.execute(
+        "UPDATE approvals SET status = ?, decided_at = datetime('now'), decided_by = ? WHERE id = ?",
+        body.status,
+        "operator",
+        approval_id,
+    )
+    row = db.query_one("SELECT * FROM approvals WHERE id = ?", approval_id)
+    if not row:
+        raise HTTPException(status_code=404, detail="not found")
+    return {"approval": db.row_to_dict(row)}
+
+
+# ─────────────────────────────────────────────────────────────────
+# Server-Sent Events (live UI updates)
+# ─────────────────────────────────────────────────────────────────
+
+
+async def _sse_generator() -> AsyncIterator[bytes]:
+    """Poll the events_log and emit SSE frames for new rows.
+
+    SQLite doesn't have LISTEN/NOTIFY, so we poll every 1.5s. That's fine
+    for a single-operator workstation — the latency is invisible to humans.
+    """
+    last_ts = time.time()
+    last_id: str | None = None
+    yield b": stream-open\n\n"
+
+    while True:
+        try:
+            rows = db.query(
+                "SELECT * FROM events_log WHERE ts > datetime('now', '-5 seconds') ORDER BY ts ASC LIMIT 50"
+            )
+            for r in rows:
+                d = db.row_to_dict(r) or {}
+                if d.get("id") == last_id:
+                    continue
+                last_id = d.get("id")
+                payload = json.dumps(d, default=str)
+                yield f"event: {d.get('kind', 'event')}\ndata: {payload}\n\n".encode()
+
+            # Heartbeat every ~15s to keep proxies from closing the connection.
+            if time.time() - last_ts > 15:
+                last_ts = time.time()
+                yield b": heartbeat\n\n"
+
+            await asyncio.sleep(1.5)
+        except asyncio.CancelledError:
+            return
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("sse generator error: %s", exc)
+            yield f"event: error\ndata: {json.dumps({'error': str(exc)})}\n\n".encode()
+            await asyncio.sleep(3)
+
+
+@router.get("/stream")
+async def sse_stream() -> StreamingResponse:
+    return StreamingResponse(
+        _sse_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
+        },
+    )
+
+
+# ─────────────────────────────────────────────────────────────────
+# Discord HTTP Interactions (slash commands)
+# ─────────────────────────────────────────────────────────────────
+
+
+def _verify_discord_signature(
+    public_key_hex: str,
+    signature_hex: str,
+    timestamp: str,
+    body: bytes,
+) -> bool:
+    try:
+        from nacl.signing import VerifyKey
+        from nacl.exceptions import BadSignatureError
+    except ImportError:
+        logger.error("pynacl not installed; install with `pip install pynacl`")
+        return False
+    try:
+        vk = VerifyKey(bytes.fromhex(public_key_hex))
+        vk.verify(timestamp.encode() + body, bytes.fromhex(signature_hex))
+        return True
+    except BadSignatureError:
+        return False
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("discord sig verify failed: %s", exc)
+        return False
+
+
+async def _dispatch_slash(name: str, options: dict[str, Any]) -> str:
+    """Generate the reply text for a slash command.
+
+    Only the minimum five commands are wired tonight. Templates can be
+    extended in ``services/nato_sim/templates/``.
+    """
+    from app.services.nato_sim.synthesizer import (
+        EvidenceItem,
+        SynthesizeInput,
+        synthesize,
+    )
+
+    if name == "rfi":
+        target = options.get("target", "")
+        body = await synthesize(
+            SynthesizeInput(
+                kind="assessment",
+                topic=f"Request for Information: {target}",
+                evidence=[EvidenceItem(text="Operator-initiated RFI", source="operator")],
+                confidence="MEDIUM",
+                extra_instructions=(
+                    "Produce a formal RFI in this exact shape:\n"
+                    "ORIGINATOR: State/INR\n"
+                    "PRIORITY: [FLASH|IMMEDIATE|PRIORITY|ROUTINE]\n"
+                    f"TARGET: {target}\n"
+                    "SPECIFIC REQUIREMENT: ...\n"
+                    "JUSTIFICATION: ...\n"
+                    "DECISION DEADLINE: ...\n"
+                    "PREFERRED SOURCES: ..."
+                ),
+            )
+        )
+        return f"```\n{body}\n```"
+
+    if name == "sitrep":
+        rows = db.query(
+            "SELECT text FROM corpus_docs WHERE origin = 'briefing' LIMIT 1"
+        )
+        txt = (rows[0]["text"] if rows else "") or ""
+        body = await synthesize(
+            SynthesizeInput(
+                kind="sitrep",
+                topic="Current NATO Eastern Flank posture",
+                evidence=[EvidenceItem(text=txt[:4000], source="briefing")],
+                confidence="MEDIUM",
+            )
+        )
+        return f"```\n{body[:1800]}\n```"
+
+    if name == "brief-dni":
+        topic = options.get("topic", "Current posture")
+        body = await synthesize(
+            SynthesizeInput(
+                kind="brief-dni",
+                topic=topic,
+                evidence=[EvidenceItem(text="(synthesized from the running graph)", source="graph")],
+                confidence="MEDIUM",
+                use_deep_model=True,
+            )
+        )
+        return f"```\n{body[:1800]}\n```"
+
+    if name == "brief-potus":
+        topic = options.get("topic", "Current posture")
+        body = await synthesize(
+            SynthesizeInput(
+                kind="brief-potus",
+                topic=topic,
+                evidence=[EvidenceItem(text="(synthesized from the running graph)", source="graph")],
+                confidence="MEDIUM",
+                use_deep_model=True,
+            )
+        )
+        return f"```\n{body[:1800]}\n```"
+
+    if name == "watchboard":
+        rows = db.query(
+            "SELECT * FROM findings WHERE kind = 'watchboard-item' AND superseded_by IS NULL ORDER BY generated_at DESC LIMIT 10"
+        )
+        if not rows:
+            return "_no Watchboard items populated yet_"
+        lines = ["**Watchboard (latest 10 items):**"]
+        for r in rows:
+            d = db.row_to_dict(r) or {}
+            lines.append(f"• **{d.get('topic')}** — {(d.get('text') or '')[:120]}")
+        return "\n".join(lines)
+
+    return f"unknown command: /{name}"
+
+
+@router.post("/discord/interactions")
+async def discord_interactions(request: Request) -> JSONResponse:
+    raw = await request.body()
+    sig = request.headers.get("x-signature-ed25519", "")
+    ts = request.headers.get("x-signature-timestamp", "")
+    pub = os.environ.get("DISCORD_PUBLIC_KEY", "")
+    if not pub or not _verify_discord_signature(pub, sig, ts, raw):
+        raise HTTPException(status_code=401, detail="bad signature")
+
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="bad json")
+
+    interaction_type = payload.get("type")
+    # 1 = PING
+    if interaction_type == 1:
+        return JSONResponse({"type": 1})
+    # 2 = APPLICATION_COMMAND
+    if interaction_type == 2:
+        data = payload.get("data", {}) or {}
+        name = data.get("name", "")
+        options = {o["name"]: o.get("value") for o in (data.get("options") or [])}
+        try:
+            content = await _dispatch_slash(name, options)
+        except Exception as exc:  # noqa: BLE001
+            logger.exception("slash dispatch failed")
+            content = f"error running /{name}: {exc}"
+        # 4 = CHANNEL_MESSAGE_WITH_SOURCE; flag 64 = ephemeral
+        return JSONResponse({"type": 4, "data": {"content": content[:1900], "flags": 64}})
+
+    return JSONResponse(
+        {"type": 4, "data": {"content": "unsupported interaction type", "flags": 64}}
+    )

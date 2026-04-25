@@ -43,6 +43,7 @@ const engineItems = [
 const liveDataItems = [
   { href: "/franklin", label: "Franklin Street", icon: MapPin },
   { href: "/dunc", label: "D-U-N-C Football", icon: Goal },
+  { href: "/nato-sim", label: "NATO Simulation", icon: Shield },
 ];
 
 const adminItems = [

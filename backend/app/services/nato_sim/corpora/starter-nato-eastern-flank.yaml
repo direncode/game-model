@@ -1,0 +1,74 @@
+# Starter corpus for the NATO Simulation.
+#
+# 30 hand-curated public sources covering NATO Eastern Flank context:
+# Russia, Ukraine, Belarus, Baltic states, Turkey, alliance cohesion,
+# hybrid warfare. Each URL points at a topic landing page or flagship
+# publication; the harvester fetches the rendered HTML and extracts the
+# main readable text.
+#
+# source_tier:
+#   1 = institutional / government primary source
+#   2 = major think tank / academic institution
+#   3 = high-quality news / commentary
+#
+# If a URL 404s or becomes unavailable, the harvester logs a warning and
+# skips it — the corpus does not require all 30 to succeed. Swap any
+# row freely.
+
+sources:
+  # Institute for the Study of War (ISW)
+  - { url: "https://www.understandingwar.org/backgrounder/russian-offensive-campaign-assessment", tier: 2, label: "ISW Russian Offensive Campaign Assessment", origin_tag: "starter:isw" }
+  - { url: "https://www.understandingwar.org/backgrounder/belarus-weekly", tier: 2, label: "ISW Belarus Weekly", origin_tag: "starter:isw" }
+
+  # CSIS
+  - { url: "https://www.csis.org/programs/europe-russia-and-eurasia-program", tier: 2, label: "CSIS Europe Russia Eurasia", origin_tag: "starter:csis" }
+  - { url: "https://www.csis.org/topics/hybrid-warfare", tier: 2, label: "CSIS Hybrid Warfare", origin_tag: "starter:csis" }
+  - { url: "https://www.csis.org/topics/russia", tier: 2, label: "CSIS Russia topic", origin_tag: "starter:csis" }
+
+  # RUSI
+  - { url: "https://rusi.org/explore-our-research/regions/europe", tier: 2, label: "RUSI Europe", origin_tag: "starter:rusi" }
+  - { url: "https://rusi.org/explore-our-research/topics/hybrid-threats", tier: 2, label: "RUSI Hybrid Threats", origin_tag: "starter:rusi" }
+
+  # RAND
+  - { url: "https://www.rand.org/topics/russia.html", tier: 2, label: "RAND Russia topic", origin_tag: "starter:rand" }
+  - { url: "https://www.rand.org/topics/north-atlantic-treaty-organization.html", tier: 2, label: "RAND NATO topic", origin_tag: "starter:rand" }
+
+  # Atlantic Council
+  - { url: "https://www.atlanticcouncil.org/region/europe/", tier: 2, label: "Atlantic Council Europe", origin_tag: "starter:atlanticcouncil" }
+  - { url: "https://www.atlanticcouncil.org/blogs/ukrainealert/", tier: 2, label: "Atlantic Council UkraineAlert", origin_tag: "starter:atlanticcouncil" }
+
+  # CNAS
+  - { url: "https://www.cnas.org/research/transatlantic-security", tier: 2, label: "CNAS Transatlantic Security", origin_tag: "starter:cnas" }
+
+  # Jamestown Foundation
+  - { url: "https://jamestown.org/programs/edm/", tier: 2, label: "Jamestown Eurasia Daily Monitor", origin_tag: "starter:jamestown" }
+
+  # Carnegie Endowment
+  - { url: "https://carnegieendowment.org/programs/russia-eurasia/", tier: 2, label: "Carnegie Russia Eurasia", origin_tag: "starter:carnegie" }
+
+  # Hudson Institute
+  - { url: "https://www.hudson.org/topics/russia", tier: 2, label: "Hudson Russia topic", origin_tag: "starter:hudson" }
+
+  # ECFR + Chatham House + Bruegel + FPRI + Stimson + IISS
+  - { url: "https://ecfr.eu/topic/russia/", tier: 2, label: "ECFR Russia", origin_tag: "starter:ecfr" }
+  - { url: "https://www.chathamhouse.org/topics/russia", tier: 2, label: "Chatham House Russia", origin_tag: "starter:chathamhouse" }
+  - { url: "https://www.bruegel.org/topic/ukraine", tier: 2, label: "Bruegel Ukraine economic", origin_tag: "starter:bruegel" }
+  - { url: "https://www.fpri.org/research-programs/eurasia-program/", tier: 2, label: "FPRI Eurasia", origin_tag: "starter:fpri" }
+  - { url: "https://www.stimson.org/program/us-foreign-policy/", tier: 2, label: "Stimson US Foreign Policy", origin_tag: "starter:stimson" }
+  - { url: "https://www.iiss.org/regions/europe/", tier: 2, label: "IISS Europe", origin_tag: "starter:iiss" }
+
+  # NATO / EU / State primary
+  - { url: "https://www.nato.int/cps/en/natohq/official_texts.htm", tier: 1, label: "NATO Official Texts", origin_tag: "starter:nato" }
+  - { url: "https://www.consilium.europa.eu/en/policies/eu-response-ukraine-invasion/", tier: 1, label: "EU Council Ukraine response", origin_tag: "starter:eu" }
+  - { url: "https://www.state.gov/policy-issues/russia/", tier: 1, label: "State Dept Russia policy", origin_tag: "starter:state" }
+
+  # Baltic MFAs
+  - { url: "https://www.vm.ee/en", tier: 1, label: "Estonia MFA", origin_tag: "starter:baltic" }
+  - { url: "https://www.mfa.gov.lv/en", tier: 1, label: "Latvia MFA", origin_tag: "starter:baltic" }
+  - { url: "https://www.urm.lt/default/en/", tier: 1, label: "Lithuania MFA", origin_tag: "starter:baltic" }
+
+  # Ukrainian MoD
+  - { url: "https://www.mil.gov.ua/en/", tier: 1, label: "Ukrainian MoD", origin_tag: "starter:ukraine" }
+
+  # SIPRI (arms control + conflict data)
+  - { url: "https://www.sipri.org/regions/europe", tier: 1, label: "SIPRI Europe", origin_tag: "starter:sipri" }
