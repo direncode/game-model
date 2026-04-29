@@ -1,0 +1,154 @@
+{
+  "generated_at": "2026-04-29T05:24:59Z",
+  "input": {
+    "dataset": "NSL-KDD train+ (9000 records, seed=42)",
+    "n_input_records": 9000,
+    "input_attack_rate": 0.4662,
+    "input_subtypes": {
+      "normal": 4804,
+      "neptune": 2982,
+      "warezclient": 65,
+      "portsweep": 219,
+      "smurf": 170,
+      "ipsweep": 264,
+      "satan": 260,
+      "teardrop": 65,
+      "nmap": 91,
+      "guess_passwd": 3,
+      "pod": 10,
+      "warezmaster": 3,
+      "land": 3,
+      "back": 57,
+      "imap": 1,
+      "ftp_write": 1,
+      "buffer_overflow": 1,
+      "rootkit": 1
+    }
+  },
+  "btut_summary": {
+    "total_entities": 9000,
+    "clusters": 137,
+    "unique_48bit_fingerprints": 1018,
+    "survivors": 299,
+    "reduction": 30,
+    "survivor_types": {
+      "icmp": 19,
+      "tcp": 245,
+      "udp": 35
+    },
+    "reconstruction": {
+      "mean_nn": 0.3494,
+      "median_nn": 0.334,
+      "p95_nn": 0.6473,
+      "variance_preservation": 1.1209,
+      "coverages": {
+        "0.5": 0.7636,
+        "1.0": 1.0,
+        "1.5": 1.0,
+        "2.0": 1.0
+      }
+    },
+    "wall_seconds": 8.9
+  },
+  "btut_wall_seconds": 9.094,
+  "device": "cpu",
+  "survivor_attack_share": 0.3846,
+  "survivor_subtype_concentration": [
+    {
+      "subtype": "normal",
+      "survivor_count": 184,
+      "survivor_share": 0.6154,
+      "original_count": 4804,
+      "original_share": 0.5338,
+      "lift": 1.153
+    },
+    {
+      "subtype": "neptune",
+      "survivor_count": 50,
+      "survivor_share": 0.1672,
+      "original_count": 2982,
+      "original_share": 0.3313,
+      "lift": 0.505
+    },
+    {
+      "subtype": "portsweep",
+      "survivor_count": 17,
+      "survivor_share": 0.0569,
+      "original_count": 219,
+      "original_share": 0.0243,
+      "lift": 2.337
+    },
+    {
+      "subtype": "satan",
+      "survivor_count": 17,
+      "survivor_share": 0.0569,
+      "original_count": 260,
+      "original_share": 0.0289,
+      "lift": 1.968
+    },
+    {
+      "subtype": "ipsweep",
+      "survivor_count": 10,
+      "survivor_share": 0.0334,
+      "original_count": 264,
+      "original_share": 0.0293,
+      "lift": 1.14
+    },
+    {
+      "subtype": "warezclient",
+      "survivor_count": 6,
+      "survivor_share": 0.0201,
+      "original_count": 65,
+      "original_share": 0.0072,
+      "lift": 2.778
+    },
+    {
+      "subtype": "back",
+      "survivor_count": 4,
+      "survivor_share": 0.0134,
+      "original_count": 57,
+      "original_share": 0.0063,
+      "lift": 2.112
+    },
+    {
+      "subtype": "warezmaster",
+      "survivor_count": 3,
+      "survivor_share": 0.01,
+      "original_count": 3,
+      "original_share": 0.0003,
+      "lift": 30.1
+    },
+    {
+      "subtype": "smurf",
+      "survivor_count": 3,
+      "survivor_share": 0.01,
+      "original_count": 170,
+      "original_share": 0.0189,
+      "lift": 0.531
+    },
+    {
+      "subtype": "land",
+      "survivor_count": 3,
+      "survivor_share": 0.01,
+      "original_count": 3,
+      "original_share": 0.0003,
+      "lift": 30.1
+    },
+    {
+      "subtype": "guess_passwd",
+      "survivor_count": 1,
+      "survivor_share": 0.0033,
+      "original_count": 3,
+      "original_share": 0.0003,
+      "lift": 10.033
+    },
+    {
+      "subtype": "nmap",
+      "survivor_count": 1,
+      "survivor_share": 0.0033,
+      "original_count": 91,
+      "original_share": 0.0101,
+      "lift": 0.331
+    }
+  ]
+}
