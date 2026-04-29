@@ -11,7 +11,7 @@
 | `docs/commercial/defense/master-tear-sheet.md` | `ab9c948c4b331abd6cebdfacaf4b04fa5cbaefccea7175af956b7f9e6e9d39de` |
 | `docs/superpowers/specs/2026-04-28-defense-tear-sheet-design.md` | `990ad57108198d8e81b3e60e4be3f9783c0f8140473413f567efcd6fde3cb9ab` |
 
-## Canonical hashes — v2.0 (megatest-grounded tear sheet)
+## Canonical hashes — v2.0 (synthetic-megatest-grounded tear sheet)
 
 | File | SHA-256 |
 |---|---|
@@ -19,6 +19,16 @@
 | `docs/commercial/defense/MEGATEST_REPORT.md` | `1d3c014c93be13549bdb9eabe780123058de0ed87fb736239b4ec67c9f4e3ca2` |
 | `data/validation/defense_megatest.json` | `7c1709b4c5788315d7d63e6bc713d11a32680d7dc54f91fb127dc70026607cea` |
 | `docs/superpowers/specs/2026-04-28-defense-megatest-design.md` | `c3c614c59e1c751b75d17ddc1522c517a367bf79f1aa949161026543f1c969f9` |
+
+## Canonical hashes — v3.0 (real-defense-data-grounded tear sheet)
+
+The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the EDGAR distress reconciliation. Synthetic megatest is demoted to architectural-fit secondary evidence.
+
+| File | SHA-256 |
+|---|---|
+| `docs/commercial/defense/master-tear-sheet-v3.md` | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` |
+| `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` |
+| `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 
@@ -63,13 +73,21 @@ To anchor (from a terminal where `ots` runs cleanly):
 
 Calendar servers (alice, bob, finney by default) accept the SHA-256 digest and return a calendar attestation. Bitcoin-block confirmation typically arrives within a few hours; `ots upgrade` then updates the proof files once the calendar attestations are committed to the chain.
 
-## Reproducing the v2.0 megatest numbers
+## Reproducing the v2.0 synthetic megatest numbers
 
 The v2.0 tear sheet is grounded in the megatest artifact at `data/validation/defense_megatest.json`. To reproduce that artifact:
 
     python -m scripts.defense_megatest.run --quick
 
 Expected wall-clock: 6 to 8 seconds on commodity 2023 laptop hardware. Expected output: 91 / 123 (74.0%) PASS verdict, with the per-vertical recall-in-survivors values printed in the v2.0 tear sheet's megatest table. Determinism is bit-identical at seed=42; deviations more than 1% indicate environment drift (numpy/scipy version, BLAS library) and warrant investigation.
+
+## Reproducing the v3.0 real-defense-data numbers
+
+The v3.0 tear sheet is grounded in the real-data artifact at `data/validation/defense_megatest_real_data.json`. To reproduce:
+
+    python -m scripts.defense_megatest.real_data
+
+Expected wall-clock: ~10 seconds on commodity 2023 laptop hardware. The script fetches KDDCUP99 from the sklearn cache (or downloads it on first run; ~5 minutes one-time download), then runs BTUT, Isolation Forest, and Local Outlier Factor on the same 6,000-entity sample with 600 attacks (10% attack rate). Expected headline: BTUT recall_in_survivors=41.5%, AUC=0.613; Isolation Forest recall=54.3%, AUC=0.845; Local Outlier Factor recall=14.0%, AUC=0.401. KDDCUP99 attack labels are provided by sklearn upstream; reconciliation with EDGAR distress prediction is included in the artifact for the predictive-task honest framing.
 
 ## Local-machine note (2026-04-28)
 

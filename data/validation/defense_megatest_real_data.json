@@ -1,0 +1,179 @@
+{
+  "generated_at": "2026-04-29T02:27:47Z",
+  "wall_seconds": 12.89,
+  "seed": 42,
+  "kddcup99_real_data": {
+    "vertical": "network_cyber_real_data",
+    "label": "Network and cyber forensics (KDDCUP99 / DARPA real data)",
+    "dataset_meta": {
+      "source": "KDDCUP99 SA subset (DARPA / MIT Lincoln Laboratory)",
+      "provenance": "DARPA Intrusion Detection Evaluation, U.S. Air Force LAN simulation, 1998-1999",
+      "fetched_via": "sklearn.datasets.fetch_kddcup99(subset='SA', percent10=True)",
+      "n_samples_total_available": 100655,
+      "n_samples_used": 6000,
+      "n_attacks_in_sample": 600,
+      "attack_fraction_in_sample": 0.1,
+      "n_features": 41,
+      "attack_subtypes_in_full_dataset": [
+        "back.",
+        "buffer_overflow.",
+        "ipsweep.",
+        "land.",
+        "neptune.",
+        "normal.",
+        "pod.",
+        "portsweep.",
+        "satan.",
+        "smurf.",
+        "teardrop.",
+        "warezclient."
+      ],
+      "feature_names": [
+        "duration",
+        "protocol_type",
+        "service",
+        "flag",
+        "src_bytes",
+        "dst_bytes",
+        "land",
+        "wrong_fragment",
+        "urgent",
+        "hot",
+        "num_failed_logins",
+        "logged_in",
+        "num_compromised",
+        "root_shell",
+        "su_attempted",
+        "num_root",
+        "num_file_creations",
+        "num_shells",
+        "num_access_files",
+        "num_outbound_cmds",
+        "is_host_login",
+        "is_guest_login",
+        "count",
+        "srv_count",
+        "serror_rate",
+        "srv_serror_rate",
+        "rerror_rate",
+        "srv_rerror_rate",
+        "same_srv_rate",
+        "diff_srv_rate",
+        "srv_diff_host_rate",
+        "dst_host_count",
+        "dst_host_srv_count",
+        "dst_host_same_srv_rate",
+        "dst_host_diff_srv_rate",
+        "dst_host_same_src_port_rate",
+        "dst_host_srv_diff_host_rate",
+        "dst_host_serror_rate",
+        "dst_host_srv_serror_rate",
+        "dst_host_rerror_rate",
+        "dst_host_srv_rerror_rate"
+      ],
+      "seed": 42
+    },
+    "corpus_size": 6000,
+    "n_anomalies_ground_truth": 600,
+    "btut": {
+      "primary_metric": {
+        "in_set_count": 249,
+        "n_anomalies": 600,
+        "n_set": 1499,
+        "recall_in_set": 0.415,
+        "lift": 1.661
+      },
+      "topk_metric": {
+        "precision": 0.295,
+        "recall": 0.295,
+        "f1": 0.295,
+        "true_positives": 177,
+        "false_positives": 423,
+        "false_negatives": 423,
+        "k": 600,
+        "n_anomalies": 600,
+        "n_ranked": 6000,
+        "lift": 2.95
+      },
+      "auc": 0.6127,
+      "wall_seconds": 6.261,
+      "entities_per_second": 958.3,
+      "n_survivors": 1499,
+      "n_clusters": 81
+    },
+    "baselines": {
+      "isolation_forest": {
+        "available": true,
+        "recall_in_set": 0.5433,
+        "lift_in_set": 2.175,
+        "in_set_count": 326,
+        "topk_precision": 0.305,
+        "topk_recall": 0.305,
+        "topk_f1": 0.305,
+        "topk_lift": 3.05,
+        "auc": 0.8452,
+        "wall_seconds": 0.305,
+        "entities_per_second": 19669.7
+      },
+      "local_outlier_factor": {
+        "available": true,
+        "recall_in_set": 0.14,
+        "lift_in_set": 0.56,
+        "in_set_count": 84,
+        "topk_precision": 0.085,
+        "topk_recall": 0.085,
+        "topk_f1": 0.085,
+        "topk_lift": 0.85,
+        "auc": 0.4005,
+        "wall_seconds": 3.223,
+        "entities_per_second": 1861.4
+      }
+    }
+  },
+  "edgar_reconciliation": {
+    "task": "Predict which CIKs will file SEC distress forms (10-K/A, 10-Q/A, NT 10-K, NT 10-Q)",
+    "task_match_to_btut_design": "WEAK: distress filings are predictive, BTUT measures structural anomaly. Low correlation expected.",
+    "competitive_backtest": {
+      "ground_truth_source": "SEC distress forms (10-K/A, 10-Q/A, NT 10-K, NT 10-Q) from scripts/edgar_cache.json",
+      "positive_total": 26,
+      "positive_in_btut_survivor_set": 6,
+      "rankers": [
+        {
+          "name": "btut_composite",
+          "auc_hits_k500": 2.9567099567099566,
+          "recall_at_k100": 0.5
+        },
+        {
+          "name": "mean_composite",
+          "auc_hits_k500": 2.857142857142857,
+          "recall_at_k100": 0.3333
+        },
+        {
+          "name": "fact_count",
+          "auc_hits_k500": 3.3333333333333335,
+          "recall_at_k100": 0.5
+        },
+        {
+          "name": "random_seed_42",
+          "auc_hits_k500": 2.9913419913419914,
+          "recall_at_k100": 0.5
+        }
+      ],
+      "random_null_auc_mean": 2.81010101010101,
+      "vendor_comparison_methodology": [
+        "bloomberg_terminal",
+        "alphasense",
+        "ravenpack",
+        "audit_analytics"
+      ]
+    },
+    "supervised_distress": {
+      "cv_mean_auc": 0.5867,
+      "cv_std_auc": 0.2528,
+      "null_auc_mean": 0.5212,
+      "cv_prec_at_10": 0.04,
+      "cv_rec_at_10": 0.3,
+      "ground_truth_source": "SEC form filings (10-K/A, 10-Q/A, NT 10-K, NT 10-Q)"
+    }
+  }
+}
