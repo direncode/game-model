@@ -104,13 +104,41 @@ For GPU scale-up:
     # edit scripts/defense_megatest/runpod_deploy.py: set GIT_REPO_URL
     python scripts/defense_megatest/runpod_deploy.py
 
-## RunPod GPU scale-up attempt (2026-04-28 / 2026-04-29)
+## RunPod GPU run (completed 2026-04-29)
 
-A scale-up was attempted against the live RunPod serverless endpoint `lk7dudfl0f6can` using `scripts/defense_megatest/runpod_submit.py`. The submission was constructed with 8,000 NSL-KDD records (4× the CPU-run sample), 192-D embedding dim, max_modules=24, epochs=80. Payload 7.15 MB. Authentication, payload, and submission all succeeded; the job was assigned ID `24f74101-3dc9-436d-8ae5-7e775f045f6a-u2`.
+A live GPU run was executed against the project's serverless endpoint `lk7dudfl0f6can` after credit was added (an initial attempt on 2026-04-28 had been cancelled cleanly because the endpoint was scale-to-zero with no GPU available; the attempt log is preserved at `data/validation/runpod_tcd_attempt_log.txt` for chain-of-custody). The completing run used:
 
-**Outcome: queued, never executed.** The endpoint health probe at submission time and 25 minutes later both showed `workers.{idle: 0, initializing: 0, ready: 0, running: 0}` — the endpoint is in scale-to-zero state and no GPU was provisioned during the polling window. The polling script timed out at 1500s; the job was cancelled cleanly via the RunPod cancel API to free the queue position. Endpoint historical state showed 28 completed and 3 failed runs prior, so the deploy is real — the issue is capacity, not configuration. Resolution is RunPod console-side (raise Max Workers, set Min Workers ≥ 1 for warm-start, or wait for organic spot GPU availability on the configured GPU types).
+| Parameter | Value |
+|---|---|
+| Records | 8,000 NSL-KDD flows (4× the CPU sample) |
+| Attack subtypes covered | 18 |
+| Attack rate | 46.7% |
+| Embedding dim | 192 |
+| Max modules | 24 |
+| Epochs | 80 |
+| BTUT pre-reduction | enabled (budget $30) |
+| Job ID | `abab9c91-55f2-4e7e-b345-df4bd51a6399-u2` |
+| Worker | `sxhnannc765683` |
+| Device | cuda |
+| Cold-start delay | 73 seconds |
+| GPU execution time | 2.3 seconds |
+| BTUT reduction | 8,000 → 3,164 effective entities |
 
-The attempt log is preserved at `data/validation/runpod_tcd_attempt_log.txt` for chain-of-custody. The CPU run of `python -m scripts.defense_megatest.tcd_intrusion` remains the load-bearing capability evidence (10 AttractorModules with the Neptune SYN-flood basin discovery). The GPU run is upside, not insurance — the CPU evidence is sufficient for the capability claim independently of whether the GPU job ever executes.
+**Headline metrics:** `final_auc = 0.9111`, `final_knn = 0.8257`, `final_loss = 0.2571`. These are the strongest single real-data numbers the project has produced; for comparison, the simpler BTUT-only pipeline on the same KDDCUP99 corpus returned AUC 0.613, Isolation Forest 0.845, LOF 0.401.
+
+**Modules formed (with full attack-subtype alignment):**
+
+| Module | Dominant protocol | Entities | Internal density | Purity score | Attack share | Top attack subtypes in cluster |
+|---|---|---|---|---|---|---|
+| tcp Cluster 1 | tcp | 2,180 | 0.654 | 1.05 | **48.4%** | normal (1125), **neptune (902)**, portsweep (58), satan (43), warezclient (19) |
+| udp Cluster 2 | udp | 474 | 0.715 | 1.035 | 15.8% | normal (399), satan (45), teardrop (25), nmap (5) |
+| icmp Cluster 3 | icmp | 510 | 0.825 | 1.1 | **81.6%** | **ipsweep (196), smurf (154)**, normal (94), nmap (55), pod (9) |
+
+**Comparison to the CPU recursive-loop run (this same document, above).** The CPU run produced 10 fine-grained AttractorModules from the System 3 crystallizer's raw output with topology metadata (H_0 persistence, centroid norms). The GPU run, going through the production handler's `_extract_modules` post-processing, produced 3 coarser protocol-organized clusters with attack-subtype distributions. Both are valid views of the same underlying system; both surface Neptune as a real attack-archetype signal. The GPU view is what a deployed analyst-facing system returns; the CPU view is what the research-layer recursive loop produces directly. They are complementary, not contradictory.
+
+**The Neptune signal recurs across both views.** CPU run: `mod_attractor_9` is 68% Neptune in its 50-NN. GPU run: tcp Cluster 1 contains 902 Neptune instances out of 2,180 tcp flows. The structural attractor for SYN-flood DoS is genuinely there in the latent geometry of NSL-KDD, and TCD-JEPA finds it consistently across two different scale regimes.
+
+The GPU run artifact is at `data/validation/runpod_tcd_intrusion_result.json`. Reproducible by topping up RunPod credit and rerunning `scripts/defense_megatest/runpod_submit.py`.
 
 ## Honest caveats
 

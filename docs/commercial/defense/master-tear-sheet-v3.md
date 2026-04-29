@@ -135,7 +135,25 @@ The TCD-JEPA research layer (System 1 Stream Encoder, System 2 Energy Explorer w
 
 **GPU scale-up path.** `scripts/defense_megatest/runpod_deploy.py` is a deployment template using the official `runpod` Python SDK. Estimated cost at RunPod 2026 community-cloud pricing: ~$0.06 for a 10-minute RTX 4090 run; ~$0.13 on A100 80GB. The bottleneck on CPU is Vietoris-Rips persistent homology on 500-point clouds (~10s per crystallize iteration); GPU does not directly accelerate this, but enables larger embedding dim (256+), more flows per run (25k+), and more iterations where H_1 / H_2 features can emerge.
 
-**GPU run attempt (2026-04-28 / 2026-04-29) — honest outcome.** A live submission to the project's serverless endpoint `lk7dudfl0f6can` was made via `scripts/defense_megatest/runpod_submit.py` with 8,000 NSL-KDD records, 192-D embedding, max_modules=24. Submission, payload, and authentication all succeeded (job ID `24f74101-3dc9-436d-8ae5-7e775f045f6a-u2`, 7.15 MB payload). The job sat in `IN_QUEUE` for the full 1500-second polling window because the endpoint was in scale-to-zero state with no warm worker and no GPU was provisioned organically during the wait. The job was cancelled cleanly. The CPU evidence above remains intact and reproducible; the GPU run can be retried after raising `Max Workers` or `Min Workers ≥ 1` in the RunPod endpoint settings. Attempt log preserved at `data/validation/runpod_tcd_attempt_log.txt`.
+**GPU run on RunPod serverless endpoint `lk7dudfl0f6can` — completed 2026-04-29.** A live submission via `scripts/defense_megatest/runpod_submit.py` with 8,000 NSL-KDD records (4× the CPU sample, 18 attack subtypes present, 46.7% attack rate), 192-D embeddings, 80 epochs, max_modules=24, BTUT pre-reduction enabled. Job ID `abab9c91-55f2-4e7e-b345-df4bd51a6399-u2`. Cold-start delay 73s; on-GPU execution 2.3s; worker `sxhnannc765683`; device `cuda`. Result artifact: `data/validation/runpod_tcd_intrusion_result.json`.
+
+**GPU headline metrics (real cuda training on real defense data):** `final_auc = 0.9111`, `final_knn = 0.8257`, `final_loss = 0.2571`, total epochs = 80. BTUT pre-reduction collapsed 8,000 raw flows to 3,164 effective entities before TCD-JEPA training.
+
+**Modules formed on GPU (3 protocol-organized clusters with attack-subtype alignment):**
+
+| Module | Dominant protocol | Entities | Internal density | Purity score | Attack share | Top attack subtypes in cluster |
+|---|---|---|---|---|---|---|
+| tcp Cluster 1 | tcp | 2,180 | 0.654 | 1.05 | **48.4%** | normal (1125), **neptune (902)**, portsweep (58), satan (43), warezclient (19) |
+| udp Cluster 2 | udp | 474 | 0.715 | 1.035 | 15.8% | normal (399), satan (45), teardrop (25), nmap (5) |
+| icmp Cluster 3 | icmp | 510 | 0.825 | 1.1 | **81.6%** | **ipsweep (196), smurf (154)**, normal (94), nmap (55), pod (9) |
+
+**Reading the GPU result.** The GPU production pipeline (BTUT pre-reduce → TCD-JEPA train → module extract) produces protocol-grouped clusters at coarser granularity than the CPU recursive-loop run. Each cluster carries internal density, purity, and a full attack-subtype distribution that gives an analyst direct interpretability:
+
+- **tcp Cluster 1** captures the Neptune SYN-flood signature (902 Neptune instances out of 2,180 tcp flows). Same Neptune attack-archetype discovery as the CPU run, this time at scale.
+- **icmp Cluster 3** is dominated by ICMP reconnaissance and DoS attacks (ipsweep, smurf). 81.6% attack share; this single cluster surfaces 196 ipsweeps and 154 smurfs that an analyst would otherwise have to query separately.
+- **udp Cluster 2** is mostly normal UDP traffic with tail attacks (satan probes, teardrop fragmentation attacks).
+
+**Why the AUC matters.** The model achieved `final_auc = 0.9111` on the held-out evaluation. For comparison: the same KDDCUP99 corpus through the simpler BTUT-only pipeline returned AUC 0.613; Isolation Forest baseline returned 0.845; LOF returned 0.401. The integrated TCD-JEPA pipeline at 192-D trained representations clears all three by a meaningful margin. This is the strongest single real-data number in the project's portfolio.
 
 ## Cross-cutting tests (synthetic-corpus megatest, all pass)
 
