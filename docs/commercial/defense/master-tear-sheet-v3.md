@@ -7,10 +7,12 @@
 **Supersedes:** v1.0 (`master-tear-sheet.md`), v2.0 (`master-tear-sheet-v2.md`). All three versions remain anchored independently for provenance.
 **Underlying artifacts (all reproducible):**
 - `data/validation/defense_megatest_real_data.json` — KDDCUP99 (DARPA / MIT Lincoln Lab) BTUT vs Isolation Forest vs LOF
+- `data/validation/tcd_intrusion_modules.json` — TCD-JEPA capability test on NSL-KDD (10 AttractorModules formed)
 - `data/validation/competitive_backtest.json` — EDGAR distress prediction with 4 rankers + ground truth
 - `data/validation/edgar_supervised_distress.json` — supervised distress prediction with cross-validation
 - `data/validation/defense_megatest.json` — 8-vertical synthetic-corpus megatest (architectural fit)
 - `docs/commercial/defense/MEGATEST_REPORT.md` — full per-vertical synthetic results
+- `docs/commercial/defense/TCD_CAPABILITY_TEST.md` — TCD-JEPA capability test report (modules formed, scale-up path)
 - `docs/commercial/VALIDATION_REPORT.md` — commercial-finance validation (some claims circular, see methodology note below)
 
 ---
@@ -101,8 +103,20 @@ The defense pitch is the composition. Detection accuracy is necessary but not su
 | **Counter-UAS and counter-MASINT signature** | Multi-modal RF + acoustic + IR + kinematic threat detection; low-observable threat surfacing. | Synthetic megatest 80% recall at 3.6× lift (architectural fit) |
 | **PNT integrity** | GPS spoofing detection; jamming-onset characterization; multi-receiver consensus deltas. | Synthetic megatest 75% recall at 3.0× lift (architectural fit) |
 | **Imagery and geospatial** | Spatial outliers; AIS-dark vessel surfacing; ROI structural scoring. | Synthetic megatest 17% recall — calibration required for deployment; real-data validation pending |
-| **Network and cyber forensics** | C2 beaconing detection; asymmetric exfil flagging; insider-threat behavioral outliers. | **KDDCUP99 (DARPA real data): AUC 0.613, recall 41.5%, throughput 958 entities/sec on raw pipeline.** Synthetic megatest 69% recall at 2.8× lift |
+| **Network and cyber forensics** | C2 beaconing detection; asymmetric exfil flagging; insider-threat behavioral outliers; structural attractor-basin discovery via TCD module crystallization. | **KDDCUP99 (DARPA real data): AUC 0.613, recall 41.5%, throughput 958 entities/sec on raw pipeline.** **NSL-KDD (DARPA, modernized 2009): TCD-JEPA capability test forms 10 AttractorModules at 25× persistence threshold in 58.7 seconds CPU.** Synthetic megatest 69% recall at 2.8× lift. |
 | **Logistics, force protection, counter-threat finance** | Shell-company markers; layering / triangulation; sanctions-evasion structural patterns. | EDGAR distress prediction: BTUT ≈ random (task-design mismatch — BTUT measures structural, not predictive). EDGAR structural anomalies: 4,999 survivors from 61,041 filers (real data, real survivors, deterministic). Synthetic megatest 29% recall on injected sanctions-evasion patterns. |
+
+## TCD-JEPA capability test (research layer, real defense data)
+
+Companion: `data/validation/tcd_intrusion_modules.json` and `docs/commercial/defense/TCD_CAPABILITY_TEST.md`. Reproducer: `python -m scripts.defense_megatest.tcd_intrusion`.
+
+The TCD-JEPA research layer (System 1 Stream Encoder, System 2 Energy Explorer with Langevin dynamics, System 3 Module Crystallizer with Vietoris-Rips persistent homology) was exercised on **NSL-KDD** (DARPA / MIT Lincoln Laboratory origin, modernized 2009 by University of New Brunswick — the cleaned successor to KDDCUP99). 2,000 flow records sampled at 47.2% attack rate across 14 attack subtypes; encoded to 64-D embeddings via standardize → one-hot → Johnson-Lindenstrauss random projection → L2 normalize. Energy function E(z) = ||z − normal_centroid||^2; attack flows occupy higher-energy regions of the latent space.
+
+**Result: 10 AttractorModules crystallized over 12 iterations.** Wall-clock 58.7 seconds on commodity 2023 laptop CPU. All 10 modules formed from H_0 (connected-component) features in trajectory point clouds; persistence values 7.69 to 8.0, all 25× above the 0.3 threshold. Each AttractorModule has a learnable 64-D centroid (norms 0.32 to 0.54, indicating genuinely distinct latent regions). Zero H_1 (cycle) and zero H_2 (boundary) features formed in this encoding regime — informative qualitative finding: NSL-KDD flow data with JL-projection encoding produces clustered structure but no detectable periodic or void topology. A trained encoder (real JEPA, contrastive, or learned representation) is the configuration where H_1 and H_2 features are expected to emerge; that is follow-on work on customer-furnished data and GPU compute.
+
+**Framing.** Internal capability evidence, not a sales claim. The capability test confirms the recursive loop runs end-to-end on tabular defense data and produces interpretable predictor modules. It does not yet validate module-to-attack-subtype alignment — that is the natural follow-on (compute per-attractor attack-subtype distribution by closest-centroid assignment).
+
+**GPU scale-up path.** `scripts/defense_megatest/runpod_deploy.py` is a deployment template using the official `runpod` Python SDK. Estimated cost at RunPod 2026 community-cloud pricing: ~$0.06 for a 10-minute RTX 4090 run; ~$0.13 on A100 80GB. The bottleneck on CPU is Vietoris-Rips persistent homology on 500-point clouds (~10s per crystallize iteration); GPU does not directly accelerate this, but enables larger embedding dim (256+), more flows per run (25k+), and more iterations where H_1 / H_2 features can emerge.
 
 ## Cross-cutting tests (synthetic-corpus megatest, all pass)
 
@@ -133,9 +147,9 @@ Core algorithmic work is protected as **trade secret** with **OpenTimeStamps cry
 Engagement paths span pilot deployment on customer-furnished corpus, capability demonstration against unclassified red-team data, BAA / SBIR / STTR Phase II match, OTA prototype agreements, prime-teaming or sub-contractor roles on existing programs of record, and classified-side roadmap discussions under sponsoring-agency NDA. The strongest entry point is a 60-minute capability demonstration where the customer provides a corpus of their own data and BTUT is run live, side-by-side with Isolation Forest, on the customer's terminal. Both rankers re-run from raw inputs in seconds; differentiation on lineage, determinism, multi-type handling, and classification posture becomes immediately tangible.
 
 **Contact:** *[populate at finalization]*
-**System version:** Latent Ocean SDK v0.2.0; megatest v1.0.0; real-data harness v1.0.0 (commit hash on request)
+**System version:** Latent Ocean SDK v0.2.0; synthetic megatest v1.0.0; real-data harness v1.0.0; TCD capability harness v1.0.0; RunPod deployment template v1.0.0 (commit hash on request)
 **Document timestamp:** *[OpenTimeStamps anchor applied to rendered PDF at finalization]*
 
 ---
 
-*Falsifiable on demand. Every claim re-runnable from `python -m scripts.defense_megatest.run` (synthetic) and `python -m scripts.defense_megatest.real_data` (DARPA / MIT Lincoln Lab cyber-defense + EDGAR distress reconciliation). Determinism, lineage, air-gap, and classification posture are bit-for-bit verifiable in the published artifacts.*
+*Falsifiable on demand. Every claim re-runnable from `python -m scripts.defense_megatest.run` (synthetic 8-vertical megatest), `python -m scripts.defense_megatest.real_data` (KDDCUP99 + EDGAR distress reconciliation), and `python -m scripts.defense_megatest.tcd_intrusion` (TCD-JEPA capability test on NSL-KDD). Determinism, lineage, air-gap, and classification posture are bit-for-bit verifiable in the published artifacts.*

@@ -22,13 +22,14 @@
 
 ## Canonical hashes — v3.0 (real-defense-data-grounded tear sheet)
 
-The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the EDGAR distress reconciliation. Synthetic megatest is demoted to architectural-fit secondary evidence.
+The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the EDGAR distress reconciliation. Synthetic megatest is demoted to architectural-fit secondary evidence. Amended to include the TCD-JEPA capability test cross-reference.
 
-| File | SHA-256 |
-|---|---|
-| `docs/commercial/defense/master-tear-sheet-v3.md` | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` |
-| `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` |
-| `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` |
+| File | SHA-256 | Note |
+|---|---|---|
+| `docs/commercial/defense/master-tear-sheet-v3.md` (initial) | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` | superseded by amended below; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended, includes TCD section) | `84546de22f62706015168f44cf55a5fd6115ac182afbad166652e366902a03a5` | current canonical v3 |
+| `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
+| `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
 ## Canonical hashes — TCD-JEPA capability test on NSL-KDD intrusion data (internal capability evidence, not for sale)
 
