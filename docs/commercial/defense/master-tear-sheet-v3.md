@@ -280,6 +280,51 @@ The GPU run discovered 5× more distinct Neptune sub-archetypes than the CPU run
 
 **Reproducer:** SCP `scripts/defense_megatest/runpod_ssh_orch.py` and `pod_ssh_run.py` (assembled inline on EC2) to a host with `RUNPOD_API_KEY` in env, then run. Cost: ~$0.05 of RunPod community-cloud RTX 4090 time per run (~3 minutes wall-clock end-to-end).
 
+### Named module catalog with interlinks
+
+The 18 raw `mod_attractor_*` outputs from the recursive loop have been named, grouped into families, and interlinked. See `docs/commercial/defense/MODULE_CATALOG.md` for the full catalog. Summary:
+
+| Family | Members | What each represents |
+|---|---|---|
+| **Neptune-Core** (3) | Neptune-Alpha, Neptune-Beta, Neptune-Gamma | Three structurally-distinct sub-flavors of SYN-flood DoS. Each basin is 100% pure: every flow grouped into it is a Neptune attack. The unsupervised discovery is that the cybersecurity field's single "Neptune" attack class is in fact three distinct attractors. |
+| **Neptune-Frontier** (1) | Neptune-Frontier | 78% Neptune basin sitting at the edge of the Neptune cluster. Captures flows that share most of the SYN-flood signature but occupy slightly off-axis latent positions. |
+| **Neptune-Periphery** (1) | Neptune-Periphery | 58% Neptune boundary basin between the Neptune core and adjacent traffic regions. Operational use: leading-indicator monitoring for SYN-flood emergence. |
+| **Normal-Adjacent-Attack** (3) | Normal-Adjacent-Attack-Alpha/Beta/Gamma | Three boundary basins where 38-62% of nearest-neighbor flows are attacks but the dominant label is still normal. High-value analyst-review zone — these are where low-signature attack variants hiding in legitimate traffic show up. |
+| **Normal-Pure** (10) | Normal-Pure-Alpha through Normal-Pure-Kappa | Ten distinct sub-archetypes of legitimate network traffic — different services, ports, and protocol mixes that produce structurally distinguishable normal-traffic basins. Together they form a structural taxonomy of "what does normal look like in this network." |
+
+**Interlink axis (purity gradient across the attack-normal interface):**
+
+```
+ATTACK SIDE                                                          NORMAL SIDE
+                                                                              
+Neptune-Alpha   ┐
+Neptune-Beta    ┼─ NEPTUNE CORE (3 pure SYN-flood sub-flavors, 100% pure)
+Neptune-Gamma   ┘
+       │
+       ▼
+Neptune-Frontier   (78% Neptune)
+       │
+       ▼
+Neptune-Periphery  (58% Neptune)
+       │
+   ── ATTACK / NORMAL INTERFACE ──
+       │
+       ▼
+Normal-Adjacent-Attack-* (38-62% attack)
+       │
+       ▼
+Normal-Pure-Zeta   (4% attack tail)
+       │
+       ▼
+Normal-Pure-Alpha  ┐
+Normal-Pure-Beta   ┤
+Normal-Pure-Gamma  ┤
+...                ┼─ NORMAL CORE (10 distinct sub-archetypes of legitimate traffic)
+Normal-Pure-Kappa  ┘
+```
+
+Reading this top-to-bottom traces a continuous structural transition from pure-attack to pure-normal in the latent space. Reading left-to-right within a family (e.g., Alpha → Beta → Gamma in Neptune-Core) traces the persistence-rank ordering of basin depth. The full named catalog (with persistence values, centroid norms, and per-family explanations) is in `docs/commercial/defense/MODULE_CATALOG.md`. The structured artifact (machine-readable named modules) is in `data/validation/named_modules_catalog.json`.
+
 ## Cross-cutting tests (synthetic-corpus megatest, all pass)
 
 | Test | Result | Detail |

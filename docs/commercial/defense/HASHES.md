@@ -34,7 +34,8 @@ The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended E: + honesty pass on simulation/BTUT findings) | `c65155c330717907bb95c1ce88eb4835ddd1daf727f4af8205176ee3e22e8a8e` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended F: + REAL 18-module GPU recursive-loop run on cuda RTX 4090) | `04247d8e4864ea0684c09ca1308329ed40acc0e8d5d51d748e21aa7d1dff84eb` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended G: + CPU BTUT pre-reduction proof: 9s, 30x reduction, rare-attack lift up to 30.10x) | `f93fb09185e0aca7887726b83f61e01f34f037cab9d629cca41924d48351e472` | superseded; preserved for chain-of-custody |
-| `docs/commercial/defense/master-tear-sheet-v3.md` (amended H: + integrated BTUT→TCD pipeline run, 14 normal-archetype basins) | `8149dd4df5f2a7d6d1f031ecd37d8b7490ad07f51661db93837da722d7f0f6bb` | **current canonical v3** |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended H: + integrated BTUT→TCD pipeline run, 14 normal-archetype basins) | `8149dd4df5f2a7d6d1f031ecd37d8b7490ad07f51661db93837da722d7f0f6bb` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended I: + named module catalog (Neptune-Alpha/Beta/Gamma + Normal-Pure-Alpha..Kappa) with interlink purity gradient) | `d5f154fe3e152547ede16ef37e5b0c42d21de930a3d017057b54a0c606010b0b` | **current canonical v3** |
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
@@ -62,6 +63,9 @@ Amended to include per-module attack-subtype alignment analysis. The artifact an
 | `data/validation/btut_nslkdd_survivors.json` | `75e3b90d79ed5c212476506b09df8db827bf9f41ff4bb2df96b77aff99a2f69e` | BTUT NSL-KDD survivors artifact: 299 of 9000 (30x), per-subtype lift table |
 | `scripts/defense_megatest/run_btut_then_tcd.py` | `18ab57c4baa66025687a7ab2c44c95d43b6d7668510f6fbc3c944f1f3f5f4ce6` | Integrated BTUT → TCD pipeline runner with plain-English module narratives |
 | `data/validation/btut_then_tcd_nslkdd.json` | `7a0ba32ac34890f289f3263911ebcf0a59b7c92d0a3dc43bfdf35a778dd509d7` | Integrated pipeline artifact: BTUT 9s + TCD 98s, 14 normal-archetype modules with plain-English narratives |
+| `docs/commercial/defense/MODULE_CATALOG.md` | `06868f88701c8c1fd473f669d33eaf7442e39bb4f65bb0f1e223405beb4a4a69` | Named module catalog: 18 attractors organized into 6 families (Neptune-Core/Frontier/Periphery + Normal-Adjacent-Attack/Pure) with interlink purity gradient and plain-English narratives |
+| `data/validation/named_modules_catalog.json` | `d7ae6afe5fa56739c2cf698be192f503474e549eb7376107e3b5587a299c142f` | Machine-readable named module catalog (family groupings, persistence ranks, attack shares) |
+| `scripts/defense_megatest/name_and_interlink_modules.py` | `56a80d8a424356dc6f421ad81d8ee38a52527a98e01b7f3cf3d65f25e59a8a97` | Reads runpod_real_gpu_modules.json and generates the named-and-interlinked catalog |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 
