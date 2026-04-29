@@ -1,0 +1,854 @@
+{
+  "generated_at": "2026-04-29T02:13:41Z",
+  "seed": 42,
+  "mode": "quick",
+  "wall_seconds": 6.16,
+  "config": {
+    "all_source": {
+      "n_entities": 600,
+      "n_anomalies": 12,
+      "target_survivors": 150
+    },
+    "sigint_comint": {
+      "n_entities": 700,
+      "n_anomalies": 14,
+      "target_survivors": 175
+    },
+    "ew_spectrum": {
+      "n_entities": 600,
+      "n_anomalies": 12,
+      "target_survivors": 150
+    },
+    "counter_uas_masint": {
+      "n_entities": 500,
+      "n_anomalies": 10,
+      "target_survivors": 125
+    },
+    "pnt_integrity": {
+      "n_entities": 600,
+      "n_anomalies": 12,
+      "target_survivors": 150
+    },
+    "imagery_geospatial": {
+      "n_entities": 600,
+      "n_anomalies": 12,
+      "target_survivors": 150
+    },
+    "network_cyber": {
+      "n_entities": 800,
+      "n_anomalies": 16,
+      "target_survivors": 200
+    },
+    "logistics_finance": {
+      "n_entities": 700,
+      "n_anomalies": 14,
+      "target_survivors": 175
+    }
+  },
+  "verticals": {
+    "all_source": {
+      "label": "All-source / fused intelligence",
+      "corpus_size": 600,
+      "n_anomalies": 12,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 6,
+          "n_anomalies": 12,
+          "n_set": 134,
+          "recall_in_set": 0.5,
+          "lift": 2.239
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 12,
+          "false_negatives": 12,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.198,
+        "entities_per_second": 3023.4,
+        "n_survivors": 134,
+        "n_clusters": 14,
+        "survivor_types": {
+          "HUMINT": 37,
+          "IMINT": 31,
+          "MULTI_INT": 6,
+          "OSINT": 28,
+          "SIGINT": 32
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 0.5833,
+          "recall": 0.5833,
+          "f1": 0.5833,
+          "true_positives": 7,
+          "false_positives": 5,
+          "false_negatives": 5,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 29.167,
+          "wall_seconds": 0.164,
+          "entities_per_second": 3653.1,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.478
+        },
+        "local_outlier_factor": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 12,
+          "false_negatives": 12,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 0.0,
+          "wall_seconds": 0.01,
+          "entities_per_second": 60958.9,
+          "available": true,
+          "recall_in_set": 0.5833,
+          "lift_in_set": 2.612
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 1800
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 6,
+          "n_anomalies": 12,
+          "n_set": 132,
+          "recall_in_set": 0.5,
+          "lift": 2.273
+        },
+        "robustness_ratio": 1.0
+      }
+    },
+    "sigint_comint": {
+      "label": "Signal and communications (SIGINT, COMINT)",
+      "corpus_size": 700,
+      "n_anomalies": 14,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 12,
+          "n_anomalies": 14,
+          "n_set": 175,
+          "recall_in_set": 0.8571,
+          "lift": 3.429
+        },
+        "topk_metric": {
+          "precision": 0.3571,
+          "recall": 0.3571,
+          "f1": 0.3571,
+          "true_positives": 5,
+          "false_positives": 9,
+          "false_negatives": 9,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 17.857
+        },
+        "wall_seconds": 0.19,
+        "entities_per_second": 3690.2,
+        "n_survivors": 175,
+        "n_clusters": 16,
+        "survivor_types": {
+          "emitter_event": 175
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 14,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 50.0,
+          "wall_seconds": 0.147,
+          "entities_per_second": 4751.6,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        },
+        "local_outlier_factor": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 14,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 50.0,
+          "wall_seconds": 0.008,
+          "entities_per_second": 91400.5,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 2800
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 9,
+          "n_anomalies": 14,
+          "n_set": 175,
+          "recall_in_set": 0.6429,
+          "lift": 2.571
+        },
+        "robustness_ratio": 0.75
+      }
+    },
+    "ew_spectrum": {
+      "label": "Electronic warfare and spectrum management",
+      "corpus_size": 600,
+      "n_anomalies": 12,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 6,
+          "n_anomalies": 12,
+          "n_set": 150,
+          "recall_in_set": 0.5,
+          "lift": 2.0
+        },
+        "topk_metric": {
+          "precision": 0.1667,
+          "recall": 0.1667,
+          "f1": 0.1667,
+          "true_positives": 2,
+          "false_positives": 10,
+          "false_negatives": 10,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 8.333
+        },
+        "wall_seconds": 0.143,
+        "entities_per_second": 4205.9,
+        "n_survivors": 150,
+        "n_clusters": 13,
+        "survivor_types": {
+          "spectrum_obs": 150
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 12,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 50.0,
+          "wall_seconds": 0.154,
+          "entities_per_second": 3898.3,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        },
+        "local_outlier_factor": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 12,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 50.0,
+          "wall_seconds": 0.005,
+          "entities_per_second": 118640.4,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 4200
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 8,
+          "n_anomalies": 12,
+          "n_set": 150,
+          "recall_in_set": 0.6667,
+          "lift": 2.667
+        },
+        "robustness_ratio": 1.333
+      }
+    },
+    "counter_uas_masint": {
+      "label": "Counter-UAS and counter-MASINT signature",
+      "corpus_size": 500,
+      "n_anomalies": 10,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 8,
+          "n_anomalies": 10,
+          "n_set": 110,
+          "recall_in_set": 0.8,
+          "lift": 3.636
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 10,
+          "false_negatives": 10,
+          "k": 10,
+          "n_anomalies": 10,
+          "n_ranked": 500,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.114,
+        "entities_per_second": 4373.3,
+        "n_survivors": 110,
+        "n_clusters": 11,
+        "survivor_types": {
+          "bird": 27,
+          "civilian_aircraft": 28,
+          "commercial_drone": 22,
+          "unknown_threat": 8,
+          "weather_balloon": 25
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 0.9,
+          "recall": 0.9,
+          "f1": 0.9,
+          "true_positives": 9,
+          "false_positives": 1,
+          "false_negatives": 1,
+          "k": 10,
+          "n_anomalies": 10,
+          "n_ranked": 500,
+          "lift": 45.0,
+          "wall_seconds": 0.14,
+          "entities_per_second": 3559.3,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.545
+        },
+        "local_outlier_factor": {
+          "precision": 0.4,
+          "recall": 0.4,
+          "f1": 0.4,
+          "true_positives": 4,
+          "false_positives": 6,
+          "false_negatives": 6,
+          "k": 10,
+          "n_anomalies": 10,
+          "n_ranked": 500,
+          "lift": 20.0,
+          "wall_seconds": 0.005,
+          "entities_per_second": 98572.7,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.545
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 4000
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 5,
+          "n_anomalies": 10,
+          "n_set": 100,
+          "recall_in_set": 0.5,
+          "lift": 2.5
+        },
+        "robustness_ratio": 0.625
+      }
+    },
+    "pnt_integrity": {
+      "label": "PNT integrity",
+      "corpus_size": 600,
+      "n_anomalies": 12,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 9,
+          "n_anomalies": 12,
+          "n_set": 150,
+          "recall_in_set": 0.75,
+          "lift": 3.0
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 12,
+          "false_negatives": 12,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.16,
+        "entities_per_second": 3752.8,
+        "n_survivors": 150,
+        "n_clusters": 15,
+        "survivor_types": {
+          "gps_reading": 150
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 12,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 50.0,
+          "wall_seconds": 0.139,
+          "entities_per_second": 4318.1,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        },
+        "local_outlier_factor": {
+          "precision": 0.9167,
+          "recall": 0.9167,
+          "f1": 0.9167,
+          "true_positives": 11,
+          "false_positives": 1,
+          "false_negatives": 1,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 45.833,
+          "wall_seconds": 0.007,
+          "entities_per_second": 86047.4,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 3600
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 8,
+          "n_anomalies": 12,
+          "n_set": 150,
+          "recall_in_set": 0.6667,
+          "lift": 2.667
+        },
+        "robustness_ratio": 0.889
+      }
+    },
+    "imagery_geospatial": {
+      "label": "Imagery and geospatial",
+      "corpus_size": 600,
+      "n_anomalies": 12,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 2,
+          "n_anomalies": 12,
+          "n_set": 134,
+          "recall_in_set": 0.1667,
+          "lift": 0.746
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 12,
+          "false_negatives": 12,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.137,
+        "entities_per_second": 4378.2,
+        "n_survivors": 134,
+        "n_clusters": 11,
+        "survivor_types": {
+          "adsb_aircraft": 48,
+          "ais_vessel": 38,
+          "gps_track": 48
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 12,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 50.0,
+          "wall_seconds": 0.142,
+          "entities_per_second": 4228.7,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.478
+        },
+        "local_outlier_factor": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 12,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 12,
+          "n_anomalies": 12,
+          "n_ranked": 600,
+          "lift": 50.0,
+          "wall_seconds": 0.007,
+          "entities_per_second": 88794.2,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.478
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 4800
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 0,
+          "n_anomalies": 12,
+          "n_set": 130,
+          "recall_in_set": 0.0,
+          "lift": 0.0
+        },
+        "robustness_ratio": 0.0
+      }
+    },
+    "network_cyber": {
+      "label": "Network and cyber forensics",
+      "corpus_size": 800,
+      "n_anomalies": 16,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 11,
+          "n_anomalies": 16,
+          "n_set": 200,
+          "recall_in_set": 0.6875,
+          "lift": 2.75
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 16,
+          "false_negatives": 16,
+          "k": 16,
+          "n_anomalies": 16,
+          "n_ranked": 800,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.223,
+        "entities_per_second": 3594.6,
+        "n_survivors": 200,
+        "n_clusters": 17,
+        "survivor_types": {
+          "flow": 200
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 16,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 16,
+          "n_anomalies": 16,
+          "n_ranked": 800,
+          "lift": 50.0,
+          "wall_seconds": 0.137,
+          "entities_per_second": 5829.2,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        },
+        "local_outlier_factor": {
+          "precision": 0.875,
+          "recall": 0.875,
+          "f1": 0.875,
+          "true_positives": 14,
+          "false_positives": 2,
+          "false_negatives": 2,
+          "k": 16,
+          "n_anomalies": 16,
+          "n_ranked": 800,
+          "lift": 43.75,
+          "wall_seconds": 0.009,
+          "entities_per_second": 89529.5,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.0
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 4000
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 8,
+          "n_anomalies": 16,
+          "n_set": 200,
+          "recall_in_set": 0.5,
+          "lift": 2.0
+        },
+        "robustness_ratio": 0.727
+      }
+    },
+    "logistics_finance": {
+      "label": "Logistics, force protection, counter-threat finance",
+      "corpus_size": 700,
+      "n_anomalies": 14,
+      "btut": {
+        "primary_metric": {
+          "in_set_count": 4,
+          "n_anomalies": 14,
+          "n_set": 173,
+          "recall_in_set": 0.2857,
+          "lift": 1.156
+        },
+        "topk_metric": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "true_positives": 0,
+          "false_positives": 14,
+          "false_negatives": 14,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 0.0
+        },
+        "wall_seconds": 0.288,
+        "entities_per_second": 2431.2,
+        "n_survivors": 173,
+        "n_clusters": 17,
+        "survivor_types": {
+          "invoice": 53,
+          "payment": 61,
+          "shipment": 59
+        }
+      },
+      "baselines": {
+        "isolation_forest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 14,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 50.0,
+          "wall_seconds": 0.158,
+          "entities_per_second": 4440.4,
+          "available": true,
+          "recall_in_set": 1.0,
+          "lift_in_set": 4.046
+        },
+        "local_outlier_factor": {
+          "precision": 0.2857,
+          "recall": 0.2857,
+          "f1": 0.2857,
+          "true_positives": 4,
+          "false_positives": 10,
+          "false_negatives": 10,
+          "k": 14,
+          "n_anomalies": 14,
+          "n_ranked": 700,
+          "lift": 14.286,
+          "wall_seconds": 0.006,
+          "entities_per_second": 117763.8,
+          "available": true,
+          "recall_in_set": 0.7143,
+          "lift_in_set": 2.89
+        }
+      },
+      "adversarial": {
+        "perturbation": {
+          "perturbation": "gaussian_noise",
+          "sigma": 0.1,
+          "n_perturbed_attrs": 3500
+        },
+        "btut_under_perturbation_in_set": {
+          "in_set_count": 3,
+          "n_anomalies": 14,
+          "n_set": 171,
+          "recall_in_set": 0.2143,
+          "lift": 0.877
+        },
+        "robustness_ratio": 0.75
+      }
+    }
+  },
+  "cross_cutting": {
+    "determinism": {
+      "name": "determinism_from_raw_inputs",
+      "vertical_used": "sigint_comint",
+      "corpus_size": 700,
+      "hash_run_1": "00fe5e6beee5c16a1aadb727d5797e28d36954c610f91f22929c7037761e920c",
+      "hash_run_2": "00fe5e6beee5c16a1aadb727d5797e28d36954c610f91f22929c7037761e920c",
+      "passed": true,
+      "headline": "BTUT on raw sigint_comint corpus: 2 runs, bit-identical SHA-256 = 00fe5e6beee5c16a\u2026"
+    },
+    "throughput": {
+      "total_entities": 5100,
+      "total_wall_seconds": 1.45,
+      "aggregate_entities_per_second": 3510.0
+    },
+    "air_gap": {
+      "name": "air_gap",
+      "outbound_attempts": 0,
+      "btut_succeeded_offline": true,
+      "error": null,
+      "passed": true,
+      "headline": "BTUT on raw inputs answered with 0 outbound socket attempts; offline run succeeded"
+    },
+    "compliance": {
+      "access_log_structure": {
+        "name": "access_log_structure",
+        "n_events": 100,
+        "n_failures": 0,
+        "passed": true,
+        "headline": "100 synthetic access events; all required fields present"
+      },
+      "worm_append_only": {
+        "name": "worm_append_only",
+        "chain_length": 50,
+        "intact_chain_verified": true,
+        "tamper_detected_at_event": 25,
+        "passed": true,
+        "headline": "WORM chain of 50 verified intact; tamper at event 25 detected at event 25"
+      },
+      "classification_deny_by_default": {
+        "name": "classification_deny_by_default",
+        "n_role_class_pairs_tested": 20,
+        "n_failures": 0,
+        "failures": [],
+        "passed": true,
+        "headline": "4-tier RBAC matrix: 20 role/classification pairs verified, all deny-by-default correct"
+      },
+      "siem_export_schema": {
+        "name": "siem_export_schema",
+        "well_formed": true,
+        "missing_required_fields": [],
+        "passed": true,
+        "headline": "SIEM export sample is well-formed JSON with all required fields"
+      }
+    }
+  },
+  "pass_fail": {
+    "score": 91,
+    "max_score": 123,
+    "pct": 74.0,
+    "verdict": "PASS",
+    "detail": {
+      "all_source": {
+        "points": 8,
+        "max": 12,
+        "grade": "PASS",
+        "recall_in_survivors": 0.5,
+        "lift_in_survivors": 2.239
+      },
+      "sigint_comint": {
+        "points": 12,
+        "max": 12,
+        "grade": "STRONG",
+        "recall_in_survivors": 0.8571,
+        "lift_in_survivors": 3.429
+      },
+      "ew_spectrum": {
+        "points": 8,
+        "max": 12,
+        "grade": "PASS",
+        "recall_in_survivors": 0.5,
+        "lift_in_survivors": 2.0
+      },
+      "counter_uas_masint": {
+        "points": 12,
+        "max": 12,
+        "grade": "STRONG",
+        "recall_in_survivors": 0.8,
+        "lift_in_survivors": 3.636
+      },
+      "pnt_integrity": {
+        "points": 12,
+        "max": 12,
+        "grade": "STRONG",
+        "recall_in_survivors": 0.75,
+        "lift_in_survivors": 3.0
+      },
+      "imagery_geospatial": {
+        "points": 0,
+        "max": 12,
+        "grade": "FAIL",
+        "recall_in_survivors": 0.1667,
+        "lift_in_survivors": 0.746
+      },
+      "network_cyber": {
+        "points": 8,
+        "max": 12,
+        "grade": "PASS",
+        "recall_in_survivors": 0.6875,
+        "lift_in_survivors": 2.75
+      },
+      "logistics_finance": {
+        "points": 4,
+        "max": 12,
+        "grade": "MARGINAL",
+        "recall_in_survivors": 0.2857,
+        "lift_in_survivors": 1.156
+      }
+    }
+  }
+}
