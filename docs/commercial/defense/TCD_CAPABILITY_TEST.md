@@ -104,6 +104,14 @@ For GPU scale-up:
     # edit scripts/defense_megatest/runpod_deploy.py: set GIT_REPO_URL
     python scripts/defense_megatest/runpod_deploy.py
 
+## RunPod GPU scale-up attempt (2026-04-28 / 2026-04-29)
+
+A scale-up was attempted against the live RunPod serverless endpoint `lk7dudfl0f6can` using `scripts/defense_megatest/runpod_submit.py`. The submission was constructed with 8,000 NSL-KDD records (4× the CPU-run sample), 192-D embedding dim, max_modules=24, epochs=80. Payload 7.15 MB. Authentication, payload, and submission all succeeded; the job was assigned ID `24f74101-3dc9-436d-8ae5-7e775f045f6a-u2`.
+
+**Outcome: queued, never executed.** The endpoint health probe at submission time and 25 minutes later both showed `workers.{idle: 0, initializing: 0, ready: 0, running: 0}` — the endpoint is in scale-to-zero state and no GPU was provisioned during the polling window. The polling script timed out at 1500s; the job was cancelled cleanly via the RunPod cancel API to free the queue position. Endpoint historical state showed 28 completed and 3 failed runs prior, so the deploy is real — the issue is capacity, not configuration. Resolution is RunPod console-side (raise Max Workers, set Min Workers ≥ 1 for warm-start, or wait for organic spot GPU availability on the configured GPU types).
+
+The attempt log is preserved at `data/validation/runpod_tcd_attempt_log.txt` for chain-of-custody. The CPU run of `python -m scripts.defense_megatest.tcd_intrusion` remains the load-bearing capability evidence (10 AttractorModules with the Neptune SYN-flood basin discovery). The GPU run is upside, not insurance — the CPU evidence is sufficient for the capability claim independently of whether the GPU job ever executes.
+
 ## Honest caveats
 
 - The encoding is JL random projection, not a learned representation. A trained encoder (real JEPA, contrastive learning, etc.) would produce a richer latent geometry and likely surface H_1 and H_2 features in addition to H_0.

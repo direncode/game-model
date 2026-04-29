@@ -28,7 +28,8 @@ The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the
 |---|---|---|
 | `docs/commercial/defense/master-tear-sheet-v3.md` (initial) | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended A: + TCD section) | `84546de22f62706015168f44cf55a5fd6115ac182afbad166652e366902a03a5` | superseded; preserved for chain-of-custody |
-| `docs/commercial/defense/master-tear-sheet-v3.md` (amended B: + per-module alignment table) | `16cb791afb2ff3a2a3b7ad726d6fb5263d70c838b4662b45dc3cbb6ed343d37c` | **current canonical v3** |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended B: + per-module alignment table) | `16cb791afb2ff3a2a3b7ad726d6fb5263d70c838b4662b45dc3cbb6ed343d37c` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended C: + RunPod GPU attempt outcome) | `abc32fdd17bf4f30b3fb9d28f4c777256abe2581a963c42ed1ee059ca4ecbca1` | **current canonical v3** |
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
@@ -39,12 +40,15 @@ Amended to include per-module attack-subtype alignment analysis. The artifact an
 | File | SHA-256 | Note |
 |---|---|---|
 | `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (initial) | `89c614d7bcce15c34ffef879c35c9cd00e0eccfa4d16b86952e6ed545110e150` | superseded; preserved for chain-of-custody |
-| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (with per-module alignment table) | `7c9d1ab5d2ceec5b43d54fd5c7771e012d1589a364aeb62f24bf6aa0d9122e41` | **current canonical** |
+| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (with per-module alignment table) | `7c9d1ab5d2ceec5b43d54fd5c7771e012d1589a364aeb62f24bf6aa0d9122e41` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (+ RunPod GPU attempt section) | `e2af7d3db6f2ffc387f42db43320d28a855db155a8f8fce46d0f5b32f37ab3ab` | **current canonical** |
 | `data/validation/tcd_intrusion_modules.json` (initial) | `5edab5a709f5b1abea713a07f3ddd1d5282ad8e27d2875ee7747ca328f3ac136` | superseded |
 | `data/validation/tcd_intrusion_modules.json` (with alignment data) | `d3ed1820a71d1a07acd275608a5432ac55ffdfa3111f924b8028d56f887ddc6f` | **current canonical** |
 | `scripts/defense_megatest/tcd_intrusion.py` (initial) | `cda24a27a1b56e395d0deec8c75387b08f02f8389c375ef12e453675e1cf2ac9` | superseded |
 | `scripts/defense_megatest/tcd_intrusion.py` (with alignment analysis) | `562c534a806735a97b4100f108b8819e527bda4c9bbd4db6c76565a5e3dce082` | **current canonical** |
 | `scripts/defense_megatest/runpod_deploy.py` | `3999d66cb993241799f14f149f631b20f5f2be021ea2fbded3d47aadb382f63b` | unchanged |
+| `scripts/defense_megatest/runpod_submit.py` | `8aeb357170082e89bc67078b108c8ec6eff3c4aa29e1190852c5a31332fefd9c` | live submission script used for GPU attempt |
+| `data/validation/runpod_tcd_attempt_log.txt` | `e248eaf01661a57a905819311b4bb152753335eb696d2fb50b93bf84bb3b5949` | log of the 2026-04-28/29 GPU submission attempt; cancelled at 0-worker endpoint |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 

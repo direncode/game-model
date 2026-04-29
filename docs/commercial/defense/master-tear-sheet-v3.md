@@ -135,6 +135,8 @@ The TCD-JEPA research layer (System 1 Stream Encoder, System 2 Energy Explorer w
 
 **GPU scale-up path.** `scripts/defense_megatest/runpod_deploy.py` is a deployment template using the official `runpod` Python SDK. Estimated cost at RunPod 2026 community-cloud pricing: ~$0.06 for a 10-minute RTX 4090 run; ~$0.13 on A100 80GB. The bottleneck on CPU is Vietoris-Rips persistent homology on 500-point clouds (~10s per crystallize iteration); GPU does not directly accelerate this, but enables larger embedding dim (256+), more flows per run (25k+), and more iterations where H_1 / H_2 features can emerge.
 
+**GPU run attempt (2026-04-28 / 2026-04-29) — honest outcome.** A live submission to the project's serverless endpoint `lk7dudfl0f6can` was made via `scripts/defense_megatest/runpod_submit.py` with 8,000 NSL-KDD records, 192-D embedding, max_modules=24. Submission, payload, and authentication all succeeded (job ID `24f74101-3dc9-436d-8ae5-7e775f045f6a-u2`, 7.15 MB payload). The job sat in `IN_QUEUE` for the full 1500-second polling window because the endpoint was in scale-to-zero state with no warm worker and no GPU was provisioned organically during the wait. The job was cancelled cleanly. The CPU evidence above remains intact and reproducible; the GPU run can be retried after raising `Max Workers` or `Min Workers ≥ 1` in the RunPod endpoint settings. Attempt log preserved at `data/validation/runpod_tcd_attempt_log.txt`.
+
 ## Cross-cutting tests (synthetic-corpus megatest, all pass)
 
 | Test | Result | Detail |

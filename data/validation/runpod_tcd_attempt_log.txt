@@ -1,0 +1,18 @@
+[runpod_submit] Loading 8000 NSL-KDD records ...
+[runpod_submit]   8000 flows, 3735 attacks (46.7% rate), 18 subtypes present
+[runpod_submit] Payload size: 7.15 MB
+[runpod_submit] Endpoint: lk7dudfl0f6can
+[runpod_submit] POST https://api.runpod.ai/v2/lk7dudfl0f6can/run  (7317.9 KB payload)
+[runpod_submit] Job submitted: id=24f74101-3dc9-436d-8ae5-7e775f045f6a-u2
+[runpod_submit] Polling (max 1500s) ...
+[runpod_submit]   t=   0s  status=IN_QUEUE  delay=None  exec_t=None
+Traceback (most recent call last):
+  File "/tmp/runpod_submit.py", line 304, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/tmp/runpod_submit.py", line 257, in main
+    final = poll_status(api_key, endpoint_id, job_id, max_wait=args.max_wait_seconds)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/runpod_submit.py", line 189, in poll_status
+    raise TimeoutError(f"Job {job_id} did not complete within {max_wait}s")
+TimeoutError: Job 24f74101-3dc9-436d-8ae5-7e775f045f6a-u2 did not complete within 1500s
