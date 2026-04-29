@@ -176,6 +176,26 @@ Reproducer: `python -m scripts.defense_megatest.run_btut_nslkdd`. Artifact: `dat
 
 **Pipeline framing.** BTUT (CPU, 9s, 30× reduction with rare-anomaly lift) is the *first* stage. TCD-JEPA recursive loop (CPU 76s or GPU 207s on RTX 4090) runs *after* BTUT on its survivors. The serverless handler's failure mode was specifically about trying to run both stages inside a single GPU worker image without the backend package installed for BTUT; the proper deployment is BTUT on CPU upstream, then survivors → TCD on GPU.
 
+### Integrated BTUT → TCD pipeline run (CPU, both stages)
+
+Reproducer: `python -m scripts.defense_megatest.run_btut_then_tcd`. Artifact: `data/validation/btut_then_tcd_nslkdd.json`.
+
+Combined wall-clock on commodity 2023 laptop CPU: ~107 seconds end-to-end (9s BTUT + 98s TCD).
+
+Stage 1: BTUT 9000 → 299 survivors (30× reduction, per-subtype lift table above).
+Stage 2: TCD recursive loop on the 299 survivors → **14 AttractorModules** crystallized from H_0 features (persistence range 7.85 to 9.05).
+
+**Plain-English finding from the integrated pipeline.** All 14 modules center on different *normal-traffic sub-archetypes* in the latent space — no module is attack-dominated. This is a meaningful finding, not a failure: BTUT preserved 184 structurally-distinctive normal flows (out of 4,804 original normals) alongside 115 attack flows; TCD's recursive loop identified fourteen distinct *clusters of normal sub-archetypes* among those preserved normals, each representing a different service / port / protocol combination of normal operational traffic. The attack signatures BTUT amplified (warezmaster 30×, land 30×, portsweep 2.34×, satan 1.97×, etc.) appear in the survivor set as scattered points rather than coherent attractor basins because there are too few of each rare attack (3 warezmasters, 3 land attacks, 17 portsweeps, 17 satans) to form their own H_0 component at the scales the persistent-homology computation explores.
+
+**Operational interpretation.** A defense analyst using the integrated pipeline gets:
+1. **BTUT survivor list (299 flows)** — the 30× reduction with rare-attack amplification (warezmaster and land at 100% retention; warezclient, portsweep, back, satan at 2-3× concentration vs original distribution).
+2. **TCD module decomposition of normal sub-archetypes (14 basins)** — a structural taxonomy of the legitimate-traffic patterns in the corpus, useful as the "what does normal look like in our network" reference baseline.
+3. The attack signatures themselves are surfaced by Stage 1 (BTUT) directly in the survivor list rather than by Stage 2 (TCD) — Stage 2 is doing different work in this configuration.
+
+**To get attack-archetype basins from TCD, run TCD on the full pre-BTUT corpus** (the 10,000-record GPU run above produced 18 modules including 5 Neptune-dominated and 3 of those at 100% Neptune purity). That's because TCD's persistent-homology needs enough instances of each archetype within the explored latent volume to form a stable H_0 component; the full-corpus run on cuda has 2,982 Neptune flows to cluster into archetype basins, while the post-BTUT run has only 50.
+
+**Two complementary views, one pipeline.** BTUT (CPU 9s) does the structural-anomaly amplification — rare attacks get pulled forward, common attacks get representatives. TCD on full corpus (GPU 207s) does the attack-archetype decomposition. TCD on BTUT survivors (CPU 98s) does the normal-archetype decomposition. An analyst running all three sequentially gets: (a) which flows are structurally distinctive enough to review (BTUT), (b) which attack archetypes exist in the broader corpus and how many sub-flavors each has (full-corpus TCD), (c) which normal sub-patterns exist in the structurally-preserved subset (BTUT-then-TCD).
+
 **Module crystallization did not run on the serverless submission either.** The handler's `_run_training` calls `tcd_train` from `train_graph`, which runs the JEPA encoder training (producing the AUC, kNN, and loss numbers below). It does *not* run the System 2 Energy Explorer + System 3 Module Crystallizer recursive loop — those are a separate code path inside `tcd-jepa` that the handler does not invoke. So `raw["modules"]` was empty when `_extract_modules` ran, triggering the simulation-fallback that groups by `type` field and returns `purity_score = max(purity, 0.5) + random.uniform(0, 0.15)` and `internal_density = random.uniform(0.3, 0.9)`. The module structure shown below has REAL membership (it's a literal partition of the 9,000 entities by their `protocol_type` field) and REAL attack-subtype counts (computed from ground-truth NSL-KDD labels), but the per-module purity and internal-density numbers are random fallback values.
 
 **To surface real TCD modules, a separate non-serverless GPU pod was provisioned and the recursive loop run directly on cuda — see "Real GPU module crystallization" section below.**

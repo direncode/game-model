@@ -1,0 +1,532 @@
+{
+  "generated_at": "2026-04-29T05:29:53Z",
+  "pipeline": "BTUT (CPU) -> TCD recursive loop (CPU)",
+  "stage1_btut": {
+    "input_records": 9000,
+    "survivors": 299,
+    "reduction_x": 30,
+    "wall_seconds": 9.037,
+    "device": "cpu"
+  },
+  "stage2_tcd": {
+    "input_survivors": 299,
+    "embed_dim": 64,
+    "iterations": 16,
+    "modules_formed": 14,
+    "modules_active_final": 14,
+    "wall_seconds": 97.784,
+    "device": "cpu"
+  },
+  "modules_formed": [
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_0",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 9.0454,
+        "persistence": 9.0454
+      },
+      "centroid_stats": {
+        "mean": -0.0115,
+        "std": 0.0476,
+        "norm": 0.3915,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_0** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 9.05 (well above 0.3 threshold). Centroid L2 norm 0.392 in the 64-D embedding space."
+    },
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_1",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.3141,
+        "persistence": 8.3141
+      },
+      "centroid_stats": {
+        "mean": -0.0048,
+        "std": 0.0659,
+        "norm": 0.5284,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_1** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.31 (well above 0.3 threshold). Centroid L2 norm 0.528 in the 64-D embedding space."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_2",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.0517,
+        "persistence": 8.0517
+      },
+      "centroid_stats": {
+        "mean": 0.0042,
+        "std": 0.0514,
+        "norm": 0.4127,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_2** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.05 (well above 0.3 threshold). Centroid L2 norm 0.413 in the 64-D embedding space."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_3",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.0425,
+        "persistence": 8.0425
+      },
+      "centroid_stats": {
+        "mean": -0.0014,
+        "std": 0.0493,
+        "norm": 0.3942,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 1,
+        "attack_share": 0.02,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.98,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 49,
+            "share": 0.98
+          },
+          {
+            "subtype": "back",
+            "count": 1,
+            "share": 0.02
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 49,
+          "back": 1
+        }
+      },
+      "narrative": "**mod_attractor_3** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (98% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 49 flows (98.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n  - 1 flows (2.0% of neighbourhood): **back** \u2014 Back \u2014 Apache web-server buffer-overflow exploit\n\nH_0 persistence 8.04 (well above 0.3 threshold). Centroid L2 norm 0.394 in the 64-D embedding space."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_4",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.9079,
+        "persistence": 7.9079
+      },
+      "centroid_stats": {
+        "mean": -0.0025,
+        "std": 0.0597,
+        "norm": 0.4783,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_4** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 7.91 (well above 0.3 threshold). Centroid L2 norm 0.478 in the 64-D embedding space."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_5",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.8547,
+        "persistence": 7.8547
+      },
+      "centroid_stats": {
+        "mean": -0.0032,
+        "std": 0.0494,
+        "norm": 0.3957,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_5** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 7.85 (well above 0.3 threshold). Centroid L2 norm 0.396 in the 64-D embedding space."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_6",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.1855,
+        "persistence": 8.1855
+      },
+      "centroid_stats": {
+        "mean": 0.0023,
+        "std": 0.0614,
+        "norm": 0.4917,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_6** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.19 (well above 0.3 threshold). Centroid L2 norm 0.492 in the 64-D embedding space."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_7",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.16,
+        "persistence": 8.16
+      },
+      "centroid_stats": {
+        "mean": -0.0066,
+        "std": 0.0694,
+        "norm": 0.5575,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_7** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.16 (well above 0.3 threshold). Centroid L2 norm 0.557 in the 64-D embedding space."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_8",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.1014,
+        "persistence": 8.1014
+      },
+      "centroid_stats": {
+        "mean": -0.0024,
+        "std": 0.0674,
+        "norm": 0.5395,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_8** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.10 (well above 0.3 threshold). Centroid L2 norm 0.539 in the 64-D embedding space."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_9",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.0597,
+        "persistence": 8.0597
+      },
+      "centroid_stats": {
+        "mean": -0.0026,
+        "std": 0.0641,
+        "norm": 0.5134,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_9** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.06 (well above 0.3 threshold). Centroid L2 norm 0.513 in the 64-D embedding space."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_10",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.499,
+        "persistence": 8.499
+      },
+      "centroid_stats": {
+        "mean": -0.0104,
+        "std": 0.0485,
+        "norm": 0.397,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_10** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.50 (well above 0.3 threshold). Centroid L2 norm 0.397 in the 64-D embedding space."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_11",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.082,
+        "persistence": 8.082
+      },
+      "centroid_stats": {
+        "mean": -0.0064,
+        "std": 0.0571,
+        "norm": 0.46,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_11** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.08 (well above 0.3 threshold). Centroid L2 norm 0.460 in the 64-D embedding space."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_12",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.3219,
+        "persistence": 8.3219
+      },
+      "centroid_stats": {
+        "mean": 0.0015,
+        "std": 0.0559,
+        "norm": 0.4471,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_12** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.32 (well above 0.3 threshold). Centroid L2 norm 0.447 in the 64-D embedding space."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_13",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.197,
+        "persistence": 8.197
+      },
+      "centroid_stats": {
+        "mean": -0.0074,
+        "std": 0.0508,
+        "norm": 0.4104,
+        "dim": 64
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      },
+      "narrative": "**mod_attractor_13** \u2014 50 BTUT-survivor flows. This basin sits in the latent region of the structurally-distinctive *normal* sub-archetypes BTUT preserved (100% of nearest neighbours are normal traffic).\n\nTop subtypes among 50 nearest neighbours:\n  - 50 flows (100.0% of neighbourhood): **normal** \u2014 normal background traffic, no attack signature\n\nH_0 persistence 8.20 (well above 0.3 threshold). Centroid L2 norm 0.410 in the 64-D embedding space."
+    }
+  ]
+}

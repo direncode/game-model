@@ -33,7 +33,8 @@ The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended D: + GPU run completed, AUC 0.9111, 3 modules) | `2cbe590bff2df678ae682c0db38c5003c8722adf874fe21d39c563886863d105` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended E: + honesty pass on simulation/BTUT findings) | `c65155c330717907bb95c1ce88eb4835ddd1daf727f4af8205176ee3e22e8a8e` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended F: + REAL 18-module GPU recursive-loop run on cuda RTX 4090) | `04247d8e4864ea0684c09ca1308329ed40acc0e8d5d51d748e21aa7d1dff84eb` | superseded; preserved for chain-of-custody |
-| `docs/commercial/defense/master-tear-sheet-v3.md` (amended G: + CPU BTUT pre-reduction proof: 9s, 30x reduction, rare-attack lift up to 30.10x) | `f93fb09185e0aca7887726b83f61e01f34f037cab9d629cca41924d48351e472` | **current canonical v3** |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended G: + CPU BTUT pre-reduction proof: 9s, 30x reduction, rare-attack lift up to 30.10x) | `f93fb09185e0aca7887726b83f61e01f34f037cab9d629cca41924d48351e472` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended H: + integrated BTUT→TCD pipeline run, 14 normal-archetype basins) | `8149dd4df5f2a7d6d1f031ecd37d8b7490ad07f51661db93837da722d7f0f6bb` | **current canonical v3** |
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
@@ -59,6 +60,8 @@ Amended to include per-module attack-subtype alignment analysis. The artifact an
 | `data/validation/runpod_real_gpu_modules.json` | `31fb1acf9a07408b766f83c935410d452f97bb2c02bb2e70bbb5ca45269b0289` | **REAL GPU TCD module artifact** (RTX 4090, 18 AttractorModules with H_0 persistence + centroids + attack-subtype alignment; 5 Neptune-dominated, 3 of those at 100% Neptune purity) |
 | `scripts/defense_megatest/run_btut_nslkdd.py` | `7ead638de8a5be61838da312fd73f886fd5ec18371e82524970bf0519fdd47c3` | CPU BTUT runner on NSL-KDD (proves BTUT runs in 9s, 30x reduction with rare-attack lift up to 30.10x for warezmaster and land) |
 | `data/validation/btut_nslkdd_survivors.json` | `75e3b90d79ed5c212476506b09df8db827bf9f41ff4bb2df96b77aff99a2f69e` | BTUT NSL-KDD survivors artifact: 299 of 9000 (30x), per-subtype lift table |
+| `scripts/defense_megatest/run_btut_then_tcd.py` | `18ab57c4baa66025687a7ab2c44c95d43b6d7668510f6fbc3c944f1f3f5f4ce6` | Integrated BTUT → TCD pipeline runner with plain-English module narratives |
+| `data/validation/btut_then_tcd_nslkdd.json` | `7a0ba32ac34890f289f3263911ebcf0a59b7c92d0a3dc43bfdf35a778dd509d7` | Integrated pipeline artifact: BTUT 9s + TCD 98s, 14 normal-archetype modules with plain-English narratives |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 
