@@ -22,23 +22,29 @@
 
 ## Canonical hashes — v3.0 (real-defense-data-grounded tear sheet)
 
-The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the EDGAR distress reconciliation. Synthetic megatest is demoted to architectural-fit secondary evidence. Amended to include the TCD-JEPA capability test cross-reference.
+The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the EDGAR distress reconciliation. Synthetic megatest is demoted to architectural-fit secondary evidence. Amended twice: first to add a TCD-JEPA capability test cross-reference, then to include the per-module attack-subtype alignment table that demonstrates each module's interpretable identity (including the unsupervised discovery of a Neptune SYN-flood basin at mod_attractor_9).
 
 | File | SHA-256 | Note |
 |---|---|---|
-| `docs/commercial/defense/master-tear-sheet-v3.md` (initial) | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` | superseded by amended below; preserved for chain-of-custody |
-| `docs/commercial/defense/master-tear-sheet-v3.md` (amended, includes TCD section) | `84546de22f62706015168f44cf55a5fd6115ac182afbad166652e366902a03a5` | current canonical v3 |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (initial) | `19b16177c5a4035247819c947586844caf4a21ab2599434a968b7941fe46d51c` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended A: + TCD section) | `84546de22f62706015168f44cf55a5fd6115ac182afbad166652e366902a03a5` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended B: + per-module alignment table) | `16cb791afb2ff3a2a3b7ad726d6fb5263d70c838b4662b45dc3cbb6ed343d37c` | **current canonical v3** |
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
 ## Canonical hashes — TCD-JEPA capability test on NSL-KDD intrusion data (internal capability evidence, not for sale)
 
-| File | SHA-256 |
-|---|---|
-| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` | `89c614d7bcce15c34ffef879c35c9cd00e0eccfa4d16b86952e6ed545110e150` |
-| `data/validation/tcd_intrusion_modules.json` | `5edab5a709f5b1abea713a07f3ddd1d5282ad8e27d2875ee7747ca328f3ac136` |
-| `scripts/defense_megatest/tcd_intrusion.py` | `cda24a27a1b56e395d0deec8c75387b08f02f8389c375ef12e453675e1cf2ac9` |
-| `scripts/defense_megatest/runpod_deploy.py` | `3999d66cb993241799f14f149f631b20f5f2be021ea2fbded3d47aadb382f63b` |
+Amended to include per-module attack-subtype alignment analysis. The artifact and capability-test report now show, for every crystallized AttractorModule, which NSL-KDD attack subtype dominates the module's 50-nearest-neighbor latent neighborhood. mod_attractor_9 was identified as a Neptune (SYN-flood DoS) basin without supervision.
+
+| File | SHA-256 | Note |
+|---|---|---|
+| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (initial) | `89c614d7bcce15c34ffef879c35c9cd00e0eccfa4d16b86952e6ed545110e150` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` (with per-module alignment table) | `7c9d1ab5d2ceec5b43d54fd5c7771e012d1589a364aeb62f24bf6aa0d9122e41` | **current canonical** |
+| `data/validation/tcd_intrusion_modules.json` (initial) | `5edab5a709f5b1abea713a07f3ddd1d5282ad8e27d2875ee7747ca328f3ac136` | superseded |
+| `data/validation/tcd_intrusion_modules.json` (with alignment data) | `d3ed1820a71d1a07acd275608a5432ac55ffdfa3111f924b8028d56f887ddc6f` | **current canonical** |
+| `scripts/defense_megatest/tcd_intrusion.py` (initial) | `cda24a27a1b56e395d0deec8c75387b08f02f8389c375ef12e453675e1cf2ac9` | superseded |
+| `scripts/defense_megatest/tcd_intrusion.py` (with alignment analysis) | `562c534a806735a97b4100f108b8819e527bda4c9bbd4db6c76565a5e3dce082` | **current canonical** |
+| `scripts/defense_megatest/runpod_deploy.py` | `3999d66cb993241799f14f149f631b20f5f2be021ea2fbded3d47aadb382f63b` | unchanged |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 

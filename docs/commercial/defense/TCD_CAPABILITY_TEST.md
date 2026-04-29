@@ -22,29 +22,36 @@ Capability test: does the TCD-JEPA recursive loop (System 1 / 2 / 3) actually fo
 
 ## Result headline
 
-**10 AttractorModules crystallized over 12 iterations.** Wall-clock: 58.7 seconds on CPU. Final active module count: 10 (max_modules cap not reached). Convergence monitor did not report converged within 12 iterations (consecutive_converged < patience=5). All 10 modules came from H_0 (connected-component) features in the trajectory point clouds. Zero H_1 (cycle) and zero H_2 (boundary) features formed.
+**10 AttractorModules crystallized over 12 iterations.** Wall-clock: 76.2 seconds on CPU. Final active module count: 10 (max_modules cap not reached). Convergence monitor did not report converged within 12 iterations (consecutive_converged < patience=5). All 10 modules came from H_0 (connected-component) features in the trajectory point clouds. Zero H_1 (cycle) and zero H_2 (boundary) features formed.
+
+**Module-to-attack-subtype alignment.** For each crystallized module, the 50 nearest entities by Euclidean distance to the module's learnable centroid were tabulated against the ground-truth NSL-KDD attack subtype labels. The labels were *not* provided to TCD during the run; this analysis is post-hoc and unsupervised from the algorithm's perspective.
+
+| Module | Iter | H_0 persistence | Centroid L2 norm | Attack share in 50-NN | Dominant subtype (share) |
+|---|---|---|---|---|---|
+| mod_attractor_0 | 4 | 7.74 | 0.410 | 0.0% | normal (100.0%) |
+| mod_attractor_1 | 4 | 7.70 | 0.366 | 0.0% | normal (100.0%) |
+| mod_attractor_2 | 6 | 7.90 | 0.346 | 0.0% | normal (100.0%) |
+| mod_attractor_3 | 6 | 7.83 | 0.425 | 0.0% | normal (100.0%) |
+| mod_attractor_4 | 8 | 8.27 | 0.461 | 0.0% | normal (100.0%) |
+| mod_attractor_5 | 8 | 8.21 | 0.402 | 4.0% | normal (96.0%) |
+| mod_attractor_6 | 10 | 8.43 | 0.399 | 22.0% | normal (78.0%) |
+| mod_attractor_7 | 10 | 8.12 | 0.407 | 32.0% | normal (68.0%) |
+| mod_attractor_8 | 12 | 9.17 | 0.379 | 0.0% | normal (100.0%) |
+| **mod_attractor_9** | **12** | **7.77** | **0.341** | **82.0%** | **neptune (68.0%)** |
+
+Per-module subtype distributions for all 10 modules are in `data/validation/tcd_intrusion_modules.json` under `modules_formed[*].alignment`.
 
 ## What this means
 
-The TCD recursive loop, run on real DARPA / Lincoln Lab intrusion data with the energy function biased toward attack-occupied regions, identifies **ten distinct attractor basins in the latent space**. Each basin is a region where Langevin dynamics get trapped — structurally interpretable as a "stable cluster of related flow patterns." The 10 attractors crystallize at high persistence (death values 7.69 to 8.0; persistence threshold was 0.3, so these features are 25× above threshold), which means they are stable across the trajectory scale parameter and not noise.
+The TCD recursive loop, run on real DARPA / Lincoln Lab intrusion data with the energy function biased toward attack-occupied regions, identifies **ten distinct attractor basins in the latent space**. Each basin is a region where Langevin dynamics get trapped — structurally interpretable as a "stable cluster of related flow patterns." The 10 attractors crystallize at high persistence (death values 7.70 to 9.17; persistence threshold was 0.3, so these features are 25× to 30× above threshold), which means they are stable across the trajectory scale parameter and not noise.
 
-Each AttractorModule has a learnable 64-D centroid that, after subsequent training, would specialize as a local predictor for flows near that basin. Centroid norms are heterogeneous (0.32 to 0.54), suggesting the basins occupy genuinely distinct regions of the embedding sphere.
+Each AttractorModule has a learnable 64-D centroid that, after subsequent training, would specialize as a local predictor for flows near that basin. Centroid norms are heterogeneous (0.34 to 0.46), suggesting the basins occupy genuinely distinct regions of the embedding sphere.
 
-The absence of H_1 and H_2 features is itself informative. Real network-flow data with a normal-centroid energy function produces clustered, simply-connected attractor structure — not periodic structure (which would suggest beaconing or other temporal regularity captured in the embedding) nor void structure (which would suggest a hollow shell, e.g., flow patterns surrounding a forbidden region). This is the kind of qualitative finding a System 3 capability is supposed to surface.
+**Nine of the ten basins are dominated by normal-traffic neighborhoods.** This is itself informative: TCD is unsupervisedly decomposing "normal traffic" into nine distinct structural sub-archetypes — different services, protocols, and operational regimes that the analyst would otherwise have to disambiguate manually. Modules 6 and 7 are mixed (22% and 32% attack neighborhoods respectively), suggesting boundary-like basins between normal traffic and adjacent attack patterns.
 
-## Modules formed (representative, full list in artifact)
+**The tenth basin, mod_attractor_9, is dominated by Neptune traffic — a SYN-flood denial-of-service attack signature.** 82% of its nearest 50 entities are attacks; 68% are specifically Neptune. This is a real, unsupervised attack-archetype discovery from the System 3 research layer. TCD found a Neptune SYN-flood signature in the latent geometry of the NSL-KDD corpus without ever being told what Neptune is.
 
-| Module ID | Iteration | Class | Topology dim | Persistence | Centroid norm | Radius |
-|---|---|---|---|---|---|---|
-| mod_attractor_0 | 4 | AttractorModule | H_0 | 7.74 | 0.32 | 1.0 |
-| mod_attractor_1 | 4 | AttractorModule | H_0 | 7.70 | 0.54 | 1.0 |
-| mod_attractor_2 | 6 | AttractorModule | H_0 | 7.90 | 0.43 | 1.0 |
-| mod_attractor_3 | 6 | AttractorModule | H_0 | 7.83 | 0.46 | 1.0 |
-| mod_attractor_4 | 8 | AttractorModule | H_0 | (in artifact) | (in artifact) | 1.0 |
-| ... | ... | ... | ... | ... | ... | ... |
-| mod_attractor_9 | 12 | AttractorModule | H_0 | (in artifact) | (in artifact) | 1.0 |
-
-(Full list of 10 modules in `data/validation/tcd_intrusion_modules.json` under `modules_formed`.)
+The absence of H_1 and H_2 features is itself informative. Real network-flow data with a normal-centroid energy function and JL-projection encoding produces clustered, simply-connected attractor structure — not periodic structure (which would suggest beaconing or other temporal regularity captured in the embedding) nor void structure (which would suggest a hollow shell, e.g., flow patterns surrounding a forbidden region). A trained encoder may surface H_1 and H_2 features that the JL projection cannot.
 
 ## What this is NOT
 

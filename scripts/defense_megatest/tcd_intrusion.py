@@ -278,17 +278,82 @@ def run_capability_test(
 
     total_wall = time.perf_counter() - t0
 
+    # ── Module-to-attack-subtype alignment analysis ────────────────────
+    # For each crystallized module, find its k nearest entities in latent
+    # space and check their ground-truth attack-subtype distribution. This
+    # answers the "what does each module represent" question that every
+    # defense reviewer will ask.
+    print()
+    print("[tcd_intrusion] Computing module-to-attack-subtype alignment ...")
+    from collections import Counter
+    z_np = z.numpy()
+    k_nearest = 50
+    for module_info in all_modules_formed:
+        mid = module_info["module_id"]
+        rec = loop.crystallizer.registry._modules.get(mid)
+        if rec is None:
+            module_info["alignment"] = None
+            continue
+        mod = rec.module
+        if not hasattr(mod, "centroid"):
+            module_info["alignment"] = None
+            continue
+        centroid = mod.centroid.detach().numpy()
+        # Euclidean distance from centroid to every embedding
+        dists = np.linalg.norm(z_np - centroid, axis=1)
+        nearest_idx = np.argsort(dists)[:k_nearest]
+        nearest_subtypes = attack_subtype[nearest_idx]
+        nearest_is_attack = is_attack[nearest_idx]
+
+        subtype_counts = Counter(nearest_subtypes.tolist())
+        attack_count = int(nearest_is_attack.sum())
+        normal_count = int((~nearest_is_attack).sum())
+
+        top3 = subtype_counts.most_common(3)
+        dominant_subtype, dominant_n = top3[0] if top3 else ("?", 0)
+
+        module_info["alignment"] = {
+            "k_nearest": k_nearest,
+            "attack_count_in_neighborhood": attack_count,
+            "normal_count_in_neighborhood": normal_count,
+            "attack_share": round(attack_count / k_nearest, 3),
+            "dominant_subtype": dominant_subtype,
+            "dominant_share": round(dominant_n / k_nearest, 3),
+            "top3_subtypes": [
+                {"subtype": s, "count": n, "share": round(n / k_nearest, 3)}
+                for s, n in top3
+            ],
+            "all_subtype_counts": dict(subtype_counts),
+            "mean_distance_to_neighborhood": round(float(dists[nearest_idx].mean()), 4),
+        }
+
     # Final module summary by class and by topological-feature type
     by_class: dict[str, int] = {}
     by_topo: dict[str, int] = {}
+    by_dominant_subtype: dict[str, int] = {}
     for m in all_modules_formed:
         by_class[m["module_class"]] = by_class.get(m["module_class"], 0) + 1
         by_topo[m["module_type"]] = by_topo.get(m["module_type"], 0) + 1
+        if m.get("alignment"):
+            ds = m["alignment"]["dominant_subtype"]
+            by_dominant_subtype[ds] = by_dominant_subtype.get(ds, 0) + 1
 
     print()
     print(f"[tcd_intrusion] Total wall: {total_wall:.1f}s; final active modules: {loop.num_modules}")
     print(f"[tcd_intrusion] Modules formed during run, by class: {by_class}")
     print(f"[tcd_intrusion] Modules formed during run, by topological feature: {by_topo}")
+    print(f"[tcd_intrusion] Modules formed during run, by dominant attack-subtype neighborhood: {by_dominant_subtype}")
+    print()
+    print("[tcd_intrusion] PER-MODULE ALIGNMENT TABLE:")
+    print(f"  {'module_id':22s}  {'iter':>4s}  {'pers':>6s}  {'cent_norm':>9s}  {'attack%':>8s}  dominant (share)")
+    for m in all_modules_formed:
+        a = m.get("alignment") or {}
+        topo = m.get("topology") or {}
+        cs = m.get("centroid_stats") or {}
+        print(f"  {m['module_id']:22s}  {m['iteration']:>4d}  "
+              f"{topo.get('persistence', 0):>6.2f}  {cs.get('norm', 0):>9.3f}  "
+              f"{100 * a.get('attack_share', 0):>7.1f}%  "
+              f"{a.get('dominant_subtype', '?')} ({100 * a.get('dominant_share', 0):.1f}%)")
 
     return {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -316,6 +381,7 @@ def run_capability_test(
             "modules_formed_total": len(all_modules_formed),
             "modules_by_class": by_class,
             "modules_by_topological_feature": by_topo,
+            "modules_by_dominant_subtype": by_dominant_subtype,
         },
         "modules_formed": all_modules_formed,
         "history": history,

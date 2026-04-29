@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T02:42:12Z",
+  "generated_at": "2026-04-29T03:12:31Z",
   "dataset": {
     "name": "NSL-KDD train+",
     "provenance": "DARPA Intrusion Detection Evaluation, MIT Lincoln Laboratory; modernized 2009 by University of New Brunswick",
@@ -42,7 +42,7 @@
     "device": "cpu"
   },
   "result_summary": {
-    "wall_seconds": 58.69,
+    "wall_seconds": 76.2,
     "final_active_modules": 10,
     "is_converged": false,
     "modules_formed_total": 10,
@@ -51,6 +51,10 @@
     },
     "modules_by_topological_feature": {
       "attractor": 10
+    },
+    "modules_by_dominant_subtype": {
+      "normal": 9,
+      "neptune": 1
     }
   },
   "modules_formed": [
@@ -66,12 +70,31 @@
         "persistence": 7.7411
       },
       "centroid_stats": {
-        "mean": -0.0033,
-        "std": 0.0401,
-        "norm": 0.3219,
+        "mean": -0.0006,
+        "std": 0.0512,
+        "norm": 0.4097,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.8779
+      }
     },
     {
       "iteration": 4,
@@ -85,12 +108,31 @@
         "persistence": 7.697
       },
       "centroid_stats": {
-        "mean": -0.0029,
-        "std": 0.0677,
-        "norm": 0.5418,
+        "mean": -0.0064,
+        "std": 0.0454,
+        "norm": 0.3664,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.8397
+      }
     },
     {
       "iteration": 6,
@@ -104,12 +146,31 @@
         "persistence": 7.9049
       },
       "centroid_stats": {
-        "mean": -0.0079,
-        "std": 0.0532,
-        "norm": 0.4305,
+        "mean": -0.0039,
+        "std": 0.0431,
+        "norm": 0.3461,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.9302
+      }
     },
     {
       "iteration": 6,
@@ -123,12 +184,31 @@
         "persistence": 7.831
       },
       "centroid_stats": {
-        "mean": -0.0104,
-        "std": 0.0561,
-        "norm": 0.4564,
+        "mean": -0.005,
+        "std": 0.0529,
+        "norm": 0.4247,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.8466
+      }
     },
     {
       "iteration": 8,
@@ -142,12 +222,31 @@
         "persistence": 8.2711
       },
       "centroid_stats": {
-        "mean": -0.0091,
-        "std": 0.0541,
-        "norm": 0.4391,
+        "mean": -0.0032,
+        "std": 0.0575,
+        "norm": 0.4605,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.8172
+      }
     },
     {
       "iteration": 8,
@@ -161,12 +260,37 @@
         "persistence": 8.213
       },
       "centroid_stats": {
-        "mean": 0.0053,
-        "std": 0.0587,
-        "norm": 0.4716,
+        "mean": 0.0043,
+        "std": 0.0501,
+        "norm": 0.4021,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 2,
+        "normal_count_in_neighborhood": 48,
+        "attack_share": 0.04,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.96,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 48,
+            "share": 0.96
+          },
+          {
+            "subtype": "satan",
+            "count": 2,
+            "share": 0.04
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 48,
+          "satan": 2
+        },
+        "mean_distance_to_neighborhood": 0.953
+      }
     },
     {
       "iteration": 10,
@@ -180,12 +304,45 @@
         "persistence": 8.4308
       },
       "centroid_stats": {
-        "mean": 0.0068,
-        "std": 0.0509,
-        "norm": 0.4108,
+        "mean": 0.0043,
+        "std": 0.0497,
+        "norm": 0.3994,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 11,
+        "normal_count_in_neighborhood": 39,
+        "attack_share": 0.22,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.78,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 39,
+            "share": 0.78
+          },
+          {
+            "subtype": "portsweep",
+            "count": 5,
+            "share": 0.1
+          },
+          {
+            "subtype": "neptune",
+            "count": 3,
+            "share": 0.06
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 39,
+          "satan": 1,
+          "neptune": 3,
+          "ipsweep": 2,
+          "portsweep": 5
+        },
+        "mean_distance_to_neighborhood": 0.9758
+      }
     },
     {
       "iteration": 10,
@@ -199,12 +356,44 @@
         "persistence": 8.1232
       },
       "centroid_stats": {
-        "mean": -0.0021,
-        "std": 0.0466,
-        "norm": 0.3732,
+        "mean": -0.0094,
+        "std": 0.05,
+        "norm": 0.4066,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 16,
+        "normal_count_in_neighborhood": 34,
+        "attack_share": 0.32,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.68,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 34,
+            "share": 0.68
+          },
+          {
+            "subtype": "ipsweep",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "subtype": "satan",
+            "count": 6,
+            "share": 0.12
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 34,
+          "satan": 6,
+          "ipsweep": 9,
+          "portsweep": 1
+        },
+        "mean_distance_to_neighborhood": 0.9563
+      }
     },
     {
       "iteration": 12,
@@ -218,12 +407,31 @@
         "persistence": 9.1662
       },
       "centroid_stats": {
-        "mean": -0.0103,
-        "std": 0.0506,
-        "norm": 0.4131,
+        "mean": 0.0053,
+        "std": 0.0471,
+        "norm": 0.3792,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 0,
+        "normal_count_in_neighborhood": 50,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        },
+        "mean_distance_to_neighborhood": 0.9177
+      }
     },
     {
       "iteration": 12,
@@ -238,11 +446,46 @@
       },
       "centroid_stats": {
         "mean": 0.0014,
-        "std": 0.0657,
-        "norm": 0.5257,
+        "std": 0.0425,
+        "norm": 0.3405,
         "dim": 64
       },
-      "radius": 1.0
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count_in_neighborhood": 41,
+        "normal_count_in_neighborhood": 9,
+        "attack_share": 0.82,
+        "dominant_subtype": "neptune",
+        "dominant_share": 0.68,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 34,
+            "share": 0.68
+          },
+          {
+            "subtype": "normal",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "subtype": "smurf",
+            "count": 2,
+            "share": 0.04
+          }
+        ],
+        "all_subtype_counts": {
+          "neptune": 34,
+          "nmap": 1,
+          "normal": 9,
+          "land": 1,
+          "pod": 1,
+          "smurf": 2,
+          "satan": 2
+        },
+        "mean_distance_to_neighborhood": 0.99
+      }
     }
   ],
   "history": [
@@ -253,7 +496,7 @@
       "num_modules_after": 0,
       "convergence_score": 1.598665,
       "is_converged": false,
-      "wall_seconds": 0.035,
+      "wall_seconds": 0.033,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -267,7 +510,7 @@
       "num_modules_after": 0,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.021,
+      "wall_seconds": 0.025,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -281,7 +524,7 @@
       "num_modules_after": 0,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.021,
+      "wall_seconds": 0.03,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -295,7 +538,7 @@
       "num_modules_after": 2,
       "convergence_score": 1.0,
       "is_converged": false,
-      "wall_seconds": 12.46,
+      "wall_seconds": 16.545,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -315,7 +558,7 @@
       "num_modules_after": 2,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.076,
+      "wall_seconds": 0.033,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -329,7 +572,7 @@
       "num_modules_after": 4,
       "convergence_score": 0.5,
       "is_converged": false,
-      "wall_seconds": 9.919,
+      "wall_seconds": 13.514,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -349,7 +592,7 @@
       "num_modules_after": 4,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.022,
+      "wall_seconds": 0.052,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -363,7 +606,7 @@
       "num_modules_after": 6,
       "convergence_score": 0.333333,
       "is_converged": false,
-      "wall_seconds": 10.383,
+      "wall_seconds": 13.973,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -383,7 +626,7 @@
       "num_modules_after": 6,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.095,
+      "wall_seconds": 0.049,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -397,7 +640,7 @@
       "num_modules_after": 8,
       "convergence_score": 0.25,
       "is_converged": false,
-      "wall_seconds": 10.732,
+      "wall_seconds": 14.152,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -417,7 +660,7 @@
       "num_modules_after": 8,
       "convergence_score": 0.0,
       "is_converged": false,
-      "wall_seconds": 0.114,
+      "wall_seconds": 0.028,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
@@ -431,7 +674,7 @@
       "num_modules_after": 10,
       "convergence_score": 0.2,
       "is_converged": false,
-      "wall_seconds": 14.808,
+      "wall_seconds": 17.763,
       "exploration": {
         "num_blank": 0,
         "mean_fisher_trace": 0.0,
