@@ -30,7 +30,9 @@ The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended A: + TCD section) | `84546de22f62706015168f44cf55a5fd6115ac182afbad166652e366902a03a5` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended B: + per-module alignment table) | `16cb791afb2ff3a2a3b7ad726d6fb5263d70c838b4662b45dc3cbb6ed343d37c` | superseded; preserved for chain-of-custody |
 | `docs/commercial/defense/master-tear-sheet-v3.md` (amended C: + RunPod GPU attempt outcome) | `abc32fdd17bf4f30b3fb9d28f4c777256abe2581a963c42ed1ee059ca4ecbca1` | superseded; preserved for chain-of-custody |
-| `docs/commercial/defense/master-tear-sheet-v3.md` (amended D: + GPU run completed, AUC 0.9111, 3 modules) | `2cbe590bff2df678ae682c0db38c5003c8722adf874fe21d39c563886863d105` | **current canonical v3** |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended D: + GPU run completed, AUC 0.9111, 3 modules) | `2cbe590bff2df678ae682c0db38c5003c8722adf874fe21d39c563886863d105` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended E: + honesty pass on simulation/BTUT findings) | `c65155c330717907bb95c1ce88eb4835ddd1daf727f4af8205176ee3e22e8a8e` | superseded; preserved for chain-of-custody |
+| `docs/commercial/defense/master-tear-sheet-v3.md` (amended F: + REAL 18-module GPU recursive-loop run on cuda RTX 4090) | `04247d8e4864ea0684c09ca1308329ed40acc0e8d5d51d748e21aa7d1dff84eb` | **current canonical v3** |
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` | |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` | |
 
@@ -51,7 +53,9 @@ Amended to include per-module attack-subtype alignment analysis. The artifact an
 | `scripts/defense_megatest/runpod_deploy.py` | `3999d66cb993241799f14f149f631b20f5f2be021ea2fbded3d47aadb382f63b` | unchanged |
 | `scripts/defense_megatest/runpod_submit.py` | `8aeb357170082e89bc67078b108c8ec6eff3c4aa29e1190852c5a31332fefd9c` | live submission script used for GPU attempt |
 | `data/validation/runpod_tcd_attempt_log.txt` | `5ca35196c1493ac78116cc27794baeee68f4852e14e3d6ae517abbe0f0033721` | combined log: cancelled attempt 2026-04-28 + completed run 2026-04-29 |
-| `data/validation/runpod_tcd_intrusion_result.json` | `95d612d58386604b20e6e4b7fbc37ff0121a4b60fbd043f42e040976e2cb5d9a` | **GPU run result artifact** (cuda, AUC 0.9111, 3 modules, attack-subtype alignment) |
+| `data/validation/runpod_tcd_intrusion_result.json` | `95d612d58386604b20e6e4b7fbc37ff0121a4b60fbd043f42e040976e2cb5d9a` | serverless GPU run artifact (cuda, AUC 0.9111, 3 simulation-fallback modules) |
+| `scripts/defense_megatest/runpod_ssh_orch.py` | `da2bd2c9a2ac47e38811ff5e5c744bcf211c2263e41238d1ea4e1c54a7bd13f9` | non-serverless GPU pod orchestrator (provisions pod, SSHes in, runs recursive loop, pulls result) |
+| `data/validation/runpod_real_gpu_modules.json` | `31fb1acf9a07408b766f83c935410d452f97bb2c02bb2e70bbb5ca45269b0289` | **REAL GPU TCD module artifact** (RTX 4090, 18 AttractorModules with H_0 persistence + centroids + attack-subtype alignment; 5 Neptune-dominated, 3 of those at 100% Neptune purity) |
 
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 

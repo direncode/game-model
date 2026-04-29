@@ -1,0 +1,894 @@
+{
+  "generated_at": "2026-04-29T05:19:35Z",
+  "config": {
+    "n_records": 10000,
+    "embed_dim": 128,
+    "n_iterations": 20,
+    "max_modules": 32,
+    "device": "cuda",
+    "cuda_device_name": "NVIDIA GeForce RTX 4090",
+    "seed": 42
+  },
+  "result_summary": {
+    "wall_seconds": 207.6,
+    "final_active_modules": 18,
+    "is_converged": false,
+    "modules_formed_total": 18,
+    "modules_by_class": {
+      "AttractorModule": 18
+    },
+    "modules_by_dominant_subtype": {
+      "neptune": 5,
+      "normal": 13
+    }
+  },
+  "modules_formed": [
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_0",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.3899,
+        "persistence": 11.3899
+      },
+      "centroid_stats": {
+        "mean": 0.0075,
+        "std": 0.0431,
+        "norm": 0.4946,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 50,
+        "attack_share": 1.0,
+        "dominant_subtype": "neptune",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "neptune": 50
+        }
+      }
+    },
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_1",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.1006,
+        "persistence": 11.1006
+      },
+      "centroid_stats": {
+        "mean": -0.0071,
+        "std": 0.047,
+        "norm": 0.5375,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 39,
+        "attack_share": 0.78,
+        "dominant_subtype": "neptune",
+        "dominant_share": 0.78,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 39,
+            "share": 0.78
+          },
+          {
+            "subtype": "normal",
+            "count": 11,
+            "share": 0.22
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 11,
+          "neptune": 39
+        }
+      }
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_2",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5914,
+        "persistence": 11.5914
+      },
+      "centroid_stats": {
+        "mean": 0.0054,
+        "std": 0.0534,
+        "norm": 0.6075,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_3",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4985,
+        "persistence": 11.4985
+      },
+      "centroid_stats": {
+        "mean": 0.0035,
+        "std": 0.047,
+        "norm": 0.5329,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_4",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.9054,
+        "persistence": 11.9054
+      },
+      "centroid_stats": {
+        "mean": 0.0025,
+        "std": 0.05,
+        "norm": 0.5665,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_5",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.0566,
+        "persistence": 11.0566
+      },
+      "centroid_stats": {
+        "mean": -0.0023,
+        "std": 0.0432,
+        "norm": 0.4896,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_6",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4012,
+        "persistence": 11.4012
+      },
+      "centroid_stats": {
+        "mean": -0.0033,
+        "std": 0.0472,
+        "norm": 0.5359,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 24,
+        "attack_share": 0.48,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.52,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 26,
+            "share": 0.52
+          },
+          {
+            "subtype": "nmap",
+            "count": 13,
+            "share": 0.26
+          },
+          {
+            "subtype": "satan",
+            "count": 11,
+            "share": 0.22
+          }
+        ],
+        "all_subtype_counts": {
+          "nmap": 13,
+          "normal": 26,
+          "satan": 11
+        }
+      }
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_7",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.1685,
+        "persistence": 11.1685
+      },
+      "centroid_stats": {
+        "mean": 0.0007,
+        "std": 0.0478,
+        "norm": 0.5411,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 29,
+        "attack_share": 0.58,
+        "dominant_subtype": "neptune",
+        "dominant_share": 0.58,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 29,
+            "share": 0.58
+          },
+          {
+            "subtype": "normal",
+            "count": 21,
+            "share": 0.42
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 21,
+          "neptune": 29
+        }
+      }
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_8",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.6696,
+        "persistence": 11.6696
+      },
+      "centroid_stats": {
+        "mean": -0.0014,
+        "std": 0.0432,
+        "norm": 0.4888,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 31,
+        "attack_share": 0.62,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.38,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 19,
+            "share": 0.38
+          },
+          {
+            "subtype": "ipsweep",
+            "count": 17,
+            "share": 0.34
+          },
+          {
+            "subtype": "neptune",
+            "count": 14,
+            "share": 0.28
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 19,
+          "neptune": 14,
+          "ipsweep": 17
+        }
+      }
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_9",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5439,
+        "persistence": 11.5439
+      },
+      "centroid_stats": {
+        "mean": -0.0086,
+        "std": 0.048,
+        "norm": 0.552,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_10",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2665,
+        "persistence": 11.2665
+      },
+      "centroid_stats": {
+        "mean": -0.0012,
+        "std": 0.0421,
+        "norm": 0.4766,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 50,
+        "attack_share": 1.0,
+        "dominant_subtype": "neptune",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "neptune": 50
+        }
+      }
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_11",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.219,
+        "persistence": 11.219
+      },
+      "centroid_stats": {
+        "mean": -0.0003,
+        "std": 0.0541,
+        "norm": 0.6123,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_12",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.6697,
+        "persistence": 11.6697
+      },
+      "centroid_stats": {
+        "mean": -0.0021,
+        "std": 0.0472,
+        "norm": 0.535,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_13",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.063,
+        "persistence": 11.063
+      },
+      "centroid_stats": {
+        "mean": 0.0011,
+        "std": 0.0404,
+        "norm": 0.4573,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    },
+    {
+      "iteration": 18,
+      "module_id": "mod_attractor_14",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5671,
+        "persistence": 11.5671
+      },
+      "centroid_stats": {
+        "mean": 0.002,
+        "std": 0.0472,
+        "norm": 0.5346,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 20,
+        "attack_share": 0.4,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.6,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 30,
+            "share": 0.6
+          },
+          {
+            "subtype": "back",
+            "count": 20,
+            "share": 0.4
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 30,
+          "back": 20
+        }
+      }
+    },
+    {
+      "iteration": 18,
+      "module_id": "mod_attractor_15",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.13,
+        "persistence": 11.13
+      },
+      "centroid_stats": {
+        "mean": 0.0032,
+        "std": 0.0464,
+        "norm": 0.5265,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 50,
+        "attack_share": 1.0,
+        "dominant_subtype": "neptune",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "neptune",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "neptune": 50
+        }
+      }
+    },
+    {
+      "iteration": 20,
+      "module_id": "mod_attractor_16",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4236,
+        "persistence": 11.4236
+      },
+      "centroid_stats": {
+        "mean": -0.0046,
+        "std": 0.0503,
+        "norm": 0.5716,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 2,
+        "attack_share": 0.04,
+        "dominant_subtype": "normal",
+        "dominant_share": 0.96,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 48,
+            "share": 0.96
+          },
+          {
+            "subtype": "back",
+            "count": 2,
+            "share": 0.04
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 48,
+          "back": 2
+        }
+      }
+    },
+    {
+      "iteration": 20,
+      "module_id": "mod_attractor_17",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.3958,
+        "persistence": 11.3958
+      },
+      "centroid_stats": {
+        "mean": -0.0065,
+        "std": 0.0595,
+        "norm": 0.6777,
+        "dim": 128
+      },
+      "radius": 1.0,
+      "alignment": {
+        "k_nearest": 50,
+        "attack_count": 0,
+        "attack_share": 0.0,
+        "dominant_subtype": "normal",
+        "dominant_share": 1.0,
+        "top3_subtypes": [
+          {
+            "subtype": "normal",
+            "count": 50,
+            "share": 1.0
+          }
+        ],
+        "all_subtype_counts": {
+          "normal": 50
+        }
+      }
+    }
+  ],
+  "history": [
+    {
+      "iteration": 1,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 1.586605,
+      "wall_seconds": 0.511
+    },
+    {
+      "iteration": 2,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.093
+    },
+    {
+      "iteration": 3,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.069
+    },
+    {
+      "iteration": 4,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 2,
+      "convergence_score": 1.0,
+      "wall_seconds": 23.024,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 5,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 2,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.068
+    },
+    {
+      "iteration": 6,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 4,
+      "convergence_score": 0.5,
+      "wall_seconds": 23.761,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 7,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 4,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.069
+    },
+    {
+      "iteration": 8,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 6,
+      "convergence_score": 0.333333,
+      "wall_seconds": 25.932,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 9,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 6,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.059
+    },
+    {
+      "iteration": 10,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 8,
+      "convergence_score": 0.25,
+      "wall_seconds": 21.982,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 11,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 8,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.068
+    },
+    {
+      "iteration": 12,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 10,
+      "convergence_score": 0.2,
+      "wall_seconds": 24.084,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 13,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 10,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.069
+    },
+    {
+      "iteration": 14,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 12,
+      "convergence_score": 0.166667,
+      "wall_seconds": 18.853,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 15,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 12,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.078
+    },
+    {
+      "iteration": 16,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 14,
+      "convergence_score": 0.142857,
+      "wall_seconds": 24.754,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 17,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 14,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.057
+    },
+    {
+      "iteration": 18,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 16,
+      "convergence_score": 0.125,
+      "wall_seconds": 22.848,
+      "new_modules_count": 2
+    },
+    {
+      "iteration": 19,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 16,
+      "convergence_score": 0.0,
+      "wall_seconds": 0.061
+    },
+    {
+      "iteration": 20,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 18,
+      "convergence_score": 0.111111,
+      "wall_seconds": 21.135,
+      "new_modules_count": 2
+    }
+  ]
+}
