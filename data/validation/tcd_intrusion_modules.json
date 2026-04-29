@@ -1,0 +1,448 @@
+{
+  "generated_at": "2026-04-29T02:42:12Z",
+  "dataset": {
+    "name": "NSL-KDD train+",
+    "provenance": "DARPA Intrusion Detection Evaluation, MIT Lincoln Laboratory; modernized 2009 by University of New Brunswick",
+    "url": "https://raw.githubusercontent.com/defcom17/NSL_KDD/master/KDDTrain%2B.txt",
+    "encoding": {
+      "n_samples": 2000,
+      "n_attacks": 944,
+      "n_normal": 1056,
+      "in_dim_after_one_hot": 110,
+      "embed_dim": 64,
+      "encoding": "standardize \u2192 one-hot(protocol_type/service/flag) \u2192 JL random projection \u2192 L2 normalize",
+      "attack_subtypes_present": [
+        "back",
+        "buffer_overflow",
+        "imap",
+        "ipsweep",
+        "land",
+        "neptune",
+        "nmap",
+        "normal",
+        "pod",
+        "portsweep",
+        "satan",
+        "smurf",
+        "teardrop",
+        "warezclient"
+      ],
+      "attack_rate": 0.472
+    }
+  },
+  "tcd_config": {
+    "embed_dim": 64,
+    "n_samples": 2000,
+    "n_iterations": 12,
+    "explore_every": 1,
+    "crystallize_every": 2,
+    "langevin_steps": 30,
+    "max_modules": 16,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "result_summary": {
+    "wall_seconds": 58.69,
+    "final_active_modules": 10,
+    "is_converged": false,
+    "modules_formed_total": 10,
+    "modules_by_class": {
+      "AttractorModule": 10
+    },
+    "modules_by_topological_feature": {
+      "attractor": 10
+    }
+  },
+  "modules_formed": [
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_0",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.7411,
+        "persistence": 7.7411
+      },
+      "centroid_stats": {
+        "mean": -0.0033,
+        "std": 0.0401,
+        "norm": 0.3219,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_1",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.697,
+        "persistence": 7.697
+      },
+      "centroid_stats": {
+        "mean": -0.0029,
+        "std": 0.0677,
+        "norm": 0.5418,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_2",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.9049,
+        "persistence": 7.9049
+      },
+      "centroid_stats": {
+        "mean": -0.0079,
+        "std": 0.0532,
+        "norm": 0.4305,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_3",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.831,
+        "persistence": 7.831
+      },
+      "centroid_stats": {
+        "mean": -0.0104,
+        "std": 0.0561,
+        "norm": 0.4564,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_4",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.2711,
+        "persistence": 8.2711
+      },
+      "centroid_stats": {
+        "mean": -0.0091,
+        "std": 0.0541,
+        "norm": 0.4391,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_5",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.213,
+        "persistence": 8.213
+      },
+      "centroid_stats": {
+        "mean": 0.0053,
+        "std": 0.0587,
+        "norm": 0.4716,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_6",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.4308,
+        "persistence": 8.4308
+      },
+      "centroid_stats": {
+        "mean": 0.0068,
+        "std": 0.0509,
+        "norm": 0.4108,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_7",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 8.1232,
+        "persistence": 8.1232
+      },
+      "centroid_stats": {
+        "mean": -0.0021,
+        "std": 0.0466,
+        "norm": 0.3732,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_8",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 9.1662,
+        "persistence": 9.1662
+      },
+      "centroid_stats": {
+        "mean": -0.0103,
+        "std": 0.0506,
+        "norm": 0.4131,
+        "dim": 64
+      },
+      "radius": 1.0
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_9",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 7.7716,
+        "persistence": 7.7716
+      },
+      "centroid_stats": {
+        "mean": 0.0014,
+        "std": 0.0657,
+        "norm": 0.5257,
+        "dim": 64
+      },
+      "radius": 1.0
+    }
+  ],
+  "history": [
+    {
+      "iteration": 1,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 1.598665,
+      "is_converged": false,
+      "wall_seconds": 0.035,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 2,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.021,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 3,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 0,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.021,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 4,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 2,
+      "convergence_score": 1.0,
+      "is_converged": false,
+      "wall_seconds": 12.46,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      },
+      "crystallization": {
+        "new_modules_count": 2,
+        "pruned_modules_count": 0,
+        "num_active_modules": 2,
+        "total_persistence": 2191.5041
+      }
+    },
+    {
+      "iteration": 5,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 2,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.076,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 6,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 4,
+      "convergence_score": 0.5,
+      "is_converged": false,
+      "wall_seconds": 9.919,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      },
+      "crystallization": {
+        "new_modules_count": 2,
+        "pruned_modules_count": 0,
+        "num_active_modules": 4,
+        "total_persistence": 2261.4518
+      }
+    },
+    {
+      "iteration": 7,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 4,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.022,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 8,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 6,
+      "convergence_score": 0.333333,
+      "is_converged": false,
+      "wall_seconds": 10.383,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      },
+      "crystallization": {
+        "new_modules_count": 2,
+        "pruned_modules_count": 0,
+        "num_active_modules": 6,
+        "total_persistence": 2271.4171
+      }
+    },
+    {
+      "iteration": 9,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 6,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.095,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 10,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 8,
+      "convergence_score": 0.25,
+      "is_converged": false,
+      "wall_seconds": 10.732,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      },
+      "crystallization": {
+        "new_modules_count": 2,
+        "pruned_modules_count": 0,
+        "num_active_modules": 8,
+        "total_persistence": 2275.7025
+      }
+    },
+    {
+      "iteration": 11,
+      "explored": true,
+      "crystallized": false,
+      "num_modules_after": 8,
+      "convergence_score": 0.0,
+      "is_converged": false,
+      "wall_seconds": 0.114,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      }
+    },
+    {
+      "iteration": 12,
+      "explored": true,
+      "crystallized": true,
+      "num_modules_after": 10,
+      "convergence_score": 0.2,
+      "is_converged": false,
+      "wall_seconds": 14.808,
+      "exploration": {
+        "num_blank": 0,
+        "mean_fisher_trace": 0.0,
+        "trajectory_length": 31
+      },
+      "crystallization": {
+        "new_modules_count": 2,
+        "pruned_modules_count": 0,
+        "num_active_modules": 10,
+        "total_persistence": 2264.1345
+      }
+    }
+  ]
+}

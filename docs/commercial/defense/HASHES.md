@@ -30,6 +30,15 @@ The v3.0 tear sheet leads with KDDCUP99 (DARPA / MIT Lincoln Laboratory) and the
 | `data/validation/defense_megatest_real_data.json` | `73cecb68d4cc5d655c0f3b50d31c41c38cb6ef42cccc162de908b87b67035f3e` |
 | `scripts/defense_megatest/real_data.py` | `5effa09d3b448bd70895f5cfbaf8525218883a8cb75dd62165adf77762bf7468` |
 
+## Canonical hashes — TCD-JEPA capability test on NSL-KDD intrusion data (internal capability evidence, not for sale)
+
+| File | SHA-256 |
+|---|---|
+| `docs/commercial/defense/TCD_CAPABILITY_TEST.md` | `89c614d7bcce15c34ffef879c35c9cd00e0eccfa4d16b86952e6ed545110e150` |
+| `data/validation/tcd_intrusion_modules.json` | `5edab5a709f5b1abea713a07f3ddd1d5282ad8e27d2875ee7747ca328f3ac136` |
+| `scripts/defense_megatest/tcd_intrusion.py` | `cda24a27a1b56e395d0deec8c75387b08f02f8389c375ef12e453675e1cf2ac9` |
+| `scripts/defense_megatest/runpod_deploy.py` | `3999d66cb993241799f14f149f631b20f5f2be021ea2fbded3d47aadb382f63b` |
+
 ## Megatest harness source — v1.0.0 (reproducibility manifest)
 
 The v2.0 tear sheet's claims are reproducible from this exact source. Any modification to a file below changes the harness output and invalidates the recorded numbers in the v2.0 tear sheet.
