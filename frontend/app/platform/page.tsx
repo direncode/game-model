@@ -14,10 +14,10 @@ export default function PlatformPage() {
         <div className="max-w-[1100px] mx-auto px-6">
           {/* Hero */}
           <header className="mb-20 text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-4">
               The primitive · a data type, not a product
             </p>
-            <h1 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95]">
+            <h1 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white leading-[0.95]">
               Structural fingerprints.<br />
               <span className="text-white/40">A first-class column.</span>
             </h1>

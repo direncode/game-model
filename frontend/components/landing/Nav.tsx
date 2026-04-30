@@ -3,11 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Console",  href: "/console" },
   { label: "Platform", href: "/platform" },
   { label: "About",    href: "/about" },
-  { label: "Titan",    href: "/titan" },
-  { label: "Live",     href: "/live" },
   { label: "Start",    href: "/start" },
 ];
 
@@ -73,7 +70,7 @@ export function Nav() {
               href="/console"
               className="hidden sm:inline-flex items-center justify-center h-9 px-5 rounded-full border border-white/25 text-white text-[11.5px] font-mono font-medium tracking-[0.22em] uppercase hover:border-white/55 hover:bg-white/[0.03] transition-colors"
             >
-              Try Console
+              Workbench
             </Link>
 
             {/* Hamburger — mobile only */}
@@ -117,7 +114,7 @@ export function Nav() {
               onClick={() => setMobileOpen(false)}
               className="mt-5 inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/30 text-white text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:bg-white/[0.04] transition-colors"
             >
-              Try Console
+              Workbench
             </Link>
           </div>
         </div>

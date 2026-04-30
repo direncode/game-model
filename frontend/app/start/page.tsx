@@ -113,10 +113,10 @@ export default function StartPage() {
       <main className="pt-28 pb-32">
         <div className="max-w-[1100px] mx-auto px-6">
           <div className="mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-4">
               Drop a CSV. Get structural outliers. Your file never leaves this page.
             </p>
-            <h1 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95]">
+            <h1 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white leading-[0.95]">
               Structural outliers<br />
               <span className="text-white/50">from your spreadsheet in 60 seconds.</span>
             </h1>
