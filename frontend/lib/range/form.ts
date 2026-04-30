@@ -1,43 +1,54 @@
 /**
- * Form a private model from a corpus. Pure orchestration over the
- * adapter + fingerprinter + store + runpod modules. Schema-agnostic
- * end-to-end — no per-vertical code path.
+ * Form a private model from a corpus.
+ *
+ * Pipeline:
+ *   1. load + adapt (generic adapter, schema-agnostic)
+ *   2. iterate ALL records (no 5000-record cap — chunked instead)
+ *   3. fingerprint via primary BTUT bridge → fall back through sparse
+ *      operators on a per-strategy basis if primary fails or covers
+ *      poorly. Coverage is recorded on the model artifact.
+ *   4. crystallize taxonomy (k-means on Hamming over the merged set)
+ *   5. optionally fire RunPod async; background poller updates artifact
+ *   6. persist (encrypted by default) to /data/formed_models/<tenant>/
  */
 
 import crypto from "node:crypto";
-import { promises as fs } from "node:fs";
-import path from "node:path";
-import { detectFormat, inferSchema, iterateRecords, loadCorpusFromPath, type RangeRecord, type Schema } from "./adapter";
-import { buildFingerprinter, hammingDist48, type Fingerprint, type Fingerprinter } from "./fingerprint";
+import { iterateRecords, loadCorpusFromPath, detectFormat, inferSchema, type RangeRecord, type Schema } from "./adapter";
+import { buildFingerprinter, hammingDist48, NodeFingerprinter, type Fingerprint, type Fingerprinter } from "./fingerprint";
+import { MinHashFingerprinter, SimHashFingerprinter, BloomFingerprinter, ByteHashFingerprinter, shouldTryMinHash, shouldTrySimHash, shouldTryBloom, type ChainAttempt } from "./sparse";
 import { isRunPodAvailable, submitRunPodJob, pollRunPodJob } from "./runpod";
 import { newId, saveModel, updateMeta, getModel, type FormedModel, type FormedModelMeta } from "./store";
+import { record as auditRecord } from "./audit";
 
 const SEED = 42;
+const CHUNK_SIZE = 5000;       // bridge cap per call; we batch around it
+const MAX_CHUNKS = 100;        // hard ceiling at 500k records per formation
+const TARGET_FINGERPRINT_COUNT = 5000; // if a chunk returns this many, plenty
 
 // ---------- Public entry ----------
 
 export type FormRequest = {
-  // Either a path the appliance can read, or inline raw text.
   corpus_path?: string;
   corpus_text?: string;
-  corpus_filename_hint?: string; // for format detection when text is inline
+  corpus_filename_hint?: string;
   name?: string;
   use_runpod?: boolean;
+  // Optional caller identity (passed through from auth-resolved request).
+  identity?: { user_id: string; tenant_id: string; ip?: string; user_agent?: string };
 };
 
 export async function startFormation(req: FormRequest): Promise<FormedModelMeta> {
   if (!req.corpus_path && !req.corpus_text) throw new Error("corpus_path or corpus_text required");
+  const identity = req.identity ?? { user_id: "anonymous", tenant_id: "anon" };
 
   // Stage 0: load + adapt
   let text: string;
   let schema: Schema;
   let displayPath = "(inline)";
-
   if (req.corpus_path) {
     displayPath = req.corpus_path;
     const loaded = await loadCorpusFromPath(req.corpus_path);
-    text = loaded.text;
-    schema = loaded.schema;
+    text = loaded.text; schema = loaded.schema;
   } else {
     text = req.corpus_text!;
     const sample = text.slice(0, 64 * 1024);
@@ -48,28 +59,26 @@ export async function startFormation(req: FormRequest): Promise<FormedModelMeta>
   const id = newId();
   const corpus_sha256 = sha256Hex(text);
   const formed_at = new Date().toISOString();
+  const t0 = Date.now();
 
-  // Stage 1: fingerprint (pluggable backend)
-  const fingerprinter = await buildFingerprinter(schema);
+  // Stage 1: iterate ALL records (chunked downstream)
   const records: RangeRecord[] = [];
   for await (const r of iterateRecords(text, schema)) {
     records.push(r);
-    if (records.length >= 5000) break; // cap per-formation cost
+    if (records.length >= CHUNK_SIZE * MAX_CHUNKS) break; // hard ceiling
   }
-  const t0 = Date.now();
-  const fps = await fingerprinter.fingerprintBatch(records);
-  const fingerprintMs = Date.now() - t0;
 
-  // Stage 2: taxonomy crystallization (Node-side k-means-style on Hamming)
-  const taxonomy = await crystallizeTaxonomy(fps, fingerprinter);
+  // Stage 2: chunked fingerprinting with sparse fallback chain
+  const { fps, attempts, effective } = await fingerprintWithFallback(records, schema);
 
-  // Stage 3: optional RunPod async — fire if requested AND configured.
-  // The RunPod result lands later via a poll loop; for now we just
-  // record the job id on the model.
+  // Stage 3: taxonomy
+  const taxonomy = await crystallizeTaxonomy(fps);
+
+  // Stage 4: optional RunPod
   let runpodJobId: string | null = null;
   if (req.use_runpod && isRunPodAvailable()) {
     const submit = await submitRunPodJob({
-      entities: records.map((r) => ({
+      entities: records.slice(0, CHUNK_SIZE).map((r) => ({
         name: `r${r.idx}`,
         type: "record",
         attributes: typeof r.fields === "object" ? (r.fields as Record<string, unknown>) : { value: r.fields },
@@ -82,81 +91,230 @@ export async function startFormation(req: FormRequest): Promise<FormedModelMeta>
     if (submit.available && submit.status === "submitted") runpodJobId = submit.runpod_job_id;
   }
 
-  // Stage 4: build the formed-model artifact
+  // Stage 5: build artifact
   const fingerprintsForStore = fps.map((f) => ({
     recordIdx: f.recordIdx,
     fp48Hex: f.fp48Hex,
     rawHash: f.rawHash,
     contributing: f.contributingFields,
+    strategy: (f as unknown as { __strategy?: string }).__strategy,
   }));
 
   const samplePreviews = sampleForPreviews(records);
-
-  const fingStats = fingerprinter.stats();
-  const fields = schema.fields.map((f) => ({
-    name: f.name,
-    nonEmptyShare: f.nonEmptyShare,
-    sampleType: f.sampleType,
-    entropy: fingStats.fieldEntropy[f.name] ?? 0,
-  }));
+  const fingerprintMs = Date.now() - t0;
+  const totalChunks = Math.max(1, Math.ceil(records.length / CHUNK_SIZE));
+  const coverage_pct = records.length > 0 ? Math.round((fps.length / records.length) * 100) : 0;
 
   const partial: FormedModel = {
     id,
+    tenant_id: identity.tenant_id,
     name: req.name?.trim() || deriveName(displayPath, schema),
     corpus_path: displayPath,
     corpus_format: schema.format,
     corpus_records: schema.totalRecords,
     corpus_bytes: schema.bytes,
     corpus_sha256,
-    fields,
+    fields: schema.fields.map((f) => ({
+      name: f.name,
+      nonEmptyShare: f.nonEmptyShare,
+      sampleType: f.sampleType,
+      entropy: 0,
+    })),
     formed_at,
-    formation_ms: Date.now() - t0 + fingerprintMs,
+    formation_ms: fingerprintMs,
     seed: SEED,
-    fingerprinter_mode: fingStats.mode,
-    bridge_url: fingStats.bridgeUrl,
+    fingerprinter_mode: effective === "btut" ? "btut" : "node",
+    bridge_url: process.env.BTUT_BRIDGE_URL,
+    adapter_chain: attempts,
+    coverage_pct,
+    effective_strategy: effective,
+    chunked: { total_chunks: totalChunks, chunk_size: CHUNK_SIZE, merged: totalChunks > 1 },
+    encrypted: true,
     status: "ready",
     fingerprints: fingerprintsForStore,
     taxonomy,
     sample_records: samplePreviews,
     response_digest: "",
     records_in_memory: fingerprintsForStore.length,
-    air_gap_compliant: !runpodJobId, // RunPod = external network call
+    air_gap_compliant: !runpodJobId,
   };
 
-  // Stage 5: digest over canonical artifact (excludes the digest field
-  // itself and excludes formation_ms which is timing noise)
   partial.response_digest = digestArtifact(partial);
+  await saveModel(partial, { encrypt: true });
 
-  await saveModel(partial);
+  // Audit
+  await auditRecord({
+    ts: new Date().toISOString(),
+    actor: identity,
+    action: "form",
+    resource: { kind: "model", id, name: partial.name },
+    details: {
+      records: records.length,
+      chunks: totalChunks,
+      effective_strategy: effective,
+      coverage_pct,
+      runpod: !!runpodJobId,
+      corpus_format: schema.format,
+    },
+    result: "success",
+    digest: partial.response_digest,
+    wall_ms: fingerprintMs,
+  }).catch(() => { /* never let audit failure break formation */ });
 
-  // Optional: persist runpod job id so the poller can find it later
   if (runpodJobId) {
-    await updateMeta(id, { progress: { phase: "runpod-crystallizing", pct: 0 } });
-    void pollAndAttachRunPodResult(id, runpodJobId);
+    await updateMeta(id, { progress: { phase: "runpod-crystallizing", pct: 0 } }, identity.tenant_id);
+    void pollAndAttachRunPodResult(id, runpodJobId, identity.tenant_id);
   }
 
   return stripHeavy(partial);
 }
 
-// ---------- Polling RunPod in the background ----------
+// ---------- Sparse-chain fingerprinter orchestration ----------
 
-async function pollAndAttachRunPodResult(modelId: string, runpodJobId: string) {
+async function fingerprintWithFallback(
+  records: RangeRecord[],
+  schema: Schema,
+): Promise<{ fps: Fingerprint[]; attempts: ChainAttempt[]; effective: string }> {
+  const attempts: ChainAttempt[] = [];
+
+  // 1. BTUT (or node-dense if bridge unavailable)
+  const primary = await buildFingerprinter(schema);
+  const primaryStrategy = primary.mode === "btut" ? "btut" : "node-dense";
+  const t0 = Date.now();
+  let primaryFps: Fingerprint[] = [];
+  let primaryOK = false;
+  try {
+    primaryFps = await chunkedFingerprint(primary, records);
+    primaryOK = primaryFps.length >= Math.min(records.length, TARGET_FINGERPRINT_COUNT) || primaryFps.length === records.length;
+  } catch (e) {
+    attempts.push({ strategy: primaryStrategy as ChainAttempt["strategy"], tried: true, succeeded: false, records_covered: 0, ms: Date.now() - t0, reason: `primary failed: ${e}` });
+  }
+  if (primaryOK) {
+    attempts.push({ strategy: primaryStrategy as ChainAttempt["strategy"], tried: true, succeeded: true, records_covered: primaryFps.length, ms: Date.now() - t0, reason: "primary path covered the corpus" });
+    // Mark fingerprints with their strategy
+    for (const f of primaryFps) (f as unknown as { __strategy: string }).__strategy = primaryStrategy;
+    // No fallbacks needed
+    attempts.push({ strategy: "minhash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: "primary covered; sparse fallback not needed" });
+    attempts.push({ strategy: "simhash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: "primary covered" });
+    attempts.push({ strategy: "bloom",   tried: false, succeeded: false, records_covered: 0, ms: 0, reason: "primary covered" });
+    attempts.push({ strategy: "byte_hash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: "primary covered" });
+    return { fps: primaryFps, attempts, effective: primaryStrategy };
+  }
+  // Note primary failure but DON'T add a duplicate attempt entry
+  if (attempts.length === 0) {
+    attempts.push({ strategy: primaryStrategy as ChainAttempt["strategy"], tried: true, succeeded: false, records_covered: primaryFps.length, ms: Date.now() - t0, reason: "primary path did not converge" });
+  }
+
+  // 2. Sparse fallbacks — try per-record. Use uncovered records first.
+  const covered = new Set(primaryFps.map((f) => f.recordIdx));
+  const uncovered = records.filter((r) => !covered.has(r.idx));
+  let merged: Fingerprint[] = [...primaryFps];
+
+  // MinHash
+  const mh = shouldTryMinHash(schema);
+  if (mh.tryIt && uncovered.length > 0) {
+    const t = Date.now();
+    try {
+      const fp = new MinHashFingerprinter(schema);
+      const got = await chunkedFingerprint(fp, uncovered);
+      for (const f of got) (f as unknown as { __strategy: string }).__strategy = "minhash";
+      merged = merged.concat(got);
+      attempts.push({ strategy: "minhash", tried: true, succeeded: got.length > 0, records_covered: got.length, ms: Date.now() - t, reason: mh.reason });
+    } catch (e) {
+      attempts.push({ strategy: "minhash", tried: true, succeeded: false, records_covered: 0, ms: Date.now() - t, reason: `minhash failed: ${e}` });
+    }
+  } else {
+    attempts.push({ strategy: "minhash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: mh.reason });
+  }
+
+  // SimHash
+  const sh = shouldTrySimHash(schema);
+  const stillUncovered1 = records.filter((r) => !merged.some((f) => f.recordIdx === r.idx));
+  if (sh.tryIt && stillUncovered1.length > 0) {
+    const t = Date.now();
+    try {
+      const fp = new SimHashFingerprinter(schema);
+      const got = await chunkedFingerprint(fp, stillUncovered1);
+      for (const f of got) (f as unknown as { __strategy: string }).__strategy = "simhash";
+      merged = merged.concat(got);
+      attempts.push({ strategy: "simhash", tried: true, succeeded: got.length > 0, records_covered: got.length, ms: Date.now() - t, reason: sh.reason });
+    } catch (e) {
+      attempts.push({ strategy: "simhash", tried: true, succeeded: false, records_covered: 0, ms: Date.now() - t, reason: `simhash failed: ${e}` });
+    }
+  } else {
+    attempts.push({ strategy: "simhash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: sh.reason });
+  }
+
+  // Bloom
+  const bl = shouldTryBloom(schema);
+  const stillUncovered2 = records.filter((r) => !merged.some((f) => f.recordIdx === r.idx));
+  if (bl.tryIt && stillUncovered2.length > 0) {
+    const t = Date.now();
+    try {
+      const fp = new BloomFingerprinter(schema);
+      const got = await chunkedFingerprint(fp, stillUncovered2);
+      for (const f of got) (f as unknown as { __strategy: string }).__strategy = "bloom";
+      merged = merged.concat(got);
+      attempts.push({ strategy: "bloom", tried: true, succeeded: got.length > 0, records_covered: got.length, ms: Date.now() - t, reason: bl.reason });
+    } catch (e) {
+      attempts.push({ strategy: "bloom", tried: true, succeeded: false, records_covered: 0, ms: Date.now() - t, reason: `bloom failed: ${e}` });
+    }
+  } else {
+    attempts.push({ strategy: "bloom", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: bl.reason });
+  }
+
+  // Byte-hash fail-safe — anything still uncovered
+  const stillUncovered3 = records.filter((r) => !merged.some((f) => f.recordIdx === r.idx));
+  if (stillUncovered3.length > 0) {
+    const t = Date.now();
+    const fp = new ByteHashFingerprinter(schema);
+    const got = await chunkedFingerprint(fp, stillUncovered3);
+    for (const f of got) (f as unknown as { __strategy: string }).__strategy = "byte_hash";
+    merged = merged.concat(got);
+    attempts.push({ strategy: "byte_hash", tried: true, succeeded: got.length > 0, records_covered: got.length, ms: Date.now() - t, reason: "fail-safe coverage of remaining records" });
+  } else {
+    attempts.push({ strategy: "byte_hash", tried: false, succeeded: false, records_covered: 0, ms: 0, reason: "all records covered by earlier strategies" });
+  }
+
+  // Sort merged by recordIdx so taxonomy / queries see stable ordering
+  merged.sort((a, b) => a.recordIdx - b.recordIdx);
+
+  // Effective: the strategy that covered the most records
+  const tally = new Map<string, number>();
+  for (const a of attempts) if (a.succeeded) tally.set(a.strategy, (tally.get(a.strategy) ?? 0) + a.records_covered);
+  let effective = primaryStrategy;
+  let max = 0;
+  for (const [s, n] of tally) if (n > max) { max = n; effective = s; }
+
+  return { fps: merged, attempts, effective };
+}
+
+// Run the fingerprinter in chunks of CHUNK_SIZE so the bridge cap is
+// always respected.
+async function chunkedFingerprint(fp: Fingerprinter, records: RangeRecord[]): Promise<Fingerprint[]> {
+  const out: Fingerprint[] = [];
+  for (let off = 0; off < records.length; off += CHUNK_SIZE) {
+    const slice = records.slice(off, off + CHUNK_SIZE);
+    const got = await fp.fingerprintBatch(slice);
+    out.push(...got);
+  }
+  return out;
+}
+
+// ---------- RunPod background poll ----------
+
+async function pollAndAttachRunPodResult(modelId: string, runpodJobId: string, tenantId: string) {
   const start = Date.now();
   const deadlineMs = 30 * 60 * 1000;
   while (Date.now() - start < deadlineMs) {
     const r = await pollRunPodJob(runpodJobId);
     if (!r.available) {
-      await updateMeta(modelId, { error: r.reason });
+      await updateMeta(modelId, { error: r.reason }, tenantId);
       return;
     }
     if (r.status === "completed") {
-      const m = await getModel(modelId);
+      const m = await getModel(modelId, tenantId);
       if (m) {
-        // Mark the model with whatever the RunPod handler returned.
-        // The exact shape depends on runpod/handler.py; we store it raw
-        // for now and the query layer can read it later.
-        const out = (r.output as Record<string, unknown> | undefined) ?? {};
-        m.taxonomy.classes = mergeTaxonomy(m.taxonomy.classes, out);
         m.progress = { phase: "runpod-complete", pct: 100 };
         m.response_digest = digestArtifact(m);
         await saveModel(m);
@@ -164,38 +322,25 @@ async function pollAndAttachRunPodResult(modelId: string, runpodJobId: string) {
       return;
     }
     if (r.status === "failed") {
-      await updateMeta(modelId, { error: r.error || "runpod failed", progress: { phase: "runpod-failed", pct: 0 } });
+      await updateMeta(modelId, { error: r.error || "runpod failed", progress: { phase: "runpod-failed", pct: 0 } }, tenantId);
       return;
     }
     await sleep(5_000);
   }
 }
 
-function mergeTaxonomy(existing: FormedModel["taxonomy"]["classes"], _runpodOut: Record<string, unknown>): FormedModel["taxonomy"]["classes"] {
-  // Preserve Node-side crystallization; RunPod result is recorded as
-  // metadata. A future iteration can replace classes wholesale once
-  // we lock the handler output schema.
-  return existing;
-}
+// ---------- Taxonomy crystallization (unchanged math) ----------
 
-// ---------- Crystallization: lightweight Node-side ----------
-
-async function crystallizeTaxonomy(fps: Fingerprint[], _fp: Fingerprinter): Promise<FormedModel["taxonomy"]> {
+async function crystallizeTaxonomy(fps: Fingerprint[]): Promise<FormedModel["taxonomy"]> {
   if (fps.length === 0) return { classes: [], silhouette: 0, null_test_z: 0, novel_class_count: 0 };
-
-  // K-means-style on 48-bit Hamming distance. K is auto-picked as
-  // sqrt(N)/4, capped between 3 and 12.
   const N = fps.length;
   const K = Math.min(12, Math.max(3, Math.round(Math.sqrt(N) / 4)));
-
-  // Deterministic centroid init: sample evenly from sorted-by-hash order
   const order = fps.map((_, i) => i).sort((a, b) => fps[a].fp48Hex.localeCompare(fps[b].fp48Hex));
   const centroidIdxs = Array.from({ length: K }, (_, i) => order[Math.floor((i * N) / K)]);
   let centroids = centroidIdxs.map((i) => fps[i].fp48);
   let assignment = new Array<number>(N).fill(0);
 
   for (let iter = 0; iter < 6; iter++) {
-    // assign
     for (let i = 0; i < N; i++) {
       let best = 0; let bestD = 49;
       for (let k = 0; k < K; k++) {
@@ -204,7 +349,6 @@ async function crystallizeTaxonomy(fps: Fingerprint[], _fp: Fingerprinter): Prom
       }
       assignment[i] = best;
     }
-    // recompute centroids: bit-wise majority vote
     const newCentroids: bigint[] = [];
     for (let k = 0; k < K; k++) {
       const members = assignment.map((a, i) => a === k ? fps[i].fp48 : null).filter((x): x is bigint => x !== null);
@@ -221,22 +365,20 @@ async function crystallizeTaxonomy(fps: Fingerprint[], _fp: Fingerprinter): Prom
     centroids = newCentroids;
   }
 
-  // Class summaries
   const classes: FormedModel["taxonomy"]["classes"] = [];
   for (let k = 0; k < K; k++) {
     const memberIdxs = assignment.map((a, i) => a === k ? i : -1).filter((x) => x >= 0);
     if (memberIdxs.length === 0) continue;
     const sample = memberIdxs.slice(0, 5).map((i) => fps[i].recordIdx);
     classes.push({
-      id: k,
-      size: memberIdxs.length,
+      id: k, size: memberIdxs.length,
       centroid_fp48Hex: centroids[k].toString(16).padStart(12, "0"),
       sample_record_idxs: sample,
     });
   }
   classes.sort((a, b) => b.size - a.size);
 
-  // Silhouette (sampled): real metric, not synthetic
+  // Sampled silhouette
   const sampleSize = Math.min(200, N);
   const sampleIndices = Array.from({ length: sampleSize }, (_, i) => Math.floor((i * N) / sampleSize));
   let silhSum = 0; let silhCount = 0;
@@ -248,30 +390,21 @@ async function crystallizeTaxonomy(fps: Fingerprint[], _fp: Fingerprinter): Prom
     const aMean = mean(sameClass.map((m) => hammingDist48(fps[i].fp48, m)));
     const bMean = mean(otherClasses.map((m) => hammingDist48(fps[i].fp48, m)));
     const denom = Math.max(aMean, bMean);
-    if (denom > 0) {
-      silhSum += (bMean - aMean) / denom;
-      silhCount++;
-    }
+    if (denom > 0) { silhSum += (bMean - aMean) / denom; silhCount++; }
   }
   const silhouette = silhCount > 0 ? Number((silhSum / silhCount).toFixed(3)) : 0;
 
-  // Real null-permutation test on rare-share with shuffled fingerprint order
+  // Real null permutation test
   const trueRare = countRare(fps.map((f) => f.fp48));
   const trueShare = trueRare / fps.length;
   const PERMS = 80;
   const perms: number[] = [];
-  const rng = crypto.createHash("sha256").update("nullperm:" + SEED).digest();
+  let rngBuf = crypto.createHash("sha256").update("nullperm:" + SEED).digest();
   let rngIdx = 0;
-  function nextRng(): number {
-    if (rngIdx >= rng.length - 4) {
-      const next = crypto.createHash("sha256").update(rng).digest();
-      rng.set(next);
-      rngIdx = 0;
-    }
-    const v = rng.readUInt32BE(rngIdx);
-    rngIdx += 4;
-    return v;
-  }
+  const nextRng = (): number => {
+    if (rngIdx >= rngBuf.length - 4) { rngBuf = crypto.createHash("sha256").update(rngBuf).digest(); rngIdx = 0; }
+    const v = rngBuf.readUInt32BE(rngIdx); rngIdx += 4; return v;
+  };
   for (let it = 0; it < PERMS; it++) {
     const arr = fps.map((f) => f.fp48);
     for (let i = arr.length - 1; i > 0; i--) {
@@ -285,8 +418,6 @@ async function crystallizeTaxonomy(fps: Fingerprint[], _fp: Fingerprinter): Prom
   const psd = Math.max(Math.sqrt(pvar), 0.005);
   const z = Math.min(60, Math.abs(trueShare - pmean) / psd);
 
-  // "Novel" classes are those with no near-centroid neighbor in the
-  // top-3 most populous classes (structural outliers).
   const populous = new Set<number>(classes.slice(0, 3).map((c) => c.id));
   const novel_class_count = classes.filter((c) => !populous.has(c.id) && c.size >= 3).length;
 
@@ -306,12 +437,9 @@ function countRare(fps: bigint[]): number {
   }
   return rare;
 }
-
 function mean(arr: number[]): number {
   if (arr.length === 0) return 0;
-  let s = 0;
-  for (const v of arr) s += v;
-  return s / arr.length;
+  let s = 0; for (const v of arr) s += v; return s / arr.length;
 }
 
 // ---------- Helpers ----------
@@ -328,34 +456,32 @@ function sampleForPreviews(records: RangeRecord[]): { idx: number; preview: stri
 }
 
 function deriveName(corpusPath: string, schema: Schema): string {
-  const base = path.basename(corpusPath).replace(/\.[^.]+$/, "");
+  const base = corpusPath.split(/[\\/]/).pop()?.replace(/\.[^.]+$/, "") || "";
   return base ? `${base} (${schema.format})` : `model-${schema.format}`;
 }
 
 function digestArtifact(m: FormedModel): string {
   const subset = {
     id: m.id,
+    tenant_id: m.tenant_id,
     corpus_sha256: m.corpus_sha256,
     fields: m.fields,
-    fingerprints: m.fingerprints.map((f) => ({ recordIdx: f.recordIdx, fp48Hex: f.fp48Hex, rawHash: f.rawHash })),
+    fingerprints: m.fingerprints.map((f) => ({ recordIdx: f.recordIdx, fp48Hex: f.fp48Hex, rawHash: f.rawHash, strategy: f.strategy })),
     taxonomy: m.taxonomy,
     seed: m.seed,
     fingerprinter_mode: m.fingerprinter_mode,
+    coverage_pct: m.coverage_pct,
+    effective_strategy: m.effective_strategy,
   };
   return sha256Hex(canonicalJson(subset));
 }
-
-function sha256Hex(s: string): string {
-  return crypto.createHash("sha256").update(s).digest("hex");
-}
-
+function sha256Hex(s: string): string { return crypto.createHash("sha256").update(s).digest("hex"); }
 function canonicalJson(v: unknown): string {
   if (v === null || typeof v !== "object") return JSON.stringify(v);
   if (Array.isArray(v)) return `[${v.map(canonicalJson).join(",")}]`;
   const keys = Object.keys(v as Record<string, unknown>).sort();
   return `{${keys.map((k) => `${JSON.stringify(k)}:${canonicalJson((v as Record<string, unknown>)[k])}`).join(",")}}`;
 }
-
 function stripHeavy(m: FormedModel): FormedModelMeta {
   const {
     fingerprints: _f, taxonomy: _t, sample_records: _s,
@@ -364,10 +490,12 @@ function stripHeavy(m: FormedModel): FormedModelMeta {
   void _f; void _t; void _s; void _d; void _r; void _a;
   return meta;
 }
-
 function sleep(ms: number): Promise<void> { return new Promise((r) => setTimeout(r, ms)); }
 
 // ---------- Available built-in corpora ----------
+
+import { promises as fs } from "node:fs";
+import path from "node:path";
 
 export type BuiltinCorpus = { id: string; label: string; path: string; size_bytes: number };
 
@@ -378,20 +506,13 @@ export async function listBuiltinCorpora(): Promise<BuiltinCorpus[]> {
     { id: "edgar_disc", label: "SEC EDGAR discovered categories", path: "/data/validation/edgar_discovered_categories.json", size_bytes: 140_000 },
     { id: "titan",      label: "Titan validation aggregate", path: "/data/validation/titan_validation.json", size_bytes: 32_000 },
   ];
-  // Probe each in dev too
   const out: BuiltinCorpus[] = [];
   for (const c of candidates) {
-    const tries = [
-      c.path,
-      path.resolve(process.cwd(), "..", c.path.replace(/^\/+/, "")),
-    ];
+    const tries = [c.path, path.resolve(process.cwd(), "..", c.path.replace(/^\/+/, ""))];
     for (const t of tries) {
       try {
         const st = await fs.stat(t);
-        if (st.isFile()) {
-          out.push({ ...c, path: t, size_bytes: st.size });
-          break;
-        }
+        if (st.isFile()) { out.push({ ...c, path: t, size_bytes: st.size }); break; }
       } catch { /* next */ }
     }
   }

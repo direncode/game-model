@@ -42,6 +42,11 @@ services:
       - FORMED_MODELS_DIR=/data/formed_models
       - RUNPOD_API_KEY=${RUNPOD_API_KEY:-}
       - RUNPOD_ENDPOINT_ID=${RUNPOD_ENDPOINT_ID:-}
+      # Internal Range auth: master admin token + HMAC secret + require-auth toggle
+      - RANGE_ADMIN_TOKEN=${RANGE_ADMIN_TOKEN:-}
+      - RANGE_AUTH_SECRET=${RANGE_AUTH_SECRET:-}
+      - RANGE_REQUIRE_AUTH=${RANGE_REQUIRE_AUTH:-0}
+      - RANGE_ENCRYPTION_KEY=${RANGE_ENCRYPTION_KEY:-}
     volumes:
       # Next.js /api/health + data-layer routes read validation artefacts
       # and BTUT caches at /data and /scripts. Read-only bind mounts

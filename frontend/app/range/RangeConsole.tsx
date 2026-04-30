@@ -8,8 +8,18 @@ type Capabilities = {
 };
 type BuiltinCorpus = { id: string; label: string; path: string; size_bytes: number };
 
+type AdapterAttempt = {
+  strategy: string;
+  tried: boolean;
+  succeeded: boolean;
+  records_covered: number;
+  ms: number;
+  reason?: string;
+};
+
 type FormedModelMeta = {
   id: string;
+  tenant_id?: string;
   name: string;
   corpus_path: string;
   corpus_format: string;
@@ -22,6 +32,11 @@ type FormedModelMeta = {
   seed: number;
   fingerprinter_mode: "node" | "btut";
   bridge_url?: string;
+  adapter_chain?: AdapterAttempt[];
+  coverage_pct?: number;
+  effective_strategy?: string;
+  chunked?: { total_chunks: number; chunk_size: number; merged: boolean };
+  encrypted?: boolean;
   status: string;
 };
 
@@ -437,6 +452,36 @@ function ModelDetail({ m, headline }: { m: FormedModel; headline: string }) {
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1.5">response_digest</div>
           <div className="font-mono text-[11px] text-li-green break-all leading-relaxed">sha256:{m.response_digest}</div>
         </div>
+
+        {/* Adapter chain coverage */}
+        {m.adapter_chain && m.adapter_chain.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                adapter chain · effective={m.effective_strategy ?? "n/a"} · coverage={m.coverage_pct ?? 0}%
+              </div>
+              <div className="font-mono text-[10px] text-white/35">
+                {m.chunked?.merged ? `${m.chunked.total_chunks} chunks merged` : "single chunk"}
+                {m.encrypted ? " · encrypted" : ""}
+                {m.tenant_id ? ` · tenant=${m.tenant_id}` : ""}
+              </div>
+            </div>
+            <div className="rounded-lg border border-white/10 overflow-hidden bg-black/40">
+              {m.adapter_chain.map((a) => {
+                const tone = !a.tried ? "text-white/35" : a.succeeded ? "text-li-green" : "text-li-yellow";
+                return (
+                  <div key={a.strategy} className="grid grid-cols-[110px_60px_70px_90px_1fr] items-center px-3 py-1.5 border-b border-white/[0.04] font-mono text-[10.5px]">
+                    <span className={`uppercase tracking-[0.18em] ${tone}`}>{a.strategy}</span>
+                    <span className={tone}>{a.tried ? (a.succeeded ? "ok" : "miss") : "skipped"}</span>
+                    <span className="text-white/65 tabular-nums text-right">{a.records_covered.toLocaleString()}</span>
+                    <span className="text-white/45 tabular-nums text-right">{a.ms}ms</span>
+                    <span className="text-white/45 truncate pl-3">{a.reason ?? ""}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {m.fields.length > 0 && (
           <div>

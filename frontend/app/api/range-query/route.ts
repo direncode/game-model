@@ -316,26 +316,33 @@ function finalize(partial: Omit<Answer, "lineage" | "response_digest" | "wall_ms
 
 // ---------- Route ----------
 
+import { resolveIdentity, shouldDeny, denyResponse } from "@/lib/range/auth";
+import { record as auditRecord } from "@/lib/range/audit";
+
 export async function GET(req: Request) {
+  const ident = await resolveIdentity(req);
+  if (shouldDeny(ident)) return denyResponse(ident.reason ?? "auth required");
   const url = new URL(req.url);
   const q = url.searchParams.get("q") || "describe corpus";
   const modelIdParam = url.searchParams.get("model_id");
 
-  // If no model_id given, pick the first available formed model.
   let modelId = modelIdParam;
   if (!modelId) {
-    const models = await listModels();
+    const models = await listModels({ tenant_id: ident.tenant_id });
     if (models.length === 0) {
       return NextResponse.json(
-        { error: "no formed models exist", hint: "POST /api/range-form first to form a model from a corpus" },
+        { error: "no formed models exist for this tenant", hint: "POST /api/range-form first to form a model" },
         { status: 404 },
       );
     }
     modelId = models[0].id;
   }
 
-  const m = await getModel(modelId);
-  if (!m) return NextResponse.json({ error: "model not found", model_id: modelId }, { status: 404 });
+  const m = await getModel(modelId, ident.tenant_id);
+  if (!m) {
+    await auditRecord({ ts: new Date().toISOString(), actor: ident, action: "query", resource: { kind: "model", id: modelId }, result: "denied", details: { reason: "not found / wrong tenant" } }).catch(() => {});
+    return NextResponse.json({ error: "model not found", model_id: modelId }, { status: 404 });
+  }
 
   const intent = classifyIntent(q);
   const t0 = Date.now();
@@ -354,6 +361,16 @@ export async function GET(req: Request) {
   } catch (e) {
     return NextResponse.json({ error: "query failed", detail: String(e) }, { status: 500 });
   }
+
+  // Audit (best-effort)
+  auditRecord({
+    ts: new Date().toISOString(),
+    actor: ident, action: "query",
+    resource: { kind: "model", id: m.id, name: m.name },
+    details: { intent, q: q.slice(0, 200) },
+    result: "success", digest: answer.response_digest, wall_ms: answer.wall_ms,
+  }).catch(() => {});
+
   return NextResponse.json(answer, {
     headers: {
       "Cache-Control": "no-store",
@@ -361,6 +378,7 @@ export async function GET(req: Request) {
       "x-range-intent": answer.intent,
       "x-range-digest": answer.response_digest,
       "x-range-seed": String(SEED),
+      "x-range-tenant": ident.tenant_id,
     },
   });
 }

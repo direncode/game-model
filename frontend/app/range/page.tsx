@@ -7,6 +7,7 @@ import { RangeWhatFormed } from "@/components/range/RangeWhatFormed";
 import { RangeQuery } from "@/components/range/RangeQuery";
 import { RangeAirGap } from "@/components/range/RangeAirGap";
 import { RangeAccess } from "@/components/range/RangeAccess";
+import { RangeOperator } from "@/components/range/RangeOperator";
 import { RangeConsole } from "./RangeConsole";
 import { SentinelReplay } from "@/components/landing/sentinel/SentinelReplay";
 
@@ -60,6 +61,7 @@ export default function RangePage() {
         <div id="replay-anchor" />
         <SentinelReplay />
 
+        <RangeOperator />
         <RangeAirGap />
         <RangeAccess />
       </main>
