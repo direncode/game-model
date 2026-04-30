@@ -3,9 +3,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Platform", href: "/platform" },
-  { label: "About",    href: "/about" },
-  { label: "Start",    href: "/start" },
+  { label: "Console",        href: "/" },
+  { label: "API",            href: "/api-docs" },
+  { label: "Infrastructure", href: "/infrastructure" },
+  { label: "News",           href: "/news" },
 ];
 
 export function Nav() {
