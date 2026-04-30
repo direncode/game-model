@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { label: "Start", href: "/start" },
   { label: "Platform", href: "/platform" },
   { label: "Sentinel", href: "/sentinel" },
+  { label: "Range", href: "/range" },
   { label: "Titan", href: "/titan" },
   { label: "Live", href: "/live" },
   { label: "Pricing", href: "#pricing" },
