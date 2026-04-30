@@ -3,13 +3,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Start", href: "/start" },
-  { label: "Platform", href: "/platform" },
-  { label: "Sentinel", href: "/sentinel" },
   { label: "Range", href: "/range" },
+  { label: "Platform", href: "/platform" },
   { label: "Titan", href: "/titan" },
   { label: "Live", href: "/live" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Start", href: "/start" },
 ];
 
 export function Nav() {

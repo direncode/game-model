@@ -573,7 +573,7 @@ export function RangeConsole() {
                       el.value = selectedDet.lineage;
                       el.dispatchEvent(new Event("input", { bubbles: true }));
                     }
-                    window.location.href = `/sentinel#replay-anchor`;
+                    document.getElementById("replay-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }}
                   className="w-full inline-flex items-center justify-center h-10 px-5 rounded-full border border-li-cyan/40 text-li-cyan text-xs font-mono hover:bg-li-cyan/10 hover:border-li-cyan/70 transition-colors"
                 >
