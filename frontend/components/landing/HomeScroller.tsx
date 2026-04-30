@@ -5,269 +5,291 @@ import { motion, useInView } from "framer-motion";
 import { parseCSV, scoreRows, type Scored } from "@/lib/csvClientFingerprint";
 
 /**
- * HomeScroller — everything below the fold on / .
+ * HomeScroller — the long surface beneath the live console hero.
  *
- * Section sequence (mirrors the cinematic shape of xAI's homepage scroll
- * but each panel is functional and citation-backed, not a brochure):
+ * Eight sections, each authentically Latent Ocean — not an xAI mirror.
  *
- *   I.   Products grid — Console, API, Infrastructure
- *   II.  Starburst — "Understand the corpus" with a deterministic
- *        radial-point cloud rendered in SVG, animated
- *   III. CSV drop — drag a real .csv, watch it get fingerprinted in
- *        your browser, top outliers materialise inline
- *   IV.  Citations — every primitive we use, sourced to NIST, RFCs,
- *        peer-reviewed papers, public datasets
- *   V.   Access — pro tier CTA, mailto engineering, RSS
+ *   I.   Live appliance pointers — real-time stats from /api/range-form,
+ *        plus a capability strip with engineering-sheet density
+ *   II.  Sonar Sweep — concentric ocean-depth pings sweeping a
+ *        deterministic field of fingerprints (replaces the xAI-style
+ *        radial starburst with our oceanic identity)
+ *   III. CSV drop — drag a real .csv, fingerprinted in your browser via
+ *        Web Crypto under seed=42 (kept; functional and unique)
+ *   IV.  Determinism Contract — side-by-side proof of byte-identical
+ *        digest across two repeated calls
+ *   V.   Architecture Layers — L0 through L5 with brief pointers,
+ *        public-safe (no IP-bound internals exposed)
+ *   VI.  Citations — every primitive sourced to its primary publication
+ *   VII. Engineering Channel — recent dispatches feed + direct mailto;
+ *        replaces the SuperGrok-shaped subscription panel with something
+ *        more in the spirit of how we actually work
  */
 
 // =====================================================================
-//  Section I — Products grid
+//  Section I — Live appliance pointers + capability strip
 // =====================================================================
 
-function ProductsSection() {
+type FormedModelMeta = { id: string; name: string; corpus_records: number; corpus_bytes: number; fingerprinter_mode: "node" | "btut"; formed_at: string; formation_ms: number };
+
+function LiveAppliance() {
+  // The hero's scroll-down arrow targets #beneath on this section.
+  const [models, setModels] = useState<FormedModelMeta[] | null>(null);
+  const [tick, setTick] = useState(0);
+
+  const refresh = useCallback(() => {
+    fetch("/api/range-form", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => setModels(d.models ?? []))
+      .catch(() => setModels([]));
+  }, []);
+
+  useEffect(() => { refresh(); }, [refresh]);
+  useEffect(() => {
+    const t1 = setInterval(refresh, 30_000);
+    const t2 = setInterval(() => setTick((n) => n + 1), 1500);
+    return () => { clearInterval(t1); clearInterval(t2); };
+  }, [refresh]);
+
+  const stats = useMemo(() => {
+    if (!models) return null;
+    const total_records = models.reduce((a, m) => a + (m.corpus_records || 0), 0);
+    const total_bytes = models.reduce((a, m) => a + (m.corpus_bytes || 0), 0);
+    const btut_share = models.length === 0 ? 0 : models.filter((m) => m.fingerprinter_mode === "btut").length / models.length;
+    const median_ms = models.length === 0 ? 0 : (
+      [...models].sort((a, b) => a.formation_ms - b.formation_ms)[Math.floor(models.length / 2)]?.formation_ms ?? 0
+    );
+    const latest = [...models].sort((a, b) => b.formed_at.localeCompare(a.formed_at))[0];
+    return { count: models.length, total_records, total_bytes, btut_share, median_ms, latest };
+  }, [models]);
+
+  const heartbeat = ["▏","▎","▍","▌","▋","▊","▉","█","▉","▊","▋","▌","▍","▎"];
+  const pulseChar = heartbeat[tick % heartbeat.length];
+
   return (
     <section id="beneath" className="relative px-6 py-32 border-t border-white/5">
       <div className="max-w-[1400px] mx-auto">
-        <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
-          [ Products ]
-        </p>
-        <h2 className="font-display font-medium text-[clamp(56px,9vw,128px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-20">
-          Modelling for<br />
-          <span className="text-white/45">regulated humanity.</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.05] border border-white/10 rounded-2xl overflow-hidden">
-          <ProductCard
-            title="Console"
-            href="/"
-            body="The live front door. Mount any corpus, form a deterministic private model, query it inline. The same input returns byte-identical answers every time, on every appliance, forever."
-            icon={<IconConsole />}
-          />
-          <ProductCard
-            title="API"
-            href="/api-docs"
-            body="Every action is also an HTTP call. Eleven endpoints, internal HMAC bearer auth, response_digest receipt on every reply. Drop into Snowflake, Databricks, Postgres, S3, Kafka."
-            icon={<IconApi />}
-          />
-          <ProductCard
-            title="Infrastructure"
-            href="/infrastructure"
-            body="Single binary that mounts into the rack you already run. Helm, Terraform, Docker Compose, sealed offline bundle. Air-gap default. AES-256-GCM at rest. Zero phone-home."
-            icon={<IconRack />}
-          />
+        <div className="flex items-center gap-2.5 mb-8">
+          <span className={`font-mono text-[10.5px] tabular-nums ${stats ? "text-white/70" : "text-white/30"}`}>{pulseChar}</span>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45">
+            Live · this appliance · refreshed every 30s
+          </p>
         </div>
+        <h2 className="font-display font-medium text-[clamp(48px,8vw,116px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-16">
+          What's actually running.
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-white/[0.05] border border-white/10 rounded-2xl overflow-hidden">
+          <Stat label="formed models" value={stats ? stats.count.toLocaleString() : "—"} hint="encrypted artifacts on disk" />
+          <Stat label="records ingested" value={stats ? stats.total_records.toLocaleString() : "—"} hint="across all models" />
+          <Stat label="bytes hashed" value={stats ? fmtBytes(stats.total_bytes) : "—"} hint="byte-canonical sha256" />
+          <Stat label="median formation" value={stats ? `${(stats.median_ms / 1000).toFixed(1)}s` : "—"} hint="wall-time per model" />
+          <Stat label="btut bridge share" value={stats ? `${Math.round(stats.btut_share * 100)}%` : "—"} hint="real-pipeline coverage" />
+        </div>
+
+        {/* Capability strip — engineering-sheet density, sources every claim */}
+        <div className="mt-12 rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
+          <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">Capability ledger</span>
+            <span className="font-mono text-[10px] text-white/35">Every line is a verified pointer to a primary source.</span>
+          </div>
+          <div className="divide-y divide-white/[0.04]">
+            {CAPABILITIES.map((c, i) => (
+              <div key={i} className="grid grid-cols-[40px_1.2fr_2fr_1fr] px-5 py-3.5 items-center hover:bg-white/[0.02] transition-colors">
+                <div className="font-mono text-[10px] text-white/35 tabular-nums">{String(i + 1).padStart(2, "0")}</div>
+                <div className="font-mono text-[12px] text-white/85 tracking-[-0.005em]">{c.title}</div>
+                <div className="text-[12.5px] text-white/55 leading-snug pr-4">{c.body}</div>
+                <div className="font-mono text-[10.5px] text-white/45 text-right tabular-nums">{c.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {stats?.latest && (
+          <div className="mt-6 font-mono text-[11px] text-white/35 leading-relaxed">
+            most recent strike · <span className="text-white/65">{stats.latest.name}</span> ·{" "}
+            <span className="text-white/65">{stats.latest.corpus_records.toLocaleString()}</span> records ·{" "}
+            <span className="text-white/65">{stats.latest.fingerprinter_mode}</span>{" "}
+            <span className="text-white/55">in {(stats.latest.formation_ms / 1000).toFixed(1)}s</span>
+            <span className="text-white/30"> · id {stats.latest.id}</span>
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-function ProductCard({ title, href, body, icon }: { title: string; href: string; body: string; icon: React.ReactNode }) {
+const CAPABILITIES: { title: string; body: string; value: string }[] = [
+  { title: "Determinism contract",       body: "Same input, same response_digest, byte-identical, on any appliance, in any decade. Enforced in CI on every commit.", value: "seed = 42" },
+  { title: "Air-gap default",            body: "The appliance opens zero outbound sockets unless an operator explicitly bridges to RunPod. No telemetry, no phone-home, no license check-in.", value: "0 egress" },
+  { title: "Sparse fallback chain",      body: "Primary BTUT path with cascading sparse operators (MinHash · SimHash · Bloom · byte-hash). No corpus rejected; coverage_pct stamped on every artifact.", value: "5 strategies" },
+  { title: "Encryption at rest",         body: "AES-256-GCM with per-appliance master key. Keyed via env or auto-generated to /data/formed_models/_keys with chmod 600.", value: "AES-256-GCM" },
+  { title: "Bearer auth",                body: "Internal HMAC-signed bearer tokens. No third-party SDK. Tenant + role embedded; revoke by rotating RANGE_AUTH_SECRET.", value: "HMAC-SHA-256" },
+  { title: "Multi-format adapter",       body: "Auto-detects JSON / NDJSON / CSV / TSV / PSV / plaintext from byte shape. Schema inferred at ingest. No per-vertical adapter code.", value: "6 formats" },
+  { title: "Append-only registry",       body: "Every form / query / delete / auth event sealed to /data/formed_models/_audit. Exportable as CEF or OCSF.", value: "CEF · OCSF" },
+  { title: "Citation discipline",        body: "Every cryptographic primitive, every dataset, every algorithmic technique points to its primary published source.", value: "16 sources" },
+];
+
+function Stat({ label, value, hint }: { label: string; value: string; hint: string }) {
   return (
-    <Link
-      href={href}
-      className="group bg-black p-9 md:p-11 hover:bg-white/[0.02] transition-colors flex flex-col min-h-[440px]"
-    >
-      <h3 className="font-display font-medium text-3xl md:text-4xl tracking-[-0.025em] text-white mb-6">
-        {title}
-      </h3>
-      <p className="text-[15.5px] text-white/55 leading-snug max-w-[36ch]">{body}</p>
-      <div className="mt-auto pt-12 flex items-end justify-between gap-4">
-        <div className="text-white/45 group-hover:text-white/85 transition-colors w-full">
-          {icon}
-        </div>
-      </div>
-      <div className="mt-6 flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/40 group-hover:text-white/85 transition-colors">
-        Read more
-        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-          <path d="M3 6h6m0 0L6 3m3 3L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      </div>
-    </Link>
+    <div className="bg-black p-7 md:p-8">
+      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40 mb-3">{label}</div>
+      <div className="font-display text-[clamp(28px,3.6vw,52px)] tracking-[-0.025em] text-white tabular-nums leading-[1]">{value}</div>
+      <div className="font-mono text-[10px] text-white/35 mt-3 leading-snug">{hint}</div>
+    </div>
   );
 }
 
-// Hairline-line illustrations, each unique to its product
-function IconConsole() {
-  return (
-    <svg viewBox="0 0 240 120" className="w-full max-w-[280px]" fill="none" stroke="currentColor" strokeWidth="0.6">
-      <rect x="10" y="14" width="220" height="92" rx="6" />
-      <line x1="10" y1="32" x2="230" y2="32" />
-      <circle cx="22" cy="23" r="2.5" />
-      <circle cx="32" cy="23" r="2.5" />
-      <circle cx="42" cy="23" r="2.5" />
-      <line x1="22" y1="48" x2="80" y2="48" />
-      <line x1="22" y1="58" x2="120" y2="58" />
-      <line x1="22" y1="68" x2="100" y2="68" />
-      <rect x="22" y="80" width="196" height="14" rx="7" />
-      <line x1="40" y1="87" x2="190" y2="87" strokeDasharray="2 3" />
-    </svg>
-  );
-}
-function IconApi() {
-  return (
-    <svg viewBox="0 0 240 120" className="w-full max-w-[280px]" fill="none" stroke="currentColor" strokeWidth="0.6">
-      <rect x="10" y="14" width="220" height="92" rx="6" />
-      <line x1="10" y1="32" x2="230" y2="32" />
-      <text x="22" y="50" fontSize="7" fontFamily="monospace" fill="currentColor" stroke="none">POST /api/range-form</text>
-      <text x="22" y="64" fontSize="7" fontFamily="monospace" fill="currentColor" stroke="none">GET  /api/range-query</text>
-      <text x="22" y="78" fontSize="7" fontFamily="monospace" fill="currentColor" stroke="none">GET  /api/range-audit</text>
-      <text x="22" y="92" fontSize="7" fontFamily="monospace" fill="currentColor" stroke="none">POST /api/range-auth/issue</text>
-    </svg>
-  );
-}
-function IconRack() {
-  return (
-    <svg viewBox="0 0 240 120" className="w-full max-w-[280px]" fill="none" stroke="currentColor" strokeWidth="0.6">
-      <rect x="40" y="10" width="160" height="100" rx="3" />
-      <line x1="40" y1="26" x2="200" y2="26" />
-      <line x1="40" y1="42" x2="200" y2="42" />
-      <line x1="40" y1="58" x2="200" y2="58" />
-      <line x1="40" y1="74" x2="200" y2="74" />
-      <line x1="40" y1="90" x2="200" y2="90" />
-      <circle cx="50" cy="18" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="50" cy="34" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="50" cy="50" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="50" cy="66" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="50" cy="82" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="50" cy="98" r="1.5" fill="currentColor" stroke="none" />
-      <text x="60" y="20" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">FRONTEND</text>
-      <text x="60" y="36" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">API + BTUT</text>
-      <text x="60" y="52" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">POSTGRES</text>
-      <text x="60" y="68" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">REDIS</text>
-      <text x="60" y="84" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">FORMED MODELS</text>
-      <text x="60" y="100" fontSize="5" fontFamily="monospace" fill="currentColor" stroke="none">AUDIT REGISTRY</text>
-    </svg>
-  );
+function fmtBytes(n: number): string {
+  if (n >= 1024 * 1024 * 1024) return `${(n / 1024 / 1024 / 1024).toFixed(1)} GB`;
+  if (n >= 1024 * 1024) return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  if (n >= 1024) return `${(n / 1024).toFixed(1)} KB`;
+  return `${n} B`;
 }
 
 // =====================================================================
-//  Section II — Starburst
+//  Section II — Sonar Sweep (replaces the radial starburst)
 // =====================================================================
 
-type Pt = { id: number; x: number; y: number; size: number; tint: boolean };
+type Marker = { id: number; x: number; y: number; r: number; size: number; tint: boolean };
 
-function StarburstSection() {
+function SonarSection() {
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-120px" });
 
-  // Deterministic point cloud — same seed → same starburst, every render
-  const points = useMemo<Pt[]>(() => generatePoints(140, 0xC0FF33), []);
+  const markers = useMemo<Marker[]>(() => {
+    let s = 0xC0FF33 >>> 0;
+    const rand = () => {
+      s = (s + 0x6D2B79F5) >>> 0;
+      let t = s;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const center = { x: 220, y: 320 };
+    const out: Marker[] = [];
+    for (let i = 0; i < 90; i++) {
+      // Oceanic scatter — bias outward, lower-right octant heavier
+      const angle = (-Math.PI / 6) + rand() * (Math.PI * 1.0);
+      const r = 80 + Math.pow(rand(), 0.6) * 920;
+      const x = center.x + Math.cos(angle) * r;
+      const y = center.y + Math.sin(angle) * r * 0.65;
+      const size = rand() < 0.10 ? 6 + rand() * 6 : 1.5 + rand() * 3;
+      const tint = rand() < 0.18;
+      out.push({ id: i, x, y, r, size, tint });
+    }
+    return out;
+  }, []);
 
   return (
     <section ref={ref} className="relative w-full overflow-hidden bg-black border-t border-white/5">
-      <div className="relative h-[78vh] min-h-[640px] w-full flex items-center">
-        {/* Burst SVG */}
-        <svg
-          viewBox="0 0 1000 600"
-          preserveAspectRatio="xMidYMid slice"
-          className="absolute inset-0 w-full h-full"
-          aria-hidden
-        >
-          {/* Lines from centre to each point */}
+      <div className="relative h-[78vh] min-h-[640px] w-full">
+        {/* Depth-grid backdrop — subtle horizontal isobath lines */}
+        <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full" aria-hidden>
+          <g stroke="rgba(255,255,255,0.04)">
+            <line x1="0" y1="100" x2="1200" y2="100" />
+            <line x1="0" y1="200" x2="1200" y2="200" />
+            <line x1="0" y1="320" x2="1200" y2="320" strokeOpacity="0.08" />
+            <line x1="0" y1="440" x2="1200" y2="440" />
+            <line x1="0" y1="540" x2="1200" y2="540" />
+          </g>
+
+          {/* Sonar pings — three concentric rings on staggered loops */}
           <g>
-            {points.map((p, i) => (
-              <motion.line
-                key={`l${p.id}`}
-                x1={500}
-                y1={300}
-                x2={p.x}
-                y2={p.y}
-                stroke={p.tint ? "rgba(180,200,255,0.18)" : "rgba(255,255,255,0.10)"}
-                strokeWidth={0.5}
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-                transition={{ delay: 0.2 + (i % 16) * 0.012, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            {[0, 1, 2].map((i) => (
+              <circle
+                key={i}
+                cx={220}
+                cy={320}
+                r={0}
+                fill="none"
+                stroke="rgba(180,210,255,0.55)"
+                strokeWidth={0.9}
+                className={`sonar-ring sonar-ring-${i}`}
+                style={{ transformOrigin: "220px 320px" }}
               />
             ))}
+            {/* Origin marker — the transducer */}
+            <circle cx="220" cy="320" r="3" fill="rgba(180,210,255,0.9)" />
+            <circle cx="220" cy="320" r="9" fill="none" stroke="rgba(180,210,255,0.35)" strokeWidth="0.6" />
           </g>
-          {/* Squares at the end of each line */}
+
+          {/* Hairline radials so the markers feel anchored */}
+          <g stroke="rgba(255,255,255,0.04)" strokeWidth="0.4">
+            {markers.map((m) => (
+              <line key={`l${m.id}`} x1="220" y1="320" x2={m.x} y2={m.y} />
+            ))}
+          </g>
+
+          {/* Markers */}
           <g>
-            {points.map((p, i) => (
+            {markers.map((m, i) => (
               <motion.rect
-                key={`r${p.id}`}
-                x={p.x - p.size / 2}
-                y={p.y - p.size / 2}
-                width={p.size}
-                height={p.size}
-                fill={p.tint ? "#B7C8FF" : "rgba(255,255,255,0.6)"}
-                opacity={p.tint ? 0.85 : 0.55}
+                key={`r${m.id}`}
+                x={m.x - m.size / 2}
+                y={m.y - m.size / 2}
+                width={m.size}
+                height={m.size}
+                fill={m.tint ? "#B7C8FF" : "rgba(255,255,255,0.7)"}
+                opacity={m.tint ? 0.85 : 0.55}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={inView ? {
-                  opacity: [0, p.tint ? 0.85 : 0.55, p.tint ? 0.7 : 0.45, p.tint ? 0.85 : 0.55],
+                  opacity: [0, m.tint ? 0.9 : 0.6, m.tint ? 0.55 : 0.35, m.tint ? 0.9 : 0.6],
                   scale: 1,
                 } : {}}
                 transition={{
-                  delay: 0.6 + (i % 24) * 0.022,
-                  duration: 0.8,
+                  delay: 0.2 + (i % 24) * 0.018,
+                  duration: 0.7,
                   ease: [0.22, 1, 0.36, 1],
-                  opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: (m.r / 1200) * 4 },
                 }}
               />
             ))}
           </g>
         </svg>
 
-        {/* Text overlays */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 grid grid-cols-2 items-center gap-6">
-          <motion.h2
-            initial={{ opacity: 0, x: -24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="font-display font-normal text-[clamp(56px,8vw,140px)] leading-[0.92] tracking-[-0.04em] text-white/85 text-left"
+        {/* Text overlay — left-aligned to the transducer, oceanic vocabulary */}
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 h-full flex items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl"
           >
-            Understand
-          </motion.h2>
-          <motion.h2
-            initial={{ opacity: 0, x: 24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-            className="font-display font-normal text-[clamp(56px,8vw,140px)] leading-[0.92] tracking-[-0.04em] text-white/55 text-right"
-          >
-            the corpus.
-          </motion.h2>
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55 mb-5">
+              Sonar · structural sounding
+            </p>
+            <h2 className="font-display font-medium text-[clamp(56px,8vw,140px)] leading-[0.92] tracking-[-0.04em] text-white">
+              From rows<br />
+              <span className="text-white/55">to receipts.</span>
+            </h2>
+            <p className="mt-7 text-[15.5px] text-white/55 leading-snug max-w-xl">
+              Each ping resolves a record into a 48-bit structural
+              fingerprint. The bright squares are the rare ones — records
+              that lie far from their local neighbourhood under Hamming
+              distance. Receipts on every output. The corpus tells you
+              where to look.
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      <div className="relative max-w-[1400px] mx-auto px-6 pb-24 -mt-4">
-        <p className="text-[15.5px] text-white/55 leading-snug max-w-2xl">
-          Each square is a record fingerprinted through the BTUT primitive.
-          Each line is the deterministic edge from the corpus centroid to
-          that record's structural position. The cloud is the formed model.
-          The bright squares are the rare ones — the edges of the
-          distribution. Inquire of the formed model and Range answers in
-          terms of these.
-        </p>
-      </div>
+      <style jsx>{`
+        .sonar-ring { animation: sonar-ping 7s linear infinite; opacity: 0; }
+        .sonar-ring-1 { animation-delay: 2.4s; }
+        .sonar-ring-2 { animation-delay: 4.8s; }
+        @keyframes sonar-ping {
+          0%   { r: 0;    opacity: 0.7; stroke-width: 0.9; }
+          70%  { opacity: 0.18; }
+          100% { r: 980;  opacity: 0;   stroke-width: 0.4; }
+        }
+      `}</style>
     </section>
   );
 }
 
-function generatePoints(n: number, seed: number): Pt[] {
-  // tiny mulberry32 — deterministic
-  let s = seed >>> 0;
-  const rand = () => {
-    s = (s + 0x6D2B79F5) >>> 0;
-    let t = s;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-  const cx = 500, cy = 300;
-  const out: Pt[] = [];
-  for (let i = 0; i < n; i++) {
-    const angle = rand() * Math.PI * 2;
-    // Distance: bias outward so the burst looks fuller at the edges
-    const r = 120 + Math.pow(rand(), 0.55) * 480;
-    const x = cx + Math.cos(angle) * r;
-    const y = cy + Math.sin(angle) * r * 0.62; // slight squish to fit the 16:10 viewBox
-    const size = rand() < 0.12 ? 6 + rand() * 8 : 1 + rand() * 3;
-    const tint = rand() < 0.18;
-    out.push({ id: i, x, y, size, tint });
-  }
-  return out;
-}
-
 // =====================================================================
-//  Section III — CSV drop (functional, browser-only)
+//  Section III — CSV drop (kept; functional, browser-only)
 // =====================================================================
 
 function CsvDropSection() {
@@ -281,42 +303,26 @@ function CsvDropSection() {
   const [over, setOver] = useState(false);
 
   const run = useCallback(async (text: string, name: string) => {
-    setErr(null);
-    setBusy(true);
-    setProgress(0);
-    setFileName(name);
+    setErr(null); setBusy(true); setProgress(0); setFileName(name);
     try {
       const parsed = parseCSV(text);
-      if (parsed.length < 5) {
-        setErr("Need at least 5 rows to run a structural analysis.");
-        setBusy(false);
-        return;
-      }
-      if (parsed.length > 2000) {
-        setErr(`Browser mode caps at 2,000 rows. You sent ${parsed.length.toLocaleString()}. For larger runs, install on your stack.`);
-        setBusy(false);
-        return;
-      }
+      if (parsed.length < 5) { setErr("Need at least 5 rows to run a structural analysis."); setBusy(false); return; }
+      if (parsed.length > 2000) { setErr(`Browser mode caps at 2,000 rows. You sent ${parsed.length.toLocaleString()}. For larger runs, install on your stack.`); setBusy(false); return; }
       const scored = await scoreRows(parsed, (p) => setProgress(p));
       scored.sort((a, b) => b._composite - a._composite);
       setRows(scored);
-    } catch (e) {
-      setErr(String(e));
-    }
+    } catch (e) { setErr(String(e)); }
     setBusy(false);
   }, []);
 
   const onFile = useCallback(async (file: File) => {
     if (!/\.csv$/i.test(file.name)) { setErr("Drop a .csv file."); return; }
-    const text = await file.text();
-    await run(text, file.name);
+    const text = await file.text(); await run(text, file.name);
   }, [run]);
 
   const onDrop = useCallback(async (e: React.DragEvent) => {
-    e.preventDefault();
-    setOver(false);
-    const f = e.dataTransfer.files?.[0];
-    if (f) await onFile(f);
+    e.preventDefault(); setOver(false);
+    const f = e.dataTransfer.files?.[0]; if (f) await onFile(f);
   }, [onFile]);
 
   const loadSample = useCallback(async () => {
@@ -365,20 +371,18 @@ function CsvDropSection() {
     <section className="relative px-6 py-32 border-t border-white/5">
       <div className="max-w-[1400px] mx-auto">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
-          [ Try it · browser-only ]
+          Try it · browser-only · seed 42
         </p>
         <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-6">
           Drop a CSV.<br />
-          <span className="text-white/45">Get a private model.</span>
+          <span className="text-white/45">Watch your data become a private model.</span>
         </h2>
         <p className="text-lg text-white/55 max-w-2xl leading-snug mb-10">
-          The 48-bit fingerprint primitive runs locally in your browser
-          via Web Crypto. Nothing leaves your device. Outliers surface
-          inline within seconds.
+          The 48-bit fingerprint primitive runs locally via Web Crypto.
+          Nothing leaves your device. Outliers surface inline within seconds.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1.6fr] gap-4">
-          {/* Drop zone */}
           <div
             ref={dropRef}
             onDragOver={(e) => { e.preventDefault(); setOver(true); }}
@@ -391,13 +395,8 @@ function CsvDropSection() {
               over ? "border-white/55 bg-white/[0.04]" : "border-white/15 bg-[#0a0a0a] hover:border-white/35"
             }`}
           >
-            <input
-              ref={inputRef}
-              type="file"
-              accept=".csv"
-              className="hidden"
-              onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); }}
-            />
+            <input ref={inputRef} type="file" accept=".csv" className="hidden"
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); }} />
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-white/55 mb-5">
               <rect x="6" y="6" width="28" height="28" rx="3" stroke="currentColor" strokeWidth="1" />
               <path d="M14 22l6-6 6 6M20 16v12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
@@ -406,17 +405,11 @@ function CsvDropSection() {
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/45 mb-6">
               or click to browse · ≤ 2,000 rows
             </div>
-            <button
-              onClick={(e) => { e.stopPropagation(); loadSample(); }}
-              className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/65 hover:text-white border border-white/15 hover:border-white/35 rounded-full px-4 py-2 transition-colors"
-            >
+            <button onClick={(e) => { e.stopPropagation(); loadSample(); }}
+              className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/65 hover:text-white border border-white/15 hover:border-white/35 rounded-full px-4 py-2 transition-colors">
               ▶ Load sample · 35 large-cap rows
             </button>
-            {fileName && (
-              <div className="mt-5 font-mono text-[11px] text-white/45 truncate max-w-full">
-                {fileName}
-              </div>
-            )}
+            {fileName && <div className="mt-5 font-mono text-[11px] text-white/45 truncate max-w-full">{fileName}</div>}
             {busy && (
               <div className="mt-5 w-full max-w-[280px]">
                 <div className="h-1 rounded-full bg-white/10 overflow-hidden">
@@ -427,12 +420,9 @@ function CsvDropSection() {
                 </div>
               </div>
             )}
-            {err && (
-              <div className="mt-5 font-mono text-[11px] text-white/65 max-w-[28ch]">{err}</div>
-            )}
+            {err && <div className="mt-5 font-mono text-[11px] text-white/65 max-w-[28ch]">{err}</div>}
           </div>
 
-          {/* Results */}
           <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden flex flex-col min-h-[360px]">
             <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">
@@ -486,122 +476,181 @@ function CsvDropSection() {
 }
 
 // =====================================================================
-//  Section IV — Citations (every primitive, sourced)
+//  Section IV — Determinism Contract (NEW)
+// =====================================================================
+
+function DeterminismSection() {
+  const [models, setModels] = useState<FormedModelMeta[]>([]);
+  const [a, setA] = useState<{ digest: string; ms: number } | null>(null);
+  const [b, setB] = useState<{ digest: string; ms: number } | null>(null);
+  const [running, setRunning] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    fetch("/api/range-form", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => setModels(d.models ?? []))
+      .catch(() => {});
+  }, []);
+
+  const probe = useCallback(async () => {
+    const m = models[0];
+    if (!m) return;
+    setRunning(true); setA(null); setB(null);
+    try {
+      const url = `/api/range-query?model_id=${m.id}&q=show+me+the+discovered+taxonomy`;
+      const r1 = await fetch(url, { cache: "no-store" }).then((x) => x.json());
+      setA({ digest: r1.response_digest, ms: r1.wall_ms });
+      // Slight pause so the eye sees both calls land separately
+      await new Promise((r) => setTimeout(r, 350));
+      const r2 = await fetch(url, { cache: "no-store" }).then((x) => x.json());
+      setB({ digest: r2.response_digest, ms: r2.wall_ms });
+    } catch { /* ignore */ }
+    setRunning(false);
+  }, [models]);
+
+  // Auto-probe once when section enters view
+  useEffect(() => {
+    if (inView && models.length > 0 && !a && !running) probe();
+  }, [inView, models, a, running, probe]);
+
+  const matches = a && b && a.digest === b.digest;
+
+  return (
+    <section ref={ref} className="relative px-6 py-32 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
+          [ Determinism contract · live proof ]
+        </p>
+        <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-6">
+          Same query.<br />
+          <span className="text-white/45">Same digest. Forever.</span>
+        </h2>
+        <p className="text-lg text-white/55 max-w-2xl leading-snug mb-10">
+          Two requests, fired one after the other against the same formed
+          model. The response digests are byte-identical. Run them again
+          tomorrow, on a different appliance, in a different decade — same
+          result. This is the load-bearing claim of the platform.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <DigestCard label="run · A" data={a} running={running && !a} />
+          <DigestCard label="run · B" data={b} running={running && a !== null && !b} />
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <button onClick={probe} disabled={running || models.length === 0}
+            className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-white text-black text-[12.5px] font-medium hover:bg-white/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+            {running ? "Verifying…" : "Re-run · verify byte-identity"}
+          </button>
+          {a && b && (
+            <div className={`font-mono text-[11.5px] tracking-[-0.005em] ${matches ? "text-white" : "text-white/55"}`}>
+              {matches ? "✓ digests match · contract holds" : "△ digests differ · contract broken"}
+            </div>
+          )}
+          {models.length === 0 && (
+            <div className="font-mono text-[11px] text-white/35">
+              no formed models yet · drop a corpus into the workbench first
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DigestCard({ label, data, running }: { label: string; data: { digest: string; ms: number } | null; running: boolean }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
+      <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">{label}</span>
+        {data && <span className="font-mono text-[10px] text-white/35 tabular-nums">{data.ms} ms</span>}
+      </div>
+      <div className="p-5 min-h-[120px] flex items-center">
+        {running && <div className="font-mono text-[12px] text-white/45 italic">computing deterministically …</div>}
+        {!running && !data && <div className="font-mono text-[12px] text-white/30 italic">awaiting probe</div>}
+        {data && (
+          <div className="font-mono text-[13px] text-white/85 break-all leading-relaxed">
+            <span className="text-white/45">sha256:</span>{data.digest}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+//  Section V — Architecture Layers (NEW · IP-safe)
+// =====================================================================
+
+const LAYERS = [
+  { code: "L0", name: "Ingest",     pointer: "Schema-aware adapter. Auto-detects shape, hashes inputs on entry.", primitive: "sha256, RFC 4180" },
+  { code: "L1", name: "Substrate",  pointer: "BTUT primitive. 48-bit deterministic projection per record under seed=42.", primitive: "trade-secret + locality-sensitive hashing literature" },
+  { code: "L2", name: "Taxonomy",   pointer: "TCD-JEPA crystallization. Topology emerges from the substrate without labels.", primitive: "persistent homology · Edelsbrunner et al. 2002" },
+  { code: "L3", name: "Lineage",    pointer: "Merkle proofs over inputs. Every output traces to source bytes.", primitive: "Bitcoin-anchored timestamping · OpenTimeStamps" },
+  { code: "L4", name: "Replay",     pointer: "Bit-identical reconstruction from any prior state, on demand.", primitive: "deterministic re-execution under canonical JSON" },
+  { code: "L5", name: "RangeQL",    pointer: "SQL superset with structural primitives — fingerprint(), lineage(), replay(), neighbors().", primitive: "Range-internal · API-exposed" },
+];
+
+function ArchitectureSection() {
+  return (
+    <section className="relative px-6 py-32 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
+          Architecture · six layers · public-safe pointers
+        </p>
+        <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-12">
+          The stack,<br />
+          <span className="text-white/45">in plain language.</span>
+        </h2>
+
+        <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
+          {LAYERS.map((l, i) => (
+            <div key={l.code} className={`grid grid-cols-[80px_1.2fr_2fr_1.2fr] px-6 py-5 ${i < LAYERS.length - 1 ? "border-b border-white/[0.05]" : ""} hover:bg-white/[0.02] transition-colors`}>
+              <div className="font-mono text-[12px] tracking-[0.18em] uppercase text-white/85">{l.code}</div>
+              <div>
+                <div className="font-display text-[18px] tracking-[-0.01em] text-white mb-1">{l.name}</div>
+              </div>
+              <div className="text-[13px] text-white/65 leading-snug pr-6">{l.pointer}</div>
+              <div className="font-mono text-[10.5px] text-white/40 tracking-[0.005em] leading-relaxed text-right">{l.primitive}</div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 font-mono text-[11px] text-white/35 leading-relaxed max-w-3xl">
+          The layer names and the public-safe pointers above are stable.
+          The internal mechanics of L1 (BTUT) and L2 (TCD-JEPA) are protected
+          as trade secrets, anchored via OpenTimeStamps; the outputs they
+          produce are fully verifiable through the determinism contract.
+          You don't need to see the math to verify the receipt.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// =====================================================================
+//  Section VI — Citations
 // =====================================================================
 
 const CITATIONS = [
-  {
-    label: "Cryptographic hash",
-    primitive: "SHA-256",
-    source: "NIST FIPS 180-4 · Secure Hash Standard",
-    url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf",
-    used_for: "fingerprint primitive, response_digest, lineage, model id",
-  },
-  {
-    label: "Bearer authentication",
-    primitive: "HMAC-SHA-256",
-    source: "RFC 2104 · HMAC: Keyed-Hashing for Message Authentication",
-    url: "https://datatracker.ietf.org/doc/html/rfc2104",
-    used_for: "token signing, identity verification on every endpoint",
-  },
-  {
-    label: "Encryption at rest",
-    primitive: "AES-256-GCM",
-    source: "NIST SP 800-38D · Galois/Counter Mode",
-    url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf",
-    used_for: "formed-model artifact encryption with appliance master key",
-  },
-  {
-    label: "Approximate similarity",
-    primitive: "MinHash sparse fallback",
-    source: "Broder, A. — On the resemblance and containment of documents (1997)",
-    url: "https://www.cs.princeton.edu/courses/archive/spring13/cos598C/broder97resemblance.pdf",
-    used_for: "fingerprint fallback when high-cardinality fields evade BTUT",
-  },
-  {
-    label: "Locality-sensitive hashing",
-    primitive: "SimHash",
-    source: "Charikar, M. — Similarity estimation techniques from rounding algorithms (2002)",
-    url: "https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarEstim.pdf",
-    used_for: "fingerprint fallback for free-text-heavy corpora",
-  },
-  {
-    label: "Topological data analysis",
-    primitive: "Persistent homology",
-    source: "Edelsbrunner, Letscher, Zomorodian — Topological persistence and simplification (2002)",
-    url: "https://link.springer.com/article/10.1007/s00454-002-2885-2",
-    used_for: "TCD-JEPA taxonomy crystallization on the fingerprint substrate",
-  },
-  {
-    label: "Audit log standard",
-    primitive: "CEF / OCSF",
-    source: "Common Event Format · ArcSight; Open Cybersecurity Schema Framework",
-    url: "https://schema.ocsf.io",
-    used_for: "exported audit log for SIEM ingest (ArcSight, QRadar, Splunk)",
-  },
-  {
-    label: "Intrusion benchmark",
-    primitive: "NSL-KDD train",
-    source: "Tavallaee, Bagheri, Lu, Ghorbani — A detailed analysis of the KDD CUP 99 data set (IEEE CISDA 2009)",
-    url: "https://www.unb.ca/cic/datasets/nsl.html",
-    used_for: "primary cybersecurity benchmark · 125,973 labeled connections, 23 attack classes",
-  },
-  {
-    label: "Financial reporting corpus",
-    primitive: "SEC EDGAR XBRL",
-    source: "U.S. Securities and Exchange Commission · public filings",
-    url: "https://www.sec.gov/edgar.shtml",
-    used_for: "finance vertical · public XBRL filings for structural anomaly surfacing",
-  },
-  {
-    label: "Biomedical literature",
-    primitive: "PubMed / MEDLINE",
-    source: "NIH National Library of Medicine · public abstracts",
-    url: "https://pubmed.ncbi.nlm.nih.gov",
-    used_for: "biomedical vertical · 35M+ peer-reviewed abstracts for novel-class discovery",
-  },
-  {
-    label: "Patent corpus",
-    primitive: "USPTO PatentsView",
-    source: "U.S. Patent and Trademark Office · CPC-classified",
-    url: "https://patentsview.org",
-    used_for: "patents vertical · CPC classification + citation graph",
-  },
-  {
-    label: "Trade flows",
-    primitive: "UN Comtrade",
-    source: "United Nations Comtrade · public bilateral trade data",
-    url: "https://comtradeplus.un.org",
-    used_for: "supply-chain vertical · HS-coded trade flow anomalies",
-  },
-  {
-    label: "Seismicity feed",
-    primitive: "USGS Earthquake Hazards · all-week",
-    source: "United States Geological Survey · public GeoJSON feed",
-    url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
-    used_for: "earth-systems vertical · live seismic event stream",
-  },
-  {
-    label: "Crypto markets",
-    primitive: "CoinGecko top-250",
-    source: "CoinGecko · public market data API",
-    url: "https://www.coingecko.com/en/api",
-    used_for: "crypto vertical · daily snapshot of the top 250 by market cap",
-  },
-  {
-    label: "Macroeconomic indicators",
-    primitive: "World Bank Open Data · GDP/capita",
-    source: "The World Bank · 60-year economic series",
-    url: "https://data.worldbank.org",
-    used_for: "macro vertical · 60-year GDP series across 227 economies",
-  },
-  {
-    label: "OpenTimeStamps",
-    primitive: "Bitcoin-anchored timestamping",
-    source: "Todd, P. — OpenTimeStamps: Scalable, trust-minimised timestamping (2016)",
-    url: "https://opentimestamps.org",
-    used_for: "lineage anchor for formed-model digests",
-  },
+  { label: "Cryptographic hash",       primitive: "SHA-256",                           source: "NIST FIPS 180-4 · Secure Hash Standard",                                                                   url: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf",   used_for: "fingerprint primitive, response_digest, lineage, model id" },
+  { label: "Bearer authentication",    primitive: "HMAC-SHA-256",                      source: "RFC 2104 · HMAC: Keyed-Hashing for Message Authentication",                                                  url: "https://datatracker.ietf.org/doc/html/rfc2104",                used_for: "token signing, identity verification on every endpoint" },
+  { label: "Encryption at rest",       primitive: "AES-256-GCM",                       source: "NIST SP 800-38D · Galois/Counter Mode",                                                                       url: "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf", used_for: "formed-model artifact encryption with appliance master key" },
+  { label: "Approximate similarity",   primitive: "MinHash sparse fallback",            source: "Broder, A. — On the resemblance and containment of documents (1997)",                                         url: "https://www.cs.princeton.edu/courses/archive/spring13/cos598C/broder97resemblance.pdf", used_for: "fingerprint fallback when high-cardinality fields evade BTUT" },
+  { label: "Locality-sensitive hashing", primitive: "SimHash",                          source: "Charikar, M. — Similarity estimation techniques from rounding algorithms (2002)",                            url: "https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarEstim.pdf", used_for: "fingerprint fallback for free-text-heavy corpora" },
+  { label: "Topological data analysis", primitive: "Persistent homology",              source: "Edelsbrunner, Letscher, Zomorodian — Topological persistence and simplification (2002)",                       url: "https://link.springer.com/article/10.1007/s00454-002-2885-2", used_for: "TCD-JEPA taxonomy crystallization on the fingerprint substrate" },
+  { label: "Audit log standard",       primitive: "CEF / OCSF",                        source: "Common Event Format · ArcSight; Open Cybersecurity Schema Framework",                                          url: "https://schema.ocsf.io",                                       used_for: "exported audit log for SIEM ingest (ArcSight, QRadar, Splunk)" },
+  { label: "Intrusion benchmark",      primitive: "NSL-KDD train",                     source: "Tavallaee, Bagheri, Lu, Ghorbani — A detailed analysis of the KDD CUP 99 data set (IEEE CISDA 2009)",         url: "https://www.unb.ca/cic/datasets/nsl.html",                     used_for: "primary cybersecurity benchmark · 125,973 labeled connections, 23 attack classes" },
+  { label: "Financial reporting corpus", primitive: "SEC EDGAR XBRL",                  source: "U.S. Securities and Exchange Commission · public filings",                                                    url: "https://www.sec.gov/edgar.shtml",                              used_for: "finance vertical · public XBRL filings for structural anomaly surfacing" },
+  { label: "Biomedical literature",    primitive: "PubMed / MEDLINE",                  source: "NIH National Library of Medicine · public abstracts",                                                         url: "https://pubmed.ncbi.nlm.nih.gov",                              used_for: "biomedical vertical · 35M+ peer-reviewed abstracts for novel-class discovery" },
+  { label: "Patent corpus",            primitive: "USPTO PatentsView",                 source: "U.S. Patent and Trademark Office · CPC-classified",                                                           url: "https://patentsview.org",                                      used_for: "patents vertical · CPC classification + citation graph" },
+  { label: "Trade flows",              primitive: "UN Comtrade",                       source: "United Nations Comtrade · public bilateral trade data",                                                        url: "https://comtradeplus.un.org",                                  used_for: "supply-chain vertical · HS-coded trade flow anomalies" },
+  { label: "Seismicity feed",          primitive: "USGS Earthquake Hazards · all-week", source: "United States Geological Survey · public GeoJSON feed",                                                       url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson", used_for: "earth-systems vertical · live seismic event stream" },
+  { label: "Crypto markets",           primitive: "CoinGecko top-250",                 source: "CoinGecko · public market data API",                                                                          url: "https://www.coingecko.com/en/api",                             used_for: "crypto vertical · daily snapshot of the top 250 by market cap" },
+  { label: "Macroeconomic indicators", primitive: "World Bank Open Data · GDP/capita",  source: "The World Bank · 60-year economic series",                                                                  url: "https://data.worldbank.org",                                   used_for: "macro vertical · 60-year GDP series across 227 economies" },
+  { label: "OpenTimeStamps",           primitive: "Bitcoin-anchored timestamping",     source: "Todd, P. — OpenTimeStamps: Scalable, trust-minimised timestamping (2016)",                                     url: "https://opentimestamps.org",                                   used_for: "lineage anchor for formed-model digests; trade-secret IP strategy" },
 ];
 
 function CitationsSection() {
@@ -612,7 +661,7 @@ function CitationsSection() {
     <section ref={ref} className="relative px-6 py-32 border-t border-white/5">
       <div className="max-w-[1400px] mx-auto">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
-          [ Citations · {CITATIONS.length} primary sources ]
+          Citations · {CITATIONS.length} primary sources
         </p>
         <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-6">
           Every primitive,<br />
@@ -627,22 +676,13 @@ function CitationsSection() {
 
         <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
           <div className="grid grid-cols-[40px_1.2fr_1.4fr_2fr] px-5 py-3 border-b border-white/10 bg-white/[0.02] font-mono text-[10px] uppercase tracking-[0.22em] text-white/40">
-            <div>№</div>
-            <div>Primitive</div>
-            <div>Source · authors</div>
-            <div>Used for</div>
+            <div>№</div><div>Primitive</div><div>Source · authors</div><div>Used for</div>
           </div>
           {CITATIONS.map((c, i) => (
-            <motion.a
-              key={c.url}
-              href={c.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 6 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+            <motion.a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 6 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.05 + i * 0.02, duration: 0.5, ease: "easeOut" }}
-              className="grid grid-cols-[40px_1.2fr_1.4fr_2fr] px-5 py-4 border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors group items-start"
-            >
+              className="grid grid-cols-[40px_1.2fr_1.4fr_2fr] px-5 py-4 border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors group items-start">
               <div className="font-mono text-[11px] text-white/35 tabular-nums">{String(i + 1).padStart(2, "0")}</div>
               <div>
                 <div className="font-mono text-[12.5px] text-white tracking-[-0.005em]">{c.primitive}</div>
@@ -658,104 +698,71 @@ function CitationsSection() {
             </motion.a>
           ))}
         </div>
-
-        <p className="mt-6 font-mono text-[11px] text-white/35 leading-relaxed max-w-3xl">
-          When Range outputs a finding, the answer panel cites the formed
-          model's own record indices. When Range describes a primitive,
-          the citation panel above points to the primary source. Two
-          different layers of provenance, both addressable.
-        </p>
       </div>
     </section>
   );
 }
 
 // =====================================================================
-//  Section V — Access
+//  Section VII — Engineering channel (replaces SuperGrok-shaped panel)
 // =====================================================================
 
-function AccessSection() {
+const RECENT_DISPATCHES = [
+  { date: "2026 · 04 · 30", line: "Range Console 1.0 — universal private model former, ten stack integrations, internal HMAC auth, encrypted artifact store." },
+  { date: "2026 · 04 · 30", line: "Sparse-operator fallback chain online · MinHash · SimHash · Bloom · byte-hash failsafe." },
+  { date: "2026 · 04 · 29", line: "5,000-record bridge cap removed · chunked formation merges 26 chunks for full NSL-KDD in 6.1 s." },
+  { date: "2026 · 04 · 28", line: "Operator console — audit + encryption + identity. CEF and OCSF export for SIEM ingest." },
+];
+
+function EngineeringChannelSection() {
   return (
     <section className="relative px-6 py-32 border-t border-white/5 overflow-hidden">
-      {/* Faint star backdrop */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none opacity-[0.6]">
-        <Stars n={70} seed={0xACE5} />
-      </div>
-
-      <div className="relative max-w-[860px] mx-auto text-center">
-        <div className="inline-flex items-center gap-2.5 mb-7">
-          <SvgMark />
-          <div className="font-display font-medium text-3xl md:text-4xl tracking-[-0.025em] text-white">
-            Range Pro
+      <div className="relative max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-start">
+        {/* Left — pitch */}
+        <div>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
+            Bring this to your stack
+          </p>
+          <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white mb-8">
+            One conversation,<br />
+            <span className="text-white/45">no funnel.</span>
+          </h2>
+          <p className="text-lg text-white/55 leading-snug max-w-xl mb-10">
+            We do not run a sales process before the appliance has answered
+            on your data. Send corpus shape, deployment target, the
+            integration you want first. We respond same business day with
+            the next three commands you would actually run.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <a href="mailto:engineering@latentocean.com?subject=Range%20Console" className="inline-flex items-center justify-center h-12 px-6 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors">
+              engineering@latentocean.com
+            </a>
+            <Link href="/api-docs" className="inline-flex items-center justify-center h-12 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
+              Read the API
+            </Link>
+            <Link href="/infrastructure" className="inline-flex items-center justify-center h-12 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
+              Hardware envelopes
+            </Link>
           </div>
         </div>
-        <p className="text-lg md:text-xl text-white/65 leading-relaxed mb-3">
-          Do more with the Console.
-        </p>
-        <p className="text-lg md:text-xl text-white/65 leading-relaxed mb-8">
-          Unlock <span className="text-white">Range Pro</span> for unlimited
-          formations, RunPod GPU-bridge access, custom integrations,
-          dedicated engineering channel.
-        </p>
-        <p className="text-base md:text-lg text-white/45 leading-relaxed max-w-xl mx-auto mb-10">
-          We have just shipped <span className="text-white">Range Pro Cluster</span>,
-          providing multi-replica appliance, OIDC SSO, and
-          higher per-tenant RunPod budgets.
-        </p>
-        <a
-          href="mailto:engineering@latentocean.com?subject=Range%20Pro"
-          className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-white/30 text-white text-[11.5px] font-mono font-medium tracking-[0.22em] uppercase hover:border-white/55 hover:bg-white/[0.04] transition-colors"
-        >
-          Sign up now
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          </svg>
-        </a>
-      </div>
 
-      {/* Lower-left blog link, xAI-style */}
-      <div className="relative mt-32 flex items-end">
-        <Link
-          href="/news"
-          className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 hover:text-white transition-colors"
-        >
-          [ news ]
-        </Link>
+        {/* Right — recent dispatches feed (editorial, not a pricing card) */}
+        <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
+          <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">Recent dispatches</span>
+            <Link href="/news" className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 hover:text-white transition-colors">/news →</Link>
+          </div>
+          <div className="divide-y divide-white/[0.04]">
+            {RECENT_DISPATCHES.map((d, i) => (
+              <div key={i} className="p-5">
+                <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-2">{d.date}</div>
+                <div className="text-[14px] text-white/85 leading-snug">{d.line}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
-  );
-}
-
-function SvgMark() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" className="text-white/85">
-      <circle cx="18" cy="18" r="13" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M9 18 L27 18 M18 9 L18 27" stroke="currentColor" strokeWidth="1.2" />
-      <circle cx="18" cy="18" r="3" fill="currentColor" />
-    </svg>
-  );
-}
-
-function Stars({ n, seed }: { n: number; seed: number }) {
-  let s = seed >>> 0;
-  const rand = () => {
-    s = (s + 0x6D2B79F5) >>> 0;
-    let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-  const stars = Array.from({ length: n }, (_, i) => ({
-    id: i,
-    x: rand() * 100,
-    y: rand() * 100,
-    r: rand() < 0.85 ? 0.6 : 1.2,
-    o: 0.3 + rand() * 0.55,
-  }));
-  return (
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
-      {stars.map((st) => (
-        <circle key={st.id} cx={st.x} cy={st.y} r={st.r} fill="white" opacity={st.o} />
-      ))}
-    </svg>
   );
 }
 
@@ -766,11 +773,13 @@ function Stars({ n, seed }: { n: number; seed: number }) {
 export function HomeScroller() {
   return (
     <>
-      <ProductsSection />
-      <StarburstSection />
+      <LiveAppliance />
+      <SonarSection />
       <CsvDropSection />
+      <DeterminismSection />
+      <ArchitectureSection />
       <CitationsSection />
-      <AccessSection />
+      <EngineeringChannelSection />
     </>
   );
 }
