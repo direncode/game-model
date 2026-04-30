@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const VERTICALS = [
-  { name: "Threat Intelligence", accent: "#00d4ff", description: "Air-gapped intrusion detection with bit-identical replay against real telemetry", tag: "Zeek · Sysmon · NetFlow · EDR", href: "/range?vertical=cyber", cta: "Form on Range" },
+  { name: "Threat Intelligence", accent: "#00d4ff", description: "Air-gapped intrusion detection with bit-identical replay against real telemetry", tag: "Zeek · Sysmon · NetFlow · EDR", href: "/console?vertical=cyber", cta: "Open Console" },
   { name: "Finance", accent: "#388bfd", description: "SEC EDGAR filings, XBRL facts, regulatory overlays", tag: "SEC · XBRL · FINRA", href: "/engine", cta: "Open Engine" },
   { name: "Pharma", accent: "#3fb950", description: "PubMed literature, clinical trials, drug interactions", tag: "PubMed · ClinicalTrials · MeSH", href: "/engine", cta: "Open Engine" },
   { name: "Patents", accent: "#a371f7", description: "USPTO filings, citation graphs, inventor networks", tag: "USPTO · CPC · Citations", href: "/engine", cta: "Open Engine" },

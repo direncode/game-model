@@ -62,10 +62,10 @@ export function Hero() {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <Link
-            href="/range"
+            href="/console"
             className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
           >
-            Range
+            Console
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3.5 7h7m0 0L7 3.5m3.5 3.5L7 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
