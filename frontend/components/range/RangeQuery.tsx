@@ -1,35 +1,24 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 
-type Vertical = "cyber" | "finance" | "pubmed" | "patents" | "comtrade" | "seismic" | "crypto" | "macro";
-
-const VERTICALS: { id: Vertical; label: string; tone: string }[] = [
-  { id: "cyber",    label: "Cyber",    tone: "#f85149" },
-  { id: "finance",  label: "Finance",  tone: "#388bfd" },
-  { id: "pubmed",   label: "PubMed",   tone: "#3fb950" },
-  { id: "patents",  label: "Patents",  tone: "#a371f7" },
-  { id: "comtrade", label: "Trade",    tone: "#c9a96e" },
-  { id: "seismic",  label: "Seismic",  tone: "#d29922" },
-  { id: "crypto",   label: "Crypto",   tone: "#00d4ff" },
-  { id: "macro",    label: "Macro",    tone: "#9aa3b2" },
-];
-
-const SUGGESTIONS = [
-  "What is the most rare record in this corpus?",
-  "Are there novel classes outside the published taxonomy?",
-  "Compare Range to ChatGPT on this corpus.",
-  "Show me the discovered taxonomy.",
-  "Describe this corpus.",
-];
+type FormedModelMeta = {
+  id: string;
+  name: string;
+  corpus_records: number;
+  corpus_format: string;
+  fingerprinter_mode: "node" | "btut";
+  formed_at: string;
+};
 
 type Citation = { record_idx: number; sha256: string; preview: string };
 
 type Answer = {
   intent: string;
   question_canonical: string;
-  vertical: Vertical;
+  model_id: string;
+  model_name: string;
   corpus_records: number;
   answer: string;
   citations: Citation[];
@@ -41,14 +30,42 @@ type Answer = {
   llm_comparison?: string;
 };
 
-type Turn = { id: number; q: string; vertical: Vertical; loading: boolean; ans?: Answer; err?: string };
+const SUGGESTIONS = [
+  "What is the most rare record in this corpus?",
+  "Are there novel classes outside the published taxonomy?",
+  "Compare Range to ChatGPT on this corpus.",
+  "Show me the discovered taxonomy.",
+  "Describe this corpus.",
+  "Summarize the formed model.",
+];
+
+type Turn = { id: number; q: string; modelId: string; loading: boolean; ans?: Answer; err?: string };
 
 export function RangeQuery() {
-  const [vertical, setVertical] = useState<Vertical>("cyber");
+  const [models, setModels] = useState<FormedModelMeta[]>([]);
+  const [modelId, setModelId] = useState<string>("");
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<Turn[]>([]);
   const turnIdRef = useRef(0);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const refresh = useCallback(async () => {
+    try {
+      const r = await fetch("/api/range-form", { cache: "no-store" });
+      const d = await r.json();
+      const list: FormedModelMeta[] = d.models ?? [];
+      setModels(list);
+      if (list.length > 0 && !modelId) setModelId(list[0].id);
+    } catch { /* ignore */ }
+  }, [modelId]);
+
+  useEffect(() => { refresh(); }, [refresh]);
+
+  // Re-poll when the user runs a formation (cheap)
+  useEffect(() => {
+    const t = setInterval(refresh, 12_000);
+    return () => clearInterval(t);
+  }, [refresh]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -56,47 +73,53 @@ export function RangeQuery() {
   }, [turns]);
 
   const ask = useCallback(async (q: string) => {
-    if (!q.trim()) return;
+    if (!q.trim() || !modelId) return;
     const id = ++turnIdRef.current;
-    const turn: Turn = { id, q, vertical, loading: true };
+    const turn: Turn = { id, q, modelId, loading: true };
     setTurns((t) => [...t, turn]);
     setInput("");
     try {
-      const url = `/api/range-query?vertical=${vertical}&q=${encodeURIComponent(q)}`;
+      const url = `/api/range-query?model_id=${encodeURIComponent(modelId)}&q=${encodeURIComponent(q)}`;
       const r = await fetch(url, { cache: "no-store" });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      if (!r.ok) {
+        const data = await r.json().catch(() => ({}));
+        throw new Error(data?.detail || data?.error || `HTTP ${r.status}`);
+      }
       const ans = (await r.json()) as Answer;
       setTurns((t) => t.map((x) => (x.id === id ? { ...x, loading: false, ans } : x)));
     } catch (e) {
       setTurns((t) => t.map((x) => (x.id === id ? { ...x, loading: false, err: String(e) } : x)));
     }
-  }, [vertical]);
+  }, [modelId]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     ask(input);
   };
 
+  const activeModel = useMemo(() => models.find((m) => m.id === modelId), [models, modelId]);
+
   return (
     <section id="query" className="relative py-32 border-t border-white/5">
       <div className="max-w-[1280px] mx-auto px-6">
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={fadeUp}>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
-            Query the formed model
+            Query a formed model
           </p>
           <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95] mb-6 max-w-4xl">
             ChatGPT for your data.<br />
             <span className="text-white/40">Without the cloud, the drift, or the guesswork.</span>
           </h2>
           <p className="text-lg text-white/60 max-w-3xl leading-relaxed">
-            Every answer is computed deterministically against the formed
-            model. Same question, same corpus, same byte-identical answer
-            and lineage hash. No probabilistic generation. No invented
-            citations. No external network.
+            Pick a formed model. Ask it a structural question. Every answer is
+            computed deterministically against that specific model's
+            fingerprints. Same question, same model, byte-identical answer
+            and lineage hash, forever. No probabilistic generation. No
+            invented citations. No external network.
           </p>
         </motion.div>
 
-        {/* Query controls */}
+        {/* Model picker */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -106,35 +129,35 @@ export function RangeQuery() {
         >
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-cyan">
-              Active model
+              Active formed model
             </span>
             <span className="font-mono text-[10px] text-white/30">
-              GET /api/range-query
+              GET /api/range-query?model_id=…
             </span>
           </div>
-          <div className="grid grid-cols-4 md:grid-cols-8">
-            {VERTICALS.map((v) => {
-              const active = v.id === vertical;
-              return (
-                <button
-                  key={v.id}
-                  onClick={() => setVertical(v.id)}
-                  className={`px-3 py-3 border-r border-white/[0.06] last:border-r-0 transition-colors text-left ${
-                    active ? "bg-white/[0.05]" : "hover:bg-white/[0.03]"
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: v.tone, boxShadow: active ? `0 0 8px ${v.tone}` : "none" }}
-                    />
-                    <span className={`font-mono text-[10.5px] uppercase tracking-[0.18em] ${active ? "text-white" : "text-white/55"}`}>
-                      {v.label}
-                    </span>
-                  </div>
-                </button>
-              );
-            })}
+          <div className="p-5 flex flex-col md:flex-row md:items-center gap-3">
+            <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 md:shrink-0">
+              model
+            </label>
+            <select
+              data-range-query-modelpicker
+              value={modelId}
+              onChange={(e) => setModelId(e.target.value)}
+              disabled={models.length === 0}
+              className="flex-1 min-w-0 font-mono text-[12.5px] text-white/85 bg-black/60 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-li-cyan/60 disabled:opacity-40"
+            >
+              {models.length === 0 && <option>(no formed models yet · scroll up to form one)</option>}
+              {models.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.name} · {m.corpus_records.toLocaleString()} records · {m.fingerprinter_mode}
+                </option>
+              ))}
+            </select>
+            {activeModel && (
+              <span className="font-mono text-[10.5px] text-white/45 md:shrink-0">
+                formed {new Date(activeModel.formed_at).toLocaleDateString()}
+              </span>
+            )}
           </div>
         </motion.div>
 
@@ -150,14 +173,17 @@ export function RangeQuery() {
             {turns.length === 0 && (
               <div className="space-y-4">
                 <div className="font-mono text-[11px] text-white/40">
-                  Try one of these against the {vertical.toUpperCase()} model:
+                  {activeModel
+                    ? `Try one of these against ${activeModel.name}:`
+                    : "Form a model first, then come back."}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {SUGGESTIONS.map((s) => (
                     <button
                       key={s}
                       onClick={() => ask(s)}
-                      className="text-left text-sm text-white/75 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 hover:border-white/25 hover:bg-white/[0.04] transition-colors"
+                      disabled={!modelId}
+                      className="text-left text-sm text-white/75 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 hover:border-white/25 hover:bg-white/[0.04] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       {s}
                     </button>
@@ -168,29 +194,22 @@ export function RangeQuery() {
 
             {turns.map((t) => (
               <div key={t.id} className="space-y-3">
-                {/* User turn */}
                 <div className="flex items-start gap-3">
                   <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center font-mono text-[10px] text-white/70 shrink-0">
                     you
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] text-white/85 leading-relaxed">{t.q}</div>
-                    <div className="font-mono text-[10px] text-white/30 mt-1">vertical={t.vertical}</div>
+                    <div className="font-mono text-[10px] text-white/30 mt-1">model={t.modelId}</div>
                   </div>
                 </div>
-
-                {/* Model turn */}
                 <div className="flex items-start gap-3">
                   <div className="w-7 h-7 rounded-full bg-li-cyan/15 border border-li-cyan/30 flex items-center justify-center font-mono text-[9.5px] text-li-cyan shrink-0">
                     rng
                   </div>
                   <div className="flex-1 min-w-0">
-                    {t.loading && (
-                      <div className="font-mono text-[12px] text-white/45 italic">computing deterministically …</div>
-                    )}
-                    {t.err && (
-                      <div className="font-mono text-[12px] text-li-red">error: {t.err}</div>
-                    )}
+                    {t.loading && <div className="font-mono text-[12px] text-white/45 italic">computing deterministically …</div>}
+                    {t.err && <div className="font-mono text-[12px] text-li-red">error: {t.err}</div>}
                     {t.ans && <AnswerCard ans={t.ans} />}
                   </div>
                 </div>
@@ -198,18 +217,18 @@ export function RangeQuery() {
             ))}
           </div>
 
-          {/* Composer */}
           <form onSubmit={handleSubmit} className="border-t border-white/10 bg-black/40 p-4 flex items-center gap-2">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={`ask the ${vertical.toUpperCase()} model …`}
+              placeholder={modelId ? "ask the formed model …" : "(select a model first)"}
               spellCheck={false}
-              className="flex-1 min-w-0 font-mono text-[13px] text-white/90 bg-black/60 border border-white/10 rounded-lg px-4 py-2.5 focus:outline-none focus:border-li-cyan/60 placeholder:text-white/30"
+              disabled={!modelId}
+              className="flex-1 min-w-0 font-mono text-[13px] text-white/90 bg-black/60 border border-white/10 rounded-lg px-4 py-2.5 focus:outline-none focus:border-li-cyan/60 placeholder:text-white/30 disabled:opacity-40"
             />
             <button
               type="submit"
-              disabled={!input.trim()}
+              disabled={!input.trim() || !modelId}
               className="inline-flex items-center justify-center h-10 px-5 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               ask →
@@ -225,7 +244,7 @@ export function RangeQuery() {
           className="mt-6 text-[12px] font-mono text-white/40 leading-relaxed max-w-3xl"
         >
           Each answer carries a <code className="text-li-cyan">response_digest</code>{" "}
-          — a SHA-256 over the canonicalized answer + citations + metrics.
+          — sha256 over the canonicalized answer + citations + metrics.
           Re-issuing the same query against the same formed model returns the
           same digest, every time, on any appliance, forever.
         </motion.p>
@@ -249,7 +268,9 @@ function AnswerCard({ ans }: { ans: Answer }) {
               <div key={i} className="px-3 py-2.5">
                 <div className="flex items-center justify-between mb-1">
                   <span className="font-mono text-[11px] text-li-cyan">record #{c.record_idx.toLocaleString()}</span>
-                  <span className="font-mono text-[10px] text-white/35 truncate ml-3">sha256: {c.sha256.slice(0, 14)}…{c.sha256.slice(-4)}</span>
+                  <span className="font-mono text-[10px] text-white/35 truncate ml-3">
+                    sha256: {c.sha256.slice(0, 14)}…{c.sha256.slice(-4)}
+                  </span>
                 </div>
                 <div className="font-mono text-[11px] text-white/65 break-all leading-relaxed">{c.preview}</div>
               </div>

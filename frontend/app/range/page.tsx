@@ -30,18 +30,24 @@ export default function RangePage() {
           <div className="max-w-[1400px] mx-auto px-4 md:px-6">
             <div className="mb-8">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-li-cyan mb-4">
-                Run · form a model now
+                Run · form a model · gallery of formed artifacts
               </p>
               <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.92] max-w-5xl">
-                Pick a corpus.<br />
-                <span className="text-white/45">Watch it become a model.</span>
+                Point at any corpus.<br />
+                <span className="text-white/45">A private model lands.</span>
               </h2>
               <p className="mt-6 text-lg text-white/65 max-w-3xl leading-relaxed">
-                Eight different real-world corpora streamed through the
-                Range pipeline live. Every event is computed from real
-                bytes. Every detection resolves to its originating
-                record. Every <code className="font-mono text-li-cyan">response_digest</code>{" "}
-                is reproducible bit-for-bit on a fresh appliance.
+                Built-in corpora (NSL-KDD, EDGAR, Titan validation), pasted
+                JSON / NDJSON / CSV, or any local file path the appliance
+                can read. The generic adapter detects shape, the
+                schema-agnostic projection fingerprints every record, the
+                Hamming-neighborhood crystallizer discovers a taxonomy,
+                and the artifact lands at{" "}
+                <code className="font-mono text-li-cyan">/data/formed_models/[id].range.json</code>.
+                If <code className="font-mono text-li-cyan">BTUT_BRIDGE_URL</code>{" "}
+                is configured, fingerprinting HTTP-bridges to the real
+                Python BTUT pipeline. If <code className="font-mono text-li-cyan">RUNPOD_API_KEY</code>{" "}
+                is set, full TCD-JEPA crystallization runs async on RunPod GPU.
               </p>
             </div>
             <RangeConsole />

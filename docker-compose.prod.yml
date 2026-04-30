@@ -32,12 +32,23 @@ services:
     environment:
       - NODE_ENV=production
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      # Range bridge (frontend Node -> backend Python BTUT). When set,
+      # the schema-agnostic fingerprinter HTTP-bridges to run_btut_pipeline
+      # in the api container; otherwise it falls back to Node-side.
+      - BTUT_BRIDGE_URL=${BTUT_BRIDGE_URL:-http://api:8000}
+      - FORMED_MODELS_DIR=/data/formed_models
+      - RUNPOD_API_KEY=${RUNPOD_API_KEY:-}
+      - RUNPOD_ENDPOINT_ID=${RUNPOD_ENDPOINT_ID:-}
     volumes:
       # Next.js /api/health + data-layer routes read validation artefacts
       # and BTUT caches at /data and /scripts. Read-only bind mounts
       # from the repo keep them fresh without re-building the image.
       - ./data:/data:ro
       - ./scripts:/scripts:ro
+      # Formed-model store: writable, shared with api container so the
+      # backend can read formed models for query-side computation if
+      # the bridge is asked to.
+      - ./data/formed_models:/data/formed_models:rw
     restart: always
 
   # ─── API Server ───
