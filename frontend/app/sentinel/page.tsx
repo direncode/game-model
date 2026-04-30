@@ -5,10 +5,10 @@ import { SentinelHero } from "@/components/landing/sentinel/SentinelHero";
 import { SentinelBreak } from "@/components/landing/sentinel/SentinelBreak";
 import { SentinelStack } from "@/components/landing/sentinel/SentinelStack";
 import { SentinelArchitecture } from "@/components/landing/sentinel/SentinelArchitecture";
+import { SentinelSimulation } from "@/components/landing/sentinel/SentinelSimulation";
 import { SentinelMeridian } from "@/components/landing/sentinel/SentinelMeridian";
 import { SentinelReplay } from "@/components/landing/sentinel/SentinelReplay";
 import { SentinelTaxonomy } from "@/components/landing/sentinel/SentinelTaxonomy";
-import { SentinelPilot } from "@/components/landing/sentinel/SentinelPilot";
 import { SentinelReproduce } from "@/components/landing/sentinel/SentinelReproduce";
 import { SentinelCTA } from "@/components/landing/sentinel/SentinelCTA";
 
@@ -27,10 +27,10 @@ export default function SentinelPage() {
         <SentinelBreak />
         <SentinelStack />
         <SentinelArchitecture />
+        <SentinelSimulation />
         <SentinelMeridian />
         <SentinelReplay />
         <SentinelTaxonomy />
-        <SentinelPilot />
         <SentinelReproduce />
         <SentinelCTA />
       </main>

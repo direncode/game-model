@@ -224,6 +224,7 @@ export function SentinelReplay() {
               spellCheck={false}
               autoCorrect="off"
               autoCapitalize="off"
+              data-replay-input="true"
               className="flex-1 min-w-0 font-mono text-[12px] text-white/85 bg-black/60 border border-white/10 rounded-lg px-3 py-2 focus:outline-none focus:border-li-cyan/60 placeholder:text-white/25"
             />
             <div className="flex gap-2">
