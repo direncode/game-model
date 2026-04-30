@@ -37,7 +37,11 @@
       "Bash(python scripts/demo_ocean_full.py)",
       "Bash(cmd //c \"del .git\\\\\\\\index.lock\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k: v for k,v in d.items\\(\\) if k != 'details'}, indent=2\\)\\)\")",
-      "Bash(timeout 1800 python scripts/cross_era_analysis/latk_tool/scale/ingest_arxiv_physics.py --total 5000000 --output scripts/cross_era_analysis/output/latk_physics_arxiv.jsonl --page-size 200)"
+      "Bash(timeout 1800 python scripts/cross_era_analysis/latk_tool/scale/ingest_arxiv_physics.py --total 5000000 --output scripts/cross_era_analysis/output/latk_physics_arxiv.jsonl --page-size 200)",
+      "Bash(PYTHONPATH=scripts/cross_era_analysis python scripts/cross_era_analysis/latk_tool/scale/ingest_arxiv_physics.py --total 5000000 --output scripts/cross_era_analysis/output/latk_physics_arxiv.jsonl --page-size 200)",
+      "Bash(python -c \"import sys; sys.path.insert\\(0, 'scripts/cross_era_analysis'\\); from latk_tool.ingest.arxiv_ingest import fetch_arxiv_page; print\\('import OK'\\)\")",
+      "Bash(timeout 15 python -c ' *)",
+      "Bash(python -c ' *)"
     ]
   }
 }

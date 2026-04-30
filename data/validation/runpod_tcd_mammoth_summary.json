@@ -1,0 +1,93 @@
+{
+  "source_artifact": "data/validation/runpod_tcd_mammoth_raw.json",
+  "runpod_job_id": "ae385d55-6888-4ffb-a0e1-76a136377805-u2",
+  "worker_id": "sxhnannc765683",
+  "device": "cuda",
+  "delay_ms": 756,
+  "exec_ms": 2730,
+  "training_metrics": {
+    "final_auc": 0.9199,
+    "final_knn": 0.8195,
+    "final_loss": 0.2705,
+    "total_epochs": 120
+  },
+  "honesty_note": "Per-module purity_score and internal_density values are simulation-fallback random outputs from the production handler (see runpod/handler.py:_extract_modules lines 397-460). Cluster membership and attack-subtype counts ARE real from ground-truth NSL-KDD labels. Training metrics (AUC, KNN, loss) above are real H100 training output.",
+  "modules": [
+    {
+      "name": "tcp Cluster 1",
+      "dominant_type": "tcp",
+      "entity_count": 2451,
+      "attack_count": 1180,
+      "attack_share": 0.4814,
+      "subtype_counts": {
+        "normal": 1271,
+        "neptune": 1006,
+        "portsweep": 64,
+        "satan": 50,
+        "back": 22,
+        "warezclient": 20,
+        "ipsweep": 8,
+        "nmap": 4,
+        "warezmaster": 2,
+        "land": 2,
+        "guess_passwd": 1,
+        "imap": 1
+      },
+      "purity_score_handler_simulation": 1.013,
+      "internal_density_handler_simulation": 0.759,
+      "narrative_plain_english": "tcp Cluster 1: 2,451 TCP flows. This is a mixed cluster \u2014 roughly half normal, half attack (48.1% of flows are attacks).\n\nTCP traffic \u2014 reliable connection-oriented flows (web, mail, SSH, file transfer, etc.)\n\nTop attack-subtype breakdown in this cluster:\n  - 1,271 flows (51.9%): **normal** \u2014 normal background traffic, no attack signature\n  - 1,006 flows (41.0%): **neptune** \u2014 Neptune \u2014 SYN-flood denial-of-service that opens half-complete TCP connections to exhaust server resources\n  - 64 flows (2.6%): **portsweep** \u2014 Port-sweep \u2014 reconnaissance scan probing many ports on a single host\n  - 50 flows (2.0%): **satan** \u2014 SATAN \u2014 automated network vulnerability scanner\n  - 22 flows (0.9%): **back** \u2014 Back \u2014 Apache web-server buffer-overflow exploit\n\n*Note on purity (1.013) and internal density (0.759): these specific numbers come from the production handler's simulation-fallback path because real TCD crystallizer output was not surfaced in this code path. The cluster membership and attack-subtype counts above ARE real (computed from ground-truth NSL-KDD labels). The handler-side density / purity values are not.*\n\n**Analyst takeaway:** mixed-traffic basin. Worth monitoring \u2014 the attack subtypes mixed in here (neptune, portsweep) are typical co-occurrences with normal TCP traffic and may indicate reconnaissance or low-rate probing among legitimate flows."
+    },
+    {
+      "name": "udp Cluster 2",
+      "dominant_type": "udp",
+      "entity_count": 538,
+      "attack_count": 87,
+      "attack_share": 0.1617,
+      "subtype_counts": {
+        "normal": 451,
+        "satan": 51,
+        "teardrop": 31,
+        "nmap": 5
+      },
+      "purity_score_handler_simulation": 1.127,
+      "internal_density_handler_simulation": 0.575,
+      "narrative_plain_english": "udp Cluster 2: 538 UDP flows. This is a mixed cluster \u2014 roughly half normal, half attack (16.2% of flows are attacks).\n\nUDP traffic \u2014 connectionless datagrams (DNS, NTP, streaming, IoT telemetry, etc.)\n\nTop attack-subtype breakdown in this cluster:\n  - 451 flows (83.8%): **normal** \u2014 normal background traffic, no attack signature\n  - 51 flows (9.5%): **satan** \u2014 SATAN \u2014 automated network vulnerability scanner\n  - 31 flows (5.8%): **teardrop** \u2014 Teardrop \u2014 fragmentation-based DoS exploiting overlapping IP fragment offsets\n  - 5 flows (0.9%): **nmap** \u2014 Nmap \u2014 automated host and port discovery scanner\n\n*Note on purity (1.127) and internal density (0.575): these specific numbers come from the production handler's simulation-fallback path because real TCD crystallizer output was not surfaced in this code path. The cluster membership and attack-subtype counts above ARE real (computed from ground-truth NSL-KDD labels). The handler-side density / purity values are not.*\n\n**Analyst takeaway:** this is the legitimate-traffic basin for UDP. Confirms the corpus has a stable normal-traffic signature on this protocol \u2014 useful as a reference background against which future shifts can be measured."
+    },
+    {
+      "name": "icmp Cluster 3",
+      "dominant_type": "icmp",
+      "entity_count": 571,
+      "attack_count": 470,
+      "attack_share": 0.8231,
+      "subtype_counts": {
+        "ipsweep": 225,
+        "smurf": 170,
+        "normal": 101,
+        "nmap": 63,
+        "pod": 10,
+        "satan": 1,
+        "portsweep": 1
+      },
+      "purity_score_handler_simulation": 1.078,
+      "internal_density_handler_simulation": 0.595,
+      "narrative_plain_english": "icmp Cluster 3: 571 ICMP flows. This cluster is dominated by attacks (82.3% of flows are attacks vs only 17.7% normal).\n\nICMP traffic \u2014 control-plane messages (ping, traceroute, error reports \u2014 and several DDoS / scanning protocols hide in here)\n\nTop attack-subtype breakdown in this cluster:\n  - 225 flows (39.4%): **ipsweep** \u2014 IP-sweep \u2014 reconnaissance scan probing a range of IP addresses to find live hosts\n  - 170 flows (29.8%): **smurf** \u2014 Smurf \u2014 ICMP-amplified DDoS using broadcast addresses to overwhelm the target\n  - 101 flows (17.7%): **normal** \u2014 normal background traffic, no attack signature\n  - 63 flows (11.0%): **nmap** \u2014 Nmap \u2014 automated host and port discovery scanner\n  - 10 flows (1.8%): **pod** \u2014 Ping-of-Death \u2014 oversized ICMP echo request crashing legacy stacks\n\n*Note on purity (1.078) and internal density (0.595): these specific numbers come from the production handler's simulation-fallback path because real TCD crystallizer output was not surfaced in this code path. The cluster membership and attack-subtype counts above ARE real (computed from ground-truth NSL-KDD labels). The handler-side density / purity values are not.*\n\n**Analyst takeaway:** this cluster is the high-attack-density basin for ICMP flows in this corpus. An operator drilling into icmp Cluster 3 immediately surfaces 468 attack flows across 6 distinct attack archetypes."
+    }
+  ],
+  "aggregate_attack_subtypes": {
+    "normal": 1823,
+    "neptune": 1006,
+    "ipsweep": 233,
+    "smurf": 170,
+    "satan": 102,
+    "nmap": 72,
+    "portsweep": 65,
+    "teardrop": 31,
+    "back": 22,
+    "warezclient": 20,
+    "pod": 10,
+    "warezmaster": 2,
+    "land": 2,
+    "guess_passwd": 1,
+    "imap": 1
+  }
+}
