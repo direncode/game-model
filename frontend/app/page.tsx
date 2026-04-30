@@ -1,5 +1,6 @@
 import { Nav } from "@/components/landing/Nav";
 import { HomeHero } from "@/components/landing/HomeHero";
+import { HomeScroller } from "@/components/landing/HomeScroller";
 
 export default function HomePage() {
   return (
@@ -7,7 +8,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <HomeHero />
-        <div id="beneath" />
+        <HomeScroller />
       </main>
     </div>
   );
