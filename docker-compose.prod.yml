@@ -32,6 +32,9 @@ services:
     environment:
       - NODE_ENV=production
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      # Nato-sim back-channel (preserved from operations)
+      - NATO_SIM_ACCESS_CODE=${NATO_SIM_ACCESS_CODE}
+      - NATO_SIM_BACKEND_URL=${NATO_SIM_BACKEND_URL:-http://api:8000}
       # Range bridge (frontend Node -> backend Python BTUT). When set,
       # the schema-agnostic fingerprinter HTTP-bridges to run_btut_pipeline
       # in the api container; otherwise it falls back to Node-side.
@@ -88,6 +91,10 @@ services:
     volumes:
       - ./tcd-jepa:/app/tcd-jepa:ro
       - checkpoints:/app/checkpoints
+      # Backend reads the data directory for nato-sim fixtures and can
+      # also read formed-model artifacts written by the frontend.
+      - ./data:/app/data
+      - ./data/formed_models:/data/formed_models:rw
     restart: always
 
   # ─── Celery Worker ───
