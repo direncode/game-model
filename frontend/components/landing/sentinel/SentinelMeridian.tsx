@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
-// Dummy customer — fictional Tier-1 DIB prime running a classified Tier-3 SOC.
+// Reference deployment — illustrative regulated-enterprise SOC.
 // Numbers are illustrative, deliberately specific to make the page feel real.
 const BEFORE_AFTER = [
   {
@@ -22,12 +22,12 @@ const BEFORE_AFTER = [
     note: "REPLAY clause returns originating bytes inline.",
   },
   {
-    metric: "Reproducibility (IG)",
+    metric: "Reproducibility (audit)",
     before: "Material weakness",
     after: "Cleared",
-    delta: "ICD 503 §6.1",
+    delta: "SOC 2 · ISO 27001",
     deltaTone: "good",
-    note: "Bit-identical reruns confirmed across 3 facilities.",
+    note: "Bit-identical reruns confirmed across 3 sites.",
   },
   {
     metric: "Tier-1 disposition rate",
@@ -56,12 +56,12 @@ const BEFORE_AFTER = [
 ];
 
 const PROFILE = [
-  { k: "Customer", v: "Meridian Defense Systems (illustrative)" },
-  { k: "Tier", v: "DIB prime · Tier-3 SOC · TS/SCI" },
-  { k: "Estate", v: "47,212 endpoints · 11 facilities · 2.4 PB/day telemetry" },
-  { k: "Stack at install", v: "Splunk Enterprise · CrowdStrike · Zeek · Sysmon" },
+  { k: "Customer", v: "Reference enterprise SOC (illustrative)" },
+  { k: "Posture", v: "Regulated · Tier-3 SOC · sovereign-on-prem" },
+  { k: "Estate", v: "47,212 endpoints · 11 sites · 2.4 PB/day telemetry" },
+  { k: "Stack at install", v: "Splunk Enterprise · EDR · Zeek · Sysmon" },
   { k: "Annual SIEM cost", v: "$14.2M (pre-Sentinel)" },
-  { k: "Compliance regime", v: "NIST 800-171 · CMMC L3 · ICD 503" },
+  { k: "Compliance regime", v: "SOC 2 · ISO 27001 · NIST 800-53" },
 ];
 
 export function SentinelMeridian() {
@@ -73,15 +73,15 @@ export function SentinelMeridian() {
             Reference deployment · illustrative
           </p>
           <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95] mb-6 max-w-4xl">
-            Meridian Defense<br />
+            Reference SOC<br />
             <span className="text-white/40">90 days in.</span>
           </h2>
           <p className="text-lg text-white/60 max-w-3xl">
-            A Tier-1 systems integrator runs a classified SOC for a federal
-            customer. They installed Sentinel in March on a single appliance
-            per facility, in parallel with their existing Splunk and EDR
-            stack. They did not rip anything out. The appliance never opened
-            an outbound socket. These are their numbers at day 90.
+            A regulated enterprise runs a sovereign on-prem SOC across
+            eleven sites. They installed Sentinel in March on a single
+            appliance per site, in parallel with their existing Splunk and
+            EDR stack. They did not rip anything out. The appliance never
+            opened an outbound socket. These are their numbers at day 90.
           </p>
         </motion.div>
 
@@ -186,13 +186,13 @@ export function SentinelMeridian() {
             From the customer
           </p>
           <p className="font-display text-2xl md:text-3xl text-white/90 leading-snug tracking-tight max-w-4xl">
-            “The first time the IG asked for the source bytes behind a flagged
-            beacon, the analyst pasted a lineage hash, hit replay, and the
-            originating PCAP rendered in the same window. The audit finding
-            was closed in the meeting.”
+            “The first time an auditor asked for the source bytes behind a
+            flagged beacon, the analyst pasted a lineage hash, hit replay,
+            and the originating PCAP rendered in the same window. The
+            finding was closed in the meeting.”
           </p>
           <div className="mt-6 font-mono text-[11px] text-white/40">
-            Director, Cyber Operations · Meridian Defense Systems · illustrative
+            Director, Cyber Operations · reference enterprise SOC · illustrative
           </div>
         </motion.div>
       </div>

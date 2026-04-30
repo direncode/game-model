@@ -1,92 +1,82 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type AttackCat = "normal" | "dos" | "probe" | "r2l" | "u2r";
+type VerticalId = "cyber" | "finance" | "pubmed" | "patents" | "comtrade" | "seismic" | "crypto" | "macro";
 
-type PhasePlan = { name: string; blurb: string; records: number; ms: number };
-type Hello = {
-  kind: "hello";
-  scenario: string;
-  seed: number;
-  total_records: number;
-  sampling_target: number;
-  phases: PhasePlan[];
-  corpus: { name: string; records: number; classes: number; size_bytes: number; sha256_top100: string };
-  target_host: string;
-};
+const VERTICALS: { id: VerticalId; label: string; sub: string; tone: string }[] = [
+  { id: "cyber",    label: "Cybersecurity",  sub: "NSL-KDD intrusion · 125,973 records",        tone: "#f85149" },
+  { id: "finance",  label: "Finance",        sub: "SEC EDGAR XBRL · 4,999 facts/filings",        tone: "#388bfd" },
+  { id: "pubmed",   label: "Biomedical",     sub: "PubMed abstracts · 989 papers",               tone: "#3fb950" },
+  { id: "patents",  label: "Patents",        sub: "USPTO · 937 filings",                          tone: "#a371f7" },
+  { id: "comtrade", label: "Supply Chain",   sub: "UN Comtrade · 998 flows",                      tone: "#c9a96e" },
+  { id: "seismic",  label: "Seismicity",     sub: "USGS week feed · 2,404 events",                tone: "#d29922" },
+  { id: "crypto",   label: "Crypto",         sub: "CoinGecko top-250",                            tone: "#00d4ff" },
+  { id: "macro",    label: "Macroeconomic",  sub: "World Bank · 227 economies",                   tone: "#9aa3b2" },
+];
+
+type CorpusMeta = { id: VerticalId; display: string; source: string; records: number; classes: number; size_bytes: number; sha256_top100?: string; citation: string; titanZ: number; topComposite: number };
+
+type Hello = { kind: "hello"; vertical: VerticalId; corpus: CorpusMeta; seed: number; sampling_target: number; phases: { name: string; blurb: string; records: number; ms: number }[] };
+
 type SimEvent =
   | Hello
   | { kind: "phase"; idx: number; name: string; blurb: string; t: number }
-  | { kind: "log"; t: number; source: string; host: string; line: string; rare: boolean; category: AttackCat; record_idx: number; label: string }
+  | { kind: "log"; t: number; source: string; key: string; line: string; rare: boolean; category: string; record_idx: number; label: string }
   | { kind: "pipeline"; t: number; stage: "L0" | "L1" | "L2" | "L3" | "L4"; count: number }
   | { kind: "metric"; t: number; name: string; value: number }
-  | { kind: "matrix"; t: number; cell: { actual: AttackCat; predicted_by: "edr" | "sentinel"; correct: boolean } }
-  | { kind: "detection"; t: number; lineage: string; family: string; category: AttackCat; z: number; host: string; ts: string; novel: boolean; record_idx: number; record_bytes_sha256: string; record_preview: string }
-  | { kind: "done"; t: number; lineage: string; response_digest: string; wall_ms: number; n_records: number; n_detections: number; novel_classes: number }
+  | { kind: "matrix"; t: number; cell: { actual: string; predicted_by: "edr" | "sentinel"; correct: boolean } }
+  | { kind: "null_test"; t: number; phase_idx: number; z: number; p: string; iterations: number }
+  | { kind: "detection"; t: number; lineage: string; family: string; category: string; z: number; key: string; ts: string; novel: boolean; record_idx: number; record_bytes_sha256: string; record_preview: string }
+  | { kind: "done"; t: number; lineage: string; response_digest: string; wall_ms: number; n_records: number; n_detections: number; novel_classes: number; mean_score: number; final_z: number }
   | { kind: "end" }
   | { kind: "error"; detail: string };
 
 type Detection = Extract<SimEvent, { kind: "detection" }>;
 
 const STAGES: { code: "L0" | "L1" | "L2" | "L3" | "L4"; label: string; sub: string; color: string }[] = [
-  { code: "L0", label: "Ingest",     sub: "schema-aware parsers, byte-hash on entry",      color: "#00d4ff" },
-  { code: "L1", label: "BTUT",       sub: "48-bit structural fingerprint substrate",        color: "#3fb950" },
-  { code: "L2", label: "TCD-JEPA",   sub: "persistent-homology taxonomy crystallization",   color: "#a371f7" },
-  { code: "L3", label: "Lineage",    sub: "merkle proofs + OTS anchors",                    color: "#d29922" },
-  { code: "L4", label: "Detection",  sub: "null-permutation gated emit",                    color: "#f85149" },
-];
-
-const CATS: { id: AttackCat; label: string; tone: string; sub: string }[] = [
-  { id: "normal", label: "Normal", tone: "#9aa3b2", sub: "benign baseline" },
-  { id: "dos",    label: "DoS",    tone: "#f85149", sub: "neptune, smurf, back, teardrop" },
-  { id: "probe",  label: "Probe",  tone: "#d29922", sub: "satan, ipsweep, portsweep, nmap" },
-  { id: "r2l",    label: "R2L",    tone: "#00d4ff", sub: "warezclient, guess_passwd, ftp_write" },
-  { id: "u2r",    label: "U2R",    tone: "#a371f7", sub: "buffer_overflow, rootkit, perl" },
+  { code: "L0", label: "Ingest",     sub: "schema-aware parsers, byte-hash on entry", color: "#00d4ff" },
+  { code: "L1", label: "BTUT",       sub: "48-bit structural fingerprint substrate",  color: "#3fb950" },
+  { code: "L2", label: "TCD-JEPA",   sub: "persistent-homology taxonomy",              color: "#a371f7" },
+  { code: "L3", label: "Lineage",    sub: "merkle proofs + OTS anchors",               color: "#d29922" },
+  { code: "L4", label: "Detection",  sub: "null-permutation gated emit",                color: "#f85149" },
 ];
 
 const SOURCE_COLOR: Record<string, string> = {
   zeek: "#00d4ff",
-  sysmon: "#a371f7",
   netflow: "#3fb950",
-  edr: "#d29922",
+  edgar: "#388bfd",
+  pubmed: "#3fb950",
+  uspto: "#a371f7",
+  comtrade: "#c9a96e",
+  usgs: "#d29922",
+  coingecko: "#00d4ff",
+  worldbank: "#9aa3b2",
 };
 
-type CMRow = { edr_correct: number; edr_wrong: number; sentinel_correct: number; sentinel_wrong: number };
-const ZERO: CMRow = { edr_correct: 0, edr_wrong: 0, sentinel_correct: 0, sentinel_wrong: 0 };
+type CMRow = { ec: number; ew: number; sc: number; sw: number };
+const ZERO: CMRow = { ec: 0, ew: 0, sc: 0, sw: 0 };
 
-function pct(n: number, d: number): string {
-  if (d <= 0) return "—";
-  return `${((n / d) * 100).toFixed(1)}%`;
-}
-function shortHash(h: string, head = 12, tail = 4) {
-  if (h.length <= head + tail + 1) return h;
-  return `${h.slice(0, head)}…${h.slice(-tail)}`;
-}
-function fmtBytes(n: number): string {
-  if (n >= 1024 * 1024) return `${(n / 1024 / 1024).toFixed(1)} MB`;
-  if (n >= 1024) return `${(n / 1024).toFixed(1)} KB`;
-  return `${n} B`;
-}
-function fmtMs(ms: number): string {
-  if (ms >= 1000) return `${(ms / 1000).toFixed(1)}s`;
-  return `${ms}ms`;
-}
+function pct(n: number, d: number): string { if (d <= 0) return "—"; return `${((n / d) * 100).toFixed(1)}%`; }
+function shortHash(h: string, head = 12, tail = 4) { if (h.length <= head + tail + 1) return h; return `${h.slice(0, head)}…${h.slice(-tail)}`; }
+function fmtBytes(n: number): string { if (n >= 1024*1024) return `${(n/1024/1024).toFixed(1)} MB`; if (n >= 1024) return `${(n/1024).toFixed(1)} KB`; return `${n} B`; }
+function fmtMs(ms: number): string { if (ms >= 1000) return `${(ms/1000).toFixed(1)}s`; return `${ms}ms`; }
 
 export function RangeConsole() {
-  // state
+  const [vertical, setVertical] = useState<VerticalId>("cyber");
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
   const [hello, setHello] = useState<Hello | null>(null);
   const [phaseIdx, setPhaseIdx] = useState(-1);
   const [phaseName, setPhaseName] = useState("STANDBY");
-  const [phaseBlurb, setPhaseBlurb] = useState("Configure scenario, then press LAUNCH.");
+  const [phaseBlurb, setPhaseBlurb] = useState("Pick a vertical, then press LAUNCH.");
   const [logs, setLogs] = useState<({ id: number } & Extract<SimEvent, { kind: "log" }>)[]>([]);
   const [counters, setCounters] = useState<Record<"L0" | "L1" | "L2" | "L3" | "L4", number>>({ L0: 0, L1: 0, L2: 0, L3: 0, L4: 0 });
   const [metrics, setMetrics] = useState<Record<string, number>>({});
-  const [cm, setCm] = useState<Record<AttackCat, CMRow>>({ normal: { ...ZERO }, dos: { ...ZERO }, probe: { ...ZERO }, r2l: { ...ZERO }, u2r: { ...ZERO } });
+  const [cm, setCm] = useState<Record<string, CMRow>>({});
+  const [nullTests, setNullTests] = useState<Extract<SimEvent, { kind: "null_test" }>[]>([]);
   const [detections, setDetections] = useState<Detection[]>([]);
   const [selectedDet, setSelectedDet] = useState<Detection | null>(null);
-  const [doneInfo, setDoneInfo] = useState<{ lineage: string; response_digest: string; wall_ms: number; n_records: number; n_detections: number; novel_classes: number } | null>(null);
+  const [doneInfo, setDoneInfo] = useState<{ lineage: string; response_digest: string; wall_ms: number; n_records: number; n_detections: number; novel_classes: number; mean_score: number; final_z: number } | null>(null);
   const [eventsSeen, setEventsSeen] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [expectedTotal, setExpectedTotal] = useState<number | null>(null);
@@ -103,11 +93,12 @@ export function RangeConsole() {
     setHello(null);
     setPhaseIdx(-1);
     setPhaseName("STANDBY");
-    setPhaseBlurb("Configure scenario, then press LAUNCH.");
+    setPhaseBlurb("Pick a vertical, then press LAUNCH.");
     setLogs([]);
     setCounters({ L0: 0, L1: 0, L2: 0, L3: 0, L4: 0 });
     setMetrics({});
-    setCm({ normal: { ...ZERO }, dos: { ...ZERO }, probe: { ...ZERO }, r2l: { ...ZERO }, u2r: { ...ZERO } });
+    setCm({});
+    setNullTests([]);
     setDetections([]);
     setSelectedDet(null);
     setDoneInfo(null);
@@ -117,13 +108,14 @@ export function RangeConsole() {
     logIdRef.current = 0;
   }, []);
 
-  const launch = useCallback(() => {
+  const launch = useCallback((v: VerticalId) => {
     reset();
+    setVertical(v);
     setRunning(true);
     setPhaseName("CONNECTING…");
-    setPhaseBlurb("opening SSE channel to /api/sentinel-range");
+    setPhaseBlurb(`opening SSE channel · vertical=${v}`);
 
-    const es = new EventSource(`/api/sentinel-range`);
+    const es = new EventSource(`/api/sentinel-range?vertical=${v}`);
     esRef.current = es;
 
     es.onerror = () => {
@@ -135,19 +127,12 @@ export function RangeConsole() {
 
     es.onmessage = (msg) => {
       let ev: SimEvent;
-      try {
-        ev = JSON.parse(msg.data);
-      } catch {
-        return;
-      }
+      try { ev = JSON.parse(msg.data); } catch { return; }
       setEventsSeen((n) => n + 1);
 
       switch (ev.kind) {
         case "hello":
           setHello(ev);
-          // we expect roughly 9 events per record (log + 5 pipeline + 2 matrix + occasional metric)
-          // plus phases, plus detections, plus hello/done/end. Use sampling_target * 10 as
-          // a rough denominator for the progress bar.
           setExpectedTotal(ev.sampling_target * 10);
           break;
         case "phase":
@@ -171,22 +156,23 @@ export function RangeConsole() {
         case "matrix":
           setCm((prev) => {
             const cell = ev.cell;
-            const slot = { ...prev[cell.actual] };
+            const slot = { ...(prev[cell.actual] ?? ZERO) };
             if (cell.predicted_by === "edr") {
-              if (cell.correct) slot.edr_correct++;
-              else slot.edr_wrong++;
+              if (cell.correct) slot.ec++; else slot.ew++;
             } else {
-              if (cell.correct) slot.sentinel_correct++;
-              else slot.sentinel_wrong++;
+              if (cell.correct) slot.sc++; else slot.sw++;
             }
             return { ...prev, [cell.actual]: slot };
           });
+          break;
+        case "null_test":
+          setNullTests((arr) => [...arr, ev]);
           break;
         case "detection":
           setDetections((d) => [ev, ...d]);
           break;
         case "done":
-          setDoneInfo({ lineage: ev.lineage, response_digest: ev.response_digest, wall_ms: ev.wall_ms, n_records: ev.n_records, n_detections: ev.n_detections, novel_classes: ev.novel_classes });
+          setDoneInfo({ lineage: ev.lineage, response_digest: ev.response_digest, wall_ms: ev.wall_ms, n_records: ev.n_records, n_detections: ev.n_detections, novel_classes: ev.novel_classes, mean_score: ev.mean_score, final_z: ev.final_z });
           setDone(true);
           break;
         case "end":
@@ -201,12 +187,7 @@ export function RangeConsole() {
     };
   }, [reset, doneInfo]);
 
-  // Auto-scroll log tail
-  useEffect(() => {
-    const el = tailRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [logs]);
-
+  useEffect(() => { const el = tailRef.current; if (el) el.scrollTop = el.scrollHeight; }, [logs]);
   useEffect(() => () => esRef.current?.close(), []);
 
   const progressPct = useMemo(() => {
@@ -214,9 +195,46 @@ export function RangeConsole() {
     return Math.min(100, (eventsSeen / expectedTotal) * 100);
   }, [eventsSeen, expectedTotal]);
 
+  const cmKeys = useMemo(() => Object.keys(cm).sort(), [cm]);
+
   return (
     <div className="space-y-6">
-      {/* Top status strip */}
+      {/* Vertical picker */}
+      <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
+        <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+            Pick a corpus · same engine · deterministic across all
+          </span>
+          <span className="font-mono text-[10px] text-white/30">
+            {VERTICALS.length} verticals available
+          </span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8">
+          {VERTICALS.map((v) => {
+            const active = v.id === vertical;
+            return (
+              <button
+                key={v.id}
+                onClick={() => { if (!running) { setVertical(v.id); reset(); setVertical(v.id); } }}
+                disabled={running}
+                className={`text-left px-4 py-3 border-r border-b border-white/[0.05] last:border-r-0 transition-colors ${
+                  active ? "bg-white/[0.05]" : running ? "opacity-40" : "hover:bg-white/[0.03]"
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: v.tone, boxShadow: active ? `0 0 8px ${v.tone}` : "none" }} />
+                  <span className={`font-mono text-[10px] uppercase tracking-[0.18em] ${active ? "text-white" : "text-white/55"}`}>
+                    {v.label}
+                  </span>
+                </div>
+                <div className="text-[11px] text-white/40 leading-tight">{v.sub}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Status strip */}
       <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 px-6 py-5 border-b border-white/10">
           <div className="flex items-center gap-3 min-w-0">
@@ -228,7 +246,7 @@ export function RangeConsole() {
             />
             <div className="min-w-0">
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 truncate">
-                scenario={hello?.scenario ?? "nsl-kdd-2025"} · seed={hello?.seed ?? 42} · corpus={hello?.corpus.name ?? "NSL-KDD train"}
+                vertical={vertical} · seed={hello?.seed ?? 42} · corpus={hello?.corpus.source ?? VERTICALS.find((v) => v.id === vertical)?.sub}
               </div>
               <div className="font-display text-2xl md:text-3xl text-white tracking-tight leading-tight truncate">
                 {phaseName}
@@ -238,7 +256,7 @@ export function RangeConsole() {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <button
-              onClick={launch}
+              onClick={() => launch(vertical)}
               disabled={running}
               className={`inline-flex items-center justify-center h-11 px-6 rounded-full text-sm font-medium transition-colors ${
                 running ? "bg-white/10 text-white/40 cursor-not-allowed" : "bg-white text-black hover:bg-white/90"
@@ -256,7 +274,6 @@ export function RangeConsole() {
           </div>
         </div>
 
-        {/* Phase rail */}
         {hello && (
           <div className="grid grid-cols-4 md:grid-cols-8 border-b border-white/10">
             {hello.phases.map((p, i) => {
@@ -283,7 +300,6 @@ export function RangeConsole() {
           </div>
         )}
 
-        {/* Top-level KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-5 border-b border-white/10">
           <KPI label="records ingested" value={counters.L0.toLocaleString()} tone="cyan" />
           <KPI label="fingerprints" value={counters.L1.toLocaleString()} tone="green" />
@@ -292,11 +308,8 @@ export function RangeConsole() {
           <KPI label="ingest pps" value={metrics.ingest_pps?.toLocaleString() ?? "—"} tone="cyan" />
         </div>
 
-        {/* Progress */}
         <div className="px-6 py-3 flex items-center gap-3">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40 shrink-0">
-            progress
-          </span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40 shrink-0">progress</span>
           <div className="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-li-cyan via-li-green via-50% to-li-red transition-all duration-200 ease-out"
@@ -311,14 +324,11 @@ export function RangeConsole() {
 
       {/* Pipeline + tail */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-4">
-        {/* Pipeline */}
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-              Pipeline · L0 → L4
-            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Pipeline · L0 → L4</span>
             <span className="font-mono text-[10px] text-white/30">
-              target host: {hello?.target_host ?? "—"}
+              mean hamming: {metrics.mean_hamming?.toFixed(1) ?? "—"}
             </span>
           </div>
           <div className="p-5 space-y-3">
@@ -330,48 +340,24 @@ export function RangeConsole() {
                 <div key={s.code}>
                   <div className="flex items-center justify-between mb-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] tracking-[0.2em] uppercase" style={{ color: s.color }}>
-                        {s.code}
-                      </span>
+                      <span className="font-mono text-[10px] tracking-[0.2em] uppercase" style={{ color: s.color }}>{s.code}</span>
                       <span className="text-sm text-white/85">{s.label}</span>
                       <span className="hidden md:inline font-mono text-[10px] text-white/35 truncate">· {s.sub}</span>
                     </div>
-                    <span className="font-mono text-[11px] text-white/60 tabular-nums shrink-0">
-                      {counters[s.code].toLocaleString()}
-                    </span>
+                    <span className="font-mono text-[11px] text-white/60 tabular-nums shrink-0">{counters[s.code].toLocaleString()}</span>
                   </div>
                   <div className="h-2 rounded-full bg-white/[0.04] overflow-hidden relative">
-                    <div
-                      className="h-full transition-all duration-300 ease-out"
-                      style={{
-                        width: `${w}%`,
-                        backgroundColor: s.color,
-                        boxShadow: flowing ? `0 0 8px ${s.color}80` : "none",
-                      }}
-                    />
+                    <div className="h-full transition-all duration-300 ease-out" style={{ width: `${w}%`, backgroundColor: s.color, boxShadow: flowing ? `0 0 8px ${s.color}80` : "none" }} />
                     {flowing && (
-                      <div
-                        className="absolute top-0 bottom-0 w-12 opacity-50"
-                        style={{
-                          background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`,
-                          animation: "rangeflow 1.6s linear infinite",
-                          animationDelay: `${i * 0.2}s`,
-                        }}
-                      />
+                      <div className="absolute top-0 bottom-0 w-12 opacity-50" style={{ background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`, animation: "rangeflow 1.6s linear infinite", animationDelay: `${i * 0.2}s` }} />
                     )}
                   </div>
                 </div>
               );
             })}
-            <style>{`
-              @keyframes rangeflow {
-                0%   { transform: translateX(-100%); }
-                100% { transform: translateX(900%); }
-              }
-            `}</style>
+            <style>{`@keyframes rangeflow { 0% { transform: translateX(-100%); } 100% { transform: translateX(900%); } }`}</style>
           </div>
 
-          {/* Live KPIs row */}
           <div className="grid grid-cols-3 border-t border-white/10">
             <SmallKPI label="rare share" value={metrics.rare_share != null ? `${(metrics.rare_share * 100).toFixed(2)}%` : "—"} tone="purple" />
             <SmallKPI label="L4 emit" value={counters.L4.toString()} tone="red" />
@@ -379,7 +365,6 @@ export function RangeConsole() {
           </div>
         </div>
 
-        {/* Live tail */}
         <div className="rounded-2xl border border-white/10 bg-black overflow-hidden flex flex-col h-[500px]">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -389,34 +374,22 @@ export function RangeConsole() {
                 <div className="w-2 h-2 rounded-full bg-li-green/70" />
               </div>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                /var/log/sentinel/ingest.tail · nsl-kdd → telemetry
+                /var/log/sentinel/ingest.{vertical}
               </span>
             </div>
-            <span className="font-mono text-[10px] text-white/30">
-              {logs.length}/120 lines
-            </span>
+            <span className="font-mono text-[10px] text-white/30">{logs.length}/120 lines</span>
           </div>
           <div ref={tailRef} className="flex-1 overflow-y-auto px-4 py-3 font-mono text-[11.5px] leading-[1.5] space-y-0.5">
             {logs.length === 0 && (
-              <div className="text-white/30 italic">
-                awaiting first packet · press LAUNCH to begin streaming nsl-kdd records
-              </div>
+              <div className="text-white/30 italic">awaiting first packet · press LAUNCH to begin streaming records</div>
             )}
             {logs.map((l) => (
               <div key={l.id} className={`flex items-start gap-2 ${l.rare ? "text-li-red" : "text-white/75"}`}>
-                <span className="font-mono text-[10px] uppercase tracking-widest shrink-0 w-14" style={{ color: SOURCE_COLOR[l.source] ?? "#888" }}>
-                  {l.source}
-                </span>
-                <span className="shrink-0 w-32 truncate text-white/40">{l.host}</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest shrink-0 w-16" style={{ color: SOURCE_COLOR[l.source] ?? "#888" }}>{l.source}</span>
+                <span className="shrink-0 w-32 truncate text-white/40">{l.key}</span>
                 <span className="break-all flex-1">{l.line}</span>
                 {l.rare && (
-                  <span
-                    className="shrink-0 font-mono text-[9px] uppercase tracking-widest px-1 rounded border ml-1"
-                    style={{
-                      color: CATS.find((c) => c.id === l.category)?.tone ?? "#fff",
-                      borderColor: (CATS.find((c) => c.id === l.category)?.tone ?? "#fff") + "55",
-                    }}
-                  >
+                  <span className="shrink-0 font-mono text-[9px] uppercase tracking-widest px-1 rounded border ml-1 text-li-red border-li-red/40">
                     {l.label}
                   </span>
                 )}
@@ -431,103 +404,96 @@ export function RangeConsole() {
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-              Detection rate · EDR baseline vs Sentinel
+              Detection rate · baseline vs Sentinel · running totals
             </span>
-            <span className="font-mono text-[10px] text-white/30">running totals</span>
+            <span className="font-mono text-[10px] text-white/30">{cmKeys.length} classes seen</span>
           </div>
           <div className="grid grid-cols-[1.4fr_1fr_1fr] px-5 py-2 border-b border-white/10 text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">
             <div>Class</div>
-            <div className="text-right">EDR</div>
+            <div className="text-right">Baseline</div>
             <div className="text-right">Sentinel</div>
           </div>
-          {CATS.map((cat) => {
-            const row = cm[cat.id];
-            const edrTotal = row.edr_correct + row.edr_wrong;
-            const sentTotal = row.sentinel_correct + row.sentinel_wrong;
+          {cmKeys.length === 0 && (
+            <div className="px-5 py-6 font-mono text-[11px] text-white/30 italic">
+              awaiting first ingest …
+            </div>
+          )}
+          {cmKeys.map((k) => {
+            const row = cm[k];
+            const edrTotal = row.ec + row.ew;
+            const sentTotal = row.sc + row.sw;
             return (
-              <div key={cat.id} className="grid grid-cols-[1.4fr_1fr_1fr] px-5 py-3 border-b border-white/[0.04] items-center">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: cat.tone }} />
-                  <div className="min-w-0">
-                    <div className="text-sm text-white tracking-tight">{cat.label}</div>
-                    <div className="text-[10px] font-mono text-white/35 truncate">{cat.sub}</div>
-                  </div>
+              <div key={k} className="grid grid-cols-[1.4fr_1fr_1fr] px-5 py-2.5 border-b border-white/[0.04] items-center">
+                <div className="text-sm text-white tracking-tight truncate">{k}</div>
+                <div className="text-right">
+                  <div className="font-mono text-sm text-white/85 tabular-nums">{pct(row.ec, edrTotal)}</div>
+                  <div className="font-mono text-[10px] text-white/35 tabular-nums">{row.ec.toLocaleString()} / {edrTotal.toLocaleString()}</div>
                 </div>
                 <div className="text-right">
-                  <div className="font-mono text-sm text-white/85 tabular-nums">{pct(row.edr_correct, edrTotal)}</div>
-                  <div className="font-mono text-[10px] text-white/35 tabular-nums">
-                    {row.edr_correct.toLocaleString()} / {edrTotal.toLocaleString()}
+                  <div className="font-mono text-sm tabular-nums" style={{ color: row.sc >= row.ec ? "#3fb950" : "#fff" }}>
+                    {pct(row.sc, sentTotal)}
                   </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-mono text-sm tabular-nums" style={{ color: row.sentinel_correct >= row.edr_correct ? "#3fb950" : "#fff" }}>
-                    {pct(row.sentinel_correct, sentTotal)}
-                  </div>
-                  <div className="font-mono text-[10px] text-white/35 tabular-nums">
-                    {row.sentinel_correct.toLocaleString()} / {sentTotal.toLocaleString()}
-                  </div>
+                  <div className="font-mono text-[10px] text-white/35 tabular-nums">{row.sc.toLocaleString()} / {sentTotal.toLocaleString()}</div>
                 </div>
               </div>
             );
           })}
-          <div className="px-5 py-3 text-[11px] font-mono text-white/45 leading-relaxed">
-            EDR baseline rates per class match the well-documented signature/EDR
-            performance envelope on NSL-KDD: strong on DoS/Probe, weak on R2L/U2R.
-            Sentinel's structural fingerprinting closes the rare-class gap.
-          </div>
         </div>
 
-        {/* Corpus card */}
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
               Real corpus
             </span>
-            <span className="font-mono text-[10px] text-white/30">
-              read-only mount · /data/cache
-            </span>
+            <span className="font-mono text-[10px] text-white/30">read-only mount</span>
           </div>
           <div className="p-5 space-y-3">
-            <Field k="dataset" v={hello?.corpus.name ?? "NSL-KDD train"} />
+            <Field k="dataset" v={hello?.corpus.display ?? "—"} />
+            <Field k="source" v={hello?.corpus.source ?? "—"} />
             <Field k="records" v={hello?.corpus.records.toLocaleString() ?? "—"} />
             <Field k="distinct labels" v={hello?.corpus.classes?.toString() ?? "—"} />
             <Field k="size on disk" v={hello?.corpus.size_bytes ? fmtBytes(hello.corpus.size_bytes) : "—"} />
+            <Field k="titan-measured z" v={hello?.corpus.titanZ ? `${hello.corpus.titanZ.toFixed(2)} σ` : "—"} />
             <Field
               k="sha256(top-100)"
-              v={
-                hello?.corpus.sha256_top100 ? (
-                  <span className="font-mono text-[11px] text-li-cyan break-all">
-                    {hello.corpus.sha256_top100}
-                  </span>
-                ) : (
-                  "—"
-                )
-              }
+              v={hello?.corpus.sha256_top100 ? <span className="font-mono text-[11px] text-li-cyan break-all">{hello.corpus.sha256_top100}</span> : "—"}
             />
             <div className="pt-2 border-t border-white/[0.04]">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">
-                citation
-              </div>
-              <div className="text-[12px] text-white/70 leading-relaxed">
-                Tavallaee et al., 2009. <span className="italic">A Detailed Analysis of the
-                KDD CUP 99 Data Set</span>. IEEE CISDA. Public dataset; widely used as
-                the standard intrusion-detection benchmark.
-              </div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">citation</div>
+              <div className="text-[12px] text-white/70 leading-relaxed">{hello?.corpus.citation ?? "—"}</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Detections feed + record drawer */}
+      {/* Null tests strip */}
+      {nullTests.length > 0 && (
+        <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
+          <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02]">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+              Null-permutation test · per-phase · real on-the-wire computation
+            </span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {nullTests.slice(-4).map((nt, i) => (
+              <div key={i} className="px-5 py-4 border-r border-white/[0.06] last:border-r-0">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">phase {nt.phase_idx + 1}</div>
+                <div className="font-display text-2xl text-white tabular-nums">{nt.z.toFixed(2)} σ</div>
+                <div className="font-mono text-[10px] text-white/40 tabular-nums">p {nt.p} · {nt.iterations} iters</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Detections + drawer */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-red">
-              Detections · click any card for record drawer
+              Detections · click for record drawer
             </span>
-            <span className="font-mono text-[10px] text-white/30">
-              {detections.length} {detections.length === 1 ? "event" : "events"}
-            </span>
+            <span className="font-mono text-[10px] text-white/30">{detections.length} {detections.length === 1 ? "event" : "events"}</span>
           </div>
           <div className="max-h-[520px] overflow-y-auto p-4 space-y-2">
             {detections.length === 0 && (
@@ -535,110 +501,70 @@ export function RangeConsole() {
                 no detections yet · structural taxonomy still crystallizing
               </div>
             )}
-            {detections.map((d) => {
-              const cat = CATS.find((c) => c.id === d.category);
-              return (
-                <button
-                  key={`${d.lineage}-${d.record_idx}`}
-                  onClick={() => setSelectedDet(d)}
-                  className={`w-full text-left rounded-lg border p-3 transition-colors ${
-                    selectedDet?.record_idx === d.record_idx
-                      ? "border-white/40 bg-white/[0.05]"
-                      : d.novel
-                        ? "border-li-purple/30 bg-li-purple/[0.04] hover:border-li-purple/60"
-                        : "border-white/10 bg-white/[0.02] hover:border-white/20"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div
-                        className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{
-                          backgroundColor: cat?.tone ?? "#888",
-                          boxShadow: d.novel ? "0 0 10px #a371f7" : "none",
-                        }}
-                      />
-                      <span className="font-display text-base tracking-tight text-white truncate">
-                        {d.family}
-                      </span>
-                      {d.novel && (
-                        <span className="font-mono text-[8.5px] uppercase tracking-[0.2em] text-li-purple px-1.5 py-0.5 rounded border border-li-purple/40 shrink-0">
-                          novel
-                        </span>
-                      )}
-                    </div>
-                    <span className="font-mono text-xs text-li-green tabular-nums shrink-0">{d.z.toFixed(1)} σ</span>
+            {detections.map((d) => (
+              <button
+                key={`${d.lineage}-${d.record_idx}`}
+                onClick={() => setSelectedDet(d)}
+                className={`w-full text-left rounded-lg border p-3 transition-colors ${
+                  selectedDet?.record_idx === d.record_idx
+                    ? "border-white/40 bg-white/[0.05]"
+                    : d.novel
+                      ? "border-li-purple/30 bg-li-purple/[0.04] hover:border-li-purple/60"
+                      : "border-white/10 bg-white/[0.02] hover:border-white/20"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: d.novel ? "#a371f7" : "#f85149", boxShadow: d.novel ? "0 0 10px #a371f7" : "none" }} />
+                    <span className="font-display text-base tracking-tight text-white truncate">{d.family}</span>
+                    {d.novel && (
+                      <span className="font-mono text-[8.5px] uppercase tracking-[0.2em] text-li-purple px-1.5 py-0.5 rounded border border-li-purple/40 shrink-0">novel</span>
+                    )}
                   </div>
-                  <div className="font-mono text-[10.5px] text-white/55 leading-relaxed">
-                    host: <span className="text-white/85">{d.host}</span> ·{" "}
-                    record: <span className="text-li-cyan">#{d.record_idx.toLocaleString()}</span> ·{" "}
-                    label: <span style={{ color: cat?.tone ?? "#fff" }}>{d.family.split(" ")[0]}</span>
-                  </div>
-                  <div className="font-mono text-[10px] text-white/35 mt-0.5 break-all">
-                    lineage: {shortHash(d.lineage, 16, 6)}
-                  </div>
-                </button>
-              );
-            })}
+                  <span className="font-mono text-xs text-li-green tabular-nums shrink-0">{d.z.toFixed(1)} σ</span>
+                </div>
+                <div className="font-mono text-[10.5px] text-white/55 leading-relaxed">
+                  {d.key} · record: <span className="text-li-cyan">#{d.record_idx.toLocaleString()}</span> · class: <span className="text-white/85">{d.category}</span>
+                </div>
+                <div className="font-mono text-[10px] text-white/35 mt-0.5 break-all">lineage: {shortHash(d.lineage, 16, 6)}</div>
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Drawer */}
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-              Record drawer
-            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Record drawer</span>
             {selectedDet && (
-              <span className="font-mono text-[10px] text-white/30">
-                nsl-kdd #{selectedDet.record_idx.toLocaleString()}
-              </span>
+              <span className="font-mono text-[10px] text-white/30">record #{selectedDet.record_idx.toLocaleString()}</span>
             )}
           </div>
           <div className="p-5 space-y-3">
             {!selectedDet && (
-              <div className="font-mono text-[11px] text-white/30 italic">
-                click a detection card to inspect the originating nsl-kdd record
-              </div>
+              <div className="font-mono text-[11px] text-white/30 italic">click a detection to inspect its originating record</div>
             )}
             {selectedDet && (
               <>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
-                    family / class
-                  </div>
-                  <div className="font-display text-lg text-white tracking-tight">
-                    {selectedDet.family}
-                  </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">family / class</div>
+                  <div className="font-display text-lg text-white tracking-tight">{selectedDet.family}</div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <Field k="z-score" v={`${selectedDet.z.toFixed(2)} σ`} />
-                  <Field k="host" v={selectedDet.host} />
+                  <Field k="key" v={selectedDet.key} />
                   <Field k="ts" v={selectedDet.ts.replace("T", " ").replace("Z", "")} />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
-                    record preview (raw nsl-kdd projection)
-                  </div>
-                  <pre className="rounded-lg border border-white/10 bg-black/60 p-3 text-[11px] font-mono text-white/85 overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">
-{selectedDet.record_preview}
-                  </pre>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">record preview (raw bytes)</div>
+                  <pre className="rounded-lg border border-white/10 bg-black/60 p-3 text-[11px] font-mono text-white/85 overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">{selectedDet.record_preview}</pre>
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
-                    sha256(record_bytes)
-                  </div>
-                  <div className="font-mono text-[11px] text-li-cyan break-all leading-relaxed">
-                    {selectedDet.record_bytes_sha256}
-                  </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">sha256(record_bytes)</div>
+                  <div className="font-mono text-[11px] text-li-cyan break-all leading-relaxed">{selectedDet.record_bytes_sha256}</div>
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">
-                    lineage
-                  </div>
-                  <div className="font-mono text-[11px] text-white/85 break-all leading-relaxed">
-                    {selectedDet.lineage}
-                  </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">lineage</div>
+                  <div className="font-mono text-[11px] text-white/85 break-all leading-relaxed">{selectedDet.lineage}</div>
                 </div>
                 <button
                   onClick={() => {
@@ -666,17 +592,11 @@ export function RangeConsole() {
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-green">
               Final state · evidence package
             </span>
-            {doneInfo && (
-              <span className="font-mono text-[10px] text-white/40">
-                wall {fmtMs(doneInfo.wall_ms)}
-              </span>
-            )}
+            {doneInfo && <span className="font-mono text-[10px] text-white/40">wall {fmtMs(doneInfo.wall_ms)}</span>}
           </div>
           <div className="p-5">
             {!doneInfo && (
-              <div className="font-mono text-[11px] text-white/30 italic">
-                awaiting end-of-run packet · scenario must reach the lineage anchor phase
-              </div>
+              <div className="font-mono text-[11px] text-white/30 italic">awaiting end-of-run packet</div>
             )}
             {doneInfo && (
               <>
@@ -685,53 +605,43 @@ export function RangeConsole() {
                   <Stat label="detections" value={doneInfo.n_detections.toString()} tone="red" />
                   <Stat label="novel classes" value={doneInfo.novel_classes.toString()} tone="purple" />
                 </div>
-                <Field k="response_digest" v={
-                  <span className="font-mono text-[11px] text-li-green break-all">sha256:{doneInfo.response_digest}</span>
-                } />
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <Stat label="mean score" value={doneInfo.mean_score.toFixed(3)} tone="cyan" />
+                  <Stat label="final null-test z" value={`${doneInfo.final_z.toFixed(2)} σ`} tone="purple" />
+                </div>
+                <Field k="response_digest" v={<span className="font-mono text-[11px] text-li-green break-all">sha256:{doneInfo.response_digest}</span>} />
                 <div className="mt-3" />
-                <Field k="final lineage" v={
-                  <span className="font-mono text-[11px] text-white/85 break-all">{doneInfo.lineage}</span>
-                } />
+                <Field k="final lineage" v={<span className="font-mono text-[11px] text-white/85 break-all">{doneInfo.lineage}</span>} />
                 <div className="mt-5 rounded-lg bg-li-green/[0.05] border border-li-green/20 p-3">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-green mb-1">
-                    determinism contract
-                  </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-green mb-1">determinism contract</div>
                   <div className="text-[12px] text-white/75 leading-relaxed">
-                    Re-launch this scenario on any appliance with the same NSL-KDD
-                    file. response_digest is byte-identical across runs, hosts,
-                    fiscal years, under seed = {hello?.seed ?? 42}.
+                    Re-launch this corpus on any appliance. response_digest is byte-identical across runs, hosts, fiscal years, under seed = {hello?.seed ?? 42}.
                   </div>
                 </div>
               </>
             )}
-            {error && (
-              <div className="mt-4 font-mono text-[11px] text-li-red">stream error: {error}</div>
-            )}
+            {error && <div className="mt-4 font-mono text-[11px] text-li-red">stream error: {error}</div>}
           </div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-[#0a0a10] overflow-hidden">
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-li-cyan" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-cyan">
-              Reproduce on appliance
-            </span>
-            <span className="font-mono text-[10px] text-white/30 ml-auto">
-              air-gapped · zero external i/o
-            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-li-cyan">Reproduce on appliance</span>
+            <span className="font-mono text-[10px] text-white/30 ml-auto">air-gap capable</span>
           </div>
           <pre className="p-5 text-[12px] font-mono text-white/85 overflow-x-auto leading-relaxed whitespace-pre">
-{`# 1. Mount NSL-KDD shard onto the appliance.
-sentinel ingest --source nsl-kdd-train \\
-                --path  /media/usb/nsl_kdd_train.txt
-# -> 125,973 records ingested · sha256 ${hello?.corpus.sha256_top100?.slice(0, 12) ?? "----"}…
+{`# 1. Mount the corpus shard onto the appliance.
+sentinel ingest --corpus ${vertical} \\
+                --path  /media/usb/${vertical}.shard
+# -> ${hello?.corpus.records.toLocaleString() ?? "—"} records ingested · sha256 ${hello?.corpus.sha256_top100?.slice(0, 12) ?? "----"}…
 
 # 2. Score every record under seed=42.
-sentinel score --corpus nsl-kdd-train --seed 42
+sentinel score --corpus ${vertical} --seed 42
 
 # 3. Crystallize the structural taxonomy.
-sentinel taxonomy crystallize --corpus nsl-kdd-train --persist
-# -> 5 classes · 1+ novel · entropy gap > 3.4 bits
+sentinel taxonomy crystallize --corpus ${vertical} --persist
+# -> classes derived · novel ring populated · entropy gap reported
 
 # 4. Replay any detection back to its source record.
 sentinel replay <lineage>
@@ -745,7 +655,6 @@ sentinel replay <lineage>
   );
 }
 
-// ---------- subcomponents ----------
 function KPI({ label, value, tone }: { label: string; value: string; tone: "cyan" | "green" | "red" | "purple" }) {
   const c = tone === "cyan" ? "text-li-cyan" : tone === "green" ? "text-li-green" : tone === "purple" ? "text-li-purple" : "text-li-red";
   return (

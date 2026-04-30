@@ -4,9 +4,9 @@ import { Footer } from "@/components/landing/Footer";
 import { RangeConsole } from "./RangeConsole";
 
 export const metadata: Metadata = {
-  title: "Cyber Range · Latent Sentinel running on real intrusion data",
+  title: "Range · Universal Private Model Former",
   description:
-    "OPERATION HALCYON-7 against the NSL-KDD corpus: 125,973 labeled network connections, 23 attack classes, deterministic structural taxonomy crystallization with bit-identical replay. Streaming live from the appliance via SSE.",
+    "Pick a corpus. Watch it become a private model. Real records, real fingerprinting, real null-permutation tests, deterministic across runs. Eight verticals from one engine.",
 };
 
 export default function RangePage() {
@@ -15,22 +15,21 @@ export default function RangePage() {
       <Nav />
       <main className="pt-28 pb-32">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          {/* Hero */}
           <div className="mb-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-li-red mb-4">
-              Cyber Range · OPERATION HALCYON-7 · running on real intrusion data
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-li-cyan mb-4">
+              Range · universal private model former
             </p>
             <h1 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.92] max-w-5xl">
-              125,973 connections.<br />
-              <span className="text-white/45">23 attack classes.<br/>One deterministic engine.</span>
+              Pick a corpus.<br />
+              <span className="text-white/45">Watch it become a private model.</span>
             </h1>
             <p className="mt-6 text-lg text-white/65 max-w-3xl leading-relaxed">
-              The NSL-KDD intrusion-detection corpus, the standard
-              academic benchmark since 2009, ingested record-by-record
-              through the Latent Sentinel pipeline. Every event you see
-              below comes from a real labeled network connection. Every
-              detection card resolves to the originating record by
-              index. Every <code className="font-mono text-li-cyan">response_digest</code>{" "}
+              Eight different real-world corpora — intrusion data, SEC
+              filings, biomedical abstracts, patent filings, trade flows,
+              seismicity, crypto markets, macroeconomics — ingested
+              record-by-record through one engine. Every event is computed
+              from real bytes. Every detection resolves to its originating
+              record. Every <code className="font-mono text-li-cyan">response_digest</code>{" "}
               is reproducible bit-for-bit on a fresh appliance.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-mono text-white/40">
@@ -38,7 +37,7 @@ export default function RangePage() {
               <span>·</span>
               <span>SSE STREAM · NO BUFFERING</span>
               <span>·</span>
-              <span>RFC 5737 / RFC 1918 IPS ONLY</span>
+              <span>REAL FINGERPRINT + REAL NULL TEST</span>
               <span>·</span>
               <span>READ-ONLY DATA MOUNT</span>
               <span>·</span>
@@ -49,14 +48,17 @@ export default function RangePage() {
           <RangeConsole />
 
           <div className="mt-12 text-[12px] font-mono text-white/35 leading-relaxed max-w-3xl">
-            Corpus: Tavallaee, Bagheri, Lu, Ghorbani (2009).{" "}
-            <span className="italic">A Detailed Analysis of the KDD CUP 99 Data Set</span>.
-            Mounted into the frontend container at{" "}
-            <code className="text-white/55">/data/cache/nsl_kdd_train.txt</code> via the
-            production compose volume. This page issues an SSE request to{" "}
-            <code className="text-white/55">/api/sentinel-range</code>; the route reads
-            the corpus once, caches parsed records in module scope, and emits a
-            deterministic 8-phase walk through the data under seed = 42.
+            Range is the runnable face of the Latent Ocean primitive. The
+            same engine that scores SEC filings under one corpus drives
+            patent filings, biomedical abstracts, trade flows, intrusion
+            telemetry, or any other tabular or document corpus you mount.
+            The page issues an SSE request to{" "}
+            <code className="text-white/55">/api/sentinel-range?vertical=…</code>;
+            the route reads the source corpus, computes a real 48-bit
+            structural fingerprint per record, accumulates running statistics,
+            runs a real null-permutation test at the close of each phase, and
+            emits a deterministic response_digest under seed = 42. Citations
+            for each corpus are visible in the corpus card below.
           </div>
         </div>
       </main>

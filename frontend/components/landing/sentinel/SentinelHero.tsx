@@ -39,7 +39,7 @@ export function SentinelHero() {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-li-green animate-pulse" />
           <span className="text-xs font-mono text-li-cyan/90 tracking-wide">
-            LATENT SENTINEL · THREAT INTELLIGENCE · AIR-GAP NATIVE
+            LATENT SENTINEL · CYBERSECURITY VERTICAL · AIR-GAP CAPABLE
           </span>
         </motion.div>
 
@@ -120,7 +120,7 @@ export function SentinelHero() {
           <span>·</span>
           <span>BIT-IDENTICAL REPLAY</span>
           <span>·</span>
-          <span>FedRAMP HIGH / IL5 PATH</span>
+          <span>SOC 2 / ISO 27001 PATH</span>
           <span>·</span>
           <span>ZERO EXTERNAL I/O</span>
         </motion.div>
