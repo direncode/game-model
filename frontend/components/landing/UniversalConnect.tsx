@@ -21,10 +21,10 @@ export function UniversalConnect() {
     <section id="connect" className="relative py-32 border-t border-white/5">
       <div className="max-w-[1280px] mx-auto px-6">
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={fadeUp}>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-4">
             Universal connect
           </p>
-          <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white mb-6 max-w-4xl">
+          <h2 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white mb-6 max-w-4xl">
             One input.<br />
             <span className="text-white/40">Any data source.</span>
           </h2>

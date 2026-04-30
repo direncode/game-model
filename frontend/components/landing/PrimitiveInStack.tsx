@@ -78,19 +78,19 @@ export function PrimitiveInStack() {
           variants={fadeUp}
           className="text-center mb-16"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
-            What it looks like once it's in your stack
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-5">
+            In your stack
           </p>
-          <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95]">
+          <h2 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white leading-[0.95]">
             The primitive,<br />
             <span className="text-white/40">where your data already lives.</span>
           </h2>
-          <p className="mt-6 text-lg text-white/60 max-w-3xl mx-auto">
+          <p className="mt-7 text-lg text-white/60 max-w-3xl mx-auto leading-snug">
             Connect once. Every row of every table acquires a deterministic
-            structural fingerprint and a 4-dimensional score column. Outlierness
-            becomes a <span className="text-li-cyan">WHERE</span> clause; peer
-            rank becomes an <span className="text-li-cyan">ORDER BY</span>; the
-            null test becomes a function call. No new query language, no
+            structural fingerprint and a 4-dimensional score column.
+            Outlierness becomes a <span className="text-white/85">WHERE</span> clause;
+            peer rank becomes an <span className="text-white/85">ORDER BY</span>;
+            the null test becomes a function call. No new query language, no
             re-platforming.
           </p>
         </motion.div>
@@ -110,12 +110,12 @@ export function PrimitiveInStack() {
             >
               <div className="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-white/[0.02]">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-mono text-white">{ex.label}</span>
-                  <span className="text-[11px] font-mono text-white/40">
+                  <span className="text-[12.5px] font-mono text-white/85 uppercase tracking-[0.14em]">{ex.label}</span>
+                  <span className="text-[10.5px] font-mono text-white/35">
                     {ex.sub}
                   </span>
                 </div>
-                <div className="w-2 h-2 rounded-full bg-li-cyan/80 shadow-[0_0_8px_rgba(0,212,255,0.6)]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white/55" />
               </div>
               <pre className="p-5 text-[12.5px] font-mono text-white/85 overflow-x-auto leading-relaxed whitespace-pre">
 {ex.code}
@@ -129,17 +129,18 @@ export function PrimitiveInStack() {
           whileInView="visible"
           viewport={viewportOnce}
           variants={fadeUp}
-          className="mt-14 rounded-xl border border-li-cyan/20 bg-li-cyan/[0.03] p-8 text-center"
+          className="mt-14 rounded-2xl border border-white/10 bg-[#0a0a0a] p-8 text-center"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-li-cyan mb-3">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-4">
             What this replaces
           </p>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-            The bespoke "anomaly detection project" that every data team runs
+          <p className="text-lg text-white/75 max-w-3xl mx-auto leading-snug">
+            The bespoke anomaly-detection project every data team runs
             quarterly — weeks of feature engineering, a handwritten
-            classifier, one-off dashboards, no null test, no reproducibility,
-            no survival across team handovers. This replaces all of it with
-            two deterministic columns and one function call.
+            classifier, one-off dashboards, no null test, no
+            reproducibility, no survival across team handovers. Range
+            replaces it with two deterministic columns and one function
+            call.
           </p>
         </motion.div>
       </div>

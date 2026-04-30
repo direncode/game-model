@@ -21,10 +21,10 @@ export function FinalCTA() {
         variants={fadeUp}
         className="relative max-w-[1100px] mx-auto px-6 text-center"
       >
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-6">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-6">
           Install the primitive · one connection · every row scored
         </p>
-        <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95] mb-8">
+        <h2 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white leading-[0.95] mb-8">
           Connect your database.<br />
           <span className="text-white/40">Every row acquires a signature.</span>
         </h2>

@@ -99,10 +99,10 @@ export function UniversalProof() {
           variants={fadeUp}
           className="text-center mb-12"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-li-cyan mb-4">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/45 mb-4">
             Primitive validation · identical substrate across {agg?.corpora_tested ?? 15} unrelated data shapes
           </p>
-          <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.95]">
+          <h2 className="font-display font-medium text-5xl md:text-7xl tracking-[-0.035em] text-white leading-[0.95]">
             {agg ? (
               <>
                 One primitive.{" "}

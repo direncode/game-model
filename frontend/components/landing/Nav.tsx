@@ -44,18 +44,18 @@ export function Nav() {
           onClick={() => setMobileOpen(false)}
           className="flex items-center gap-2 group"
         >
-          <div className="w-2 h-2 rounded-full bg-li-cyan shadow-[0_0_8px_rgba(0,212,255,0.6)]" />
-          <span className="font-display text-base tracking-tight text-white/90 group-hover:text-white">
+          <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+          <span className="text-[14px] font-medium tracking-[-0.01em] text-white/90 group-hover:text-white">
             Latent Ocean
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="text-sm text-white/60 hover:text-white transition-colors"
+              className="text-[13px] text-white/55 hover:text-white transition-colors tracking-[-0.005em]"
             >
               {item.label}
             </a>
@@ -69,15 +69,15 @@ export function Nav() {
           >
             Legacy App
           </Link>
-          <a
-            href="mailto:sales@latentocean.com?subject=Install%20Latent%20Ocean"
-            className="hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
+          <Link
+            href="/range"
+            className="hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors"
           >
-            Install
+            Build
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M3 6h6m0 0L6 3m3 3L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-          </a>
+          </Link>
 
           {/* Hamburger — only visible on mobile; everything else above is hidden md:/sm: */}
           <button

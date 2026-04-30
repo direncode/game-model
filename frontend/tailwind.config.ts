@@ -66,9 +66,12 @@ const config: Config = {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
         serif: ["Instrument Serif", "Georgia", "Times New Roman", "serif"],
         mono: ["JetBrains Mono", "IBM Plex Mono", "monospace"],
-        // Semantic aliases
+        // Semantic aliases — display is now Inter sans to match the
+        // xAI-style monochrome geometric voice site-wide. The serif
+        // family is still available via `font-serif` if a particular
+        // surface wants to opt in.
         body: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-        display: ["Instrument Serif", "Georgia", "Times New Roman", "serif"],
+        display: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
         data: ["JetBrains Mono", "IBM Plex Mono", "monospace"],
       },
       fontSize: {
