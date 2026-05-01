@@ -148,10 +148,10 @@ export function HomeHero() {
           initial={{ opacity: 0, scale: 0.985, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className="hb-word relative font-display select-none text-center leading-[0.85] tracking-[-0.06em] text-white font-medium"
-          style={{ fontSize: "clamp(110px, 21vw, 340px)" }}
+          className="hb-word relative font-display select-none text-center leading-[0.86] tracking-[-0.055em] text-white font-medium"
+          style={{ fontSize: "clamp(72px, 14.5vw, 232px)" }}
         >
-          Console
+          Latent Ocean
         </motion.h1>
       </div>
 

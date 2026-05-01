@@ -30,19 +30,6 @@ export function RangeHero() {
       />
 
       <div className="relative max-w-[1280px] mx-auto px-6 text-center z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={fadeUp}
-          className="inline-flex items-center gap-2 h-7 px-3 rounded-full border border-li-cyan/25 bg-li-cyan/[0.04] backdrop-blur mb-10"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-li-green animate-pulse" />
-          <span className="text-xs font-mono text-li-cyan/90 tracking-wide">
-            RANGE · PRIVATE MODEL FORMER · AIR-GAP BY DEFAULT
-          </span>
-        </motion.div>
-
         <motion.h1
           initial="hidden"
           whileInView="visible"
