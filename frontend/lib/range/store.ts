@@ -40,6 +40,26 @@ export type FormedModelMeta = {
   // chunked formation
   chunked?: { total_chunks: number; chunk_size: number; merged: boolean };
   encrypted?: boolean;
+  // Persistent homology — H0/H1/H2 bars over the BTUT survivor fingerprints,
+  // computed by the api container's ripser endpoint when persistence is on.
+  persistence?: {
+    bars: { dim: 0 | 1 | 2; birth: number; death: number }[];
+    counts: { H0: number; H1: number; H2: number };
+    metric: "hamming48";
+    n_points: number;
+    wall_seconds: number;
+    library: "ripser";
+    max_dim: 0 | 1 | 2;
+  };
+  // RunPod async — populated when use_runpod=true and the job was submitted
+  runpod?: {
+    job_id: string;
+    status: "submitted" | "in_queue" | "in_progress" | "completed" | "failed";
+    submitted_at: string;
+    completed_at?: string;
+    output_summary?: { modules: number; final_loss?: number; final_auc?: number; final_knn?: number; total_epochs?: number; training_time_seconds?: number; device?: string };
+    error?: string;
+  };
   status: FormedModelStatus;
   progress?: { phase: string; pct: number };
   error?: string;

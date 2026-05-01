@@ -33,6 +33,7 @@ export type FormRequest = {
   corpus_filename_hint?: string;
   name?: string;
   use_runpod?: boolean;
+  compute_persistence?: boolean;       // call api container's ripser endpoint after BTUT
   // Optional caller identity (passed through from auth-resolved request).
   identity?: { user_id: string; tenant_id: string; ip?: string; user_agent?: string };
 };
@@ -74,8 +75,29 @@ export async function startFormation(req: FormRequest): Promise<FormedModelMeta>
   // Stage 3: taxonomy
   const taxonomy = await crystallizeTaxonomy(fps);
 
+  // Stage 3b: persistent homology (H0/H1/H2) over the BTUT survivor
+  // fingerprints. Fires only when explicitly requested — ripser runs in
+  // the api container with O(n^2) memory for the distance matrix and
+  // O(n^(d+1)) compute for the Vietoris-Rips complex.
+  let persistence: FormedModel["persistence"] | undefined = undefined;
+  if (req.compute_persistence && fps.length >= 3) {
+    persistence = await computePersistence(fps).catch(() => {
+      // Persistence is optional — never let its failure break formation.
+      return {
+        bars: [],
+        counts: { H0: 0, H1: 0, H2: 0 },
+        metric: "hamming48" as const,
+        n_points: 0,
+        wall_seconds: 0,
+        library: "ripser" as const,
+        max_dim: 2 as const,
+      };
+    });
+  }
+
   // Stage 4: optional RunPod
   let runpodJobId: string | null = null;
+  let runpodSubmittedAt: string | null = null;
   if (req.use_runpod && isRunPodAvailable()) {
     const submit = await submitRunPodJob({
       entities: records.slice(0, CHUNK_SIZE).map((r) => ({
@@ -88,7 +110,10 @@ export async function startFormation(req: FormRequest): Promise<FormedModelMeta>
       dataset_id: id,
       job_id: id,
     });
-    if (submit.available && submit.status === "submitted") runpodJobId = submit.runpod_job_id;
+    if (submit.available && submit.status === "submitted") {
+      runpodJobId = submit.runpod_job_id;
+      runpodSubmittedAt = new Date().toISOString();
+    }
   }
 
   // Stage 5: build artifact
@@ -130,6 +155,12 @@ export async function startFormation(req: FormRequest): Promise<FormedModelMeta>
     effective_strategy: effective,
     chunked: { total_chunks: totalChunks, chunk_size: CHUNK_SIZE, merged: totalChunks > 1 },
     encrypted: true,
+    persistence,
+    runpod: runpodJobId ? {
+      job_id: runpodJobId,
+      status: "submitted",
+      submitted_at: runpodSubmittedAt!,
+    } : undefined,
     status: "ready",
     fingerprints: fingerprintsForStore,
     taxonomy,
@@ -325,17 +356,93 @@ async function pollAndAttachRunPodResult(modelId: string, runpodJobId: string, t
       const m = await getModel(modelId, tenantId);
       if (m) {
         m.progress = { phase: "runpod-complete", pct: 100 };
+        // Capture RunPod output summary on the model so callers can verify
+        // the GPU run actually fired and produced something. The handler
+        // returns either a single dict or a list (one per yield).
+        const out = r.output;
+        const final = Array.isArray(out) ? (out[out.length - 1] as Record<string, unknown>) : (out as Record<string, unknown> | undefined);
+        if (final && typeof final === "object") {
+          const modules = Array.isArray(final.modules) ? final.modules.length : 0;
+          if (m.runpod) {
+            m.runpod = {
+              ...m.runpod,
+              status: "completed",
+              completed_at: new Date().toISOString(),
+              output_summary: {
+                modules,
+                final_loss: typeof final.final_loss === "number" ? final.final_loss : undefined,
+                final_auc:  typeof final.final_auc  === "number" ? final.final_auc  : undefined,
+                final_knn:  typeof final.final_knn  === "number" ? final.final_knn  : undefined,
+                total_epochs: typeof final.total_epochs === "number" ? final.total_epochs : undefined,
+                training_time_seconds: typeof final.training_time_seconds === "number" ? final.training_time_seconds : undefined,
+                device: typeof final.device === "string" ? final.device : undefined,
+              },
+            };
+          }
+        }
         m.response_digest = digestArtifact(m);
         await saveModel(m);
       }
       return;
     }
     if (r.status === "failed") {
-      await updateMeta(modelId, { error: r.error || "runpod failed", progress: { phase: "runpod-failed", pct: 0 } }, tenantId);
+      // Update both progress AND runpod sub-state so the model artifact
+      // reflects the failure honestly.
+      const m = await getModel(modelId, tenantId);
+      if (m) {
+        m.progress = { phase: "runpod-failed", pct: 0 };
+        m.error = r.error || "runpod failed";
+        if (m.runpod) m.runpod = { ...m.runpod, status: "failed", error: r.error, completed_at: new Date().toISOString() };
+        m.response_digest = digestArtifact(m);
+        await saveModel(m);
+      }
       return;
     }
     await sleep(5_000);
   }
+}
+
+// Compute persistent homology over a set of survivor fingerprints by
+// calling the api container's /api/v1/range/persistence endpoint.
+// Returns null shape if the bridge URL isn't set or the call fails;
+// callers MUST treat persistence as optional.
+async function computePersistence(fps: Fingerprint[]): Promise<FormedModel["persistence"]> {
+  const bridge = process.env.BTUT_BRIDGE_URL;
+  if (!bridge) return undefined;
+  // Cap the input — ripser memory grows with n and the full 2400 survivors
+  // is fine, but if a future formed model has many more we trim deterministically.
+  const max_points = 1500;
+  const fpsHex = fps.slice(0, Math.min(fps.length, 4 * max_points)).map((f) => f.fp48Hex);
+  const t0 = Date.now();
+  let res: Response;
+  try {
+    res = await fetch(`${bridge}/api/v1/range/persistence`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fingerprints: fpsHex, max_dim: 2, max_points }),
+    });
+  } catch (e) {
+    throw new Error(`persistence bridge unreachable: ${e}`);
+  }
+  if (!res.ok) throw new Error(`persistence bridge HTTP ${res.status}`);
+  const data = (await res.json()) as {
+    bars?: { dim: number; birth: number; death: number }[];
+    counts?: { H0?: number; H1?: number; H2?: number };
+    metric?: string; n_points?: number; wall_seconds?: number; library?: string; max_dim?: number;
+  };
+  const bars = (data.bars ?? []).map((b) => ({
+    dim: (b.dim === 1 ? 1 : b.dim === 2 ? 2 : 0) as 0 | 1 | 2,
+    birth: b.birth, death: b.death,
+  }));
+  return {
+    bars,
+    counts: { H0: data.counts?.H0 ?? 0, H1: data.counts?.H1 ?? 0, H2: data.counts?.H2 ?? 0 },
+    metric: "hamming48",
+    n_points: data.n_points ?? fpsHex.length,
+    wall_seconds: data.wall_seconds ?? (Date.now() - t0) / 1000,
+    library: "ripser",
+    max_dim: 2,
+  };
 }
 
 // ---------- Taxonomy crystallization (unchanged math) ----------

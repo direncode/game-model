@@ -140,3 +140,110 @@ async def form(payload: dict[str, Any]) -> dict[str, Any]:
         "wall_seconds": round(wall, 3),
         "bridge_version": "v0.1",
     }
+
+
+@router.post("/persistence")
+async def persistence(payload: dict[str, Any]) -> dict[str, Any]:
+    """Compute persistent homology (H0, H1, H2) over a set of 48-bit fingerprints.
+
+    Uses ripser for the Vietoris-Rips persistence diagram with Hamming distance
+    as the metric. Returns birth/death pairs per dimension.
+
+    Request:
+      {
+        "fingerprints": ["abcd012345ef", ...],   # hex strings, 48-bit each
+        "max_dim": 2,                            # default 2; H0 H1 H2
+        "max_points": 1500,                      # cap input for compute time
+      }
+
+    Response:
+      {
+        "bars": [{"dim": 0|1|2, "birth": float, "death": float}, ...],
+        "counts": {"H0": N, "H1": M, "H2": K},
+        "metric": "hamming48",
+        "n_points": int,
+        "wall_seconds": float,
+        "library": "ripser",
+      }
+    """
+    fps_hex = payload.get("fingerprints") or []
+    if not fps_hex:
+        raise HTTPException(status_code=400, detail="fingerprints[] required")
+    max_dim = max(0, min(int(payload.get("max_dim") or 2), 2))
+    max_points = max(50, min(int(payload.get("max_points") or 1500), 3000))
+
+    # Sample down if needed — ripser memory is O(n^d+1)
+    if len(fps_hex) > max_points:
+        # Deterministic stride sampling
+        stride = len(fps_hex) // max_points
+        fps_hex = [fps_hex[i] for i in range(0, len(fps_hex), stride)][:max_points]
+
+    try:
+        import numpy as np
+        from ripser import ripser
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=f"persistence libs unavailable: {exc}")
+
+    n = len(fps_hex)
+    # Decode hex to 48-bit ints
+    try:
+        ints = [int(h, 16) & 0xFFFFFFFFFFFF for h in fps_hex]
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"bad fingerprint hex: {exc}")
+
+    # Build pairwise Hamming distance matrix (48-bit popcount of XOR)
+    t0 = time.time()
+    arr = np.array(ints, dtype=np.uint64)
+    dist = np.zeros((n, n), dtype=np.float32)
+    for i in range(n):
+        x = arr[i] ^ arr  # vector XOR
+        # popcount each element
+        counts = np.zeros(n, dtype=np.uint8)
+        for shift in range(48):
+            counts += ((x >> shift) & 1).astype(np.uint8)
+        dist[i] = counts.astype(np.float32)
+    # Symmetric, zero diagonal
+    np.fill_diagonal(dist, 0.0)
+
+    # Run ripser on the precomputed distance matrix
+    try:
+        result = ripser(dist, distance_matrix=True, maxdim=max_dim, thresh=48.0)
+    except Exception as exc:
+        logger.exception("ripser failed")
+        raise HTTPException(status_code=500, detail=f"ripser error: {exc}")
+
+    wall = time.time() - t0
+    diagrams = result.get("dgms", [])
+
+    bars: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    for d, dgm in enumerate(diagrams):
+        n_bars = 0
+        for birth, death in dgm:
+            # ripser returns inf for the persistent component; clamp to maxdist
+            if not (death == death):  # NaN check
+                continue
+            if death == float("inf"):
+                death_v = 48.0
+            else:
+                death_v = float(death)
+            birth_v = float(birth)
+            if death_v <= birth_v:
+                continue
+            bars.append({"dim": int(d), "birth": birth_v, "death": death_v})
+            n_bars += 1
+        counts[f"H{d}"] = n_bars
+
+    # Sort: H0 first, then H1, then H2; within each, longest persistence first
+    bars.sort(key=lambda b: (b["dim"], -(b["death"] - b["birth"])))
+
+    return {
+        "bars": bars,
+        "counts": counts,
+        "metric": "hamming48",
+        "n_points": n,
+        "wall_seconds": round(wall, 3),
+        "library": "ripser",
+        "max_dim": max_dim,
+        "thresh": 48.0,
+    }
