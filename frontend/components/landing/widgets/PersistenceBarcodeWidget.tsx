@@ -55,6 +55,7 @@ export function PersistenceBarcodeWidget({ compact = false, showcase, showcaseLa
   const [hover, setHover] = useState<number | null>(null);
   const [showcaseData, setShowcaseData] = useState<ShowcaseData | null>(null);
   const [showcaseErr, setShowcaseErr] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     if (!showcase) return;
@@ -68,19 +69,31 @@ export function PersistenceBarcodeWidget({ compact = false, showcase, showcaseLa
 
   // Decide which bars to show.
   const isReal = !!showcase && !!showcaseData?.persistence?.bars?.length;
+  const allBars = useMemo<Bar[]>(() => {
+    if (!isReal) return DEMO_BARS;
+    return showcaseData!.persistence!.bars as Bar[];
+  }, [isReal, showcaseData]);
+
   const displayBars = useMemo<Bar[]>(() => {
     if (!isReal) return DEMO_BARS;
-    const all = showcaseData!.persistence!.bars as Bar[];
-    // Longest-persistence-first per dimension, capped at maxBars.
-    const grouped: Bar[] = [0, 1, 2].flatMap((dim) =>
-      all
+    if (expanded) {
+      // Show ALL bars, sorted by dim then by persistence desc within dim.
+      return allBars.slice().sort((a, b) => {
+        if (a.dim !== b.dim) return a.dim - b.dim;
+        return (b.death - b.birth) - (a.death - a.birth);
+      });
+    }
+    // Top-N per dimension by persistence.
+    return [0, 1, 2].flatMap((dim) =>
+      allBars
         .filter((b) => b.dim === dim)
         .slice()
         .sort((a, b) => (b.death - b.birth) - (a.death - a.birth))
         .slice(0, maxBars)
     );
-    return grouped;
-  }, [isReal, showcaseData, maxBars]);
+  }, [isReal, allBars, maxBars, expanded]);
+
+  const totalAvailable = isReal ? allBars.length : DEMO_BARS.length;
 
   const maxDeath = useMemo(() => Math.max(...displayBars.map((b) => b.death), 1), [displayBars]);
   const totalCounts = useMemo(() => {
@@ -121,7 +134,7 @@ export function PersistenceBarcodeWidget({ compact = false, showcase, showcaseLa
         )}
 
         {/* Bars */}
-        <div className="space-y-1.5 mb-6">
+        <div className={`${expanded ? "max-h-[520px] overflow-y-auto pr-1 -mr-1" : ""} space-y-1.5 mb-4 transition-all`}>
           {displayBars.map((bar, i) => {
             const left = (bar.birth / maxDeath) * 100;
             const width = ((bar.death - bar.birth) / maxDeath) * 100;
@@ -155,6 +168,36 @@ export function PersistenceBarcodeWidget({ compact = false, showcase, showcaseLa
             );
           })}
         </div>
+
+        {/* Expand / collapse toggle */}
+        {isReal && totalAvailable > displayBars.length && !expanded && (
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-mono text-[10px] text-white/45">
+              showing top {maxBars} per dimension · {totalAvailable - displayBars.length} more bars hidden
+            </span>
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="inline-flex items-center h-7 px-3 rounded-full border border-white/15 text-white/85 hover:border-white/35 hover:text-white font-mono text-[10px] tracking-wide transition-colors"
+            >
+              show all {totalAvailable} bars
+            </button>
+          </div>
+        )}
+        {isReal && expanded && (
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-mono text-[10px] text-white/45">
+              showing all {totalAvailable} bars · scroll to see them
+            </span>
+            <button
+              type="button"
+              onClick={() => setExpanded(false)}
+              className="inline-flex items-center h-7 px-3 rounded-full border border-white/15 text-white/85 hover:border-white/35 hover:text-white font-mono text-[10px] tracking-wide transition-colors"
+            >
+              collapse
+            </button>
+          </div>
+        )}
 
         {/* Scale ticks */}
         <div className="flex items-center gap-2">

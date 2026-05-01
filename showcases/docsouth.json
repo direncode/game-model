@@ -1,0 +1,4928 @@
+{
+  "showcase": "docsouth",
+  "model_id": "rng_772c6fb01bea38cb6a3a",
+  "tenant_id": "docsouth_showcase",
+  "name": "DocSouth \u00b7 UNC Libraries \u00b7 BTUT + ripser H0/H1/H2 + RunPod GPU",
+  "corpus_records": 37505,
+  "corpus_bytes": 65000586,
+  "corpus_sha256": "ce4edcbd3de74d51c6b8bba6a7d678bbf1f0ec9576ad10b68a9f91ce81b167a2",
+  "corpus_format": "ndjson",
+  "formed_at": "2026-05-01T06:30:26.848Z",
+  "formation_ms": 121827,
+  "fingerprinter_mode": "btut",
+  "effective_strategy": "btut",
+  "coverage_pct": 6,
+  "response_digest": "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  "encrypted": true,
+  "chunked": {
+    "total_chunks": 8,
+    "chunk_size": 5000,
+    "merged": true
+  },
+  "adapter_chain": [
+    {
+      "strategy": "btut",
+      "tried": true,
+      "succeeded": true,
+      "records_covered": 2400,
+      "ms": 45156,
+      "reason": "primary path covered the corpus"
+    },
+    {
+      "strategy": "minhash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered; sparse fallback not needed"
+    },
+    {
+      "strategy": "simhash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    },
+    {
+      "strategy": "bloom",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    },
+    {
+      "strategy": "byte_hash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    }
+  ],
+  "taxonomy_summary": {
+    "classes": 12,
+    "silhouette": 0.28,
+    "null_test_z": 0,
+    "novel_class_count": 9
+  },
+  "persistence": {
+    "bars": [
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 24
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 5
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 5
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 4
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 3,
+        "death": 4
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      }
+    ],
+    "counts": {
+      "H0": 522,
+      "H1": 179,
+      "H2": 77
+    },
+    "metric": "hamming48",
+    "n_points": 600,
+    "wall_seconds": 74.544,
+    "library": "ripser",
+    "max_dim": 2
+  },
+  "runpod": {
+    "job_id": "08d6edef-adcf-4af7-949c-81572c099062-u2",
+    "status": "completed",
+    "submitted_at": "2026-05-01T06:32:28.674Z",
+    "completed_at": "2026-05-01T06:33:34.738Z",
+    "output_summary": {
+      "modules": 3,
+      "final_loss": 0.1992,
+      "final_auc": 0.9045,
+      "final_knn": 0.8192,
+      "total_epochs": 50,
+      "training_time_seconds": 0.0006532669067382812,
+      "device": "cuda"
+    }
+  },
+  "survivors_total": 2400,
+  "collections": {
+    "Church in the Southern Black Community": 419,
+    "First-Person Narratives of the American South": 530,
+    "Library of Southern Literature": 404,
+    "North American Slave Narratives": 1047
+  },
+  "cluster_purity": {
+    "weighted_purity": 0.442,
+    "classes": [
+      {
+        "class_id": 7,
+        "size": 957,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.514,
+        "collections": {
+          "Church in the Southern Black Community": 144,
+          "First-Person Narratives of the American South": 165,
+          "Library of Southern Literature": 156,
+          "North American Slave Narratives": 492
+        }
+      },
+      {
+        "class_id": 1,
+        "size": 359,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.479,
+        "collections": {
+          "Church in the Southern Black Community": 69,
+          "First-Person Narratives of the American South": 61,
+          "Library of Southern Literature": 57,
+          "North American Slave Narratives": 172
+        }
+      },
+      {
+        "class_id": 2,
+        "size": 245,
+        "dominant_collection": "First-Person Narratives of the American South",
+        "dominant_share": 0.343,
+        "collections": {
+          "Church in the Southern Black Community": 49,
+          "First-Person Narratives of the American South": 84,
+          "Library of Southern Literature": 39,
+          "North American Slave Narratives": 73
+        }
+      },
+      {
+        "class_id": 3,
+        "size": 206,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.369,
+        "collections": {
+          "Church in the Southern Black Community": 44,
+          "First-Person Narratives of the American South": 48,
+          "Library of Southern Literature": 38,
+          "North American Slave Narratives": 76
+        }
+      },
+      {
+        "class_id": 6,
+        "size": 184,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.37,
+        "collections": {
+          "Church in the Southern Black Community": 28,
+          "First-Person Narratives of the American South": 56,
+          "Library of Southern Literature": 32,
+          "North American Slave Narratives": 68
+        }
+      },
+      {
+        "class_id": 0,
+        "size": 154,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.357,
+        "collections": {
+          "Church in the Southern Black Community": 33,
+          "First-Person Narratives of the American South": 42,
+          "Library of Southern Literature": 24,
+          "North American Slave Narratives": 55
+        }
+      },
+      {
+        "class_id": 8,
+        "size": 64,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.406,
+        "collections": {
+          "Church in the Southern Black Community": 9,
+          "First-Person Narratives of the American South": 17,
+          "Library of Southern Literature": 12,
+          "North American Slave Narratives": 26
+        }
+      },
+      {
+        "class_id": 10,
+        "size": 62,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.306,
+        "collections": {
+          "Church in the Southern Black Community": 12,
+          "First-Person Narratives of the American South": 17,
+          "Library of Southern Literature": 14,
+          "North American Slave Narratives": 19
+        }
+      },
+      {
+        "class_id": 5,
+        "size": 51,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.451,
+        "collections": {
+          "Church in the Southern Black Community": 5,
+          "First-Person Narratives of the American South": 10,
+          "Library of Southern Literature": 13,
+          "North American Slave Narratives": 23
+        }
+      },
+      {
+        "class_id": 9,
+        "size": 50,
+        "dominant_collection": "First-Person Narratives of the American South",
+        "dominant_share": 0.34,
+        "collections": {
+          "Church in the Southern Black Community": 12,
+          "First-Person Narratives of the American South": 17,
+          "Library of Southern Literature": 7,
+          "North American Slave Narratives": 14
+        }
+      },
+      {
+        "class_id": 11,
+        "size": 49,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.429,
+        "collections": {
+          "Church in the Southern Black Community": 10,
+          "First-Person Narratives of the American South": 10,
+          "Library of Southern Literature": 8,
+          "North American Slave Narratives": 21
+        }
+      },
+      {
+        "class_id": 4,
+        "size": 19,
+        "dominant_collection": "North American Slave Narratives",
+        "dominant_share": 0.421,
+        "collections": {
+          "Church in the Southern Black Community": 4,
+          "First-Person Narratives of the American South": 3,
+          "Library of Southern Literature": 4,
+          "North American Slave Narratives": 8
+        }
+      }
+    ]
+  },
+  "cross_collection_bleed": [
+    {
+      "class_id": 7,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.514,
+      "size": 957,
+      "bleed_share": 0.486,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 144,
+        "First-Person Narratives of the American South": 165,
+        "Library of Southern Literature": 156
+      },
+      "bleed_year_range": [
+        1732,
+        1961
+      ],
+      "bleed_authors": [
+        "Thomas Nelson Page",
+        "William Gilmore Simms",
+        "Ellen Anderson Gholson Glasgow",
+        "James  Patton",
+        "William Alexander Caruthers"
+      ]
+    },
+    {
+      "class_id": 1,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.479,
+      "size": 359,
+      "bleed_share": 0.521,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 69,
+        "First-Person Narratives of the American South": 61,
+        "Library of Southern Literature": 57
+      },
+      "bleed_year_range": [
+        1810,
+        1927
+      ],
+      "bleed_authors": [
+        "Thomas L. Johnson",
+        "Moses  Roper",
+        "Booker T. Washington",
+        "Frederick  Douglass",
+        "Augustus Baldwin Longstreet"
+      ]
+    },
+    {
+      "class_id": 2,
+      "dominant": "First-Person Narratives of the American South",
+      "dominant_share": 0.343,
+      "size": 245,
+      "bleed_share": 0.657,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 49,
+        "Library of Southern Literature": 39,
+        "North American Slave Narratives": 73
+      },
+      "bleed_year_range": [
+        1770,
+        1941
+      ],
+      "bleed_authors": [
+        "Frederick  Douglass",
+        "William H. Robinson",
+        "William A. Smith",
+        "William Wells Brown",
+        "Sojourner  Truth"
+      ]
+    },
+    {
+      "class_id": 3,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.369,
+      "size": 206,
+      "bleed_share": 0.631,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 44,
+        "First-Person Narratives of the American South": 48,
+        "Library of Southern Literature": 38
+      },
+      "bleed_year_range": [
+        1788,
+        1928
+      ],
+      "bleed_authors": [
+        "Levin  Tilmon",
+        "Josiah  Henson",
+        "Mary Boykin Miller Chesnut",
+        "B. F. Wheeler",
+        "N. B. De Saussure"
+      ]
+    },
+    {
+      "class_id": 6,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.37,
+      "size": 184,
+      "bleed_share": 0.63,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 28,
+        "First-Person Narratives of the American South": 56,
+        "Library of Southern Literature": 32
+      },
+      "bleed_year_range": [
+        1810,
+        1923
+      ],
+      "bleed_authors": [
+        "W. E. B. Du Bois",
+        "William  Pickens",
+        "Augustus Baldwin Longstreet",
+        "Virginia  Clay-Clopton",
+        "Belle  Edmondson"
+      ]
+    },
+    {
+      "class_id": 0,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.357,
+      "size": 154,
+      "bleed_share": 0.643,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 33,
+        "First-Person Narratives of the American South": 42,
+        "Library of Southern Literature": 24
+      },
+      "bleed_year_range": [
+        1791,
+        1928
+      ],
+      "bleed_authors": [
+        "Levin  Tilmon",
+        "William H. Robinson",
+        "Rebecca Harding Davis",
+        "Henry  Watterson",
+        "George Moses Horton"
+      ]
+    },
+    {
+      "class_id": 8,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.406,
+      "size": 64,
+      "bleed_share": 0.594,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 9,
+        "First-Person Narratives of the American South": 17,
+        "Library of Southern Literature": 12
+      },
+      "bleed_year_range": [
+        1817,
+        1925
+      ],
+      "bleed_authors": [
+        "William Gilmore Simms",
+        "Ida M. Beard",
+        "Kate  Plake",
+        "Edgar Allan Poe",
+        "Nat  Turner"
+      ]
+    },
+    {
+      "class_id": 10,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.306,
+      "size": 62,
+      "bleed_share": 0.694,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 12,
+        "First-Person Narratives of the American South": 17,
+        "Library of Southern Literature": 14
+      },
+      "bleed_year_range": [
+        1811,
+        1922
+      ],
+      "bleed_authors": [
+        "W. E. B. Du Bois",
+        "Belle  Edmondson",
+        "John Gregg Fee",
+        "William Wells Brown",
+        "M. F. Jamison"
+      ]
+    },
+    {
+      "class_id": 5,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.451,
+      "size": 51,
+      "bleed_share": 0.549,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 5,
+        "First-Person Narratives of the American South": 10,
+        "Library of Southern Literature": 13
+      },
+      "bleed_year_range": [
+        1835,
+        1917
+      ],
+      "bleed_authors": [
+        "George Washington Harris",
+        "Moses  Roper",
+        "Ida M. Beard",
+        "William Gilmore Simms",
+        "Levin  Tilmon"
+      ]
+    },
+    {
+      "class_id": 9,
+      "dominant": "First-Person Narratives of the American South",
+      "dominant_share": 0.34,
+      "size": 50,
+      "bleed_share": 0.66,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 12,
+        "Library of Southern Literature": 7,
+        "North American Slave Narratives": 14
+      },
+      "bleed_year_range": [
+        1811,
+        1980
+      ],
+      "bleed_authors": [
+        "Daniel J. Russell",
+        "Protestant Episcopal Church in the Confederate States of America",
+        "M. L. Latta",
+        "Henry McNeal Turner",
+        "Elisha Winfield Green"
+      ]
+    },
+    {
+      "class_id": 11,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.429,
+      "size": 49,
+      "bleed_share": 0.571,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 10,
+        "First-Person Narratives of the American South": 10,
+        "Library of Southern Literature": 8
+      },
+      "bleed_year_range": [
+        1849,
+        1922
+      ],
+      "bleed_authors": [
+        "Thomas Nelson Page",
+        "M. L. Latta",
+        "Jared Maurice Arter",
+        "Albion Winegar Tourg&#xe9;e",
+        "Peter  Randolph"
+      ]
+    },
+    {
+      "class_id": 4,
+      "dominant": "North American Slave Narratives",
+      "dominant_share": 0.421,
+      "size": 19,
+      "bleed_share": 0.579,
+      "bleed_breakdown": {
+        "Church in the Southern Black Community": 4,
+        "First-Person Narratives of the American South": 3,
+        "Library of Southern Literature": 4
+      },
+      "bleed_year_range": [
+        1859,
+        1925
+      ],
+      "bleed_authors": [
+        "T. G. Steward",
+        "Charles Waddell Chesnutt",
+        "W. H. Davenport",
+        "William H. Robinson",
+        "J. W. Loguen"
+      ]
+    }
+  ],
+  "baselines": [
+    {
+      "method": "chance",
+      "purity": 0.25,
+      "k": 12,
+      "note": "1/k for k collections"
+    },
+    {
+      "method": "engine",
+      "purity": 0.442,
+      "k": 12,
+      "note": "BTUT 48-bit fp + KMeans on Hamming distance"
+    },
+    {
+      "method": "tfidf_kmeans",
+      "purity": 0.49,
+      "k": 12,
+      "note": "sklearn TfidfVectorizer (1-2 gram, 20k features) + KMeans, random_state=42"
+    },
+    {
+      "method": "lda_argmax",
+      "purity": 0.476,
+      "k": 12,
+      "note": "sklearn LatentDirichletAllocation (k=12, online, 20 iter), argmax \u2192 hard cluster"
+    }
+  ],
+  "decade_centroids": [
+    {
+      "decade": 1730,
+      "count": 12,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Library of Southern Literature": 1,
+        "North American Slave Narratives": 11
+      }
+    },
+    {
+      "decade": 1750,
+      "count": 3,
+      "centroid_fp48Hex": "f7ffffbfffff",
+      "drift_from_prev": 2,
+      "collections": {
+        "North American Slave Narratives": 3
+      }
+    },
+    {
+      "decade": 1760,
+      "count": 3,
+      "centroid_fp48Hex": "fbffffffff7f",
+      "drift_from_prev": 4,
+      "collections": {
+        "North American Slave Narratives": 3
+      }
+    },
+    {
+      "decade": 1770,
+      "count": 6,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 2,
+      "collections": {
+        "North American Slave Narratives": 6
+      }
+    },
+    {
+      "decade": 1780,
+      "count": 21,
+      "centroid_fp48Hex": "efffffffffff",
+      "drift_from_prev": 1,
+      "collections": {
+        "Church in the Southern Black Community": 3,
+        "Library of Southern Literature": 4,
+        "North American Slave Narratives": 14
+      }
+    },
+    {
+      "decade": 1790,
+      "count": 25,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 1,
+      "collections": {
+        "Library of Southern Literature": 4,
+        "North American Slave Narratives": 21
+      }
+    },
+    {
+      "decade": 1800,
+      "count": 6,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "North American Slave Narratives": 6
+      }
+    },
+    {
+      "decade": 1810,
+      "count": 21,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 15,
+        "Library of Southern Literature": 2,
+        "North American Slave Narratives": 4
+      }
+    },
+    {
+      "decade": 1820,
+      "count": 20,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 1,
+        "Library of Southern Literature": 2,
+        "North American Slave Narratives": 17
+      }
+    },
+    {
+      "decade": 1830,
+      "count": 103,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 12,
+        "First-Person Narratives of the American South": 14,
+        "Library of Southern Literature": 19,
+        "North American Slave Narratives": 58
+      }
+    },
+    {
+      "decade": 1840,
+      "count": 215,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 9,
+        "First-Person Narratives of the American South": 40,
+        "Library of Southern Literature": 40,
+        "North American Slave Narratives": 126
+      }
+    },
+    {
+      "decade": 1850,
+      "count": 340,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 73,
+        "First-Person Narratives of the American South": 28,
+        "Library of Southern Literature": 71,
+        "North American Slave Narratives": 168
+      }
+    },
+    {
+      "decade": 1860,
+      "count": 244,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 15,
+        "First-Person Narratives of the American South": 37,
+        "Library of Southern Literature": 33,
+        "North American Slave Narratives": 159
+      }
+    },
+    {
+      "decade": 1870,
+      "count": 121,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 19,
+        "First-Person Narratives of the American South": 7,
+        "Library of Southern Literature": 16,
+        "North American Slave Narratives": 79
+      }
+    },
+    {
+      "decade": 1880,
+      "count": 189,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 51,
+        "First-Person Narratives of the American South": 36,
+        "Library of Southern Literature": 24,
+        "North American Slave Narratives": 78
+      }
+    },
+    {
+      "decade": 1890,
+      "count": 233,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 50,
+        "First-Person Narratives of the American South": 46,
+        "Library of Southern Literature": 54,
+        "North American Slave Narratives": 83
+      }
+    },
+    {
+      "decade": 1900,
+      "count": 288,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 51,
+        "First-Person Narratives of the American South": 115,
+        "Library of Southern Literature": 59,
+        "North American Slave Narratives": 63
+      }
+    },
+    {
+      "decade": 1910,
+      "count": 240,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 42,
+        "First-Person Narratives of the American South": 124,
+        "Library of Southern Literature": 24,
+        "North American Slave Narratives": 50
+      }
+    },
+    {
+      "decade": 1920,
+      "count": 90,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0,
+      "collections": {
+        "Church in the Southern Black Community": 49,
+        "First-Person Narratives of the American South": 9,
+        "Library of Southern Literature": 7,
+        "North American Slave Narratives": 25
+      }
+    },
+    {
+      "decade": 1940,
+      "count": 1,
+      "centroid_fp48Hex": "c7ffffffffff",
+      "drift_from_prev": 3,
+      "collections": {
+        "Church in the Southern Black Community": 1
+      }
+    }
+  ],
+  "content_decade_drift": [
+    {
+      "decade": 1730,
+      "count": 12,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1750,
+      "count": 3,
+      "centroid_fp48Hex": "fffffbfeff7e",
+      "drift_from_prev": 4
+    },
+    {
+      "decade": 1760,
+      "count": 3,
+      "centroid_fp48Hex": "b7fffdffefff",
+      "drift_from_prev": 8
+    },
+    {
+      "decade": 1770,
+      "count": 6,
+      "centroid_fp48Hex": "ffffffffffef",
+      "drift_from_prev": 5
+    },
+    {
+      "decade": 1780,
+      "count": 21,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 1
+    },
+    {
+      "decade": 1790,
+      "count": 25,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1800,
+      "count": 6,
+      "centroid_fp48Hex": "ffffffffbfff",
+      "drift_from_prev": 1
+    },
+    {
+      "decade": 1810,
+      "count": 21,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 1
+    },
+    {
+      "decade": 1820,
+      "count": 20,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1830,
+      "count": 103,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1840,
+      "count": 215,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1850,
+      "count": 340,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1860,
+      "count": 244,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1870,
+      "count": 121,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1880,
+      "count": 189,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1890,
+      "count": 233,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1900,
+      "count": 288,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1910,
+      "count": 240,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1920,
+      "count": 90,
+      "centroid_fp48Hex": "ffffffffffff",
+      "drift_from_prev": 0
+    },
+    {
+      "decade": 1940,
+      "count": 1,
+      "centroid_fp48Hex": "fdffffbf75fd",
+      "drift_from_prev": 6
+    }
+  ],
+  "drift_summary": {
+    "structural_avg": 0.68,
+    "structural_max": 4,
+    "content_avg": 1.37,
+    "content_max": 8,
+    "lift_avg": 0.69,
+    "method": "content fingerprint = Bloom-style 48-bit projection of top-32 TF-IDF terms (1-2 gram, English stop-words removed). Decade centroid = majority bit per position over the decade's records."
+  },
+  "named_rare": [
+    {
+      "idx": 10,
+      "fp48Hex": "fffffdffbff7",
+      "hamming_min": 24,
+      "collection": "Church in the Southern Black Community",
+      "author": "Alfred Lee Ridgel",
+      "title": "Africa and African Methodism",
+      "year": "1896",
+      "filename": "church-ridgel-ridgel",
+      "url": "http://docsouth.unc.edu/church/ridgel/menu.html"
+    },
+    {
+      "idx": 35800,
+      "fp48Hex": "fbb6f7ff351f",
+      "hamming_min": 10,
+      "collection": "North American Slave Narratives",
+      "author": "Isaac  Johnson",
+      "title": "Slavery Days in Old Kentucky. A True Story of a Father Who Sold His Wife and Four Children. By One of the Children",
+      "year": "1901",
+      "filename": "neh-johnson-johnson",
+      "url": "http://docsouth.unc.edu/neh/johnson/menu.html"
+    },
+    {
+      "idx": 7758,
+      "fp48Hex": "eca7fbbdbfff",
+      "hamming_min": 7,
+      "collection": "First-Person Narratives of the American South",
+      "author": "John Gregg Fee",
+      "title": "Autobiography of John G. Fee: Berea, Kentucky",
+      "year": "1891",
+      "filename": "fpn-fee-fee",
+      "url": "http://docsouth.unc.edu/fpn/fee/menu.html"
+    },
+    {
+      "idx": 20078,
+      "fp48Hex": "a6f7ffbfff7d",
+      "hamming_min": 7,
+      "collection": "Library of Southern Literature",
+      "author": "William Gilmore Simms",
+      "title": "Poems: Descriptive, Dramatic, Legendary and Contemplative, by William Gilmore Simms, Esq.  In Two Volumes:  Vol. II.  I. Southern Passages a...",
+      "year": "1853",
+      "filename": "southlit-simmspoems2-simmspoems2",
+      "url": "http://docsouth.unc.edu/southlit/simmspoems2/menu.html"
+    },
+    {
+      "idx": 28435,
+      "fp48Hex": "87fdf3bfffff",
+      "hamming_min": 7,
+      "collection": "North American Slave Narratives",
+      "author": "Sarah J. W. Early",
+      "title": "Life and Labors of Rev. Jordan W. Early, One of the Pioneers of African Methodism in the West and South",
+      "year": "1894",
+      "filename": "neh-early-early",
+      "url": "http://docsouth.unc.edu/neh/early/menu.html"
+    },
+    {
+      "idx": 28977,
+      "fp48Hex": "a5dafdfdbf7f",
+      "hamming_min": 7,
+      "collection": "North American Slave Narratives",
+      "author": "James  Mars",
+      "title": "Life of James Mars, a Slave Born and Sold in Connecticut. Written by Himself",
+      "year": "1868",
+      "filename": "neh-mars-mars",
+      "url": "http://docsouth.unc.edu/neh/mars/menu.html"
+    },
+    {
+      "idx": 30151,
+      "fp48Hex": "8df7fffe7eff",
+      "hamming_min": 7,
+      "collection": "North American Slave Narratives",
+      "author": "Louisa  Picquet",
+      "title": "Louisa Picquet, the Octoroon, or, Inside Views of Southern Domestic Life",
+      "year": "1861",
+      "filename": "neh-picquet-picquet",
+      "url": "http://docsouth.unc.edu/neh/picquet/menu.html"
+    },
+    {
+      "idx": 35266,
+      "fp48Hex": "fdfffd3f797f",
+      "hamming_min": 7,
+      "collection": "North American Slave Narratives",
+      "author": "Jacob  Stroyer",
+      "title": "Sketches of My Life in the South. Part I",
+      "year": "1879",
+      "filename": "neh-stroyer-stroyer",
+      "url": "http://docsouth.unc.edu/neh/stroyer/menu.html"
+    },
+    {
+      "idx": 138,
+      "fp48Hex": "fdfeffddbf7d",
+      "hamming_min": 6,
+      "collection": "Church in the Southern Black Community",
+      "author": "Thomas L. Johnson",
+      "title": "Africa for Christ. Twenty-Eight Years a Slave",
+      "year": "1892",
+      "filename": "neh-johnsontl-johnsontl",
+      "url": "http://docsouth.unc.edu/neh/johnsontl/menu.html"
+    },
+    {
+      "idx": 2513,
+      "fp48Hex": "e4fffd9fffff",
+      "hamming_min": 6,
+      "collection": "Church in the Southern Black Community",
+      "author": "William H. Robinson",
+      "title": "From Log Cabin to the Pulpit, or, Fifteen Years in Slavery",
+      "year": "1913",
+      "filename": "fpn-robinson-robinson",
+      "url": "http://docsouth.unc.edu/fpn/robinson/menu.html"
+    }
+  ],
+  "source": {
+    "url": "https://docsouth.unc.edu/docsouthdata/",
+    "license": "Open / public domain (DocSouth full-text archives)",
+    "publisher": "UNC Libraries \u00b7 University of North Carolina at Chapel Hill",
+    "collections": [
+      "North American Slave Narratives",
+      "First-Person Narratives of the American South",
+      "Library of Southern Literature",
+      "The Church in the Southern Black Community"
+    ],
+    "source_texts": 711
+  },
+  "verification": {
+    "instructions": "1) Re-download the four DocSouth ZIPs from https://docsouth.unc.edu/docsouthdata/ . 2) Re-run scripts/docsouth_harvest.py to produce docsouth.ndjson. 3) sha256sum docsouth.ndjson should equal corpus_sha256. 4) Re-form via POST /api/range-form with corpus_path, compute_persistence, use_runpod, seed=42. The response_digest is invariant under (corpus_sha256, model_id_within_tenant, seed).",
+    "corpus_sha256_check": "Run sha256sum on the rebuilt /data/formed_models/_inputs/docsouth.ndjson."
+  },
+  "generated_at": "2026-05-01T07:09:53Z"
+}

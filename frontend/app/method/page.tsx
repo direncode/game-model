@@ -12,6 +12,9 @@ import { ClusterPurityWidget } from "@/components/landing/widgets/ClusterPurityW
 import { DecadeTrajectoryWidget } from "@/components/landing/widgets/DecadeTrajectoryWidget";
 import { NamedRareRecordsWidget } from "@/components/landing/widgets/NamedRareRecordsWidget";
 import { CorpusVerificationWidget } from "@/components/landing/widgets/CorpusVerificationWidget";
+import { BaselineComparisonWidget } from "@/components/landing/widgets/BaselineComparisonWidget";
+import { CrossCollectionBleedWidget } from "@/components/landing/widgets/CrossCollectionBleedWidget";
+import { ContentDriftWidget } from "@/components/landing/widgets/ContentDriftWidget";
 
 export const metadata: Metadata = {
   title: "Method · Latent Ocean",
@@ -75,6 +78,7 @@ export default function MethodPage() {
                 "isolation", "resilience", "query", "provenance",
                 "audit", "topology", "falsifiability",
                 "curatorial recovery", "decade drift", "named rare", "verifiable",
+                "baselines", "bleed", "content drift",
               ].map((t, i) => (
                 <a
                   key={t}
@@ -222,6 +226,36 @@ export default function MethodPage() {
           body="The corpus_sha256 is third-party-derivable from the public DocSouth ZIP archives — re-download, re-harvest, re-hash, compare. The response_digest is invariant under (corpus, model_id, seed=42) and reproduces internally. The full verification recipe is one block away. The 2,400 BTUT-survivor fingerprint hex strings themselves stay private; everything that lets you verify the claim publicly does not."
         >
           <CorpusVerificationWidget showcase="docsouth" />
+        </Section>
+
+        {/* 12. Baseline comparison */}
+        <Section
+          anchor="section-12"
+          kicker="12 · Baselines · TF-IDF, LDA, chance"
+          title={<>The honest comparison.<br /><span className="text-white/45">On a text corpus, full-text NLP wins curatorial recovery.</span></>}
+          body="A humanities reader will reasonably ask how 0.442 weighted purity compares to TF-IDF + k-means or LDA. We ran both on the same 2,400 survivors with k=12 and seed=42. TF-IDF reaches 0.490; LDA reaches 0.476. Both beat the engine's structural fingerprint on this metric. The engine wins on different axes — fixed-size 32 KB artifact vs the 65 MB corpus required to re-derive TF-IDF, deterministic re-issuability, version-stable across sklearn upgrades. Surfacing the loss publicly is the contract."
+        >
+          <BaselineComparisonWidget showcase="docsouth" />
+        </Section>
+
+        {/* 13. Cross-collection bleed */}
+        <Section
+          anchor="section-13"
+          kicker="13 · Bleed · where the actual finding is"
+          title={<>Class #7 is 51% Slave Narratives.<br /><span className="text-white/45">The other 49% is the finding.</span></>}
+          body="The single largest k-means class is dominated by Slave Narratives at 51% — and the remaining 49% spreads almost evenly across the other three collections (165 First-Person, 156 Library, 144 Church). An even bleed across three different curatorial categories is structural similarity that crosses the curatorial boundary — a testimonial register the engine reads as one signal regardless of where the archive's editors filed each text. Click any class to inspect its breakdown, year range, and most-frequent bleed authors."
+        >
+          <CrossCollectionBleedWidget showcase="docsouth" />
+        </Section>
+
+        {/* 14. Content drift */}
+        <Section
+          anchor="section-14"
+          kicker="14 · Content drift · the structural variant redeemed"
+          title={<>The structural fingerprint flatlines.<br /><span className="text-white/45">A content-weighted variant doesn&rsquo;t.</span></>}
+          body="The structural 48-bit fingerprint shows ~0–4 Hamming bits of decade-to-decade drift across 180 years — content-light by design. We built a content-weighted variant (Bloom-style 48-bit projection of each record's top-32 TF-IDF terms) and recomputed decade centroids on the same 2,400 survivors. Average drift roughly doubles (0.68 → 1.37 bits, +0.69 lift); peak drift hits 8/48. Both variants are valid; the platform now publishes both and documents the trade-off."
+        >
+          <ContentDriftWidget showcase="docsouth" />
         </Section>
 
         {/* CTA */}
