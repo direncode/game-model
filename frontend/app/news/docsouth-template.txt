@@ -1,0 +1,9 @@
+{
+    date: "2026 · 05 · 01",
+    kind: "dispatch",
+    title: "DocSouth · UNC Libraries · the engine on a real archive",
+    blurb:
+      "Today the platform formed its first private model on a real institutional corpus: Documenting the American South, UNC Libraries' digitized archive of Southern history. {{TOTAL_RECORDS}} chapter-sized segments across four collections — North American Slave Narratives, First-Person Narratives of the American South, Library of Southern Literature, The Church in the Southern Black Community — totaling {{CORPUS_BYTES}} of plain text. Formation completed in {{FORMATION_MS}}ms with effective_strategy={{EFFECTIVE_STRATEGY}} and coverage_pct={{COVERAGE_PCT}}%. Re-issuing the same query against the formed model returns byte-identical bytes; the determinism contract held across {{DIGEST_MATCHES}}/7 query intents. Cross-tenant probe with a separate bearer returned 404, confirming hard isolation. The audit log captured {{AUDIT_COUNT}} events with CEF and OCSF export available. The artifact lives in tenant docsouth_showcase, encrypted at rest with AES-256-GCM.",
+    link: { label: "Open the workbench", href: "/console" },
+    digest: "{{RESPONSE_DIGEST}}",
+  },

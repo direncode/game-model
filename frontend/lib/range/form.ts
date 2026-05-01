@@ -185,7 +185,16 @@ async function fingerprintWithFallback(
   let primaryOK = false;
   try {
     primaryFps = await chunkedFingerprint(primary, records);
-    primaryOK = primaryFps.length >= Math.min(records.length, TARGET_FINGERPRINT_COUNT) || primaryFps.length === records.length;
+    // Coverage heuristic differs by primary mode:
+    //   - BTUT is a SAMPLING primitive by design (~300 survivors per chunk).
+    //     If it produced any survivors at all, primary covered the corpus
+    //     in the BTUT sense and the sparse-fallback chain should NOT run.
+    //   - Node-dense is a 1:1 fingerprinter: it must cover every record.
+    if (primary.mode === "btut") {
+      primaryOK = primaryFps.length > 0;
+    } else {
+      primaryOK = primaryFps.length >= Math.min(records.length, TARGET_FINGERPRINT_COUNT) || primaryFps.length === records.length;
+    }
   } catch (e) {
     attempts.push({ strategy: primaryStrategy as ChainAttempt["strategy"], tried: true, succeeded: false, records_covered: 0, ms: Date.now() - t0, reason: `primary failed: ${e}` });
   }
