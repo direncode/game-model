@@ -18,6 +18,15 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
+    date: "2026 · 05 · 01",
+    kind: "dispatch",
+    title: "DocSouth · the engine on a real institutional archive",
+    blurb:
+      "Today the platform formed its first private model on a real institutional corpus: Documenting the American South, UNC Libraries' digitized archive of Southern history. 37,505 chapter-sized segments across four collections — North American Slave Narratives, First-Person Narratives of the American South, Library of Southern Literature, The Church in the Southern Black Community — totaling 65 MB of plain text from 711 source texts. Formation completed in 45.4 seconds via the real Python BTUT bridge: 8 chunks of 5,000 records each, merged into a single artifact with 2,400 representative fingerprints. The orchestrator stamped fingerprinter_mode=btut, effective_strategy=btut, coverage_pct=6 (the BTUT sample's intentional ratio); the sparse-fallback chain correctly stayed dormant. K-means crystallized 12 classes with silhouette 0.28 and 9 novel classes outside the three most populous. Re-issuing each of the seven query intents returned byte-identical sha256 digests — 7/7 deterministic. A cross-tenant probe with a separate bearer token returned 404; the docsouth_showcase tenant's own token returned 200. Audit log captured 18 events in JSON, CEF, and OCSF formats. The artifact is encrypted at rest with AES-256-GCM and lives at /data/formed_models/docsouth_showcase/rng_6a31af003d56fd0375b5.range.enc — 639 KB on disk.",
+    link: { label: "Open the workbench", href: "/console" },
+    digest: "57b8740da500bbae73332c2aad739b11b62959ded2834b345fdb87353f526800",
+  },
+  {
     date: "2026 · 04 · 30",
     kind: "release",
     title: "Range Console 1.0",

@@ -41,9 +41,13 @@ CTX = ssl.create_default_context()
 CTX.check_hostname = False
 CTX.verify_mode = ssl.CERT_NONE
 
+UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+
 def http(method: str, url: str, *, headers: dict | None = None, body: bytes | None = None,
          timeout: float = 60.0) -> tuple[int, bytes]:
-    req = urllib.request.Request(url, method=method, data=body, headers=headers or {})
+    h = {"User-Agent": UA, "Accept": "application/json"}
+    if headers: h.update(headers)
+    req = urllib.request.Request(url, method=method, data=body, headers=h)
     try:
         with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
             return r.status, r.read()
@@ -73,7 +77,7 @@ def main() -> int:
         print(f"  ERROR no DocSouth model in {len(models)} returned"); return 1
     m = max(docsouth, key=lambda x: x.get("formed_at", ""))
     model_id = m["id"]
-    print(f"  selected: {model_id}  ·  {m['name']}")
+    print(f"  selected: {model_id}  .  {m['name']}")
     print(f"           records={m['corpus_records']:,}  fingerprinter={m.get('fingerprinter_mode')}  formation_ms={m.get('formation_ms','?'):,}")
     summary["model_id"] = model_id
     summary["model_name"] = m["name"]
@@ -96,14 +100,14 @@ def main() -> int:
     tx = meta.get("taxonomy", {})
     print(f"  taxonomy.classes:      {len(tx.get('classes', []))}")
     print(f"  taxonomy.silhouette:   {tx.get('silhouette','n/a')}")
-    print(f"  taxonomy.null_test_z:  {tx.get('null_test_z','n/a')}σ")
+    print(f"  taxonomy.null_test_z:  {tx.get('null_test_z','n/a')} sigma")
     print(f"  taxonomy.novel_count:  {tx.get('novel_class_count','n/a')}")
     chunked = meta.get("chunked", {})
     print(f"  chunked.total_chunks:  {chunked.get('total_chunks','n/a')}")
     print(f"  chunked.merged:        {chunked.get('merged','n/a')}")
     print(f"  adapter_chain:")
     for a in (meta.get("adapter_chain") or []):
-        flag = "✓" if a.get("succeeded") else ("·" if not a.get("tried") else "✗")
+        flag = "✓" if a.get("succeeded") else ("." if not a.get("tried") else "✗")
         print(f"    {flag} {a.get('strategy'):<14} tried={a.get('tried')!s:<5} covered={a.get('records_covered',0):>6}  ms={a.get('ms',0):>6}  reason={a.get('reason','')}")
     summary["meta"] = {
         "fingerprinter_mode":  meta.get("fingerprinter_mode"),
@@ -142,7 +146,7 @@ def main() -> int:
             "metrics": ans.get("metrics", {}),
             "citations": ans.get("citations", []),
         }
-        print(f"  [{intent:<16}] digest={digest[:32]}…  wall={wall}ms  citations={cits}")
+        print(f"  [{intent:<16}] digest={digest[:32]}...  wall={wall}ms  citations={cits}")
 
     # 4. Re-issue determinism check
     print("\n=== 4. Determinism — re-issue each query, verify byte-identical digest ===")
@@ -161,8 +165,8 @@ def main() -> int:
         determinism[intent] = "match" if match else "diverged"
         if match: pass_n += 1
         else:     fail_n += 1
-        print(f"  [{intent:<16}] {'match  ✓' if match else 'DIVERGED ✗'}  ({d2[:32]}…)")
-    print(f"  → {pass_n}/{len(INTENTS)} byte-identical · {fail_n} diverged")
+        print(f"  [{intent:<16}] {'match  OK' if match else 'DIVERGED ✗'}  ({d2[:32]}...)")
+    print(f"  -> {pass_n}/{len(INTENTS)} byte-identical . {fail_n} diverged")
     summary["determinism"] = {"pass": pass_n, "fail": fail_n, "intents": determinism}
 
     # 5. Cross-tenant probe
@@ -218,9 +222,9 @@ def main() -> int:
         "taxonomy": tax_ans[:600],
         "first_digests": {k: v.get("digest") for k, v in first_runs.items()},
     }
-    print("  rare answer head:    ", rare_ans[:120].replace("\n", " "), "…")
-    print("  novel answer head:   ", novel_ans[:120].replace("\n", " "), "…")
-    print("  taxonomy answer head:", tax_ans[:120].replace("\n", " "), "…")
+    print("  rare answer head:    ", rare_ans[:120].replace("\n", " "), "...")
+    print("  novel answer head:   ", novel_ans[:120].replace("\n", " "), "...")
+    print("  taxonomy answer head:", tax_ans[:120].replace("\n", " "), "...")
 
     summary["finished_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     json.dump(summary, open(SUMMARY_PATH, "w"), indent=2)
