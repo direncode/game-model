@@ -3,6 +3,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { parseCSV, scoreRows, type Scored } from "@/lib/csvClientFingerprint";
+import { MultiTenantSplitWidget } from "@/components/landing/widgets/MultiTenantSplitWidget";
+import { SparseFallbackChainWidget } from "@/components/landing/widgets/SparseFallbackChainWidget";
 
 /**
  * HomeScroller — the long surface beneath the live console hero.
@@ -704,6 +706,61 @@ function CitationsSection() {
 }
 
 // =====================================================================
+//  Section VIa — Multi-tenant split (real concurrent formations)
+// =====================================================================
+
+function MultiTenantSection() {
+  return (
+    <section className="relative px-6 py-32 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
+          Isolation · two tenants, one substrate · live
+        </p>
+        <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-8">
+          Two API keys.<br />
+          <span className="text-white/45">Two artifact stores.</span>
+        </h2>
+        <p className="text-[15px] text-white/55 leading-snug max-w-3xl mb-12">
+          Click "form both" — two demo tokens are minted, two formations
+          fire concurrently, two distinct artifact IDs come back. Each
+          tenant's bearer token is then used against the OTHER tenant's
+          ID; both probes return 404. The route's getModel(id, tenant_id)
+          is the gate, the 404 is the proof.
+        </p>
+        <MultiTenantSplitWidget compact />
+      </div>
+    </section>
+  );
+}
+
+// =====================================================================
+//  Section VIb — Sparse fallback chain (real cascade)
+// =====================================================================
+
+function SparseFallbackSection() {
+  return (
+    <section className="relative px-6 py-32 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
+          Resilience · five strategies · zero rejections
+        </p>
+        <h2 className="font-display font-medium text-[clamp(48px,7vw,108px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl mb-8">
+          The orchestrator<br />
+          <span className="text-white/45">falls through.</span>
+        </h2>
+        <p className="text-[15px] text-white/55 leading-snug max-w-3xl mb-12">
+          BTUT primary, then dense Node, then MinHash 128 permutations,
+          then SimHash 48-bit, then Bloom-projection, then byte-hash as
+          the failsafe. Whichever stage produces coverage pulses bright;
+          the others record their attempt and reason. No corpus rejected.
+        </p>
+        <SparseFallbackChainWidget compact />
+      </div>
+    </section>
+  );
+}
+
+// =====================================================================
 //  Section VII — Engineering channel (replaces SuperGrok-shaped panel)
 // =====================================================================
 
@@ -779,6 +836,8 @@ export function HomeScroller() {
       <DeterminismSection />
       <ArchitectureSection />
       <CitationsSection />
+      <MultiTenantSection />
+      <SparseFallbackSection />
       <EngineeringChannelSection />
     </>
   );
