@@ -170,13 +170,23 @@ async def persistence(payload: dict[str, Any]) -> dict[str, Any]:
     if not fps_hex:
         raise HTTPException(status_code=400, detail="fingerprints[] required")
     max_dim = max(0, min(int(payload.get("max_dim") or 2), 2))
-    max_points = max(50, min(int(payload.get("max_points") or 1500), 3000))
+    # Vietoris-Rips memory grows as O(n^(max_dim+1)); cap aggressively.
+    # 600 points × dim 2 already produces ~36M 2-simplices.
+    default_max = 800 if max_dim < 2 else 600
+    max_points = max(50, min(int(payload.get("max_points") or default_max), 1500))
+    # Threshold limits which simplices ripser enumerates. For 48-bit Hamming
+    # distance, mean random-pair distance is ~24, so capping at 24 keeps the
+    # half of the metric space where local structure lives.
+    thresh = float(payload.get("thresh") or 24.0)
 
-    # Sample down if needed — ripser memory is O(n^d+1)
+    # Sample down if needed — Vietoris-Rips up to dim 2 is O(n^3) in
+    # 2-simplices, so we cap aggressively. Use ceil division so the
+    # stride genuinely thins the input (stride=1 was a no-op for any
+    # n > max_points).
     if len(fps_hex) > max_points:
-        # Deterministic stride sampling
-        stride = len(fps_hex) // max_points
-        fps_hex = [fps_hex[i] for i in range(0, len(fps_hex), stride)][:max_points]
+        import math as _math
+        stride = max(2, _math.ceil(len(fps_hex) / max_points))
+        fps_hex = fps_hex[::stride][:max_points]
 
     try:
         import numpy as np
@@ -207,7 +217,7 @@ async def persistence(payload: dict[str, Any]) -> dict[str, Any]:
 
     # Run ripser on the precomputed distance matrix
     try:
-        result = ripser(dist, distance_matrix=True, maxdim=max_dim, thresh=48.0)
+        result = ripser(dist, distance_matrix=True, maxdim=max_dim, thresh=thresh)
     except Exception as exc:
         logger.exception("ripser failed")
         raise HTTPException(status_code=500, detail=f"ripser error: {exc}")
@@ -224,7 +234,7 @@ async def persistence(payload: dict[str, Any]) -> dict[str, Any]:
             if not (death == death):  # NaN check
                 continue
             if death == float("inf"):
-                death_v = 48.0
+                death_v = thresh
             else:
                 death_v = float(death)
             birth_v = float(birth)
@@ -245,5 +255,5 @@ async def persistence(payload: dict[str, Any]) -> dict[str, Any]:
         "wall_seconds": round(wall, 3),
         "library": "ripser",
         "max_dim": max_dim,
-        "thresh": 48.0,
+        "thresh": thresh,
     }
