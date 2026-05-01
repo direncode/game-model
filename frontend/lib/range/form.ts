@@ -414,28 +414,49 @@ async function computePersistence(fps: Fingerprint[]): Promise<FormedModel["pers
   const max_points = 600;
   const fpsHex = fps.map((f) => f.fp48Hex);
   const t0 = Date.now();
-  // Long timeout for ripser — 5 min ceiling.
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 300_000);
-  let res: Response;
-  try {
-    res = await fetch(`${bridge}/api/v1/range/persistence`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fingerprints: fpsHex, max_dim: 2, max_points, thresh: 24.0 }),
-      signal: ctrl.signal,
-    });
-  } catch (e) {
-    clearTimeout(timer);
-    throw new Error(`persistence bridge unreachable: ${e}`);
-  }
-  clearTimeout(timer);
-  if (!res.ok) throw new Error(`persistence bridge HTTP ${res.status}`);
-  const data = (await res.json()) as {
-    bars?: { dim: number; birth: number; death: number }[];
+
+  // Node 20's undici fetch defaults to headersTimeout=60s. Ripser on 600
+  // Hamming-48 points runs ~75s, so we use the raw http module with no
+  // socket idle timeout — fetch+webpack don't surface a clean way to
+  // raise undici timeouts in a Next.js server route.
+  const data = await new Promise<{
+    bars: { dim: number; birth: number; death: number }[];
     counts?: { H0?: number; H1?: number; H2?: number };
-    metric?: string; n_points?: number; wall_seconds?: number; library?: string; max_dim?: number;
-  };
+    n_points?: number;
+    wall_seconds?: number;
+  }>((resolve, reject) => {
+    const http = require("node:http") as typeof import("node:http");
+    const url = new URL(`${bridge}/api/v1/range/persistence`);
+    const body = JSON.stringify({ fingerprints: fpsHex, max_dim: 2, max_points, thresh: 24.0 });
+    const req = http.request({
+      protocol: url.protocol,
+      hostname: url.hostname,
+      port: url.port || 80,
+      path: url.pathname + url.search,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(body),
+        Connection: "close",
+      },
+      timeout: 0,
+    }, (res) => {
+      const chunks: Buffer[] = [];
+      res.on("data", (c) => chunks.push(c));
+      res.on("end", () => {
+        if ((res.statusCode ?? 0) < 200 || (res.statusCode ?? 0) >= 300) {
+          return reject(new Error(`persistence bridge HTTP ${res.statusCode}`));
+        }
+        try { resolve(JSON.parse(Buffer.concat(chunks).toString("utf-8"))); }
+        catch (e) { reject(new Error(`persistence bridge JSON parse: ${e}`)); }
+      });
+      res.on("error", reject);
+    });
+    req.setTimeout(0);   // no idle timeout
+    req.on("error", (e) => reject(new Error(`persistence bridge unreachable: ${e}`)));
+    req.write(body);
+    req.end();
+  });
   const bars = (data.bars ?? []).map((b) => ({
     dim: (b.dim === 1 ? 1 : b.dim === 2 ? 2 : 0) as 0 | 1 | 2,
     birth: b.birth, death: b.death,
