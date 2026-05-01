@@ -409,21 +409,27 @@ async function pollAndAttachRunPodResult(modelId: string, runpodJobId: string, t
 async function computePersistence(fps: Fingerprint[]): Promise<FormedModel["persistence"]> {
   const bridge = process.env.BTUT_BRIDGE_URL;
   if (!bridge) return undefined;
-  // Cap the input — ripser memory grows with n and the full 2400 survivors
-  // is fine, but if a future formed model has many more we trim deterministically.
-  const max_points = 1500;
-  const fpsHex = fps.slice(0, Math.min(fps.length, 4 * max_points)).map((f) => f.fp48Hex);
+  // The bridge samples server-side (stride). We send all survivors and let
+  // the server cap. max_points=600 + thresh=24 keeps wall-time under ~90s.
+  const max_points = 600;
+  const fpsHex = fps.map((f) => f.fp48Hex);
   const t0 = Date.now();
+  // Long timeout for ripser — 5 min ceiling.
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 300_000);
   let res: Response;
   try {
     res = await fetch(`${bridge}/api/v1/range/persistence`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fingerprints: fpsHex, max_dim: 2, max_points }),
+      body: JSON.stringify({ fingerprints: fpsHex, max_dim: 2, max_points, thresh: 24.0 }),
+      signal: ctrl.signal,
     });
   } catch (e) {
+    clearTimeout(timer);
     throw new Error(`persistence bridge unreachable: ${e}`);
   }
+  clearTimeout(timer);
   if (!res.ok) throw new Error(`persistence bridge HTTP ${res.status}`);
   const data = (await res.json()) as {
     bars?: { dim: number; birth: number; death: number }[];
