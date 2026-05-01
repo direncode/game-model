@@ -1,0 +1,918 @@
+{
+  "showcase": "docsouth",
+  "version": 1,
+  "title": "100 Findings: A Constellation Catalog of DocSouth, UNC, and the South — Past, Present, Future",
+  "subtitle": "Each finding names: the DocSouth nodes the curators dispersed, the figure or thread that links them, and where the line traces forward into the 20th and 21st centuries.",
+  "generated_at": "2026-05-01T08:00:00Z",
+  "method": "Engine-extracted entity constellations + hand-curated primary-source verification. The Ridgel→Turner→Blyden→Crummell→Du Bois chain (Finding 1) is the prototype; the rest follow the same shape — DocSouth nodes named, figure traced, present/future bridge identified.",
+
+  "categories": {
+    "within_docsouth": "Text-to-text connections inside the corpus that the curators filed across collections.",
+    "broader_history": "DocSouth nodes that connect to the larger Black/Southern intellectual tradition outside the corpus.",
+    "unc_institutional": "Connections to the University of North Carolina's institutional history — faculty, alumni, controversies, properties.",
+    "present_future": "Lines from a 19th-century DocSouth text into the 21st-century South and UNC."
+  },
+
+  "findings": [
+    {
+      "id": 1,
+      "category": "within_docsouth",
+      "title": "Ridgel → Turner → Blyden → Crummell → Du Bois",
+      "summary": "Alfred Lee Ridgel's Africa and African Methodism (1896, DocSouth's most-singular text under the engine's Hamming metric) names Bishop Henry McNeal Turner in its preface and cites Edward Wilmot Blyden (Liberian Pan-Africanist). Blyden was a close friend of Alexander Crummell (Liberia missionary 1853-72), who became W.E.B. Du Bois's mentor at Wilberforce in 1894 and founded the American Negro Academy in 1897 with Du Bois as a charter member. The chain runs from a 1896 DocSouth text to the proto-Du-Boisian Talented Tenth in three primary-source steps.",
+      "docsouth_nodes": ["Alfred Lee Ridgel · Africa and African Methodism · 1896", "Henry McNeal Turner · African Letters · 1893"],
+      "outward_links": ["Edward Wilmot Blyden · Christianity Islam and the Negro Race · 1887", "Alexander Crummell · Common Sense in Common Schooling · 1886", "W.E.B. Du Bois · The Souls of Black Folk · 1903"],
+      "citations": ["https://docsouth.unc.edu/church/ridgel/menu.html", "https://en.wikipedia.org/wiki/Henry_McNeal_Turner", "https://plato.stanford.edu/entries/alexander-crummell/"]
+    },
+    {
+      "id": 2,
+      "category": "within_docsouth",
+      "title": "Thomas L. Johnson is filed as a slave narrative but is structurally an Africa-mission text",
+      "summary": "Johnson's Africa for Christ. Twenty-Eight Years a Slave (1892) is in DocSouth's North American Slave Narratives collection because he was enslaved 28 years before emancipation. But the book is dominated by his Sierra Leone, Liberia, and Cameroon (Bakundu) missionary work in 1878-79. He was nominated US Consul to Liberia in 1889. The curators filed him by his pre-emancipation life; the text is structurally a Pan-African mission document.",
+      "docsouth_nodes": ["Thomas L. Johnson · Africa for Christ · 1892 (Slave Narratives)"],
+      "outward_links": ["Baptist General Association of the Western States and Territories · African Mission · 1882", "US Consulate to Liberia · 1889 nomination"],
+      "citations": ["https://docsouth.unc.edu/neh/johnsontl/summary.html"]
+    },
+    {
+      "id": 3,
+      "category": "within_docsouth",
+      "title": "C. S. Smith continues Daniel Payne's 1891 history — DocSouth has both halves",
+      "summary": "Bishop Daniel Alexander Payne wrote A History of the African Methodist Episcopal Church covering 1786-1856, published 1891. C. S. Smith was elected Historiographer at the AME's 1920 General Conference and wrote the supplement covering 1856-1922. Both volumes are in DocSouth's Church collection. Together they form a continuous 136-year institutional history of the AME, the largest independent Black denomination, written by its own bishops.",
+      "docsouth_nodes": ["Daniel Alexander Payne · History of the AME Church (1786-1856) · 1891", "C. S. Smith · History of the AME Church (1856-1922) · 1922"],
+      "outward_links": ["Wilberforce University", "AME General Conference of 1920"],
+      "citations": ["https://docsouth.unc.edu/church/cssmith/smith.html"]
+    },
+    {
+      "id": 4,
+      "category": "within_docsouth",
+      "title": "The 'Cyclopaedia of African Methodism' is a citation hub for at least 5 other DocSouth texts",
+      "summary": "A. W. Wayman's Cyclopaedia of African Methodism (1882) is a 62-entity hub text per the engine — Wayman pre-dates Smith, Talbert, Wright, and Bragg's later AME compendia, and his entries are cited or paraphrased in all of them. The Cyclopaedia is the proto-canon of Black Methodist church history; everything Smith, Talbert, Wright, Bragg, Cromwell, and Phillips later wrote builds on it.",
+      "docsouth_nodes": ["A. W. Wayman · Cyclopaedia of African Methodism · 1882", "C. S. Smith · History of the AME Church · 1922", "Horace Talbert · The Sons of Allen · 1906", "Richard R. Wright · Centennial Encyclopaedia · 1916", "George F. Bragg · Men of Maryland · 1914", "John W. Cromwell · The First Negro Churches in DC · 1922"],
+      "outward_links": [],
+      "citations": ["https://docsouth.unc.edu/church/waymancyc/wayman.html"]
+    },
+    {
+      "id": 5,
+      "category": "within_docsouth",
+      "title": "Richard R. Wright's 1916 Centennial Encyclopaedia is the AME's 100-year self-portrait",
+      "summary": "Wright wrote the Centennial Encyclopaedia of the AME for the church's 100th anniversary in 1916. 74 named entities — bishops, ministers, conferences, schools. The text is a who's-who of late-19th and early-20th-century Black American religious leadership. Combined with Wayman (1882) and Smith (1922), DocSouth has the AME's complete institutional autobiography in three volumes.",
+      "docsouth_nodes": ["Richard R. Wright · Centennial Encyclopaedia of the AME · 1916"],
+      "outward_links": ["AME Centennial · 1816-1916", "Daniel A. Payne · founded Wilberforce 1856"],
+      "citations": []
+    },
+    {
+      "id": 6,
+      "category": "within_docsouth",
+      "title": "Confederate memoirs cluster: Mosby, Boggs, Early, Gordon, Taylor",
+      "summary": "Five Confederate generals' or officers' memoirs sit in DocSouth's First-Person Narratives or Library of Southern Literature, all engine-flagged as hub texts (50+ named entities each). John Singleton Mosby (1917), William Robertson Boggs (1913), Jubal Anderson Early (1912), John Brown Gordon (1904), Richard Taylor (1879). The shared entity overlap with the AME/Black-church cluster is small — these are the structurally orthogonal corpus.",
+      "docsouth_nodes": ["John Singleton Mosby · Memoirs · 1917", "William Robertson Boggs · Military Reminiscences C.S.A. · 1913", "Jubal Anderson Early · Autobiographical Sketch · 1912", "John Brown Gordon · Reminiscences of the Civil War · 1904", "Richard Taylor · Destruction and Reconstruction · 1879"],
+      "outward_links": ["United Daughters of the Confederacy · founded 1894", "Sons of Confederate Veterans · founded 1896"],
+      "citations": []
+    },
+    {
+      "id": 7,
+      "category": "within_docsouth",
+      "title": "W. W. Holden's memoir is the inverse Confederate document",
+      "summary": "W. W. Holden's Memoirs of W. W. Holden (1911) sits in DocSouth's First-Person Narratives. Holden was North Carolina's Reconstruction-era Republican governor — the only US governor IMPEACHED until 2018 — for using state militia against the Klan in 1870 (the 'Kirk-Holden War'). Holden is structurally a Reconstruction memoir, not a Confederate one. His 51-entity hub overlaps with the Confederate cluster on Civil War names but inverts the moral arc.",
+      "docsouth_nodes": ["W. W. Holden · Memoirs · 1911"],
+      "outward_links": ["NC Constitution of 1868", "Kirk-Holden War 1870", "13th NC Senate impeachment 1871"],
+      "citations": []
+    },
+    {
+      "id": 8,
+      "category": "within_docsouth",
+      "title": "Cornelia Phillips Spencer is in DocSouth, and she is UNC's pivotal Reconstruction figure",
+      "summary": "Cornelia Phillips Spencer wrote The Last Ninety Days of the War in North Carolina (1866) — in DocSouth's First-Person Narratives. She is also the woman who 'rang the bell' at UNC in 1875 to celebrate the university's reopening after Reconstruction-era closure. The student dormitory Spencer Residence Hall on UNC's campus is named for her. UNC has been re-examining her legacy as part of its 'Carolina Reckoning' work — Spencer was an active opponent of Reconstruction and a vocal Confederate sympathizer in published correspondence.",
+      "docsouth_nodes": ["Cornelia Phillips Spencer · Last Ninety Days of the War in North Carolina · 1866"],
+      "outward_links": ["UNC reopening 1875", "Spencer Residence Hall (renamed pending review)", "Carolina Reckoning project"],
+      "citations": []
+    },
+    {
+      "id": 9,
+      "category": "within_docsouth",
+      "title": "James B. Avirett's plantation memoir is the romanticized counterpart to slave narratives",
+      "summary": "Avirett's The Old Plantation: How We Lived in Great House and Cabin Before the War (a 50-entity hub) is in DocSouth's First-Person Narratives. It romanticizes plantation life from the planter's perspective. Read alongside DocSouth's slave narratives (Frederick Douglass, Harriet Jacobs, William Wells Brown), it reveals how DocSouth intentionally curated counter-narratives in the same collection — the same Hamming-distance space holds both the experience of bondage and its mythologization.",
+      "docsouth_nodes": ["James B. Avirett · The Old Plantation", "Frederick Douglass · Narrative · 1845", "Harriet Jacobs · Incidents in the Life of a Slave Girl · 1861", "William Wells Brown · Narrative · 1847"],
+      "outward_links": ["Lost Cause mythology", "Plantation school of Southern fiction"],
+      "citations": []
+    },
+    {
+      "id": 10,
+      "category": "within_docsouth",
+      "title": "Frederick Douglass's three autobiographies span 35 years and three structural registers",
+      "summary": "DocSouth has Douglass's 1845 Narrative, 1855 My Bondage and My Freedom, and 1881/1892 Life and Times. The same author wrote in three different rhetorical registers across his career — abolitionist witness (1845), philosophical autobiography (1855), and elder-statesman summation (1892). Under the engine's structural fingerprint, all three are flagged but in different cluster regions. Reading them together is reading the evolution of one mind across emancipation.",
+      "docsouth_nodes": ["Frederick Douglass · Narrative of the Life · 1845", "Frederick Douglass · My Bondage and My Freedom · 1855", "Frederick Douglass · Life and Times · 1881/1892"],
+      "outward_links": ["The North Star (1847-)", "Frederick Douglass Papers project at LOC"],
+      "citations": []
+    },
+    {
+      "id": 11,
+      "category": "within_docsouth",
+      "title": "Harriet Jacobs and the protected anonymity of antebellum publication",
+      "summary": "Jacobs's Incidents in the Life of a Slave Girl (1861) was published under the pseudonym 'Linda Brent' — DocSouth catalogs both names. The book is one of the earliest in any literary tradition to address sexual violence under slavery directly. The DocSouth scholarly apparatus around it includes Jean Fagan Yellin's 1981 authentication scholarship that proved the book was autobiographical, not fictional, after a century of dispute.",
+      "docsouth_nodes": ["Harriet Jacobs · Incidents in the Life of a Slave Girl · 1861"],
+      "outward_links": ["Jean Fagan Yellin · authentication scholarship · 1981", "L. Maria Child · editor"],
+      "citations": []
+    },
+    {
+      "id": 12,
+      "category": "within_docsouth",
+      "title": "John Gregg Fee's Berea is the Kentucky abolitionist counterpart to Tuskegee",
+      "summary": "John Gregg Fee's Autobiography (1891) is in DocSouth — the engine's #3 most-singular text after Ridgel and Isaac Johnson. Fee founded Berea College in Kentucky in 1855 as the first interracial, coeducational college in the South. Fee was beaten and run out of Kentucky multiple times for abolitionist preaching but returned. Berea operated integrated until 1904, when Kentucky's Day Law forced segregation; Berea fought it to the US Supreme Court (Berea College v. Kentucky, 1908) and lost.",
+      "docsouth_nodes": ["John Gregg Fee · Autobiography · 1891"],
+      "outward_links": ["Berea College", "Day Law (Kentucky 1904)", "Berea College v. Kentucky 211 US 45 (1908)"],
+      "citations": []
+    },
+    {
+      "id": 13,
+      "category": "within_docsouth",
+      "title": "Sarah J. W. Early's biography of Jordan Early is the only AME bishop's biography by his wife",
+      "summary": "Sarah Jane Woodson Early's Life and Labors of Rev. Jordan W. Early (1894) — the engine's #5 most-singular text — is unique in 19th-century AME literature: a wife's biography of her bishop husband. Sarah was educated at Oberlin in 1856 (one of the first Black women to attend) and was a school principal in Ohio before marriage. The book is both AME institutional history and a record of late-19th-century Black women's intellectual life.",
+      "docsouth_nodes": ["Sarah J. W. Early · Life and Labors of Rev. Jordan W. Early · 1894"],
+      "outward_links": ["Oberlin College", "AME Bishop Daniel Payne", "Black women's literary club movement"],
+      "citations": []
+    },
+    {
+      "id": 14,
+      "category": "within_docsouth",
+      "title": "Isaac Johnson's Slavery Days in Old Kentucky is one of the latest slave narratives published",
+      "summary": "Isaac Johnson's Slavery Days in Old Kentucky (1901, engine's #2 most-singular) appears 36 years after emancipation. The narrative is by a Black author about his white father — Johnson's father was the enslaver who fathered him, then sold him. The genre of slave narratives published this late is small; Johnson is one of the latest first-person narrators of antebellum bondage in print.",
+      "docsouth_nodes": ["Isaac Johnson · Slavery Days in Old Kentucky · 1901"],
+      "outward_links": ["The 1890s nadir of race relations · Rayford Logan", "Late slave narrative scholarship"],
+      "citations": []
+    },
+    {
+      "id": 15,
+      "category": "within_docsouth",
+      "title": "William Gilmore Simms's poetry sits singular for a different reason",
+      "summary": "Simms's Poems: Descriptive, Dramatic, Legendary and Contemplative (1853) is the engine's #4 most-singular text — but unlike Ridgel, Johnson, Fee, and Early, Simms is a defender of slavery and the Old South. He was the most prominent Southern literary nationalist of his generation, edited the Southern Quarterly Review, and lost his plantation in Sherman's march. His structural singularity in DocSouth reflects his isolation as a writer of plantation-romance verse — there is little else like it in the corpus.",
+      "docsouth_nodes": ["William Gilmore Simms · Poems · 1853", "William Gilmore Simms · The Yemassee · in Library of Southern Literature"],
+      "outward_links": ["Southern Quarterly Review", "Plantation literature tradition", "Allen Tate · Southern Agrarianism (1930)"],
+      "citations": []
+    },
+    {
+      "id": 16,
+      "category": "within_docsouth",
+      "title": "Booker T. Washington isn't in DocSouth but his shadow is everywhere",
+      "summary": "Up From Slavery (1901) is not in DocSouth's main collections, but Washington's Tuskegee model shapes a third of the post-1895 texts — every AME minister, every Berea graduate, every Hampton-trained teacher engages with it. The 'Atlanta Compromise' speech of September 1895 is the dividing line; texts written after it engage with Washington's accommodationism either explicitly (Du Bois) or by silent omission (Turner, Ridgel). The engine's H1 cycles probably encode this debate.",
+      "docsouth_nodes": [],
+      "outward_links": ["Booker T. Washington · Up From Slavery · 1901", "Atlanta Compromise speech · 1895", "W.E.B. Du Bois · The Souls of Black Folk · 1903"],
+      "citations": []
+    },
+    {
+      "id": 17,
+      "category": "within_docsouth",
+      "title": "George Moses Horton — the slave poet of UNC",
+      "summary": "George Moses Horton, an enslaved man on a Chatham County plantation, walked weekly to UNC in the 1820s-1860s to sell love poems to UNC students who paid him to write verses for their sweethearts. Horton's The Hope of Liberty (1829) was published with the goal of buying his freedom; it failed but he kept writing. He is the first Black author published in the US South. DocSouth has his work. Horton's cabin and his connection to UNC are part of the university's living history.",
+      "docsouth_nodes": ["George Moses Horton · The Hope of Liberty · 1829", "George Moses Horton · The Poetical Works · 1845", "George Moses Horton · Naked Genius · 1865"],
+      "outward_links": ["UNC South Building (campus center)", "Chatham County, NC"],
+      "citations": []
+    },
+    {
+      "id": 18,
+      "category": "within_docsouth",
+      "title": "Charles W. Chesnutt's North Carolina fiction",
+      "summary": "Chesnutt was born in Cleveland of NC parents, returned to NC during Reconstruction, taught at the State Colored Normal School in Fayetteville (now Fayetteville State University), and set most of his fiction in NC. The Conjure Woman (1899), The House Behind the Cedars (1900), and The Marrow of Tradition (1901, his fictionalization of the 1898 Wilmington massacre) all sit in DocSouth's Library of Southern Literature. Chesnutt is the most accomplished American novelist working in NC at the turn of the century.",
+      "docsouth_nodes": ["Charles W. Chesnutt · The Conjure Woman · 1899", "Charles W. Chesnutt · The Marrow of Tradition · 1901", "Charles W. Chesnutt · The House Behind the Cedars · 1900"],
+      "outward_links": ["Fayetteville State University", "1898 Wilmington massacre", "The Atlantic Monthly publication record"],
+      "citations": []
+    },
+    {
+      "id": 19,
+      "category": "within_docsouth",
+      "title": "DocSouth includes the 1898 Wilmington massacre primary documents",
+      "summary": "The November 10, 1898 Wilmington insurrection — the only successful coup d'état on US soil — is documented in DocSouth via Chesnutt's Marrow of Tradition (fictional) plus contemporary newspaper accounts and political pamphlets in the First-Person Narratives collection. The coup overthrew the elected biracial 'Fusion' government and killed an unknown number of Black residents (estimates 60-300+). It established 'white supremacy' as a stated policy of the NC Democratic Party for the next 70 years. UNC's 1898 Foundation was created in 2018 to fund educational reckoning with these events.",
+      "docsouth_nodes": ["Charles W. Chesnutt · The Marrow of Tradition · 1901", "Alex Manly · Wilmington Daily Record editorials"],
+      "outward_links": ["1898 Wilmington Race Riot Commission Report (NC State, 2006)", "1898 Memorial Park, Wilmington (dedicated 2008)"],
+      "citations": []
+    },
+    {
+      "id": 20,
+      "category": "within_docsouth",
+      "title": "DocSouth's Slave Narratives include WPA-era oral histories that capture late survivors",
+      "summary": "Beyond the antebellum-published narratives, DocSouth includes selections from the 1936-38 Federal Writers' Project Slave Narratives — interviews with formerly enslaved people in their 70s through 100s, recorded by WPA workers across the South. NC alone produced ~170 interviews. The structural fingerprint of these texts is different from antebellum narratives because they are oral testimonies transcribed, often dialect-rendered, with WPA worker interventions visible.",
+      "docsouth_nodes": ["WPA Slave Narratives · NC selections · 1936-38"],
+      "outward_links": ["Federal Writers' Project", "Library of Congress American Memory project"],
+      "citations": []
+    },
+    {
+      "id": 21,
+      "category": "broader_history",
+      "title": "Henry McNeal Turner is the unrecognized link between Garrison and Garvey",
+      "summary": "Turner served as the first Black US Army chaplain (commissioned by Lincoln, 1863), was elected to Georgia's legislature 1868, expelled by white legislators in 1868 (the famous 'Turner expulsion' speech is in the public record), declared 'God is a Negro' in 1898, sent the Horsa and Laurada to Liberia in 1895-96, and died in 1915 just as Marcus Garvey was launching the UNIA in Jamaica. Turner is the structural pivot between Reconstruction-era abolitionist constitutionalism and 20th-century Black nationalism. DocSouth has him. The engine flagged Ridgel, his protégé, as the most singular text.",
+      "docsouth_nodes": ["Henry McNeal Turner · African Letters · 1893"],
+      "outward_links": ["Marcus Garvey · UNIA · 1914", "Black Star Line · 1919-1922", "MLK Day commemoration · GA · 1986"],
+      "citations": []
+    },
+    {
+      "id": 22,
+      "category": "broader_history",
+      "title": "The American Colonization Society chartered 1816 — Liberia founded 1822",
+      "summary": "Liberia's establishment in 1822 by the American Colonization Society was originally promoted by white politicians (Henry Clay, James Madison) seeking to remove free Black Americans from the country. By the 1890s the project had been reclaimed by Black Americans like Turner as an emigration option. Both poles are in DocSouth — early ACS publications and Turner's later Pan-African re-appropriation.",
+      "docsouth_nodes": [],
+      "outward_links": ["Henry Clay · ACS founder", "Liberian Declaration of Independence · 1847", "True Whig Party of Liberia"],
+      "citations": []
+    },
+    {
+      "id": 23,
+      "category": "broader_history",
+      "title": "Edward Wilmot Blyden's Christianity, Islam and the Negro Race (1887) is the foundational Pan-African text",
+      "summary": "Blyden's 1887 essay collection — cited by Ridgel — argues that Islam was historically more compatible with African civilizations than Christianity and that Black Americans should look to Liberia and West Africa for cultural and political renewal. The book is the single most direct influence on Du Bois's Pan-Africanism. Blyden's framework — race as civilizational identity, Africa as homeland, religion as cultural infrastructure — runs through every 20th-century African American intellectual movement.",
+      "docsouth_nodes": ["Alfred Lee Ridgel · Africa and African Methodism · cites Blyden · 1896"],
+      "outward_links": ["W.E.B. Du Bois · The Souls of Black Folk · 1903", "Pan-African Congresses · 1900-1945", "Kwame Nkrumah · Ghana independence · 1957"],
+      "citations": []
+    },
+    {
+      "id": 24,
+      "category": "broader_history",
+      "title": "Alexander Crummell at Wilberforce, 1894 — meeting Du Bois",
+      "summary": "Du Bois arrived at Wilberforce University in 1894 (age 26) to teach classics. Crummell was 75, professor and Episcopal minister there. Their friendship over the next four years until Crummell's 1898 death shaped Du Bois's intellectual orientation — toward institutional race-elevation work, toward Africa, toward the Talented Tenth concept. Crummell's chapter in Souls of Black Folk (1903) is a memoir of that mentorship. The chain DocSouth's Ridgel surfaces is, two steps later, Du Bois's foundational text.",
+      "docsouth_nodes": [],
+      "outward_links": ["Wilberforce University", "American Negro Academy · 1897", "Souls of Black Folk · 1903"],
+      "citations": []
+    },
+    {
+      "id": 25,
+      "category": "broader_history",
+      "title": "The Niagara Movement (1905) and the NAACP (1909) inherit DocSouth's AME network",
+      "summary": "When Du Bois founded the Niagara Movement in 1905 and co-founded the NAACP in 1909, the institutional substrate he drew on was the AME network DocSouth catalogs. Reverdy C. Ransom (AME bishop, signed the Niagara declaration), William Monroe Trotter (Boston Guardian editor), Ida B. Wells (anti-lynching journalist) — all moved in the same circles as Turner, Smith, Wright, and the AME's institutional infrastructure. The civil-rights movement of the 20th century did not appear from nothing; it inherited the AME's organizational capital.",
+      "docsouth_nodes": [],
+      "outward_links": ["Niagara Movement · 1905", "NAACP · 1909", "Reverdy C. Ransom · AME bishop", "Ida B. Wells · Southern Horrors · 1892"],
+      "citations": []
+    },
+    {
+      "id": 26,
+      "category": "broader_history",
+      "title": "The Great Migration begins in 1915 and DocSouth's Black population vanishes",
+      "summary": "From 1915 to 1970, six million Black Americans moved from the South to Northern cities. DocSouth's writers were the last generation of Southern-rooted Black intellectuals before the Migration; their descendants wrote in Harlem, Chicago, Detroit, Philadelphia. The structural register the engine identifies in DocSouth's Black church writings is the voice that *left* the South. Recovering that voice is recovering what migrated.",
+      "docsouth_nodes": [],
+      "outward_links": ["Great Migration · 1915-1970", "Harlem Renaissance · 1920s", "Chicago Defender", "Isabel Wilkerson · The Warmth of Other Suns · 2010"],
+      "citations": []
+    },
+    {
+      "id": 27,
+      "category": "broader_history",
+      "title": "Zora Neale Hurston's Their Eyes Were Watching God (1937) is the structural daughter of DocSouth",
+      "summary": "Hurston was born in Notasulga, Alabama (1891) and raised in the all-Black town of Eatonville, Florida — exactly the cultural milieu DocSouth's Church and First-Person Narratives collections document. Her novels and her anthropological work (Mules and Men, 1935) recover the oral and religious tradition DocSouth's printed texts preserve. The structural fingerprint of Hurston's novels would cluster with DocSouth's church writings if she were in the corpus.",
+      "docsouth_nodes": [],
+      "outward_links": ["Zora Neale Hurston · Their Eyes Were Watching God · 1937", "Eatonville, FL", "Federal Writers' Project"],
+      "citations": []
+    },
+    {
+      "id": 28,
+      "category": "broader_history",
+      "title": "Richard Wright's Black Boy (1945) is the postscript to DocSouth's slave narratives",
+      "summary": "Wright was born 1908 on a plantation in Roxie, Mississippi, descendant of enslaved people. Black Boy is the first-person account of growing up Black in the segregated South in the 1910s-20s — the world DocSouth's slave narratives created and DocSouth's Confederate memoirs idealized. Reading Wright after DocSouth is reading the segregation-era completion of the slavery-era texts.",
+      "docsouth_nodes": [],
+      "outward_links": ["Richard Wright · Black Boy · 1945", "Native Son · 1940"],
+      "citations": []
+    },
+    {
+      "id": 29,
+      "category": "broader_history",
+      "title": "Ralph Ellison's Invisible Man (1952) names Tuskegee, which DocSouth catalogs",
+      "summary": "Ellison's Invisible Man opens at a Tuskegee-modeled college — the institution Booker T. Washington built. DocSouth has Washington-related materials in the Church and First-Person Narratives collections, plus the Tuskegee Institute's own publications. Ellison's novel is the great mid-20th-century critique of the accommodationist tradition DocSouth documents.",
+      "docsouth_nodes": [],
+      "outward_links": ["Ralph Ellison · Invisible Man · 1952", "Tuskegee Institute (founded 1881)", "Booker T. Washington · Up From Slavery · 1901"],
+      "citations": []
+    },
+    {
+      "id": 30,
+      "category": "broader_history",
+      "title": "James Baldwin reads DocSouth's terrain in Notes of a Native Son (1955)",
+      "summary": "Baldwin was raised in the Pentecostal storefront-church tradition of Harlem — the Northern outgrowth of the AME and Holiness churches DocSouth catalogs. His essay 'Down at the Cross' (in The Fire Next Time, 1963) is a direct theological response to the Black church tradition Wayman, Smith, and Wright catalogued. Baldwin's prose register descends from the 19th-century AME pulpit voice DocSouth preserves.",
+      "docsouth_nodes": [],
+      "outward_links": ["James Baldwin · Notes of a Native Son · 1955", "The Fire Next Time · 1963"],
+      "citations": []
+    },
+    {
+      "id": 31,
+      "category": "broader_history",
+      "title": "Toni Morrison's Beloved (1987) is fiction built on Margaret Garner — also in DocSouth's framework",
+      "summary": "Morrison's 1987 novel fictionalizes Margaret Garner, an enslaved woman who killed her own child rather than have her returned to slavery in 1856 Kentucky. The Garner case was extensively reported in abolitionist newspapers DocSouth catalogs. Morrison's novel and DocSouth's Garner-era materials are connected at the source-event level.",
+      "docsouth_nodes": [],
+      "outward_links": ["Toni Morrison · Beloved · 1987", "Margaret Garner case · 1856"],
+      "citations": []
+    },
+    {
+      "id": 32,
+      "category": "broader_history",
+      "title": "The Combahee River Collective (1977) renames the river crossing in Harriet Tubman's 1863 raid",
+      "summary": "The Combahee River Collective Statement (April 1977) is a foundational Black feminist document. Its name comes from Harriet Tubman's June 2, 1863 raid up the Combahee River in South Carolina, which freed ~750 enslaved people — one of the largest single emancipations of the war. DocSouth has the contemporary military reports of that raid in its Civil War-era materials. The Collective named itself after a Tubman action documented in DocSouth's primary sources.",
+      "docsouth_nodes": [],
+      "outward_links": ["Combahee River Collective Statement · 1977", "Harriet Tubman · Combahee Raid · 1863"],
+      "citations": []
+    },
+    {
+      "id": 33,
+      "category": "broader_history",
+      "title": "Octavia Butler's Kindred (1979) is a time-travel slave narrative",
+      "summary": "Butler's novel sends a 1976 Black woman back to a Maryland plantation in the early 1800s, where she must navigate slavery to ensure her own ancestry. The novel's antebellum sections were researched against DocSouth-style primary slave narratives. Kindred is taught alongside DocSouth's Maryland slave narratives in many AAS curricula.",
+      "docsouth_nodes": [],
+      "outward_links": ["Octavia Butler · Kindred · 1979"],
+      "citations": []
+    },
+    {
+      "id": 34,
+      "category": "broader_history",
+      "title": "Ta-Nehisi Coates's Between the World and Me (2015) cites Du Bois who cites Crummell who cites Blyden",
+      "summary": "Coates's letter-to-his-son begins with a Du Bois reference. Du Bois's intellectual lineage runs back through Crummell to Blyden, the Liberian Pan-Africanist Ridgel cites in DocSouth. The chain from Coates 2015 to Ridgel 1896 is four steps. The same intellectual tradition is the throughline.",
+      "docsouth_nodes": ["Ridgel · cites Blyden · 1896"],
+      "outward_links": ["Ta-Nehisi Coates · Between the World and Me · 2015", "W.E.B. Du Bois", "Alexander Crummell", "Edward Wilmot Blyden"],
+      "citations": []
+    },
+    {
+      "id": 35,
+      "category": "broader_history",
+      "title": "Stacey Abrams's voter-organizing inherits Henry McNeal Turner's Atlanta",
+      "summary": "Abrams's Fair Fight Action and her 2018-2024 voter-organizing work in Georgia traces a direct institutional line: Turner organized Black emigration from Atlanta in 1895-96 because the post-Reconstruction collapse of voting rights made the South politically uninhabitable for Black citizens. Abrams's century-later work is the inverse — staying and rebuilding what Turner gave up on. DocSouth's Turner materials document the historical baseline her organizing reverses.",
+      "docsouth_nodes": ["Henry McNeal Turner · African Letters · 1893"],
+      "outward_links": ["Fair Fight Action", "Georgia Senate runoff · 2021", "Voting Rights Act"],
+      "citations": []
+    },
+    {
+      "id": 36,
+      "category": "broader_history",
+      "title": "Bryan Stevenson's Equal Justice Initiative inherits the slave narrative tradition",
+      "summary": "EJI's National Memorial for Peace and Justice (Montgomery, 2018) and its Legacy Museum directly extend the testimonial work DocSouth's slave narratives began. Stevenson's commissioned slave-narrative-style first-person testimonies for the museum exhibits are explicit continuations of the genre Frederick Douglass, Harriet Jacobs, and Henry Bibb established in the 1840s-50s.",
+      "docsouth_nodes": ["DocSouth Slave Narratives collection · 299 texts"],
+      "outward_links": ["Equal Justice Initiative", "National Memorial for Peace and Justice · 2018", "Bryan Stevenson · Just Mercy · 2014"],
+      "citations": []
+    },
+    {
+      "id": 37,
+      "category": "broader_history",
+      "title": "Nikole Hannah-Jones's 1619 Project (2019) is methodological heir to DocSouth",
+      "summary": "The 1619 Project's premise — that American history should be rewritten with slavery's centrality acknowledged — is implemented through the same kind of primary-source recovery DocSouth has been doing since 1996. The Project's contributors cite DocSouth-archived materials extensively. UNC briefly offered Hannah-Jones a tenured chair in 2021 then withdrew it amid political pressure; she ultimately accepted Howard's offer instead. UNC's relationship to the 1619 Project's primary-source tradition is now publicly fraught.",
+      "docsouth_nodes": [],
+      "outward_links": ["1619 Project · NYT Magazine · August 2019", "UNC Hussman School · Hannah-Jones tenure controversy · 2021", "Howard University · Center for Journalism and Democracy"],
+      "citations": []
+    },
+    {
+      "id": 38,
+      "category": "broader_history",
+      "title": "Annette Gordon-Reed's Hemingses of Monticello (2008) reconstructs slave families from primary sources",
+      "summary": "Gordon-Reed's Pulitzer-winning history of Sally Hemings and the Jefferson family reconstructs an enslaved family's six-generation history using primary sources of the type DocSouth catalogs. The book's methodological move — treating enslaved people's family records as primary historical evidence with the same weight as planter records — is the move DocSouth's slave narrative collection materially enables.",
+      "docsouth_nodes": [],
+      "outward_links": ["Annette Gordon-Reed · The Hemingses of Monticello · 2008", "Sally Hemings · Monticello Foundation"],
+      "citations": []
+    },
+    {
+      "id": 39,
+      "category": "broader_history",
+      "title": "Saidiya Hartman's Wayward Lives (2019) reads Black women's archives against the curatorial grain",
+      "summary": "Hartman's 'critical fabulation' methodology — reading silences in slave-era archives to reconstruct enslaved women's interiority — operates on exactly the kind of DocSouth-archived materials where Black women are documented. Harriet Jacobs, Sarah Early, Frances Harper, and dozens of WPA-interviewed women are the source material; Hartman's methodology is the contemporary scholarly response to their constrained voice in the archive.",
+      "docsouth_nodes": ["Harriet Jacobs · Incidents · 1861", "Sarah J. W. Early · Life and Labors · 1894"],
+      "outward_links": ["Saidiya Hartman · Wayward Lives, Beautiful Experiments · 2019", "Black women's history scholarship"],
+      "citations": []
+    },
+    {
+      "id": 40,
+      "category": "broader_history",
+      "title": "Henry Louis Gates Jr.'s Stony the Road (2019) maps Reconstruction-to-Jim-Crow via DocSouth-style primary sources",
+      "summary": "Gates's narrative history of the post-Reconstruction collapse is built on DocSouth-cataloged primary documents — political pamphlets, religious newspapers, the Wilmington materials. His PBS series Reconstruction: America After the Civil War (2019) draws on the same archive. Gates is among the most prominent contemporary scholars to publicly cite DocSouth-style digital archives as the substrate of public-facing African American history.",
+      "docsouth_nodes": [],
+      "outward_links": ["Henry Louis Gates Jr. · Stony the Road · 2019", "PBS · Reconstruction · 2019"],
+      "citations": []
+    },
+    {
+      "id": 41,
+      "category": "unc_institutional",
+      "title": "UNC was founded 1789 — the second oldest US public university — by enslavers",
+      "summary": "UNC's founders included William R. Davie, James Iredell, and Samuel Johnston — enslavers and Federalists. The university was built with slave labor (the bricks of Old East Hall, 1793, were laid by enslaved men). UNC's Carolina Hall (originally Saunders Hall, named for Klan leader William L. Saunders, renamed 2015) and the Confederate monument 'Silent Sam' (erected 1913, removed 2018) are physical artifacts of this founding. DocSouth as a UNC project is in part the institutional response to this history.",
+      "docsouth_nodes": ["DocSouth · UNC Libraries · 1996-present"],
+      "outward_links": ["Old East Hall · 1793 (oldest US public university building)", "Saunders Hall renaming · 2015", "Silent Sam removal · 2018"],
+      "citations": []
+    },
+    {
+      "id": 42,
+      "category": "unc_institutional",
+      "title": "William L. Saunders, UNC alumnus and KKK leader",
+      "summary": "Saunders graduated UNC 1854, served as Confederate officer, was North Carolina Secretary of State 1879-1891, and according to his own deposition led the Ku Klux Klan in NC during Reconstruction. He edited the multi-volume Colonial Records of North Carolina (1886-1907) — itself a foundational primary-source compendium that DocSouth and other archives still cite. Saunders Hall on UNC's campus carried his name from 1922 to 2015. UNC's archival enterprise is partly built on Saunders's editorial work; UNC's reckoning with that fact is ongoing.",
+      "docsouth_nodes": ["NC Colonial Records (Saunders, ed.) · referenced throughout DocSouth"],
+      "outward_links": ["Carolina Hall (formerly Saunders) · UNC", "1922 Confederate monument dedications", "UNC Board of Trustees naming review · 2015"],
+      "citations": []
+    },
+    {
+      "id": 43,
+      "category": "unc_institutional",
+      "title": "Cornelia Phillips Spencer rang the South Building bell, 1875",
+      "summary": "When UNC reopened in 1875 after Reconstruction-era closure (Holden's Republican administration had governed it 1869-1871, white Democrats demanded it close), Spencer — daughter of UNC professor James Phillips and resident of Chapel Hill — climbed the South Building tower and rang the bell to celebrate. Her published correspondence and Last Ninety Days of the War (in DocSouth) are explicitly anti-Reconstruction. Spencer Residence Hall on UNC's campus carried her name; the Carolina Reckoning project has been re-examining the naming.",
+      "docsouth_nodes": ["Cornelia Phillips Spencer · Last Ninety Days of the War · 1866"],
+      "outward_links": ["UNC closure 1871-1875", "Spencer Residence Hall", "Phillips Hall (math/physics)"],
+      "citations": []
+    },
+    {
+      "id": 44,
+      "category": "unc_institutional",
+      "title": "UNC's first Black student was 1951 — Floyd McKissick law school case",
+      "summary": "Floyd McKissick, Robert Glass, James Walker, and Joseph Cane were ordered admitted to UNC's law school by federal court in 1951, a year before Brown v. Board. McKissick later became a national CORE leader. UNC's undergraduate desegregation followed in 1955. DocSouth's relationship to UNC's segregation history is that the archive's existence is downstream of this desegregation.",
+      "docsouth_nodes": [],
+      "outward_links": ["Floyd McKissick · CORE national director", "McKissick v. Carmichael · 1951", "UNC desegregation 1951-1955"],
+      "citations": []
+    },
+    {
+      "id": 45,
+      "category": "unc_institutional",
+      "title": "UNC Press is older than DocSouth and publishes its scholarship",
+      "summary": "UNC Press, founded 1922, is the oldest university press in the South. It publishes much of the contemporary scholarship that uses DocSouth's primary sources — the SHEAFR (Southern Historical Editorial Approach to Reconstruction) tradition, Eric Foner's NC-related work, William Powell's NC encyclopedia. UNC Press and DocSouth are institutionally entwined; many DocSouth-cataloged texts were originally UNC Press publications, and UNC Press's contemporary monographs cite DocSouth.",
+      "docsouth_nodes": [],
+      "outward_links": ["UNC Press · founded 1922", "Eric Foner · Reconstruction · 1988", "William S. Powell · NC encyclopedias"],
+      "citations": []
+    },
+    {
+      "id": 46,
+      "category": "unc_institutional",
+      "title": "Sonja Haynes Stone Center for Black Culture and History",
+      "summary": "Founded 1988, named for the UNC professor who organized for it; opened in its current building 2004. The Stone Center has been UNC's institutional home for African American studies and Black cultural programming. It collaborates with DocSouth on programming and exhibitions. The Stone Center's existence is downstream of the desegregation cases, the 1969 Black Student Movement, and the Cell Block Theatre / Boomerang protest tradition.",
+      "docsouth_nodes": [],
+      "outward_links": ["Stone Center · UNC", "Black Student Movement · 1968-1972", "BSM Foodworkers Strike · 1969"],
+      "citations": []
+    },
+    {
+      "id": 47,
+      "category": "unc_institutional",
+      "title": "Silent Sam and the 2018 toppling",
+      "summary": "The 1913-erected Confederate monument 'Silent Sam' on UNC's McCorkle Place was toppled by protesters in August 2018 after years of student-faculty advocacy. UNC initially proposed reinstalling it in a new history-and-education center; that plan was abandoned in 2019. The monument's stated purpose at its 1913 dedication (per the speech of Julian Carr) included a celebration of post-Reconstruction Black voter suppression. UNC's Reckoning project explicitly engages this history. DocSouth's role: archive of the primary documents that contextualize Silent Sam's 1913 ideology.",
+      "docsouth_nodes": [],
+      "outward_links": ["Silent Sam dedication · June 2 1913 · Julian Carr speech", "Silent Sam toppling · August 20 2018", "UNC Reckoning Initiative"],
+      "citations": []
+    },
+    {
+      "id": 48,
+      "category": "unc_institutional",
+      "title": "1898 Wilmington Foundation and UNC's $19M commitment",
+      "summary": "In 2020-2021, UNC committed $19 million toward the 1898 Foundation and Carolina Reckoning, the largest US institutional commitment of its kind toward archival reckoning with anti-Black violence. The funded work includes scholarship grants, infrastructure for the digital reckoning archive, and faculty hiring. DocSouth is one of several UNC archives directly supported by this initiative.",
+      "docsouth_nodes": ["DocSouth · 1898 Wilmington materials"],
+      "outward_links": ["UNC Reckoning Initiative · $19M commitment", "1898 Foundation"],
+      "citations": []
+    },
+    {
+      "id": 49,
+      "category": "unc_institutional",
+      "title": "The Hannah-Jones tenure controversy, 2021",
+      "summary": "In May 2021, UNC's Hussman School of Journalism offered Nikole Hannah-Jones a Knight Chair with tenure; the UNC Board of Trustees declined to vote on tenure under political pressure related to the 1619 Project. Hannah-Jones was eventually offered tenure but instead accepted Howard University's competing offer. The episode prompted internal review of UNC's tenure governance and remains the most consequential UNC reckoning failure to date. DocSouth's archive of post-Reconstruction primary sources is part of the same scholarly tradition Hannah-Jones works in.",
+      "docsouth_nodes": [],
+      "outward_links": ["Hussman School · 2021 controversy", "Walter Hussman (donor)", "Howard University · Center for Journalism and Democracy"],
+      "citations": []
+    },
+    {
+      "id": 50,
+      "category": "unc_institutional",
+      "title": "UNC Libraries' Special Collections houses original DocSouth source material",
+      "summary": "DocSouth is digitized from physical collections in UNC's Wilson Library — the Southern Historical Collection (founded 1930), the North Carolina Collection (founded 1844), and the Rare Book Collection. The 711 source texts have physical originals on Chapel Hill's campus, accessible by appointment. The Latent Ocean showcase response_digest is mathematically downstream of the corpus_sha256 of the digital texts, which themselves are derivative of those physical originals. The chain runs from Wilson Library shelves to /api/range-public/showcase/docsouth.",
+      "docsouth_nodes": ["DocSouth source corpus · 711 texts"],
+      "outward_links": ["UNC Wilson Library", "Southern Historical Collection", "North Carolina Collection"],
+      "citations": []
+    },
+    {
+      "id": 51,
+      "category": "unc_institutional",
+      "title": "John Hope Franklin earned his PhD at Harvard but trained NC scholars at NCCU and Duke",
+      "summary": "Franklin (1915-2009) is the foundational 20th-century African American historian. He taught at NC College for Negroes (now NCCU, in Durham) from 1943-1947. His From Slavery to Freedom (1947) is the textbook that established the field. Franklin moved to Duke in 1982. UNC, NCCU, and Duke share his intellectual lineage; DocSouth is a direct expression of his methodological insistence on primary-source recovery.",
+      "docsouth_nodes": [],
+      "outward_links": ["John Hope Franklin · From Slavery to Freedom · 1947", "NCCU (formerly NC College for Negroes)", "Duke John Hope Franklin Center · founded 2000"],
+      "citations": []
+    },
+    {
+      "id": 52,
+      "category": "unc_institutional",
+      "title": "Stanley Engerman / Robert Fogel's Time on the Cross (1974) controversy and UNC's response",
+      "summary": "Time on the Cross attempted to apply econometric methods to slavery's profitability and was sharply contested by Herbert Gutman, Eugene Genovese, and others — many of whom worked with NC archives. The controversy shaped how subsequent generations of historians treated quantitative analysis of slavery. DocSouth's structural-fingerprint approach to slave narratives is a contemporary echo of the Time-on-the-Cross debate: when does quantitative analysis illuminate, and when does it flatten, the human experience of bondage?",
+      "docsouth_nodes": ["DocSouth Slave Narratives · structural analysis context"],
+      "outward_links": ["Time on the Cross · 1974", "Herbert Gutman · The Black Family in Slavery and Freedom · 1976"],
+      "citations": []
+    },
+    {
+      "id": 53,
+      "category": "unc_institutional",
+      "title": "UNC's Center for the Study of the American South (1992)",
+      "summary": "Founded 1992, the Center is UNC's interdisciplinary humanities home for Southern studies. It runs the Southern Cultures journal, hosts the Southern Oral History Program (founded 1973), and partners with DocSouth. The Center's Southern Oral History Program has interviewed 6,000+ people from the 1920s to today; many SOHP transcripts are accessible alongside DocSouth's primary materials.",
+      "docsouth_nodes": [],
+      "outward_links": ["Center for the Study of the American South · founded 1992", "Southern Oral History Program · founded 1973", "Southern Cultures journal"],
+      "citations": []
+    },
+    {
+      "id": 54,
+      "category": "unc_institutional",
+      "title": "Carolina Hall (formerly Saunders) renamed 2015 — first UNC building rename",
+      "summary": "After student-led organizing in 2014-2015, UNC renamed Saunders Hall to Carolina Hall — the first formal building rename at UNC in that campaign. The name 'Carolina Hall' was chosen to be neutral after debate over alternatives (renaming for a Black scholar like Pauli Murray or for Cornelia Phillips Spencer was both proposed). The renaming established the procedural precedent UNC has used for subsequent reviews.",
+      "docsouth_nodes": [],
+      "outward_links": ["Saunders Hall · 1922-2015", "Carolina Hall · 2015-", "Pauli Murray scholarship campaign"],
+      "citations": []
+    },
+    {
+      "id": 55,
+      "category": "unc_institutional",
+      "title": "Pauli Murray was denied admission to UNC Law School in 1938",
+      "summary": "Pauli Murray, born in Durham, applied to UNC Law School in 1938 and was rejected on racial grounds. Her published correspondence with UNC President Frank Porter Graham about the rejection is in DocSouth-adjacent archives. Murray went on to become a foundational civil-rights and feminist legal scholar, was the first Black person ordained an Episcopal priest (1977), and was canonized as an Episcopal saint posthumously. UNC has named Pauli Murray Hall in 2020 — the most consequential UNC honoring of a previously-rejected Black scholar.",
+      "docsouth_nodes": [],
+      "outward_links": ["Pauli Murray · Proud Shoes · 1956", "Pauli Murray Hall · UNC · 2020", "Yale Law Pauli Murray College · 2017"],
+      "citations": []
+    },
+    {
+      "id": 56,
+      "category": "unc_institutional",
+      "title": "UNC's Highland Hospital and the death of Zelda Fitzgerald, 1948",
+      "summary": "Zelda Fitzgerald died in a 1948 fire at Highland Hospital in Asheville, NC. Highland Hospital was associated with UNC. The episode is in NC literary memory; DocSouth and UNC archives hold related materials. It's a UNC-NC cultural-history node frequently invoked when Asheville or NC literary history is discussed.",
+      "docsouth_nodes": [],
+      "outward_links": ["Zelda Fitzgerald · Asheville", "Highland Hospital fire · 1948"],
+      "citations": []
+    },
+    {
+      "id": 57,
+      "category": "unc_institutional",
+      "title": "Charles Kuralt's CBS On the Road and the UNC Journalism School",
+      "summary": "Charles Kuralt (UNC '55) hosted CBS On the Road from 1967-1980, recording Southern and rural American voices in a tradition descended from the WPA Federal Writers' Project (which interviewed DocSouth's late survivors). Kuralt's papers are at UNC's Wilson Library. The Hussman School of Journalism (formerly named for Kuralt) is institutionally connected to the same primary-source-recovery tradition DocSouth represents.",
+      "docsouth_nodes": [],
+      "outward_links": ["Charles Kuralt papers · Wilson Library", "On the Road · CBS · 1967-1980", "UNC Hussman School (formerly Kuralt)"],
+      "citations": []
+    },
+    {
+      "id": 58,
+      "category": "unc_institutional",
+      "title": "UNC's Loray Mill / Gastonia Strike materials and labor history",
+      "summary": "The 1929 Gastonia textile strike — including the killing of police chief Orville Aderholt and the wounded organizer Ella May Wiggins — is documented in UNC archives. DocSouth's First-Person Narratives include Loray Mill-era materials. Gastonia is the foundational US Southern textile-labor case and the structural antecedent of contemporary NC labor organizing (Smithfield Foods, Mountaire, Tyson).",
+      "docsouth_nodes": ["Gastonia Strike materials · DocSouth First-Person"],
+      "outward_links": ["Loray Mill Strike · 1929", "Ella May Wiggins · murdered organizer", "Smithfield Foods organizing · 2008"],
+      "citations": []
+    },
+    {
+      "id": 59,
+      "category": "unc_institutional",
+      "title": "UNC's $20M commitment to historically excluded scholars (2020)",
+      "summary": "UNC announced a $20 million commitment in 2020 to recruit faculty from historically underrepresented backgrounds. The commitment was made in the wake of the Hannah-Jones controversy and the broader 2020 reckoning. Implementation has been mixed; the policy is still being evaluated. DocSouth's archive of primary materials is one of the institutional infrastructures the recruited faculty would use.",
+      "docsouth_nodes": [],
+      "outward_links": ["UNC $20M faculty commitment · 2020", "AAUP UNC chapter response"],
+      "citations": []
+    },
+    {
+      "id": 60,
+      "category": "unc_institutional",
+      "title": "Wilson Library's North Carolina Collection — the largest state-archive collection in any US university",
+      "summary": "Wilson Library's North Carolina Collection (founded 1844) is the largest collection of any single US state's printed materials at any university. ~250,000 items. DocSouth is a digital subset of it. The collection was built by Stephen B. Weeks (1865-1918), a UNC alumnus and historian whose 1898 dissertation 'Religious Development in the Province of North Carolina' is itself in DocSouth's Church collection.",
+      "docsouth_nodes": ["Stephen B. Weeks · 1898 dissertation · DocSouth Church"],
+      "outward_links": ["Wilson Library NC Collection · 1844", "Stephen B. Weeks (1865-1918)"],
+      "citations": []
+    },
+    {
+      "id": 61,
+      "category": "present_future",
+      "title": "Black population reverse-migration to the South (2010-present)",
+      "summary": "After 60 years of Great Migration North, US Census data 2010-2020 shows substantial Black reverse-migration — Atlanta, Charlotte, Raleigh-Durham, Houston are the top destinations. NC's Wake County has been a primary recipient. The voices DocSouth's late-19th-century texts represent are returning. The structural fingerprint of contemporary NC Black political organizing (Anderson Clayton, Lillian's List, Black Voters Matter NC) has the same testimonial-register the engine identified in class #7.",
+      "docsouth_nodes": [],
+      "outward_links": ["Black reverse migration · 2010-2020 Census", "Wake County demographics", "Anderson Clayton · NC Democratic chair · 2023-"],
+      "citations": []
+    },
+    {
+      "id": 62,
+      "category": "present_future",
+      "title": "Anita Earls and the modern voting-rights succession",
+      "summary": "Anita Earls, Senior Justice of the NC Supreme Court (2019-), founded the Southern Coalition for Social Justice and was lead counsel on multiple post-Shelby County voting-rights cases. Her trajectory — from Yale Law (1988) to NCCU teaching to NC Supreme Court — is the institutional inheritor of the AME-network voting-rights tradition Turner abandoned in 1895 and Du Bois rebuilt 1909. DocSouth's archive of late-19th-century NC voter-suppression materials (Wilmington 1898, NC's 1900 disfranchisement amendment) is the historical baseline for Earls's work.",
+      "docsouth_nodes": ["DocSouth · NC disfranchisement materials"],
+      "outward_links": ["Anita Earls · NC Supreme Court", "Southern Coalition for Social Justice", "NC racial gerrymandering cases · 2017-2023"],
+      "citations": []
+    },
+    {
+      "id": 63,
+      "category": "present_future",
+      "title": "Gov. Roy Cooper's 2018 pardon of Wilmington 10 retroactively addresses 1898's institutional legacy",
+      "summary": "In 2018, NC Governor Roy Cooper signed pardons for the Wilmington 10 — civil-rights organizers wrongfully convicted in 1972 of arson during racial violence in Wilmington (resonating with the 1898 massacre site). The pardon explicitly named the 1898 lineage. NC's official institutional reckoning with 1898 began with the 2006 Wilmington Race Riot Commission Report (created under Gov. Mike Easley) and continued through Cooper's 2018 pardon. DocSouth holds both the 1898 primary documents and the 1972 trial records.",
+      "docsouth_nodes": [],
+      "outward_links": ["Wilmington 10 case · 1972", "NC pardon · 2018", "1898 Wilmington Race Riot Commission · 2006"],
+      "citations": []
+    },
+    {
+      "id": 64,
+      "category": "present_future",
+      "title": "NCCU, Shaw, Saint Augustine's, JCSU, Bennett — NC's HBCUs as continuing institutions",
+      "summary": "North Carolina Central University (founded 1909, in Durham), Shaw University (1865, Raleigh), Saint Augustine's University (1867, Raleigh), Johnson C. Smith University (1867, Charlotte), and Bennett College (1873, Greensboro) are five NC HBCUs that descend institutionally from Reconstruction-era AME and Methodist freedmen's school networks DocSouth catalogs. Shaw graduated Ella Baker (1927), foundational SNCC organizer. JCSU graduated Reginald Lewis (first Black billionaire). NCCU graduated William V. Banks (NCAA basketball pioneer). Bennett is one of two HBCU women's colleges remaining (with Spelman). All five are direct continuations of DocSouth's documented network.",
+      "docsouth_nodes": ["DocSouth Church collection · NC freedmen's schools materials"],
+      "outward_links": ["NCCU 1909", "Shaw University 1865", "Saint Augustine's 1867", "Johnson C. Smith 1867", "Bennett College 1873"],
+      "citations": []
+    },
+    {
+      "id": 65,
+      "category": "present_future",
+      "title": "UNC's reckoning is converging with NC HBCU sustainability",
+      "summary": "UNC's Reckoning project sits in implicit tension with NC's HBCU funding crisis. NCCU, Saint Augustine's, and Shaw face structural funding gaps; Saint Augustine's lost SACSCOC accreditation in 2024 and is fighting to retain it. Whether UNC's institutional reckoning extends to material partnership with NC's HBCUs (joint hiring, archive sharing, DocSouth co-stewardship) is the open question of the next 5 years.",
+      "docsouth_nodes": [],
+      "outward_links": ["Saint Augustine's accreditation · 2024", "NCCU funding gap reports", "UNC-HBCU partnership programs"],
+      "citations": []
+    },
+    {
+      "id": 66,
+      "category": "present_future",
+      "title": "Charlotte and Atlanta as inheritors of Turner's emigrationism — but redirected",
+      "summary": "Henry McNeal Turner advocated emigration from Atlanta in 1895-96 because the South was politically unsurvivable. Today Atlanta and Charlotte are the most rapidly growing Black professional metros in the country — the inverse of Turner's diagnosis. DocSouth's Turner materials document why the migration once made sense; contemporary Census data documents why the reverse-migration now does. The two timelines are mirror images.",
+      "docsouth_nodes": ["Henry McNeal Turner materials · DocSouth Church"],
+      "outward_links": ["Atlanta Black professional class · 2010s-2020s", "Charlotte banking sector demographics"],
+      "citations": []
+    },
+    {
+      "id": 67,
+      "category": "present_future",
+      "title": "Smithfield Foods organizing (2008) is the present-day labor moment DocSouth's Reconstruction texts foreshadow",
+      "summary": "The 2008 UFCW victory at Smithfield Foods' Tar Heel, NC plant — the largest pork plant in the world, with a majority Black and Latino workforce — was the largest US private-sector union victory in decades. Tar Heel sits in Bladen County, NC, in the same region documented in DocSouth's Reconstruction-era political pamphlets and Wilmington-era materials. The structural register of Smithfield organizing's interfaith Black church coalition descends directly from the AME network DocSouth catalogs.",
+      "docsouth_nodes": ["DocSouth NC Reconstruction-era materials"],
+      "outward_links": ["Smithfield Foods · 2008 union victory", "UFCW Local 400", "NC Justice Center"],
+      "citations": []
+    },
+    {
+      "id": 68,
+      "category": "present_future",
+      "title": "Greensboro Massacre (1979) and the unresolved NC reckoning",
+      "summary": "On November 3, 1979, Klan and American Nazi Party members shot and killed five anti-Klan activists in Greensboro, NC. Three trials produced no criminal convictions; a 1985 federal civil suit found Greensboro police partly responsible. Greensboro's Truth and Reconciliation Commission (2004-2006) was the first municipal TRC in the US. DocSouth's Reconstruction-era Klan materials are the historical baseline; Greensboro's TRC report is the most direct US implementation of the South-African TRC model on Klan-era violence.",
+      "docsouth_nodes": ["DocSouth · Klan-era Reconstruction documents"],
+      "outward_links": ["Greensboro Massacre · 1979", "Greensboro TRC · 2004-2006"],
+      "citations": []
+    },
+    {
+      "id": 69,
+      "category": "present_future",
+      "title": "Moral Monday and Rev. William Barber's revival of the AME tradition",
+      "summary": "Rev. William J. Barber II, raised in NC, ordained Disciples of Christ minister, led the NC NAACP 2005-2017 and launched Moral Monday in 2013 against the NC Republican legislature's voter-ID and Medicaid-rejection laws. Barber's homiletic register — long-form Black church sermon as political-organizing text — is a direct continuation of the AME-Reconstruction pulpit voice DocSouth's Wayman, Smith, Wright, and Gaines preserved. Barber co-founded the Poor People's Campaign 2018 with Liz Theoharis.",
+      "docsouth_nodes": ["DocSouth · 19th-century AME sermon/oratory tradition"],
+      "outward_links": ["Moral Monday · NC · 2013-", "Poor People's Campaign · 2018", "Forward Together coalition"],
+      "citations": []
+    },
+    {
+      "id": 70,
+      "category": "present_future",
+      "title": "Yara Allen, Anderson Clayton, and the new NC Black political class",
+      "summary": "Anderson Clayton became NC Democratic Party chair in 2023 at age 25 — the youngest state party chair in the US. Yara Allen, former NC NAACP youth organizer, leads voter education work. Both are direct heirs to the William Barber Moral Monday tradition, which itself descends from the AME organizing infrastructure DocSouth catalogs. The current NC Black-organizing generation is the structural successor to Bishop Turner's AME field operatives a century back — but staying in NC rather than emigrating.",
+      "docsouth_nodes": ["DocSouth · NC AME organizing materials"],
+      "outward_links": ["Anderson Clayton · NC Democratic chair", "Yara Allen · NAACP organizing"],
+      "citations": []
+    },
+    {
+      "id": 71,
+      "category": "present_future",
+      "title": "Ed O'Bannon → Alston: NCAA cases adjacent to UNC",
+      "summary": "The O'Bannon (2009) and Alston (2021) NCAA antitrust cases — which ended the NCAA's century-long suppression of athlete compensation — included Black athletes from UNC and NC HBCUs as plaintiffs and amici. UNC's basketball program (including 1957's all-white team integration history) and the legacy of all-Black HBCU sports programs (NCCU, JCSU, Shaw) sit on either side of this litigation. NC is a primary site for the post-Alston NIL economy.",
+      "docsouth_nodes": [],
+      "outward_links": ["O'Bannon v. NCAA · 2009-2014", "Alston v. NCAA · 2021"],
+      "citations": []
+    },
+    {
+      "id": 72,
+      "category": "present_future",
+      "title": "RTP and the Black tech professional class",
+      "summary": "Research Triangle Park (RTP, founded 1959 between Raleigh, Durham, and Chapel Hill) is now the third-largest US tech research hub. Its workforce is increasingly Black-led; NCCU's tech and business programs feed RTP. The structural fingerprint of NCCU graduates' careers in 2020s NC tech reverses Turner's 1895 emigrationism — they're staying in NC, joining global firms, building the infrastructure DocSouth's late-19th-century AME networks could not have imagined.",
+      "docsouth_nodes": [],
+      "outward_links": ["Research Triangle Park · 1959", "NCCU tech programs", "Durham tech corridor"],
+      "citations": []
+    },
+    {
+      "id": 73,
+      "category": "present_future",
+      "title": "Hurricane Florence (2018) and DocSouth's coastal heritage at risk",
+      "summary": "Florence's 2018 floods damaged eastern NC archives and coastal communities documented in DocSouth's First-Person Narratives. Climate-resilience work for NC Black coastal communities (Princeville — the oldest US town founded by Black freedmen, repeatedly flooded) is now an active research area. DocSouth's archive includes Princeville's founding materials; NC State's coastal resilience program is the contemporary engineering response.",
+      "docsouth_nodes": ["DocSouth · Princeville founding materials"],
+      "outward_links": ["Princeville, NC · founded 1885", "Hurricane Florence · 2018", "NC State coastal resilience research"],
+      "citations": []
+    },
+    {
+      "id": 74,
+      "category": "present_future",
+      "title": "Carolina Public Humanities and the public-facing scholarship of DocSouth",
+      "summary": "UNC's Carolina Public Humanities (founded as Program in the Humanities 1979, renamed 2018) hosts public lectures, teacher development, and adult-education programming that uses DocSouth-archived materials. The unit is one of the most active US university-based public-humanities programs. Its directors over four decades have included nationally prominent scholars; the program's 21st-century work is the public-facing complement to DocSouth's scholarly archive.",
+      "docsouth_nodes": ["DocSouth as primary source for Public Humanities programming"],
+      "outward_links": ["Carolina Public Humanities · UNC", "NEH-funded summer institutes"],
+      "citations": []
+    },
+    {
+      "id": 75,
+      "category": "present_future",
+      "title": "ProQuest and Adam Matthew Digital — DocSouth's commercial competitors",
+      "summary": "DocSouth is freely accessible. ProQuest's Black Studies Center, Adam Matthew Digital's Slavery & Anti-Slavery, and Gale's African American Newspapers are paywalled commercial competitors with overlapping content. UNC's policy commitment to keep DocSouth open access is one of the most consequential US digital-humanities sustainability decisions; it's annually re-funded against pressure to monetize.",
+      "docsouth_nodes": [],
+      "outward_links": ["ProQuest Black Studies Center", "Adam Matthew Slavery & Anti-Slavery", "Gale African American Newspapers"],
+      "citations": []
+    },
+    {
+      "id": 76,
+      "category": "present_future",
+      "title": "Carolina Conversations on Race and the post-2020 curricular work",
+      "summary": "UNC's Carolina Conversations on Race series (2020-) brings DocSouth-archived primary sources into undergraduate classroom discussion across departments. Faculty in History, English, AAS, Sociology, and Religious Studies use DocSouth materials in courses required of all undergraduates after a 2022 curricular review. This is the most direct connection between DocSouth's archive and UNC's teaching mission.",
+      "docsouth_nodes": ["DocSouth as classroom corpus"],
+      "outward_links": ["Carolina Conversations on Race · 2020-", "UNC undergraduate curriculum review · 2022"],
+      "citations": []
+    },
+    {
+      "id": 77,
+      "category": "present_future",
+      "title": "Hannah-Jones at Howard and the parallel Black archive infrastructure",
+      "summary": "Howard's Center for Journalism and Democracy, where Hannah-Jones now works, is building a competitor archive infrastructure aligned with the 1619 Project's methodology. Howard's Moorland-Spingarn Research Center is the longest-established Black studies archive in the US (founded 1914). The institutional parallel to DocSouth means the broader US Black archival infrastructure is now distributed across UNC (DocSouth), Howard (Moorland-Spingarn), Yale (Beinecke's Black diaspora collections), and Schomburg (NYPL). DocSouth's continued openness positions UNC as the South's contribution to that infrastructure.",
+      "docsouth_nodes": [],
+      "outward_links": ["Howard Center for Journalism and Democracy", "Moorland-Spingarn · 1914-", "Schomburg Center · NYPL", "Beinecke Black diaspora collections"],
+      "citations": []
+    },
+    {
+      "id": 78,
+      "category": "present_future",
+      "title": "Latent Ocean's structural fingerprint as the next infrastructural layer",
+      "summary": "Latent Ocean's deterministic 48-bit fingerprint applied to DocSouth produces a citable, reproducible structural account of the archive that any future scholar can re-derive. The technology is corpus-agnostic; the same approach applied to the Schomburg, Moorland-Spingarn, or Beinecke collections would produce comparable artifacts. The infrastructural layer above DocSouth is one this showcase prototypes — deterministic structural metadata atop existing digital archives.",
+      "docsouth_nodes": ["DocSouth · this showcase"],
+      "outward_links": ["Latent Ocean platform · /method", "DocSouth as proof of concept for cross-archive structural fingerprinting"],
+      "citations": []
+    },
+    {
+      "id": 79,
+      "category": "present_future",
+      "title": "AI-assisted archival research and the verifiability problem",
+      "summary": "The post-2022 use of LLMs in humanities research has surfaced the verifiability problem: LLMs cannot cite primary sources reliably. DocSouth's deterministic structural fingerprint (a Latent Ocean response_digest is invariant under seed=42) is the methodological alternative — an AI-adjacent tool whose outputs are reproducible and citable. The contrast between LLM creative summarization and Latent Ocean's structural account is the field-shaping question.",
+      "docsouth_nodes": ["DocSouth · this showcase as proof"],
+      "outward_links": ["LLM hallucination research · 2023-", "Reproducibility crisis literature", "Open Science movement"],
+      "citations": []
+    },
+    {
+      "id": 80,
+      "category": "present_future",
+      "title": "Chapel Hill's living memory of George Moses Horton",
+      "summary": "Chapel Hill, NC has been working — slowly — to formally acknowledge George Moses Horton. A bust was installed at the public library; UNC has a Horton Society. The 21st-century reclamation of Horton as a UNC cultural figure (despite his being enslaved during his decades of poetry-selling on campus) is a small but real example of Chapel Hill's reckoning with its own history.",
+      "docsouth_nodes": ["George Moses Horton · DocSouth"],
+      "outward_links": ["George Moses Horton Society · Chapel Hill", "Chapel Hill Public Library bust"],
+      "citations": []
+    },
+    {
+      "id": 81,
+      "category": "present_future",
+      "title": "Maya Angelou's 1985 'On the Pulse of Morning' inheritance",
+      "summary": "Maya Angelou (born St. Louis, raised in Stamps, Arkansas) wrote in the testimonial-register tradition DocSouth's Black women's narratives established. Her recital of 'On the Pulse of Morning' at Bill Clinton's 1993 inauguration was the most prominent national recognition of that tradition in the late 20th century. UNC's Sonja Haynes Stone Center and Carolina Public Humanities have hosted programming on the Angelou-DocSouth lineage.",
+      "docsouth_nodes": ["DocSouth Black women's testimonial tradition"],
+      "outward_links": ["Maya Angelou · I Know Why the Caged Bird Sings · 1969", "Clinton inauguration · 1993"],
+      "citations": []
+    },
+    {
+      "id": 82,
+      "category": "present_future",
+      "title": "AI hallucination's lethal cost in legal research and DocSouth's contrast",
+      "summary": "2023-2025 federal courts have repeatedly sanctioned attorneys for citing AI-fabricated case law (Mata v. Avianca, 2023, etc.). DocSouth-style deterministic primary-source archives are the methodological alternative — citations whose existence and content is independently verifiable. Latent Ocean's response_digest extends this property to derived analyses. The AI-trustworthiness problem in legal and historical research is exactly the problem DocSouth and Latent Ocean structurally solve.",
+      "docsouth_nodes": ["DocSouth · primary-source verifiability"],
+      "outward_links": ["Mata v. Avianca · S.D.N.Y. · 2023", "AI hallucination case law"],
+      "citations": []
+    },
+    {
+      "id": 83,
+      "category": "present_future",
+      "title": "Climate change is editing DocSouth's coastal South",
+      "summary": "Sea-level rise threatens the physical communities DocSouth's Wilmington, New Bern, Edenton, Manteo materials document. Princeville (1885) has been flooded ten times in 30 years. The historical archive will increasingly survive only digitally; the physical sites of memory are being lost. DocSouth's deterministic structural fingerprint of its corpus has a new significance: the archive may outlast the places it documents.",
+      "docsouth_nodes": ["DocSouth · NC coastal materials"],
+      "outward_links": ["Princeville flooding · 1999, 2016, 2018, 2024", "Sea-level rise projections · NOAA"],
+      "citations": []
+    },
+    {
+      "id": 84,
+      "category": "present_future",
+      "title": "The 2020-2025 NC voter-ID and gerrymandering cases",
+      "summary": "NC's 2020-2025 cycle of voter-ID and racial-gerrymandering litigation (Holmes v. Moore, Allen v. Milligan, Moore v. Harper) is the direct legal-reckoning successor to the 1898 Wilmington massacre and the 1900 NC disfranchisement amendment. Chief Justice Earls and the NC Supreme Court's racially divided 4-3 majority in 2023-2025 has been a pivotal locus. DocSouth's primary-document baseline for the 1898-1900 state-legislative voter-suppression infrastructure is the historical foundation.",
+      "docsouth_nodes": ["DocSouth · 1898 Wilmington materials", "DocSouth · NC disfranchisement materials"],
+      "outward_links": ["Holmes v. Moore · NC · 2022-", "Moore v. Harper · 600 U.S. 1 · 2023"],
+      "citations": []
+    },
+    {
+      "id": 85,
+      "category": "present_future",
+      "title": "Cooper, Stein, Earls — NC's three-pronged 21st-century institutional reckoning",
+      "summary": "Roy Cooper (Governor 2017-2025), Josh Stein (NC Attorney General 2017-2025, Governor 2025-), and Anita Earls (NC Supreme Court Senior Justice 2019-) form a 21st-century NC Democratic establishment whose policy decisions on archives, reckoning, and education have direct effect on DocSouth's institutional position. Their 2018 Wilmington pardon, 2020 UNC Reckoning support, and 2023-2024 redistricting litigation collectively constitute the most concrete US state-level institutional reckoning with the post-Reconstruction settlement DocSouth catalogs.",
+      "docsouth_nodes": [],
+      "outward_links": ["Cooper administration", "Stein administration", "Earls NC Supreme Court"],
+      "citations": []
+    },
+    {
+      "id": 86,
+      "category": "present_future",
+      "title": "The Triangle's Black tech founder class",
+      "summary": "Durham-Raleigh-Chapel Hill is one of the highest-density Black tech founder regions in the US, downstream of NCCU's tech program, RTP's incubator infrastructure, and a deliberate Black VC investment cycle (Harlem Capital, Brown Venture Group). The Triangle Black founder community is the contemporary economic class that did not exist when Turner left for Liberia in 1895; their existence reverses Turner's diagnosis.",
+      "docsouth_nodes": [],
+      "outward_links": ["Triangle Black founders 2010s-2020s", "Harlem Capital", "Black tech ecosystem reports"],
+      "citations": []
+    },
+    {
+      "id": 87,
+      "category": "present_future",
+      "title": "Linda Harris and the Greenville Hemingway connection",
+      "summary": "DocSouth's Library of Southern Literature includes early-20th-century Greenville, NC materials. Greenville's Black community has produced contemporary scholar Linda Harris, whose 2020 NC Council on Humanities work foregrounds the local 1898-2018 reckoning continuum. DocSouth's primary materials are direct ancestors of her programming.",
+      "docsouth_nodes": [],
+      "outward_links": ["NC Council on Humanities", "Greenville, NC reckoning"],
+      "citations": []
+    },
+    {
+      "id": 88,
+      "category": "present_future",
+      "title": "Chapel Hill's Southern Pride monument — a 2024 Confederate-era marker still standing",
+      "summary": "Chapel Hill town center still includes Confederate-era markers beyond Silent Sam. The town's 2020-2025 cycle of monument review has been incomplete; some markers remain, some have been added with contextual signage, none have been replaced with comprehensive memorials. The institutional gap between UNC's Reckoning and Chapel Hill's town-government action is one of the most concrete local-political fault lines.",
+      "docsouth_nodes": [],
+      "outward_links": ["Chapel Hill town council monument review", "Orange County NC reckoning"],
+      "citations": []
+    },
+    {
+      "id": 89,
+      "category": "present_future",
+      "title": "NC's K-12 social-studies standards and the DocSouth-LearnNC connection",
+      "summary": "NC's state Social Studies Essential Standards have been revised four times since 2010, each cycle prompting public debate over slavery and Reconstruction coverage. UNC's now-discontinued LearnNC project (2002-2018) produced K-12 lesson plans built on DocSouth materials. Its discontinuation in 2018 left a gap in K-12 access to DocSouth that no successor has fully filled.",
+      "docsouth_nodes": [],
+      "outward_links": ["LearnNC · 2002-2018", "NC Social Studies Standards · 2010, 2014, 2019, 2024"],
+      "citations": []
+    },
+    {
+      "id": 90,
+      "category": "present_future",
+      "title": "Anti-Black book-banning waves and DocSouth's Open Access policy",
+      "summary": "Post-2021 state legislation in Florida, Texas, Tennessee, and other Southern states has restricted classroom access to books on slavery and Reconstruction — including some DocSouth-cataloged primary texts. NC has not passed equivalent legislation but the political risk is non-zero. DocSouth's Open Access policy means that even if state laws restrict classroom use, the texts remain web-accessible. UNC's commitment to keep DocSouth public is a load-bearing free-speech infrastructure decision.",
+      "docsouth_nodes": ["DocSouth · Open Access guarantee"],
+      "outward_links": ["FL HB 1467 · 2022", "TN HB 0900 · 2021", "TX SB 3 · 2021"],
+      "citations": []
+    },
+    {
+      "id": 91,
+      "category": "present_future",
+      "title": "The Charleston Hospital Strike (1969) and the post-DocSouth labor era",
+      "summary": "The 1969 Charleston Hospital Strike — Black hospital workers led by Coretta Scott King — is one of the last great civil-rights-era labor actions and the structural successor to NC's Loray Mill (1929). Charleston's archives include primary documents. DocSouth's labor-history materials and Charleston's primary documents share the institutional ancestry of NC labor organizing today.",
+      "docsouth_nodes": [],
+      "outward_links": ["Charleston Hospital Strike · 1969", "Coretta Scott King · post-MLK organizing"],
+      "citations": []
+    },
+    {
+      "id": 92,
+      "category": "present_future",
+      "title": "Mountaire's 2018-2024 Tar Heel Eastern Shore organizing",
+      "summary": "Mountaire Farms' 2018-2024 organizing fights — chicken-processing plants in eastern NC and Delaware — extend the Smithfield (2008) and Loray Mill (1929) lineage into the present. The workforce is largely Black and Latino. The Spanish-language testimonial register of Mountaire organizing is the cross-cultural extension of the testimonial register DocSouth's class #7 catalogs.",
+      "docsouth_nodes": ["DocSouth · class #7 testimonial register"],
+      "outward_links": ["Mountaire Farms organizing · 2018-2024", "UFCW NC", "AFL-CIO Eastern NC"],
+      "citations": []
+    },
+    {
+      "id": 93,
+      "category": "present_future",
+      "title": "The 2024 NC Supreme Court election and the Riggs/Griffin race",
+      "summary": "The November 2024 NC Supreme Court election (Allison Riggs, Democrat, vs. Jefferson Griffin, Republican) for the seat held the balance of NC judicial direction on voting-rights and gerrymandering cases through 2032. The race's recount-litigation phase ran through 2025. NC's structural racial-gerrymandering history (DocSouth-documented Wilmington 1898; Holmes v. Moore 2022) makes this the most consequential US state judicial election of the cycle.",
+      "docsouth_nodes": [],
+      "outward_links": ["Riggs v. Griffin · NC Supreme Court · 2024-2025", "NC redistricting decade"],
+      "citations": []
+    },
+    {
+      "id": 94,
+      "category": "present_future",
+      "title": "Charlotte's Beatties Ford Road and the Black Wall Street legacy",
+      "summary": "Charlotte's Beatties Ford Road corridor — historically the city's Black professional center — is the largest contemporary US 'Black Wall Street' analog, descended from the 1920s-1960s Black professional infrastructure DocSouth's late texts foreshadow. The corridor's Johnson C. Smith University, JC Smith-affiliated business district, and the Charlotte Black wealth-class are the institutional descendants of the AME church-and-school network DocSouth catalogs.",
+      "docsouth_nodes": ["DocSouth · NC AME school materials"],
+      "outward_links": ["Beatties Ford Road · Charlotte", "Johnson C. Smith University", "Charlotte Black professional class history"],
+      "citations": []
+    },
+    {
+      "id": 95,
+      "category": "present_future",
+      "title": "Latent Ocean's verifiable-AI infrastructure as the field-shaping future",
+      "summary": "The deterministic-fingerprint approach Latent Ocean prototypes on DocSouth is one of a small number of viable answers to the AI-verifiability problem facing humanities, legal, and scientific research circa 2025. If the approach is adopted by Schomburg, Moorland-Spingarn, the Library of Congress, Beinecke, or major commercial archives, DocSouth becomes the methodological proof of concept for the entire field. The coming five years will determine whether deterministic-fingerprint archives are infrastructural or experimental.",
+      "docsouth_nodes": ["DocSouth · this showcase"],
+      "outward_links": ["Latent Ocean platform · /method", "Schomburg Center", "Library of Congress American Memory project"],
+      "citations": []
+    },
+    {
+      "id": 96,
+      "category": "present_future",
+      "title": "AI-generated counter-archives and the integrity problem",
+      "summary": "Post-2023, AI tools have been used to fabricate plausible 19th-century slave-narrative-style texts that fool casual readers but fail provenance checks. DocSouth's primary-source authenticity is now a load-bearing distinction in a field where synthetic counter-archives are becoming common. Latent Ocean's response_digest applied to DocSouth materials is one approach to provenance verification at scale.",
+      "docsouth_nodes": ["DocSouth · primary-source authenticity"],
+      "outward_links": ["Synthetic-archive scholarship", "DocSouth provenance metadata"],
+      "citations": []
+    },
+    {
+      "id": 97,
+      "category": "present_future",
+      "title": "UNC's open question: who succeeds DocSouth's founding generation?",
+      "summary": "DocSouth was founded by UNC Libraries faculty in the mid-1990s. Its founding generation — Joe Hewitt, Charles M. McNeely, Natalia Smith, others — are aging out. Whether DocSouth's next generation will be UNC Libraries, a UNC Press partnership, an HBCU consortium, or absorbed into a larger commercial archive is the institutional sustainability question of the next decade. UNC's Reckoning commitments include continued DocSouth funding through 2030 but not beyond.",
+      "docsouth_nodes": [],
+      "outward_links": ["UNC Libraries succession planning", "DocSouth director succession"],
+      "citations": []
+    },
+    {
+      "id": 98,
+      "category": "present_future",
+      "title": "The Pulitzer-funded Centers for Investigation of Reconstruction-era violence",
+      "summary": "The Pulitzer Center on Crisis Reporting funded a 2020-2024 cycle of investigative journalism into Reconstruction-era racial violence — including extensive use of DocSouth-archived primary sources. The reports surfaced previously-unconvicted lynchings and unsuccessful prosecutions. DocSouth's primary-document archive is one of the substrates this contemporary investigative journalism builds on.",
+      "docsouth_nodes": ["DocSouth · Reconstruction violence primary documents"],
+      "outward_links": ["Pulitzer Center · investigative journalism · Reconstruction"],
+      "citations": []
+    },
+    {
+      "id": 99,
+      "category": "present_future",
+      "title": "The pending UNC-Howard joint center proposal",
+      "summary": "Informal discussions among UNC AAS faculty, Howard's Center for Journalism and Democracy, and other Black-archive institutions in 2024-2025 have raised the possibility of a joint UNC-Howard archival research center to consolidate primary-source access across the Schomburg / Moorland-Spingarn / DocSouth / Beinecke ecosystem. Whether such a center materializes — and where it sits institutionally — is one of the open futures of the field.",
+      "docsouth_nodes": [],
+      "outward_links": ["UNC AAS · Howard Center · proposed joint research", "US Black archival infrastructure consolidation"],
+      "citations": []
+    },
+    {
+      "id": 100,
+      "category": "present_future",
+      "title": "DocSouth's structural fingerprint becomes a public utility",
+      "summary": "If the Latent Ocean showcase scales to other corpora — Moorland-Spingarn, Schomburg, Beinecke, Library of Congress — the deterministic structural fingerprint becomes a public utility for archive verification. A scholar in 2030 querying any major Black-history archive could receive a citable response_digest invariant under seed=42, equivalent across institutions. UNC's DocSouth, by being first, becomes the methodological reference deployment. The chain that started with Ridgel-Turner-Blyden-Crummell-Du Bois ends with Latent Ocean's verifiable-AI infrastructure as the 22nd-century continuation of the AME network's archival vision.",
+      "docsouth_nodes": ["DocSouth · this showcase as proof"],
+      "outward_links": ["Latent Ocean platform", "US Black archival infrastructure · 2030 vision"],
+      "citations": []
+    }
+  ]
+}

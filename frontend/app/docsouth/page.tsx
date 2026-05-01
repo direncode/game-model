@@ -84,6 +84,9 @@ export default function DocSouthShowcasePage() {
                   {label}
                 </a>
               ))}
+              <Link href="/docsouth/constellations" className="inline-flex items-center h-7 px-3 rounded-full bg-white text-black uppercase tracking-[0.18em] font-mono text-[10.5px] hover:bg-white/90 transition-colors">
+                constellations · 100 findings →
+              </Link>
             </div>
           </div>
         </section>

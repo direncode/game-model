@@ -18,7 +18,9 @@ export const runtime = "nodejs";
 // the contract narrow.
 
 const ALLOWED: Record<string, string> = {
-  docsouth: "docsouth.json",
+  docsouth:                 "docsouth.json",
+  "docsouth-constellations": "docsouth_constellations.json",
+  "docsouth-findings":       "docsouth_findings.json",
 };
 
 export async function GET(_req: Request, ctx: { params: { slug: string } }) {
