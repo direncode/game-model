@@ -1,0 +1,44 @@
+{
+  "showcase": "pulse",
+  "patentsview_snapshot_date": "2026-04-30",
+  "corpus_input_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "corpus_sha256":       "1111111111111111111111111111111111111111111111111111111111111111",
+  "corpus_records": 500000,
+  "model_id": "rng_test",
+  "response_digest": "deadbeef",
+  "n_survivors": 12000,
+  "baseline_disambiguators": {
+    "engine":      0.84,
+    "patentsview": 1.0,
+    "naive_name":  0.61,
+    "chance":      0.0001
+  },
+  "decade_trajectory": [
+    {"decade": "1980s", "n_records": 1500, "n_inventors": 1100, "ipc_share": {"35": 0.4, "2": 0.3, "1": 0.2}},
+    {"decade": "1990s", "n_records": 3000, "n_inventors": 2200, "ipc_share": {"35": 0.45, "2": 0.25, "1": 0.2}},
+    {"decade": "2000s", "n_records": 5000, "n_inventors": 3700, "ipc_share": {"35": 0.5, "2": 0.2, "1": 0.18}},
+    {"decade": "2010s", "n_records": 8000, "n_inventors": 5800, "ipc_share": {"35": 0.6, "2": 0.15, "1": 0.15}},
+    {"decade": "2020s", "n_records": 4000, "n_inventors": 3000, "ipc_share": {"35": 0.65, "2": 0.12, "1": 0.13}}
+  ],
+  "polymath_bleed": [],
+  "rare_records": [
+    {
+      "patent_id": "5031819", "title": "Apparatus for ejecting fluid", "canonical_name": "Johnson L",
+      "year": 1991, "primary_ipc": "32", "city": "Marietta", "state": "GA",
+      "min_hamming": 28, "uspto_url": "https://patents.uspto.gov/patent/5031819"
+    },
+    {
+      "patent_id": "4744354", "title": "Method and apparatus for removing cataracts", "canonical_name": "Bath P",
+      "year": 1988, "primary_ipc": "35", "city": "Los Angeles", "state": "CA",
+      "min_hamming": 25, "uspto_url": "https://patents.uspto.gov/patent/4744354"
+    }
+  ],
+  "cluster_meta": [
+    {"cluster_id": 0, "size": 200, "patent_count": 50, "ipc_entropy": 2.1, "career_span": 25, "solo_share": 0.4, "median_year": 2005, "year_spread": 25, "category_entropy": 2.1},
+    {"cluster_id": 1, "size": 150, "patent_count": 30, "ipc_entropy": 0.8, "career_span": 15, "solo_share": 0.6, "median_year": 2010, "year_spread": 15, "category_entropy": 0.8}
+  ],
+  "singular_inventor_candidates": [
+    {"cluster_id": 0, "size": 200, "patent_count": 50, "ipc_entropy": 2.1, "career_span": 25, "solo_share": 0.4, "median_year": 2005, "year_spread": 25, "category_entropy": 2.1}
+  ],
+  "generated_at": "2026-05-02T12:00:00Z"
+}
