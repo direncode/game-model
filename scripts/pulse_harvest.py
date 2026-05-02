@@ -112,13 +112,19 @@ def _stream_tsv(path: Path):
             yield row
 
 
-def _build_records(fixtures_dir: Path, snapshot_nominal_date: str) -> list[dict]:
+def _build_records(
+    fixtures_dir: Path,
+    snapshot_nominal_date: str,
+    *,
+    pre_sample_patents_per_year: int = 0,
+) -> list[dict]:
     """Join the PatentsView TSVs into one inventor-record per appearance.
 
-    Streaming-safe: never loads any of the multi-gigabyte TSVs (inventors,
-    assignees, patents) fully into memory. Memory peak is dominated by the
-    set of accepted patent_ids (~few-hundred-MB worst case at full PatentsView
-    scale; ~few-MB on test fixtures).
+    Pre-sampling at pass 0 keeps the in-memory pat_meta dict small even at
+    full PatentsView scale: when pre_sample_patents_per_year > 0, only that
+    many patent_ids per year are retained (deterministic stride sample),
+    bounding memory regardless of corpus size. When 0, all in-window
+    patents are kept (correct for small fixtures).
 
     Filters: patents granted before 1976, patents granted after snapshot_nominal_date.
     """
@@ -129,18 +135,63 @@ def _build_records(fixtures_dir: Path, snapshot_nominal_date: str) -> list[dict]
     pat_path = fixtures_dir / "g_patent.tsv"
     inv_path = fixtures_dir / "g_inventor_disambiguated.tsv"
 
-    # Pass 1 — patents. Stream g_patent.tsv, keep only patents in our date
-    # window. Build patent_id -> (year, primary_ipc, title) dict. At full
-    # PatentsView scale this is ~10M rows × ~80 bytes = ~800 MB; trimmed to
-    # the in-window subset typically ~5M × 80 = 400 MB.
+    # Pass 1 — patents. Stream g_patent.tsv. When pre_sample_patents_per_year
+    # > 0, group by year and stride-sample BEFORE building pat_meta — this
+    # keeps memory tiny even at full PatentsView scale (10M+ patents).
     pat_meta: dict[str, tuple[int, str, str]] = {}
-    for p in _stream_tsv(pat_path):
-        pid = p.get("patent_id") or ""
-        date = p.get("patent_date") or ""
-        if not date or date < "1976-01-01" or date > snapshot_nominal_date:
-            continue
-        year = int(date[:4]) if len(date) >= 4 else 0
-        pat_meta[pid] = (year, p.get("wipo_field_id", ""), p.get("patent_title", ""))
+    if pre_sample_patents_per_year > 0:
+        # Two-pass stride sample: first count per year, then stream again
+        # selecting every k-th patent per year. Order of patents within a
+        # year follows file order (deterministic given input).
+        year_counts: dict[int, int] = defaultdict(int)
+        for p in _stream_tsv(pat_path):
+            date = p.get("patent_date") or ""
+            if not date or date < "1976-01-01" or date > snapshot_nominal_date:
+                continue
+            try:
+                year = int(date[:4])
+            except (ValueError, IndexError):
+                continue
+            year_counts[year] += 1
+
+        year_strides: dict[int, int] = {}
+        for year, n in year_counts.items():
+            if n <= pre_sample_patents_per_year:
+                year_strides[year] = 1
+            else:
+                year_strides[year] = max(1, n // pre_sample_patents_per_year)
+
+        year_seen: dict[int, int] = defaultdict(int)
+        for p in _stream_tsv(pat_path):
+            pid = p.get("patent_id") or ""
+            date = p.get("patent_date") or ""
+            if not date or date < "1976-01-01" or date > snapshot_nominal_date:
+                continue
+            try:
+                year = int(date[:4])
+            except (ValueError, IndexError):
+                continue
+            stride = year_strides.get(year, 1)
+            idx = year_seen[year]
+            year_seen[year] += 1
+            if idx % stride != 0:
+                continue
+            kept_in_year = idx // stride
+            if kept_in_year >= pre_sample_patents_per_year:
+                continue
+            pat_meta[pid] = (year, p.get("wipo_field_id", ""), p.get("patent_title", ""))
+    else:
+        # Small-fixture mode: keep every in-window patent. Used by tests.
+        for p in _stream_tsv(pat_path):
+            pid = p.get("patent_id") or ""
+            date = p.get("patent_date") or ""
+            if not date or date < "1976-01-01" or date > snapshot_nominal_date:
+                continue
+            try:
+                year = int(date[:4])
+            except (ValueError, IndexError):
+                continue
+            pat_meta[pid] = (year, p.get("wipo_field_id", ""), p.get("patent_title", ""))
 
     # Pass 2 — assignees. Only keep entries whose patent_id is in pat_meta.
     asg_by_patent: dict[str, tuple[str, str]] = {}
@@ -264,12 +315,16 @@ def run(
     snapshot_nominal_date: str,
     target_per_year: int = 0,
     per_name_cap: int = 100,
+    pre_sample_patents_per_year: int = 0,
 ) -> dict:
     fixtures_dir = Path(fixtures_dir)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    records = _build_records(fixtures_dir, snapshot_nominal_date)
+    records = _build_records(
+        fixtures_dir, snapshot_nominal_date,
+        pre_sample_patents_per_year=pre_sample_patents_per_year,
+    )
     sampled = _two_stage_sample(
         records, per_name_cap=per_name_cap, target_per_year=target_per_year,
     )
@@ -310,6 +365,10 @@ def main(argv: list[str] | None = None) -> int:
                    help="Outer stride-by-year cap. 0 = no outer stride. Default 10000.")
     p.add_argument("--per-name-cap", type=int, default=100,
                    help="Max appearances per canonical_name. Default 100.")
+    p.add_argument("--pre-sample-patents-per-year", type=int, default=0,
+                   help="Bound memory at full-corpus scale by stride-sampling patents to this count "
+                        "per year BEFORE filtering inventors. Default 0 (keep all in-window patents). "
+                        "Set to e.g. 20000 for full-PatentsView runs on a 16-GB box.")
     args = p.parse_args(argv)
 
     stats = run(
@@ -317,6 +376,7 @@ def main(argv: list[str] | None = None) -> int:
         snapshot_nominal_date=args.snapshot_date,
         target_per_year=args.target_per_year,
         per_name_cap=args.per_name_cap,
+        pre_sample_patents_per_year=args.pre_sample_patents_per_year,
     )
     print(json.dumps(stats, indent=2))
     print(f"corpus_sha256: {file_sha256(args.output)}")
