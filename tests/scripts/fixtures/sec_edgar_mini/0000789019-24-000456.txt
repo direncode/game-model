@@ -1,0 +1,17 @@
+ITEM 1. BUSINESS
+
+The Company develops, licenses, and supports a wide range of software products, services, and devices that deliver new opportunities, greater convenience, and enhanced value to people's lives. The Company's segments include Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. Cloud computing services are provided through a global network of data centers.
+
+ITEM 1A. RISK FACTORS
+
+The Company faces intense competition across all markets for its products and services. Competitors include other large technology companies and emerging cloud providers. The Company's business depends on the ability to attract and retain talented employees. Cybersecurity threats and information security incidents may compromise the Company's intellectual property, products, and customer data. Regulatory and litigation risks include antitrust, data privacy, and AI-specific regulations in multiple jurisdictions.
+
+ITEM 7. MANAGEMENT DISCUSSION AND ANALYSIS
+
+Revenue increased driven by Intelligent Cloud and Productivity and Business Processes segments. Cloud revenue grew significantly from prior year. Operating income increased reflecting higher revenue partially offset by increased capital expenditures for AI and cloud infrastructure. The Company expects continued investment in AI infrastructure to support customer demand.
+
+ITEM 8. FINANCIAL STATEMENTS
+
+Total revenue: $211.9 billion
+Net income: $72.4 billion
+Total assets: $411.9 billion
