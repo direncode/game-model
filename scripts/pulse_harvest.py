@@ -96,100 +96,139 @@ def canonical_name(first: str, last: str) -> str:
 
 
 def _read_tsv(path: Path) -> list[dict]:
-    """Read a PatentsView TSV (header + tab-separated rows). Returns list of dicts."""
+    """Read a PatentsView TSV (header + tab-separated rows). Returns list of dicts.
+    Used only for the small location TSV; do NOT use for the large inventor or
+    patent files — they are processed via _stream_tsv to avoid OOM at scale."""
     with path.open(encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f, delimiter="\t")
         return list(reader)
 
 
+def _stream_tsv(path: Path):
+    """Yield dict-rows lazily. Caller controls memory; only one row in memory at a time."""
+    with path.open(encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        for row in reader:
+            yield row
+
+
 def _build_records(fixtures_dir: Path, snapshot_nominal_date: str) -> list[dict]:
     """Join the PatentsView TSVs into one inventor-record per appearance.
 
+    Streaming-safe: never loads any of the multi-gigabyte TSVs (inventors,
+    assignees, patents) fully into memory. Memory peak is dominated by the
+    set of accepted patent_ids (~few-hundred-MB worst case at full PatentsView
+    scale; ~few-MB on test fixtures).
+
     Filters: patents granted before 1976, patents granted after snapshot_nominal_date.
     """
-    inv_tsv  = _read_tsv(fixtures_dir / "g_inventor_disambiguated.tsv")
-    # not_disambiguated is optional: when missing, raw_name falls back to the
-    # disambiguated name (no information lost; raw is just the verbatim
-    # patent-text rendering, which we don't strictly need for fingerprinting)
     raw_path = fixtures_dir / "g_inventor_not_disambiguated.tsv"
-    raw_tsv  = _read_tsv(raw_path) if raw_path.exists() else []
-    asg_tsv  = _read_tsv(fixtures_dir / "g_assignee_disambiguated.tsv")
-    loc_tsv  = _read_tsv(fixtures_dir / "g_location_disambiguated.tsv")
-    pat_tsv  = _read_tsv(fixtures_dir / "g_patent.tsv")
+    has_raw  = raw_path.exists()
+    asg_path = fixtures_dir / "g_assignee_disambiguated.tsv"
+    loc_path = fixtures_dir / "g_location_disambiguated.tsv"
+    pat_path = fixtures_dir / "g_patent.tsv"
+    inv_path = fixtures_dir / "g_inventor_disambiguated.tsv"
 
-    raw_by_patent_seq = {(r["patent_id"], r["inventor_sequence"]): r for r in raw_tsv}
-    asg_by_patent     = {a["patent_id"]: a for a in asg_tsv}
-    loc_by_id         = {l["location_id"]: l for l in loc_tsv}
-    pat_by_id         = {p["patent_id"]: p for p in pat_tsv}
+    # Pass 1 — patents. Stream g_patent.tsv, keep only patents in our date
+    # window. Build patent_id -> (year, primary_ipc, title) dict. At full
+    # PatentsView scale this is ~10M rows × ~80 bytes = ~800 MB; trimmed to
+    # the in-window subset typically ~5M × 80 = 400 MB.
+    pat_meta: dict[str, tuple[int, str, str]] = {}
+    for p in _stream_tsv(pat_path):
+        pid = p.get("patent_id") or ""
+        date = p.get("patent_date") or ""
+        if not date or date < "1976-01-01" or date > snapshot_nominal_date:
+            continue
+        year = int(date[:4]) if len(date) >= 4 else 0
+        pat_meta[pid] = (year, p.get("wipo_field_id", ""), p.get("patent_title", ""))
 
-    invs_by_patent: dict[str, list[tuple[int, dict]]] = defaultdict(list)
-    for inv in inv_tsv:
-        invs_by_patent[inv["patent_id"]].append((int(inv["inventor_sequence"]), inv))
+    # Pass 2 — assignees. Only keep entries whose patent_id is in pat_meta.
+    asg_by_patent: dict[str, tuple[str, str]] = {}
+    for a in _stream_tsv(asg_path):
+        pid = a.get("patent_id") or ""
+        if pid in pat_meta:
+            asg_by_patent[pid] = (a.get("assignee_id", ""), a.get("organization", ""))
+
+    # Locations are small enough (~9 MB) to load fully.
+    loc_by_id = {l["location_id"]: l for l in _read_tsv(loc_path)}
+
+    # Pass 3 — inventors. First sub-pass: collect (patent_id, seq, fname, lname)
+    # tuples filtered to in-window patents. This is needed for co-inventor lookup.
+    # ~7M rows × ~80 bytes = ~600 MB worst case. Acceptable.
+    invs_by_patent: dict[str, list[tuple[int, str, str, str, str]]] = defaultdict(list)
+    for inv in _stream_tsv(inv_path):
+        pid = inv.get("patent_id") or ""
+        if pid not in pat_meta:
+            continue
+        try:
+            seq = int(inv.get("inventor_sequence") or "0")
+        except ValueError:
+            seq = 0
+        invs_by_patent[pid].append((
+            seq,
+            inv.get("disambig_inventor_name_first", ""),
+            inv.get("disambig_inventor_name_last", ""),
+            inv.get("inventor_id", ""),
+            inv.get("location_id", ""),
+        ))
     for pid in invs_by_patent:
         invs_by_patent[pid].sort(key=lambda x: x[0])
 
+    # Pass 4 — raw inventors (optional). Only read if present.
+    raw_by_patent_seq: dict[tuple[str, str], tuple[str, str]] = {}
+    if has_raw:
+        for r in _stream_tsv(raw_path):
+            pid = r.get("patent_id") or ""
+            if pid in pat_meta:
+                key = (pid, r.get("inventor_sequence", ""))
+                raw_by_patent_seq[key] = (
+                    r.get("raw_inventor_name_first", ""),
+                    r.get("raw_inventor_name_last", ""),
+                )
+
+    # Final emit: iterate inventors in patent_id order, build records.
     out: list[dict] = []
-    for inv in inv_tsv:
-        patent_id = inv["patent_id"]
-        seq = int(inv["inventor_sequence"])
+    for pid in sorted(invs_by_patent.keys()):
+        year, primary_ipc, title = pat_meta[pid]
+        invs = invs_by_patent[pid]
+        for seq, fname, lname, inventor_id, location_id in invs:
+            cname = canonical_name(fname, lname)
 
-        pat = pat_by_id.get(patent_id, {})
-        patent_date = pat.get("patent_date", "")
-        if not patent_date or patent_date < "1976-01-01":
-            continue
-        if patent_date > snapshot_nominal_date:
-            continue
-        year = int(patent_date[:4]) if len(patent_date) >= 4 else 0
-        title = pat.get("patent_title", "")
-        primary_ipc = pat.get("wipo_field_id", "")
+            co: list[str] = []
+            for other_seq, other_f, other_l, _oiv, _olc in invs:
+                if other_seq == seq:
+                    continue
+                co.append(canonical_name(other_f, other_l))
 
-        first = inv.get("disambig_inventor_name_first", "")
-        last  = inv.get("disambig_inventor_name_last", "")
-        cname = canonical_name(first, last)
+            raw_first, raw_last = raw_by_patent_seq.get((pid, str(seq)), ("", ""))
+            raw_name = f"{raw_last}, {raw_first}".strip(", ") if (raw_first or raw_last) else ""
 
-        co: list[str] = []
-        for other_seq, other_inv in invs_by_patent.get(patent_id, []):
-            if other_seq == seq:
-                continue
-            co.append(canonical_name(
-                other_inv.get("disambig_inventor_name_first", ""),
-                other_inv.get("disambig_inventor_name_last", ""),
-            ))
+            assignee_id, assignee_name = asg_by_patent.get(pid, ("", ""))
+            loc = loc_by_id.get(location_id, {})
+            city, state, country = loc.get("city", ""), loc.get("state", ""), loc.get("country", "")
 
-        raw = raw_by_patent_seq.get((patent_id, str(seq)), {})
-        raw_first = raw.get("raw_inventor_name_first", "")
-        raw_last  = raw.get("raw_inventor_name_last", "")
-        raw_name  = f"{raw_last}, {raw_first}".strip(", ")
+            co_str = "; ".join(co)
+            text = f"{cname} | {co_str} | {assignee_id} | {city} {state} {country}".strip()
 
-        asg = asg_by_patent.get(patent_id, {})
-        assignee_id = asg.get("assignee_id", "")
-        assignee_name = asg.get("organization", "")
-
-        loc = loc_by_id.get(inv.get("location_id", ""), {})
-        city, state, country = loc.get("city", ""), loc.get("state", ""), loc.get("country", "")
-
-        co_str = "; ".join(co)
-        text = f"{cname} | {co_str} | {assignee_id} | {city} {state} {country}".strip()
-
-        out.append({
-            "paper_id":                   patent_id,
-            "patent_id":                  patent_id,
-            "inventor_seq":               seq,
-            "raw_name":                   raw_name,
-            "canonical_name":             cname,
-            "co_inventors_canonical":     co,
-            "assignee_id":                assignee_id,
-            "assignee_name":              assignee_name,
-            "city":                       city,
-            "state":                      state,
-            "country":                    country,
-            "primary_ipc":                primary_ipc,
-            "year":                       year,
-            "title":                      title,
-            "patentsview_inventor_id":    inv.get("inventor_id", ""),
-            "raw_assignee_string":        assignee_name,
-            "text":                       text,
-        })
+            out.append({
+                "paper_id":                   pid,
+                "patent_id":                  pid,
+                "inventor_seq":               seq,
+                "raw_name":                   raw_name,
+                "canonical_name":             cname,
+                "co_inventors_canonical":     co,
+                "assignee_id":                assignee_id,
+                "assignee_name":              assignee_name,
+                "city":                       city,
+                "state":                      state,
+                "country":                    country,
+                "primary_ipc":                primary_ipc,
+                "year":                       year,
+                "title":                      title,
+                "patentsview_inventor_id":    inventor_id,
+                "raw_assignee_string":        assignee_name,
+                "text":                       text,
+            })
 
     return out
 

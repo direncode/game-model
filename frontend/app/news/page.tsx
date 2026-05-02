@@ -20,9 +20,36 @@ const ENTRIES: Entry[] = [
   {
     date: "2026 · 05 · 02",
     kind: "release",
+    title: "Receipt · /receipt/sec-edgar — 1,000 SEC 10-Ks, every summary attested, chain head anchored to Bitcoin via OpenTimeStamps.",
+    blurb:
+      "Receipt is the audit-trail showcase. 1,000 SEC EDGAR 10-K filings (stratified across industry × year, 2018-2025), summarized once via Claude Sonnet 4.6 against a single fixed prompt + JSON output schema, every call attested by a tamper-proof receipt. Each receipt is sha256(prev_receipt_hash || prompt_hash || schema_hash || corpus_sha256 || model_id || timestamp || output_sha256), forming a linked-list chain. The chain head is OpenTimeStamps-stamped to the Bitcoin timechain so retroactive forgery is detectable. The dedicated verifier at /receipt/verify lets anyone paste a receipt JSON and confirm its hash bit-for-bit in their browser via crypto.subtle.digest, plus replay the entire chain from /api/range-public/showcase/receipt-chain. Python and TypeScript hash implementations are kept in sync by an explicit cross-language test contract. Substrate compounds: the existing JSON/CEF/OCSF audit infrastructure (lib/range/audit.ts) was extended with action='summarize' rather than reimplemented. This is the first showcase to use OpenTimeStamps anchoring, demonstrating the company's trade-secrets + OTS IP framing in production.",
+    link: { label: "Open the receipt list + verifier", href: "/receipt/sec-edgar" },
+    digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  },
+  {
+    date: "2026 · 05 · 02",
+    kind: "release",
+    title: "Pulse · /pulse/uspto-inventors — 50 years of US innovation, deterministically disambiguated against PatentsView gold.",
+    blurb:
+      "Pulse is the IP-attorney / M&A / innovation-economy showcase. A 500k-record stratified sample of inventor-records 1976-2025, drawn from PatentsView's bulk-distributed disambiguated inventor + assignee + location + patent TSVs. The fingerprint payload is canonicalized name (Surname I I) + co-inventor list + assignee_id + city/state/country — PatentsView's gold-standard disambig_inventor_id is held out of the fingerprint entirely so the cluster-purity claim is honest unsupervised recovery, not a tautology. Two-stage sampling preserves disambiguation signal for typical inventors (≤ K appearances kept fully) while down-sampling ultra-common names. Multi-baseline disambiguation panel: engine vs PatentsView (gold) vs naive-name-collision vs chance. Per-cluster signals (productivity, IPC entropy, career-span, solo-share) flag candidate singularly-prolific inventors without naming them — readers click through to USPTO and judge. Top-25 structurally singular inventor-records each link to https://patents.uspto.gov/patent/<id>. Constellations catalog at /pulse/uspto-inventors/constellations.",
+    link: { label: "Open the disambiguation showcase", href: "/pulse/uspto-inventors" },
+    digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  },
+  {
+    date: "2026 · 05 · 02",
+    kind: "release",
+    title: "Atlas · /atlas/arxiv — 30 years of scientific discourse, structurally mapped, citable forever.",
+    blurb:
+      "Atlas is the scientific-publisher / bibliometrician showcase. A 500k-record stratified sample of arXiv abstracts 1991-2025, drawn from a pinned monthly snapshot. The fingerprint payload is title + abstract — categories never enter the engine, so cluster-purity-vs-archives is an honest unsupervised-recovery claim. Coarse purity vs. 8 archive-level disciplines (cs, math, physics, q-bio, q-fin, stat, econ, eess) is the page headline; fine purity vs. ~152 primary subcategories is disclosed in the verification appendix. Decade trajectory across four decades shows the structural reweighting of arXiv from the early-physics era to the 2020s cs/stat/eess dominance. Cross-discipline bleed surfaces papers whose cluster's modal-archive differs from their own. Top-25 rare records link to arxiv.org for direct verification. Static emergence-candidate detection (median pub year, year-spread, category Shannon entropy) flags young + tight + diverse clusters without naming them — Atlas refuses the curatorial call from algorithmic signals alone. Constellations catalog at /atlas/arxiv/constellations. Verification recipe: re-download the same Kaggle snapshot, re-run scripts/arxiv_harvest.py, compare corpus_sha256 byte-for-byte.",
+    link: { label: "Open the arXiv structural map", href: "/atlas/arxiv" },
+    digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  },
+  {
+    date: "2026 · 05 · 02",
+    kind: "release",
     title: "The whole site, readable by anyone. Pricing comes after the conversation.",
     blurb:
-      "The site has been rewritten so any customer can understand it without asking an engineer to translate. The five products and their three tiers are documented in plain English at /products. A new /how-it-works page explains the engine in three steps — what you bring, what we make, what comes back — without using a single piece of jargon. Pricing has been removed from the visible site and replaced with a comprehensive preview at /preview that shows what each tier includes, who it serves, and what the relationship looks like. We discuss prices in the conversation that follows the preview, once we know the right tier shape for what you actually need. The engineering proof remains at /method, with a clear note at the top that this is the page for your CTO; the rest of the site stays plain. Nav reformed: How it works · Products · Preview · DocSouth · Method · News, with Vault → as the dedicated CTA pill for partners shipping AI to regulated customers.",
+      "The site has been rewritten so any customer can understand it without asking an engineer to translate. The five products and their three tiers are documented in plain English at /products. A new /how-it-works page explains the engine in three steps — what you bring, what we make, what comes back — without using a single piece of jargon. Pricing has been removed from the visible site and replaced with a comprehensive preview at /preview that shows what each tier includes, who it serves, and what the relationship looks like. We discuss prices in the conversation that follows the preview, once we know the right tier shape for what you actually need. The engineering proof remains at /method, with a clear note at the top that this is the page for your CTO; the rest of the site stays plain. Nav reformed: How it works · Products · Preview · Method · News, with Vault → as the dedicated CTA pill for partners shipping AI to regulated customers. (DocSouth removed from main nav — it is the proof of Studio and lives on /studio plus the four-showcase strip.)",
     link: { label: "Start with How it works", href: "/how-it-works" },
     digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
   },
