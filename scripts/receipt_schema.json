@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Receipt v1 SEC 10-K Summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["executive_summary", "business_description", "risk_factors", "material_changes", "financial_highlights", "management_changes"],
+  "properties": {
+    "executive_summary":     {"type": "string", "maxLength": 1500},
+    "business_description":  {"type": "string", "maxLength": 800},
+    "risk_factors":          {"type": "array", "items": {"type": "string", "maxLength": 200}, "maxItems": 12},
+    "material_changes":      {"type": "array", "items": {"type": "string", "maxLength": 200}, "maxItems": 8},
+    "financial_highlights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["revenue", "net_income", "total_assets"],
+      "properties": {
+        "revenue":      {"type": ["string", "null"]},
+        "net_income":   {"type": ["string", "null"]},
+        "total_assets": {"type": ["string", "null"]}
+      }
+    },
+    "management_changes":    {"type": "array", "items": {"type": "string", "maxLength": 200}, "maxItems": 6}
+  }
+}
