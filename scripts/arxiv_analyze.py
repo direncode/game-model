@@ -27,13 +27,27 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
-import math
 import os
 import sys
 import urllib.request
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Any
+
+# Shared analyze primitives. The library is at scripts/_showcase_lib.py;
+# we add scripts/ to sys.path so the import works whether this script is
+# invoked from the repo root or from scripts/.
+_SCRIPTS = Path(__file__).resolve().parent
+sys.path.insert(0, str(_SCRIPTS))
+from _showcase_lib import (  # noqa: E402
+    hamming48,
+    weighted_purity,
+    category_entropy,
+    decade_of,
+    assign_to_class,
+    top_rare as _lib_top_rare,
+    bleed_per_class as _lib_bleed_per_class,
+    flag_emergence_candidates,
+)
 
 # Resolve corpus + output paths against either container (/data/...) or host
 # bind-mount (/opt/latentocean/data/...).
@@ -46,7 +60,7 @@ TOKEN_PATH  = Path("/tmp/.atlastoken")
 BASE_URL    = os.environ.get("LO_BASE_URL", "https://www.latentocean.com")
 
 
-# ---------- pure functions (extensively unit-tested) ----------
+# ---------- arXiv-specific primitives ----------
 
 def archive_of(primary_category: str) -> str:
     """Map a primary category to its top-level archive.
@@ -59,159 +73,43 @@ def archive_of(primary_category: str) -> str:
     return primary_category
 
 
-def decade_of(year: int) -> str:
-    if year < 1990:
-        return "pre-1990s"
-    return f"{(year // 10) * 10}s"
-
-
-def hamming48(a: int, b: int) -> int:
-    x = a ^ b
-    c = 0
-    while x:
-        x &= x - 1
-        c += 1
-    return c
-
-
-def weighted_purity(labels: list, golds: list) -> tuple[float, list[dict]]:
-    """For each cluster, take the share of records whose gold label is the
-    cluster's plurality label; weight by cluster size; sum.
-    """
-    by_cluster: dict[Any, Counter] = defaultdict(Counter)
-    for lab, g in zip(labels, golds):
-        by_cluster[lab][g] += 1
-    rows: list[dict] = []
-    weighted = 0
-    total = 0
-    for cid, ctr in by_cluster.items():
-        size = sum(ctr.values())
-        if size == 0:
-            continue
-        dom_label, dom_n = max(ctr.items(), key=lambda x: x[1])
-        rows.append({
-            "cluster":         cid,
-            "size":            size,
-            "dominant":        dom_label,
-            "dominant_share": round(dom_n / size, 3),
-            "breakdown":       dict(ctr),
-        })
-        weighted += dom_n
-        total += size
-    rows.sort(key=lambda x: -x["size"])
-    return (round(weighted / total, 3) if total else 0.0, rows)
-
-
-def category_entropy(categories: list[str]) -> float:
-    """Shannon entropy of a multiset of categories."""
-    if not categories:
-        return 0.0
-    counts = Counter(categories)
-    n = len(categories)
-    h = 0.0
-    for c in counts.values():
-        p = c / n
-        h -= p * math.log2(p)
-    return h
-
-
-def flag_emergence_candidates(
-    cluster_meta: list[dict],
-    *,
-    min_median_year: int,
-    max_year_spread: int,
-    min_category_entropy: float,
-) -> list[dict]:
-    """A cluster is a candidate emerged-field if it is young (recent median
-    publication year), tight (small spread of years), and diverse (high
-    Shannon entropy over primary categories — meaning it pulls papers from
-    several subcategories rather than mirroring one).
-
-    NO naming. The artifact page lists the candidate clusters and their
-    rare-record exemplars; readers judge.
-    """
+def top_rare(survivors: list[dict], k: int = 25) -> list[dict]:
+    """Atlas-shaped wrapper around the shared lib's top_rare. Picks Atlas-specific
+    fields and adds the arxiv.org clickthrough URL."""
+    raw = _lib_top_rare(survivors, k=k)
     return [
-        c for c in cluster_meta
-        if c.get("median_year", 0) >= min_median_year
-        and c.get("year_spread", 999) <= max_year_spread
-        and c.get("category_entropy", 0.0) >= min_category_entropy
+        {
+            "paper_id":         r["paper_id"],
+            "title":            r.get("title", ""),
+            "year":             r.get("year", 0),
+            "primary_category": r.get("primary_category", ""),
+            "archive":          r.get("archive", ""),
+            "min_hamming":      r["min_hamming"],
+            "arxiv_url":        f"https://arxiv.org/abs/{r['paper_id']}",
+        }
+        for r in raw
     ]
 
 
-def assign_to_class(fp48: int, classes: list[dict]) -> int | None:
-    """Return the class_id whose centroid has the smallest Hamming distance to fp48.
-    None when classes is empty."""
-    best_id, best_d = None, 49
-    for c in classes:
-        d = hamming48(fp48, c["centroid_fp48"])
-        if d < best_d:
-            best_d, best_id = d, c["id"]
-    return best_id
-
-
-def top_rare(survivors: list[dict], k: int = 25) -> list[dict]:
-    """Rank survivors by their min-Hamming-distance to any other survivor (descending).
-    A survivor with no close neighbors is structurally rare."""
-    fps = [s["fp48"] for s in survivors]
-    rarities: list[tuple[int, int]] = []
-    for i, fp_i in enumerate(fps):
-        best = 49
-        for j, fp_j in enumerate(fps):
-            if i == j:
-                continue
-            d = hamming48(fp_i, fp_j)
-            if d < best:
-                best = d
-        rarities.append((i, best))
-    rarities.sort(key=lambda x: -x[1])
-    out = []
-    for i, dist in rarities[:k]:
-        s = survivors[i]
-        out.append({
-            "paper_id":         s["paper_id"],
-            "title":            s.get("title", ""),
-            "year":             s.get("year", 0),
-            "primary_category": s.get("primary_category", ""),
-            "archive":          s.get("archive", ""),
-            "min_hamming":      dist,
-            "arxiv_url":        f"https://arxiv.org/abs/{s['paper_id']}",
-        })
-    return out
-
-
 def bleed_per_class(survivors: list[dict], classes: list[dict]) -> list[dict]:
-    """For each cluster, identify the dominant archive and the off-archive bleed share.
-    Mirrors DocSouth's bleed analysis but at archive-level instead of collection-level.
-    """
-    by_class: dict[Any, list[dict]] = defaultdict(list)
-    for s in survivors:
-        cid = assign_to_class(s["fp48"], classes)
-        if cid is not None:
-            by_class[cid].append(s)
-    rows: list[dict] = []
-    for cid, ss in by_class.items():
-        if not ss:
-            continue
-        archives = Counter(s["archive"] for s in ss)
-        dom_archive, dom_n = archives.most_common(1)[0]
-        bleed = [s for s in ss if s["archive"] != dom_archive]
-        bleed_breakdown = Counter(s["archive"] for s in bleed)
-        bleed_years = [s["year"] for s in bleed if s.get("year")]
-        rows.append({
-            "class_id":          cid,
-            "size":              len(ss),
-            "dominant":          dom_archive,
-            "dominant_share":    round(dom_n / len(ss), 3),
-            "bleed_share":       round(len(bleed) / len(ss), 3),
-            "bleed_breakdown":   dict(bleed_breakdown),
-            "bleed_year_range":  [min(bleed_years), max(bleed_years)] if bleed_years else None,
-            "bleed_examples":    [
-                {"paper_id": s["paper_id"], "title": s.get("title", ""), "archive": s["archive"]}
-                for s in bleed[:5]
+    """Atlas-shaped wrapper around the shared lib's bleed_per_class. Adds the
+    Atlas-specific bleed_year_range and bleed_examples fields after the call."""
+    raw = _lib_bleed_per_class(survivors, classes, gold_field="archive")
+    out: list[dict] = []
+    for row in raw:
+        # Re-derive the actual cluster survivors for the Atlas-specific fields
+        cluster_survivors = [s for s in survivors if assign_to_class(s["fp48"], classes) == row["class_id"]]
+        bleed_records = [s for s in cluster_survivors if s.get("archive", "") != row["dominant"]]
+        bleed_years = [s["year"] for s in bleed_records if s.get("year")]
+        out.append({
+            **row,
+            "bleed_year_range": [min(bleed_years), max(bleed_years)] if bleed_years else None,
+            "bleed_examples": [
+                {"paper_id": s["paper_id"], "title": s.get("title", ""), "archive": s.get("archive", "")}
+                for s in bleed_records[:5]
             ],
         })
-    rows.sort(key=lambda x: -x["size"])
-    return rows
+    return out
 
 
 # ---------- IO + orchestration ----------
