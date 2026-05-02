@@ -24,6 +24,9 @@ const ALLOWED: Record<string, string> = {
   atlas:                     "arxiv.json",
   "atlas-constellations":    "arxiv_constellations.json",
   "atlas-findings":          "atlas_findings.json",
+  pulse:                     "uspto.json",
+  "pulse-constellations":    "uspto_constellations.json",
+  "pulse-findings":          "pulse_findings.json",
 };
 
 export async function GET(_req: Request, ctx: { params: { slug: string } }) {
