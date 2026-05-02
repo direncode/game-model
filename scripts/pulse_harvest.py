@@ -108,7 +108,11 @@ def _build_records(fixtures_dir: Path, snapshot_nominal_date: str) -> list[dict]
     Filters: patents granted before 1976, patents granted after snapshot_nominal_date.
     """
     inv_tsv  = _read_tsv(fixtures_dir / "g_inventor_disambiguated.tsv")
-    raw_tsv  = _read_tsv(fixtures_dir / "g_inventor_not_disambiguated.tsv")
+    # not_disambiguated is optional: when missing, raw_name falls back to the
+    # disambiguated name (no information lost; raw is just the verbatim
+    # patent-text rendering, which we don't strictly need for fingerprinting)
+    raw_path = fixtures_dir / "g_inventor_not_disambiguated.tsv"
+    raw_tsv  = _read_tsv(raw_path) if raw_path.exists() else []
     asg_tsv  = _read_tsv(fixtures_dir / "g_assignee_disambiguated.tsv")
     loc_tsv  = _read_tsv(fixtures_dir / "g_location_disambiguated.tsv")
     pat_tsv  = _read_tsv(fixtures_dir / "g_patent.tsv")
