@@ -99,7 +99,7 @@ echo "  $PASS/7 byte-identical · $FAIL diverged"
 # 5. Cross-tenant probe
 echo ""
 echo "=== 5. Multi-tenant isolation ==="
-PROBE_TOK_RESP=$(curl -sk -X POST -H 'Content-Type: application/json' -d '{"color":"atlasprobe"}' "$BASE/api/range-demo-token")
+PROBE_TOK_RESP=$(curl -sk -X POST -H 'Content-Type: application/json' -d '{"color":"pulseprobe"}' "$BASE/api/range-demo-token")
 PROBE_TOK=$(echo "$PROBE_TOK_RESP" | python -c "import sys,json;print(json.load(sys.stdin)['token'])")
 PROBE_TENANT=$(echo "$PROBE_TOK_RESP" | python -c "import sys,json;print(json.load(sys.stdin)['tenant_id'])")
 PROBE_STATUS=$(curl -sk -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $PROBE_TOK" "$BASE/api/range-form/$MODEL_ID")
