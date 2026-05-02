@@ -27,6 +27,8 @@ const ALLOWED: Record<string, string> = {
   pulse:                     "uspto.json",
   "pulse-constellations":    "uspto_constellations.json",
   "pulse-findings":          "pulse_findings.json",
+  receipt:                   "sec_edgar.json",
+  "receipt-chain":           "sec_edgar_chain.json",
 };
 
 export async function GET(_req: Request, ctx: { params: { slug: string } }) {
