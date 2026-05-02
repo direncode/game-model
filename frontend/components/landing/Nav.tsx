@@ -3,12 +3,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Console",        href: "/" },
-  { label: "Method",         href: "/method" },
-  { label: "DocSouth",       href: "/docsouth" },
-  { label: "API",            href: "/api-docs" },
-  { label: "Infrastructure", href: "/infrastructure" },
-  { label: "News",           href: "/news" },
+  { label: "Products", href: "/products" },
+  { label: "Pricing",  href: "/pricing" },
+  { label: "DocSouth", href: "/docsouth" },
+  { label: "Method",   href: "/method" },
+  { label: "News",     href: "/news" },
 ];
 
 export function Nav() {
@@ -67,13 +66,13 @@ export function Nav() {
             ))}
           </div>
 
-          {/* Right CTA — pill outlined, xAI 'TRY GROK' shape */}
+          {/* Right CTA — Vault is the Private Banking entry, treated distinctly */}
           <div className="flex items-center gap-3 shrink-0">
             <Link
-              href="/console"
-              className="hidden sm:inline-flex items-center justify-center h-9 px-5 rounded-full border border-white/25 text-white text-[11.5px] font-mono font-medium tracking-[0.22em] uppercase hover:border-white/55 hover:bg-white/[0.03] transition-colors"
+              href="/vault"
+              className="hidden sm:inline-flex items-center justify-center h-9 px-5 rounded-full bg-white text-black text-[11.5px] font-mono font-medium tracking-[0.22em] uppercase hover:bg-white/90 transition-colors"
             >
-              Workbench
+              Vault →
             </Link>
 
             {/* Hamburger — mobile only */}
@@ -113,11 +112,11 @@ export function Nav() {
               </Link>
             ))}
             <Link
-              href="/console"
+              href="/vault"
               onClick={() => setMobileOpen(false)}
-              className="mt-5 inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/30 text-white text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:bg-white/[0.04] transition-colors"
+              className="mt-5 inline-flex items-center justify-center h-11 px-5 rounded-full bg-white text-black text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:bg-white/90 transition-colors"
             >
-              Workbench
+              Vault →
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { parseCSV, scoreRows, type Scored } from "@/lib/csvClientFingerprint";
 import { MultiTenantSplitWidget } from "@/components/landing/widgets/MultiTenantSplitWidget";
 import { SparseFallbackChainWidget } from "@/components/landing/widgets/SparseFallbackChainWidget";
+import { ProductLineupSection } from "@/components/landing/ProductLineupSection";
 
 /**
  * HomeScroller — the long surface beneath the live console hero.
@@ -831,6 +832,7 @@ export function HomeScroller() {
   return (
     <>
       <LiveAppliance />
+      <ProductLineupSection />
       <SonarSection />
       <CsvDropSection />
       <DeterminismSection />

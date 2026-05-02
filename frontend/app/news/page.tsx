@@ -18,6 +18,15 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
+    date: "2026 · 05 · 02",
+    kind: "release",
+    title: "Five products. Three tiers. Private Banking on top.",
+    blurb:
+      "The substrate ships as five products today, each addressing a different buyer at the right relationship category. Pulse — find duplicates and look-alikes in any data. Atlas — reproducible analytics with citable receipts. Receipt — provable AI for compliance, legal, and AI-governance teams. Studio — concierge service that maps an archive in 24 hours, then keeps enriching it (DocSouth × UNC Libraries is the flagship). Vault — Private Banking tier, by application, for partners shipping AI to banks, hospitals, law firms, governments. Pulse, Atlas, and Receipt run on the Consumer · Pro · Enterprise ladder; Studio is Enterprise concierge; Vault is one floor up. Same engine on every tier of every product — BTUT, deterministic response_digest, ripser persistent homology, hard 404 multi-tenant isolation, AES-256-GCM at rest, append-only audit log in CEF + OCSF. The five product pages are at /pulse, /atlas, /receipt, /studio, /vault. Pricing comparison at /pricing. Lineup overview at /products. Nav reformed: Products · Pricing · DocSouth · Method · News, with Vault → as the dedicated CTA.",
+    link: { label: "Compare all five", href: "/products" },
+    digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  },
+  {
     date: "2026 · 05 · 01",
     kind: "dispatch",
     title: "DocSouth · constellation engine + 100 findings · the network DocSouth's curators dispersed",
