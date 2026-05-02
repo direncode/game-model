@@ -1,0 +1,56 @@
+{
+  "showcase": "atlas",
+  "kaggle_snapshot_date": "2026-04-30",
+  "corpus_input_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "corpus_sha256":       "1111111111111111111111111111111111111111111111111111111111111111",
+  "corpus_records": 500000,
+  "model_id": "rng_test",
+  "response_digest": "deadbeef",
+  "purity": {
+    "coarse_8_archive": 0.74,
+    "fine_subcategory": 0.41,
+    "rows": [
+      {"cluster": 0, "size": 120, "dominant": "cs",      "dominant_share": 0.92, "breakdown": {"cs": 110, "math": 5, "stat": 5}},
+      {"cluster": 1, "size": 95,  "dominant": "math",    "dominant_share": 0.88, "breakdown": {"math": 84, "physics": 11}},
+      {"cluster": 2, "size": 80,  "dominant": "physics", "dominant_share": 0.76, "breakdown": {"physics": 61, "astro-ph": 19}}
+    ]
+  },
+  "decade_trajectory": [
+    {"decade": "1990s", "n_survivors": 50,  "archive_share": {"hep-th": 0.4, "math": 0.3, "cs": 0.1, "physics": 0.2}},
+    {"decade": "2000s", "n_survivors": 120, "archive_share": {"hep-th": 0.2, "math": 0.25, "cs": 0.3, "physics": 0.25}},
+    {"decade": "2010s", "n_survivors": 220, "archive_share": {"cs": 0.55, "math": 0.15, "physics": 0.15, "stat": 0.15}},
+    {"decade": "2020s", "n_survivors": 110, "archive_share": {"cs": 0.7, "stat": 0.15, "math": 0.1, "physics": 0.05}}
+  ],
+  "bleed_per_class": [
+    {"class_id": 0, "size": 120, "dominant": "cs",      "dominant_share": 0.92, "bleed_share": 0.08,
+     "bleed_breakdown": {"math": 5, "stat": 5}, "bleed_year_range": [2014, 2023],
+     "bleed_examples": [
+       {"paper_id": "1503.02531", "title": "Distilling the Knowledge", "archive": "stat"},
+       {"paper_id": "1611.03530", "title": "Generalization", "archive": "cs"}
+     ]},
+    {"class_id": 2, "size": 80, "dominant": "physics", "dominant_share": 0.76, "bleed_share": 0.24,
+     "bleed_breakdown": {"astro-ph": 19}, "bleed_year_range": [1998, 2020],
+     "bleed_examples": [{"paper_id": "9901.0001", "title": "String Theory", "archive": "hep-th"}]}
+  ],
+  "rare_records": [
+    {"paper_id": "9901.0001", "title": "On Some String Theory Compactification", "year": 1999,
+     "primary_category": "hep-th", "archive": "hep-th", "min_hamming": 28,
+     "arxiv_url": "https://arxiv.org/abs/9901.0001"},
+    {"paper_id": "1706.03762", "title": "Attention Is All You Need", "year": 2017,
+     "primary_category": "cs.CL", "archive": "cs", "min_hamming": 24,
+     "arxiv_url": "https://arxiv.org/abs/1706.03762"}
+  ],
+  "cluster_meta": [
+    {"cluster_id": 0, "size": 120, "median_year": 2018, "year_spread": 4,  "category_entropy": 2.3},
+    {"cluster_id": 1, "size": 95,  "median_year": 2008, "year_spread": 12, "category_entropy": 1.1},
+    {"cluster_id": 2, "size": 80,  "median_year": 2010, "year_spread": 14, "category_entropy": 0.9}
+  ],
+  "emergence_candidates": [
+    {"cluster_id": 0, "size": 120, "median_year": 2018, "year_spread": 4, "category_entropy": 2.3}
+  ],
+  "baseline_panel": {
+    "K": 12, "chance": 0.125, "tfidf_kmeans": 0.62, "lda_argmax": 0.48
+  },
+  "n_survivors": 295,
+  "generated_at": "2026-05-02T12:00:00Z"
+}
