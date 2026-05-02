@@ -50,6 +50,48 @@ export type Product = {
   highlights:   { label: string; value: string; hint: string }[];  // 4 stats — kept plain
 };
 
+// Public showcase deployments. Each one is a fully-citable, third-party-
+// verifiable artifact running on the same substrate as the products.
+// Surfaced on every product page as the cross-buyer-category proof set.
+export type ShowcaseRef = {
+  slug:    string;        // matches the product slug whose showcase this is, OR 'docsouth'
+  label:   string;        // short display name
+  href:    string;        // page URL
+  buyer:   string;        // 1-line buyer persona this showcase speaks to
+  blurb:   string;        // 1-line summary of what's in the showcase
+};
+
+export const ALL_SHOWCASES: ShowcaseRef[] = [
+  {
+    slug:  "docsouth",
+    label: "DocSouth",
+    href:  "/docsouth",
+    buyer: "Research libraries, foundations, archives",
+    blurb: "UNC Libraries · 711 texts · 180 years · scholar-pace artifact",
+  },
+  {
+    slug:  "atlas",
+    label: "Atlas",
+    href:  "/atlas/arxiv",
+    buyer: "Scientific publishers, bibliometricians, libraries",
+    blurb: "arXiv · 500k abstracts · 30 years · cluster purity vs. archives",
+  },
+  {
+    slug:  "pulse",
+    label: "Pulse",
+    href:  "/pulse/uspto-inventors",
+    buyer: "IP attorneys, M&A, innovation economists",
+    blurb: "USPTO · 500k inventor-records · 50 years · multi-baseline disambiguation",
+  },
+  {
+    slug:  "receipt",
+    label: "Receipt",
+    href:  "/receipt/sec-edgar",
+    buyer: "Compliance officers, AI governance, regulators",
+    blurb: "SEC EDGAR · 1,000 10-Ks · OpenTimeStamps-anchored chain head",
+  },
+];
+
 export const PRODUCTS: Product[] = [
   // -----------------------------------------------------------------
   // 1. PULSE — data dedup / cohort detection
@@ -114,7 +156,7 @@ export const PRODUCTS: Product[] = [
         best_for: "Banks, hospitals, retailers with tens of millions of records",
       },
     ],
-    proof_link: { label: "See how the engine works", href: "/method" },
+    proof_link: { label: "Pulse showcase · USPTO inventor disambiguation, 500k records, 50 years", href: "/pulse/uspto-inventors" },
   },
 
   // -----------------------------------------------------------------
@@ -180,7 +222,7 @@ export const PRODUCTS: Product[] = [
         best_for: "Pharma, financial research, government R&D",
       },
     ],
-    proof_link: { label: "See it on a real archive · DocSouth", href: "/docsouth" },
+    proof_link: { label: "Atlas showcase · arXiv 500k abstracts, structurally mapped across 30 years", href: "/atlas/arxiv" },
   },
 
   // -----------------------------------------------------------------
@@ -232,7 +274,7 @@ export const PRODUCTS: Product[] = [
         best_for: "Banks, hospitals, law firms, defense contractors, government",
       },
     ],
-    proof_link: { label: "See the audit primitives", href: "/method#section-5" },
+    proof_link: { label: "Receipt showcase · 1,000 SEC 10-Ks, OpenTimeStamps-anchored chain", href: "/receipt/sec-edgar" },
   },
 
   // -----------------------------------------------------------------
@@ -316,7 +358,7 @@ export const PRODUCTS: Product[] = [
         best_for: "Founders selling AI into banks, hospitals, law firms, defense, intelligence",
       },
     ],
-    proof_link: { label: "See the engineering substrate", href: "/method" },
+    proof_link: { label: "All four public showcases run on Vault's substrate", href: "/atlas/arxiv" },
   },
 ];
 

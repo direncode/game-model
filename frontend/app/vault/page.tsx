@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav } from "@/components/landing/Nav";
-import { productBySlug } from "@/lib/products/data";
+import { ALL_SHOWCASES, productBySlug } from "@/lib/products/data";
 
 export const metadata: Metadata = {
   title:       "Vault · Private Banking · Latent Ocean",
@@ -153,6 +153,43 @@ export default function VaultPage() {
                   for each other.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Public reference deployments — Vault's substrate, demonstrated four times */}
+        <section className="relative px-6 py-24 border-b border-white/[0.04]">
+          <div className="max-w-[1100px] mx-auto">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.32em] text-white/45 mb-6">
+              Public reference deployments
+            </p>
+            <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.05] mb-6 max-w-3xl">
+              Four citable showcases.<br />
+              <span className="text-white/45">Four buyer categories. One substrate.</span>
+            </h2>
+            <p className="text-[15.5px] text-white/65 leading-relaxed mb-12 max-w-2xl">
+              The four artifacts below all run on the Vault substrate. Each is third-party-verifiable: hashes pinned, receipts attestable, re-derivable byte-for-byte. Your customers&apos; deployments will look the same shape.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {ALL_SHOWCASES.map((s) => (
+                <Link
+                  key={s.slug}
+                  href={s.href}
+                  className="block rounded-xl p-5 border border-white/10 bg-[#0a0a0a] hover:border-white/30 transition-colors"
+                >
+                  <div className="font-display text-2xl tracking-[-0.025em] text-white mb-2">
+                    {s.label}
+                  </div>
+                  <p className="font-mono text-[11px] text-white/50 leading-relaxed mb-2">{s.blurb}</p>
+                  <p className="text-[12px] text-white/65 leading-snug">For {s.buyer.toLowerCase()}.</p>
+                  <span className="mt-3 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55 border-b border-white/20 pb-0.5">
+                    {s.href}
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 6h6m0 0L6 3m3 3L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

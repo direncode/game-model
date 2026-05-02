@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TIER_COLORS, TIER_LABELS, type Product, type Tier } from "@/lib/products/data";
+import { ALL_SHOWCASES, TIER_COLORS, TIER_LABELS, type Product, type Tier } from "@/lib/products/data";
 
 // ProductPage is the shared template every product page renders. It accepts
 // a Product object and decides layout treatment based on the product's tier
@@ -118,7 +118,7 @@ export function ProductPage({ product }: { product: Product }) {
         </div>
       </section>
 
-      {/* Proof link */}
+      {/* Proof link — primary showcase for THIS product */}
       {product.proof_link && (
         <section className="relative px-6 py-20 border-b border-white/5">
           <div className="max-w-[1200px] mx-auto text-center">
@@ -137,6 +137,59 @@ export function ProductPage({ product }: { product: Product }) {
           </div>
         </section>
       )}
+
+      {/* Public reference deployments — same substrate, four buyer categories */}
+      <section className="relative px-6 py-20 border-b border-white/5">
+        <div className="max-w-[1300px] mx-auto">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
+            Public reference deployments
+          </p>
+          <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.04] mb-3 max-w-3xl">
+            Four citable showcases.<br />
+            <span className="text-white/45">Four buyer categories. One substrate.</span>
+          </h2>
+          <p className="text-[15px] text-white/55 leading-relaxed mb-10 max-w-3xl">
+            Every showcase below is a fully-citable, third-party-verifiable artifact running on the same engine that powers {product.name}. Every number, every cluster, every receipt is anchored by a hash that anyone can re-derive. Pick any one and audit it byte-for-byte.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {ALL_SHOWCASES.map((s) => {
+              const isCurrent = s.slug === product.slug;
+              return (
+                <Link
+                  key={s.slug}
+                  href={s.href}
+                  className={`block rounded-xl p-5 transition-colors border ${
+                    isCurrent
+                      ? "border-white/45 bg-white/[0.04] hover:border-white/70"
+                      : "border-white/10 bg-[#0a0a0a] hover:border-white/25"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-display text-2xl tracking-[-0.025em] text-white">
+                      {s.label}
+                    </span>
+                    {isCurrent && (
+                      <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/55">
+                        for {product.name}
+                      </span>
+                    )}
+                  </div>
+                  <p className="font-mono text-[11px] text-white/50 leading-relaxed mb-2">{s.blurb}</p>
+                  <p className="text-[12px] text-white/65 leading-snug">
+                    For {s.buyer.toLowerCase()}.
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55 hover:text-white border-b border-white/20 pb-0.5">
+                    {s.href}
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 6h6m0 0L6 3m3 3L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="relative px-6 pt-24">
