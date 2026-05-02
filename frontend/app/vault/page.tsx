@@ -127,11 +127,11 @@ export default function VaultPage() {
           </div>
         </section>
 
-        {/* Pricing — minimal, dignified */}
+        {/* The shape of the engagement */}
         <section className="relative px-6 py-24 border-b border-white/[0.04]">
           <div className="max-w-[1100px] mx-auto">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.32em] text-white/45 mb-6">
-              Pricing
+              The shape of the engagement
             </p>
             <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-baseline">
               <div className="font-display text-4xl md:text-6xl tracking-[-0.035em] text-white leading-[1]">
@@ -139,17 +139,18 @@ export default function VaultPage() {
               </div>
               <div className="space-y-4 text-[15px] text-white/70 leading-relaxed max-w-xl">
                 <p>
-                  Pricing is structured around your business — a platform
-                  fee plus per-tenant or per-call fees as appropriate to
-                  what you're shipping. We discuss terms in our discovery
-                  call once we have decided we are both right for the
-                  engagement.
+                  Vault is a long-term partnership, not a transactional
+                  product. We accept a small number of partners at any
+                  time, on application. The engagement is structured
+                  around your business — what you're shipping, who your
+                  customers are, what regulatory environment you operate
+                  in.
                 </p>
                 <p>
-                  Engagements typically begin in the low five figures
-                  monthly and scale with your customer base. We have not
-                  found this to be the friction point for the partners
-                  we work with.
+                  We discuss the practical shape of the engagement —
+                  scope, deployment posture, pace, terms — in our
+                  discovery call once we have decided we are both right
+                  for each other.
                 </p>
               </div>
             </div>

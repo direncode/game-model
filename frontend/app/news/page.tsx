@@ -20,6 +20,15 @@ const ENTRIES: Entry[] = [
   {
     date: "2026 · 05 · 02",
     kind: "release",
+    title: "The whole site, readable by anyone. Pricing comes after the conversation.",
+    blurb:
+      "The site has been rewritten so any customer can understand it without asking an engineer to translate. The five products and their three tiers are documented in plain English at /products. A new /how-it-works page explains the engine in three steps — what you bring, what we make, what comes back — without using a single piece of jargon. Pricing has been removed from the visible site and replaced with a comprehensive preview at /preview that shows what each tier includes, who it serves, and what the relationship looks like. We discuss prices in the conversation that follows the preview, once we know the right tier shape for what you actually need. The engineering proof remains at /method, with a clear note at the top that this is the page for your CTO; the rest of the site stays plain. Nav reformed: How it works · Products · Preview · DocSouth · Method · News, with Vault → as the dedicated CTA pill for partners shipping AI to regulated customers.",
+    link: { label: "Start with How it works", href: "/how-it-works" },
+    digest: "08cea801c24e0f1c9aad12facee1e12ff469142aad8ba19385f80f84801ed714",
+  },
+  {
+    date: "2026 · 05 · 02",
+    kind: "release",
     title: "Five products. Three tiers. Private Banking on top.",
     blurb:
       "The substrate ships as five products today, each addressing a different buyer at the right relationship category. Pulse — find duplicates and look-alikes in any data. Atlas — reproducible analytics with citable receipts. Receipt — provable AI for compliance, legal, and AI-governance teams. Studio — concierge service that maps an archive in 24 hours, then keeps enriching it (DocSouth × UNC Libraries is the flagship). Vault — Private Banking tier, by application, for partners shipping AI to banks, hospitals, law firms, governments. Pulse, Atlas, and Receipt run on the Consumer · Pro · Enterprise ladder; Studio is Enterprise concierge; Vault is one floor up. Same engine on every tier of every product — BTUT, deterministic response_digest, ripser persistent homology, hard 404 multi-tenant isolation, AES-256-GCM at rest, append-only audit log in CEF + OCSF. The five product pages are at /pulse, /atlas, /receipt, /studio, /vault. Pricing comparison at /pricing. Lineup overview at /products. Nav reformed: Products · Pricing · DocSouth · Method · News, with Vault → as the dedicated CTA.",

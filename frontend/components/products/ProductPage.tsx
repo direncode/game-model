@@ -90,7 +90,7 @@ export function ProductPage({ product }: { product: Product }) {
       <section className="relative px-6 py-20 border-b border-white/5">
         <div className="max-w-[1200px] mx-auto">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
-            {isPrivateBanking ? "The engagement" : "Plans"}
+            {isPrivateBanking ? "The engagement" : "Tiers · what's in each"}
           </p>
           <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.05] mb-12 max-w-3xl">
             {isPrivateBanking ? (
@@ -100,8 +100,8 @@ export function ProductPage({ product }: { product: Product }) {
               </>
             ) : (
               <>
-                Three tiers.<br />
-                <span className="text-white/45">Same engine underneath.</span>
+                Three tiers, three relationships.<br />
+                <span className="text-white/45">Same engine underneath each one.</span>
               </>
             )}
           </h2>
@@ -147,7 +147,7 @@ export function ProductPage({ product }: { product: Product }) {
           <p className="text-lg text-white/55 max-w-2xl mx-auto mb-10 leading-snug">
             {isPrivateBanking
               ? "Tell us about your customers, your data, and what you're trying to ship. We respond within two business days. If we work together, we work together for years."
-              : `Start free or talk to us. Same engine on every tier.`}
+              : `Tell us about your data and we will set you up. Same engine on every tier.`}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {product.plans.map((plan) => (
@@ -189,12 +189,12 @@ function PricingCard({ plan }: { plan: import("@/lib/products/data").PricingPlan
           {label}
         </span>
       </div>
-      <div className="font-display text-3xl md:text-4xl tracking-[-0.025em] text-white mb-1">
-        {plan.price}
+      <div className="font-display text-2xl md:text-3xl tracking-[-0.025em] text-white leading-snug mb-2">
+        {plan.headline}
       </div>
-      {plan.cadence && (
-        <div className="font-mono text-[11px] text-white/40 mb-6">{plan.cadence}</div>
-      )}
+      <div className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45 mb-6">
+        {plan.shape}
+      </div>
 
       <ul className="space-y-2.5 mb-7 flex-1">
         {plan.bullets.map((b, i) => (

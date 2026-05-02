@@ -73,6 +73,21 @@ export default function MethodPage() {
               mocks. No vertical-flavoring. The corpus is generic; the
               behaviour is the engine.
             </p>
+            <p className="mt-5 text-base text-white/55 max-w-3xl leading-snug">
+              <span className="text-white/80">This page is for engineering evaluators</span> — your
+              CTO, your head of platform, your security architect. It is
+              the proof that the substrate underneath every Latent Ocean
+              product is real. If you are evaluating Latent Ocean as a
+              business, the simpler path is{" "}
+              <a href="/products" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px">
+                /products
+              </a>{" "}
+              and{" "}
+              <a href="/how-it-works" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px">
+                /how-it-works
+              </a>
+              . If you are evaluating the engine, this is the page.
+            </p>
             <div className="mt-10 flex flex-wrap gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45">
               {[
                 "isolation", "resilience", "query", "provenance",

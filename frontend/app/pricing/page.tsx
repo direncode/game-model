@@ -4,20 +4,18 @@ import { Nav } from "@/components/landing/Nav";
 import { PRODUCTS, TIER_COLORS, TIER_LABELS, type Tier } from "@/lib/products/data";
 
 export const metadata: Metadata = {
-  title:       "Pricing · Latent Ocean",
-  description: "Five products, three tiers — plus a Private Banking floor for partners shipping AI to regulated customers. Free to start; talk to us when you scale.",
+  title:       "Preview · Latent Ocean",
+  description: "A comprehensive preview of every product, every tier — what's included, who it serves, and what the relationship looks like. Pricing is discussed in the conversation that follows.",
 };
 
 const TIER_ORDER: Tier[] = ["consumer", "pro", "enterprise"];
 
-export default function PricingPage() {
-  // Build a map: product → tier → plan (for the comparison table)
+export default function PreviewPage() {
   const cellPlan = (productSlug: string, tier: Tier) => {
     const p = PRODUCTS.find((x) => x.slug === productSlug);
     return p?.plans.find((pl) => pl.tier === tier);
   };
 
-  // The four tiered products (Pulse, Atlas, Receipt, Studio); Vault sits separately
   const tieredProducts = PRODUCTS.filter((p) => p.slug !== "vault");
   const vault          = PRODUCTS.find((p) => p.slug === "vault")!;
 
@@ -29,28 +27,30 @@ export default function PricingPage() {
         <section className="relative px-6 border-b border-white/5 pb-24 pt-12">
           <div className="max-w-[1300px] mx-auto">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-5">
-              Pricing
+              Preview · what's included
             </p>
             <h1 className="font-display font-medium text-[clamp(56px,9vw,128px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl">
-              Five products,<br />
-              <span className="text-white/45">three tiers, one floor up.</span>
+              Every product,<br />
+              <span className="text-white/45">every tier, side by side.</span>
             </h1>
             <p className="mt-8 text-lg text-white/65 max-w-3xl leading-snug">
               Each product is offered on the tiers that make sense for who
               it serves. Pulse, Atlas, and Receipt run on the Consumer ·
               Pro · Enterprise ladder. Studio is an Enterprise concierge
-              service. Vault sits one floor up — Private Banking, by
-              invitation — and is described separately at the bottom.
+              service. Vault is one floor up — Private Banking, by
+              invitation — described separately at the bottom of the page.
+              We discuss what each tier costs in the conversation we have
+              once you tell us a little about what you need.
             </p>
           </div>
         </section>
 
-        {/* Tier-by-product matrix */}
+        {/* Tier-by-product matrix — features only, no prices */}
         <section className="relative px-6 py-20 border-b border-white/5">
-          <div className="max-w-[1400px] mx-auto">
+          <div className="max-w-[1500px] mx-auto">
             <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
               {/* Header row */}
-              <div className="grid grid-cols-[1.2fr_repeat(3,_1fr)] border-b border-white/10">
+              <div className="grid grid-cols-[1.2fr_repeat(3,_1.2fr)] border-b border-white/10">
                 <div className="p-5 md:p-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 border-r border-white/10">
                   Product / Tier
                 </div>
@@ -62,10 +62,10 @@ export default function PricingPage() {
                         {TIER_LABELS[t]}
                       </span>
                     </div>
-                    <div className="font-mono text-[10px] text-white/40">
-                      {t === "consumer" && "Free to start"}
-                      {t === "pro"      && "Subscription"}
-                      {t === "enterprise" && "Talk to us"}
+                    <div className="font-mono text-[10px] text-white/40 leading-snug">
+                      {t === "consumer"   && "For solo evaluation"}
+                      {t === "pro"        && "For teams ready to use it"}
+                      {t === "enterprise" && "For institutions and regulated firms"}
                     </div>
                   </div>
                 ))}
@@ -73,7 +73,7 @@ export default function PricingPage() {
 
               {/* Product rows */}
               {tieredProducts.map((p) => (
-                <div key={p.slug} className="grid grid-cols-[1.2fr_repeat(3,_1fr)] border-b border-white/[0.04] last:border-b-0">
+                <div key={p.slug} className="grid grid-cols-[1.2fr_repeat(3,_1.2fr)] border-b border-white/[0.04] last:border-b-0">
                   <div className="p-5 md:p-6 border-r border-white/10 flex flex-col justify-center">
                     <div className="font-display text-2xl tracking-[-0.025em] text-white mb-1">
                       <Link href={`/${p.slug}`} className="hover:underline">
@@ -95,21 +95,30 @@ export default function PricingPage() {
                     }
                     return (
                       <div key={t} className="p-5 md:p-6 border-r border-white/10 last:border-r-0 flex flex-col">
-                        <div className="font-display text-xl md:text-2xl tracking-[-0.02em] text-white mb-0.5">
-                          {plan.price}
+                        <div className="font-display text-[15px] md:text-[17px] tracking-[-0.01em] text-white leading-snug mb-2">
+                          {plan.headline}
                         </div>
-                        {plan.cadence && (
-                          <div className="font-mono text-[10px] text-white/40 mb-3">{plan.cadence}</div>
-                        )}
+                        <div className="font-mono text-[10px] text-white/40 mb-3 uppercase tracking-[0.18em]">
+                          {plan.shape}
+                        </div>
+                        <ul className="space-y-1.5 mb-4">
+                          {plan.bullets.slice(0, 3).map((b, i) => (
+                            <li key={i} className="text-[12px] text-white/70 leading-snug flex items-start gap-1.5">
+                              <span className="text-white/35 mt-0.5">·</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                          {plan.bullets.length > 3 && (
+                            <li className="text-[11px] text-white/35 italic ml-2.5">
+                              and {plan.bullets.length - 3} more on the {p.name} page
+                            </li>
+                          )}
+                        </ul>
                         <Link
-                          href={plan.cta.href}
-                          className={`mt-auto inline-flex items-center justify-center h-9 px-3 rounded-full text-[11px] font-medium transition-colors ${
-                            t === "consumer"
-                              ? "bg-white text-black hover:bg-white/90"
-                              : "border border-white/20 text-white/85 hover:text-white hover:border-white/40"
-                          }`}
+                          href={`/${p.slug}`}
+                          className="mt-auto inline-flex items-center justify-center h-9 px-3 rounded-full text-[11px] font-medium transition-colors border border-white/20 text-white/85 hover:text-white hover:border-white/40"
                         >
-                          {plan.cta.label}
+                          See full preview
                         </Link>
                       </div>
                     );
@@ -151,7 +160,7 @@ export default function PricingPage() {
                       By invitation
                     </div>
                     <div className="font-mono text-[11px] text-white/40 mb-8">
-                      bespoke engagement
+                      Long-term partnership
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-3">
@@ -184,27 +193,35 @@ export default function PricingPage() {
               {[
                 {
                   q: "Why three tiers per product?",
-                  a: "Because the same engine has very different value to a solo developer with a side project, a 50-person data team, and a Fortune 500 deployment. We price for who you are, not what we cost to run.",
+                  a: "Because the same engine has very different value to a solo developer with a side project, a fifty-person data team, and a Fortune 500 deployment. We meet you where you are.",
                 },
                 {
                   q: "Why is Vault separate?",
-                  a: "Vault is the Private Banking tier — bespoke, by application, long-term partnership. It is not the top of a ladder; it is a different relationship category. We accept a small number of partners at any time.",
+                  a: "Vault is the Private Banking tier — bespoke, by application, long-term partnership. It's not the top of a ladder; it's a different relationship category. We accept a small number of partners at any time.",
                 },
                 {
                   q: "Can I move tiers later?",
                   a: "Yes. Consumer to Pro to Enterprise is one signup; the substrate and your data are the same on all three. Enterprise customers often grow into Vault as their customer base demands it.",
                 },
                 {
-                  q: "Is the substrate the same on every tier?",
-                  a: "Yes. BTUT, the determinism contract, the encryption at rest, the audit log, the multi-tenant isolation — every tier shares the same engine. The differences are quotas, support, deployment, and bespoke services.",
+                  q: "Is the engine the same on every tier?",
+                  a: "Yes. The same fingerprinting engine, the same reproducibility guarantees, the same encryption and audit. The differences are scale, support, deployment, and bespoke services.",
                 },
                 {
                   q: "Do I need to host anything?",
-                  a: "No on Consumer and Pro — fully managed. Yes optional on Enterprise — single-binary appliance for VPC or on-premise. Yes always on Vault — your customer's posture dictates deployment.",
+                  a: "No on Consumer and Pro — fully managed by us. Optional on Enterprise — we can deploy into your cloud or on your premises. Always on Vault — your customer's posture decides.",
                 },
                 {
-                  q: "What about academic, nonprofit, or institutional discounts?",
-                  a: "Yes, on a case-by-case basis. The DocSouth deployment is the kind of work we want to keep doing. Email engineering@latentocean.com with a one-paragraph description.",
+                  q: "What about academic, nonprofit, or institutional fit?",
+                  a: "Yes — case by case. The DocSouth deployment with UNC is the kind of work we want to keep doing. Email engineering@latentocean.com with a one-paragraph description and we will respond.",
+                },
+                {
+                  q: "What does it cost?",
+                  a: "We discuss pricing in the conversation that follows your preview. We have intentionally kept it off the website while we make sure every customer gets the right tier shape for what they actually need.",
+                },
+                {
+                  q: "How fast can we start?",
+                  a: "Consumer and Pro: minutes. Enterprise: a discovery call and then days. Studio: a day from corpus handover to first deliverable. Vault: a partner application, then a few weeks of onboarding.",
                 },
               ].map((item, i) => (
                 <div key={i}>
@@ -224,17 +241,22 @@ export default function PricingPage() {
         <section className="relative px-6 pt-24">
           <div className="max-w-[1080px] mx-auto text-center">
             <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white mb-6">
-              Start free.<br />Talk to us when you scale.
+              Tell us a little<br />about what you need.
             </h2>
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-10">
-              <Link href="/pulse" className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors">
-                Start with Pulse · Free
+            <p className="text-lg text-white/55 max-w-2xl mx-auto leading-snug mb-10">
+              Two questions: what data do you have, and what are you trying
+              to do with it. We respond within a business day with the
+              right shape of preview for you.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/contact" className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors">
+                Talk to us
               </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
-                Talk to sales
+              <Link href="/products" className="inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
+                The five products
               </Link>
-              <Link href="/method" className="inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
-                See the substrate
+              <Link href="/docsouth" className="inline-flex items-center justify-center h-11 px-5 rounded-full border border-white/20 text-white/85 text-[13px] hover:text-white hover:border-white/35 transition-colors">
+                Studio case study
               </Link>
             </div>
           </div>

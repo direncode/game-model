@@ -103,15 +103,15 @@ export function ProductLineupSection() {
           className="mt-12 flex flex-wrap items-center justify-between gap-5"
         >
           <p className="font-mono text-[11px] text-white/45 max-w-2xl leading-relaxed">
-            Same engine on every tier of every product. The substrate is documented at
+            Same engine on every tier of every product. The plain-language explainer is at
+            <Link href="/how-it-works" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px ml-1">
+              /how-it-works
+            </Link>
+            ; the engineering proof is at
             <Link href="/method" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px ml-1">
               /method
             </Link>
-            ; pricing across the four tiered products plus Vault is at
-            <Link href="/pricing" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px ml-1">
-              /pricing
-            </Link>
-            ; the flagship Studio engagement is documented at
+            ; the flagship Studio engagement is at
             <Link href="/docsouth" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white pb-px ml-1">
               /docsouth
             </Link>
