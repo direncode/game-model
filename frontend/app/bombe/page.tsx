@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav } from "@/components/landing/Nav";
+import { BombeData } from "./BombeData";
 
 export const metadata: Metadata = {
   title: "Bombe · Bletchley Park reanalyzed · Latent Ocean",
@@ -144,26 +145,28 @@ export default function BombeShowcasePage() {
         </Section>
 
         {/* Claim 3: reanalysis */}
-        <Section anchor="reanalysis" kicker="Claim three · reanalysis" title="Re-read the historical decrypted archive.">
+        <Section anchor="reanalysis" kicker="Claim three · reanalysis" title="Re-read the public archive — and we did.">
           <Prose>
             <p>
-              Bletchley Park has released thousands of decrypted messages
-              into the public domain. Historians have been picking through
-              them for decades. The substrate&apos;s job — reading every
-              message, surfacing the structural outliers — would, at the
-              very least, surface a list of historically interesting
-              messages no one has thought to focus on. Probably more.
+              We took 504 Wikipedia articles related to Bletchley Park,
+              the codebreakers, the Enigma machine, the WWII intelligence
+              operations, and the codebreaking organizations. All
+              public-domain. All CC-BY-SA. Pulled directly from the live
+              Wikipedia API by{" "}
+              <code className="font-mono text-white/80 text-sm">scripts/bombe_harvest.py</code>{" "}
+              and committed to the repo. Same harvester pattern as Atlas
+              and Pulse, different corpus.
             </p>
             <p>
-              We don&apos;t claim novel historical findings before doing
-              the work. We claim that the work is straightforward: same
-              engine, different corpus. Drop the Bletchley archive into
-              the harvester, run the formation, look at what stands out.
-              The substrate has done this on humanities archives,
-              scientific abstracts, US patents, SEC filings. WWII signals
-              intelligence is not a different problem class.
+              Then we ran the same engine that produces Atlas, Pulse,
+              and DocSouth. The engine never saw which category each
+              article came from. It grouped them by structural
+              similarity alone. Below — the actual findings.
             </p>
           </Prose>
+          <div className="mt-12">
+            <BombeData />
+          </div>
         </Section>
 
         {/* Why this matters in 2026 */}
@@ -208,14 +211,14 @@ export default function BombeShowcasePage() {
               made the Bombe&apos;s work more efficient.
             </p>
             <p>
-              <span className="text-white">We have not yet run the
-              Bletchley reanalysis.</span> This page is a position
-              statement, not a published artifact. The other four
-              showcases on the site (DocSouth, Atlas, Pulse, Receipt)
-              are runbook-ready or shipped. The Bletchley applied study
-              is queued behind them. When it ships, the verification
-              recipe will be the same shape: re-download the public
-              archive, run the harvester, compare the file fingerprint.
+              <span className="text-white">The reanalysis you can see
+              above is the v1 cut: 504 Wikipedia articles, not the
+              UK National Archives HW series.</span> Pulling the
+              digitized HW records (the actual decrypted intercepts
+              held at Kew) is a separate, larger fetcher we have not
+              yet built. The Wikipedia corpus demonstrates that the
+              engine generalizes to a WWII-signals-intelligence
+              archive at v1 scope. v2 expands to the harder corpus.
             </p>
             <p>
               <span className="text-white">The Bombe deserves its

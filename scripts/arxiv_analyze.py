@@ -75,7 +75,8 @@ def archive_of(primary_category: str) -> str:
 
 def top_rare(survivors: list[dict], k: int = 25) -> list[dict]:
     """Atlas-shaped wrapper around the shared lib's top_rare. Picks Atlas-specific
-    fields and adds the arxiv.org clickthrough URL."""
+    fields and adds a clickthrough URL — wikipedia_url if the corpus has one
+    (used by the bombe showcase), else arxiv.org by paper_id (Atlas default)."""
     raw = _lib_top_rare(survivors, k=k)
     return [
         {
@@ -85,7 +86,7 @@ def top_rare(survivors: list[dict], k: int = 25) -> list[dict]:
             "primary_category": r.get("primary_category", ""),
             "archive":          r.get("archive", ""),
             "min_hamming":      r["min_hamming"],
-            "arxiv_url":        f"https://arxiv.org/abs/{r['paper_id']}",
+            "arxiv_url":        r.get("wikipedia_url") or f"https://arxiv.org/abs/{r['paper_id']}",
         }
         for r in raw
     ]

@@ -1,0 +1,848 @@
+{
+  "showcase": "bombe",
+  "kaggle_snapshot_date": "2026-05-03",
+  "sample_strategy": "stratified-by-year",
+  "target_per_year": 14500,
+  "corpus_input_sha256": "4062611c6a7ad8898ce3eaafd662041c8ac77880d7afc37229b4f3ed657cde18",
+  "corpus_sha256": "4062611c6a7ad8898ce3eaafd662041c8ac77880d7afc37229b4f3ed657cde18",
+  "corpus_records": 504,
+  "corpus_bytes": 938976,
+  "model_id": "rng_bbc0bc2f8c60a634fe7f",
+  "tenant_id": "demo_bombeshowcas_2fe0801a",
+  "name": "Bombe \u00b7 Bletchley reanalysis \u00b7 Wikipedia public-domain",
+  "formed_at": "2026-05-03T05:29:56.310Z",
+  "formation_ms": 848,
+  "fingerprinter_mode": "btut",
+  "effective_strategy": "btut",
+  "coverage_pct": 20,
+  "response_digest": "2069968ba8add58819bb99071413affd4630af5e9559af1f8fdebf8eaddc29d7",
+  "encrypted": true,
+  "chunked": {
+    "total_chunks": 1,
+    "chunk_size": 5000,
+    "merged": false
+  },
+  "adapter_chain": [
+    {
+      "strategy": "btut",
+      "tried": true,
+      "succeeded": true,
+      "records_covered": 100,
+      "ms": 566,
+      "reason": "primary path covered the corpus"
+    },
+    {
+      "strategy": "minhash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered; sparse fallback not needed"
+    },
+    {
+      "strategy": "simhash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    },
+    {
+      "strategy": "bloom",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    },
+    {
+      "strategy": "byte_hash",
+      "tried": false,
+      "succeeded": false,
+      "records_covered": 0,
+      "ms": 0,
+      "reason": "primary covered"
+    }
+  ],
+  "taxonomy_summary": null,
+  "persistence": {
+    "bars": [
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 24
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 6
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 5
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 5
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 3
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 2
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 0,
+        "birth": 0,
+        "death": 1
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 1,
+        "birth": 1,
+        "death": 2
+      },
+      {
+        "dim": 2,
+        "birth": 2,
+        "death": 3
+      }
+    ],
+    "counts": {
+      "H0": 64,
+      "H1": 11,
+      "H2": 1
+    },
+    "metric": "hamming48",
+    "n_points": 100,
+    "wall_seconds": 0.146,
+    "library": "ripser",
+    "max_dim": 2
+  },
+  "purity": {
+    "coarse_8_archive": 0.7,
+    "fine_subcategory": 0.7,
+    "rows": [
+      {
+        "cluster": 1,
+        "size": 86,
+        "dominant": "people",
+        "dominant_share": 0.698,
+        "breakdown": {
+          "people": 60,
+          "organization": 8,
+          "place": 12,
+          "machine": 4,
+          "operation": 2
+        }
+      },
+      {
+        "cluster": 2,
+        "size": 13,
+        "dominant": "people",
+        "dominant_share": 0.692,
+        "breakdown": {
+          "people": 9,
+          "organization": 2,
+          "machine": 1,
+          "place": 1
+        }
+      },
+      {
+        "cluster": 0,
+        "size": 1,
+        "dominant": "people",
+        "dominant_share": 1.0,
+        "breakdown": {
+          "people": 1
+        }
+      }
+    ]
+  },
+  "decade_trajectory": [],
+  "bleed_per_class": [
+    {
+      "class_id": 1,
+      "size": 86,
+      "dominant": "people",
+      "dominant_share": 0.698,
+      "bleed_share": 0.302,
+      "bleed_breakdown": {
+        "organization": 8,
+        "place": 12,
+        "machine": 4,
+        "operation": 2
+      },
+      "bleed_year_range": null,
+      "bleed_examples": [
+        {
+          "paper_id": "4315660",
+          "title": "Radio Reconnaissance Platoon",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "611189",
+          "title": "Central Security Service",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "1582238",
+          "title": "SECG",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "734289",
+          "title": "National Cryptologic Museum",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "1705629",
+          "title": "Hut 8",
+          "archive": "place"
+        }
+      ]
+    },
+    {
+      "class_id": 2,
+      "size": 13,
+      "dominant": "people",
+      "dominant_share": 0.692,
+      "bleed_share": 0.308,
+      "bleed_breakdown": {
+        "organization": 2,
+        "machine": 1,
+        "place": 1
+      },
+      "bleed_year_range": null,
+      "bleed_examples": [
+        {
+          "paper_id": "3159625",
+          "title": "GCHQ Bude",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "60953954",
+          "title": "Schl\u00fcsselger\u00e4t 41",
+          "archive": "machine"
+        },
+        {
+          "paper_id": "991864",
+          "title": "Black Chamber",
+          "archive": "organization"
+        },
+        {
+          "paper_id": "27922365",
+          "title": "Turingery",
+          "archive": "place"
+        }
+      ]
+    },
+    {
+      "class_id": 0,
+      "size": 1,
+      "dominant": "people",
+      "dominant_share": 1.0,
+      "bleed_share": 0.0,
+      "bleed_breakdown": {},
+      "bleed_year_range": null,
+      "bleed_examples": []
+    }
+  ],
+  "rare_records": [
+    {
+      "paper_id": "53545524",
+      "title": "Horst Hauthal",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 6,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Horst_Hauthal",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Horst_Hauthal"
+    },
+    {
+      "paper_id": "3159625",
+      "title": "GCHQ Bude",
+      "year": 0,
+      "primary_category": "organization",
+      "archive": "organization",
+      "min_hamming": 5,
+      "arxiv_url": "https://en.wikipedia.org/wiki/GCHQ_Bude",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/GCHQ_Bude"
+    },
+    {
+      "paper_id": "3781602",
+      "title": "Edward Scheidt",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 5,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Edward_Scheidt",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Edward_Scheidt"
+    },
+    {
+      "paper_id": "991864",
+      "title": "Black Chamber",
+      "year": 0,
+      "primary_category": "organization",
+      "archive": "organization",
+      "min_hamming": 3,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Black_Chamber",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Black_Chamber"
+    },
+    {
+      "paper_id": "4315660",
+      "title": "Radio Reconnaissance Platoon",
+      "year": 0,
+      "primary_category": "organization",
+      "archive": "organization",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Radio_Reconnaissance_Platoon",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Radio_Reconnaissance_Platoon"
+    },
+    {
+      "paper_id": "58765237",
+      "title": "Rosemary Bamforth",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Rosemary_Bamforth",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rosemary_Bamforth"
+    },
+    {
+      "paper_id": "1705629",
+      "title": "Hut 8",
+      "year": 0,
+      "primary_category": "place",
+      "archive": "place",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Hut_8",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hut_8"
+    },
+    {
+      "paper_id": "31748",
+      "title": "Ultra (cryptography)",
+      "year": 0,
+      "primary_category": "place",
+      "archive": "place",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Ultra_(cryptography)",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ultra_(cryptography)"
+    },
+    {
+      "paper_id": "45705310",
+      "title": "Alec Naylor Dakin",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Alec_Naylor_Dakin",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Alec_Naylor_Dakin"
+    },
+    {
+      "paper_id": "31026380",
+      "title": "Hut 3",
+      "year": 0,
+      "primary_category": "place",
+      "archive": "place",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Hut_3",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hut_3"
+    },
+    {
+      "paper_id": "20786388",
+      "title": "Joan Thirsk",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Joan_Thirsk",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Joan_Thirsk"
+    },
+    {
+      "paper_id": "51956046",
+      "title": "Ann Katharine Mitchell",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 2,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Ann_Katharine_Mitchell",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ann_Katharine_Mitchell"
+    },
+    {
+      "paper_id": "4081683",
+      "title": "Arnold Lynch",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Arnold_Lynch",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Arnold_Lynch"
+    },
+    {
+      "paper_id": "62035505",
+      "title": "Rudolf Schauffler",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Rudolf_Schauffler",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rudolf_Schauffler"
+    },
+    {
+      "paper_id": "2567169",
+      "title": "Walter Horace Bruford",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Walter_Horace_Bruford",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Walter_Horace_Bruford"
+    },
+    {
+      "paper_id": "611189",
+      "title": "Central Security Service",
+      "year": 0,
+      "primary_category": "organization",
+      "archive": "organization",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Central_Security_Service",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Central_Security_Service"
+    },
+    {
+      "paper_id": "4185128",
+      "title": "Leslie Yoxall",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Leslie_Yoxall",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leslie_Yoxall"
+    },
+    {
+      "paper_id": "58764324",
+      "title": "Robert Churchhouse",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Robert_Churchhouse",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Robert_Churchhouse"
+    },
+    {
+      "paper_id": "1582238",
+      "title": "SECG",
+      "year": 0,
+      "primary_category": "organization",
+      "archive": "organization",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/SECG",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/SECG"
+    },
+    {
+      "paper_id": "2619911",
+      "title": "Ernst Witt",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Ernst_Witt",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ernst_Witt"
+    },
+    {
+      "paper_id": "56952863",
+      "title": "Wilma Z. Davis",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Wilma_Z._Davis",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Wilma_Z._Davis"
+    },
+    {
+      "paper_id": "61024493",
+      "title": "Hans Pietsch (mathematician)",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Hans_Pietsch_(mathematician)",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Hans_Pietsch_(mathematician)"
+    },
+    {
+      "paper_id": "23486",
+      "title": "Phil Zimmermann",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Phil_Zimmermann",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Phil_Zimmermann"
+    },
+    {
+      "paper_id": "565930",
+      "title": "Taher Elgamal",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Taher_Elgamal",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Taher_Elgamal"
+    },
+    {
+      "paper_id": "57663995",
+      "title": "Otto Leiberich",
+      "year": 0,
+      "primary_category": "people",
+      "archive": "people",
+      "min_hamming": 1,
+      "arxiv_url": "https://en.wikipedia.org/wiki/Otto_Leiberich",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Otto_Leiberich"
+    }
+  ],
+  "cluster_meta": [],
+  "emergence_candidates": [],
+  "baseline_panel": null,
+  "n_survivors": 100,
+  "generated_at": "2026-05-03T05:30:38.417574Z"
+}
