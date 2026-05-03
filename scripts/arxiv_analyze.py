@@ -338,8 +338,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--corpus-sha256", required=True)
     p.add_argument("--target-per-year", type=int, default=14500)
     p.add_argument("--output", default=str(PUBLIC_OUT))
+    p.add_argument("--corpus-path", default=str(CORPUS_PATH),
+                   help="Override the corpus NDJSON path (used by /bombe and similar reuses).")
     p.add_argument("--no-baselines", action="store_true",
                    help="Skip TF-IDF + LDA baselines (useful for fast smoke tests)")
+    p.add_argument("--showcase-name", default="atlas",
+                   help="Override the 'showcase' field in the output artifact (default 'atlas').")
     args = p.parse_args(argv)
 
     print(f"Loading model {args.model_id} ...")
@@ -347,13 +351,14 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  records={model.get('corpus_records'):,}  fingerprints={len(model.get('fingerprints', [])):,}")
 
     artifact = build_public_artifact(
-        model, CORPUS_PATH,
+        model, Path(args.corpus_path),
         snapshot_date=args.snapshot_date,
         corpus_input_sha256=args.corpus_input_sha256,
         corpus_sha256=args.corpus_sha256,
         target_per_year=args.target_per_year,
         include_baselines=not args.no_baselines,
     )
+    artifact["showcase"] = args.showcase_name
 
     out_path = Path(args.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)

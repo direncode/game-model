@@ -29,6 +29,7 @@ const ALLOWED: Record<string, string> = {
   "pulse-findings":          "pulse_findings.json",
   receipt:                   "sec_edgar.json",
   "receipt-chain":           "sec_edgar_chain.json",
+  bombe:                     "bombe.json",
 };
 
 export async function GET(_req: Request, ctx: { params: { slug: string } }) {
