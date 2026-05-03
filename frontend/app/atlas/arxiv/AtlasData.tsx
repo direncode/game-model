@@ -135,14 +135,15 @@ export function AtlasData() {
     return (
       <div className="my-12 p-6 border border-amber-500/30 bg-amber-500/5 rounded-lg">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-amber-300/80 mb-2">
-          atlas artifact pending
+          findings not yet generated
         </p>
         <p className="text-white/70 text-sm leading-relaxed">{err}</p>
         <p className="text-white/50 text-xs mt-3 leading-relaxed">
-          The page renders prose and structure now. The live numbers will appear
-          once <code className="text-white/70">scripts/arxiv_analyze.py</code> writes{" "}
-          <code className="text-white/70">/data/formed_models/_public/arxiv.json</code>.
-          See <code className="text-white/70">docs/superpowers/runbooks/2026-05-02-atlas-arxiv-runbook.md</code>.
+          The page is set up; the run that produces the numbers
+          (downloading the arXiv snapshot, signing each paper, comparing
+          the groups against the discipline labels) hasn&apos;t been
+          executed yet. When it has, the numbers will appear here
+          automatically.
         </p>
       </div>
     );
@@ -194,12 +195,16 @@ function PurityBlock({ data }: { data: AtlasArtifact }) {
   return (
     <div>
       <h3 className="font-display text-2xl text-white mb-2">
-        Cluster purity vs. 8 archives: <span className="text-cyan-300">{pct(p.coarse_8_archive)}</span>
+        Engine groups match arXiv&apos;s eight disciplines:{" "}
+        <span className="text-cyan-300">{pct(p.coarse_8_archive)}</span> of the time
       </h3>
       <p className="text-white/55 text-sm mb-4">
-        K-means at K={data.taxonomy_summary?.classes ?? "?"} on Hamming over the BTUT survivors.
-        Fine-grained purity vs. ~152 primary subcategories: <span className="text-white/80">{pct(p.fine_subcategory)}</span>.
-        Chance baseline (uniform-random label assignment): <span className="text-white/80">{pct(data.baseline_panel?.chance)}</span>.
+        The engine sorted papers into {data.taxonomy_summary?.classes ?? "?"} groups, never told the
+        discipline labels. When we compared each group&apos;s papers to the disciplines arXiv had
+        labelled them with, this is how often the engine&apos;s group matched the discipline majority.
+        At the finer subcategory level (152 sub-disciplines), the match is{" "}
+        <span className="text-white/80">{pct(p.fine_subcategory)}</span>.
+        Random guessing would land at <span className="text-white/80">{pct(data.baseline_panel?.chance)}</span>.
       </p>
       <div className="space-y-2">
         {p.rows.slice(0, 12).map((row) => (
@@ -238,11 +243,11 @@ function DecadeBlock({ data }: { data: AtlasArtifact }) {
   if (!decades?.length) return null;
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Decade trajectory · 1990s → 2020s</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Thirty years of arXiv, decade by decade</h3>
       <p className="text-white/55 text-sm mb-4">
-        Survivor count and per-decade archive share. Read across to see the
-        structural reweighting of arXiv from the early-physics era to the
-        cs/stat/eess-dominated 2020s.
+        How many papers came from each discipline in each decade. Read across the rows
+        to see arXiv shift from a physics archive in the 1990s to a computer-science-heavy
+        archive in the 2020s.
       </p>
       <div className="space-y-3">
         {decades.map((d) => {
@@ -286,10 +291,11 @@ function BleedBlock({ data }: { data: AtlasArtifact }) {
   const topBleed = sorted.slice(0, 8);
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Cross-discipline bleed</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Where disciplines bleed into each other</h3>
       <p className="text-white/55 text-sm mb-4">
-        Clusters where the dominant-archive grouping pulls in papers from other
-        archives. The structural signature of cross-disciplinary discourse.
+        Groups whose papers mostly come from one discipline but pull in papers
+        from other disciplines too. These are the cross-disciplinary papers —
+        ones that genuinely sit between two fields.
       </p>
       <div className="space-y-2">
         {topBleed.map((row) => (
@@ -326,13 +332,15 @@ function EmergenceBlock({ data }: { data: AtlasArtifact }) {
   return (
     <div>
       <h3 className="font-display text-2xl text-white mb-2">
-        Emergence candidates: {candidates.length} cluster{candidates.length === 1 ? "" : "s"}
+        Possible emerging fields: {candidates.length} group{candidates.length === 1 ? "" : "s"}
       </h3>
       <p className="text-white/55 text-sm mb-4">
-        Clusters with median publication year ≥ 2015, year-spread ≤ 5, and
-        Shannon entropy over primary categories ≥ 2.0. The structural signature
-        of an emerging field. Atlas does not name what these clusters are —
-        readers can inspect the centroid and rare-record exemplars and decide.
+        Groups that mostly contain recent papers (median year 2015 or later),
+        from a narrow time window (papers within five years of each other), and
+        that pull from several disciplines at once. Together these three
+        signals look like an emerging field. Atlas does not name them — that
+        judgment is for a domain expert. Look at the example papers in each
+        group and decide for yourself.
       </p>
       {candidates.length === 0 ? (
         <p className="text-white/40 text-sm italic">
@@ -371,19 +379,22 @@ function BaselinesBlock({ data }: { data: AtlasArtifact }) {
   const engine = data.purity?.coarse_8_archive;
   if (!b || engine === undefined) return null;
   const rows: { label: string; purity: number; note: string }[] = [
-    { label: "chance", purity: b.chance, note: "uniform-random label assignment over 8 archives" },
-    { label: "engine", purity: engine, note: "BTUT 48-bit fingerprint + KMeans on Hamming distance" },
-    { label: "TF-IDF + KMeans", purity: b.tfidf_kmeans, note: `sklearn TfidfVectorizer (1-2 gram, 20k features) + KMeans, K=${b.K}` },
-    { label: "LDA argmax", purity: b.lda_argmax, note: `sklearn LatentDirichletAllocation K=${b.K}, online, 20 iter, argmax → hard cluster` },
+    { label: "random guessing", purity: b.chance, note: "what you'd get by assigning labels at random" },
+    { label: "the engine", purity: engine, note: "Latent Ocean's signatures, sorted into groups" },
+    { label: "standard text-clustering", purity: b.tfidf_kmeans, note: "off-the-shelf word-frequency clustering" },
+    { label: "topic-modelling", purity: b.lda_argmax, note: "off-the-shelf topic-model clustering" },
   ];
   const max = Math.max(...rows.map((r) => r.purity));
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Baselines</h3>
+      <h3 className="font-display text-2xl text-white mb-2">How does the engine compare?</h3>
       <p className="text-white/55 text-sm mb-4">
-        Engine vs. TF-IDF + KMeans, vs. LDA, vs. chance. All measured against
-        the same 8-archive gold via weighted purity. The engine is honest about
-        its position relative to full-text NLP.
+        The engine vs. random guessing, vs. two standard text-mining tools.
+        All four are scored the same way: how often each tool&apos;s groups
+        match arXiv&apos;s discipline labels. The engine isn&apos;t the
+        strongest of the four on raw match rate — it isn&apos;t supposed to
+        be. The engine&apos;s contract is reproducibility: same input, same
+        answer, decade after decade.
       </p>
       <div className="space-y-2">
         {rows.map((r) => (
@@ -410,10 +421,12 @@ function RareBlock({ data }: { data: AtlasArtifact }) {
   if (!rare?.length) return null;
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Top-25 structurally rare papers</h3>
+      <h3 className="font-display text-2xl text-white mb-2">The 25 most unusual papers in arXiv</h3>
       <p className="text-white/55 text-sm mb-4">
-        Survivors with the largest min-Hamming distance to any other survivor.
-        Each row links to arxiv.org for direct verification.
+        Papers whose signature stands the furthest apart from every other paper
+        in the corpus. Each row links to the original on arxiv.org so you can
+        read it and decide whether the engine&apos;s &ldquo;unusual&rdquo;
+        verdict is a useful one.
       </p>
       <div className="space-y-1 font-mono text-xs">
         {rare.map((r, i) => (
@@ -439,24 +452,22 @@ function RareBlock({ data }: { data: AtlasArtifact }) {
 
 function VerificationBlock({ data }: { data: AtlasArtifact }) {
   const fields: { label: string; value: string }[] = [
-    { label: "kaggle_snapshot_date", value: data.kaggle_snapshot_date },
-    { label: "corpus_input_sha256",   value: data.corpus_input_sha256 },
-    { label: "corpus_records",        value: (data.corpus_records ?? 0).toLocaleString() },
-    { label: "corpus_sha256",         value: data.corpus_sha256 },
-    { label: "model_id",              value: data.model_id },
-    { label: "formed_at",             value: data.formed_at },
-    { label: "response_digest",       value: data.response_digest },
+    { label: "snapshot date",              value: data.kaggle_snapshot_date },
+    { label: "input file fingerprint",     value: data.corpus_input_sha256 },
+    { label: "papers in the run",          value: (data.corpus_records ?? 0).toLocaleString() },
+    { label: "processed-data fingerprint", value: data.corpus_sha256 },
+    { label: "run identifier",             value: data.model_id },
+    { label: "run completed at",           value: data.formed_at },
+    { label: "answer fingerprint",         value: data.response_digest },
   ];
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Verification fields</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Verify it yourself</h3>
       <p className="text-white/55 text-sm mb-4">
-        Every claim above is a function of these fields. Re-derive them from the
-        same Kaggle snapshot and you obtain a byte-identical Atlas. Two hashes:
-        the upstream Kaggle file (corpus_input_sha256), the harvested NDJSON
-        (corpus_sha256). The seven canonical query response digests are written
-        to the model artifact and re-issued by{" "}
-        <code className="text-white/70">scripts/atlas_verify.sh</code>.
+        Every claim above is a function of these seven values. Anyone can
+        re-download the same arXiv snapshot, run the same code, and produce the
+        same fingerprints byte for byte. If our fingerprints match yours, our
+        answer is reproducible. If they don&apos;t, we&apos;re lying.
       </p>
       <div className="space-y-1 font-mono text-xs">
         {fields.map((f) => (

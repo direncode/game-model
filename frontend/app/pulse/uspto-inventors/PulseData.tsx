@@ -106,14 +106,15 @@ export function PulseData() {
     return (
       <div className="my-12 p-6 border border-amber-500/30 bg-amber-500/5 rounded-lg">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-amber-300/80 mb-2">
-          pulse artifact pending
+          findings not yet generated
         </p>
         <p className="text-white/70 text-sm leading-relaxed">{err}</p>
         <p className="text-white/50 text-xs mt-3 leading-relaxed">
-          The page renders prose and structure now. The live numbers will appear
-          once <code className="text-white/70">scripts/pulse_analyze.py</code> writes{" "}
-          <code className="text-white/70">/data/formed_models/_public/uspto.json</code>.
-          See <code className="text-white/70">docs/superpowers/runbooks/2026-05-02-pulse-uspto-runbook.md</code>.
+          The page is set up; the run that produces the numbers
+          (downloading the PatentsView snapshot, signing each
+          inventor-record, comparing the groups against PatentsView&apos;s
+          gold inventor IDs) hasn&apos;t been executed yet. When it has,
+          the numbers will appear here automatically.
         </p>
       </div>
     );
@@ -160,23 +161,26 @@ function BaselinesBlock({ data }: { data: PulseArtifact }) {
   const b = data.baseline_disambiguators;
   if (!b) return null;
   const rows: { label: string; purity: number; note: string }[] = [
-    { label: "chance",      purity: b.chance,      note: "1 / N where N = number of distinct PatentsView inventors" },
-    { label: "naive_name",  purity: b.naive_name,  note: "collapse all records with identical canonical_name (the trivial baseline)" },
-    { label: "engine",      purity: b.engine,      note: "BTUT 48-bit fingerprint + KMeans on Hamming, vs PatentsView gold" },
-    { label: "patentsview", purity: b.patentsview, note: "PatentsView's own disambiguation, used as gold (1.0 by definition)" },
+    { label: "random guessing",       purity: b.chance,      note: "what you'd get by assigning labels at random" },
+    { label: "match by name only",    purity: b.naive_name,  note: "collapse every record with identical name into one inventor" },
+    { label: "the engine",            purity: b.engine,      note: "Latent Ocean's signatures, sorted into groups" },
+    { label: "PatentsView (gold)",    purity: b.patentsview, note: "PatentsView's own answer, used as the comparison point" },
   ];
   const max = Math.max(...rows.map((r) => r.purity || 0));
   return (
     <div>
       <h3 className="font-display text-2xl text-white mb-2">
-        Disambiguation baselines: engine <span className="text-cyan-300">{pct(b.engine)}</span>, naive-name {pct(b.naive_name)}
+        Engine matches PatentsView <span className="text-cyan-300">{pct(b.engine)}</span> of the time;
+        match-by-name alone gets {pct(b.naive_name)}
       </h3>
       <p className="text-white/55 text-sm mb-4">
-        Each row is a disambiguation strategy measured against PatentsView's
-        gold-standard <code className="text-white/70">disambig_inventor_id</code> via weighted purity.
-        PatentsView itself is an algorithmic approximation, so the engine&apos;s
-        lift over the naive-name baseline is the cleaner signal of structural
-        disambiguation power.
+        Four ways to figure out which patent records belong to the same
+        inventor. All four are scored by how often they match
+        PatentsView&apos;s gold answer. The naive baseline (just collapse
+        identical names) is the failure mode the engine has to beat —
+        because &ldquo;John Smith&rdquo; on two different patents is
+        often two different people. The engine&apos;s lift over the naive
+        baseline is the real measure of how much it understands.
       </p>
       <div className="space-y-2">
         {rows.map((r) => (
@@ -205,11 +209,12 @@ function DecadeBlock({ data }: { data: PulseArtifact }) {
   const maxN = Math.max(...decades.map((d) => d.n_records || 0));
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Decade productivity trajectory</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Fifty years of US innovation, decade by decade</h3>
       <p className="text-white/55 text-sm mb-4">
-        Per-decade inventor-record volume and number of distinct disambiguated
-        inventors per PatentsView. The top-3 IPC class shares per decade trace
-        the structural reweighting of US innovation by domain.
+        How many patent records came from each decade, how many distinct
+        inventors PatentsView counts in each, and the top three technology
+        classes per decade. Read across the rows to see US innovation
+        shift across technology domains over fifty years.
       </p>
       <div className="space-y-3">
         {decades.map((d) => {
@@ -250,10 +255,12 @@ function PolymathBlock({ data }: { data: PulseArtifact }) {
   const sorted = [...bleed].sort((a, b) => b.bleed_share - a.bleed_share).slice(0, 8);
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Cross-IPC bleed (the polymath signal)</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Inventors who span multiple technology domains</h3>
       <p className="text-white/55 text-sm mb-4">
-        Clusters where the dominant IPC class is diluted by other IPC classes.
-        High bleed share indicates inventors working across technology domains.
+        Groups where the inventor&apos;s patents fall across several
+        different technology classes — the polymath signal. High
+        cross-domain share means the inventor&apos;s career runs across
+        technology boundaries, not within them.
       </p>
       <div className="space-y-2">
         {sorted.map((row) => (
@@ -284,26 +291,27 @@ function SingularInventorsBlock({ data }: { data: PulseArtifact }) {
   return (
     <div>
       <h3 className="font-display text-2xl text-white mb-2">
-        Singular inventor candidates: {candidates.length} cluster{candidates.length === 1 ? "" : "s"}
+        Possibly-singular inventors: {candidates.length} group{candidates.length === 1 ? "" : "s"}
       </h3>
       <p className="text-white/55 text-sm mb-4">
-        Disambiguated-inventor clusters that score above threshold on all four
-        signals: productivity (≥10 patents), IPC entropy (≥1.0), career span
-        (≥10 years), and solo-share (≥30%). Pulse does not name what or who
-        these clusters are. Readers can inspect the rare-record exemplars
-        below and judge.
+        Inventor groups that score high on all four signals at once: lots
+        of patents, work spread across many technology classes, a long
+        career, and a high share of solo or small-team work. Together
+        these signals look like a singularly-prolific independent
+        inventor. Pulse does not name them. Look at the example records
+        and decide for yourself.
       </p>
       {candidates.length === 0 ? (
         <p className="text-white/40 text-sm italic">
-          No clusters meet the four-signal threshold under this run. Honest
-          disclosure: the signal is empty here.
+          No groups meet the four-signal threshold in this run. Honest
+          disclosure: there&apos;s no signal here.
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {candidates.map((c) => (
             <div key={c.cluster_id} className="border border-white/10 rounded p-3 text-xs">
               <div className="font-mono text-white/55 mb-2">
-                cluster #{c.cluster_id} · {c.size} survivors
+                group #{c.cluster_id} · {c.size} records
               </div>
               <div className="grid grid-cols-2 gap-2 text-white/70">
                 <div>
@@ -311,15 +319,15 @@ function SingularInventorsBlock({ data }: { data: PulseArtifact }) {
                   <div className="text-white">{c.patent_count}</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">IPC entropy</div>
+                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">domain spread</div>
                   <div className="text-white">{c.ipc_entropy.toFixed(2)}</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">career span</div>
-                  <div className="text-white">{c.career_span} y</div>
+                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">career length</div>
+                  <div className="text-white">{c.career_span} yrs</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">solo-share</div>
+                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">solo share</div>
                   <div className="text-white">{Math.round(c.solo_share * 100)}%</div>
                 </div>
               </div>
@@ -336,11 +344,12 @@ function RareBlock({ data }: { data: PulseArtifact }) {
   if (!rare?.length) return null;
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Top-25 structurally rare inventor-records</h3>
+      <h3 className="font-display text-2xl text-white mb-2">The 25 most unusual inventor-records</h3>
       <p className="text-white/55 text-sm mb-4">
-        Inventor-records (one per appearance) with the largest min-Hamming
-        distance to any other survivor. Each row links to USPTO for direct
-        verification.
+        Records whose name + co-inventor + assignee + location combination
+        stands the furthest apart from every other record in the corpus.
+        Each row links to the original patent on USPTO so you can read it
+        and decide whether the &ldquo;unusual&rdquo; verdict is useful.
       </p>
       <div className="space-y-1 font-mono text-xs">
         {rare.map((r, i) => (
@@ -366,24 +375,23 @@ function RareBlock({ data }: { data: PulseArtifact }) {
 
 function VerificationBlock({ data }: { data: PulseArtifact }) {
   const fields: { label: string; value: string }[] = [
-    { label: "patentsview_snapshot_date", value: data.patentsview_snapshot_date },
-    { label: "corpus_input_sha256",       value: data.corpus_input_sha256 },
-    { label: "corpus_records",            value: (data.corpus_records ?? 0).toLocaleString() },
-    { label: "corpus_sha256",             value: data.corpus_sha256 },
-    { label: "model_id",                  value: data.model_id },
-    { label: "formed_at",                 value: data.formed_at },
-    { label: "response_digest",           value: data.response_digest },
+    { label: "snapshot date",              value: data.patentsview_snapshot_date },
+    { label: "input file fingerprint",     value: data.corpus_input_sha256 },
+    { label: "records in the run",         value: (data.corpus_records ?? 0).toLocaleString() },
+    { label: "processed-data fingerprint", value: data.corpus_sha256 },
+    { label: "run identifier",             value: data.model_id },
+    { label: "run completed at",           value: data.formed_at },
+    { label: "answer fingerprint",         value: data.response_digest },
   ];
   return (
     <div>
-      <h3 className="font-display text-2xl text-white mb-2">Verification fields</h3>
+      <h3 className="font-display text-2xl text-white mb-2">Verify it yourself</h3>
       <p className="text-white/55 text-sm mb-4">
-        Every claim above is a function of these fields. Re-derive the
-        PatentsView snapshot to obtain a byte-identical Pulse. Two hashes:
-        the upstream PatentsView TSVs (corpus_input_sha256), the harvested
-        NDJSON (corpus_sha256). The seven canonical query response digests
-        are written to the model artifact and re-issued by{" "}
-        <code className="text-white/70">scripts/pulse_verify.sh</code>.
+        Every claim above is a function of these seven values. Anyone can
+        re-download the same PatentsView snapshot, run the same code, and
+        produce the same fingerprints byte for byte. If our fingerprints
+        match yours, the answer is reproducible. If they don&apos;t,
+        we&apos;re lying.
       </p>
       <div className="space-y-1 font-mono text-xs">
         {fields.map((f) => (

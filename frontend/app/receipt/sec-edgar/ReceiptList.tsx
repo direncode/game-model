@@ -73,14 +73,14 @@ export function ReceiptList() {
     return (
       <div className="my-12 p-6 border border-amber-500/30 bg-amber-500/5 rounded-lg">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-amber-300/80 mb-2">
-          receipt artifact pending
+          receipts not yet generated
         </p>
         <p className="text-white/70 text-sm leading-relaxed">{err}</p>
         <p className="text-white/50 text-xs mt-3 leading-relaxed">
-          The page renders prose and structure now. The live receipts will
-          appear once <code className="text-white/70">scripts/receipt_run.py</code>{" "}
-          completes the 1,000-filing summarization run and writes{" "}
-          <code className="text-white/70">/data/formed_models/_public/sec_edgar.json</code>.
+          The page is set up; the run that produces the receipts (sending
+          each 10-K to Claude with the same fixed prompt and recording
+          the result) hasn&apos;t been executed yet. When it has, the
+          receipts will appear here automatically.
         </p>
       </div>
     );

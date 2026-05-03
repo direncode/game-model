@@ -115,7 +115,7 @@ export default function MethodPage() {
               Public reference deployments
             </p>
             <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.04] mb-3 max-w-3xl">
-              Four citable showcases, every output third-party-verifiable.
+              Five citable showcases, every output third-party-verifiable.
             </h2>
             <p className="text-[15px] text-white/55 leading-relaxed mb-10 max-w-3xl">
               The seven proofs below are the engine&apos;s isolated capabilities.

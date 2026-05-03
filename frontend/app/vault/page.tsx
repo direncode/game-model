@@ -164,7 +164,7 @@ export default function VaultPage() {
               Public reference deployments
             </p>
             <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.05] mb-6 max-w-3xl">
-              Four citable showcases.<br />
+              Five citable showcases.<br />
               <span className="text-white/45">Four buyer categories. One substrate.</span>
             </h2>
             <p className="text-[15.5px] text-white/65 leading-relaxed mb-12 max-w-2xl">

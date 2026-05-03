@@ -6,7 +6,7 @@ import { PulseData } from "./PulseData";
 export const metadata: Metadata = {
   title: "Pulse · USPTO Inventors · Latent Ocean",
   description:
-    "Fifty years of US innovation, deterministically disambiguated. A 500k inventor-record stratified sample across 1976-2025, fingerprinted under the BTUT primitive, with a multi-baseline disambiguation panel (engine vs PatentsView vs naive-name vs chance) at the centerpiece.",
+    "Fifty years of US innovation, deterministically disambiguated. 500,000 inventor-records 1976-2025 with a multi-baseline panel: engine vs the PatentsView gold answer vs match-by-name-only vs chance.",
 };
 
 export default function PulseUsptoShowcasePage() {
@@ -26,32 +26,30 @@ export default function PulseUsptoShowcasePage() {
               <span className="text-white/45">One disambiguation.</span>
             </h1>
             <p className="mt-8 text-lg text-white/75 max-w-3xl leading-relaxed">
-              An applied study of one open IP archive, the United States Patent
-              and Trademark Office&apos;s bulk patent record from 1976 forward,
-              through a deterministic structural lens. The corpus is a
-              stratified representative sample of 500,000 inventor-records (one
-              per inventor-appearance on a granted patent) drawn from
-              PatentsView&apos;s monthly bulk distribution, spanning fifty
-              years of US innovation across all USPTO IPC classes.
+              The hardest question in patent analytics is also the simplest
+              one: which patents were filed by the same person? US patent
+              records spell names a hundred different ways. &ldquo;John W.
+              Smith&rdquo; on one patent, &ldquo;J. W. Smith&rdquo; on
+              another, &ldquo;John Smith&rdquo; on a third. We took 500,000
+              inventor-records spanning fifty years and tried to figure out
+              which ones are the same person.
             </p>
             <p className="mt-5 text-lg text-white/75 max-w-3xl leading-relaxed">
-              The corpus is passed through Latent Ocean&apos;s formation
-              pipeline: deterministic 48-bit structural fingerprints under the
-              BTUT primitive, k-means taxonomy on Hamming distance, and a
-              RunPod GPU finalize. The fingerprint sees only the inventor&apos;s
-              canonicalized name plus their co-inventor list, plus the assignee
-              identifier, plus the city/state/country. PatentsView&apos;s gold
-              <code className="font-mono text-white/85 text-sm"> disambig_inventor_id </code>
-              is held out of the fingerprint payload entirely so the cluster-
-              purity claim is honest.
+              The engine looks at four things on each record: the inventor&apos;s
+              name (with the spelling variations smoothed out), who else is
+              listed as a co-inventor on that patent, who the patent was
+              assigned to (Apple Inc., Google LLC, etc.), and the inventor&apos;s
+              city, state, and country. Nothing else. The engine never sees
+              the gold-standard answer that PatentsView (the standard
+              academic disambiguation tool) computed, so when our groups
+              match PatentsView&apos;s inventor IDs, that&apos;s a real finding,
+              not a parroted answer.
             </p>
             <p className="mt-5 text-base text-white/55 max-w-3xl leading-relaxed">
-              This page mirrors{" "}
-              <Link href="/atlas/arxiv" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/atlas/arxiv</Link>
-              {" "}in shape and rhetoric, applied to inventor disambiguation
-              instead of paper-level structural mapping. Every number on this
-              page is fetched from{" "}
-              <code className="font-mono text-white/85 text-sm">/api/range-public/showcase/pulse</code>.
+              For the engineering version of this same story, see{" "}
+              <Link href="/method" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/method</Link>.
+              The companion findings catalog is at{" "}
+              <Link href="/pulse/uspto-inventors/constellations" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/pulse/uspto-inventors/constellations</Link>.
             </p>
             <div className="mt-9 flex flex-wrap gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45">
               {[
@@ -84,23 +82,24 @@ export default function PulseUsptoShowcasePage() {
               disputes), so the disambiguation claim made here is not academic.
             </p>
             <p>
-              A 48-bit structural fingerprint cannot tell you whether a patent
-              is novel, valid, or infringed. It can only measure where a given
-              inventor-record sits relative to the 500,000 other surviving
-              inventor-records in a deterministic geometric space. Where the
-              engine surfaces a cluster as a candidate singularly-prolific
-              inventor, the page reports the metrics and links to USPTO. The
-              page makes no claim about who any cluster represents; that
-              identification is upstream of any structural metric.
+              The engine cannot tell you whether a patent is novel, valid,
+              or being infringed. It only tells you which inventor-records
+              look enough like each other to plausibly belong to the same
+              person. Where the engine flags a group as a possible
+              singularly-prolific inventor, this page reports the
+              measurements and links every record to its USPTO page. The
+              page does not name who any group represents; that
+              identification is for an IP attorney or a domain expert.
             </p>
             <p>
-              The deepest finding here is not a single number. It is that the
-              engine, given only canonicalized name + co-inventor list +
-              assignee + city/state/country, recovers the bulk of
-              PatentsView&apos;s disambiguation unsupervised, while clearly
-              outperforming the naive baseline (collapse all records with
-              identical canonical_name) on the cases where common-name
-              collision matters most.
+              The deepest finding here is not a single number. It is that
+              the engine, given only the four surface signals (name,
+              co-inventors, assignee, location), groups records into the
+              same buckets PatentsView&apos;s much more elaborate
+              disambiguation algorithm produces — most of the time — and
+              clearly beats the naive baseline (collapse all records with
+              identical names) on the common-name cases where naive
+              collision is most damaging.
             </p>
           </Prose>
         </Section>
@@ -109,44 +108,35 @@ export default function PulseUsptoShowcasePage() {
         <Section anchor="corpus" kicker="The corpus" title="A pinned PatentsView snapshot, two-stage stratified.">
           <Prose>
             <p>
-              The PatentsView bulk TSV files are downloaded from{" "}
+              The patent data comes from{" "}
               <a href="https://patentsview.org/download/data-download-tables" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">
-                patentsview.org
-              </a>{" "}
-              as a coordinated bundle: <code className="font-mono text-sm">g_inventor_disambiguated.tsv</code>{" "}
-              (the gold standard), <code className="font-mono text-sm">g_inventor_not_disambiguated.tsv</code>{" "}
-              (the raw inventor strings from the patent), <code className="font-mono text-sm">g_assignee_disambiguated.tsv</code>,
-              <code className="font-mono text-sm"> g_location_disambiguated.tsv</code>, and <code className="font-mono text-sm">g_patent.tsv</code>.
-              The harvester at{" "}
-              <code className="font-mono text-white/80 text-sm">scripts/pulse_harvest.py</code>{" "}
-              joins these on patent_id, normalizes inventor names to canonical
-              &ldquo;Surname I I&rdquo; form (so &ldquo;John W. Smith&rdquo; and
-              &ldquo;J. W. Smith&rdquo; become the same fingerprint payload),
-              collects each record&apos;s co-inventors and assignee + location
-              metadata, and emits one canonical NDJSON record per
-              inventor-appearance.
+                PatentsView
+              </a>, an open research project of the US Patent Office that
+              publishes monthly bulk exports of the patent record. We pin
+              to a specific snapshot date so anyone can re-download the
+              same files and reproduce this exact artifact. We normalize
+              every inventor&apos;s name to the same shape — so &ldquo;John
+              W. Smith&rdquo; and &ldquo;J. W. Smith&rdquo; look identical
+              to the engine — and we pull together each record&apos;s
+              co-inventors, assignee, and city/state/country.
             </p>
             <p>
-              The fingerprint payload is the canonicalized name plus the
-              pipe-separated co-inventor canonical names plus the assignee
-              identifier plus city/state/country, full stop. PatentsView&apos;s
-              <code className="font-mono text-sm"> disambig_inventor_id </code>
-              is kept as a metadata field but never enters the fingerprint
-              text. Including it would make the cluster-purity-vs-PatentsView
-              comparison a tautology: the engine would just be parroting the
-              gold label it was given. Excluding it makes the recovery claim
-              honest.
+              PatentsView publishes its own gold-standard answer for who
+              each record belongs to. We deliberately hide that answer
+              from the engine. If the engine ever saw the gold ID, the
+              comparison between our groups and PatentsView&apos;s would
+              be circular — we&apos;d just be repeating the answer we were
+              given. Hiding it is the difference between a real
+              recovery claim and a parrot.
             </p>
             <p>
-              Two-stage sampling preserves the disambiguation signal for
-              uncommon-name inventors while down-sampling ultra-common names.
-              For canonical_names with at most <code className="font-mono text-sm">per_name_cap</code>
-              {" "}appearances (default 100), all records are kept; for
-              ultra-common names, stride sampling brings the bucket down to
-              the cap. The 500,000-record total is set by the platform&apos;s
-              MAX_CHUNKS = 100 ceiling on a single formation. The decision is
-              documented in{" "}
-              <code className="font-mono text-white/80 text-sm">docs/superpowers/specs/2026-05-02-atlas-arxiv-recon.md</code>.
+              Two-stage sampling: for uncommon names, every record is
+              kept (so a real inventor&apos;s career is fully visible); for
+              ultra-common names like &ldquo;John Smith,&rdquo; we keep
+              only every Nth record (so common-name records don&apos;t
+              swamp the corpus). The 500,000-record total is what fits in
+              one run on the current platform; the full PatentsView
+              record is several times larger.
             </p>
           </Prose>
         </Section>
@@ -213,7 +203,7 @@ export default function PulseUsptoShowcasePage() {
               </a>{" "}
               is the upstream source PatentsView itself derives from. The
               chain of custody from raw USPTO XML to PatentsView&apos;s TSVs
-              to Pulse&apos;s NDJSON is fully open and auditable.
+              to Pulse&apos;s processed records is fully open and auditable.
             </p>
             <p>
               The Atlas scholarly artifact at{" "}

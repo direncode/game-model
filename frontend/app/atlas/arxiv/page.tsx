@@ -6,7 +6,7 @@ import { AtlasData } from "./AtlasData";
 export const metadata: Metadata = {
   title: "Atlas · arXiv · Latent Ocean",
   description:
-    "Thirty years of scientific discourse, structurally sampled and citably mapped. A 500k-paper stratified sample across the eight arXiv archive disciplines, fingerprinted under the BTUT primitive, with full disclosure of method, baselines, and the cross-discipline bleed where the actual interdisciplinary finding lives.",
+    "Thirty years of scientific discourse, mapped and re-derivable forever. A reproducible map of 500,000 arXiv papers across all eight disciplines, with full disclosure of method, baselines, and where disciplines bleed into each other.",
 };
 
 export default function AtlasArxivShowcasePage() {
@@ -26,30 +26,32 @@ export default function AtlasArxivShowcasePage() {
               <span className="text-white/45">Thirty years.</span>
             </h1>
             <p className="mt-8 text-lg text-white/75 max-w-3xl leading-relaxed">
-              An applied study of one open scientific archive, arXiv,
-              hosted at Cornell University and distributed in bulk via
-              Kaggle, through a deterministic structural lens. The
-              corpus is a stratified representative sample of 500,000
-              papers spanning 1991 through 2025: roughly 14,500 papers
-              per year, drawn deterministically from the pinned monthly
-              snapshot. Eight archive-level disciplines are represented:
-              cs, math, physics, q-bio, q-fin, stat, econ, eess.
+              A reproducible map of arXiv — Cornell University&apos;s
+              public preprint archive, the daily reading list for working
+              scientists. We took 500,000 papers spread evenly across 35
+              years (1991-2025) and across all eight disciplines arXiv
+              covers — computer science, math, physics, biology, finance,
+              statistics, economics, electrical engineering — and ran
+              them through our engine. Every paper got a compact
+              reproducible signature. We grouped the signatures and
+              checked whether the groups matched the disciplines.
             </p>
             <p className="mt-5 text-lg text-white/75 max-w-3xl leading-relaxed">
-              The corpus is passed through Latent Ocean&apos;s formation
-              pipeline: deterministic 48-bit structural fingerprints
-              under the BTUT primitive, k-means taxonomy on Hamming
-              distance, persistent homology via ripser, and a RunPod GPU
-              finalize. Every claim that follows on this page is a
-              function of the resulting public artifact alone.
+              The point of this page is not the engine. The point is
+              that every number you see can be re-derived. Anyone who
+              downloads the same arXiv snapshot will produce identical
+              signatures, identical groups, identical findings. No
+              guessing, no version drift, no model retraining changes
+              the answer. Decade after decade, the same input gives the
+              same result.
             </p>
             <p className="mt-5 text-base text-white/55 max-w-3xl leading-relaxed">
-              This page mirrors{" "}
-              <Link href="/docsouth" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/docsouth</Link>
-              {" "}in shape and rhetoric, applied to a scientific
-              archive instead of a humanities one. Every number on this
-              page is fetched from the public artifact at{" "}
-              <code className="font-mono text-white/85 text-sm">/api/range-public/showcase/atlas</code>.
+              For the engineering version of the same story, with the
+              technical primitives and library calls documented in full,
+              see{" "}
+              <Link href="/method" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/method</Link>.
+              The companion findings catalog is at{" "}
+              <Link href="/atlas/arxiv/constellations" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/atlas/arxiv/constellations</Link>.
             </p>
             <div className="mt-9 flex flex-wrap gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45">
               {[
@@ -83,24 +85,22 @@ export default function AtlasArxivShowcasePage() {
               record, not a closed historical object.
             </p>
             <p>
-              A 48-bit structural fingerprint cannot tell you whether a
-              paper is correct, original, or important. It can only
-              measure where the paper&apos;s prose sits relative to the
-              500,000 other surviving fingerprints in a deterministic
-              geometric space. Where the engine surfaces a paper as
-              singular, the page names it and links to the canonical
-              arxiv.org URL. The page makes no claim about quality,
-              priority, or scientific weight; that judgment is upstream
-              of any structural metric.
+              The engine cannot tell you whether a paper is correct,
+              original, or important. It only measures whether a paper
+              looks like the others in the corpus, or stands apart from
+              them. Where the engine flags a paper as standing apart,
+              this page names it and links to the original on
+              arxiv.org. The page makes no claim about quality or
+              priority; that judgment is for a domain expert.
             </p>
             <p>
               The deepest finding here is not a single number. It is
-              that the engine, never told the discipline labels,
-              recovers the eight-archive structure of arXiv unsupervised
-              from abstract+title text alone. The baseline panel below
-              is honest about the gap between the engine&apos;s recovery
-              and what TF-IDF + k-means or LDA topic-modeling can do on
-              the same corpus.
+              that the engine, never told which discipline a paper
+              belongs to, sorts the 500,000 papers into groups that
+              mostly match the discipline labels arXiv&apos;s authors
+              chose for themselves. The baseline panel below is honest
+              about how the engine compares to standard text-clustering
+              tools on the same corpus.
             </p>
           </Prose>
         </Section>
@@ -109,43 +109,34 @@ export default function AtlasArxivShowcasePage() {
         <Section anchor="corpus" kicker="The corpus" title="A pinned Kaggle snapshot, stratified across thirty years.">
           <Prose>
             <p>
-              The arXiv metadata is downloaded from{" "}
+              The arXiv data comes from{" "}
               <a href="https://www.kaggle.com/datasets/Cornell-University/arxiv" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">
-                kaggle.com/datasets/Cornell-University/arxiv
+                Cornell University&apos;s public arXiv dataset
               </a>{" "}
-              as a single JSON-lines file (~1.5 GB) representing the
-              monthly snapshot of all arXiv records with their title,
-              abstract, primary category list, author list, and
-              update_date. The harvester at{" "}
-              <code className="font-mono text-white/80 text-sm">scripts/arxiv_harvest.py</code>{" "}
-              filters withdrawn papers, papers updated after the pinned
-              snapshot date, and papers with empty abstracts. It then
-              groups by publication year and applies a deterministic
-              stride sample to cap each year at the per-year target
-              (~14,500). The output is a canonical NDJSON file at{" "}
-              <code className="font-mono text-white/80 text-sm">/data/formed_models/_inputs/arxiv.ndjson</code>{" "}
-              with two anchored hashes: <code className="font-mono text-sm">corpus_input_sha256</code>{" "}
-              over the original Kaggle file, and <code className="font-mono text-sm">corpus_sha256</code>{" "}
-              over the harvested NDJSON.
+              — a monthly snapshot of every paper&apos;s title, abstract,
+              authors, and discipline tags. We pin to a specific
+              snapshot date so that anyone, anywhere, can re-download
+              the same file and reproduce the entire artifact byte for
+              byte. We sample evenly across the 35 years (about 14,500
+              papers per year) so the artifact represents the full span
+              of arXiv&apos;s history, not just the recent boom.
             </p>
             <p>
-              The fingerprint payload is the title plus a blank line
-              plus the abstract, full stop. Categories and authors are
-              kept as metadata fields but never appear in the text the
-              engine fingerprints. This is important: cluster-purity
-              against arXiv&apos;s primary categories is only an honest
-              unsupervised-recovery claim if the engine never saw the
-              category labels. Including the categories in the
-              fingerprint would make purity-vs-categories a tautology.
+              The engine looks at the title and the abstract. That is
+              all. It never sees which discipline arXiv has tagged the
+              paper with. This is on purpose: claiming the engine
+              recovers arXiv&apos;s discipline structure on its own
+              would be meaningless if the engine had been told the
+              answer. By holding the discipline tags out of view, the
+              recovery — when it happens — is a real finding.
             </p>
             <p>
-              The 500,000-paper sample size is set by the platform&apos;s
-              MAX_CHUNKS = 100 ceiling on a single formation. The full
-              arXiv corpus exceeds 2.5 million abstracts; the stratified
-              sample preserves the 30-year span, the 8 disciplines, and
-              the proportional category distribution at the cost of
-              paper-level completeness. The decision is documented in{" "}
-              <code className="font-mono text-white/80 text-sm">docs/superpowers/specs/2026-05-02-atlas-arxiv-recon.md</code>.
+              The 500,000-paper sample is what fits in a single run on
+              the current platform. The full arXiv archive is roughly
+              five times larger. The sample preserves the 35-year
+              span, all eight disciplines, and the proportional mix
+              between them; what it sacrifices is paper-level
+              completeness.
             </p>
           </Prose>
         </Section>
@@ -160,8 +151,8 @@ export default function AtlasArxivShowcasePage() {
           <Prose>
             <p>
               <span className="text-white">It is not a literature
-              review.</span> The engine produces structural measurements
-              and named records. Whether an emerging-cluster signal
+              review.</span> The engine produces signatures and named
+              records. Whether an emerging-group signal
               represents transformer-era deep learning, mRNA vaccine
               technology, or some other field is for a domain expert to
               read and decide. Atlas refuses to name the candidate
@@ -169,36 +160,36 @@ export default function AtlasArxivShowcasePage() {
             </p>
             <p>
               <span className="text-white">It does not capture every
-              paper.</span> The 500k stratified sample is roughly 20%
-              of the full arXiv corpus. The proportional category mix is
-              preserved but specific papers are dropped via deterministic
-              stride. The verification recipe re-derives the same 500k
-              given the same Kaggle snapshot.
+              paper.</span> The 500,000-paper sample is roughly 20% of
+              everything arXiv has ever published. The discipline mix
+              and the year mix are preserved; specific papers are not
+              all there. Anyone with the same monthly snapshot of arXiv
+              can re-derive the exact same 500,000.
             </p>
             <p>
-              <span className="text-white">It does not beat full-text
-              NLP on a text corpus.</span> TF-IDF and LDA may match or
-              exceed the engine&apos;s recovery number on raw archive
-              classification. The engine&apos;s contract is reproducibility,
-              fixed-size artifact, and bit-identical re-issue, not maximum
-              supervised metric.
+              <span className="text-white">It is not the strongest
+              text-mining tool you could point at arXiv.</span>{" "}
+              Specialized text-clustering tools may match or beat the
+              engine on this kind of data. What the engine offers
+              instead is reproducibility — same input today, same answer
+              in 2030 — and a small, citable artifact you can attach to
+              a paper or a contract.
             </p>
             <p>
               <span className="text-white">It does not handle
               non-English abstracts well.</span> A small fraction of
-              arXiv abstracts (mostly French math papers) are in
-              non-English languages. They tend to surface in the
-              rare-records list because their lexical surface is
-              structurally distant from the English-dominated bulk. This
-              is honest behavior, not a bug.
+              arXiv abstracts (mostly French math papers) are not in
+              English. They tend to come up as outliers in the
+              rare-records list, because their language stands apart
+              from the English-dominated bulk. That&apos;s honest
+              behavior, not a bug.
             </p>
             <p>
-              <span className="text-white">It uses primary category
-              only.</span> Papers cross-listed across multiple
-              categories (e.g., cs.LG + stat.ML) are credited to their
-              first-listed category for the gold-standard purity
-              calculation. The full categories list is retained in the
-              NDJSON and exposed via the bleed analysis.
+              <span className="text-white">It uses each paper&apos;s
+              first-listed discipline.</span> Papers tagged with
+              several disciplines (e.g., a machine-learning paper
+              tagged both computer-science and statistics) are
+              credited to whichever the author listed first.
             </p>
           </Prose>
         </Section>
@@ -220,21 +211,19 @@ export default function AtlasArxivShowcasePage() {
               <a href="https://www.kaggle.com/datasets/Cornell-University/arxiv" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">
                 Cornell-University/arxiv
               </a>{" "}
-              dataset is maintained as a regular monthly bulk export of
-              arXiv metadata and is the upstream source pinned by the{" "}
-              <code className="font-mono text-sm">corpus_input_sha256</code>{" "}
-              field above. The Kaggle dataset team and the arXiv
-              maintainers are the people without whom this artifact is
-              not possible.
+              dataset is the monthly bulk export of arXiv metadata; it
+              is the public source we pinned this artifact to. Without
+              the Kaggle dataset team and the arXiv maintainers, none
+              of this exists.
             </p>
             <p>
-              The DocSouth scholarly artifact at{" "}
+              The DocSouth artifact at{" "}
               <Link href="/docsouth" className="text-white/85 hover:text-white border-b border-white/30 hover:border-white">/docsouth</Link>{" "}
-              is the substrate Atlas is built on. The harvester pattern,
-              the analyze script, the constellations catalog, and the
-              page voice are all extensions of the DocSouth shape: proof
-              that the substrate generalizes from a humanities archive
-              to a scientific archive without engine changes.
+              is the original engagement Atlas is built on. The same
+              engine that mapped a humanities archive of slave
+              narratives, southern literature, and church history now
+              maps a scientific archive of computer science, math, and
+              physics — without any change to the engine itself.
             </p>
           </Prose>
         </Section>

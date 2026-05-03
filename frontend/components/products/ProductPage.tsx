@@ -145,7 +145,7 @@ export function ProductPage({ product }: { product: Product }) {
             Public reference deployments
           </p>
           <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.04] mb-3 max-w-3xl">
-            Four citable showcases.<br />
+            Five citable showcases.<br />
             <span className="text-white/45">Four buyer categories. One substrate.</span>
           </h2>
           <p className="text-[15px] text-white/55 leading-relaxed mb-10 max-w-3xl">

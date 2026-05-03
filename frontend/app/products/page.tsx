@@ -104,14 +104,14 @@ export default function ProductsOverviewPage() {
           </div>
         </section>
 
-        {/* Public reference deployments — four citable showcases */}
+        {/* Public reference deployments — five citable showcases */}
         <section className="relative px-6 py-20 border-b border-white/5">
           <div className="max-w-[1300px] mx-auto">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
               Public reference deployments
             </p>
             <h2 className="font-display font-medium text-3xl md:text-5xl tracking-[-0.035em] text-white leading-[1.04] mb-3 max-w-3xl">
-              Four citable showcases.<br />
+              Five citable showcases.<br />
               <span className="text-white/45">Four buyer categories. One substrate.</span>
             </h2>
             <p className="text-[15px] text-white/55 leading-relaxed mb-10 max-w-3xl">

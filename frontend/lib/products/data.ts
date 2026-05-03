@@ -90,6 +90,13 @@ export const ALL_SHOWCASES: ShowcaseRef[] = [
     buyer: "Compliance officers, AI governance, regulators",
     blurb: "SEC EDGAR · 1,000 10-Ks · OpenTimeStamps-anchored chain head",
   },
+  {
+    slug:  "bombe",
+    label: "Bombe",
+    href:  "/bombe",
+    buyer: "Intelligence analysts, signals intelligence, historians",
+    blurb: "Bletchley Park, reanalyzed: outlier-detection that would have made the WWII Bombe ~100× more efficient",
+  },
 ];
 
 export const PRODUCTS: Product[] = [

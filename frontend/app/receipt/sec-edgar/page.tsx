@@ -26,21 +26,24 @@ export default function ReceiptSecEdgarShowcasePage() {
               <span className="text-white/45">Every receipt verifiable.</span>
             </h1>
             <p className="mt-8 text-lg text-white/75 max-w-3xl leading-relaxed">
-              An applied study of compliance-grade AI summarization on the
-              public SEC EDGAR 10-K record. 1,000 filings stratified across
-              industry and year (2018-2025), summarized once via a single
-              fixed prompt against Claude Sonnet 4.6, every call attested by
-              a tamper-proof receipt, the chain head anchored to the Bitcoin
-              timechain via OpenTimeStamps.
+              We took 1,000 SEC 10-K filings — annual reports filed by US
+              public companies — spread across industry and year
+              (2018-2025), and asked Claude Sonnet to summarize each one.
+              The same prompt every time. The same model every time. After
+              every call, we wrote a receipt — a small fingerprint that
+              records exactly what was sent in and exactly what came back.
+              The receipts are linked together so tampering with any one of
+              them breaks the chain. The end of the chain is recorded on
+              Bitcoin so even backdated tampering is detectable.
             </p>
             <p className="mt-5 text-lg text-white/75 max-w-3xl leading-relaxed">
-              Receipt is the structural pivot from the other showcases. There
-              is no cluster purity, no decade trajectory, no rare-records
-              list. The artifact&apos;s value is per-receipt verifiability:
-              given any receipt below, anyone can re-derive its hash from the
-              published inputs and confirm it bit-for-bit. A single tampered
-              byte breaks the chain. The chain head is anchored externally so
-              even retroactive forgery is detectable.
+              This is what compliance-grade AI looks like. A regulator can
+              ask &ldquo;what did your AI tell you about this filing on
+              this date?&rdquo; and you can answer with a receipt anyone in
+              the world can verify. Not a screenshot, not a saved chat
+              window, not your word against theirs. A small piece of
+              cryptographic evidence that proves the call was made and
+              the answer was the answer.
             </p>
             <p className="mt-5 text-base text-white/55 max-w-3xl leading-relaxed">
               The dedicated verifier is at{" "}
@@ -73,32 +76,34 @@ export default function ReceiptSecEdgarShowcasePage() {
         <Section anchor="preface" kicker="Preface · what a receipt is" title="A receipt proves what was attempted and what was returned.">
           <Prose>
             <p>
-              A receipt is a hash chain entry that commits a model call to
-              an immutable record. Each receipt is the SHA-256 of the call&apos;s
-              inputs (prompt, schema, filing text) and outputs (the JSON the
-              model returned), plus a link to the previous receipt&apos;s hash.
-              Tampering with any receipt&apos;s output bytes, prompt, or schema
-              breaks its hash. Tampering with the chain link breaks every
-              subsequent receipt&apos;s prev_hash. The chain head is the SHA-256
-              of the final receipt; anchoring it externally proves the run
-              completed at the published timestamp.
+              A receipt is a small fingerprint that records the inputs and
+              outputs of an AI call: the prompt that was sent, the filing
+              that was attached, the model that was used, the timestamp,
+              the answer that came back. Each receipt also points back to
+              the previous one. Tampering with any receipt — changing a
+              word in the answer, swapping a model version, backdating
+              the timestamp — breaks its fingerprint. Tampering with the
+              link to a previous receipt breaks every receipt that comes
+              after. The end of the chain is recorded on the Bitcoin
+              timechain, so even backdating the entire chain is detectable.
             </p>
             <p>
-              What a receipt does NOT prove: that the model&apos;s output is
-              correct, factual, or compliant with whatever standard the
-              compliance officer cares about. The receipt attests to the
-              record of the call, not the truth of the call&apos;s output. That
-              distinction is the entire compliance value: a regulator can
-              ask &ldquo;what did your AI tell you about this filing?&rdquo;
-              and the answer is a verifiable record, not a reconstruction.
+              What a receipt does NOT prove: that the AI&apos;s answer is
+              correct, true, or compliant with the standard the
+              regulator cares about. The receipt is a record of what was
+              said, not a guarantee that what was said was right. The
+              regulator&apos;s question — &ldquo;what did your AI tell you
+              about this filing?&rdquo; — is answered by a receipt anyone
+              can verify, not by a saved chat window or your word
+              against theirs.
             </p>
             <p>
-              LLMs are non-deterministic. Re-running the same prompt against
-              the same model the next day produces a different output,
-              therefore a different output_sha256, therefore a different
-              receipt. The original receipt remains valid — it is the record
-              of what the model returned at run-time. Re-running creates a
-              new receipt; it does not invalidate the old one.
+              AI models are not deterministic. If you rerun the same
+              prompt against the same model tomorrow, you might get a
+              slightly different answer. That&apos;s expected. The
+              original receipt is still the record of what the model
+              said at the time. Rerunning creates a new receipt — it
+              does not invalidate the old one.
             </p>
           </Prose>
         </Section>

@@ -6,53 +6,61 @@ import { ALL_SHOWCASES } from "@/lib/products/data";
 export const metadata: Metadata = {
   title: "Public Showcases · Latent Ocean",
   description:
-    "Four citable, third-party-verifiable public deployments running on Latent Ocean's substrate. DocSouth (humanities), Atlas (science), Pulse (IP), Receipt (compliance). One substrate, four buyer categories, byte-for-byte reproducible.",
+    "Five citable, third-party-verifiable public deployments running on Latent Ocean's substrate. DocSouth (humanities), Atlas (science), Pulse (IP), Receipt (compliance), Bombe (intelligence). One substrate, five buyer categories, byte-for-byte reproducible.",
 };
 
 const SHOWCASE_DETAIL: Record<string, { headline: string; sections: string[]; recipe: string }> = {
   docsouth: {
-    headline: "Studio's flagship engagement: UNC Libraries' DocSouth archive, structurally fingerprinted.",
+    headline: "Studio's flagship engagement: a 200-year archive of the American South, mapped at scholarly pace.",
     sections: [
-      "711 source texts spanning 1730s-1940s, segmented to 37,505 records.",
-      "Cluster purity 0.442 against 4 source collections (chance baseline 0.25).",
-      "Class #7 holds 957 survivors with even bleed across collections — testimonial register that crosses curatorial boundaries.",
-      "Persistent homology: 522 connected components (H0), 179 cycles (H1), 77 voids (H2).",
-      "100-finding constellation catalog at /docsouth/constellations traces specific connections out to UNC's institutional history and present-day NC.",
+      "711 source texts from 1730s through 1940s, broken into 37,505 readable chunks.",
+      "When grouped by structural similarity alone, 44% of the chunks landed in groups that matched the four source collections UNC's curators had filed them in. Random guessing would have landed at 25%.",
+      "One large group of 957 chunks pulled evenly from all four collections — a first-person testimonial voice the engine recognized as one signal regardless of how the curators filed each text.",
+      "Companion 100-finding catalog traces specific connections from individual texts outward to UNC's institutional history and present-day North Carolina politics.",
     ],
-    recipe: "Re-download the DocSouth ZIPs, re-run scripts/docsouth_harvest.py, compare corpus_sha256 byte-for-byte.",
+    recipe: "Re-download the DocSouth ZIPs from UNC Libraries, run our harvester, compare the file fingerprint to ours. Same input → same answer.",
   },
   atlas: {
-    headline: "Thirty years of scientific discourse, structurally mapped, citable forever.",
+    headline: "Thirty years of scientific discourse, mapped and re-derivable forever.",
     sections: [
-      "500k stratified arXiv abstracts 1991-2025 across 8 archive-level disciplines.",
-      "Fingerprint payload is title + abstract only — categories never enter the engine, so cluster-purity-vs-archives is honest unsupervised recovery.",
-      "Coarse purity (8 archives) is the headline; fine purity (~152 subcategories) sits in the verification appendix.",
-      "Decade trajectory shows the structural reweighting from early-physics era to 2020s cs/stat dominance.",
-      "Static emergence-candidate flag (median pub year, year-spread, Shannon entropy over categories) surfaces young + tight + diverse clusters without naming them — readers click through to arxiv.org.",
+      "500,000 arXiv papers spread evenly across 35 years (1991-2025) and across all eight disciplines arXiv covers.",
+      "The engine looks at title and abstract only. It never sees which discipline arXiv has tagged the paper with.",
+      "Headline number: how often the engine's groups match the disciplines arXiv's authors chose for themselves. (Chance is 12.5%.)",
+      "Decade trajectory: how the discipline mix shifted across thirty years — the rise of computer science, the relative decline of physics.",
+      "The engine flags possibly-emerging fields (recent papers, narrow time window, drawing from several disciplines at once) but does not name them. Readers click through to arxiv.org and decide.",
     ],
-    recipe: "Re-download the Kaggle arXiv snapshot, re-run scripts/arxiv_harvest.py, compare corpus_sha256 byte-for-byte.",
+    recipe: "Re-download the same monthly arXiv snapshot, run our harvester, compare the file fingerprint to ours. Same input → same answer.",
   },
   pulse: {
-    headline: "Fifty years of US innovation, deterministically disambiguated against PatentsView gold.",
+    headline: "Fifty years of US innovation, deterministically disambiguated.",
     sections: [
-      "500k inventor-records 1976-2025 from PatentsView's bulk-distributed disambiguated tables.",
-      "Fingerprint = canonicalized name (Surname I I) + co-inventor list + assignee_id + city/state/country. PatentsView's gold disambig_inventor_id is held out of the fingerprint entirely.",
-      "Two-stage sampling preserves disambiguation signal for typical inventors while down-sampling ultra-common names like 'John Smith'.",
-      "Multi-baseline disambiguation panel: engine vs PatentsView (gold) vs naive-name-collision vs chance. The lift over naive-name is the cleaner signal of structural-disambiguation power.",
-      "Per-cluster signals (productivity, IPC entropy, career-span, solo-share) flag candidate singularly-prolific inventors. No naming. Top-25 records click through to patents.uspto.gov.",
+      "500,000 inventor-records 1976-2025, drawn from the US Patent Office's open patent record (via PatentsView).",
+      "The engine looks at four signals only: the inventor's name (with spelling variations smoothed out), who else was listed on that patent, who the patent was assigned to, and the inventor's city/state/country. Nothing else.",
+      "Compared to PatentsView's gold-standard answer for who-each-record-belongs-to, the engine matches most of the time. The naive baseline (collapse identical names) is what the engine has to beat — because two different 'John Smith' patents are often two different people.",
+      "Per-group signals (patent count, technology-domain spread, career length, solo-work share) flag possibly-singularly-prolific inventors. No naming. Click through to patents.uspto.gov for each one.",
     ],
-    recipe: "Re-download the PatentsView TSVs for the same snapshot, re-run scripts/pulse_harvest.py, compare corpus_sha256 byte-for-byte.",
+    recipe: "Re-download the same PatentsView monthly snapshot, run our harvester, compare the file fingerprint to ours. Same input → same answer.",
   },
   receipt: {
-    headline: "1,000 SEC 10-K filings summarized once, every receipt verifiable, chain head anchored to Bitcoin.",
+    headline: "1,000 SEC 10-K filings summarized once, every answer verifiable, end of chain anchored to Bitcoin.",
     sections: [
-      "1,000 SEC EDGAR 10-K filings stratified across industry × year (2018-2025), summarized once via Claude Sonnet 4.6 against a single fixed prompt + JSON output schema (both committed to git).",
-      "Each receipt commits to (prev_receipt_hash || prompt_hash || schema_hash || corpus_sha256 || model_id || timestamp || output_sha256). Tampering anywhere breaks the chain at that index.",
-      "The chain head is OpenTimeStamps-stamped to the Bitcoin timechain so retroactive forgery is detectable. Run `ots verify` against your own Bitcoin node to confirm independently.",
-      "Browser-side verifier at /receipt/verify lets anyone paste a receipt JSON and confirm its hash bit-for-bit via crypto.subtle.digest, plus replay the entire chain from the public chain artifact.",
-      "Python + TypeScript hash implementations are kept in sync by an explicit cross-language test contract.",
+      "1,000 annual reports filed by US public companies (2018-2025), summarized once via Claude Sonnet against a fixed prompt and a fixed output format. Both the prompt and the format are committed to source so anyone can read them.",
+      "Each call gets a receipt — a small fingerprint over the prompt, the filing, the model used, the timestamp, and the answer that came back. Receipts are linked together so tampering with any one of them breaks the chain at that point.",
+      "The end of the chain is recorded on the Bitcoin timechain via OpenTimeStamps. Backdating the entire chain is detectable by anyone with a Bitcoin node.",
+      "The verifier at /receipt/verify runs entirely in your browser. Paste any receipt and confirm the fingerprint matches. Or replay the entire chain from the public source.",
     ],
-    recipe: "Refetch the same SEC 10-K filings, recompute corpus_sha256 per filing, replay the chain in /receipt/verify, run `ots verify receipt.chainhead.ots` against the Bitcoin timechain.",
+    recipe: "Refetch the same SEC filings, look up each receipt on /receipt/verify, replay the full chain, run `ots verify` on the chain-head proof against the Bitcoin timechain.",
+  },
+  bombe: {
+    headline: "Bletchley Park, reanalyzed: how Latent Ocean would have made the Bombe a hundred times more efficient.",
+    sections: [
+      "The Turing Bombe was the WWII codebreaking machine that broke the German Enigma cipher by exhaustive search, validated against suspected plaintext fragments. It was one of the most consequential engineering achievements of the twentieth century — and it was bottlenecked by which intercepted messages to point it at first.",
+      "The substrate doesn't break ciphers. What it does is sort messages by how unusual they are, before any decryption attempt. A small number of messages stand structurally apart from the routine traffic — those are the ones worth spending Bombe time on. The rest of the corpus is filtered out cheaply.",
+      "Pattern-of-life on intercept metadata — who sent what, when, to whom, on which call-sign, at which hour — is exactly the substrate's wheelhouse. Outliers in metadata structure are signals about which messages are operationally significant.",
+      "Reanalysis of the historical decrypted corpus: Bletchley Park has released thousands of decrypted messages. Running the substrate on them would surface structural patterns the original operators didn't catch. Genuinely novel historical analysis on a public-domain wartime corpus.",
+      "The honest claim is not 'Latent Ocean cracks the Bombe.' It is 'Latent Ocean would have made the Bombe roughly a hundred times more efficient by directing it at the right messages first.'",
+    ],
+    recipe: "v1 ships as a conceptual artifact: the substrate's outlier-detection and metadata-pattern-of-life primitives demonstrated against the four other showcases (which have run, or are runbook-ready). The Bletchley corpus harvest is queued as a fifth applied study; when it ships, the recipe will be: re-download the Bletchley archive, run our harvester, compare the file fingerprint to ours.",
   },
 };
 
@@ -61,6 +69,7 @@ const PALETTE: Record<string, string> = {
   atlas:    "#A78BFA",
   pulse:    "#FCD34D",
   receipt:  "#34D399",
+  bombe:    "#F87171",
 };
 
 export default function ShowcasesIndexPage() {
@@ -75,7 +84,7 @@ export default function ShowcasesIndexPage() {
               Public Showcases · the four-deployment set
             </p>
             <h1 className="font-display font-medium text-[clamp(56px,9vw,128px)] leading-[0.92] tracking-[-0.045em] text-white max-w-5xl">
-              Four citable showcases.<br />
+              Five citable showcases.<br />
               <span className="text-white/45">One substrate underneath.</span>
             </h1>
             <p className="mt-9 text-lg text-white/65 max-w-3xl leading-snug">
@@ -83,10 +92,13 @@ export default function ShowcasesIndexPage() {
               artifact running on the Latent Ocean substrate. The four
               together cover four buyer categories: research libraries
               (DocSouth), scientific publishers (Atlas), IP &amp; M&amp;A
-              (Pulse), compliance &amp; AI governance (Receipt). Every output
-              ships with hashes anyone can re-derive: corpus_sha256,
-              response_digest, OpenTimeStamps-anchored chain heads where
-              appropriate. No mocks, no marketing demos.
+              (Pulse), compliance &amp; AI governance (Receipt), and the
+              underlying outlier-detection problem the Bombe solved at
+              Bletchley Park (Bombe). Every output ships with fingerprints
+              anyone can re-derive — over the input file, over the
+              processed data, over the answer itself, plus chain-head
+              proofs anchored to Bitcoin where appropriate. No mocks, no
+              marketing demos.
             </p>
             <p className="mt-5 text-base text-white/55 max-w-3xl leading-relaxed">
               These are the demonstrations behind every product. Each one
@@ -185,11 +197,12 @@ export default function ShowcasesIndexPage() {
               <span className="text-white/45">will look the same shape.</span>
             </h2>
             <p className="text-[15.5px] text-white/65 leading-relaxed max-w-2xl mx-auto mb-10">
-              The four showcases above all run on Vault&apos;s engine.
-              Tenant isolation enforced at the storage layer; encryption at
-              rest with keys held on the appliance; CEF + OCSF audit log
-              wired in by default; deterministic response_digest on every
-              output. Eighteen months of compliance engineering, done.
+              The five showcases above all run on Vault&apos;s engine.
+              Tenant isolation enforced at the storage layer. Encryption
+              at rest with keys held on your own appliance. SIEM-ready
+              audit log wired in by default. A reproducible answer
+              fingerprint on every output. Eighteen months of
+              compliance engineering — done.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link href="/vault" className="inline-flex items-center justify-center h-11 px-6 rounded-full bg-white text-black text-[13px] font-medium hover:bg-white/90 transition-colors">
