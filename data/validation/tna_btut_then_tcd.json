@@ -1,0 +1,1183 @@
+{
+  "generated_at": "2026-05-03T06:54:31Z",
+  "pipeline": "TF-IDF -> JL projection -> TCD recursive loop (CPU)",
+  "config": {
+    "corpus": "tmp\\bombe_tna.ndjson",
+    "target_records": 500,
+    "embed_dim": 128,
+    "iterations": 16,
+    "max_modules": 24,
+    "skip_btut": true,
+    "seed": 42
+  },
+  "stage0_embed": {
+    "input_records": 400,
+    "sampled": 400,
+    "embedding_dim": 128,
+    "wall_seconds": 0.272
+  },
+  "stage2_tcd": {
+    "input_records": 400,
+    "iterations": 16,
+    "modules_formed": 14,
+    "modules_active_final": 14,
+    "wall_seconds": 121.576,
+    "device": "cpu"
+  },
+  "modules_formed": [
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_0",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 12.2604,
+        "persistence": 12.2604
+      },
+      "centroid_stats": {
+        "mean": -0.0043,
+        "std": 0.0447,
+        "norm": 0.5079,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "directorate_policy",
+        "dominant_share": 0.24,
+        "bleed_share": 0.76,
+        "top3_archives": [
+          {
+            "archive": "directorate_policy",
+            "count": 12,
+            "share": 0.24
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 8,
+            "share": 0.16
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 17": 8,
+          "HW 12": 8,
+          "HW 14": 12,
+          "HW 13": 1,
+          "HW 25": 6,
+          "HW 7": 7,
+          "HW 67": 1,
+          "HW 1": 2,
+          "HW 3": 1,
+          "HW 43": 3,
+          "HW 18": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C4317973",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Stockholm, Sweden. (Described"
+          },
+          {
+            "paper_id": "C3878862",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 36465. Afghanistan"
+          },
+          {
+            "paper_id": "C7711907",
+            "archive": "directorate_policy",
+            "title": "HMS Flowerdown to EWT May 9 thanking him for congratulatory signal, their thanks"
+          },
+          {
+            "paper_id": "C7712078",
+            "archive": "sigint_summaries",
+            "title": "PEARL/ZIP reports on GAF W/T and Cypher arrangements"
+          },
+          {
+            "paper_id": "C8438299",
+            "archive": "cryptographic_studies",
+            "title": "Letter from Cdr Travis to Nigel de Grey, recounting his recollections of the sea"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_0** \u2014 mixed basin: top archive directorate_policy (24%), heavy cross-series bleed (76%). Top-3 archives among 50 NN: directorate_policy:12, comintern_decrypts:8, diplomatic_decrypts:8. H\u2080 persistence 12.26 | centroid norm 0.508."
+    },
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_1",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5321,
+        "persistence": 11.5321
+      },
+      "centroid_stats": {
+        "mean": -0.0053,
+        "std": 0.0462,
+        "norm": 0.5262,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.2,
+        "bleed_share": 0.8,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 5": 5,
+          "HW 17": 10,
+          "HW 12": 10,
+          "HW 43": 8,
+          "HW 56": 1,
+          "HW 14": 3,
+          "HW 13": 3,
+          "HW 67": 4,
+          "HW 3": 4,
+          "HW 11": 1,
+          "HW 18": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C5250650",
+            "archive": "german_machine_decrypts",
+            "title": "Including North Africa, North West and Eastern Europe, the Baltic"
+          },
+          {
+            "paper_id": "C4317946",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Prague, Czechoslovakia. (Desc"
+          },
+          {
+            "paper_id": "C3878844",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 30172, 30240-302"
+          },
+          {
+            "paper_id": "C4317978",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR to United States. (Described at ite"
+          },
+          {
+            "paper_id": "C8403949",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume VI: German and Italian Naval Sigint by M E Storey. Par"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_1** \u2014 mixed basin: top archive comintern_decrypts (20%), heavy cross-series bleed (80%). Top-3 archives among 50 NN: comintern_decrypts:10, diplomatic_decrypts:10, british_sigint_history:8. H\u2080 persistence 11.53 | centroid norm 0.526."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_2",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2219,
+        "persistence": 11.2219
+      },
+      "centroid_stats": {
+        "mean": -0.0078,
+        "std": 0.0509,
+        "norm": 0.5823,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.46,
+        "bleed_share": 0.54,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 23,
+            "share": 0.46
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 11,
+            "share": 0.22
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 9,
+            "share": 0.18
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 5": 23,
+          "HW 12": 11,
+          "HW 43": 9,
+          "HW 7": 1,
+          "HW 17": 1,
+          "HW 14": 2,
+          "HW 1": 3
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C5250669",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250671",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250664",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250663",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C6086581",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39378, 39441, 3952"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_2** \u2014 mixed basin: top archive german_machine_decrypts (46%), heavy cross-series bleed (54%). Top-3 archives among 50 NN: german_machine_decrypts:23, diplomatic_decrypts:11, british_sigint_history:9. H\u2080 persistence 11.22 | centroid norm 0.582."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_3",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2219,
+        "persistence": 11.2219
+      },
+      "centroid_stats": {
+        "mean": 0.001,
+        "std": 0.043,
+        "norm": 0.4863,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "sigint_summaries",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "sigint_summaries",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 14,
+            "share": 0.28
+          },
+          {
+            "archive": "directorate_to_pm",
+            "count": 6,
+            "share": 0.12
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 1": 6,
+          "HW 13": 15,
+          "HW 17": 14,
+          "HW 3": 2,
+          "HW 18": 2,
+          "HW 25": 2,
+          "HW 43": 4,
+          "HW 56": 1,
+          "HW 14": 3,
+          "HW 5": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C5490956",
+            "archive": "directorate_to_pm",
+            "title": "Naval Headlines 97: Convoy C delayed en route to Tripoli, attacked by British ai"
+          },
+          {
+            "paper_id": "C7712057",
+            "archive": "sigint_summaries",
+            "title": "Weekly reports on GAF bomber and reconnaissance activity"
+          },
+          {
+            "paper_id": "C7712058",
+            "archive": "sigint_summaries",
+            "title": "Weekly reports on GAF bomber and reconnaissance activity"
+          },
+          {
+            "paper_id": "C4317969",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Spain; Spain with France incl"
+          },
+          {
+            "paper_id": "C7792073",
+            "archive": "comintern_decrypts",
+            "title": "Soviet Comintern messages: Moscow to and from Austria. Service 36 (2): Moscow to"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_3** \u2014 mixed basin: top archive sigint_summaries (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: sigint_summaries:15, comintern_decrypts:14, directorate_to_pm:6. H\u2080 persistence 11.22 | centroid norm 0.486."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_4",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4034,
+        "persistence": 11.4034
+      },
+      "centroid_stats": {
+        "mean": -0.0093,
+        "std": 0.048,
+        "norm": 0.5526,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "british_sigint_history",
+        "dominant_share": 0.42,
+        "bleed_share": 0.58,
+        "top3_archives": [
+          {
+            "archive": "british_sigint_history",
+            "count": 21,
+            "share": 0.42
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 14,
+            "share": 0.28
+          },
+          {
+            "archive": "cryptographic_studies",
+            "count": 4,
+            "share": 0.08
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 21,
+          "HW 1": 1,
+          "HW 25": 4,
+          "HW 5": 14,
+          "HW 7": 4,
+          "HW 17": 2,
+          "HW 12": 1,
+          "HW 3": 1,
+          "HW 13": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403947",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume V(b): The Organisation and Evolution of British Naval "
+          },
+          {
+            "paper_id": "C5490941",
+            "archive": "directorate_to_pm",
+            "title": "PM's request for information to be passed to AOC/ME, C's note to AOC and his res"
+          },
+          {
+            "paper_id": "C8403932",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Army and Air Force Sigint Volume I: The Organisation and Evolution of Brit"
+          },
+          {
+            "paper_id": "C8438300",
+            "archive": "cryptographic_studies",
+            "title": "Chief Cryptographer [Brigadier Tiltman]. Miscellaneous cryptological papers"
+          },
+          {
+            "paper_id": "C8403943",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume I: The Organisation and Evolution of British Naval Sig"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_4** \u2014 mixed basin: top archive british_sigint_history (42%), heavy cross-series bleed (57%). Top-3 archives among 50 NN: british_sigint_history:21, german_machine_decrypts:14, cryptographic_studies:4. H\u2080 persistence 11.40 | centroid norm 0.553."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_5",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.1195,
+        "persistence": 11.1195
+      },
+      "centroid_stats": {
+        "mean": -0.0023,
+        "std": 0.0546,
+        "norm": 0.6188,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.36,
+        "bleed_share": 0.64,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 18,
+            "share": 0.36
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "directorate_to_pm",
+            "count": 3,
+            "share": 0.06
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 1": 3,
+          "HW 17": 18,
+          "HW 25": 2,
+          "HW 5": 15,
+          "HW 14": 2,
+          "HW 18": 1,
+          "HW 7": 1,
+          "HW 12": 3,
+          "HW 3": 1,
+          "HW 43": 2,
+          "HW 13": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C5490948",
+            "archive": "directorate_to_pm",
+            "title": "Air activity building up in support of 4th Panzer Group in central area of Russi"
+          },
+          {
+            "paper_id": "C5490965",
+            "archive": "directorate_to_pm",
+            "title": "Objectives reached by 1st Panzer Group Oct 6 in Ukraine. Positions reached Oct 6"
+          },
+          {
+            "paper_id": "C7792079",
+            "archive": "comintern_decrypts",
+            "title": "Soviet Comintern messages: Service 91: Moscow with Germany (under Gestapo contro"
+          },
+          {
+            "paper_id": "C8438300",
+            "archive": "cryptographic_studies",
+            "title": "Chief Cryptographer [Brigadier Tiltman]. Miscellaneous cryptological papers"
+          },
+          {
+            "paper_id": "C5250673",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_5** \u2014 mixed basin: top archive comintern_decrypts (36%), heavy cross-series bleed (64%). Top-3 archives among 50 NN: comintern_decrypts:18, german_machine_decrypts:15, directorate_to_pm:3. H\u2080 persistence 11.12 | centroid norm 0.619."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_6",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.7509,
+        "persistence": 11.7509
+      },
+      "centroid_stats": {
+        "mean": -0.0052,
+        "std": 0.0427,
+        "norm": 0.4866,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 8,
+            "share": 0.16
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 8,
+          "HW 1": 4,
+          "HW 25": 6,
+          "HW 14": 1,
+          "HW 5": 15,
+          "HW 12": 8,
+          "HW 17": 2,
+          "HW 7": 3,
+          "HW 67": 1,
+          "HW 3": 1,
+          "HW 18": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403930",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume XVII: Japanese Naval Attache Hand Cyphe"
+          },
+          {
+            "paper_id": "C5490965",
+            "archive": "directorate_to_pm",
+            "title": "Objectives reached by 1st Panzer Group Oct 6 in Ukraine. Positions reached Oct 6"
+          },
+          {
+            "paper_id": "C8438301",
+            "archive": "cryptographic_studies",
+            "title": "Colossus Working Aids. Colossus was the first computer, used at Bletchley Park f"
+          },
+          {
+            "paper_id": "C8358217",
+            "archive": "cryptographic_studies",
+            "title": "The COLOSSUS by B Randell, published in June 1976: an attempt to document the st"
+          },
+          {
+            "paper_id": "C6830174",
+            "archive": "directorate_policy",
+            "title": "Bletchley Park (BP) accommodation problems, no room for Commercial and Diplomati"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_6** \u2014 mixed basin: top archive german_machine_decrypts (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: german_machine_decrypts:15, british_sigint_history:8, diplomatic_decrypts:8. H\u2080 persistence 11.75 | centroid norm 0.487."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_7",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4674,
+        "persistence": 11.4674
+      },
+      "centroid_stats": {
+        "mean": 0.0036,
+        "std": 0.0447,
+        "norm": 0.5078,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "diplomatic_decrypts",
+        "dominant_share": 0.38,
+        "bleed_share": 0.62,
+        "top3_archives": [
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 19,
+            "share": 0.38
+          },
+          {
+            "archive": "sigint_summaries",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 9,
+            "share": 0.18
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 19,
+          "HW 5": 9,
+          "HW 13": 10,
+          "HW 11": 1,
+          "HW 1": 1,
+          "HW 43": 4,
+          "HW 56": 3,
+          "HW 25": 2,
+          "HW 18": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C3878843",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 29766-29767, 297"
+          },
+          {
+            "paper_id": "C3878752",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Argentina: 3205. Denmark: 320"
+          },
+          {
+            "paper_id": "C5949462",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 37414, 37517. Afgh"
+          },
+          {
+            "paper_id": "C3878864",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 36893. Afghanistan"
+          },
+          {
+            "paper_id": "C5250650",
+            "archive": "german_machine_decrypts",
+            "title": "Including North Africa, North West and Eastern Europe, the Baltic"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_7** \u2014 mixed basin: top archive diplomatic_decrypts (38%), heavy cross-series bleed (62%). Top-3 archives among 50 NN: diplomatic_decrypts:19, sigint_summaries:10, german_machine_decrypts:9. H\u2080 persistence 11.47 | centroid norm 0.508."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_8",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.9015,
+        "persistence": 11.9015
+      },
+      "centroid_stats": {
+        "mean": 0.0006,
+        "std": 0.0482,
+        "norm": 0.5452,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "british_sigint_history",
+        "dominant_share": 0.26,
+        "bleed_share": 0.74,
+        "top3_archives": [
+          {
+            "archive": "british_sigint_history",
+            "count": 13,
+            "share": 0.26
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "cryptographic_studies",
+            "count": 5,
+            "share": 0.1
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 13,
+          "HW 1": 3,
+          "HW 25": 5,
+          "HW 5": 4,
+          "HW 17": 9,
+          "HW 3": 3,
+          "HW 13": 5,
+          "HW 14": 3,
+          "HW 18": 1,
+          "HW 56": 1,
+          "HW 67": 1,
+          "HW 12": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403958",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume XV: Contents, Sources and General Index"
+          },
+          {
+            "paper_id": "C8403945",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume III: The Organisation and Evolution of British Naval S"
+          },
+          {
+            "paper_id": "C8403949",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume VI: German and Italian Naval Sigint by M E Storey. Par"
+          },
+          {
+            "paper_id": "C5490951",
+            "archive": "directorate_to_pm",
+            "title": "Copies of telegrams sent to British liaison staff, Moscow in response to query f"
+          },
+          {
+            "paper_id": "C8186613",
+            "archive": "cryptographic_studies",
+            "title": "Bombe Register Vol I, which had been on loan to the Historical Section. The Bomb"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_8** \u2014 mixed basin: top archive british_sigint_history (26%), heavy cross-series bleed (74%). Top-3 archives among 50 NN: british_sigint_history:13, comintern_decrypts:9, cryptographic_studies:5. H\u2080 persistence 11.90 | centroid norm 0.545."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_9",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.6488,
+        "persistence": 11.6488
+      },
+      "centroid_stats": {
+        "mean": -0.0036,
+        "std": 0.0435,
+        "norm": 0.4937,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.26,
+        "bleed_share": 0.74,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 13,
+            "share": 0.26
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "japanese_sigint",
+            "count": 5,
+            "share": 0.1
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 10,
+          "HW 25": 3,
+          "HW 67": 5,
+          "HW 43": 5,
+          "HW 17": 13,
+          "HW 7": 1,
+          "HW 1": 4,
+          "HW 14": 5,
+          "HW 5": 3,
+          "HW 13": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C3878852",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 32826, 32892, 32"
+          },
+          {
+            "paper_id": "C8358218",
+            "archive": "cryptographic_studies",
+            "title": "A technical description of COLOSSUS I by D C Horwood, dated August 1973"
+          },
+          {
+            "paper_id": "C8443367",
+            "archive": "japanese_sigint",
+            "title": "Japanese communications: messages and reports concerned with intercept, analysis"
+          },
+          {
+            "paper_id": "C8443363",
+            "archive": "japanese_sigint",
+            "title": "Japanese communications: messages and reports concerned with intercept, analysis"
+          },
+          {
+            "paper_id": "C8403946",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume V(a): The Organisation and Evolution of British Sigint"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_9** \u2014 mixed basin: top archive comintern_decrypts (26%), heavy cross-series bleed (74%). Top-3 archives among 50 NN: comintern_decrypts:13, diplomatic_decrypts:10, japanese_sigint:5. H\u2080 persistence 11.65 | centroid norm 0.494."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_10",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.3339,
+        "persistence": 11.3339
+      },
+      "centroid_stats": {
+        "mean": -0.0065,
+        "std": 0.0437,
+        "norm": 0.4996,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.42,
+        "bleed_share": 0.58,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 21,
+            "share": 0.42
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 11,
+            "share": 0.22
+          },
+          {
+            "archive": "sigint_summaries",
+            "count": 5,
+            "share": 0.1
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 5": 21,
+          "HW 3": 3,
+          "HW 43": 11,
+          "HW 13": 5,
+          "HW 25": 4,
+          "HW 1": 1,
+          "HW 17": 1,
+          "HW 11": 1,
+          "HW 12": 2,
+          "HW 67": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C5250673",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250664",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250669",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250671",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250559",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_10** \u2014 mixed basin: top archive german_machine_decrypts (42%), heavy cross-series bleed (57%). Top-3 archives among 50 NN: german_machine_decrypts:21, british_sigint_history:11, sigint_summaries:5. H\u2080 persistence 11.33 | centroid norm 0.500."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_11",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.3019,
+        "persistence": 11.3019
+      },
+      "centroid_stats": {
+        "mean": -0.0057,
+        "std": 0.0463,
+        "norm": 0.5278,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.4,
+        "bleed_share": 0.6,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 20,
+            "share": 0.4
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 18,
+            "share": 0.36
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 4,
+            "share": 0.08
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 14": 4,
+          "HW 12": 18,
+          "HW 5": 20,
+          "HW 25": 1,
+          "HW 43": 2,
+          "HW 3": 2,
+          "HW 1": 1,
+          "HW 17": 1,
+          "HW 7": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C6830183",
+            "archive": "directorate_policy",
+            "title": "AGD requests annual work reports for 1940 from all main GCCS sections; security "
+          },
+          {
+            "paper_id": "C3878860",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 35652, 35668-356"
+          },
+          {
+            "paper_id": "C7711910",
+            "archive": "directorate_policy",
+            "title": "D of S WO to EWT June 19 re non-use of printer links between BP and Forest Moor,"
+          },
+          {
+            "paper_id": "C5250558",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250559",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_11** \u2014 mixed basin: top archive german_machine_decrypts (40%), heavy cross-series bleed (60%). Top-3 archives among 50 NN: german_machine_decrypts:20, diplomatic_decrypts:18, directorate_policy:4. H\u2080 persistence 11.30 | centroid norm 0.528."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_12",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5098,
+        "persistence": 11.5098
+      },
+      "centroid_stats": {
+        "mean": -0.0049,
+        "std": 0.0403,
+        "norm": 0.4596,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "sigint_summaries",
+            "count": 8,
+            "share": 0.16
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 13": 8,
+          "HW 3": 2,
+          "HW 5": 15,
+          "HW 17": 8,
+          "HW 14": 6,
+          "HW 25": 6,
+          "HW 18": 2,
+          "HW 1": 2,
+          "HW 67": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C7712073",
+            "archive": "sigint_summaries",
+            "title": "Reports on German rail movemnts from German Army and Air Force high grade traffi"
+          },
+          {
+            "paper_id": "C2900395",
+            "archive": "personal_papers",
+            "title": "Commercial Section, BP: Historical Survey, by GLN Hope; evaluation of commercial"
+          },
+          {
+            "paper_id": "C5250558",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250559",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C7712071",
+            "archive": "sigint_summaries",
+            "title": "Reports on German rail movements from German Army and Air Force high grade traff"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_12** \u2014 mixed basin: top archive german_machine_decrypts (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: german_machine_decrypts:15, sigint_summaries:8, comintern_decrypts:8. H\u2080 persistence 11.51 | centroid norm 0.460."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_13",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2515,
+        "persistence": 11.2515
+      },
+      "centroid_stats": {
+        "mean": -0.0039,
+        "std": 0.0542,
+        "norm": 0.6145,
+        "dim": 128
+      },
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "sigint_summaries",
+        "dominant_share": 0.28,
+        "bleed_share": 0.72,
+        "top3_archives": [
+          {
+            "archive": "sigint_summaries",
+            "count": 14,
+            "share": 0.28
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "cryptographic_studies",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 13": 14,
+          "HW 43": 9,
+          "HW 25": 8,
+          "HW 14": 3,
+          "HW 1": 2,
+          "HW 7": 4,
+          "HW 3": 2,
+          "HW 12": 3,
+          "HW 18": 1,
+          "HW 5": 1,
+          "HW 56": 2,
+          "HW 17": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C7712056",
+            "archive": "sigint_summaries",
+            "title": "Daily reports on GAF bomber and reconnaissance acitivity"
+          },
+          {
+            "paper_id": "C7712054",
+            "archive": "sigint_summaries",
+            "title": "Daily reports on GAF bomber and reconnaissance activity . Narrative missing on c"
+          },
+          {
+            "paper_id": "C8403967",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume IX: The Japanese Fleet General Purpose "
+          },
+          {
+            "paper_id": "C7712055",
+            "archive": "sigint_summaries",
+            "title": "Daily reports on GAF bomber and reconnaissance activity"
+          },
+          {
+            "paper_id": "C7712053",
+            "archive": "sigint_summaries",
+            "title": "Daily reports on GAF bomber and reconnaissance activity . Narrative missing on c"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_13** \u2014 mixed basin: top archive sigint_summaries (28%), heavy cross-series bleed (72%). Top-3 archives among 50 NN: sigint_summaries:14, british_sigint_history:9, cryptographic_studies:8. H\u2080 persistence 11.25 | centroid norm 0.615."
+    }
+  ],
+  "archive_distribution_in_input": {
+    "directorate_to_pm": 39,
+    "german_machine_decrypts": 37,
+    "ww2_history": 2,
+    "diplomatic_decrypts": 41,
+    "sigint_summaries": 34,
+    "directorate_policy": 41,
+    "comintern_decrypts": 41,
+    "cryptographic_studies": 36,
+    "british_sigint_history": 41,
+    "air_section": 5,
+    "japanese_sigint": 17,
+    "ww1_history": 25,
+    "rss_admin": 1,
+    "naval_section": 12,
+    "japanese_army": 1,
+    "personal_papers": 25,
+    "tactical_sigint": 2
+  }
+}
