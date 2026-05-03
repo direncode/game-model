@@ -308,6 +308,93 @@ def test_compile_define_decl():
 
 # ── End-to-end smoke test ──────────────────────────────────────────────
 
+# ── v1.1 features ───────────────────────────────────────────────────────
+
+def test_parse_match_basic():
+    prog = parse_ocean(
+        "load tmp/x.ndjson\n"
+        "match 1 with\n"
+        "    case 1 do\n"
+        "        embed text into 64 dimensions\n"
+        "    case _ do\n"
+        "        embed text into 32 dimensions\n"
+        "end\n"
+    )
+    # The match is the second statement (after load)
+    match_stmt = prog.statements[1]
+    assert hasattr(match_stmt, "arms")
+    assert len(match_stmt.arms) == 2
+
+
+def test_parse_match_with_constructor_pattern():
+    prog = parse_ocean(
+        "match 1 with\n"
+        "    case ok(v) do\n"
+        "        embed text into 64 dimensions\n"
+        "    case err(msg) do\n"
+        "        embed text into 32 dimensions\n"
+        "end\n"
+    )
+    match = prog.statements[0]
+    assert match.arms[0].pattern.name == "ok"
+    assert match.arms[0].pattern.bindings == ["v"]
+
+
+def test_parse_try_catch():
+    prog = parse_ocean(
+        "try do\n"
+        "    load tmp/x.ndjson\n"
+        "catch e do\n"
+        "    load tmp/fallback.ndjson\n"
+        "end\n"
+    )
+    t = prog.statements[0]
+    assert t.error_name == "e"
+    assert len(t.body) == 1
+    assert len(t.handler) == 1
+
+
+def test_parse_throw():
+    prog = parse_ocean('throw "something went wrong"')
+    assert hasattr(prog.statements[0], "expr")
+
+
+def test_parametric_sweep_bounds_in_define():
+    """A sweep inside a define body where bounds are parameters."""
+    src = (
+        'define run_seeds(first = 42, last = 45) do\n'
+        '    sweep s from first to last do\n'
+        '        load tmp/x.ndjson take 100 records\n'
+        '    end\n'
+        'end\n'
+        'run_seeds(first = 1, last = 3)\n'
+    )
+    cfg = compile_ocean(src)
+    # 1 statement * 3 sweep iterations = 3 source steps
+    sources = [s for s in cfg["steps"] if s["kind"] == "source.ndjson"]
+    assert len(sources) == 3
+
+
+def test_compile_match_picks_matching_arm():
+    """Constant scrutinee → only the matched arm's body emits steps."""
+    src = (
+        "load tmp/x.ndjson\n"
+        "match 2 with\n"
+        "    case 1 do\n"
+        "        embed text into 32 dimensions\n"
+        "    case 2 do\n"
+        "        embed text into 64 dimensions\n"
+        "    case _ do\n"
+        "        embed text into 96 dimensions\n"
+        "end\n"
+    )
+    cfg = compile_ocean(src)
+    embeds = [s for s in cfg["steps"] if s["kind"].startswith("embed.")]
+    # Only the case-2 arm fires
+    assert len(embeds) == 1
+    assert embeds[0]["config"]["dims"] == 64
+
+
 def test_full_program_with_all_features_compiles(tmp_path):
     f = tmp_path / "corpus.ndjson"
     f.write_text('{"paper_id":"x","archive":"a","text":"hello"}\n', encoding="utf-8")

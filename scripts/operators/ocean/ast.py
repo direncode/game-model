@@ -197,6 +197,113 @@ class ParallelStmt:
     col: int
 
 
+# ── v1.1 additions ───────────────────────────────────────────────────────
+
+@dataclass
+class MatchArm:
+    """One arm of a match expression: 'case PATTERN [when GUARD] => BODY'."""
+    pattern: Any                    # pattern AST (Wildcard, Constructor, Lit, Bind)
+    guard: Any | None               # optional 'when' guard expression
+    body: Any                       # statement or expression
+    line: int
+    col: int
+
+
+@dataclass
+class MatchStmt:
+    """match X with case A => ... case B => ... end"""
+    scrutinee: Any                  # the expression being matched
+    arms: list[MatchArm]
+    line: int
+    col: int
+
+
+@dataclass
+class WildcardPattern:
+    line: int
+    col: int
+
+
+@dataclass
+class LiteralPattern:
+    """Pattern that matches a specific literal value."""
+    value: Any                      # IntLit, StringLit, BoolLit, etc.
+    line: int
+    col: int
+
+
+@dataclass
+class ConstructorPattern:
+    """Pattern matching a constructor like 'ok(x)' or 'err(msg)'."""
+    name: str                       # constructor name: 'ok' / 'err' / 'some' / 'none'
+    bindings: list[str]             # variable names captured from the constructor
+    line: int
+    col: int
+
+
+@dataclass
+class BindPattern:
+    """A bare identifier — matches anything and binds it to NAME."""
+    name: str
+    line: int
+    col: int
+
+
+@dataclass
+class TryStmt:
+    """try BODY catch IDENT do HANDLER end"""
+    body: list[Any]
+    error_name: str
+    handler: list[Any]
+    line: int
+    col: int
+
+
+@dataclass
+class ThrowStmt:
+    expr: Any
+    line: int
+    col: int
+
+
+@dataclass
+class ExternDecl:
+    """extern fn NAME(p1: T1, p2: T2) -> RET — register a foreign operator."""
+    name: str
+    params: list['Param']
+    return_type: TypeAnnotation | None
+    impl: str                       # 'python:module.func' or registered kind
+    line: int
+    col: int
+
+
+@dataclass
+class SpawnStmt:
+    """spawn STMT — fire a step into a parallel branch (DAG-implicit)."""
+    body: Any
+    bind_name: str | None
+    line: int
+    col: int
+
+
+@dataclass
+class JoinStmt:
+    """join NAME1, NAME2, ... — synchronization barrier in the DAG."""
+    names: list[str]
+    line: int
+    col: int
+
+
+@dataclass
+class MacroDecl:
+    """macro NAME(p1, p2) do quote ... end end — quote-based pseudo-macro."""
+    name: str
+    params: list[str]
+    body: list[Any]                 # AST nodes that get spliced
+    line: int
+    col: int
+
+
 @dataclass
 class Program:
     """Top-level: an OCEAN program is a sequence of statements."""

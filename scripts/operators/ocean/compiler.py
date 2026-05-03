@@ -17,6 +17,10 @@ from .ast import (
     Program, VerbStmt, LetStmt, SweepStmt, CompareStmt,
     IfStmt, ReturnStmt, ParallelStmt, BoolLit, IntLit, FloatLit,
     BinaryOp, UnaryOp, IdentRef,
+    # v1.1
+    MatchStmt, MatchArm, WildcardPattern, LiteralPattern,
+    ConstructorPattern, BindPattern,
+    TryStmt, ThrowStmt, SpawnStmt, JoinStmt, ExternDecl,
 )
 from .parser import parse_ocean
 
@@ -184,6 +188,28 @@ def _compile_stmt(stmt, ctx: CompileContext):
         # don't emit DAG steps directly. At top level, `return` is a no-op.
         if stmt.expr is not None and isinstance(stmt.expr, VerbStmt):
             _compile_verb(stmt.expr, ctx)
+    elif isinstance(stmt, MatchStmt):
+        _compile_match(stmt, ctx)
+    elif isinstance(stmt, TryStmt):
+        _compile_try(stmt, ctx)
+    elif isinstance(stmt, ThrowStmt):
+        # Throws compile to a meta operator the runner reads
+        ctx.steps.append({
+            "name": f"throw_{ctx.step_count()}",
+            "kind": "meta.throw",
+            "inputs": {},
+            "config": {"_throw_repr": str(type(stmt.expr).__name__)},
+        })
+    elif isinstance(stmt, SpawnStmt):
+        # Mark the inner statement as parallelizable. Without a true async
+        # runner, this is a hint — the DAG runner already executes
+        # independent branches in topological order.
+        if stmt.body is not None:
+            _compile_stmt(stmt.body, ctx)
+    elif isinstance(stmt, JoinStmt):
+        # Compile-time barrier — a no-op for the DAG runner since
+        # topological order already implies join semantics.
+        pass
     else:
         # Function call as a top-level statement (rare but valid)
         from .ast import CallExpr
@@ -191,6 +217,82 @@ def _compile_stmt(stmt, ctx: CompileContext):
             _expand_call(stmt, ctx)
             return
         raise CompileError(f"unsupported statement type {type(stmt).__name__}")
+
+
+def _compile_match(stmt: MatchStmt, ctx: CompileContext):
+    """Compile-time match: evaluate the scrutinee if constant; pick the
+    matching arm; compile its body. Non-constant scrutinees emit a
+    runtime-match operator placeholder."""
+    val = _eval_const(stmt.scrutinee)
+    if val is not None:
+        for arm in stmt.arms:
+            if _pattern_matches(arm.pattern, val):
+                # Bind any captured variables for the arm body
+                saved_subs = dict(ctx.param_subs)
+                _bind_pattern(arm.pattern, val, ctx)
+                # Guards (if any) — evaluate at compile time too
+                if arm.guard is not None:
+                    g = _eval_const(arm.guard)
+                    if not g:
+                        ctx.param_subs = saved_subs
+                        continue
+                for sub in arm.body:
+                    _compile_stmt(sub, ctx)
+                ctx.param_subs = saved_subs
+                return
+        return  # no arm matched — silent (could warn)
+    # Non-constant scrutinee — emit a meta operator marker
+    ctx.steps.append({
+        "name": f"match_{ctx.step_count()}",
+        "kind": "meta.match",
+        "inputs": {},
+        "config": {"_n_arms": len(stmt.arms)},
+    })
+
+
+def _pattern_matches(pat, val) -> bool:
+    if isinstance(pat, WildcardPattern):
+        return True
+    if isinstance(pat, BindPattern):
+        return True
+    if isinstance(pat, LiteralPattern):
+        lv = _eval_const(pat.value)
+        return lv == val
+    if isinstance(pat, ConstructorPattern):
+        # Result/Option semantics: ok(x) matches dict {ok: x}; etc.
+        if isinstance(val, dict) and pat.name in val:
+            return True
+        if val == pat.name:    # bare constructors like 'none' that evaluate to "none"
+            return True
+    return False
+
+
+def _bind_pattern(pat, val, ctx: CompileContext):
+    if isinstance(pat, BindPattern):
+        ctx.param_subs[pat.name] = val
+    if isinstance(pat, ConstructorPattern):
+        # Bind the captured variables; for ok(x) on val={"ok": v}, x = v
+        if isinstance(val, dict) and pat.name in val:
+            inner = val[pat.name]
+            if pat.bindings:
+                ctx.param_subs[pat.bindings[0]] = inner
+
+
+def _compile_try(stmt: TryStmt, ctx: CompileContext):
+    """try/catch: compile the body; on compile-time exception, compile
+    the handler. The runner doesn't yet support runtime exception
+    propagation across operators — runtime errors surface from the
+    operator that raised them."""
+    saved_count = ctx.step_count()
+    try:
+        for sub in stmt.body:
+            _compile_stmt(sub, ctx)
+    except CompileError:
+        # Roll back partial steps; compile the handler instead.
+        del ctx.steps[saved_count:]
+        ctx.param_subs[stmt.error_name] = "compile-time error"
+        for sub in stmt.handler:
+            _compile_stmt(sub, ctx)
 
 
 def _expand_call(call, ctx: CompileContext):
@@ -409,11 +511,30 @@ def _file_sha256(path: Path) -> str:
 # ── Sweep ────────────────────────────────────────────────────────────────
 
 def _compile_sweep(sweep: SweepStmt, ctx: CompileContext):
-    """Expand `sweep VAR from A to B do ... end` into N independent branches."""
+    """Expand `sweep VAR from A to B do ... end` into N independent branches.
+
+    A/B/step may be ints OR `_param_ref` dicts (parameter references from
+    a `define` body). Resolve refs against ctx.param_subs at expansion time.
+    """
+    def _resolve(v):
+        if isinstance(v, dict) and "_param_ref" in v:
+            ref = v["_param_ref"]
+            resolved = ctx.param_subs.get(ref)
+            if resolved is None:
+                raise CompileError(
+                    f"sweep bound references parameter {ref!r} which is not bound",
+                    sweep.line, sweep.col, ctx.source_lines,
+                )
+            return int(resolved)
+        return int(v)
+
+    start = _resolve(sweep.start)
+    end = _resolve(sweep.end)
+    step = _resolve(sweep.step) if sweep.step != 1 else 1
+
     saved_subs = dict(ctx.sweep_subs)
     saved_last = dict(ctx.last_by_verb)
-    for v in range(sweep.start, sweep.end + 1, sweep.step):
-        # Reset the per-branch verb tracker (each branch is independent)
+    for v in range(start, end + 1, step):
         ctx.last_by_verb = dict(saved_last)
         ctx.sweep_subs = dict(saved_subs)
         ctx.sweep_subs[sweep.var] = str(v)

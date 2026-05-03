@@ -52,6 +52,12 @@ KEYWORDS = {
     "btut",   # used in 'using btut'
     "survivors", "budget", "target",
     "style", "technical", "plain", "terse",
+    # v1.1 additions
+    "match",  "case",  "when",
+    "ok",     "err",   "some",  "none",
+    "try",    "catch", "throw",
+    "extern", "fn",    "spawn", "join",
+    "macro",  "quote", "unquote",
 }
 VERBS = {"load", "embed", "cluster", "align", "find", "narrate", "save", "reduce"}
 

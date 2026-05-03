@@ -20,13 +20,14 @@ define basic_run(corpus, target = 500, embed_dim = 128, iters = 16,
     save to output
 end
 
-## seed_sweep_42_to_45 — multi-seed stability study, fixed range 42..45
+## seed_sweep — multi-seed stability study with parametric bounds (v1.1)
 ## Args:
-##   corpus       — NDJSON file path
-##   target       — record sample size per branch
-## (Parametric sweep bounds are a v1.1 feature — for now, fixed range.)
-define seed_sweep_42_to_45(corpus, target = 500) do
-    sweep s from 42 to 45 do
+##   corpus     — NDJSON file path
+##   target     — record sample size per branch
+##   first_seed — first seed in the sweep (default 42)
+##   last_seed  — last seed inclusive (default 45)
+define seed_sweep(corpus, target = 500, first_seed = 42, last_seed = 45) do
+    sweep s from first_seed to last_seed do
         load corpus take target records balanced by archive
         embed text into 128 dimensions
         cluster for 16 rounds max 24 modules energy = corpus mean

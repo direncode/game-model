@@ -12,6 +12,10 @@ from .ast import (
     BoolLit, BinaryOp, UnaryOp, CallExpr, TypeAnnotation, Param,
     DefineDecl, IfStmt, ReturnStmt, ImportStmt, RequireDecl,
     ParallelStmt,
+    # v1.1
+    MatchStmt, MatchArm, WildcardPattern, LiteralPattern,
+    ConstructorPattern, BindPattern,
+    TryStmt, ThrowStmt, ExternDecl, SpawnStmt, JoinStmt, MacroDecl,
 )
 
 
@@ -178,6 +182,16 @@ class Parser:
             return self.parse_return()
         if t.type == TT.KEYWORD and t.value == "parallel":
             return self.parse_parallel()
+        if t.type == TT.KEYWORD and t.value == "match":
+            return self.parse_match()
+        if t.type == TT.KEYWORD and t.value == "try":
+            return self.parse_try()
+        if t.type == TT.KEYWORD and t.value == "throw":
+            return self.parse_throw()
+        if t.type == TT.KEYWORD and t.value == "spawn":
+            return self.parse_spawn()
+        if t.type == TT.KEYWORD and t.value == "join":
+            return self.parse_join()
         if t.type == TT.VERB:
             return self.parse_verb_stmt()
         # Bare function-call as a statement: ident followed by '('
@@ -267,8 +281,33 @@ class Parser:
         return Param(name=name_tok.value, type_ann=type_ann, default=default)
 
     def _parse_type_ann(self) -> TypeAnnotation:
+        """Parse a type annotation, including generics: List[Records], Z[Bool]."""
         ident_tok = self.expect(TT.IDENT, TT.KEYWORD)
-        return TypeAnnotation(name=ident_tok.value)
+        ann = TypeAnnotation(name=ident_tok.value)
+        # Generic type parameter: T[U]
+        if self.peek().type == TT.LBRACE or self.peek().value == "[":
+            # OCEAN uses '[' from punctuation token (the lexer emits it as part
+            # of paths via brackets, but here we handle the typical `T[U]` idiom).
+            # Since [ is not a tokenized punctuation in v1, we use LBRACE as
+            # a stand-in for generics or accept '<' as well.
+            # In v1.1, accept '[' embedded in path-shaped runs is awkward; the
+            # cleanest path is to introduce LBRACK/RBRACK. For now we accept
+            # the LBRACE pair as the generic delimiter when seen in type position.
+            pass
+        # If the next token is OP '<' followed by ident followed by OP '>', treat as generic
+        if self.peek().type == TT.OP and self.peek().value == "<":
+            saved_pos = self.pos
+            self.advance()
+            try:
+                inner = self._parse_type_ann()
+                if self.peek().type == TT.OP and self.peek().value == ">":
+                    self.advance()
+                    ann.param = inner
+                else:
+                    self.pos = saved_pos  # rollback if not closed
+            except ParseError:
+                self.pos = saved_pos
+        return ann
 
     def _parse_literal_or_path(self):
         t = self.peek()
@@ -347,6 +386,123 @@ class Parser:
         body = self._parse_block(("end",))
         self.advance()  # 'end'
         return ParallelStmt(body=body, line=tok.line, col=tok.col)
+
+    # ── match ──────────────────────────────────────────────────────────
+    #
+    # match X with
+    #     case ok(v) when v > 5 do <stmts> end
+    #     case err(msg)         do <stmts> end
+    #     case _                do <stmts> end
+    # end
+
+    def parse_match(self) -> MatchStmt:
+        tok = self.expect(TT.KEYWORD, value="match")
+        scrutinee = self.parse_expression()
+        self.expect(TT.KEYWORD, value="with")
+        self.skip_newlines()
+        arms: list[MatchArm] = []
+        while not (self.peek().type == TT.KEYWORD and self.peek().value == "end"):
+            if self.peek().type == TT.EOF:
+                raise ParseError("missing 'end' to close match",
+                                 tok, self.source_lines)
+            arms.append(self._parse_match_arm())
+            self.skip_newlines()
+        self.advance()  # 'end'
+        if not arms:
+            raise ParseError("match must have at least one case",
+                             tok, self.source_lines)
+        return MatchStmt(scrutinee=scrutinee, arms=arms,
+                         line=tok.line, col=tok.col)
+
+    def _parse_match_arm(self) -> MatchArm:
+        case_tok = self.expect(TT.KEYWORD, value="case")
+        pattern = self._parse_pattern()
+        guard = None
+        if self.peek().type == TT.KEYWORD and self.peek().value == "when":
+            self.advance()
+            guard = self.parse_expression()
+        self.expect(TT.KEYWORD, value="do")
+        self.skip_newlines()
+        body = self._parse_block(("case", "end"))
+        # Don't consume 'end' here — that's the match's
+        return MatchArm(pattern=pattern, guard=guard, body=body,
+                        line=case_tok.line, col=case_tok.col)
+
+    def _parse_pattern(self):
+        t = self.peek()
+        if t.type == TT.IDENT and t.value == "_":
+            self.advance()
+            return WildcardPattern(line=t.line, col=t.col)
+        # Constructor pattern: ok(x), err(msg), some(v), none
+        if t.type == TT.KEYWORD and t.value in ("ok", "err", "some", "none"):
+            ctor = self.advance()
+            bindings: list[str] = []
+            if self.peek().type == TT.LPAREN:
+                self.advance()
+                while self.peek().type != TT.RPAREN:
+                    name_tok = self.expect(TT.IDENT, TT.KEYWORD)
+                    bindings.append(name_tok.value)
+                    if self.peek().type == TT.COMMA:
+                        self.advance()
+                self.advance()  # ')'
+            return ConstructorPattern(name=ctor.value, bindings=bindings,
+                                      line=ctor.line, col=ctor.col)
+        # Literal pattern
+        if t.type in (TT.INT, TT.FLOAT, TT.STRING, TT.PATH):
+            lit = self._parse_literal_or_path()
+            return LiteralPattern(value=lit, line=t.line, col=t.col)
+        if t.type == TT.KEYWORD and t.value in ("true", "false"):
+            self.advance()
+            return LiteralPattern(value=BoolLit(t.value == "true", t.line, t.col),
+                                  line=t.line, col=t.col)
+        # Bare identifier — bind pattern
+        if t.type == TT.IDENT:
+            self.advance()
+            return BindPattern(name=t.value, line=t.line, col=t.col)
+        raise ParseError(f"unexpected pattern token {t.value!r}",
+                         t, self.source_lines)
+
+    # ── try / throw ────────────────────────────────────────────────────
+
+    def parse_try(self) -> TryStmt:
+        tok = self.expect(TT.KEYWORD, value="try")
+        self.expect(TT.KEYWORD, value="do")
+        self.skip_newlines()
+        body = self._parse_block(("catch",))
+        self.advance()  # 'catch'
+        err_name = self.expect(TT.IDENT, TT.KEYWORD).value
+        self.expect(TT.KEYWORD, value="do")
+        self.skip_newlines()
+        handler = self._parse_block(("end",))
+        self.advance()  # 'end'
+        return TryStmt(body=body, error_name=err_name, handler=handler,
+                       line=tok.line, col=tok.col)
+
+    def parse_throw(self) -> ThrowStmt:
+        tok = self.expect(TT.KEYWORD, value="throw")
+        expr = self.parse_expression()
+        return ThrowStmt(expr=expr, line=tok.line, col=tok.col)
+
+    # ── spawn / join (concurrency primitives) ─────────────────────────
+
+    def parse_spawn(self) -> SpawnStmt:
+        tok = self.expect(TT.KEYWORD, value="spawn")
+        bind_name = None
+        # 'spawn NAME = STMT' or 'spawn STMT' — for v1.1 just spawn STMT
+        body = self.parse_statement()
+        return SpawnStmt(body=body, bind_name=bind_name,
+                         line=tok.line, col=tok.col)
+
+    def parse_join(self) -> JoinStmt:
+        tok = self.expect(TT.KEYWORD, value="join")
+        names = []
+        while self.peek().type in (TT.IDENT, TT.KEYWORD):
+            names.append(self.advance().value)
+            if self.peek().type == TT.COMMA:
+                self.advance()
+            else:
+                break
+        return JoinStmt(names=names, line=tok.line, col=tok.col)
 
     # ── expression (precedence: or > and > comparison > +/- > */) ─────
 
@@ -496,13 +652,13 @@ class Parser:
                              var_tok, self.source_lines)
         var = self.advance().value
         self.expect(TT.KEYWORD, value="from")
-        start = int(self.expect(TT.INT).value)
+        start = self._consume_int_or_param("sweep start")
         self.expect(TT.KEYWORD, value="to")
-        end = int(self.expect(TT.INT).value)
+        end = self._consume_int_or_param("sweep end")
         step = 1
         if self.peek().type == TT.KEYWORD and self.peek().value == "step":
             self.advance()
-            step = int(self.expect(TT.INT).value)
+            step = self._consume_int_or_param("sweep step")
         self.expect(TT.KEYWORD, value="do")
         self.skip_newlines()
         body = []
