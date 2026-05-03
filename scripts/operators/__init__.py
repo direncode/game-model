@@ -162,11 +162,22 @@ def run_pipeline(pipeline: PipelineConfig, *, verbose: bool = True) -> dict[str,
 # ── Config loading ───────────────────────────────────────────────────────
 
 def load_config(path: Path) -> PipelineConfig:
-    """Load a pipeline config from JSON, YAML, or `.ocean` DSL."""
+    """Load a pipeline config from JSON, YAML, or `.ocean` (OCEAN language).
+
+    `.ocean` files use the full lexer + parser + compiler pipeline; see
+    docs/OCEAN_LANG.md for the language spec.
+    """
     text = path.read_text(encoding="utf-8")
     if path.suffix == ".ocean":
-        from .dsl import parse_dsl
-        raw = parse_dsl(text)
+        from .ocean import compile_ocean
+        from .ocean.parser import ParseError
+        from .ocean.lexer import LexerError
+        from .ocean.compiler import CompileError
+        try:
+            raw = compile_ocean(text, source_name=str(path))
+        except (LexerError, ParseError, CompileError) as e:
+            print(e.pretty(str(path)))
+            raise SystemExit(1) from e
     elif path.suffix in {".yaml", ".yml"}:
         try:
             import yaml
@@ -175,5 +186,8 @@ def load_config(path: Path) -> PipelineConfig:
         raw = yaml.safe_load(text)
     else:
         raw = json.loads(text)
-    steps = [StepConfig(**s) for s in raw.get("steps", [])]
+    steps_raw = raw.get("steps", [])
+    # Drop bookkeeping keys that StepConfig doesn't accept
+    steps = [StepConfig(**{k: v for k, v in s.items() if k in {"name", "kind", "inputs", "config"}})
+             for s in steps_raw]
     return PipelineConfig(seed=raw.get("seed", 42), steps=steps)

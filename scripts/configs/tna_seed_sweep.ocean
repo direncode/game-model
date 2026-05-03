@@ -1,0 +1,14 @@
+# TNA seed-stability study — sweeps seeds 42..45 in parallel branches.
+# Each branch independently loads, embeds, clusters, aligns, finds dispersion, saves.
+# This was previously a bash for-loop calling the same Python script 4 times.
+
+seed 42
+
+sweep seed from 42 to 45 do
+    load tmp/bombe_tna.ndjson take 500 records balanced by archive label field is archive
+    embed text into 128 dimensions using tf-idf
+    cluster for 16 rounds max 24 modules energy = corpus mean
+    align modules using 50 nearest records fine label field is primary_category
+    find dispersion of each label
+    save to data/validation/tna_ocean_seed_${seed}.json
+end

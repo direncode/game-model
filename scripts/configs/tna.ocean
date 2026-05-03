@@ -1,11 +1,11 @@
-# TNA HW catalogue — Englishify pipeline.
-# This file replaces ~390 lines of Python (run_tna_btut_then_tcd.py).
+# TNA HW catalogue — OCEAN pipeline.
+# Replaces ~390 lines of Python (run_tna_btut_then_tcd.py).
 
 seed 42
 
-Load tmp/bombe_tna_full.ndjson, take 500 records balanced by archive, label field is archive
-Embed text into 128 dimensions
-Cluster using TCD recursive loop, 16 rounds, max 24 modules, energy = corpus mean
-Align modules using 50 nearest records, fine label field is primary_category
-Find dispersion of each label
-Save to data/validation/tna_dsl_run.json
+load tmp/bombe_tna_full.ndjson take 500 records balanced by archive label field is archive
+embed text into 128 dimensions using tf-idf
+cluster for 16 rounds max 24 modules energy = corpus mean
+align modules using 50 nearest records fine label field is primary_category
+find dispersion of each label
+save to data/validation/tna_dsl_run.json
