@@ -1,0 +1,69 @@
+{
+  "_comment": "TNA HW catalogue corpus → TF-IDF embed → TCD recursive loop → align + dispersion → persist. Replaces scripts/defense_megatest/run_tna_btut_then_tcd.py.",
+  "seed": 42,
+  "steps": [
+    {
+      "name": "source",
+      "kind": "source.ndjson",
+      "inputs": {},
+      "config": {
+        "path": "tmp/bombe_tna_full.ndjson",
+        "target": 500,
+        "stratify_by": "archive",
+        "text_field": "text",
+        "label_field": "archive"
+      }
+    },
+    {
+      "name": "embed",
+      "kind": "embed.tfidf_jl",
+      "inputs": {
+        "records": "source.records",
+        "text_field": "source.text_field"
+      },
+      "config": {"dims": 128, "max_features": 10000}
+    },
+    {
+      "name": "cluster",
+      "kind": "cluster.tcd_recursive_loop",
+      "inputs": {
+        "Z": "embed.Z",
+        "records": "source.records",
+        "label_field": "source.label_field"
+      },
+      "config": {"iters": 16, "max_modules": 24, "energy": "corpus_mean"}
+    },
+    {
+      "name": "align",
+      "kind": "align.module",
+      "inputs": {
+        "modules": "cluster.modules",
+        "records": "source.records",
+        "Z": "embed.Z",
+        "label_field": "source.label_field"
+      },
+      "config": {"k_nearest": 50, "fine_label_field": "primary_category"}
+    },
+    {
+      "name": "disperse",
+      "kind": "align.dispersion",
+      "inputs": {
+        "aligned_modules": "align.aligned_modules",
+        "records": "source.records",
+        "Z": "embed.Z",
+        "label_field": "source.label_field"
+      },
+      "config": {}
+    },
+    {
+      "name": "persist",
+      "kind": "persist.json",
+      "inputs": {
+        "aligned_modules": "align.aligned_modules",
+        "dispersion_per_label": "disperse.dispersion_per_label",
+        "per_record_assignments": "disperse.per_record_assignments"
+      },
+      "config": {"output": "data/validation/tna_universal_run.json"}
+    }
+  ]
+}
