@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+// Three-layer information architecture per docs/BUSINESS_FRAME.md.
+// Layer 1: protocols. Layer 2: build. Layer 3: silicon. Plus Language + Gallery.
 const NAV_ITEMS = [
-  { label: "How it works", href: "/how-it-works" },
-  { label: "Products",     href: "/products" },
-  { label: "Preview",      href: "/pricing" },
-  { label: "Bombe",        href: "/bombe" },
-  { label: "Method",       href: "/method" },
-  { label: "News",         href: "/news" },
+  { label: "Protocols", href: "/protocols", layer: "L1" },
+  { label: "Build",     href: "/build",     layer: "L2" },
+  { label: "Silicon",   href: "/silicon",   layer: "L3" },
+  { label: "Language",  href: "/language",  layer: null },
+  { label: "Gallery",   href: "/gallery",   layer: null },
 ];
 
 export function Nav() {
@@ -39,7 +40,6 @@ export function Nav() {
         }`}
       >
         <div className="max-w-[1480px] mx-auto h-full px-6 flex items-center justify-between">
-          {/* Brand mark — minimal logotype */}
           <Link
             href="/"
             onClick={() => setMobileOpen(false)}
@@ -54,20 +54,23 @@ export function Nav() {
             </span>
           </Link>
 
-          {/* Center nav — all-caps tracked mono, exactly the xAI shape */}
-          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="font-mono text-[11.5px] font-medium tracking-[0.22em] uppercase text-white/70 hover:text-white transition-colors"
+                className="group flex items-center gap-1.5 font-mono text-[11.5px] font-medium tracking-[0.22em] uppercase text-white/70 hover:text-white transition-colors"
               >
-                {item.label}
+                {item.layer && (
+                  <span className="text-[9px] tracking-[0.18em] text-white/35 group-hover:text-white/55 transition-colors">
+                    {item.layer}
+                  </span>
+                )}
+                <span>{item.label}</span>
               </Link>
             ))}
           </div>
 
-          {/* Right CTA — Vault is the Private Banking entry, treated distinctly */}
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href="/vault"
@@ -76,7 +79,6 @@ export function Nav() {
               Vault →
             </Link>
 
-            {/* Hamburger — mobile only */}
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
@@ -98,7 +100,6 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile sheet */}
       {mobileOpen && (
         <div className="md:hidden fixed top-16 inset-x-0 bottom-0 z-40 bg-black/95 backdrop-blur-xl border-t border-white/5 overflow-y-auto">
           <div className="max-w-[1280px] mx-auto px-6 py-7 flex flex-col gap-1">
@@ -107,9 +108,14 @@ export function Nav() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-mono text-[14px] font-medium tracking-[0.22em] uppercase text-white/85 hover:text-white py-3.5 border-b border-white/[0.06]"
+                className="flex items-center gap-3 font-mono text-[14px] font-medium tracking-[0.22em] uppercase text-white/85 hover:text-white py-3.5 border-b border-white/[0.06]"
               >
-                {item.label}
+                {item.layer && (
+                  <span className="text-[10px] tracking-[0.18em] text-white/40 w-7">
+                    {item.layer}
+                  </span>
+                )}
+                <span>{item.label}</span>
               </Link>
             ))}
             <Link
