@@ -1,0 +1,5823 @@
+{
+  "generated_at": "2026-05-03T07:21:18Z",
+  "pipeline": "TF-IDF -> JL projection -> TCD recursive loop (CPU)",
+  "config": {
+    "corpus": "tmp\\bombe_tna.ndjson",
+    "target_records": 500,
+    "embed_dim": 128,
+    "iterations": 16,
+    "max_modules": 24,
+    "skip_btut": true,
+    "seed": 43
+  },
+  "stage0_embed": {
+    "input_records": 400,
+    "sampled": 400,
+    "embedding_dim": 128,
+    "wall_seconds": 0.258
+  },
+  "stage2_tcd": {
+    "input_records": 400,
+    "iterations": 16,
+    "modules_formed": 14,
+    "modules_active_final": 14,
+    "wall_seconds": 80.041,
+    "device": "cpu"
+  },
+  "modules_formed": [
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_0",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.705,
+        "persistence": 11.705
+      },
+      "centroid_stats": {
+        "mean": 0.0022,
+        "std": 0.0473,
+        "norm": 0.5363,
+        "dim": 128
+      },
+      "centroid_vec": [
+        0.03257,
+        0.06961,
+        0.00292,
+        -0.08643,
+        0.09494,
+        -0.08684,
+        0.13695,
+        0.05836,
+        0.07635,
+        0.02145,
+        -0.00998,
+        -0.0766,
+        -0.05711,
+        -0.02234,
+        -0.08339,
+        0.00361,
+        0.04982,
+        0.01903,
+        0.0375,
+        0.02808,
+        0.03115,
+        0.01639,
+        0.02727,
+        0.04737,
+        0.11147,
+        -0.04,
+        -0.06841,
+        -0.042,
+        0.03878,
+        0.0408,
+        0.07781,
+        -0.04295,
+        0.04011,
+        0.01391,
+        0.0109,
+        0.00094,
+        0.04018,
+        0.03916,
+        0.05249,
+        0.00432,
+        0.06751,
+        0.0077,
+        -0.01592,
+        -0.03086,
+        0.02902,
+        -0.0129,
+        0.00029,
+        -0.0435,
+        -0.07348,
+        -0.03824,
+        0.02665,
+        0.02419,
+        0.01811,
+        0.05373,
+        -0.0099,
+        0.01303,
+        0.01413,
+        0.01664,
+        0.03236,
+        -0.00255,
+        -0.06506,
+        -0.05691,
+        0.02133,
+        -0.0391,
+        0.01184,
+        0.0223,
+        -0.0226,
+        -0.10142,
+        -0.02615,
+        -0.00107,
+        0.05029,
+        -0.00369,
+        -0.00626,
+        0.04726,
+        0.05925,
+        -0.00252,
+        -0.07421,
+        0.01997,
+        -0.0139,
+        0.0031,
+        0.0013,
+        -0.07461,
+        0.03651,
+        -0.06396,
+        -0.04477,
+        0.04687,
+        -0.0362,
+        0.04096,
+        0.04456,
+        -0.02559,
+        -0.0269,
+        -0.02123,
+        -0.05194,
+        -0.03613,
+        -0.05068,
+        0.02884,
+        -0.02624,
+        -0.05664,
+        0.03726,
+        0.02163,
+        0.00687,
+        0.01477,
+        0.08435,
+        0.02645,
+        -0.1405,
+        0.04792,
+        0.01266,
+        -0.05466,
+        -0.01107,
+        0.01765,
+        -0.03085,
+        -0.06739,
+        0.03123,
+        -0.04162,
+        -0.00927,
+        0.05578,
+        -0.00115,
+        -0.02343,
+        0.08993,
+        -0.02549,
+        -0.00055,
+        -0.00498,
+        -0.01743,
+        0.01446,
+        0.01715,
+        0.02404,
+        0.09221,
+        -0.08052
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "british_sigint_history",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "british_sigint_history",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 11,
+            "share": 0.22
+          },
+          {
+            "archive": "japanese_sigint",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 15,
+          "HW 14": 11,
+          "HW 13": 4,
+          "HW 17": 5,
+          "HW 67": 8,
+          "HW 25": 3,
+          "HW 18": 1,
+          "HW 12": 2,
+          "HW 1": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403968",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume X: Japanese Four-Figure Additive Cypher"
+          },
+          {
+            "paper_id": "C8403964",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume VI: Japanese Systems I by H R Foss"
+          },
+          {
+            "paper_id": "C6830276",
+            "archive": "directorate_policy",
+            "title": "EWT to DMI May 2 with notes in preparation for DMI's visit to BP, DMI to C May 8"
+          },
+          {
+            "paper_id": "C8403959",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume I: Introduction and Scoring Techniques "
+          },
+          {
+            "paper_id": "C8403925",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume XII: Japanese Machine Cyphers by R A Ca"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_0** \u2014 mixed basin: top archive british_sigint_history (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: british_sigint_history:15, directorate_policy:11, japanese_sigint:8. H_0 persistence 11.71 | centroid norm 0.536."
+    },
+    {
+      "iteration": 4,
+      "module_id": "mod_attractor_1",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5439,
+        "persistence": 11.5439
+      },
+      "centroid_stats": {
+        "mean": -0.0077,
+        "std": 0.0533,
+        "norm": 0.6095,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.01148,
+        -0.02168,
+        0.01592,
+        0.02752,
+        -0.00027,
+        0.00378,
+        -0.05544,
+        0.03447,
+        -0.07719,
+        0.03918,
+        0.08896,
+        -0.02688,
+        -0.04002,
+        -0.01116,
+        -0.10971,
+        -0.00896,
+        -0.03559,
+        -0.04089,
+        -0.03945,
+        0.05365,
+        0.02713,
+        -0.03727,
+        0.06921,
+        -0.01498,
+        0.09839,
+        -0.07714,
+        0.01095,
+        0.00807,
+        0.03752,
+        -0.13855,
+        -0.06162,
+        -0.02212,
+        -0.01467,
+        -0.03347,
+        0.03601,
+        0.01494,
+        -0.01225,
+        0.00401,
+        0.03413,
+        -0.06649,
+        -0.07248,
+        0.06624,
+        0.09327,
+        0.01608,
+        0.01262,
+        -0.02071,
+        -0.08175,
+        -0.11018,
+        -0.02357,
+        0.03091,
+        -0.08919,
+        0.093,
+        -0.05339,
+        -0.04495,
+        0.02122,
+        -0.02067,
+        -0.04138,
+        -0.01986,
+        -0.04263,
+        0.014,
+        -0.02578,
+        -0.00666,
+        0.02255,
+        0.11228,
+        -0.05554,
+        0.04093,
+        -0.08223,
+        -0.02922,
+        -0.03424,
+        -0.05653,
+        -0.00629,
+        0.02796,
+        -0.00744,
+        -0.00724,
+        0.05633,
+        0.05563,
+        -0.08431,
+        -0.04934,
+        0.06018,
+        -0.02529,
+        -0.05568,
+        -0.1158,
+        0.09828,
+        0.11256,
+        -0.01724,
+        0.03008,
+        -0.06247,
+        -0.0308,
+        0.01134,
+        -0.0048,
+        0.0496,
+        -0.07867,
+        -0.02387,
+        -0.01698,
+        0.02655,
+        -0.02697,
+        0.06734,
+        0.00037,
+        -0.01465,
+        0.00476,
+        0.06351,
+        -0.11981,
+        -0.03736,
+        -0.05444,
+        0.00509,
+        0.05597,
+        -0.03255,
+        -0.04381,
+        -0.00888,
+        -0.08279,
+        0.07954,
+        -0.01435,
+        -0.01725,
+        -0.06052,
+        -0.09107,
+        0.09337,
+        -0.03948,
+        -0.07231,
+        -0.03047,
+        0.05589,
+        -0.07954,
+        0.03548,
+        0.00894,
+        0.03981,
+        0.04587,
+        -0.00788,
+        -0.00165,
+        0.08893
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.18,
+        "bleed_share": 0.82,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "directorate_to_pm",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 4,
+          "HW 17": 9,
+          "HW 14": 9,
+          "HW 18": 2,
+          "HW 11": 2,
+          "HW 3": 3,
+          "HW 5": 2,
+          "HW 67": 1,
+          "HW 1": 8,
+          "HW 12": 3,
+          "HW 13": 3,
+          "HW 56": 1,
+          "HW 25": 3
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403927",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume XIV: Japanese Operational Codes and Min"
+          },
+          {
+            "paper_id": "C4317963",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with London, Great Britain. (Descr"
+          },
+          {
+            "paper_id": "C7711903",
+            "archive": "directorate_policy",
+            "title": "EWT to Kenworthy and Major King at Knockholt Mar 3 with chart of Knockholt organ"
+          },
+          {
+            "paper_id": "C8016704",
+            "archive": "naval_section",
+            "title": "Copies of Admiralty signals to Y stations teleprinted to the Naval Section, Blet"
+          },
+          {
+            "paper_id": "C2716854",
+            "archive": "ww2_history",
+            "title": "The Battle of the Atlantic Operational Intelligence Centre Special Summary. This"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_1** \u2014 mixed basin: top archive comintern_decrypts (18%), heavy cross-series bleed (82%). Top-3 archives among 50 NN: comintern_decrypts:9, directorate_policy:9, directorate_to_pm:8. H_0 persistence 11.54 | centroid norm 0.610."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_2",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.883,
+        "persistence": 11.883
+      },
+      "centroid_stats": {
+        "mean": -0.0056,
+        "std": 0.0476,
+        "norm": 0.5423,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.02441,
+        -0.07602,
+        -0.00101,
+        -0.0036,
+        -0.00804,
+        -0.04913,
+        0.0213,
+        -0.04528,
+        0.02831,
+        0.05169,
+        -0.03151,
+        0.0372,
+        -0.0374,
+        -0.00122,
+        -0.0407,
+        -0.00729,
+        0.00669,
+        0.03726,
+        -0.0433,
+        -0.03653,
+        0.07191,
+        -0.01796,
+        0.02222,
+        0.03208,
+        0.04355,
+        -0.06634,
+        -0.03052,
+        -0.00984,
+        0.10379,
+        -0.05907,
+        0.02676,
+        -0.00708,
+        -0.03847,
+        0.00969,
+        -0.00774,
+        -0.06862,
+        0.0461,
+        0.02508,
+        0.03468,
+        0.05266,
+        0.06568,
+        0.03289,
+        -0.06202,
+        -0.01714,
+        0.01797,
+        0.00508,
+        -0.03528,
+        0.00131,
+        -0.02326,
+        -0.01762,
+        -0.02817,
+        -0.00379,
+        -0.07255,
+        0.03537,
+        0.07861,
+        -0.07844,
+        0.02048,
+        0.0059,
+        -0.03829,
+        -0.13979,
+        -0.03483,
+        -0.04797,
+        -0.0133,
+        -0.03754,
+        0.08062,
+        0.01176,
+        -0.03834,
+        0.07273,
+        -0.0303,
+        0.02608,
+        0.01733,
+        -0.05732,
+        -0.06685,
+        -0.0337,
+        0.05271,
+        0.07364,
+        -0.06659,
+        0.05919,
+        0.01726,
+        -0.04839,
+        -0.04384,
+        -0.03012,
+        0.08333,
+        0.02318,
+        0.00808,
+        0.03137,
+        -0.05976,
+        -0.07166,
+        -0.09318,
+        -0.11047,
+        -0.09341,
+        0.03191,
+        -0.01614,
+        0.03157,
+        0.11571,
+        -0.00457,
+        0.0306,
+        -0.04602,
+        0.00813,
+        0.00235,
+        0.01456,
+        0.00823,
+        -0.02648,
+        -0.0214,
+        -0.07057,
+        0.03527,
+        -0.0469,
+        0.0074,
+        0.03719,
+        -0.0562,
+        -0.03685,
+        -0.01737,
+        0.01053,
+        -0.01261,
+        -0.09466,
+        0.07876,
+        -0.05083,
+        -0.01977,
+        -0.01253,
+        0.00822,
+        0.06763,
+        -0.04069,
+        0.03544,
+        0.09768,
+        -0.06395,
+        0.03235,
+        0.00791,
+        -0.00341
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.4,
+        "bleed_share": 0.6,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 20,
+            "share": 0.4
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 8,
+            "share": 0.16
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 7,
+            "share": 0.14
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 7": 1,
+          "HW 18": 4,
+          "HW 12": 7,
+          "HW 5": 20,
+          "HW 1": 3,
+          "HW 3": 1,
+          "HW 14": 8,
+          "HW 17": 2,
+          "HW 43": 3,
+          "HW 13": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C3981635",
+            "archive": "ww1_history",
+            "title": "WF Clarke's personal papers: background to sinking of HMS Hampshire, with Lord K"
+          },
+          {
+            "paper_id": "C8016701",
+            "archive": "naval_section",
+            "title": "Copies of Admiralty signals to commands teleprinted to the Naval Section, Bletch"
+          },
+          {
+            "paper_id": "C8016702",
+            "archive": "naval_section",
+            "title": "Copies of Admiralty signals to commands teleprinted to the Naval Section, Bletch"
+          },
+          {
+            "paper_id": "C3878843",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 29766-29767, 297"
+          },
+          {
+            "paper_id": "C5250664",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_2** \u2014 mixed basin: top archive german_machine_decrypts (40%), heavy cross-series bleed (60%). Top-3 archives among 50 NN: german_machine_decrypts:20, directorate_policy:8, diplomatic_decrypts:7. H_0 persistence 11.88 | centroid norm 0.542."
+    },
+    {
+      "iteration": 6,
+      "module_id": "mod_attractor_3",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.7314,
+        "persistence": 11.7314
+      },
+      "centroid_stats": {
+        "mean": 0.0064,
+        "std": 0.0482,
+        "norm": 0.5503,
+        "dim": 128
+      },
+      "centroid_vec": [
+        0.02507,
+        -0.00545,
+        0.02616,
+        0.03209,
+        0.04455,
+        0.07728,
+        0.00912,
+        0.07255,
+        0.0172,
+        0.00743,
+        0.02798,
+        -0.08879,
+        0.04782,
+        0.01052,
+        -0.08937,
+        0.13347,
+        0.03403,
+        0.0625,
+        0.06554,
+        -0.06153,
+        0.04637,
+        -0.0008,
+        -0.01484,
+        0.00892,
+        0.00973,
+        -0.08143,
+        -0.09534,
+        0.00863,
+        -0.01256,
+        -0.01857,
+        0.03978,
+        0.02353,
+        0.0165,
+        0.06336,
+        -0.04983,
+        -0.12866,
+        0.08382,
+        0.09898,
+        -0.0258,
+        0.0175,
+        -0.00272,
+        0.02677,
+        0.00673,
+        -0.04112,
+        -0.02207,
+        -0.00103,
+        0.01963,
+        0.02936,
+        0.01909,
+        -0.02598,
+        -0.00019,
+        0.04322,
+        -0.08137,
+        0.08575,
+        -0.01377,
+        -0.06535,
+        0.06305,
+        0.00094,
+        0.00181,
+        -0.01844,
+        -0.09766,
+        -0.00936,
+        0.13892,
+        0.02567,
+        -0.01957,
+        -0.03026,
+        0.01937,
+        0.04017,
+        0.03358,
+        0.02389,
+        -0.05177,
+        0.01021,
+        0.02061,
+        0.02519,
+        -0.00738,
+        0.03578,
+        -0.03212,
+        0.03201,
+        0.02477,
+        0.0115,
+        -0.07488,
+        -0.10613,
+        0.03697,
+        0.05583,
+        -0.04604,
+        -0.01536,
+        -0.07342,
+        0.01583,
+        -0.03851,
+        -0.01426,
+        0.04153,
+        -0.02569,
+        0.00102,
+        -0.0924,
+        0.05466,
+        -0.01581,
+        0.02817,
+        0.01011,
+        0.03469,
+        -0.01066,
+        0.0016,
+        0.05448,
+        0.02477,
+        -0.01612,
+        -0.01553,
+        0.0146,
+        0.005,
+        0.00442,
+        -0.05329,
+        0.0152,
+        0.02361,
+        0.02925,
+        0.0177,
+        0.00366,
+        -0.00377,
+        0.07811,
+        0.02023,
+        -0.04348,
+        -0.03107,
+        0.0753,
+        -0.03932,
+        -0.03274,
+        0.0053,
+        0.02797,
+        0.08483,
+        0.09145,
+        -0.04065,
+        0.10045
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.32,
+        "bleed_share": 0.68,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 16,
+            "share": 0.32
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 12,
+            "share": 0.24
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 6,
+            "share": 0.12
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 12,
+          "HW 5": 16,
+          "HW 12": 6,
+          "HW 3": 3,
+          "HW 18": 3,
+          "HW 14": 3,
+          "HW 13": 2,
+          "HW 25": 1,
+          "HW 1": 2,
+          "HW 56": 1,
+          "HW 11": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403947",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Sigint Volume V(b): The Organisation and Evolution of British Naval "
+          },
+          {
+            "paper_id": "C5250669",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250671",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250664",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250656",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_3** \u2014 mixed basin: top archive german_machine_decrypts (32%), heavy cross-series bleed (68%). Top-3 archives among 50 NN: german_machine_decrypts:16, british_sigint_history:12, diplomatic_decrypts:6. H_0 persistence 11.73 | centroid norm 0.550."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_4",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.6026,
+        "persistence": 11.6026
+      },
+      "centroid_stats": {
+        "mean": -0.0066,
+        "std": 0.0453,
+        "norm": 0.518,
+        "dim": 128
+      },
+      "centroid_vec": [
+        0.04476,
+        -0.00784,
+        -0.00867,
+        -0.05329,
+        0.02269,
+        -0.08737,
+        0.02334,
+        -0.06788,
+        0.05354,
+        0.0516,
+        0.01377,
+        0.04089,
+        -0.05557,
+        0.0115,
+        -0.04493,
+        0.00182,
+        -0.07228,
+        0.09218,
+        -0.05838,
+        -0.03882,
+        0.09622,
+        0.02157,
+        -0.00743,
+        -0.04625,
+        -0.08188,
+        -0.03886,
+        -0.05384,
+        -0.09329,
+        0.00104,
+        0.00099,
+        -0.00425,
+        0.01964,
+        0.00984,
+        -0.02909,
+        -0.00847,
+        0.01398,
+        0.03581,
+        0.07443,
+        0.02033,
+        -0.02628,
+        0.00128,
+        0.03958,
+        -0.02448,
+        -0.0744,
+        -0.02501,
+        -0.08203,
+        -0.07144,
+        -0.08838,
+        -0.04896,
+        -0.02952,
+        0.03579,
+        0.05682,
+        -0.01082,
+        -0.01311,
+        -0.00831,
+        0.00967,
+        -0.05698,
+        0.03721,
+        -0.03097,
+        -0.01299,
+        -0.04916,
+        -0.04689,
+        0.00657,
+        0.06172,
+        -0.02547,
+        -0.03919,
+        0.02802,
+        0.00314,
+        -0.0387,
+        -0.01277,
+        -0.05718,
+        -0.02201,
+        0.08884,
+        0.01235,
+        -0.05074,
+        -0.03177,
+        0.00144,
+        0.019,
+        0.03591,
+        -0.04907,
+        -0.02792,
+        -0.05926,
+        0.01019,
+        0.053,
+        0.02881,
+        0.05103,
+        -0.09853,
+        -0.06736,
+        0.01831,
+        0.05314,
+        0.08016,
+        0.00312,
+        -0.07479,
+        -0.06233,
+        -0.02265,
+        -0.02256,
+        0.02941,
+        0.02929,
+        -0.0112,
+        0.01088,
+        0.00905,
+        0.01363,
+        0.04117,
+        0.03149,
+        -0.01414,
+        0.01718,
+        -0.04298,
+        -0.02567,
+        0.07512,
+        -0.07535,
+        -0.07491,
+        0.00601,
+        0.08953,
+        -0.05813,
+        -0.00441,
+        -0.00915,
+        0.01623,
+        0.0619,
+        0.01584,
+        0.08639,
+        0.02476,
+        -0.01256,
+        -0.03773,
+        -0.02923,
+        -0.03557,
+        0.0417,
+        -0.02389,
+        -0.0564
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.32,
+        "bleed_share": 0.68,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 16,
+            "share": 0.32
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 11,
+            "share": 0.22
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 6,
+            "share": 0.12
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 11": 1,
+          "HW 12": 6,
+          "HW 17": 16,
+          "HW 43": 11,
+          "HW 14": 4,
+          "HW 1": 3,
+          "HW 13": 2,
+          "HW 3": 2,
+          "HW 7": 1,
+          "HW 25": 4
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C35801",
+            "archive": "ww2_history",
+            "title": "AIR MILITARY HISTORY"
+          },
+          {
+            "paper_id": "C6086602",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39802-39803. Afgha"
+          },
+          {
+            "paper_id": "C4317979",
+            "archive": "comintern_decrypts",
+            "title": "Comintern courier and visa lists. (Described at item level). Note: that message "
+          },
+          {
+            "paper_id": "C4317960",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with London, Great Britain. (Descr"
+          },
+          {
+            "paper_id": "C8403925",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume XII: Japanese Machine Cyphers by R A Ca"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_4** \u2014 mixed basin: top archive comintern_decrypts (32%), heavy cross-series bleed (68%). Top-3 archives among 50 NN: comintern_decrypts:16, british_sigint_history:11, diplomatic_decrypts:6. H_0 persistence 11.60 | centroid norm 0.518."
+    },
+    {
+      "iteration": 8,
+      "module_id": "mod_attractor_5",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.4443,
+        "persistence": 11.4443
+      },
+      "centroid_stats": {
+        "mean": -0.0071,
+        "std": 0.0498,
+        "norm": 0.5692,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.09531,
+        -0.07535,
+        -0.06538,
+        0.08058,
+        0.12083,
+        -0.06115,
+        0.02618,
+        -0.03379,
+        0.01721,
+        0.01424,
+        0.06187,
+        0.06806,
+        -0.07896,
+        -0.091,
+        -0.0443,
+        0.03699,
+        -0.01885,
+        0.01228,
+        -0.0199,
+        -0.08388,
+        0.06892,
+        -0.06706,
+        0.06474,
+        0.02533,
+        0.08989,
+        -0.10384,
+        -0.05288,
+        0.03366,
+        0.03783,
+        -0.13706,
+        -0.05055,
+        -0.09408,
+        0.00276,
+        -0.00183,
+        0.04458,
+        -0.01579,
+        -0.05552,
+        -0.02129,
+        0.0216,
+        0.08916,
+        -0.00035,
+        0.0418,
+        0.10834,
+        -0.0283,
+        -0.00803,
+        -0.04382,
+        0.00958,
+        0.05296,
+        -0.01108,
+        0.02502,
+        -0.03232,
+        -0.00499,
+        -0.04514,
+        0.07464,
+        0.05998,
+        0.04287,
+        -0.02648,
+        -0.0481,
+        0.00469,
+        -0.06723,
+        -0.05113,
+        -0.08041,
+        -0.00665,
+        -0.03975,
+        0.03576,
+        -0.02889,
+        0.01802,
+        0.01067,
+        0.02714,
+        -0.02374,
+        -0.04053,
+        0.07114,
+        0.05115,
+        0.00649,
+        0.05327,
+        0.0056,
+        -0.03573,
+        -0.04059,
+        -0.0013,
+        -0.04104,
+        0.04896,
+        -0.01291,
+        0.00129,
+        -0.00539,
+        -0.0325,
+        -0.06907,
+        -0.07756,
+        -0.07121,
+        -0.067,
+        -0.00195,
+        -0.02078,
+        -0.00104,
+        -0.04161,
+        0.02019,
+        0.05944,
+        0.01755,
+        -0.02488,
+        0.096,
+        0.00159,
+        -0.03533,
+        -0.0239,
+        -0.05339,
+        -0.01137,
+        0.01544,
+        -0.00599,
+        0.00303,
+        0.00191,
+        -0.00666,
+        -0.07136,
+        -0.1308,
+        0.0143,
+        0.00066,
+        0.07378,
+        -0.01566,
+        -0.04367,
+        0.02957,
+        -0.02718,
+        0.00884,
+        0.00495,
+        -0.01346,
+        -0.07748,
+        0.026,
+        0.00359,
+        -0.01128,
+        -0.04651,
+        0.00833,
+        -0.01975,
+        0.03308
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "diplomatic_decrypts",
+        "dominant_share": 0.46,
+        "bleed_share": 0.54,
+        "top3_archives": [
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 23,
+            "share": 0.46
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 6,
+            "share": 0.12
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 23,
+          "HW 14": 6,
+          "HW 17": 10,
+          "HW 43": 3,
+          "HW 18": 1,
+          "HW 25": 4,
+          "HW 20": 1,
+          "HW 3": 1,
+          "HW 1": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C6079367",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 38774, 38809, 38"
+          },
+          {
+            "paper_id": "C3878842",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 29393-29396, 294"
+          },
+          {
+            "paper_id": "C3878862",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 36465. Afghanistan"
+          },
+          {
+            "paper_id": "C3878858",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 34966-34967, 349"
+          },
+          {
+            "paper_id": "C3878864",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 36893. Afghanistan"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_5** \u2014 mixed basin: top archive diplomatic_decrypts (46%), heavy cross-series bleed (54%). Top-3 archives among 50 NN: diplomatic_decrypts:23, comintern_decrypts:10, directorate_policy:6. H_0 persistence 11.44 | centroid norm 0.569."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_6",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2366,
+        "persistence": 11.2366
+      },
+      "centroid_stats": {
+        "mean": -0.0057,
+        "std": 0.0503,
+        "norm": 0.5728,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.01625,
+        0.02235,
+        -0.00075,
+        0.08851,
+        0.0609,
+        -0.06974,
+        0.0347,
+        0.01591,
+        -0.01463,
+        -0.05072,
+        -0.01631,
+        -0.03096,
+        -0.01412,
+        0.03846,
+        -0.0646,
+        0.02093,
+        0.06106,
+        -0.01432,
+        0.10744,
+        -0.04377,
+        -0.01836,
+        0.03145,
+        -0.03986,
+        0.00741,
+        0.00922,
+        0.02713,
+        0.01127,
+        -0.00104,
+        0.01677,
+        -0.07671,
+        -0.04654,
+        0.05932,
+        0.01508,
+        0.09922,
+        0.02433,
+        0.07672,
+        -0.06499,
+        -0.11681,
+        0.01877,
+        -0.00254,
+        -0.04288,
+        -0.04128,
+        -0.05179,
+        -0.00327,
+        -0.01932,
+        -0.00101,
+        0.00127,
+        -0.04925,
+        -0.06691,
+        0.01386,
+        0.02128,
+        -0.04569,
+        -0.12271,
+        -0.00021,
+        0.02371,
+        -0.06212,
+        -0.0604,
+        0.01285,
+        -0.05295,
+        -0.02697,
+        -0.06963,
+        0.02469,
+        0.00992,
+        -0.01008,
+        -0.02423,
+        0.01051,
+        0.04281,
+        -0.02909,
+        -0.01395,
+        0.03172,
+        -0.03078,
+        -0.08243,
+        0.02269,
+        0.08849,
+        0.16485,
+        -0.02337,
+        0.0003,
+        -0.08613,
+        0.03926,
+        0.02793,
+        -0.00849,
+        -0.03492,
+        -0.11236,
+        0.02717,
+        0.05238,
+        -0.06089,
+        0.00963,
+        0.01821,
+        0.00694,
+        -0.01738,
+        0.05579,
+        0.01985,
+        0.01419,
+        0.00063,
+        -0.02174,
+        -0.04872,
+        0.04161,
+        0.00253,
+        -0.11568,
+        0.02902,
+        -0.01209,
+        -0.01559,
+        -0.02323,
+        0.00307,
+        -0.14372,
+        0.00569,
+        -0.04092,
+        0.01576,
+        0.02747,
+        0.02629,
+        0.00212,
+        0.04057,
+        0.12278,
+        -0.04855,
+        -0.09994,
+        0.03699,
+        -0.07119,
+        -0.03525,
+        0.0066,
+        -0.065,
+        -0.0335,
+        -0.02311,
+        0.07665,
+        0.05192,
+        -0.05306,
+        0.01942,
+        0.0051,
+        -0.02386
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.46,
+        "bleed_share": 0.54,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 23,
+            "share": 0.46
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 8,
+            "share": 0.16
+          },
+          {
+            "archive": "directorate_to_pm",
+            "count": 5,
+            "share": 0.1
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 18": 4,
+          "HW 17": 23,
+          "HW 14": 8,
+          "HW 7": 2,
+          "HW 1": 5,
+          "HW 43": 2,
+          "HW 3": 1,
+          "HW 5": 5
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C78122",
+            "archive": "naval_section",
+            "title": "Information on German, Spanish, Italian and French naval communications and traf"
+          },
+          {
+            "paper_id": "C4317946",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Prague, Czechoslovakia. (Desc"
+          },
+          {
+            "paper_id": "C7711901",
+            "archive": "directorate_policy",
+            "title": "DDI 3 to EWT and Col Taylor at BP Feb 1 re assessment of strength of Soviet Air "
+          },
+          {
+            "paper_id": "C4317954",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Paris, France. (Described at "
+          },
+          {
+            "paper_id": "C4317978",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR to United States. (Described at ite"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_6** \u2014 mixed basin: top archive comintern_decrypts (46%), heavy cross-series bleed (54%). Top-3 archives among 50 NN: comintern_decrypts:23, directorate_policy:8, directorate_to_pm:5. H_0 persistence 11.24 | centroid norm 0.573."
+    },
+    {
+      "iteration": 10,
+      "module_id": "mod_attractor_7",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.0031,
+        "persistence": 11.0031
+      },
+      "centroid_stats": {
+        "mean": 0.0022,
+        "std": 0.0451,
+        "norm": 0.5106,
+        "dim": 128
+      },
+      "centroid_vec": [
+        0.01777,
+        0.01271,
+        -0.04016,
+        -0.00556,
+        0.0826,
+        -0.01879,
+        0.06282,
+        0.00485,
+        -0.00489,
+        0.00026,
+        -0.04337,
+        0.05135,
+        -0.03551,
+        -0.00528,
+        -0.06653,
+        -0.02945,
+        0.01844,
+        0.03012,
+        0.00798,
+        -0.07782,
+        0.01854,
+        -0.00783,
+        0.023,
+        0.04747,
+        0.04282,
+        -0.05839,
+        -0.01956,
+        -0.05718,
+        0.03951,
+        0.05515,
+        0.03614,
+        -0.05408,
+        0.05563,
+        -0.0034,
+        0.04341,
+        -0.02117,
+        -0.03704,
+        0.00915,
+        0.04284,
+        0.06299,
+        0.03972,
+        0.01599,
+        0.01023,
+        -0.08167,
+        -0.00195,
+        0.06045,
+        0.0003,
+        0.02377,
+        -0.04287,
+        0.03611,
+        0.0579,
+        -0.00029,
+        -0.06039,
+        0.03795,
+        0.10856,
+        0.00757,
+        0.0309,
+        -0.07559,
+        -0.09128,
+        -0.05977,
+        0.02406,
+        -0.05395,
+        0.00387,
+        -0.00433,
+        -0.06486,
+        0.05005,
+        0.03942,
+        0.06396,
+        -0.04753,
+        -0.0274,
+        0.07442,
+        0.04038,
+        0.05052,
+        -0.00469,
+        -0.03363,
+        -0.01143,
+        -0.03988,
+        -0.10063,
+        0.08289,
+        -0.06486,
+        5e-05,
+        0.02331,
+        0.00223,
+        -0.0233,
+        0.03939,
+        0.11119,
+        -0.06879,
+        -0.02549,
+        -0.02881,
+        -0.01266,
+        -0.07066,
+        -0.02059,
+        0.04458,
+        -0.00295,
+        -0.05308,
+        -0.06128,
+        -0.02091,
+        -0.02334,
+        -0.02409,
+        0.06211,
+        -0.03179,
+        0.06011,
+        0.03379,
+        0.03091,
+        -0.05571,
+        0.10103,
+        -0.05256,
+        -0.02576,
+        -0.00537,
+        -0.01526,
+        0.02295,
+        -0.00367,
+        0.03008,
+        0.00029,
+        0.08165,
+        0.04833,
+        -0.00624,
+        -0.03086,
+        0.01421,
+        -0.00379,
+        -0.03982,
+        -0.02249,
+        -0.01032,
+        0.00663,
+        0.02146,
+        0.09064,
+        -0.00193,
+        0.02669
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "diplomatic_decrypts",
+        "dominant_share": 0.54,
+        "bleed_share": 0.46,
+        "top3_archives": [
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 27,
+            "share": 0.54
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 7,
+            "share": 0.14
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 27,
+          "HW 17": 7,
+          "HW 13": 1,
+          "HW 25": 1,
+          "HW 43": 9,
+          "HW 3": 2,
+          "HW 5": 1,
+          "HW 1": 1,
+          "HW 67": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C3878846",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 31012-31019, 310"
+          },
+          {
+            "paper_id": "C6079367",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 38774, 38809, 38"
+          },
+          {
+            "paper_id": "C4317975",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Basle and Zurich, Switzerland"
+          },
+          {
+            "paper_id": "C6086581",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39378, 39441, 3952"
+          },
+          {
+            "paper_id": "C3878858",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 34966-34967, 349"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_7** \u2014 diplomatic_decrypts-dominant basin (54%) with 46% bleed from other series. Top-3 archives among 50 NN: diplomatic_decrypts:27, british_sigint_history:9, comintern_decrypts:7. H_0 persistence 11.00 | centroid norm 0.511."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_8",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.3547,
+        "persistence": 11.3547
+      },
+      "centroid_stats": {
+        "mean": -0.001,
+        "std": 0.0525,
+        "norm": 0.5943,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.03502,
+        -0.0053,
+        -0.07347,
+        0.07204,
+        0.01999,
+        -0.03249,
+        0.00066,
+        0.09935,
+        0.02119,
+        -0.04086,
+        0.05169,
+        -0.08071,
+        0.00848,
+        -0.07223,
+        -0.054,
+        0.05026,
+        -0.03652,
+        0.00412,
+        0.05068,
+        0.03547,
+        0.11713,
+        -0.04302,
+        0.05304,
+        0.06584,
+        -0.08114,
+        -0.06524,
+        -0.04849,
+        -0.05019,
+        -0.01906,
+        0.00986,
+        0.04559,
+        -0.01656,
+        -0.1276,
+        0.02563,
+        0.10152,
+        -0.00236,
+        -0.02698,
+        -0.0194,
+        -0.04639,
+        0.01766,
+        0.02507,
+        0.0726,
+        -0.03019,
+        -0.01141,
+        -0.04004,
+        0.03003,
+        -0.09976,
+        0.03671,
+        -0.11919,
+        0.0291,
+        -0.01785,
+        0.03814,
+        -0.04009,
+        -0.02144,
+        0.05065,
+        -0.05241,
+        -0.03803,
+        0.0691,
+        -0.00316,
+        -0.05206,
+        -0.04172,
+        -0.02794,
+        -0.00578,
+        0.07765,
+        -0.02318,
+        -0.08096,
+        0.07511,
+        -0.0279,
+        0.01072,
+        -0.01229,
+        -0.02168,
+        -0.02308,
+        0.09728,
+        0.11314,
+        0.03313,
+        -0.05609,
+        -0.00827,
+        0.03211,
+        -0.01685,
+        0.03355,
+        -0.10368,
+        0.0104,
+        -0.03718,
+        -0.03639,
+        0.01992,
+        -0.01484,
+        -0.06287,
+        -0.03925,
+        -0.00375,
+        0.00252,
+        -0.00915,
+        -0.08765,
+        -0.00352,
+        0.01151,
+        -0.03628,
+        -0.04757,
+        0.06063,
+        0.05142,
+        -0.00752,
+        -0.00575,
+        -0.01864,
+        -0.01212,
+        -0.04269,
+        -0.01006,
+        -0.04009,
+        0.02726,
+        0.04235,
+        0.00026,
+        0.00055,
+        0.01128,
+        0.02289,
+        0.14262,
+        0.05769,
+        -0.1407,
+        -0.04624,
+        0.02882,
+        -0.03167,
+        0.09657,
+        0.0241,
+        0.07533,
+        -0.01097,
+        0.03086,
+        0.04414,
+        0.06874,
+        -0.05634,
+        0.05694,
+        0.03083,
+        0.0394
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "directorate_policy",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "directorate_policy",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "british_sigint_history",
+            "count": 10,
+            "share": 0.2
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 8,
+            "share": 0.16
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 10,
+          "HW 17": 6,
+          "HW 14": 15,
+          "HW 3": 2,
+          "HW 5": 8,
+          "HW 1": 2,
+          "HW 13": 1,
+          "HW 25": 2,
+          "HW 7": 2,
+          "HW 12": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403962",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume IV: German Hand Cyphers by W H Bruford,"
+          },
+          {
+            "paper_id": "C4317964",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with London, Great Britain. (Descr"
+          },
+          {
+            "paper_id": "C7711913",
+            "archive": "directorate_policy",
+            "title": "Covering letter Aug 1 from EWT to DDs and Section Heads re letter from DMI, EWT "
+          },
+          {
+            "paper_id": "C2900355",
+            "archive": "personal_papers",
+            "title": "Report on the work of 3G(N): Professor Norman's original 31-page draft subsequen"
+          },
+          {
+            "paper_id": "C5250668",
+            "archive": "german_machine_decrypts",
+            "title": "Including North Africa, Central and Eastern Europe"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_8** \u2014 mixed basin: top archive directorate_policy (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: directorate_policy:15, british_sigint_history:10, german_machine_decrypts:8. H_0 persistence 11.35 | centroid norm 0.594."
+    },
+    {
+      "iteration": 12,
+      "module_id": "mod_attractor_9",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.0625,
+        "persistence": 11.0625
+      },
+      "centroid_stats": {
+        "mean": 0.0005,
+        "std": 0.0463,
+        "norm": 0.524,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.08946,
+        0.00121,
+        -0.05119,
+        0.01644,
+        -0.03585,
+        -0.01861,
+        -0.01591,
+        0.006,
+        0.0718,
+        0.0178,
+        -0.01653,
+        -0.05104,
+        -0.03214,
+        0.05782,
+        -0.02616,
+        0.10501,
+        0.01065,
+        -0.01324,
+        0.02568,
+        0.00076,
+        0.04525,
+        0.05114,
+        0.00737,
+        0.03949,
+        0.03211,
+        0.02825,
+        -0.0487,
+        0.04387,
+        0.12602,
+        -0.01013,
+        -0.02316,
+        0.04561,
+        -0.04982,
+        -0.00379,
+        0.01987,
+        0.00221,
+        -0.00519,
+        -0.0003,
+        0.02355,
+        0.04168,
+        0.00501,
+        0.02867,
+        0.00843,
+        -0.11646,
+        0.06142,
+        -0.01999,
+        0.0198,
+        0.05035,
+        0.0174,
+        0.03592,
+        -0.02097,
+        -0.0355,
+        -0.02979,
+        -0.00251,
+        0.01602,
+        0.09559,
+        -0.04873,
+        -0.09635,
+        0.01813,
+        -0.01452,
+        -0.06942,
+        -0.02575,
+        -0.00655,
+        -0.02153,
+        -0.06967,
+        -0.071,
+        0.07084,
+        -0.04349,
+        -0.02434,
+        -0.0455,
+        0.01713,
+        0.05439,
+        -0.00859,
+        0.01142,
+        0.06084,
+        0.03136,
+        -0.04756,
+        -0.02475,
+        0.02816,
+        -0.00027,
+        -0.0161,
+        -0.00332,
+        0.04418,
+        0.02736,
+        -0.07899,
+        0.04119,
+        0.00836,
+        0.03788,
+        -0.0386,
+        -0.03914,
+        0.05033,
+        0.03161,
+        -0.03527,
+        -0.02044,
+        0.04304,
+        0.044,
+        0.05672,
+        0.01537,
+        -0.07451,
+        0.05521,
+        -0.08351,
+        -0.08883,
+        0.06665,
+        -0.03601,
+        -0.05941,
+        -0.00949,
+        0.02434,
+        -0.10266,
+        0.01651,
+        -0.07041,
+        -0.07874,
+        0.02703,
+        0.08952,
+        0.02428,
+        -0.02106,
+        -0.01842,
+        0.02251,
+        0.01702,
+        0.02843,
+        0.05831,
+        -0.00117,
+        -0.04006,
+        -0.04815,
+        0.05208,
+        -0.07172,
+        -0.00198,
+        0.04811,
+        0.05543
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "diplomatic_decrypts",
+        "dominant_share": 0.5,
+        "bleed_share": 0.5,
+        "top3_archives": [
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 25,
+            "share": 0.5
+          },
+          {
+            "archive": "directorate_to_pm",
+            "count": 6,
+            "share": 0.12
+          },
+          {
+            "archive": "directorate_policy",
+            "count": 5,
+            "share": 0.1
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 25,
+          "HW 14": 5,
+          "HW 17": 5,
+          "HW 5": 1,
+          "HW 43": 3,
+          "HW 1": 6,
+          "HW 13": 2,
+          "HW 3": 1,
+          "HW 67": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C6086581",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39378, 39441, 3952"
+          },
+          {
+            "paper_id": "C3878854",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 33482, 33496, 33"
+          },
+          {
+            "paper_id": "C5949462",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 37414, 37517. Afgh"
+          },
+          {
+            "paper_id": "C3878850",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 32267-32268, 323"
+          },
+          {
+            "paper_id": "C3878857",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 34659, 34695, 34"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_9** \u2014 diplomatic_decrypts-dominant basin (50%) with 50% bleed from other series. Top-3 archives among 50 NN: diplomatic_decrypts:25, directorate_to_pm:6, directorate_policy:5. H_0 persistence 11.06 | centroid norm 0.524."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_10",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.2383,
+        "persistence": 11.2383
+      },
+      "centroid_stats": {
+        "mean": -0.005,
+        "std": 0.0472,
+        "norm": 0.5365,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.00135,
+        -0.07477,
+        -0.06323,
+        0.08083,
+        0.08291,
+        -0.01792,
+        0.01411,
+        0.00972,
+        0.01781,
+        -0.03097,
+        -0.05834,
+        -0.04895,
+        -0.01243,
+        0.03831,
+        0.0261,
+        0.0253,
+        -0.03494,
+        0.06658,
+        0.01186,
+        -0.0216,
+        -0.04107,
+        -0.04399,
+        -0.04166,
+        -0.03617,
+        0.01305,
+        -0.02116,
+        -0.02615,
+        0.0311,
+        -0.00818,
+        0.08263,
+        0.03303,
+        0.00139,
+        -0.009,
+        -0.00288,
+        -0.02501,
+        0.09125,
+        0.07894,
+        0.04482,
+        0.02069,
+        0.00595,
+        0.02508,
+        -0.07594,
+        -0.01948,
+        -0.13637,
+        -0.04675,
+        -0.03256,
+        0.06719,
+        0.03044,
+        -0.01274,
+        0.09753,
+        0.11333,
+        0.01157,
+        -0.02859,
+        -0.10675,
+        0.05935,
+        -0.02892,
+        -0.04092,
+        -0.04951,
+        -0.05624,
+        -0.01888,
+        -0.05212,
+        -0.01368,
+        -0.03612,
+        -0.05273,
+        0.03335,
+        -0.0702,
+        0.03722,
+        -0.02737,
+        0.0061,
+        0.04056,
+        -0.066,
+        0.08243,
+        0.06605,
+        0.00215,
+        -0.02304,
+        -0.04374,
+        -0.03841,
+        0.03412,
+        0.01895,
+        -0.07178,
+        0.00151,
+        -0.02372,
+        -0.05992,
+        -0.04238,
+        0.05213,
+        -0.06793,
+        -0.06432,
+        -0.08099,
+        0.01185,
+        -0.02788,
+        -0.00927,
+        0.0374,
+        -0.01641,
+        0.02643,
+        -5e-05,
+        -0.0055,
+        0.0128,
+        -0.0282,
+        -0.05043,
+        -0.02419,
+        0.00683,
+        -0.0249,
+        -0.02989,
+        -0.01766,
+        -0.06424,
+        0.03981,
+        -0.014,
+        -0.06928,
+        -0.03273,
+        0.00221,
+        -0.03494,
+        0.02658,
+        0.06962,
+        0.05982,
+        -0.00506,
+        0.05031,
+        0.08227,
+        0.03857,
+        -0.00733,
+        0.00817,
+        -0.11907,
+        0.03968,
+        -0.00333,
+        0.05927,
+        -0.02728,
+        -0.0026,
+        0.01017,
+        -0.05355
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "british_sigint_history",
+        "dominant_share": 0.32,
+        "bleed_share": 0.68,
+        "top3_archives": [
+          {
+            "archive": "british_sigint_history",
+            "count": 16,
+            "share": 0.32
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 13,
+            "share": 0.26
+          },
+          {
+            "archive": "cryptographic_studies",
+            "count": 4,
+            "share": 0.08
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 43": 16,
+          "HW 5": 13,
+          "HW 25": 4,
+          "HW 13": 4,
+          "HW 3": 3,
+          "HW 14": 4,
+          "HW 12": 1,
+          "HW 20": 1,
+          "HW 1": 2,
+          "HW 7": 1,
+          "HW 17": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C8403959",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume I: Introduction and Scoring Techniques "
+          },
+          {
+            "paper_id": "C8403926",
+            "archive": "british_sigint_history",
+            "title": "GC&CS Naval Cryptanalytic Studies Volume XIII: The Japanese Merchant/Navy Liaiso"
+          },
+          {
+            "paper_id": "C5250646",
+            "archive": "german_machine_decrypts",
+            "title": "Including instructions for treatment of \"German political refugees\" fighting wit"
+          },
+          {
+            "paper_id": "C8438300",
+            "archive": "cryptographic_studies",
+            "title": "Chief Cryptographer [Brigadier Tiltman]. Miscellaneous cryptological papers"
+          },
+          {
+            "paper_id": "C6244425",
+            "archive": "sigint_summaries",
+            "title": "German Economics: manpower, finance, fuel, food, ammunition and equipment, commu"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_10** \u2014 mixed basin: top archive british_sigint_history (32%), heavy cross-series bleed (68%). Top-3 archives among 50 NN: british_sigint_history:16, german_machine_decrypts:13, cryptographic_studies:4. H_0 persistence 11.24 | centroid norm 0.536."
+    },
+    {
+      "iteration": 14,
+      "module_id": "mod_attractor_11",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.1952,
+        "persistence": 11.1952
+      },
+      "centroid_stats": {
+        "mean": 0.0026,
+        "std": 0.0605,
+        "norm": 0.6854,
+        "dim": 128
+      },
+      "centroid_vec": [
+        0.02457,
+        -0.10317,
+        -0.07336,
+        0.0291,
+        0.00074,
+        0.00635,
+        0.08645,
+        -0.10503,
+        0.02815,
+        -0.00368,
+        -0.07391,
+        -0.00504,
+        -0.00628,
+        -0.02849,
+        -0.03746,
+        0.01281,
+        0.00528,
+        -0.00786,
+        0.08976,
+        0.03982,
+        0.1471,
+        -0.04315,
+        0.0205,
+        -0.02974,
+        0.0122,
+        0.00222,
+        -0.09779,
+        0.05507,
+        0.06542,
+        -0.08092,
+        0.00888,
+        -0.05649,
+        -0.05398,
+        0.07761,
+        -0.00071,
+        -0.02362,
+        -0.11276,
+        -0.04665,
+        0.07283,
+        0.05015,
+        0.04371,
+        0.07815,
+        -0.02896,
+        -0.03751,
+        -0.0438,
+        -0.04918,
+        -0.09216,
+        -0.00805,
+        0.04865,
+        0.02488,
+        0.1097,
+        0.0493,
+        -0.04153,
+        0.16595,
+        -0.0308,
+        0.09144,
+        -0.04218,
+        -0.01555,
+        0.05043,
+        -0.04419,
+        -0.01095,
+        -0.12328,
+        0.04203,
+        0.12208,
+        -0.00207,
+        -0.09265,
+        0.02645,
+        0.118,
+        0.00132,
+        -0.00382,
+        0.03429,
+        0.05943,
+        -0.0418,
+        0.07846,
+        -0.00419,
+        0.08768,
+        -0.02264,
+        -0.05653,
+        0.11077,
+        -0.05882,
+        -0.01207,
+        0.01758,
+        -0.06524,
+        -0.0952,
+        0.00492,
+        0.06734,
+        -0.00375,
+        0.02818,
+        0.09863,
+        -0.03346,
+        0.05066,
+        0.01405,
+        -0.00798,
+        -0.05374,
+        -0.00596,
+        -0.03194,
+        -0.00289,
+        -0.10244,
+        -0.05825,
+        0.03591,
+        0.03745,
+        -0.05319,
+        -0.01909,
+        -0.02717,
+        0.01455,
+        0.02614,
+        -0.04915,
+        0.01689,
+        -0.08528,
+        -0.00543,
+        -0.11048,
+        0.01662,
+        0.11038,
+        -0.0586,
+        0.00831,
+        0.09978,
+        0.00153,
+        0.09118,
+        -0.06621,
+        0.06846,
+        -0.00985,
+        -0.02853,
+        0.09873,
+        0.0834,
+        -0.00564,
+        -0.00859,
+        -0.06523,
+        0.07151
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "comintern_decrypts",
+        "dominant_share": 0.3,
+        "bleed_share": 0.7,
+        "top3_archives": [
+          {
+            "archive": "comintern_decrypts",
+            "count": 15,
+            "share": 0.3
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 13,
+            "share": 0.26
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 11,
+            "share": 0.22
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 17": 15,
+          "HW 12": 11,
+          "HW 25": 4,
+          "HW 43": 2,
+          "HW 5": 13,
+          "HW 14": 2,
+          "HW 67": 1,
+          "HW 7": 2
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C4317973",
+            "archive": "comintern_decrypts",
+            "title": "Decrypts of Comintern messages: Moscow, USSR, with Stockholm, Sweden. (Described"
+          },
+          {
+            "paper_id": "C3878846",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 31012-31019, 310"
+          },
+          {
+            "paper_id": "C8186611",
+            "archive": "cryptographic_studies",
+            "title": "Bombe registerDetails of availability of 3- and 4- wheel bombes from BTM (Britis"
+          },
+          {
+            "paper_id": "C8085821",
+            "archive": "british_sigint_history",
+            "title": "The History of British Sigint 1914-1945. Vol III: 'Appendices', by Monica Zambra"
+          },
+          {
+            "paper_id": "C8186613",
+            "archive": "cryptographic_studies",
+            "title": "Bombe Register Vol I, which had been on loan to the Historical Section. The Bomb"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_11** \u2014 mixed basin: top archive comintern_decrypts (30%), heavy cross-series bleed (70%). Top-3 archives among 50 NN: comintern_decrypts:15, german_machine_decrypts:13, diplomatic_decrypts:11. H_0 persistence 11.20 | centroid norm 0.685."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_12",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.5832,
+        "persistence": 11.5832
+      },
+      "centroid_stats": {
+        "mean": -0.0053,
+        "std": 0.0478,
+        "norm": 0.5443,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.06308,
+        -0.06518,
+        -0.06251,
+        -0.04181,
+        -0.03594,
+        -0.09485,
+        -0.01405,
+        0.02673,
+        -0.02957,
+        0.04242,
+        -0.11531,
+        -0.04438,
+        0.02195,
+        0.01327,
+        0.05575,
+        -0.0641,
+        -0.06618,
+        0.06813,
+        0.05995,
+        -0.01239,
+        0.03679,
+        0.06745,
+        -0.00379,
+        -0.01355,
+        0.05123,
+        0.04002,
+        -0.01752,
+        -0.00641,
+        -0.04267,
+        0.0656,
+        -0.00875,
+        0.03865,
+        0.02976,
+        -0.00971,
+        0.04411,
+        0.07395,
+        0.04361,
+        -0.05498,
+        0.0711,
+        -0.01306,
+        0.07029,
+        -0.00464,
+        -0.05109,
+        -0.07364,
+        -0.02361,
+        0.05464,
+        0.01526,
+        0.02183,
+        0.00295,
+        0.05448,
+        -0.09915,
+        -0.01159,
+        -0.08531,
+        -0.04371,
+        -0.07579,
+        -0.05401,
+        -0.14588,
+        0.00628,
+        -0.02809,
+        -0.06691,
+        0.01386,
+        0.03417,
+        0.04906,
+        0.0641,
+        -0.01648,
+        -0.03585,
+        -0.06996,
+        -0.01921,
+        0.01145,
+        0.00216,
+        0.02973,
+        -0.00722,
+        -0.0133,
+        -0.01023,
+        0.0131,
+        0.02127,
+        -0.09273,
+        -0.03604,
+        0.03361,
+        -0.06131,
+        0.01002,
+        -0.0399,
+        -0.03311,
+        0.05266,
+        -0.00831,
+        -0.03332,
+        -0.07109,
+        0.06388,
+        -0.0244,
+        0.00919,
+        0.0323,
+        -0.00412,
+        -0.09132,
+        -0.02815,
+        0.03979,
+        -0.05532,
+        0.00606,
+        -0.00258,
+        -0.06162,
+        -0.02956,
+        -0.01537,
+        -0.02826,
+        0.03199,
+        0.02315,
+        -0.02285,
+        -0.03954,
+        -0.01057,
+        -0.02143,
+        0.05341,
+        -0.03205,
+        0.01586,
+        0.02967,
+        0.0809,
+        0.01396,
+        0.03516,
+        -0.00301,
+        0.01627,
+        -0.02033,
+        -0.05162,
+        0.02908,
+        -0.02525,
+        -0.06741,
+        0.12186,
+        0.0363,
+        -0.00865,
+        0.06736,
+        0.0649,
+        -0.03055
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "german_machine_decrypts",
+        "dominant_share": 0.42,
+        "bleed_share": 0.58,
+        "top3_archives": [
+          {
+            "archive": "german_machine_decrypts",
+            "count": 21,
+            "share": 0.42
+          },
+          {
+            "archive": "comintern_decrypts",
+            "count": 9,
+            "share": 0.18
+          },
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 4,
+            "share": 0.08
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 3": 2,
+          "HW 12": 4,
+          "HW 5": 21,
+          "HW 43": 2,
+          "HW 14": 3,
+          "HW 17": 9,
+          "HW 56": 2,
+          "HW 1": 2,
+          "HW 20": 1,
+          "HW 7": 1,
+          "HW 13": 2,
+          "HW 67": 1
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C2900392",
+            "archive": "personal_papers",
+            "title": "Intelligence Exchange (IE) Section at BP: History, 1940-1945; dossier of notes o"
+          },
+          {
+            "paper_id": "C3878858",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 34966-34967, 349"
+          },
+          {
+            "paper_id": "C6086581",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39378, 39441, 3952"
+          },
+          {
+            "paper_id": "C5250658",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          },
+          {
+            "paper_id": "C5250659",
+            "archive": "german_machine_decrypts",
+            "title": "German section: reports of German army and air force high grade machine decrypts"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_12** \u2014 mixed basin: top archive german_machine_decrypts (42%), heavy cross-series bleed (57%). Top-3 archives among 50 NN: german_machine_decrypts:21, comintern_decrypts:9, diplomatic_decrypts:4. H_0 persistence 11.58 | centroid norm 0.544."
+    },
+    {
+      "iteration": 16,
+      "module_id": "mod_attractor_13",
+      "module_class": "AttractorModule",
+      "module_type": "attractor",
+      "topology": {
+        "homology_dim": 0,
+        "birth": 0.0,
+        "death": 11.301,
+        "persistence": 11.301
+      },
+      "centroid_stats": {
+        "mean": -0.0003,
+        "std": 0.0463,
+        "norm": 0.5237,
+        "dim": 128
+      },
+      "centroid_vec": [
+        -0.07011,
+        -0.00466,
+        0.02755,
+        0.03643,
+        0.08307,
+        0.03333,
+        0.00586,
+        0.02798,
+        0.04559,
+        0.0267,
+        -0.02816,
+        0.03315,
+        -0.07965,
+        -0.00959,
+        0.01596,
+        0.00729,
+        0.06776,
+        0.00808,
+        -0.04952,
+        -0.01884,
+        0.07826,
+        0.01882,
+        -0.0194,
+        0.0342,
+        0.04961,
+        -0.03568,
+        0.01039,
+        -0.01238,
+        0.00126,
+        -0.02062,
+        -0.06601,
+        0.05203,
+        -0.01949,
+        -0.04567,
+        -0.00181,
+        0.02844,
+        0.00848,
+        0.00994,
+        0.09024,
+        0.06188,
+        0.01488,
+        -0.03661,
+        -0.03554,
+        -0.05316,
+        -0.07165,
+        0.04874,
+        0.03469,
+        -0.02768,
+        -0.05569,
+        -0.0086,
+        0.03302,
+        0.06283,
+        -0.03924,
+        0.04272,
+        0.01666,
+        -0.0587,
+        -0.05269,
+        -0.0373,
+        0.00061,
+        -0.09048,
+        0.01239,
+        0.04785,
+        0.02602,
+        0.04193,
+        0.12511,
+        -0.05726,
+        -0.0727,
+        0.04353,
+        -0.09486,
+        -0.03576,
+        0.05432,
+        -0.04214,
+        0.06319,
+        0.02546,
+        0.03599,
+        0.02405,
+        -0.03106,
+        -0.10999,
+        0.07649,
+        -0.01803,
+        0.07099,
+        0.06976,
+        0.04562,
+        0.01961,
+        -0.02801,
+        0.00901,
+        -0.04688,
+        0.01826,
+        -0.01412,
+        -0.07665,
+        -0.01145,
+        -0.09291,
+        -0.00236,
+        -0.02002,
+        -0.02596,
+        -0.00875,
+        0.00826,
+        0.03668,
+        -0.05396,
+        0.06217,
+        0.04253,
+        -0.00992,
+        0.01217,
+        0.06667,
+        -0.09199,
+        0.03103,
+        -0.05922,
+        -0.03082,
+        -0.00804,
+        0.03436,
+        -0.01182,
+        -0.03474,
+        0.01622,
+        -0.03727,
+        -0.02966,
+        -0.012,
+        0.03015,
+        -0.02571,
+        -0.06342,
+        0.04249,
+        -0.0429,
+        -0.0807,
+        -0.03622,
+        0.06253,
+        0.04483,
+        -0.0115,
+        0.03565,
+        -0.00896
+      ],
+      "alignment": {
+        "k_nearest": 50,
+        "dominant_archive": "diplomatic_decrypts",
+        "dominant_share": 0.54,
+        "bleed_share": 0.46,
+        "top3_archives": [
+          {
+            "archive": "diplomatic_decrypts",
+            "count": 27,
+            "share": 0.54
+          },
+          {
+            "archive": "japanese_sigint",
+            "count": 6,
+            "share": 0.12
+          },
+          {
+            "archive": "german_machine_decrypts",
+            "count": 4,
+            "share": 0.08
+          }
+        ],
+        "primary_cat_dist": {
+          "HW 12": 27,
+          "HW 1": 1,
+          "HW 3": 1,
+          "HW 67": 6,
+          "HW 14": 1,
+          "HW 13": 3,
+          "HW 7": 3,
+          "HW 5": 4,
+          "HW 17": 4
+        },
+        "sample_titles": [
+          {
+            "paper_id": "C3878846",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 31012-31019, 310"
+          },
+          {
+            "paper_id": "C6079367",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 38774, 38809, 38"
+          },
+          {
+            "paper_id": "C6086581",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 39378, 39441, 3952"
+          },
+          {
+            "paper_id": "C3878852",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Afghanistan: 32826, 32892, 32"
+          },
+          {
+            "paper_id": "C3878862",
+            "archive": "diplomatic_decrypts",
+            "title": "Decrypts of intercepted diplomatic communications. Abyssinia: 36465. Afghanistan"
+          }
+        ]
+      },
+      "narrative": "**mod_attractor_13** \u2014 diplomatic_decrypts-dominant basin (54%) with 46% bleed from other series. Top-3 archives among 50 NN: diplomatic_decrypts:27, japanese_sigint:6, german_machine_decrypts:4. H_0 persistence 11.30 | centroid norm 0.524."
+    }
+  ],
+  "archive_distribution_in_input": {
+    "directorate_to_pm": 39,
+    "german_machine_decrypts": 37,
+    "ww2_history": 2,
+    "diplomatic_decrypts": 41,
+    "sigint_summaries": 34,
+    "directorate_policy": 41,
+    "comintern_decrypts": 41,
+    "cryptographic_studies": 36,
+    "british_sigint_history": 41,
+    "air_section": 5,
+    "japanese_sigint": 17,
+    "ww1_history": 25,
+    "rss_admin": 1,
+    "naval_section": 12,
+    "japanese_army": 1,
+    "personal_papers": 25,
+    "tactical_sigint": 2
+  },
+  "dispersion_per_archive": [
+    {
+      "archive": "air_section",
+      "n_records": 5,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 4,
+          "share": 0.8
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 1,
+          "share": 0.2
+        }
+      ]
+    },
+    {
+      "archive": "british_sigint_history",
+      "n_records": 41,
+      "self_basin_share": 0.415,
+      "lands_in": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 17,
+          "share": 0.415
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 9,
+          "share": 0.22
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 9,
+          "share": 0.22
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 5,
+          "share": 0.122
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 1,
+          "share": 0.024
+        }
+      ]
+    },
+    {
+      "archive": "comintern_decrypts",
+      "n_records": 41,
+      "self_basin_share": 0.61,
+      "lands_in": [
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 25,
+          "share": 0.61
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 12,
+          "share": 0.293
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 2,
+          "share": 0.049
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 2,
+          "share": 0.049
+        }
+      ]
+    },
+    {
+      "archive": "cryptographic_studies",
+      "n_records": 36,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 10,
+          "share": 0.278
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 10,
+          "share": 0.278
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 9,
+          "share": 0.25
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 6,
+          "share": 0.167
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 1,
+          "share": 0.028
+        }
+      ]
+    },
+    {
+      "archive": "diplomatic_decrypts",
+      "n_records": 41,
+      "self_basin_share": 0.829,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 34,
+          "share": 0.829
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 5,
+          "share": 0.122
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 2,
+          "share": 0.049
+        }
+      ]
+    },
+    {
+      "archive": "directorate_policy",
+      "n_records": 41,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 18,
+          "share": 0.439
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 11,
+          "share": 0.268
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 8,
+          "share": 0.195
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 4,
+          "share": 0.098
+        }
+      ]
+    },
+    {
+      "archive": "directorate_to_pm",
+      "n_records": 39,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 12,
+          "share": 0.308
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 12,
+          "share": 0.308
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 10,
+          "share": 0.256
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 5,
+          "share": 0.128
+        }
+      ]
+    },
+    {
+      "archive": "german_machine_decrypts",
+      "n_records": 37,
+      "self_basin_share": 0.73,
+      "lands_in": [
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 27,
+          "share": 0.73
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 3,
+          "share": 0.081
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 3,
+          "share": 0.081
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 3,
+          "share": 0.081
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 1,
+          "share": 0.027
+        }
+      ]
+    },
+    {
+      "archive": "japanese_army",
+      "n_records": 1,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 1,
+          "share": 1.0
+        }
+      ]
+    },
+    {
+      "archive": "japanese_sigint",
+      "n_records": 17,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 8,
+          "share": 0.471
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 6,
+          "share": 0.353
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 2,
+          "share": 0.118
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 1,
+          "share": 0.059
+        }
+      ]
+    },
+    {
+      "archive": "naval_section",
+      "n_records": 12,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 6,
+          "share": 0.5
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 4,
+          "share": 0.333
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 1,
+          "share": 0.083
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 1,
+          "share": 0.083
+        }
+      ]
+    },
+    {
+      "archive": "personal_papers",
+      "n_records": 25,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 7,
+          "share": 0.28
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 7,
+          "share": 0.28
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 5,
+          "share": 0.2
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 3,
+          "share": 0.12
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 3,
+          "share": 0.12
+        }
+      ]
+    },
+    {
+      "archive": "rss_admin",
+      "n_records": 1,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 1,
+          "share": 1.0
+        }
+      ]
+    },
+    {
+      "archive": "sigint_summaries",
+      "n_records": 34,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 11,
+          "share": 0.324
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 11,
+          "share": 0.324
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 5,
+          "share": 0.147
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 4,
+          "share": 0.118
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 3,
+          "share": 0.088
+        }
+      ]
+    },
+    {
+      "archive": "tactical_sigint",
+      "n_records": 2,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 1,
+          "share": 0.5
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 1,
+          "share": 0.5
+        }
+      ]
+    },
+    {
+      "archive": "ww1_history",
+      "n_records": 25,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 12,
+          "share": 0.48
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 7,
+          "share": 0.28
+        },
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 4,
+          "share": 0.16
+        },
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 2,
+          "share": 0.08
+        }
+      ]
+    },
+    {
+      "archive": "ww2_history",
+      "n_records": 2,
+      "self_basin_share": 0.0,
+      "lands_in": [
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 1,
+          "share": 0.5
+        },
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 1,
+          "share": 0.5
+        }
+      ]
+    }
+  ],
+  "per_record_assignments": [
+    {
+      "paper_id": "C5490841",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250547",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C35801",
+      "archive": "ww2_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C3878742",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6244414",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830174",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317943",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7828494",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8085819",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8441520",
+      "archive": "air_section",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443357",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5490850",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250556",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981613",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878751",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6244423",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830183",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317952",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8038034",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C86739",
+      "archive": "rss_admin",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403943",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8441521",
+      "archive": "air_section",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443366",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490940",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250646",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3981622",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2716854",
+      "archive": "ww2_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878840",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712052",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830273",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C4317953",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C78122",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038035",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403944",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8441522",
+      "archive": "air_section",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8443367",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490941",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3981623",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878841",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712053",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830274",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C4317954",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038036",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403945",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8441523",
+      "archive": "air_section",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443368",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490942",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5250648",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3981624",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878842",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712054",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830275",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317955",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C78124",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8038037",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8441240",
+      "archive": "japanese_army",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403946",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8876738",
+      "archive": "air_section",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443369",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490943",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250649",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981625",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878843",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7712055",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830276",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317956",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C78125",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8038038",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403947",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443370",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490944",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900235",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250650",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981626",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878844",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7712056",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830277",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317957",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038039",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403948",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443371",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490945",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900350",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250651",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981627",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878845",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7712057",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C6830278",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317958",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038040",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403949",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5490946",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3981628",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5182235",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712058",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830279",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317959",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C78128",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8186611",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_11",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403950",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8443373",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5490947",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900352",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250653",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3981629",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3878846",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712059",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C6830280",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317960",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8186612",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403951",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8443374",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_1",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5490948",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250654",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981630",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C3878847",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712060",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C6830281",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317961",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C83642",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8186613",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403952",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8443358",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490949",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900354",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250655",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C3981631",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878848",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7712061",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C6830282",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317944",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8085820",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8443359",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490851",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900355",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C5250557",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981614",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3878752",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6244424",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830184",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317962",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8186614",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C8403953",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8443360",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490950",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250656",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981632",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C3878849",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712062",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830283",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C4317963",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8186615",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403954",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8443361",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490951",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5250657",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981633",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878850",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712063",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C6830284",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317964",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8240681",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403955",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8443362",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490952",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900358",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C5250658",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981634",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878851",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712064",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C6830285",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317965",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C89685",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8358217",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403956",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8443363",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490953",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_1",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900359",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C5250659",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981635",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878852",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712065",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C6830286",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317966",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8016700",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8358218",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403957",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8443364",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490954",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900360",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5250660",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3981636",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878853",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712066",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830287",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317967",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8016701",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8358219",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403958",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8443365",
+      "archive": "japanese_sigint",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490955",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900361",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5250661",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981637",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878854",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830288",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317968",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8016702",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403959",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490956",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250662",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878855",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6830289",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317969",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8016703",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8388536",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403960",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490957",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250663",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981615",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878856",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712069",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6830290",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317970",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8016704",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8388537",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403961",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490958",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900364",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250664",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981646",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878857",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712070",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830291",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317971",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8016705",
+      "archive": "naval_section",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8388538",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403962",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C5490959",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900365",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250665",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C8560853",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878858",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712071",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7711899",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317945",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7828496",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8085821",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5490852",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250558",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981616",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3878753",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6244425",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830185",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317972",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7708393",
+      "archive": "tactical_sigint",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8438297",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403963",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5490960",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900367",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878859",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712072",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7711900",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317973",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8438298",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403964",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C2900384",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250667",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3878860",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712073",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7711901",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317974",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8438299",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403965",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900385",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250668",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_8",
+      "nearest_module_dom_archive": "directorate_policy"
+    },
+    {
+      "paper_id": "C3981619",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878861",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7712074",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7711902",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317975",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8438300",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403966",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490963",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250669",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981620",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C3878862",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712075",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7711903",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317976",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8438301",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403967",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490964",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250670",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3981621",
+      "archive": "ww1_history",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C3878863",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712076",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7711904",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C4317977",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8878909",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403968",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490965",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900388",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250671",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878864",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712077",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711905",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317978",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8878910",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403924",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490966",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C2900389",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C3878865",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712078",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711906",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C4317979",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7708507",
+      "archive": "tactical_sigint",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8878911",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403925",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490967",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250673",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5949462",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712079",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711907",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C4317980",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8878912",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403926",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490968",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900391",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250674",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5969624",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712080",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711908",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792073",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8006998",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403927",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C2900392",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250675",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5993970",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711909",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C4317946",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8006999",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403923",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490853",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250559",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C3878754",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C6244426",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C6830186",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792074",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038030",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403928",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490970",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_6",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900394",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250676",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6008266",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712082",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7711910",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792075",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8038031",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403929",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5490971",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900395",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250677",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6067488",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711911",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792076",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038032",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C8403930",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490972",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900396",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250678",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6079367",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711912",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792077",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8038033",
+      "archive": "cryptographic_studies",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C8403931",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5490973",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_1",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900397",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5250679",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6083001",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_9",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7712085",
+      "archive": "sigint_summaries",
+      "nearest_module": "mod_attractor_12",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7711913",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_0",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C7792078",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403932",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_5",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C5490974",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900398",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C5250680",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6086581",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C7711914",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C7792079",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C8403933",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5490975",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_3",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C2900399",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_10",
+      "nearest_module_dom_archive": "british_sigint_history"
+    },
+    {
+      "paper_id": "C5250681",
+      "archive": "german_machine_decrypts",
+      "nearest_module": "mod_attractor_2",
+      "nearest_module_dom_archive": "german_machine_decrypts"
+    },
+    {
+      "paper_id": "C6086602",
+      "archive": "diplomatic_decrypts",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7711915",
+      "archive": "directorate_policy",
+      "nearest_module": "mod_attractor_1",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C7792080",
+      "archive": "comintern_decrypts",
+      "nearest_module": "mod_attractor_13",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    },
+    {
+      "paper_id": "C8403934",
+      "archive": "british_sigint_history",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C5490976",
+      "archive": "directorate_to_pm",
+      "nearest_module": "mod_attractor_4",
+      "nearest_module_dom_archive": "comintern_decrypts"
+    },
+    {
+      "paper_id": "C2900400",
+      "archive": "personal_papers",
+      "nearest_module": "mod_attractor_7",
+      "nearest_module_dom_archive": "diplomatic_decrypts"
+    }
+  ]
+}

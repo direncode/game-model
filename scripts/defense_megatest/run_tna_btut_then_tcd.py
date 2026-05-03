@@ -225,6 +225,9 @@ def main() -> int:
                         "norm":  round(float(np.linalg.norm(c)), 4),
                         "dim":   int(c.shape[0]),
                     }
+                    # Persist the centroid vector itself so dispersion analysis
+                    # can be recomputed from the artifact alone.
+                    info["centroid_vec"] = [round(float(v), 5) for v in c.tolist()]
                 all_modules.append(info)
         print(f"  iter {ep+1:2d}: cryst={r.get('crystallized', False)} mods={loop.num_modules} {ep_wall:.2f}s")
     tcd_wall = time.perf_counter() - t0
@@ -280,9 +283,60 @@ def main() -> int:
                     f"({int(100*dom_share)}%), heavy cross-series bleed "
                     f"({int(100*bleed_share)}%). ")
         nbr = ", ".join(f"{a}:{c}" for a, c in top3)
-        topo = (f"H₀ persistence {module_info['topology']['persistence']:.2f} | "
+        topo = (f"H_0 persistence {module_info['topology']['persistence']:.2f} | "
                 f"centroid norm {module_info['centroid_stats']['norm']:.3f}.")
         module_info["narrative"] = head + f"Top-3 archives among 50 NN: {nbr}. " + topo
+
+    # ── Stage 4: per-archive dispersion analysis ──────────────────────
+    # For every record, find its nearest module by centroid distance.
+    # Tally per-archive: where do this archive's records get assigned?
+    # Specifically: what is the dominant_archive of the basin each record
+    # of archive X lands in? This is the directorate_to_pm dispersion test.
+    print()
+    print("=" * 78)
+    print("STAGE 4 — per-archive dispersion (where do each archive's records land?)")
+    print("=" * 78)
+
+    modules_with_centroid = [m for m in all_modules if "centroid_vec" in m]
+    if modules_with_centroid:
+        centroid_matrix = np.array([m["centroid_vec"] for m in modules_with_centroid], dtype=np.float32)
+        module_dom_archive = [m["alignment"]["dominant_archive"] for m in modules_with_centroid]
+        module_ids_list = [m["module_id"] for m in modules_with_centroid]
+
+        # For each record: distance to every module, take argmin.
+        # Z_keep is (N, D), centroid_matrix is (M, D). Pairwise distances:
+        diffs = z_np[:, None, :] - centroid_matrix[None, :, :]      # (N, M, D)
+        dists_all = np.linalg.norm(diffs, axis=-1)                   # (N, M)
+        nearest_module_idx = np.argmin(dists_all, axis=1)            # (N,)
+        nearest_module_id = [module_ids_list[i] for i in nearest_module_idx]
+        nearest_module_dom = [module_dom_archive[i] for i in nearest_module_idx]
+
+        # Per-archive: distribution of dom-archive of nearest module.
+        per_archive_dispersion: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+        for src_archive, dest_dom in zip(archives_keep, nearest_module_dom):
+            per_archive_dispersion[src_archive][dest_dom] += 1
+
+        # Print + save.
+        dispersion_rows = []
+        for src in sorted(per_archive_dispersion.keys()):
+            dist = dict(per_archive_dispersion[src])
+            n_total = sum(dist.values())
+            top = sorted(dist.items(), key=lambda x: -x[1])[:5]
+            self_share = dist.get(src, 0) / n_total if n_total else 0
+            row = {
+                "archive":       src,
+                "n_records":     n_total,
+                "self_basin_share": round(self_share, 3),
+                "lands_in":      [{"dominant_archive": k, "count": v, "share": round(v / n_total, 3)}
+                                  for k, v in top],
+            }
+            dispersion_rows.append(row)
+            top_str = ", ".join(f"{k}:{v}" for k, v in top[:3])
+            print(f"  {src:28s} N={n_total:3d}  self={int(100*self_share):3d}%  -> {top_str}")
+    else:
+        dispersion_rows = []
+        nearest_module_id = []
+        nearest_module_dom = []
 
     out = {
         "generated_at":     time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -314,20 +368,21 @@ def main() -> int:
         },
         "modules_formed": all_modules,
         "archive_distribution_in_input": dict(archive_counts),
+        "dispersion_per_archive": dispersion_rows,
+        "per_record_assignments": [
+            {"paper_id": p, "archive": a, "nearest_module": m, "nearest_module_dom_archive": d}
+            for p, a, m, d in zip(
+                [r["paper_id"] for r in sample_keep],
+                archives_keep,
+                nearest_module_id,
+                nearest_module_dom,
+            )
+        ] if dispersion_rows else [],
     }
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
     print(f"\n[tna+tcd] artifact: {args.output}")
-    print()
-    print("=== PER-MODULE NARRATIVES ===")
-    print()
-    for m in all_modules:
-        print(m.get("narrative", "(no narrative)"))
-        print()
-        print("-" * 78)
-        print()
-
     return 0
 
 

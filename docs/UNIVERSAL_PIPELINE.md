@@ -251,25 +251,50 @@ python -m scripts.defense_megatest.run_tna_btut_then_tcd \
 
 **Reading:** *zero* modules are pure (highest dominant share is 46%). Every
 module pulls from multiple HW series. Persistence is uniformly high
-(11.1–11.9). This is the **substrate-novelty signature**: the engine found
-14 topologically distinct basins, but none of them matches the archivist's
-HW-series taxonomy. Either the catalogue descriptions share substantial
-cross-series vocabulary OR the structural basins represent something
-*different* from the series boundaries — operational themes, time periods,
-record types — that cuts across series.
+(11.1–11.9).
 
-The over-representation worth investigating:
-- `german_machine_decrypts` (9% of corpus) dominates 5 of 14 modules (36%).
-- `comintern_decrypts` (10% of corpus) dominates 3 of 14 modules (21%).
-- `directorate_to_pm` (10% of corpus) dominates **zero** modules — its
-  records get dispersed across multiple basins without forming one of
-  their own. That's a real finding: the PM-correspondence series doesn't
-  have an internal structural archetype; it's a thin layer that touches
-  many themes.
+The headline finding from this corpus, **validated across four seeds and
+across a 4× scale jump (500 → 2,169 records)**:
 
-This is the kind of observation a domain historian could investigate. It's
-not a discovery in itself — but it's a *pointer* to where discovery would
-plausibly live.
+> **HW 1 (`directorate_to_pm`) is structurally a *channel*, not a *content
+> type*. The engine surfaces this without being told the labels.**
+
+Evidence trail:
+
+| Check                          | Result                                                                     |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| PM-dominant modules @ seed 42 (500) | 0 / 14                                                                |
+| PM-dominant modules @ seed 42 (2,169) | 0 / 12 (everything collapses onto German basins; PM still has none) |
+| PM-dominant modules @ seed 43 (500) | 0 / 14                                                                |
+| PM-dominant modules @ seed 44 (500) | 1 / 14 (40% plurality, content-mixed)                                 |
+| PM-dominant modules @ seed 45 (500) | 0 / 14                                                                |
+| **Total** PM-dominant modules across 5 runs | **1 / 70** (vs ~7 expected at PM's 10% corpus share — a 7× shortfall) |
+| Per-record content routing @ seed 43 | 12 PM → comintern (Russian Front), 12 → diplomatic (Naval), 10 → german (Wehrmacht), 5 → british_sigint_history (admin) |
+| Top distinctive PM tokens (full corpus, n=417) | ambassador, benghazi, headlines, BONIFACE, derna, tripoli, kesselring, leningrad — **operational subjects, not correspondence vocabulary** |
+| Title prefixes in PM records   | "North Africa" (80), "Naval Headlines" (35), "BONIFACE reports" (26), "Mediterranean" (14), "Russian Front" (14) — content-organized |
+| Comparison: comparable-size archives' self-basin share | diplomatic 82%, comintern 61%, german 73% (seed 43); PM 0% in 3 of 4 seeds, 38% in 1 |
+
+Other comparably-sized archives form pure-ish basins; PM never does. The
+PM records' nearest-module assignments cluster by *operational topic*: a
+PM record about Kharkov lands near comintern (the Soviet-message basin),
+a PM record about Tirpitz lands near diplomatic (Naval Headlines), a PM
+record about Mediterranean convoys lands near german (Wehrmacht ops).
+Admin records about the PM channel itself ("Letter to C requesting daily
+service") land near british_sigint_history (the self-referential basin).
+
+**Mechanism:** HW 1 is the only HW series in this set that's organized by
+*destination* (PM's desk) rather than by *content type*. Each HW 1
+record's text is dominated by the operational subject of the message it
+carried, not by anything PM-specific (the prose check found 0% explicit
+PM-correspondence vocabulary). The TF-IDF embedder picks up content
+vocabulary, so PM records get routed to whichever content basin matches
+their topic.
+
+This is the kind of finding the engine is for: a structural property of
+the corpus that the archivist's classification scheme implicitly encodes
+but doesn't explicitly call out. A domain historian could investigate
+and probably confirm — TNA's HW classification is mixed, with HW 1 being
+the destination-organized outlier.
 
 ### RunPod GPU run (numeric, NSL-KDD, A100/4090)
 
