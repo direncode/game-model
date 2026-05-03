@@ -1,0 +1,11 @@
+# TNA pipeline via the OCEAN stdlib.
+# Demonstrates module import + function call.
+
+require ocean 1.0
+
+import "scripts/operators/ocean/stdlib/substrate.ocean" as substrate
+
+substrate.basic_run(corpus = "tmp/bombe_tna_full.ndjson",
+                    target = 500,
+                    embed_dim = 128,
+                    output = "data/validation/tna_via_stdlib.json")

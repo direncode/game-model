@@ -15,6 +15,8 @@ from typing import Any
 
 from .ast import (
     Program, VerbStmt, LetStmt, SweepStmt, CompareStmt,
+    IfStmt, ReturnStmt, ParallelStmt, BoolLit, IntLit, FloatLit,
+    BinaryOp, UnaryOp, IdentRef,
 )
 from .parser import parse_ocean
 
@@ -86,26 +88,71 @@ class CompileContext:
         self.named_steps: dict[str, dict] = {}        # bind_name -> step dict
         self.last_by_verb: dict[str, str] = {}        # verb -> step name
         self.sweep_subs: dict[str, str] = {}          # variable -> string value (for ${var})
+        self.defines: dict = {}                       # function table
+        self.param_subs: dict = {}                    # parameter name -> compile-time value
 
     def step_count(self) -> int:
         return len(self.steps)
 
 
-def compile_ocean(text: str, source_name: str = "<input>") -> dict:
+def compile_ocean(text: str, source_name: str = "<input>",
+                  skip_typecheck: bool = False,
+                  module_resolver=None) -> dict:
     """Compile OCEAN source -> a JSON-shaped pipeline config dict.
 
-    The dict matches the schema run_pipeline() expects:
-        {seed, steps: [{name, kind, inputs, config}, ...]}
+    Pipeline:  parse -> resolve imports -> typecheck -> compile DAG.
+
+    `module_resolver(path: str) -> Program` is an optional callback that
+    loads an imported file. Defaults to filesystem reads relative to the
+    source file's directory.
     """
     prog = parse_ocean(text, source_name=source_name)
+
+    # Resolve imports — load each imported file and merge its `define`s
+    # into our program's namespace under the alias.
+    if prog.imports:
+        prog = _resolve_imports(prog, source_name, module_resolver)
+
+    # Static type check (can be disabled for debugging).
+    if not skip_typecheck:
+        from .typecheck import typecheck
+        typecheck(prog)
+
     ctx = CompileContext(source_name, text.splitlines())
+    ctx.defines = dict(prog.defines)  # function table for call expansion
     for stmt in prog.statements:
         _compile_stmt(stmt, ctx)
     return {
         "seed":  prog.seed,
         "steps": ctx.steps,
         "_source_name": source_name,
+        "_require_version": prog.require_version,
     }
+
+
+def _resolve_imports(prog: Program, source_name: str, resolver) -> Program:
+    """Walk imports, parse imported files, namespace their defines under alias."""
+    base_dir = Path(source_name).parent if source_name != "<input>" else Path(".")
+    for imp in prog.imports:
+        if resolver:
+            imported = resolver(imp.path)
+        else:
+            imp_path = base_dir / imp.path
+            if not imp_path.exists():
+                # Try absolute / repo-rooted
+                imp_path = Path(imp.path)
+            if not imp_path.exists():
+                raise CompileError(
+                    f"import not found: {imp.path}",
+                    imp.line, imp.col, prog.source_text.splitlines(),
+                )
+            imported = parse_ocean(imp_path.read_text(encoding="utf-8"),
+                                   source_name=str(imp_path))
+        # Namespace defines under alias (or no prefix if no alias)
+        prefix = (imp.alias + ".") if imp.alias else ""
+        for name, d in imported.defines.items():
+            prog.defines[prefix + name] = d
+    return prog
 
 
 # ── Statement compilers ──────────────────────────────────────────────────
@@ -115,15 +162,148 @@ def _compile_stmt(stmt, ctx: CompileContext):
         _compile_verb(stmt, ctx)
     elif isinstance(stmt, LetStmt):
         # Let just compiles the inner verb_stmt, but binds the result-name
-        if stmt.expr.bind_name is None:
-            stmt.expr.bind_name = stmt.name
-        _compile_verb(stmt.expr, ctx)
+        if isinstance(stmt.expr, VerbStmt):
+            if stmt.expr.bind_name is None:
+                stmt.expr.bind_name = stmt.name
+            _compile_verb(stmt.expr, ctx)
+        # Non-verb let-bindings (let x = 5) don't emit DAG steps; their
+        # value is consumed by upstream wiring at parse time.
     elif isinstance(stmt, SweepStmt):
         _compile_sweep(stmt, ctx)
     elif isinstance(stmt, CompareStmt):
         _compile_compare(stmt, ctx)
+    elif isinstance(stmt, IfStmt):
+        _compile_if(stmt, ctx)
+    elif isinstance(stmt, ParallelStmt):
+        # Parallel = inline-with-marker. The runner already runs independent
+        # ops in topological order; `parallel do ... end` is currently a hint.
+        for sub in stmt.body:
+            _compile_stmt(sub, ctx)
+    elif isinstance(stmt, ReturnStmt):
+        # `return` inside a define declares the function output, but defines
+        # don't emit DAG steps directly. At top level, `return` is a no-op.
+        if stmt.expr is not None and isinstance(stmt.expr, VerbStmt):
+            _compile_verb(stmt.expr, ctx)
     else:
+        # Function call as a top-level statement (rare but valid)
+        from .ast import CallExpr
+        if isinstance(stmt, CallExpr):
+            _expand_call(stmt, ctx)
+            return
         raise CompileError(f"unsupported statement type {type(stmt).__name__}")
+
+
+def _expand_call(call, ctx: CompileContext):
+    """Inline-expand a function call: substitute params, compile body."""
+    d = ctx.defines.get(call.func)
+    if d is None:
+        raise CompileError(
+            f"call to undefined function {call.func!r}",
+            call.line, call.col, ctx.source_lines,
+            suggestion=f"defined functions: {', '.join(sorted(ctx.defines)) or '(none)'}",
+        )
+    # Build arg map from positional + kwargs
+    arg_map = {}
+    for i, p in enumerate(d.params):
+        if i < len(call.args):
+            arg_map[p.name] = call.args[i]
+        elif p.name in call.kwargs:
+            arg_map[p.name] = call.kwargs[p.name]
+        elif p.default is not None:
+            arg_map[p.name] = p.default
+        else:
+            raise CompileError(
+                f"missing required argument {p.name!r} in call to {call.func!r}",
+                call.line, call.col, ctx.source_lines,
+            )
+    # Resolve to literal values where possible (compile-time)
+    saved_subs = dict(ctx.param_subs)
+    for k, v in arg_map.items():
+        ctx.param_subs[k] = _eval_const(v) if v else None
+    # Compile the body with substitutions in scope
+    for sub in d.body:
+        _compile_stmt(sub, ctx)
+    ctx.param_subs = saved_subs
+
+
+def _compile_if(stmt: IfStmt, ctx: CompileContext):
+    """Constant-fold the condition at compile time and emit the chosen branch.
+
+    Non-constant conditions raise CompileError. This is appropriate for a
+    DAG language: the condition determines pipeline STRUCTURE, not data.
+    Like Rust's `if cfg!(...)` or C++ `if constexpr`.
+    """
+    val = _eval_const(stmt.cond)
+    if val is None:
+        raise CompileError(
+            "if condition must be a compile-time constant; "
+            "found non-constant expression",
+            stmt.line, stmt.col, ctx.source_lines,
+            suggestion="OCEAN if-statements determine pipeline structure at compile time. "
+                       "Use `sweep` for parameterized variation or branch on literal flags.",
+        )
+    if val:
+        for sub in stmt.then_body:
+            _compile_stmt(sub, ctx)
+        return
+    for cond, body in stmt.elif_branches:
+        if _eval_const(cond):
+            for sub in body:
+                _compile_stmt(sub, ctx)
+            return
+    if stmt.else_body:
+        for sub in stmt.else_body:
+            _compile_stmt(sub, ctx)
+
+
+def _eval_const(expr):
+    """Evaluate a literal expression at compile time. Returns None if it
+    contains a non-literal (e.g. an IdentRef), which surfaces a CompileError."""
+    if expr is None:
+        return None
+    if isinstance(expr, BoolLit):
+        return expr.value
+    if isinstance(expr, IntLit):
+        return expr.value
+    if isinstance(expr, FloatLit):
+        return expr.value
+    # String + Path literals: import here to avoid circular imports
+    from .ast import StringLit, PathLit
+    if isinstance(expr, StringLit):
+        return expr.value
+    if isinstance(expr, PathLit):
+        return expr.value
+    if isinstance(expr, BinaryOp):
+        l = _eval_const(expr.left)
+        r = _eval_const(expr.right)
+        if l is None or r is None:
+            return None
+        ops = {
+            "==": lambda a, b: a == b,
+            "!=": lambda a, b: a != b,
+            "<":  lambda a, b: a < b,
+            ">":  lambda a, b: a > b,
+            "<=": lambda a, b: a <= b,
+            ">=": lambda a, b: a >= b,
+            "+":  lambda a, b: a + b,
+            "-":  lambda a, b: a - b,
+            "*":  lambda a, b: a * b,
+            "/":  lambda a, b: a / b,
+            "and": lambda a, b: a and b,
+            "or":  lambda a, b: a or b,
+        }
+        op = ops.get(expr.op)
+        if op is None:
+            return None
+        return op(l, r)
+    if isinstance(expr, UnaryOp):
+        v = _eval_const(expr.operand)
+        if v is None:
+            return None
+        return (not v) if expr.op == "not" else (-v)
+    if isinstance(expr, IdentRef):
+        return None
+    return None
 
 
 def _compile_verb(stmt: VerbStmt, ctx: CompileContext):
@@ -179,6 +359,18 @@ def _resolve_template(template: str, stmt: VerbStmt, ctx: CompileContext) -> str
 def _coerce_config(stmt: VerbStmt, ctx: CompileContext) -> dict:
     """Normalize args dict into the operator's expected config shape."""
     cfg = dict(stmt.args)
+
+    # Resolve parameter references ({"_param_ref": "name"}) using ctx.param_subs.
+    for k, v in list(cfg.items()):
+        if isinstance(v, dict) and "_param_ref" in v:
+            ref = v["_param_ref"]
+            resolved = ctx.param_subs.get(ref)
+            if resolved is None:
+                raise CompileError(
+                    f"parameter {ref!r} is not bound at this call site",
+                    stmt.line, stmt.col, ctx.source_lines,
+                )
+            cfg[k] = resolved
 
     # output_template (path with ${var}) -> output (resolved)
     if "output_template" in cfg:

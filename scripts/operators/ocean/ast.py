@@ -101,9 +101,109 @@ class SeedDecl:
 
 
 @dataclass
+class BoolLit:
+    value: bool
+    line: int
+    col: int
+
+
+@dataclass
+class BinaryOp:
+    op: str                         # ==, !=, <, >, <=, >=, +, -, *, /, and, or
+    left: Any
+    right: Any
+    line: int
+    col: int
+
+
+@dataclass
+class UnaryOp:
+    op: str                         # 'not', '-'
+    operand: Any
+    line: int
+    col: int
+
+
+@dataclass
+class CallExpr:
+    func: str                       # function name (or namespaced 'mod.func')
+    args: list[Any]                 # positional or keyword args
+    kwargs: dict[str, Any]
+    line: int
+    col: int
+
+
+@dataclass
+class TypeAnnotation:
+    name: str                       # type name (Records, Z, Modules, ...)
+    param: 'TypeAnnotation | None' = None  # generic param e.g. List[Records]
+
+
+@dataclass
+class Param:
+    """Function parameter."""
+    name: str
+    type_ann: TypeAnnotation | None = None
+    default: Any = None             # literal AST node or None
+
+
+@dataclass
+class DefineDecl:
+    name: str
+    params: list[Param]
+    body: list[Any]                 # statements
+    line: int
+    col: int
+
+
+@dataclass
+class IfStmt:
+    cond: Any                       # expression
+    then_body: list[Any]            # statements
+    elif_branches: list[tuple[Any, list[Any]]]  # [(cond, body), ...]
+    else_body: list[Any] | None
+    line: int
+    col: int
+
+
+@dataclass
+class ReturnStmt:
+    expr: Any | None                # may be None for bare 'return'
+    line: int
+    col: int
+
+
+@dataclass
+class ImportStmt:
+    path: str
+    alias: str | None
+    line: int
+    col: int
+
+
+@dataclass
+class RequireDecl:
+    major: int
+    minor: int
+    patch: int
+    line: int
+    col: int
+
+
+@dataclass
+class ParallelStmt:
+    body: list[Any]
+    line: int
+    col: int
+
+
+@dataclass
 class Program:
     """Top-level: an OCEAN program is a sequence of statements."""
     seed: int
     statements: list[Any] = field(default_factory=list)
+    require_version: tuple[int, int, int] | None = None
+    imports: list[ImportStmt] = field(default_factory=list)
+    defines: dict[str, DefineDecl] = field(default_factory=dict)
     source_name: str = "<input>"
     source_text: str = ""

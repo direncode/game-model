@@ -12,8 +12,7 @@ from typing import Iterator
 
 class TT(Enum):
     """Token type."""
-    KEYWORD = "KEYWORD"          # seed let in as on from to into using with by of do end
-                                  # sweep compare against parallel import step
+    KEYWORD = "KEYWORD"          # reserved word
     VERB    = "VERB"              # load embed cluster align find narrate save reduce
     IDENT   = "IDENT"             # lowercase_with_underscores
     INT     = "INT"               # 42, 1500, 10_000
@@ -26,6 +25,9 @@ class TT(Enum):
     RBRACE  = "RBRACE"            # }
     LPAREN  = "LPAREN"            # (
     RPAREN  = "RPAREN"            # )
+    COLON   = "COLON"             # : (type annotation)
+    DOT     = "DOT"               # . (namespace access for imports)
+    OP      = "OP"                # comparison / arithmetic
     NEWLINE = "NEWLINE"           # \n (significant)
     INTERP  = "INTERP"            # ${name}
     EOF     = "EOF"
@@ -33,7 +35,8 @@ class TT(Enum):
 
 # Keywords vs Verbs is a distinction the parser cares about.
 KEYWORDS = {
-    "seed", "let", "in", "as", "on", "from", "to", "into",
+    # version + structure
+    "require", "seed", "let", "in", "as", "on", "from", "to", "into",
     "using", "with", "by", "of", "do", "end", "sweep",
     "compare", "against", "parallel", "import", "step", "take",
     "balanced", "field", "is", "for", "rounds", "round", "max",
@@ -42,8 +45,21 @@ KEYWORDS = {
     "dimensions", "dimension", "loop", "recursive", "tcd", "tf-idf",
     "tfidf", "content", "fingerprint", "one-hot", "numeric", "mean",
     "corpus", "normal", "text",
+    # v1 additions
+    "define", "return", "if", "then", "else", "elif",
+    "true", "false", "not", "and", "or",
+    "ocean",  # used in 'require ocean 1.0'
+    "btut",   # used in 'using btut'
+    "survivors", "budget", "target",
+    "style", "technical", "plain", "terse",
 }
 VERBS = {"load", "embed", "cluster", "align", "find", "narrate", "save", "reduce"}
+
+# Comparison + arithmetic operators (multi-char)
+OPERATORS = {
+    "==", "!=", "<=", ">=", "<", ">",
+    "+", "-", "*", "/",
+}
 
 
 @dataclass
@@ -109,6 +125,14 @@ def tokenize(text: str) -> list[Token]:
 
         col = i - line_start + 1
 
+        # Two-char operators first (==, !=, <=, >=)
+        if i + 1 < len(text):
+            two = text[i:i + 2]
+            if two in ("==", "!=", "<=", ">="):
+                out.append(Token(TT.OP, two, line_no, col))
+                i += 2
+                continue
+
         # Punctuation
         if ch == "=":
             out.append(Token(TT.EQ, "=", line_no, col))
@@ -134,15 +158,55 @@ def tokenize(text: str) -> list[Token]:
             out.append(Token(TT.RPAREN, ")", line_no, col))
             i += 1
             continue
+        if ch == ":":
+            out.append(Token(TT.COLON, ":", line_no, col))
+            i += 1
+            continue
+        # Single-char arith / comparison.
+        # `/` is ambiguous: division vs path-start. Disambiguate by lookahead —
+        # if it leads into a path-shaped word, treat as path-start; else OP.
+        if ch == "/":
+            j = i + 1
+            while j < len(text) and (text[j].isalnum() or text[j] in "_./-\\"):
+                j += 1
+            candidate = text[i:j]
+            looks_like_path = ("/" in candidate[1:] or
+                               any(candidate.endswith("." + ext) for ext in
+                                   ("ndjson", "csv", "tsv", "json", "yaml",
+                                    "yml", "txt", "ocean")))
+            if looks_like_path and j > i + 1:
+                out.append(Token(TT.PATH, candidate, line_no, col))
+                i = j
+                continue
+            out.append(Token(TT.OP, "/", line_no, col))
+            i += 1
+            continue
+        if ch in "<>+*":
+            out.append(Token(TT.OP, ch, line_no, col))
+            i += 1
+            continue
+        # `-` is tricky — could be unary on a numeric (handled in numeric branch
+        # below) or binary subtraction. Disambiguate: if previous token is a
+        # value (INT, FLOAT, IDENT, RPAREN), it's binary; else unary.
+        if ch == "-":
+            prev = out[-1] if out else None
+            if prev and prev.type in (TT.INT, TT.FLOAT, TT.IDENT, TT.RPAREN, TT.STRING):
+                out.append(Token(TT.OP, "-", line_no, col))
+                i += 1
+                continue
+            # else: fall through to numeric handling below
 
         # String literals: "..." or '...'
         if ch in ("\"", "'"):
             quote = ch
             j = i + 1
             buf = []
+            ESCAPE_MAP = {"n": "\n", "t": "\t", "r": "\r",
+                          "\\": "\\", '"': '"', "'": "'"}
             while j < len(text) and text[j] != quote:
                 if text[j] == "\\" and j + 1 < len(text):
-                    buf.append(text[j + 1])
+                    nxt = text[j + 1]
+                    buf.append(ESCAPE_MAP.get(nxt, nxt))
                     j += 2
                 else:
                     buf.append(text[j])
@@ -200,8 +264,12 @@ def tokenize(text: str) -> list[Token]:
         # for interp) as a PATH token.
         if ch.isalpha() or ch == "_" or ch == "/" or ch == ".":
             j = i
+            # Special-case Windows drive letters: 'C:/' or 'C:\\'.
+            if (j + 2 < len(text) and text[j].isalpha()
+                    and text[j + 1] == ":" and text[j + 2] in "/\\"):
+                j += 2
             while j < len(text) and (
-                text[j].isalnum() or text[j] in "_./-"
+                text[j].isalnum() or text[j] in "_./-\\"
             ):
                 j += 1
             word = text[i:j]
