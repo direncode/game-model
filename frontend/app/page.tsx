@@ -1,6 +1,7 @@
 import { Nav } from "@/components/landing/Nav";
 import { HomeHero } from "@/components/landing/HomeHero";
 import { HomeLayers } from "@/components/landing/HomeLayers";
+import { HomeMass } from "@/components/landing/HomeMass";
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <main>
         <HomeHero />
         <HomeLayers />
+        <HomeMass />
       </main>
     </div>
   );

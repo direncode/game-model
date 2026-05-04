@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: "Silicon",   href: "/silicon",   layer: "L3" },
   { label: "Language",  href: "/language",  layer: null },
   { label: "Gallery",   href: "/gallery",   layer: null },
+  { label: "System",    href: "/system",    layer: null },
 ];
 
 export function Nav() {
