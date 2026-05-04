@@ -1,71 +1,71 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Nav } from "@/components/landing/Nav";
-import { Footer } from "@/components/landing/Footer";
-import { RangeHero } from "@/components/range/RangeHero";
-import { RangeBeyondLLM } from "@/components/range/RangeBeyondLLM";
-import { RangeWhatFormed } from "@/components/range/RangeWhatFormed";
-import { RangeQuery } from "@/components/range/RangeQuery";
-import { RangeAirGap } from "@/components/range/RangeAirGap";
-import { RangeIntegrations } from "@/components/range/RangeIntegrations";
-import { RangeOperator } from "@/components/range/RangeOperator";
-import { RangeConsole } from "./RangeConsole";
-import { SentinelReplay } from "@/components/landing/sentinel/SentinelReplay";
+import { OceanWorkbench } from "./OceanWorkbench";
 
 export const metadata: Metadata = {
-  title: "Range · Private Model Former",
+  title: "Console · OCEAN Workbench · Latent Ocean",
   description:
-    "Form a deterministic private model from any corpus. The air-gap-by-default alternative to probabilistic AI. Real records, real fingerprinting, byte-identical replay across runs.",
+    "The OCEAN workbench. Write a substrate-clustering pipeline, run it, see the same program rendered as MCP / Postgres / HTTP invocations. One language, three protocols, identical semantics.",
 };
 
-export default function RangePage() {
+export default function ConsolePage() {
   return (
     <div className="min-h-screen bg-black text-white antialiased">
       <Nav />
-      <main>
-        <RangeHero />
-        <RangeBeyondLLM />
-        <RangeWhatFormed />
-
-        {/* Runnable formation console */}
-        <section id="range-console" className="relative py-24 border-t border-white/5">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-            <div className="mb-8">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-li-cyan mb-4">
-                Run · form a model · gallery of formed artifacts
-              </p>
-              <h2 className="font-display text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[0.92] max-w-5xl">
-                Point at any corpus.<br />
-                <span className="text-white/45">A private model lands.</span>
-              </h2>
-              <p className="mt-6 text-lg text-white/65 max-w-3xl leading-relaxed">
-                Built-in corpora (NSL-KDD, EDGAR, Titan validation), pasted
-                JSON / NDJSON / CSV, or any local file path the appliance
-                can read. The generic adapter detects shape, the
-                schema-agnostic projection fingerprints every record, the
-                Hamming-neighborhood crystallizer discovers a taxonomy,
-                and the artifact lands at{" "}
-                <code className="font-mono text-li-cyan">/data/formed_models/[id].range.json</code>.
-                If <code className="font-mono text-li-cyan">BTUT_BRIDGE_URL</code>{" "}
-                is configured, fingerprinting HTTP-bridges to the real
-                Python BTUT pipeline. If <code className="font-mono text-li-cyan">RUNPOD_API_KEY</code>{" "}
-                is set, full TCD-JEPA crystallization runs async on RunPod GPU.
-              </p>
+      <main className="pt-32">
+        {/* Hero */}
+        <section className="px-6 pb-12 border-b border-white/5">
+          <div className="max-w-[1480px] mx-auto">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
+              CONSOLE · OCEAN WORKBENCH
+            </p>
+            <h1 className="text-[clamp(2.4rem,5vw,4.2rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-8 max-w-[20ch]">
+              Write a pipeline. Run it. Pick which protocol it ships through.
+            </h1>
+            <p className="text-[16.5px] leading-[1.65] text-white/65 max-w-[60ch]">
+              The same OCEAN program is reachable through three protocols. Below: an editor for the program, a runner that executes it deterministically, and side-by-side rendering of the same program as it would be invoked through the MCP server, the Postgres extension, and the HTTP API.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/language" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Language Spec →
+              </Link>
+              <Link href="/protocols" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Protocols →
+              </Link>
+              <Link href="/console/legacy" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55 hover:text-white border border-white/15 hover:border-white/30 px-4 py-2 rounded-full">
+                Legacy formation runner
+              </Link>
             </div>
-            <RangeConsole />
           </div>
         </section>
 
-        <RangeQuery />
+        {/* The workbench itself */}
+        <OceanWorkbench />
 
-        {/* Lineage verifier (anchor target for "open in live replay" deep links) */}
-        <div id="replay-anchor" />
-        <SentinelReplay />
-
-        <RangeIntegrations />
-        <RangeOperator />
-        <RangeAirGap />
+        {/* Footer link strip */}
+        <section className="px-6 py-16 border-t border-white/5">
+          <div className="max-w-[1480px] mx-auto">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-4">
+              WHERE TO GO NEXT
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/protocols" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Layer 1 — Protocols
+              </Link>
+              <Link href="/build" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Layer 2 — Build
+              </Link>
+              <Link href="/silicon" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Layer 3 — Silicon
+              </Link>
+              <Link href="/gallery" className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/85 hover:text-white border border-white/30 hover:border-white px-4 py-2 rounded-full">
+                Gallery
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-      <Footer />
     </div>
   );
 }
