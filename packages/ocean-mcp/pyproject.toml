@@ -58,4 +58,10 @@ include  = ["ocean_mcp*"]
 ocean_mcp = [
     "stdlib/*.ocean",
     "py.typed",
+    "_vendored/**/*.py",
+    "_vendored/**/*.ocean",
 ]
+
+# Include the vendored runtime as data files
+[tool.setuptools.exclude-package-data]
+ocean_mcp = ["_vendored/**/__pycache__/**"]

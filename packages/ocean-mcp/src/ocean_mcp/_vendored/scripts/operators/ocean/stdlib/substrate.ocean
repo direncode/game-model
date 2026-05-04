@@ -1,0 +1,62 @@
+# OCEAN standard library — substrate-clustering presets.
+# Importable via:    import "stdlib/substrate.ocean" as substrate
+# Then call:         let result = substrate.basic_run(corpus="x.ndjson")
+
+## basic_run — simplest end-to-end pipeline
+## Args:
+##   corpus       — NDJSON file path
+##   target       — record sample size (default 500)
+##   embed_dim    — embedding dimensions (default 128)
+##   iters        — TCD recursive-loop rounds (default 16)
+##   k_nearest    — neighbors per module for alignment (default 50)
+##   output       — artifact destination
+define basic_run(corpus, target = 500, embed_dim = 128, iters = 16,
+                 k_nearest = 50, output = "data/validation/basic_run.json") do
+    load corpus take target records balanced by archive
+    embed text into embed_dim dimensions
+    cluster for iters rounds max 24 modules energy = corpus mean
+    align modules using k_nearest nearest records
+    find dispersion of each label
+    save to output
+end
+
+## seed_sweep — multi-seed stability study with parametric bounds (v1.1)
+## Args:
+##   corpus     — NDJSON file path
+##   target     — record sample size per branch
+##   first_seed — first seed in the sweep (default 42)
+##   last_seed  — last seed inclusive (default 45)
+define seed_sweep(corpus, target = 500, first_seed = 42, last_seed = 45) do
+    sweep s from first_seed to last_seed do
+        load corpus take target records balanced by archive
+        embed text into 128 dimensions
+        cluster for 16 rounds max 24 modules energy = corpus mean
+        align modules using 50 nearest records
+        find dispersion of each label
+        save to data/validation/seed_${s}.json
+    end
+end
+
+## anomaly_focused — uses the normal-anchored energy function
+## Suitable for corpora with a privileged "normal" class (e.g. NSL-KDD).
+define anomaly_focused(corpus, normal_label = "normal",
+                       target = 8000, output = "data/validation/anomaly.json") do
+    load corpus take target records balanced by type label field is type
+    embed text into 64 dimensions using one-hot numeric
+    cluster for 16 rounds max 24 modules energy = normal anchored on normal_label
+    align modules using 50 nearest records
+    find dispersion of each label
+    save to output
+end
+
+## content_vs_structural — methodology comparison
+## Compares TF-IDF embedding against content-fingerprint embedding
+## on the directorate_to_pm dispersion finding.
+define content_vs_structural(corpus, output = "data/validation/content_vs_struct.json") do
+    load corpus take 500 records balanced by archive as raw
+    compare
+        embed text from raw into 128 dimensions using tf-idf
+    against
+        embed text from raw into 128 dimensions using content fingerprint
+    on dispersion of directorate_to_pm
+end
