@@ -38,7 +38,7 @@ LANGUAGE plpython3u
 AS $$
     import sys
     if 'ocean_loaded' not in GD:
-        sys.path.insert(0, '/opt/latentocean')   -- adjust to the repo install path
+        sys.path.insert(0, '/opt/latentocean')   # adjust to the repo install path
         GD['ocean_loaded'] = True
     import json
     from scripts.operators.ocean.compiler import compile_ocean

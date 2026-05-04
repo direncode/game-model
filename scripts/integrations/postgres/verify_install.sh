@@ -179,9 +179,12 @@ docker exec ocean_pg_test_supabase bash -c '
     head -1 /tmp/supabase_stubbed.sql
 ' > /dev/null
 
-# Actually run a syntax-only check by parsing with postgres
+# Actually run a syntax-only check by parsing with postgres.
+# Stub the pg_net schema (extensions.*) so the install SQL parses without
+# the actual extension installed.
 syntax_log=$(docker exec ocean_pg_test_supabase psql -U postgres -d ocean_test -v ON_ERROR_STOP=0 \
     -c "CREATE SCHEMA IF NOT EXISTS extensions;" \
+    -c "CREATE TYPE extensions.http_response AS (id BIGINT, status_code INT, content TEXT);" \
     -c "CREATE TABLE extensions._http_response (id BIGINT, status_code INT, content TEXT);" \
     -c "CREATE FUNCTION extensions.http_post(url TEXT, body JSONB, headers JSONB) RETURNS BIGINT LANGUAGE sql AS \$\$ SELECT 0::BIGINT \$\$;" \
     -f /tmp/raw.sql 2>&1 | tail -5)
