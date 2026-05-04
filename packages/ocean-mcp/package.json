@@ -1,0 +1,32 @@
+{
+  "name":         "@latentocean/ocean-mcp",
+  "version":      "1.1.0",
+  "description":  "npx wrapper for ocean-mcp — auto-installs the Python package and runs the MCP server.",
+  "license":      "MIT",
+  "bin": {
+    "ocean-mcp":  "./bin/ocean-mcp.js"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage":     "https://latentocean.com/protocols#mcp",
+  "repository": {
+    "type":       "git",
+    "url":        "https://github.com/direncode/lsx-latentocean.git",
+    "directory":  "packages/ocean-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "ocean",
+    "substrate-clustering",
+    "ai-agents",
+    "anthropic",
+    "claude",
+    "cursor",
+    "goose"
+  ]
+}

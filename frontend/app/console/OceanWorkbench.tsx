@@ -141,6 +141,23 @@ export function OceanWorkbench() {
   const [apiAvailable, setApiAvailable] = useState<boolean | null>(null);
   const [activeExample, setActiveExample] = useState(EXAMPLES[0].name);
 
+  // Persisted API key — Bearer token used for premium operators.
+  // Stored in localStorage so users don't have to paste it every session.
+  const [apiKey, setApiKey] = useState("");
+  const [keyVisible, setKeyVisible] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const k = window.localStorage.getItem("ocean_api_key") || "";
+    setApiKey(k);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (apiKey) window.localStorage.setItem("ocean_api_key", apiKey);
+    else window.localStorage.removeItem("ocean_api_key");
+  }, [apiKey]);
+
   // Probe the API once on mount
   useEffect(() => {
     fetch("/api/ocean/health", { cache: "no-store" })
@@ -160,7 +177,10 @@ export function OceanWorkbench() {
       if (apiAvailable) {
         const r = await fetch("/api/ocean/validate", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
+          },
           body: JSON.stringify({ source }),
         });
         const data = await r.json();
@@ -189,7 +209,10 @@ export function OceanWorkbench() {
       if (apiAvailable) {
         const r = await fetch("/api/ocean/run", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
+          },
           body: JSON.stringify({ source }),
         });
         const data = await r.json();
@@ -228,20 +251,55 @@ export function OceanWorkbench() {
   return (
     <section className="relative px-6 py-12 border-t border-white/5">
       <div className="max-w-[1480px] mx-auto">
-        {/* API status pill */}
-        <div className="mb-8 flex items-center gap-3">
-          <div className={`w-1.5 h-1.5 rounded-full ${
-            apiAvailable === null ? "bg-white/30 animate-pulse" :
-            apiAvailable          ? "bg-emerald-400" :
-                                    "bg-amber-400"
-          }`} />
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55">
-            {apiAvailable === null
-              ? "checking ocean api…"
-              : apiAvailable
-                ? "ocean api · live · per-call billing active"
-                : "ocean api · unreachable · structural mock active"}
-          </span>
+        {/* API status pill + key entry */}
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className={`w-1.5 h-1.5 rounded-full ${
+              apiAvailable === null ? "bg-white/30 animate-pulse" :
+              apiAvailable          ? "bg-emerald-400" :
+                                      "bg-amber-400"
+            }`} />
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55">
+              {apiAvailable === null
+                ? "checking ocean api…"
+                : apiAvailable
+                  ? `ocean api · live${apiKey ? " · key configured" : " · free tier"}`
+                  : "ocean api · unreachable · structural mock active"}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45">
+              API key
+            </span>
+            <input
+              type={keyVisible ? "text" : "password"}
+              value={apiKey}
+              onChange={e => setApiKey(e.target.value)}
+              placeholder="lo_pk_…"
+              className="font-mono text-[12px] bg-black border border-white/15 hover:border-white/30 focus:border-white/50 rounded px-3 py-1.5 text-white placeholder:text-white/25 focus:outline-none w-[200px]"
+              spellCheck={false}
+              autoComplete="off"
+            />
+            <button
+              type="button"
+              onClick={() => setKeyVisible(v => !v)}
+              className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/55 hover:text-white border border-white/15 hover:border-white/30 rounded-full px-3 py-1.5 transition-colors"
+              title={keyVisible ? "Hide" : "Show"}
+            >
+              {keyVisible ? "Hide" : "Show"}
+            </button>
+            {apiKey && (
+              <button
+                type="button"
+                onClick={() => setApiKey("")}
+                className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 hover:text-rose-300 transition-colors"
+                title="Clear key"
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Editor + Examples */}
