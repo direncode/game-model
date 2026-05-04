@@ -110,8 +110,56 @@ def tool_validate(source: str) -> dict:
     return {"ok": True, "diagnostics": diags}
 
 
+PREMIUM_OPERATOR_KINDS = {
+    "embed.content_fp48",
+    "cluster.tcd_recursive_loop",
+    "reduce.btut",
+    "align.dispersion",
+}
+
+
+def _route_run_to_api(source: str, api_key: str | None) -> dict:
+    """When a compiled program references premium operators, the local
+    install can't execute them. Route the entire run to the hosted API.
+
+    The api endpoint is api.latentocean.com/v1/run by default; override
+    via OCEAN_API_BASE env var.
+    """
+    import os
+    import urllib.request
+    import urllib.error
+
+    api_base = os.environ.get("OCEAN_API_BASE", "https://api.latentocean.com")
+    body = json.dumps({"source": source}).encode("utf-8")
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    req = urllib.request.Request(
+        f"{api_base}/v1/run", data=body, headers=headers, method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=300) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        if e.code == 402:
+            return {
+                "ok": False,
+                "error": "premium-operator call requires a paid OCEAN_API_KEY. "
+                         "Get one at https://latentocean.com/protocols",
+            }
+        return {"ok": False, "error": f"hosted API returned HTTP {e.code}: {e.read().decode('utf-8')[:200]}"}
+    except Exception as e:
+        return {"ok": False, "error": f"could not reach hosted API at {api_base}: {e}"}
+
+
 def tool_run(source: str) -> dict:
-    """Compile + execute. Returns the persisted artifact + step timings."""
+    """Compile + execute. Returns the persisted artifact + step timings.
+
+    If the compiled DAG references any premium operator (BTUT, TCD,
+    content_fp48, dispersion), the entire pipeline is routed to the
+    hosted API at api.latentocean.com — the proprietary implementations
+    don't ship with this package.
+    """
     import os
     os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
     try:
@@ -129,6 +177,12 @@ def tool_run(source: str) -> dict:
         import scripts.operators.persist  # noqa: F401
 
         cfg = compile_ocean(source, source_name="<mcp-call>")
+
+        # Detect premium operators in the DAG and route to hosted API
+        uses_premium = any(s["kind"] in PREMIUM_OPERATOR_KINDS for s in cfg.get("steps", []))
+        if uses_premium:
+            api_key = os.environ.get("OCEAN_API_KEY")
+            return _route_run_to_api(source, api_key)
         pipeline = PipelineConfig(
             seed=cfg["seed"],
             steps=[StepConfig(**{k: v for k, v in s.items()
