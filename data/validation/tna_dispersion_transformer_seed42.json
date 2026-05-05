@@ -1,0 +1,120 @@
+{
+  "experiment": "OCEAN-shape pipeline with transformer embedder",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "config": {
+    "corpus_path": "tmp\\bombe_tna.ndjson",
+    "n_per_archive": 40,
+    "top_n_archives": 6,
+    "k_clusters": 12,
+    "kmeans_iters": 32,
+    "seed": 42
+  },
+  "n_records": 236,
+  "archives_in_run": {
+    "directorate_policy": 40,
+    "german_machine_decrypts": 37,
+    "diplomatic_decrypts": 40,
+    "british_sigint_history": 40,
+    "directorate_to_pm": 39,
+    "comintern_decrypts": 40
+  },
+  "k_clusters_used": 12,
+  "cluster_dominant_archive": {
+    "c0": "comintern_decrypts",
+    "c1": "german_machine_decrypts",
+    "c2": "directorate_policy",
+    "c3": "british_sigint_history",
+    "c4": "comintern_decrypts",
+    "c5": "british_sigint_history",
+    "c6": "british_sigint_history",
+    "c7": "directorate_to_pm",
+    "c8": "german_machine_decrypts",
+    "c9": "diplomatic_decrypts",
+    "c10": "directorate_to_pm",
+    "c11": "directorate_to_pm"
+  },
+  "dispersion_per_archive": [
+    {
+      "archive": "british_sigint_history",
+      "n_records": 40,
+      "self_basin_share": 1.0,
+      "top_landings": [
+        {
+          "dominant_archive": "british_sigint_history",
+          "count": 40,
+          "share": 1.0
+        }
+      ]
+    },
+    {
+      "archive": "comintern_decrypts",
+      "n_records": 40,
+      "self_basin_share": 0.975,
+      "top_landings": [
+        {
+          "dominant_archive": "comintern_decrypts",
+          "count": 39,
+          "share": 0.975
+        },
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 1,
+          "share": 0.025
+        }
+      ]
+    },
+    {
+      "archive": "diplomatic_decrypts",
+      "n_records": 40,
+      "self_basin_share": 1.0,
+      "top_landings": [
+        {
+          "dominant_archive": "diplomatic_decrypts",
+          "count": 40,
+          "share": 1.0
+        }
+      ]
+    },
+    {
+      "archive": "directorate_policy",
+      "n_records": 40,
+      "self_basin_share": 1.0,
+      "top_landings": [
+        {
+          "dominant_archive": "directorate_policy",
+          "count": 40,
+          "share": 1.0
+        }
+      ]
+    },
+    {
+      "archive": "directorate_to_pm",
+      "n_records": 39,
+      "self_basin_share": 0.769,
+      "top_landings": [
+        {
+          "dominant_archive": "directorate_to_pm",
+          "count": 30,
+          "share": 0.769
+        },
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 7,
+          "share": 0.179
+        }
+      ]
+    },
+    {
+      "archive": "german_machine_decrypts",
+      "n_records": 37,
+      "self_basin_share": 1.0,
+      "top_landings": [
+        {
+          "dominant_archive": "german_machine_decrypts",
+          "count": 37,
+          "share": 1.0
+        }
+      ]
+    }
+  ]
+}

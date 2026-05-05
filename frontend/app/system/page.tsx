@@ -5,7 +5,7 @@ import { Nav } from "@/components/landing/Nav";
 export const metadata: Metadata = {
   title: "System · Latent Ocean",
   description:
-    "Full system inventory — eight independently valuable assets, five replication moats, four strategic adjacencies (Snowflake, dbt, Palantir, Cerebras), and the saleable-units view.",
+    "Full system inventory — eight independently valuable assets, five replication moats, four strategic adjacencies (Anthropic / OpenAI, Snowflake, dbt, Cerebras), and the saleable-units view.",
 };
 
 const STATS: { v: string; l: string }[] = [
@@ -87,11 +87,12 @@ const ASSETS: Asset[] = [
     kicker: "ASSET 05 · SHOWCASES",
     title: "Eight vertical showcases",
     body: [
-      "Each is a credibility artifact that doubles as a near-shippable product into a defined buyer category:",
-      "/nato-sim — twelve sub-pages, full intelligence-simulation vertical for defense, government, think tanks. /receipt/sec-edgar — provenance audit trail for regulatory filings; every public company is a target. /pulse/uspto-inventors — innovator graph analytics; IP firms, VCs, R&D departments. /atlas/arxiv — scientific corpus constellations; research-funding agencies, universities. /bombe — archival provenance over The National Archives Kew; museums, archives, intelligence services. /docsouth, /dunc, /franklin — additional credibility surfaces.",
+      "Each is a proof artifact: the substrate operating on a real corpus in a real domain, with reproducible code and citable outputs.",
+      "/nato-sim — twelve sub-pages of intelligence-simulation surfacing. /receipt/sec-edgar — provenance audit trail for regulatory filings. /pulse/uspto-inventors — innovator graph analytics. /atlas/arxiv — scientific corpus constellations. /bombe — archival provenance over The National Archives Kew. /docsouth, /dunc, /franklin — additional proof surfaces.",
+      "These are not productized verticals. They are demonstrations that the substrate works on real data across regulatory, scientific, archival, IP, defense, and historical domains. Customers who want a similar use case sign up, get an API key, and build their own version using OCEAN. Latent Ocean does not run their pipelines.",
     ],
-    meta: ["8 verticals · each one buyer-category-shaped", "Defense, regtech, IP, scientific, archival, historical", "Each near-shippable as a Layer 2b contract"],
-    adjacency: { label: "Adjacency", comp: "Same shape as Palantir Forward Deploy for vertical AI. Forward Deploy contracts run $1M–50M each." },
+    meta: ["8 proof artifacts · 8 buyer-category domains", "Defense, regtech, IP, scientific, archival, historical", "Lower the activation energy for external builders"],
+    adjacency: { label: "Note", comp: "These are not vertical SaaS products. The lead motion is verticalless infrastructure (Layer 2a + 2c). Layer 2b bespoke contracts exist as a side channel for sovereign / hyperscale customers who cannot self-serve, but are never the lead." },
     href: { label: "See the showcase gallery", url: "/gallery" },
   },
   {
@@ -163,24 +164,24 @@ const MOATS: Moat[] = [
 type Adjacency = { shape: string; comp: string; position: string };
 const ADJACENCIES: Adjacency[] = [
   {
-    shape: "Open-core data substrate",
+    shape: "Auditable AI infrastructure",
+    comp: "Anthropic / OpenAI / Pinecone-adjacent",
+    position: "The substrate primitive missing from the current AI stack. LLMs hallucinate; vector databases retrieve. OCEAN provides deterministic structure-discovery with linear decision logs and cryptographic citations — the audit-tier the AI stack currently lacks. This is the lead positioning.",
+  },
+  {
+    shape: "Open-core data substrate at the protocol layer",
     comp: "Snowflake / Databricks",
-    position: "Distribution at the protocol layer, not the SaaS layer. The substrate-clustering primitive becomes ambient infrastructure the same way SQL did.",
+    position: "Distribution at the protocol layer, not the SaaS layer. The substrate-clustering primitive becomes ambient infrastructure the same way SQL did. MCP, Postgres, HTTP, frontend — four channels, one operator catalog.",
   },
   {
     shape: "DSL for AI and data pipelines",
     comp: "dbt Labs",
-    position: "Language is the moat. dbt won by being the lingua franca of the analytics-engineering layer. OCEAN is positioned to be the lingua franca of the substrate-clustering layer.",
-  },
-  {
-    shape: "Vertical AI for compliance, IP, intelligence",
-    comp: "Palantir Forward Deploy",
-    position: "High-ARPU bespoke buildouts on top of the substrate. Eight verticals are already plumbed in code. Each contract is sold scoped, our stack as backend, customer takes ownership at handover.",
+    position: "Language is the moat. dbt won by being the lingua franca of analytics-engineering. OCEAN is positioned as the lingua franca of substrate-clustering and auditable AI reasoning. The full toolchain — lexer, parser, type-check, LSP, formatter, linter, REPL, FFI — is already shipping.",
   },
   {
     shape: "Custom AI silicon for substrate workloads",
     comp: "Cerebras / Groq",
-    position: "Hardware moat at category-defining efficiency. Not an inference chip. A coprocessor for the operator classes GPUs do badly. Compounds the economics of every layer above by 90×.",
+    position: "Hardware moat at category-defining efficiency. Not an inference chip. A coprocessor for the operator classes GPUs do badly: hashing, content-addressable retrieval, sparse scatter-gather, persistent homology. Compounds the economics of every layer above by 90×.",
   },
 ];
 
@@ -233,7 +234,7 @@ export default function SystemPage() {
               The system, in totality.
             </h1>
             <p className="text-[17px] leading-[1.65] text-white/65 max-w-[60ch] mb-6">
-              Eight independently valuable assets. Five replication moats. Four strategic adjacencies — Snowflake, dbt, Palantir, Cerebras. The scale that makes the substrate-clustering primitive a position rather than a product.
+              Eight independently valuable assets. Five replication moats. Four strategic adjacencies — Anthropic / OpenAI / Pinecone (the auditable AI infrastructure tier), Snowflake / Databricks, dbt Labs, Cerebras / Groq. The scale that makes the substrate-clustering primitive a position rather than a product.
             </p>
             <p className="text-[15px] leading-[1.65] text-white/45 max-w-[60ch]">
               Built in 402 commits across five weeks by one contributor in one repository. The shape of an asset that could be unbundled and sold five different ways.

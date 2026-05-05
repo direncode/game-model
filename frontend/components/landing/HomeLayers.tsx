@@ -85,17 +85,20 @@ export function HomeLayers() {
       {/* Intro */}
       <div className="px-6 pt-32 pb-16 border-b border-white/5">
         <div className="max-w-[1400px] mx-auto">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
-            THE ARCHITECTURE · THREE LAYERS
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-emerald-300/85 mb-6">
+            AUDITABLE AI INFRASTRUCTURE · THREE LAYERS
           </p>
-          <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-8 max-w-[22ch]">
-            An infrastructure protocol with proprietary operators and dedicated silicon.
+          <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-8 max-w-[24ch]">
+            The interpretability-by-construction substrate underneath the AI stack.
           </h2>
-          <p className="text-[17px] leading-[1.65] text-white/65 max-w-[60ch] mb-4">
-            Latent Ocean ships substrate clustering as a primitive. The protocols are open. The operators are the moat. The silicon is dedicated. Distribution happens through standards — MCP for every AI agent, Postgres extensions for every data warehouse, HTTP for everything else.
+          <p className="text-[17px] leading-[1.65] text-white/70 max-w-[64ch] mb-4">
+            LLMs hallucinate. Vector databases retrieve, they do not reason. Latent Ocean ships substrate clustering as the audit-tier of the AI stack — deterministic operators, linear decision logs, cryptographic citations, bit-identical reproducibility. The reasoning is yours; the audit trail is mechanical.
           </p>
-          <p className="text-[15px] leading-[1.65] text-white/45 max-w-[60ch]">
-            The same way Snowflake sold the warehouse engine, Stripe sold the payments primitive, Confluent sold Kafka. We sell the substrate-clustering primitive — never the analyses on top of it.
+          <p className="text-[15px] leading-[1.65] text-white/55 max-w-[64ch] mb-4">
+            Distribution happens through standards. MCP for every AI agent. Postgres extension for every data warehouse. HTTP for every microservice. Frontend for every browser. One operator catalog. Four channels. Premium operators metered through API key.
+          </p>
+          <p className="text-[15px] leading-[1.65] text-white/45 max-w-[64ch]">
+            The same way Stripe sold the payments primitive and Snowflake sold the warehouse engine, Latent Ocean ships the auditable-reasoning primitive. The substrate, never the analyses on top of it. <Link href="/interpretability" className="text-emerald-300/85 hover:text-emerald-200 border-b border-emerald-300/40 hover:border-emerald-200 pb-0.5 transition-colors">See the interpretability proof →</Link>
           </p>
         </div>
       </div>

@@ -119,17 +119,17 @@ export function HomeMass() {
       {/* Section header */}
       <div className="px-6 pt-32 pb-16 border-b border-white/5">
         <div className="max-w-[1400px] mx-auto">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45 mb-6">
-            BUILT MASS · WHAT EXISTS TODAY
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-emerald-300/85 mb-6">
+            BUILT MASS · THE AUDITABLE AI SUBSTRATE, AS IT EXISTS TODAY
           </p>
-          <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-8 max-w-[24ch]">
+          <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-8 max-w-[26ch]">
             The architecture is the smaller story. The amount of it already built is the larger one.
           </h2>
-          <p className="text-[17px] leading-[1.65] text-white/65 max-w-[60ch] mb-4">
-            Built in 402 commits across five weeks by one contributor in one repository. The asset surfaces below are what a stranger could not replicate quickly, even with the design in hand.
+          <p className="text-[17px] leading-[1.65] text-white/70 max-w-[64ch] mb-4">
+            Built in 402 commits across five weeks by one contributor in one repository. The eight asset surfaces below are what a stranger could not replicate quickly, even with the design in hand. Each is independently valuable. Together they form the substrate primitive missing from the current AI stack.
           </p>
-          <p className="text-[15px] leading-[1.65] text-white/45 max-w-[60ch]">
-            Each block below is independently valuable. Together they span four category-leader profiles simultaneously.
+          <p className="text-[15px] leading-[1.65] text-white/45 max-w-[64ch]">
+            Auditable AI infrastructure. Deterministic reasoning operators. Hardware-aligned silicon roadmap. Verticalless deployment. The asset profile spans four category-leader shapes simultaneously: auditable AI infrastructure (Anthropic / OpenAI-adjacent), open-core data substrate (Snowflake-adjacent), language for AI pipelines (dbt-adjacent), custom AI silicon (Cerebras-adjacent).
           </p>
         </div>
       </div>
@@ -205,7 +205,7 @@ export function HomeMass() {
               See the totality. Moats, adjacencies, saleable units.
             </h3>
             <p className="text-[15px] leading-[1.6] text-white/55 mb-5 max-w-[64ch]">
-              The asset profile spans four category-leader shapes simultaneously: open-core data substrate (Snowflake / Databricks), DSL for AI pipelines (dbt), vertical AI (Palantir Forward Deploy), and custom AI silicon (Cerebras / Groq). Each unit could be unbundled and sold on its own.
+              The asset profile spans four category-leader shapes simultaneously: auditable AI infrastructure (Anthropic / OpenAI / Pinecone-adjacent), open-core data substrate (Snowflake / Databricks-adjacent), DSL for AI pipelines (dbt-adjacent), and custom AI silicon (Cerebras / Groq-adjacent). Each unit could be unbundled and sold on its own.
             </p>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/65 group-hover:text-white border-b border-white/35 group-hover:border-white pb-1">
               Open the system inventory →
