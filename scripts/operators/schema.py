@@ -77,6 +77,17 @@ EMBED_ONEHOT_NUMERIC = [
           "string", default=None, advanced=True),
 ]
 
+EMBED_TRANSFORMER = [
+    Param("max_length", "Max tokens per record",
+          "Token-level truncation cap. 128 is fine for catalog/abstract-style "
+          "records; raise to 256 or 512 for long documents.",
+          "int", default=128, min=32, max=512),
+    Param("batch_size", "Records per forward pass",
+          "How many records the transformer encodes in one batch. 16 fits on "
+          "CPU comfortably; 32-64 if a GPU is available.",
+          "int", default=16, min=1, max=128, advanced=True),
+]
+
 CLUSTER_TCD = [
     Param("iters", "Recursive-loop rounds",
           "How many explore-then-crystallize rounds. 16 is the validated TNA+NSLKDD "
@@ -128,6 +139,7 @@ SCHEMAS: dict[str, list[Param]] = {
     "source.ndjson":              SOURCE_NDJSON,
     "embed.tfidf_jl":             EMBED_TFIDF_JL,
     "embed.onehot_numeric":       EMBED_ONEHOT_NUMERIC,
+    "embed.transformer":          EMBED_TRANSFORMER,
     "cluster.tcd_recursive_loop": CLUSTER_TCD,
     "align.module":               ALIGN_MODULE,
     "align.dispersion":           ALIGN_DISPERSION,

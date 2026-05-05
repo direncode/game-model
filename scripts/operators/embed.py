@@ -98,6 +98,55 @@ class OneHotNumericEmbedder(Operator):
 
 
 @register
+class TransformerEmbedder(Operator):
+    """Text → MiniLM-L6 transformer embedding → mean-pool → L2-normalize.
+
+    Validated on TNA HW catalogue: same OCEAN program, swapping this in for
+    embed.tfidf_jl flips HW1 (directorate_to_pm) self-basin from 0.000 to
+    0.769 — a clean demonstration that the substrate architecture is
+    embedder-composable and that the embedder choice is load-bearing.
+
+    See data/validation/tna_dispersion_transformer_seed42.json for the
+    reproducible artifact.
+
+    Implementation: pure-torch BERT forward pass (no transformers library
+    dependency). Model is sentence-transformers/all-MiniLM-L6-v2 — 22.7M
+    params, 6 layers, 384-dim. Downloaded once via huggingface_hub or
+    direct urllib fallback, cached locally.
+
+    config:
+        max_length: int   — token truncation cap (default 128)
+        batch_size: int   — records per forward pass (default 16)
+    """
+    kind = "embed.transformer"
+    stage = "embed"
+
+    def run(self, inputs, *, seed, config):
+        from ._minibert import ensure_minilm, MiniBert
+
+        records    = inputs["records"]
+        text_field = inputs.get("text_field", "text")
+        max_len    = int(config.get("max_length", 128))
+        batch      = int(config.get("batch_size", 16))
+
+        snapshot = ensure_minilm()
+        bert     = MiniBert.from_snapshot(snapshot)
+
+        texts = [
+            (r.get("title", "") + ". " + r.get(text_field, "")).strip()
+            for r in records
+        ]
+        Z = bert.embed_texts(texts, snapshot, max_length=max_len, batch_size=batch)
+        return {
+            "Z": Z,
+            "embedder": "transformer:minilm-L6-v2",
+            "dims": int(Z.shape[1]),
+            "model_params_m": 22.7,
+            "snapshot": str(snapshot),
+        }
+
+
+@register
 class ContentFp48Embedder(Operator):
     """Promote DocSouth's content_fp48 primitive to the universal lib.
 

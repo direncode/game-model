@@ -10,8 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Python deps. Pin versions for deterministic builds.
-# torch is heavy (~800MB) — only needed for cluster.tcd_recursive_loop;
-# kept in image so the workbench's "Run" works for premium operators.
+# torch is heavy (~800MB) — only needed for cluster.tcd_recursive_loop and
+# embed.transformer; kept in image so the workbench's "Run" works for
+# premium operators.
 RUN pip install --no-cache-dir \
     fastapi==0.115.* \
     uvicorn[standard]==0.32.* \
@@ -21,7 +22,18 @@ RUN pip install --no-cache-dir \
     pandas \
     scikit-learn \
     redis \
+    tokenizers>=0.20 \
+    safetensors>=0.4 \
+    huggingface_hub>=0.24 \
     && pip install --no-cache-dir torch==2.4.* --index-url https://download.pytorch.org/whl/cpu
+
+# Pre-cache the MiniLM-L6 weights (~90 MB) so the first embed.transformer
+# call doesn't pay the download cost. Built into the image at build time.
+ENV HF_HOME=/app/.cache/huggingface
+RUN python -c "from huggingface_hub import snapshot_download; \
+    snapshot_download('sentence-transformers/all-MiniLM-L6-v2', \
+        allow_patterns=['config.json', 'tokenizer.json', 'model.safetensors'], \
+        cache_dir='/app/.cache/huggingface/hub')"
 
 # Pre-load env workaround for sklearn/torch MKL DLL clash on Windows hosts
 # (no-op on Linux; harmless).
