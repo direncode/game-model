@@ -1,0 +1,578 @@
+{
+  "campaign": "universal_substrate_test",
+  "generated_at": "2026-05-05T09:01:39.437728Z",
+  "endpoint": "production runpod serverless (BTUT + TCD-JEPA on H100)",
+  "n_modalities": 5,
+  "runs": [
+    {
+      "modality": "TEXT_TNA_SIGINT",
+      "n_entities_input": 1149,
+      "n_classes_input": 6,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "min_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "min_archive_self_basin": 1.0,
+      "final_auc": 0.9163,
+      "final_knn": 0.803,
+      "wall_seconds": 26.11,
+      "device": "cuda",
+      "module_purity_rows": [
+        {
+          "module_name": "german_machine_decrypts Cluster 1",
+          "dominant_type": "german_machine_decrypts",
+          "n_entities": 33,
+          "top_archive": "german_machine_decrypts",
+          "top_archive_count": 33,
+          "purity": 1.0,
+          "archive_distribution": {
+            "german_machine_decrypts": 33
+          }
+        },
+        {
+          "module_name": "directorate_to_pm Cluster 2",
+          "dominant_type": "directorate_to_pm",
+          "n_entities": 40,
+          "top_archive": "directorate_to_pm",
+          "top_archive_count": 40,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_to_pm": 40
+          }
+        },
+        {
+          "module_name": "tactical_sigint Cluster 3",
+          "dominant_type": "tactical_sigint",
+          "n_entities": 50,
+          "top_archive": "tactical_sigint",
+          "top_archive_count": 50,
+          "purity": 1.0,
+          "archive_distribution": {
+            "tactical_sigint": 50
+          }
+        },
+        {
+          "module_name": "diplomatic_decrypts Cluster 4",
+          "dominant_type": "diplomatic_decrypts",
+          "n_entities": 66,
+          "top_archive": "diplomatic_decrypts",
+          "top_archive_count": 66,
+          "purity": 1.0,
+          "archive_distribution": {
+            "diplomatic_decrypts": 66
+          }
+        },
+        {
+          "module_name": "sigint_summaries Cluster 5",
+          "dominant_type": "sigint_summaries",
+          "n_entities": 93,
+          "top_archive": "sigint_summaries",
+          "top_archive_count": 93,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sigint_summaries": 93
+          }
+        },
+        {
+          "module_name": "directorate_policy Cluster 6",
+          "dominant_type": "directorate_policy",
+          "n_entities": 163,
+          "top_archive": "directorate_policy",
+          "top_archive_count": 163,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_policy": 163
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records_in_modules": 66,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records_in_modules": 163,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records_in_modules": 40,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records_in_modules": 33,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records_in_modules": 93,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records_in_modules": 50,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "modality": "NETWORK_NSL_KDD",
+      "n_entities_input": 1200,
+      "n_classes_input": 6,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "min_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "min_archive_self_basin": 1.0,
+      "final_auc": 0.9107,
+      "final_knn": 0.8407,
+      "wall_seconds": 9.43,
+      "device": "cuda",
+      "module_purity_rows": [
+        {
+          "module_name": "normal Cluster 1",
+          "dominant_type": "normal",
+          "n_entities": 33,
+          "top_archive": "normal",
+          "top_archive_count": 33,
+          "purity": 1.0,
+          "archive_distribution": {
+            "normal": 33
+          }
+        },
+        {
+          "module_name": "neptune Cluster 2",
+          "dominant_type": "neptune",
+          "n_entities": 40,
+          "top_archive": "neptune",
+          "top_archive_count": 40,
+          "purity": 1.0,
+          "archive_distribution": {
+            "neptune": 40
+          }
+        },
+        {
+          "module_name": "satan Cluster 3",
+          "dominant_type": "satan",
+          "n_entities": 50,
+          "top_archive": "satan",
+          "top_archive_count": 50,
+          "purity": 1.0,
+          "archive_distribution": {
+            "satan": 50
+          }
+        },
+        {
+          "module_name": "ipsweep Cluster 4",
+          "dominant_type": "ipsweep",
+          "n_entities": 66,
+          "top_archive": "ipsweep",
+          "top_archive_count": 66,
+          "purity": 1.0,
+          "archive_distribution": {
+            "ipsweep": 66
+          }
+        },
+        {
+          "module_name": "portsweep Cluster 5",
+          "dominant_type": "portsweep",
+          "n_entities": 100,
+          "top_archive": "portsweep",
+          "top_archive_count": 100,
+          "purity": 1.0,
+          "archive_distribution": {
+            "portsweep": 100
+          }
+        },
+        {
+          "module_name": "smurf Cluster 6",
+          "dominant_type": "smurf",
+          "n_entities": 200,
+          "top_archive": "smurf",
+          "top_archive_count": 200,
+          "purity": 1.0,
+          "archive_distribution": {
+            "smurf": 200
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "ipsweep",
+          "n_records_in_modules": 66,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "neptune",
+          "n_records_in_modules": 40,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "normal",
+          "n_records_in_modules": 33,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "portsweep",
+          "n_records_in_modules": 100,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "satan",
+          "n_records_in_modules": 50,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "smurf",
+          "n_records_in_modules": 200,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "modality": "TIME_SERIES",
+      "n_entities_input": 1200,
+      "n_classes_input": 6,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "min_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "min_archive_self_basin": 1.0,
+      "final_auc": 0.9188,
+      "final_knn": 0.8598,
+      "wall_seconds": 9.45,
+      "device": "cuda",
+      "module_purity_rows": [
+        {
+          "module_name": "trending_up Cluster 1",
+          "dominant_type": "trending_up",
+          "n_entities": 33,
+          "top_archive": "trending_up",
+          "top_archive_count": 33,
+          "purity": 1.0,
+          "archive_distribution": {
+            "trending_up": 33
+          }
+        },
+        {
+          "module_name": "trending_down Cluster 2",
+          "dominant_type": "trending_down",
+          "n_entities": 40,
+          "top_archive": "trending_down",
+          "top_archive_count": 40,
+          "purity": 1.0,
+          "archive_distribution": {
+            "trending_down": 40
+          }
+        },
+        {
+          "module_name": "mean_reverting Cluster 3",
+          "dominant_type": "mean_reverting",
+          "n_entities": 50,
+          "top_archive": "mean_reverting",
+          "top_archive_count": 50,
+          "purity": 1.0,
+          "archive_distribution": {
+            "mean_reverting": 50
+          }
+        },
+        {
+          "module_name": "random_walk Cluster 4",
+          "dominant_type": "random_walk",
+          "n_entities": 66,
+          "top_archive": "random_walk",
+          "top_archive_count": 66,
+          "purity": 1.0,
+          "archive_distribution": {
+            "random_walk": 66
+          }
+        },
+        {
+          "module_name": "regime_switch Cluster 5",
+          "dominant_type": "regime_switch",
+          "n_entities": 100,
+          "top_archive": "regime_switch",
+          "top_archive_count": 100,
+          "purity": 1.0,
+          "archive_distribution": {
+            "regime_switch": 100
+          }
+        },
+        {
+          "module_name": "periodic Cluster 6",
+          "dominant_type": "periodic",
+          "n_entities": 200,
+          "top_archive": "periodic",
+          "top_archive_count": 200,
+          "purity": 1.0,
+          "archive_distribution": {
+            "periodic": 200
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "mean_reverting",
+          "n_records_in_modules": 50,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "periodic",
+          "n_records_in_modules": 200,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "random_walk",
+          "n_records_in_modules": 66,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "regime_switch",
+          "n_records_in_modules": 100,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "trending_down",
+          "n_records_in_modules": 40,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "trending_up",
+          "n_records_in_modules": 33,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "modality": "GENOMICS",
+      "n_entities_input": 1200,
+      "n_classes_input": 6,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "min_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "min_archive_self_basin": 1.0,
+      "final_auc": 0.9079,
+      "final_knn": 0.8452,
+      "wall_seconds": 9.43,
+      "device": "cuda",
+      "module_purity_rows": [
+        {
+          "module_name": "gc_rich Cluster 1",
+          "dominant_type": "gc_rich",
+          "n_entities": 33,
+          "top_archive": "gc_rich",
+          "top_archive_count": 33,
+          "purity": 1.0,
+          "archive_distribution": {
+            "gc_rich": 33
+          }
+        },
+        {
+          "module_name": "at_rich Cluster 2",
+          "dominant_type": "at_rich",
+          "n_entities": 40,
+          "top_archive": "at_rich",
+          "top_archive_count": 40,
+          "purity": 1.0,
+          "archive_distribution": {
+            "at_rich": 40
+          }
+        },
+        {
+          "module_name": "palindromic Cluster 3",
+          "dominant_type": "palindromic",
+          "n_entities": 50,
+          "top_archive": "palindromic",
+          "top_archive_count": 50,
+          "purity": 1.0,
+          "archive_distribution": {
+            "palindromic": 50
+          }
+        },
+        {
+          "module_name": "repeat_dense Cluster 4",
+          "dominant_type": "repeat_dense",
+          "n_entities": 66,
+          "top_archive": "repeat_dense",
+          "top_archive_count": 66,
+          "purity": 1.0,
+          "archive_distribution": {
+            "repeat_dense": 66
+          }
+        },
+        {
+          "module_name": "sparse_signal Cluster 5",
+          "dominant_type": "sparse_signal",
+          "n_entities": 100,
+          "top_archive": "sparse_signal",
+          "top_archive_count": 100,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sparse_signal": 100
+          }
+        },
+        {
+          "module_name": "regulatory Cluster 6",
+          "dominant_type": "regulatory",
+          "n_entities": 200,
+          "top_archive": "regulatory",
+          "top_archive_count": 200,
+          "purity": 1.0,
+          "archive_distribution": {
+            "regulatory": 200
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "at_rich",
+          "n_records_in_modules": 40,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "gc_rich",
+          "n_records_in_modules": 33,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "palindromic",
+          "n_records_in_modules": 50,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "regulatory",
+          "n_records_in_modules": 200,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "repeat_dense",
+          "n_records_in_modules": 66,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sparse_signal",
+          "n_records_in_modules": 100,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "modality": "CODE",
+      "n_entities_input": 1200,
+      "n_classes_input": 6,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "min_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "min_archive_self_basin": 1.0,
+      "final_auc": 0.922,
+      "final_knn": 0.8179,
+      "wall_seconds": 9.48,
+      "device": "cuda",
+      "module_purity_rows": [
+        {
+          "module_name": "python Cluster 1",
+          "dominant_type": "python",
+          "n_entities": 33,
+          "top_archive": "python",
+          "top_archive_count": 33,
+          "purity": 1.0,
+          "archive_distribution": {
+            "python": 33
+          }
+        },
+        {
+          "module_name": "javascript Cluster 2",
+          "dominant_type": "javascript",
+          "n_entities": 40,
+          "top_archive": "javascript",
+          "top_archive_count": 40,
+          "purity": 1.0,
+          "archive_distribution": {
+            "javascript": 40
+          }
+        },
+        {
+          "module_name": "c Cluster 3",
+          "dominant_type": "c",
+          "n_entities": 50,
+          "top_archive": "c",
+          "top_archive_count": 50,
+          "purity": 1.0,
+          "archive_distribution": {
+            "c": 50
+          }
+        },
+        {
+          "module_name": "rust Cluster 4",
+          "dominant_type": "rust",
+          "n_entities": 66,
+          "top_archive": "rust",
+          "top_archive_count": 66,
+          "purity": 1.0,
+          "archive_distribution": {
+            "rust": 66
+          }
+        },
+        {
+          "module_name": "sql Cluster 5",
+          "dominant_type": "sql",
+          "n_entities": 100,
+          "top_archive": "sql",
+          "top_archive_count": 100,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sql": 100
+          }
+        },
+        {
+          "module_name": "html Cluster 6",
+          "dominant_type": "html",
+          "n_entities": 200,
+          "top_archive": "html",
+          "top_archive_count": 200,
+          "purity": 1.0,
+          "archive_distribution": {
+            "html": 200
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "c",
+          "n_records_in_modules": 50,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "html",
+          "n_records_in_modules": 200,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "javascript",
+          "n_records_in_modules": 40,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "python",
+          "n_records_in_modules": 33,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "rust",
+          "n_records_in_modules": 66,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sql",
+          "n_records_in_modules": 100,
+          "self_basin_share": 1.0
+        }
+      ]
+    }
+  ]
+}

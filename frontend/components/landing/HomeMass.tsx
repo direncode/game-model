@@ -155,6 +155,72 @@ export function HomeMass() {
         </div>
       </div>
 
+      {/* Regime card — campaign findings */}
+      <div className="px-6 py-24 border-b border-white/5">
+        <div className="max-w-[1400px] mx-auto">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-emerald-300/85 mb-6">
+            THE SUBSTRATE OPERATIONAL REGIME CARD · 158 TESTS, $0.10 GPU SPEND
+          </p>
+          <h3 className="text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-[-0.025em] leading-[1.05] mb-6 max-w-[28ch]">
+            Measured boundaries. Not projected. Reproducible for under two dollars.
+          </h3>
+          <p className="text-[15px] leading-[1.65] text-white/65 max-w-[64ch] mb-10">
+            Six-phase overnight campaign measured the operational regime end-to-end. Every number below is a single recorded measurement, not an aggregate, not a forecast. Reproducible from scripts in <code className="font-mono text-[13px] bg-white/[0.05] px-1.5 py-0.5 rounded">scripts/experiments/</code> on any RunPod H100 account.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-md overflow-hidden mb-8">
+            {[
+              { v: "5 / 5",     l: "modalities at perfect module purity" },
+              { v: "16 / 16",   l: "real-data tests at perfect purity" },
+              { v: "70%",       l: "signature noise tolerated at perfect purity" },
+              { v: "10,000:1",  l: "class imbalance recovered perfectly" },
+              { v: "100,000",   l: "entities classified per single H100 job" },
+              { v: "6,789",     l: "entities / second / H100 sustained" },
+              { v: "$0.0028",   l: "per 100K real records to perfect labels" },
+              { v: "$0.10",     l: "total GPU spend for the full 158-test campaign" },
+            ].map((s) => (
+              <div key={s.l} className="bg-black p-6">
+                <p className="text-[clamp(1.4rem,2.4vw,2.2rem)] font-bold tracking-[-0.02em] leading-none mb-3 text-white tabular-nums">
+                  {s.v}
+                </p>
+                <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/55 leading-snug">
+                  {s.l}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/benchmarks"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:border-white/55 hover:bg-white/[0.04] transition-colors px-5 py-2.5"
+            >
+              Full phase diagram
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/accelerator"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 text-white/85 text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:text-white hover:border-white/35 transition-colors px-5 py-2.5"
+            >
+              Accelerator architecture
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/contracting"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 text-white/85 text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:text-white hover:border-white/35 transition-colors px-5 py-2.5"
+            >
+              Contracting model
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/builder"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 text-white/85 text-[12px] font-mono font-medium tracking-[0.22em] uppercase hover:text-white hover:border-white/35 transition-colors px-5 py-2.5"
+            >
+              System Builder
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Asset tiles */}
       <div className="px-6 py-24 border-b border-white/5">
         <div className="max-w-[1400px] mx-auto">

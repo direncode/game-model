@@ -1,0 +1,106 @@
+{
+  "campaign": "jensen_throughput_test",
+  "generated_at": "2026-05-05T09:11:38.475213Z",
+  "endpoint": "production runpod serverless (BTUT + TCD-JEPA on H100)",
+  "input": {
+    "n_entities": 107716,
+    "n_classes": 4,
+    "classes": [
+      "normal",
+      "neptune",
+      "satan",
+      "ipsweep"
+    ],
+    "class_distribution": {
+      "neptune": 41214,
+      "normal": 67343,
+      "ipsweep": 3599,
+      "satan": 3633
+    },
+    "payload_mb": 8.99
+  },
+  "result": {
+    "device": "cuda",
+    "n_modules_discovered": 4,
+    "mean_module_purity": 1.0,
+    "min_module_purity": 1.0,
+    "mean_class_self_basin": 1.0,
+    "final_auc": 0.906,
+    "wall_seconds": 60.18,
+    "gpu_exec_ms": 4161,
+    "cost_dollars_estimate": 0.0028,
+    "throughput_per_sec": 25887.0,
+    "throughput_per_dollar": 38830570.0,
+    "cost_per_million_entities": 0.0258,
+    "cost_per_billion_entities": 25.75,
+    "days_per_billion_entities_one_h100": 0.45
+  },
+  "module_purity_rows": [
+    {
+      "module_name": "p Cluster 1",
+      "dominant_type": "p",
+      "n_entities": 9578,
+      "top_archive": "p",
+      "top_archive_count": 9578,
+      "purity": 1.0,
+      "archive_distribution": {
+        "p": 9578
+      }
+    },
+    {
+      "module_name": "n Cluster 2",
+      "dominant_type": "n",
+      "n_entities": 20895,
+      "top_archive": "n",
+      "top_archive_count": 20895,
+      "purity": 1.0,
+      "archive_distribution": {
+        "n": 20895
+      }
+    },
+    {
+      "module_name": "i Cluster 3",
+      "dominant_type": "i",
+      "n_entities": 1668,
+      "top_archive": "i",
+      "top_archive_count": 1668,
+      "purity": 1.0,
+      "archive_distribution": {
+        "i": 1668
+      }
+    },
+    {
+      "module_name": "s Cluster 4",
+      "dominant_type": "s",
+      "n_entities": 3378,
+      "top_archive": "s",
+      "top_archive_count": 3378,
+      "purity": 1.0,
+      "archive_distribution": {
+        "s": 3378
+      }
+    }
+  ],
+  "class_self_basin_rows": [
+    {
+      "archive": "i",
+      "n_records_in_modules": 1668,
+      "self_basin_share": 1.0
+    },
+    {
+      "archive": "n",
+      "n_records_in_modules": 20895,
+      "self_basin_share": 1.0
+    },
+    {
+      "archive": "p",
+      "n_records_in_modules": 9578,
+      "self_basin_share": 1.0
+    },
+    {
+      "archive": "s",
+      "n_records_in_modules": 3378,
+      "self_basin_share": 1.0
+    }
+  ]
+}

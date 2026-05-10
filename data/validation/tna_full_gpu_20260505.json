@@ -1,0 +1,359 @@
+{
+  "campaign": "tna_full_gpu_runpod",
+  "generated_at": "2026-05-05T08:38:29.414727Z",
+  "endpoint": "production runpod serverless (BTUT + TCD-JEPA on H100)",
+  "config": {
+    "corpus_path": "tmp\\bombe_tna_full.ndjson",
+    "top_n_archives": 6,
+    "knn_k": 6,
+    "budgets_dollars": [
+      0.5,
+      5.0,
+      50.0
+    ]
+  },
+  "runs": [
+    {
+      "budget_dollars": 0.5,
+      "epochs": 50,
+      "wall_seconds": 21.97,
+      "exec_ms": 0.3762245178222656,
+      "device": "cuda",
+      "final_auc": 0.911,
+      "final_knn": 0.8214,
+      "final_loss": 0.1841,
+      "n_entities_input": 1857,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "module_purity_rows": [
+        {
+          "module_name": "directorate_to_pm Cluster 1",
+          "dominant_type": "directorate_to_pm",
+          "n_entities": 69,
+          "top_archive": "directorate_to_pm",
+          "top_archive_count": 69,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_to_pm": 69
+          }
+        },
+        {
+          "module_name": "german_machine_decrypts Cluster 2",
+          "dominant_type": "german_machine_decrypts",
+          "n_entities": 85,
+          "top_archive": "german_machine_decrypts",
+          "top_archive_count": 85,
+          "purity": 1.0,
+          "archive_distribution": {
+            "german_machine_decrypts": 85
+          }
+        },
+        {
+          "module_name": "diplomatic_decrypts Cluster 3",
+          "dominant_type": "diplomatic_decrypts",
+          "n_entities": 82,
+          "top_archive": "diplomatic_decrypts",
+          "top_archive_count": 82,
+          "purity": 1.0,
+          "archive_distribution": {
+            "diplomatic_decrypts": 82
+          }
+        },
+        {
+          "module_name": "sigint_summaries Cluster 4",
+          "dominant_type": "sigint_summaries",
+          "n_entities": 62,
+          "top_archive": "sigint_summaries",
+          "top_archive_count": 62,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sigint_summaries": 62
+          }
+        },
+        {
+          "module_name": "directorate_policy Cluster 5",
+          "dominant_type": "directorate_policy",
+          "n_entities": 81,
+          "top_archive": "directorate_policy",
+          "top_archive_count": 81,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_policy": 81
+          }
+        },
+        {
+          "module_name": "tactical_sigint Cluster 6",
+          "dominant_type": "tactical_sigint",
+          "n_entities": 332,
+          "top_archive": "tactical_sigint",
+          "top_archive_count": 332,
+          "purity": 1.0,
+          "archive_distribution": {
+            "tactical_sigint": 332
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records_in_modules": 82,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records_in_modules": 81,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records_in_modules": 69,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records_in_modules": 85,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records_in_modules": 62,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records_in_modules": 332,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "budget_dollars": 5.0,
+      "epochs": 50,
+      "wall_seconds": 9.72,
+      "exec_ms": 0.36334991455078125,
+      "device": "cuda",
+      "final_auc": 0.9247,
+      "final_knn": 0.8023,
+      "final_loss": 0.2251,
+      "n_entities_input": 1857,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "module_purity_rows": [
+        {
+          "module_name": "directorate_to_pm Cluster 1",
+          "dominant_type": "directorate_to_pm",
+          "n_entities": 69,
+          "top_archive": "directorate_to_pm",
+          "top_archive_count": 69,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_to_pm": 69
+          }
+        },
+        {
+          "module_name": "german_machine_decrypts Cluster 2",
+          "dominant_type": "german_machine_decrypts",
+          "n_entities": 85,
+          "top_archive": "german_machine_decrypts",
+          "top_archive_count": 85,
+          "purity": 1.0,
+          "archive_distribution": {
+            "german_machine_decrypts": 85
+          }
+        },
+        {
+          "module_name": "diplomatic_decrypts Cluster 3",
+          "dominant_type": "diplomatic_decrypts",
+          "n_entities": 82,
+          "top_archive": "diplomatic_decrypts",
+          "top_archive_count": 82,
+          "purity": 1.0,
+          "archive_distribution": {
+            "diplomatic_decrypts": 82
+          }
+        },
+        {
+          "module_name": "sigint_summaries Cluster 4",
+          "dominant_type": "sigint_summaries",
+          "n_entities": 62,
+          "top_archive": "sigint_summaries",
+          "top_archive_count": 62,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sigint_summaries": 62
+          }
+        },
+        {
+          "module_name": "directorate_policy Cluster 5",
+          "dominant_type": "directorate_policy",
+          "n_entities": 81,
+          "top_archive": "directorate_policy",
+          "top_archive_count": 81,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_policy": 81
+          }
+        },
+        {
+          "module_name": "tactical_sigint Cluster 6",
+          "dominant_type": "tactical_sigint",
+          "n_entities": 332,
+          "top_archive": "tactical_sigint",
+          "top_archive_count": 332,
+          "purity": 1.0,
+          "archive_distribution": {
+            "tactical_sigint": 332
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records_in_modules": 82,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records_in_modules": 81,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records_in_modules": 69,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records_in_modules": 85,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records_in_modules": 62,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records_in_modules": 332,
+          "self_basin_share": 1.0
+        }
+      ]
+    },
+    {
+      "budget_dollars": 50.0,
+      "epochs": 50,
+      "wall_seconds": 9.64,
+      "exec_ms": 0.4146099090576172,
+      "device": "cuda",
+      "final_auc": 0.9263,
+      "final_knn": 0.8188,
+      "final_loss": 0.2029,
+      "n_entities_input": 1857,
+      "n_modules_discovered": 6,
+      "mean_module_purity": 1.0,
+      "mean_archive_self_basin": 1.0,
+      "module_purity_rows": [
+        {
+          "module_name": "directorate_to_pm Cluster 1",
+          "dominant_type": "directorate_to_pm",
+          "n_entities": 69,
+          "top_archive": "directorate_to_pm",
+          "top_archive_count": 69,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_to_pm": 69
+          }
+        },
+        {
+          "module_name": "german_machine_decrypts Cluster 2",
+          "dominant_type": "german_machine_decrypts",
+          "n_entities": 85,
+          "top_archive": "german_machine_decrypts",
+          "top_archive_count": 85,
+          "purity": 1.0,
+          "archive_distribution": {
+            "german_machine_decrypts": 85
+          }
+        },
+        {
+          "module_name": "diplomatic_decrypts Cluster 3",
+          "dominant_type": "diplomatic_decrypts",
+          "n_entities": 82,
+          "top_archive": "diplomatic_decrypts",
+          "top_archive_count": 82,
+          "purity": 1.0,
+          "archive_distribution": {
+            "diplomatic_decrypts": 82
+          }
+        },
+        {
+          "module_name": "sigint_summaries Cluster 4",
+          "dominant_type": "sigint_summaries",
+          "n_entities": 62,
+          "top_archive": "sigint_summaries",
+          "top_archive_count": 62,
+          "purity": 1.0,
+          "archive_distribution": {
+            "sigint_summaries": 62
+          }
+        },
+        {
+          "module_name": "directorate_policy Cluster 5",
+          "dominant_type": "directorate_policy",
+          "n_entities": 81,
+          "top_archive": "directorate_policy",
+          "top_archive_count": 81,
+          "purity": 1.0,
+          "archive_distribution": {
+            "directorate_policy": 81
+          }
+        },
+        {
+          "module_name": "tactical_sigint Cluster 6",
+          "dominant_type": "tactical_sigint",
+          "n_entities": 332,
+          "top_archive": "tactical_sigint",
+          "top_archive_count": 332,
+          "purity": 1.0,
+          "archive_distribution": {
+            "tactical_sigint": 332
+          }
+        }
+      ],
+      "archive_self_basin_rows": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records_in_modules": 82,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records_in_modules": 81,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records_in_modules": 69,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records_in_modules": 85,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records_in_modules": 62,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records_in_modules": 332,
+          "self_basin_share": 1.0
+        }
+      ]
+    }
+  ]
+}

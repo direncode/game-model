@@ -31,6 +31,7 @@ from app.api.v1.engine import router as engine_router
 from app.api.v1.lo_analyze import router as lo_analyze_router
 from app.api.v1.nato_sim import router as nato_sim_router
 from app.api.v1.range import router as range_router
+from app.api.v1.lsc import router as lsc_router
 
 router = APIRouter()
 
@@ -63,6 +64,7 @@ router.include_router(engine_router)
 router.include_router(lo_analyze_router)
 router.include_router(nato_sim_router)
 router.include_router(range_router)
+router.include_router(lsc_router)
 
 # Also export as api_router for alternate import style
 api_router = router

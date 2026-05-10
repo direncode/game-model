@@ -1,0 +1,1984 @@
+{
+  "campaign": "embedder_amplification_local",
+  "generated_at": "2026-05-05T07:51:22.934293Z",
+  "config": {
+    "corpus_path": "tmp\\bombe_tna.ndjson",
+    "n_per_archive": 40,
+    "top_n_archives": 6,
+    "k_clusters": 12,
+    "kmeans_iters": 32,
+    "seeds": [
+      42,
+      43,
+      44,
+      45
+    ],
+    "embedders": [
+      "tfidf",
+      "minilm_l6",
+      "bge_small",
+      "bge_base"
+    ]
+  },
+  "runs": [
+    {
+      "embedder": "tfidf",
+      "embedder_spec": {
+        "kind": "tfidf",
+        "mteb_avg": 0.0,
+        "label": "TF-IDF (no pretraining)",
+        "params_M": 0.0
+      },
+      "seed": 42,
+      "n_records": 236,
+      "embed_dim": 4221,
+      "embed_seconds": 0.07,
+      "cluster_seconds": 0.02,
+      "mean_self_basin_share": 0.8672,
+      "min_self_basin_share": 0.4324,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "german_machine_decrypts",
+        "c2": "directorate_policy",
+        "c3": "british_sigint_history",
+        "c4": "comintern_decrypts",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "comintern_decrypts",
+        "c8": "british_sigint_history",
+        "c9": "diplomatic_decrypts",
+        "c10": "directorate_to_pm",
+        "c11": "directorate_to_pm"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.8205,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 32,
+              "share": 0.8205
+            },
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 5,
+              "share": 0.1282
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.4324,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 21,
+              "share": 0.5676
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 16,
+              "share": 0.4324
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "tfidf",
+      "embedder_spec": {
+        "kind": "tfidf",
+        "mteb_avg": 0.0,
+        "label": "TF-IDF (no pretraining)",
+        "params_M": 0.0
+      },
+      "seed": 43,
+      "n_records": 236,
+      "embed_dim": 4205,
+      "embed_seconds": 0.07,
+      "cluster_seconds": 0.02,
+      "mean_self_basin_share": 0.8164,
+      "min_self_basin_share": 0.2564,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "directorate_to_pm",
+        "c1": "directorate_policy",
+        "c2": "german_machine_decrypts",
+        "c3": "german_machine_decrypts",
+        "c4": "german_machine_decrypts",
+        "c5": "comintern_decrypts",
+        "c6": "directorate_to_pm",
+        "c7": "british_sigint_history",
+        "c8": "diplomatic_decrypts",
+        "c9": "diplomatic_decrypts",
+        "c10": "british_sigint_history",
+        "c11": "directorate_policy"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.75,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 30,
+              "share": 0.75
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 9,
+              "share": 0.225
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.2564,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 29,
+              "share": 0.7436
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 10,
+              "share": 0.2564
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.8919,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 33,
+              "share": 0.8919
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 4,
+              "share": 0.1081
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "tfidf",
+      "embedder_spec": {
+        "kind": "tfidf",
+        "mteb_avg": 0.0,
+        "label": "TF-IDF (no pretraining)",
+        "params_M": 0.0
+      },
+      "seed": 44,
+      "n_records": 236,
+      "embed_dim": 4236,
+      "embed_seconds": 0.08,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.7671,
+      "min_self_basin_share": 0.0,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "british_sigint_history",
+        "c2": "british_sigint_history",
+        "c3": "british_sigint_history",
+        "c4": "diplomatic_decrypts",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "diplomatic_decrypts",
+        "c8": "comintern_decrypts",
+        "c9": "directorate_policy",
+        "c10": "german_machine_decrypts",
+        "c11": "british_sigint_history"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.9,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 36,
+              "share": 0.9
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 4,
+              "share": 0.1
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 37,
+              "share": 0.9487
+            },
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 1,
+              "share": 0.0256
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.7027,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 26,
+              "share": 0.7027
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 7,
+              "share": 0.1892
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "tfidf",
+      "embedder_spec": {
+        "kind": "tfidf",
+        "mteb_avg": 0.0,
+        "label": "TF-IDF (no pretraining)",
+        "params_M": 0.0
+      },
+      "seed": 45,
+      "n_records": 236,
+      "embed_dim": 4241,
+      "embed_seconds": 0.07,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9035,
+      "min_self_basin_share": 0.6486,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "directorate_policy",
+        "c2": "directorate_to_pm",
+        "c3": "german_machine_decrypts",
+        "c4": "directorate_to_pm",
+        "c5": "comintern_decrypts",
+        "c6": "directorate_policy",
+        "c7": "diplomatic_decrypts",
+        "c8": "directorate_to_pm",
+        "c9": "british_sigint_history",
+        "c10": "comintern_decrypts",
+        "c11": "diplomatic_decrypts"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 0.95,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 38,
+              "share": 0.95
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.925,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 37,
+              "share": 0.925
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 2,
+              "share": 0.05
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.8974,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 35,
+              "share": 0.8974
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 3,
+              "share": 0.0769
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.6486,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 24,
+              "share": 0.6486
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 12,
+              "share": 0.3243
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "minilm_l6",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "mteb_avg": 56.26,
+        "label": "MiniLM-L6-v2 (22M, 6L)",
+        "params_M": 22.0,
+        "pool": "mean"
+      },
+      "seed": 42,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 11.16,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9574,
+      "min_self_basin_share": 0.7692,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "comintern_decrypts",
+        "c1": "german_machine_decrypts",
+        "c2": "directorate_policy",
+        "c3": "british_sigint_history",
+        "c4": "comintern_decrypts",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "directorate_to_pm",
+        "c8": "german_machine_decrypts",
+        "c9": "diplomatic_decrypts",
+        "c10": "directorate_to_pm",
+        "c11": "directorate_to_pm"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.7692,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 30,
+              "share": 0.7692
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 7,
+              "share": 0.1795
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "minilm_l6",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "mteb_avg": 56.26,
+        "label": "MiniLM-L6-v2 (22M, 6L)",
+        "params_M": 22.0,
+        "pool": "mean"
+      },
+      "seed": 43,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 12.76,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9747,
+      "min_self_basin_share": 0.9231,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "directorate_to_pm",
+        "c1": "directorate_policy",
+        "c2": "german_machine_decrypts",
+        "c3": "directorate_to_pm",
+        "c4": "directorate_to_pm",
+        "c5": "directorate_policy",
+        "c6": "german_machine_decrypts",
+        "c7": "british_sigint_history",
+        "c8": "diplomatic_decrypts",
+        "c9": "comintern_decrypts",
+        "c10": "british_sigint_history",
+        "c11": "directorate_policy"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 0.95,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 38,
+              "share": 0.95
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 2,
+              "share": 0.05
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.9231,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 36,
+              "share": 0.9231
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 3,
+              "share": 0.0769
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "minilm_l6",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "mteb_avg": 56.26,
+        "label": "MiniLM-L6-v2 (22M, 6L)",
+        "params_M": 22.0,
+        "pool": "mean"
+      },
+      "seed": 44,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 10.62,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9317,
+      "min_self_basin_share": 0.6923,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "british_sigint_history",
+        "c2": "british_sigint_history",
+        "c3": "british_sigint_history",
+        "c4": "directorate_to_pm",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "diplomatic_decrypts",
+        "c8": "comintern_decrypts",
+        "c9": "directorate_policy",
+        "c10": "german_machine_decrypts",
+        "c11": "british_sigint_history"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 0.95,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 38,
+              "share": 0.95
+            },
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 2,
+              "share": 0.05
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.6923,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 27,
+              "share": 0.6923
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 7,
+              "share": 0.1795
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.973,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 36,
+              "share": 0.973
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 1,
+              "share": 0.027
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "minilm_l6",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "mteb_avg": 56.26,
+        "label": "MiniLM-L6-v2 (22M, 6L)",
+        "params_M": 22.0,
+        "pool": "mean"
+      },
+      "seed": 45,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 11.56,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9318,
+      "min_self_basin_share": 0.641,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "directorate_policy",
+        "c2": "directorate_to_pm",
+        "c3": "german_machine_decrypts",
+        "c4": "directorate_to_pm",
+        "c5": "comintern_decrypts",
+        "c6": "british_sigint_history",
+        "c7": "diplomatic_decrypts",
+        "c8": "german_machine_decrypts",
+        "c9": "british_sigint_history",
+        "c10": "comintern_decrypts",
+        "c11": "diplomatic_decrypts"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.641,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 25,
+              "share": 0.641
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 10,
+              "share": 0.2564
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_small",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-small-en-v1.5",
+        "mteb_avg": 62.17,
+        "label": "BGE-small-en-v1.5 (33M, 12L)",
+        "params_M": 33.0,
+        "pool": "cls"
+      },
+      "seed": 42,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 21.98,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9489,
+      "min_self_basin_share": 0.7436,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "comintern_decrypts",
+        "c1": "german_machine_decrypts",
+        "c2": "directorate_policy",
+        "c3": "british_sigint_history",
+        "c4": "diplomatic_decrypts",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "directorate_policy",
+        "c8": "british_sigint_history",
+        "c9": "comintern_decrypts",
+        "c10": "directorate_to_pm",
+        "c11": "directorate_to_pm"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.95,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 38,
+              "share": 0.95
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.7436,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 29,
+              "share": 0.7436
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 10,
+              "share": 0.2564
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_small",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-small-en-v1.5",
+        "mteb_avg": 62.17,
+        "label": "BGE-small-en-v1.5 (33M, 12L)",
+        "params_M": 33.0,
+        "pool": "cls"
+      },
+      "seed": 43,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 19.03,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9913,
+      "min_self_basin_share": 0.973,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "directorate_to_pm",
+        "c1": "directorate_policy",
+        "c2": "german_machine_decrypts",
+        "c3": "directorate_to_pm",
+        "c4": "directorate_to_pm",
+        "c5": "directorate_policy",
+        "c6": "german_machine_decrypts",
+        "c7": "british_sigint_history",
+        "c8": "comintern_decrypts",
+        "c9": "diplomatic_decrypts",
+        "c10": "british_sigint_history",
+        "c11": "directorate_policy"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 39,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.973,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 36,
+              "share": 0.973
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 1,
+              "share": 0.027
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_small",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-small-en-v1.5",
+        "mteb_avg": 62.17,
+        "label": "BGE-small-en-v1.5 (33M, 12L)",
+        "params_M": 33.0,
+        "pool": "cls"
+      },
+      "seed": 44,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 21.87,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.8292,
+      "min_self_basin_share": 0.0,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "british_sigint_history",
+        "c2": "british_sigint_history",
+        "c3": "british_sigint_history",
+        "c4": "diplomatic_decrypts",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "diplomatic_decrypts",
+        "c8": "comintern_decrypts",
+        "c9": "directorate_policy",
+        "c10": "german_machine_decrypts",
+        "c11": "british_sigint_history"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 38,
+              "share": 0.9744
+            },
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 1,
+              "share": 0.0256
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_small",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-small-en-v1.5",
+        "mteb_avg": 62.17,
+        "label": "BGE-small-en-v1.5 (33M, 12L)",
+        "params_M": 33.0,
+        "pool": "cls"
+      },
+      "seed": 45,
+      "n_records": 236,
+      "embed_dim": 384,
+      "embed_seconds": 21.95,
+      "cluster_seconds": 0.02,
+      "mean_self_basin_share": 0.9958,
+      "min_self_basin_share": 0.975,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "directorate_policy",
+        "c2": "directorate_to_pm",
+        "c3": "german_machine_decrypts",
+        "c4": "directorate_to_pm",
+        "c5": "comintern_decrypts",
+        "c6": "directorate_policy",
+        "c7": "diplomatic_decrypts",
+        "c8": "directorate_to_pm",
+        "c9": "british_sigint_history",
+        "c10": "comintern_decrypts",
+        "c11": "diplomatic_decrypts"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 39,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_base",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-base-en-v1.5",
+        "mteb_avg": 63.55,
+        "label": "BGE-base-en-v1.5 (109M, 12L)",
+        "params_M": 109.0,
+        "pool": "cls"
+      },
+      "seed": 42,
+      "n_records": 236,
+      "embed_dim": 768,
+      "embed_seconds": 66.89,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9958,
+      "min_self_basin_share": 0.975,
+      "k_clusters_used": 11,
+      "cluster_dominant_archive": {
+        "c0": "comintern_decrypts",
+        "c1": "german_machine_decrypts",
+        "c2": "directorate_policy",
+        "c3": "british_sigint_history",
+        "c4": "diplomatic_decrypts",
+        "c6": "british_sigint_history",
+        "c7": "german_machine_decrypts",
+        "c8": "british_sigint_history",
+        "c9": "diplomatic_decrypts",
+        "c10": "directorate_to_pm",
+        "c11": "directorate_to_pm"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 39,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_base",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-base-en-v1.5",
+        "mteb_avg": 63.55,
+        "label": "BGE-base-en-v1.5 (109M, 12L)",
+        "params_M": 109.0,
+        "pool": "cls"
+      },
+      "seed": 43,
+      "n_records": 236,
+      "embed_dim": 768,
+      "embed_seconds": 64.54,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.8163,
+      "min_self_basin_share": 0.3784,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "directorate_to_pm",
+        "c1": "directorate_policy",
+        "c2": "german_machine_decrypts",
+        "c3": "directorate_to_pm",
+        "c4": "german_machine_decrypts",
+        "c5": "directorate_policy",
+        "c6": "directorate_to_pm",
+        "c7": "british_sigint_history",
+        "c8": "comintern_decrypts",
+        "c9": "diplomatic_decrypts",
+        "c10": "british_sigint_history",
+        "c11": "directorate_policy"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.75,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 30,
+              "share": 0.75
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 10,
+              "share": 0.25
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.7692,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 30,
+              "share": 0.7692
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 9,
+              "share": 0.2308
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.3784,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 21,
+              "share": 0.5676
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 14,
+              "share": 0.3784
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_base",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-base-en-v1.5",
+        "mteb_avg": 63.55,
+        "label": "BGE-base-en-v1.5 (109M, 12L)",
+        "params_M": 109.0,
+        "pool": "cls"
+      },
+      "seed": 44,
+      "n_records": 236,
+      "embed_dim": 768,
+      "embed_seconds": 70.77,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.8767,
+      "min_self_basin_share": 0.5676,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "british_sigint_history",
+        "c2": "british_sigint_history",
+        "c3": "british_sigint_history",
+        "c4": "directorate_to_pm",
+        "c5": "british_sigint_history",
+        "c6": "british_sigint_history",
+        "c7": "diplomatic_decrypts",
+        "c8": "comintern_decrypts",
+        "c9": "directorate_policy",
+        "c10": "german_machine_decrypts",
+        "c11": "british_sigint_history"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.7179,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 28,
+              "share": 0.7179
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 10,
+              "share": 0.2564
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 0.5676,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 21,
+              "share": 0.5676
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 16,
+              "share": 0.4324
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "embedder": "bge_base",
+      "embedder_spec": {
+        "kind": "bert_handrolled",
+        "hf_id": "BAAI/bge-base-en-v1.5",
+        "mteb_avg": 63.55,
+        "label": "BGE-base-en-v1.5 (109M, 12L)",
+        "params_M": 109.0,
+        "pool": "cls"
+      },
+      "seed": 45,
+      "n_records": 236,
+      "embed_dim": 768,
+      "embed_seconds": 172.11,
+      "cluster_seconds": 0.01,
+      "mean_self_basin_share": 0.9317,
+      "min_self_basin_share": 0.6154,
+      "k_clusters_used": 12,
+      "cluster_dominant_archive": {
+        "c0": "diplomatic_decrypts",
+        "c1": "directorate_policy",
+        "c2": "directorate_to_pm",
+        "c3": "german_machine_decrypts",
+        "c4": "german_machine_decrypts",
+        "c5": "comintern_decrypts",
+        "c6": "directorate_policy",
+        "c7": "diplomatic_decrypts",
+        "c8": "directorate_to_pm",
+        "c9": "british_sigint_history",
+        "c10": "comintern_decrypts",
+        "c11": "diplomatic_decrypts"
+      },
+      "dispersion_per_archive": [
+        {
+          "archive": "british_sigint_history",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "british_sigint_history",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "comintern_decrypts",
+          "n_records": 40,
+          "self_basin_share": 0.975,
+          "top_landings": [
+            {
+              "dominant_archive": "comintern_decrypts",
+              "count": 39,
+              "share": 0.975
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 0.025
+            }
+          ]
+        },
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 40,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 40,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 39,
+          "self_basin_share": 0.6154,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 24,
+              "share": 0.6154
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 15,
+              "share": 0.3846
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 37,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 37,
+              "share": 1.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary_by_embedder": [
+    {
+      "embedder": "tfidf",
+      "label": "TF-IDF (no pretraining)",
+      "mteb_avg": 0.0,
+      "params_M": 0.0,
+      "n_seeds": 4,
+      "mean_self_basin_mean": 0.8385,
+      "mean_self_basin_std": 0.0516,
+      "min_self_basin_mean": 0.3344,
+      "min_self_basin_std": 0.2378
+    },
+    {
+      "embedder": "minilm_l6",
+      "label": "MiniLM-L6-v2 (22M, 6L)",
+      "mteb_avg": 56.26,
+      "params_M": 22.0,
+      "n_seeds": 4,
+      "mean_self_basin_mean": 0.9489,
+      "mean_self_basin_std": 0.0182,
+      "min_self_basin_mean": 0.7564,
+      "min_self_basin_std": 0.1065
+    },
+    {
+      "embedder": "bge_small",
+      "label": "BGE-small-en-v1.5 (33M, 12L)",
+      "mteb_avg": 62.17,
+      "params_M": 33.0,
+      "n_seeds": 4,
+      "mean_self_basin_mean": 0.9413,
+      "mean_self_basin_std": 0.0673,
+      "min_self_basin_mean": 0.6729,
+      "min_self_basin_std": 0.3997
+    },
+    {
+      "embedder": "bge_base",
+      "label": "BGE-base-en-v1.5 (109M, 12L)",
+      "mteb_avg": 63.55,
+      "params_M": 109.0,
+      "n_seeds": 4,
+      "mean_self_basin_mean": 0.9051,
+      "mean_self_basin_std": 0.0664,
+      "min_self_basin_mean": 0.6341,
+      "min_self_basin_std": 0.2159
+    }
+  ]
+}

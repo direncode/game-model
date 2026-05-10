@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 // Three-layer information architecture per docs/BUSINESS_FRAME.md.
 // Layer 1: protocols. Layer 2: build. Layer 3: silicon. Plus Language + Gallery.
 const NAV_ITEMS = [
-  { label: "Protocols",       href: "/protocols",       layer: "L1" },
-  { label: "Build",           href: "/build",           layer: "L2" },
+  { label: "Benchmarks",      href: "/benchmarks",      layer: null },
+  { label: "Accelerator",     href: "/accelerator",     layer: null },
+  { label: "Builder",         href: "/builder",         layer: null },
+  { label: "Contracting",     href: "/contracting",     layer: null },
   { label: "Silicon",         href: "/silicon",         layer: "L3" },
-  { label: "Interpretability",href: "/interpretability",layer: null },
   { label: "Language",        href: "/language",        layer: null },
-  { label: "Gallery",         href: "/gallery",         layer: null },
   { label: "System",          href: "/system",          layer: null },
 ];
 

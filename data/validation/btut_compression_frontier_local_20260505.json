@@ -1,0 +1,861 @@
+{
+  "campaign": "btut_compression_frontier_local",
+  "generated_at": "2026-05-05T08:04:09.192707Z",
+  "config": {
+    "corpus_path": "tmp\\bombe_tna_full.ndjson",
+    "n_per_archive": 320,
+    "top_n_archives": 6,
+    "k_clusters": 12,
+    "kmeans_iters": 32,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "compression_ratios": [
+      1,
+      2,
+      5,
+      10,
+      20
+    ],
+    "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+    "knn_k": 12
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "compression_ratio_target": 1,
+      "compression_ratio_actual": 1.0,
+      "n_input": 1629,
+      "n_survivors": 1629,
+      "btut_seconds": 0.0,
+      "mean_self_basin_share": 0.8821,
+      "min_self_basin_share": 0.7406,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.9812,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 314,
+              "share": 0.9812
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 4,
+              "share": 0.0125
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 163,
+          "self_basin_share": 0.9264,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 151,
+              "share": 0.9264
+            },
+            {
+              "dominant_archive": "tactical_sigint",
+              "count": 7,
+              "share": 0.0429
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 320,
+          "self_basin_share": 0.9406,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 301,
+              "share": 0.9406
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 9,
+              "share": 0.0281
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.7406,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 237,
+              "share": 0.7406
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 76,
+              "share": 0.2375
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 186,
+          "self_basin_share": 0.8226,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 153,
+              "share": 0.8226
+            },
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 22,
+              "share": 0.1183
+            }
+          ]
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records": 320,
+          "self_basin_share": 0.8812,
+          "top_landings": [
+            {
+              "dominant_archive": "tactical_sigint",
+              "count": 282,
+              "share": 0.8812
+            },
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 31,
+              "share": 0.0969
+            }
+          ]
+        }
+      ],
+      "btut_metrics": null,
+      "is_control": true
+    },
+    {
+      "seed": 42,
+      "compression_ratio_target": 2,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.88,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 5,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 5,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 42,
+      "compression_ratio_target": 5,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.43,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 5,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 5,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 42,
+      "compression_ratio_target": 10,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.51,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 5,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 5,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 42,
+      "compression_ratio_target": 20,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.34,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 5,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 5,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 43,
+      "compression_ratio_target": 1,
+      "compression_ratio_actual": 1.0,
+      "n_input": 1629,
+      "n_survivors": 1629,
+      "btut_seconds": 0.0,
+      "mean_self_basin_share": 0.878,
+      "min_self_basin_share": 0.75,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.9812,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 314,
+              "share": 0.9812
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 5,
+              "share": 0.0156
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 163,
+          "self_basin_share": 0.9448,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 154,
+              "share": 0.9448
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 7,
+              "share": 0.0429
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 320,
+          "self_basin_share": 0.8969,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 287,
+              "share": 0.8969
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 23,
+              "share": 0.0719
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.75,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 240,
+              "share": 0.75
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 71,
+              "share": 0.2219
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 186,
+          "self_basin_share": 0.8172,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 152,
+              "share": 0.8172
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 31,
+              "share": 0.1667
+            }
+          ]
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records": 320,
+          "self_basin_share": 0.8781,
+          "top_landings": [
+            {
+              "dominant_archive": "tactical_sigint",
+              "count": 281,
+              "share": 0.8781
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 36,
+              "share": 0.1125
+            }
+          ]
+        }
+      ],
+      "btut_metrics": null,
+      "is_control": true
+    },
+    {
+      "seed": 43,
+      "compression_ratio_target": 2,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.58,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 43,
+      "compression_ratio_target": 5,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.4,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 43,
+      "compression_ratio_target": 10,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.26,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 43,
+      "compression_ratio_target": 20,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 0.98,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 1,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 1,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 44,
+      "compression_ratio_target": 1,
+      "compression_ratio_actual": 1.0,
+      "n_input": 1629,
+      "n_survivors": 1629,
+      "btut_seconds": 0.0,
+      "mean_self_basin_share": 0.9014,
+      "min_self_basin_share": 0.7281,
+      "dispersion_per_archive": [
+        {
+          "archive": "diplomatic_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.9844,
+          "top_landings": [
+            {
+              "dominant_archive": "diplomatic_decrypts",
+              "count": 315,
+              "share": 0.9844
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 4,
+              "share": 0.0125
+            }
+          ]
+        },
+        {
+          "archive": "directorate_policy",
+          "n_records": 163,
+          "self_basin_share": 0.9264,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 151,
+              "share": 0.9264
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 9,
+              "share": 0.0552
+            }
+          ]
+        },
+        {
+          "archive": "directorate_to_pm",
+          "n_records": 320,
+          "self_basin_share": 0.8812,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 282,
+              "share": 0.8812
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 38,
+              "share": 0.1187
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 320,
+          "self_basin_share": 0.7281,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 233,
+              "share": 0.7281
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 83,
+              "share": 0.2594
+            }
+          ]
+        },
+        {
+          "archive": "sigint_summaries",
+          "n_records": 186,
+          "self_basin_share": 0.9194,
+          "top_landings": [
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 171,
+              "share": 0.9194
+            },
+            {
+              "dominant_archive": "directorate_to_pm",
+              "count": 11,
+              "share": 0.0591
+            }
+          ]
+        },
+        {
+          "archive": "tactical_sigint",
+          "n_records": 320,
+          "self_basin_share": 0.9688,
+          "top_landings": [
+            {
+              "dominant_archive": "tactical_sigint",
+              "count": 310,
+              "share": 0.9688
+            },
+            {
+              "dominant_archive": "sigint_summaries",
+              "count": 10,
+              "share": 0.0312
+            }
+          ]
+        }
+      ],
+      "btut_metrics": null,
+      "is_control": true
+    },
+    {
+      "seed": 44,
+      "compression_ratio_target": 2,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.59,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "directorate_policy",
+          "n_records": 2,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 2,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 44,
+      "compression_ratio_target": 5,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.53,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "directorate_policy",
+          "n_records": 2,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 2,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 44,
+      "compression_ratio_target": 10,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 1.3,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "directorate_policy",
+          "n_records": 2,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 2,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    },
+    {
+      "seed": 44,
+      "compression_ratio_target": 20,
+      "compression_ratio_actual": 325.8,
+      "n_input": 1629,
+      "n_survivors": 5,
+      "btut_seconds": 0.99,
+      "mean_self_basin_share": 1.0,
+      "min_self_basin_share": 1.0,
+      "dispersion_per_archive": [
+        {
+          "archive": "directorate_policy",
+          "n_records": 2,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "directorate_policy",
+              "count": 2,
+              "share": 1.0
+            }
+          ]
+        },
+        {
+          "archive": "german_machine_decrypts",
+          "n_records": 3,
+          "self_basin_share": 1.0,
+          "top_landings": [
+            {
+              "dominant_archive": "german_machine_decrypts",
+              "count": 3,
+              "share": 1.0
+            }
+          ]
+        }
+      ],
+      "is_control": false
+    }
+  ],
+  "summary_by_ratio": [
+    {
+      "compression_ratio_target": 1,
+      "compression_ratio_actual_mean": 1.0,
+      "n_survivors_mean": 1629,
+      "n_seeds": 3,
+      "mean_self_basin_mean": 0.8872,
+      "mean_self_basin_std": 0.0102
+    },
+    {
+      "compression_ratio_target": 2,
+      "compression_ratio_actual_mean": 325.8,
+      "n_survivors_mean": 5,
+      "n_seeds": 3,
+      "mean_self_basin_mean": 1.0,
+      "mean_self_basin_std": 0.0
+    },
+    {
+      "compression_ratio_target": 5,
+      "compression_ratio_actual_mean": 325.8,
+      "n_survivors_mean": 5,
+      "n_seeds": 3,
+      "mean_self_basin_mean": 1.0,
+      "mean_self_basin_std": 0.0
+    },
+    {
+      "compression_ratio_target": 10,
+      "compression_ratio_actual_mean": 325.8,
+      "n_survivors_mean": 5,
+      "n_seeds": 3,
+      "mean_self_basin_mean": 1.0,
+      "mean_self_basin_std": 0.0
+    },
+    {
+      "compression_ratio_target": 20,
+      "compression_ratio_actual_mean": 325.8,
+      "n_survivors_mean": 5,
+      "n_seeds": 3,
+      "mean_self_basin_mean": 1.0,
+      "mean_self_basin_std": 0.0
+    }
+  ]
+}

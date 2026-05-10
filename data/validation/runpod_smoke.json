@@ -1,0 +1,1174 @@
+{
+  "delayTime": 3048,
+  "executionTime": 448,
+  "id": "31d9c05a-779f-413f-9ac7-c212a84b8936-u1",
+  "output": [
+    {
+      "job_id": "campaign_1777970148",
+      "status": "running",
+      "step": "initializing"
+    },
+    {
+      "job_id": "campaign_1777970148",
+      "status": "running",
+      "step": "training"
+    },
+    {
+      "device": "cuda",
+      "job_id": "campaign_1777970148",
+      "message": "Using NVIDIA H100 80GB HBM3",
+      "status": "running",
+      "step": "training"
+    },
+    {
+      "job_id": "campaign_1777970148",
+      "status": "running",
+      "step": "extracting_modules"
+    },
+    {
+      "device": "cuda",
+      "final_auc": 0.9147,
+      "final_knn": 0.8116,
+      "final_loss": 0.2131,
+      "job_id": "campaign_1777970148",
+      "modules": [
+        {
+          "dominant_type": "archetype_0",
+          "entities": [
+            {
+              "attributes": {
+                "text": "keyword_0 content 654",
+                "title": "Document 0 archetype 0"
+              },
+              "name": "e0",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 250",
+                "title": "Document 5 archetype 0"
+              },
+              "name": "e5",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 692",
+                "title": "Document 10 archetype 0"
+              },
+              "name": "e10",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 604",
+                "title": "Document 15 archetype 0"
+              },
+              "name": "e15",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 223",
+                "title": "Document 20 archetype 0"
+              },
+              "name": "e20",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 574",
+                "title": "Document 25 archetype 0"
+              },
+              "name": "e25",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 558",
+                "title": "Document 30 archetype 0"
+              },
+              "name": "e30",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 284",
+                "title": "Document 35 archetype 0"
+              },
+              "name": "e35",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 825",
+                "title": "Document 40 archetype 0"
+              },
+              "name": "e40",
+              "type": "archetype_0"
+            },
+            {
+              "attributes": {
+                "text": "keyword_0 content 284",
+                "title": "Document 45 archetype 0"
+              },
+              "name": "e45",
+              "type": "archetype_0"
+            }
+          ],
+          "entity_count": 10,
+          "internal_density": 0.53,
+          "module_index": 0,
+          "name": "archetype_0 Cluster 1",
+          "purity_score": 1.035,
+          "type_distribution": {
+            "archetype_0": 10
+          }
+        },
+        {
+          "dominant_type": "archetype_1",
+          "entities": [
+            {
+              "attributes": {
+                "text": "keyword_1 content 114",
+                "title": "Document 1 archetype 1"
+              },
+              "name": "e1",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 228",
+                "title": "Document 6 archetype 1"
+              },
+              "name": "e6",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 758",
+                "title": "Document 11 archetype 1"
+              },
+              "name": "e11",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 432",
+                "title": "Document 16 archetype 1"
+              },
+              "name": "e16",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 238",
+                "title": "Document 21 archetype 1"
+              },
+              "name": "e21",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 203",
+                "title": "Document 26 archetype 1"
+              },
+              "name": "e26",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 429",
+                "title": "Document 31 archetype 1"
+              },
+              "name": "e31",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 828",
+                "title": "Document 36 archetype 1"
+              },
+              "name": "e36",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 163",
+                "title": "Document 41 archetype 1"
+              },
+              "name": "e41",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 159",
+                "title": "Document 46 archetype 1"
+              },
+              "name": "e46",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 104",
+                "title": "Document 51 archetype 1"
+              },
+              "name": "e51",
+              "type": "archetype_1"
+            },
+            {
+              "attributes": {
+                "text": "keyword_1 content 867",
+                "title": "Document 56 archetype 1"
+              },
+              "name": "e56",
+              "type": "archetype_1"
+            }
+          ],
+          "entity_count": 12,
+          "internal_density": 0.342,
+          "module_index": 1,
+          "name": "archetype_1 Cluster 2",
+          "purity_score": 1.026,
+          "type_distribution": {
+            "archetype_1": 12
+          }
+        },
+        {
+          "dominant_type": "archetype_2",
+          "entities": [
+            {
+              "attributes": {
+                "text": "keyword_2 content 25",
+                "title": "Document 2 archetype 2"
+              },
+              "name": "e2",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 142",
+                "title": "Document 7 archetype 2"
+              },
+              "name": "e7",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 913",
+                "title": "Document 12 archetype 2"
+              },
+              "name": "e12",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 32",
+                "title": "Document 17 archetype 2"
+              },
+              "name": "e17",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 517",
+                "title": "Document 22 archetype 2"
+              },
+              "name": "e22",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 733",
+                "title": "Document 27 archetype 2"
+              },
+              "name": "e27",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 225",
+                "title": "Document 32 archetype 2"
+              },
+              "name": "e32",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 890",
+                "title": "Document 37 archetype 2"
+              },
+              "name": "e37",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 714",
+                "title": "Document 42 archetype 2"
+              },
+              "name": "e42",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 220",
+                "title": "Document 47 archetype 2"
+              },
+              "name": "e47",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 94",
+                "title": "Document 52 archetype 2"
+              },
+              "name": "e52",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 352",
+                "title": "Document 57 archetype 2"
+              },
+              "name": "e57",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 747",
+                "title": "Document 62 archetype 2"
+              },
+              "name": "e62",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 944",
+                "title": "Document 67 archetype 2"
+              },
+              "name": "e67",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 849",
+                "title": "Document 72 archetype 2"
+              },
+              "name": "e72",
+              "type": "archetype_2"
+            },
+            {
+              "attributes": {
+                "text": "keyword_2 content 370",
+                "title": "Document 77 archetype 2"
+              },
+              "name": "e77",
+              "type": "archetype_2"
+            }
+          ],
+          "entity_count": 16,
+          "internal_density": 0.486,
+          "module_index": 2,
+          "name": "archetype_2 Cluster 3",
+          "purity_score": 1.015,
+          "type_distribution": {
+            "archetype_2": 16
+          }
+        },
+        {
+          "dominant_type": "archetype_3",
+          "entities": [
+            {
+              "attributes": {
+                "text": "keyword_3 content 759",
+                "title": "Document 3 archetype 3"
+              },
+              "name": "e3",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 754",
+                "title": "Document 8 archetype 3"
+              },
+              "name": "e8",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 558",
+                "title": "Document 13 archetype 3"
+              },
+              "name": "e13",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 30",
+                "title": "Document 18 archetype 3"
+              },
+              "name": "e18",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 616",
+                "title": "Document 23 archetype 3"
+              },
+              "name": "e23",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 665",
+                "title": "Document 28 archetype 3"
+              },
+              "name": "e28",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 459",
+                "title": "Document 33 archetype 3"
+              },
+              "name": "e33",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 6",
+                "title": "Document 38 archetype 3"
+              },
+              "name": "e38",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 432",
+                "title": "Document 43 archetype 3"
+              },
+              "name": "e43",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 980",
+                "title": "Document 48 archetype 3"
+              },
+              "name": "e48",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 389",
+                "title": "Document 53 archetype 3"
+              },
+              "name": "e53",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 618",
+                "title": "Document 58 archetype 3"
+              },
+              "name": "e58",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 470",
+                "title": "Document 63 archetype 3"
+              },
+              "name": "e63",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 387",
+                "title": "Document 68 archetype 3"
+              },
+              "name": "e68",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 643",
+                "title": "Document 73 archetype 3"
+              },
+              "name": "e73",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 591",
+                "title": "Document 78 archetype 3"
+              },
+              "name": "e78",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 677",
+                "title": "Document 83 archetype 3"
+              },
+              "name": "e83",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 875",
+                "title": "Document 88 archetype 3"
+              },
+              "name": "e88",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 284",
+                "title": "Document 93 archetype 3"
+              },
+              "name": "e93",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 166",
+                "title": "Document 98 archetype 3"
+              },
+              "name": "e98",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 273",
+                "title": "Document 103 archetype 3"
+              },
+              "name": "e103",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 73",
+                "title": "Document 108 archetype 3"
+              },
+              "name": "e108",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 746",
+                "title": "Document 113 archetype 3"
+              },
+              "name": "e113",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 276",
+                "title": "Document 118 archetype 3"
+              },
+              "name": "e118",
+              "type": "archetype_3"
+            },
+            {
+              "attributes": {
+                "text": "keyword_3 content 224",
+                "title": "Document 123 archetype 3"
+              },
+              "name": "e123",
+              "type": "archetype_3"
+            }
+          ],
+          "entity_count": 25,
+          "internal_density": 0.452,
+          "module_index": 3,
+          "name": "archetype_3 Cluster 4",
+          "purity_score": 1.065,
+          "type_distribution": {
+            "archetype_3": 25
+          }
+        },
+        {
+          "dominant_type": "archetype_4",
+          "entities": [
+            {
+              "attributes": {
+                "text": "keyword_4 content 281",
+                "title": "Document 4 archetype 4"
+              },
+              "name": "e4",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 104",
+                "title": "Document 9 archetype 4"
+              },
+              "name": "e9",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 89",
+                "title": "Document 14 archetype 4"
+              },
+              "name": "e14",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 95",
+                "title": "Document 19 archetype 4"
+              },
+              "name": "e19",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 27",
+                "title": "Document 24 archetype 4"
+              },
+              "name": "e24",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 718",
+                "title": "Document 29 archetype 4"
+              },
+              "name": "e29",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 603",
+                "title": "Document 34 archetype 4"
+              },
+              "name": "e34",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 777",
+                "title": "Document 39 archetype 4"
+              },
+              "name": "e39",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 348",
+                "title": "Document 44 archetype 4"
+              },
+              "name": "e44",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 781",
+                "title": "Document 49 archetype 4"
+              },
+              "name": "e49",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 99",
+                "title": "Document 54 archetype 4"
+              },
+              "name": "e54",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 270",
+                "title": "Document 59 archetype 4"
+              },
+              "name": "e59",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 549",
+                "title": "Document 64 archetype 4"
+              },
+              "name": "e64",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 80",
+                "title": "Document 69 archetype 4"
+              },
+              "name": "e69",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 633",
+                "title": "Document 74 archetype 4"
+              },
+              "name": "e74",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 196",
+                "title": "Document 79 archetype 4"
+              },
+              "name": "e79",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 233",
+                "title": "Document 84 archetype 4"
+              },
+              "name": "e84",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 238",
+                "title": "Document 89 archetype 4"
+              },
+              "name": "e89",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 464",
+                "title": "Document 94 archetype 4"
+              },
+              "name": "e94",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 379",
+                "title": "Document 99 archetype 4"
+              },
+              "name": "e99",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 718",
+                "title": "Document 104 archetype 4"
+              },
+              "name": "e104",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 623",
+                "title": "Document 109 archetype 4"
+              },
+              "name": "e109",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 250",
+                "title": "Document 114 archetype 4"
+              },
+              "name": "e114",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 947",
+                "title": "Document 119 archetype 4"
+              },
+              "name": "e119",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 701",
+                "title": "Document 124 archetype 4"
+              },
+              "name": "e124",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 57",
+                "title": "Document 129 archetype 4"
+              },
+              "name": "e129",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 323",
+                "title": "Document 134 archetype 4"
+              },
+              "name": "e134",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 935",
+                "title": "Document 139 archetype 4"
+              },
+              "name": "e139",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 322",
+                "title": "Document 144 archetype 4"
+              },
+              "name": "e144",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 905",
+                "title": "Document 149 archetype 4"
+              },
+              "name": "e149",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 271",
+                "title": "Document 154 archetype 4"
+              },
+              "name": "e154",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 551",
+                "title": "Document 159 archetype 4"
+              },
+              "name": "e159",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 919",
+                "title": "Document 164 archetype 4"
+              },
+              "name": "e164",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 141",
+                "title": "Document 169 archetype 4"
+              },
+              "name": "e169",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 48",
+                "title": "Document 174 archetype 4"
+              },
+              "name": "e174",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 163",
+                "title": "Document 179 archetype 4"
+              },
+              "name": "e179",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 65",
+                "title": "Document 184 archetype 4"
+              },
+              "name": "e184",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 541",
+                "title": "Document 189 archetype 4"
+              },
+              "name": "e189",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 965",
+                "title": "Document 194 archetype 4"
+              },
+              "name": "e194",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 698",
+                "title": "Document 199 archetype 4"
+              },
+              "name": "e199",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 787",
+                "title": "Document 204 archetype 4"
+              },
+              "name": "e204",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 445",
+                "title": "Document 209 archetype 4"
+              },
+              "name": "e209",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 739",
+                "title": "Document 214 archetype 4"
+              },
+              "name": "e214",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 512",
+                "title": "Document 219 archetype 4"
+              },
+              "name": "e219",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 108",
+                "title": "Document 224 archetype 4"
+              },
+              "name": "e224",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 654",
+                "title": "Document 229 archetype 4"
+              },
+              "name": "e229",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 382",
+                "title": "Document 234 archetype 4"
+              },
+              "name": "e234",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 797",
+                "title": "Document 239 archetype 4"
+              },
+              "name": "e239",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 613",
+                "title": "Document 244 archetype 4"
+              },
+              "name": "e244",
+              "type": "archetype_4"
+            },
+            {
+              "attributes": {
+                "text": "keyword_4 content 951",
+                "title": "Document 249 archetype 4"
+              },
+              "name": "e249",
+              "type": "archetype_4"
+            }
+          ],
+          "entity_count": 50,
+          "internal_density": 0.453,
+          "module_index": 4,
+          "name": "archetype_4 Cluster 5",
+          "purity_score": 1.042,
+          "type_distribution": {
+            "archetype_4": 50
+          }
+        }
+      ],
+      "status": "completed",
+      "total_epochs": 20,
+      "training_metrics": [
+        {
+          "auc": 0.4907,
+          "epoch": 0,
+          "knn": 0.2689,
+          "loss": 2.6378,
+          "nan_detected": false,
+          "step": 0
+        },
+        {
+          "auc": 0.5773,
+          "epoch": 1,
+          "knn": 0.3997,
+          "loss": 2.2293,
+          "nan_detected": false,
+          "step": 1
+        },
+        {
+          "auc": 0.6391,
+          "epoch": 2,
+          "knn": 0.4414,
+          "loss": 1.8916,
+          "nan_detected": false,
+          "step": 2
+        },
+        {
+          "auc": 0.6987,
+          "epoch": 3,
+          "knn": 0.5101,
+          "loss": 1.5836,
+          "nan_detected": false,
+          "step": 3
+        },
+        {
+          "auc": 0.7426,
+          "epoch": 4,
+          "knn": 0.555,
+          "loss": 1.3468,
+          "nan_detected": false,
+          "step": 4
+        },
+        {
+          "auc": 0.7782,
+          "epoch": 5,
+          "knn": 0.5971,
+          "loss": 1.1318,
+          "nan_detected": false,
+          "step": 5
+        },
+        {
+          "auc": 0.7924,
+          "epoch": 6,
+          "knn": 0.6362,
+          "loss": 0.9819,
+          "nan_detected": false,
+          "step": 6
+        },
+        {
+          "auc": 0.8158,
+          "epoch": 7,
+          "knn": 0.6668,
+          "loss": 0.8367,
+          "nan_detected": false,
+          "step": 7
+        },
+        {
+          "auc": 0.8526,
+          "epoch": 8,
+          "knn": 0.7245,
+          "loss": 0.7081,
+          "nan_detected": false,
+          "step": 8
+        },
+        {
+          "auc": 0.857,
+          "epoch": 9,
+          "knn": 0.7402,
+          "loss": 0.6208,
+          "nan_detected": false,
+          "step": 9
+        },
+        {
+          "auc": 0.8848,
+          "epoch": 10,
+          "knn": 0.734,
+          "loss": 0.5353,
+          "nan_detected": false,
+          "step": 10
+        },
+        {
+          "auc": 0.8754,
+          "epoch": 11,
+          "knn": 0.7596,
+          "loss": 0.4623,
+          "nan_detected": false,
+          "step": 11
+        },
+        {
+          "auc": 0.8695,
+          "epoch": 12,
+          "knn": 0.7552,
+          "loss": 0.4052,
+          "nan_detected": false,
+          "step": 12
+        },
+        {
+          "auc": 0.883,
+          "epoch": 13,
+          "knn": 0.8068,
+          "loss": 0.3582,
+          "nan_detected": false,
+          "step": 13
+        },
+        {
+          "auc": 0.9105,
+          "epoch": 14,
+          "knn": 0.7968,
+          "loss": 0.3237,
+          "nan_detected": false,
+          "step": 14
+        },
+        {
+          "auc": 0.8927,
+          "epoch": 15,
+          "knn": 0.7939,
+          "loss": 0.2934,
+          "nan_detected": false,
+          "step": 15
+        },
+        {
+          "auc": 0.8939,
+          "epoch": 16,
+          "knn": 0.8057,
+          "loss": 0.2679,
+          "nan_detected": false,
+          "step": 16
+        },
+        {
+          "auc": 0.9126,
+          "epoch": 17,
+          "knn": 0.8077,
+          "loss": 0.2469,
+          "nan_detected": false,
+          "step": 17
+        },
+        {
+          "auc": 0.9157,
+          "epoch": 18,
+          "knn": 0.8461,
+          "loss": 0.2283,
+          "nan_detected": false,
+          "step": 18
+        },
+        {
+          "auc": 0.9147,
+          "epoch": 19,
+          "knn": 0.8116,
+          "loss": 0.2131,
+          "nan_detected": false,
+          "step": 19
+        }
+      ],
+      "training_time_seconds": 0.0005762577056884766
+    }
+  ],
+  "status": "COMPLETED",
+  "workerId": "xvt3ubumccecv3"
+}

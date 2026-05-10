@@ -1,0 +1,287 @@
+{
+  "campaign": "synth_scale_gpu_runpod",
+  "generated_at": "2026-05-05T08:47:54.014061Z",
+  "endpoint": "production runpod serverless (BTUT + TCD-JEPA on H100)",
+  "scales_tested": [
+    {
+      "n_entities": 100000,
+      "n_archetypes": 20
+    }
+  ],
+  "runs": [
+    {
+      "n_entities": 100000,
+      "n_archetypes": 20,
+      "budget_dollars": 5.0,
+      "epochs": 30,
+      "wall_seconds": 43.66,
+      "device": "cuda",
+      "final_auc": 0.9153,
+      "final_knn": 0.8287,
+      "final_loss": 0.2644,
+      "n_modules_discovered": 16,
+      "mean_module_purity": 1.0,
+      "mean_archetype_self_basin": 1.0,
+      "module_purity_rows": [
+        {
+          "module_name": "a0 Cluster 1",
+          "dominant_type": "a0",
+          "n_entities": 312,
+          "top_archive": "a0",
+          "top_archive_count": 312,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a0": 312
+          }
+        },
+        {
+          "module_name": "a1 Cluster 2",
+          "dominant_type": "a1",
+          "n_entities": 333,
+          "top_archive": "a1",
+          "top_archive_count": 333,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a1": 333
+          }
+        },
+        {
+          "module_name": "a2 Cluster 3",
+          "dominant_type": "a2",
+          "n_entities": 357,
+          "top_archive": "a2",
+          "top_archive_count": 357,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a2": 357
+          }
+        },
+        {
+          "module_name": "a3 Cluster 4",
+          "dominant_type": "a3",
+          "n_entities": 384,
+          "top_archive": "a3",
+          "top_archive_count": 384,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a3": 384
+          }
+        },
+        {
+          "module_name": "a4 Cluster 5",
+          "dominant_type": "a4",
+          "n_entities": 416,
+          "top_archive": "a4",
+          "top_archive_count": 416,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a4": 416
+          }
+        },
+        {
+          "module_name": "a5 Cluster 6",
+          "dominant_type": "a5",
+          "n_entities": 454,
+          "top_archive": "a5",
+          "top_archive_count": 454,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a5": 454
+          }
+        },
+        {
+          "module_name": "a6 Cluster 7",
+          "dominant_type": "a6",
+          "n_entities": 500,
+          "top_archive": "a6",
+          "top_archive_count": 500,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a6": 500
+          }
+        },
+        {
+          "module_name": "a7 Cluster 8",
+          "dominant_type": "a7",
+          "n_entities": 555,
+          "top_archive": "a7",
+          "top_archive_count": 555,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a7": 555
+          }
+        },
+        {
+          "module_name": "a8 Cluster 9",
+          "dominant_type": "a8",
+          "n_entities": 625,
+          "top_archive": "a8",
+          "top_archive_count": 625,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a8": 625
+          }
+        },
+        {
+          "module_name": "a9 Cluster 10",
+          "dominant_type": "a9",
+          "n_entities": 714,
+          "top_archive": "a9",
+          "top_archive_count": 714,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a9": 714
+          }
+        },
+        {
+          "module_name": "a10 Cluster 11",
+          "dominant_type": "a10",
+          "n_entities": 833,
+          "top_archive": "a10",
+          "top_archive_count": 833,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a10": 833
+          }
+        },
+        {
+          "module_name": "a11 Cluster 12",
+          "dominant_type": "a11",
+          "n_entities": 1000,
+          "top_archive": "a11",
+          "top_archive_count": 1000,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a11": 1000
+          }
+        },
+        {
+          "module_name": "a12 Cluster 13",
+          "dominant_type": "a12",
+          "n_entities": 1250,
+          "top_archive": "a12",
+          "top_archive_count": 1250,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a12": 1250
+          }
+        },
+        {
+          "module_name": "a13 Cluster 14",
+          "dominant_type": "a13",
+          "n_entities": 1666,
+          "top_archive": "a13",
+          "top_archive_count": 1666,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a13": 1666
+          }
+        },
+        {
+          "module_name": "a14 Cluster 15",
+          "dominant_type": "a14",
+          "n_entities": 2500,
+          "top_archive": "a14",
+          "top_archive_count": 2500,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a14": 2500
+          }
+        },
+        {
+          "module_name": "a15 Cluster 16",
+          "dominant_type": "a15",
+          "n_entities": 5000,
+          "top_archive": "a15",
+          "top_archive_count": 5000,
+          "purity": 1.0,
+          "archive_distribution": {
+            "a15": 5000
+          }
+        }
+      ],
+      "archetype_self_basin_rows": [
+        {
+          "archive": "a0",
+          "n_records_in_modules": 312,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a1",
+          "n_records_in_modules": 333,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a10",
+          "n_records_in_modules": 833,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a11",
+          "n_records_in_modules": 1000,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a12",
+          "n_records_in_modules": 1250,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a13",
+          "n_records_in_modules": 1666,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a14",
+          "n_records_in_modules": 2500,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a15",
+          "n_records_in_modules": 5000,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a2",
+          "n_records_in_modules": 357,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a3",
+          "n_records_in_modules": 384,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a4",
+          "n_records_in_modules": 416,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a5",
+          "n_records_in_modules": 454,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a6",
+          "n_records_in_modules": 500,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a7",
+          "n_records_in_modules": 555,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a8",
+          "n_records_in_modules": 625,
+          "self_basin_share": 1.0
+        },
+        {
+          "archive": "a9",
+          "n_records_in_modules": 714,
+          "self_basin_share": 1.0
+        }
+      ]
+    }
+  ]
+}
