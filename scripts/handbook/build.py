@@ -12,7 +12,7 @@ Runs all seven validators against `docs/handbook/`:
 
 Usage:
     python -m scripts.handbook.build --check
-    python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.ts
+    python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.generated.ts
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 from backend.handbook_runner.premium_gate import OPERATOR_REGISTRY, OperatorSpec
-from scripts.handbook.parse_chapter import ParseChapterError, parse_chapter
+from scripts.handbook.parse_chapter import Chapter, ParseChapterError, parse_chapter
 from scripts.handbook.validate_corpora import validate_corpora
 from scripts.handbook.validate_exercises import validate_exercises
 from scripts.handbook.validate_glossary import validate_glossary
@@ -288,31 +288,189 @@ def run_check(handbook_dir: Path) -> int:
     return errors_total
 
 
+def _slugify(s: str) -> str:
+    return re.sub(r"[^a-z0-9-]+", "-", s.lower()).strip("-")
+
+
+def _parse_corpus_from_info(info: str) -> str | None:
+    """Extract `corpus=...` from a fence info string, if present."""
+    for part in info.split():
+        if part.startswith("corpus="):
+            return part.split("=", 1)[1]
+    return None
+
+
+def _is_runnable_info(info: str) -> bool:
+    parts = info.split()
+    if not parts or parts[0] != "ocean":
+        return False
+    return "static" not in parts[1:]
+
+
+def _extract_chapter_view(chap: Chapter) -> dict:
+    """Build the frontend-facing dict for a chapter."""
+    fm = chap.frontmatter
+    slug = fm.get("slug") or chap.path.stem
+    number = fm.get("number")
+    title = fm.get("title") or chap.title or slug
+    promise = fm.get("promise") or ""
+
+    # Outline: H2 + H3 headings (excluding the H1 title).
+    outline = []
+    for h in chap.headings:
+        if h.level not in (2, 3):
+            continue
+        outline.append(
+            {
+                "id": _slugify(h.text),
+                "text": h.text,
+                "level": h.level,
+            }
+        )
+
+    # Concepts: items under "## Concepts in this chapter" — parsed from body.
+    concepts = _extract_section_bullets(chap.body, "Concepts in this chapter")
+
+    # Exercises: items under "## Exercises" — parsed as numbered list.
+    exercises = _extract_numbered_list(chap.body, "Exercises")
+
+    # Snippets: only fenced blocks with `ocean` info.
+    snippets = []
+    for sn in chap.snippets:
+        if not sn.info.startswith("ocean"):
+            continue
+        runnable = _is_runnable_info(sn.info)
+        corpus = _parse_corpus_from_info(sn.info)
+        snippets.append(
+            {
+                "code": sn.content,
+                "runnable": runnable,
+                "corpus": corpus,
+                "line": sn.line_no,
+            }
+        )
+
+    return {
+        "slug": slug,
+        "number": number,
+        "title": title,
+        "promise": promise,
+        "concepts": concepts,
+        "outline": outline,
+        "snippets": snippets,
+        "exercises": exercises,
+    }
+
+
+def _extract_section_bullets(body: str, heading_text: str) -> list[str]:
+    """Return bullet-list items found directly under `## <heading_text>`."""
+    lines = body.splitlines()
+    items: list[str] = []
+    inside = False
+    target_pat = re.compile(rf"^##\s+{re.escape(heading_text)}\s*$")
+    for line in lines:
+        if target_pat.match(line.strip()):
+            inside = True
+            continue
+        if inside and line.strip().startswith("## "):
+            break
+        if inside:
+            s = line.strip()
+            if s.startswith("- ") or s.startswith("* "):
+                items.append(s[2:].strip())
+    return items
+
+
+def _extract_numbered_list(body: str, heading_text: str) -> list[dict]:
+    """Return numbered-list items found under `## <heading_text>`."""
+    lines = body.splitlines()
+    items: list[dict] = []
+    inside = False
+    target_pat = re.compile(rf"^##\s+{re.escape(heading_text)}\s*$")
+    num_pat = re.compile(r"^(\d+)\.\s+(.+)$")
+    for line in lines:
+        if target_pat.match(line.strip()):
+            inside = True
+            continue
+        if inside and line.strip().startswith("## "):
+            break
+        if inside:
+            m = num_pat.match(line.strip())
+            if m:
+                items.append({"number": int(m.group(1)), "prompt": m.group(2).strip()})
+    return items
+
+
+_META_SECTIONS = {"Concepts in this chapter", "Exercises", "What's next"}
+
+
+def _split_body(body: str) -> tuple[str, str]:
+    """Return (body_markdown_excluding_meta, wider_system_markdown).
+
+    Strips H1 title, the "Concepts in this chapter", "Exercises", and "What's
+    next" sections. Pulls out the "Wider system" section separately so the UI
+    can render it as a styled callout.
+    """
+    lines = body.splitlines()
+    sections: list[tuple[str, list[str]]] = []  # (title or "", body lines)
+    current_title = ""
+    current_lines: list[str] = []
+
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("# ") and not stripped.startswith("## "):
+            # H1: skip — it's the title, rendered separately.
+            if current_title or current_lines:
+                sections.append((current_title, current_lines))
+            current_title = ""
+            current_lines = []
+            continue
+        if stripped.startswith("## "):
+            if current_title or current_lines:
+                sections.append((current_title, current_lines))
+            current_title = stripped[3:].strip()
+            current_lines = []
+            continue
+        current_lines.append(line)
+    if current_title or current_lines:
+        sections.append((current_title, current_lines))
+
+    body_out: list[str] = []
+    wider_system: list[str] = []
+    for title, body_lines in sections:
+        if title == "":
+            # Pre-H2 prose (intro after the H1).
+            text = "\n".join(body_lines).strip()
+            if text:
+                body_out.append(text)
+            continue
+        if title in _META_SECTIONS:
+            continue
+        if title == "Wider system":
+            wider_system.append("\n".join(body_lines).strip())
+            continue
+        body_out.append(f"## {title}\n\n" + "\n".join(body_lines).strip())
+
+    return ("\n\n".join(s for s in body_out if s).strip(),
+            "\n\n".join(s for s in wider_system if s).strip())
+
+
 def run_emit_content(handbook_dir: Path, out_path: Path) -> int:
     chapter_paths = _discover_chapter_paths(handbook_dir)
-    entries = []
+    chapters_view = []
     for cp in chapter_paths:
         try:
             chap = parse_chapter(cp)
         except ParseChapterError as exc:
             _emit_error(str(exc))
             return 1
-        entries.append(
-            {
-                "slug": chap.frontmatter.get("slug"),
-                "number": chap.frontmatter.get("number"),
-                "title": chap.frontmatter.get("title"),
-                "promise": chap.frontmatter.get("promise"),
-                "status": chap.frontmatter.get("status"),
-                "path": str(cp.relative_to(REPO_ROOT)).replace("\\", "/"),
-                "body": chap.body,
-            }
-        )
-    payload = json.dumps(entries, indent=2)
+        chapters_view.append(_extract_chapter_view(chap))
+    payload = json.dumps(chapters_view, indent=2)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(
         "// Generated by scripts/handbook/build.py — do not edit by hand.\n"
-        f"export const handbookContent = {payload} as const;\n",
+        'import type { HandbookChapter } from "./handbook-types";\n\n'
+        f"export const handbookChapters: readonly HandbookChapter[] = {payload} as const;\n",
         encoding="utf-8",
     )
     return 0

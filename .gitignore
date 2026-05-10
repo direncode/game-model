@@ -82,3 +82,6 @@ bot/nato_sim/.env.local
 # Local debug extracts (regenerable)
 briefing-book-extract.txt
 friday-intro-extract.txt
+
+# Generated handbook content
+frontend/lib/handbook-content.generated.ts
