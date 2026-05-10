@@ -1,0 +1,44 @@
+{
+  "name": "OCEAN",
+  "scopeName": "source.ocean",
+  "fileTypes": ["ocean"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#verbs" },
+    { "include": "#types" },
+    { "include": "#literals" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "match": "#.*$",
+      "name": "comment.line.number-sign.ocean"
+    },
+    "keywords": {
+      "match": "\\b(require|seed|let|in|as|on|from|to|into|using|with|by|of|do|end|sweep|compare|against|parallel|import|step|take|balanced|field|is|for|rounds|round|max|modules|module|energy|crystallize|every|nearest|records|record|dispersion|each|label|fine|anchored|dimensions|dimension|loop|recursive|tcd|tf-idf|tfidf|content|fingerprint|one-hot|numeric|mean|corpus|normal|text|define|return|if|then|else|elif|true|false|not|and|or)\\b",
+      "name": "keyword.control.ocean"
+    },
+    "verbs": {
+      "match": "\\b(load|embed|reduce|cluster|align|find|narrate|save)\\b",
+      "name": "support.function.verb.ocean"
+    },
+    "types": {
+      "match": "\\b(Records|Z|Modules|Aligned|Dispersion|Artifact|Pipeline|Number|String|Path|Bool|Any)\\b",
+      "name": "support.type.ocean"
+    },
+    "literals": {
+      "patterns": [
+        { "match": "\\b\\d+(_\\d+)*\\.\\d+([eE][+-]?\\d+)?\\b", "name": "constant.numeric.float.ocean" },
+        { "match": "\\b\\d+(_\\d+)*\\b", "name": "constant.numeric.integer.ocean" },
+        { "match": "\\\"[^\\\"\\n]*\\\"|'[^'\\n]*'", "name": "string.quoted.ocean" },
+        { "match": "\\$\\{[a-z_][a-z0-9_]*\\}", "name": "variable.parameter.interpolation.ocean" },
+        { "match": "\\b(true|false)\\b", "name": "constant.language.boolean.ocean" }
+      ]
+    },
+    "operators": {
+      "match": "==|!=|<=|>=|<|>|\\+|-|\\*|/|=",
+      "name": "keyword.operator.ocean"
+    }
+  }
+}
