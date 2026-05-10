@@ -26,7 +26,52 @@ import sys
 from pathlib import Path
 
 import markdown
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from xhtml2pdf import pisa
+
+
+def _register_unicode_fonts() -> str | None:
+    """Register an OS-available Unicode TTF font so chars like sigma render.
+
+    Returns the CSS font-family name to use, or None if no font found.
+    Tries Arial first (Windows / macOS), then DejaVu Sans (Linux).
+    """
+    candidates = [
+        ("Arial", [
+            "C:/Windows/Fonts/arial.ttf",
+            "/Library/Fonts/Arial.ttf",
+        ], "C:/Windows/Fonts/arialbd.ttf", "C:/Windows/Fonts/ariali.ttf", "C:/Windows/Fonts/arialbi.ttf"),
+        ("DejaVu Sans", [
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+            "/usr/share/fonts/dejavu/DejaVuSans.ttf",
+        ], "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+           "/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf",
+           "/usr/share/fonts/truetype/dejavu/DejaVuSans-BoldOblique.ttf"),
+    ]
+    for name, regulars, bold, italic, bolditalic in candidates:
+        regular_path = next((p for p in regulars if Path(p).exists()), None)
+        if regular_path is None:
+            continue
+        try:
+            pdfmetrics.registerFont(TTFont(name, regular_path))
+            if Path(bold).exists():
+                pdfmetrics.registerFont(TTFont(f"{name}-Bold", bold))
+            if Path(italic).exists():
+                pdfmetrics.registerFont(TTFont(f"{name}-Italic", italic))
+            if Path(bolditalic).exists():
+                pdfmetrics.registerFont(TTFont(f"{name}-BoldItalic", bolditalic))
+            pdfmetrics.registerFontFamily(
+                name,
+                normal=name,
+                bold=f"{name}-Bold" if Path(bold).exists() else name,
+                italic=f"{name}-Italic" if Path(italic).exists() else name,
+                boldItalic=f"{name}-BoldItalic" if Path(bolditalic).exists() else name,
+            )
+            return name
+        except Exception:
+            continue
+    return None
 
 
 HANDBOOK_DIR = Path("docs/handbook")
@@ -75,7 +120,7 @@ PRINT_CSS = """
 }
 
 body {
-    font-family: "Helvetica", "Arial", sans-serif;
+    font-family: {{FONT_FAMILY}};
     font-size: 10.5pt;
     line-height: 1.45;
     color: #1a1a1a;
@@ -256,14 +301,14 @@ COVER_HTML = """
     <h1>The OCEAN Handbook</h1>
     <div class="subtitle">Foundations-up reference for the OCEAN substrate-clustering language</div>
     <div class="footer">
-        Version 1.0 &nbsp;·&nbsp; LatentOcean Platform
+        Version 1.0 &nbsp;|&nbsp; LatentOcean Platform
     </div>
 </div>
 """
 
 FOOTER_HTML = """
 <div id="footerContent" style="font-size: 9pt; color: #71717a; text-align: center;">
-    The OCEAN Handbook &nbsp;·&nbsp; page <pdf:pagenumber /> of <pdf:pagecount />
+    The OCEAN Handbook &nbsp;|&nbsp; page <pdf:pagenumber /> of <pdf:pagecount />
 </div>
 """
 
@@ -339,6 +384,17 @@ def build_pdf(handbook_dir: Path, output: Path) -> int:
         print(f"error: handbook directory not found: {handbook_dir}", file=sys.stderr)
         return 1
 
+    font_family = _register_unicode_fonts()
+    if font_family is None:
+        print(
+            "warning: no Unicode TTF font found; some characters (sigma, "
+            "middle-dot, multiplication sign) may render as boxes",
+            file=sys.stderr,
+        )
+        font_css = '"Helvetica", "Arial", sans-serif'
+    else:
+        font_css = f'"{font_family}", "Helvetica", "Arial", sans-serif'
+
     chapter_info: list[tuple[str, str, str]] = []
     bodies: list[str] = []
 
@@ -355,12 +411,14 @@ def build_pdf(handbook_dir: Path, output: Path) -> int:
     toc_html = _build_toc_html(chapter_info)
     body_html = "\n".join(bodies)
 
+    styled_css = PRINT_CSS.replace("{{FONT_FAMILY}}", font_css)
+
     full_html = f"""<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>The OCEAN Handbook</title>
-    <style>{PRINT_CSS}</style>
+    <style>{styled_css}</style>
 </head>
 <body>
 {COVER_HTML}
