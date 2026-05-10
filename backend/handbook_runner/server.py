@@ -61,6 +61,10 @@ class RunRequest(BaseModel):
     corpus: str
 
 
+class ValidateRequest(BaseModel):
+    source: str = Field(..., max_length=20_000)
+
+
 def _classify_error(exc: Exception) -> str:
     """Map a compiler exception to one of: syntax | type | name | runtime."""
     name = type(exc).__name__.lower()
@@ -376,6 +380,21 @@ def create_app(redis: Any) -> FastAPI:
                 }
         finally:
             limiter.release(ip=client_ip)
+
+    @app.post("/api/handbook/validate")
+    async def validate_endpoint(
+        req: ValidateRequest, response: Response
+    ) -> Any:
+        # Compile-only path used by the MCP `ocean_validate` tool and the
+        # frontend's "check syntax" affordance. No corpus, no sandbox, no
+        # rate limit (it's cheap; size cap is the only safety net).
+        if len(req.source.encode("utf-8")) > MAX_SOURCE_BYTES:
+            raise HTTPException(status_code=413, detail="source larger than 16 KB")
+        _program, error = _compile_and_type_check(req.source)
+        if error is not None:
+            response.status_code = 400
+            return error
+        return {"ok": True}
 
     @app.get("/api/handbook/health")
     async def health() -> dict[str, Any]:
