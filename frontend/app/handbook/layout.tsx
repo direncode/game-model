@@ -1,3 +1,4 @@
+import "./handbook.css";
 import { handbookChapters } from "@/lib/handbook-content.generated";
 import { HandbookSidebar } from "@/components/handbook/HandbookSidebar";
 import { HandbookSearch } from "@/components/handbook/HandbookSearch";

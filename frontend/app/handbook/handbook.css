@@ -1,0 +1,33 @@
+.handbook-shell .prose {
+  max-width: none;
+}
+
+.handbook-shell .prose h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.handbook-shell .prose h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  padding-bottom: 0.5rem;
+}
+
+.handbook-shell .prose blockquote {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--fg-secondary, #52525b);
+  border-left: 3px solid var(--accent, #10b981);
+  background: var(--accent-subtle, #f0fdf4);
+  padding: 0.75rem 1rem;
+}
+
+.handbook-shell .prose pre {
+  margin: 0;
+}
+
+.handbook-code-block {
+  margin: 1.5rem 0;
+}
