@@ -33,7 +33,9 @@ from pydantic import BaseModel, Field
 
 from app.core.api_key_auth import require_api_scope
 from app.services.lsc.backends import CostAwareRouter, BackendUnavailable
+from app.services.lsc.dashboards import fetch_org_aggregate, fetch_org_recent_jobs
 from app.services.lsc.metering import record_job_usage
+from app.services.lsc.persistence import get_job_result, store_job_result
 
 
 router = APIRouter(prefix="/lsc", tags=["lsc"])
@@ -423,6 +425,37 @@ async def lsc_submit(
         # Metering must not fail the customer's job.
         pass
 
+    result_doc = {
+        "job_id": job_id,
+        "status": "COMPLETED",
+        "backend": backend["backend"],
+        "device": final_stage.get("device"),
+        "n_entities_input": len(req.entities),
+        "n_modules_discovered": len(modules),
+        "mean_module_purity": mean_purity,
+        "min_module_purity": round(min_purity, 4) if min_purity is not None else None,
+        "mean_class_self_basin": mean_self_basin,
+        "final_auc": final_stage.get("final_auc"),
+        "wall_seconds": round(elapsed, 2),
+        "gpu_exec_ms": exec_ms,
+        "cost_dollars_estimate": round(cost_dollars, 6),
+        "regime_card_compliant": compliant,
+        "module_purity_rows": [m.model_dump() for m in module_rows],
+        "archive_self_basin_rows": [r.model_dump() for r in archive_rows],
+        "lineage_signature": lineage,
+    }
+    # Layer 6 — persist result for /lsc/jobs/{job_id} retrieval. Non-fatal.
+    try:
+        customer_key_id = request.headers.get("X-Customer-Key-Id")
+        store_job_result(
+            org_id=auth_ctx.get("org_id"),
+            job_id=job_id,
+            result=result_doc,
+            customer_key_id=customer_key_id,
+        )
+    except Exception:
+        pass
+
     return JobResult(
         job_id=job_id,
         status="COMPLETED",
@@ -442,3 +475,44 @@ async def lsc_submit(
         archive_self_basin_rows=archive_rows,
         lineage_signature=lineage,
     )
+
+
+# ------------------------------ retrieval (L6) ----------------------------
+
+
+@router.get("/jobs/{job_id}")
+async def lsc_job(
+    job_id: str,
+    auth_ctx: dict = Depends(require_api_scope("query")),
+) -> dict[str, Any]:
+    """Retrieve a stored job result by id.
+
+    Scoped to the authenticated API key's org. Tenant isolation is
+    enforced at the persistence layer key prefix (``org=<id>/...``).
+    """
+    doc = get_job_result(auth_ctx.get("org_id"), job_id)
+    if doc is None:
+        raise HTTPException(status_code=404, detail="job not found or not persisted")
+    return doc
+
+
+# ------------------------------ dashboards (L9) ---------------------------
+
+
+@router.get("/metrics")
+async def lsc_metrics(
+    auth_ctx: dict = Depends(require_api_scope("query")),
+) -> dict[str, Any]:
+    """Return aggregate usage + recent job rollup for the org.
+
+    Powers the /dashboard customer-facing page. Reads from the Redis
+    usage records written by the metering layer; returns empty
+    aggregates if Redis is unavailable.
+    """
+    org_id = auth_ctx.get("org_id")
+    aggregate = await fetch_org_aggregate(org_id)
+    recent = await fetch_org_recent_jobs(org_id, limit=50)
+    return {
+        "aggregate": aggregate,
+        "recent_jobs": recent,
+    }

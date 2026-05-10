@@ -8,10 +8,10 @@ const NAV_ITEMS = [
   { label: "Benchmarks",      href: "/benchmarks",      layer: null },
   { label: "Accelerator",     href: "/accelerator",     layer: null },
   { label: "Builder",         href: "/builder",         layer: null },
+  { label: "Dashboard",       href: "/dashboard",       layer: null },
+  { label: "Status",          href: "/status",          layer: null },
   { label: "Contracting",     href: "/contracting",     layer: null },
   { label: "Silicon",         href: "/silicon",         layer: "L3" },
-  { label: "Language",        href: "/language",        layer: null },
-  { label: "System",          href: "/system",          layer: null },
 ];
 
 export function Nav() {
