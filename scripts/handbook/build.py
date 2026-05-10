@@ -19,9 +19,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
+from backend.handbook_runner.premium_gate import OPERATOR_REGISTRY, OperatorSpec
 from scripts.handbook.parse_chapter import ParseChapterError, parse_chapter
 from scripts.handbook.validate_corpora import validate_corpora
 from scripts.handbook.validate_exercises import validate_exercises
@@ -34,6 +36,16 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 HANDBOOK_DIR = REPO_ROOT / "docs" / "handbook"
 SOLUTIONS_FILENAME = "app-f-exercise-solutions.md"
 GLOSSARY_FILENAME = "app-d-glossary.md"
+APP_B_FILENAME = "app-b-operator-catalog.md"
+
+# AUTO-GENERATED region markers in app-b-operator-catalog.md. Two pairs:
+# one for the free / open-core table, one for the premium table. Each pair
+# is generated independently so a tier-flip in the registry only diffs the
+# affected table.
+_FREE_BEGIN = "<!-- AUTO-GENERATED:catalog-begin -->"
+_FREE_END = "<!-- AUTO-GENERATED:catalog-end -->"
+_PREMIUM_BEGIN = "<!-- AUTO-GENERATED:premium-begin -->"
+_PREMIUM_END = "<!-- AUTO-GENERATED:premium-end -->"
 
 
 def _discover_chapter_paths(handbook_dir: Path) -> list[Path]:
@@ -44,9 +56,171 @@ def _emit_error(msg: str) -> None:
     print(f"ERROR: {msg}")
 
 
+# ─── Catalog generation (Plan C, Task 8) ─────────────────────────────
+#
+# The operator catalog in Appendix B is generated from the runtime registry
+# at `backend.handbook_runner.premium_gate.OPERATOR_REGISTRY`. Two tables
+# live in the doc — one for the free tier, one for the premium tier —
+# each wrapped in its own AUTO-GENERATED marker pair.
+#
+# `regenerate_catalog_table()` rewrites both tables in place. It is
+# idempotent: running it twice produces the same file bytes.
+#
+# `validate_catalog()` re-generates the tables in memory and compares the
+# resulting file content to what's on disk. Any drift is reported as an
+# error so CI catches a hand-edited catalog or a registry change that
+# wasn't committed alongside the doc.
+
+
+def _escape_md_cell(text: str) -> str:
+    """Escape characters that would break a markdown table cell.
+
+    Pipes split columns; backslashes / newlines break formatting. We
+    flatten newlines to spaces and escape pipe characters.
+    """
+    cleaned = text.replace("\r", " ").replace("\n", " ").strip()
+    return cleaned.replace("|", r"\|")
+
+
+def _format_schema(schema: dict[str, str]) -> str:
+    """Render the per-operator schema dict as a single-cell summary.
+
+    Keys are listed in their dict-insertion order (which is the order the
+    author wrote them). Each parameter is rendered as `name`: description.
+    """
+    if not schema:
+        return "—"
+    parts = [f"`{k}`: {_escape_md_cell(v)}" for k, v in schema.items()]
+    return "; ".join(parts)
+
+
+def _render_table(specs: list[OperatorSpec]) -> str:
+    """Render a markdown table for the given operator specs."""
+    if not specs:
+        return "_(none)_\n"
+    header = (
+        "| Operator | Signature | Summary | Parameters |\n"
+        "| --- | --- | --- | --- |\n"
+    )
+    rows = []
+    for spec in specs:
+        rows.append(
+            "| `{name}` | `{sig}` | {summary} | {schema} |".format(
+                name=_escape_md_cell(spec.name),
+                sig=_escape_md_cell(spec.signature),
+                summary=_escape_md_cell(spec.summary),
+                schema=_format_schema(spec.schema),
+            )
+        )
+    return header + "\n".join(rows) + "\n"
+
+
+def _split_registry() -> tuple[list[OperatorSpec], list[OperatorSpec]]:
+    """Partition the registry into (free, premium), each sorted by name."""
+    free: list[OperatorSpec] = []
+    premium: list[OperatorSpec] = []
+    for spec in OPERATOR_REGISTRY.values():
+        if spec.tier == "free":
+            free.append(spec)
+        else:
+            premium.append(spec)
+    free.sort(key=lambda s: s.name)
+    premium.sort(key=lambda s: s.name)
+    return free, premium
+
+
+def _replace_marker_region(
+    content: str, begin: str, end: str, body: str
+) -> tuple[str, str | None]:
+    """Replace text between `begin` and `end` markers (inclusive of markers).
+
+    Returns (new_content, error). If a marker is missing or out of order,
+    returns (content, error_message) leaving content unchanged.
+    """
+    pattern = re.compile(
+        re.escape(begin) + r".*?" + re.escape(end), flags=re.DOTALL
+    )
+    replacement = f"{begin}\n{body.rstrip()}\n{end}"
+    new_content, n = pattern.subn(replacement, content, count=1)
+    if n == 0:
+        return content, (
+            f"missing AUTO-GENERATED region: '{begin}' ... '{end}'"
+        )
+    return new_content, None
+
+
+def _build_expected_content(current: str) -> tuple[str, list[str]]:
+    """Apply both marker substitutions to `current`. Returns (new, errors)."""
+    free, premium = _split_registry()
+    free_table = _render_table(free)
+    premium_table = _render_table(premium)
+    errors: list[str] = []
+    updated, err = _replace_marker_region(
+        current, _FREE_BEGIN, _FREE_END, free_table
+    )
+    if err is not None:
+        errors.append(err)
+    updated, err = _replace_marker_region(
+        updated, _PREMIUM_BEGIN, _PREMIUM_END, premium_table
+    )
+    if err is not None:
+        errors.append(err)
+    return updated, errors
+
+
+def regenerate_catalog_table(app_b_path: Path) -> list[str]:
+    """Rewrite the AUTO-GENERATED regions in `app_b_path` to match the registry.
+
+    Returns a list of error messages (empty on success). Marker absence is
+    surfaced as an error rather than silently inserted, so an accidental
+    deletion of the markers fails CI rather than landing a duplicate.
+    """
+    if not app_b_path.is_file():
+        return [f"{app_b_path}: catalog file not found"]
+    current = app_b_path.read_text(encoding="utf-8")
+    updated, errors = _build_expected_content(current)
+    if errors:
+        return [f"{app_b_path}: {e}" for e in errors]
+    if updated != current:
+        app_b_path.write_text(updated, encoding="utf-8")
+    return []
+
+
+def validate_catalog(app_b_path: Path) -> list[str]:
+    """Check the catalog tables match the registry byte-for-byte.
+
+    Used as a tripwire — if `regenerate_catalog_table` was called at the
+    start of the build, this should always pass on the same run; the
+    primary purpose is to catch a manually-edited catalog that wasn't
+    re-generated.
+    """
+    if not app_b_path.is_file():
+        return [f"{app_b_path}: catalog file not found"]
+    current = app_b_path.read_text(encoding="utf-8")
+    expected, errors = _build_expected_content(current)
+    if errors:
+        return [f"{app_b_path}: {e}" for e in errors]
+    if expected != current:
+        return [
+            f"{app_b_path}: catalog tables drift from the registry; "
+            f"run `python -m scripts.handbook.build --check` to re-generate"
+        ]
+    return []
+
+
 def run_check(handbook_dir: Path) -> int:
     """Return number of errors discovered."""
     errors_total = 0
+
+    # 0. Regenerate Appendix B's operator catalog from the runtime
+    #    registry. Doing this BEFORE parsing means downstream validators
+    #    (e.g. snippets, voice) see the fresh content. validate_catalog
+    #    near the end of the build catches drift if the file is somehow
+    #    inconsistent after the regen step (e.g. missing markers).
+    app_b_path = handbook_dir / APP_B_FILENAME
+    for err in regenerate_catalog_table(app_b_path):
+        _emit_error(err)
+        errors_total += 1
 
     chapter_paths = _discover_chapter_paths(handbook_dir)
     if not chapter_paths:
@@ -103,6 +277,13 @@ def run_check(handbook_dir: Path) -> int:
         for err in validate_voice(chap):
             _emit_error(err)
             errors_total += 1
+
+    # 8. catalog drift — re-validate after the regen at step 0 to catch
+    #    pathological cases (e.g. missing markers re-introduced by a
+    #    parallel writer) before the build claims OK.
+    for err in validate_catalog(app_b_path):
+        _emit_error(err)
+        errors_total += 1
 
     return errors_total
 
