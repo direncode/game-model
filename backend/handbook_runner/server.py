@@ -319,9 +319,23 @@ def create_app(redis: Any) -> FastAPI:
                             "--config",
                             str(program_path),
                         ],
-                        wall_seconds=10,
-                        cpu_seconds=5,
-                        rss_bytes=256 * 1024 * 1024,
+                        # 30 s wall, 20 s CPU. The pipeline runner does an
+                        # `import torch` at module load (~2 s on cold-cache),
+                        # then runs the user pipeline. Plan-default 10 s /
+                        # 5 s was tight enough to SIGKILL on every cold
+                        # start. Backpressure is enforced by the rate
+                        # limiter (4 concurrent / IP).
+                        wall_seconds=30,
+                        cpu_seconds=20,
+                        # 4 GB address-space cap. RLIMIT_AS bounds the
+                        # virtual address space (mmap budget). torch's CPU
+                        # shared objects mmap ~700 MB on import, sklearn
+                        # adds ~150 MB, plus per-pipeline scratch. The
+                        # cgroup memory limit (2 GB in compose) is the
+                        # real RSS guardrail; RLIMIT_AS is intentionally
+                        # generous to avoid spurious "failed to map
+                        # segment from shared object" or hangs at import.
+                        rss_bytes=4 * 1024 * 1024 * 1024,
                         cwd=str(workdir),
                     )
                 except SandboxTimeoutError:

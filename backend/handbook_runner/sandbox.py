@@ -80,6 +80,16 @@ def run_sandboxed(
             "PYTHONHASHSEED": "0",      # determinism
             "HOME": cwd,
         }
+        # Propagate PYTHONPATH from the host process. The sandboxed
+        # subprocess invokes `python -m scripts.run_universal_pipeline`,
+        # which requires `scripts/` to be importable. In production the
+        # parent uvicorn process sets PYTHONPATH=/app; we mirror it here
+        # so the child can resolve the module. This does not leak secrets
+        # (PYTHONPATH is a path list, not credentials) and keeps the env
+        # whitelist tight.
+        host_pythonpath = os.environ.get("PYTHONPATH")
+        if host_pythonpath:
+            env["PYTHONPATH"] = host_pythonpath
         # Windows needs SYSTEMROOT to load DLLs; preserve it without leaking
         # anything else.
         if sys.platform != "linux":  # pragma: no cover - platform-specific
