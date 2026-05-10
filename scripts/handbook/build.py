@@ -350,6 +350,9 @@ def _extract_chapter_view(chap: Chapter) -> dict:
             }
         )
 
+    # Body markdown: everything except meta-sections that are rendered specially.
+    body_markdown, wider_system = _split_body(chap.body)
+
     return {
         "slug": slug,
         "number": number,
@@ -359,6 +362,8 @@ def _extract_chapter_view(chap: Chapter) -> dict:
         "outline": outline,
         "snippets": snippets,
         "exercises": exercises,
+        "bodyMarkdown": body_markdown,
+        "widerSystemMarkdown": wider_system,
     }
 
 

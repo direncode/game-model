@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { handbookChapters } from "@/lib/handbook-content.generated";
 import { OceanCodeBlock } from "@/components/handbook/OceanCodeBlock";
 import { OnThisPage } from "@/components/handbook/OnThisPage";
 import { PrevNext } from "@/components/handbook/PrevNext";
 import { Exercise } from "@/components/handbook/Exercise";
+import { WiderSystemCallout } from "@/components/handbook/WiderSystemCallout";
 
 type Params = { params: { chapter: string } };
 
@@ -12,6 +15,36 @@ export function generateStaticParams() {
     .filter((c) => c.slug !== "index")
     .map((c) => ({ chapter: c.slug }));
 }
+
+const markdownComponents = {
+  code({
+    className,
+    children,
+    ...props
+  }: {
+    className?: string;
+    children?: React.ReactNode;
+  } & React.HTMLAttributes<HTMLElement>) {
+    // Fence info comes through as e.g. "language-ocean run corpus=toy_tna_50".
+    // We only special-case `language-ocean...` blocks; everything else falls
+    // back to default <code>.
+    const info = className ?? "";
+    if (!info.startsWith("language-ocean")) {
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    }
+    // "run" anywhere in the info string means runnable. `static` overrides to false.
+    const isStatic = /\bstatic\b/.test(info);
+    const runnable = !isStatic && /\brun\b/.test(info);
+    const corpusMatch = /corpus=(\S+)/.exec(info);
+    const corpus = corpusMatch ? corpusMatch[1] : null;
+    const code = String(children ?? "").replace(/\n$/, "");
+    return <OceanCodeBlock code={code} runnable={runnable} corpus={corpus} />;
+  },
+};
 
 export default function ChapterPage({ params }: Params) {
   const chapter = handbookChapters.find((c) => c.slug === params.chapter);
@@ -42,10 +75,19 @@ export default function ChapterPage({ params }: Params) {
           </>
         )}
 
-        {/* TODO: render outline body sections via MDX. For now, render snippets and exercises in order. */}
-        {chapter.snippets.map((s, i) => (
-          <OceanCodeBlock key={i} code={s.code} runnable={s.runnable} corpus={s.corpus} />
-        ))}
+        {chapter.bodyMarkdown && (
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            {chapter.bodyMarkdown}
+          </ReactMarkdown>
+        )}
+
+        {chapter.widerSystemMarkdown && (
+          <WiderSystemCallout>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+              {chapter.widerSystemMarkdown}
+            </ReactMarkdown>
+          </WiderSystemCallout>
+        )}
 
         {chapter.exercises.length > 0 && (
           <>

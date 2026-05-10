@@ -25,4 +25,6 @@ export type HandbookChapter = {
   outline: HandbookOutlineItem[];
   snippets: HandbookSnippet[];
   exercises: HandbookExercise[];
+  bodyMarkdown: string;
+  widerSystemMarkdown: string;
 };
