@@ -78,7 +78,7 @@ export function OceanCodeBlock({ code, runnable, corpus }: Props) {
 }
 
 function RunResultPanel({ result }: { result: RunResult | RunUnavailable }) {
-  if (result.category === "unavailable") {
+  if (result.ok === false && result.category === "unavailable") {
     return (
       <div className="border-t border-zinc-200 dark:border-zinc-800 px-3 py-2 text-xs text-amber-700 dark:text-amber-400">
         {result.message}
