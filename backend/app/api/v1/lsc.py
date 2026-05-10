@@ -32,7 +32,11 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from app.core.api_key_auth import require_api_scope
-from app.services.lsc.backends import CostAwareRouter, BackendUnavailable
+from app.services.lsc.backends import (
+    BackendNotImplemented,
+    BackendUnavailable,
+    CostAwareRouter,
+)
 from app.services.lsc.dashboards import fetch_org_aggregate, fetch_org_recent_jobs
 from app.services.lsc.metering import record_job_usage
 from app.services.lsc.persistence import get_job_result, store_job_result
@@ -304,7 +308,7 @@ async def lsc_submit(
 
     # Layer 4/5 — cost-aware backend selection across configured providers.
     try:
-        backend = _router_backends.select(
+        adapter = _router_backends.select_adapter(
             entity_count=len(req.entities),
             budget_dollars=req.config.btut_budget_dollars,
         )
@@ -324,48 +328,22 @@ async def lsc_submit(
         }
     }
 
+    backend = {"backend": adapter.name}
     t0 = time.time()
-    headers = {"Authorization": f"Bearer {backend['api_key']}"}
-
-    async with httpx.AsyncClient(timeout=PER_REQUEST_TIMEOUT_SECONDS) as client:
-        try:
-            submit_resp = await client.post(f"{backend['url']}/run", headers=headers, json=payload)
-        except Exception as e:
-            raise HTTPException(status_code=502, detail=f"backend submit failed: {type(e).__name__}")
-        if submit_resp.status_code != 200:
-            raise HTTPException(
-                status_code=502,
-                detail=f"backend rejected: HTTP {submit_resp.status_code}",
-            )
-        submit_data = submit_resp.json()
-        runpod_id = submit_data.get("id")
-        if not runpod_id:
-            raise HTTPException(status_code=502, detail="backend returned no job id")
-
-        # poll
-        last_status = None
-        final = None
-        while True:
-            if time.time() - t0 > PER_REQUEST_TIMEOUT_SECONDS:
-                try:
-                    await client.post(f"{backend['url']}/cancel/{runpod_id}", headers=headers, json={})
-                except Exception:
-                    pass
-                raise HTTPException(status_code=504, detail="per-request timeout exceeded")
-            status_resp = await client.get(f"{backend['url']}/status/{runpod_id}", headers=headers)
-            if status_resp.status_code != 200:
-                # transient — retry
-                continue
-            status = status_resp.json()
-            s = status.get("status")
-            if s in ("COMPLETED", "FAILED", "CANCELLED"):
-                final = status
-                break
-            last_status = s
-
+    try:
+        final = await adapter.submit_and_wait(payload, per_job_timeout_seconds=PER_REQUEST_TIMEOUT_SECONDS)
+    except BackendNotImplemented as e:
+        raise HTTPException(status_code=501, detail=str(e))
+    except BackendUnavailable as e:
+        raise HTTPException(status_code=502, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"backend submit failed: {type(e).__name__}: {e}")
     elapsed = time.time() - t0
     if not final or final.get("status") != "COMPLETED":
-        raise HTTPException(status_code=502, detail=f"job did not complete: {final.get('status') if final else 'unknown'}")
+        raise HTTPException(
+            status_code=502,
+            detail=f"job did not complete: {final.get('status') if final else 'unknown'}",
+        )
 
     output = final.get("output")
     final_stage = None

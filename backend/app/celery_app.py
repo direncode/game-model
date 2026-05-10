@@ -47,12 +47,21 @@ import app.tasks.ocean_build  # noqa: E402, F401
 import app.tasks.tcd_crystallize  # noqa: E402, F401
 import app.services.crystallization.job_manager  # noqa: E402, F401
 import app.tasks.data_estate_crystallize  # noqa: E402, F401
+import app.tasks.lsc_stripe_sync  # noqa: E402, F401
 
 # ── Periodic tasks (Celery Beat) ───────────────────────────────────
+beat: dict = {
+    # Layer 8 — Stripe Meter API sync every 60s. No-op (dry-run + logs)
+    # when STRIPE_API_KEY is absent. Idempotent per job_id via Stripe's
+    # identifier field.
+    "lsc-stripe-sync": {
+        "task": "lsc.stripe_sync",
+        "schedule": 60.0,
+    },
+}
 if settings.FSD_ENABLED:
-    celery_app.conf.beat_schedule = {
-        "fsd-daily-crystallize": {
-            "task": "fsd.daily_crystallize",
-            "schedule": crontab(hour=settings.FSD_DAILY_CRON_HOUR, minute=0),
-        },
+    beat["fsd-daily-crystallize"] = {
+        "task": "fsd.daily_crystallize",
+        "schedule": crontab(hour=settings.FSD_DAILY_CRON_HOUR, minute=0),
     }
+celery_app.conf.beat_schedule = beat

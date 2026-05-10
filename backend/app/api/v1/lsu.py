@@ -20,6 +20,11 @@ from app.services.lsu import (
     list_lsus,
     register_lsu,
 )
+from app.services.lsu.pairing import (
+    DEFAULT_TOKEN_TTL_SECONDS,
+    issue_token,
+    redeem_token,
+)
 
 
 router = APIRouter(prefix="/lsu", tags=["lsu"])
@@ -117,3 +122,88 @@ async def deregister_endpoint(
     if not ok:
         raise HTTPException(status_code=404, detail="LSU not found")
     return {"ok": True, "deregistered": lsu_id}
+
+
+# ---------------------------------------------------------------------------
+# Pairing flow — v0.2
+# ---------------------------------------------------------------------------
+
+
+class PairRequest(BaseModel):
+    allowed_fingerprint_prefix: str | None = Field(
+        default=None,
+        description="Optional prefix the redeeming fingerprint must match.",
+    )
+    ttl_seconds: int = Field(
+        default=DEFAULT_TOKEN_TTL_SECONDS,
+        ge=60, le=60 * 60 * 24 * 30,
+    )
+
+
+class PairResponse(BaseModel):
+    token: str
+    expires_at: float
+    org_id: str
+    allowed_fingerprint_prefix: str | None
+
+
+class RedeemRequest(BaseModel):
+    token: str = Field(..., min_length=8)
+    fingerprint: str = Field(..., min_length=8, max_length=128)
+
+
+class RedeemResponse(BaseModel):
+    lsu_long_lived_key: str
+    org_id: str
+    fingerprint: str
+    issued_at: float
+
+
+@router.post("/pair", response_model=PairResponse)
+async def pair_endpoint(
+    req: PairRequest,
+    ctx: dict = Depends(require_api_scope("admin")),
+) -> PairResponse:
+    """Issue a one-time LSU pairing token.
+
+    Admin-scope; bound to the caller's org. Operator passes the token
+    to the on-prem unit which redeems it for a long-lived key.
+    """
+    org_id = ctx.get("org_id")
+    if not org_id:
+        raise HTTPException(status_code=403, detail="pair requires org-scoped admin key")
+    try:
+        token = await issue_token(
+            org_id=org_id,
+            allowed_fingerprint_prefix=req.allowed_fingerprint_prefix,
+            ttl_seconds=req.ttl_seconds,
+        )
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    return PairResponse(
+        token=token.token,
+        expires_at=token.expires_at,
+        org_id=token.org_id,
+        allowed_fingerprint_prefix=token.allowed_fingerprint_prefix,
+    )
+
+
+@router.post("/pair/redeem", response_model=RedeemResponse)
+async def redeem_endpoint(req: RedeemRequest) -> RedeemResponse:
+    """Redeem a pairing token + fingerprint for a long-lived LSU key.
+
+    Public (the LSU calling in does not yet have an API key). The token
+    itself is the secret; redemption is one-shot.
+    """
+    cred = await redeem_token(req.token, req.fingerprint)
+    if cred is None:
+        raise HTTPException(
+            status_code=400,
+            detail="token unknown, expired, already redeemed, or fingerprint mismatch",
+        )
+    return RedeemResponse(
+        lsu_long_lived_key=cred.lsu_long_lived_key,
+        org_id=cred.org_id,
+        fingerprint=cred.fingerprint,
+        issued_at=cred.issued_at,
+    )
