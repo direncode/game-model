@@ -8,10 +8,12 @@ services:
       - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/handbook-runner.conf:/etc/nginx/handbook-runner.conf:ro
     depends_on:
       - api
       - frontend
       - ocean_api
+      - handbook-runner
     restart: always
 
   # ─── OCEAN HTTP API (Layer 1 protocol distribution) ───
@@ -213,6 +215,31 @@ services:
       timeout: 5s
       retries: 5
     restart: always
+
+  # ─── Handbook runner (sandboxed OCEAN executor) ───
+  # Hosts /api/handbook/* — POST /run, POST /validate, GET /health.
+  # Compiles and runs the OCEAN snippets embedded in the public handbook
+  # under a hard rlimit budget. Premium operators are blocked at the
+  # compile stage by premium_gate.OPERATOR_REGISTRY.
+  handbook-runner:
+    build:
+      context: .
+      dockerfile: backend/handbook_runner/Dockerfile
+    expose:
+      - "8080"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - PYTHONUNBUFFERED=1
+      - KMP_DUPLICATE_LIB_OK=TRUE
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+    restart: unless-stopped
 
   # ─── Neo4j ───
   neo4j:
