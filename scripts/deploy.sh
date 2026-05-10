@@ -53,6 +53,16 @@ echo ""
 echo "→ [5/6] Starting all services..."
 docker compose -f docker-compose.prod.yml --env-file .env.production up -d
 
+# ─── 5b. Restart nginx so it re-resolves upstream container IPs ───
+# docker-compose recreates application containers with new IPs; nginx
+# keepalive / DNS cache holds the old IPs and serves 502 until restarted.
+# A blanket nginx restart is a no-op on cost and prevents the stale-upstream
+# class of post-deploy bug.
+echo ""
+echo "→ [5b/6] Restarting nginx to refresh upstream DNS..."
+docker compose -f docker-compose.prod.yml --env-file .env.production restart nginx
+sleep 3
+
 # ─── 6. Health check ───
 echo ""
 echo "→ [6/6] Running health checks..."

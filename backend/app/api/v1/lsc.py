@@ -28,11 +28,16 @@ import time
 from typing import Any
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Header, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
+
+from app.core.api_key_auth import require_api_scope
+from app.services.lsc.backends import CostAwareRouter, BackendUnavailable
+from app.services.lsc.metering import record_job_usage
 
 
 router = APIRouter(prefix="/lsc", tags=["lsc"])
+_router_backends = CostAwareRouter()
 
 
 # ------------------------------ schemas ----------------------------------
@@ -115,47 +120,10 @@ PER_REQUEST_TIMEOUT_SECONDS = 600
 MAX_ENTITIES_PER_REQUEST = 200_000  # advisory; the 10 MiB payload limit is harder
 
 
-# ------------------------------ auth -------------------------------------
-
-
-def _verify_api_key(authorization: str | None = Header(default=None)) -> str:
-    """Stub key check; the real implementation defers to api_keys.py with
-    rate limiting + scope checks. For now we accept any Bearer token long
-    enough to look real.
-    """
-    if not authorization:
-        raise HTTPException(status_code=401, detail="missing authorization header")
-    if not authorization.lower().startswith("bearer "):
-        raise HTTPException(status_code=401, detail="expected Bearer token")
-    token = authorization[7:].strip()
-    if len(token) < 16:
-        raise HTTPException(status_code=401, detail="token too short")
-    return token
-
-
-# ------------------------------ backend ----------------------------------
-
-
-def _select_backend(config: JobConfig, entity_count: int) -> dict[str, str]:
-    """Layer 4/5 — select a backend provider for this job.
-
-    Phase one: always route to the production RunPod endpoint. Multi-cloud
-    routing will read provider spot prices and queue depths and select the
-    cheapest available GPU that meets the job's SLA. This function is
-    intentionally simple so the integration surface is clear.
-    """
-    api_key = os.environ.get("RUNPOD_API_KEY")
-    endpoint_id = os.environ.get("RUNPOD_ENDPOINT_ID")
-    if not api_key or not endpoint_id:
-        raise HTTPException(
-            status_code=503,
-            detail="LSC backend not configured: missing RUNPOD credentials",
-        )
-    return {
-        "backend": "runpod-serverless",
-        "url": f"https://api.runpod.ai/v2/{endpoint_id}",
-        "api_key": api_key,
-    }
+# Auth + backend routing now live in:
+#   app.core.api_key_auth          — proper API-key validation, scopes, store
+#   app.services.lsc.backends      — multi-cloud adapter + cost-aware router
+#   app.services.lsc.metering      — per-job usage records + Stripe sync
 
 
 # ------------------------------ pipeline ---------------------------------
@@ -269,46 +237,60 @@ def _measure_archive_self_basin(
 async def lsc_health() -> dict[str, Any]:
     """Public health check for the LSC API.
 
-    Reports backend reachability without leaking credentials.
+    Reports which backend adapters are configured and probes the primary
+    one (RunPod serverless) for live worker state. Designed to be
+    backend-agnostic as additional providers come online.
     """
-    api_key = os.environ.get("RUNPOD_API_KEY")
-    endpoint_id = os.environ.get("RUNPOD_ENDPOINT_ID")
-    if not api_key or not endpoint_id:
-        return {"status": "degraded", "backend_configured": False}
-    try:
-        async with httpx.AsyncClient(timeout=10) as client:
-            r = await client.get(
-                f"https://api.runpod.ai/v2/{endpoint_id}/health",
-                headers={"Authorization": f"Bearer {api_key}"},
-            )
-            if r.status_code != 200:
-                return {"status": "degraded", "backend_configured": True, "backend_status": r.status_code}
-            data = r.json()
-            workers = data.get("workers", {})
-            return {
-                "status": "healthy",
-                "backend_configured": True,
-                "backend": "runpod-serverless",
-                "workers_idle": workers.get("idle"),
-                "workers_ready": workers.get("ready"),
-                "workers_running": workers.get("running"),
-                "jobs_completed": data.get("jobs", {}).get("completed"),
-            }
-    except Exception:
-        return {"status": "degraded", "backend_configured": True, "backend_status": "unreachable"}
+    configured = _router_backends.configured_backends()
+    out: dict[str, Any] = {
+        "status": "healthy" if configured else "degraded",
+        "backend_configured": bool(configured),
+        "configured_backends": configured,
+    }
+    # Live probe of RunPod when configured — it is currently the
+    # production-proven backend; other adapters return health info via
+    # their own provider APIs as they come online.
+    runpod_key = os.environ.get("RUNPOD_API_KEY")
+    runpod_endpoint = os.environ.get("RUNPOD_ENDPOINT_ID")
+    if runpod_key and runpod_endpoint:
+        try:
+            async with httpx.AsyncClient(timeout=10) as client:
+                r = await client.get(
+                    f"https://api.runpod.ai/v2/{runpod_endpoint}/health",
+                    headers={"Authorization": f"Bearer {runpod_key}"},
+                )
+                if r.status_code == 200:
+                    data = r.json()
+                    workers = data.get("workers", {})
+                    out["backend"] = "runpod-serverless"
+                    out["workers_idle"] = workers.get("idle")
+                    out["workers_ready"] = workers.get("ready")
+                    out["workers_running"] = workers.get("running")
+                    out["jobs_completed"] = data.get("jobs", {}).get("completed")
+                else:
+                    out["status"] = "degraded"
+                    out["backend_status"] = r.status_code
+        except Exception:
+            out["status"] = "degraded"
+            out["backend_status"] = "unreachable"
+    return out
 
 
 @router.post("/submit", response_model=JobResult)
 async def lsc_submit(
     req: SubmitRequest,
     request: Request,
-    token: str = Depends(_verify_api_key),
+    auth_ctx: dict = Depends(require_api_scope("query")),
 ) -> JobResult:
     """Submit a substrate job to the LSC pooled-compute backend.
 
+    Authentication: requires a valid API key with the ``query`` scope via
+    either ``X-API-Key`` header or ``Authorization: Bearer lo_sk_...``.
+
     Returns the discovered modules, dispersion measurements, and a
     regime-card-compliance flag. This is the Layer 1 public surface that
-    wraps Layer 3 substrate execution and Layer 5 backend routing.
+    wraps Layer 3 substrate execution, Layer 5 backend routing, and
+    Layer 8 metered billing.
     """
     if len(req.entities) == 0:
         raise HTTPException(status_code=422, detail="entities list cannot be empty")
@@ -318,7 +300,15 @@ async def lsc_submit(
             detail=f"too many entities; advisory limit is {MAX_ENTITIES_PER_REQUEST}",
         )
 
-    backend = _select_backend(req.config, len(req.entities))
+    # Layer 4/5 — cost-aware backend selection across configured providers.
+    try:
+        backend = _router_backends.select(
+            entity_count=len(req.entities),
+            budget_dollars=req.config.btut_budget_dollars,
+        )
+    except BackendUnavailable as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
     lineage = _compute_lineage_signature(req)
     job_id = req.job_id or f"lsc_{int(time.time())}_{lineage[:8]}"
 
@@ -414,6 +404,24 @@ async def lsc_submit(
     if cost_dollars > PER_REQUEST_BUDGET_CAP_DOLLARS:
         # Cap-enforcement is upstream; this is the post-hoc accounting line.
         cost_dollars = round(cost_dollars, 6)
+
+    # Layer 8 — record metered usage against the authenticated API key /
+    # org so the billing rollup picks it up. Non-fatal on failure.
+    try:
+        await record_job_usage(
+            org_id=auth_ctx.get("org_id"),
+            user_id=auth_ctx.get("user_id"),
+            api_key_id=auth_ctx.get("key_id"),
+            job_id=job_id,
+            backend=backend["backend"],
+            n_entities=len(req.entities),
+            gpu_exec_ms=exec_ms,
+            cost_dollars=cost_dollars,
+            regime_card_compliant=compliant,
+        )
+    except Exception:
+        # Metering must not fail the customer's job.
+        pass
 
     return JobResult(
         job_id=job_id,
