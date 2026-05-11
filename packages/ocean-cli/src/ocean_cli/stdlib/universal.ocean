@@ -1,0 +1,22 @@
+# Universal - cross-domain substrate records.
+# Free-tier: tf-idf + kmeans. Premium: content fingerprint + tcd recursive loop.
+
+## universal.substrate - cross-domain substrate records, free-tier substrate clustering.
+## Default corpus: 400-record sample of the universal cross-domain corpus.
+define substrate(corpus = "stdlib/data/universal/substrate_demo.ndjson", target = 400, embed_dim = 64, iters = 8, output = "data/showcases/universal/substrate_artifact.json") do
+    load corpus take target records balanced by source_type label field is source_type
+    embed text into embed_dim dimensions using tf-idf
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
+    align modules using 50 nearest records fine label field is quality
+    save to output
+end
+
+## universal.substrate_pro - same shape, premium operators. Requires OCEAN_API_KEY.
+define substrate_pro(corpus = "stdlib/data/universal/substrate_demo.ndjson", target = 400, output = "data/showcases/universal/substrate_artifact_pro.json") do
+    load corpus take target records balanced by source_type label field is source_type
+    embed text into 48 dimensions using content fingerprint
+    cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+    align modules using 50 nearest records fine label field is quality
+    find dispersion of each label
+    save to output
+end
