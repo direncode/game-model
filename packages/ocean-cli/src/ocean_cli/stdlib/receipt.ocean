@@ -1,0 +1,22 @@
+# Receipt - SEC EDGAR filings.
+# Free-tier: tf-idf + kmeans. Premium: content fingerprint + tcd recursive loop.
+
+## receipt.edgar - SEC EDGAR filing records, free-tier substrate clustering.
+## Default corpus: 500-record sample of EDGAR filings.
+define edgar(corpus = "stdlib/data/receipt/edgar_demo.ndjson", target = 500, embed_dim = 64, iters = 8, output = "data/showcases/receipt/edgar_artifact.json") do
+    load corpus take target records balanced by form_type label field is form_type
+    embed text into embed_dim dimensions using tf-idf
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
+    align modules using 50 nearest records fine label field is sector
+    save to output
+end
+
+## receipt.edgar_pro - same shape, premium operators. Requires OCEAN_API_KEY.
+define edgar_pro(corpus = "stdlib/data/receipt/edgar_demo.ndjson", target = 500, output = "data/showcases/receipt/edgar_artifact_pro.json") do
+    load corpus take target records balanced by form_type label field is form_type
+    embed text into 48 dimensions using content fingerprint
+    cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+    align modules using 50 nearest records fine label field is sector
+    find dispersion of each label
+    save to output
+end
