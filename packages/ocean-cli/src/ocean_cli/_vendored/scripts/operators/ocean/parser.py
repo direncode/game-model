@@ -40,6 +40,13 @@ EMBED_VARIANTS = {
     "numeric":             "embed.onehot_numeric",
 }
 
+CLUSTER_VARIANTS = {
+    "kmeans":              "cluster.kmeans",
+    "k-means":             "cluster.kmeans",
+    "tcd recursive loop":  "cluster.tcd_recursive_loop",
+    "tcd":                 "cluster.tcd_recursive_loop",
+}
+
 
 class ParseError(Exception):
     def __init__(self, message: str, token: Token, source_lines: list[str], suggestion: str | None = None):
@@ -763,9 +770,14 @@ class Parser:
                         suggestion=f"valid variants: {', '.join(sorted(EMBED_VARIANTS))}",
                     )
             elif verb == "cluster":
-                # 'using tcd recursive loop' — just confirms the default; no other variant yet.
-                # Accept silently.
-                pass
+                if variant in CLUSTER_VARIANTS:
+                    kind = CLUSTER_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown cluster variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(CLUSTER_VARIANTS))}",
+                    )
             # Other verbs may not have variants yet; silent accept.
 
         return VerbStmt(

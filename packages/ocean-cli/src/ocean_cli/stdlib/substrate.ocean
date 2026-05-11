@@ -14,9 +14,8 @@ define basic_run(corpus, target = 500, embed_dim = 128, iters = 16,
                  k_nearest = 50, output = "data/validation/basic_run.json") do
     load corpus take target records balanced by archive
     embed text into embed_dim dimensions
-    cluster for iters rounds max 24 modules energy = corpus mean
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
     align modules using k_nearest nearest records
-    find dispersion of each label
     save to output
 end
 
