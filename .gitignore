@@ -83,5 +83,7 @@ bot/nato_sim/.env.local
 briefing-book-extract.txt
 friday-intro-extract.txt
 
-# Generated handbook content
-frontend/lib/handbook-content.generated.ts
+# Generated handbook content — committed so Docker builds without Python work.
+# Local dev refreshes it via `npm run prebuild` (which silently no-ops if
+# Python is unavailable).
+# frontend/lib/handbook-content.generated.ts

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "cd .. && python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.generated.ts --handbook-dir docs/handbook && python -m scripts.handbook.build_pdf",
+    "prebuild": "node -e \"const{execSync}=require('child_process');try{execSync('python --version',{stdio:'ignore'})}catch(e){console.log('handbook prebuild: python not available, using committed handbook-content.generated.ts and ocean-handbook.pdf');process.exit(0)}execSync('cd .. && python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.generated.ts --handbook-dir docs/handbook && python -m scripts.handbook.build_pdf',{stdio:'inherit'})\"",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
