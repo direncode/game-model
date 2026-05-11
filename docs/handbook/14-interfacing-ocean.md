@@ -127,26 +127,28 @@ vocabulary lives in the agent ecosystem.
 ## The CLI
 
 ```
-ocean compile file.ocean             # parse + typecheck + emit DAG
-ocean run file.ocean                 # compile + execute
-ocean fmt file.ocean --write         # pretty-print in place
-ocean lint file.ocean --strict       # style + dead-code
-ocean repl                           # interactive
-ocean version                        # toolchain version
+pip install latentocean-ocean
 ```
 
-The CLI is a thin wrapper over the same Python modules covered in
-chapter 12. It is the right surface for shell-script usage and for
-CI pipelines.
+After install, a single `ocean` binary is on PATH:
 
+```
+ocean version
+ocean run pulse.uspto                          run a bundled stdlib preset
+ocean run path/to/program.ocean                run a local file
+ocean repl                                     interactive REPL
+ocean fmt file.ocean --write                   pretty-print
+ocean lint file.ocean --strict                 style + dead-code
+ocean lsp                                      LSP server on stdio
+ocean mcp                                      MCP server on stdio
+ocean list ops [--free | --premium]            enumerate operators
+ocean list stdlib [--namespace=NS]             enumerate stdlib presets
+ocean new my_pipeline                          scaffold from a template
+```
+
+The CLI is the right surface for shell-script usage and CI pipelines.
 The `ocean run` command exits with status 0 on success, 1 on
-compile/type error, 2 on runtime error. Diagnostic output goes to
-stderr; step timings and the artifact path go to stdout. This makes
-the CLI composable with the standard Unix tool stack:
-
-```sh
-ocean run pipeline.ocean | jq '.dispersion.by_label' | grep -v '^null'
-```
+compile/type error, 2 on runtime error.
 
 ## The agent-loop pattern
 
