@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import sys
 
+from ocean_cli.commands import fmt as _fmt
 from ocean_cli.commands import repl as _repl
 from ocean_cli.commands import run as _run
 from ocean_cli.commands import version as _version
@@ -18,7 +19,8 @@ def _build_parser() -> argparse.ArgumentParser:
     _version.add_parser(subparsers)
     _run.add_parser(subparsers)
     _repl.add_parser(subparsers)
-    # Later tasks register: fmt, lint, lsp, mcp, list, new.
+    _fmt.add_parser(subparsers)
+    # Later tasks register: lint, lsp, mcp, list, new.
     return parser
 
 

@@ -1,0 +1,6 @@
+seed 42
+
+load tmp/corpus.ndjson   take   500    records
+
+
+embed text into 128 dimensions
