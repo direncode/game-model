@@ -2,6 +2,7 @@ import "./handbook.css";
 import { handbookChapters } from "@/lib/handbook-content.generated";
 import { HandbookSidebar } from "@/components/handbook/HandbookSidebar";
 import { HandbookSearch } from "@/components/handbook/HandbookSearch";
+import { Nav } from "@/components/landing/Nav";
 
 export default function HandbookLayout({ children }: { children: React.ReactNode }) {
   const searchDataset = handbookChapters.map((c) => ({
@@ -11,10 +12,13 @@ export default function HandbookLayout({ children }: { children: React.ReactNode
   }));
 
   return (
-    <div className="handbook-shell flex min-h-screen mx-auto max-w-[1400px]">
-      <HandbookSidebar chapters={handbookChapters} currentSlug="" />
-      <main className="flex-1 px-8 py-8 max-w-[760px]">{children}</main>
-      <HandbookSearch dataset={searchDataset} />
-    </div>
+    <>
+      <Nav />
+      <div className="handbook-shell flex min-h-screen mx-auto max-w-[1400px] pt-16">
+        <HandbookSidebar chapters={handbookChapters} currentSlug="" />
+        <main className="flex-1 px-8 py-8 max-w-[760px]">{children}</main>
+        <HandbookSearch dataset={searchDataset} />
+      </div>
+    </>
   );
 }
