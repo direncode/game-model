@@ -1,0 +1,22 @@
+# Pulse - USPTO patent and inventor records.
+# Free-tier: tf-idf + kmeans. Premium: content fingerprint + tcd recursive loop.
+
+## pulse.uspto - USPTO inventor records, free-tier substrate clustering.
+## Default corpus: 500-record sample from the USPTO inventor public file.
+define uspto(corpus = "stdlib/data/pulse/uspto_demo.ndjson", target = 500, embed_dim = 64, iters = 8, output = "data/showcases/pulse/uspto_artifact.json") do
+    load corpus take target records balanced by directorate label field is directorate
+    embed text into embed_dim dimensions using tf-idf
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
+    align modules using 50 nearest records fine label field is primary_class
+    save to output
+end
+
+## pulse.uspto_pro - same shape, premium operators. Requires OCEAN_API_KEY.
+define uspto_pro(corpus = "stdlib/data/pulse/uspto_demo.ndjson", target = 500, output = "data/showcases/pulse/uspto_artifact_pro.json") do
+    load corpus take target records balanced by directorate label field is directorate
+    embed text into 48 dimensions using content fingerprint
+    cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+    align modules using 50 nearest records fine label field is primary_class
+    find dispersion of each label
+    save to output
+end
