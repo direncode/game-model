@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+recursive-include src/ocean_cli/stdlib *.ocean *.ndjson
+recursive-include src/ocean_cli/templates *.ocean
+recursive-include src/ocean_cli/_vendored *.py
+prune src/ocean_cli/_vendored/__pycache__
