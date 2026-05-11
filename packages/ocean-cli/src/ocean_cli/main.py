@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import sys
 
+from ocean_cli.commands import run as _run
 from ocean_cli.commands import version as _version
 
 
@@ -14,7 +15,8 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", metavar="<command>")
     _version.add_parser(subparsers)
-    # Later tasks register: run, repl, fmt, lint, lsp, mcp, list, new.
+    _run.add_parser(subparsers)
+    # Later tasks register: repl, fmt, lint, lsp, mcp, list, new.
     return parser
 
 
