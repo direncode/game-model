@@ -59,6 +59,10 @@ services:
         NEXT_PUBLIC_CLERK_SIGN_UP_URL: /register
         NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: /engine
         NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: /engine
+    # Override the base docker-compose.yml dev-pattern `npm run build && npm run start`.
+    # The multi-stage Dockerfile.prod slim runner has only the Next.js standalone output;
+    # `next` is not in PATH. Use the standalone server entrypoint instead.
+    command: node server.js
     expose:
       - "3000"
     environment:
