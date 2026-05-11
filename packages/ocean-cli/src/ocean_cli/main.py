@@ -9,6 +9,7 @@ from ocean_cli.commands import lint as _lint
 from ocean_cli.commands import list_cmd as _list
 from ocean_cli.commands import lsp as _lsp
 from ocean_cli.commands import mcp as _mcp
+from ocean_cli.commands import new_cmd as _new
 from ocean_cli.commands import repl as _repl
 from ocean_cli.commands import run as _run
 from ocean_cli.commands import version as _version
@@ -28,7 +29,7 @@ def _build_parser() -> argparse.ArgumentParser:
     _lsp.add_parser(subparsers)
     _mcp.add_parser(subparsers)
     _list.add_parser(subparsers)
-    # Later tasks register: new.
+    _new.add_parser(subparsers)
     return parser
 
 
