@@ -89,7 +89,7 @@ def _format_schema(schema: dict[str, str]) -> str:
     author wrote them). Each parameter is rendered as `name`: description.
     """
     if not schema:
-        return "—"
+        return "(none)"
     parts = [f"`{k}`: {_escape_md_cell(v)}" for k, v in schema.items()]
     return "; ".join(parts)
 

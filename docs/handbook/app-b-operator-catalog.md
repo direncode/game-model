@@ -32,15 +32,15 @@ handbook can invoke any of them from a `.ocean` source file or via
 the inline Run button on a runnable snippet.
 
 <!-- AUTO-GENERATED:catalog-begin -->
-| Operator | Tier | Signature | Summary |
-|---|---|---|---|
-| `align.module` | free | `(Modules, Records, Z) -> Aligned` | Align modules to records via k-nearest neighbors. |
-| `cluster.kmeans` | free | `Z -> Modules` | Standard k-means clustering with deterministic initialization. |
-| `embed.tfidf_jl` | free | `Records -> Z` | TF-IDF embedding followed by Johnson-Lindenstrauss random projection to D dimensions. |
-| `embed.transformer.minilm_l6` | free | `Records -> Z` | MiniLM-L6 sentence-transformer embedding at 384 dimensions native. |
-| `find.dispersion_per_label` | free | `(Aligned, Records, Z) -> Dispersion` | Compute the dispersion of each label across modules. |
-| `load.ndjson` | free | `Path -> Records` | Load an NDJSON corpus from disk, optionally stratifying the sample. |
-| `persist.json` | free | `Any -> Artifact` | Write the input value as pretty-printed JSON to disk, with a sha256 sidecar. |
+| Operator | Signature | Summary | Parameters |
+| --- | --- | --- | --- |
+| `align.module` | `(Modules, Records, Z) -> Aligned` | Align modules to records via k-nearest neighbors. | `k_nearest`: number of records per module to align; `fine_label_field`: which field holds the fine-grained label |
+| `cluster.kmeans` | `Z -> Modules` | Standard k-means clustering with deterministic initialization. | `rounds`: number of Lloyd iterations; `max_modules`: upper bound on module count; `energy`: either 'corpus mean' or 'normal anchored on LABEL' |
+| `embed.tfidf_jl` | `Records -> Z` | TF-IDF embedding followed by Johnson-Lindenstrauss random projection to D dimensions. | `dimensions`: target embedding dimension (typical: 64-256); `min_df`: minimum document frequency for a term to be kept; `max_df`: maximum document frequency (drops stopword-like terms); `max_features`: vocabulary cap (default: unlimited) |
+| `embed.transformer.minilm_l6` | `Records -> Z` | MiniLM-L6 sentence-transformer embedding at 384 dimensions native. | `dimensions`: target dimension; non-native sizes are linearly projected |
+| `find.dispersion_per_label` | `(Aligned, Records, Z) -> Dispersion` | Compute the dispersion of each label across modules. | (none) |
+| `load.ndjson` | `Path -> Records` | Load an NDJSON corpus from disk, optionally stratifying the sample. | `take`: sample N records (after stratification if balanced by); `balanced_by`: round-robin sample across distinct values of this field; `text_field`: which field holds the text body (default 'text'); `label_field`: which field holds the coarse gold label (default 'archive') |
+| `persist.json` | `Any -> Artifact` | Write the input value as pretty-printed JSON to disk, with a sha256 sidecar. | `path`: output path; must end in .json |
 <!-- AUTO-GENERATED:catalog-end -->
 
 ## Premium operators
@@ -50,12 +50,12 @@ so the diagnostics elsewhere in a program remain accurate. Execution
 requires a paid API key (`OCEAN_API_KEY`).
 
 <!-- AUTO-GENERATED:premium-begin -->
-| Operator | Tier | Signature | Summary |
-|---|---|---|---|
-| `align.dispersion` | premium | `(Modules, Records, Z) -> Aligned` | Dispersion-weighted alignment (premium alignment with module-quality scoring). |
-| `cluster.tcd_recursive_loop` | premium | `Z -> Modules` | TCD recursive-loop clustering with monotone module-energy guarantees (premium algorithm). |
-| `embed.content_fp48` | premium | `Records -> Z` | Bloom-style 48-bit content fingerprint over top-K terms (premium structural primitive). |
-| `reduce.btut` | premium | `(Z, Records) -> (Z, Records)` | BTUT structural-anomaly pre-reduction targeting N survivors within a compute budget. |
+| Operator | Signature | Summary | Parameters |
+| --- | --- | --- | --- |
+| `align.dispersion` | `(Modules, Records, Z) -> Aligned` | Dispersion-weighted alignment (premium alignment with module-quality scoring). | `k_nearest`: number of records per module to align; `fine_label_field`: which field holds the fine-grained label |
+| `cluster.tcd_recursive_loop` | `Z -> Modules` | TCD recursive-loop clustering with monotone module-energy guarantees (premium algorithm). | `rounds`: number of recursive-loop iterations; `max_modules`: upper bound on module count; `energy`: either 'corpus mean' or 'normal anchored on LABEL'; `crystallize_every`: freeze converged modules every K rounds |
+| `embed.content_fp48` | `Records -> Z` | Bloom-style 48-bit content fingerprint over top-K terms (premium structural primitive). | `dimensions`: always 48 - fingerprint width is fixed by the primitive spec |
+| `reduce.btut` | `(Z, Records) -> (Z, Records)` | BTUT structural-anomaly pre-reduction targeting N survivors within a compute budget. | `target`: target number of surviving records after reduction; `budget`: compute budget in dollars (proxy for time) |
 <!-- AUTO-GENERATED:premium-end -->
 
 Get an API key at <https://latentocean.com/protocols>.
