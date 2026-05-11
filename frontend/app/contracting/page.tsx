@@ -187,6 +187,51 @@ export default function ContractingPage() {
         </div>
       </Section>
 
+      {/* Strategic-tier case studies */}
+      <Section id="strategic-cases" kicker="Strategic-tier engagements" title="Operational primitives delivered.">
+        <p className="mb-8 max-w-[860px]">
+          The Strategic tier is the sovereign, defense, intelligence, financial, and
+          healthcare end of the contracting model. The substrate deploys above the
+          customer&apos;s existing detection or signal layer as a campaign-intelligence
+          primitive — measured, reproducible, sovereign-owned, certifiable. Each
+          engagement is a referenceable case study, evaluated by technical reviewers
+          against on-disk artifacts.
+        </p>
+        <div className="grid md:grid-cols-1 gap-4">
+          <Link
+            href="/contracting/mine-sweep"
+            className="group rounded-2xl border border-white/12 bg-white/[0.015] p-6 md:p-7 hover:border-cyan-400/30 hover:bg-cyan-500/[0.025] transition-colors"
+          >
+            <div className="flex flex-wrap items-baseline justify-between gap-4 mb-3">
+              <h3 className="font-display text-[24px] md:text-[28px] tracking-[-0.02em] text-white group-hover:text-cyan-100 transition-colors">
+                Mine countermeasures · Strait of Hormuz
+              </h3>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/55">
+                UAE EDGE Group · ADASI integration · 6 months to fielded
+              </div>
+            </div>
+            <p className="text-[14px] text-white/72 leading-relaxed max-w-[860px]">
+              OCEAN Substrate as the campaign-intelligence + auditability + sovereignty
+              primitive layered above existing classical sonar ATR. Measured on real
+              public multibeam sonar at 0.9347 within-class generalization on the
+              dominant threat class, 2.13× novel-class structural separation (strengthens
+              with scale), 11-field per-detection structured audit vs 4 from classical
+              methods, byte-identical reproducibility. Native on-premise console binary
+              + operator-modifiable OCEAN pipeline. Operational value $20-45B per
+              Hormuz mining event in market-disruption avoided.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45">
+              <span className="inline-flex items-center h-7 px-3 rounded-full border border-white/10">measurement-anchored</span>
+              <span className="inline-flex items-center h-7 px-3 rounded-full border border-white/10">on-prem TUI included</span>
+              <span className="inline-flex items-center h-7 px-3 rounded-full border border-white/10">EDGE pathway documented</span>
+              <span className="inline-flex items-center h-7 px-3 rounded-full border border-cyan-400/30 text-cyan-200/80 group-hover:bg-cyan-500/10">
+                read case study →
+              </span>
+            </div>
+          </Link>
+        </div>
+      </Section>
+
       {/* Lock-in */}
       <Section id="lockin" kicker="The moat is in the integration depth" title="Six compounding lock-in mechanisms.">
         <p className="mb-8 max-w-[860px]">

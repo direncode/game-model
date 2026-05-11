@@ -1,0 +1,374 @@
+{
+  "substrate_audit_top_k": [
+    {
+      "rank": 0,
+      "record_id": "00058_544_512",
+      "is_positive_strict": false,
+      "anomaly_score": 231.5782470703125,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 231.5782470703125,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        231.5782470703125,
+        232.17227172851562,
+        232.5482177734375
+      ],
+      "feature_deviation_l2": 231.57825555979312,
+      "feature_deviation_max_dim": 417,
+      "feature_deviation_max_value": 18.65007781982422
+    },
+    {
+      "rank": 1,
+      "record_id": "00431_576_832",
+      "is_positive_strict": true,
+      "anomaly_score": 219.33474731445312,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 219.33474731445312,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        219.33474731445312,
+        219.56997680664062,
+        219.82498168945312
+      ],
+      "feature_deviation_l2": 219.33474548191538,
+      "feature_deviation_max_dim": 414,
+      "feature_deviation_max_value": 21.395586013793945
+    },
+    {
+      "rank": 2,
+      "record_id": "00078_544_1184",
+      "is_positive_strict": true,
+      "anomaly_score": 206.7361297607422,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 206.7361297607422,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        206.7361297607422,
+        207.1893768310547,
+        207.6452178955078
+      ],
+      "feature_deviation_l2": 206.73613357847887,
+      "feature_deviation_max_dim": 919,
+      "feature_deviation_max_value": 22.747013092041016
+    },
+    {
+      "rank": 3,
+      "record_id": "00431_576_864",
+      "is_positive_strict": true,
+      "anomaly_score": 204.63919067382812,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 204.63919067382812,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        204.63919067382812,
+        205.10267639160156,
+        205.37326049804688
+      ],
+      "feature_deviation_l2": 204.63917839643776,
+      "feature_deviation_max_dim": 900,
+      "feature_deviation_max_value": 18.035856246948242
+    },
+    {
+      "rank": 4,
+      "record_id": "00085_608_704",
+      "is_positive_strict": true,
+      "anomaly_score": 204.2989501953125,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 204.2989501953125,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        204.2989501953125,
+        204.65533447265625,
+        204.95166015625
+      ],
+      "feature_deviation_l2": 204.29895682063807,
+      "feature_deviation_max_dim": 833,
+      "feature_deviation_max_value": 21.92417335510254
+    },
+    {
+      "rank": 5,
+      "record_id": "00191_384_1216",
+      "is_positive_strict": true,
+      "anomaly_score": 203.946533203125,
+      "assigned_module_idx": 4,
+      "assigned_module_id": "mod_attractor_4",
+      "distance_to_assigned": 203.946533203125,
+      "nearest_3_modules": [
+        4,
+        12,
+        7
+      ],
+      "nearest_3_distances": [
+        203.946533203125,
+        204.33753967285156,
+        204.87020874023438
+      ],
+      "feature_deviation_l2": 203.94653249260662,
+      "feature_deviation_max_dim": 139,
+      "feature_deviation_max_value": 17.667484283447266
+    },
+    {
+      "rank": 6,
+      "record_id": "00393_768_448",
+      "is_positive_strict": true,
+      "anomaly_score": 200.0998992919922,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 200.0998992919922,
+      "nearest_3_modules": [
+        12,
+        4,
+        2
+      ],
+      "nearest_3_distances": [
+        200.0998992919922,
+        200.40960693359375,
+        200.83306884765625
+      ],
+      "feature_deviation_l2": 200.09989069937805,
+      "feature_deviation_max_dim": 547,
+      "feature_deviation_max_value": 18.445775985717773
+    },
+    {
+      "rank": 7,
+      "record_id": "00191_416_1216",
+      "is_positive_strict": true,
+      "anomaly_score": 199.6730194091797,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 199.6730194091797,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        199.6730194091797,
+        199.95892333984375,
+        200.347412109375
+      ],
+      "feature_deviation_l2": 199.6730170223359,
+      "feature_deviation_max_dim": 15,
+      "feature_deviation_max_value": 17.639230728149414
+    },
+    {
+      "rank": 8,
+      "record_id": "00748_512_1056",
+      "is_positive_strict": true,
+      "anomaly_score": 198.18617248535156,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 198.18617248535156,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        198.18617248535156,
+        198.22607421875,
+        198.87635803222656
+      ],
+      "feature_deviation_l2": 198.18617101180303,
+      "feature_deviation_max_dim": 6,
+      "feature_deviation_max_value": 16.53894805908203
+    },
+    {
+      "rank": 9,
+      "record_id": "00393_800_448",
+      "is_positive_strict": true,
+      "anomaly_score": 196.33653259277344,
+      "assigned_module_idx": 12,
+      "assigned_module_id": "mod_attractor_13",
+      "distance_to_assigned": 196.33653259277344,
+      "nearest_3_modules": [
+        12,
+        4,
+        7
+      ],
+      "nearest_3_distances": [
+        196.33653259277344,
+        196.67494201660156,
+        196.80673217773438
+      ],
+      "feature_deviation_l2": 196.33652977526523,
+      "feature_deviation_max_dim": 675,
+      "feature_deviation_max_value": 17.0131893157959
+    }
+  ],
+  "isolation_forest_top_k": [
+    {
+      "rank": 0,
+      "record_id": "00058_544_512",
+      "is_positive_strict": false,
+      "anomaly_score": 0.24661676422433765,
+      "structured_explanation": null
+    },
+    {
+      "rank": 1,
+      "record_id": "00431_544_864",
+      "is_positive_strict": true,
+      "anomaly_score": 0.24616928311945463,
+      "structured_explanation": null
+    },
+    {
+      "rank": 2,
+      "record_id": "00085_576_704",
+      "is_positive_strict": true,
+      "anomaly_score": 0.24532622813921545,
+      "structured_explanation": null
+    },
+    {
+      "rank": 3,
+      "record_id": "00078_544_1184",
+      "is_positive_strict": true,
+      "anomaly_score": 0.2427707343786164,
+      "structured_explanation": null
+    },
+    {
+      "rank": 4,
+      "record_id": "00431_576_864",
+      "is_positive_strict": true,
+      "anomaly_score": 0.2413551266332683,
+      "structured_explanation": null
+    },
+    {
+      "rank": 5,
+      "record_id": "00048_448_416",
+      "is_positive_strict": false,
+      "anomaly_score": 0.2411927609759641,
+      "structured_explanation": null
+    },
+    {
+      "rank": 6,
+      "record_id": "00393_800_448",
+      "is_positive_strict": true,
+      "anomaly_score": 0.23965739232808092,
+      "structured_explanation": null
+    },
+    {
+      "rank": 7,
+      "record_id": "00191_384_1216",
+      "is_positive_strict": true,
+      "anomaly_score": 0.2393817943840696,
+      "structured_explanation": null
+    },
+    {
+      "rank": 8,
+      "record_id": "00085_608_704",
+      "is_positive_strict": true,
+      "anomaly_score": 0.23354200644500334,
+      "structured_explanation": null
+    },
+    {
+      "rank": 9,
+      "record_id": "00431_576_832",
+      "is_positive_strict": true,
+      "anomaly_score": 0.23344747049584547,
+      "structured_explanation": null
+    }
+  ],
+  "mahalanobis_top_k": [
+    {
+      "rank": 0,
+      "record_id": "00058_544_512",
+      "is_positive_strict": false,
+      "anomaly_score": 131.37888147930985,
+      "structured_explanation": null
+    },
+    {
+      "rank": 1,
+      "record_id": "00406_480_1184",
+      "is_positive_strict": true,
+      "anomaly_score": 125.62855994814038,
+      "structured_explanation": null
+    },
+    {
+      "rank": 2,
+      "record_id": "00431_544_864",
+      "is_positive_strict": true,
+      "anomaly_score": 124.2020110913784,
+      "structured_explanation": null
+    },
+    {
+      "rank": 3,
+      "record_id": "00632_384_1152",
+      "is_positive_strict": true,
+      "anomaly_score": 124.09498289569862,
+      "structured_explanation": null
+    },
+    {
+      "rank": 4,
+      "record_id": "00078_544_1184",
+      "is_positive_strict": true,
+      "anomaly_score": 124.07413562937865,
+      "structured_explanation": null
+    },
+    {
+      "rank": 5,
+      "record_id": "00048_448_416",
+      "is_positive_strict": false,
+      "anomaly_score": 123.98299446703615,
+      "structured_explanation": null
+    },
+    {
+      "rank": 6,
+      "record_id": "00085_608_704",
+      "is_positive_strict": true,
+      "anomaly_score": 123.5430422480528,
+      "structured_explanation": null
+    },
+    {
+      "rank": 7,
+      "record_id": "00632_416_1152",
+      "is_positive_strict": true,
+      "anomaly_score": 123.03137093490152,
+      "structured_explanation": null
+    },
+    {
+      "rank": 8,
+      "record_id": "00431_544_832",
+      "is_positive_strict": true,
+      "anomaly_score": 122.97742469858427,
+      "structured_explanation": null
+    },
+    {
+      "rank": 9,
+      "record_id": "00431_576_864",
+      "is_positive_strict": true,
+      "anomaly_score": 122.6250715599799,
+      "structured_explanation": null
+    }
+  ],
+  "structured_fields_per_detection": {
+    "substrate": 11,
+    "isolation_forest": 4,
+    "mahalanobis": 4
+  },
+  "audit_top_k": 10
+}

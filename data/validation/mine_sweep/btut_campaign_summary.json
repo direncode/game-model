@@ -1,0 +1,86 @@
+{
+  "computed_at_utc": "2026-05-11T02:25:05+00:00",
+  "harness": "btut_then_substrate",
+  "btut": {
+    "input_count": 5791,
+    "survivor_count": 5,
+    "actual_ratio": 1158.2,
+    "btut_seconds": 6.55,
+    "survivor_edge_count": 0
+  },
+  "substrate_config": {
+    "iters": 16,
+    "max_modules": 32,
+    "crystallize_every": 2,
+    "langevin_steps": 30,
+    "energy": "corpus_mean"
+  },
+  "knn_k": 12,
+  "positive_only": true,
+  "T1_module_purity": {
+    "weighted_purity": 1.0,
+    "nmi": 0.9057460992755193,
+    "ari": 0.0,
+    "chance_baseline": 0.25,
+    "largest_class_baseline": 0.4,
+    "n_modules_emerged": 14,
+    "n_classes_truth": 4,
+    "per_module": [
+      {
+        "module": 11,
+        "size": 1,
+        "dominant_class": "ball",
+        "purity": 1.0,
+        "class_breakdown": {
+          "ball": 1
+        }
+      },
+      {
+        "module": 7,
+        "size": 1,
+        "dominant_class": "circle cage",
+        "purity": 1.0,
+        "class_breakdown": {
+          "circle cage": 1
+        }
+      },
+      {
+        "module": 1,
+        "size": 1,
+        "dominant_class": "circle cage",
+        "purity": 1.0,
+        "class_breakdown": {
+          "circle cage": 1
+        }
+      },
+      {
+        "module": 5,
+        "size": 1,
+        "dominant_class": "cube",
+        "purity": 1.0,
+        "class_breakdown": {
+          "cube": 1
+        }
+      },
+      {
+        "module": 6,
+        "size": 1,
+        "dominant_class": "cylinder",
+        "purity": 1.0,
+        "class_breakdown": {
+          "cylinder": 1
+        }
+      }
+    ]
+  },
+  "T2_generalization": {
+    "skipped": "insufficient survivor count per class"
+  },
+  "T3_new_class_detection": {
+    "substrate_auroc": 0.602072596760769,
+    "substrate_separation_ratio": 1.0686367750167847,
+    "n_held_out_positives": 181,
+    "n_known": 24819,
+    "note": "substrate trained on BTUT survivors of the full corpus including held-out classes; for a strict open-set test, re-run with held-out classes removed from BTUT input"
+  }
+}

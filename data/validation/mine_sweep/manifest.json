@@ -1,0 +1,22 @@
+{
+  "corpus": "seabed",
+  "feature_dim": 128,
+  "feature_extractor": "gabor_filter_bank",
+  "gabor_frequencies": [
+    0.05,
+    0.1,
+    0.2,
+    0.4
+  ],
+  "harvested_at_utc": "2026-05-11T07:31:13+00:00",
+  "n_orientations": 8,
+  "n_patches_kept": 30000,
+  "n_positive": 8909,
+  "patch_size": 64,
+  "positive_class_counts": {
+    "plane": 8909
+  },
+  "region": "seabed_gabor",
+  "stats_per_filter": 4,
+  "uatd_subdir": null
+}

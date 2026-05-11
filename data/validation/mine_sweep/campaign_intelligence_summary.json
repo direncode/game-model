@@ -1,0 +1,314 @@
+{
+  "computed_at_utc": "2026-05-11T07:16:15+00:00",
+  "n_records": 60000,
+  "feature_dim": 128,
+  "test_1_module_purity": {
+    "weighted_purity": 0.29135248639877825,
+    "nmi": 0.05715864726239283,
+    "ari": 0.027228853538552214,
+    "largest_class_baseline": 0.24844898348763958,
+    "chance_baseline": 0.125,
+    "n_modules_emerged": 14,
+    "n_classes_truth": 8,
+    "per_module": [
+      {
+        "module": 8,
+        "size": 7201,
+        "dominant_class": "tyre",
+        "dominant_count": 1993,
+        "purity": 0.27676711567837803,
+        "class_breakdown": {
+          "human body": 1579,
+          "ball": 1924,
+          "circle cage": 900,
+          "square cage": 291,
+          "tyre": 1993,
+          "metal bucket": 370,
+          "cube": 78,
+          "cylinder": 66
+        }
+      },
+      {
+        "module": 10,
+        "size": 6776,
+        "dominant_class": "ball",
+        "dominant_count": 1745,
+        "purity": 0.2575265643447462,
+        "class_breakdown": {
+          "human body": 1252,
+          "ball": 1745,
+          "circle cage": 733,
+          "square cage": 613,
+          "tyre": 1265,
+          "metal bucket": 774,
+          "cube": 288,
+          "cylinder": 106
+        }
+      },
+      {
+        "module": 12,
+        "size": 1886,
+        "dominant_class": "square cage",
+        "dominant_count": 591,
+        "purity": 0.31336161187698836,
+        "class_breakdown": {
+          "human body": 130,
+          "ball": 101,
+          "circle cage": 337,
+          "square cage": 591,
+          "tyre": 139,
+          "metal bucket": 431,
+          "cube": 103,
+          "cylinder": 54
+        }
+      },
+      {
+        "module": 11,
+        "size": 1747,
+        "dominant_class": "human body",
+        "dominant_count": 529,
+        "purity": 0.3028048082427018,
+        "class_breakdown": {
+          "human body": 529,
+          "ball": 477,
+          "circle cage": 52,
+          "square cage": 77,
+          "tyre": 381,
+          "metal bucket": 222,
+          "cube": 6,
+          "cylinder": 3
+        }
+      },
+      {
+        "module": 9,
+        "size": 629,
+        "dominant_class": "human body",
+        "dominant_count": 186,
+        "purity": 0.2957074721780604,
+        "class_breakdown": {
+          "human body": 186,
+          "ball": 81,
+          "circle cage": 78,
+          "square cage": 119,
+          "tyre": 60,
+          "metal bucket": 80,
+          "cube": 19,
+          "cylinder": 6
+        }
+      },
+      {
+        "module": 3,
+        "size": 517,
+        "dominant_class": "ball",
+        "dominant_count": 247,
+        "purity": 0.47775628626692457,
+        "class_breakdown": {
+          "human body": 153,
+          "ball": 247,
+          "circle cage": 7,
+          "square cage": 13,
+          "tyre": 56,
+          "metal bucket": 34,
+          "cube": 7
+        }
+      },
+      {
+        "module": 6,
+        "size": 476,
+        "dominant_class": "ball",
+        "dominant_count": 230,
+        "purity": 0.4831932773109244,
+        "class_breakdown": {
+          "human body": 112,
+          "ball": 230,
+          "circle cage": 6,
+          "square cage": 30,
+          "tyre": 24,
+          "metal bucket": 51,
+          "cube": 7,
+          "cylinder": 16
+        }
+      },
+      {
+        "module": 13,
+        "size": 383,
+        "dominant_class": "ball",
+        "dominant_count": 165,
+        "purity": 0.4308093994778068,
+        "class_breakdown": {
+          "human body": 133,
+          "ball": 165,
+          "circle cage": 13,
+          "square cage": 13,
+          "tyre": 32,
+          "metal bucket": 14,
+          "cube": 2,
+          "cylinder": 11
+        }
+      },
+      {
+        "module": 4,
+        "size": 372,
+        "dominant_class": "tyre",
+        "dominant_count": 105,
+        "purity": 0.28225806451612906,
+        "class_breakdown": {
+          "human body": 68,
+          "ball": 59,
+          "circle cage": 50,
+          "square cage": 32,
+          "tyre": 105,
+          "metal bucket": 49,
+          "cube": 5,
+          "cylinder": 4
+        }
+      },
+      {
+        "module": 5,
+        "size": 368,
+        "dominant_class": "human body",
+        "dominant_count": 109,
+        "purity": 0.296195652173913,
+        "class_breakdown": {
+          "human body": 109,
+          "ball": 77,
+          "circle cage": 42,
+          "square cage": 38,
+          "tyre": 57,
+          "metal bucket": 41,
+          "cube": 3,
+          "cylinder": 1
+        }
+      },
+      {
+        "module": 0,
+        "size": 198,
+        "dominant_class": "tyre",
+        "dominant_count": 73,
+        "purity": 0.3686868686868687,
+        "class_breakdown": {
+          "human body": 33,
+          "ball": 64,
+          "tyre": 73,
+          "square cage": 4,
+          "metal bucket": 14,
+          "circle cage": 9,
+          "cube": 1
+        }
+      },
+      {
+        "module": 7,
+        "size": 179,
+        "dominant_class": "tyre",
+        "dominant_count": 42,
+        "purity": 0.2346368715083799,
+        "class_breakdown": {
+          "human body": 36,
+          "ball": 18,
+          "circle cage": 39,
+          "square cage": 17,
+          "tyre": 42,
+          "metal bucket": 25,
+          "cube": 1,
+          "cylinder": 1
+        }
+      },
+      {
+        "module": 2,
+        "size": 134,
+        "dominant_class": "tyre",
+        "dominant_count": 30,
+        "purity": 0.22388059701492538,
+        "class_breakdown": {
+          "human body": 17,
+          "circle cage": 21,
+          "ball": 17,
+          "square cage": 23,
+          "tyre": 30,
+          "metal bucket": 19,
+          "cylinder": 7
+        }
+      },
+      {
+        "module": 1,
+        "size": 88,
+        "dominant_class": "metal bucket",
+        "dominant_count": 60,
+        "purity": 0.6818181818181818,
+        "class_breakdown": {
+          "human body": 6,
+          "circle cage": 12,
+          "square cage": 3,
+          "tyre": 6,
+          "metal bucket": 60,
+          "ball": 1
+        }
+      }
+    ]
+  },
+  "test_2_distribution_completeness": {
+    "n_train": 16761,
+    "n_test": 4193,
+    "class_preserving_generalization_rate": 0.2652039112807059,
+    "per_class_coverage": {
+      "human body": {
+        "correct": 66,
+        "total": 869,
+        "rate": 0.0759493670886076
+      },
+      "ball": {
+        "correct": 974,
+        "total": 1042,
+        "rate": 0.9347408829174664
+      },
+      "circle cage": {
+        "correct": 17,
+        "total": 460,
+        "rate": 0.03695652173913044
+      },
+      "square cage": {
+        "correct": 9,
+        "total": 373,
+        "rate": 0.024128686327077747
+      },
+      "tyre": {
+        "correct": 27,
+        "total": 853,
+        "rate": 0.031652989449003514
+      },
+      "metal bucket": {
+        "correct": 19,
+        "total": 437,
+        "rate": 0.043478260869565216
+      },
+      "cube": {
+        "correct": 0,
+        "total": 104,
+        "rate": 0.0
+      },
+      "cylinder": {
+        "correct": 0,
+        "total": 55,
+        "rate": 0.0
+      }
+    },
+    "spatial_within_module_avg_dist": 3409.27880859375,
+    "spatial_corpus_avg_dist": 3381.935791015625,
+    "spatial_coherence_ratio": 1.008085012435913
+  },
+  "test_3_new_class_detection": {
+    "held_out_classes": [
+      "cylinder",
+      "metal bucket"
+    ],
+    "n_train": 57541,
+    "n_test_held_out": 2459,
+    "n_test_known": 57541,
+    "substrate_auroc": 0.6564570232464474,
+    "isolation_forest_auroc": 0.6892206055326189,
+    "mahalanobis_auroc": 0.7830027437549896,
+    "substrate_separation_ratio_held_over_known": 1.9975610141965368,
+    "substrate_median_held": 5.859615802764893,
+    "substrate_median_known": 2.933385133743286
+  }
+}

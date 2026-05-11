@@ -1,0 +1,51 @@
+{
+  "computed_at_utc": "2026-05-11T01:21:29+00:00",
+  "corpus": {
+    "n_records": 25000,
+    "feature_dim": 1024,
+    "n_positive": 5791
+  },
+  "A_reproducibility": {
+    "substrate": {
+      "centroids_sha256_run1": "ff74ad0a47519cc0042c61e143d3f0c014521712d1049088140985745b052794",
+      "centroids_sha256_run2": "ff74ad0a47519cc0042c61e143d3f0c014521712d1049088140985745b052794",
+      "centroids_byte_identical": true,
+      "summary_sha256_run1": "d289bd88cfc6dd5e3d505279999aa5f0890323f9ccbd9cf4074d0ed20bac5b64",
+      "summary_sha256_run2": "d289bd88cfc6dd5e3d505279999aa5f0890323f9ccbd9cf4074d0ed20bac5b64",
+      "summary_byte_identical": true,
+      "n_modules": 14,
+      "determinism_kind": "structural \u2014 deterministic-clustering operator"
+    },
+    "isolation_forest": {
+      "scores_sha256_run1": "2875ff667c9304a8c3907ad0b71eacb80377ce74d4c99f7c1a45f5028f98ded0",
+      "scores_sha256_run2": "2875ff667c9304a8c3907ad0b71eacb80377ce74d4c99f7c1a45f5028f98ded0",
+      "byte_identical": true,
+      "determinism_kind": "contingent \u2014 requires random_state set"
+    },
+    "mahalanobis": {
+      "scores_sha256_run1": "e684c94e93219e9d79aa1c2a4f3ed663ee534192d7952fb06414fec895b952c6",
+      "scores_sha256_run2": "e684c94e93219e9d79aa1c2a4f3ed663ee534192d7952fb06414fec895b952c6",
+      "byte_identical": true,
+      "determinism_kind": "purely numerical \u2014 no stochasticity"
+    }
+  },
+  "B_auditability": {
+    "structured_fields_per_detection": {
+      "substrate": 11,
+      "isolation_forest": 4,
+      "mahalanobis": 4
+    },
+    "audit_top_k": 10,
+    "see_full_dump": "data\\validation\\mine_sweep\\orthogonal_audit_dump.json"
+  },
+  "C_cross_corpus": {
+    "n_train_uatd_background": 19209,
+    "n_test_seabed": 62232,
+    "n_test_seabed_positive": 8909,
+    "auroc_substrate": 0.4918677885803558,
+    "auroc_isolation_forest": 0.544380978921861,
+    "auroc_mahalanobis": 0.3547853604964618,
+    "delta_substrate_vs_if": -0.0525131903415052,
+    "delta_substrate_vs_mahal": 0.13708242808389398
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "computed_at_utc": "2026-05-11T07:37:15+00:00",
+  "feature_extractor": "gabor_filter_bank",
+  "feature_dim": 128,
+  "n_uatd_records": 60000,
+  "n_seabed_records": 30000,
+  "n_seabed_positive_planes": 8909,
+  "n_seabed_negative_ships": 21091,
+  "substrate_naive_transfer_auroc": 0.39612631884776794,
+  "substrate_re_anchored_auroc": 0.4252666577963323,
+  "isolation_forest_naive_auroc": 0.36479150881540173,
+  "mahalanobis_naive_auroc": 0.485945862431013,
+  "re_anchor_lift_over_naive": 0.02914033894856438,
+  "substrate_re_anchored_vs_if": 0.06047514898093059
+}

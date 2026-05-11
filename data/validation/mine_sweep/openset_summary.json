@@ -1,0 +1,133 @@
+{
+  "harness": "openset_off_manifold",
+  "substrate": {
+    "name": "substrate_off_manifold",
+    "auroc": 0.7980293281011546,
+    "p_d_at_p_fa": {
+      "pfa_0.01": {
+        "p_d": 0.1055085477465032,
+        "p_fa": 0.00999531469623614,
+        "threshold": 84.57669830322266,
+        "mdbfa": 100.046875
+      },
+      "pfa_0.001": {
+        "p_d": 0.032982213780003454,
+        "p_fa": 0.0009891196834817012,
+        "threshold": 127.56556701660156,
+        "mdbfa": 1011.0
+      },
+      "pfa_0.0001": {
+        "p_d": 0.004144361940942842,
+        "p_fa": 5.2058930709563226e-05,
+        "threshold": 180.62803649902344,
+        "mdbfa": 19209.0
+      }
+    },
+    "n_test": 25000,
+    "n_positive": 5791,
+    "n_negative": 19209
+  },
+  "baselines": {
+    "isolation_forest": {
+      "name": "isolation_forest",
+      "auroc": 0.8209366060574319,
+      "p_d_at_p_fa": {
+        "pfa_0.01": {
+          "p_d": 0.09583836988430323,
+          "p_fa": 0.00999531469623614,
+          "threshold": 0.16301161540350328,
+          "mdbfa": 100.046875
+        },
+        "pfa_0.001": {
+          "p_d": 0.014505266793299948,
+          "p_fa": 0.0009891196834817012,
+          "threshold": 0.2284570523702527,
+          "mdbfa": 1011.0
+        },
+        "pfa_0.0001": {
+          "p_d": 0.0005180452426178552,
+          "p_fa": 5.2058930709563226e-05,
+          "threshold": 0.2667156657886144,
+          "mdbfa": 19209.0
+        }
+      },
+      "n_test": 25000,
+      "n_positive": 5791,
+      "n_negative": 19209
+    },
+    "one_class_svm": {
+      "name": "one_class_svm",
+      "auroc": 0.874794235300919,
+      "p_d_at_p_fa": {
+        "pfa_0.01": {
+          "p_d": 0.14159903298221377,
+          "p_fa": 0.00999531469623614,
+          "threshold": 8.327734711083178,
+          "mdbfa": 100.046875
+        },
+        "pfa_0.001": {
+          "p_d": 0.052322569504403386,
+          "p_fa": 0.0009891196834817012,
+          "threshold": 8.357390295537602,
+          "mdbfa": 1011.0
+        },
+        "pfa_0.0001": {
+          "p_d": 0.022966672422724918,
+          "p_fa": 5.2058930709563226e-05,
+          "threshold": 8.357390908095013,
+          "mdbfa": 19209.0
+        }
+      },
+      "n_test": 25000,
+      "n_positive": 5791,
+      "n_negative": 19209
+    },
+    "mahalanobis": {
+      "name": "mahalanobis",
+      "auroc": 0.7424758506477374,
+      "p_d_at_p_fa": {
+        "pfa_0.01": {
+          "p_d": 0.1483336211362459,
+          "p_fa": 0.00999531469623614,
+          "threshold": 91.80511128359264,
+          "mdbfa": 100.046875
+        },
+        "pfa_0.001": {
+          "p_d": 0.11345190813331031,
+          "p_fa": 0.0009891196834817012,
+          "threshold": 108.93815942199087,
+          "mdbfa": 1011.0
+        },
+        "pfa_0.0001": {
+          "p_d": 0.09169400794336038,
+          "p_fa": 5.2058930709563226e-05,
+          "threshold": 121.20115659726069,
+          "mdbfa": 19209.0
+        }
+      },
+      "n_test": 25000,
+      "n_positive": 5791,
+      "n_negative": 19209
+    }
+  },
+  "substrate_config": {
+    "iters": 16,
+    "max_modules": 64,
+    "crystallize_every": 2,
+    "langevin_steps": 30,
+    "energy": "normal_centroid",
+    "normal_label": false
+  },
+  "n_normal_train": 19209,
+  "n_test": 25000,
+  "n_positive_in_test": 5791,
+  "n_substrate_modules": 14,
+  "computed_at_utc": "2026-05-11T01:03:14+00:00",
+  "military_b_gate": {
+    "verdict": "FAILS_MILITARY_GATE",
+    "threshold_p_d_at_pfa_0.01": 0.85,
+    "substrate_p_d_at_pfa_0.01": 0.1055085477465032,
+    "substrate_auroc": 0.7980293281011546,
+    "best_baseline_auroc": 0.874794235300919
+  }
+}

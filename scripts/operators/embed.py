@@ -203,3 +203,72 @@ def _hash_terms_to_fp48(terms) -> int:
             pos = int.from_bytes(h[off:off + 2], "big") % 48
             fp |= (1 << pos)
     return fp & 0xFFFFFFFFFFFF
+
+
+@register
+class NumericDirectEmbedder(Operator):
+    """Named numeric fields → Z, per-feature z-scored, no projection.
+
+    Use when records already carry pre-computed numeric features that
+    should reach the substrate unchanged in dimension and direction. Unlike
+    one-hot/tfidf embedders, this operator does NOT L2-normalize rows —
+    preserving per-feature magnitude differences that downstream substrate
+    energy depends on (e.g. spike-like features in bathymetry tiles).
+
+    First used by /mine-sweep showcase (4 bathymetry features per tile).
+    The companion .ocean syntax `embed numeric features [...]` lives in
+    scripts/operators/ocean/lexer.py + parser.py — see the extension notes
+    at pipelines/mine_sweep.ocean.extension_notes.md.
+
+    config:
+        fields:         list[str] — record field names to pull as features
+        attribute_path: str       — record key holding the field dict
+                                    (default '' meaning top-level of record)
+        l2_normalize:   bool      — opt-in L2 row-normalization
+                                    (default False, preserves magnitudes)
+    """
+    kind = "embed.numeric_direct"
+    stage = "embed"
+
+    def run(self, inputs, *, seed, config):
+        import numpy as np
+
+        records = inputs["records"]
+        fields  = config.get("fields")
+        if not fields or not isinstance(fields, list):
+            raise ValueError(
+                "embed.numeric_direct requires config['fields'] as a non-empty list of field names"
+            )
+        attr_path = config.get("attribute_path", "")
+
+        def extract(r):
+            src = r.get(attr_path, r) if attr_path else r
+            row = []
+            for f in fields:
+                v = src.get(f)
+                if v is None or (isinstance(v, float) and (v != v)):  # None or NaN
+                    raise ValueError(
+                        f"record missing or NaN-valued required feature {f!r}; "
+                        f"upstream feature extractor must drop these"
+                    )
+                row.append(float(v))
+            return row
+
+        X = np.asarray([extract(r) for r in records], dtype=np.float32)
+        # Per-feature z-score across the corpus.
+        mean = X.mean(axis=0)
+        std  = X.std(axis=0)
+        Z = (X - mean) / (std + 1e-8)
+
+        if config.get("l2_normalize", False):
+            Z = Z / (np.linalg.norm(Z, axis=1, keepdims=True) + 1e-8)
+
+        return {
+            "Z":             Z.astype(np.float32),
+            "embedder":      "numeric_direct",
+            "dims":          int(Z.shape[1]),
+            "fields":        list(fields),
+            "feature_mean":  mean.tolist(),
+            "feature_std":   std.tolist(),
+            "l2_normalized": bool(config.get("l2_normalize", False)),
+        }

@@ -1,0 +1,280 @@
+{
+  "region": "stellwagen_bank_sbnms",
+  "n_tiles": 447,
+  "n_positives_strict": 62,
+  "substrate": {
+    "config": {
+      "iters": 16,
+      "max_modules": 256,
+      "crystallize_every": 2,
+      "langevin_steps": 30,
+      "energy": "corpus_mean"
+    },
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "enrichment_at_1pct_mean": 0.5376344086021505,
+    "enrichment_at_1pct_ci95": [
+      -1.7756198924731184,
+      2.8508887096774194
+    ],
+    "auprc_mean": 0.13056629799070843,
+    "auprc_ci95": [
+      0.1192165027922105,
+      0.14191609318920637
+    ],
+    "per_seed": [
+      {
+        "enrichment_at_1pct": 1.6129032258064515,
+        "enrichment_curve": [
+          {
+            "K_frac": 0.001,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.005,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.01,
+            "enrichment": 1.6129032258064515
+          },
+          {
+            "K_frac": 0.02,
+            "enrichment": 1.6129032258064515
+          },
+          {
+            "K_frac": 0.05,
+            "enrichment": 0.6451612903225806
+          },
+          {
+            "K_frac": 0.1,
+            "enrichment": 1.129032258064516
+          }
+        ],
+        "auprc": 0.13267600017515502,
+        "seed": 42,
+        "module_count": 14,
+        "rarest_module_size": 1
+      },
+      {
+        "enrichment_at_1pct": 0.0,
+        "enrichment_curve": [
+          {
+            "K_frac": 0.001,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.005,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.01,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.02,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.05,
+            "enrichment": 0.3225806451612903
+          },
+          {
+            "K_frac": 0.1,
+            "enrichment": 0.6451612903225806
+          }
+        ],
+        "auprc": 0.1336991407528502,
+        "seed": 43,
+        "module_count": 14,
+        "rarest_module_size": 0
+      },
+      {
+        "enrichment_at_1pct": 0.0,
+        "enrichment_curve": [
+          {
+            "K_frac": 0.001,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.005,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.01,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.02,
+            "enrichment": 0.0
+          },
+          {
+            "K_frac": 0.05,
+            "enrichment": 0.9677419354838709
+          },
+          {
+            "K_frac": 0.1,
+            "enrichment": 0.8064516129032258
+          }
+        ],
+        "auprc": 0.12532375304412016,
+        "seed": 44,
+        "module_count": 14,
+        "rarest_module_size": 3
+      }
+    ]
+  },
+  "baselines": {
+    "uniform_random": {
+      "enrichment_at_1pct_mean": 1.0483870967741935,
+      "enrichment_at_1pct_std": 1.0789587226015849,
+      "n_resamplings": 100
+    },
+    "z_score": {
+      "enrichment_at_1pct": 0.0,
+      "enrichment_curve": [
+        {
+          "K_frac": 0.001,
+          "enrichment": 0.0
+        },
+        {
+          "K_frac": 0.005,
+          "enrichment": 0.0
+        },
+        {
+          "K_frac": 0.01,
+          "enrichment": 0.0
+        },
+        {
+          "K_frac": 0.02,
+          "enrichment": 0.0
+        },
+        {
+          "K_frac": 0.05,
+          "enrichment": 1.2903225806451613
+        },
+        {
+          "K_frac": 0.1,
+          "enrichment": 1.4516129032258065
+        }
+      ],
+      "auprc": 0.1727685974946105
+    },
+    "isolation_forest": {
+      "enrichment_at_1pct_mean": 0.0,
+      "enrichment_at_1pct_ci95": [
+        0.0,
+        0.0
+      ],
+      "per_seed": [
+        {
+          "enrichment_at_1pct": 0.0,
+          "enrichment_curve": [
+            {
+              "K_frac": 0.001,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.005,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.01,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.02,
+              "enrichment": 0.8064516129032258
+            },
+            {
+              "K_frac": 0.05,
+              "enrichment": 1.9354838709677418
+            },
+            {
+              "K_frac": 0.1,
+              "enrichment": 2.258064516129032
+            }
+          ],
+          "auprc": 0.19751435294746078,
+          "seed": 42
+        },
+        {
+          "enrichment_at_1pct": 0.0,
+          "enrichment_curve": [
+            {
+              "K_frac": 0.001,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.005,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.01,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.02,
+              "enrichment": 0.8064516129032258
+            },
+            {
+              "K_frac": 0.05,
+              "enrichment": 1.6129032258064515
+            },
+            {
+              "K_frac": 0.1,
+              "enrichment": 1.4516129032258065
+            }
+          ],
+          "auprc": 0.18124479590675246,
+          "seed": 43
+        },
+        {
+          "enrichment_at_1pct": 0.0,
+          "enrichment_curve": [
+            {
+              "K_frac": 0.001,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.005,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.01,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.02,
+              "enrichment": 0.0
+            },
+            {
+              "K_frac": 0.05,
+              "enrichment": 1.6129032258064515
+            },
+            {
+              "K_frac": 0.1,
+              "enrichment": 1.7741935483870968
+            }
+          ],
+          "auprc": 0.1964168767837447,
+          "seed": 44
+        }
+      ]
+    }
+  },
+  "computed_at_utc": "2026-05-11T00:08:18+00:00",
+  "b_gate": {
+    "verdict": "SHELVE_A",
+    "thresholds": {
+      "chance_multiplier": 5.0,
+      "baseline_multiplier": 2.0
+    },
+    "best_baseline_at_1pct": 1.0483870967741935,
+    "substrate_mean_at_1pct": 0.5376344086021505,
+    "substrate_ci_lower_at_1pct": -1.7756198924731184
+  }
+}
