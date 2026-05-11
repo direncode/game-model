@@ -1,0 +1,58 @@
+name: ocean-cli
+
+on:
+  push:
+    paths:
+      - "packages/ocean-cli/**"
+      - "scripts/operators/ocean/**"
+      - "backend/handbook_runner/premium_gate.py"
+      - ".github/workflows/ocean-cli.yml"
+  pull_request:
+    paths:
+      - "packages/ocean-cli/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package + dev deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e packages/ocean-cli[dev]
+
+      - name: Run vendor_strip
+        run: python packages/ocean-cli/scripts/vendor_strip.py
+
+      - name: Run pytest
+        run: cd packages/ocean-cli && python -m pytest -v
+
+      - name: Smoke-test the binary
+        run: |
+          ocean version
+          ocean list ops --free | head -20
+          ocean list stdlib
+
+      - name: Build the wheel
+        run: |
+          cd packages/ocean-cli
+          python -m build
+
+      - name: Grep the wheel for proprietary identifiers
+        run: |
+          cd packages/ocean-cli/dist
+          for whl in *.whl; do
+            unzip -p "$whl" > /tmp/wheel-content.txt
+            for ident in ContentFP48Embedder BTUTReducer TCDRecursiveLoop DispersionAlignment; do
+              if grep -q "$ident" /tmp/wheel-content.txt; then
+                echo "ERROR: proprietary identifier '$ident' present in $whl"
+                exit 1
+              fi
+            done
+            echo "OK: no proprietary identifiers in $whl"
+          done
