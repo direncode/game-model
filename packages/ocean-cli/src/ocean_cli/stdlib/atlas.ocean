@@ -1,0 +1,22 @@
+# Atlas - arXiv preprint metadata.
+# Free-tier: tf-idf + kmeans. Premium: content fingerprint + tcd recursive loop.
+
+## atlas.arxiv - arXiv abstracts, free-tier substrate clustering.
+## Default corpus: 500-record sample of arXiv metadata.
+define arxiv(corpus = "stdlib/data/atlas/arxiv_demo.ndjson", target = 500, embed_dim = 64, iters = 8, output = "data/showcases/atlas/arxiv_artifact.json") do
+    load corpus take target records balanced by category label field is category
+    embed text into embed_dim dimensions using tf-idf
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
+    align modules using 50 nearest records fine label field is year
+    save to output
+end
+
+## atlas.arxiv_pro - same shape, premium operators. Requires OCEAN_API_KEY.
+define arxiv_pro(corpus = "stdlib/data/atlas/arxiv_demo.ndjson", target = 500, output = "data/showcases/atlas/arxiv_artifact_pro.json") do
+    load corpus take target records balanced by category label field is category
+    embed text into 48 dimensions using content fingerprint
+    cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+    align modules using 50 nearest records fine label field is year
+    find dispersion of each label
+    save to output
+end
