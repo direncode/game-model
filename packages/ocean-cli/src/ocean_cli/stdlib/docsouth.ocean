@@ -1,0 +1,22 @@
+# DocSouth - historical American narratives.
+# Free-tier: tf-idf + kmeans. Premium: content fingerprint + tcd recursive loop.
+
+## docsouth.narratives - public-domain narratives, free-tier substrate clustering.
+## Default corpus: 200-record sample of Documenting the American South.
+define narratives(corpus = "stdlib/data/docsouth/narratives_demo.ndjson", target = 200, embed_dim = 64, iters = 8, output = "data/showcases/docsouth/narratives_artifact.json") do
+    load corpus take target records balanced by era label field is era
+    embed text into embed_dim dimensions using tf-idf
+    cluster for iters rounds max 24 modules energy = corpus mean using kmeans
+    align modules using 50 nearest records fine label field is form
+    save to output
+end
+
+## docsouth.narratives_pro - same shape, premium operators. Requires OCEAN_API_KEY.
+define narratives_pro(corpus = "stdlib/data/docsouth/narratives_demo.ndjson", target = 200, output = "data/showcases/docsouth/narratives_artifact_pro.json") do
+    load corpus take target records balanced by era label field is era
+    embed text into 48 dimensions using content fingerprint
+    cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+    align modules using 50 nearest records fine label field is form
+    find dispersion of each label
+    save to output
+end
