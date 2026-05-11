@@ -87,3 +87,6 @@ friday-intro-extract.txt
 # Local dev refreshes it via `npm run prebuild` (which silently no-ops if
 # Python is unavailable).
 # frontend/lib/handbook-content.generated.ts
+
+# ocean-cli vendor_strip manifest — build artifact, regenerated on every run.
+packages/ocean-cli/src/ocean_cli/_vendored/TRIMMED.txt
