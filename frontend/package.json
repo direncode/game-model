@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "cd .. && python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.generated.ts --handbook-dir docs/handbook",
+    "prebuild": "cd .. && python -m scripts.handbook.build --emit-content frontend/lib/handbook-content.generated.ts --handbook-dir docs/handbook && python -m scripts.handbook.build_pdf",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
