@@ -20,12 +20,13 @@ from .ast import (
 
 
 # Verb → default operator-kind. Configurable via 'using <variant>'.
+# Defaults route to free-tier operators so bare verbs work zero-key.
 DEFAULT_OPERATOR_KIND = {
     "load":    "source.ndjson",
     "embed":   "embed.tfidf_jl",
-    "cluster": "cluster.tcd_recursive_loop",
+    "cluster": "cluster.kmeans",
     "align":   "align.module",
-    "find":    "align.dispersion",
+    "find":    "find.dispersion_per_label",
     "save":    "persist.json",
 }
 

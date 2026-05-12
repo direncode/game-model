@@ -54,8 +54,8 @@ def _merged_registry() -> dict[str, Any]:
     """Walk every operator submodule and merge its `_REGISTRY` dict."""
     out: dict[str, Any] = {}
     # Import lazily to avoid circular imports during package init
-    from . import embed, cluster, align, reduce, source, persist  # noqa: F401
-    for mod in (embed, cluster, align, reduce, source, persist):
+    from . import embed, cluster, align, reduce, source, persist, find  # noqa: F401
+    for mod in (embed, cluster, align, reduce, source, persist, find):
         reg = getattr(mod, "_REGISTRY", None)
         if isinstance(reg, dict):
             out.update(reg)
