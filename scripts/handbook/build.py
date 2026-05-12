@@ -285,6 +285,13 @@ def run_check(handbook_dir: Path) -> int:
         _emit_error(err)
         errors_total += 1
 
+    # 9. showcase artifact drift — every free-tier preset's committed
+    #    artifact must match its committed SHA-256 sidecar.
+    from scripts.handbook.validate_showcase_artifacts import validate_showcase_artifacts
+    for err in validate_showcase_artifacts():
+        _emit_error(err)
+        errors_total += 1
+
     return errors_total
 
 
