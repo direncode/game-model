@@ -16,12 +16,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 PRESET_DEFINITIONS: list[dict] = [
-    {"namespace": "pulse",     "preset": "uspto",      "artifact_path": "data/showcases/pulse/uspto_artifact.json"},
-    {"namespace": "atlas",     "preset": "arxiv",      "artifact_path": "data/showcases/atlas/arxiv_artifact.json"},
-    {"namespace": "receipt",   "preset": "edgar",      "artifact_path": "data/showcases/receipt/edgar_artifact.json"},
-    {"namespace": "docsouth",  "preset": "narratives", "artifact_path": "data/showcases/docsouth/narratives_artifact.json"},
-    {"namespace": "titan",     "preset": "benchmark",  "artifact_path": "data/showcases/titan/benchmark_artifact.json"},
-    {"namespace": "universal", "preset": "substrate",  "artifact_path": "data/showcases/universal/substrate_artifact.json"},
+    {"namespace": "pulse",     "preset": "uspto",      "artifact_path": "frontend/data/showcases/pulse/uspto_artifact.json"},
+    {"namespace": "atlas",     "preset": "arxiv",      "artifact_path": "frontend/data/showcases/atlas/arxiv_artifact.json"},
+    {"namespace": "receipt",   "preset": "edgar",      "artifact_path": "frontend/data/showcases/receipt/edgar_artifact.json"},
+    {"namespace": "docsouth",  "preset": "narratives", "artifact_path": "frontend/data/showcases/docsouth/narratives_artifact.json"},
+    {"namespace": "titan",     "preset": "benchmark",  "artifact_path": "frontend/data/showcases/titan/benchmark_artifact.json"},
+    {"namespace": "universal", "preset": "substrate",  "artifact_path": "frontend/data/showcases/universal/substrate_artifact.json"},
 ]
 
 

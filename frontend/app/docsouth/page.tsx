@@ -7,8 +7,8 @@ import { ShowcaseSourcePanel } from "@/components/showcase/ShowcaseSourcePanel";
 import { ShowcaseFooter } from "@/components/showcase/ShowcaseFooter";
 import type { ShowcaseArtifact } from "@/components/showcase/types";
 
-import freeArtifactRaw from "../../../data/showcases/docsouth/narratives_artifact.json";
-import premiumArtifactRaw from "../../../data/showcases/docsouth/narratives_artifact_pro.json";
+import freeArtifactRaw from "@/data/showcases/docsouth/narratives_artifact.json";
+import premiumArtifactRaw from "@/data/showcases/docsouth/narratives_artifact_pro.json";
 
 const freeArtifact = freeArtifactRaw as unknown as ShowcaseArtifact;
 const premiumArtifact = premiumArtifactRaw as unknown as ShowcaseArtifact;
