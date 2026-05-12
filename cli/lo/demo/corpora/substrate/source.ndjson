@@ -1,0 +1,400 @@
+{"id":"universal-0000","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0001","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0002","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0003","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0004","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence "}
+{"id":"universal-0005","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0006","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0007","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0008","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0009","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0010","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence "}
+{"id":"universal-0011","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0012","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0013","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0014","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0015","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0016","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0017","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0018","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0019","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0020","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0021","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0022","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0023","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0024","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0025","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0026","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence "}
+{"id":"universal-0027","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0028","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0029","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0030","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0031","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence "}
+{"id":"universal-0032","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0033","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0034","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0035","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0036","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0037","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0038","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0039","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0040","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0041","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0042","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0043","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0044","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0045","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence "}
+{"id":"universal-0046","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0047","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence "}
+{"id":"universal-0048","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0049","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0050","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0051","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence "}
+{"id":"universal-0052","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0053","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0054","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence "}
+{"id":"universal-0055","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence "}
+{"id":"universal-0056","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence "}
+{"id":"universal-0057","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0058","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0059","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0060","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0061","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0062","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0063","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0064","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0065","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0066","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence "}
+{"id":"universal-0067","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0068","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0069","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0070","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0071","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0072","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0073","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence "}
+{"id":"universal-0074","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0075","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0076","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence "}
+{"id":"universal-0077","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0078","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0079","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence "}
+{"id":"universal-0080","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0081","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0082","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0083","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0084","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence "}
+{"id":"universal-0085","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0086","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0087","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0088","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0089","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0090","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0091","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0092","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0093","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0094","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0095","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0096","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0097","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0098","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0099","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence "}
+{"id":"universal-0100","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0101","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0102","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0103","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0104","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0105","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0106","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0107","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0108","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0109","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0110","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0111","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence "}
+{"id":"universal-0112","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence "}
+{"id":"universal-0113","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0114","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0115","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence "}
+{"id":"universal-0116","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0117","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0118","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0119","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0120","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0121","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0122","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0123","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0124","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0125","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0126","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0127","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0128","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0129","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence "}
+{"id":"universal-0130","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence "}
+{"id":"universal-0131","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0132","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0133","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0134","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0135","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0136","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0137","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0138","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0139","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0140","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0141","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0142","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0143","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0144","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0145","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0146","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0147","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0148","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0149","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0150","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0151","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0152","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0153","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0154","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0155","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0156","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0157","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0158","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0159","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0160","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0161","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0162","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0163","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence "}
+{"id":"universal-0164","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0165","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0166","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0167","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0168","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0169","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0170","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0171","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0172","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0173","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0174","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0175","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0176","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0177","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0178","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0179","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0180","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0181","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0182","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0183","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0184","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0185","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0186","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0187","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0188","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0189","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0190","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence "}
+{"id":"universal-0191","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence "}
+{"id":"universal-0192","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0193","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0194","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0195","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0196","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0197","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0198","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0199","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0200","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0201","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0202","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence "}
+{"id":"universal-0203","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0204","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence "}
+{"id":"universal-0205","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0206","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0207","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0208","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence "}
+{"id":"universal-0209","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0210","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0211","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0212","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0213","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0214","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence "}
+{"id":"universal-0215","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0216","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0217","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0218","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0219","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence "}
+{"id":"universal-0220","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0221","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0222","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0223","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0224","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0225","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0226","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0227","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0228","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence "}
+{"id":"universal-0229","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0230","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0231","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0232","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0233","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0234","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0235","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0236","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0237","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0238","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0239","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0240","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0241","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0242","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0243","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0244","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0245","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0246","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0247","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence "}
+{"id":"universal-0248","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0249","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0250","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0251","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0252","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0253","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0254","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0255","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0256","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence "}
+{"id":"universal-0257","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0258","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0259","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0260","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0261","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0262","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0263","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0264","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0265","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0266","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0267","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0268","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0269","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0270","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0271","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0272","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0273","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0274","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0275","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0276","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0277","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0278","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0279","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0280","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0281","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0282","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0283","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0284","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0285","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence "}
+{"id":"universal-0286","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0287","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0288","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0289","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0290","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0291","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0292","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0293","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0294","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0295","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0296","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0297","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0298","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0299","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence "}
+{"id":"universal-0300","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0301","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0302","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0303","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0304","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0305","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0306","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0307","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0308","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0309","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0310","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0311","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0312","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence "}
+{"id":"universal-0313","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0314","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0315","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0316","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0317","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0318","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0319","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0320","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0321","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0322","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0323","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0324","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0325","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0326","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0327","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0328","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0329","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0330","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0331","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0332","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0333","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0334","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0335","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0336","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence "}
+{"id":"universal-0337","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0338","quality":"high","source_type":"letter","text":"cross-domain letter quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0339","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0340","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0341","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0342","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0343","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0344","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0345","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0346","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0347","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0348","quality":"high","source_type":"log","text":"cross-domain log quality high substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0349","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0350","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0351","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence "}
+{"id":"universal-0352","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0353","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0354","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0355","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0356","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0357","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence "}
+{"id":"universal-0358","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0359","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0360","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence "}
+{"id":"universal-0361","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0362","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0363","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0364","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0365","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0366","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0367","quality":"low","source_type":"paper","text":"cross-domain paper quality low substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0368","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0369","quality":"medium","source_type":"patent","text":"cross-domain patent quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0370","quality":"high","source_type":"claim","text":"cross-domain claim quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0371","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0372","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence "}
+{"id":"universal-0373","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0374","quality":"low","source_type":"letter","text":"cross-domain letter quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0375","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0376","quality":"high","source_type":"patent","text":"cross-domain patent quality high substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0377","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0378","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence "}
+{"id":"universal-0379","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0380","quality":"medium","source_type":"log","text":"cross-domain log quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0381","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0382","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0383","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0384","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0385","quality":"high","source_type":"filing","text":"cross-domain filing quality high substrate evidence substrate evidence "}
+{"id":"universal-0386","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0387","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0388","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0389","quality":"low","source_type":"claim","text":"cross-domain claim quality low substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0390","quality":"low","source_type":"log","text":"cross-domain log quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0391","quality":"medium","source_type":"claim","text":"cross-domain claim quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0392","quality":"medium","source_type":"paper","text":"cross-domain paper quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0393","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence "}
+{"id":"universal-0394","quality":"medium","source_type":"letter","text":"cross-domain letter quality medium substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0395","quality":"low","source_type":"patent","text":"cross-domain patent quality low substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0396","quality":"high","source_type":"paper","text":"cross-domain paper quality high substrate evidence substrate evidence "}
+{"id":"universal-0397","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence "}
+{"id":"universal-0398","quality":"medium","source_type":"filing","text":"cross-domain filing quality medium substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence substrate evidence "}
+{"id":"universal-0399","quality":"low","source_type":"filing","text":"cross-domain filing quality low substrate evidence substrate evidence substrate evidence "}

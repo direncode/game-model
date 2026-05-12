@@ -1,0 +1,18 @@
+# cli/lo/demo/program.ocean
+#
+# THE CANONICAL DEMO PROGRAM.
+#
+# Read aloud once at the start of the live demo, then pinned to the top
+# pane of the TUI for every corpus in the gauntlet. Not one byte changes
+# between corpora. Each corpus is normalized to a temporary `corpus.ndjson`
+# with three fields: `id`, `text`, `label`. The OCEAN program never sees
+# the original format on disk.
+
+seed 42
+
+load corpus.ndjson take 500 records balanced by label label field is label
+embed text into 128 dimensions using tf-idf
+cluster for 16 rounds max 24 modules energy = corpus mean using kmeans
+align modules using 50 nearest records fine label field is label
+find dispersion of each label
+save to result.json

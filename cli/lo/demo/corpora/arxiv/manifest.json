@@ -1,0 +1,10 @@
+{
+  "id": "arxiv",
+  "display_name": "arXiv scientific abstracts",
+  "format": "NDJSON (originally LaTeX / XML)",
+  "label_field": "category",
+  "substrate_question": "Do scientific abstracts cluster by subject category without seeing the arXiv tag?",
+  "source": "packages/ocean-cli/src/ocean_cli/stdlib/data/atlas/arxiv_demo.ndjson",
+  "records": 500,
+  "narration": "Five hundred arXiv abstracts spanning astrophysics, mathematical physics, condensed matter and beyond. The OCEAN program never sees the arXiv category; modules surface research-domain substrate from theoretical framework text."
+}

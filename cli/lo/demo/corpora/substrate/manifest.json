@@ -1,0 +1,10 @@
+{
+  "id": "substrate",
+  "display_name": "Cross-domain substrate sample",
+  "format": "NDJSON (originally mixed: filings, logs, sensor)",
+  "label_field": "source_type",
+  "substrate_question": "Does a corpus mixed across three domains still resolve into clean substrate modules?",
+  "source": "packages/ocean-cli/src/ocean_cli/stdlib/data/universal/substrate_demo.ndjson",
+  "records": 400,
+  "narration": "Four hundred records spanning filings, logs, and sensor readings combined into one corpus. The OCEAN program never sees the source-type label; modules surface format substrate even when the corpus is heterogeneous."
+}

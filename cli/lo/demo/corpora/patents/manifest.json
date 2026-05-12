@@ -1,0 +1,10 @@
+{
+  "id": "patents",
+  "display_name": "USPTO patent abstracts",
+  "format": "NDJSON (originally PDFs / XML)",
+  "label_field": "primary_class",
+  "substrate_question": "Do patents cluster by technological domain without seeing the SIC code?",
+  "source": "packages/ocean-cli/src/ocean_cli/stdlib/data/pulse/uspto_demo.ndjson",
+  "records": 500,
+  "narration": "Five hundred USPTO patent abstracts, sampled balanced across primary class. The OCEAN program never sees the SIC label; the modules surface technological-domain substrate purely from the abstract text."
+}

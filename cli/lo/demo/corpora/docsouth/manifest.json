@@ -1,0 +1,10 @@
+{
+  "id": "docsouth",
+  "display_name": "DocSouth historical narratives",
+  "format": "NDJSON (originally plain text)",
+  "label_field": "era",
+  "substrate_question": "Do 19th-century first-hand accounts cluster by historical era without seeing the date?",
+  "source": "packages/ocean-cli/src/ocean_cli/stdlib/data/docsouth/narratives_demo.ndjson",
+  "records": 200,
+  "narration": "Two hundred first-hand 19th-century American narratives (memoirs, speeches, letters). The OCEAN program never sees the year or era; modules surface period substrate from voice and vocabulary."
+}

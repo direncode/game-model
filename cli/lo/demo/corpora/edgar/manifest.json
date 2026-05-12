@@ -1,0 +1,10 @@
+{
+  "id": "edgar",
+  "display_name": "EDGAR financial filings",
+  "format": "NDJSON (originally HTML / XBRL)",
+  "label_field": "sector",
+  "substrate_question": "Do 10-K filings cluster by industry sector without seeing the SIC code?",
+  "source": "packages/ocean-cli/src/ocean_cli/stdlib/data/receipt/edgar_demo.ndjson",
+  "records": 500,
+  "narration": "Five hundred public company filings (S-1, 10-K, 10-Q). The OCEAN program never sees the sector label; modules surface industry substrate from the discussion text alone."
+}

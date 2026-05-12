@@ -1,0 +1,19 @@
+# cli/lo/demo/program_pro.ocean
+#
+# The premium-tier program used for the cloud-replay tail. Same shape as
+# program.ocean, with the open-core variants swapped for the proprietary
+# ones (content fingerprint + tcd recursive loop). Requires LO_API_KEY in
+# the environment; raises PremiumOperatorError otherwise.
+#
+# The audience sees this side-by-side with the local artifacts during the
+# tail beat — the single-word swaps (`tf-idf` → `content fingerprint`,
+# `kmeans` → `tcd recursive loop`) are the open-core split made visible.
+
+seed 42
+
+load corpus.ndjson take 500 records balanced by label label field is label
+embed text into 128 dimensions using content fingerprint
+cluster for 16 rounds max 24 modules energy = corpus mean crystallize every 4 using tcd recursive loop
+align modules using 50 nearest records fine label field is label
+find dispersion of each label
+save to result.json

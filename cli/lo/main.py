@@ -16,6 +16,12 @@ app = typer.Typer(
     help="Latent Ocean CLI — structural intelligence infrastructure",
     add_completion=True,
 )
+demo_app = typer.Typer(
+    name="demo",
+    help="Live Latent Ocean gauntlet — five corpora, one OCEAN program, eight verbs.",
+    invoke_without_command=True,
+)
+app.add_typer(demo_app, name="demo")
 console = Console()
 
 
@@ -240,6 +246,203 @@ def export(
     console.print(f"  Path:    {result.path or output}")
     console.print(f"  Size:    {result.size_bytes:,} bytes")
     console.print(f"  Rows:    {result.row_count:,}")
+
+
+@demo_app.callback(invoke_without_command=True)
+def demo_root(
+    ctx: typer.Context,
+    seed: int = typer.Option(42, help="Seed for the canonical OCEAN program."),
+    work_dir: Path = typer.Option(
+        None,
+        help="Working directory for artifacts (default: ~/.latentocean/demo-runs/<timestamp>).",
+    ),
+) -> None:
+    """`lo demo` with no subcommand: run the full five-corpus gauntlet."""
+    if ctx.invoked_subcommand is not None:
+        return
+    from lo.demo.sequencer import GauntletConfig, run_gauntlet
+
+    cfg = GauntletConfig(seed=seed, work_root=work_dir)
+    ledger = run_gauntlet(config=cfg, console=console)
+    console.print()
+    console.print(
+        f"[bold green]gauntlet complete[/bold green] · "
+        f"{len(ledger.receipts)}/5 corpora · "
+        f"total ${ledger.total_cost():.4f} · "
+        f"{ledger.total_records():,} records",
+    )
+    console.print("[dim]next: `lo demo replay` for cloud-replay hash match[/dim]")
+
+
+@demo_app.command("replay")
+def demo_replay(
+    cloud: bool = typer.Option(True, "--cloud/--local", help="Replay vs production cloud."),
+    work_root: Path = typer.Option(
+        None,
+        help="Working directory of the just-completed gauntlet (default: latest run).",
+    ),
+) -> None:
+    """Re-run the same artifacts against the production backend. Hashes match."""
+    from lo.demo.replay import ReplayConfig, replay_against_cloud
+    from lo.demo.receipts import Ledger
+
+    runs_root = Path.home() / ".latentocean" / "demo-runs"
+    if work_root is None:
+        if not runs_root.exists():
+            console.print("[red]no prior `lo demo` run found[/red]")
+            raise typer.Exit(1)
+        runs = sorted(runs_root.iterdir())
+        if not runs:
+            console.print("[red]no prior `lo demo` run found[/red]")
+            raise typer.Exit(1)
+        work_root = runs[-1]
+
+    transcript = work_root / "transcript.json"
+    if not transcript.exists():
+        console.print(f"[red]missing transcript: {transcript}[/red]")
+        raise typer.Exit(1)
+    data = json.loads(transcript.read_text(encoding="utf-8"))
+    from lo.demo.receipts import Receipt
+    ledger = Ledger(
+        receipts=[
+            Receipt(
+                corpus_id=r["corpus_id"],
+                display_name=r["display_name"],
+                corpus_sha256=r["corpus_sha256"],
+                artifact_sha256=r["artifact_sha256"],
+                wall_seconds=r["wall_seconds"],
+                estimated_cost_usd=r["estimated_cost_usd"],
+                n_records=r["n_records"],
+                n_modules=r.get("n_modules"),
+            )
+            for r in data["receipts"]
+        ]
+    )
+    cfg = ReplayConfig()
+    cfg.base_url = os.environ.get("LO_BASE_URL", cfg.base_url)
+    cfg.api_key = os.environ.get("LO_API_KEY", "")
+    replay_against_cloud(
+        ledger=ledger,
+        work_root=work_root,
+        config=cfg,
+        console=console,
+    )
+    matched = sum(1 for r in ledger.receipts if r.cloud_matches_local)
+    console.print()
+    console.print(
+        f"[bold]{matched}/{len(ledger.receipts)}[/bold] cloud hashes match local "
+        f"({'all bit-identical' if matched == len(ledger.receipts) else 'partial match'})"
+    )
+
+
+@demo_app.command("client")
+def demo_client(
+    path: Path = typer.Argument(..., exists=True, dir_okay=False, readable=True),
+    seed: int = typer.Option(42),
+) -> None:
+    """Run the canonical OCEAN program against a client-provided file."""
+    from lo.demo.client_data import run_client_file
+
+    receipt = run_client_file(
+        source_path=path,
+        console=console,
+        seed=seed,
+    )
+    if receipt is None:
+        console.print("[red]client run failed[/red]")
+        raise typer.Exit(1)
+    console.print()
+    console.print(
+        f"[bold green]✓ client run complete[/bold green] · "
+        f"sha [green]{receipt.short_sha()}[/green] · "
+        f"{receipt.n_records:,} records · "
+        f"{receipt.n_modules or '?'} modules"
+    )
+
+
+@demo_app.command("rehearse")
+def demo_rehearse(
+    timing_budget_seconds: float = typer.Option(
+        18 * 60.0,
+        help="Wall-time budget for the full gauntlet (default: 18 minutes).",
+    ),
+    fail_on_premium_check: bool = typer.Option(False),
+) -> None:
+    """Headless verification run. Prints a pass/fail summary."""
+    from lo.demo.sequencer import GauntletConfig, run_gauntlet
+    from lo.demo import CORPUS_ORDER
+
+    console.print("[bold]lo demo rehearse[/bold] — headless gauntlet verification\n")
+    cfg = GauntletConfig(headless=True, verb_walk_seconds=0.0, inter_corpus_pause=0.0)
+    try:
+        ledger = run_gauntlet(config=cfg)
+    except Exception as e:  # noqa: BLE001
+        console.print(f"[red]rehearse failed: {type(e).__name__}: {e}[/red]")
+        raise typer.Exit(2)
+
+    failures: list[str] = []
+    if len(ledger.receipts) != len(CORPUS_ORDER):
+        failures.append(
+            f"only {len(ledger.receipts)}/{len(CORPUS_ORDER)} corpora produced receipts"
+        )
+    if ledger.total_wall() > timing_budget_seconds:
+        failures.append(
+            f"wall time {ledger.total_wall():.1f}s exceeds budget "
+            f"{timing_budget_seconds:.0f}s"
+        )
+    for r in ledger.receipts:
+        if not r.artifact_sha256:
+            failures.append(f"{r.corpus_id}: missing artifact SHA-256")
+
+    # Determinism gate: every receipt's SHA must match the pinned golden hash.
+    from lo.demo import DEMO_ROOT
+    golden_path = DEMO_ROOT / "golden.json"
+    if golden_path.exists():
+        golden = json.loads(golden_path.read_text(encoding="utf-8"))
+        for r in ledger.receipts:
+            pinned = golden.get("corpora", {}).get(r.corpus_id)
+            if not pinned:
+                continue
+            if pinned["artifact_sha256"] != r.artifact_sha256:
+                failures.append(
+                    f"{r.corpus_id}: artifact SHA drifted from golden "
+                    f"(expected {pinned['artifact_sha256'][:12]}, "
+                    f"got {r.artifact_sha256[:12]})"
+                )
+            if pinned.get("corpus_sha256") and pinned["corpus_sha256"] != r.corpus_sha256:
+                failures.append(
+                    f"{r.corpus_id}: corpus SHA drifted from golden "
+                    f"(expected {pinned['corpus_sha256'][:12]}, "
+                    f"got {r.corpus_sha256[:12]})"
+                )
+
+    table = Table(show_header=True, header_style="bold")
+    table.add_column("corpus")
+    table.add_column("records")
+    table.add_column("sha (8+4)")
+    table.add_column("wall")
+    table.add_column("cost")
+    for r in ledger.receipts:
+        table.add_row(
+            r.corpus_id,
+            f"{r.n_records:,}",
+            r.short_sha(),
+            f"{r.wall_seconds:.2f}s",
+            f"${r.estimated_cost_usd:.4f}",
+        )
+    console.print(table)
+    console.print()
+    console.print(
+        f"total: {ledger.total_records():,} records · "
+        f"{ledger.total_wall():.1f}s wall · "
+        f"${ledger.total_cost():.4f}"
+    )
+
+    if failures:
+        for f in failures:
+            console.print(f"[red]✗[/red] {f}")
+        raise typer.Exit(1)
+    console.print("[bold green]✓ rehearse passed — demo ready[/bold green]")
 
 
 if __name__ == "__main__":

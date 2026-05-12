@@ -1,0 +1,43 @@
+{
+  "description": "Expected artifact SHA-256 values for the five bundled corpora at seed 42.",
+  "seed": 42,
+  "program": "cli/lo/demo/program.ocean",
+  "pinned_at": "2026-05-12",
+  "corpora": {
+    "patents": {
+      "display_name": "USPTO patent abstracts",
+      "n_records": 500,
+      "corpus_sha256": "4b787ee418aef1976f290984b701174eb5174b2381fe7bfbf7ec16029589154f",
+      "artifact_sha256": "e39d6176fe9abb5766be51cbddb58037504522f7a4fabd382feab21fa77c9fdc",
+      "n_modules": 5
+    },
+    "edgar": {
+      "display_name": "EDGAR financial filings",
+      "n_records": 500,
+      "corpus_sha256": "0e89256325058dba291f98e0f5f4c8c45e60d6929c7d83daa685a56c85a5a0a1",
+      "artifact_sha256": "6f3fa6420281b9fe99e499cfa67427b15418fa0c901358f8a54e0a509dea7096",
+      "n_modules": 15
+    },
+    "docsouth": {
+      "display_name": "DocSouth historical narratives",
+      "n_records": 200,
+      "corpus_sha256": "a5e57a4c3a13e874d7ea014a8c97a890bb4953c259ab55776c4c32c4d886ebc4",
+      "artifact_sha256": "3fd865fa57d8472b33f4a8b0faf0036ce5421f447f9b59cec08a59d048a5a0c9",
+      "n_modules": 16
+    },
+    "arxiv": {
+      "display_name": "arXiv scientific abstracts",
+      "n_records": 500,
+      "corpus_sha256": "06a205497f7cd0011da239f5a7757fb5f5a4990e0baef92dcd36f3bdacaf7e62",
+      "artifact_sha256": "2bbed696efb3f5b08dd00924ba2e85b2ba378a91b2ce872a69b4f5e8790d68b3",
+      "n_modules": 6
+    },
+    "substrate": {
+      "display_name": "Cross-domain substrate sample",
+      "n_records": 400,
+      "corpus_sha256": "fb52158e40fd1cce3551effe4a054211b8cf963b24423c3fcbab830913845081",
+      "artifact_sha256": "1714a4eb089110581c62fe769f1b45901ee61d8f0763172fe736b85f39921aae",
+      "n_modules": 18
+    }
+  }
+}
