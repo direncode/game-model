@@ -60,6 +60,36 @@ requires a paid API key (`OCEAN_API_KEY`).
 
 Get an API key at <https://latentocean.com/protocols>.
 
+## Stdlib presets
+
+In addition to the operators above, OCEAN ships seven stdlib namespaces
+that compose those operators into named pipelines. The `ocean list stdlib`
+command enumerates them at runtime:
+
+| Namespace | Free-tier preset | Premium preset | Demo corpus |
+| --- | --- | --- | --- |
+| `substrate` | `basic_run`, `seed_sweep`, `anomaly_focused`, `content_vs_structural` | (none) | user-supplied |
+| `pulse` | `uspto` | `uspto_pro` | `pulse/uspto_demo.ndjson` (500 records) |
+| `atlas` | `arxiv` | `arxiv_pro` | `atlas/arxiv_demo.ndjson` (500 records) |
+| `receipt` | `edgar` | `edgar_pro` | `receipt/edgar_demo.ndjson` (500 records) |
+| `docsouth` | `narratives` | `narratives_pro` | `docsouth/narratives_demo.ndjson` (200 records) |
+| `titan` | `benchmark` | `benchmark_pro` | `titan/benchmark_demo.ndjson` (300 records) |
+| `universal` | `substrate` | `substrate_pro` | `universal/substrate_demo.ndjson` (400 records) |
+
+Each free-tier preset runs in under 30 seconds against its bundled
+demo corpus. Each premium preset uses one or more proprietary
+operators and requires `OCEAN_API_KEY`.
+
+Run any preset directly from the command line:
+
+```
+ocean run pulse.uspto
+ocean run atlas.arxiv --target 200
+ocean run receipt.edgar_pro --output /tmp/edgar_pro.json
+```
+
+The last invocation requires an API key.
+
 ## Toy corpora
 
 The handbook ships three small NDJSON corpora at
