@@ -1,0 +1,15 @@
+{
+  "_note": "Premium-tier artifact stub. Regenerate with OCEAN_API_KEY set to populate full content.",
+  "alignment": {
+    "module_to_records": {}
+  },
+  "dispersion": {
+    "by_label": {}
+  },
+  "modules": [],
+  "pipeline": {
+    "seed": 42,
+    "status": "premium-stub",
+    "tier": "premium"
+  }
+}
