@@ -26,16 +26,27 @@ console = Console()
 
 
 @app.command("cmd")
-def cmd() -> None:
+def cmd(
+    verify: bool = typer.Option(
+        False,
+        "--verify",
+        help="Headless determinism check — run the canonical sample program "
+             "against each bundled corpus and compare against the pinned SHAs "
+             "in cli/lo/demo/golden.json. Exits non-zero on drift.",
+    ),
+) -> None:
     """Interactive claude-cmd-style menu — browse every operator, load
     a bundled corpus, run a pipeline, see the artifact SHA inline.
 
     Usage:
-        lo cmd
+        lo cmd            # interactive menu
+        lo cmd --verify   # headless determinism check (CI-friendly)
 
     Arrow keys to navigate, Enter to select, q to quit.
     """
     from . import cmd as _cmd  # noqa: PLC0415 — local import to keep `lo --help` fast
+    if verify:
+        raise typer.Exit(code=_cmd.verify_samples())
     raise typer.Exit(code=_cmd.main())
 
 
@@ -451,6 +462,15 @@ def demo_rehearse(
         f"{ledger.total_wall():.1f}s wall · "
         f"${ledger.total_cost():.4f}"
     )
+
+    # Also gate the `lo cmd` sample-run path. Different program + different
+    # corpus normalization, so its SHAs are pinned separately under
+    # golden.cmd_samples and verified by lo.cmd.verify_samples().
+    from . import cmd as _cmd_mod  # noqa: PLC0415
+    console.print()
+    cmd_rc = _cmd_mod.verify_samples()
+    if cmd_rc != 0:
+        failures.append(f"`lo cmd` sample determinism check failed (rc={cmd_rc})")
 
     if failures:
         for f in failures:

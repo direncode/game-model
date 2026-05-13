@@ -191,8 +191,10 @@ class AppState:
     """In-memory state the menu reads + mutates."""
     program: str = ""
     corpus_path: Optional[Path] = None
+    corpus_id: Optional[str] = None         # which bundled sample is loaded
     last_message: str = ""
     last_sha: str = ""
+    last_golden_status: str = ""            # "" | "match" | "drift:<exp8>:<got8>"
     quit: bool = False
 
 
@@ -267,6 +269,31 @@ def _make_preset_handler(preset: dict):
     return _msg
 
 
+CANONICAL_SAMPLE_PROGRAM = (
+    "seed 42\n"
+    "load corpus.ndjson take 80 records balanced by label label field is label\n"
+    "embed text into 32 dimensions using tf-idf\n"
+    "cluster for 4 rounds max 4 modules using kmeans\n"
+    "align modules using 5 nearest records\n"
+    "find dispersion of each label\n"
+    "save to result.json\n"
+)
+
+
+def _golden_path() -> Path:
+    return Path(__file__).resolve().parent / "demo" / "golden.json"
+
+
+def _load_cmd_pin(corpus_id: str) -> Optional[dict]:
+    """Return the pinned cmd_samples entry for `corpus_id`, or None."""
+    try:
+        import json as _json
+        data = _json.loads(_golden_path().read_text(encoding="utf-8"))
+        return (data.get("cmd_samples") or {}).get(corpus_id)
+    except (OSError, ValueError):
+        return None
+
+
 def _make_sample_handler(corpus_id: str):
     def _load(state: AppState) -> None:
         corpora_root = Path(__file__).resolve().parent / "demo" / "corpora"
@@ -274,17 +301,10 @@ def _make_sample_handler(corpus_id: str):
         if not candidate.exists():
             state.last_message = f"bundled corpus missing: {candidate}"
             return
-        # Pre-fill a runnable program against this corpus.
-        state.program = (
-            "seed 42\n"
-            "load corpus.ndjson take 80 records balanced by label label field is label\n"
-            "embed text into 32 dimensions using tf-idf\n"
-            "cluster for 4 rounds max 4 modules using kmeans\n"
-            "align modules using 5 nearest records\n"
-            "find dispersion of each label\n"
-            "save to result.json\n"
-        )
+        state.program = CANONICAL_SAMPLE_PROGRAM
         state.corpus_path = candidate
+        state.corpus_id = corpus_id
+        state.last_golden_status = ""
         state.last_message = f"loaded sample corpus {corpus_id} ({candidate.name})"
     return _load
 
@@ -292,6 +312,8 @@ def _make_sample_handler(corpus_id: str):
 def _action_clear(state: AppState) -> None:
     state.program = ""
     state.corpus_path = None
+    state.corpus_id = None
+    state.last_golden_status = ""
     state.last_message = "cleared program + corpus"
 
 
@@ -324,6 +346,17 @@ def _action_run(state: AppState) -> None:
                 f"run OK · sha {result.artifact_sha256[:8]}… · "
                 f"{result.n_modules} modules · {result.wall_seconds:.2f}s"
             )
+            state.last_golden_status = ""
+            if state.corpus_id and state.program == CANONICAL_SAMPLE_PROGRAM:
+                pin = _load_cmd_pin(state.corpus_id)
+                if pin and pin.get("artifact_sha256"):
+                    if pin["artifact_sha256"] == result.artifact_sha256:
+                        state.last_golden_status = "match"
+                    else:
+                        state.last_golden_status = (
+                            f"drift:{pin['artifact_sha256'][:8]}:"
+                            f"{result.artifact_sha256[:8]}"
+                        )
         else:
             tail = (result.stderr or "")[-180:]
             state.last_message = f"run FAILED · {tail}"
@@ -492,6 +525,19 @@ def render(state: AppState, items: list[MenuItem], cursor: int, console: Console
                 style=_PALETTE["warm"] if state.last_sha else _PALETTE["muted"])
     status_lines.append(meta)
 
+    if state.last_golden_status:
+        badge = Text()
+        badge.append("golden  ", style=_PALETTE["tertiary"])
+        if state.last_golden_status == "match":
+            badge.append("✓ matches pinned SHA", style=_PALETTE["green"])
+        elif state.last_golden_status.startswith("drift:"):
+            _, exp, got = state.last_golden_status.split(":", 2)
+            badge.append(
+                f"✗ DRIFT — expected {exp}…, got {got}…",
+                style=_PALETTE["red"],
+            )
+        status_lines.append(badge)
+
     msg = Text()
     msg.append("message  ", style=_PALETTE["tertiary"])
     if state.last_message:
@@ -550,6 +596,107 @@ def main() -> int:
     console.print(f"[{_PALETTE['muted']}]lo cmd · session ended[/{_PALETTE['muted']}]")
     if state.last_sha:
         console.print(f"[{_PALETTE['warm']}]last sha:[/{_PALETTE['warm']}] {state.last_sha}")
+    return 0
+
+
+def verify_samples() -> int:
+    """Headless determinism check for the five bundled cmd samples.
+
+    Runs the canonical 7-line program against each corpus, compares the
+    resulting artifact SHA against the pinned value in
+    ``cli/lo/demo/golden.json::cmd_samples``, and returns:
+
+        0 if every sample matches its pin (or has no pin)
+        1 if any sample drifted from its pin
+        2 if any sample crashed
+
+    Prints a one-line-per-sample table to stdout.
+    """
+    from rich.table import Table
+    import tempfile
+
+    from .demo.runner import run_program
+
+    console = Console()
+    table = Table(show_header=True, header_style="bold")
+    table.add_column("corpus")
+    table.add_column("sha (got)")
+    table.add_column("sha (pinned)")
+    table.add_column("modules")
+    table.add_column("status")
+
+    drift = 0
+    crashed = 0
+    samples = ("patents", "edgar", "docsouth", "arxiv", "substrate")
+    corpora_root = Path(__file__).resolve().parent / "demo" / "corpora"
+
+    for corpus_id in samples:
+        src = corpora_root / corpus_id / "source.ndjson"
+        if not src.exists():
+            table.add_row(corpus_id, "—", "—", "—",
+                          f"[{_PALETTE['red']}]missing corpus[/{_PALETTE['red']}]")
+            crashed += 1
+            continue
+        # All success checks must happen inside the TemporaryDirectory `with`
+        # block — once we exit it, the work_dir (and the artifact inside it)
+        # is deleted and RunResult.succeeded() returns False even though the
+        # run itself completed correctly.
+        try:
+            with tempfile.TemporaryDirectory(prefix="lo-cmd-verify-") as td:
+                tdp = Path(td)
+                prog = tdp / "program.ocean"
+                prog.write_text(CANONICAL_SAMPLE_PROGRAM, encoding="utf-8")
+                corpus_dst = tdp / "corpus.ndjson"
+                corpus_dst.write_bytes(src.read_bytes())
+                r = run_program(
+                    program_path=prog,
+                    corpus_path=corpus_dst,
+                    work_dir=tdp,
+                    seed=42,
+                )
+                if not r.succeeded():
+                    tail = (r.stderr or "").strip().splitlines()
+                    last_line = tail[-1] if tail else "(no stderr)"
+                    row = (corpus_id, "—", "—", "—",
+                           f"[{_PALETTE['red']}]run failed: {last_line[:80]}[/{_PALETTE['red']}]")
+                    table.add_row(*row)
+                    crashed += 1
+                    continue
+
+                pin = _load_cmd_pin(corpus_id)
+                pinned_sha = (pin or {}).get("artifact_sha256")
+                if not pinned_sha:
+                    status = f"[{_PALETTE['muted']}]no pin[/{_PALETTE['muted']}]"
+                elif pinned_sha == r.artifact_sha256:
+                    status = f"[{_PALETTE['green']}]✓ match[/{_PALETTE['green']}]"
+                else:
+                    status = f"[{_PALETTE['red']}]✗ DRIFT[/{_PALETTE['red']}]"
+                    drift += 1
+
+                table.add_row(
+                    corpus_id,
+                    r.artifact_sha256[:12],
+                    (pinned_sha or "—")[:12],
+                    str(r.n_modules) if r.n_modules is not None else "?",
+                    status,
+                )
+        except Exception as e:  # noqa: BLE001
+            table.add_row(corpus_id, "—", "—", "—",
+                          f"[{_PALETTE['red']}]crash: {type(e).__name__}: {e}[/{_PALETTE['red']}]")
+            crashed += 1
+            continue
+
+    console.print()
+    console.print("[bold]lo cmd verify[/bold] — cmd-sample determinism check")
+    console.print(table)
+    console.print()
+    if crashed:
+        console.print(f"[{_PALETTE['red']}]✗ {crashed} sample(s) crashed[/{_PALETTE['red']}]")
+        return 2
+    if drift:
+        console.print(f"[{_PALETTE['red']}]✗ {drift} sample(s) drifted from golden pin[/{_PALETTE['red']}]")
+        return 1
+    console.print(f"[{_PALETTE['green']}]✓ all cmd samples match pinned SHAs[/{_PALETTE['green']}]")
     return 0
 
 

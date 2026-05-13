@@ -40,5 +40,34 @@
       "artifact_sha256": "1714a4eb089110581c62fe769f1b45901ee61d8f0763172fe736b85f39921aae",
       "n_modules": 18
     }
+  },
+  "cmd_samples": {
+    "description": "Expected SHAs for the lighter canonical program used by `lo cmd`'s sample handler (80 records / 32 dims / 4 modules / 5 nearest, no ingest normalization). Different from `corpora` above, which pins the heavier gauntlet program (500 records / 128 dims / 24 modules) on the normalized corpus.",
+    "program_source": "cli/lo/cmd.py:_make_sample_handler",
+    "patents": {
+      "corpus_sha256":   "d15263d216cd9445db513835896674765febaeecf1de1c542e7dad55f344ff20",
+      "artifact_sha256": "18ac0863ee3ff49136bef1d748076f241b1bd71753d37b806922f3b350bacb41",
+      "n_modules": 4
+    },
+    "edgar": {
+      "corpus_sha256":   "bbeed098e6435c88990a2ad240d80c54c0b96b60c3abe6ac3372473683ca5de7",
+      "artifact_sha256": "16457c323bbc3585de4fe93410ca70383ad93666bbb6b9001951e1b28e3d080b",
+      "n_modules": 4
+    },
+    "docsouth": {
+      "corpus_sha256":   "b5727da5820e0f421c8b89132f378a24dd3313bb76ea225086f1ca976bcd92df",
+      "artifact_sha256": "ad73287797dece3203676628209daf5a9b3c1f67b80794125bde6ce42e5c8ae9",
+      "n_modules": 4
+    },
+    "arxiv": {
+      "corpus_sha256":   "075653ccc75f64d4fa94a8d08c405ca74eee3306a16662c259422968b28ecd20",
+      "artifact_sha256": "1f81f12a5607da4ad8431f9a7ca182b46981538b5fa8e50d30df18f0c58988c3",
+      "n_modules": 4
+    },
+    "substrate": {
+      "corpus_sha256":   "7691706058208f66d89a4c33e1d61448c298e7ccbb89d9ccaf73f3426e8700ec",
+      "artifact_sha256": "48f23d76ed7a3ec91bb7f06afebf28e8a84074b3cd4cfec3617fa0abb7dd8acf",
+      "n_modules": 4
+    }
   }
 }
