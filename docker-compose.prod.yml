@@ -83,7 +83,13 @@ services:
       - RANGE_AUTH_SECRET=${RANGE_AUTH_SECRET:-}
       - RANGE_REQUIRE_AUTH=${RANGE_REQUIRE_AUTH:-0}
       - RANGE_ENCRYPTION_KEY=${RANGE_ENCRYPTION_KEY:-}
-    volumes:
+    # `!override` REPLACES (does not append-merge) the volume list from
+    # the base docker-compose.yml. The base mounts ``./frontend:/app``
+    # for dev hot-reload; in production that bind hides the
+    # Dockerfile.prod-baked Next.js standalone output at /app/server.js
+    # and the runner crashes with `Cannot find module '/app/server.js'`.
+    # Replacing the list keeps only the data + scripts read mounts.
+    volumes: !override
       # Next.js /api/health + data-layer routes read validation artefacts
       # and BTUT caches at /data and /scripts. Read-only bind mounts
       # from the repo keep them fresh without re-building the image.
