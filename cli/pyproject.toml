@@ -2,12 +2,13 @@
 name = "lo-cli"
 version = "0.1.0"
 description = "Latent Ocean CLI — structural intelligence from the command line"
-readme = "README.md"
+# `readme` deliberately omitted — older hatchling versions choke on it
+# during isolated editable builds. README.md still ships in the tree;
+# it's just not declared as a metadata-resolved field.
 license = "MIT"
 requires-python = ">=3.10"
 dependencies = [
     "typer>=0.9.0",
-    "latentocean>=0.1.0",
     "rich>=13.0.0",
     "pyyaml>=6.0",
 ]
@@ -16,6 +17,11 @@ dependencies = [
 lo = "lo.main:app"
 
 [project.optional-dependencies]
+# `latentocean` is only needed by `lo configure / deploy / status` which
+# call the hosted-API client. `lo cmd`, `lo demo`, and the local-only
+# commands work without it. Install via `pip install lo-cli[client]`
+# when you need hosted-API features.
+client = ["latentocean>=0.1.0"]
 dev = ["pytest>=7.0"]
 
 [build-system]
