@@ -19,8 +19,10 @@ from typing import Callable
 
 from rich.console import Console
 
+from .. import obs
 from . import CORPORA_ROOT, CORPUS_ORDER, PROGRAM_FREE
 from .ingest import normalize_bundled_corpus
+from .pause import hold_while_paused, maybe_toggle
 from .receipts import Ledger, Receipt, estimate_cost_usd
 from .runner import RunResult, run_program
 from .tui import (
@@ -79,10 +81,26 @@ def _walk_verbs(
         while time.time() < t_end:
             if runner_done.is_set():
                 break
+            maybe_toggle(state)
+            if state.operator_paused:
+                # The runner thread keeps churning in the background; we
+                # only freeze the *animation*. When the operator un-pauses,
+                # the bar jumps to wherever the engine actually is.
+                hold_while_paused(
+                    is_paused=lambda: state.operator_paused,
+                    on_tick=lambda: update_live(live, state),
+                )
+                t_end = time.time() + walk_seconds_per_verb * (1 - (i * pct_step) / 100.0)
             time.sleep(0.06)
             update_live(live, state)
     while not runner_done.is_set():
         stage.progress_pct = 100.0
+        maybe_toggle(state)
+        if state.operator_paused:
+            hold_while_paused(
+                is_paused=lambda: state.operator_paused,
+                on_tick=lambda: update_live(live, state),
+            )
         update_live(live, state)
         time.sleep(0.1)
     stage.progress_pct = 100.0
@@ -151,6 +169,12 @@ def _run_corpus(
 
     result = result_box.get("result")
     if not result or not result.succeeded():
+        obs.event(
+            "gauntlet.corpus_failed",
+            corpus_id=corpus_id,
+            seed=config.seed,
+            wall_s=round(result.wall_seconds, 3) if result else None,
+        )
         stage.last_event_text = "✗ run failed; advancing to next corpus"
         update_live(live, state)
         time.sleep(1.0)
@@ -170,6 +194,15 @@ def _run_corpus(
         n_modules=result.n_modules,
     )
     state.ledger.add(receipt)
+    obs.event(
+        "gauntlet.corpus_completed",
+        corpus_id=corpus_id,
+        seed=config.seed,
+        artifact_sha256=result.artifact_sha256,
+        n_records=ingest_report.n_records_out,
+        n_modules=result.n_modules,
+        wall_s=round(result.wall_seconds, 3),
+    )
     stage.last_event_text = (
         f"✓ artifact sha {receipt.short_sha()} · "
         f"{result.wall_seconds:.1f}s · "

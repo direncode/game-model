@@ -25,6 +25,20 @@ app.add_typer(demo_app, name="demo")
 console = Console()
 
 
+@app.command("cmd")
+def cmd() -> None:
+    """Interactive claude-cmd-style menu — browse every operator, load
+    a bundled corpus, run a pipeline, see the artifact SHA inline.
+
+    Usage:
+        lo cmd
+
+    Arrow keys to navigate, Enter to select, q to quit.
+    """
+    from . import cmd as _cmd  # noqa: PLC0415 — local import to keep `lo --help` fast
+    raise typer.Exit(code=_cmd.main())
+
+
 def _get_client():
     """Create a Latent Ocean client from environment or config."""
     try:

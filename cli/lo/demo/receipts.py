@@ -38,6 +38,14 @@ class Receipt:
     n_modules: int | None = None
     cloud_artifact_sha256: str | None = None  # set during replay tail
     cloud_matches_local: bool | None = None
+    # ``cloud_source`` records *where* the cloud hash came from so the TUI
+    # and downstream consumers can distinguish a live cloud round-trip
+    # from a cached hash from this morning's rehearsal. Values:
+    #   "live"   — fresh response from /v1/ocean/run
+    #   "cached" — read from ~/.latentocean/demo-cache/cloud_hashes.json
+    #   "absent" — neither live nor cached; cloud_artifact_sha256 is None
+    cloud_source: str = "absent"
+    cloud_cached_at: str | None = None  # ISO date string of cache origin
 
     def short_sha(self) -> str:
         """Truncated render for the TUI ledger pane: `7c3a...b41f`."""
@@ -49,6 +57,23 @@ class Receipt:
         if not self.cloud_artifact_sha256:
             return "—"
         return f"{self.cloud_artifact_sha256[:4]}...{self.cloud_artifact_sha256[-4:]}"
+
+    def cloud_status_label(self) -> str:
+        """Short audience-readable label for the cloud column.
+
+        ``live``    rendered green so the audience sees a real cloud
+                    round-trip when it lands. ``cached`` rendered yellow
+                    with the date so it's obvious this isn't a live hit.
+                    ``absent`` rendered dim, conveying the demo is in
+                    local-only mode and the determinism reveal still
+                    holds (local hashes pin to themselves)."""
+        if self.cloud_source == "live":
+            return "live"
+        if self.cloud_source == "cached":
+            if self.cloud_cached_at:
+                return f"cached @ {self.cloud_cached_at[:10]}"
+            return "cached"
+        return "local only"
 
 
 @dataclass
@@ -94,6 +119,8 @@ class Ledger:
                     "artifact_sha256": r.artifact_sha256,
                     "cloud_artifact_sha256": r.cloud_artifact_sha256,
                     "cloud_matches_local": r.cloud_matches_local,
+                    "cloud_source": r.cloud_source,
+                    "cloud_cached_at": r.cloud_cached_at,
                     "wall_seconds": r.wall_seconds,
                     "estimated_cost_usd": r.estimated_cost_usd,
                     "n_records": r.n_records,

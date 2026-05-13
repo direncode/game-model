@@ -24,6 +24,14 @@
       "port": 5555,
       "autoPort": true,
       "cwd": "backend"
+    },
+    {
+      "name": "ocean-run-standalone",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "backend.ocean_run_standalone:app", "--host", "127.0.0.1", "--port", "8787"],
+      "port": 8787,
+      "autoPort": true,
+      "cwd": "."
     }
   ]
 }

@@ -24,9 +24,11 @@ from .ast import (
 DEFAULT_OPERATOR_KIND = {
     "load":    "source.ndjson",
     "embed":   "embed.tfidf_jl",
+    "reduce":  "reduce.btut",
     "cluster": "cluster.kmeans",
     "align":   "align.module",
     "find":    "find.dispersion_per_label",
+    "narrate": "narrate.plain_english",
     "save":    "persist.json",
 }
 
@@ -46,6 +48,20 @@ CLUSTER_VARIANTS = {
     "k-means":             "cluster.kmeans",
     "tcd recursive loop":  "cluster.tcd_recursive_loop",
     "tcd":                 "cluster.tcd_recursive_loop",
+    "hamming":             "cluster.hamming",
+}
+
+REDUCE_VARIANTS = {
+    "btut":                "reduce.btut",
+    "stratified":          "reduce.stratified",
+    "stratified sample":   "reduce.stratified",
+}
+
+NARRATE_VARIANTS = {
+    "plain english":       "narrate.plain_english",
+    "template":            "narrate.plain_english",
+    "llm":                 "narrate.llm_summary",
+    "llm summary":         "narrate.llm_summary",
 }
 
 
@@ -778,6 +794,24 @@ class Parser:
                         f"unknown cluster variant {variant!r}",
                         verb_tok, self.source_lines,
                         suggestion=f"valid variants: {', '.join(sorted(CLUSTER_VARIANTS))}",
+                    )
+            elif verb == "reduce":
+                if variant in REDUCE_VARIANTS:
+                    kind = REDUCE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown reduce variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(REDUCE_VARIANTS))}",
+                    )
+            elif verb == "narrate":
+                if variant in NARRATE_VARIANTS:
+                    kind = NARRATE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown narrate variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(NARRATE_VARIANTS))}",
                     )
             # Other verbs may not have variants yet; silent accept.
 

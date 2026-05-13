@@ -23,9 +23,11 @@ from .ast import (
 DEFAULT_OPERATOR_KIND = {
     "load":    "source.ndjson",
     "embed":   "embed.tfidf_jl",
+    "reduce":  "reduce.btut",
     "cluster": "cluster.tcd_recursive_loop",
     "align":   "align.module",
     "find":    "align.dispersion",
+    "narrate": "narrate.plain_english",
     "save":    "persist.json",
 }
 
@@ -38,6 +40,27 @@ EMBED_VARIANTS = {
     "one-hot numeric":     "embed.onehot_numeric",
     "one-hot":             "embed.onehot_numeric",
     "numeric":             "embed.onehot_numeric",
+}
+
+CLUSTER_VARIANTS = {
+    "kmeans":              "cluster.kmeans",
+    "k-means":             "cluster.kmeans",
+    "tcd recursive loop":  "cluster.tcd_recursive_loop",
+    "tcd":                 "cluster.tcd_recursive_loop",
+    "hamming":             "cluster.hamming",
+}
+
+REDUCE_VARIANTS = {
+    "btut":                "reduce.btut",
+    "stratified":          "reduce.stratified",
+    "stratified sample":   "reduce.stratified",
+}
+
+NARRATE_VARIANTS = {
+    "plain english":       "narrate.plain_english",
+    "template":            "narrate.plain_english",
+    "llm":                 "narrate.llm_summary",
+    "llm summary":         "narrate.llm_summary",
 }
 
 
@@ -763,9 +786,32 @@ class Parser:
                         suggestion=f"valid variants: {', '.join(sorted(EMBED_VARIANTS))}",
                     )
             elif verb == "cluster":
-                # 'using tcd recursive loop' — just confirms the default; no other variant yet.
-                # Accept silently.
-                pass
+                if variant in CLUSTER_VARIANTS:
+                    kind = CLUSTER_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown cluster variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(CLUSTER_VARIANTS))}",
+                    )
+            elif verb == "reduce":
+                if variant in REDUCE_VARIANTS:
+                    kind = REDUCE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown reduce variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(REDUCE_VARIANTS))}",
+                    )
+            elif verb == "narrate":
+                if variant in NARRATE_VARIANTS:
+                    kind = NARRATE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown narrate variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(NARRATE_VARIANTS))}",
+                    )
             # Other verbs may not have variants yet; silent accept.
 
         return VerbStmt(

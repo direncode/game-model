@@ -1,14 +1,15 @@
 {
-  "description": "Expected artifact SHA-256 values for the five bundled corpora at seed 42.",
+  "description": "Expected artifact SHA-256 values for the five bundled corpora at seed 42. Pinned against thread=1 BLAS (OMP_NUM_THREADS=1 + MKL_NUM_THREADS=1), which lo/_bootstrap.py sets by default. Multi-threaded BLAS produces different SHAs for the small-module-count corpora (patents, arxiv) because parallel sum-reduction order tips kmeans assignments. The single-thread pin is the cross-machine determinism contract.",
   "seed": 42,
+  "blas_threads": 1,
   "program": "cli/lo/demo/program.ocean",
-  "pinned_at": "2026-05-12",
+  "pinned_at": "2026-05-13",
   "corpora": {
     "patents": {
       "display_name": "USPTO patent abstracts",
       "n_records": 500,
       "corpus_sha256": "4b787ee418aef1976f290984b701174eb5174b2381fe7bfbf7ec16029589154f",
-      "artifact_sha256": "e39d6176fe9abb5766be51cbddb58037504522f7a4fabd382feab21fa77c9fdc",
+      "artifact_sha256": "a085e14238e7b1c471fb794ef7c2f81e53fc6160bc826f3da609036f5d39e8e8",
       "n_modules": 5
     },
     "edgar": {
@@ -29,7 +30,7 @@
       "display_name": "arXiv scientific abstracts",
       "n_records": 500,
       "corpus_sha256": "06a205497f7cd0011da239f5a7757fb5f5a4990e0baef92dcd36f3bdacaf7e62",
-      "artifact_sha256": "2bbed696efb3f5b08dd00924ba2e85b2ba378a91b2ce872a69b4f5e8790d68b3",
+      "artifact_sha256": "f72119709dddd55b34c5fc0d32274fc34b5d4b28b634fbef9ae505a325290daa",
       "n_modules": 6
     },
     "substrate": {

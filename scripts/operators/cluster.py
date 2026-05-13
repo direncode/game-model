@@ -150,3 +150,89 @@ class KMeansBaseline(Operator):
                 "topology":       None,  # KMeans has no persistent homology
             })
         return {"modules": modules, "modules_active_final": len(modules), "iterations": km.n_iter_}
+
+
+@register
+class HammingClusterer(Operator):
+    """Bit-vector clustering for ``embed.content_fp48`` output.
+
+    Consumes uint64 Bloom-style fingerprints (``Z_FP48``) and groups
+    records by Hamming distance — bitwise XOR + popcount. The natural
+    downstream of ``embed.content_fp48``; the typecheck system refuses
+    to chain content_fp48 into Euclidean clusterers (kmeans / TCD) so
+    this operator is the only path that closes the program.
+
+    Free-tier, no trade-secret. Generic technique (Bloom-filter-style
+    Hamming clustering predates this codebase by decades).
+
+    config:
+        threshold:   int — max Hamming distance for cluster membership
+                           out of 48 bits (default 12, ~25%)
+        max_modules: int — module budget (default 24)
+    """
+    kind = "cluster.hamming"
+    stage = "cluster"
+
+    def run(self, inputs, *, seed, config):
+        import numpy as np
+
+        fps = inputs.get("fp48s")
+        if fps is None:
+            fps = inputs.get("Z")
+        if fps is None:
+            raise ValueError(
+                "cluster.hamming requires 'fp48s' (uint64 fingerprints) "
+                "from upstream embed.content_fp48"
+            )
+        fps = np.asarray(fps, dtype=np.uint64)
+        threshold = int(config.get("threshold", 12))
+        max_modules = int(config.get("max_modules", 24))
+
+        # Deterministic order: process records by fingerprint then index
+        # so the same (fps, seed) produces the same cluster assignments.
+        order = np.lexsort((np.arange(len(fps)), fps))
+        centroids: list = []
+        members: list[list[int]] = []
+
+        for idx in order:
+            fp = fps[idx]
+            best_c, best_d = -1, threshold + 1
+            for ci, c in enumerate(centroids):
+                d = int(bin(int(fp ^ c)).count("1"))
+                if d < best_d:
+                    best_c, best_d = ci, d
+            if best_c >= 0:
+                members[best_c].append(int(idx))
+            elif len(centroids) < max_modules:
+                centroids.append(fp)
+                members.append([int(idx)])
+            else:
+                nearest = min(
+                    range(len(centroids)),
+                    key=lambda ci: bin(int(fp ^ centroids[ci])).count("1"),
+                )
+                members[nearest].append(int(idx))
+
+        modules = []
+        for mid, member_idxs in enumerate(members):
+            cluster_fps = fps[member_idxs]
+            bit_columns = np.unpackbits(
+                cluster_fps.view(np.uint8).reshape(-1, 8), axis=1
+            )
+            majority = (bit_columns.mean(axis=0) > 0.5).astype(np.uint8)
+            centroid_bytes = np.packbits(majority).view(np.uint64)[0]
+            modules.append({
+                "module_id":    f"hamming_{mid}",
+                "module_class": "HammingCluster",
+                "centroid_stats": {
+                    "popcount":  int(bin(int(centroid_bytes)).count("1")),
+                    "n_members": len(member_idxs),
+                },
+                "centroid_fp48": int(centroid_bytes),
+                "topology":     None,
+            })
+        return {
+            "modules":              modules,
+            "modules_active_final": len(modules),
+            "iterations":           1,
+        }

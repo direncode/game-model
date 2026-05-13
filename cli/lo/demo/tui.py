@@ -76,6 +76,23 @@ def _format_elapsed(seconds: float) -> str:
     return f"{m:02d}:{s:02d}"
 
 
+def _styled_cloud_source(source: str, cached_at: str | None) -> str:
+    """Map a Receipt's ``cloud_source`` to Rich-markup for the src column.
+
+    Colour signals provenance at a glance:
+        live        → green   (the cloud round-trip actually happened now)
+        cached      → yellow  (rehearsal hash from $stored_at; not live)
+        absent      → dim     (local-only mode; nothing to compare against)
+    """
+    if source == "live":
+        return "[bold green]live[/bold green]"
+    if source == "cached":
+        if cached_at:
+            return f"[yellow]cached @ {cached_at[:10]}[/yellow]"
+        return "[yellow]cached[/yellow]"
+    return "[dim]local only[/dim]"
+
+
 def _current_verb_for_line(line: str) -> str | None:
     """Return the OCEAN verb a program line begins with, or None."""
     stripped = line.lstrip()
@@ -115,26 +132,31 @@ def render_ledger_pane(state: DemoState) -> RenderableType:
     )
     table.add_column("corpus", style="white", no_wrap=True)
     table.add_column("sha", style="green", no_wrap=True)
-    if state.cloud_replay_active or any(
-        r.cloud_artifact_sha256 for r in state.ledger.receipts
-    ):
-        table.add_column("cloud", style="magenta", no_wrap=True)
-        table.add_column("✓", style="bold", no_wrap=True)
-    table.add_column("cost", style="yellow", no_wrap=True, justify="right")
-
     show_cloud = state.cloud_replay_active or any(
         r.cloud_artifact_sha256 for r in state.ledger.receipts
     )
+    if show_cloud:
+        table.add_column("cloud", style="magenta", no_wrap=True)
+        # `src` is the audience-readable provenance: a green "live" if the
+        # cloud round-trip just happened, a yellow "cached @ <date>" if we
+        # fell back to a rehearsal hash, and a dim "local only" when no
+        # cloud value exists. This replaces the old silent fallback where
+        # cached hashes rendered identically to live ones.
+        table.add_column("src", style="cyan", no_wrap=True)
+        table.add_column("=", style="bold", no_wrap=True)
+    table.add_column("cost", style="yellow", no_wrap=True, justify="right")
+
     for r in state.ledger.receipts:
         row = [r.corpus_id, r.short_sha()]
         if show_cloud:
             row.append(r.short_cloud_sha())
+            row.append(_styled_cloud_source(r.cloud_source, r.cloud_cached_at))
             if r.cloud_matches_local is True:
-                row.append("✓")
+                row.append("[green]✓[/green]")
             elif r.cloud_matches_local is False:
-                row.append("✗")
+                row.append("[red]✗[/red]")
             else:
-                row.append("…")
+                row.append("[dim]—[/dim]")
         row.append(f"${r.estimated_cost_usd:.4f}")
         table.add_row(*row)
 

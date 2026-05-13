@@ -10,6 +10,49 @@ missing), the tail falls back to a cached cloud-hash file produced by a
 prior `lo demo rehearse --cloud` run. The narration in the room shifts
 accordingly: "and here is the cloud's hash from this morning's
 rehearsal — bit-identical to what we just produced."
+
+## Endpoint contract
+
+The cloud-replay tail issues exactly one HTTP request per corpus:
+
+    POST {base_url}/v1/ocean/run
+
+    Authorization: Bearer {api_key}        # required
+    Content-Type:  multipart/form-data
+
+    Fields:
+        program  — the .ocean program source text (UTF-8)
+        corpus   — the normalized corpus.ndjson bytes
+
+    Successful response (HTTP 200):
+        {
+          "artifact_sha256": "<64-char hex>"   # canonical SHA per
+                                               # runner._deterministic_artifact_sha
+        }
+        # OR (legacy field name accepted)
+        {
+          "sha256": "<64-char hex>"
+        }
+
+    Error responses:
+        HTTP 401 / 403  → missing or invalid API key. Treated as
+                          "live unavailable"; replay falls back to cache.
+        HTTP 4xx / 5xx  → any other code: same fallback path.
+        Network failure → same fallback path.
+
+    The endpoint MUST compute the same canonical SHA as
+    ``runner._deterministic_artifact_sha`` (strips _meta.generated_at /
+    wall_seconds / started_at before hashing). Otherwise local-vs-cloud
+    comparisons will never match.
+
+    Idempotency: identical (program, corpus) bodies must produce
+    identical responses. The demo is built around this promise.
+
+The endpoint is **not deployed yet** on api.latentocean.io. Until it
+is, the cloud-replay tail uses a cached hash from rehearsal runs and
+the TUI surfaces "cached @ <date>" so the audience knows what they're
+seeing. For dev / CI testing of the cloud-replay code path, see
+``cli/lo/demo/_cloud_mock.py``.
 """
 from __future__ import annotations
 
@@ -41,16 +84,37 @@ def _cache_default_path() -> Path:
     return Path.home() / ".latentocean" / "demo-cache" / "cloud_hashes.json"
 
 
-def _load_cache(cache_path: Path) -> dict[str, str]:
+def _load_cache(cache_path: Path) -> dict:
+    """Return the cache dict-of-dicts, or an empty dict on any read failure.
+
+    Older rehearsal runs wrote a flat ``{corpus_id: sha}`` map. New runs
+    write ``{corpus_id: {"sha": ..., "stored_at": ISO8601}}``. We accept
+    both for backward compatibility and surface the timestamp to the TUI
+    so cached cloud hashes carry an explicit "from when" label.
+    """
     if not cache_path.exists():
         return {}
     try:
-        return json.loads(cache_path.read_text(encoding="utf-8"))
+        raw = json.loads(cache_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
+    if not isinstance(raw, dict):
+        return {}
+    return raw
 
 
-def _save_cache(cache_path: Path, hashes: dict[str, str]) -> None:
+def _cache_get(cache: dict, corpus_id: str) -> tuple[str | None, str | None]:
+    """Return (sha, stored_at) for ``corpus_id`` from a flat-or-nested cache."""
+    entry = cache.get(corpus_id)
+    if isinstance(entry, str):
+        return entry, None
+    if isinstance(entry, dict):
+        sha = entry.get("sha") or entry.get("artifact_sha256")
+        return (sha if isinstance(sha, str) else None), entry.get("stored_at")
+    return None, None
+
+
+def _save_cache(cache_path: Path, hashes: dict) -> None:
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     cache_path.write_text(json.dumps(hashes, indent=2), encoding="utf-8")
 
@@ -135,36 +199,60 @@ def replay_against_cloud(
             if on_progress:
                 on_progress(f"replaying {receipt.corpus_id} against cloud…")
 
-            cloud_sha = None
+            live_sha: str | None = None
             if cfg.api_key and corpus_norm.exists():
-                cloud_sha = _call_cloud_run_ocean(
+                live_sha = _call_cloud_run_ocean(
                     program_source=program_source,
                     corpus_ndjson_path=corpus_norm,
                     api_key=cfg.api_key,
                     base_url=cfg.base_url,
                 )
 
-            if cloud_sha is None:
-                cloud_sha = cache.get(receipt.corpus_id)
+            if live_sha is not None:
+                receipt.cloud_artifact_sha256 = live_sha
+                receipt.cloud_source = "live"
+                receipt.cloud_cached_at = None
+            else:
+                cached_sha, cached_at = _cache_get(cache, receipt.corpus_id)
+                receipt.cloud_artifact_sha256 = cached_sha
+                if cached_sha is not None:
+                    receipt.cloud_source = "cached"
+                    receipt.cloud_cached_at = cached_at
+                else:
+                    receipt.cloud_source = "absent"
+                    receipt.cloud_cached_at = None
 
-            receipt.cloud_artifact_sha256 = cloud_sha
+            cloud_sha = receipt.cloud_artifact_sha256
             if cloud_sha and receipt.artifact_sha256:
                 receipt.cloud_matches_local = (
                     cloud_sha == receipt.artifact_sha256
                 )
             else:
-                receipt.cloud_matches_local = False
+                # Honest reporting: with no cloud value to compare against
+                # we cannot claim a match. The TUI renders this as the
+                # neutral "local only" status, not a red ✗.
+                receipt.cloud_matches_local = None
 
             update_live(live, state)
             time.sleep(0.9)
 
+        # Only persist *live* hashes back into the cache. Caching a cached
+        # hash would round-trip the same value forever and obscure that
+        # this hash has not been confirmed against the live cloud in
+        # months. Stamps each entry with the ISO timestamp so the TUI can
+        # surface staleness.
         if cfg.cache_path:
-            # Update cache so the next rehearsal-less venue still has fresh
-            # hashes to display.
-            updated_cache = dict(cache)
+            stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            updated_cache: dict = {
+                k: (v if isinstance(v, dict) else {"sha": v, "stored_at": None})
+                for k, v in cache.items()
+            }
             for r in ledger.receipts:
-                if r.cloud_artifact_sha256:
-                    updated_cache[r.corpus_id] = r.cloud_artifact_sha256
+                if r.cloud_source == "live" and r.cloud_artifact_sha256:
+                    updated_cache[r.corpus_id] = {
+                        "sha":       r.cloud_artifact_sha256,
+                        "stored_at": stamp,
+                    }
             _save_cache(cfg.cache_path, updated_cache)
 
         time.sleep(1.6)

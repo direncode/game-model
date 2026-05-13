@@ -127,6 +127,7 @@ def _handle_command(cmd: str, accumulated: list[str]) -> bool:
             import scripts.operators.embed    # noqa: F401
             import scripts.operators.cluster  # noqa: F401
             import scripts.operators.align    # noqa: F401
+            import scripts.operators.narrate  # noqa: F401
             import scripts.operators.persist  # noqa: F401
             run_pipeline(pipeline, verbose=True)
         except (LexerError, ParseError, TypeError_, CompileError) as e:

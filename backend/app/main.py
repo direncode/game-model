@@ -97,6 +97,18 @@ def create_app() -> FastAPI:
 
     app.include_router(api_v1_router, prefix="/api/v1")
 
+    # ── Public /v1/ocean/run endpoint ──────────────────────────────
+    # Mounted at the root (not /api/v1) because the determinism-replay
+    # contract documented in cli/lo/demo/replay.py uses POST /v1/ocean/run.
+    # Keeping the path stable across deploys is what makes the demo's
+    # "and here's the cloud's hash" reveal land — clients pin against
+    # this URL shape.
+    try:
+        from app.api.v1.ocean_run import router as ocean_run_router  # noqa: E402
+        app.include_router(ocean_run_router)
+    except ImportError as e:
+        logger.warning("ocean_run router not available: %s", e)
+
     # ── WebSocket routes ────────────────────────────────────────────
     try:
         from app.api.v1.ws import router as ws_router  # noqa: E402

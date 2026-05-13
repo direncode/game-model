@@ -43,9 +43,14 @@ class Type:
         return hash((self.name, repr(self.param)))
 
 
-# Singleton type values
+# Singleton type values.
+#
+# `Z` is the Euclidean float embedding matrix every classical clustering
+# operator consumes (Kmeans, TCD recursive loop). `Z_FP48` is the bit-vector
+# fingerprint output of `embed.content_fp48` — Hamming-space, not Euclidean.
 T_RECORDS    = Type("Records")
 T_Z          = Type("Z")
+T_Z_FP48     = Type("Z_FP48")
 T_MODULES    = Type("Modules")
 T_ALIGNED    = Type("Aligned")
 T_DISPERSION = Type("Dispersion")
@@ -59,7 +64,7 @@ T_ANY        = Type("Any")
 
 
 PRIMITIVES = {
-    "Records": T_RECORDS, "Z": T_Z, "Modules": T_MODULES,
+    "Records": T_RECORDS, "Z": T_Z, "Z_FP48": T_Z_FP48, "Modules": T_MODULES,
     "Aligned": T_ALIGNED, "Dispersion": T_DISPERSION, "Artifact": T_ARTIFACT,
     "Pipeline": T_PIPELINE, "Number": T_NUMBER, "String": T_STRING,
     "Path": T_PATH, "Bool": T_BOOL, "Any": T_ANY,
@@ -96,12 +101,18 @@ OPERATOR_INPUT_TYPE: dict[str, Type] = {
     "embed.tfidf_jl":             T_RECORDS,
     "embed.content_fp48":         T_RECORDS,
     "embed.onehot_numeric":       T_RECORDS,
+    "embed.transformer":          T_RECORDS,
+    "embed.numeric_direct":       T_RECORDS,
     "reduce.btut":                T_RECORDS,
+    "reduce.stratified":          T_RECORDS,
     "cluster.tcd_recursive_loop": T_Z,
     "cluster.kmeans":             T_Z,
+    "cluster.hamming":            T_Z_FP48,
     "align.module":               T_MODULES,
     "align.dispersion":           T_ALIGNED,
+    "find.dispersion_per_label":  T_ALIGNED,
     "narrate.plain_english":      T_ALIGNED,
+    "narrate.llm_summary":        T_ALIGNED,
     "persist.json":               T_ANY,
     "meta.compare":               T_ANY,
 }
@@ -109,14 +120,20 @@ OPERATOR_INPUT_TYPE: dict[str, Type] = {
 OPERATOR_OUTPUT_TYPE: dict[str, Type] = {
     "source.ndjson":              T_RECORDS,
     "embed.tfidf_jl":             T_Z,
-    "embed.content_fp48":         T_Z,
+    "embed.content_fp48":         T_Z_FP48,
     "embed.onehot_numeric":       T_Z,
+    "embed.transformer":          T_Z,
+    "embed.numeric_direct":       T_Z,
     "reduce.btut":                T_RECORDS,
+    "reduce.stratified":          T_RECORDS,
     "cluster.tcd_recursive_loop": T_MODULES,
     "cluster.kmeans":             T_MODULES,
+    "cluster.hamming":            T_MODULES,
     "align.module":               T_ALIGNED,
     "align.dispersion":           T_DISPERSION,
+    "find.dispersion_per_label":  T_DISPERSION,
     "narrate.plain_english":      T_ALIGNED,
+    "narrate.llm_summary":        T_ALIGNED,
     "persist.json":               T_ARTIFACT,
     "meta.compare":               T_ARTIFACT,
 }
@@ -235,7 +252,10 @@ class TypeChecker:
                     suggestion=self._upstream_suggestion(stmt.verb, ref_t, in_t),
                 )
         else:
-            # Validate via implicit upstream (last stage of expected type)
+            # Validate via implicit upstream (last stage of expected type).
+            # Also compares upstream's output type against this verb's
+            # declared input type so content_fp48 → cluster mismatches
+            # surface at compile time instead of as runtime crashes.
             if stmt.verb != "load":
                 expected_source_verb = {
                     "embed":   "load",
@@ -252,6 +272,16 @@ class TypeChecker:
                         stmt.line, stmt.col, self.source_lines,
                         suggestion=f"add a {expected_source_verb!r} statement above",
                     )
+                if expected_source_verb and in_t is not None:
+                    upstream_bind = self.last_by_verb.get(expected_source_verb)
+                    upstream_t = self.env.get(upstream_bind) if upstream_bind else None
+                    if upstream_t is not None and not is_subtype(upstream_t, in_t):
+                        raise TypeError_(
+                            f"{stmt.verb} expects {in_t}, got {upstream_t} "
+                            f"from upstream {upstream_bind!r}",
+                            stmt.line, stmt.col, self.source_lines,
+                            suggestion=self._upstream_suggestion(stmt.verb, upstream_t, in_t),
+                        )
 
         # Track the binding
         bind = stmt.bind_name or _DEFAULT_NAME.get(stmt.verb, stmt.verb)

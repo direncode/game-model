@@ -23,9 +23,11 @@ from .ast import (
 DEFAULT_OPERATOR_KIND = {
     "load":    "source.ndjson",
     "embed":   "embed.tfidf_jl",
+    "reduce":  "reduce.btut",
     "cluster": "cluster.tcd_recursive_loop",
     "align":   "align.module",
     "find":    "align.dispersion",
+    "narrate": "narrate.plain_english",
     "save":    "persist.json",
 }
 
@@ -38,6 +40,29 @@ EMBED_VARIANTS = {
     "one-hot numeric":     "embed.onehot_numeric",
     "one-hot":             "embed.onehot_numeric",
     "numeric":             "embed.onehot_numeric",
+}
+
+CLUSTER_VARIANTS = {
+    "kmeans":              "cluster.kmeans",
+    "k-means":             "cluster.kmeans",
+    "tcd recursive loop":  "cluster.tcd_recursive_loop",
+    "tcd":                 "cluster.tcd_recursive_loop",
+    # Hamming-space clusterer for fp48 fingerprints (downstream of
+    # ``embed.content_fp48``). Free-tier; ships in the open-core wheel.
+    "hamming":             "cluster.hamming",
+}
+
+REDUCE_VARIANTS = {
+    "btut":                "reduce.btut",
+    "stratified":          "reduce.stratified",
+    "stratified sample":   "reduce.stratified",
+}
+
+NARRATE_VARIANTS = {
+    "plain english":       "narrate.plain_english",
+    "template":            "narrate.plain_english",
+    "llm":                 "narrate.llm_summary",
+    "llm summary":         "narrate.llm_summary",
 }
 
 
@@ -763,9 +788,32 @@ class Parser:
                         suggestion=f"valid variants: {', '.join(sorted(EMBED_VARIANTS))}",
                     )
             elif verb == "cluster":
-                # 'using tcd recursive loop' — just confirms the default; no other variant yet.
-                # Accept silently.
-                pass
+                if variant in CLUSTER_VARIANTS:
+                    kind = CLUSTER_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown cluster variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(CLUSTER_VARIANTS))}",
+                    )
+            elif verb == "reduce":
+                if variant in REDUCE_VARIANTS:
+                    kind = REDUCE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown reduce variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(REDUCE_VARIANTS))}",
+                    )
+            elif verb == "narrate":
+                if variant in NARRATE_VARIANTS:
+                    kind = NARRATE_VARIANTS[variant]
+                else:
+                    raise ParseError(
+                        f"unknown narrate variant {variant!r}",
+                        verb_tok, self.source_lines,
+                        suggestion=f"valid variants: {', '.join(sorted(NARRATE_VARIANTS))}",
+                    )
             # Other verbs may not have variants yet; silent accept.
 
         return VerbStmt(
@@ -931,6 +979,37 @@ class Parser:
                 if self.consume_keyword("of"):
                     self.consume_keyword("each")
                     self.consume_keyword("label")
+                return True
+
+        # === NARRATE ===
+        # ``narrate every module using N nearest records`` is sugar for
+        # ``narrate.plain_english``. The phrase is decorative — the
+        # operator's actual config travels through `using <variant>`.
+        if verb == "narrate":
+            if t.type == TT.KEYWORD and t.value in {"every", "each"}:
+                self.advance()
+                self.consume_keyword("module")
+                return True
+            if t.type == TT.KEYWORD and t.value == "using":
+                # Delegate to the variant-selector at the end of
+                # ``parse_verb_stmt``; do not consume here.
+                return False
+            if t.type == TT.INT:
+                args["top_k_alt_labels"] = self.advance().value
+                if self.consume_keyword("nearest"):
+                    self.consume_keyword("records")
+                return True
+
+        # === REDUCE ===
+        # ``reduce to N records`` / ``reduce using btut`` — the latter
+        # is the default. The phrase here only captures the target count.
+        if verb == "reduce":
+            if t.type == TT.KEYWORD and t.value == "to":
+                self.advance()
+                if self.peek().type == TT.INT:
+                    args["target_survivors"] = self.advance().value
+                    if self.consume_keyword("records"):
+                        pass
                 return True
 
         # === SAVE ===

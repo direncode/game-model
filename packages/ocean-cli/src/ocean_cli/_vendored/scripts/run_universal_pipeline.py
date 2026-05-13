@@ -36,6 +36,7 @@ import scripts.operators.source  # noqa: F401, E402
 import scripts.operators.embed   # noqa: F401, E402
 import scripts.operators.cluster # noqa: F401, E402
 import scripts.operators.align   # noqa: F401, E402
+import scripts.operators.narrate # noqa: F401, E402
 import scripts.operators.persist # noqa: F401, E402
 
 

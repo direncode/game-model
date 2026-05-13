@@ -174,6 +174,7 @@ def tool_run(source: str) -> dict:
         import scripts.operators.embed    # noqa: F401
         import scripts.operators.cluster  # noqa: F401
         import scripts.operators.align    # noqa: F401
+        import scripts.operators.narrate  # noqa: F401
         import scripts.operators.persist  # noqa: F401
 
         cfg = compile_ocean(source, source_name="<mcp-call>")

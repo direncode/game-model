@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Iterator
 
+from .. import obs
 from .receipts import sha256_of_bytes, sha256_of_file
 
 
@@ -161,6 +162,29 @@ def _module_count_from_artifact(artifact: Path) -> int | None:
     return None
 
 
+def _copy_unless_same(src: Path, dst: Path) -> None:
+    """Copy ``src`` to ``dst`` unless they already refer to the same file.
+
+    On Windows, ``Path.resolve()`` can produce mixed-style strings (Git-Bash
+    surfaces `/c/Users/...` while CPython prefers `C:\\Users\\...`). Comparing
+    the two as strings then handing both to ``shutil.copyfile`` raises
+    ``SameFileError`` even though the user-visible paths look different.
+
+    ``Path.samefile`` consults the OS inode / file-id, which is the only
+    reliable equivalence on case-insensitive Windows filesystems. We still
+    guard the call with ``OSError`` in case ``src`` does not exist yet.
+    """
+    try:
+        if src.exists() and dst.exists() and src.samefile(dst):
+            return
+    except OSError:
+        pass
+    try:
+        shutil.copyfile(src, dst)
+    except shutil.SameFileError:
+        return
+
+
 def _record_count_from_artifact(artifact: Path, corpus: Path | None = None) -> int:
     """Best-effort record count. The artifact rarely surfaces this directly;
     we count corpus.ndjson lines as the source of truth."""
@@ -209,10 +233,8 @@ def run_program(
     work_corpus = (work_dir / "corpus.ndjson").resolve()
     work_artifact = (work_dir / "result.json").resolve()
 
-    if Path(program_path).resolve() != work_program:
-        shutil.copyfile(program_path, work_program)
-    if Path(corpus_path).resolve() != work_corpus:
-        shutil.copyfile(corpus_path, work_corpus)
+    _copy_unless_same(Path(program_path), work_program)
+    _copy_unless_same(Path(corpus_path), work_corpus)
     if work_artifact.exists():
         work_artifact.unlink()
 
@@ -247,6 +269,14 @@ def run_program(
         captured_err = buf_err.getvalue()
     except Exception as e:  # noqa: BLE001
         # Catch absolutely anything from the engine so the TUI never crashes.
+        # The structured logger preserves the full traceback in the
+        # rolling NDJSON log; the TUI surfaces only `last_event_text`.
+        obs.exception(
+            "runner.engine_failed",
+            program=str(program_path),
+            corpus=str(corpus_path),
+            seed=seed,
+        )
         return RunResult(
             artifact_path=work_artifact,
             artifact_sha256="",
@@ -276,6 +306,18 @@ def run_program(
     events = _parse_verb_events(captured_out)
     n_modules = _module_count_from_artifact(work_artifact)
     n_records = _record_count_from_artifact(work_artifact, work_corpus)
+
+    obs.event(
+        "runner.completed",
+        program=Path(program_path).name,
+        corpus=Path(corpus_path).name,
+        seed=seed,
+        artifact_sha256=artifact_sha,
+        wall_s=round(wall, 3),
+        n_records=n_records,
+        n_modules=n_modules,
+        n_verb_events=len(events),
+    )
 
     if on_progress:
         on_progress(f"artifact landed · sha {artifact_sha[:8]}…")

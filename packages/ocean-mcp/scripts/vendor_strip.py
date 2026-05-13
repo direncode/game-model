@@ -35,9 +35,11 @@ PKG_VENDORED   = REPO_ROOT / "packages" / "ocean-mcp" / "src" / "ocean_mcp" / "_
 PROPRIETARY: dict[str, set[str]] = {
     "scripts/operators/cluster.py": {"TCDRecursiveLoop"},
     "scripts/operators/embed.py":   {"ContentFp48Embedder"},
-    "scripts/operators/align.py":   {"DispersionAnalysis"},
-    # If reduce.btut ever lands as a class in cluster.py / reduce.py,
-    # add it here too.
+    "scripts/operators/reduce.py":  {"BTUTReducer"},
+    # NOTE: ``DispersionAnalysis`` is generic kNN+crosstab and SHIPS in
+    # the wheel — do not add it back. ``StratifiedReducer``,
+    # ``HammingClusterer``, and ``NarrateLlmSummary`` are also generic
+    # and ship freely. Only trade-secret algorithm bodies get stripped.
 }
 
 
