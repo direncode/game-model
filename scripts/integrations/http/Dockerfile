@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # premium operators.
 RUN pip install --no-cache-dir \
     fastapi==0.115.* \
+    "python-multipart>=0.0.9" \
     uvicorn[standard]==0.32.* \
     pydantic==2.* \
     numpy>=1.26 \
