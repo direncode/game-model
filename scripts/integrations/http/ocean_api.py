@@ -342,6 +342,437 @@ def stdlib_file(file: str, key_info: dict = Depends(_verify_key)):
 
 # ── OpenAPI customizations ────────────────────────────────────────────
 
+# ── /v1/ocean/* — playground + CLI surface ──────────────────────────────
+#
+# These endpoints back the in-browser playground at
+# frontend/public/ocean-demo/ AND the `lo cmd` desktop CLI's catalog.
+# They live in this service (ocean_api) because nginx already routes
+# /v1/* here and this container already has the full operator runtime
+# pre-installed in its image.
+#
+# Mirrors the catalog declared in backend/app/api/v1/ocean_run.py so the
+# two services agree on what an "operator" looks like even though they
+# run in separate processes. Drift is caught by handbook Appendix B's
+# AUTO-GENERATED catalog block, which is the canonical source.
+
+import hashlib as _hashlib
+import json as _json
+import shutil as _shutil
+import tempfile as _tempfile
+
+try:
+    from fastapi import File, Form, UploadFile  # noqa: E402
+except ImportError:
+    pass
+
+
+_OPERATOR_CATALOG: list[dict] = [
+    {"kind": "source.ndjson", "verb": "load", "tier": "free", "icon": "□",
+     "input": "Path", "output": "Records",
+     "summary": "Load an NDJSON corpus from disk, optionally stratifying the sample.",
+     "snippet": "load corpus.ndjson take 100 records balanced by label label field is label"},
+    {"kind": "embed.tfidf_jl", "verb": "embed", "tier": "free", "icon": "▤",
+     "input": "Records", "output": "Z",
+     "summary": "TF-IDF + Johnson-Lindenstrauss random projection to a dense Z.",
+     "snippet": "embed text into 64 dimensions using tf-idf"},
+    {"kind": "embed.transformer.minilm_l6", "verb": "embed", "tier": "free", "icon": "▤",
+     "input": "Records", "output": "Z",
+     "summary": "MiniLM-L6 sentence-transformer at 384 dims native.",
+     "snippet": "embed text into 384 dimensions using transformer minilm_l6"},
+    {"kind": "embed.onehot_numeric", "verb": "embed", "tier": "free", "icon": "▤",
+     "input": "Records", "output": "Z",
+     "summary": "One-hot encoder for numeric / categorical record fields.",
+     "snippet": "embed text using one-hot numeric"},
+    {"kind": "embed.content_fp48", "verb": "embed", "tier": "premium", "icon": "▦",
+     "input": "Records", "output": "Z_FP48",
+     "summary": "Bloom-style 48-bit content fingerprints. Pairs with cluster.hamming.",
+     "snippet": "embed text using content fingerprint"},
+    {"kind": "reduce.stratified", "verb": "reduce", "tier": "free", "icon": "▼",
+     "input": "Records", "output": "Records",
+     "summary": "Deterministic stratified-by-label sample. Free-tier substitute for BTUT.",
+     "snippet": "reduce to 100 records using stratified"},
+    {"kind": "reduce.btut", "verb": "reduce", "tier": "premium", "icon": "▼",
+     "input": "(Z, Records)", "output": "(Z, Records)",
+     "summary": "8-tier BTUT lattice-threading reduction.",
+     "snippet": "reduce records using btut target 300 survivors budget $5"},
+    {"kind": "cluster.kmeans", "verb": "cluster", "tier": "free", "icon": "◉",
+     "input": "Z", "output": "Modules",
+     "summary": "sklearn KMeans with deterministic random_state.",
+     "snippet": "cluster for 8 rounds max 8 modules using kmeans"},
+    {"kind": "cluster.hamming", "verb": "cluster", "tier": "free", "icon": "◉",
+     "input": "Z_FP48", "output": "Modules",
+     "summary": "Bit-vector Hamming clustering for content_fp48 fingerprints.",
+     "snippet": "cluster using hamming"},
+    {"kind": "cluster.tcd_recursive_loop", "verb": "cluster", "tier": "premium", "icon": "◉",
+     "input": "Z", "output": "Modules",
+     "summary": "TCD-JEPA recursive loop with persistent-homology crystallization.",
+     "snippet": "cluster for 16 rounds max 24 modules using tcd recursive loop"},
+    {"kind": "align.module", "verb": "align", "tier": "free", "icon": "◇",
+     "input": "(Modules, Records, Z)", "output": "Aligned",
+     "summary": "Per-module K-nearest-records alignment with dominant-label tally.",
+     "snippet": "align modules using 10 nearest records"},
+    {"kind": "align.dispersion", "verb": "align", "tier": "premium", "icon": "◇",
+     "input": "(Modules, Records, Z)", "output": "Aligned",
+     "summary": "Dispersion-weighted alignment with module-quality scoring.",
+     "snippet": "align modules using 10 nearest records (premium)"},
+    {"kind": "find.dispersion_per_label", "verb": "find", "tier": "free", "icon": "◈",
+     "input": "(Aligned, Records, Z)", "output": "Dispersion",
+     "summary": "Per-label routing: where do each label's records land?",
+     "snippet": "find dispersion of each label"},
+    {"kind": "narrate.plain_english", "verb": "narrate", "tier": "free", "icon": "▶",
+     "input": "Aligned", "output": "Aligned",
+     "summary": "Deterministic per-module template narration. Zero-LLM.",
+     "snippet": "narrate every module using plain english"},
+    {"kind": "narrate.llm_summary", "verb": "narrate", "tier": "free", "icon": "▶",
+     "input": "Aligned", "output": "Aligned",
+     "summary": "Anthropic-API narration. Requires ANTHROPIC_API_KEY; falls back to template.",
+     "snippet": "narrate every module using llm"},
+    {"kind": "persist.json", "verb": "save", "tier": "free", "icon": "↧",
+     "input": "Any", "output": "Artifact",
+     "summary": "Write pipeline state as JSON with SHA-256 manifest.",
+     "snippet": "save to result.json"},
+]
+
+
+_STDLIB_PRESETS: list[dict] = [
+    {"namespace": "substrate", "preset": "basic_run",             "tier": "free",
+     "summary": "Canonical free-tier pipeline against any NDJSON corpus."},
+    {"namespace": "substrate", "preset": "seed_sweep",            "tier": "free",
+     "summary": "Sweep seeds 42-46 and emit a SHA per seed."},
+    {"namespace": "substrate", "preset": "anomaly_focused",       "tier": "free",
+     "summary": "Cluster around the 'normal' label as energy anchor."},
+    {"namespace": "substrate", "preset": "content_vs_structural", "tier": "free",
+     "summary": "Compare TF-IDF embedding vs content-fingerprint."},
+    {"namespace": "pulse",     "preset": "uspto",                  "tier": "free",
+     "summary": "USPTO patent abstracts (500 records). Bundled."},
+    {"namespace": "pulse",     "preset": "uspto_pro",              "tier": "premium",
+     "summary": "USPTO with BTUT + TCD chain (premium)."},
+    {"namespace": "atlas",     "preset": "arxiv",                  "tier": "free",
+     "summary": "arXiv scientific abstracts (500 records). Bundled."},
+    {"namespace": "atlas",     "preset": "arxiv_pro",              "tier": "premium",
+     "summary": "arXiv with premium operator chain."},
+    {"namespace": "receipt",   "preset": "edgar",                  "tier": "free",
+     "summary": "EDGAR financial filings (500 records). Bundled."},
+    {"namespace": "receipt",   "preset": "edgar_pro",              "tier": "premium",
+     "summary": "EDGAR with premium operator chain."},
+    {"namespace": "docsouth",  "preset": "narratives",             "tier": "free",
+     "summary": "DocSouth historical narratives (200 records). Bundled."},
+    {"namespace": "docsouth",  "preset": "narratives_pro",         "tier": "premium",
+     "summary": "DocSouth with premium operator chain."},
+    {"namespace": "titan",     "preset": "benchmark",              "tier": "free",
+     "summary": "TITAN benchmark corpus (300 records). Bundled."},
+    {"namespace": "titan",     "preset": "benchmark_pro",          "tier": "premium",
+     "summary": "TITAN with premium operator chain."},
+    {"namespace": "universal", "preset": "substrate",              "tier": "free",
+     "summary": "Cross-domain substrate sample (400 records). Bundled."},
+    {"namespace": "universal", "preset": "substrate_pro",          "tier": "premium",
+     "summary": "Universal substrate with premium operators."},
+]
+
+
+_SAMPLE_PROGRAMS: dict[str, dict] = {
+    "intro": {
+        "title": "Intro — load → embed → cluster → align → find → save",
+        "summary": "The canonical pipeline. Loads a fraud/legit corpus and finds two clusters.",
+        "program": "\n".join([
+            "seed 42",
+            "load corpus.ndjson take 40 records balanced by label label field is label",
+            "embed text into 32 dimensions using tf-idf",
+            "cluster for 4 rounds max 4 modules using kmeans",
+            "align modules using 5 nearest records",
+            "find dispersion of each label",
+            "save to result.json",
+        ]) + "\n",
+        "corpus": "fraud-legit-small",
+    },
+    "narrate": {
+        "title": "Narrate — add a template summary at the tail",
+        "summary": "Same as intro plus narrate.plain_english on the aligned modules.",
+        "program": "\n".join([
+            "seed 42",
+            "load corpus.ndjson take 40 records balanced by label label field is label",
+            "embed text into 32 dimensions using tf-idf",
+            "cluster for 4 rounds max 4 modules using kmeans",
+            "align modules using 5 nearest records",
+            "narrate every module using plain english",
+            "save to result.json",
+        ]) + "\n",
+        "corpus": "fraud-legit-small",
+    },
+    "reduce": {
+        "title": "Reduce — stratified sample before embed",
+        "summary": "Downsample 80 records to 24 by label-stratified hashing, then cluster.",
+        "program": "\n".join([
+            "seed 42",
+            "load corpus.ndjson take 80 records balanced by label label field is label",
+            "reduce to 24 records using stratified",
+            "embed text into 32 dimensions using tf-idf",
+            "cluster for 4 rounds max 3 modules using kmeans",
+            "align modules using 4 nearest records",
+            "find dispersion of each label",
+            "save to result.json",
+        ]) + "\n",
+        "corpus": "fraud-legit-large",
+    },
+}
+
+
+def _generate_sample_corpus(corpus_id: str) -> bytes:
+    fraud_phrases = [
+        "stolen card pattern detected", "unauthorized merchant transaction",
+        "geographic mismatch flag triggered", "high-value fraud signature match",
+        "card-not-present anomaly identified", "velocity rule breach detected",
+    ]
+    legit_phrases = [
+        "monthly grocery shopping payment", "restaurant dinner service charge",
+        "online subscription renewal billing", "gas station convenience purchase",
+        "department store retail transaction", "pharmacy prescription pickup payment",
+    ]
+    if corpus_id == "fraud-legit-small":
+        n = 40
+    elif corpus_id == "fraud-legit-large":
+        n = 80
+    else:
+        raise HTTPException(status_code=404, detail=f"unknown sample corpus {corpus_id!r}")
+    lines = []
+    for i in range(n):
+        is_fraud = (i % 2 == 0)
+        phrase = (fraud_phrases if is_fraud else legit_phrases)[i % 6]
+        lines.append(_json.dumps({
+            "id":    f"r{i}",
+            "text":  f"transaction record {i}: {phrase}",
+            "label": "fraud" if is_fraud else "legit",
+        }))
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def _canonical_artifact_sha(artifact_path: Path) -> str:
+    """Mirror of cli/lo/demo/runner._deterministic_artifact_sha so server
+    and laptop SHAs match byte-for-byte."""
+    try:
+        data = _json.loads(artifact_path.read_text(encoding="utf-8"))
+    except (OSError, _json.JSONDecodeError):
+        h = _hashlib.sha256()
+        with artifact_path.open("rb") as f:
+            for chunk in iter(lambda: f.read(65536), b""):
+                h.update(chunk)
+        return h.hexdigest()
+    if isinstance(data.get("_meta"), dict):
+        data["_meta"].pop("generated_at", None)
+        data["_meta"].pop("wall_seconds", None)
+        data["_meta"].pop("started_at", None)
+    canonical = _json.dumps(data, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return _hashlib.sha256(canonical).hexdigest()
+
+
+def _run_ocean_with_corpus(program_source: str, corpus_bytes: bytes,
+                           seed: Optional[int]) -> dict:
+    """Compile + run a program against a corpus, return artifact + SHA."""
+    from scripts.operators import run_pipeline, PipelineConfig, StepConfig
+    import scripts.operators.source   # noqa: F401
+    import scripts.operators.embed    # noqa: F401
+    import scripts.operators.cluster  # noqa: F401
+    import scripts.operators.align    # noqa: F401
+    import scripts.operators.persist  # noqa: F401
+    try:
+        import scripts.operators.reduce   # noqa: F401
+    except Exception:
+        pass
+    try:
+        import scripts.operators.narrate  # noqa: F401
+    except Exception:
+        pass
+
+    try:
+        cfg = compile_ocean(program_source, source_name="<ocean-run>")
+    except (LexerError, ParseError, TypeError_, CompileError) as e:
+        raise HTTPException(status_code=400, detail={
+            "error":      "compile-failed",
+            "diagnostic": e.pretty("<ocean-run>") if hasattr(e, "pretty") else str(e),
+        })
+
+    work_dir = Path(_tempfile.mkdtemp(prefix="ocean-run-"))
+    work_corpus = work_dir / "corpus.ndjson"
+    work_artifact = work_dir / "result.json"
+    work_corpus.write_bytes(corpus_bytes)
+
+    saved_cwd = Path.cwd()
+    t0 = time.time()
+    try:
+        os.chdir(work_dir)
+        steps = []
+        for s in cfg.get("steps", []):
+            kept = {k: v for k, v in s.items() if k in {"name", "kind", "inputs", "config"}}
+            if kept.get("kind") == "persist.json":
+                kept.setdefault("config", {})
+                kept["config"] = {**kept["config"], "output": str(work_artifact)}
+            steps.append(StepConfig(**kept))
+        pipeline = PipelineConfig(
+            seed=int(seed if seed is not None else cfg.get("seed", 42)),
+            steps=steps,
+        )
+        run_pipeline(pipeline, verbose=False)
+    finally:
+        os.chdir(saved_cwd)
+    wall = round(time.time() - t0, 3)
+    if not work_artifact.exists():
+        _shutil.rmtree(work_dir, ignore_errors=True)
+        raise HTTPException(status_code=500,
+                            detail="pipeline ran but no artifact at expected path")
+    sha = _canonical_artifact_sha(work_artifact)
+    artifact_data = None
+    try:
+        artifact_data = _json.loads(work_artifact.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    _shutil.rmtree(work_dir, ignore_errors=True)
+    n_modules = None
+    if artifact_data:
+        for key in ("aligned_modules", "modules", "clusters"):
+            v = artifact_data.get(key)
+            if isinstance(v, list):
+                n_modules = len(v); break
+            if isinstance(v, dict):
+                n_modules = len(v); break
+    return {
+        "artifact_sha256": sha,
+        "n_modules":       n_modules,
+        "wall_seconds":    wall,
+        "seed":            int(seed if seed is not None else 42),
+        "artifact":        artifact_data,
+    }
+
+
+class RunTextIn(BaseModel):
+    program:       str
+    corpus_ndjson: str
+    seed:          Optional[int] = None
+
+
+@app.get("/v1/ocean/health", tags=["ocean-playground"])
+def ocean_health(key_info: dict = Depends(_verify_key)):
+    """Lightweight health + tier signal for the playground."""
+    try:
+        from scripts.operators import registered_kinds
+        import scripts.operators.source   # noqa: F401
+        import scripts.operators.embed    # noqa: F401
+        import scripts.operators.cluster  # noqa: F401
+        import scripts.operators.align    # noqa: F401
+        import scripts.operators.persist  # noqa: F401
+        kinds = registered_kinds()
+    except Exception as e:
+        return {"status": "degraded", "error": f"{type(e).__name__}: {e}"}
+    return {
+        "status":               "healthy",
+        "registered_operators": len(kinds),
+        "tier": "premium" if any(
+            k in kinds for k in ("reduce.btut", "cluster.tcd_recursive_loop", "embed.content_fp48")
+        ) else "open-core",
+    }
+
+
+@app.get("/v1/ocean/operators", tags=["ocean-playground"])
+def ocean_operators(key_info: dict = Depends(_verify_key)):
+    """Rich catalog used by the playground UI (web + lo cmd)."""
+    registered: set[str] = set()
+    try:
+        from scripts.operators import registered_kinds
+        import scripts.operators.source   # noqa: F401
+        import scripts.operators.embed    # noqa: F401
+        import scripts.operators.cluster  # noqa: F401
+        import scripts.operators.align    # noqa: F401
+        import scripts.operators.persist  # noqa: F401
+        try:
+            import scripts.operators.reduce   # noqa: F401
+        except Exception:
+            pass
+        try:
+            import scripts.operators.narrate  # noqa: F401
+        except Exception:
+            pass
+        registered = set(registered_kinds())
+    except Exception:
+        pass
+    return {
+        "operators": [{**op, "registered": op["kind"] in registered} for op in _OPERATOR_CATALOG],
+        "stdlib_presets": _STDLIB_PRESETS,
+        "tier": "premium" if any(
+            k in registered for k in ("reduce.btut", "cluster.tcd_recursive_loop", "embed.content_fp48")
+        ) else "open-core",
+    }
+
+
+@app.get("/v1/ocean/samples", tags=["ocean-playground"])
+def ocean_samples(key_info: dict = Depends(_verify_key)):
+    return {
+        "samples": [
+            {"id": k, **{kk: v for kk, v in spec.items() if kk != "corpus"},
+             "corpus_id": spec["corpus"]}
+            for k, spec in _SAMPLE_PROGRAMS.items()
+        ],
+    }
+
+
+@app.get("/v1/ocean/samples/{sample_id}", tags=["ocean-playground"])
+def ocean_sample_detail(sample_id: str, key_info: dict = Depends(_verify_key)):
+    spec = _SAMPLE_PROGRAMS.get(sample_id)
+    if spec is None:
+        raise HTTPException(status_code=404, detail=f"unknown sample {sample_id!r}")
+    corpus_bytes = _generate_sample_corpus(spec["corpus"])
+    return {
+        "id":            sample_id,
+        "title":         spec["title"],
+        "summary":       spec["summary"],
+        "program":       spec["program"],
+        "corpus_id":     spec["corpus"],
+        "corpus_ndjson": corpus_bytes.decode("utf-8"),
+        "n_records":     sum(1 for line in corpus_bytes.splitlines() if line.strip()),
+    }
+
+
+@app.post("/v1/ocean/run", tags=["ocean-playground"])
+async def ocean_run(
+    program: UploadFile = File(...),
+    corpus:  UploadFile = File(...),
+    seed:    Optional[int] = Form(None),
+    key_info: dict = Depends(_verify_key),
+):
+    """Multipart variant of /v1/run for the CLI's cloud-replay tail.
+
+    Same canonical SHA semantics as cli/lo/demo/runner._deterministic_artifact_sha,
+    so a laptop SHA and a server SHA match byte-for-byte for the same
+    (program, corpus, seed).
+    """
+    program_bytes = await program.read()
+    corpus_bytes  = await corpus.read()
+    program_source = program_bytes.decode("utf-8", errors="replace")
+    _meter_call(key_info, "ocean.run", len(program_bytes) + len(corpus_bytes))
+    try:
+        cfg = compile_ocean(program_source, source_name="<ocean-run>")
+        _gate_premium(cfg, key_info)
+    except (LexerError, ParseError, TypeError_, CompileError) as e:
+        raise HTTPException(status_code=400, detail=e.pretty("<ocean-run>"))
+    result = _run_ocean_with_corpus(program_source, corpus_bytes, seed=seed)
+    result["n_records"] = sum(1 for line in corpus_bytes.splitlines() if line.strip())
+    return JSONResponse(result)
+
+
+@app.post("/v1/ocean/run_text", tags=["ocean-playground"])
+def ocean_run_text(body: RunTextIn, key_info: dict = Depends(_verify_key)):
+    """JSON-body variant used by the in-browser playground."""
+    _meter_call(key_info, "ocean.run_text", len(body.program) + len(body.corpus_ndjson))
+    try:
+        cfg = compile_ocean(body.program, source_name="<ocean-run-text>")
+        _gate_premium(cfg, key_info)
+    except (LexerError, ParseError, TypeError_, CompileError) as e:
+        raise HTTPException(status_code=400, detail=e.pretty("<ocean-run-text>"))
+    result = _run_ocean_with_corpus(
+        body.program, body.corpus_ndjson.encode("utf-8"), seed=body.seed,
+    )
+    result["n_records"] = sum(1 for line in body.corpus_ndjson.splitlines() if line.strip())
+    return JSONResponse(result)
+
+
 @app.get("/", include_in_schema=False)
 def root():
     return {
